@@ -7,7 +7,7 @@
 
 \newcommand{\TBlabel}[1]{\textbf{#1}\hfil}
 \newenvironment{TBlist}{%
-  \list{}{\labelwidth 35mm \leftmargin 60mm % alt: 35/60 mm
+  \list{}{\labelwidth 35mm \leftmargin 67mm % alt: 35/60 mm
     \rightmargin 10mm \let\makelabel\TBlabel}%
 }{\endlist}
 
@@ -23,14 +23,14 @@
 \newcommand*{\placeofbirth}[1]{\def\@placeofbirth{#1\xspace}}
 \def\@placeofbirth{
   \@latex@warning@no@line{Package `titlepage': No \noexpand\placeofbirth given}}
-\newcommand*{\faculty}[1]{\def\@faculty{#1\xspace}}
+\newcommand*{\faculty}[2][der]{\def\@faculty{#1\xspace#2\xspace}}
 \def\@faculty{
   \@latex@warning@no@line{Package `titlepage': No \noexpand\faculty given}}
-\newcommand*{\department}[1]{\def\@department{#1\xspace}}
-\def\@department{
-  \@latex@warning@no@line{Package `titlepage': No \noexpand\department given}}
+\newcommand*{\institute}[1]{\def\@institute{#1\xspace}}
+\def\@institute{
+  \@latex@warning@no@line{Package `titlepage': No \noexpand\institute given}}
 \newcommand*{\university}[1]{\def\@university{#1\xspace}}
-\def\@university{Universit\"at Stuttgart\xspace}
+\def\@university{Universität~Stuttgart\xspace}
 \newcommand*{\keywords}[1]{\def\@keywords{#1}}
 \def\@keywords{}
 
@@ -51,23 +51,25 @@
       \setlength{\parskip}{0pt}
       \includegraphics[width=6cm]{logo_us}
       \vfill
-      {\LARGE \normalfont\bfseries \@title \par}
-      \vspace{40pt}
-      {Von der \@faculty der \@university
+      {\Large \normalfont\bfseries \@title \par}
+      \vspace{35pt}
+      {\@faculty der \@university
         zur Erlangung der W\"urde eines Doktors der
         Naturwissenschaften (Dr.~rer.~nat.) genehmigte Abhandlung \par}
       % \bigskip
-      \vspace{40pt}
+      \vspace{35pt}
       {Vorgelegt von \par}
-      {\large \@author \par}
+      {\large \bfseries \@author \par}
+      \vspace{2pt}
       {aus \@placeofbirth \par}
-      \vspace{40pt}
+      \vspace{35pt}
       \begin{TBlist}%
       \item[Hauptberichter:]\@firstexaminer
       \item[Mitberichter:]\@secondexaminer
       \item[Tag der m\"undlichen Pr\"ufung:]\@dateofexamination
       \end{TBlist}%
-      \vspace{20pt}
+      \vspace{35pt}
+      {\@institute \par}
       {\@date \par}
       \bigskip
     \end{center}
