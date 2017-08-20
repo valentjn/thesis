@@ -1,0 +1,22 @@
+Import ('env')
+from os.path import splitext
+
+def createTargetName(node, ext):
+  if ext[0] != '.':
+    ext = '.' + ext
+  targetFile = splitext(node.get_path())[0] + ext
+  return targetFile
+
+srcs = env.Glob('*.tex')
+res = []
+for s in srcs:
+  targetFile = createTargetName(s, '.pdf')
+  res.append(env.PDF(source=s, target=targetFile))
+
+for s in res:
+    env.Clean(s, [createTargetName(s[0], 'py')])
+    env.Clean(s, [createTargetName(s[0], 'py.err')])
+    env.Clean(s, [createTargetName(s[0], 'py.out')])
+
+if len(res) > 0:
+  env.Clean(res[0], '__pycache__')

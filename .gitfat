@@ -1,0 +1,3 @@
+[rsync]
+	remote = neon:/data/scratch-ssd1/valentjn/git_repos/git-fat
+	sshuser = valentjn

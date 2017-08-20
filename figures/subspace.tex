@@ -1,0 +1,78 @@
+\RequirePackage{luatex85}
+\documentclass{standalone}
+\usepackage{shellesc,regexpatch}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{python}
+
+% Example how to draw 2D regular sparse grid without boundary points using
+% python package and TikZ.
+% Note that comments in python part have to be in python syntax.
+% compile with --enable-write18
+
+\begin{document}
+  \begin{python}
+lmax = 3
+
+# calculate points in 1D
+pts = []
+for l in range(1, lmax + 1):
+    lvlPts = []
+    for x in range(2 ** l):
+        if x % 2 == 1:
+            lvlPts.append(x / float(2**l))
+    pts.append(lvlPts)
+
+def make_list(size):
+    """create a list of size number of zeros"""
+    mylist = []
+    for i in range(size):
+        mylist.append(0)
+    return mylist
+
+def make_matrix(rows, cols):
+    """
+    create a 2D matrix as a list of rows number of lists
+    where the lists are cols in size
+    resulting matrix contains zeros
+    """
+    matrix = []
+    for i in range(rows):
+        matrix.append(make_list(cols))
+    return matrix
+
+subspacepts = make_matrix(lmax, lmax)
+for x in range (lmax):
+    for y in range (lmax):
+        subspacepts[x][y] = []
+        for a in pts[x]:
+            for b in pts[y]:
+              subspacepts[x][y].append([a, b])
+
+# epic print debug statement :-)
+# print (r"" + repr (subspacepts))
+
+# setup tikz env (scale by lmax to avoid bullets being too close together)
+print(r"\begin{tikzpicture}[scale=" + repr(lmax) + "]")
+
+
+# draw sparse grid nodes
+for i in range(lmax):
+    for j in range (lmax):
+        print (r"\begin{scope}")
+        print (r"\pgftransformcm{1}{0}{0}{1}{\pgfpoint{" + repr(i + i*0.25) + "cm}{" + repr(-j - j*0.25) + "cm}}")
+        # draw bounding box
+        if i + j < lmax:
+            print(r"\draw (0, 0) rectangle (1, 1);")
+        else:
+            print(r"\draw[gray] (0, 0) rectangle (1, 1);")
+        for p in subspacepts[i][j]:
+            if i + j < lmax:
+                print(r"\node at (" + repr(p[0]) + ", " + repr(p[1]) + ") {\\textbullet};")
+            else:
+                print(r"\node[gray] at (" + repr(p[0]) + ", " + repr(p[1]) + ") {\\textbullet};")
+        print (r"\end{scope}")
+# close tikz env
+print(r"\end{tikzpicture}")
+  \end{python}
+\end{document}

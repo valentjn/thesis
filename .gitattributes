@@ -1,0 +1,4 @@
+*.eps filter=fat -crlf
+*.jpg filter=fat -crlf
+*.pdf filter=fat -crlf
+*.png filter=fat -crlf

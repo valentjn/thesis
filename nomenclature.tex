@@ -1,0 +1,160 @@
+
+
+%% -------------------------------------------------------
+%% nomenclature
+%% -------------------------------------------------------
+% % introduction
+\nomenclature[s1000]{\textbf{1}}{\textbf{introduction}}%
+\nomenclature[a1001]{UQ}{uncertainty quantification}%
+
+%% -------------------------------------------------------
+% % problem formulation
+\nomenclature[s2000]{\textbf{2}}{\textbf{problem formulation}}%
+\nomenclature[s2001]{$(\Omega, \Sigma, P)$}{sample space $\Omega$,
+  sigma-algebra $\Sigma$ and measure $P$}%
+\nomenclature[s2002]{$\vxi = (\xi_1, \ldots, \xi_d) \in
+  \Omega$}{random event of the samples space $\Omega$}%
+\nomenclature[s2003]{$f$}{probability density function of $\vxi$}%
+\nomenclature[s2004]{$\vx \in D \subset \bbR^{d_s}$}{physical domain
+  $D$ of dimensionality $1 \leq d_s \leq 3$}%
+\nomenclature[s2005]{$t \in T$}{temporal domain $T \subset
+  \mathbb{R}$}%
+\nomenclature[s2006]{$\model$}{physical model}%
+\nomenclature[s2007]{$u(\vx, t, \vxi) = \model(\vx, t, \vxi) \in
+  \bbR^{d_r}$}{model function with corresponding parameters and
+  dimensionality $d_r$ of the response vector}%
+\nomenclature[s2008]{$Q[u(\vx, t, \vxi)]$}{quantity of interest from
+  model function $u$, this is going to be approximated by $g_\Ind$}%
+\nomenclature[s2009]{$\mathcal{D} := \{\vxik\}_{i = 1}^n$}{sample set;
+  one realization of $f$}%
+\nomenclature[s2010]{$\vxik$}{one sample of dimensionality $d$}%
+\nomenclature[s2011]{$n$}{number of samples available from $f$}%
+\nomenclature[s2012]{$d$}{the number of stochastic dimensions,
+  $|\vxik| = d$}%
+\nomenclature[s2013]{$\mean_f(u)$}{expectation value of $u$}%
+\nomenclature[s2014]{$\var_f(u)$}{variance of $u$}%
+
+% --------------------------------------------------------
+% % stochastic collocation
+\nomenclature[s3100]{\textbf{3.1}}{\textbf{stochastic collocation}}%
+\nomenclature[s3101]{$g$}{surrogate model for model function $u$}%
+\nomenclature[s3102]{$N$}{the number of collocation nodes}%
+\nomenclature[s3103]{$\Xi_N$}{set of collocation nodes, which needs to
+  be evaluated}%
+\nomenclature[s3104]{$\gi$}{surrogate model for model function $u$ at
+  selected point in time $t_i$ and space $x_i$}%
+\nomenclature[s3105]{$x_i$}{selected point in space}%
+\nomenclature[s3106]{$t_i$}{selected point in time}%
+% % --------------------------------------------------------
+% % sparse grids
+\nomenclature[s3200]{\textbf{3.2}}{\textbf{sparse grids}}%
+\nomenclature[s3201]{$\level$}{maximum discretization level}
+\nomenclature[s3202]{$V_\level$}{space of piece wise $d$-linear
+  functions}%
+\nomenclature[s3203]{$V_\level^{(1)}$}{sparse grid space of piece wise
+  $d$-linear functions}%
+\nomenclature[s3204]{$\vli$}{multi-dimensional level index pair with
+  $(\vli) \in \Ind$}%
+\nomenclature[s3205]{$\Ind$}{set of collocation nodes as pair of level
+  and index}%
+\nomenclature[s3206]{$\psi_\vli$}{piecewise linear basis}%
+\nomenclature[s3207]{$W_\vl$}{hierarchical subspaces}%
+\nomenclature[s3208]{$|\vl|_\infty$}{infinity norm of level $\vl$}%
+\nomenclature[s3209]{$|\vl|_1$}{one norm of level $\vl$}%
+\nomenclature[s3210]{$g_\Il$}{regular sparse grid function}%
+\nomenclature[s3210]{$g_\Ind$}{adaptively refined sparse grid function}%
+\nomenclature[s3211]{$v_\vli$}{hierarchical coefficients, for SG
+  surrogate model}%
+\nomenclature[s3212]{$p$}{degree of polynomial basis}%
+\nomenclature[s3213]{$\psip_\vli$}{piecewise $d$-polynomial basis}%
+% \nomenclature[s]{$w_\vli$}{hierarchical coefficients, for $\hat{p}$}%
+% \nomenclature[s]{$\varphi_\vkj$}{piecewise linear basis $p = 1$,
+% polynomial basis $p > 1$ functions}%
+% % --------------------------------------------------------
+% % density estimation
+\nomenclature[s3300]{\textbf{3.3}}{\textbf{Sparse Grid Density
+    Estimation method}}%
+\nomenclature[a3301]{SGDE}{Sparse Grid Density Estimation}%
+\nomenclature[s3302]{$R$}{functional to be minimized}%
+\nomenclature[s3303]{$\fhk$}{sparse grid function that minimizes $R$
+  defined on level, index set $\Knd$}%
+\nomenclature[s3304]{$\lambda$}{regularization parameter}%
+\nomenclature[s3305]{$S$}{regularization method}%
+
+% % --------------------------------------------------------
+% % Sparse Grid Collocation
+\nomenclature[s3400]{\textbf{3.4}}{\textbf{Sparse Grid Collocation}}%
+\nomenclature[a3401]{SGC}{Sparse Grid Collocation}%
+
+% % --------------------------------------------------------
+% % Moment estimation
+\nomenclature[s3500]{\textbf{3.5}}{\textbf{Moment Estimation}}%
+\nomenclature[s3501]{$\mu$}{abbreviation for true expectation value,
+  i.e. $\mean_f(u)$}%
+\nomenclature[s3502]{$\sigma^2$}{abbreviation for true variance,
+  i.e. $\var_f(u)$}%
+\nomenclature[s3503]{$\fh$}{estimated density function}%
+\nomenclature[s3504]{$\Dhcal$}{sample set drawn from $\fh$}%
+\nomenclature[s3505]{$\nh$}{number of samples of $\Dhcal$}%
+\nomenclature[s3506]{$\fhd$}{dirac delta density}%
+\nomenclature[s3507]{$\delta$}{dirac delty function}%
+\nomenclature[s3508]{$\vkj$}{alternative hierarchical coefficients
+  to $\vli$}%
+\nomenclature[s3509]{$\vlit$}{alternative hierarchical coefficients
+  to $\vli$}%
+\nomenclature[s3510]{$\varphiq$}{alternative basis to $\psip$}%
+\nomenclature[s3511]{$q$}{polynomial degree of $\varphiq$ basis}%
+
+% % --------------------------------------------------------
+% % The Sparse Grid data-driven UQ forward Pipeline
+\nomenclature[s3600]{\textbf{3.6}}{\textbf{The Sparse Grid data-driven
+    UQ forward Pipeline}}%
+\nomenclature[s3601]{$\epsilon$}{machine epsilon}%
+
+% % --------------------------------------------------------
+% % Analytic Example
+\nomenclature[s4100]{\textbf{4.1}}{\textbf{Analytic Example}}%
+\nomenclature[s4101]{$\Bcal$}{Beta distribution}%
+\nomenclature[s4102]{$\alpha, \beta$}{shape parameters for beta
+  distribution}%
+\nomenclature[s4103]{$c_k$}{$1/B(\alpha, \beta)$ coefficient of pdf of
+beta distribution, where $B$ is the beta function}%
+\nomenclature[s4104]{$\Gamma$}{gamma function}%
+\nomenclature[s4105]{$\Omega_1$}{domain for $\xi_1$}%
+\nomenclature[s4106]{$\Omega_2$}{domain for $\xi_2$}%
+\nomenclature[s4107]{$\Omega$}{complete domain $\Omega = \Omega_1
+  \times \Omega_2$}%
+\nomenclature[s4108]{$\partial \Omega$}{border of domain $\Omega$}%
+\nomenclature[s4109]{$k$}{number of realizations of $\Dcal$}%
+\nomenclature[s4110]{$\Dcal_k$}{$k^{\text{th}}$ realization of $f$}%
+\nomenclature[a4111]{SG$^{\text{++}}$}{SGpp}%
+\nomenclature[s4112]{$\Tcal$}{test set of size $m$}%
+\nomenclature[s4113]{$m$}{size of test set}%
+\nomenclature[s4114]{$L$}{cross entropy (negative log-likelihood)}%
+\nomenclature[a4115]{L}{cross entropy (negative log-likelihood)}%
+\nomenclature[a4116]{KL}{Kullback-Leibler divergence}%
+
+% % --------------------------------------------------------
+% % Multivariate Stochastic Application
+\nomenclature[s4200]{\textbf{4.2}}{\textbf{Multivariate Stochastic
+    Application}}%
+\nomenclature[s4201]{$\phi$}{reservoir porosity}%
+\nomenclature[s4202]{$\Ka$}{reservoir permeability}%
+\nomenclature[s4203]{$\KL$}{leaky well permeability}%
+\nomenclature[s4204]{$f_1, f_2, f_3$}{density functions for different
+  parameters ($\phi, \Ka, \KL$)}%
+\nomenclature[s4205]{$\nu$}{variation}%
+\nomenclature[s4206]{$h$}{transformation function from stochastic
+  space to parameter space}%
+\nomenclature[s4207]{$\Omega_\phi$}{domain of $\phi$}%
+\nomenclature[s4208]{$\Omega_\nu$}{domain of $\nu$}%
+\nomenclature[s4209]{$\Omega_\KL$}{domain of $\KL$}%
+\nomenclature[s4210]{$\Tcal$}{test set}%
+\nomenclature[s4211]{$m$}{number of samples in the test set}%
+
+%%% --------------------------------------------------
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "thesis"
+%%% End:
+%%% --------------------------------------------------
