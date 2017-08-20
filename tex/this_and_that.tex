@@ -2,10 +2,10 @@
 \section{Univers-Font}
 To disable setting this document using University of Stuttgart's very own
 ``Univers'' font, comment out the following lines in preamble/template.tex:
-\begin{minted}{latex}
+\begin{verbatim}
 \usepackage{fontspec}
 \setmainfont{Univers for UniS 55 Roman Rg}
-\end{minted}
+\end{verbatim}
 Note, that the font needs to be installed for building the document.
 
 \section{Sync Bibfile}
@@ -14,7 +14,7 @@ may be helpful to check if the file in your diss repo is in sync with the SGS
 repo.
 
 The following pre- or post-commit hook might be helpful.
-\begin{minted}{python}
+\begin{verbatim}
 #!/usr/bin/env python
 
 import difflib
@@ -36,11 +36,11 @@ def main(args=None):
 
 if __name__ == "__main__":
     main()
-\end{minted}
+\end{verbatim}
 
 \section{Build with latexmk}
 If you prefer latexmk over SCons, you may consider the following Makefile
-\begin{minted}{Makefile}
+\begin{verbatim}
 NAME=diss
 FIGURES=figures
 
@@ -60,9 +60,9 @@ clean:
 clean-all:
 	$(MAKE) -C $(FIGURES) clean-all
 	@latexmk -C
-\end{minted}
+\end{verbatim}
 The Makefile for the figures folder may look like this:
-\begin{minted}{Makefile}
+\begin{verbatim}
 all: build
 
 build:
@@ -73,13 +73,13 @@ clean:
 
 clean-all:
 	@latexmk -C
-\end{minted}
+\end{verbatim}
 
 The template requires some customizations for latexmk.
 latexmk can be customized by creating a file called ``latexmkrc'' in the
 respective folder.
 The customizations for the main directory may look like this:
-\begin{minted}{perl}
+\begin{verbatim}
  # Custom dependency and function for nomencl package
  add_cus_dep( 'nlo', 'nls', 0, 'makenlo2nls' );
  sub makenlo2nls {
@@ -98,4 +98,4 @@ $pdf_mode = 1; #$
 # Custom cleaning rule
 $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak thm upa upb nls nlo \
               bbl bcf fdb_latexmk run tdo %R-blx.bib'
-\end{minted}
+\end{verbatim}

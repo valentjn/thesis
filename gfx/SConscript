@@ -1,22 +1,18 @@
-Import ('env')
-from os.path import splitext
+Import("env")
+env = env.Clone()
 
-def createTargetName(node, ext):
-  if ext[0] != '.':
-    ext = '.' + ext
-  targetFile = splitext(node.get_path())[0] + ext
-  return targetFile
+# install pre-made graphics
+pre = env.Glob("pre/*.pdf")
+env.Install(env["BUILD_DIR"], pre)
 
-srcs = env.Glob('*.tex')
-res = []
-for s in srcs:
-  targetFile = createTargetName(s, '.pdf')
-  res.append(env.PDF(source=s, target=targetFile))
+# set output directory
+env.Append(PDFLATEXFLAGS="--output-directory={}".format(env["BUILD_DIR"]))
 
-for s in res:
-    env.Clean(s, [createTargetName(s[0], 'py')])
-    env.Clean(s, [createTargetName(s[0], 'py.err')])
-    env.Clean(s, [createTargetName(s[0], 'py.out')])
+# compile TeX graphics
+texs = env.Glob("tex/*.tex")
+pdfs = []
 
-if len(res) > 0:
-  env.Clean(res[0], '__pycache__')
+for tex in texs:
+  pdfs.append(env.PDF(tex))
+
+Return("pdfs")

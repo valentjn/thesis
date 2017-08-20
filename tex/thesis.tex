@@ -14,11 +14,13 @@
 ]{scrbook}
 \usepackage[utf8]{inputenc}
 
-\input{preambel/template}
-\usepackage{preambel/titlepage}
+\input{template}
+\usepackage{titlepage}
 
 \input{commands}
-\bibliography{bibliography}
+\bibliography{../bib/bibliography}
+
+\graphicspath{{../gfx/}}
 
 % nomenclature
 \renewcommand{\nomgroup}[1]{
@@ -39,7 +41,7 @@
 \pdfgentounicode=1
 
 % hyphenations
-\input{preambel/hyphenation}
+\input{hyphenation}
 
 % Die Seitennummerierung erfolgt durchlaufend ab der Titelseite. Also keine
 % Spielereien mit römischen Ziffern usw. - Die ISO 7144 schreibt das sogar für
@@ -78,14 +80,14 @@
 \pagestyle{scrheadings}
 
 %% ---- abstracts ----------------------------------------------
-\input{content/abstracts-danksagung}
+\input{abstracts-danksagung}
 %% -------------------------------------------------------------
 \pagestyle{scrheadings}
 
 %% ---- Content ------------------------------------------------
-% \input{content/examples}
-\input{content/introduction}
-\input{content/this_and_that}
+% \input{examples}
+\input{introduction}
+\input{this_and_that}
 %% -------------------------------------------------------------
 
 \printbibliography
@@ -110,7 +112,7 @@ Alle URLs wurden zuletzt am \today~gepr\"uft.
 
 \chapter{Various}
 
-%\input{content/Z-Anhang}
+%\input{Z-Anhang}
 
 %% --------------------------------------------------------------
 % nomenclature

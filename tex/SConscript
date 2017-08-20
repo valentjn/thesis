@@ -1,5 +1,13 @@
-Import('env')
+Import("env")
+env = env.Clone()
 
-env.PDF(source='thesis.tex', target='thesis.pdf')
+# set output directory
+env.Append(PDFLATEXFLAGS="--output-directory={}".format(env["BUILD_DIR"]))
+# set openout_any=a (the default value is p which forbids makeindex
+# to write into parent directories)
+env["ENV"]["openout_any"] = "a"
 
-env.Clean("thesis.pdf", "_minted-thesis")
+# compile PDF
+pdf = env.PDF(target="{}/thesis.pdf".format(env["BUILD_DIR"]), source="thesis.tex")
+
+Return("pdf")
