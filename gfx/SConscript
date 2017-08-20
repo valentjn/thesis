@@ -1,3 +1,11 @@
+import os
+import subprocess
+
+def crop_pdf_action(target, source, env):
+  for t in target:
+    path = t.get_abspath()
+    subprocess.call(["pdfcrop", path, path])
+
 Import("env")
 env = env.Clone()
 
@@ -13,6 +21,9 @@ texs = env.Glob("tex/*.tex")
 pdfs = []
 
 for tex in texs:
-  pdfs.append(env.PDF(tex))
+  pdf = "{}/{}.pdf".format(env["BUILD_DIR"], os.path.splitext(tex.name)[0])
+  pdfs.append(env.PDF(target=pdf, source=tex))
+
+env.AddPostAction(pdfs, crop_pdf_action)
 
 Return("pdfs")
