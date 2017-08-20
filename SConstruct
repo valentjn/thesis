@@ -5,9 +5,11 @@ import os
 env = Environment(ENV=os.environ)
 
 # use LuaLaTeX as compiler (successor of PDFLaTeX)
-env.Replace(PDFLATEX="lualatex")
+env.Replace(PDFLATEX="texfot lualatex")
 # enable SyncTeX for GUI editors
 env.Append(PDFLATEXFLAGS="--synctex=1")
+# quiet output
+env.Append(BIBERFLAGS="-q")
 
 sconscripts = {}
 
