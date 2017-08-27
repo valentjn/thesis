@@ -1,6 +1,211 @@
+% needed for custom switches
+\RequirePackage{etoolbox}
+
+% checkmode switch:
+% show all overfull/underfull boxes, show unknown hyphenations
+\newtoggle{checkmode}
+\toggletrue{checkmode}
+
+% debugmode switch:
+% show all boxes, glues, and kerning info
+\newtoggle{debugmode}
+\togglefalse{debugmode}
+
 % warns about outdated packages and missing caption declarations
-\RequirePackage[l2tabu, orthodox]{nag}
+\RequirePackage[
+  l2tabu,
+  orthodox,
+]{nag}
+
+% set main document class and options
 \documentclass[
+  % choose font size (PO: should be between 12pt and 14pt)
+  fontsize=12pt,
+  % let typearea calculate appropriate page margins
+  DIV=calc,
+  % don't use KOMA-Script's default "big" headings
+  headings=normal,
+]{scrbook}
+
+% check mode
+\iftoggle{checkmode}{
+  % show overfull boxes
+  \overfullrule=1mm
+  % show underfull vboxes
+  \directlua{dofile("detect_underfull.lua")}
+  % show non-whitelisted hyphenations
+  \usepackage[mark]{lua-check-hyphen}
+  % whitelist is in hyphenation_whitelist.txt:
+  % one word per line with dashes (-) indicating the places where
+  % hyphenation is whitelisted
+  \LuaCheckHyphen{whitelist=hyphenation_whitelist.txt}
+}{}
+
+% debug mode
+\iftoggle{debugmode}{
+  % show boxes, glues, and kerning
+  \usepackage{lua-visual-debug}
+}{}
+
+% language-specific things (hyphenation, ...)
+\usepackage[ngerman,american]{babel}
+
+% biblatex package wants to have csquotes (otherwise: warning)
+\usepackage{csquotes}
+
+% dummy texts
+\usepackage[math]{blindtext}
+
+% basic AMS math commands
+\usepackage{amsmath}
+
+% micro-typographic adjustments
+% (final: don't deactivate extensions due to document class draft option)
+\usepackage[final]{microtype}
+
+% Unicode umlauts
+\usepackage[utf8]{luainputenc}
+
+% need T1 font encoding for Charter,
+% otherwise there will be "undefined font shape" warnings
+\usepackage[T1]{fontenc}
+
+% use Bitstream Charter as main font
+\usepackage[bitstream-charter]{mathdesign}
+
+% don't use another, sans-serif font for headings
+\setkomafont{disposition}{\normalcolor\bfseries}
+
+% graphics
+\usepackage{graphicx}
+
+% X column type for tables (filling rest of line)
+\usepackage{tabularx}
+
+% line spacing (one and a half lines)
+\usepackage[onehalfspacing]{setspace}
+
+% location of graphics files
+\graphicspath{{../gfx/}}
+
+% chapter heading: make number bigger
+\renewcommand*{\chapterformat}{%
+  \mbox{%
+    \chapappifchapterprefix{\nobreakspace}%
+    \scalebox{3.5}{\thechapter\autodot}%
+    \IfUsePrefixLine{}{\enskip}%
+  }%
+}
+
+% chapter heading: align number and text at the baseline of the last line
+% of the text, add some more space between number and text
+\renewcommand*{\chapterlinesformat}[3]{%
+  \begin{tabularx}{\textwidth}{@{}l@{}X@{}}%
+    % chapter number
+    #2%
+    % add hspace between number and text, but only if \chapter (not \chapter*)
+    % has been used (i.e., if the chapter number #2 is not empty)
+    \if\relax\detokenize{#2}\relax\else\hspace*{5mm}\fi&%
+    % text of heading, [b] is for alignment, \linewidth is width of X cell,
+    % \raggedchapter for not justifying headings
+    \parbox[b]{\linewidth}{\raggedchapter#3}%
+  \end{tabularx}%
+}
+
+% PDF links
+\usepackage{hyperref}
+
+% BibLaTeX
+\usepackage{biblatex}
+
+% location of *.bib file
+\addbibresource{../bib/bibliography.bib}
+
+% named references
+\usepackage{cleveref}
+
+% meta-data variables
+\newcommand*{\thetitle}{%
+  B-Splines for Sparse Grids:\texorpdfstring{\\}{}
+  Algorithms and Application to
+  Higher-Dimensional Optimization%
+}
+\newcommand*{\theauthor}{Julian Valentin}
+\newcommand*{\thedate}{TODO(date)}
+
+% set up hyperref
+\hypersetup{
+  pdftitle={\thetitle},
+  pdfauthor={\theauthor},
+  pdfcreator={LaTeX, KOMA-Script, hyperref},
+}
+
+% change bibliography heading (default: "Bibliography")
+\DefineBibliographyStrings{english}{bibliography={References}}
+
+\begin{document}
+  % title page
+  \input{titlepage}
+  
+  % dedication page
+  \cleardoublepage
+  \input{dedication}
+  
+  % table of contents
+  \tableofcontents
+  
+  % abstract
+  \input{abstract}
+  
+  % preface
+  \input{preface}
+  
+  % TODO: dummy chapters
+  \chapter{A Long Heading Without Any Meaning and Using Two Lines}
+  Hello World!
+  
+  Umlaute: äöüß
+    
+  \begin{gather}
+    X \times Y\\
+    A \cdot \vec{x} = \vec{b}\\
+    \min_{\vec{x} \in [0, 1]} \int_\Omega f(\vec{x}, \vec{y}) d\vec{y}
+  \end{gather}
+  
+  \section{Abschnitt}
+  
+  \blindtext
+  
+  \subsection{Unterabschnitt}
+  
+  \blindtext
+  
+  \chapter{Kapitel 1}
+  \blindmathpaper
+  
+  \chapter{Kapitel 2}
+  \blindmathpaper
+  
+  % start appendix
+  \appendix
+  
+  % TODO: cite all for debug purposes
+  \nocite{*}
+  % references (add to TOC)
+  \printbibliography[heading=bibintoc]
+\end{document}
+
+\endinput
+
+
+
+
+
+
+
+
+
+documentclass[
   paper=a4,
   twoside,
   fontsize=12pt,
@@ -13,11 +218,11 @@
   plainfootsepline,
 ]{scrbook}
 
-\input{template}
-\usepackage{titlepage}
+%input{template}
+usepackage{titlepage}
 
-\input{commands}
-\bibliography{../bib/bibliography}
+input{commands}
+bibliography{../bib/bibliography}
 
 \graphicspath{{../gfx/}}
 
@@ -30,7 +235,7 @@
 
 \begin{document}
 % hyphenations
-\input{hyphenation}
+input{hyphenation}
 
 % Die Seitennummerierung erfolgt durchlaufend ab der Titelseite. Also keine
 % Spielereien mit römischen Ziffern usw. - Die ISO 7144 schreibt das sogar für
@@ -65,20 +270,20 @@
 \clearpage
 
 \pagestyle{justpagenums}
-% \input{abstract}
+% input{abstract}
 
 %\mainmatter
 \pagestyle{scrheadings}
 
 %% ---- abstracts ----------------------------------------------
-\input{abstracts-danksagung}
+input{abstracts-danksagung}
 %% -------------------------------------------------------------
 \pagestyle{scrheadings}
 
 %% ---- Content ------------------------------------------------
-% \input{examples}
-\input{introduction}
-\input{this_and_that}
+% input{examples}
+input{introduction}
+input{this_and_that}
 %% -------------------------------------------------------------
 
 \printbibliography
@@ -103,11 +308,11 @@ Alle URLs wurden zuletzt am \today~gepr\"uft.
 
 \chapter{Various}
 
-%\input{Z-Anhang}
+%input{Z-Anhang}
 
 %% --------------------------------------------------------------
 % nomenclature
-\input{nomenclature}
+input{nomenclature}
 
 \IfDefined{printindex}{\printindex}
 \IfDefined{printnomenclature}{

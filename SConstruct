@@ -11,9 +11,14 @@ env.Append(PDFLATEXFLAGS="--synctex=1")
 # quiet output
 env.Append(BIBERFLAGS="-q")
 
-sconscripts = {}
+# use timestamp to decide if a file should be rebuilt
+# (otherwise SCons won't rebuild even if it is necessary)
+env.Decider("timestamp-newer")
 
-for dir in ["bib", "gfx", "tex"]:
+sconscripts = {}
+dirs = ["bib", "gfx", "tex"]
+
+for dir in dirs:
   # tell SConscript which its build directory is
   env.Replace(BUILD_DIR=env.Dir("build/{}".format(dir)))
   # create build directory
@@ -24,11 +29,11 @@ for dir in ["bib", "gfx", "tex"]:
   env.Clean(sconscripts[dir], env["BUILD_DIR"])
 
 # dependencies
-env.Depends(sconscripts["tex"], [sconscripts["bib"], sconscripts["gfx"]])
+env.Depends(sconscripts["tex"], [sconscripts[dir] for dir in dirs if dir != "tex"])
 # install PDF
 pdf_dir = env.Dir("pdf")
 env.Execute(Mkdir(pdf_dir))
 pdf = env.Install(pdf_dir, sconscripts["tex"])
 
-# don't clean PDF
+# don't clean final PDF in pdf directory
 env.NoClean(sconscripts["tex"], pdf)
