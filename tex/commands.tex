@@ -20,3 +20,11 @@
 \newcommand*{\defcal}[1]{\newnamecommand{cal#1}{\mathcal{#1}}}
 \defcal{C}
 \defcal{O}
+
+% shortcut for setting the dictum for a chapter
+\newcommand*{\setdictum}[2]{%
+  \setchapterpreamble{%
+    \dictum[#2]{``#1''}%
+    \chapterheadendvskip%
+  }%
+}
