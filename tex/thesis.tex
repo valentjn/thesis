@@ -36,11 +36,13 @@
   \cleardoublepage
   \input{dedication}
   
-  % table of contents
-  \tableofcontents
-  
-  % table of symbols and acronyms
-  \printglossary[title={Table of Symbols and Acronyms}]
+  \begin{spacing}{1}
+    % table of contents
+    \tableofcontents
+    
+    % table of symbols and acronyms
+    \printglossary[title={Table of Symbols and Acronyms}]
+  \end{spacing}
   
   % abstract
   \input{abstract}
@@ -56,8 +58,10 @@
   % start appendix
   \appendix
   
-  % TODO: cite all for debug purposes
-  \nocite{*}
-  % references (add to TOC)
-  \printbibliography[heading=bibintoc]
+  \begin{spacing}{1}
+    % TODO: cite all for debug purposes
+    \nocite{*}
+    % references (add to TOC)
+    \printbibliography[heading=bibintoc]
+  \end{spacing}
 \end{document}
