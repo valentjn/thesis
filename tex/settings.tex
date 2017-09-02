@@ -1,0 +1,97 @@
+% don't use sans-serif font for headings
+\setkomafont{disposition}{\normalcolor\bfseries}
+
+% don't use sans-serif font for dictums
+\addtokomafont{dictum}{\rmfamily}
+
+% make dictums larger
+\renewcommand*{\dictumwidth}{0.6667\textwidth}
+
+% location of graphics files
+\graphicspath{{../gfx/}}
+
+% chapter heading: make number bigger
+\renewcommand*{\chapterformat}{%
+  \mbox{%
+    \chapappifchapterprefix{\nobreakspace}%
+    \scalebox{3.5}{\thechapter\autodot}%
+    \IfUsePrefixLine{}{\enskip}%
+  }%
+}
+
+% chapter heading: align number and text at the baseline of the last line
+% of the text, add some more space between number and text
+\renewcommand*{\chapterlinesformat}[3]{%
+  \begin{tabularx}{\textwidth}{@{}l@{}X@{}}%
+    % chapter number
+    #2%
+    % add hspace between number and text, but only if \chapter (not \chapter*)
+    % has been used (i.e., if the chapter number #2 is not empty)
+    \if\relax\detokenize{#2}\relax\else\hspace*{5mm}\fi&%
+    % text of heading, [b] is for alignment, \linewidth is width of X cell,
+    % \raggedchapter for not justifying headings
+    \parbox[b]{\linewidth}{\raggedchapter\setstretch{1.05}#3}%
+  \end{tabularx}%
+}
+
+% check mode
+\iftoggle{checkmode}{
+  % show overfull boxes
+  \overfullrule=1mm
+  % show underfull vboxes
+  \directlua{dofile("detect_underfull.lua")}
+  % whitelist is in hyphenation_whitelist.txt:
+  % one word per line with dashes (-) indicating the places where
+  % hyphenation is whitelisted
+  \LuaCheckHyphen{whitelist=hyphenation_whitelist.txt}
+}{}
+
+% location of *.bib file
+\addbibresource{../bib/bibliography.bib}
+
+% meta-data variables
+\newcommand*{\thetitle}{%
+  B-Splines for Sparse Grids:\texorpdfstring{\\}{}
+  Algorithms and Application to
+  Higher-Dimensional Optimization%
+}
+\newcommand*{\theauthor}{Julian Valentin}
+\newcommand*{\thedate}{TODO(date)}
+
+% set up hyperref
+\hypersetup{
+  pdftitle={\thetitle},
+  pdfauthor={\theauthor},
+  pdfcreator={LaTeX, KOMA-Script, hyperref},
+}
+
+% change bibliography heading (default: "Bibliography")
+\DefineBibliographyStrings{english}{bibliography={References}}
+
+% change font size of bibliography
+\renewcommand*{\bibfont}{\small}
+
+% define dummy glossary
+% (Needed for SCons because it automatically executes makeindex
+% twice; once for *.glo and once for *.acn. *.glo is the default
+% one and we don't have a *.acn, so we have to generate an empty one.)
+\newglossary[alg]{dummyglossary}{acr}{acn}{Empty Dummy Glossary}
+
+% define new glossary style based on long (uses longtable)
+% in which the column widths are fixed and space before/after the
+% table is removed
+\newglossarystyle{longfixed}{%
+  \setglossarystyle{long}%
+  \renewenvironment{theglossary}%
+    {%
+      \setlength{\LTpre}{0pt}%
+      \setlength{\LTpost}{0pt}%
+      \begin{longtable}{@{}p{0.2\textwidth}@{}p{0.8\textwidth}@{}}}%
+    {\end{longtable}}%
+}
+
+% use new glossary style
+\setglossarystyle{longfixed}
+
+% generate table of symbols and acronyms
+\makeglossaries

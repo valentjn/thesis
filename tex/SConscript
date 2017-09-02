@@ -5,8 +5,8 @@ env = env.Clone()
 
 # remove temporary files created accidential run of LuaLaTeX instead of SCons
 # (pressing the wrong button in TeXstudio)
-for extension in ["aux", "bbl", "bcf", "blg", "lof", "log", "lot", "nlo", "out",
-                  "pdf", "run.xml", "synctex.gz", "thm", "toc", "upa", "upb"]:
+for extension in ["acn", "aux", "bbl", "bcf", "blg", "glo", "ist", "lof", "log", "lot", "nlo",
+                  "out", "pdf", "run.xml", "synctex.gz", "thm", "toc", "uhy", "upa", "upb"]:
   path = "thesis.{}".format(extension)
   if os.path.isfile(path): os.remove(path)
 

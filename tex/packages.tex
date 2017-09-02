@@ -1,0 +1,67 @@
+% language-specific things (hyphenation, ...)
+\usepackage[ngerman,american]{babel}
+
+% biblatex package wants to have csquotes (otherwise: warning)
+\usepackage{csquotes}
+
+% dummy texts
+\usepackage[math]{blindtext}
+
+% basic AMS math commands
+\usepackage{amsmath}
+
+% micro-typographic adjustments
+% (final: don't deactivate extensions due to document class draft option)
+\usepackage[final]{microtype}
+
+% check mode
+\iftoggle{checkmode}{
+  % show non-whitelisted hyphenations
+  \usepackage[mark]{lua-check-hyphen}
+}{}
+
+% debug mode
+\iftoggle{debugmode}{
+  % show boxes, glues, and kerning
+  \usepackage{lua-visual-debug}
+}{}
+
+% Unicode umlauts
+\usepackage[utf8]{luainputenc}
+
+% need T1 font encoding for Charter,
+% otherwise there will be "undefined font shape" warnings
+\usepackage[T1]{fontenc}
+
+% use Bitstream Charter as main font
+\usepackage[bitstream-charter]{mathdesign}
+
+% graphics
+\usepackage{graphicx}
+
+% X column type for tables (filling rest of line)
+\usepackage{tabularx}
+
+% table of symbols and acronyms
+\usepackage[
+  % show glossary in table of contents
+  toc,
+  % don't group entries with same first letter
+  nogroupskip,
+  % don't append full stop to entries
+  nopostdot,
+  % don't append pages where the acronym is referenced
+  nonumberlist,
+]{glossaries}
+
+% line spacing (one and a half lines)
+\usepackage[onehalfspacing]{setspace}
+
+% PDF links
+\usepackage{hyperref}
+
+% BibLaTeX
+\usepackage{biblatex}
+
+% named references
+\usepackage{cleveref}

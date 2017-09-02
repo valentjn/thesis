@@ -1,0 +1,22 @@
+% \newcommand with variable command names
+% (https://tex.stackexchange.com/a/317094)
+\makeatletter
+\newcommand*{\newnamecommand}{\@star@or@long\new@name@command}
+\newcommand*{\new@name@command}[1]{\expandafter\new@command\csname #1\endcsname}
+\makeatother
+
+% black-board letters
+% define \bbN and \NN (N = arbitrary letter)
+\newcommand*{\defbb}[1]{%
+  \newnamecommand{bb#1}{\mathbb{#1}}%
+  \newnamecommand{#1#1}{\mathbb{#1}}%
+}
+\defbb{N}
+\defbb{R}
+\defbb{Z}
+
+% calligraphic letters
+% define \calC (C = arbitrary letter)
+\newcommand*{\defcal}[1]{\newnamecommand{cal#1}{\mathcal{#1}}}
+\defcal{C}
+\defcal{O}
