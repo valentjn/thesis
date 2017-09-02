@@ -4,6 +4,9 @@
 % biblatex package wants to have csquotes (otherwise: warning)
 \usepackage{csquotes}
 
+% lower-case page header
+\usepackage[markcase=lower]{scrlayer-scrpage}
+
 % dummy texts
 \usepackage[math]{blindtext}
 
@@ -11,8 +14,14 @@
 \usepackage{amsmath}
 
 % micro-typographic adjustments
-% (final: don't deactivate extensions due to document class draft option)
-\usepackage[final]{microtype}
+\usepackage[
+  % don't deactivate extensions due to document class draft option
+  final,
+  % increase letter spacing in small-caps
+  tracking=smallcaps,
+  % smaller amount of letter spacing (default: 100)
+  letterspace=50,
+]{microtype}
 
 % check mode
 \iftoggle{checkmode}{
