@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+# post-action for cropping PDFs with pdfcrop
 def crop_pdf_action(target, source, env):
   for t in target:
     path = t.get_abspath()
@@ -16,14 +17,37 @@ env.Install(env["BUILD_DIR"], pre)
 # set output directory
 env.Append(PDFLATEXFLAGS="--output-directory={}".format(env["BUILD_DIR"]))
 
-# compile TeX graphics
-texs = env.Glob("tex/*.tex")
+# search for Python scripts
+pys = env.Glob("py/*.py")
 pdfs = []
 
-for tex in texs:
-  pdf = "{}/{}.pdf".format(env["BUILD_DIR"], os.path.splitext(tex.name)[0])
-  pdfs.append(env.PDF(target=pdf, source=tex))
+for py in pys:
+  # determine number of generated images by script
+  name, ext = os.path.splitext(py.name)
+  tex_count = 1
+  
+  if "_" in name:
+    parts = name.split("_")
+    number = parts[-1]
+    
+    if len(number.strip("0123456789")) == 0:
+      tex_count = int(number)
+      name = "_".join(parts[:-1])
+  
+  # generate list of *.tex files and compile to *.pdf files
+  texs = []
+  
+  for i in range(1, tex_count + 1):
+    tex = os.path.join(env["BUILD_DIR"].abspath, "{}_{}.tex".format(name, i))
+    pdf = "{}.pdf".format(os.path.splitext(tex)[0])
+    env.PDF(target=pdf, source=tex)
+    texs.append(tex)
+    pdfs.append(pdf)
+  
+  # generate *.tex files
+  env.Command(texs, py, "python3 $SOURCE")
 
+# crop *.pdf files
 env.AddPostAction(pdfs, crop_pdf_action)
 
 Return("pdfs")
