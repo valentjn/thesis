@@ -70,9 +70,6 @@
   \LuaCheckHyphen{whitelist=hyphenation_whitelist.txt}
 }{}
 
-% location of *.bib file
-\addbibresource{../bib/bibliography.bib}
-
 % meta-data variables
 \newcommand*{\thetitle}{%
   B-Splines for Sparse Grids:\texorpdfstring{\\}{}
@@ -89,11 +86,17 @@
   pdfcreator={LaTeX, KOMA-Script, hyperref},
 }
 
+% location of *.bib file
+\addbibresource{../bib/bibliography.bib}
+
 % change bibliography heading (default: "Bibliography")
 \DefineBibliographyStrings{english}{bibliography={References}}
 
 % change font size of bibliography
 \renewcommand*{\bibfont}{\small}
+
+% set single line spacing for bibliography
+\renewcommand*{\bibsetup}{\singlespacing}
 
 % use single spacing in table of contents
 \AfterTOCHead[toc]{\singlespacing}
