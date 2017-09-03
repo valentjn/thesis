@@ -24,20 +24,12 @@
 \newcommand*{\currentname}{\@currentlabelname}
 \makeatother
 
-% patch easy-todo such that nag warning goes away (unmatched flushright);
-% in addition, this removes the ugly "P." header
-%\makeatletter
-%\renewcommand*{\listoftodos}{%
-%  \ifthenelse{\equal{\@todoenable}{true}}{%
-%    \addchap{\texorpdfstring{\todocolor{}}{}List of TODOs}%
-%    \todocolor\@starttoc{lod}%
-%  }{}%
-%}
-%\makeatother
-%
-%% include position in TODOs
-%\let\oldtodoii\todoii
-%\renewcommand*{\todoii}[2]{\oldtodoii{#1}{\thesubsection{} \currentname: #2}}
+% custom TODO command with warning
+% (all packages that were tried produced problems)
+\newcommand*{\todo}[1]{%
+  \textcolor{red}{TODO: #1}%
+  \GenericWarning{}{LaTeX TODO Warning (\thesubsection\space\currentname): "#1"}%
+}
 
 % location of graphics files
 \graphicspath{{../gfx/}}
