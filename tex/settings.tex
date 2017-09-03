@@ -103,6 +103,9 @@
 % change font size of bibliography
 \renewcommand*{\bibfont}{\small}
 
+% use single spacing in table of contents
+\AfterTOCHead[toc]{\singlespacing}
+
 % define new glossary style based on long (uses longtable)
 % in which the column widths are fixed and space before/after the
 % table is removed
@@ -112,8 +115,13 @@
     {%
       \setlength{\LTpre}{0pt}%
       \setlength{\LTpost}{0pt}%
-      \begin{longtable}{@{}p{0.2\textwidth}@{}p{0.8\textwidth}@{}}}%
-    {\end{longtable}}%
+      \begin{spacing}{1}%
+        \begin{longtable}{@{}p{0.2\textwidth}@{}p{0.8\textwidth}@{}}%
+    }%
+    {%
+        \end{longtable}%
+      \end{spacing}%
+    }%
 }
 
 % use new glossary style
