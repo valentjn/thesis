@@ -28,3 +28,12 @@
     \chapterheadendvskip%
   }%
 }
+
+% custom TODO command with warning
+% (all packages that were tried produced problems)
+\newcommand*{\TODO}[1]{%
+  \GenericWarning{}{%
+    LaTeX Warning (\thesubsection\space\currentname): TODO "#1"%
+  }%
+  \textcolor{red}{TODO: #1}%
+}

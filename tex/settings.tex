@@ -24,15 +24,6 @@
 \newcommand*{\currentname}{\@currentlabelname}
 \makeatother
 
-% custom TODO command with warning
-% (all packages that were tried produced problems)
-\newcommand*{\todo}[1]{%
-  \GenericWarning{}{%
-    LaTeX TODO Warning (\thesubsection\space\currentname): "#1"%
-  }%
-  \textcolor{red}{TODO: #1}%
-}
-
 % warn for every usage of \blindtext
 \let\oldblindtext\blindtext
 \renewcommand*{\blindtext}{%
@@ -88,7 +79,7 @@
   Higher-Dimensional Optimization%
 }
 \newcommand*{\theauthor}{Julian Valentin}
-\newcommand*{\thedate}{TODO(date)}
+\newcommand*{\thedate}{\TODO{insert date}}
 
 % set up hyperref
 \hypersetup{
