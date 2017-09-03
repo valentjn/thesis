@@ -27,8 +27,19 @@
 % custom TODO command with warning
 % (all packages that were tried produced problems)
 \newcommand*{\todo}[1]{%
+  \GenericWarning{}{%
+    LaTeX TODO Warning (\thesubsection\space\currentname): "#1"%
+  }%
   \textcolor{red}{TODO: #1}%
-  \GenericWarning{}{LaTeX TODO Warning (\thesubsection\space\currentname): "#1"}%
+}
+
+% warn for every usage of \blindtext
+\let\oldblindtext\blindtext
+\renewcommand*{\blindtext}{%
+  \GenericWarning{}{%
+    LaTeX Warning (\thesubsection\space\currentname): \string\blindtext%
+  }%
+  \oldblindtext%
 }
 
 % location of graphics files
