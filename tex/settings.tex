@@ -80,12 +80,6 @@
 % change font size of bibliography
 \renewcommand*{\bibfont}{\small}
 
-% define dummy glossary
-% (Needed for SCons because it automatically executes makeindex
-% twice; once for *.glo and once for *.acn. *.glo is the default
-% one and we don't have a *.acn, so we have to generate an empty one.)
-\newglossary[alg]{dummyglossary}{acr}{acn}{Empty Dummy Glossary}
-
 % define new glossary style based on long (uses longtable)
 % in which the column widths are fixed and space before/after the
 % table is removed
