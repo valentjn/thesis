@@ -8,8 +8,19 @@ env = Environment(ENV=os.environ)
 env.Replace(PDFLATEX="texfot lualatex")
 # enable SyncTeX for GUI editors
 env.Append(PDFLATEXFLAGS="--synctex=1")
-# quiet output
+# don't call BibTeX on *.aux files of chapters
+env.Replace(BIBTEXCOM="")
+# quiet Biber output
 env.Append(BIBERFLAGS="-q")
+# use makeglossaries instead of directly calling makeindex
+env.Replace(MAKEGLOSSARY="makeglossaries")
+# quiet makeglossaries output
+env.Replace(MAKEGLOSSARYFLAGS="-q")
+# reorder arguments for makeglossaries
+# (filename without extension has to be at the end)
+env.Replace(MAKEGLOSSARYCOM=env["MAKEGLOSSARYCOM"].replace(
+    "${SOURCE.filebase}.glo $MAKEGLOSSARYFLAGS -o ${SOURCE.filebase}.gls",
+    "$MAKEGLOSSARYFLAGS -o ${SOURCE.filebase}.gls ${SOURCE.filebase}"))
 
 # use timestamp to decide if a file should be rebuilt
 # (otherwise SCons won't rebuild even if it is necessary)
