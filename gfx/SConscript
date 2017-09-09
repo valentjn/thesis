@@ -48,7 +48,7 @@ for py in pys:
     pdfs.append(pdf)
   
   # generate *.tex files
-  env.Command(texs, py, "python3 $SOURCE")
+  env.Command(texs, py, "python3 $SOURCE --build-dir=$BUILD_DIR")
   # *.tex files depend on helper scripts
   env.Depends(texs, helper_pys)
 
