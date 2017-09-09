@@ -11,8 +11,6 @@ env = Environment(ENV=os.environ)
 
 # use LuaLaTeX as compiler (successor of PDFLaTeX)
 env.Replace(PDFLATEX="texfot lualatex")
-# enable SyncTeX for GUI editors
-env.Append(PDFLATEXFLAGS="--synctex=1")
 # don't call BibTeX on *.aux files of chapters
 env.Replace(BIBTEXCOM="")
 # quiet Biber output

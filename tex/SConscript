@@ -3,6 +3,9 @@ import os
 Import("env")
 env = env.Clone()
 
+# enable SyncTeX for GUI editors
+env.Append(PDFLATEXFLAGS="--synctex=1")
+
 # remove temporary files created accidential run of LuaLaTeX instead of SCons
 # (pressing the wrong button in TeXstudio)
 for path in os.listdir("."):
