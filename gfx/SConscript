@@ -21,6 +21,9 @@ env.Append(PDFLATEXFLAGS="--output-directory={}".format(env["BUILD_DIR"]))
 pys = env.Glob("py/*.py")
 pdfs = []
 
+# search for helper Python scripts
+helper_pys = env.Glob("py/helper/*.py")
+
 for py in pys:
   # determine number of generated images by script
   name, ext = os.path.splitext(py.name)
@@ -46,6 +49,8 @@ for py in pys:
   
   # generate *.tex files
   env.Command(texs, py, "python3 $SOURCE")
+  # *.tex files depend on helper scripts
+  env.Depends(texs, helper_pys)
 
 # crop *.pdf files
 env.AddPostAction(pdfs, crop_pdf_action)
