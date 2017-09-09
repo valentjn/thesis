@@ -1,5 +1,10 @@
 import os
 
+# increase line length of LuaLaTeX error log lines by setting environment variables
+os.environ["max_print_line"] = "1000"
+os.environ["error_line"] = "254"
+os.environ["half_error_line"] = "238"
+
 # set up environment, export environment variables of the shell
 # (for example needed for custom TeX installations which need PATH)
 env = Environment(ENV=os.environ)
