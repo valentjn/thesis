@@ -11,7 +11,7 @@ class CardinalBSpline(object):
   def evaluate(self, xx):
     return scipy.signal.bspline(xx - (self.p+1)/2, self.p)
 
-class BSpline(object):
+class HierarchicalBSpline(object):
   def __init__(self, p):
     self.p = p
     self.cardinal_bspline = CardinalBSpline(p)
