@@ -11,7 +11,10 @@
 \renewcommand*{\raggeddictumtext}{\raggedleft}
 
 % small-caps page header
-\setkomafont{pageheadfoot}{\normalfont\normalcolor\scshape}
+\setkomafont{pageheadfoot}{\normalfont\footnotesize\normalcolor\scshape}
+
+% ... but don't use small-caps for page number in footer
+\setkomafont{pagenumber}{\normalfont\normalsize}
 
 % recalculate page margins as the line spread has changed
 \recalctypearea
