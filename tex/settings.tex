@@ -16,6 +16,34 @@
 % ... but don't use small-caps for page number in footer
 \setkomafont{pagenumber}{\normalfont\normalsize}
 
+% format float captions
+\DeclareCaptionLabelFormat{mylabelformat}{%
+  \bfseries\footnotesize{\scshape\MakeUppercase{#1}} #2%
+}
+\captionsetup{
+  % use custom label format
+  labelformat=mylabelformat,
+  % separate number and caption with \quad
+  labelsep=quad,
+}
+
+% format subfloat captions
+\DeclareCaptionLabelFormat{mysublabelformat}{%
+  \bfseries\footnotesize{\scshape\MakeUppercase{#2}}%
+}
+\captionsetup[sub]{
+  % use custom label format
+  labelformat=mysublabelformat,
+  % separate number and caption with \quad
+  labelsep=quad,
+}
+
+% automatically center all float and subfigure contents
+\makeatletter
+\g@addto@macro\@floatboxreset{\centering}
+\apptocmd\subcaption@minipage{\centering}{}{}
+\makeatother
+
 % recalculate page margins as the line spread has changed
 \recalctypearea
 
