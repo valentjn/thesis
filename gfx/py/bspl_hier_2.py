@@ -22,11 +22,11 @@ for l in range(1, n+1):
     xx = np.linspace(max((i - (p+1)/2) * h, 0),
                      min((i + (p+1)/2) * h, 1), 200)
     yy = b.evaluate(l, i, xx)
-    ax.plot(xx, yy, "b-")
+    ax.plot(xx, yy, "-")
+  
+  ax.autoscale(tight=True)
 
 fig.save(1, width=50)
-
-
 
 fig = helper.figure.Figure()
 ax = fig.gca()
@@ -35,6 +35,7 @@ for i in range(1, h_inv):
   xx = np.linspace(max((i - (p+1)/2) * h, 0),
                     min((i + (p+1)/2) * h, 1), 200)
   yy = b.evaluate(l, i, xx)
-  ax.plot(xx, yy, "b-")
+  ax.plot(xx, yy, "-")
 
+ax.autoscale(tight=True)
 fig.save(2)

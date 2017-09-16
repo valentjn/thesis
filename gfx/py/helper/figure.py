@@ -2,6 +2,7 @@ import io
 import os
 import sys
 
+import cycler
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib2tikz
@@ -54,8 +55,25 @@ Horizontal alignment will be ignored as no 'y tick label text width' has been pa
 Horizontal alignment will be ignored as no 'z tick label text width' has been passed in the 'extra' parameter
 """
   
+  _DEFAULT_AXIS_OPTIONS = [
+    "axis lines=left",
+  ]
+  
+  _LINE_COLORS = [
+    (0.000, 0.447, 0.741),
+    (0.850, 0.325, 0.098),
+    (0.929, 0.694, 0.125),
+    (0.494, 0.184, 0.556),
+    (0.466, 0.674, 0.188),
+    (0.301, 0.745, 0.933),
+    (0.635, 0.078, 0.184),
+    (0.887, 0.465, 0.758),
+    (0.496, 0.496, 0.496),
+  ]
+  
   def __init__(self, *args, **kwargs):
     super(Figure, self).__init__(*args, **kwargs)
+    matplotlib.rcParams["axes.prop_cycle"] = cycler.cycler(color=Figure._LINE_COLORS)
   
   def _get_build_dir():
     return os.path.realpath(os.environ["BUILD_DIR"])
@@ -76,7 +94,9 @@ Horizontal alignment will be ignored as no 'z tick label text width' has been pa
   def save(self, graphics_number, width=None, height=None, extra_axis_options=None):
     if width is not None:  width  = "{}mm".format(width)
     if height is not None: height = "{}mm".format(height)
-    if extra_axis_options is None: extra_axis_options = {}
+    if extra_axis_options is None: extra_axis_options = []
+    
+    extra_axis_options = Figure._DEFAULT_AXIS_OPTIONS + extra_axis_options
     
     build_dir = Figure._get_build_dir()
     graphics_basename = Figure._get_graphics_basename()
