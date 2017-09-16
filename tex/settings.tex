@@ -10,15 +10,18 @@
 \renewcommand*{\dictumrule}{}
 \renewcommand*{\raggeddictumtext}{\raggedleft}
 
-% small-caps sans-serif page header
-\setkomafont{pageheadfoot}{\normalfont\sffamily\footnotesize\normalcolor\scshape}
+% all-caps sans-serif page header
+\setkomafont{pageheadfoot}{%
+  \normalfont\normalcolor\sffamily\fontsize{9}{10}\selectfont\lsstyle%
+}
 
-% ... but don't use small-caps for page number in footer
-\setkomafont{pagenumber}{\normalfont\sffamily\normalsize}
+% ... but don't use all-caps for page number in footer
+% (caution: the "\textls*[0]" is a hack for deactivating letter spacing)
+\setkomafont{pagenumber}{\normalfont\normalsize\textls*[0]}
 
 % format float captions
 \DeclareCaptionLabelFormat{mylabelformat}{%
-  \sffamily\bfseries\footnotesize{\scshape\MakeUppercase{#1}} #2%
+  \sffamily\bfseries\footnotesize\textls*{\MakeUppercase{#1}} #2%
 }
 \captionsetup{
   % use custom label format
@@ -29,7 +32,7 @@
 
 % format subfloat captions
 \DeclareCaptionLabelFormat{mysublabelformat}{%
-  \sffamily\bfseries\footnotesize{\scshape\MakeUppercase{#2}}%
+  \sffamily\bfseries\footnotesize\textls*{\MakeUppercase{#2}}%
 }
 \captionsetup[sub]{
   % use custom label format
