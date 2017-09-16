@@ -29,6 +29,11 @@
   }%
 }
 
+% calculate difference between page numbers
+\newcommand*{\pagedifference}[2]{%
+  \number\numexpr\getpagerefnumber{#2}-\getpagerefnumber{#1}\relax%
+}
+
 % custom TODO command with warning
 % (all packages that were tried produced problems)
 \newcommand*{\TODO}[1]{%
