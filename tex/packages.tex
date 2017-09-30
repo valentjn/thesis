@@ -94,7 +94,14 @@
 \usepackage{hyperref}
 
 % BibLaTeX
-\usepackage{biblatex}
+\usepackage[
+  % abbreviate author names
+  giveninits=true,
+  % don't show ISBNs/ISSNs
+  isbn=false,
+  % only show years in dates
+  date=year,
+]{biblatex}
 
 % named references
 \usepackage[capitalise]{cleveref}

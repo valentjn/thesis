@@ -125,8 +125,55 @@
 % location of *.bib file
 \addbibresource{../bib/bibliography.bib}
 
-% change bibliography heading (default: "Bibliography")
-\DefineBibliographyStrings{english}{bibliography={References}}
+% add custom bibliography post note (URLs last checked on ...)
+\defbibnote{mypostnote}{All URLs have last been checked on \thedate.}
+
+% insert colon after author names
+\renewcommand*{\labelnamepunct}{: }
+
+% hide urldate field
+\AtEveryBibitem{\clearfield{urlyear}}
+
+% make paper titles italic, remove quotation marks
+\DeclareFieldFormat[article]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[article]{journaltitle}{#1}
+\DeclareFieldFormat[thesis]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[inbook]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[inbook]{booktitle}{#1}
+\DeclareFieldFormat[incollection]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[incollection]{booktitle}{#1}
+\DeclareFieldFormat[inproceedings]{title}{\mkbibemph{#1}}
+\DeclareFieldFormat[inproceedings]{booktitle}{#1}
+\DeclareFieldFormat[unpublished]{title}{\mkbibemph{#1}}
+
+% fix title capitalization to sentence case (all lowercase)
+\DeclareFieldFormat{titlecase}{\MakeSentenceCase*{#1}}
+
+% ... but don't change journal titles
+\renewbibmacro*{journal}{%
+  \iffieldundef{journaltitle}{}{%
+    \printtext[journaltitle]{%
+      \printfield[noformat]{journaltitle}%
+      \setunit{\subtitlepunct}%
+      \printfield[noformat]{journalsubtitle}%
+    }%
+  }%
+}
+
+% suppress "In:" before journal names
+\renewbibmacro*{in:}{}
+
+% suppress "and" in author names
+\renewcommand*{\finalnamedelim}{\addcomma\space}
+
+% make names bold
+\renewcommand*{\mkbibnamefamily}[1]{\textbf{#1}}
+
+% define custom heading to fix non-uppercase page header
+\defbibheading{myheading}[\bibname]{%
+  \addchap{#1}%
+  \markboth{BIBLIOGRAPHY}{BIBLIOGRAPHY}%
+}
 
 % change font size of bibliography
 \renewcommand*{\bibfont}{\small}
