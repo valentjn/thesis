@@ -1,36 +1,880 @@
 % Encoding: UTF-8
 
-@INPROCEEDINGS{zenger91sparse,
-  author = {Zenger, Ch.},
-  title = "{Sparse Grids}",
-  booktitle = "{Parallel Algorithms for Partial Differential Equations}",
-  year = {1991},
-  editor = {Hackbusch, Wolfgang},
-  volume = {31},
-  series = {Notes on Numerical Fluid Mechanics},
-  pages = {241-251},
-  publisher = {Vieweg},
-  file = {zenger91sparse.pdf:zenger91sparse.pdf:PDF},
-  review = {DAS erste Paper {\"{u }}ber "D{\"{u}}nne Gitter"}
+
+@Online{ankerl12,
+  Title                    = {Optimized Approximative pow() in C / C++},
+  Author                   = {Martin Ankerl},
+  Date                     = {2012-01-25},
+  Url                      = {http://martin.ankerl.com/2012/01/25/optimized-approximative-pow-in-c-and-cpp/},
+  Urldate                  = {2014-07-08},
+
+  Comment                  = {als Quelle für fastPow (wird in IterativeGridGeneratorRitterNovak verwendet)},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.08}
 }
 
-@Article{Alberty99Remarks,
-  Title                    = {Remarks around 50 lines of {M}atlab: short finite element implementation},
-  Author                   = {Alberty, J. and Carstensen, C. and Funken, S. A.},
-  Journal                  = {Numer. Algorithms},
-  Year                     = {1999},
-  Number                   = {2--3},
-  Pages                    = {117--137},
-  Volume                   = {20},
+@Phdthesis{balder94,
+  Title                    = {Adaptive Verfahren für elliptische und parabolische Dif"|ferentialgleichungen auf dünnen Gittern},
+  Author                   = {Robert Balder},
+  Date                     = {1994},
+  Institution              = {TU München, Institut für Informatik},
 
-  Abstract                 = {A short Matlab implementation for P1-Q1 finite elements on triangles and parallelograms is provided for the numerical solution of elliptic problems with mixed boundary conditions on unstructured grids. According to the shortness of the program and the given documentation, any adaptation from simple model examples to more complex problems can easily beperformed. Numerical examples prove the flexibility of the Matlab tool.},
-  File                     = {:pdf/Alberty99Remarks.pdf:PDF},
-  Fjournal                 = {Numerical Algorithms},
+  Comment                  = {laut pflueger10 die erste Arbeit mit unidirektionalem Prinzip},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/balder_dissertation.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.28}
+}
+
+@Article{boor72,
+  Title                    = {On Calculating with B-Splines},
+  Author                   = {Carl de Boor},
+  Date                     = {1972},
+  Journaltitle             = {Journal of Approximation Theory},
+  Doi                      = {10.1016/0021-9045(72)90080-9},
+  ISSN                     = {0021-9045},
+  Number                   = {1},
+  Pages                    = {50--62},
+  Volume                   = {6},
+
+  Comment                  = {für Cox-de-Boor-Rekursion bei B-Splines},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/boor_on_calculating_with_b-splines.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.27}
+}
+
+@Article{brinks08,
+  Title                    = {On the convergence of derivatives of B-splines to derivatives of the Gaussian function},
+  Author                   = {Ralph Brinks},
+  Date                     = {2008},
+  Journaltitle             = {Computational \& Applied Mathematics},
+  ISSN                     = {1807-0302},
+  Pages                    = {79--92},
+  Volume                   = {27},
+
+  Comment                  = {für Definition/Bedeutung des Mexican-Hat-Wavelets},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/brinks_on_the_convergence_of_derivatives_of_b-splines.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.08.02}
+}
+
+@PhdThesis{bungartz92,
+  author      = {Hans-Joachim Bungartz},
+  title       = {Dünne Gitter und deren Anwendung bei der adaptiven Lösung der dreidimensionalen Poisson-Gleichung},
+  institution = {TU München, Institut für Informatik},
+  date        = {1992-02-07},
+  file        = {:home/julian/studium/sem10/ma/ebooks/bungartz_dissertation.pdf:PDF},
+  langid      = {ngerman},
+  owner       = {julian},
+  timestamp   = {2014.03.31},
+}
+
+@Article{bungartz04,
+  Title                    = {Sparse grids},
+  Author                   = {Hans-Joachim Bungartz and Michael Griebel},
+  Date                     = {2004-05},
+  Journaltitle             = {Acta Numerica},
+  Doi                      = {10.1017/S0962492904000182},
+  ISSN                     = {1474-0508},
+  Pages                    = {147--269},
+  Volume                   = {13},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/bungartz-griebel_sparse_grids.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.29}
+}
+
+@Book{bungartz13,
+  Title                    = {Modellbildung und Simulation},
+  Author                   = {Hans-Joachim Bungartz and Stefan Zimmer and Martin Buchholz and Dirk Pflüger},
+  Date                     = {2013},
+  Doi                      = {10.1007/978-3-642-37656-6},
+  Edition                  = {2},
+  Location                 = {Berlin, Heidelberg},
+  Publisher                = {Springer},
+  Subtitle                 = {Eine anwendungsorientierte Einführung},
+
+  Comment                  = {Buch der ModSim-Vorlesung, für die Einleitung (Anwendung von Modellierung)},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/bungartz-et-al_modellbildung_und_simulation.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Article{clenshaw60,
+  Title                    = {A method for numerical integration on an automatic computer},
+  Author                   = {Charles W. Clenshaw and Alan R. Curtis},
+  Date                     = {1960-12-01},
+  Journaltitle             = {Numerische Mathematik},
+  Doi                      = {10.1007/BF01386223},
+  ISSN                     = {0029-599X},
+  Issue                    = {1},
+  Pages                    = {197--205},
+  Volume                   = {2},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/clenshaw-curtis_method_for_numerical_integration.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.07}
+}
+
+@Manual{comsol13,
+  Title                    = {Tuning Fork},
+  Author                   = {{COMSOL Inc.}},
+  Date                     = {2013},
+  Note                     = {COMSOL Multiphysics 4.3b},
+  Type                     = {Dokumentation mit Beispiel-Modell},
+  Url                      = {http://www.comsol.com/model/tuning-fork-computing-the-eigenfrequency-and-eigenmode-8499},
+  Urldate                  = {2014-05-23},
+
+  Comment                  = {aus der COMSOL-Dokumentation über die Stimmgabel},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/comsol_tuning_fork.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.23}
+}
+
+@Incollection{corliss99,
+  Title                    = {Rigorous Global Search: Industrial Applications},
+  Author                   = {George F. Corliss and R. Baker Kearfott},
+  Booktitle                = {Developments in Reliable Computing},
+  Date                     = {1999},
+  Editor                   = {Tibor Csendes},
+  Doi                      = {10.1007/978-94-017-1247-7_1},
+  Location                 = {Boston},
+  Publisher                = {Kluwer Academic Publishers},
+
+  Comment                  = {viele Anwendungen von globaler Optimierung},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/corliss-kearfott_rigorous_global_search_industrial_applications.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Article{cox72,
+  Title                    = {The Numerical Evaluation of B-Splines},
+  Author                   = {Maurice G. Cox},
+  Date                     = {1972},
+  Journaltitle             = {IMA Journal of Applied Mathematics},
+  Doi                      = {10.1093/imamat/10.2.134},
+  ISSN                     = {0272-4960},
+  Number                   = {2},
+  Pages                    = {134--149},
+  Volume                   = {10},
+
+  Comment                  = {für Cox-de-Boor-Rekursion bei B-Splines},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/cox_the_numerical_evaluation_of_b-splines.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.27}
+}
+
+@Article{dagum98,
+  Title                    = {OpenMP: An Industry Standard API for Shared-Memory Programming},
+  Author                   = {Leonardo Dagum and Ramesh Menon},
+  Date                     = {1998-01},
+  Journaltitle             = {IEEE Computational Science \& Engineering},
+  Doi                      = {10.1109/99.660313},
+  ISSN                     = {1070-9924},
+  Issue                    = {1},
+  Pages                    = {46--55},
+  Volume                   = {5},
+
+  Comment                  = {für OpenMP},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/dagum-menon_openmp.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.10}
+}
+
+@Article{davis04,
+  Title                    = {Algorithm 832: UMFPACK V4.3---An Unsymmetric-pattern Multifrontal Method},
+  Author                   = {Timothy A. Davis},
+  Date                     = {2004-06},
+  Journaltitle             = {ACM Transactions on Mathematical Software},
+  Doi                      = {10.1145/992200.992206},
+  ISSN                     = {0098-3500},
+  Number                   = {2},
+  Pages                    = {196--199},
+  Volume                   = {30},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/davis_umfpack.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.31}
+}
+
+@Inproceedings{donahue09,
+  Title                    = {Robust Parameter Identification with Adaptive Sparse Grid-Based Optimization for Nonlinear Systems Biology Models},
+  Author                   = {Maia M. Donahue and Gregery T. Buzzard and Ann E. Rundell},
+  Booktitle                = {Proceedings of the 2009 American Control Conference},
+  Date                     = {2009-06},
+  Doi                      = {10.1109/ACC.2009.5160512},
+  Location                 = {St. Louis},
+  Pages                    = {5055--5060},
+  Publisher                = {IEEE},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/donahue-et-al_robust_parameter_identification.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.03}
+}
+
+@Article{elton42,
+  Title                    = {The Ten-Year Cycle in Numbers of the Lynx in Canada},
+  Author                   = {Charles Elton and Mary Nicholson},
+  Date                     = {1942-11},
+  Journaltitle             = {Journal of Animal Ecology},
+  Number                   = {2},
+  Pages                    = {215--244},
+  Volume                   = {11},
+
+  Comment                  = {Räuber-Beute: von gilpin73 als Quelle genannt, dass die MacLulich-Daten ungenau sind},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/elton-nicholson_ten-year_cycle_in_numbers_of_the_lynx_in_canada.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.06.03}
+}
+
+@Thesis{ferenczi05,
+  Title                    = {Globale Optimierung unter Nebenbedingungen mit dünnen Gittern},
+  Author                   = {Izabella Ferenczi},
+  Date                     = {2005},
+  Institution              = {TU München, Zentrum Mathematik},
+  Type                     = {Diplomarbeit},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/ferenczi_globale_optimierung.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.28}
+}
+
+@Article{gao12,
+  Title                    = {Implementing the Nelder-Mead simplex algorithm with adaptive parameters},
+  Author                   = {Fuchang Gao and Lixing Han},
+  Date                     = {2012},
+  Journaltitle             = {Computational Optimization and Applications},
+  Doi                      = {10.1007/s10589-010-9329-3},
+  ISSN                     = {0926-6003},
+  Issue                    = {1},
+  Pages                    = {256--277},
+  Volume                   = {51},
+
+  Comment                  = {gute allgemeinverständliche Beschreibung von Nelder-Mead},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/gao-han_implementing_the_nelder-mead_simplex_algorithm.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.31}
+}
+
+@Incollection{garcke13,
+  Title                    = {Sparse Grids in a Nutshell},
+  Author                   = {Jochen Garcke},
+  Booktitle                = {Sparse Grids and Applications},
+  Date                     = {2013},
+  Editor                   = {Jochen Garcke and Michael Griebel},
+  Doi                      = {10.1007/978-3-642-31703-3_3},
+  Location                 = {Berlin Heidelberg},
+  Pages                    = {57--80},
+  Publisher                = {Springer},
+  Series                   = {Lecture Notes in Computational Science and Engineering},
+  Volume                   = {88},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/garcke_sparse_grids_in_a_nutshell.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.29}
+}
+
+@Article{garcke01,
+  Title                    = {Data Mining with Sparse Grids},
+  Author                   = {Jochen Garcke and Michael Griebel and Michael Thess},
+  Date                     = {2001-10},
+  Journaltitle             = {Computing},
+  Doi                      = {10.1007/s006070170007},
+  ISSN                     = {0010-485X},
+  Issue                    = {3},
+  Pages                    = {225--253},
+  Volume                   = {67},
+
+  Comment                  = {über Data Mining mit dünnen Gittern},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/garcke-et-al_data_mining_with_sparse_grids.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Article{gerstner98,
+  Title                    = {Numerical integration using sparse grids},
+  Author                   = {Thomas Gerstner and Michael Griebel},
+  Date                     = {1998-10-10},
+  Journaltitle             = {Numerical Algorithms},
+  Doi                      = {10.1023/A:1019129717644},
   ISSN                     = {1017-1398},
-  Keywords                 = {students, lecture, GLWissRech, seminar, students},
-  Mrclass                  = {65N30 (65M60)},
-  Mrnumber                 = {1 709 562},
-  Owner                    = {zimmersn},
-  Timestamp                = {2016.02.01},
-  Url                      = {https://www.math.hu-berlin.de/~cc/cc_homepage/download/1999-AJ_CC_FS-50_Lines_of_Matlab.pdf}
+  Issue                    = {3--4},
+  Pages                    = {209--232},
+  Volume                   = {18},
+
+  Comment                  = {untersuchen Gauß-Patterson- und Gauß-Legendre-Gitter},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/gerstner-griebel_numerical_integration_using_sparse_grids.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.31}
 }
+
+@Article{gilpin73,
+  Title                    = {Do Hares Eat Lynx?},
+  Author                   = {Michael E. Gilpin},
+  Date                     = {1973},
+  Journaltitle             = {The American Naturalist},
+  ISSN                     = {0003-0147},
+  Number                   = {957},
+  Pages                    = {727--730},
+  Volume                   = {107},
+
+  Comment                  = {als Quelle, dass Räuber-Beute-Modelle oft mit den MacLulich-Daten gecheckt werden},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/gilpin_do_hares_eat_lynx.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.06.03}
+}
+
+@Online{eigen10,
+  Title                    = {Eigen v3},
+  Author                   = {Ga\"{e}l Guennebaud and Beno\^{i}t Jacob and andere},
+  Date                     = {2010},
+  Url                      = {http://eigen.tuxfamily.org/},
+  Urldate                  = {2014-07-10},
+
+  Comment                  = {für Eigen},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.10}
+}
+
+@Article{han99,
+  Title                    = {Dynamics of Transversely Vibrating Beams Using Four Engineering Theories},
+  Author                   = {Seon M. Han and Haym Benaroya and Timothy Wei},
+  Date                     = {1999},
+  Journaltitle             = {Journal of Sound and Vibration},
+  Doi                      = {10.1006/jsvi.1999.2257},
+  ISSN                     = {0022-460X},
+  Number                   = {5},
+  Pages                    = {935--988},
+  Volume                   = {225},
+
+  Comment                  = {Stimmgabel: als Quelle für die Abschätzungsformel der Eigenfrequenz},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/han_dynamics_of_transversely_vibrating_beams.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.06.04}
+}
+
+@Unpublished{he13,
+  Title                    = {Computational Modelling with MATLAB},
+  Author                   = {Shan He},
+  Date                     = {2013},
+  HowPublished             = {Folien zur Vorlesung},
+  Location                 = {University of Birmingham},
+  Subtitle                 = {Model Parameter Estimation},
+  Url                      = {http://www.cs.bham.ac.uk/~szh/teaching/matlabmodeling/Lecture19_body_ModelParameterEstimation.pdf},
+  Urldate                  = {2014-06-03},
+
+  Comment                  = {Datenquelle für Lotka-Volterra + Erklärungen dazu},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/he_model_parameter_estimation.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.06.03}
+}
+
+@Book{hoellig03,
+  Title                    = {Finite Element Methods with B-Splines},
+  Author                   = {Klaus Höllig},
+  Date                     = {2003},
+  Doi                      = {10.1137/1.9780898717532},
+  Location                 = {Philadelphia},
+  Publisher                = {SIAM},
+
+  File                     = {:home/julian/studium/sem6/fe/fem.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.08}
+}
+
+@Book{hoellig13,
+  Title                    = {Approximation and Modeling with B-Splines},
+  Author                   = {Klaus Höllig and Jörg Hörner},
+  Date                     = {2013},
+  Location                 = {Philadelphia},
+  Publisher                = {SIAM},
+
+  Owner                    = {julian},
+  Timestamp                = {2014.04.08}
+}
+
+@Thesis{huebner14,
+  Title                    = {Mehrdimensionale Parametrisierung der Mikrozellen in der Zwei-Skalen-Optimierung},
+  Author                   = {Daniel Hübner},
+  Date                     = {2014-05-02},
+  Institution              = {Universität Erlangen-Nürnberg, Department Mathematik},
+  Type                     = {Masterarbeit},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/huebner_mehrdimensionale_parametrisierung.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.08.14}
+}
+
+@Inproceedings{kaltenbacher10,
+  Title                    = {Advanced Simulation Tool for the Design of Sensors and Actuators},
+  Author                   = {Manfred Kaltenbacher},
+  Booktitle                = {Eurosensor XXIV Conference},
+  Date                     = {2010},
+  Editor                   = {Bernhard Jakoby and Michael J. Vellekoop},
+  Doi                      = {10.1016/j.proeng.2010.09.180},
+  Location                 = {Linz},
+  Maintitle                = {Procedia Engineering},
+  Pages                    = {597--600},
+  Publisher                = {Elsevier},
+  Volume                   = {5},
+
+  Comment                  = {als Quelle für CFS++},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/kaltenbacher_advanced_simulation_tool_for_the_design_of_sensors_and_actuators.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.08.19}
+}
+
+@Thesis{kinauer13,
+  Title                    = {Hierarchische Optimierung mit Dünnen Gittern},
+  Author                   = {Stefan Kinauer},
+  Date                     = {2013-09-30},
+  Institution              = {TU München, Fakultät für Informatik},
+  Type                     = {Projektarbeit},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/kinauer_hierarchische_optimierung.pdf:PDF},
+  HowPublished             = {Projektarbeit},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.28}
+}
+
+@Article{klimke05,
+  Title                    = {Algorithm 847: \texttt{spinterp}},
+  Author                   = {Andreas Klimke and Barbara Wohlmuth},
+  Date                     = {2005-12},
+  Journaltitle             = {ACM Transactions on Mathematical Software},
+  Doi                      = {10.1145/1114268.1114275},
+  ISSN                     = {0098-3500},
+  Number                   = {4},
+  Pages                    = {561--579},
+  Subtitle                 = {Piecewise Multilinear Hierarchical Sparse Grid Interpolation in MATLAB},
+  Volume                   = {31},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/klimke-wohlmuth_spinterp.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.31}
+}
+
+@Article{lekien05,
+  Title                    = {Tricubic interpolation in three dimensions},
+  Author                   = {Francois Lekien and Jerrold E. Marsden},
+  Date                     = {2005},
+  Journaltitle             = {International Journal for Numerical Methods in Engineering},
+  Doi                      = {10.1002/nme.1296},
+  ISSN                     = {1097-0207},
+  Number                   = {3},
+  Pages                    = {455--471},
+  Volume                   = {63},
+
+  Comment                  = {als Quelle von Hübner für C1-Interpolation},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/lekien-marsden_tricubic_interpolation_in_three_dimensions.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.08.17}
+}
+
+@Book{ljung99,
+  Title                    = {System Identification},
+  Author                   = {Lennart Ljung},
+  Date                     = {1999},
+  Edition                  = {2},
+  Location                 = {Upper Saddle River, New Jersey},
+  Publisher                = {Prentice Hall},
+  Subtitle                 = {Theory for the User},
+
+  Comment                  = {nach matlab14 (MATLAB-Dokumentation) Quelle für Gleichstrommotor-ODE},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/ljung_system_identification_page_97.png:PNG image;:home/julian/studium/sem10/ma/ebooks/ljung_system_identification_page_96.png:PNG image;:home/julian/studium/sem10/ma/ebooks/ljung_system_identification_page_95.png:PNG image},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.23}
+}
+
+@Article{maclulich36,
+  Title                    = {Sunspots and abundance of animals},
+  Author                   = {Duncan A. MacLulich},
+  Date                     = {1936},
+  Journaltitle             = {Journal of the Royal Astronomical Society of Canada},
+  ISSN                     = {0035-872X},
+  Pages                    = {233--246},
+  Url                      = {http://articles.adsabs.harvard.edu/full/1936JRASC..30..233M},
+  Volume                   = {30},
+
+  Comment                  = {Datenquelle für Räuber-Beute-Modell, genaue Daten von http://www.cs.bham.ac.uk/~szh/teaching/matlabmodeling/Lecture19_body_ModelParameterEstimation.pdf},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.20}
+}
+
+@Unpublished{molga05,
+  Title                    = {Test functions for optimization needs},
+  Author                   = {Marcin Molga and Czesław Smutnicki},
+  Date                     = {2005-04-03},
+  Url                      = {www.zsd.ict.pwr.wroc.pl/files/docs/functions.pdf},
+  Urldate                  = {2014-04-23},
+
+  Comment                  = {gut für verschiedene Testfunktionen},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/molga-smutnicki_test_functions_for_optimization.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.23}
+}
+
+@Article{nelder65,
+  Title                    = {A simplex method for function minimization},
+  Author                   = {John A. Nelder and Roger Mead},
+  Date                     = {1965},
+  Journaltitle             = {The Computer Journal},
+  Doi                      = {10.1093/comjnl/7.4.308},
+  ISSN                     = {0010-4620},
+  Issue                    = {4},
+  Pages                    = {308--313},
+  Volume                   = {7},
+
+  Comment                  = {Originalpaper vom Nelder-Mead-Verfahren},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/nelder-mead_simplex_method_for_function_minimization.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.27}
+}
+
+@Inbook{novak96b,
+  Title                    = {Global Optimization Using Hyperbolic Cross Points},
+  Author                   = {Erich Novak and Klaus Ritter},
+  Booktitle                = {State of the Art in Global Optimization},
+  Date                     = {1996},
+  Booksubtitle             = {Computational Methods and Applications},
+  Doi                      = {10.1007/978-1-4613-3437-8_2},
+  Editor                   = {Christodoulos A. Floudas and Panos M. Pardalos},
+  Location                 = {USA},
+  Pages                    = {19--33},
+  Publisher                = {Springer},
+  Series                   = {Nonconvex Optimization and Its Applications},
+  Volume                   = {7},
+
+  Comment                  = {darauf baut Ferenczis Algorithmus auf},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/novak-ritter_global_optimization_using_hyperbolic_cross_points.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.27}
+}
+
+@Article{novak96a,
+  Title                    = {High dimensional integration of smooth functions over cubes},
+  Author                   = {Erich Novak and Klaus Ritter},
+  Date                     = {1996-11-01},
+  Journaltitle             = {Numerische Mathematik},
+  Doi                      = {10.1007/s002110050231},
+  ISSN                     = {0029-599X},
+  Issue                    = {1},
+  Pages                    = {79--97},
+  Volume                   = {75},
+
+  Comment                  = {untersuchen Clenshaw-Curtis-Gitter},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/novak-ritter_high_dimensional_integration_of_smooth_functions_over_cubes.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.31}
+}
+
+@Thesis{pandey08,
+  Title                    = {Regression with Spatially Adaptive Sparse Grids in Financial Applications},
+  Author                   = {Deepak Pandey},
+  Date                     = {2008},
+  Institution              = {TU München, Fakultät für Informatik},
+  Type                     = {Masterarbeit},
+
+  Comment                  = {laut pflueger10 die erste Arbeit mit B-Splines auf dünnen Gittern},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.08}
+}
+
+@Book{pflueger10,
+  Title                    = {Spatially Adaptive Sparse Grids for High-Dimensional Problems},
+  Author                   = {Dirk Pflüger},
+  Date                     = {2010},
+  Location                 = {München},
+  Publisher                = {Verlag Dr. Hut},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/pflueger_dissertation.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.29}
+}
+
+@Manual{sgpp09,
+  Title                    = {Dokumentation von \sgpp{}},
+  Author                   = {Dirk Pflüger and Jörg Blank and Alexander Heinecke},
+  Date                     = {2009},
+  Url                      = {http://www5.in.tum.de/SGpp/releases/index.html},
+  Urldate                  = {2014-07-05},
+
+  Comment                  = {SG++-Dokumentation für die Bilder bei GetAffectedBasisFunctions},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.05}
+}
+
+@Article{powell77,
+  Title                    = {Restart procedures for the conjugate gradient method},
+  Author                   = {Michael J. D. Powell},
+  Date                     = {1977},
+  Journaltitle             = {Mathematical Programming},
+  Doi                      = {10.1007/BF01593790},
+  ISSN                     = {0025-5610},
+  Issue                    = {1},
+  Pages                    = {241--254},
+  Volume                   = {12},
+
+  Comment                  = {für Neustart-Kriterium beim NLCG-Verfahren},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/powell_restart_procedures_for_the_conjugate_gradient_method.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.27}
+}
+
+@Book{press07,
+  Title                    = {Numerical Recipes},
+  Author                   = {William H. Press and Saul A. Teukolsky and William T. Vetterling and Brian P. Flannery},
+  Date                     = {2007},
+  Edition                  = {3},
+  Location                 = {New York},
+  Publisher                = {Cambridge University Press},
+  Subtitle                 = {The Art of Scientific Computing},
+
+  Comment                  = {z. B. für Berechnung von Legendre-Nullstellen oder Nelder-Mead},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/press-et-al_numerical_recipes.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.01}
+}
+
+@Book{reinhardt13,
+  Title                    = {Nichtlineare Optimierung},
+  Author                   = {Rüdiger Reinhardt and Armin Hoffmann and Tobias Gerlach},
+  Date                     = {2013},
+  Doi                      = {10.1007/978-3-8274-2949-0},
+  Location                 = {Berlin Heidelberg},
+  Publisher                = {Springer},
+  Subtitle                 = {Theorie, Numerik und Experimente},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/reinhardt-hoffmann-gerlach_nichtlineare_optimierung.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.29}
+}
+
+@Online{renard14,
+  Title                    = {Gmm++},
+  Author                   = {Yves Renard and Julien Pommier},
+  Date                     = {2014},
+  Url                      = {http://download.gna.org/getfem/html/homepage/gmm/index.html},
+  Urldate                  = {2014-07-10},
+
+  Comment                  = {für Gmm++},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.10}
+}
+
+@Techreport{sanderson10,
+  Title                    = {Armadillo: An Open Source C++ Linear Algebra Library for Fast Prototyping and Computationally Intensive Experiments},
+  Author                   = {Conrad Sanderson},
+  Date                     = {2010-09},
+  Institution              = {NICTA},
+  Location                 = {Brisbane},
+  Url                      = {http://arma.sourceforge.net/armadillo_nicta_2010.pdf},
+  Urldate                  = {2014-03-30},
+
+  Owner                    = {julian},
+  Timestamp                = {2014.03.30}
+}
+
+@Phdthesis{schreiber00,
+  Title                    = {Die Methode von Smolyak bei der multivariaten Interpolation},
+  Author                   = {Anja Schreiber},
+  Date                     = {2000-06-22},
+  Institution              = {Universität Göttingen, Fakultät für Mathematik und Informatik},
+
+  Comment                  = {hat zuerst das "Clenshaw-Curtis-Gitter" mit äquidistanten Knoten gemacht},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/schreiber_methode_von_smolyak_bei_der_multivariaten_interpolation.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Book{schwarz09,
+  Title                    = {Numerische Mathematik},
+  Author                   = {Hans Rudolf Schwarz and Norbert Köckler},
+  Date                     = {2009},
+  Doi                      = {10.1007/978-3-8348-9282-9},
+  Edition                  = {7},
+  Location                 = {Wiesbaden},
+  Publisher                = {Vieweg+""Teubner},
+
+  Comment                  = {Buch, behandelt hauptsächlich Themen aus Numerik I, aber auch teilweise für Numerik II gut},
+  File                     = {:studium_big/ebooks/schwarz-koeckler_numerische_mathematik.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.07}
+}
+
+@Article{smolyak63,
+  Title                    = {Quadrature and interpolation formulas for tensor products of certain classes of functions},
+  Author                   = {Sergey A. Smolyak},
+  Date                     = {1963},
+  Journaltitle             = {Soviet Mathematics - Doklady},
+  ISSN                     = {0197-6788},
+  Origlanguage             = {russian},
+  Pages                    = {240--243},
+  Volume                   = {4},
+
+  Comment                  = {nicht verfügbar...},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Article{storn97,
+  Title                    = {Dif"|ferential Evolution -- A Simple and Ef"|ficient Heuristic for Global Optimization over Continuous Spaces},
+  Author                   = {Rainer Storn and Kenneth Price},
+  Date                     = {1997-12},
+  Journaltitle             = {Journal of Global Optimization},
+  Doi                      = {10.1023/A:1008202821328},
+  ISSN                     = {0925-5001},
+  Issue                    = {4},
+  Pages                    = {341--359},
+  Volume                   = {11},
+
+  Comment                  = {gute Beschreibung von DE als globaler Optimierungsalgorithmus (zum Vergleich, benötigt keine Ableitungen)},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/storn-price_differential_evolution.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.06}
+}
+
+@Manual{matlab14,
+  Title                    = {Represent Nonlinear Dynamics Using MATLAB File for Grey-Box Estimation},
+  Author                   = {{The MathWorks, Inc.}},
+  Date                     = {2014},
+  Note                     = {MATLAB R2014a, System Identification Toolbox},
+  Type                     = {Dokumentation mit Beispiel-Daten},
+  Url                      = {http://www.mathworks.de/de/help/ident/examples/represent-nonlinear-dynamics-using-matlab-file-for-grey-box-estimation.html},
+  Urldate                  = {2014-05-23},
+
+  Comment                  = {für DC-Motor, aus der MATLAB-Dokumentation inkl. Beispieldaten},
+  Key                      = {MathWorks},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.24}
+}
+
+@Book{ulbrich12,
+  Title                    = {Nichtlineare Optimierung},
+  Author                   = {Michael Ulbrich and Stefan Ulbrich},
+  Date                     = {2012},
+  Doi                      = {10.1007/978-3-0346-0654-7},
+  Location                 = {Basel},
+  Publisher                = {Springer},
+  Series                   = {Mathematik Kompakt},
+
+  File                     = {:home/julian/studium/sem10/ma/ebooks/ulbrich_nichtlineare_optimierung.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.29}
+}
+
+@Online{un13,
+  Title                    = {World Population Prospects},
+  Author                   = {{United Nations, Department of Economic and Social Af"|fairs, Population Division}},
+  Date                     = {2013},
+  Url                      = {http://esa.un.org/wpp/Excel-Data/population.htm},
+  Subtitle                 = {The 2012 Revision},
+  Titleaddon               = {DVD Edition},
+
+  Owner                    = {julian},
+  Timestamp                = {2014.06.02}
+}
+
+@Thesis{valentin12,
+  Title                    = {Spline-Approximation unregelmäßig verteilter Daten},
+  Author                   = {Julian Valentin},
+  Date                     = {2012-08-14},
+  Institution              = {Universität Stuttgart, Fachbereich Mathematik},
+  Type                     = {Bachelorarbeit},
+
+  File                     = {:home/julian/studium/sem6/ba/cdrom_final/pdf/spline-approximation_unregelmaessig_verteilter_daten.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.03.31}
+}
+
+@Article{vandervorst92,
+  Title                    = {Bi-CGSTAB: A Fast and Smoothly Converging Variant of Bi-CG for the Solution of Nonsymmetric Linear Systems},
+  Author                   = {Henk A. van der Vorst},
+  Date                     = {1992-03},
+  Journaltitle             = {SIAM Journal on Scientific and Statistical Computing},
+  Doi                      = {10.1137/0913035},
+  ISSN                     = {0196-5204},
+  Number                   = {2},
+  Pages                    = {631--644},
+  Volume                   = {13},
+
+  Comment                  = {für BiCGStab},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/vandervorst_bicgstab.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.07.10}
+}
+
+@Manual{mathematica14,
+  Title                    = {Numerical Nonlinear Global Optimization},
+  Author                   = {{Wolfram Research}},
+  Date                     = {2014},
+  Note                     = {Mathematica 9},
+  Type                     = {Dokumentation},
+  Url                      = {http://reference.wolfram.com/mathematica/tutorial/ConstrainedOptimizationGlobalNumerical.html},
+  Urldate                  = {2014-05-29},
+
+  Comment                  = {für Random Search (evtl. noch für Differential Evolution)},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.29}
+}
+
+@Inbook{yang10,
+  Title                    = {Appendix A: Test Problems in Optimization},
+  Author                   = {Xin-She Yang},
+  Booktitle                = {Engineering Optimization},
+  Date                     = {2010},
+  Booksubtitle             = {An Introduction with Metaheuristic Applications},
+  Doi                      = {10.1002/9780470640425.app1},
+  Location                 = {Hoboken, New Jersey},
+  Pages                    = {261--266},
+  Publisher                = {John Wiley \& Sons},
+
+  Comment                  = {gut für verschiedene Testfunktionen},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/yang_test_problems_in_optimization.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.23}
+}
+
+@Inproceedings{zenger91,
+  Title                    = {Sparse Grids},
+  Author                   = {Christoph Zenger},
+  Booktitle                = {Parallel Algorithms for Partial Dif"|ferential Equations: Proceedings of the Sixth GAMM-Seminar},
+  Date                     = {1991},
+  Editor                   = {Wolfgang Hackbusch},
+  Location                 = {Braunschweig},
+  Pages                    = {241--251},
+  Publisher                = {Vieweg},
+  Series                   = {Notes on Numerical Fluid Mechanics},
+  Volume                   = {31},
+
+  Comment                  = {hat den Begriff "Sparse Grids" geprägt},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/zenger_sparse_grids.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.04.04}
+}
+
+@Inproceedings{zielinski05,
+  Title                    = {Stopping Criteria for Single-Objective Optimization},
+  Author                   = {Karin Zielinski and Dagmar Peters and Rainer Laur},
+  Booktitle                = {Proceedings of the 3rd International Conference on Computational Intelligence, Robotics and Autonomous Systems},
+  Date                     = {2005},
+  Location                 = {Singapur},
+
+  Comment                  = {Vergleich von Stoppkriterien für Differential Evolution},
+  File                     = {:home/julian/studium/sem10/ma/ebooks/zielinski-et-al_stopping_criteria_for_single_objective_optimization.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.05.07}
+}
+
+@Manual{cfs14,
+  Title                    = {\cfspp{} -- Developer's Manual},
+  Date                     = {2014-04-08},
+  Editor                   = {{Universitäten Erlangen-Nürnberg und Klagenfurt}},
+  Type                     = {Entwicklerhandbuch},
+
+  Comment                  = {für CFS++-Logo},
+  File                     = {:home/julian/studium/sem10/ma/cfs/pdfs/cfs_developer_manual.pdf:PDF},
+  Owner                    = {julian},
+  Timestamp                = {2014.08.19}
+}
+
+@Comment{jabref-meta: databaseType:biblatex;}
