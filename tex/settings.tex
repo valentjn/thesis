@@ -146,9 +146,6 @@
 % location of *.bib file
 \addbibresource{../bib/bibliography.bib}
 
-% add custom bibliography post note (URLs last checked on ...)
-\defbibnote{mypostnote}{All URLs have last been checked on \thedate.}
-
 % insert colon after author names
 \renewcommand*{\labelnamepunct}{: }
 
@@ -184,16 +181,34 @@
 % suppress "In:" before journal names
 \renewbibmacro*{in:}{}
 
-% suppress "and" in author names
-\renewcommand*{\finalnamedelim}{\addcomma\space}
+% separate authors with semicolon, suppress "and" in author names
+\renewcommand{\multinamedelim}{\addsemicolon\space}
+\renewcommand*{\finalnamedelim}{\addsemicolon\space}
 
 % make names bold
 \renewcommand*{\mkbibnamefamily}[1]{\textbf{#1}}
 
-% define custom heading to fix non-uppercase page header
+\DeclareNameAlias{sortname}{last-first}
+\DeclareNameAlias{default}{last-first}
+
+% define custom heading to fix non-uppercase page header, make URLs smaller
 \defbibheading{myheading}[\bibname]{%
   \addchap{#1}%
   \markboth{BIBLIOGRAPHY}{BIBLIOGRAPHY}%
+  \let\oldtexttt\texttt%
+  \renewcommand*{\texttt}[1]{\oldtexttt{\scriptsize##1}}%
+}
+
+% add custom bibliography post note (URLs last checked on ...)
+\defbibnote{mypostnote}{%
+  All URLs have last been checked on \thedate.%
+  \renewcommand*{\texttt}[1]{\oldtexttt{##1}}%
+}
+
+% omit "URL:" and "DOI:" separators to save space
+\DeclareFieldFormat{url}{\url{#1}}
+\DeclareFieldFormat{doi}{%
+  \ifhyperref{\href{https://doi.org/#1}{\nolinkurl{#1}}}{\nolinkurl{#1}}%
 }
 
 % change font size of bibliography
