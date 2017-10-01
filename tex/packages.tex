@@ -13,16 +13,6 @@
 % amsmath with improvements
 \usepackage{mathtools}
 
-% micro-typographic adjustments
-\usepackage[
-  % don't deactivate extensions due to document class draft option
-  final,
-  % increase letter spacing in small-caps
-  tracking=smallcaps,
-  % smaller amount of letter spacing (default: 100)
-  %letterspace=120,
-]{microtype}
-
 % check mode
 \iftoggle{checkmode}{
   % show non-whitelisted hyphenations
@@ -50,6 +40,16 @@
 
 % use Bitstream Charter as main font
 \usepackage[bitstream-charter]{mathdesign}
+
+% micro-typographic adjustments
+\usepackage[
+  % don't deactivate extensions due to document class draft option
+  final,
+  % increase letter spacing in small-caps
+  tracking=smallcaps,
+  % smaller amount of letter spacing (default: 100)
+  %letterspace=120,
+]{microtype}
 
 % reference last page of document
 \usepackage{lastpage}
