@@ -77,6 +77,83 @@ This is the function $f$ (which is defined as $y =: f(x)$).
   \label{fig:test2}
 \end{figure}
 
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Statex{}
+    \Function{$a =$ GetAffectedBasisFunctions}{$X$, $\vec{\alpha}$, $\vec{x}$, $t$, $\vec{\ell}$, $\vec{j}$, $b$}
+    \If{$x_{\vec{\ell},\vec{j}} \notin X$}
+    \Return{$0$}
+    \Comment{nichts tun, falls Gitterpunkt nicht vorhanden}
+    \EndIf\vspace{-0.25em}
+    \If{$t = d$}
+    \State{$a \gets \alpha_{\vec{\ell},\vec{j}} \cdot (b \cdot \varphi_{\ell_d,j_d}(x_d))$}
+    \Comment{letzte Dimension: Summanden zu Ergebnis addieren}
+    \color{green}
+    \If{$\vec{x}_{\vec{\ell},\vec{j}}^{\text{(rn($d$))}} \in X$}
+    $a \gets a + \alpha_{\vec{\ell},\vec{j}}^{\text{(rn($d$))}} \cdot
+    (b \cdot \varphi_{\ell_d,j_d}^{\text{(rn($d$))}}(x_d))$
+    \EndIf
+    \label{line:getaffected1}
+    \If{$\vec{x}_{\vec{\ell},\vec{j}}^{\text{(ln($d$))}} \in X$}
+    $a \gets a + \alpha_{\vec{\ell},\vec{j}}^{\text{(ln($d$))}} \cdot
+    (b \cdot \varphi_{\ell_d,j_d}^{\text{(ln($d$))}}(x_d))$
+    \EndIf\vspace{-0.4em}
+    \label{line:getaffected2}
+    \color{black}
+    %         \If{$\text{\Call{RightNeighbor}{$\vec{\ell}$, $\vec{j}$}} \in X$}
+    %             $a \gets a + \alpha_{\vec{\ell},\vec{j}} \cdot (b \cdot \varphi_{\ell_d,j_d}(x_d))$
+    %         \EndIf
+    \Else
+    \State{$a \gets \text{\Call{GABF}{$X$, $\vec{\alpha}$, $\vec{x}$, $t+1$,
+          $\vec{\ell}$, $\vec{j}$, $b \cdot \varphi_{\ell_t,j_t}(x_t)$}}$}
+    \Comment{nächste Dimension}
+    \label{line:getaffected5}
+    \color{green}
+    \If{$\vec{x}_{\vec{\ell},\vec{j}}^{\text{(rn($t$))}} \in X$}
+    $a \gets a + \text{\Call{GABF}{$X$, $\vec{\alpha}$, $\vec{x}$, $t+1$,
+        $\vec{\ell}$, $\vec{j}^{\text{(rn($t$))}}$,
+        $b \cdot \varphi_{\ell_t,j_t}^{\text{(rn($t$))}}(x_t)$}}$
+    \EndIf
+    \label{line:getaffected3}
+    \If{$\vec{x}_{\vec{\ell},\vec{j}}^{\text{(ln($t$))}} \in X$}
+    $a \gets a + \text{\Call{GABF}{$X$, $\vec{\alpha}$, $\vec{x}$, $t+1$,
+        $\vec{\ell}$, $\vec{j}^{\text{(ln($t$))}}$,
+        $b \cdot \varphi_{\ell_t,j_t}^{\text{(ln($t$))}}(x_t)$}}$
+    \EndIf
+    \label{line:getaffected4}
+    \color{black}
+    \EndIf\vspace{-0.25em}
+    \If{$x_t > j_t h_{\ell_t}$}
+    $a \gets a + \text{\Call{GABF}{$X$, $\vec{\alpha}$, $\vec{x}$, $t$,
+        $\vec{\ell}^{\text{(rc($t$))}}$, $\vec{j}^{\text{(rc($t$))}}$, $b$}}$
+    \Comment{nächster Level}
+    \label{line:getaffected6}
+    \Else{}
+    $a \gets a + \text{\Call{GABF}{$X$, $\vec{\alpha}$, $\vec{x}$, $t$,
+        $\vec{\ell}^{\text{(lc($t$))}}$, $\vec{j}^{\text{(lc($t$))}}$, $b$}}$
+    \EndIf\vspace{-0.15em}
+    \label{line:getaffected7}
+    \State{\Return{$a$}}
+    \EndFunction
+  \end{algorithmic}
+  \caption{Approximative Auswertung von Linearkombinationen auf dünnen Gittern,
+    Zeilen \ref*{line:getaffected1}, \ref*{line:getaffected2},
+    \ref*{line:getaffected3}, \ref*{line:getaffected4} nicht für
+    stückweise lineare Basisfunktionen,\\
+    \emph{input:}
+    Gitter $X = \{\vec{x}_i\}_i$,
+    Koeffizienten $\vec{\alpha} = (\alpha_i)_i$,
+    Auswertungspunkt $\vec{x} \in [0, 1]^d$,
+    aktuelle Dimension $t \in \{1, \dotsc, d\}$ (anfangs $1$),
+    Level und Index $(\vec{\ell}, \vec{j})$ des aktuellen Punkts
+    (für randlose Gitter anfangs $(\vec{e}, \vec{e})$) und
+    aktuelles Produkt $b$ von 1D-Auswertungen (anfangs 1),\\
+    \emph{output:}
+    $a \approx \widetilde{f}(\vec{x}) = \sum_{k=1}^N \alpha_k \varphi_k(\vec{x})$
+    (für stückweise lineare Funktionen sogar $a = \widetilde{f}(\vec{x})$)}%
+  \label{alg:getaffected}
+\end{algorithm}
+
 \cref{tbl:test}
 
 \cref{fig:test1}
@@ -86,5 +163,7 @@ This is the function $f$ (which is defined as $y =: f(x)$).
 \cref{fig:test1b}
 
 \cref{fig:test2}
+
+\cref{alg:getaffected}
 
 \blindmathpaper
