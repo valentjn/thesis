@@ -29,7 +29,12 @@
 \usepackage[utf8]{luainputenc}
 
 % use GoMono as typewriter font
-\usepackage[scale=0.9]{GoMono}
+\usepackage[
+  % otherwise, bold is not available ("undefined font shape" warnings)
+  type1,
+  % scale to match main font size
+  scale=0.9,
+]{GoMono}
 
 % use TeX Gyre Heros as sans-serif font
 \usepackage{tgheros}
