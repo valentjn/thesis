@@ -19,32 +19,67 @@
 % (caution: the "\textls*[0]" is a hack for deactivating letter spacing)
 \setkomafont{pagenumber}{\normalfont\normalsize\textls*[0]}
 
-% format float captions
-\DeclareCaptionLabelFormat{mylabelformat}{%
-  \sffamily\bfseries\footnotesize\textls*{\MakeUppercase{#1}} #2%
+% change font size for captions
+\makeatletter
+\DeclareCaptionFormat{mycaptionformat}{%
+  \small\@hangfrom{#1#2}%
+  \advance\caption@parindent\hangindent
+  \advance\caption@hangindent\hangindent
+  \caption@@par#3\par%
 }
+\makeatother
+
+% change appearance of caption label
+\DeclareCaptionLabelFormat{mycaptionlabelformat}{%
+  \sffamily\bfseries\fontsize{9.5}{12}\selectfont\textls*{\MakeUppercase{#1}} #2%
+}
+
+% set caption format
 \captionsetup{
+  % use custom format
+  format=mycaptionformat,
   % use custom label format
-  labelformat=mylabelformat,
+  labelformat=mycaptionlabelformat,
   % separate number and caption with \quad
   labelsep=quad,
 }
 
-% format subfloat captions
-\DeclareCaptionLabelFormat{mysublabelformat}{%
-  \sffamily\bfseries\footnotesize\textls*{\MakeUppercase{#2}}%
+% change font size for sub-captions
+\makeatletter
+\DeclareCaptionFormat{mysubcaptionformat}{%
+  \fontsize{10}{12}\selectfont\@hangfrom{#1#2}%
+  \advance\caption@parindent\hangindent
+  \advance\caption@hangindent\hangindent
+  \caption@@par#3\par%
 }
+\makeatother
+
+% change appearance of sub-caption label
+\DeclareCaptionLabelFormat{mysubcaptionlabelformat}{%
+  \sffamily\bfseries\fontsize{8.8}{11}\selectfont\textls*{\MakeUppercase{#2}}%
+}
+
+% set sub-caption format
 \captionsetup[sub]{
+  % use custom format
+  format=mysubcaptionformat,
   % use custom label format
-  labelformat=mysublabelformat,
+  labelformat=mysubcaptionlabelformat,
   % separate number and caption with \quad
   labelsep=quad,
 }
 
 % automatically center all float and subfigure contents
 \makeatletter
-\g@addto@macro\@floatboxreset{\centering}
+\g@addto@macro{\@floatboxreset}{\centering}
 \apptocmd\subcaption@minipage{\centering}{}{}
+\makeatother
+
+% change font size in float environments
+\makeatletter
+\g@addto@macro{\figure}{\small}
+\g@addto@macro{\table}{\small}
+\g@addto@macro{\algorithm}{\small}
 \makeatother
 
 % recalculate page margins as the line spread has changed
