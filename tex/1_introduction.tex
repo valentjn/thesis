@@ -32,27 +32,33 @@ This is the function $f$ (which is defined as $y =: f(x)$).
   \mathrm{f}(x)\cos(x)\mathrm{g}(x)
 \end{gather}
 
-\cref{fig:1}
-
-\cref{fig:1a}
-
-\cref{fig:1b}
-
-\cref{fig:2}
+\begin{table}
+  \begin{tabular}{llll}
+    \toprule
+    \textbf{Header 1}&\textbf{Header 2}&\textbf{Header 3}&\textbf{Header 4}\\
+    \midrule
+    bla&bla&bla&bla\\
+    bla&bla&bla&bla\\
+    bla&bla&bla&bla\\
+    \bottomrule
+  \end{tabular}
+  \caption{This is a test table.}
+  \label{tbl:test}
+\end{table}
 
 \begin{figure}
   \begin{subfigure}{60mm}
     \includegraphics{bspl_hier_1}
     \caption{Dummy caption A.}
-    \label{fig:1a}
+    \label{fig:test1a}
   \end{subfigure}
   \begin{subfigure}{60mm}
     \includegraphics{bspl_hier_1}
     \caption{Dummy caption B.}
-    \label{fig:1b}
+    \label{fig:test1b}
   \end{subfigure}
   \caption{This is a test caption.}
-  \label{fig:1}
+  \label{fig:test1}
 \end{figure}
 
 \begin{figure}
@@ -68,7 +74,17 @@ This is the function $f$ (which is defined as $y =: f(x)$).
     This is a test caption.
     This is a test caption.%
   }
-  \label{fig:2}
+  \label{fig:test2}
 \end{figure}
+
+\cref{tbl:test}
+
+\cref{fig:test1}
+
+\cref{fig:test1a}
+
+\cref{fig:test1b}
+
+\cref{fig:test2}
 
 \blindmathpaper
