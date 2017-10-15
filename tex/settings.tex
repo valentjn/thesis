@@ -4,11 +4,8 @@
 % don't use sans-serif font for dictums
 \addtokomafont{dictum}{\rmfamily}
 
-% make dictums larger, remove dictum rule (led to errors),
-% align text on the right
-\renewcommand*{\dictumwidth}{0.6667\textwidth}
-\renewcommand*{\dictumrule}{}
-\renewcommand*{\raggeddictumtext}{\raggedleft}
+% format dictums with custom command
+\renewcommand*{\dictum}[2][]{\cleanchapterquote{#2}{#1}}
 
 % all-caps sans-serif page header
 \setkomafont{pageheadfoot}{%
