@@ -138,6 +138,57 @@
 % recalculate page margins as the line spread has changed
 \recalctypearea
 
+% define mdframed style for theorems (left bar)
+\mdfdefinestyle{mymdfstyle}{
+  hidealllines=true,
+  leftline=true,
+  innerleftmargin=10pt,
+  innerrightmargin=0pt,
+  innertopmargin=-1pt,
+  innerbottommargin=0pt,
+  linewidth=2pt,
+  linecolor=anthrazit,
+}
+
+% define theorem styles (format theorem "head" with sans-serif caps)
+\declaretheoremstyle[
+  headfont={\sffamily\bfseries\fontsize{9.5}{12}\selectfont},
+  headformat={\textls*{\MakeUppercase{\NAME{} \NUMBER}}\hspace{0.7em}\NOTE\\},
+  notefont={\normalfont\normalsize},
+  headpunct={},
+]{mythmdefstyle}
+
+% same as before, but italic body font
+\declaretheoremstyle[
+  headfont={\sffamily\bfseries\fontsize{9.5}{12}\selectfont},
+  headformat={\textls*{\MakeUppercase{\NAME{} \NUMBER}}\hspace{0.7em}\NOTE\\},
+  notefont={\normalfont\normalsize},
+  headpunct={},
+  bodyfont={\itshape},
+]{mythmplainstyle}
+
+% theorem environments
+\declaretheorem[
+  numberwithin=chapter,
+  mdframed={style=mymdfstyle},
+  style=mythmdefstyle,
+]{definition}
+\declaretheorem[
+  numberlike=definition,
+  mdframed={style=mymdfstyle},
+  style=mythmplainstyle,
+]{theorem}
+\declaretheorem[
+  numberlike=definition,
+  mdframed={style=mymdfstyle},
+  style=mythmplainstyle,
+]{proposition}
+\declaretheorem[
+  numberlike=definition,
+  mdframed={style=mymdfstyle},
+  style=mythmplainstyle,
+]{lemma}
+
 % vertically center ":" in ":="
 \mathtoolsset{centercolon}
 

@@ -13,6 +13,12 @@
 % amsmath with improvements
 \usepackage{mathtools}
 
+% math theorems
+\usepackage{amsthm}
+
+% format math theorems
+\usepackage{thmtools}
+
 % check mode
 \iftoggle{checkmode}{
   % show non-whitelisted hyphenations
@@ -82,6 +88,9 @@
 
 % pseudo-code
 \usepackage[noend]{algpseudocode}
+
+% nice bars left of theorems
+\usepackage[framemethod=tikz]{mdframed}
 
 % styling of table of contents
 \usepackage{tocbasic}
