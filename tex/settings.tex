@@ -287,7 +287,10 @@
 % location of *.bib file
 \addbibresource{../bib/bibliography.bib}
 
-% insert colon after author names
+% don't append "+" sign to BibLaTeX citations in alphabetic style
+\renewcommand*{\labelalphaothers}{}
+
+% insert colon after author names in bibliography
 \renewcommand*{\labelnamepunct}{: }
 
 % hide urldate field
