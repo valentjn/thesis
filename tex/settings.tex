@@ -14,10 +14,17 @@
 \setkomafont{pageheadfoot}{%
   \normalfont\normalcolor\sffamily\fontsize{9}{10}\selectfont\lsstyle%
 }
+\setkomafont{pagenumber}{\usekomafont{pageheadfoot}}
 
-% ... but don't use all-caps for page number in footer
-% (caution: the "\textls*[0]" is a hack for deactivating letter spacing)
-\setkomafont{pagenumber}{\normalfont\normalsize\textls*[0]}
+% move page number to page header
+\clearscrheadfoot
+\lehead*{\pagemark}
+\rehead{\headmark}
+\lohead{\headmark}
+\rohead*{\pagemark}
+
+% prepend "Chapter X: " in front of the chapter name in page headers
+\renewcommand*{\chaptermarkformat}{Chapter \thechapter: }
 
 % change font size for captions
 \makeatletter
