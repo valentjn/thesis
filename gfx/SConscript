@@ -40,4 +40,9 @@ for py in pys:
   # *.pdf files depend on helper scripts
   env.Depends(cur_pdfs, helper_pys)
 
+pdf = os.path.join(env["BUILD_DIR"].abspath, "title_1_without_text.pdf")
+env.Command(pdf, os.path.join(env["BUILD_DIR"].abspath, "title_1.pdf"),
+            "inkscape $SOURCE --export-text-to-path --export-pdf=$TARGET")
+pdfs.append(pdf)
+
 Return("pdfs")
