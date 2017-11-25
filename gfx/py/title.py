@@ -19,9 +19,9 @@ texts = {
 by Julian Valentin""",
   (0.375, 0.5) :
 """From the B-ible of B-splines
-("On Calculating with B-Splines"):
-"In the beginning, there was the
-B-spline. Then God came along...""",
+(“On Calculating with B-Splines”):
+“In the beginning, there was the
+B-spline. Then God came along...”""",
   (0.5, 0.625) :
 """de Boor is the Pope of B-Splines
 (or short B-ope) and Höllig is the
@@ -50,7 +50,7 @@ Infinite Heaven of B-ell Curves!""",
   (0.25, 0.5) :
 """The B-Spline Hell is for all those
 who call B-splines of degree 1
-"hat functions" and for all those who
+“hat functions” and for all those who
 try to use even-degree B-splines
 for sparse grids...""",
   (0.25, 0.75) :
