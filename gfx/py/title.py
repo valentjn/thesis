@@ -1,6 +1,9 @@
 #!/usr/bin/python3
 # number of output figures = 1
 
+import base64
+import gzip
+
 import numpy as np
 
 import helper.basis
@@ -13,65 +16,34 @@ p = 3
 l = (1, 1)
 i = (1, 1)
 
-texts = {
-  (0.5, 0.5) :
-"""About the Church of B-Splines
-by Julian Valentin""",
-  (0.375, 0.5) :
-"""From the B-ible of B-splines
-(“On Calculating with B-Splines”):
-“In the beginning, there was the
-B-spline. Then God came along...”""",
-  (0.5, 0.625) :
-"""de Boor is the Pope of B-Splines
-(or short B-ope) and Höllig is the
-Cardinal of B-Splines.""",
-  (0.625, 0.5) :
-"""Disciples of the Church of
-B-Splines call themselves Priests
-of B-Splines (or short B-riests).""",
-  (0.5, 0.75) :
-"""B-ropagate the good B-spline news
-all around the world: Stuttgart, Bonn
-Frankfurt, Miami, Sydney, Canberra,
-Los Angeles have already been
-B-rainwashed...""",
-  (0.5, 0.375) :
-"""Good followers of the Church of
-B-Splines will come to the B-Spline
-Heavens: It starts with the 3rd
-(Degree) Heaven, but very faithful
-followers will reach the 5th Heaven,
-7th Heaven, and so on.""",
-  (0.5, 0.75) :
-"""The ultimate goal of every Priest of
-B-Splines is to reach the
-Infinite Heaven of B-ell Curves!""",
-  (0.25, 0.5) :
-"""The B-Spline Hell is for all those
-who call B-splines of degree 1
-“hat functions” and for all those who
-try to use even-degree B-splines
-for sparse grids...""",
-  (0.25, 0.75) :
-"""The central hub for all B-ropagation
-activities is bsplines.org!""",
-  (0.5, 0.875) :
-"""Don't think about what B-splines
-can do for you, think about what you
-can do for B-splines.""",
-  (0.75, 0.5) :
-"""In talks, always think about how to
-sneak B-splines into the seemingly
-unrelated topic.""",
-  (0.125, 0.5) : "",
-  (0.25, 0.25) : "",
-  (0.5, 0.125) : "",
-  (0.5, 0.25) : "",
-  (0.75, 0.25) : "",
-  (0.875, 0.5) : "",
-  (0.75, 0.75) : "Thank you for reading!",
-}
+# s = '''code'''
+# a = base64.b64encode(gzip.compress(s.encode())).decode()
+# print("\n".join(a[i:i+80] for i in range(0, len(a), 80)))
+g = """
+H4sIAA+XGloC/31WzY7bNhC+8ykmuTQBtEZ2k03S3LIp2qToT4AE7SUXSqIs1jRpkNQqQlEgD9K+XJ6k
+34wkS/Zue1l4bXL4zfcz5J+K6NGTzXVB+POYXtHDhw/V1y9/f2wNvWm7WLUUGrq5+HBw1pv09cs/SpUD
+/dg5qz39pp3x2XpsKsZCT1+clrrc0K++MtQdgidN2e5NQbk10VCvE2m11/gPf2yVKOWuRj3q20Ctrqk0
+xqtkNFBYv6UmRC4RDraSz61NtNcpm/hNUqiSbNrQW3x5iKExKfESVNnG0HsKrlba1+OpZegyClE02Uaz
+WeAL+OdXR/hXDN+ghB7ol3Br9qWJVOuhIPCTQ9gpBlGFLuqtIa6v087gLw2h81u1IAGLVdgfOqClVFnD
+pNgGZRR2u5rSQYOTdXv3cnOOFXzPWJ9u6GZAx4fDgKOsr2zNpwjd6s7ZJ8g+Pfj0oIEmNdrZH0GMNN1c
+pFH7ArrYqlXMqXa9HpIIRI1GTQ+UkIiPmlW0XhTif61JK+Dg98QjzzbEdpv3Gf9HGMBhH+KOawbP4tIo
+MKVA+w6uzK3O+Idd1aCvQmFJFdiM3Wpvb3M7gtL7dc+s1NQk7EDv2+/UfxC88Hu9od9b9NtO1s3Z+Fqa
+1m6X2BFqoiW3odu2eSKwDT3OUskbvVvYBD0wIDeWjNmjjBtU56NxOpsZG5SRzlFfjA0VnTN622F7zxGS
+/tnCNa+Fdiv0ZyQ/Z5JBGUOXokgiBEU/a81Ks0WsAaw0zppbwyLy70fYwGEIP0B2GLxmqPgZA+P+YcGl
+msARFQ0hwEFvYRXAlpWztZRYi6mtNFqsCRVvLpbVKHWntUWZF4KqS9jHjiu7xEXRZ9S3xiVmH/VweOU0
+/M1ItiHUx/PJm15GG84mHbkxWQQXufoV3QTvC/V91H7XdDEX9LPVe1vQh6H2ZijUG+0xFqIu6KeQ6LXf
+GmfSpzrkdOallwvklxt6N+VDgn8cjHMMlJBcRSN+0NC7TDbP/Khy1iPE7ejhCpuidtR2pZLxgV7WFJKu
+sr21+TSLZ+P629MopqwjH8+HwqI8HZJxDavzPqJQvqP3oxBVakPkuSErHos2k6rcn/VoLGPZ5O4lEVw1
+HMydC+fRzQW+flxIapkyzPIly2I+HZFENH+29U6jiwCXT8ZWZU4fG9ZVxTZi8uMQvJGrSIwlmTFxzyiR
+I9V0vpqcKdlDHNMgCMVksgPLVlcdlDaVBciD0zz8vZqhgiGIxaLxKbyDR/4K/OVZmC9xrb6uqhDH+RM4
++oV4GtI7FzAc0jw97gmm6uXKwZ3Al9ikwhEKMuOPiWRQidfBiIlT691A5rNFpGuxWahr8h3fi+kVPY31
+VKBQ15i802d6cfx8XyyW6/by6tR/c2RXbFLnkBWE4oioIWcbDiv3VBol97oG9p7nXbs2H3vlnW+s5ySN
+gEZimP83Xbw9d83VOUBcsq+zMIbhPw7dNM5SSLy6RuSB0MeAc3gFfpkusI1a4mDzOOds6cz/WFcwXK5A
+POPhgSSjynAyNGA0n6dWp7JgQ1J8vAp5qtXQV6iQLzD0rfdw0vpltp76IoqnHwJPAm7VBb8VJQH0PGIr
+nLgx38KLyNIpygZPOthHrvAsrzjL12XJocDzBTMrWlYY/lJ6zR3jiAZfG+G3akMSvVs8deSEPUYCv8Ss
+PDbN56zYvL10NV5lc6kF9svzJ+vz0YS8XajAs6IyWgTzeEMS7IcjwlTOZrB8mJ5/Cs7jNyCNMUQkQPOd
+B/DJVLjnkafWD2C69wGszh/AU1+zKkp9HD0q177fJdnM6FDogTT/17+4kiiA/AsAAA=="""
+texts = eval(gzip.decompress(base64.b64decode(g.replace("\n", "").encode())).decode())
 
 b = helper.basis.HierarchicalBSpline(p)
 grid = helper.grid.RegularSparse()
@@ -123,7 +95,7 @@ for pos, text in texts.items():
       y = Y[k]
       break
   
-  ax.text(pos[0], pos[1], y, text,
+  ax.text(pos[0], pos[1], y, text.strip(),
           ha="center", va="center", color=text_color, size=text_size)
 
 ax.autoscale(tight=True)
