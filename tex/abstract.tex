@@ -2,14 +2,50 @@
 
 \section*{Abstract}
 
-\blindtext
-
-\TODO{write English abstract}
+In simulation technology, computationally expensive objective
+functions are often replaced
+by cheap surrogates, which can be obtained by interpolation.
+Full-grid interpolation methods are affected by the curse of dimensionality,
+rendering them infeasible if the function has four or more parameters.
+Sparse grids are an interpolation method that does not suffer from the
+curse while not much deteriorating the approximation quality.
+However, conventional basis functions such as piecewise linear functions
+are not smooth (continuously differentiable).
+Thus, they are unsuitable for applications in which gradients are required,
+for example, gradient-based optimization.
+This thesis shows that hierarchical B-splines are well-fitted for obtaining
+smooth interpolants in higher dimensionalities.
+The thesis considers numerical and algorithmic aspects of the new basis
+as well as three different real-world applications in optimization:
+topology optimization, biomechanical continuum-mechanics, and
+dynamic portfolio choice models in finance.
+The results show that the optimization problems in these applications
+can be solved accurately and efficiently with hierarchical B-splines on sparse grids.
 
 \begin{otherlanguage}{ngerman}
   \section*{Kurzzusammenfassung}
   
-  \blindtext
-  
-  \TODO{deutschen Abstract schreiben}
+  In der Simulationstechnologie werden zeitaufwendige Zielfunktionen
+  oft durch einfache Surrogate ersetzt, die durch Interpolation
+  gewonnen werden können.
+  Vollgitter-Interpolationsmethoden sind vom Fluch der
+  Dimensionalität betroffen, der sie für Funktionen mit vier oder mehr
+  Parametern unbrauchbar macht.
+  Dünne Gitter sind eine Interpolationsmethode, die nicht unter
+  dem Fluch leidet, aber den Approximationsfehler nicht stark verschlechtert.
+  Leider sind konventionelle Basisfunktionen wie die stückweise
+  lineare Funktionen nicht glatt (stetig differenzierbar).
+  Daher sind sie für Anwendungen unbrauchbar, in denen Gradienten
+  benötigt werden, zum Beispiel gradientenbasierte Optimierung.
+  Diese Dissertation zeigt, dass hierarchische B-Splines gut
+  geeignet sind, um glatte Interpolierende für höhere
+  Dimensionalitäten zu erhalten.
+  Die Dissertation behandelt sowohl numerische und algorithmische
+  Aspekte der neuen Basis als auch drei verschiedene
+  Realwelt-Anwendungen:
+  Topologieoptimierung, biomechanische Kontinuumsmechanik und
+  Modelle der dynamischen Portfolio-Wahl in der Finanzmathematik.
+  Die Ergebnisse zeigen, dass die Optimierungsprobleme in diesen
+  Anwendungen durch hierarchische B-Splines auf dünnen Gittern
+  gut und effizient gelöst werden können.
 \end{otherlanguage}
