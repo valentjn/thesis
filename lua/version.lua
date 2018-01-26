@@ -4,28 +4,40 @@ function execute(command)
     print(j)
     os.exit(-1)
   end
-  tex.sprint(-2, i:read("*all"))
+  local output = i:read("*all")
   i:close()
+  return output
+end
+
+function executePrint(command)
+  tex.print(execute(command))
 end
 
 function getGitCommitHash()
-  execute("git log -1 --pretty=format:%h")
+  local gitHash = execute("git log -1 --pretty=format:%h")
+  local gitStatus = execute("git status --porcelain")
+  local n = 0
+  for i in gitStatus:gmatch("\n") do n = n + 1 end
+  if n > 2 then
+    gitHash = gitHash .. "*"
+  end
+  tex.print(gitHash)
 end
 
 function getGitCommitTimeShort()
-  execute("LC_ALL=en_US git log -1 --pretty=format:%cd '--date=format:%b %d, %l:%M%P'")
+  executePrint("LC_ALL=en_US git log -1 --pretty=format:%cd '--date=format:%b %d, %l:%M%P'")
 end
 
 function getGitCommitTimeLong()
-  execute("LC_ALL=en_US git log -1 --pretty=format:%cd '--date=format:%B %e, %Y at %l:%M%P'")
+  executePrint("LC_ALL=en_US git log -1 --pretty=format:%cd '--date=format:%B %e, %Y at %l:%M%P'")
 end
 
 function getCurrentTimeShort()
-  execute("LC_ALL=en_US date '+%b %d, %l:%M%P' | tr -d '\n'")
+  executePrint("LC_ALL=en_US date '+%b %d, %l:%M%P' | tr -d '\n'")
 end
 
 function getCurrentTimeLong()
-  execute("LC_ALL=en_US date '+%B %e, %Y at %l:%M%P' | tr -d '\n'")
+  executePrint("LC_ALL=en_US date '+%B %e, %Y at %l:%M%P' | tr -d '\n'")
 end
 
 function getAndIncreaseCompileCounter()
