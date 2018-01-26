@@ -66,3 +66,12 @@
   }%
   \textcolor{red}{TODO: #1}%
 }
+
+% set up versioning information
+\luaexec{require("version")}
+\edef\gitCommitHash{\luadirect{getGitCommitHash()}}
+\edef\gitCommitTimeShort{\luadirect{getGitCommitTimeShort()}}
+\edef\gitCommitTimeLong{\luadirect{getGitCommitTimeLong()}}
+\edef\currentTimeShort{\luadirect{getCurrentTimeShort()}}
+\edef\currentTimeLong{\luadirect{getCurrentTimeLong()}}
+\edef\getAndIncreaseCompileCounter{\luadirect{getAndIncreaseCompileCounter()}}
