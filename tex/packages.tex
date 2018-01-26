@@ -86,6 +86,11 @@
 % more beautiful tables
 \usepackage{booktabs}
 
+% watermarks
+\iftoggle{draftmode}{
+  \usepackage[bottom]{background}
+}{}
+
 % algorithms
 \usepackage{algorithmicx}
 

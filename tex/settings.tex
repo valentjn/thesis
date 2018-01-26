@@ -270,6 +270,25 @@
 \definecolor{mittelblau}{RGB}{0,81,158}
 \definecolor{helllblau}{RGB}{0,190,255}
 
+% set up watermark
+\iftoggle{draftmode}{
+  \backgroundsetup{
+    contents={%
+      \parbox{100mm}{%
+        \begin{center}
+          \bfseries%
+          Draft v\getAndIncreaseCompileCounter{} (\currentTimeShort)\\
+          Commit \gitCommitHash{} (\gitCommitTimeShort)
+        \end{center}%
+      }%
+    },
+    color=black,
+    opacity=0.5,
+    scale=1,
+    vshift=10mm,
+  }
+}{}
+
 % set up hyperref
 \hypersetup{
   % set metadata
