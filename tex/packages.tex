@@ -86,9 +86,9 @@
 % more beautiful tables
 \usepackage{booktabs}
 
-% watermarks
+% draft watermarks (version info and line numbers)
 \iftoggle{draftmode}{
-  \usepackage[bottom]{background}
+  \usepackage{everypage}
 }{}
 
 % algorithms
