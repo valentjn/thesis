@@ -14,13 +14,33 @@ env.Append(PDFLATEXFLAGS="--output-directory={}".format(env["BUILD_DIR"]))
 # search for Python scripts
 pys = env.Glob("py/*.py")
 pdfs = []
+pgfs = []
+helper_pys = []
 
 # search for helper Python scripts
-helper_pys = env.Glob("py/helper/*.py")
+tools_dir = env.Dir(os.path.join(os.environ["HOME"], "git", "prog", "python", "tools"))
+tools_files = []
+for root, dirs, files in os.walk(tools_dir.abspath):
+  tools_files.extend([os.path.join(root, x) for x in files])
+
+# set environment variables
+sgpp_dir = os.path.join(os.environ["HOME"], "sgpp", "sgopt")
+py_env = env.Clone()
+py_env["ENV"]["BUILD_DIR"]       = env["BUILD_DIR"].abspath
+py_env["ENV"]["LD_LIBRARY_PATH"] = ":".join([py_env["ENV"].get("LD_LIBRARY_PATH", ""),
+                                             os.path.join(sgpp_dir, "lib", "sgpp")])
+py_env["ENV"]["PYTHONPATH"]      = ":".join([py_env["ENV"].get("PYTHONPATH", ""),
+                                             tools_dir.abspath,
+                                             os.path.join(sgpp_dir, "lib"),
+                                             os.path.join(sgpp_dir, "lib", "pysgpp")])
 
 for py in pys:
   # determine number of generated images by script
   name = os.path.splitext(py.name)[0]
+  
+  if name.startswith("helper_"):
+    helper_pys.append(py)
+    continue
   
   with open(py.abspath, "r") as f: py_code = f.readlines()
   pdf_count = 1
@@ -35,14 +55,18 @@ for py in pys:
   cur_pdfs = [os.path.join(env["BUILD_DIR"].abspath, "{}_{}.pdf".format(name, i))
               for i in range(1, pdf_count + 1)]
   # generate *.pdf files
-  env.Command(cur_pdfs, py, "BUILD_DIR=$BUILD_DIR python3 $SOURCE")
+  py_env.Command(cur_pdfs, py, "python3 $SOURCE")
   pdfs.extend(cur_pdfs)
-  # *.pdf files depend on helper scripts
-  env.Depends(cur_pdfs, helper_pys)
 
-pdf = os.path.join(env["BUILD_DIR"].abspath, "title_1_without_text.pdf")
-env.Command(pdf, os.path.join(env["BUILD_DIR"].abspath, "title_1.pdf"),
-            "inkscape $SOURCE --export-text-to-path --export-pdf=$TARGET")
-pdfs.append(pdf)
+  pgfs.extend([x[:-4] + ".pgf" for x in cur_pdfs])
+
+# *.pdf files depend on helper scripts (local helper *.py files and global tools)
+env.Depends(pdfs, [helper_pys, tools_files])
+
+# don't delete PDFs before calling Python scripts
+env.Precious(pdfs)
+
+# clean *.xz data files as well
+env.Clean(pdfs, [pgfs, env.Glob(os.path.join(env["BUILD_DIR"].abspath, "*.xz"))])
 
 Return("pdfs")
