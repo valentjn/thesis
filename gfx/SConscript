@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 
 Import("env")
 env = env.Clone()
@@ -17,14 +18,18 @@ pdfs = []
 pgfs = []
 helper_pys = []
 
+# home or Documents directory
+home_dir = (os.environ["HOME"] if sys.platform == "linux" else
+            os.path.join(os.environ["HOMEDRIVE"], os.environ["HOMEPATH"], "Documents"))
+
 # search for helper Python scripts
-tools_dir = env.Dir(os.path.join(os.environ["HOME"], "git", "prog", "python", "tools"))
+tools_dir = env.Dir(os.path.join(home_dir, "git", "prog", "python", "tools"))
 tools_files = []
 for root, dirs, files in os.walk(tools_dir.abspath):
   tools_files.extend([os.path.join(root, x) for x in files])
 
 # set environment variables
-sgpp_dir = os.path.join(os.environ["HOME"], "sgpp", "sgopt")
+sgpp_dir = os.path.join(home_dir, "sgpp", "sgopt")
 py_env = env.Clone()
 py_env["ENV"]["BUILD_DIR"]       = env["BUILD_DIR"].abspath
 py_env["ENV"]["LD_LIBRARY_PATH"] = ":".join([py_env["ENV"].get("LD_LIBRARY_PATH", ""),

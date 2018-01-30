@@ -1,4 +1,5 @@
 import os
+import sys
 
 Import("env")
 env = env.Clone()
@@ -8,6 +9,9 @@ env.Append(PDFLATEXFLAGS="--synctex=1")
 
 # enable shell commands to display Git version
 env.Append(PDFLATEXFLAGS="--shell-escape")
+
+# set TMPDIR to get texfot to work on Windows
+if sys.platform == "win32": env["ENV"]["TMPDIR"] = env["ENV"]["TEMP"]
 
 # remove temporary files created accidential run of LuaLaTeX instead of SCons
 # (pressing the wrong button in TeXstudio)
