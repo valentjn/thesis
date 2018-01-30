@@ -4,7 +4,7 @@
 import numpy as np
 
 import helper.basis
-import helper.figure
+from   helper.figure import Figure
 
 n = 3
 p = 3
@@ -12,7 +12,7 @@ b = helper.basis.HierarchicalBSpline(p)
 
 
 
-fig = helper.figure.create(figsize=(3,5))
+fig = Figure.create(figsize=(3,5))
 
 for l in range(1, n+1):
   ax = fig.add_subplot(n, 1, l)
@@ -28,9 +28,11 @@ for l in range(1, n+1):
   ax.set_xlim((0, 1))
   ax.set_ylim((0, 0.7))
 
-fig.save(1)
+fig.save()
 
-fig = helper.figure.create()
+
+
+fig = Figure.create()
 ax = fig.gca()
 
 for i in range(1, h_inv):
@@ -41,4 +43,4 @@ for i in range(1, h_inv):
 
 ax.set_xlim((0, 1))
 ax.set_ylim((0, 0.7))
-fig.save(2)
+fig.save()

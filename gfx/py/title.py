@@ -7,7 +7,7 @@ import gzip
 import numpy as np
 
 import helper.basis
-import helper.figure
+from   helper.figure import Figure
 import helper.grid
 
 d = 2
@@ -50,7 +50,7 @@ grid = helper.grid.RegularSparse()
 
 
 
-fig = helper.figure.create()
+fig = Figure.create()
 ax = fig.add_subplot(111, projection="3d")
 
 
@@ -78,12 +78,13 @@ for k in range(NN):
 YY = np.reshape(YY, XX1.shape)
 
 color1 = "k"
-color2 = helper.figure.COLORS["anthrazit"]
+color2 = Figure.COLORS["anthrazit"]
 text_color = (0.04, 0.04, 0.04)
 text_size = 0.4
 
 z = 0
-ax.plot_surface(XX1, XX2, z, rstride=16, cstride=16, alpha=0, edgecolors=color2)
+ax.plot_surface(XX1, XX2, np.zeros_like(XX1),
+                rstride=16, cstride=16, alpha=0, edgecolors=color2)
 ax.plot(X[:,0], X[:,1], zs=z, marker="o", ls="", c=color2, zorder=-1)
 
 ax.plot_surface(XX1, XX2, YY, rstride=16, cstride=16, alpha=0, edgecolors=color1)
@@ -101,4 +102,4 @@ for pos, text in texts.items():
 ax.autoscale(tight=True)
 ax.set_axis_off()
 
-fig.save(1)
+fig.save()
