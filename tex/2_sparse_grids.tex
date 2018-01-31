@@ -13,11 +13,44 @@
 \todo{write}
 
 \chapter{Hierarchical B-Splines and Sparse Grids}
+\label{sec:sg}
 
 In the following, we consider functions that are defined on the unit interval
 $[0, 1]$.
-We discretize this domain by splitting it into $2^\ell$ segments where
-$l \in \NN$.
+We discretize this domain by splitting it into $2^l$ equidistant segments,
+where $l \in \NN$ is the \term{level}.
+The resulting $2^l + 1$ \term{grid points} are given by
+\begin{equation}
+  x_{l,i} := i \cdot h_l,\quad
+  i = 0, \dotsc, 2^l,
+\end{equation}
+where $h_l := 2^{-l}$ is the \term{mesh size}.
+Every grid point is associated with a \term{basis function}
+\begin{equation}
+  \varphi_{l,i}\colon [0, 1] \to \RR.
+\end{equation}
+In this thesis, we assume $\varphi_{l,i}$ to be arbitrary,
+satisfying required assumptions when needed.
+However, it helps for both the theory and the intuition to have a
+specific example of basis functions in mind.
+The most common choice for $\varphi_{l,i}$ are the so-called \term{hat functions}
+(linear B-splines), which are defined as
+\begin{equation}
+  \varphi_{l,i}^1(x)
+  := \max(1 - |x/h_l - i|, 0).
+\end{equation}
+Here and in the following,
+the superscript ``1'' is the degree of the linear B-spline and
+is not to be read as an exponent.
+We will generalize this notation to B-splines $\varphi_{l,i}^p$ of
+arbitrary degrees $p$ (see \Cref{sec:sg_bspl}).
+
+The \emph{nodal space} $V_l$ of level $l$
+is defined as the linear span of all basis functions
+$\varphi_{l,i}$, $i = 0, \dotsc, 2^l$:
+\begin{equation}
+  V_l := \spn\{\varphi_{l,i} \mid i = 0, \dotsc, 2^l\}.
+\end{equation}
 
 \todo{write}
 
@@ -38,6 +71,7 @@ $l \in \NN$.
 \todo{write}
 
 \section{Defining Hierarchical B-Splines on Sparse Grids}
+\label{sec:sg_bspl}
 
 \todo{write}
 
