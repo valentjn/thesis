@@ -1,11 +1,82 @@
+% ======================================================================
+% Meta-Data
+% ======================================================================
+
+% meta-data variables
+\newcommand*{\thetitle}{%
+  B-Splines for Sparse Grids:\texorpdfstring{\\}{}
+  Algorithms and Application to\texorpdfstring{\\}{}
+  Higher-Dimensional Optimization%
+}
+\newcommand*{\theauthor}{Julian Valentin}
+\newcommand*{\thebirthplace}{Stuttgart}
+\newcommand*{\thedefensedate}{\todo{insert date of defense}}
+\newcommand*{\thedate}{\todo{insert date}}
+\newcommand*{\theyear}{2018}
+\newcommand*{\theinstitute}{Institut für Parallele und Verteilte Systeme}
+\newcommand*{\theadvisor}{Prof.\ Dr.\ Dirk Pflüger}
+\newcommand*{\theexamineri}{Univ.-Prof.\ Oliver Röhrle, PhD}
+\newcommand*{\theexaminerii}{\todo{insert 2nd examiner}}
+\newcommand*{\theexamineriii}{\todo{insert 3rd examiner}}
+
+% ======================================================================
+% Type Area
+% ======================================================================
+
+% recalculate page margins as the line spread has changed
+\recalctypearea
+
+% ======================================================================
+% Table of Contents
+% ======================================================================
+
+% use single spacing in table of contents
+\AfterTOCHead[toc]{\setstretch{1}}
+
+% ======================================================================
+% Headings
+% ======================================================================
+
 % don't use sans-serif font for headings
 \setkomafont{disposition}{\normalcolor\bfseries}
+
+% chapter heading: make number bigger
+\renewcommand*{\chapterformat}{%
+  \mbox{%
+    \chapappifchapterprefix{\nobreakspace}%
+    \scalebox{3.2}{\thechapter\autodot}%
+    \IfUsePrefixLine{}{\enskip}%
+  }%
+}
+
+% chapter heading: align number and text at the baseline of the last line
+% of the text, add some more space between number and text
+\renewcommand*{\chapterlinesformat}[3]{%
+  \begin{tabularx}{\textwidth}{@{}l@{}X@{}}%
+    % chapter number
+    #2%
+    % add hspace between number and text, but only if \chapter (not \chapter*)
+    % has been used (i.e., if the chapter number #2 is not empty)
+    \if\relax\detokenize{#2}\relax\else\hspace*{5mm}\fi&%
+    % text of heading, [b] is for alignment, \linewidth is width of X cell,
+    % \raggedchapter for not justifying headings
+    \parbox[b]{\linewidth}{\raggedchapter\setstretch{1}#3}%
+  \end{tabularx}%
+}
+
+% ======================================================================
+% Dictums
+% ======================================================================
 
 % don't use sans-serif font for dictums
 \addtokomafont{dictum}{\rmfamily}
 
 % format dictums with custom command
 \renewcommand*{\dictum}[2][]{\cleanchapterquote{#2}{#1}}
+
+% ======================================================================
+% Page Headers and Footers
+% ======================================================================
 
 % all-caps sans-serif page header
 \setkomafont{pageheadfoot}{%
@@ -24,6 +95,10 @@
 
 % prepend "Chapter X: " in front of the chapter name in page headers
 \renewcommand*{\chaptermarkformat}{Chapter \thechapter: }
+
+% ======================================================================
+% Float Captions
+% ======================================================================
 
 % change font size for captions
 \makeatletter
@@ -75,6 +150,10 @@
   labelsep=quad,
 }
 
+% ======================================================================
+% Algorithms
+% ======================================================================
+
 % line number format
 \algrenewcommand{\alglinenumber}[1]{\footnotesize\color{anthrazit}{#1}}
 \algrenewcommand{\algorithmicrequire}{\textbf{Input:}}
@@ -122,6 +201,10 @@
   counterwithin=chapter,
 ]{loa}
 
+% ======================================================================
+% Floats
+% ======================================================================
+
 % automatically center all float and subfigure contents
 \makeatletter
 \g@addto@macro{\@floatboxreset}{\centering}
@@ -135,8 +218,9 @@
 \g@addto@macro{\algorithm}{\small}
 \makeatother
 
-% recalculate page margins as the line spread has changed
-\recalctypearea
+% ======================================================================
+% Theorems
+% ======================================================================
 
 % define mdframed style for theorems (left bar)
 \mdfdefinestyle{mymdfstyle}{
@@ -189,8 +273,16 @@
   style=mythmplainstyle,
 ]{lemma}
 
+% ======================================================================
+% Mathematics
+% ======================================================================
+
 % vertically center ":" in ":="
 \mathtoolsset{centercolon}
+
+% ======================================================================
+% Blindtext
+% ======================================================================
 
 % get name of current label (chapter, section, subsection, ...)
 \makeatletter
@@ -206,53 +298,16 @@
   \oldblindtext%
 }
 
+% ======================================================================
+% Graphics
+% ======================================================================
+
 % location of graphics files
 \graphicspath{{../gfx/}}
 
-% chapter heading: make number bigger
-\renewcommand*{\chapterformat}{%
-  \mbox{%
-    \chapappifchapterprefix{\nobreakspace}%
-    \scalebox{3.2}{\thechapter\autodot}%
-    \IfUsePrefixLine{}{\enskip}%
-  }%
-}
-
-% chapter heading: align number and text at the baseline of the last line
-% of the text, add some more space between number and text
-\renewcommand*{\chapterlinesformat}[3]{%
-  \begin{tabularx}{\textwidth}{@{}l@{}X@{}}%
-    % chapter number
-    #2%
-    % add hspace between number and text, but only if \chapter (not \chapter*)
-    % has been used (i.e., if the chapter number #2 is not empty)
-    \if\relax\detokenize{#2}\relax\else\hspace*{5mm}\fi&%
-    % text of heading, [b] is for alignment, \linewidth is width of X cell,
-    % \raggedchapter for not justifying headings
-    \parbox[b]{\linewidth}{\raggedchapter\setstretch{1}#3}%
-  \end{tabularx}%
-}
-
-% check mode
-\iftoggle{checkmode}{
-  % show overfull boxes
-  \overfullrule=1mm
-  % show underfull vboxes
-  \directlua{dofile("detect_underfull.lua")}
-  % whitelist is in hyphenation_whitelist.txt:
-  % one word per line with dashes (-) indicating the places where
-  % hyphenation is whitelisted
-  \LuaCheckHyphen{whitelist=hyphenation_whitelist.txt}
-}{}
-
-% meta-data variables
-\newcommand*{\thetitle}{%
-  B-Splines for Sparse Grids:\texorpdfstring{\\}{}
-  Algorithms and Application to
-  Higher-Dimensional Optimization%
-}
-\newcommand*{\theauthor}{Julian Valentin}
-\newcommand*{\thedate}{\todo{insert date}}
+% ======================================================================
+% Colors
+% ======================================================================
 
 % define line colors (mix between MATLAB and matplotlib colors)
 \definecolor{C0}{rgb}{0.000,0.447,0.741}
@@ -269,6 +324,26 @@
 \definecolor{anthrazit}{RGB}{62,68,76}
 \definecolor{mittelblau}{RGB}{0,81,158}
 \definecolor{helllblau}{RGB}{0,190,255}
+
+% ======================================================================
+% Blindtext
+% ======================================================================
+
+% check mode
+\iftoggle{checkmode}{
+  % show overfull boxes
+  \overfullrule=1mm
+  % show underfull vboxes
+  \directlua{dofile("detect_underfull.lua")}
+  % whitelist is in hyphenation_whitelist.txt:
+  % one word per line (all lowercase) with dashes (-) indicating the
+  % places where hyphenation is permitted
+  \LuaCheckHyphen{whitelist=hyphenation_whitelist.txt}
+}{}
+
+% ======================================================================
+% Watermarks
+% ======================================================================
 
 % set up watermarks
 \iftoggle{draftmode}{
@@ -312,6 +387,10 @@
   }
 }{}
 
+% ======================================================================
+% PDF Meta-Data and Links
+% ======================================================================
+
 % set up hyperref
 \hypersetup{
   % set metadata
@@ -328,6 +407,10 @@
   runbordercolor=C1,
   urlbordercolor=C0,
 }
+
+% ======================================================================
+% Bibliography
+% ======================================================================
 
 % location of *.bib file
 \addbibresource{../bib/bibliography.bib}
@@ -412,8 +495,9 @@
 \renewcommand*{\url}[1]{\luadirect{breakurl(\luastringN{#1}, \luastringN{#1})}}
 \renewcommand*{\href}[2]{\luadirect{breakurl(\luastringN{#1}, \luastringN{#2})}}
 
-% use single spacing in table of contents
-\AfterTOCHead[toc]{\setstretch{1}}
+% ======================================================================
+% Glossary
+% ======================================================================
 
 % define new glossary style based on long (uses longtable)
 % in which the column widths are fixed and space before/after the
