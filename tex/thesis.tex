@@ -30,51 +30,55 @@
 \input{glossary}
 
 \begin{document}
-  % title page
-  \input{titlepage}
-  
-  % second title page
-  \input{titlepage2}
-  
-  % table of contents
-  \cleardoublepage
-  \tableofcontents
-  
-  % table of symbols and acronyms
-  \printglossary[title={Symbols and Acronyms}]
-  
-  % abstract
-  \input{abstract}
-  
-  % preface
-  \input{preface}
+  \iftoggle{partialCompileMode}{}{
+    % title page
+    \input{titlepage}
+    
+    % second title page
+    \input{titlepage2}
+    
+    % table of contents
+    \cleardoublepage
+    \tableofcontents
+    
+    % table of symbols and acronyms
+    \printglossary[title={Symbols and Acronyms}]
+    
+    % abstract
+    \input{abstract}
+    
+    % preface
+    \input{preface}
+  }
   
   % chapters
-  \include{1_introduction}
-  \include{2_sparse_grids}
-  \include{3_hierarchization}
-  \include{4_optimization}
-  \include{5_topoopt}
-  \include{6_muscle}
-  \include{7_finance}
-  \include{8_conclusion}
+  \iftoggle{compileChapter1}{\include{1_introduction}}{}
+  \iftoggle{compileChapter2}{\include{2_sparse_grids}}{}
+  \iftoggle{compileChapter3}{\include{3_hierarchization}}{}
+  \iftoggle{compileChapter4}{\include{4_optimization}}{}
+  \iftoggle{compileChapter5}{\include{5_topoopt}}{}
+  \iftoggle{compileChapter6}{\include{6_muscle}}{}
+  \iftoggle{compileChapter7}{\include{7_finance}}{}
+  \iftoggle{compileChapter8}{\include{8_conclusion}}{}
   
-  % start appendix
-  \appendix
-  
-  % bibliography
-  \printbibliography[%
-    % change title
-    title=Bibliography,
-    % use custom heading
-    heading=myheading,
-    % print custom note
-    postnote=mypostnote,
-  ]
-  \cleardoublepage
-  
-  % add all symbols and acronyms that have not been used
-  % in the text to the glossary
-  % (this command has to come after all glossary definitions)
-  \glsaddallunused
+  \iftoggle{partialCompileMode}{}{
+    % start appendix
+    \appendix
+    
+    % bibliography
+    \printbibliography[%
+      % change title
+      title=Bibliography,
+      % use custom heading
+      heading=myheading,
+      % print custom note
+      postnote=mypostnote,
+    ]
+    \cleardoublepage
+    
+    % add all symbols and acronyms that have not been used
+    % in the text to the glossary
+    % (this command has to come after all glossary definitions)
+    \glsaddallunused
+  }
 \end{document}
