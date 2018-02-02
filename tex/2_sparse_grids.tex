@@ -171,7 +171,8 @@ in $V_\ßl$, if
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \varphi_{\ßl,\ßi},\quad
   \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\tilde{f}_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
 \end{equation}
-where the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
+where $c_\ßi \in \RR$ and
+the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
 One can prove that the functions
 $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 form a basis of $V_\ßl$, if the univariate functions
@@ -179,14 +180,52 @@ $\varphi_{l,i}$ ($i = 0, \dotsc, 2^l$)
 form a basis of the univariate nodal space $V_l$.%
 \footnote{%
   For example in 2D, assume that $\tilde{f}_{(l_1,l_2)} \equiv 0$.
-  Then for all $i_1'$ and $i_2'$, due to the tensor product construction, it holds
+  Then for all $i_1'$ and $i_2'$, due to the tensor product construction,
+  it holds that
   $\sum_{i_1} \big[\sum_{i_2} c_{(i_1,i_2)}
   \varphi_{l_2,i_2}(x_{l_2,i_2'})\big] \varphi_{l_1,i_1}(x_{l_1,i_1'})  = 0$.
   We can now apply the linear independence in 1D twice to
   infer that the bracket vanishes and consequently $c_{(i_1,i_2)}$.
 }
+\newgsymbol{Omegal!}{$\Omega_\ßl$}{%
+  Set of grid points of the full grid of level $\ßl$%
+}%
+This is equivalent to the statement that the coefficients $c_\ßi \in \RR$
+exist for every objective function $f$ and are uniquely determined by
+the values at the grid points
+\begin{equation}
+  \Omega_\ßl
+  := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl} - \ß1\}.
+\end{equation}
 
 \subsection{Hierarchical Subspaces}
+
+The dimension of the nodal space $V_\ßl$ is given by
+\begin{equation}
+  \dim V_\ßl
+  = |\Omega_\ßl|
+  = \prod_{t=1}^d (2^{l_t} + 1).
+\end{equation}
+\newgsymbol{Omega}{$\Omega(f(x))$}{Big-$\Omega$ Landau notation}%
+\newgsymbol{norm1}{$\norm{\cdot}_1$}{1-norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$}%
+In asymptotic terms, this dimension is in $\Omega(2^{\norm{\ßl}_1})$,
+where the 1-norm $\norm{\ßl}_1$ of $\ßl$ is defined as
+$\norm{\ßl}_1 := \sum_{t=1}^d l_t$.
+\newgsymbol{n}{$n$}{Level $\in \natural_0$ of full or sparse grid}
+If we choose the same level $n \in \NN_0$ in all dimensions, i.e.,
+$\ßl = n \cdot \ß1$, this means that the dimension and the
+number of grid points grow at least as fast as $2^{nd}$.
+This exponential dependency between $\dim V_n$ and $d$ is known as the
+\term{curse of dimensionality}.
+The curse makes interpolation on $V_\ßl$ computationally infeasible
+for dimensionalities $d > 4$,
+as we have would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
+\footnote{%
+  The number of necessary basis evaluations to evaluate the interpolant once
+  would not be as large, as most types of basis functions
+  (like hat functions $\varphi_{l,i}^1$ and higher-order B-splines)
+  are locally supported.%
+}
 
 \todo{write}
 
