@@ -23,20 +23,23 @@
 
 \todo{insert citations}
 
-In the following, we consider functions that are defined on the unit interval
-$[0, 1]$.
+Let us first consider univariate functions
+that are defined on the unit interval $[0, 1]$.
+\newgsymbol{l}{$l$}{Level $\in \NN_0$}%
 We discretize this domain by splitting it into $2^l$ equidistant segments,
 where $l \in \NN_0$ is the \term{level}.
-\newgsymbol{l}{$l$}{Level $\in \NN_0$}%
+\newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
+\newgsymbol{i}{$i$}{Index $= 0, \dotsc, 2^l$}%
+\newgsymbol{hl}{$h_l$}{Mesh size $:= 2^{-l}$}%
 The resulting $2^l + 1$ \term{grid points} are given by
 \begin{equation}
   x_{l,i} := i \cdot h_l,\quad
   i = 0, \dotsc, 2^l,
 \end{equation}
-\newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
 where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.
-\newgsymbol{i}{$i$}{Index $\in \{0, \dotsc, 2^l\}$}%
-\newgsymbol{hl}{$h_l$}{Mesh size $:= 2^{-l}$}%
+\newgsymbol{phili}{$\varphi_{l,i}$}{%
+  Hierarchical basis function of level $l$, index $i$%
+}%
 Every grid point is associated with a \term{basis function}
 \begin{equation}
   \varphi_{l,i}\colon [0, 1] \to \RR.
@@ -45,6 +48,7 @@ In this thesis, we assume $\varphi_{l,i}$ to be arbitrary,
 satisfying required assumptions when needed.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
+\newgsymbol{phili1}{$\varphi_{l,i}^1$}{Hat function of level $l$, index $i$}%
 The most common choice for $\varphi_{l,i}$ are the so-called \term{hat functions}
 (linear B-splines), which are defined as
 \begin{equation}
@@ -57,6 +61,7 @@ is not to be read as an exponent.
 We will generalize this notation to B-splines $\varphi_{l,i}^p$ of
 arbitrary degrees $p$ (see \Cref{sec:sg_bspl}).
 
+\newgsymbol{Vl}{$V_l$}{Nodal space of level $l$}%
 The \emph{nodal space} $V_l$ of level $l$
 is defined as the linear span of all basis functions
 $\varphi_{l,i}$, $i = 0, \dotsc, 2^l$:
