@@ -405,11 +405,100 @@ which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.
   and by the induction hypothesis, the other coefficients also vanish.
 \end{proof}
 
-\todo{write about multivariate case}
+\subsubsection{Hierarchical Splitting in the Multivariate Case}
 
-\subsection{Regular Sparse Grids}
+\newgsymbol{Wl!}{$W_\ßl$}{Multivariate hierarchical subspace of level $\ßl$}%
+\newgsymbol{Il!}{$I_\ßl$}{%
+  Set $:= I_{l_1} \times \dotsb \times I_{l_d}$ of
+  (odd) multivariate indices for hierarchical basis functions%
+}%
+Multivariate hierarchical subspaces of level $\ßl$
+are defined analogously to the univariate case:
+\begin{equation}
+  W_\ßl
+  := \spn\{\varphi_{l,i} \mid \ßi \in I_\ßl\},\quad
+  I_\ßl
+  := I_{l_1} \times \dotsb \times I_{l_d}.
+\end{equation}
+The splitting \eqref{eq:hierSplittingUV} can now be generalized to the
+multivariate case:
+\begin{equation}
+  \label{eq:hierSplittingMV}
+  V_\ßl
+  = \bigoplus_{\ßl'=0}^\ßl W_{\ßl'},
+\end{equation}
+Again, this relation does not hold in general.
+A multivariate counterpart of \cref{lemma:hierSplittingUV} can be used
+to prove that \eqref{eq:hierSplittingMV} holds if
+the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimensions:
+\begin{lemma}[Multivariate hierarchical splitting characterization]
+  \label{lemma:hierSplittingMV}
+  Equivalent to relation \eqref{eq:hierSplittingMV} is the satisfaction of
+  both of the following conditions:
+  \begin{itemize}
+    \item
+    The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $V_\ßl$.
+    
+    \item
+    The basis functions $\varphi_{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
+    are linearly independent.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  If the sum is direct, then its dimension is given by
+  \begin{equation}
+    \dim \sum_{\ßl'=0}^\ßl W_{\ßl'}
+    = \sum_{\mathclap{l_1'=0}}^{l_1} \dotsb \sum_{\mathclap{l_d'=0}}^{l_d} \prod_{t=1}^d \dim W_{l_t'}
+    = \prod_{t=1}^d \sum_{\mathclap{l_t'=0}}^{l_t} \dim W_{l_t'}
+    = \prod_{t=1}^d (2^{l_t} + 1)
+    = \dim V_\ßl
+  \end{equation}
+  by \eqref{eq:dimensionFG}.
+  The rest is analogous to the proof of \cref{lemma:hierSplittingUV}.
+\end{proof}
+\begin{proposition}
+  If univariate splitting \eqref{eq:hierSplittingUV} holds for every dimension,
+  then the multivariate splitting \eqref{eq:hierSplittingMV} holds as well.
+\end{proposition}
+\begin{proof}
+  We check the two conditions of \cref{lemma:hierSplittingMV}
+  given the two univariate conditions of \cref{lemma:hierSplittingUV}:
+  \begin{enumerate}
+    \item
+    The hierarchical basis functions $\varphi_{\ßl',\ßi'}$
+    of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_\ßl'$) are tensor products
+    of functions $\varphi_{l_t',i_t'}$.
+    According to the first condition of \cref{lemma:hierSplittingUV},
+    each of these functions can be written as a linear combination of
+    the nodal basis $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$).
+    The tensor product can be expanded to a linear combination
+    of tensor products of nodal basis functions.
+    Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
+    multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
+    As this is true for all $\ßi' \in I_\ßl'$, we obtain $W_\ßl' \subset V_\ßl$.
+    
+    \item
+    The linear independence of the hierarchical functions $\varphi_{\ßl',\ßi'}$
+    ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) can be shown completely analogously
+    to the proof of \cref{lemma:tensorProductLinearIndependence}.\qedhere
+  \end{enumerate}
+\end{proof}
+\begin{corollary}
+  The multivariate hierarchical splitting \eqref{eq:hierSplittingMV}
+  holds for the hat function basis.\qed
+\end{corollary}
+
+\subsection{Sparse Grids}
+
+\subsubsection{Regular Sparse Grids}
+
+\subsubsection{Dimensionally Adaptive Sparse Grids}
+
+\subsubsection{Spatially Adaptive Sparse Grids}
 
 \todo{write}
+
+\blindtext[3]
 
 \subsection{Boundary Treatment}
 
