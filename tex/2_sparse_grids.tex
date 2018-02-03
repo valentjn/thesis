@@ -15,19 +15,19 @@
 
 \todo{write}
 
+
+
 \section{Hierarchical Bases and Sparse Grids}
 
 \todo{write}
+
+
 
 \subsection{Nodal Spaces}
 
 \todo{insert citations}
 
-\todo{make glossary consistent}
-
-\todo{append $, d$ to $n$ subscripts}
-
-\paragraph{Univariate case}
+\subsubsection{Univariate Case}
 
 Let us first consider univariate functions
 that are defined on the unit interval $[0, 1]$.
@@ -86,7 +86,7 @@ that is, the space of all continuous functions on $[0, 1]$ that are
 piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
 $i = 0, \dotsc, 2^l - 1$.
 
-\paragraph{Multivariate case}
+\subsubsection{Multivariate Case}
 
 \newgsymbol{d}{$d$}{Dimensionality $\in \NN$}%
 For the multivariate case with $d \in \NN$ dimensions,
@@ -246,9 +246,9 @@ $f_{n,d}^1$ is given by
 i.e., the order of the interpolation error is quadratic in the mesh size.
 \todo{reference Höllig, as Acta is only for zero boundary}
 
-\subsection{Hierarchical Subspaces}
 
-\paragraph{Curse of dimensionality}
+
+\subsection{Hierarchical Subspaces}
 
 \newgsymbol{dim}{$\dim$}{Vector space dimension}%
 \newgsymbol{abs}{$|\cdot|$}{%
@@ -281,7 +281,7 @@ as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
   are locally supported.%
 }
 
-\paragraph{Hierarchical splitting}
+\subsubsection{Hierarchical Splitting in the Univariate Case}
 
 In order to reduce the computational effort,
 we first split $V_\ßl$ into smaller subspaces and then identify
