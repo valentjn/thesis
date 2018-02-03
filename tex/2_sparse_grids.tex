@@ -162,41 +162,63 @@ all hyper-cubes
   [x_{l_d,i_d}, x_{l_d,i_d+1}],\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
+
 We can now interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
 in the nodal space $V_\ßl$.
-A function $\tilde{f}_\ßl\colon [\ß0, \ß1] \to \RR$ is called \term{interpolant}
+A function $f_\ßl\colon [\ß0, \ß1] \to \RR$ is called \term{interpolant}
 in $V_\ßl$, if
 \begin{equation}
-  \tilde{f}_\ßl
+  \label{eq:interpFullGrid}
+  f_\ßl
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \varphi_{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\tilde{f}_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
 \end{equation}
 where $c_\ßi \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
-One can prove that the functions
-$\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
-form a basis of $V_\ßl$, if the univariate functions
-$\varphi_{l,i}$ ($i = 0, \dotsc, 2^l$)
-form a basis of the univariate nodal space $V_l$.%
-\footnote{%
-  For example in 2D, assume that $\tilde{f}_{(l_1,l_2)} \equiv 0$.
-  Then for all $i_1'$ and $i_2'$, due to the tensor product construction,
-  it holds that
-  $\sum_{i_1} \big[\sum_{i_2} c_{(i_1,i_2)}
-  \varphi_{l_2,i_2}(x_{l_2,i_2'})\big] \varphi_{l_1,i_1}(x_{l_1,i_1'})  = 0$.
-  We can now apply the linear independence in 1D twice to
-  infer that the bracket vanishes and consequently $c_{(i_1,i_2)}$.
-}
+\begin{lemma}[Linear independence of tensor products]
+  The functions $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
+  form a basis of $V_\ßl$, if the univariate functions
+  $\varphi_{l,i}$ ($i = 0, \dotsc, 2^l$)
+  form a basis of the univariate nodal space $V_l$.
+\end{lemma}
+\begin{proof}
+  Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGrid}
+  such that $f_\ßl \equiv 0$.
+  Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
+  we can evaluate \eqref{eq:interpFullGrid} at $\ßx_{\ßl,\ßi'}$ to obtain
+  \begin{equation}
+    \sum_{i_1=0}^{2^{l_1}}
+    \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
+    \left(\sum_{i_d=0}^{2^{l_d}} c_\ßi \varphi_{l_d,i_d}(x_{l_d,i_d'})\right) \dotsb
+    \varphi_{l_2,i_2}(x_{l_2,i_2'})\right) \varphi_{l_1,i_1}(x_{l_1,i_1'})
+    = 0.
+  \end{equation}
+  We apply the linear independence in 1D ($x_1$ direction) to conclude that
+  the sum over $i_2$ must vanish.
+  Repeating this argument for all dimensions, we infer that $c_\ßi = 0$
+  for all $\ßi = \ß0, \dotsc, \ß2^\ßl$,
+  implying the linear independence of the functions $\varphi_{\ßl,\ßi}$.
+\end{proof}
 \newgsymbol{Omegal!}{$\Omega_\ßl$}{%
   Set of grid points of the full grid of level $\ßl$%
 }%
-This is equivalent to the statement that the coefficients $c_\ßi \in \RR$
+The lemma is equivalent to the statement that the coefficients $c_\ßi \in \RR$
 exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
   \Omega_\ßl
   := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl} - \ß1\}.
 \end{equation}
+A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
+In this case, we replace $\ßl$ in the subscripts with $n$
+(for example, $V_n := V_{n \cdot \ß1}$).
+For the hat function basis $\varphi_{l,i}^1$,
+it can be shown that the $L^2$ interpolation error is given by
+\begin{equation}
+  \norm{f - f_n}_{L^2} = \calO(h_n^2),
+\end{equation}
+i.e., the order of the interpolation error is quadratic in the mesh size.
+\todo{reference Höllig, as Acta is only for zero boundary}
 
 \subsection{Hierarchical Subspaces}
 
@@ -211,15 +233,16 @@ The dimension of the nodal space $V_\ßl$ is given by
 In asymptotic terms, this dimension is in $\Omega(2^{\norm{\ßl}_1})$,
 where the 1-norm $\norm{\ßl}_1$ of $\ßl$ is defined as
 $\norm{\ßl}_1 := \sum_{t=1}^d l_t$.
-\newgsymbol{n}{$n$}{Level $\in \natural_0$ of full or sparse grid}
+\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}
 If we choose the same level $n \in \NN_0$ in all dimensions, i.e.,
 $\ßl = n \cdot \ß1$, this means that the dimension and the
-number of grid points grow at least as fast as $2^{nd}$.
+number of grid points grow at least as fast as
+$2^{nd} = (h_n^{-1})^d$.
 This exponential dependency between $\dim V_n$ and $d$ is known as the
 \term{curse of dimensionality}.
 The curse makes interpolation on $V_\ßl$ computationally infeasible
 for dimensionalities $d > 4$,
-as we have would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
+as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
 \footnote{%
   The number of necessary basis evaluations to evaluate the interpolant once
   would not be as large, as most types of basis functions
@@ -227,7 +250,115 @@ as we have would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$
   are locally supported.%
 }
 
-\todo{write}
+In order to reduce the computational effort,
+we first split $V_\ßl$ into smaller subspaces and then identify
+which subspaces are most important and which subspaces can be omitted
+at the cost of a slightly larger error.
+In the univariate case, the key observation is that a grid point of a level $l$
+can be written as a grid point of a higher level $l'$:
+\begin{equation}
+  x_{l,i} = x_{l',i'},\quad
+  l' \ge l,\quad
+  i' = 2^{l'-l} i.
+\end{equation}
+Conversely, this implies that every grid point $x_{l,i}$ can be uniquely written
+as a grid point of a coarser level $l'$ and an odd index $i'$:
+\begin{equation}
+  x_{l,i} = x_{l',i'},\quad
+  l' =
+  \begin{cases}
+    l - \left[\log_2(\xor(i, i-1) + 1) - 1\right],&l > 0,\\
+    l,&l = 0,\\
+  \end{cases}\quad
+  i' = 2^{l'-l} i,
+\end{equation}
+% https://mathoverflow.net/a/29973
+where $\xor$ is the bitwise ``exclusive or'' function.
+The term in brackets is the exponent of the
+highest power of two that divides $i$.
+This implies that $\Omega_l$ decomposes as
+\begin{equation}
+  \Omega_l
+  = \mathop{\dot{\bigcup}}_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
+  I_l :=
+  \begin{cases}
+    \{i = 0, \dotsc, 2^l \mid \text{$i$ odd}\},&l > 0,\\
+    \{0, 1\},&l = 0,
+  \end{cases}
+\end{equation}
+where the union is disjoint.
+We call the spaces spanned by the basis functions that correspond to the
+joined sets \term{hierarchical subspaces} $W_l$:
+\begin{equation}
+  W_l
+  := \spn\{\varphi_{l,i} \mid i \in I_l\}.
+\end{equation}
+
+For the hat function basis $\varphi_{l,i}^1$ and other basis types,
+one can prove that the corresponding nodal space
+decomposes into the direct sum of all
+hierarchical subspaces of coarser levels or the same level, i.e.,
+\begin{equation}
+  \label{eq:hierSplitting}
+  V_l
+  = \bigoplus_{l'=0}^l W_{l'},
+\end{equation}
+Here, the direct sum $\oplus$ is
+the normal vector space sum with the additional indication
+that the dimension of the sum is the sum $\sum_{l'=0}^l W_{l'}$
+of the dimensions of the summands
+(analogously to $|\Omega_l| = \sum_{l'=0}^l |\Omega_{l'}|$,
+where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
+In general, \eqref{eq:hierSplitting} may not be true.
+The following lemma provides a characterization,
+which can be used to prove \eqref{eq:hierSplitting} for hat functions.
+\begin{lemma}[Hierarchical splitting characterization]
+  \label{lemma:hierSplitting}
+  Equivalent to relation \eqref{eq:hierSplitting} is the satisfaction of
+  both of the following conditions:
+  \begin{itemize}
+    \item
+    The hierarchical subspaces $W_{l'}$ ($l' \le l$) are subspaces of $V_l$.
+    
+    \item
+    The basis functions $\varphi_{l',i'}$ ($l' \le l$, $i' \in I_{l'}$)
+    are linearly independent.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subseteq V_l$.
+  The second condition is equivalent to
+  $\dim \sum_{l'=0}^l W_{l'} = \sum_{l'=0}^l \dim W_{l'}$,
+  i.e., to the directness of the sum.
+  Therefore, the logical conjunction of both is equivalent to
+  $\bigoplus_{l'=0}^l W_{l'} \subseteq V_l$.
+  If the sum is direct,
+  the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
+  (due to $\dim W_{l'} = |I_{l'}| = 2^{l'-1}$ for $l' > 0$ and
+  $\dim W_{l'} = 2$ for $l' = 0$),
+  which is also the dimension of $V_l$.
+  The only subspace of $V_l$ that has the same dimension as $V_l$ is $V_l$ itself,
+  so we infer $\bigoplus_{l'=0}^l W_{l'} = V_l$.
+\end{proof}
+\begin{corollary}
+  The splitting \eqref{eq:hierSplitting} holds for the hat function basis.
+\end{corollary}
+\begin{proof}
+  The first condition of \cref{lemma:hierSplitting}
+  is satisfied as piecewise linear splines of level $l'$
+  are also piecewise linear splines of higher levels $l \ge l'$.
+  The linear independence for the second condition can be proved by induction
+  over $l$:
+  If a linear combination of $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+  vanishes everywhere, then the coefficients of level $l$ must be zero,
+  as otherwise the basis functions $\varphi_{l,i'}^1$ ($i \in I_l$) would
+  introduce kinks at $x_{l,i'}$, which the zero function does not have.
+  This means that we have a zero linear combination of $\varphi_{l',i'}^1$ for
+  $l' \le l - 1$, $i' \in I_{l'}$,
+  and by the induction hypothesis, the other coefficients also vanish.
+\end{proof}
+
+\todo{write about multivariate case}
 
 \subsection{Regular Sparse Grids}
 
@@ -273,7 +404,5 @@ as we have would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$
 \subsection{Modified and Non-Uniform Hierarchical Not-A-Knot B-Splines}
 
 \todo{write}
-
-\cite{zenger91}
 
 \blindmathpaper
