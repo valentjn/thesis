@@ -1,4 +1,5 @@
 /build/
+/pdf/thesis.pdf
 /.sconsign.dblite
 /tex/thesis.txss
 /**/__pycache__/
