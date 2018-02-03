@@ -68,6 +68,7 @@ We will generalize this notation to B-splines $\varphi_{l,i}^p$ of
 arbitrary degrees $p$ (see \cref{sec:sgBspl}).
 
 \newgsymbol{Vl}{$V_l$}{Nodal space of level $l$}%
+\newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
 The \emph{nodal space} $V_l$ of level $l$
 is defined as the linear span of all basis functions
 $\varphi_{l,i}$, $i = 0, \dotsc, 2^l$:
@@ -97,9 +98,6 @@ multi-indices, Cartesian products and tensor products, respectively.
 \newgsymbol{01!}{$[\ß0, \ß1]$}{%
   Unit hypercube $:= [0, 1]^d$%
 }
-\newgsymbol{ab!}{$[\ßa, \ßb]$}{%
-  Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
-}
 \newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NN_0^d$}%
 Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
 which can be partitioned into
@@ -107,7 +105,9 @@ $\prod_{t=1}^d (2^{l_t} + 1)$ equally sized hyper-cubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level.
 \newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{Multivariate grid point $:= \ßi \cdot \ßh_\ßl$}%
 \newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^l$}%
-\newgsymbol{hl!}{$\ßh_\ßl$}{Multivariate mesh size $:= \ß2^{-\ßl}$}%
+\newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^l$}{%
+  For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
+}%
 The corners of the hyper-cubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
@@ -119,6 +119,7 @@ are to be read coordinate-wise, unless stated otherwise.
 Bold-faced numbers like $\ß0$ are defined to be the vector $(0, \dotsc, 0)$
 in which every entry is equal to that number.
 This allows for a somewhat intuitive and suggestive notation.
+\newgsymbol{hl!}{$\ßh_\ßl$}{Multivariate mesh size $:= \ß2^{-\ßl}$}%
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \begin{equation}
   \ßx_{\ßl,\ßi}
@@ -153,11 +154,14 @@ the univariate case:
   V_\ßl
   := \spn\{\varphi_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{phili1!}{$\varphi_{\ßl,\ßi}$}{%
+\newgsymbol{phili1!}{$\varphi_{\ßl,\ßi}^1$}{%
   Multivariate hat function of level $\ßl$, index $\ßi$%
 }%
 \newgsymbol{Vl1!}{$V_\ßl^1$}{%
   Multivariate nodal piecewise linear space of level $\ßl$%
+}%
+\newgsymbol{ab!}{$[\ßa, \ßb]$}{%
+  Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
 }%
 In the case of hat functions $\varphi_{\ßl,\ßi}^1$,
 the nodal space $V_\ßl^1$ is the $d$-linear spline space, i.e.,
@@ -173,6 +177,8 @@ all hyper-cubes
 
 We can now interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
 in the nodal space $V_\ßl$.
+\newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $V_\ßl$}%
+\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 A function $f_\ßl\colon [\ß0, \ß1] \to \RR$ is called \term{interpolant}
 in $V_\ßl$, if
 \begin{equation}
@@ -215,15 +221,27 @@ exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
   \Omega_\ßl
-  := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl} - \ß1\}.
+  := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
+\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
-In this case, we replace $\ßl$ in the subscripts with $n$
-(for example, $V_n := V_{n \cdot \ß1}$).
+\newgsymbol{Vnd}{$V_{n,d}$}{%
+  Multivariate nodal space
+  $:= V_{n \cdot \ß1}$ of level $n$ with dimensionality $d$%
+}
+\newgsymbol{Vnd1}{$V_{n,d}^1$}{%
+  Multivariate nodal piecewise linear space
+  $:= V_{n \cdot \ß1}^1$ of level $n$ with dimensionality $d$%
+}
+In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
+(for example, $V_{n,d} := V_{n \cdot \ß1}$).
+\newgsymbol{fnd1}{$f_{n,d}^1$}{Interpolant of $f$ in $V_{n,d}^1$}%
+\newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\varphi_{l,i}^1$,
-it can be shown that the $L^2$ interpolation error is given by
+it can be shown that the $L^2$ interpolation error of the interpolant
+$f_{n,d}^1$ is given by
 \begin{equation}
-  \norm{f - f_n}_{L^2} = \calO(h_n^2),
+  \norm{f - f_{n,d}^1}_{L^2} = \calO(h_n^2),
 \end{equation}
 i.e., the order of the interpolation error is quadratic in the mesh size.
 \todo{reference Höllig, as Acta is only for zero boundary}
@@ -232,6 +250,10 @@ i.e., the order of the interpolation error is quadratic in the mesh size.
 
 \paragraph{Curse of dimensionality}
 
+\newgsymbol{dim}{$\dim$}{Vector space dimension}%
+\newgsymbol{abs}{$|\cdot|$}{%
+  Absolute value of a scalar or the number of elements of a set%
+}%
 The dimension of the nodal space $V_\ßl$ is given by
 \begin{equation}
   \dim V_\ßl
@@ -243,12 +265,11 @@ The dimension of the nodal space $V_\ßl$ is given by
 In asymptotic terms, this dimension is in $\Omega(2^{\norm{\ßl}_1})$,
 where the 1-norm $\norm{\ßl}_1$ of $\ßl$ is defined as
 $\norm{\ßl}_1 := \sum_{t=1}^d l_t$.
-\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}
-If we choose the same level $n \in \NN_0$ in all dimensions, i.e.,
-$\ßl = n \cdot \ß1$, this means that the dimension and the
+If we choose the same level $n \in \NN_0$ in all dimensions,
+this means that the dimension of $V_{n,d}$ and the
 number of grid points grow at least as fast as
 $2^{nd} = (h_n^{-1})^d$.
-This exponential dependency between $\dim V_n$ and $d$ is known as the
+This exponential dependency between $\dim V_{n,d}$ and $d$ is known as the
 \term{curse of dimensionality}.
 The curse makes interpolation on $V_\ßl$ computationally infeasible
 for dimensionalities $d > 4$,
@@ -273,6 +294,7 @@ can be written as a grid point of a higher level $l'$:
   l' \ge l,\quad
   i' = 2^{l'-l} i.
 \end{equation}
+\newgsymbol{xor}{$\xor$}{Bitwise ``exclusive or''}%
 Conversely, this implies that every grid point $x_{l,i}$ can be uniquely written
 as a grid point of a coarser level $l'$ and an odd index $i'$:
 \begin{equation}
@@ -288,6 +310,11 @@ as a grid point of a coarser level $l'$ and an odd index $i'$:
 where $\xor$ is the bitwise ``exclusive or'' function.
 The term in brackets is the exponent of the
 highest power of two that divides $i$.
+\newgsymbol{u!}{$\dot{\cup}$}{%
+  Disjoint union of sets (union where the pairwise intersection of
+  the joined sets is empty)%
+}%
+\newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
 This implies that $\Omega_l$ decomposes as
 \begin{equation}
   \Omega_l
@@ -299,6 +326,7 @@ This implies that $\Omega_l$ decomposes as
   \end{cases}
 \end{equation}
 where the union is disjoint.
+\newgsymbol{Wl}{$W_l$}{Hierarchical subspace of level $l$}%
 We call the spaces spanned by the basis functions that correspond to the
 joined sets \term{hierarchical subspaces} $W_l$:
 \begin{equation}
@@ -306,6 +334,10 @@ joined sets \term{hierarchical subspaces} $W_l$:
   := \spn\{\varphi_{l,i} \mid i \in I_l\}.
 \end{equation}
 
+\newgsymbol{oplus}{$\oplus$}{%
+  Direct sum of vector spaces (vector space sum in which the dimension of
+  the sum equals the sum of the summands' dimensions)%
+}%
 For the hat function basis $\varphi_{l,i}^1$ and other basis types,
 one can prove that the corresponding nodal space
 decomposes into the direct sum of all
