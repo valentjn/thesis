@@ -51,7 +51,7 @@ Every grid point is associated with a \term{basis function}
   \varphi_{l,i}\colon [0, 1] \to \RR.
 \end{equation}
 In this thesis, we assume $\varphi_{l,i}$ to be arbitrary,
-satisfying required assumptions when needed.
+satisfying required assumptions when needed and stated.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
 \newgsymbol{phili1}{$\varphi_{l,i}^1$}{Hat function of level $l$, index $i$}%
@@ -190,6 +190,7 @@ in $V_\ßl$, if
 where $c_\ßi \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
 \begin{lemma}[Linear independence of tensor products]
+  \label{lemma:tensorProductLinearIndependence}
   The functions $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
   form a basis of $V_\ßl$, if the univariate functions
   $\varphi_{l,i}$ ($i = 0, \dotsc, 2^l$)
@@ -256,6 +257,7 @@ i.e., the order of the interpolation error is quadratic in the mesh size.
 }%
 The dimension of the nodal space $V_\ßl$ is given by
 \begin{equation}
+  \label{eq:dimensionFG}
   \dim V_\ßl
   = |\Omega_\ßl|
   = \prod_{t=1}^d (2^{l_t} + 1).
@@ -343,7 +345,7 @@ one can prove that the corresponding nodal space
 decomposes into the direct sum of all
 hierarchical subspaces of coarser levels or the same level, i.e.,
 \begin{equation}
-  \label{eq:hierSplitting}
+  \label{eq:hierSplittingUV}
   V_l
   = \bigoplus_{l'=0}^l W_{l'},
 \end{equation}
@@ -353,12 +355,12 @@ that the dimension of the sum is the sum $\sum_{l'=0}^l W_{l'}$
 of the dimensions of the summands
 (analogously to $|\Omega_l| = \sum_{l'=0}^l |\Omega_{l'}|$,
 where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
-In general, \eqref{eq:hierSplitting} may not be true.
+In general, \eqref{eq:hierSplittingUV} may not be true.
 The following lemma provides a characterization,
-which can be used to prove \eqref{eq:hierSplitting} for hat functions.
+which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.
 \begin{lemma}[Hierarchical splitting characterization]
-  \label{lemma:hierSplitting}
-  Equivalent to relation \eqref{eq:hierSplitting} is the satisfaction of
+  \label{lemma:hierSplittingUV}
+  Equivalent to relation \eqref{eq:hierSplittingUV} is the satisfaction of
   both of the following conditions:
   \begin{itemize}
     \item
@@ -370,12 +372,12 @@ which can be used to prove \eqref{eq:hierSplitting} for hat functions.
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subseteq V_l$.
+  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subset V_l$.
   The second condition is equivalent to
   $\dim \sum_{l'=0}^l W_{l'} = \sum_{l'=0}^l \dim W_{l'}$,
   i.e., to the directness of the sum.
   Therefore, the logical conjunction of both is equivalent to
-  $\bigoplus_{l'=0}^l W_{l'} \subseteq V_l$.
+  $\bigoplus_{l'=0}^l W_{l'} \subset V_l$.
   If the sum is direct,
   the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
   (due to $\dim W_{l'} = |I_{l'}| = 2^{l'-1}$ for $l' > 0$ and
@@ -385,10 +387,11 @@ which can be used to prove \eqref{eq:hierSplitting} for hat functions.
   so we infer $\bigoplus_{l'=0}^l W_{l'} = V_l$.
 \end{proof}
 \begin{corollary}
-  The splitting \eqref{eq:hierSplitting} holds for the hat function basis.
+  The hierarchical splitting \eqref{eq:hierSplittingUV}
+  holds for the hat function basis.
 \end{corollary}
 \begin{proof}
-  The first condition of \cref{lemma:hierSplitting}
+  The first condition of \cref{lemma:hierSplittingUV}
   is satisfied as piecewise linear splines of level $l'$
   are also piecewise linear splines of higher levels $l \ge l'$.
   The linear independence for the second condition can be proved by induction
