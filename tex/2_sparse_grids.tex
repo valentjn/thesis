@@ -23,6 +23,12 @@
 
 \todo{insert citations}
 
+\todo{make glossary consistent}
+
+\todo{append $, d$ to $n$ subscripts}
+
+\paragraph{Univariate case}
+
 Let us first consider univariate functions
 that are defined on the unit interval $[0, 1]$.
 \newgsymbol{l}{$l$}{Level $\in \NN_0$}%
@@ -78,6 +84,8 @@ The space $V_l^1$ is the space of the linear splines,
 that is, the space of all continuous functions on $[0, 1]$ that are
 piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
 $i = 0, \dotsc, 2^l - 1$.
+
+\paragraph{Multivariate case}
 
 \newgsymbol{d}{$d$}{Dimensionality $\in \NN$}%
 For the multivariate case with $d \in \NN$ dimensions,
@@ -222,6 +230,8 @@ i.e., the order of the interpolation error is quadratic in the mesh size.
 
 \subsection{Hierarchical Subspaces}
 
+\paragraph{Curse of dimensionality}
+
 The dimension of the nodal space $V_\ßl$ is given by
 \begin{equation}
   \dim V_\ßl
@@ -249,6 +259,8 @@ as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
   (like hat functions $\varphi_{l,i}^1$ and higher-order B-splines)
   are locally supported.%
 }
+
+\paragraph{Hierarchical splitting}
 
 In order to reduce the computational effort,
 we first split $V_\ßl$ into smaller subspaces and then identify
