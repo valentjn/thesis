@@ -295,7 +295,7 @@ as a grid point of a coarser level $l'$ and an odd index $i'$:
 where $\xor$ is the bitwise ``exclusive or'' function.
 The term in brackets is the exponent of the
 highest power of two that divides $i$.
-\newgsymbol{u!}{$\dot{\cup}$}{%
+\newgsymbol{u!}{$\dotcup$}{%
   Disjoint union of sets (union where the pairwise intersection of
   the joined sets is empty)%
 }%
@@ -303,14 +303,14 @@ highest power of two that divides $i$.
 This implies that $\Omega_l$ decomposes as
 \begin{equation}
   \Omega_l
-  = \mathop{\dot{\bigcup}}_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
+  = \bigdotcup_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
   I_l :=
   \begin{cases}
     \{i = 0, \dotsc, 2^l \mid \text{$i$ odd}\},&l > 0,\\
     \{0, 1\},&l = 0,
   \end{cases}
 \end{equation}
-where the union is disjoint.
+where $\dotcup$ indicates the disjoint union.
 \newgsymbol{Wl}{$W_l$}{Hierarchical subspace of level $l$}%
 We call the spaces spanned by the basis functions that correspond to the
 joined sets \term{hierarchical subspaces} $W_l$:
@@ -556,8 +556,8 @@ The resulting function space and grid point set
   V_{n,d}^\sparse
   := \bigoplus_{\norm{\ßl}_1 \le n} W_{\ßl},\qquad
   \Omega_{n,d}^\sparse
-  := \mathop{\dot{\bigcup}}_{\norm{\ßl}_1 \le n}
-  \{\ßx_{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}.
+  := \bigdotcup_{\norm{\ßl}_1 \le n}
+  \{\ßx_{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid (space)} of level $n$.
 To better distinguish the different grids,
