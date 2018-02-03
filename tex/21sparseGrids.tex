@@ -195,9 +195,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for all $\ßi = \ß0, \dotsc, \ß2^\ßl$,
   implying the linear independence of the functions $\varphi_{\ßl,\ßi}$.
 \end{proof}
-\newgsymbol{Omegal!}{$\Omega_\ßl$}{%
-  Set of grid points of the full grid of level $\ßl$%
-}%
+\newgsymbol{Omegal!}{$\Omega_\ßl$}{Set of full grid points of level $\ßl$}%
 The lemma is equivalent to the statement that the coefficients $c_\ßi \in \RR$
 exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
@@ -218,6 +216,10 @@ A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
 (for example, $V_{n,d} := V_{n \cdot \ß1}$).
 \newgsymbol{fnd1}{$f_{n,d}^1$}{Interpolant of $f$ in $V_{n,d}^1$}%
+\newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
+  $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
+  for a function $f\colon \Omega \to \RR$%
+}
 \newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\varphi_{l,i}^1$,
 it can be shown that the $L^2$ interpolation error of the interpolant
@@ -233,7 +235,7 @@ i.e., the order of the interpolation error is quadratic in the mesh size.
 \subsection{Hierarchical Subspaces}
 
 \newgsymbol{dim}{$\dim$}{Vector space dimension}%
-\newgsymbol{abs}{$|\cdot|$}{%
+\newgsymbol{|.|}{$|\cdot|$}{%
   Absolute value of a scalar or the number of elements of a set%
 }%
 The dimension of the nodal space $V_\ßl$ is given by
@@ -397,7 +399,7 @@ Multivariate hierarchical subspaces of level $\ßl$
 are defined analogously to the univariate case:
 \begin{equation}
   W_\ßl
-  := \spn\{\varphi_{l,i} \mid \ßi \in I_\ßl\},\quad
+  := \spn\{\varphi_{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
   I_\ßl
   := I_{l_1} \times \dotsb \times I_{l_d}.
 \end{equation}
@@ -429,12 +431,13 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   If the sum is direct, then its dimension is given by
   \begin{equation}
     \dim \sum_{\ßl'=0}^\ßl W_{\ßl'}
-    = \sum_{\mathclap{l_1'=0}}^{l_1} \dotsb \sum_{\mathclap{l_d'=0}}^{l_d} \prod_{t=1}^d \dim W_{l_t'}
-    = \prod_{t=1}^d \sum_{\mathclap{l_t'=0}}^{l_t} \dim W_{l_t'}
+    = \sum_{l_1'=0}^{l_1} \dotsb \sum_{l_d'=0}^{l_d}
+    \prod_{t=1}^d \dim W_{l_t'}
+    = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim W_{l_t'}
     = \prod_{t=1}^d (2^{l_t} + 1)
     = \dim V_\ßl
   \end{equation}
-  by \eqref{eq:dimensionFG}.
+  using \eqref{eq:dimensionFG}.
   The rest is analogous to the proof of \cref{lemma:hierSplittingUV}.
 \end{proof}
 \begin{proposition}
@@ -447,7 +450,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   \begin{enumerate}
     \item
     The hierarchical basis functions $\varphi_{\ßl',\ßi'}$
-    of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_\ßl'$) are tensor products
+    of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) are tensor products
     of functions $\varphi_{l_t',i_t'}$.
     According to the first condition of \cref{lemma:hierSplittingUV},
     each of these functions can be written as a linear combination of
@@ -456,7 +459,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     of tensor products of nodal basis functions.
     Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
     multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
-    As this is true for all $\ßi' \in I_\ßl'$, we obtain $W_\ßl' \subset V_\ßl$.
+    As this is true for all $\ßi' \in I_{\ßl'}$, we obtain $W_{\ßl'} \subset V_\ßl$.
     
     \item
     The linear independence of the hierarchical functions $\varphi_{\ßl',\ßi'}$
@@ -473,12 +476,121 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
 
 \subsection{Sparse Grids}
 
+The idea of sparse grids is to use the
+hierarchical splitting \eqref{eq:hierSplittingUV}
+to keep only the most ``important'' hierarchical subspaces,
+omitting the remaining ones.
+There are three main ``flavors'' of sparse grids:
+regular, dimensionally adaptive, and spatially adaptive.
+
 \subsubsection{Regular Sparse Grids}
 
+To assess the importance of a subspace, we consider again the
+interpolant $f_\ßl \in V_\ßl$ of a function $f\colon [\ß0, \ß1] \to \RR$.
+According to the splitting \eqref{eq:hierSplittingUV}, the interpolant can
+be written as
+\begin{equation}
+  \label{eq:interpHierFullGrid}
+  f_\ßl
+  = \sum_{\ßl'=0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
+  \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'},\quad
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})}.
+\end{equation}
+\newgsymbol{alphali!}{$\alpha_{\ßl,\ßi}$}{%
+  Hierarchical surpluses (coefficients of a linear combination of hierarchical
+  basis functions)%
+}%
+The coefficients $\alpha_{\ßl',\ßi'}$ with respect to the hierarchical basis
+$\varphi_{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
+When using the hat function basis $\varphi_{\ßl,\ßi}^1$,
+one can prove the following representation
+for the corresponding surpluses:
+\begin{equation}
+  \alpha_{\ßl,\ßi}
+  = (-1)^d 2^{-\norm{\ßl+\ß1}_1}
+  \int_\ß0^\ß1 \varphi_{\ßl,\ßi}(\ßx)
+  \frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f(\ßx) \diff{}\ßx,
+\end{equation}
+if $\ßl \ge \ß1$ and
+$f$ is twice continuously differentiable in every dimension simultaneously,
+i.e., $\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f$
+exists and is continuous.%
+\footnote{%
+  Again, the notation implies that the integration domain is
+  the hypercube $[\ß0, \ß1]$.%
+}\multiplefootnoteseparator%
+\footnote{%
+  The statement is even valid for functions in the Sobolev space
+  $H_\mathrm{mix}^2([\ß0, \ß1])$ of with dominating mixed derivative.%
+}
+This equation provides a direct relation between the hat function surpluses
+and the second mixed derivative of the objective function, which has
+two consequences.
+First, the absolute value of the surpluses will large in regions where
+the absolute value of the second mixed derivative is large, i.e.,
+where the objective function oscillates strongly.
+Second, the surplus will decay with increasing level $\ßl$ as both the factor
+$2^{-\norm{\ßl+\ß1}_1}$ and the size of the support of $\varphi_{\ßl,\ßi}$
+are decreasing.
+As a direct corollary, it can be shown that
+\begin{equation}
+  \label{eq:componentEstimation}
+  \bignorm{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
+  \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'}}_{L^2}
+  \le 3^{-d} \cdot 2^{-2 \norm{\ßl}_1} \cdot
+  \bignorm{\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f}_{L^2}
+\end{equation}
+for the hat function surpluses $\alpha_{\ßl',\ßi'}$.
+
+Equation \eqref{eq:componentEstimation} motivates to omit those summands
+from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
+exceeds a certain value $n \in \NN_0$.
+\newgsymbol{Vnds}{$V_{n,d}^\sparse$}{%
+  Regular sparse grid space of level $n$ with dimensionality $d$%
+}%
+\newgsymbol{Omegands}{$\Omega_{n,d}^\sparse$}{%
+  Set of sparse grid points of level $n$ with dimensionality $d$%
+}%
+The resulting function space and grid point set
+\begin{equation}
+  V_{n,d}^\sparse
+  := \bigoplus_{\norm{\ßl}_1 \le n} W_{\ßl},\qquad
+  \Omega_{n,d}^\sparse
+  := \mathop{\dot{\bigcup}}_{\norm{\ßl}_1 \le n}
+  \{\ßx_{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}.
+\end{equation}
+are called \term{regular sparse grid (space)} of level $n$.
+To better distinguish the different grids,
+we call the nodal spaces and grids \term{full grids}.
+Although sparse grids have been motivated using the hat function
+basis $\varphi_{\ßl,\ßi}^1$,
+we generalize the definition to arbitrary bases $\varphi_{\ßl,\ßi}$.
+One can prove that for homogeneous boundary conditions
+$f|_{\partial[\ß0,\ß1]} \equiv 0$,
+the number of required inner grid points
+($\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
+grows like $\calO(h_n^{-1} (\log_2 h_n^{-1})^{d-1})$, which is much less than
+the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
+(see \eqref{eq:dimensionFG}).
+In particular, the exponential dependency on the dimensionality $d$
+has vanished.
+The corresponding $L^2$ error of the sparse grid interpolant
+$f_{n,d}^{\sparse,1}$ using hat functions decays
+(still assuming homogeneous boundary conditions) like
+\begin{equation}
+  \norm{f - f_{n,d}^{\sparse,1}} = \calO(h_n^2 (\log_2 h_n^{-1})^{d-1}),
+\end{equation}
+which is only slightly worse than the full grid error by the factor of
+$(\log_2 h_n^{-1})^{d-1}$.
+
 \subsubsection{Dimensionally Adaptive Sparse Grids}
+
+\todo{write}
+
+\blindtext
 
 \subsubsection{Spatially Adaptive Sparse Grids}
 
 \todo{write}
 
-\blindtext[3]
+\blindtext
