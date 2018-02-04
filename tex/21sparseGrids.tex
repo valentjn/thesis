@@ -215,7 +215,7 @@ A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
 }
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
 (for example, $V_{n,d} := V_{n \cdot \ß1}$).
-\newgsymbol{fnd1}{$f_{n,d}^1$}{Interpolant of $f$ in $V_{n,d}^1$}%
+\newgsymbol{fnd1}{$f_{n,d}^1$}{Full grid interpolant $\in V_{n,d}^1$ of $f$}%
 \newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
   $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
   for a function $f\colon \Omega \to \RR$%
@@ -570,6 +570,7 @@ we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
 basis $\varphi_{\ßl,\ßi}^1$,
 we generalize the definition to arbitrary bases $\varphi_{\ßl,\ßi}$.
+\newgsymbol{dOmega}{$\partial \Omega$}{Boundary of the domain $\Omega \subset \RR^d$}%
 One can prove that for homogeneous boundary conditions
 $f|_{\partial[\ß0,\ß1]} \equiv 0$,
 the number of required inner grid points
@@ -579,6 +580,9 @@ the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
 (see \eqref{eq:dimensionFG}).
 In particular, the exponential dependency on the dimensionality $d$
 has vanished.
+\newgsymbol{fnds1}{$f_{n,d}^{\sparse,1}$}{%
+  Sparse grid interpolant $\in V_{n,d}^{\sparse,1}$ of $f$%
+}%
 The corresponding $L^2$ error of the sparse grid interpolant
 $f_{n,d}^{\sparse,1}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
@@ -600,6 +604,13 @@ To incorporate dimensional adaptivity into sparse grids,
 one has to generalize the symmetric
 choice of subspaces in the definition of regular sparse grids
 to allow for an asymmetric preference.
+\newgsymbol{Vs}{$V^\sparse$}{%
+  Arbitrary sparse grid space (possibly spatially adaptive)%
+}%
+\newgsymbol{Omegas}{$\Omega^\sparse$}{%
+  Arbitrary sparse grid (possibly spatially adaptive)%
+}%
+\newgsymbol{L}{$L$}{Finite subset $L \subset \NN_0^d$ of levels}%
 Generally, function spaces $V^\sparse$ and grid sets $\Omega^\sparse$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
@@ -617,6 +628,9 @@ $L = \{\ßl \in \NN_0^d \mid \norm{\ßl}_1 \le n\}$.
 The key advantage of dimensionally adaptive sparse grids over
 spatially adaptive approaches lies in the
 so-called \term{combination technique}.
+\newgsymbol{cli!}{$c_{\ßl,\ßi}$}{%
+  Interpolation coefficients for the full grid $V_\ßl$%
+}%
 For regular sparse grids, one can show that the sparse grid interpolant
 $f_{n,d}^\sparse$ can be written as
 \begin{equation}
@@ -654,6 +668,7 @@ interpolation error, but rather high accuracy near the optima.
 
 This can be achieved by \term{spatially adaptive sparse grids},
 on which this thesis focuses.
+\newgsymbol{K}{$K$}{Finite set of level-index pairs $(\ßl,\ßi)$}%
 In the most general form, their function spaces and grid sets have the form
 \begin{equation}
   V^\sparse
@@ -665,6 +680,7 @@ where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \NN_0^d$ and $\ßi \in I_\ßl$.
 Often, one has to make specific assumptions about $K$ in order for
 sparse grid algorithms to work correctly.
+\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 For example for hat functions $\varphi_{\ßl,\ßi}^1$, the grid should contain
 the hierarchical ancestors of every grid point:
 \begin{equation}
