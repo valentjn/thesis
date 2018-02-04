@@ -54,13 +54,13 @@
   \iftoggle{compileChapter7}{\include{70finance}}{}
   \iftoggle{compileChapter8}{\include{80conclusion}}{}
   
+  % start appendix
+  \appendix
+  
+  % appendix chapters
+  \iftoggle{compileChapterAppendix1}{\include{a10proofs}}{}
+  
   \iftoggle{partialCompileMode}{}{
-    % start appendix
-    \appendix
-    
-    % appendix chapters
-    \include{a10proofs}
-    
     % bibliography
     \printbibliography[%
       % change title
@@ -70,8 +70,11 @@
       % print custom note
       postnote=mypostnote,
     ]
-    \cleardoubleevenemptypage
-    
+  }
+  
+  \cleardoubleevenemptypage
+  
+  \iftoggle{partialCompileMode}{}{
     % add all symbols and acronyms that have not been used
     % in the text to the glossary
     % (this command has to come after all glossary definitions)
