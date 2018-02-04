@@ -147,7 +147,7 @@ the univariate case:
 In the case of hat functions $\varphi_{\ßl,\ßi}^1$,
 the nodal space $V_\ßl^1$ is the $d$-linear spline space, i.e.,
 the space of all continuous functions
-on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomial on
+on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
 all hyper-cubes
 \begin{equation}
   [\ßx_{\ßl,\ßi}, \ßx_{\ßl,\ßi+\ß1}]
@@ -508,7 +508,7 @@ for the corresponding surpluses:
 \begin{equation}
   \alpha_{\ßl,\ßi}
   = (-1)^d 2^{-\norm{\ßl+\ß1}_1}
-  \int_\ß0^\ß1 \varphi_{\ßl,\ßi}(\ßx)
+  \int_\ß0^\ß1 \varphi_{\ßl,\ßi}^1(\ßx)
   \frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f(\ßx) \diff{}\ßx,
 \end{equation}
 if $\ßl \ge \ß1$ and
@@ -536,7 +536,7 @@ As a direct corollary, it can be shown that
 \begin{equation}
   \label{eq:componentEstimation}
   \bignorm{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'}}_{L^2}
+  \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'}^1}_{L^2}
   \le 3^{-d} \cdot 2^{-2 \norm{\ßl}_1} \cdot
   \bignorm{\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f}_{L^2}
 \end{equation}
@@ -545,6 +545,8 @@ for the hat function surpluses $\alpha_{\ßl',\ßi'}$.
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
 exceeds a certain value $n \in \NN_0$.
+The selection of the relevant subspaces can be formulated as a
+continuous knapsack problem.
 \newgsymbol{Vnds}{$V_{n,d}^\sparse$}{%
   Regular sparse grid space of level $n$ with dimensionality $d$%
 }%
@@ -559,7 +561,8 @@ The resulting function space and grid point set
   := \bigdotcup_{\norm{\ßl}_1 \le n}
   \{\ßx_{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
 \end{equation}
-are called \term{regular sparse grid (space)} of level $n$.
+are called \term{regular sparse grid space} and
+\term{regular sparse grid} of level $n$, respectively.
 To better distinguish the different grids,
 we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
@@ -575,10 +578,10 @@ the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
 In particular, the exponential dependency on the dimensionality $d$
 has vanished.
 The corresponding $L^2$ error of the sparse grid interpolant
-$f_{n,d}^{\sparse,1}$ using hat functions decays
-(still assuming homogeneous boundary conditions) like
+$f_{n,d}^{\sparse,1}$ using hat functions
+(still assuming homogeneous boundary conditions) decays like
 \begin{equation}
-  \norm{f - f_{n,d}^{\sparse,1}} = \calO(h_n^2 (\log_2 h_n^{-1})^{d-1}),
+  \norm{f - f_{n,d}^{\sparse,1}}_{L^2} = \calO(h_n^2 (\log_2 h_n^{-1})^{d-1}),
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
 $(\log_2 h_n^{-1})^{d-1}$.
