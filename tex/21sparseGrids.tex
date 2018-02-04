@@ -590,6 +590,102 @@ $(\log_2 h_n^{-1})^{d-1}$.
 
 \subsubsection{Dimensionally Adaptive Sparse Grids}
 
+The idea of dimensional adaptivity is to spend more grid
+points in specific dimensions depending on the objective function.
+Different criteria for the choice of dimensions exists,
+for example the absolute value of the linear hierarchical surpluses
+or the ANOVA decomposition.
+\todo{not sure about that one}
+To incorporate dimensional adaptivity into sparse grids,
+one has to generalize the symmetric
+choice of subspaces in the definition of regular sparse grids
+to allow for an asymmetric preference.
+Generally, function spaces $V^\sparse$ and grid sets $\Omega^\sparse$
+of \term{dimensionally adaptive sparse grids} have the form
+\begin{equation}
+  V^\sparse
+  = \bigoplus_{\ßl \in L} W_\ßl,\qquad
+  \Omega^\sparse
+  = \bigdotcup_{\ßl \in L} \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},
+\end{equation}
+where $L$ is a \term{downward closed} set, i.e.,
+a finite subset $L \subset \NN_0^d$
+for which $\forall_{\ßl \in L} \fa{\ßl' \le \ßl}{\ßl' \in L}$.
+Regular sparse grids are a special case by setting
+$L = \{\ßl \in \NN_0^d \mid \norm{\ßl}_1 \le n\}$.
+
+The key advantage of dimensionally adaptive sparse grids over
+spatially adaptive approaches lies in the
+so-called \term{combination technique}.
+For regular sparse grids, one can show that the sparse grid interpolant
+$f_{n,d}^\sparse$ can be written as
+\begin{equation}
+  \label{eq:combiTechnique}
+  f_{n,d}^\sparse
+  = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\norm{\ßl}_1 = n-q}
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \varphi_{\ßl,\ßi},
+\end{equation}
+where the $c_{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
+are the interpolation coefficients on the full grid of level $\ßl$, i.e.,
+$\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \varphi_{\ßl,\ßi}(\ßx_{\ßl,\ßi'})
+  = f(\ßx_{\ßl,\ßi'})%
+}$.
+For general dimensionally adaptive sparse grids, a similar formula exists.
+\todo{citation}
+The combination formula \eqref{eq:combiTechnique} decomposes the
+sparse grid interpolant into a weighted sum of full grid interpolants.
+In applications, each of the grid can be processed in parallel,
+allowing to drastically speed up computations like the solution of
+\pde{}s.
+In addition, existing software working with nodal bases do not have to be
+rewritten in terms of hierarchical functions,
+which means that combination technique allows sparse grids to be employed
+in a minimally invasive way.
+
+\subsubsection{Spatially Adaptive Sparse Grids}
+
+Dimensional adaptivity does not suffice to resolve local features of the
+objective function.
+Especially in some applications, it is crucial for the
+interpolant to have a high accuracy in specific regions of the domain
+For instance in optimization, it is not necessary to have a small global
+interpolation error, but rather high accuracy near the optima.
+
+This can be achieved by \term{spatially adaptive sparse grids},
+on which this thesis focuses.
+In the most general form, their function spaces and grid sets have the form
+\begin{equation}
+  V^\sparse
+  = \spn\{\varphi_{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},\qquad
+  \Omega^\sparse
+  = \{\ßx_{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
+\end{equation}
+where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
+with $\ßl \in \NN_0^d$ and $\ßi \in I_\ßl$.
+Often, one has to make specific assumptions about $K$ in order for
+sparse grid algorithms to work correctly.
+For example for hat functions $\varphi_{\ßl,\ßi}^1$, the grid should contain
+the hierarchical ancestors of every grid point:
+\begin{equation}
+  \label{eq:hierAncestors}
+  \forall_{(\ßl,\ßi) \in K}
+  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in K},\quad
+  \ßl' := \ßl - \ße_t,\quad
+  i_{t'}' :=
+  \begin{cases}
+    2 \lfloor i_t/4 \rfloor + 1,&t = t',\\
+    i_{t'},&t \not= t',
+  \end{cases}
+\end{equation}
+where $\ße_t$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+If \eqref{eq:hierAncestors} is not met, the so-called
+unidirectional principle, which is used for instance to efficiently calculate
+hierarchical surpluses, does not work.
+However, as we will see that the unidirectional principle cannot be applied
+to B-splines of general degree, most of the time we will not restrict the
+choice of $K$.
+
 \subsection{Boundary Treatment}
 
 \todo{write}
