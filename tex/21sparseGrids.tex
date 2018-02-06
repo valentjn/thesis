@@ -73,7 +73,7 @@ $i = 0, \dotsc, 2^l - 1$.
 For the multivariate case with $d \in \NN$ dimensions,
 we proceed with the usual tensor product approach,
 for which we replace all indices, points, and functions with
-multi-indices, Cartesian products and tensor products, respectively.
+multi-indices, Cartesian products, and tensor products, respectively.
 \newgsymbol{0!}{$\ß0$}{$(0, \dotsc, 0) \in \NN_0^d$}%
 \newgsymbol{1!}{$\ß1$}{$(1, \dotsc, 1) \in \NN^d$}%
 \newgsymbol{01!}{$[\ß0, \ß1]$}{%
@@ -521,7 +521,8 @@ exists and is continuous.%
 }\multiplefootnoteseparator%
 \footnote{%
   The statement is even valid for functions in the Sobolev space
-  $H_\mathrm{mix}^2([\ß0, \ß1])$ of with dominating mixed derivative.%
+  $H_\mathrm{mix}^2([\ß0, \ß1])$ with dominating mixed derivative,
+  as its proof mainly relies on integration by parts.%
 }
 %This equation provides a direct relation between the hat function surpluses
 %and the second mixed derivative of the objective function, which has
@@ -722,7 +723,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 }
 \begin{equation}
   \interior{\Omega}_{n,d}^\sparse
-  := \Omega_{n,d}^\sparse \cap \NN^d
+  := \Omega_{n,d}^\sparse \cap \mathopen]\ß0, \ß1\mathclose[
   = \{\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse \mid \ßl \ge \ß1\},
 \end{equation}
 then the following relation about the number of grid points
