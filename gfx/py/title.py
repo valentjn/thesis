@@ -11,7 +11,7 @@ from   helper.figure import Figure
 import helper.grid
 
 d = 2
-n = 3
+n = 4
 p = 3
 l = (1, 1)
 i = (1, 1)
@@ -46,7 +46,7 @@ B/DJVLjnkafWD2C69wGszh/AU1+zKkp9HD0q177fJdnM6FDogTT/17+4kiiA/AsAAA=="""
 texts = eval(gzip.decompress(base64.b64decode(g.replace("\n", "").encode())).decode())
 
 b = helper.basis.HierarchicalBSpline(p)
-grid = helper.grid.RegularSparse()
+grid = helper.grid.RegularSparse(n, d)
 
 
 
@@ -55,7 +55,7 @@ ax = fig.add_subplot(111, projection="3d")
 
 
 
-X, Xl, Xi = grid.generate(d, n)
+X, L, I = grid.generate()
 N = X.shape[0]
 Y = np.zeros((N,))
 
