@@ -1,6 +1,103 @@
 \chapter{Proofs}
 
-\section{%
+This chapter contains the proofs of the propositions and theorems that
+were too long or technical to include them in the main text.
+For convenience, the propositions and theorems are repeated
+before the proofs.
+
+
+
+\section[Proof of Proposition~\ref*{prop:gridSizeCoarseBoundary}]{%
+  Proof of \texorpdfstring{%
+    \Cref{prop:gridSizeCoarseBoundary}%
+  }{%
+    Proposition \ref{prop:gridSizeCoarseBoundary}%
+  }%
+}
+\label{sec:proofGridSizeCoarseBoundary}
+
+\propGridSizeCoarseBoundary*
+
+\begin{proof}
+  Note that the outer union in the definition of $L_{n,d}^{\sparse(b)}$ in
+  \eqref{eq:coarseBoundary} is indeed disjoint.
+  Therefore,
+  \begin{align}
+    |\Omega_{n,d}^{\sparse(b)}|
+    &= \sum_{\substack{\ßl \in \NN^d,\\\norm{\ßl}_1 \le n}} |I_\ßl| +
+    \sum_{
+      \substack{
+        \ßl \in \NN_0^d \setminus \NN^d,\\
+        (\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n - b + 1) \lor
+        (\ßl = \ß0)
+      }
+    } |I_\ßl|.\\
+    \intertext{%
+      The first sum is the number $|\interior{\Omega}_{n,d}^\sparse|$
+      of interior grid points in $\Omega_{n,d}^\sparse$.
+      The second sum can be split into summands
+      with the same number $q$ of zero entries,
+      which we count with
+      $N_\ßl := |\{t \mid l_t = 0\}|
+      = \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 - \norm{\ßl}_1$,
+      and the same level sum $m = \norm{\ßl}_1$:%
+    }
+    &= |\interior{\Omega}_{n,d}^\sparse| + 2^d +
+    \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
+    \sum_{
+      \substack{
+        \ßl \in \NN_0^d,\\
+        N_\ßl = q,\,\norm{\ßl}_1 = m}
+    } |I_\ßl|
+  \end{align}
+  where $2^d$ is the summand for $\ßl = \ß0$
+  (number $|I_\ß0|$ of corners of $[\ß0, \ß1]$).
+  The limits of the $m$ sum are $d-q$,
+  since there must be at least $d-q$ entries $\ge 1$ in a level vector
+  with $q$ zero entries, and $n-b-q+1$,
+  since $m = \norm{\ßl}_1
+  = \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 - N_\ßl
+  \le n-b+1 - N_\ßl
+  = n-b-q+1$.
+  
+  In general, the innermost summand $|I_\ßl|$ can be calculated as
+  $|I_\ßl|
+  = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
+  = 2^{\norm{\ßl}_1 - d + 2N_\ßl}$.
+  The number of innermost summands is given by
+  $|\{\ßl \in \NN_0^d \mid N_\ßl = q,\, \norm{\ßl}_1 = m\}|
+  = \binom{d}{q} |\{\ßl \in \NN^{d-q} \mid \norm{\ßl}_1 = m\}|
+  = \binom{d}{q} \binom{m-1}{d-q-1}$
+  by first placing $q$ zeros in $d$ places,
+  for which there are $\binom{d}{q}$ possibilities, and then
+  counting all positive vectors of length $d - q$ with level sum $m$,
+  which can be done in $\binom{m-1}{d-q-1}$ ways.
+  Thus,
+  \begin{align}
+    |\Omega_{n,d}^{\sparse(b)}|
+    &= |\interior{\Omega}_{n,d}^\sparse| + 2^d +
+    \sum_{q=1}^{d-1} \binom{d}{q} \sum_{m=d-q}^{n-b-q+1}
+    2^{m - d + 2q} \binom{m-1}{d-q-1}.\\
+    \intertext{%
+      Shifting the index $m \to (m + d - q)$ and rearranging the terms
+      slightly, we obtain%
+    }
+    &= |\interior{\Omega}_{n,d}^\sparse| + 2^d +
+    \sum_{q=1}^{d-1} 2^q \binom{d}{q} \sum_{m=0}^{n-d-b+1}
+    2^m \binom{(d-q)+m-1}{(d-q)-1}.\\
+    \intertext{%
+      We can now use \cref{lemma:numberOfGridPointsInterior} to conclude that%
+    }
+    &= |\interior{\Omega}_{n,d}^\sparse| +
+    \sum_{q=1}^d 2^q \binom{d}{q}
+    |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|,
+  \end{align}
+  which is the right-hand side of the assertion.
+\end{proof}
+
+
+
+\section[Proof of Proposition~\ref*{prop:invariantCoarseBoundary}]{%
   Proof of \texorpdfstring{%
     \Cref{prop:invariantCoarseBoundary}%
   }{%
@@ -9,13 +106,15 @@
 }
 \label{sec:proofInvariantCoarseBoundary}
 
+\propInvariantCoarseBoundary*
+
 \begin{proof}
   First, we show that every inserted level $\ßl' \in \NN_0^t$ in the inner loop
-  can be found on the right-hand side of~\eqref{eq:coarseInvariant}.
+  can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
   then we have $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n+d+t-b$ or
-  $\ßl = \ß0$ by line \ref{line:algCoarseBoundary1}.
+  $\ßl = \ß0$ by line~\ref{line:algCoarseBoundary1}.
   In the first case, we have
   \begin{equation}
     \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1
@@ -33,7 +132,7 @@
     \item
     If $\ßl \in \NN^{t-1}$, then $\ßl' \in \NN^{t-1}$ as well and
     $\norm{\ßl'}_1 \le \norm{\ßl}_1 + l^\ast = n - d + t$
-    due to line \ref{line:algCoarseBoundary2},
+    due to line~\ref{line:algCoarseBoundary2},
     i.e., $\ßl'$ is contained in the first set of the RHS of
     \eqref{eq:coarseInvariant}.
     
@@ -42,14 +141,14 @@
     $\norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1
     \le \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 + l^\ast
     = n - d + t - b + 1$
-    due to line \ref{line:algCoarseBoundary3},
+    due to line~\ref{line:algCoarseBoundary3},
     i.e., $\ßl$ is contained in the second set of the RHS of
     \eqref{eq:coarseInvariant}.
   \end{itemize}
   Thus, all levels that the algorithm inserts into $L^{(t)}$
   can be found on the RHS of \eqref{eq:coarseInvariant}.
   
-  It remains to prove that all levels on the RHS of~\eqref{eq:coarseInvariant}
+  It remains to prove that all levels on the RHS of \eqref{eq:coarseInvariant}
   are inserted by the algorithm into $L^{(t)}$ eventually.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the right-hand side (RHS) of \eqref{eq:coarseInvariant} equals
@@ -68,97 +167,69 @@
     \{\vec{0}\}\big).
     \end{aligned}
   \end{equation}
+  The RHS of \eqref{eq:coarseInvariant} has three parts,
+  so we check for elements $\ßl' \in \NN_0^t$
+  of each of the three sets that they are appended to $L^{(t)}$
+  eventually.
   
-  \todo{check beginning from here: n --> n-d+1, l' --> l, l --> l'}
   First, let $\ßl' = (\ßl, l_t)$ be in the first set of the RHS,
-  i.e., $\norm{\ßl'}_1 \le n - d + t$ and $l_t > 0$.
+  i.e., $\ßl' \in \NN^t$ (in particular $l_t \ge 1$) and
+  $\norm{\ßl'}_1 \le n - d + t$.
   Note that $\ßl$ will be encountered in the inner loop, as
-  \begin{equation*}
-    \ßl \in \NN^{t-1},\quad
-    \norm{\ßl}_1
-    = \norm{\ßl'}_1 - l_t
-    \le (n-d+t) - 1
-    = n - d + t - 1
-  \end{equation*}
-  implies $\ßl \in L^{(t-1)}$ by the induction
-  hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
-  Since $N_{\ßl} = 0$ and
-  \begin{equation*}
-    l_t
-    = \norm{\ßl'}_1 - \norm{\ßl}_1
-    \le n-d+t - \norm{\ßl}_1
-    = u_{\ßl},
-  \end{equation*}
-  this $\ßl'$ is inserted into $L^{(t)}$ during the innermost loop.
+  $\ßl \in \NN^{t-1}$ and
+  $\norm{\ßl}_1 = \norm{\ßl'}_1 - l_t \le n - d + t - 1$,
+  which implies $\ßl \in L^{(t-1)}$ by the induction
+  hypothesis \eqref{eq:proofCoarseInductionHypothesis}.
+  Since $1 \le l_t \le l^\ast$
+  (due to
+  $l_t = \norm{\ßl'}_1 - \norm{\ßl}_1 \le n-d+t - \norm{\ßl}_1 = l^\ast$),
+  the level $\ßl'$ is inserted into $L^{(t)}$ during the innermost loop
+  in line~\ref{line:algCoarseBoundary4}.
   
-  Now, we take $\ßl = (\ßl', l_t)$
-  in the second set of the RHS, i.e.,
-  $\norm{\ßl}_1 + N_{\ßl} \le n+t-b$ and
-  $N_{\ßl} > 0$.
-  Again, there are two cases:
+  Second, let $\ßl' = (\ßl, l_t)$
+  be in the second set of the RHS, i.e.,
+  $\ßl' \notin \NN^t$ and
+  $\norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 \le n-d+t-b+1$.
+  Here, there are three cases:
   \begin{enumerate}
     \item
-    $l_t > 0$:
-    This implies $N_{\ßl'} = N_{\ßl} > 0$ and
-    $\ßl'$ will be reached in the loop 2b) since
-    \begin{equation*}
-      \ßl' \in \NN_0^{t-1} \setminus \NN^{t-1},\quad
-      \norm{\ßl'}_1 + N_{\ßl'}
-      = (\norm{\ßl}_1 - l_t) + N_{\ßl}
-      \le n+t-b-l_t
-      \le n+t-1-b
-    \end{equation*}
-    implies $\ßl' \in L^{(t-1)}$ by the induction
-    hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
-    Also,
-    \begin{equation*}
-      l_t
-      = \norm{\ßl}_1 - \norm{\ßl'}_1
-      \le (n+t-b - N_{\ßl}) - \norm{\ßl'}_1
-      = n+t-b - (\norm{\ßl'}_1 + N_{\ßl'})
-      = u_{\ßl'},
-    \end{equation*}
-    i.e., $\ßl$ gets added to $L^{(t)}$
-    by the innermost loop.
+    $l_t \ge 1$:
+    This implies $\ßl \notin \NN^{t-1}$ and 
+    $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
+    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - l_t
+    \le n-d+t-b$.
+    This means $\ßl \in L^{(t-1)}$ by the induction hypothesis
+    \eqref{eq:proofCoarseInductionHypothesis}.
+    As $l_t \in \{1, \dotsc, l^\ast\}$
+    (due to $l_t \le n-d+t-b -
+    \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 = l^\ast$),
+    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary4}.
     
     \item
-    $l_t = 0$:
-    This implies
-    $\norm{\ßl'}_1 = \norm{\ßl}_1$ and
-    $N_{\ßl'} = N_{\ßl} - 1$.
-    $\ßl'$ will be reached in the loop 2b) since
-    \begin{equation*}
-      \ßl' \in \NN_0^{t-1} \setminus \NN^{t-1},\quad
-      \norm{\ßl'}_1 + N_{\ßl'}
-      = \norm{\ßl}_1 + (N_{\ßl} - 1)
-      \le n + t - 1 - b,
-    \end{equation*}
-    if $N_{\ßl'} > 0$ and
-    \begin{equation*}
-      \ßl' \in \NN^{t-1},\quad
-      \norm{\ßl'}_1
-      = \norm{\ßl}_1
-      \le n + t - b - N_{\ßl}
-      \le n + t - 2,
-    \end{equation*}
-    if $N_{\ßl'} = 0$
-    (due to $N_{\ßl} = 1$ in this sub-case and $b \ge 1$).
-    In both of these sub-cases,
-    we have $\ßl' \in L^{(t-1)}$ by the induction
-    hypothesis~\eqref{eq:proofCoarseInductionHypothesis}. Also,
-    \begin{equation*}
-      \norm{\ßl'}_1 + (N_{\ßl'} + 1)
-      = \norm{\ßl}_1 + N_{\ßl}
-      \le n + t - b.
-    \end{equation*}
-    i.e., $\ßl$ gets added to $L^{(t)}$
-    by the if clause.
+    $l_t = 0$ and $\ßl \in \NN^{t-1}$:
+    This implies $\norm{\ßl}_1 = \norm{\ßl'}_1
+    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - 1
+    \le n - d + t - b
+    \le n - d + t - 1$ since $b \ge 1$.
+    Again, by the induction hypothesis,
+    \eqref{eq:proofCoarseInductionHypothesis} and
+    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary5} due to
+    $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
+    = \norm{\ßl}_1 \le n - d + t - b$.
+    
+    \item
+    $l_t = 0$ and $\ßl \notin \NN^{t-1}$:
+    This implies $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
+    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - 1
+    \le n - d + t - b$.
+    Again, by the induction hypothesis,
+    \eqref{eq:proofCoarseInductionHypothesis} and
+    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary5}.
   \end{enumerate}
   
-  Finally, we take $\ßl = (\vec{0}, 0) \in \NN_0^t$
-  in the third set of the RHS.
-  This level is appended to $L^{(t)}$, because
-  $\ßl' = \vec{0} \in \NN_0^{t-1}$ is in $L^{(t-1)}$ by 
-  induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis} and $N_{\ßl'} = t - 1$
-  (i.e., the second statement in the if clause is fulfilled).
+  Third, let $\ßl = (\vec{0}, 0) \in \NN_0^t$
+  be in the third set of the RHS.
+  This level is appended in line~\ref{line:algCoarseBoundary5}
+  to $L^{(t)}$, since $\ßl' = \vec{0} \in \NN_0^{t-1}$ is in $L^{(t-1)}$ by 
+  induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}

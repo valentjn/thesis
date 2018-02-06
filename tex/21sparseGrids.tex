@@ -729,7 +729,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 then the following relation about the number of grid points
 of $\Omega_{n,d}^\sparse$ can be shown:
 \begin{lemma}[Number of grid points of $\Omega_{n,d}^\sparse$]
-  \label{lemma:numberOfGridPoints}
+  \label{lemma:numberOfGridPointsBoundary}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
     |\Omega_{n,d}^\sparse|
@@ -738,12 +738,23 @@ of $\Omega_{n,d}^\sparse$ can be shown:
 \end{lemma}
 \begin{proof}
   See \todo{insert Acta}.
-  The proof will also be similar to the proof of \todo{insert reference}.
 \end{proof}
 Here, we define $0$-dimensional grids to contain exactly one grid point
 (the empty tuple).
+The number of interior grid points can be calculated as follows:
+\begin{lemma}[Number of grid points of $\interior{\Omega}_{n,d}^\sparse$]
+  \label{lemma:numberOfGridPointsInterior}
+  \setlength{\abovedisplayskip}{0pt}
+  \begin{equation}
+    |\interior{\Omega}_{n,d}^\sparse|
+    = \sum_{q=0}^{n-d} 2^q \binom{d-1+q}{d-1}
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  See \todo{insert Acta}.
+\end{proof}
 
-Intuitively, \cref{lemma:numberOfGridPoints} splits the sparse grid
+Intuitively, \cref{lemma:numberOfGridPointsBoundary} splits the sparse grid
 $\Omega_{n,d}^\sparse$ into lower-dimensional sparse grids
 $\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
@@ -807,6 +818,7 @@ the boundary functions and points at a level $b \in \NN$:
   The regular sparse grid of level $n \ge d$,
   dimensionality $d \in \NN$, and boundary level $b \in \NN$ is defined as
   \begin{equation}
+    \label{eq:coarseBoundary}
     \begin{split}
       \Omega_{n,d}^{\sparse(b)}
       := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(b)}}
@@ -835,23 +847,29 @@ for $b = 1$.
 
 The number of grid points of $\Omega_{n,d}^{\sparse(b)}$
 can be calculated as follows:
-\begin{proposition}[Number of grid points of $\Omega_{n,d}^{\sparse(b)}$]
+\begin{restatable}[Number of grid points of $\Omega_{n,d}^{\sparse(b)}$]{%
+  proposition%
+}{%
+  propGridSizeCoarseBoundary%
+}
+  \label{prop:gridSizeCoarseBoundary}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
     |\Omega_{n,d}^{\sparse(b)}|
     = |\interior{\Omega}_{n,d}^\sparse| +
-    \sum_{q=1}^d 2^q \binom{d}{q} |\interior{\Omega}_{n-b+1,d-q}^\sparse|
+    \sum_{q=1}^d 2^q \binom{d}{q} |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|
   \end{equation}
-\end{proposition}
+\end{restatable}
 \begin{proof}
-  See appendix.
-  \todo{add proof}
+  See \cref{sec:proofGridSizeCoarseBoundary}.
 \end{proof}
 
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
 hierarchical levels.
 Its correctness can be formally proved with the following invariant:
-\begin{proposition}[Invariant of \cref{alg:coarseBoundary}]
+\begin{restatable}[Invariant of \cref{alg:coarseBoundary}]{proposition}{%
+  propInvariantCoarseBoundary%
+}
   \label{prop:invariantCoarseBoundary}
   \label{PROP:INVARIANTCOARSEBOUNDARY}
   After iteration $t$ of the algorithm ($t = 1, \dotsc, d$), it holds
@@ -864,7 +882,7 @@ Its correctness can be formally proved with the following invariant:
       \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n-d+t-b+1\} \cup \{\ß0\}\big).
     \end{split}
   \end{equation}
-\end{proposition}
+\end{restatable}
 \begin{proof}
   See \cref{sec:proofInvariantCoarseBoundary}.
 \end{proof}
@@ -891,6 +909,7 @@ Its correctness can be formally proved with the following invariant:
           }%
           \label{line:algCoarseBoundary1}
             \State{$L^{(t)} \gets L^{(t)} \cup \{(\ßl, 0)\}$}
+            \label{line:algCoarseBoundary5}
           \EndIf{}
           \If{$\ßl \in \NN^{t-1}$}
             \State{$l^\ast \gets n - d + t - \norm{\ßl}_1$}%
@@ -906,6 +925,7 @@ Its correctness can be formally proved with the following invariant:
             $L^{(t)} \gets L^{(t)} \cup
             \{(\ßl, l_t) \mid l_t = 1, \dotsc, l^\ast\}$%
           }
+          \label{line:algCoarseBoundary4}
         \EndFor{}
       \EndFor{}
       \State{\Return{$L^{(d)}$}}
