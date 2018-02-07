@@ -740,7 +740,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 }
 \begin{equation}
   \interior{\Omega}_{n,d}^\sparse
-  := \Omega_{n,d}^\sparse \cap \mathopen]\ß0, \ß1\mathclose[
+  := \Omega_{n,d}^\sparse \cap \openinterval{\ß0, \ß1}
   = \{\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse \mid \ßl \ge \ß1\},
 \end{equation}
 then the following relation about the number of grid points
@@ -777,11 +777,11 @@ $\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
 For example, the 3D cube decomposes into
-$2^0 \binom{3}{0} = 1$ interior cube $\mathopen]0, 1\mathclose[^3$,
+$2^0 \binom{3}{0} = 1$ interior cube $\openinterval{0, 1}^3$,
 $2^1 \binom{3}{1} = 6$ sides ($2$-dimensional faces)
-like $\mathopen]0, 1\mathclose[^2 \times \{0\}$,
+like $\openinterval{0, 1}^2 \times \{0\}$,
 $2^2 \binom{3}{2} = 12$ edges ($1$-dimensional faces)
-like $\mathopen]0, 1\mathclose[ \times \{(0, 0)\}$, and
+like $\openinterval{0, 1} \times \{(0, 0)\}$, and
 $2^3 \binom{3}{3} = 8$ corners ($0$-dimensional faces)
 like $(0, 0, 0)$.
 On each of these $(d-q)$-dimensional faces,
