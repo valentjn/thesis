@@ -195,6 +195,10 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   form a basis of the univariate nodal space $V_l$.
 \end{lemma}
 \begin{proof}
+  \newgsymbol{!equiv}{$\equiv$}{%
+    Equality of functions everywhere on their domain
+    (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)%
+  }%
   Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGrid}
   such that $f_\ßl \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
@@ -571,7 +575,7 @@ continuous knapsack problem.
   Regular sparse grid space of level $n$ with dimensionality $d$%
 }%
 \newgsymbol{Omegands}{$\Omega_{n,d}^\sparse$}{%
-  Set of sparse grid points of level $n$ with dimensionality $d$%
+  Set of regular sparse grid points of level $n$ with dimensionality $d$%
 }%
 The resulting function space and grid point set
 \begin{equation}
@@ -588,9 +592,11 @@ we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
 basis $\varphi_{\ßl,\ßi}^1$,
 we generalize the definition to arbitrary bases $\varphi_{\ßl,\ßi}$.
-\newgsymbol{dOmega}{$\partial \Omega$}{Boundary of the domain $\Omega \subset \RR^d$}%
+\newgsymbol{Omegad}{$\bndry{\Omega}$}{%
+  Boundary of the domain $\Omega \subset \RR^d$%
+}%
 One can prove that for homogeneous boundary conditions
-$f|_{\partial[\ß0,\ß1]} \equiv 0$,
+$f|_{\bndry{[\ß0,\ß1]}} \equiv 0$,
 the number of required inner grid points
 ($\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
 grows like $\calO(h_n^{-1} (\log_2 h_n^{-1})^{d-1})$, which is much less than
@@ -729,6 +735,16 @@ with the level $n$ and the dimensionality $d$,
 This is mainly because the finest mesh size $h_n$ on the
 boundary of the domain $[\ß0, \ß1]$ is finer than
 the finest mesh size $h_{n-d+1}$ that can be found in the interior.
+\newgsymbol{Omegaso}{$\interior{\Omega}^\sparse$}{%
+  Interior grid points $:= \Omega^\sparse \cap \openinterval{\ß0, \ß1}$
+  for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
+}%
+\newgsymbol{01!}{$\openinterval{0, 1}$}{%
+  Open unit interval $:= \{x \in \RR \mid 0 < x < 1\}$%
+}%
+\newgsymbol{01o!}{$\openinterval{\ß0, \ß1}$}{%
+  Open unit hypercube $:= \openinterval{0, 1}^d$%
+}%
 If we define $\interior{\Omega}_{n,d}^\sparse$ as the set of
 interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 \footnote{%
@@ -828,13 +844,17 @@ boundary.
 However, for very high dimensionalities this might still lead to
 computationally infeasible sparse grids.
 
+\newgsymbol{Omegandsb}{$\Omega_{n,d}^{\sparse(b)}$}{%
+  Set of sparse grid points of level $n$ with dimensionality $d$
+  and boundary parameter $b$%
+}%
 We generalize these two solutions to the definition of a
 sparse grid $\Omega_{n,d}^{\sparse(b)}$ that is equivalent to inserting
 the boundary functions and points at a level $b \in \NN$:
 \begin{definition}
   \label{def:coarseBoundary}
   The regular sparse grid of level $n \ge d$,
-  dimensionality $d \in \NN$, and boundary level $b \in \NN$ is defined as
+  dimensionality $d \in \NN$, and boundary parameter $b \in \NN$ is defined as
   \begin{equation}
     \label{eq:coarseBoundary}
     \begin{split}
@@ -972,13 +992,16 @@ this issue is not important in the scope of this thesis.
 
 However, it is possible to calculate the hierarchical surpluses in
 a three-step algorithm.
+\newgsymbol{Omegasd}{$\bndry{\Omega}^\sparse$}{%
+  Boundary grid points $:= \Omega^\sparse \setminus \interior{\Omega}^\sparse$
+  for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
+}%
 First, we compute the surpluses of the boundary grid
 $\bndry{\Omega}_{n,d}^{\sparse(b)} :=
-\Omega_{n,d}^{\sparse(b)} \cap \partial[\ß0, \ß1]$.
+\Omega_{n,d}^{\sparse(b)} \setminus \interior{\Omega}_{n,d}^{\sparse(b)}$.
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
-$\interior{\Omega}_{n,d}^{\sparse(b)}
-:= \Omega_{n,d}^{\sparse(b)} \setminus \bndry{\Omega}_{n,d}^{\sparse(b)}$.
+$\interior{\Omega}_{n,d}^{\sparse(b)}$.
 Third, we calculate the surpluses of the inner grid point
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
@@ -991,10 +1014,7 @@ is to omit boundary points and basis functions altogether.
 For the hat function basis $\varphi_{\ßl,\ßi}^1$,
 this is a feasible option if the objective
 function $f\colon [\ß0, \ß1] \to \RR$
-satisfies homogeneous boundary conditions $f_{\partial[\ß0, \ß1]} \equiv 0$,
-\todo{equiv in glossary}
-\todo{command for mathopen, add to glossary}
-\todo{command for boundary, add to glossary, interior in glossary for general sets?}
+satisfies homogeneous boundary conditions $f_{\bndry{[\ß0, \ß1]}} \equiv 0$,
 as $\varphi_{\ßl,\ßi}^1$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.
@@ -1012,6 +1032,9 @@ values linearly towards the boundary.
 The basis function on level one is replaced by the
 ``constant one'' function.
 All other basis functions remain unchanged.
+\newgsymbol{phili1mod}{$\varphi_{l,i}^{1,\modified}$}{%
+  Modified hat function of level $l$, index $i$%
+}%
 The resulting \term{modified hat functions} $\varphi_{l,i}^{1,\modified}$
 are defined as follows:
 \begin{subequations}
