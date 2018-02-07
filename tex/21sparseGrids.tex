@@ -805,7 +805,7 @@ A popular choice is the insertion at level one, which corresponds to
   := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(1)}}
   \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
   L_{n,d}^{\sparse(1)}
-  := \{\ßl \in \NN_0^d \mid \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n\},
+  := \{\ßl \in \NN_0^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\},
 \end{equation}
 where $\vec{\max}$ is to be read coordinate-wise as usual.
 This choice is equivalent to treating zero level components as level one
@@ -844,7 +844,7 @@ the boundary functions and points at a level $b \in \NN$:
       L_{n,d}^{\sparse(b)}
       := \{\ßl \in \NN^d \mid \norm{\ßl}_1 \le n\} \dotcup {}\\[-1em]
       &\big(\{\ßl \in \NN_0^d \setminus \NN^d \mid
-      \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n-b+1\} \cup \{\ß0\}\big).
+      \norm{\vecmax(\ßl, \ß1)}_1 \le n-b+1\} \cup \{\ß0\}\big).
     \end{split}
   \end{equation}
 \end{definition}
@@ -860,7 +860,7 @@ We add $\ß0$ to the level set to ensure that at least the $2^d$ corner
 points are included in the resulting sparse grid.
 Note that this definition is consistent with \eqref{eq:sparseGridB1} as
 $L_{n,d}^{\sparse(b)}
-= \{\ßl \in \NN_0^d \mid \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n\}$
+= \{\ßl \in \NN_0^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\}$
 for $b = 1$.
 
 The number of grid points of $\Omega_{n,d}^{\sparse(b)}$
@@ -897,7 +897,7 @@ Its correctness can be formally proved with the following invariant:
       L^{(t)}
       &= \{\ßl \in \NN^t \mid \norm{\ßl}_1 \le n - d + t\} \dotcup {}\\
       &\hphantom{{}={}} \big(\{\ßl \in \NN_0^t \setminus \NN^t \mid
-      \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n-d+t-b+1\} \cup \{\ß0\}\big).
+      \norm{\vecmax(\ßl, \ß1)}_1 \le n-d+t-b+1\} \cup \{\ß0\}\big).
     \end{split}
   \end{equation}
 \end{restatable}
@@ -922,7 +922,7 @@ Its correctness can be formally proved with the following invariant:
         \State{$L^{(t)} \gets \emptyset$}
         \For{$\ßl \in L^{(t-1)}$}
           \If{%
-            $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n - d + t - b$ or
+            $\norm{\vecmax(\ßl, \ß1)}_1 \le n - d + t - b$ or
             $\ßl = \ß0$%
           }%
           \label{line:algCoarseBoundary1}
@@ -935,7 +935,7 @@ Its correctness can be formally proved with the following invariant:
           \Else{}
             \State{%
               $l^\ast \gets n - d + t - b + 1 -
-              \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1$%
+              \norm{\vecmax(\ßl, \ß1)}_1$%
             }%
             \label{line:algCoarseBoundary3}
           \EndIf{}

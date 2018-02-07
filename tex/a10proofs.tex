@@ -28,7 +28,7 @@ before the proofs.
     \sum_{
       \substack{
         \ßl \in \NN_0^d \setminus \NN^d,\\
-        (\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n - b + 1) \lor
+        (\norm{\vecmax(\ßl, \ß1)}_1 \le n - b + 1) \lor
         (\ßl = \ß0)
       }
     } |I_\ßl|.\\
@@ -39,7 +39,7 @@ before the proofs.
       with the same number $q$ of zero entries,
       which we count with
       $N_\ßl := |\{t \mid l_t = 0\}|
-      = \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 - \norm{\ßl}_1$,
+      = \norm{\vecmax(\ßl, \ß1)}_1 - \norm{\ßl}_1$,
       and the same level sum $m = \norm{\ßl}_1$:%
     }
     &= |\interior{\Omega}_{n,d}^\sparse| + 2^d +
@@ -56,7 +56,7 @@ before the proofs.
   since there must be at least $d-q$ entries $\ge 1$ in a level vector
   with $q$ zero entries, and $n-b-q+1$,
   since $m = \norm{\ßl}_1
-  = \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 - N_\ßl
+  = \norm{\vecmax(\ßl, \ß1)}_1 - N_\ßl
   \le n-b+1 - N_\ßl
   = n-b-q+1$.
   
@@ -113,12 +113,12 @@ before the proofs.
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
-  then we have $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n+d+t-b$ or
+  then we have $\norm{\vecmax(\ßl, \ß1)}_1 \le n+d+t-b$ or
   $\ßl = \ß0$ by line~\ref{line:algCoarseBoundary1}.
   In the first case, we have
   \begin{equation}
-    \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1
-    = \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 + 1
+    \norm{\vecmax(\ßl', \ß1)}_1
+    = \norm{\vecmax(\ßl, \ß1)}_1 + 1
     \le n - d + t - b + 1,
   \end{equation}
   and in the second case $\ßl' = \vec{0}$.
@@ -138,8 +138,8 @@ before the proofs.
     
     \item
     If $\ßl \notin \NN^{t-1}$, then $\ßl' \notin \NN^{t-1}$ as well and
-    $\norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1
-    \le \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 + l^\ast
+    $\norm{\vecmax(\ßl', \ß1)}_1
+    \le \norm{\vecmax(\ßl, \ß1)}_1 + l^\ast
     = n - d + t - b + 1$
     due to line~\ref{line:algCoarseBoundary3},
     i.e., $\ßl$ is contained in the second set of the RHS of
@@ -163,7 +163,7 @@ before the proofs.
     \norm{\ßl}_1 \le n-d+t-1\} \dotcup {}\\
     &\hphantom{{}={}}
     \big(\{\ßl \in \NN_0^{t-1} \setminus \NN^{t-1} \mid
-    \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 \le n-d+t-b\} \cup
+    \norm{\vecmax(\ßl, \ß1)}_1 \le n-d+t-b\} \cup
     \{\vec{0}\}\big).
     \end{aligned}
   \end{equation}
@@ -189,38 +189,38 @@ before the proofs.
   Second, let $\ßl' = (\ßl, l_t)$
   be in the second set of the RHS, i.e.,
   $\ßl' \notin \NN^t$ and
-  $\norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 \le n-d+t-b+1$.
+  $\norm{\vecmax(\ßl', \ß1)}_1 \le n-d+t-b+1$.
   Here, there are three cases:
   \begin{enumerate}
     \item
     $l_t \ge 1$:
     This implies $\ßl \notin \NN^{t-1}$ and 
-    $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
-    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - l_t
+    $\norm{\vecmax(\ßl, \ß1)}_1
+    = \norm{\vecmax(\ßl', \ß1)}_1 - l_t
     \le n-d+t-b$.
     This means $\ßl \in L^{(t-1)}$ by the induction hypothesis
     \eqref{eq:proofCoarseInductionHypothesis}.
     As $l_t \in \{1, \dotsc, l^\ast\}$
     (due to $l_t \le n-d+t-b -
-    \norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1 = l^\ast$),
+    \norm{\vecmax(\ßl, \ß1)}_1 = l^\ast$),
     $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary4}.
     
     \item
     $l_t = 0$ and $\ßl \in \NN^{t-1}$:
     This implies $\norm{\ßl}_1 = \norm{\ßl'}_1
-    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - 1
+    = \norm{\vecmax(\ßl', \ß1)}_1 - 1
     \le n - d + t - b
     \le n - d + t - 1$ since $b \ge 1$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
     $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary5} due to
-    $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
+    $\norm{\vecmax(\ßl, \ß1)}_1
     = \norm{\ßl}_1 \le n - d + t - b$.
     
     \item
     $l_t = 0$ and $\ßl \notin \NN^{t-1}$:
-    This implies $\norm{\mathop{\vec{\max}}(\ßl, \ß1)}_1
-    = \norm{\mathop{\vec{\max}}(\ßl', \ß1)}_1 - 1
+    This implies $\norm{\vecmax(\ßl, \ß1)}_1
+    = \norm{\vecmax(\ßl', \ß1)}_1 - 1
     \le n - d + t - b$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
