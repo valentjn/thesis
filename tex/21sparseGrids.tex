@@ -13,23 +13,8 @@ A more detailed introduction to sparse grids can be found in
 
 \subsection{Nodal Spaces}
 
-\todo{insert citations}
-
-\todo{add figures:
-  * nodal 1D hat functions
-    * basis
-    * interpolation with ci
-  * nodal multivariate hat functions
-    * one nodal 2D hat with full grid points
-  * hierarchical 1D hat functions
-    * basis
-    * interpolation with alphai
-  * SG stairs with regular SG (with grid points)
-  * dimensionally adaptive SGs
-    * stairs with combination technique (regular), beware: nodal basis
-  * spatially adaptive SGs
+\todo{add figure:
   * coarse boundary: examples in 2D, 3D with different b (and b = 0)
-  * modified basis
 }
 
 \subsubsection{Univariate Case}
@@ -82,14 +67,45 @@ $\varphi_{l,i}$, $i = 0, \dotsc, 2^l$:
 \end{equation}
 We assume that the functions $\varphi_{l,i}$ form a basis of $V_l$, i.e.,
 every linear combination of these functions is unique.
+\newgsymbol{fl}{$f_l$}{Interpolant of $f$ in $V_l$}%
+\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+This ensures that for every objective function $f\colon [0, 1] \to \RR$,
+there is a unique function $f_l\colon [0, 1] \to \RR$ such that
+\begin{equation}
+  \label{eq:interpFullGridUV}
+  f_l
+  = \sum_{i=0}^{2^l} c_i \varphi_{l,i},\quad
+  \fa{i = 0, \dotsc, 2^l}{f_l(x_{l,i}) = f(x_{l,i})},
+\end{equation}
+for some $c_i \in \RR$.
+In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
 \newgsymbol{Vl1}{$V_l^1$}{Nodal piecewise linear space of level $l$}%
-In the case of hat functions $\varphi_{l,i}^1$,
-the nodal space $V_l^1$ is defined analogously as the span of the
+The nodal space $V_l^1$ is defined analogously as the span of the
 $\varphi_{l,i}^1$ functions.
-The space $V_l^1$ is the space of the linear splines,
+It is the space of all linear splines,
 that is, the space of all continuous functions on $[0, 1]$ that are
 piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
 $i = 0, \dotsc, 2^l - 1$.
+The nodal hat function basis and a linear combination are shown in
+\cref{fig:nodalHat}.
+
+\begin{figure}
+  \subcaptionbox{%
+    Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
+    \emph{(dots)}.%
+  }[75mm]{%
+    \includegraphics{nodalHat_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Piecewise linear interpolant $f_l$ as a weighted linear combination
+    of the nodal hat functions.%
+  }[75mm]{%
+    \includegraphics{nodalHat_2}%
+  }%
+  \caption{Univariate nodal hat functions of level $l = 3$.}
+  \label{fig:nodalHat}
+\end{figure}
 
 \subsubsection{Multivariate Case}
 
@@ -151,6 +167,18 @@ as the tensor product of the univariate functions:%
   \varphi_{\ßl,\ßi}(\ßx)
   := \prod_{t=1}^d \varphi_{l_t,i_t}(x_t).
 \end{equation}
+As an example, \cref{fig:nodalHat2D} shows a bivariate nodal hat function
+$\varphi_{\ßl,\ßi}^1$.
+
+\begin{figure}
+  \includegraphics{nodalHat2D_1}%
+  \caption{%
+    Bivariate nodal hat function of level $\ßl = (2, 1)$ and
+    index $i = (1, 1)$ as the tensor product of two univariate
+    nodal hat functions.%
+  }
+  \label{fig:nodalHat2D}
+\end{figure}
 
 \newgsymbol{Vl!}{$V_\ßl$}{Multivariate nodal space of level $\ßl$}%
 The multivariate nodal space $V_\ßl$ is defined analogously to
@@ -179,15 +207,13 @@ all hyper-cubes
   [x_{l_d,i_d}, x_{l_d,i_d+1}],\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
-
-We can now interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
-in the nodal space $V_\ßl$.
 \newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $V_\ßl$}%
 \newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
-A function $f_\ßl\colon [\ß0, \ß1] \to \RR$ is called \term{interpolant}
-in $V_\ßl$, if
+Analogously to \eqref{eq:interpFullGridUV},
+we can interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
+in the nodal space $V_\ßl$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
 \begin{equation}
-  \label{eq:interpFullGrid}
+  \label{eq:interpFullGridMV}
   f_\ßl
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \varphi_{\ßl,\ßi},\quad
   \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
@@ -206,10 +232,10 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
     Equality of functions everywhere on their domain
     (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)%
   }%
-  Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGrid}
+  Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
   such that $f_\ßl \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
-  we can evaluate \eqref{eq:interpFullGrid} at $\ßx_{\ßl,\ßi'}$ to obtain
+  we can evaluate \eqref{eq:interpFullGridMV} at $\ßx_{\ßl,\ßi'}$ to obtain
   \begin{equation}
     \sum_{i_1=0}^{2^{l_1}}
     \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
@@ -369,6 +395,28 @@ where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
 In general, \eqref{eq:hierSplittingUV} may not be true.
 The following lemma provides a characterization,
 which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.
+The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
+
+\begin{figure}
+  \subcaptionbox{%
+    Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
+    \emph{(dots)}.%
+  }[75mm]{%
+    \includegraphics{hierarchicalHat_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Piecewise linear interpolant $f_l$ as a weighted linear combination
+    of the hierarchical hat functions \emph{(stacked)}.
+    The two boundary functions are combined to a single function
+    \emph{\textcolor{C0}{(blue)}} for simplicity.%
+  }[75mm]{%
+    \includegraphics{hierarchicalHat_2}%
+  }%
+  \caption{Univariate hierarchical hat functions of level $l' = 0, \dotsc, 3$.}
+  \label{fig:hierarchicalHat}
+\end{figure}
+
 \begin{lemma}[Hierarchical splitting characterization]
   \label{lemma:hierSplittingUV}
   Equivalent to relation \eqref{eq:hierSplittingUV} is the satisfaction of
@@ -600,6 +648,35 @@ we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
 basis $\varphi_{\ßl,\ßi}^1$,
 we generalize the definition to arbitrary bases $\varphi_{\ßl,\ßi}$.
+\Cref{fig:regularSG} shows a regular sparse grid in two dimensions.
+
+\begin{figure}
+  \subcaptionbox{%
+    Hierarchical splitting and subspace selection.
+    The rectangles indicate the support of the
+    bivariate hat basis functions.%
+  }[85mm]{%
+    \includegraphics{sg_1}%
+  }%
+  \hfill%
+  \begin{minipage}[b]{65mm}
+    \subcaptionbox{%
+      Full grid obtained by adding all subspaces of level $\ßl \le n \cdot \ß1$.%
+    }[65mm]{%
+      \includegraphics{sg_2}%
+    }\\[5mm]%
+    \subcaptionbox{%
+      Regular sparse grid obtained by adding all subspaces
+      whose level $\ßl$ satisfies $\norm{\ßl}_1 \le n$
+      \emph{\textcolor{mittelblau}{(blue)}}.%
+    }[65mm]{%
+      \includegraphics{sg_3}%
+    }%
+  \end{minipage}
+  \caption{Regular sparse grid of level $n = 3$ in two dimensions.}
+  \label{fig:regularSG}
+\end{figure}
+
 \newgsymbol{Omegad}{$\bndry{\Omega}$}{%
   Boundary of the domain $\Omega \subset \RR^d$%
 }%
@@ -680,7 +757,8 @@ $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
 }$ \cite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.
-The combination formula \eqref{eq:combiTechnique} decomposes the
+The combination formula \eqref{eq:combiTechnique},
+which is visualized in \cref{fig:combinationTechnique}, decomposes the
 sparse grid interpolant into a weighted sum of full grid interpolants.
 In applications, each of the grid can be processed in parallel,
 allowing to drastically speed up computations like the solution of
@@ -689,6 +767,16 @@ In addition, existing software working with nodal bases do not have to be
 rewritten in terms of hierarchical functions,
 which means that combination technique allows sparse grids to be employed
 in a minimally invasive way.
+
+\begin{figure}
+  \includegraphics{sg_4}%
+  \caption{%
+    The combination technique combines nodal subspaces in a weighted
+    sum to form a regular sparse grid of level $n = 3$ in two dimensions.
+    The red subspaces are subtracted from the sum of the green subspaces.%
+  }
+  \label{fig:combinationTechnique}
+\end{figure}
 
 \subsubsection{Spatially Adaptive Sparse Grids}
 
@@ -735,6 +823,28 @@ However, as we will see, the unidirectional principle cannot be applied
 to B-splines of general degree.
 Therefore, for most of our considerations, we will not restrict the
 choice of $K$.
+
+\begin{figure}
+  \subcaptionbox{%
+    Hierarchical splitting and grid point selection.
+    The rectangles indicate again the support of the
+    bivariate hat basis functions.%
+  }[85mm]{%
+    \includegraphics{sg_5}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Resulting spatially adaptive sparse grid.%
+  }[65mm]{%
+    \includegraphics{sg_6}%
+  }%
+  \caption{%
+    Spatially adaptive sparse grid in two dimensions.
+    More grid points were generated in the top right corner,
+    which can help to resolve fine oscillations of the objective function.%
+  }
+  \label{fig:spatiallyAdaptiveSG}
+\end{figure}
 
 \subsection{Boundary Treatment}
 \label{sec:213boundary}
@@ -1038,7 +1148,7 @@ making it necessary to change the basis.
 For hat functions, Pflüger modified the leftmost and rightmost
 univariate basis function of each level (with indices $i = 1$ and
 $i = 2^l - 1$ respectively) such that the extrapolate the inner
-values linearly towards the boundary.
+values linearly towards the boundary \cite{Pflueger10Spatially}
 The basis function on level one is replaced by the
 ``constant one'' function.
 All other basis functions remain unchanged.
@@ -1062,7 +1172,14 @@ are defined as follows:
     l \ge 2.
   \end{alignat}
 \end{subequations}
-The modified linear basis provides ``reasonable'' boundary values
+The modified linear basis, which can be seen in \cref{fig:modifiedHat}
+provides ``reasonable'' boundary values
 without the need to insert basis functions and grid points on the boundary.
 For other bases such as B-splines, similar modifications are possible,
 which we will discuss when we introduce the corresponding unmodified functions.
+
+\begin{figure}
+  \includegraphics{hierarchicalHat_3}%
+  \caption{Modified hierarchical hat functions of level $l' = 1, 2, 3$.}
+  \label{fig:modifiedHat}
+\end{figure}

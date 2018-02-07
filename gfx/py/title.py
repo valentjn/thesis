@@ -65,17 +65,17 @@ for k in range(N):
 
 
 
+xx0 = np.linspace(0, 1, 129)
 xx1 = np.linspace(0, 1, 129)
-xx2 = np.linspace(0, 1, 129)
-XX1, XX2 = np.meshgrid(xx1, xx2)
-XX = np.stack((XX1.flatten(), XX2.flatten()), axis=1)
+XX0, XX1 = np.meshgrid(xx0, xx1)
+XX = np.stack((XX0.flatten(), XX1.flatten()), axis=1)
 NN = XX.shape[0]
 YY = np.zeros((NN,))
 
 for k in range(NN):
   YY[k] = np.prod([b.evaluate(l[t], i[t], XX[k,t]) for t in range(d)])
 
-YY = np.reshape(YY, XX1.shape)
+YY = np.reshape(YY, XX0.shape)
 
 color1 = "k"
 color2 = Figure.COLORS["anthrazit"]
@@ -83,11 +83,11 @@ text_color = (0.04, 0.04, 0.04)
 text_size = 0.4
 
 z = 0
-ax.plot_surface(XX1, XX2, np.zeros_like(XX1),
+ax.plot_surface(XX0, XX1, np.zeros_like(XX0),
                 rstride=16, cstride=16, alpha=0, edgecolors=color2)
 ax.plot(X[:,0], X[:,1], zs=z, marker="o", ls="", c=color2, zorder=-1)
 
-ax.plot_surface(XX1, XX2, YY, rstride=16, cstride=16, alpha=0, edgecolors=color1)
+ax.plot_surface(XX0, XX1, YY, rstride=16, cstride=16, alpha=0, edgecolors=color1)
 ax.plot(X[:,0], X[:,1], zs=Y, marker="o", ls="", c=color1)
 
 for pos, text in texts.items():
