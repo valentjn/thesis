@@ -255,8 +255,8 @@ $f_{n,d}^1$ is given by
 \begin{equation}
   \norm{f - f_{n,d}^1}_{L^2} = \calO(h_n^2),
 \end{equation}
-i.e., the order of the interpolation error is quadratic in the mesh size.
-\todo{reference Höllig, as Acta is only for zero boundary}
+i.e., the order of the interpolation error is quadratic in the mesh size
+\cite{Hoellig13Approximation,Bungartz04Sparse}.
 
 
 
@@ -532,7 +532,7 @@ The coefficients $\alpha_{\ßl',\ßi'}$ with respect to the hierarchical basis
 $\varphi_{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
 When using the hat function basis $\varphi_{\ßl,\ßi}^1$,
 one can prove the following representation
-for the corresponding surpluses:
+for the corresponding surpluses \cite{Bungartz04Sparse}:
 \begin{equation}
   \alpha_{\ßl,\ßi}
   = (-1)^d 2^{-\norm{\ßl+\ß1}_1}
@@ -550,7 +550,8 @@ exists and is continuous.%
 \footnote{%
   The statement is even valid for functions in the Sobolev space
   $H_\mathrm{mix}^2([\ß0, \ß1])$ with dominating mixed derivative,
-  as its proof mainly relies on integration by parts.%
+  as its proof mainly relies on integration by parts
+  \cite{Bungartz04Sparse}.%
 }
 %This equation provides a direct relation between the hat function surpluses
 %and the second mixed derivative of the objective function, which has
@@ -571,7 +572,7 @@ can be estimated by
   \le 3^{-d} \cdot 2^{-2 \norm{\ßl}_1} \cdot
   \bignorm{\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f}_{L^2}
 \end{equation}
-for the hat function surpluses $\alpha_{\ßl',\ßi'}$.
+for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
@@ -606,7 +607,8 @@ One can prove that for homogeneous boundary conditions
 $f|_{\bndry{[\ß0,\ß1]}} \equiv 0$,
 the number of required inner grid points
 ($\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
-grows like $\calO(h_n^{-1} (\log_2 h_n^{-1})^{d-1})$, which is much less than
+grows like $\calO(h_n^{-1} (\log_2 h_n^{-1})^{d-1})$
+\cite{Bungartz04Sparse}, which is much less than
 the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
 (see \eqref{eq:dimensionFG}).
 In particular, the exponential dependency on the dimensionality $d$
@@ -621,7 +623,7 @@ $f_{n,d}^{\sparse,1}$ using hat functions
   \norm{f - f_{n,d}^{\sparse,1}}_{L^2} = \calO(h_n^2 (\log_2 h_n^{-1})^{d-1}),
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
-$(\log_2 h_n^{-1})^{d-1}$.
+$(\log_2 h_n^{-1})^{d-1}$ \cite{Bungartz04Sparse}.
 
 \subsubsection{Dimensionally Adaptive Sparse Grids}
 
@@ -675,9 +677,9 @@ are the interpolation coefficients on the full grid of level $\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
   \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \varphi_{\ßl,\ßi}(\ßx_{\ßl,\ßi'})
   = f(\ßx_{\ßl,\ßi'})%
-}$.
-For general dimensionally adaptive sparse grids, a similar formula exists.
-\todo{citation}
+}$ \cite{Smolyak63Quadrature,Zenger91Sparse}.
+For general dimensionally adaptive sparse grids, a similar formula exists
+\cite{Wasilkowski95Explicit}.
 The combination formula \eqref{eq:combiTechnique} decomposes the
 sparse grid interpolant into a weighted sum of full grid interpolants.
 In applications, each of the grid can be processed in parallel,
@@ -735,6 +737,7 @@ Therefore, for most of our considerations, we will not restrict the
 choice of $K$.
 
 \subsection{Boundary Treatment}
+\label{sec:213boundary}
 
 One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
 is that the number of grid points still grows very fast
@@ -777,7 +780,7 @@ of $\Omega_{n,d}^\sparse$ can be shown:
   \end{equation}
 \end{lemma}
 \begin{proof}
-  See \todo{insert Acta}.
+  See \cite{Bungartz04Sparse}.
 \end{proof}
 Here, we define $0$-dimensional grids to contain exactly one grid point
 (the empty tuple).
@@ -791,7 +794,7 @@ The number of interior grid points can be calculated as follows:
   \end{equation}
 \end{lemma}
 \begin{proof}
-  See \todo{insert Acta}.
+  See \cite{Bungartz04Sparse}.
 \end{proof}
 
 Intuitively, \cref{lemma:numberOfGridPointsBoundary} splits the sparse grid
