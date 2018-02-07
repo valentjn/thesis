@@ -973,12 +973,12 @@ this issue is not important in the scope of this thesis.
 However, it is possible to calculate the hierarchical surpluses in
 a three-step algorithm.
 First, we compute the surpluses of the boundary grid
-$\partial\Omega_{n,d}^{\sparse(b)} :=
+$\bndry{\Omega}_{n,d}^{\sparse(b)} :=
 \Omega_{n,d}^{\sparse(b)} \cap \partial[\ß0, \ß1]$.
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
 $\interior{\Omega}_{n,d}^{\sparse(b)}
-:= \Omega_{n,d}^{\sparse(b)} \setminus \partial\Omega_{n,d}^{\sparse(b)}$.
+:= \Omega_{n,d}^{\sparse(b)} \setminus \bndry{\Omega}_{n,d}^{\sparse(b)}$.
 Third, we calculate the surpluses of the inner grid point
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
