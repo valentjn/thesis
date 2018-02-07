@@ -792,11 +792,11 @@ As the number of boundary faces increases exponentially
 with the dimensionality $d$,
 the size of $\Omega_{n,d}^\sparse$ can exhaust computational memory
 quite fast.
-There are mainly two approaches to deal with this issue.
+There are mainly two solutions to deal with this issue.
 
 \subsubsection{Sparse Grids with Coarser Boundaries}
 
-One solution is to insert the boundary level functions and grid points
+The first solution is to insert the boundary level functions and grid points
 at a finer level than zero.
 A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
@@ -832,6 +832,7 @@ We generalize these two solutions to the definition of a
 sparse grid $\Omega_{n,d}^{\sparse(b)}$ that is equivalent to inserting
 the boundary functions and points at a level $b \in \NN$:
 \begin{definition}
+  \label{def:coarseBoundary}
   The regular sparse grid of level $n \ge d$,
   dimensionality $d \in \NN$, and boundary level $b \in \NN$ is defined as
   \begin{equation}
@@ -959,10 +960,76 @@ Its correctness can be formally proved with the following invariant:
 
 \todo{add table with numbers}
 
-\todo{add note about hierarchization with hat functions}
+An important implication of the regular sparse grids
+$\Omega_{n,d}^{\sparse(b)}$ as defined in \cref{def:coarseBoundary}
+is that in general,
+the unidirectional principle cannot be directly applied anymore.
+For example, this is relevant when calculating hierarchical surpluses
+for the hat function basis.
+As we will deal mostly with B-splines, for which the unidirectional
+principle cannot be applied even on regular sparse grids,
+this issue is not important in the scope of this thesis.
+
+However, it is possible to calculate the hierarchical surpluses in
+a three-step algorithm.
+First, we compute the surpluses of the boundary grid
+$\partial\Omega_{n,d}^{\sparse(b)} :=
+\Omega_{n,d}^{\sparse(b)} \cap \partial[\ß0, \ß1]$.
+Second, we subtract the values of the resulting ``boundary interpolant'' at
+the inner grid points
+$\interior{\Omega}_{n,d}^{\sparse(b)}
+:= \Omega_{n,d}^{\sparse(b)} \setminus \partial\Omega_{n,d}^{\sparse(b)}$.
+Third, we calculate the surpluses of the inner grid point
+as usual with the unidirectional principle.
+As the corresponding ``inner interpolant'' vanishes
+on the boundary, this does not influence the interpolated values in step~1.
 
 \subsubsection{Sparse Grids Without Boundary Points and Modified Bases}
 
-\todo{write}
+The second solution to reduce the number of grid points on the boundary
+is to omit boundary points and basis functions altogether.
+For the hat function basis $\varphi_{\ßl,\ßi}^1$,
+this is a feasible option if the objective
+function $f\colon [\ß0, \ß1] \to \RR$
+satisfies homogeneous boundary conditions $f_{\partial[\ß0, \ß1]} \equiv 0$,
+\todo{equiv in glossary}
+\todo{command for mathopen, add to glossary}
+\todo{command for boundary, add to glossary, interior in glossary for general sets?}
+as $\varphi_{\ßl,\ßi}^1$ vanishes on the boundary if and only if
+$\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
+boundary point.
+Consequently, the surpluses corresponding to boundary points vanish
+for a grid with boundary points,
+implying that these points can be removed from the grid.
 
-\blindtext{}
+Of course, this approach is not viable for functions with non-zero
+boundary values or general hierarchical bases,
+making it necessary to change the basis.
+For hat functions, Pflüger modified the leftmost and rightmost
+univariate basis function of each level (with indices $i = 1$ and
+$i = 2^l - 1$ respectively) such that the extrapolate the inner
+values linearly towards the boundary.
+The basis function on level one is replaced by the
+``constant one'' function.
+All other basis functions remain unchanged.
+The resulting \term{modified hat functions} $\varphi_{l,i}^{1,\modified}$
+are defined as follows:
+\begin{subequations}
+  \begin{alignat}{2}
+    \varphi_{1,1}^{1,\modified}(x)
+    &:= 1,&&\\
+    \varphi_{l,1}^{1,\modified}(x)
+    &:= \max(2 - x/h_l, 0),&&\quad
+    l \ge 2,\\
+    \varphi_{l,i}^{1,\modified}(x)
+    &:= \varphi_{l,i}^1(x),&&\quad
+    l \ge 2,\quad i \in I_l \setminus \{1, 2^{l-1}\},\\
+    \varphi_{l,2^l-1}^{1,\modified}(x)
+    &:= \max(x/h_l + 2 - 2^l, 0),&&\quad
+    l \ge 2.
+  \end{alignat}
+\end{subequations}
+The modified linear basis provides ``reasonable'' boundary values
+without the need to insert basis functions and grid points on the boundary.
+For other bases such as B-splines, similar modifications are possible,
+which we will discuss when we introduce the corresponding unmodified functions.
