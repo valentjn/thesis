@@ -36,8 +36,8 @@
 \newtoggle{partialCompileMode}
 \toggletrue{partialCompileMode}
 
-% compileChapterX:
-% select chapter to compile for partialCompileMode = true
+% compileX:
+% select chapters to compile for partialCompileMode = true
 \newtoggle{compileChapter1}
 \newtoggle{compileChapter2}\toggletrue{compileChapter2}
 \newtoggle{compileChapter3}
@@ -47,6 +47,7 @@
 \newtoggle{compileChapter7}
 \newtoggle{compileChapter8}
 \newtoggle{compileChapterAppendix1}\toggletrue{compileChapterAppendix1}
+\newtoggle{compileBibliography}\toggletrue{compileBibliography}
 
 % ======================================================================
 % Toggle logic
@@ -60,7 +61,7 @@
   \togglefalse{showGlossaryDefinitionsMode}
 }
 
-% disable compileChapterX if partialCompileMode is disabled
+% disable compileX if partialCompileMode is disabled
 \iftoggle{partialCompileMode}{}{
   \toggletrue{compileChapter1}
   \toggletrue{compileChapter2}
@@ -71,4 +72,5 @@
   \toggletrue{compileChapter7}
   \toggletrue{compileChapter8}
   \toggletrue{compileChapterAppendix1}
+  \toggletrue{compileBibliography}
 }

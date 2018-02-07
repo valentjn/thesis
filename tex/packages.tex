@@ -130,7 +130,7 @@
 \usepackage{hyperref}
 
 % BibLaTeX
-\iftoggle{partialCompileMode}{}{
+\iftoggle{compileBibliography}{
   \usepackage[
     % abbreviate author names
     giveninits=true,
@@ -143,7 +143,7 @@
     % only use first author's name for the style
     maxalphanames=1,
   ]{biblatex}
-}
+}{}
 
 % named references
 \usepackage[
