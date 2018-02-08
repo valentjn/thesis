@@ -1002,6 +1002,8 @@ Note that this definition is consistent with \eqref{eq:sparseGridB1} as
 $L_{n,d}^{\sparse(b)}
 = \{\ßl \in \NN_0^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\}$
 for $b = 1$.
+Examples of $\Omega_{n,d}^{\sparse(b)}$ are shown
+in \cref{fig:coarseBoundary}.
 
 The number of grid points of $\Omega_{n,d}^{\sparse(b)}$
 can be calculated as follows:
@@ -1100,6 +1102,66 @@ Its correctness can be formally proved with the following invariant:
   }
   \label{alg:coarseBoundary}
 \end{algorithm}
+
+\begin{figure}
+  \subcaptionbox{%
+    $d = 2$, $b = 0$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 2$, $b = 1$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 2$, $b = 2$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_3}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 2$, $b = 3$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_4}%
+  }\\[2mm]%
+  \subcaptionbox{%
+    $d = 3$, $b = 0$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_5}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 3$, $b = 1$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_6}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 3$, $b = 2$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_7}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 3$, $b = 3$%
+  }[35mm]{%
+    \includegraphics{coarseBoundary_8}%
+  }%
+  \caption{%
+    Sparse grids $\Omega_{n,d}^{\sparse(b)}$ of level $n = 3$
+    in two and three dimensions for different values of the
+    boundary parameter $b$.
+    For reasons of clarity, the grid points on the
+    bottom, left, and back faces of the three-dimensional cubes
+    are not shown.
+    The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
+    serve as a visual aid.%
+  }
+  \label{fig:coarseBoundary}
+\end{figure}
 
 \todo{add table with numbers}
 
