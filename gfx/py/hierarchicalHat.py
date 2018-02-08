@@ -95,7 +95,7 @@ fig.save(tightLayout=tightLayout)
 
 
 
-fig = Figure.create(figsize=(3.3,1.6), scale=1.0)
+fig = Figure.create(figsize=(3.3, 2.0), scale=1.0)
 ax = fig.gca()
 c = [0.3, 0.8, 0.7, 0.7, 0.5, 0.9, 0.8, 0.7, 0.2]
 hInv = 2**n
@@ -131,7 +131,7 @@ ax.set_xticks(X)
 ax.set_xticklabels(xtl)
 ax.set_yticks([0])
 
-fig.save()
+fig.save(tightLayout={"pad" : 2})
 
 
 

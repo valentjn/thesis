@@ -44,7 +44,7 @@ fig.save(tightLayout={"pad" : 2})
 
 
 
-fig = Figure.create(figsize=(3.3, 1.6))
+fig = Figure.create(figsize=(3.3, 2.0))
 ax = fig.gca()
 c = [0.3, 0.8, 0.7, 0.7, 0.5, 0.9, 0.8, 0.7, 0.2]
 
