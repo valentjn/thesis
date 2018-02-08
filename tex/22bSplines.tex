@@ -1,18 +1,193 @@
-\section{Defining Hierarchical B-Splines on Sparse Grids}
+\section{Defining Hierarchical B-Splines}
 \label{sec:22bSplines}
 
-\todo{write}
+\todo{add references}
 
-\blindtext{}
+B-splines are a generalization of the well-known hat functions.
+They were first studied by Schoenberg, who claimed that they had
+already been known to Laplace.
+\newgacronym{fem}{FEM}{Finite element method}
+In the 1960s, Schoenberg's results were rediscovered and the potential
+of B-splines for the emerging finite element method (\fem) was
+recognized.
+Important work was done by de Boor, who found simple B-spline algorithms.
+B-spline have found application in a number of fields,
+e.g., for the aforementioned \fem,
+as non-uniform rational B-splines (NURBS) for geometric modeling,
+for atomic and molecular physics,
+and for financial mathematics,
+to name just a few examples.
+
+In this section, we mainly follow the presentation of
+\cite{Valentin16Hierarchical} to define hierarchical B-splines.
+Thanks to the groundwork laid in \cref{sec:21sparseGrids},
+it suffices to study the univariate case.
+The multivariate case is as usual treated by the tensor product approach.
 
 \subsection{Uniform Hierarchical B-Splines}
 
-\todo{write}
+\todo{add references}
 
-\blindtext{}
+The \term{cardinal B-spline}
+$b^p\colon \RR \to \RR$ of \term{degree} $p \in \NN_0$
+is defined by the recursion
+\begin{equation}
+  \label{eq:cardinalBSpline}
+  b^p(x)
+  :=
+  \begin{cases}
+    \displaystyle\int_0^1 b^{p-1}(x - y) \diff{}y,&p \ge 1,\\
+    \chi_{\halfopeninterval{0, 1}}(x),&p = 0,
+  \end{cases}
+\end{equation}
+where $\chi_{\halfopeninterval{0, 1}}$ is the characteristic function of
+the half-open unit interval $\halfopeninterval{0, 1}$.
+The definition implies the following properties of $b^p$:
+\begin{itemize}
+  \item
+  \emph{Support:}
+  The support of $b^p$ is given by $\supp b^p = [0, p + 1]$.
+  
+  \item
+  \emph{Bounds and symmetry:}
+  The cardinal B-spline $b^p$ is non-negative and bounded from above by $1$.
+  It is symmetric with respect to the center of its support, i.e.,
+  $b^p(x) = b^p(p + 1 - x)$.
+  
+  \item
+  \emph{Spline:}
+  On every \term{knot interval} $\halfopeninterval{k, k+1}$
+  ($k = 0, \dotsc, p$), $b^p$ is a polynomial of degree~$p$, i.e.,
+  $b^p$ is a spline (piecewise polynomial).
+  
+  \item
+  \emph{Differentiability:}
+  At the \term{knots} $k = 0, \dotsc, p + 1$,
+  $b^p$ is $(p - 1)$ times continuously differentiable.
+  The derivative can be computed by differentiating
+  \eqref{eq:cardinalBSpline}:
+  \begin{equation}
+    \frac{\diff}{\dx} b^p(x)
+    = b^{p-1}(x) - b^{p-1}(x-1).
+  \end{equation}
+  
+  \item
+  \emph{Convolution:}
+  The integral in the definition of $b^p$
+  is the convolution $b^{p-1} \ast b^0$ of the B-spline $b^{p-1}$
+  of degree $p - 1$ with the B-spline $b^0$ of degree $0$.
+  
+  \item
+  \emph{Generalization:}
+  As a special case, $b^1$ is a hat function interpolating the data
+  $\{(k, \delta_{k,1}) \mid k \in \ZZ\}$.
+  One can show that for the limit of $p \to \infty$,
+  $b^p$ converges to the Gaussian bell curve function
+  $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$.
+  \todo{check, more exact}
+\end{itemize}
 
-\subsection{Linear Independence and Linear Span}
+We can use the cardinal B-spline $b^p$ as a ``mother function'' to
+define the uniform hierarchical B-spline
+$\varphi_{l,i}^p\colon [0, 1] \to \RR$ of level $l \in \NN_0$ and index
+$i \in I_l$ via an affine parameter transformation:
+\todo{citation [28] in SGA?}
+\begin{equation}
+  \label{eq:uniformHierarchicalBSplineUV}
+  \varphi_{l,i}^p(x)
+  := b^p(x/h_l + (p+1)/2 - i).
+\end{equation}
+The support of $\varphi_{l,i}^p$ is given
+by $\supp \varphi_{l,i}^p = [0, 1] \cap (h_l \cdot [i \pm (p+1)/2])$,
+where $[i \pm (p+1)/2] := [i - (p+1)/2, i + (p+1)/2]$.
+The hat function basis $\varphi_{l,i}^1$ defined in
+\eqref{eq:hatFunctionUV} is a special case of
+\cref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
+which allows us to use the same notation $\varphi_{l,i}^p$ for both.
 
+In the following, we will only allow odd degrees $p = 1, 3, 5, \dotsc$
+in this thesis.
+Many theoretical considerations will not hold for even degrees.
+The basic reason is that for odd degrees, the knots of
+$\varphi_{l,i}^p$ coincide with the grid points
+\begin{equation}
+  x_{l,i-(p+1)/2},\quad
+  \dotsc,\quad
+  x_{l,i},\quad
+  \dotsc,\quad
+  x_{l,i+(p+1)/2}.
+\end{equation}
+For even degrees $p$, the knots of $\varphi_{l,i}^p$ lie exactly in
+the middle between two subsequent grid points:
+\begin{equation}
+  x_{l,i-p/2} - \frac{h_l}{2},\quad
+  \dotsc,\quad
+  x_{l,i} - \frac{h_l}{2},\quad
+  x_{l,i} + \frac{h_l}{2},\quad
+  \dotsc,\quad
+  x_{l,i+p/2} + \frac{h_l}{2}.
+\end{equation}
+For the theory of hierarchical functions,
+this would have many severe implications,
+which we will discuss later
+when we make the respective considerations.
+
+\subsection{Non-Uniform B-Splines and Proof of the Hierarchical Splitting}
+
+With the hierarchical B-splines $\varphi_{l,i}^p$, we can define
+the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
+as in \cref{sec:21sparseGrids}.
+However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
+to be correct, we have to prove that the conditions of
+\cref{lemma:hierSplittingUV} are satisfied.
+To investigate how the nodal space $V_l^p$ looks like,
+we introduce the notion of non-uniform B-splines.
+
+\begin{definition}[Non-uniform B-splines]
+  Let $m, p \in \NN_0$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
+  increasing sequence of real numbers \term{(knot sequence)}.
+  For $k = 0, \dotsc, m - 1$,
+  the \term{(non-uniform) B-spline} $b_{k,\ß\xi}^p$ of degree $p$
+  with knots $\ß\xi$ and index $k$ is defined by the
+  Cox--de Boor recurrence
+  \cite{Cox72Numerical,Boor72Calculating,Hoellig13Approximation}
+  \begin{equation}
+    b_{k,\ß\xi}^p(x)
+    :=
+    \begin{cases}
+      \dfrac{x - \xi_k}{\xi_{k+p} - \xi_k} b_{k,\ß\xi}^{p-1}(x) +
+      \dfrac{\xi_{k+p+1} - x}{\xi_{k+p+1} - \xi_{k+1}}
+      b_{k+1,\ß\xi}^{p-1}(x),&p \ge 1,\\
+      \chi_{\halfopeninterval{\xi_k, \xi_{k+1}}}(x),&p = 0.
+    \end{cases}
+  \end{equation}
+\end{definition}
+Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
+$k = 0$, we obtain the cardinal B-spline $b^p$.
+
+\begin{proposition}[Spline space]
+  Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
+  Then, the B-splines $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$)
+  form a basis of the \term{spline space}
+  \begin{equation}
+    S_\ß\xi^p
+    := \spn\{b_{k,\ß\xi}^p \mid k = 0, \dotsc, m - 1\}.
+  \end{equation}
+  $S_\ß\xi^p$ contains exactly those functions which are continuous
+  on $D_\ßxi^p := [\xi_p, \xi_m]$,
+  polynomials of degree $\le p$ on every knot interval
+  $[\xi_k, \xi_{k+1}]$ \todo{check half-open interval?} in $D_\ß\xi$
+  ($k = p, \dotsc, m - 1$) and at least $(p - 1)$ times
+  continuously differentiable at every knot $\xi_k$ in the interior of
+  $D_\ß\xi^p$ ($k = p + 1, \dotsc, m - 1$).
+\end{proposition}
+\begin{proof}
+  See \cite{Hoellig13Approximation}.
+\end{proof}
+
+The proposition implies that the nodal B-splines $\varphi_{l,i}^p$
+($i = 0, \dotsc, 2^l$) of level $l \in \NN_0$ are linearly independent,
+as they coincide with $b_{k,\ß\xi}^p$ by choosing
 \todo{write}
 
 \blindtext{}
