@@ -1,8 +1,8 @@
 \chapter{Proofs}
 
-This chapter contains the proofs of the propositions and theorems that
+This chapter contains proofs that
 were too long or technical to include them in the main text.
-For convenience, the propositions and theorems are repeated
+For convenience, the corresponding propositions and theorems are repeated
 before the proofs.
 
 
@@ -68,7 +68,7 @@ before the proofs.
   $|\{\ßl \in \NN_0^d \mid N_\ßl = q,\, \norm{\ßl}_1 = m\}|
   = \binom{d}{q} |\{\ßl \in \NN^{d-q} \mid \norm{\ßl}_1 = m\}|
   = \binom{d}{q} \binom{m-1}{d-q-1}$
-  by first placing $q$ zeros in $d$ places,
+  by first putting $q$ zeros in $d$ places,
   for which there are $\binom{d}{q}$ possibilities, and then
   counting all positive vectors of length $d - q$ with level sum $m$,
   which can be done in $\binom{m-1}{d-q-1}$ ways.
@@ -114,7 +114,8 @@ before the proofs.
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
   then we have $\norm{\vecmax(\ßl, \ß1)}_1 \le n+d+t-b$ or
-  $\ßl = \ß0$ by line~\ref{line:algCoarseBoundary1}.
+  $\ßl = \ß0$ by line~\ref{line:algCoarseBoundary1} of
+  \cref{alg:coarseBoundary}.
   In the first case, we have
   \begin{equation}
     \norm{\vecmax(\ßl', \ß1)}_1

@@ -13,16 +13,12 @@ A more detailed introduction to sparse grids can be found in
 
 \subsection{Nodal Spaces}
 
-\todo{add figure:
-  * coarse boundary: examples in 2D, 3D with different b (and b = 0)
-}
-
 \subsubsection{Univariate Case}
 
 Let us first consider univariate functions
 that are defined on the unit interval $[0, 1]$.
 \newgsymbol{l}{$l$}{Level $\in \NN_0$}%
-We discretize this domain by splitting it into $2^l$ equidistant segments,
+We discretize this domain by splitting it into $2^l$ equally sized segments,
 where $l \in \NN_0$ is the \term{level}.
 \newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
 \newgsymbol{i}{$i$}{Index $= 0, \dotsc, 2^l$}%
@@ -45,12 +41,12 @@ satisfying required assumptions when needed and stated.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
 \newgsymbol{phili1}{$\varphi_{l,i}^1$}{Hat function of level $l$, index $i$}%
-The most common choice for $\varphi_{l,i}$ are the so-called \term{hat functions}
-(linear B-splines), which are defined as
+The so-called \term{hat functions} (linear B-splines), which are defined as
 \begin{equation}
   \varphi_{l,i}^1(x)
-  := \max(1 - |x/h_l - i|, 0).
+  := \max(1 - |x/h_l - i|, 0),
 \end{equation}
+are the most common choice for $\varphi_{l,i}$.
 Here and in the following,
 the superscript ``1'' is the degree of the linear B-spline and
 is not to be read as an exponent.
@@ -61,7 +57,7 @@ arbitrary degrees $p$ (see \cref{sec:22bSplines}).
 \newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
 The \emph{nodal space} $V_l$ of level $l$
 is defined as the linear span of all basis functions
-$\varphi_{l,i}$, $i = 0, \dotsc, 2^l$:
+$\varphi_{l,i}$:
 \begin{equation}
   V_l := \spn\{\varphi_{l,i} \mid i = 0, \dotsc, 2^l\}.
 \end{equation}
@@ -81,13 +77,13 @@ for some $c_i \in \RR$.
 In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
 \newgsymbol{Vl1}{$V_l^1$}{Nodal piecewise linear space of level $l$}%
 The nodal space $V_l^1$ is defined analogously as the span of the
-$\varphi_{l,i}^1$ functions.
+hat functions $\varphi_{l,i}^1$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $[0, 1]$ that are
 piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
 $i = 0, \dotsc, 2^l - 1$.
-The nodal hat function basis and a linear combination are shown in
-\cref{fig:nodalHat}.
+The nodal hat function basis of level $3$
+and a linear combination are shown in \cref{fig:nodalHat}.
 
 \begin{figure}
   \subcaptionbox{%
@@ -98,7 +94,7 @@ The nodal hat function basis and a linear combination are shown in
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $f_l$ as a weighted linear combination
+    Piecewise linear interpolant $f_l$ as a weighted sum
     of the nodal hat functions.%
   }[75mm]{%
     \includegraphics{nodalHat_2}%
@@ -120,26 +116,28 @@ multi-indices, Cartesian products, and tensor products, respectively.
   Unit hypercube $:= [0, 1]^d$%
 }
 \newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NN_0^d$}%
+\newgsymbol{norm1}{$\norm{\cdot}_1$}{1-norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$}%
 Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
 which can be partitioned into
-$\prod_{t=1}^d (2^{l_t} + 1)$ equally sized hyper-cubes,
-where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level.
+$\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
+where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level
+and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
 \newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{Multivariate grid point $:= \ßi \cdot \ßh_\ßl$}%
 \newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^l$}%
 \newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^l$}{%
   For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
 }%
-The corners of the hyper-cubes are given by the grid points
+The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
   \ßx_{\ßl,\ßi} := \ßi \cdot \ßh_\ßl,\quad
   \ßi = \ß0, \dotsc, \ß2^{\ßl}.
 \end{equation}
-In this thesis, relations and operations with vectors (in bold face)
-are to be read coordinate-wise, unless stated otherwise.
+To allow for a somewhat intuitive and suggestive notation,
+relations and operations with vectors (in bold face)
+are to be read coordinate-wise in this thesis, unless stated otherwise.
 Bold-faced numbers like $\ß0$ are defined to be the vector $(0, \dotsc, 0)$
 in which every entry is equal to that number.
-This allows for a somewhat intuitive and suggestive notation.
 \newgsymbol{hl!}{$\ßh_\ßl$}{Multivariate mesh size $:= \ß2^{-\ßl}$}%
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \begin{equation}
@@ -167,7 +165,7 @@ as the tensor product of the univariate functions:%
   \varphi_{\ßl,\ßi}(\ßx)
   := \prod_{t=1}^d \varphi_{l_t,i_t}(x_t).
 \end{equation}
-As an example, \cref{fig:nodalHat2D} shows a bivariate nodal hat function
+\cref{fig:nodalHat2D} shows an example of a bivariate nodal hat function
 $\varphi_{\ßl,\ßi}^1$.
 
 \begin{figure}
@@ -200,7 +198,7 @@ In the case of hat functions $\varphi_{\ßl,\ßi}^1$,
 the nodal space $V_\ßl^1$ is the $d$-linear spline space, i.e.,
 the space of all continuous functions
 on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
-all hyper-cubes
+all hypercubes
 \begin{equation}
   [\ßx_{\ßl,\ßi}, \ßx_{\ßl,\ßi+\ß1}]
   := [x_{l_1,i_1}, x_{l_1,i_1+1}] \times \dotsb \times
@@ -224,8 +222,9 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   \label{lemma:tensorProductLinearIndependence}
   The functions $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
   form a basis of $V_\ßl$, if the univariate functions
-  $\varphi_{l,i}$ ($i = 0, \dotsc, 2^l$)
-  form a basis of the univariate nodal space $V_l$.
+  $\varphi_{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$)
+  form a basis of the univariate nodal space $V_{l_t}$
+  for $t = 1, \dotsc, d$.
 \end{lemma}
 \begin{proof}
   \newgsymbol{!equiv}{$\equiv$}{%
@@ -299,13 +298,8 @@ The dimension of the nodal space $V_\ßl$ is given by
   = |\Omega_\ßl|
   = \prod_{t=1}^d (2^{l_t} + 1).
 \end{equation}
-\newgsymbol{Omega}{$\Omega(f(x))$}{Big-$\Omega$ Landau notation}%
-\newgsymbol{norm1}{$\norm{\cdot}_1$}{1-norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$}%
-In asymptotic terms, this dimension is in $\Omega(2^{\norm{\ßl}_1})$,
-where the 1-norm $\norm{\ßl}_1$ of $\ßl$ is defined as
-$\norm{\ßl}_1 := \sum_{t=1}^d l_t$.
 If we choose the same level $n \in \NN_0$ in all dimensions,
-this means that the dimension of $V_{n,d}$ and the
+then the dimension of $V_{n,d}$ and the
 number of grid points grow at least as fast as
 $2^{nd} = (h_n^{-1})^d$.
 This exponential dependency between $\dim V_{n,d}$ and $d$ is known as the
@@ -334,16 +328,13 @@ can be written as a grid point of a higher level $l'$:
   i' = 2^{l'-l} i.
 \end{equation}
 \newgsymbol{xor}{$\xor$}{Bitwise ``exclusive or''}%
-Conversely, this implies that every grid point $x_{l,i}$ can be uniquely written
+Conversely, this implies that every grid point $x_{l,i}$ of level $l \ge 1$
+can be uniquely written
 as a grid point of a coarser level $l'$ and an odd index $i'$:
 \begin{equation}
   x_{l,i} = x_{l',i'},\quad
-  l' =
-  \begin{cases}
-    l - \left[\log_2(\xor(i, i-1) + 1) - 1\right],&l > 0,\\
-    l,&l = 0,\\
-  \end{cases}\quad
-  i' = 2^{l'-l} i,
+  l' = l - \left[\log_2(\xor(i, i-1) + 1) - 1\right],\quad
+  i' = i/2^{l-l'},
 \end{equation}
 % https://mathoverflow.net/a/29973
 where $\xor$ is the bitwise ``exclusive or'' function.
@@ -354,14 +345,14 @@ highest power of two that divides $i$.
   the joined sets is empty)%
 }%
 \newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
-This implies that $\Omega_l$ decomposes as
+This implies that $\Omega_l$ decomposes into
 \begin{equation}
   \Omega_l
   = \bigdotcup_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
-  I_l :=
+  I_{l'} :=
   \begin{cases}
-    \{i = 0, \dotsc, 2^l \mid \text{$i$ odd}\},&l > 0,\\
-    \{0, 1\},&l = 0,
+    \{i = 0, \dotsc, 2^{l'} \mid \text{$i$ odd}\},&l' > 0,\\
+    \{0, 1\},&l' = 0,
   \end{cases}
 \end{equation}
 where $\dotcup$ indicates the disjoint union.
@@ -388,8 +379,8 @@ hierarchical subspaces of coarser levels or the same level, i.e.,
 \end{equation}
 Here, the direct sum $\oplus$ is
 the normal vector space sum with the additional indication
-that the dimension of the sum is the sum $\sum_{l'=0}^l W_{l'}$
-of the dimensions of the summands
+that the dimension of the sum $\sum_{l'=0}^l W_{l'}$ is the sum
+of the dimensions of the summands $W_{l'}$
 (analogously to $|\Omega_l| = \sum_{l'=0}^l |\Omega_{l'}|$,
 where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
 In general, \eqref{eq:hierSplittingUV} may not be true.
@@ -400,13 +391,14 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 \begin{figure}
   \subcaptionbox{%
     Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
-    \emph{(dots)}.%
+    \emph{(dots)}.
+    The domain is the unit interval $[0, 1]$.%
   }[75mm]{%
     \includegraphics{hierarchicalHat_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $f_l$ as a weighted linear combination
+    Piecewise linear interpolant $f_l$ as a weighted sum
     of the hierarchical hat functions \emph{(stacked)}.
     The two boundary functions are combined to a single function
     \emph{\textcolor{C0}{(blue)}} for simplicity.%
@@ -457,7 +449,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   over $l$:
   If a linear combination of $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
-  as otherwise the basis functions $\varphi_{l,i'}^1$ ($i \in I_l$) would
+  as otherwise the basis functions $\varphi_{l,i'}^1$ ($i' \in I_l$) would
   introduce kinks at $x_{l,i'}$, which the zero function does not have.
   This means that we have a zero linear combination of $\varphi_{l',i'}^1$ for
   $l' \le l - 1$, $i' \in I_{l'}$,
@@ -529,10 +521,10 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) are tensor products
     of functions $\varphi_{l_t',i_t'}$.
     According to the first condition of \cref{lemma:hierSplittingUV},
-    each of these functions can be written as a linear combination of
-    the nodal basis $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$).
-    The tensor product can be expanded to a linear combination
-    of tensor products of nodal basis functions.
+    each $\varphi_{l_t',i_t'}$ can be written as a linear combination of
+    the nodal basis $\varphi_{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$).
+    We can expand the tensor product to a linear combination
+    of tensor products of the univariate nodal basis functions.
     Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
     multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
     As this is true for all $\ßi' \in I_{\ßl'}$, we obtain $W_{\ßl'} \subset V_\ßl$.
@@ -563,7 +555,7 @@ regular, dimensionally adaptive, and spatially adaptive.
 
 To assess the importance of a subspace, we consider again the
 interpolant $f_\ßl \in V_\ßl$ of a function $f\colon [\ß0, \ß1] \to \RR$.
-According to the splitting \eqref{eq:hierSplittingUV}, the interpolant can
+According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
   \label{eq:interpHierFullGrid}
@@ -585,11 +577,13 @@ for the corresponding surpluses \cite{Bungartz04Sparse}:
   \alpha_{\ßl,\ßi}
   = (-1)^d 2^{-\norm{\ßl+\ß1}_1}
   \int_\ß0^\ß1 \varphi_{\ßl,\ßi}^1(\ßx)
-  \frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f(\ßx) \diff{}\ßx,
+  \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
+  f(\ßx) \diff{}\ßx,
 \end{equation}
 if $\ßl \ge \ß1$ and
 $f$ is twice continuously differentiable in every dimension simultaneously,
-i.e., $\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f$
+i.e.,
+$\frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2} f$
 exists and is continuous.%
 \footnote{%
   Again, the notation implies that the integration domain is
@@ -618,14 +612,16 @@ can be estimated by
   \bignorm{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'}^1}_{L^2}
   \le 3^{-d} \cdot 2^{-2 \norm{\ßl}_1} \cdot
-  \bignorm{\frac{\partial^{2d}}{\partial x_1^2 \dotsb \partial x_d^2} f}_{L^2}
+  \bignorm{\frac{\partialdiff^{2d}}{
+      \partialdiff x_1^2 \dotsb \partialdiff x_d^2
+  } f}_{L^2}
 \end{equation}
 for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
 exceeds a certain value $n \in \NN_0$.
-The selection of the relevant subspaces can be formulated as a
+More formally, the selection of the relevant subspaces can be formulated as a
 continuous knapsack problem.
 \newgsymbol{Vnds}{$V_{n,d}^\sparse$}{%
   Regular sparse grid space of level $n$ with dimensionality $d$%
@@ -648,7 +644,8 @@ we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
 basis $\varphi_{\ßl,\ßi}^1$,
 we generalize the definition to arbitrary bases $\varphi_{\ßl,\ßi}$.
-\Cref{fig:regularSG} shows a regular sparse grid in two dimensions.
+\Cref{fig:regularSG} shows the construction of a
+regular sparse grid in two dimensions.
 
 \begin{figure}
   \subcaptionbox{%
@@ -705,7 +702,7 @@ $(\log_2 h_n^{-1})^{d-1}$ \cite{Bungartz04Sparse}.
 \subsubsection{Dimensionally Adaptive Sparse Grids}
 
 The idea of dimensional adaptivity is to spend more grid
-points in specific dimensions depending on the objective function.
+points along specific dimensions depending on the objective function.
 Different criteria for the choice of dimensions exists,
 for example the absolute value of the linear hierarchical surpluses
 or the ANOVA decomposition.
@@ -758,13 +755,13 @@ $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.
 The combination formula \eqref{eq:combiTechnique},
-which is visualized in \cref{fig:combinationTechnique}, decomposes the
+which is visualized in \cref{fig:combinationTechnique}, splits the
 sparse grid interpolant into a weighted sum of full grid interpolants.
-In applications, each of the grid can be processed in parallel,
-allowing to drastically speed up computations like the solution of
-\pde{}s.
+In applications, each grid can be processed in parallel,
+drastically speeding up computations like the solution of
+partial differential equations (\pde{}s).
 In addition, existing software working with nodal bases do not have to be
-rewritten in terms of hierarchical functions,
+rewritten in terms of implementing hierarchical functions,
 which means that combination technique allows sparse grids to be employed
 in a minimally invasive way.
 
@@ -772,8 +769,9 @@ in a minimally invasive way.
   \includegraphics{sg_4}%
   \caption{%
     The combination technique combines nodal subspaces in a weighted
-    sum to form a regular sparse grid of level $n = 3$ in two dimensions.
-    The red subspaces are subtracted from the sum of the green subspaces.%
+    sum to form a regular sparse grid space of level $n = 3$ in two dimensions.
+    The red subspaces ($q = 1$ in \eqref{eq:combiTechnique})
+    are subtracted from the sum of the green subspaces ($q = 0$).%
   }
   \label{fig:combinationTechnique}
 \end{figure}
@@ -783,9 +781,9 @@ in a minimally invasive way.
 Dimensional adaptivity does not suffice to resolve local features of the
 objective function.
 Especially in some applications, it is crucial for the
-interpolant to have a high accuracy in specific regions of the domain.
+interpolant to be highly accurate in specific regions of the domain.
 For instance in optimization, it is not necessary to have a small global
-interpolation error, but rather high accuracy near the optima.
+interpolation error, but rather high accuracy near the optima is important.
 
 This can be achieved by \term{spatially adaptive sparse grids},
 on which this thesis focuses.
@@ -820,7 +818,7 @@ If \eqref{eq:hierAncestors} is not met, the so-called
 unidirectional principle, which is used for instance to efficiently calculate
 hierarchical surpluses, does not work.
 However, as we will see, the unidirectional principle cannot be applied
-to B-splines of general degree.
+to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
 Therefore, for most of our considerations, we will not restrict the
 choice of $K$.
 
@@ -851,7 +849,7 @@ choice of $K$.
 
 One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
 is that the number of grid points still grows very fast
-with the level $n$ and the dimensionality $d$,
+with the level $n$ and the dimensionality $d$.
 This is mainly because the finest mesh size $h_n$ on the
 boundary of the domain $[\ß0, \ß1]$ is finer than
 the finest mesh size $h_{n-d+1}$ that can be found in the interior.
@@ -926,15 +924,15 @@ the interior of a sparse grid of level $n + q$,
 the size of which grows like $\calO(2^{n+q} n^{d-q-1})$.
 As the number of boundary faces increases exponentially
 with the dimensionality $d$,
-the size of $\Omega_{n,d}^\sparse$ can exhaust computational memory
-quite fast.
+the size of $\Omega_{n,d}^\sparse$ quickly exhausts the available
+computational memory.
 There are mainly two solutions to deal with this issue.
 
 \subsubsection{Sparse Grids with Coarser Boundaries}
 
 The first solution is to insert the boundary level functions and grid points
-at a finer level than zero.
-A popular choice is the insertion at level one, which corresponds to
+at a finer level than $0$.
+A popular choice is the insertion at level $1$, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
   \Omega_{n,d}^{\sparse(1)}
@@ -944,7 +942,7 @@ A popular choice is the insertion at level one, which corresponds to
   := \{\ßl \in \NN_0^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\},
 \end{equation}
 where $\vec{\max}$ is to be read coordinate-wise as usual.
-This choice is equivalent to treating zero level components as level one
+This choice is equivalent to treating $0$-level components as level $1$
 in the subspace selection.
 This ensures that the finest mesh sizes in interior of $[\ß0, \ß1]$ and
 its boundary coincide to be $h_{n-d+1}$, which reduces the number of grid points
@@ -952,12 +950,12 @@ on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
 hat functions is (in the univariate case)
-to start with the constant function on level zero with
+to start with the constant function on level $0$ with
 corresponding grid point $0.5$,
-then employ the two boundary functions and points on level one,
+then employ the two boundary functions and points on level $1$,
 and finally proceed as usual for the finer levels $\ge 2$.
 Apart from a constant shift in the level of the resulting sparse grids,
-this is equivalent to inserting the boundary functions and points at level two.
+this is equivalent to inserting the boundary functions and points at level $2$.
 This solution leads to even less grid points than the previous approach,
 as now the mesh size is finer in the interior of the domain than on the
 boundary.
@@ -987,16 +985,18 @@ the boundary functions and points at a level $b \in \NN$:
       \norm{\vecmax(\ßl, \ß1)}_1 \le n-b+1\} \cup \{\ß0\}\big).
     \end{split}
   \end{equation}
+  For convenience, we define
+  $\Omega_{n,d}^{\sparse(0)} := \Omega_{n,d}^\sparse$.
 \end{definition}
 The definition is motivated by partitioning the levels $\ßl \in \NN_0^d$
 into interior levels ($\ßl \in \NN^d$)
 and boundary levels ($\ßl \in \NN_0^d \setminus \NN^d$).
 By including the levels of the interior grid $\interior{\Omega}_{n,d}^\sparse$,
 the mesh size in the interior is the same as before ($h_{n-d+1}$).
-Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level one,
+Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level $1$,
 but we subtract $b - 1$ from the upper bound to ensure the correct
 mesh size $h_{n-d-b+2}$ on the boundary.
-We add $\ß0$ to the level set to ensure that at least the $2^d$ corner
+We append $\ß0$ to the level set to ensure that at least the $2^d$ corner
 points are included in the resulting sparse grid.
 Note that this definition is consistent with \eqref{eq:sparseGridB1} as
 $L_{n,d}^{\sparse(b)}
@@ -1015,7 +1015,9 @@ can be calculated as follows:
   \begin{equation}
     |\Omega_{n,d}^{\sparse(b)}|
     = |\interior{\Omega}_{n,d}^\sparse| +
-    \sum_{q=1}^d 2^q \binom{d}{q} |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|
+    \sum_{q=1}^d 2^q \binom{d}{q}
+    |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|,\quad
+    b \in \NN
   \end{equation}
 \end{restatable}
 \begin{proof}
@@ -1030,7 +1032,8 @@ Its correctness can be formally proved with the following invariant:
 }
   \label{prop:invariantCoarseBoundary}
   \label{PROP:INVARIANTCOARSEBOUNDARY}
-  After iteration $t$ of the algorithm ($t = 1, \dotsc, d$), it holds
+  After iteration $t$ of \cref{alg:coarseBoundary}
+  ($t = 1, \dotsc, d$), it holds
   \begin{equation}
     \label{eq:coarseInvariant}
     \begin{split}
@@ -1106,7 +1109,7 @@ is that in general,
 the unidirectional principle cannot be directly applied anymore.
 For example, this is relevant when calculating hierarchical surpluses
 for the hat function basis.
-As we will deal mostly with B-splines, for which the unidirectional
+As we mostly deal with B-splines, for which the unidirectional
 principle cannot be applied even on regular sparse grids,
 this issue is not important in the scope of this thesis.
 
@@ -1122,7 +1125,7 @@ $\bndry{\Omega}_{n,d}^{\sparse(b)} :=
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
 $\interior{\Omega}_{n,d}^{\sparse(b)}$.
-Third, we calculate the surpluses of the inner grid point
+Third, we calculate the surpluses of the inner grid points
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
 on the boundary, this does not influence the interpolated values in step~1.
@@ -1147,10 +1150,11 @@ boundary values or general hierarchical bases,
 making it necessary to change the basis.
 For hat functions, Pflüger modified the leftmost and rightmost
 univariate basis function of each level (with indices $i = 1$ and
-$i = 2^l - 1$ respectively) such that the extrapolate the inner
-values linearly towards the boundary \cite{Pflueger10Spatially}
-The basis function on level one is replaced by the
-``constant one'' function.
+$i = 2^l - 1$ respectively) such that the modified functions
+extrapolate the inner values linearly towards the boundary
+\cite{Pflueger10Spatially}.
+The basis function on level $1$ is replaced by the
+``constant $1$'' function.
 All other basis functions remain unchanged.
 \newgsymbol{phili1mod}{$\varphi_{l,i}^{1,\modified}$}{%
   Modified hat function of level $l$, index $i$%
@@ -1172,7 +1176,7 @@ are defined as follows:
     l \ge 2.
   \end{alignat}
 \end{subequations}
-The modified linear basis, which can be seen in \cref{fig:modifiedHat}
+The modified linear basis, which can be seen in \cref{fig:modifiedHat},
 provides ``reasonable'' boundary values
 without the need to insert basis functions and grid points on the boundary.
 For other bases such as B-splines, similar modifications are possible,
