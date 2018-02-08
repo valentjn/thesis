@@ -125,7 +125,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
         x = Xl[k,:]
         rect = matplotlib.patches.Rectangle(
           s(max(x[0]-hl0, 0), max(x[1]-hl1, 0)), min(2*hl0, 1), min(2*hl1, 1),
-          edgecolor="none", facecolor=Figure.COLORS["hellblau"])
+          edgecolor="none", facecolor=hellhellblau)
         ax.add_patch(rect)
       
       ax.plot(*s(xSquare, ySquare), "-", clip_on=False, color=borderColor)
