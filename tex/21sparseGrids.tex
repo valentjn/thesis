@@ -1025,6 +1025,197 @@ can be calculated as follows:
 \begin{proof}
   See \cref{sec:proofGridSizeCoarseBoundary}.
 \end{proof}
+As can be seen in \cref{tbl:coarseBoundary3D} for three dimensions and
+in \cref{tbl:coarseBoundary10D} for ten dimensions,
+the number of grid points decreases drastically for increasing values
+of $b$, especially when compared with
+$\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
+
+\begin{table}
+  \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
+    \toprule
+    &
+    {$|\interior{\Omega}_{n,d}^\sparse|$}&
+    {$b = 0$}&
+    {$b = 1$}&
+    {$b = 2$}&
+    {$b = 3$}&
+    {$b = 4$}&
+    {$b = 5$}\\
+    \midrule
+    $n = 3$&
+    \num{1}&
+    \num{123.0}&
+    \num{27.0}&
+    \num{9.00}&
+    \num{9.00}&
+    \num{9.00}&
+    \num{9.00}\\
+    $n = 4$&
+    \num{7}&
+    \num{42.4}&
+    \num{11.6}&
+    \num{4.71}&
+    \num{2.14}&
+    \num{2.14}&
+    \num{2.14}\\
+    $n = 5$&
+    \num{31}&
+    \num{22.7}&
+    \num{7.3}&
+    \num{3.39}&
+    \num{1.84}&
+    \num{1.26}&
+    \num{1.26}\\
+    $n = 6$&
+    \num{111}&
+    \num{14.9}&
+    \num{5.3}&
+    \num{2.75}&
+    \num{1.67}&
+    \num{1.23}&
+    \num{1.07}\\
+    $n = 7$&
+    \num{351}&
+    \num{10.9}&
+    \num{4.3}&
+    \num{2.37}&
+    \num{1.55}&
+    \num{1.21}&
+    \num{1.07}\\
+    $n = 8$&
+    \num{1023}&
+    \num{8.5}&
+    \num{3.6}&
+    \num{2.13}&
+    \num{1.47}&
+    \num{1.19}&
+    \num{1.07}\\
+    $n = 9$&
+    \num{2815}&
+    \num{7.0}&
+    \num{3.2}&
+    \num{1.96}&
+    \num{1.41}&
+    \num{1.17}&
+    \num{1.07}\\
+    $n = 10$&
+    \num{7423}&
+    \num{6.0}&
+    \num{2.9}&
+    \num{1.83}&
+    \num{1.36}&
+    \num{1.16}&
+    \num{1.06}\\
+    \bottomrule
+  \end{tabular}
+  \caption{%
+    For $d = 3$:
+    Grid size of the interior grid
+    $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
+    and ratios
+    $|\Omega_{n,d}^{\sparse(b)}|/|\interior{\Omega}_{n,d}^\sparse|$
+    \emph{(beginning with third column)} of the sizes of
+    the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
+    to the size of the interior grid of the same level.
+    The table begins at the first level $n = 3$ for which
+    the interior grid $\interior{\Omega}_{n,d}^\sparse$ is not empty.%
+  }
+  \label{tbl:coarseBoundary3D}
+\end{table}
+
+\begin{table}
+  \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
+    \toprule
+    &
+    {$|\interior{\Omega}_{n,d}^\sparse|$}&
+    {$b = 0$}&
+    {$b = 1$}&
+    {$b = 2$}&
+    {$b = 3$}&
+    {$b = 4$}&
+    {$b = 5$}\\
+    \midrule
+    $n = 10$&
+    \num{1}&
+    \num{3.3e+08}&
+    \num{59049}&
+    \num{1025}&
+    \num{1025.0}&
+    \num{1025.0}&
+    \num{1025.0}\\
+    $n = 11$&
+    \num{21}&
+    \num{4.3e+07}&
+    \num{21558}&
+    \num{2813}&
+    \num{49.8}&
+    \num{49.8}&
+    \num{49.8}\\
+    $n = 12$&
+    \num{241}&
+    \num{1.0e+07}&
+    \num{10046}&
+    \num{1879}&
+    \num{246.0}&
+    \num{5.2}&
+    \num{5.2}\\
+    $n = 13$&
+    \num{2001}&
+    \num{3.4e+06}&
+    \num{5407}&
+    \num{1211}&
+    \num{227.2}&
+    \num{30.5}&
+    \num{1.5}\\
+    $n = 14$&
+    \num{13441}&
+    \num{1.3e+06}&
+    \num{3213}&
+    \num{806}&
+    \num{181.1}&
+    \num{34.7}&
+    \num{5.4}\\
+    $n = 15$&
+    \num{77505}&
+    \num{6.2e+05}&
+    \num{2054}&
+    \num{558}&
+    \num{140.6}&
+    \num{32.2}&
+    \num{6.8}\\
+    $n = 16$&
+    \num{397825}&
+    \num{3.1e+05}&
+    \num{1390}&
+    \num{401}&
+    \num{109.5}&
+    \num{28.2}&
+    \num{7.1}\\
+    $n = 17$&
+    \num{1862145}&
+    \num{1.7e+05}&
+    \num{984}&
+    \num{298}&
+    \num{86.5}&
+    \num{24.2}&
+    \num{6.8}\\
+    \bottomrule
+  \end{tabular}
+  \caption{%
+    For $d = 10$:
+    Grid size of the interior grid
+    $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
+    and ratios
+    $|\Omega_{n,d}^{\sparse(b)}|/|\interior{\Omega}_{n,d}^\sparse|$
+    \emph{(beginning with third column)} of the sizes of
+    the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
+    to the size of the interior grid of the same level.
+    The table begins at the first level $n = 10$ for which
+    the interior grid $\interior{\Omega}_{n,d}^\sparse$ is not empty.%
+  }
+  \label{tbl:coarseBoundary10D}
+\end{table}
 
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
 hierarchical levels.
@@ -1162,8 +1353,6 @@ Its correctness can be formally proved with the following invariant:
   }
   \label{fig:coarseBoundary}
 \end{figure}
-
-\todo{add table with numbers}
 
 An important implication of the regular sparse grids
 $\Omega_{n,d}^{\sparse(b)}$ as defined in \cref{def:coarseBoundary}
