@@ -37,11 +37,13 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
   I = (helper.grid.getNodalIndices1D if combinationTechnique else
        helper.grid.getHierarchicalIndices1D)
   
+  hellhellblau = [x + 0.5 * (1 - x) for x in Figure.COLORS["hellblau"]]
   figureScale = (0.4 if whiteMode else 1.2)
   fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none", preamble=r"""
-\usepackage{contour}
-\contourlength{1.5pt}
-""")
+\usepackage{{contour}}
+\contourlength{{1.5pt}}
+\definecolor{{hellhellblau}}{{rgb}}{{{},{},{}}}
+""".format(*hellhellblau))
   ax = fig.gca()
   
   stairsCornersInner = []
@@ -95,11 +97,11 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
           ((highlightedSubspaces is None) and
            (highlightedPoints is None) and
            (l0 + l1 <= levelSumDiagonal))):
-        contourColor = "hellblau"
+        contourColor = "hellhellblau"
         color = Figure.COLORS["mittelblau"]
         rect = matplotlib.patches.Rectangle(
           (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
-          facecolor=Figure.COLORS["hellblau"])
+          facecolor=hellhellblau)
         ax.add_patch(rect)
       else:
         contourColor = "white"
