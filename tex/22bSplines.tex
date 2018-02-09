@@ -69,6 +69,7 @@ The definition implies the following properties of $b^p$:
   The derivative can be computed by differentiating
   \eqref{eq:cardinalBSpline}:
   \begin{equation}
+    \label{eq:cardinalBSplineDerivative}
     \frac{\diff}{\dx} b^p(x)
     = b^{p-1}(x) - b^{p-1}(x-1).
   \end{equation}
@@ -166,8 +167,10 @@ we introduce the notion of non-uniform B-splines.
 \end{definition}
 Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline $b^p$.
+The definition can be used to characterize the nodal space $V_l^p$:
 
 \begin{proposition}[Spline space]
+  \label{prop:splineSpace}
   Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
   Then, the B-splines $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
@@ -176,27 +179,151 @@ $k = 0$, we obtain the cardinal B-spline $b^p$.
     := \spn\{b_{k,\ß\xi}^p \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
   $S_\ß\xi^p$ contains exactly those functions which are continuous
-  on $D_\ßxi^p := [\xi_p, \xi_m]$,
+  on $D_\ß\xi^p := [\xi_p, \xi_m]$,
   polynomials of degree $\le p$ on every knot interval
   $[\xi_k, \xi_{k+1}]$ \todo{check half-open interval?} in $D_\ß\xi$
   ($k = p, \dotsc, m - 1$) and at least $(p - 1)$ times
   continuously differentiable at every knot $\xi_k$ in the interior of
   $D_\ß\xi^p$ ($k = p + 1, \dotsc, m - 1$).
 \end{proposition}
+
 \begin{proof}
   See \cite{Hoellig13Approximation}.
 \end{proof}
 
-The proposition implies that the nodal B-splines $\varphi_{l,i}^p$
-($i = 0, \dotsc, 2^l$) of level $l \in \NN_0$ are linearly independent,
-as they coincide with $b_{k,\ß\xi}^p$ by choosing
-\todo{write}
+\begin{corollary}[Nodal B-spline space]
+  \label{cor:nodalBSplineSpace}
+  The nodal B-splines $\varphi_{l,i}^p$ ($i = 0, \dotsc, 2^l$)
+  of level $l \in \NN_0$ are
+  a basis of the spline space $S_\ß\xi^p$
+  \begin{equation}
+    \xi_k
+    := (k - (p+1)/2) h_l,\quad
+    k = 0, \dotsc, m + p,\quad
+    m := 2^l + 1,
+  \end{equation}
+  and
+  \begin{equation}
+    V_l^p|_{D_l^p} = S_\ß\xi^p,\quad
+    D_l^p := \left[h_l \frac{p-1}{2},\; 1 - h_l \frac{p-1}{2}\right],
+  \end{equation}
+  where $V_l^p|_{D_l^p} := \{f_l|_{D_l^p} \mid f_l \in V_l^p\}$
+  is the nodal space restricted to $D_l^p$.
+\end{corollary}
 
-\blindtext{}
+\begin{proof}
+  We have $\varphi_{l,i}^p = b_{i,\ß\xi}^p$ for
+  $i = 0, \dotsc, m - 1$,
+  as the B-splines on both sides have the same knots.
+  The assertions now follow from \cref{prop:splineSpace}.
+\end{proof}
+
+Note that $D_l^p$ might contain only a single point or even be empty,
+if $p$ is too large or $l$ is too small.
+However, the corresponding B-splines $\varphi_{l,i}^p$ are still linearly
+independent on $[0, 1]$ (see \cite{Hoellig13Approximation}).
+Similarly, the corollary also implies that the hierarchical functions
+$\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
+
+\begin{lemma}[First condition of \cref{lemma:hierSplittingUV}]
+  The restricted hierarchical subspaces
+  $W_{l'}^p|_{D_l^p}$ ($l' \le l$) are
+  subspaces of the restricted nodal space $V_l^p|_{D_l^p}$.
+\end{lemma}
+
+\begin{proof}
+  Every function $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
+  $D_l^p$, a polynomial of degree $\le p$ on every knot interval
+  of $\ß\xi$ as defined in \cref{cor:nodalBSplineSpace},
+  and at the knots themselves at least $(p - 1)$ times continuously
+  differentiable.
+  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_\ß\xi^p$
+  and from \cref{cor:nodalBSplineSpace}, it follows
+  $\varphi_{l',i'}^p \in V_l^p|_{D_l^p}$.
+  As the functions $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) span
+  $W_{l'}^p|_{D_l^p}$, we can conclude
+  $W_{l'}^p|_{D_l^p} \subset V_l^p|_{D_l^p}$.
+\end{proof}
+
+\begin{restatable}[Second condition of \cref{lemma:hierSplittingUV}]{%
+  proposition%
+}{%
+  propHierBSplineLinearlyIndependent%
+}
+  \label{prop:hierBSplineLinearlyIndependent}
+  \label{PROP:HIERBSPLINELINEARLYINDEPENDENT}
+  The restricted hierarchical B-splines
+  $\varphi_{l',i'}^p|_{D_l^p}$ ($l' \le l$, $i' \in I_{l'}$)
+  are linearly independent.
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofHierBSplineLinearlyIndependent}.
+\end{proof}
+
+Although we have to restrict all functions and spaces to $D_l^p$,
+\cref{lemma:hierSplittingUV} is still applicable to prove that
+the hierarchical splitting equation \eqref{eq:hierSplittingUV}
+is correct for hierarchical B-splines:
+
+\begin{corollary}
+  The hierarchical splitting \eqref{eq:hierSplittingUV}
+  holds for the hierarchical B-spline basis
+  if restricting all functions to $D_l^p$:
+  \begin{equation}
+    V_l|_{D_l^p}
+    = \bigoplus_{l'=0}^l W_{l'}|_{D_l^p}.
+  \end{equation}
+\end{corollary}
+
+\begin{proof}
+  Analogously to the proof of \cref{lemma:hierSplittingUV}.
+\end{proof}
 
 \subsection{Modification}
 
 \todo{write}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \blindtext{}
 
