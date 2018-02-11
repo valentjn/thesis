@@ -219,7 +219,7 @@ in the nodal space $V_\ßl$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
 \end{equation}
 where $c_\ßi \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
-\begin{lemma}[Linear independence of tensor products]
+\begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
   The functions $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
   form a basis of $V_\ßl$, if the univariate functions
@@ -324,6 +324,7 @@ at the cost of a slightly larger error.
 In the univariate case, the key observation is that a grid point of a level $l$
 can be written as a grid point of a higher level $l'$:
 \begin{equation}
+  \label{eq:rewriteGridPoint}
   x_{l,i} = x_{l',i'},\quad
   l' \ge l,\quad
   i' = 2^{l'-l} i.
@@ -410,7 +411,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   \label{fig:hierarchicalHat}
 \end{figure}
 
-\begin{lemma}[Hierarchical splitting characterization]
+\begin{lemma}[univariate hierarchical splitting characterization]
   \label{lemma:hierSplittingUV}
   Equivalent to relation \eqref{eq:hierSplittingUV} is the satisfaction of
   both of the following conditions:
@@ -480,10 +481,10 @@ multivariate case:
   = \bigoplus_{\ßl'=0}^\ßl W_{\ßl'},
 \end{equation}
 Again, this relation does not hold in general.
-A multivariate counterpart of \cref{lemma:hierSplittingUV} can be used
+A multivariate counterpart of \thmref{lemma:hierSplittingUV} can be used
 to prove that \eqref{eq:hierSplittingMV} holds if
 the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimensions:
-\begin{lemma}[Multivariate hierarchical splitting characterization]
+\begin{lemma}[multivariate hierarchical splitting characterization]
   \label{lemma:hierSplittingMV}
   Equivalent to relation \eqref{eq:hierSplittingMV} is the satisfaction of
   both of the following conditions:
@@ -509,7 +510,8 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   using \eqref{eq:dimensionFG}.
   The rest is analogous to the proof of \cref{lemma:hierSplittingUV}.
 \end{proof}
-\begin{proposition}
+\begin{proposition}[from univariate to multivariate splitting]
+  \label{prop:splittingUVToMV}
   If univariate splitting \eqref{eq:hierSplittingUV} holds for every dimension,
   then the multivariate splitting \eqref{eq:hierSplittingMV} holds as well.
 \end{proposition}
@@ -528,12 +530,13 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     of tensor products of the univariate nodal basis functions.
     Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
     multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
-    As this is true for all $\ßi' \in I_{\ßl'}$, we obtain $W_{\ßl'} \subset V_\ßl$.
+    As this is true for all $\ßi' \in I_{\ßl'}$, we obtain
+    $W_{\ßl'} \subset V_\ßl$.
     
     \item
     The linear independence of the hierarchical functions $\varphi_{\ßl',\ßi'}$
     ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) can be shown completely analogously
-    to the proof of \cref{lemma:tensorProductLinearIndependence}.\qedhere
+    to the proof of \thmref{lemma:tensorProductLinearIndependence}.\qedhere
   \end{enumerate}
 \end{proof}
 \begin{corollary}
@@ -880,7 +883,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 \end{equation}
 then the following relation about the number of grid points
 of $\Omega_{n,d}^\sparse$ can be shown:
-\begin{lemma}[Number of grid points of $\Omega_{n,d}^\sparse$]
+\begin{lemma}[number of grid points of $\Omega_{n,d}^\sparse$]
   \label{lemma:numberOfGridPointsBoundary}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
@@ -894,7 +897,7 @@ of $\Omega_{n,d}^\sparse$ can be shown:
 Here, we define $0$-dimensional grids to contain exactly one grid point
 (the empty tuple).
 The number of interior grid points can be calculated as follows:
-\begin{lemma}[Number of grid points of $\interior{\Omega}_{n,d}^\sparse$]
+\begin{lemma}[number of grid points of $\interior{\Omega}_{n,d}^\sparse$]
   \label{lemma:numberOfGridPointsInterior}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
@@ -970,7 +973,7 @@ computationally infeasible sparse grids.
 We generalize these two solutions to the definition of a
 sparse grid $\Omega_{n,d}^{\sparse(b)}$ that is equivalent to inserting
 the boundary functions and points at a level $b \in \NN$:
-\begin{definition}
+\begin{definition}[regular sparse grid with coarse boundary]
   \label{def:coarseBoundary}
   The regular sparse grid of level $n \ge d$,
   dimensionality $d \in \NN$, and boundary parameter $b \in \NN$ is defined as
@@ -1008,12 +1011,13 @@ in \cref{fig:coarseBoundary}.
 
 The number of grid points of $\Omega_{n,d}^{\sparse(b)}$
 can be calculated as follows:
-\begin{restatable}[Number of grid points of $\Omega_{n,d}^{\sparse(b)}$]{%
+\begin{restatable}[number of grid points of $\Omega_{n,d}^{\sparse(b)}$]{%
   proposition%
 }{%
   propGridSizeCoarseBoundary%
 }
   \label{prop:gridSizeCoarseBoundary}
+  \label{PROP:GRIDSIZECOARSEBOUNDARY}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
     |\Omega_{n,d}^{\sparse(b)}|
@@ -1221,7 +1225,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
 hierarchical levels.
 Its correctness can be formally proved with the following invariant:
-\begin{restatable}[Invariant of \cref{alg:coarseBoundary}]{proposition}{%
+\begin{restatable}[invariant of \cref{alg:coarseBoundary}]{proposition}{%
   propInvariantCoarseBoundary%
 }
   \label{prop:invariantCoarseBoundary}
