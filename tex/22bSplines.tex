@@ -106,6 +106,19 @@ The cardinal B-spline $b^p$ has the following properties:
   $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$.
   \todo{check, more exact}
 \end{itemize}
+The cardinal B-splines of the first degrees are shown in
+\cref{fig:cardinalBSpline}.
+Due to the convolution property,
+which is visualized with the flip book animation in the bottom left corner
+of the pages of this thesis,
+cardinal B-splines of degree $p \ge 2$ are ``smoothed versions''
+of the hat function.
+
+\begin{figure}
+  \includegraphics{cardinalBSpline_1}%
+  \caption{Cardinal B-splines $b^p$ up to quintic degree $p = 5$.}%
+  \label{fig:cardinalBSpline}
+\end{figure}
 
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
@@ -129,6 +142,36 @@ Note that due to the \term{translation invariance} of $\varphi_{l,i}^p$
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
 $\varphi_{l,i}^p$, $l \in \NN_0$, $i \in I_l$.
+
+\begin{figure}
+  \subcaptionbox{%
+    Nodal B-splines $\varphi_{l,i}^p$ ($i \in I_l$) and grid points $x_{l,i}$
+    \emph{(dots)}.%
+  }[70mm]{%
+    \includegraphics{hierarchicalBSpline_1}%
+  }%
+  \hfill%
+  \begin{tikzpicture}
+    \draw[decorate,thick,decoration={brace,aspect=0.158}] (0,-8.5) -- (0,0);
+    \node[anchor=east] at (-0.1,-7.157) {$= \bigoplus$};
+  \end{tikzpicture}%
+  \hfill%
+  \subcaptionbox{%
+    Hierarchical B-splines $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+    and grid points $x_{l',i'}$
+    \emph{(dots)}.%
+  }[72mm]{%
+    \includegraphics{hierarchicalBSpline_2}%
+  }%
+  \caption{%
+    Univariate nodal and hierarchical cubic B-splines ($p = 3$)
+    up to level $l = 3$.
+    When restricting all functions to $D_l^p$ \emph{(thick black line)},
+    the nodal space $V_l^p|_{D_l^p}$ decomposes into the direct sum
+    of the hierarchical subspaces $W_{l'}^p|_{D_l^p}$ ($l' \le l$).%
+  }
+  \label{fig:hierarchicalBSpline}
+\end{figure}
 
 In the following, we will only allow odd degrees $p = 1, 3, 5, \dotsc$
 in this thesis.
@@ -225,6 +268,44 @@ The definition can be used to characterize the nodal space $V_l^p$:
   See \cite{Hoellig13Approximation}.
 \end{proof}
 
+This proposition gives the reason for ``B'' in ``B-splines'',
+which is for ``basis'' (of the space of splines).
+The key observation is that B-splines of a knot sequence $\ß\xi$
+do not form a basis of the spline space on the union
+$[\xi_0, \xi_{m+p}]$ of the B-spline supports,
+but rather on a proper sub-interval $D_\ß\xi^p$.
+Intuitively, for every point in $D_\ß\xi^p$ that is not a knot,
+exactly $(p + 1)$ B-splines must be \term{relevant} (i.e., non-zero)
+to span the spline space as
+on every knot interval, the spline is a polynomial of degree $\le p$
+and therefore, there must be $(p + 1)$ degrees of freedom.
+Outside of $D_\ß\xi^p$, there are too few relevant B-splines
+to span the spline space.
+This important observation, which is visualized in \cref{fig:splineSpace},
+forces us to restrict nodal space and hierarchical subspaces to
+$D_\ß\xi^p$:
+
+\begin{figure}
+  \includegraphics{splineSpace_1}%
+  \caption{%
+    Knot sequence $\ß\xi = (\xi_0, \dotsc, \xi_{m+p}$)
+    with the corresponding $m = 7$ non-uniform cubic B-splines
+    $b_{k,\ß\xi}^p$, $k = 0, \dotsc, m - 1$, $p = 3$.
+    On $D_\ß\xi^p$ \emph{(thick line, delimited by dashed lines)},
+    which starts with the last knot interval of the first B-spline
+    $b_{0,\ß\xi}^p$
+    and ends with the first knot interval of the last B-spline
+    $b_{m-1,\ß\xi}^p$,
+    the B-splines span the spline space $S_\ß\xi^p$.
+    Elements of this space are splines $s\colon D_\ß\xi^p \to \RR$
+    \emph{(black line)},
+    which are linear combinations
+    $s = \sum_{k=0}^{m-1} c_k b_{k,\ß\xi}^p$
+    of the B-splines.%
+  }%
+  \label{fig:splineSpace}
+\end{figure}
+
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
   The nodal B-splines $\varphi_{l,i}^p$ ($i = 0, \dotsc, 2^l$)
@@ -315,16 +396,20 @@ is correct for hierarchical B-splines:
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
   \begin{equation}
-    V_l|_{D_l^p}
-    = \bigoplus_{l'=0}^l W_{l'}|_{D_l^p}.
+    S_\ß\xi^p
+    = V_l^p|_{D_l^p}
+    = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p},
   \end{equation}
+  where $\ß\xi$ is as defined in \cref{cor:nodalBSplineSpace}.
 \end{corollary}
 
 \begin{proof}
-  Analogously to the proof of \cref{lemma:hierSplittingUV}.
+  Analogously to the proof of \thmref{lemma:hierSplittingUV}
+  and apply \thmref{cor:nodalBSplineSpace}.
 \end{proof}
 
-Using this corollary, we can now proceed to define multivariate
+This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
+We can now proceed to define multivariate
 nodal spaces $V_\ßl^p$, hierarchical subspaces $W_\ßl^p$, and
 sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{sec:21sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
@@ -405,8 +490,8 @@ Pflüger omits summands with $i > 1$ as he only wants to modify
 $\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
 The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
 analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $0.5$.
-For $l = 1$, again the ``constant one'' is taken for the definition
-of modified hierarchical B-splines:
+For $l = 1$, again the ``constant $1$'' function is taken for the definition
+of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
   \label{eq:modifiedBSplines}
   \varphi_{l,i}^{p,\modified}(x)
@@ -423,7 +508,7 @@ of modified hierarchical B-splines:
   \end{cases}
 \end{equation}
 By \thmref{prop:splineSpace},
-this implies that
+this definition implies that
 $\varphi_{l,1}^p(x) = 2 - x/h_l$ ($l \ge 2$)
 is only valid for $x \in [0,\; h_l \cdot (5-p)/2]$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
@@ -433,6 +518,30 @@ If it is desired to enforce natural boundary conditions
 for higher than quintic degrees,
 then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplines}
 must be extended to $(p+1)/2 - 1$.
+
+\begin{figure}
+  \subcaptionbox{%
+    Construction of the modified hierarchical cubic B-spline
+    $\varphi_{l,1}^{p,\modified}$ (\emph{dashed}, $l \ge 2$)
+    as a linear combination of neighboring B-splines $\varphi_{l,i'}^p$
+    using Marsden's identity.%
+  }[75mm]{%
+    \includegraphics{modifiedBSpline_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Modified hierarchical cubic B-splines $\varphi_{l,i}^{p,\modified}$
+    and grid points $x_{l,i}$
+    \emph{(dots)}.%
+  }[75mm]{%
+    \includegraphics{hierarchicalBSpline_3}%
+  }%
+  \caption{%
+    Construction of modified hierarchical B-splines and
+    the resulting basis.%
+  }
+  \label{fig:modifiedBSpline}
+\end{figure}
 
 \subsection{Non-Uniform Hierarchical B-Splines}
 
@@ -445,14 +554,6 @@ than the standard equidistant choice of $x_{l,i} = i \cdot h_l$,
 if the basis functions are altered accordingly.
 The so-called Chebyshev points $x_{l,i}^\clenshawcurtis$ and the
 resulting Clenshaw--Curtis grids and B-splines will serve as an example.
-Please note that our framework permits arbitrary grid point distributions
-$x_{l,i}^\ast$,
-as long as their number grows exponentially
-(i.e., there are $2^l + 1$ points $x_{l,i}^\ast$ in each level $l \in \NN_0$)
-and they are nested
-(i.e., \eqref{eq:rewriteGridPoint} holds).
-Appropriate non-uniform B-spline bases could be defined analogously
-to Clenshaw--Curtis B-splines, which we will consider in the following.
 
 The \term{Chebyshev points} $x_{l,i}^\clenshawcurtis$ of level $l \in \NN_0$
 are defined as
@@ -472,11 +573,25 @@ $T_{2^l}(x) := \cos(2^l \arccos(x))$ \cite{Xu16Chebyshev}.%
   ``Chebyshev--Gauss points'' \cite{Xu16Chebyshev}.%
 }
 They are obtained by dividing a semicircle into $2^l$ equally sized
-segments and subsequently orthogonally projecting the endpoints
-onto the diameter.
+segments and subsequently orthogonally projecting the
+segment endpoints onto the diameter
+(see \cref{fig:chebyshev}).
 The most practical use of Chebyshev points is for
 polynomial interpolation to avoid Runge's phenomenon and for
 so-called Clenshaw--Curtis quadrature rules.
+
+\begin{figure}
+  \includegraphics{chebyshev_1}%
+  \caption{%
+    Chebyshev points $x_{l,i}^\clenshawcurtis$ on the unit interval $[0, 1]$
+    \emph{(black lines)}
+    for $l = 0, \dotsc, 4$
+    and their construction as the orthogonal projection of the
+    endpoints of $2^l$ equally sized segments
+    of a semicircle onto its diameter \emph{\textcolor{C0}{(blue)}}.%
+  }
+  \label{fig:chebyshev}
+\end{figure}
 
 In some settings, it can be beneficial to use full or sparse grids consisting
 of Chebyshev points, which are then called \term{Clenshaw--Curtis grids},
@@ -499,7 +614,7 @@ $i \in I_l$ is defined as
   \ß\xi
   := (x_{l,i-(p+1)/2}^\clenshawcurtis,\; \dotsc,\;
   x_{l,i}^\clenshawcurtis,\; \dotsc,\;
-  x_{l,i+(p+1)/2}^\clenshawcurtis)
+  x_{l,i+(p+1)/2}^\clenshawcurtis),
 \end{equation}
 where the Chebyshev points $x_{l,i}^\clenshawcurtis$
 are equidistantly extended onto $\RR$:
@@ -519,7 +634,35 @@ it is now straightforward to define nodal spaces
 $V_l^{p,\clenshawcurtis}$
 and hierarchical subspaces $W_l^{p,\clenshawcurtis}$ as well as
 sparse grid spaces $V_{n,d}^{\sparse,p,\clenshawcurtis}$ and
-grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$.
+grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$
+using Cartesian products of Chebyshev points
+and tensor products of Clenshaw--Curtis B-splines.
+The one-dimensional cubic Clenshaw--Curtis basis and a two-dimensional
+sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
+
+\begin{figure}
+  \subcaptionbox{%
+    Hierarchical cubic Clenshaw--Curtis B-splines
+    $\varphi_{l,i}^{p,\clenshawcurtis}$ and
+    modified Clenshaw--Curtis B-splines
+     $\varphi_{l,i}^{p,\clenshawcurtis,\modified}$
+    \emph{(dashed)}.%
+  }[75mm]{%
+    \includegraphics{hierarchicalBSpline_4}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Sparse Clenshaw--Curtis grid $\Omega_{n,d}^{\sparse,\clenshawcurtis}$
+    of level $n = 4$ in $d = 2$ dimensions.%
+  }[75mm]{%
+    \includegraphics{sg_7}%
+  }%
+  \caption{%
+    Clenshaw--Curtis B-splines and sparse grids.%
+  }
+  \label{fig:clenshawCurtis}
+\end{figure}
+
 Note that in contrast to the standard hierarchical B-spline functions
 $\varphi_{l,i}^p$, the Clenshaw--Curtis functions
 $\varphi_{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
@@ -544,3 +687,12 @@ it is possible to recompute the coefficients
 of the components $\varphi_{l,i'}^{p,\clenshawcurtis}$
 dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
+
+Please note that our framework permits arbitrary grid point distributions
+$x_{l,i}^\ast$,
+as long as their number grows exponentially
+(i.e., there are $2^l + 1$ points $x_{l,i}^\ast$ in each level $l \in \NN_0$)
+and they are nested
+(i.e., \eqref{eq:rewriteGridPoint} holds).
+Appropriate non-uniform B-spline bases could be defined analogously
+to Clenshaw--Curtis B-splines.
