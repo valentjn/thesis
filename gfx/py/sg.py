@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 6
+# number of output figures = 7
 
 import numpy as np
 import matplotlib.patches
@@ -227,8 +227,9 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
 
 
 
-def plotGrid(sgType, n=None, includedSubspaces=[], includedPoints=None, withBoundary=True):
-  fig = Figure.create(figsize=(1, 1), scale=1.7)
+def plotGrid(sgType, n=None, includedSubspaces=[], includedPoints=None,
+             withBoundary=True, distribution="uniform", scale=1.7):
+  fig = Figure.create(figsize=(1, 1), scale=scale)
   ax = fig.gca()
   
   X = np.zeros((0, 2))
@@ -245,10 +246,12 @@ def plotGrid(sgType, n=None, includedSubspaces=[], includedPoints=None, withBoun
       levelSumDiagonal = n + 1
     
     for l0 in range(lowerLevel, upperLevel + 1):
-      Xl0 = [i * 2**(-l0) for i in I(l0)]
+      Xl0 = helper.grid.getCoordinates(len(I(l0)) * [l0], I(l0),
+                                       distribution=distribution)
       
       for l1 in range(lowerLevel, upperLevel + 1):
-        Xl1 = [i * 2**(-l1) for i in I(l1)]
+        Xl1 = helper.grid.getCoordinates(len(I(l1)) * [l1], I(l1),
+                                         distribution=distribution)
         Xl = np.array([(x0, x1) for x0 in Xl0 for x1 in Xl1])
         
         if (sgType == "full") or ((sgType == "regular") and (l0 + l1 <= levelSumDiagonal)):
@@ -314,4 +317,9 @@ fig, ax = plotSGScheme(b, n, showDiagonal=False, highlightedSubspaces=L,
 fig.save()
 fig, ax = plotGrid("adaptive", includedSubspaces=L, includedPoints=Omega,
                    withBoundary=withBoundary)
+fig.save()
+
+n = 4
+fig, ax = plotGrid("regular", n=n, withBoundary=withBoundary,
+                   distribution="clenshawCurtis", scale=2.5)
 fig.save()
