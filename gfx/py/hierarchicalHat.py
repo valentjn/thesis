@@ -28,7 +28,7 @@ def plotSubspace(n, p, b, l, modified=False):
   for i in plotI:
     color = "C{}".format((i * 2**(n - l)) % 9)
     
-    lb, ub = helper.basis.computeNAKBSplineSupport(p, l, i)
+    lb, ub = helper.basis.getNAKBSplineSupport(p, l, i)
     xx = np.linspace(lb, ub, 100)
     yy = b.evaluate(l, i, xx)
     if (i == 1) or (i == hInv - 1): yy = [modifiedScale * y for y in yy]
@@ -85,7 +85,7 @@ tightLayout = {"h_pad" : 0.5, "pad" : 3.5}
 
 
 
-fig = Figure.create(figsize=(3.3,4.2), scale=1.0)
+fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
 
 for l in range(n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
@@ -136,7 +136,7 @@ fig.save(tightLayout={"pad" : 2})
 
 
 b = helper.basis.HierarchicalModifiedBSpline(p)
-fig = Figure.create(figsize=(3.3,5.0), scale=1.0)
+fig = Figure.create(figsize=(3.3, 5.0), scale=1.0)
 
 for l in range(1, n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
