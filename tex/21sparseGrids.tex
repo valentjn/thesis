@@ -1417,21 +1417,20 @@ All other basis functions remain unchanged.
 }%
 The resulting \term{modified hat functions} $\varphi_{l,i}^{1,\modified}$
 are defined as follows:
-\begin{subequations}
-  \begin{alignat}{2}
-    \varphi_{1,1}^{1,\modified}(x)
-    &:= 1,&&\\
-    \varphi_{l,1}^{1,\modified}(x)
-    &:= \max(2 - x/h_l, 0),&&\quad
-    l \ge 2,\\
-    \varphi_{l,i}^{1,\modified}(x)
-    &:= \varphi_{l,i}^1(x),&&\quad
-    l \ge 2,\quad i \in I_l \setminus \{1, 2^{l-1}\},\\
-    \varphi_{l,2^l-1}^{1,\modified}(x)
-    &:= \max(x/h_l + 2 - 2^l, 0),&&\quad
-    l \ge 2.
-  \end{alignat}
-\end{subequations}
+\begin{equation}
+  \varphi_{l,i}^{1,\modified}(x)
+  :=
+  \begin{cases}
+    1,&
+    l = 1,\quad i = 1,\\
+    \max(2 - x/h_l, 0),&
+    l \ge 2,\quad i = 1,\\
+    \varphi_{l,i}^1(x),&
+    l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
+    \varphi_{l,1}^{1,\modified}(1 - x),&
+    l \ge 2,\quad i = 2^l - 1.
+  \end{cases}
+\end{equation}
 The modified linear basis, which can be seen in \cref{fig:modifiedHat},
 provides ``reasonable'' boundary values
 without the need to insert basis functions and grid points on the boundary.
