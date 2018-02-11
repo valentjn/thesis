@@ -3,6 +3,8 @@
 
 \todo{add references}
 
+\todo{add glossary entries}
+
 B-spline basis functions generalize the well-known hat functions.
 The first to study B-splines was Schoenberg in 1946,
 but he claimed that they had already been known to Laplace.
@@ -48,7 +50,7 @@ is defined by the recursion
 \end{equation}
 where $\chi_{\halfopeninterval{0, 1}}$ is the characteristic function of
 the half-open unit interval $\halfopeninterval{0, 1}$.
-The definition implies the following properties of $b^p$:
+The cardinal B-spline $b^p$ has the following properties:
 \begin{itemize}
   \item
   \emph{Support:}
@@ -59,6 +61,16 @@ The definition implies the following properties of $b^p$:
   The cardinal B-spline $b^p$ is non-negative and bounded from above by $1$.
   It is symmetric with respect to the center of its support, i.e.,
   $b^p(x) = b^p(p + 1 - x)$.
+  
+  \item
+  \emph{Recursion:}
+  The cardinal B-spline $b^p$ ($p \ge 1$) satisfies the following recurrence
+  relation
+  (which could be used as an alternative definition):
+  \begin{equation}
+    b^p(x)
+    = \frac{x}{p} b^{p-1}(x) + \frac{p+1-x}{p} b^{p-1}(x-1).
+  \end{equation}
   
   \item
   \emph{Spline:}
@@ -75,7 +87,8 @@ The definition implies the following properties of $b^p$:
   \begin{equation}
     \label{eq:cardinalBSplineDerivative}
     \frac{\diff}{\dx} b^p(x)
-    = b^{p-1}(x) - b^{p-1}(x-1).
+    = b^{p-1}(x) - b^{p-1}(x-1),\quad
+    x \in \RR.
   \end{equation}
   
   \item
