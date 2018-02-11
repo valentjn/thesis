@@ -86,13 +86,12 @@ before the proofs.
     \sum_{q=1}^{d-1} 2^q \binom{d}{q} \sum_{m=0}^{n-d-b+1}
     2^m \binom{(d-q)+m-1}{(d-q)-1}.\\
     \intertext{%
-      We can now use \cref{lemma:numberOfGridPointsInterior} to conclude that%
+      We can now use \thmref{lemma:numberOfGridPointsInterior} to conclude that%
     }
     &= |\interior{\Omega}_{n,d}^\sparse| +
     \sum_{q=1}^d 2^q \binom{d}{q}
-    |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|,
+    |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|.\qedhere
   \end{align}
-  which is the right-hand side of the assertion.
 \end{proof}
 
 
@@ -276,12 +275,19 @@ before the proofs.
   since these grid points are not knots of the hierarchical B-splines
   $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) of level $l' < l$.
   This implies that the left-hand $g_1$ side must be smooth there as well:
-  \begin{equation}
-    \label{eq:hierBSplineLinearlyIndependent1}
+  \begin{alignat}{3}
+    &&
     \partialdiff_-^p g_1(x_{l,i'})
-    = \partialdiff_+^p g_1(x_{l,i'}),\quad
-    i' \in I_l,
-  \end{equation}
+    &= \partialdiff_+^p g_1(x_{l,i'}),\quad
+    &&i' \in I_l,\\
+    \label{eq:hierBSplineLinearlyIndependent1}
+    \iff\quad&&
+    \sum_{i \in I_l} \alpha_{l,i}
+    \partialdiff_-^p \varphi_{l,i}^p(x_{l,i'})
+    &= \sum_{i \in I_l} \alpha_{l,i}
+    \partialdiff_+^p \varphi_{l,i}^p(x_{l,i'}),\quad
+    &&i' \in I_l,
+  \end{alignat}
   where $\partialdiff_-^p$ and $\partialdiff_+^p$ denote the left and right
   derivative of order $p$, respectively.
   By repeated application of \eqref{eq:cardinalBSplineDerivative},
@@ -295,22 +301,9 @@ before the proofs.
   where $\binom{p}{k} = 0$ for $k < 0$ or $k > p$
   \cite{Hoellig13Approximation}.
   We can insert this relation into
-  \eqref{eq:hierBSplineLinearlyIndependent1}, i.e., into
+  \eqref{eq:hierBSplineLinearlyIndependent1}
+  and use \eqref{eq:uniformHierarchicalBSplineUV} to obtain
   \begin{alignat}{2}
-    %&&
-    \sum_{i \in I_l} \alpha_{l,i}
-    \partialdiff_-^p \varphi_{l,i}^p(x_{l,i'})
-    &= \sum_{i \in I_l} \alpha_{l,i}
-    \partialdiff_+^p \varphi_{l,i}^p(x_{l,i'}),\quad
-    &&i' \in I_l,\\
-    \intertext{and use \eqref{eq:uniformHierarchicalBSplineUV} to obtain}
-    %\iff\quad&&
-    %(h_l)^{-p} \sum_{i \in I_l} \alpha_{l,i}
-    %\partialdiff_-^p b^p((p+1)/2 + i' - i)
-    %&= (h_l)^{-p} \sum_{i \in I_l} \alpha_{l,i}
-    %\partialdiff_+^p b^p((p+1)/2 + i' - i),\quad
-    %i' \in I_l\\
-    %\iff\quad&&
     \sum_{i \in I_l} \alpha_{l,i} (-1)^{k-1} \binom{p}{k-1}
     &= \sum_{i \in I_l} \alpha_{l,i} (-1)^k \binom{p}{k},\quad
     &&i' \in I_l,\quad
@@ -328,44 +321,78 @@ before the proofs.
   
   This is a quadratic linear system of equations
   whose system matrix
-  $A(p)$ is a banded symmetric Toeplitz matrix of size
+  $A(p)$ is a banded symmetric Toeplitz%
+  \footnote{%
+    A Toeplitz matrix is a matrix $A$ whose entries $a_{k,j}$
+    solely depend on $k - j$, i.e.,
+    $a_{k,j} = c_{k-j}$ for some vector $\ßc$.%
+  }
+  matrix of size
   $2^{l-1} \times 2^{l-1}$ with bandwidth $\lceil(p-1)/4\rceil$.
-  For $p = 1, 3, 5, 7$, $A(p)$ is as follows:
-  \begin{equation}
-    \begin{gathered}
-      A(1) =
-      \begin{pmatrix}
-        2&&\\
-        &\ddots&\\
-        &&2
-      \end{pmatrix},\quad
-      A(3) =
-      \begin{pmatrix}
-        6&1&&\\
-        1&\ddots&\ddots\\
-        &\ddots&\ddots&1\\
-        &&1&6
-      \end{pmatrix},\\
-      A(5) =
-      \begin{pmatrix}
-        20&6&&\\
-        6&\ddots&\ddots\\
-        &\ddots&\ddots&6\\
-        &&6&20
-      \end{pmatrix},\quad
-      A(7) =
-      \begin{pmatrix}
-        70&28&1&&\\
-        28&\ddots&\ddots&\ddots&\\
-        1&\ddots&\ddots&\ddots&1\\
-        &\ddots&\ddots&\ddots&28\\
-        &&1&28&70
-      \end{pmatrix},
-    \end{gathered}
-  \end{equation}
-  These matrices are diagonally dominant and therefore regular.
+  %For $p = 1, 3, 5, 7$, the top rows $a(p)$ of $A(p)$,
+  %which fully determines a symmetric Toeplitz matrix, is given as follows:
+  %\begin{align}
+  %  a(1) &= (\hphantom{7}2, \hphantom{2}0, 0, 0, \dotsc, 0),\\
+  %  a(3) &= (\hphantom{7}6, \hphantom{2}1, 0, 0, \dotsc, 0),\\
+  %  a(5) &= (20, \hphantom{2}6, 0, 0, \dotsc, 0),\\
+  %  a(7) &= (70, 28, 1, 0, \dotsc, 0).
+  %\end{align}
+  %For $p = 1, 3, 5, 7$, $A(p)$ is as follows:
+  %\begin{equation}
+  %  \begin{gathered}
+  %    A(1) =
+  %    \begin{pmatrix}
+  %      2&&\\
+  %      &\ddots&\\
+  %      &&2
+  %    \end{pmatrix},\quad
+  %    A(3) =
+  %    \begin{pmatrix}
+  %      6&1&&\\
+  %      1&\ddots&\ddots\\
+  %      &\ddots&\ddots&1\\
+  %      &&1&6
+  %    \end{pmatrix},\\
+  %    A(5) =
+  %    \begin{pmatrix}
+  %      20&6&&\\
+  %      6&\ddots&\ddots\\
+  %      &\ddots&\ddots&6\\
+  %      &&6&20
+  %    \end{pmatrix},\quad
+  %    A(7) =
+  %    \begin{pmatrix}
+  %      70&28&1&&\\
+  %      28&\ddots&\ddots&\ddots&\\
+  %      1&\ddots&\ddots&\ddots&1\\
+  %      &\ddots&\ddots&\ddots&28\\
+  %      &&1&28&70
+  %    \end{pmatrix},
+  %  \end{gathered}
+  %\end{equation}
+  The non-zero values of $A(p)$ are tabulated for $p = 1, 3, 5, 7$
+  in \cref{tbl:proofHierBSplineLinearlyIndependent}.
+  The corresponding matrices are diagonally dominant and therefore regular.
   For higher B-spline degrees $p$, the regularity of $A(p)$ has
   to be shown differently.
+  
+  \begin{table}
+    \begin{tabular}{l@{\hspace{7mm}}ccc}
+      \toprule
+      &$k = 0$&$k = 1$&$k = 2$\\
+      \midrule
+      $p = 1$&2&&\\
+      $p = 3$&6&1&\\
+      $p = 5$&20&6&\\
+      $p = 7$&70&28&1\\
+      \bottomrule
+    \end{tabular}%
+    \caption{%
+      Non-zero values $(A(p))_{j,j+k}$ of the diagonals of $A(p)$
+      obtained in \eqref{eq:hierBSplineLinearlyIndependent2}.%
+    }%
+    \label{tbl:proofHierBSplineLinearlyIndependent}
+  \end{table}
   
   Due to the regularity of $A(p)$, we infer from
   \eqref{eq:hierBSplineLinearlyIndependent2} that
