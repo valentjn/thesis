@@ -11,8 +11,8 @@ The possibilities of B-splines were recognized when
 the finite element method (\fem),
 which is still one of the most important applications of B-splines,
 emerged in the 1960s.
-The most groundwork like finding basic algorithms and proving fundamental
-theoretic results was done by de Boor.
+Much important work like finding basic algorithms and proving fundamental
+theoretical results was done by de Boor.
 B-splines have been applied in various fields:
 \fem,
 geometric modeling with non-uniform rational B-splines (NURBS),
@@ -21,10 +21,14 @@ molecular and atomic physics,
 and other scientific and industrial areas.
 
 In this section, we mainly follow the presentation of
-\cite{Valentin16Hierarchical} to define hierarchical B-splines.
-Thanks to the groundwork laid in \cref{sec:21sparseGrids},
-it suffices to study the univariate case.
-The multivariate case is as usual treated by the tensor product approach.
+\cite{Valentin14Hierarchische,Valentin16Hierarchical}
+to define hierarchical B-splines.
+Note that thanks to the groundwork laid in \cref{sec:21sparseGrids},
+especially \thmref{lemma:tensorProductLinearIndependence} and
+\thmref{prop:splittingUVToMV},
+it completely suffices to study the univariate case
+of all bases that will be defined in the rest of this thesis.
+The multivariate case is treated as usual by the tensor product approach.
 
 \subsection{Uniform Hierarchical B-Splines}
 
@@ -105,12 +109,17 @@ by $\supp \varphi_{l,i}^p = [0, 1] \cap (h_l \cdot [i \pm (p+1)/2])$,
 where $[i \pm (p+1)/2] := [i - (p+1)/2, i + (p+1)/2]$.
 The hat function basis $\varphi_{l,i}^1$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
-\cref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
+\eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
 which allows us to use the same notation $\varphi_{l,i}^p$ for both.
+Note that due to the \term{translation invariance} of $\varphi_{l,i}^p$
+(i.e., the basis functions are the same up to scaling and translation),
+it suffices to precompute and implement the polynomial pieces of $b^p$
+to enable evaluations of all hierarchical B-splines
+$\varphi_{l,i}^p$, $l \in \NN_0$, $i \in I_l$.
 
 In the following, we will only allow odd degrees $p = 1, 3, 5, \dotsc$
 in this thesis.
-Many theoretical considerations will not hold for even degrees.
+Many theoretical considerations would fail for even degrees.
 The basic reason is that for odd degrees, the knots of
 $\varphi_{l,i}^p$ coincide with the grid points
 \begin{equation}
@@ -130,10 +139,21 @@ the middle between two subsequent grid points:
   \dotsc,\quad
   x_{l,i+p/2} + \frac{h_l}{2}.
 \end{equation}
-For the theory of hierarchical functions,
-this would have many severe implications,
-which we will discuss later
-when we make the respective considerations.
+As we will see in this thesis,
+this fact would have many adverse implications.
+Most crucial among these are
+that the hierarchical splitting \eqref{eq:hierSplittingUV} would not hold,
+\todo{insert reference}
+that non-uniform hierarchical B-splines would not be able to be defined as
+simple as for odd degree,
+\todo{insert reference} and
+that the so-called fundamental splines would not be defined at all.
+\todo{insert reference}
+Therefore, and
+as these degrees include the hat function case ($p = 1$) and the
+most common applied cubic degree ($p = 3$),
+it is reasonable to restrict ourselves to odd degrees
+for the rest of the thesis.
 
 \subsection{Non-Uniform B-Splines and Proof of the Hierarchical Splitting}
 
@@ -142,11 +162,12 @@ the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
 as in \cref{sec:21sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
 to be correct, we have to prove that the conditions of
-\cref{lemma:hierSplittingUV} are satisfied.
+\thmref{lemma:hierSplittingUV} are satisfied.
 To investigate how the nodal space $V_l^p$ looks like,
 we introduce the notion of non-uniform B-splines.
 
-\begin{definition}[Non-uniform B-splines]
+\begin{definition}[non-uniform B-splines]
+  \label{def:nonUniformBSplines}
   Let $m, p \in \NN_0$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
   For $k = 0, \dotsc, m - 1$,
@@ -169,7 +190,7 @@ Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline $b^p$.
 The definition can be used to characterize the nodal space $V_l^p$:
 
-\begin{proposition}[Spline space]
+\begin{proposition}[spline space]
   \label{prop:splineSpace}
   Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
   Then, the B-splines $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$)
@@ -191,7 +212,7 @@ The definition can be used to characterize the nodal space $V_l^p$:
   See \cite{Hoellig13Approximation}.
 \end{proof}
 
-\begin{corollary}[Nodal B-spline space]
+\begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
   The nodal B-splines $\varphi_{l,i}^p$ ($i = 0, \dotsc, 2^l$)
   of level $l \in \NN_0$ are
@@ -215,7 +236,7 @@ The definition can be used to characterize the nodal space $V_l^p$:
   We have $\varphi_{l,i}^p = b_{i,\ß\xi}^p$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
-  The assertions now follow from \cref{prop:splineSpace}.
+  The assertions now follow from \thmref{prop:splineSpace}.
 \end{proof}
 
 Note that $D_l^p$ might contain only a single point or even be empty,
@@ -225,7 +246,7 @@ independent on $[0, 1]$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
 $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 
-\begin{lemma}[First condition of \cref{lemma:hierSplittingUV}]
+\begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
   $W_{l'}^p|_{D_l^p}$ ($l' \le l$) are
   subspaces of the restricted nodal space $V_l^p|_{D_l^p}$.
@@ -234,7 +255,7 @@ $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 \begin{proof}
   Every function $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
-  of $\ß\xi$ as defined in \cref{cor:nodalBSplineSpace},
+  of $\ß\xi$ as defined in \cref{cor:nodalBSplineSpace} (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
   \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_\ß\xi^p$
@@ -245,7 +266,17 @@ $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
   $W_{l'}^p|_{D_l^p} \subset V_l^p|_{D_l^p}$.
 \end{proof}
 
-\begin{restatable}[Second condition of \cref{lemma:hierSplittingUV}]{%
+It is crucial to note that this lemma does not hold for even $p$,
+as the knots of the B-splines of level $l - 1$ are not contained in the
+knots of level $l$.
+This implies that in general,
+$W_{l-1}^p|_{D_l^p}$ is not contained in $V_l^p|_{D_l^p}$
+for even degrees $p$.
+Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
+does not hold, which is the reason for us to restrict the
+remaining considerations to odd $p$.
+
+\begin{restatable}[second condition of \cref{lemma:hierSplittingUV}]{%
   proposition%
 }{%
   propHierBSplineLinearlyIndependent%
@@ -262,7 +293,7 @@ $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 \end{proof}
 
 Although we have to restrict all functions and spaces to $D_l^p$,
-\cref{lemma:hierSplittingUV} is still applicable to prove that
+\thmref{lemma:hierSplittingUV} is still applicable to prove that
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 is correct for hierarchical B-splines:
 
@@ -280,55 +311,223 @@ is correct for hierarchical B-splines:
   Analogously to the proof of \cref{lemma:hierSplittingUV}.
 \end{proof}
 
+Using this corollary, we can now proceed to define multivariate
+nodal spaces $V_\ßl^p$, hierarchical subspaces $W_\ßl^p$, and
+sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{sec:21sparseGrids}.
+Note that it is possible to choose different degrees $p_t$ for
+different dimensions $t = 1, \dotsc, d$,
+since the hierarchical splitting \eqref{eq:hierSplittingMV} does not
+require the bases in each dimension to be the same.
+Consequently, we can define degree-dimension-adaptive sparse grids
+$V_{n,d}^{\sparse,\ßp}$ for arbitrary odd degree vectors $\ßp$.
+
+In the course of this thesis, we will derive multiple variations
+of the standard hierarchical B-spline basis.
+We will not repeat formal proofs of the hierarchical splitting equation
+\eqref{eq:hierSplittingUV}
+(i.e., verifying the two conditions of \cref{lemma:hierSplittingUV})
+for each of theses bases for the sake of brevity.
+The idea of the proof of \cref{prop:hierBSplineLinearlyIndependent},
+which is inductively exploiting the smoothness conditions given by
+B-splines of previous levels, can often be transferred to similar B-spline
+bases.
+
 \subsection{Modification}
 
-\todo{write}
+Similarly to the piecewise linear case in \cref{sec:213boundary},
+Pflüger defined modified
+hierarchical B-splines to obtain reasonable values on the boundary
+without having to place grid points there \cite{Pflueger10Spatially}.
+In \cite{Pflueger10Spatially}, the main motivation is to define basis
+functions $\varphi_{l,i}^{p,\modified}$ that satisfy natural boundary
+conditions, i.e.,
+\begin{equation}
+  \label{eq:naturalBoundaryConditions}
+  \frac{\diff^2}{\dx^2} \varphi_{l,i}^{p,\modified}(x) = 0,\quad
+  x \in \bndry{[0, 1]} = \{0, 1\}.
+\end{equation}
+Originally, this requirement stems from financial problems
+\cite{Pflueger10Spatially}.
 
+For the left boundary,
+\eqref{eq:naturalBoundaryConditions} can be satisfied by
+modifying the left-most function $\varphi_{l,1}^p$ such that
+$\varphi_{l,1}^{p,\modified}(x) = 2 - x/h_l$ is a linear polynomial
+when $x$ is ``near'' the boundary.
+As in \cite{Pflueger10Spatially},
+we append $\varphi_{l,1}^p$ with
+B-splines $\varphi_{l,i}^p$ with index $i \le 0$ and
+use the so-called Marsden's identity to compute the corresponding
+coefficients:
 
+\begin{lemma}[Marsden's identity]
+  \label{lemma:marsden}
+  Let $p \in \NN_0$ and
+  $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
+  Then, for all $x \in D_\ß\xi^p$ and $y \in \RR$,
+  \begin{equation}
+    \label{eq:marsden}
+    (x - y)^p
+    = \sum_{k=0}^{m-1} \big[(\xi_{k+1} - y) \dotsm (\xi_{k+p} - y)\big]
+    b_{k,\ß\xi}^p(x).
+  \end{equation}
+\end{lemma}
 
+\begin{proof}
+  See \cite{Hoellig13Approximation}.
+\end{proof}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\blindtext{}
+By applying Marsden's identity twice,
+\begin{equation}
+  2 - \frac{x}{h_l}
+  = 2 \sum_{i \in \ZZ} \varphi_{l,i}^p(x)
+  - \frac{1}{h_l} \sum_{i \in \ZZ} x_{l,i} \varphi_{l,i}^p(x)
+  = \sum_{i \in \ZZ} (2 - i) \varphi_{l,i}^p(x),\quad
+  x \in \RR,
+\end{equation}
+we obtain a possible definition for $\varphi_{l,i}^{p,\modified}$.
+Note that only the B-splines with $i \ge 1 - (p+1)/2$
+are relevant for the unit interval as all other B-splines vanish in $[0, 1]$.
+Pflüger omits summands with $i > 1$ as he only wants to modify
+$\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
+The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
+analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $0.5$.
+For $l = 1$, again the ``constant one'' is taken for the definition
+of modified hierarchical B-splines:
+\begin{equation}
+  \label{eq:modifiedBSplines}
+  \varphi_{l,i}^{p,\modified}(x)
+  :=
+  \begin{cases}
+    1,&
+    l = 1,\quad i = 1,\\
+    \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \varphi_{l,i'}^p(x),&
+    l \ge 2,\quad i = 1,\\
+    \varphi_{l,i}^p(x),&
+    l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
+    \varphi_{l,1}^{p,\modified}(1 - x),&
+    l \ge 2,\quad i = 2^l - 1.
+  \end{cases}
+\end{equation}
+By \thmref{prop:splineSpace},
+this implies that
+$\varphi_{l,1}^p(x) = 2 - x/h_l$ ($l \ge 2$)
+is only valid for $x \in [0,\; h_l \cdot (5-p)/2]$, i.e.,
+the second derivative at $x = 0$ vanishes only for $p \le 5$.
+For higher degrees, it is non-zero, albeit very small
+in its absolute value.
+If it is desired to enforce natural boundary conditions
+for higher than quintic degrees,
+then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplines}
+must be extended to $(p+1)/2 - 1$.
 
 \subsection{Non-Uniform Hierarchical B-Splines}
 
-\todo{write}
+Sparse grid spaces and their corresponding grid point sets,
+as we have defined them in \cref{sec:21sparseGrids},
+are completely independent of the actual location of the grid points
+$x_{l,i}$.
+Therefore, it is possible to use different distributions for the grid points
+than the standard equidistant choice of $x_{l,i} = i \cdot h_l$,
+if the basis functions are altered accordingly.
+The so-called Chebyshev points $x_{l,i}^\clenshawcurtis$ and the
+resulting Clenshaw--Curtis grids and B-splines will serve as an example.
+Please note that our framework permits arbitrary grid point distributions
+$x_{l,i}^\ast$,
+as long as their number grows exponentially
+(i.e., there are $2^l + 1$ points $x_{l,i}^\ast$ in each level $l \in \NN_0$)
+and they are nested
+(i.e., \eqref{eq:rewriteGridPoint} holds).
+Appropriate non-uniform B-spline bases could be defined analogously
+to Clenshaw--Curtis B-splines, which we will consider in the following.
 
-\blindtext{}
+The \term{Chebyshev points} $x_{l,i}^\clenshawcurtis$ of level $l \in \NN_0$
+are defined as
+\begin{equation}
+  x_{l,i}^\clenshawcurtis
+  := \frac{1 - \cos(\pi x_{l,i})}{2},\quad
+  i = 0, \dotsc, 2^l.
+\end{equation}
+Chebyshev points are the normalized locations of the extrema of the
+Chebyshev polynomials $T_{2^l}\colon [-1, 1] \to \RR$,
+$T_{2^l}(x) := \cos(2^l \arccos(x))$ \cite{Xu16Chebyshev}.%
+\footnote{%
+  The literature sometimes uses the name ``Chebyshev points'' for
+  the roots of $T_{2^l}$, which are closely connected to the extrema.
+  One way to distinguish them is to call the extrema
+  ``Chebyshev--Lobatto points'' and the roots
+  ``Chebyshev--Gauss points'' \cite{Xu16Chebyshev}.%
+}
+They are obtained by dividing a semicircle into $2^l$ equally sized
+segments and subsequently orthogonally projecting the endpoints
+onto the diameter.
+The most practical use of Chebyshev points is for
+polynomial interpolation to avoid Runge's phenomenon and for
+so-called Clenshaw--Curtis quadrature rules.
+
+In some settings, it can be beneficial to use full or sparse grids consisting
+of Chebyshev points, which are then called \term{Clenshaw--Curtis grids},
+instead of uniform grids.
+Besides the already mentioned advantages for polynomial integration and
+quadrature, Clenshaw--Curtis grids can help to reduce interpolation
+error in a neighborhood of the boundary of the domain due to the increased
+grid point density near the boundary.
+If we want to use Chebyshev points as grid points for sparse grids,
+we have to employ an appropriate basis to ensure that interpolation
+is still possible.
+Fortunately, \cref{def:nonUniformBSplines} specifies B-splines for non-uniform
+knot sequences.
+The \term{hierarchical Clenshaw--Curtis B-spline}
+$\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NN_0$ and index
+$i \in I_l$ is defined as
+\begin{equation}
+  \varphi_{l,i}^{p,\clenshawcurtis}
+  := b_{0,\ß\xi}^p,\quad
+  \ß\xi
+  := (x_{l,i-(p+1)/2}^\clenshawcurtis,\; \dotsc,\;
+  x_{l,i}^\clenshawcurtis,\; \dotsc,\;
+  x_{l,i+(p+1)/2}^\clenshawcurtis)
+\end{equation}
+where the Chebyshev points $x_{l,i}^\clenshawcurtis$
+are equidistantly extended onto $\RR$:
+\begin{subequations}
+  \label{eq:clenshawCurtisExtend}
+  \begin{alignat}{2}
+    x_{l,i}^\clenshawcurtis
+    &:= i \cdot x_{l,1}^\clenshawcurtis,
+    &&\quad i < 0,\\
+    x_{l,i}^\clenshawcurtis
+    &:= 1 + (i - 2^l) \cdot x_{l,1}^\clenshawcurtis,
+    &&\quad i > 2^l.
+  \end{alignat}
+\end{subequations}
+As for the standard hierarchical B-spline basis,
+it is now straightforward to define nodal spaces
+$V_l^{p,\clenshawcurtis}$
+and hierarchical subspaces $W_l^{p,\clenshawcurtis}$ as well as
+sparse grid spaces $V_{n,d}^{\sparse,p,\clenshawcurtis}$ and
+grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$.
+Note that in contrast to the standard hierarchical B-spline functions
+$\varphi_{l,i}^p$, the Clenshaw--Curtis functions
+$\varphi_{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
+As a result, both implementation effort and evaluation runtime
+are significantly higher for Clenshaw--Curtis B-splines than
+for the standard uniform basis,
+as the Clenshaw--Curtis B-splines cannot be precomputed.
+
+Like for uniform B-splines,
+\term{modified hierarchical Clenshaw--Curtis B-splines}
+$\varphi_{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
+same method as in \eqref{eq:modifiedBSplines}.
+Here, the second derivative does not vanish exactly at the boundary
+even for degrees $p \le 5$,
+as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
+However, as most of the B-spline knots in the summation formula
+lie outside $[0, 1]$ and are thus uniformly extended according
+to \eqref{eq:clenshawCurtisExtend},
+the absolute deviation of the second derivative from $0$ is small.
+Again, to enforce the natural boundary condition,
+it is possible to recompute the coefficients
+of the components $\varphi_{l,i'}^{p,\clenshawcurtis}$
+dynamically with Marsden's identity using the correct Chebyshev knots
+in \eqref{eq:marsden}.
