@@ -36,6 +36,12 @@ The multivariate case is treated as usual by the tensor product approach.
 
 \todo{add references}
 
+\newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
+\newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \RR$}%
+\newgsymbol{01!h}{$\halfopeninterval{\ß0, \ß1}$}{%
+  Half-open unit interval $:= \halfopeninterval{0, 1}^d =
+  \{x \in \RR \mid 0 \le x < 1\}^d$%
+}%
 The \term{cardinal B-spline}
 $b^p\colon \RR \to \RR$ of \term{degree} $p \in \NN_0$
 is defined by the recursion
@@ -53,6 +59,7 @@ the half-open unit interval $\halfopeninterval{0, 1}$.
 The cardinal B-spline $b^p$ has the following properties:
 \begin{itemize}
   \item
+  \newgsymbol{supp}{$\supp f$}{Support of a function $f$}%
   \emph{Support:}
   The support of $b^p$ is given by $\supp b^p = [0, p + 1]$.
   
@@ -99,6 +106,9 @@ The cardinal B-spline $b^p$ has the following properties:
   
   \item
   \emph{Generalization:}
+  \newgsymbol{dij}{$\delta_{i,j}$}{%
+    Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise%
+  }%
   As a special case, $b^1$ is a hat function interpolating the data
   $\{(k, \delta_{k,1}) \mid k \in \ZZ\}$.
   One can show that for the limit of $p \to \infty$,
@@ -120,6 +130,10 @@ of the hat function.
   \label{fig:cardinalBSpline}
 \end{figure}
 
+\newgsymbol{.p}{$\cdot^p$}{%
+  Superscript for ``B-spline (basis function/function space/interpolant)
+  of degree $p$''%
+}%
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
 $\varphi_{l,i}^p\colon [0, 1] \to \RR$ of level $l \in \NN_0$ and index
@@ -224,8 +238,14 @@ we introduce the notion of non-uniform B-splines.
 
 \begin{definition}[non-uniform B-splines]
   \label{def:nonUniformBSplines}
+  \newgsymbol{xi!}{$\ß\xi$}{%
+    Knot sequence $:= (\xi_0, \dotsc, \xi_{m+p})$%
+  }%
   Let $m, p \in \NN_0$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
+  \newgsymbol{bkxip}{$b_{k,\ß\xi}^p$}{%
+    Non-uniform B-spline of degree $p$ with knots $\ß\xi$ and index $k$%
+  }%
   For $k = 0, \dotsc, m - 1$,
   the \term{(non-uniform) B-spline} $b_{k,\ß\xi}^p$ of degree $p$
   with knots $\ß\xi$ and index $k$ is defined by the
@@ -248,6 +268,9 @@ The definition can be used to characterize the nodal space $V_l^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
+  \newgsymbol{Sxip}{$S_\ß\xi^p$}{%
+    Spline space of degree $p$ with knots $\ß\xi$%
+  }%
   Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
   Then, the B-splines $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
@@ -308,6 +331,14 @@ $D_\ß\xi^p$:
 
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
+  \newgsymbol{f|D}{$f|_D$}{%
+    Restriction $f|_D\colon D \to \RR$, $f|_D(x) := f(x)$,
+    onto a sub-domain $D$ for a function $f$%
+  }%
+  \newgsymbol{V|D}{$V|_D$}{%
+    Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
+    for a function space $V$%
+  }%
   The nodal B-splines $\varphi_{l,i}^p$ ($i = 0, \dotsc, 2^l$)
   of level $l \in \NN_0$ are
   a basis of the spline space $S_\ß\xi^p$
@@ -555,6 +586,10 @@ if the basis functions are altered accordingly.
 The so-called Chebyshev points $x_{l,i}^\clenshawcurtis$ and the
 resulting Clenshaw--Curtis grids and B-splines will serve as an example.
 
+\newgsymbol{.cc}{$\cdot^\clenshawcurtis$}{%
+  Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
+  function/function space/interpolant)''%
+}%
 The \term{Chebyshev points} $x_{l,i}^\clenshawcurtis$ of level $l \in \NN_0$
 are defined as
 \begin{equation}

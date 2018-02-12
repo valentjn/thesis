@@ -40,7 +40,10 @@ In this thesis, we assume $\varphi_{l,i}$ to be arbitrary,
 satisfying required assumptions when needed and stated.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
-\newgsymbol{phili1}{$\varphi_{l,i}^1$}{Hat function of level $l$, index $i$}%
+\newgsymbol{.1}{$\cdot^1$}{%
+  Superscript for ``Piecewise linear
+  (basis function/function space/interpolant)%
+}%
 The so-called \term{hat functions} (linear B-splines), which are defined as
 \begin{equation}
   \label{eq:hatFunctionUV}
@@ -76,7 +79,6 @@ there is a unique function $f_l\colon [0, 1] \to \RR$ such that
 \end{equation}
 for some $c_i \in \RR$.
 In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
-\newgsymbol{Vl1}{$V_l^1$}{Nodal piecewise linear space of level $l$}%
 The nodal space $V_l^1$ is defined analogously as the span of the
 hat functions $\varphi_{l,i}^1$.
 It is the space of all linear splines,
@@ -113,17 +115,21 @@ for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \newgsymbol{0!}{$\ß0$}{$(0, \dotsc, 0) \in \NN_0^d$}%
 \newgsymbol{1!}{$\ß1$}{$(1, \dotsc, 1) \in \NN^d$}%
-\newgsymbol{01!}{$[\ß0, \ß1]$}{%
-  Unit hypercube $:= [0, 1]^d$%
+\newgsymbol{01!c}{$[\ß0, \ß1]$}{%
+  Unit hypercube $:= [0, 1]^d := \{x \in \RR \mid 0 \le x \le 1\}^d$%
 }
 \newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NN_0^d$}%
-\newgsymbol{norm1}{$\norm{\cdot}_1$}{1-norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$}%
+\newgsymbol{||.||1}{$\norm{\cdot}_1$}{%
+  $\ell_1$ norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$%
+}%
 Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level
 and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
-\newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{Multivariate grid point $:= \ßi \cdot \ßh_\ßl$}%
+\newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{%
+  Multivariate grid point $:= \ßi \cdot \ßh_\ßl$%
+}%
 \newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^l$}%
 \newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^l$}{%
   For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
@@ -186,12 +192,6 @@ the univariate case:
   V_\ßl
   := \spn\{\varphi_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{phili1!}{$\varphi_{\ßl,\ßi}^1$}{%
-  Multivariate hat function of level $\ßl$, index $\ßi$%
-}%
-\newgsymbol{Vl1!}{$V_\ßl^1$}{%
-  Multivariate nodal piecewise linear space of level $\ßl$%
-}%
 \newgsymbol{ab!}{$[\ßa, \ßb]$}{%
   Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
 }%
@@ -263,16 +263,11 @@ A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
   Multivariate nodal space
   $:= V_{n \cdot \ß1}$ of level $n$ with dimensionality $d$%
 }%
-\newgsymbol{Vnd1}{$V_{n,d}^1$}{%
-  Multivariate nodal piecewise linear space
-  $:= V_{n \cdot \ß1}^1$ of level $n$ with dimensionality $d$%
-}%
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
 (for example, $V_{n,d} := V_{n \cdot \ß1}$).
-\newgsymbol{fnd1}{$f_{n,d}^1$}{Full grid interpolant $\in V_{n,d}^1$ of $f$}%
 \newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
   $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
-  for a function $f\colon \Omega \to \RR$%
+  of a function $f\colon \Omega \to \RR$%
 }
 \newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\varphi_{l,i}^1$,
@@ -633,6 +628,9 @@ continuous knapsack problem.
 \newgsymbol{Omegands}{$\Omega_{n,d}^\sparse$}{%
   Set of regular sparse grid points of level $n$ with dimensionality $d$%
 }%
+\newgsymbol{.s}{$\cdot^\sparse$}{%
+  Superscript for ``sparse grid (grid point set/function space/interpolant)''%
+}%
 The resulting function space and grid point set
 \begin{equation}
   V_{n,d}^\sparse
@@ -691,9 +689,6 @@ the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
 (see \eqref{eq:dimensionFG}).
 In particular, the exponential dependency on the dimensionality $d$
 has vanished.
-\newgsymbol{fnds1}{$f_{n,d}^{\sparse,1}$}{%
-  Sparse grid interpolant $\in V_{n,d}^{\sparse,1}$ of $f$%
-}%
 The corresponding $L^2$ error of the sparse grid interpolant
 $f_{n,d}^{\sparse,1}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
@@ -861,11 +856,8 @@ the finest mesh size $h_{n-d+1}$ that can be found in the interior.
   Interior grid points $:= \Omega^\sparse \cap \openinterval{\ß0, \ß1}$
   for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
 }%
-\newgsymbol{01!}{$\openinterval{0, 1}$}{%
-  Open unit interval $:= \{x \in \RR \mid 0 < x < 1\}$%
-}%
 \newgsymbol{01o!}{$\openinterval{\ß0, \ß1}$}{%
-  Open unit hypercube $:= \openinterval{0, 1}^d$%
+  Open unit hypercube $:= \openinterval{0, 1}^d := \{x \in \RR \mid 0 < x < 1\}^d$%
 }%
 If we define $\interior{\Omega}_{n,d}^\sparse$ as the set of
 interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
@@ -966,9 +958,9 @@ boundary.
 However, for very high dimensionalities this might still lead to
 computationally infeasible sparse grids.
 
-\newgsymbol{Omegandsb}{$\Omega_{n,d}^{\sparse(b)}$}{%
-  Set of sparse grid points of level $n$ with dimensionality $d$
-  and boundary parameter $b$%
+\newgsymbol{.sb}{$\cdot^{\sparse(b)}$}{%
+  Superscript for ``sparse grid with boundary parameter $b$
+  (grid point set/function space/interpolant)''%
 }%
 We generalize these two solutions to the definition of a
 sparse grid $\Omega_{n,d}^{\sparse(b)}$ that is equivalent to inserting
@@ -1414,8 +1406,9 @@ extrapolate the inner values linearly towards the boundary
 The basis function on level $1$ is replaced by the
 ``constant $1$'' function.
 All other basis functions remain unchanged.
-\newgsymbol{phili1mod}{$\varphi_{l,i}^{1,\modified}$}{%
-  Modified hat function of level $l$, index $i$%
+\newgsymbol{.mod}{$\cdot^\modified$}{%
+  Superscript for ``Modified (basis function/function space/interpolant)
+  for grids without boundary points''%
 }%
 The resulting \term{modified hat functions} $\varphi_{l,i}^{1,\modified}$
 are defined as follows:
