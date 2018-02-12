@@ -42,8 +42,7 @@ yy = splineShift + splineScale * yy
 ax.plot(xx, yy, "k-", clip_on=False)
 ax.text(8, 1, r"$s$", color="k", ha="center", va="bottom")
 
-h = 0.05
-ax.plot([D[0] + h, D[1] - h], 2*[-0.01], "k-", clip_on=False, lw=2)
+ax.plot(D, 2*[-0.01], "k-", clip_on=False, lw=2, solid_capstyle="butt")
 ax.text(sum(D) / 2, -0.08, r"$D_\ß\xi^p$", color="k", ha="center", va="top")
 
 for x in D:
