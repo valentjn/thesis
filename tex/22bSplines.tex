@@ -347,6 +347,7 @@ $D_\ß\xi^p$:
   of level $l \in \NN_0$ are
   a basis of the spline space $S_\ß\xi^p$
   \begin{equation}
+    \label{eq:nodalBSplineSpaceKnots}
     \xi_k
     := (k - (p+1)/2) h_l,\quad
     k = 0, \dotsc, m + p,\quad
@@ -426,7 +427,8 @@ Although we have to restrict all functions and spaces to $D_l^p$,
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 is correct for hierarchical B-splines:
 
-\begin{corollary}
+\begin{corollary}[hierarchical splitting for uniform B-splines]
+  \label{cor:hierSplittingBSplines}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
@@ -435,7 +437,7 @@ is correct for hierarchical B-splines:
     = V_l^p|_{D_l^p}
     = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p},
   \end{equation}
-  where $\ß\xi$ is as defined in \cref{cor:nodalBSplineSpace}.
+  where $\ß\xi$ is as defined in \eqref{eq:nodalBSplineSpaceKnots}.
 \end{corollary}
 
 \begin{proof}
