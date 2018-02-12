@@ -1,17 +1,158 @@
 \section{Boundary Behavior of Hierarchical B-Splines}
 \label{sec:23boundary}
 
-\todo{write}
+As we have seen in the last section (see \cref{cor:hierSplittingBSplines}),
+the hierarchical splitting equation \eqref{eq:hierSplittingUV}
+only holds when restricting the function spaces to
+$D_l^p = [h_l (p-1)/2,\; 1 - h_l (p-1)/2]$,
+which is for $p > 1$ a proper subset of the domain $[0, 1]$.
+The implications of this fact on the approximation quality
+of the hierarchical B-spline basis are severe.
+In this section, we study the underlying reasons of the restriction and
+we introduce a new B-spline basis that does not suffer from this issue.
 
-\blindtext{}
 
 
+\subsection{Approximation Power of Uniform Hierarchical B-Splines}
 
-\subsection{Problems with Uniform Hierarchical B-Splines}
+Splines are a piecewise generalization of polynomials.
+Consequently, approximation spaces spanned by splines of degree $p$ should
+at least contain all polynomials of degree $\le p$,
+since the approximation power of splines should be at least as good
+as that of polynomials.
+Unfortunately, this statement is not true for the uniform B-splines
+$\varphi_{l,i}^p$ as we have defined them in the last section.
+A counterexample is given in \cref{fig:nakInterpolation},
+in which a cubic polynomial $f$ is interpolated with
+hierarchical cubic B-splines.
+However, one can clearly deviations of the interpolant from the polynomial
+near the boundary, where the relative error exceeds \SI{10}{\percent}.
+The oscillations occur even in the interior of the
+spline interpolation domain $D_l^p$.
+Of course, this phenomenon does not improve the approximation quality
+for other non-polynomial functions as well.
 
-\todo{write}
+\begin{figure}
+  \subcaptionbox{%
+    Objective function \textcolor{C0}{$f$ \emph{(blue)}},
+    interpolant \textcolor{C1}{$\tilde{f}$ \emph{(red, dashed)}},
+    grid points \emph{(dots)}, and
+    spline interpolation domain $D_3^p$ \emph{(thick line)}.%
+  }[75mm]{%
+    \includegraphics{nakInterpolation_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Relative error $|(f - \tilde{f})/f|$ on a logarithmic scale.%
+  }[75mm]{%
+    \includegraphics{nakInterpolation_2}%
+  }%
+  \caption{%
+    Hierarchical cubic B-splines $\varphi_{l',i'}^p$
+    ($l' \le l$, $i' \in I_{l'}$, $p = 3$)
+    fail to interpolate the cubic polynomial
+    $f(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
+    on the grid of level $l = 3$.%
+  }
+  \label{fig:nakInterpolation}
+\end{figure}
 
-\blindtext{}
+We can explain this as follows:
+According to \thmref{cor:hierSplittingBSplines},
+we have $S_\ß\xi^p = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$,
+where $\ß\xi$ is as defined in \eqref{eq:nodalBSplineSpaceKnots}
+and $p = 3$.
+Since cubic polynomials as $f$ are cubic splines as well,
+$f \in S_\ß\xi^p$ and, consequently,
+$f \in \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$.
+This means that there is a linear combination of hierarchical B-splines
+$\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+that interpolates $f$ exactly on the whole domain $D_l^p$
+(not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
+which does not interpolate $f$ exactly in $D_l^p$).
+However, in general, this interpolant is not equal $f$ outside
+of $D_l^p$ (i.e., in $[0, 1] \setminus D_l^p$),
+as \thmref{prop:splineSpace} only holds for $D_l^p$.
+In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
+equal to $f(x)$.
+If we now force the additional interpolation conditions in
+$x_{l,0} = 0$ and $x_{l,2^l} = 1$,
+the resulting interpolant $\tilde{f}$ cannot be the same as the previous
+interpolant,
+which is why $f$ and $\tilde{f}$ differ inside $D_l^p$.
+
+Formally, the unique existence of an interpolating spline is
+described by the so-called Schoenberg--Whitney conditions:
+
+\begin{proposition}[Schoenberg--Whitney conditions]
+  Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence
+  and $t_0, \dotsc, t_{m-1}$ a sequence of interpolation points with
+  $\xi_p \le t_0 < \dotsb < t_{m-1} \le \xi_m$.
+  Then, there exists a unique interpolating spline
+  $s = \sum_{k=0}^{m-1} c_k b_{k,\ß\xi}^p$ for arbitrary data if and only if
+  \begin{equation}
+    \xi_k < t_k < \xi_{k+p+1},\quad
+    k = 0, \dotsc, m - 1.
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  See \cite{Hoellig13Approximation}.
+\end{proof}
+
+The Schoenberg--Whitney conditions require that the interpolation points
+are contained in $D_l^p$.
+In the example of $p = 3$ in \cref{fig:nakInterpolation},
+the points $0$ and $1$ do not lie in $D_l^p$.
+For general degree $p$, the first $(p-1)/2$ and the last $(p-1)/2$
+grid points of level $l$ are missing from $D_l^p$,
+thus violating the Schoenberg--Whitney conditions.
+One possible remedy would be to move these interpolation points inside
+$D_l^p$ without changing the corresponding basis functions
+(i.e., the knots would stay the same) \cite{Hoellig13Approximation}.
+For instance in the cubic case, we could move $0$ and $1$ to
+$1.5 h_l$ and $1 - 1.5 h_l$, respectively.
+However, with this approach, we would not be able to interpolate
+boundary values.
+In addition, the condition of the interpolation problem will most likely
+worsen if we place interpolation points near the end of the supports
+of the corresponding basis functions.
+
+As often, taking slightly a different view of the problem helps
+to find a solution.
+Let $S_l^p$ denote the space of all splines of degree $p$
+on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
+\begin{equation}
+  \xi_k := (k - p) h_l,\quad
+  k = 0, \dotsc, m + p,\quad
+  m := 2^l + p.
+\end{equation}
+We have $D_\ß\xi^p = [0, 1]$ for this choice of $\ß\xi$, i.e.,
+the grid points $x_{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
+the Schoenberg--Whitney conditions for the uniform B-spline basis.
+Clearly, $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^p$,
+but it cannot equal $S_l^p$ due to
+\begin{equation}
+  \dim \bigoplus_{l'=0}^l W_l^p
+  = 2^l + 1
+  < 2^l + p
+  = m
+  = \dim S_\ß\xi^p,\quad
+  p > 1,
+\end{equation}
+by \thmref{prop:splineSpace}.
+There are too few nodal (and hierarchical) basis functions to
+span the whole spline space $S_\ß\xi^p$.
+
+The key idea is now to impose additional $(p - 1)$ boundary conditions
+on the basis functions to restrict $S_\ß\xi^p$ to a reasonable subspace
+with the correct dimension $(2^l + p) - (p - 1) = 2^l + 1$.
+``Reasonable'' means that two requirements should be met:
+First, the Schoenberg-Whitney conditions should be satisfied for
+the new subspace and the grid of level $l$.
+Second, the new subspace should contain all polynomials of degree $\le p$,
+eliminating the issue discussed in \cref{fig:nakInterpolation}
+in the process.
 
 
 
