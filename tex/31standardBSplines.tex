@@ -45,7 +45,7 @@ The cardinal B-spline $b^p$ has the following properties:
 \begin{itemize}
   \item
   \newgsymbol{supp}{$\supp f$}{Support of a function $f$}%
-  \emph{Support:}
+  \emph{Compact support:}
   The support of $b^p$ is given by $\supp b^p = [0, p + 1]$.
   
   \item
@@ -68,10 +68,10 @@ The cardinal B-spline $b^p$ has the following properties:
   \emph{Spline:}
   On every \term{knot interval} $\halfopeninterval{k, k+1}$
   ($k = 0, \dotsc, p$), $b^p$ is a polynomial of degree~$p$, i.e.,
-  $b^p$ is a spline (piecewise polynomial).
+  $b^p$ is a spline of degree $p$ (piecewise polynomial).
   
   \item
-  \emph{Differentiability:}
+  \emph{Derivative:}
   At the \term{knots} $k = 0, \dotsc, p + 1$,
   $b^p$ is $(p - 1)$ times continuously differentiable.
   The derivative can be computed by differentiating
@@ -81,6 +81,13 @@ The cardinal B-spline $b^p$ has the following properties:
     \frac{\diff}{\dx} b^p(x)
     = b^{p-1}(x) - b^{p-1}(x-1),\quad
     x \in \RR.
+  \end{equation}
+  
+  \item
+  \emph{Integral}:
+  The integral of $b^p$ is normalized, i.e.,
+  \begin{equation}
+    \int_\RR b^p(x) \dx = 1.
   \end{equation}
   
   \item
