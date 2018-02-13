@@ -3,7 +3,7 @@
 
 \todo{add references}
 
-\todo{add glossary entries}
+\todo{update glossary entries after chapter split...}
 
 In this section, we mainly follow the presentation of
 \cite{Valentin14Hierarchische,Valentin16Hierarchical}
@@ -224,7 +224,7 @@ To investigate how the nodal space $V_l^p$ looks like,
 we introduce the notion of non-uniform B-splines.
 
 \begin{definition}[non-uniform B-splines]
-  \label{def:nonUniformBSplines}
+  \label{def:nonUniformBSpline}
   \newgsymbol{xi!}{$\ß\xi$}{%
     Knot sequence $:= (\xi_0, \dotsc, \xi_{m+p})$%
   }%
@@ -413,7 +413,7 @@ the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 is correct for hierarchical B-splines:
 
 \begin{corollary}[hierarchical splitting for uniform B-splines]
-  \label{cor:hierSplittingBSplines}
+  \label{cor:hierSplittingBSpline}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
@@ -516,7 +516,7 @@ analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $0.5$.
 For $l = 1$, again the ``constant $1$'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
-  \label{eq:modifiedBSplines}
+  \label{eq:modifiedBSpline}
   \varphi_{l,i}^{p,\modified}(x)
   :=
   \begin{cases}
@@ -539,7 +539,7 @@ For higher degrees, it is non-zero, albeit very small
 in its absolute value.
 If it is desired to enforce natural boundary conditions
 for higher than quintic degrees,
-then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplines}
+then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSpline}
 must be extended to $(p+1)/2 - 1$.
 
 \begin{figure}
@@ -632,7 +632,7 @@ grid point density near the boundary.
 If we want to use Chebyshev points as grid points for sparse grids,
 we have to employ an appropriate basis to ensure that interpolation
 is still possible.
-Fortunately, \cref{def:nonUniformBSplines} specifies B-splines for non-uniform
+Fortunately, \cref{def:nonUniformBSpline} specifies B-splines for non-uniform
 knot sequences.
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
@@ -706,7 +706,7 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 Like for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}
 $\varphi_{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
-same method as in \eqref{eq:modifiedBSplines}.
+same method as in \eqref{eq:modifiedBSpline}.
 Here, the second derivative does not vanish exactly at the boundary
 even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
