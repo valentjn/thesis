@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 40
+# number of output figures = 60
 
 import matplotlib.patches
 import numpy as np
@@ -7,7 +7,7 @@ import numpy as np
 import helper.basis
 from helper.figure import Figure
 
-numberOfImages = 40
+numberOfImages = 60
 pauseStartInXUnits = 0.2
 pauseBetweenInXUnits = 0.2
 pauseEndInXUnits = 0.2

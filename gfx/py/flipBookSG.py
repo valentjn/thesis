@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 40
+# number of output figures = 60
 
 import numpy as np
 import scipy.linalg
@@ -26,7 +26,7 @@ def axisEqual3D(ax):
 
 
 
-numberOfImages = 40
+numberOfImages = 60
 numberOfRevolutions = 1.0
 startAngle = 30
 elevation = 20
