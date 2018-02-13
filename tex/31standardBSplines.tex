@@ -634,30 +634,33 @@ we have to employ an appropriate basis to ensure that interpolation
 is still possible.
 Fortunately, \cref{def:nonUniformBSplines} specifies B-splines for non-uniform
 knot sequences.
+
 The \term{hierarchical Clenshaw--Curtis B-spline}
 $\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NN_0$ and index
 $i \in I_l$ is defined as
-\begin{equation}
-  \varphi_{l,i}^{p,\clenshawcurtis}
-  := b_{0,\ß\xi_l^{p,\clenshawcurtis}}^p,\quad
-  \ß\xi_l^{p,\clenshawcurtis}
-  := (x_{l,i-(p+1)/2}^\clenshawcurtis,\; \dotsc,\;
-  x_{l,i}^\clenshawcurtis,\; \dotsc,\;
-  x_{l,i+(p+1)/2}^\clenshawcurtis),
-\end{equation}
-where the Chebyshev points $x_{l,i}^\clenshawcurtis$
-are equidistantly extended onto $\RR$:
 \begin{subequations}
-  \label{eq:clenshawCurtisExtend}
-  \begin{alignat}{2}
-    x_{l,i}^\clenshawcurtis
-    &:= i \cdot x_{l,1}^\clenshawcurtis,
-    &&\quad i < 0,\\
-    x_{l,i}^\clenshawcurtis
-    &:= 1 + (i - 2^l) \cdot x_{l,1}^\clenshawcurtis,
-    &&\quad i > 2^l.
-  \end{alignat}
+  \label{eq:clenshawCurtisBSpline}
+  \begin{gather}
+    \varphi_{l,i}^{p,\clenshawcurtis}
+    := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,\\
+    \intertext{where}
+    \xi_{l,k}^{p,\clenshawcurtis}
+    :=
+    \begin{cases}
+      (k - \frac{p+1}{2}) \cdot x_{l,1}^\clenshawcurtis,&
+      k = 0, \dotsc, \frac{p-1}{2},\\
+      x_{l,k-(p+1)/2}^\clenshawcurtis,&
+      k = \frac{p+1}{2}, \dotsc, 2^l + \frac{p+1}{2},\\
+      1 + (k - 2^l - \frac{p+1}{2}) \cdot x_{l,1}^\clenshawcurtis,&
+      k = 2^l + \frac{p+3}{2}, \dotsc, 2^l + p + 1,
+    \end{cases}\\
+    k = 0, \dotsc, m + p,\quad
+    m := 2^l + 1.
+  \end{gather}
 \end{subequations}
+For the construction of the knot sequence $\ß\xi_l^{p,\clenshawcurtis}$,
+the Chebyshev points $x_{l,i}^\clenshawcurtis$
+are equidistantly extended onto the real line $\RR$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
 $V_l^{p,\clenshawcurtis}$
@@ -709,7 +712,7 @@ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
 lie outside $[0, 1]$ and are thus uniformly extended according
-to \eqref{eq:clenshawCurtisExtend},
+to \eqref{eq:clenshawCurtisBSpline},
 the absolute deviation of the second derivative from $0$ is small.
 Again, to enforce the natural boundary condition,
 it is possible to recompute the coefficients
