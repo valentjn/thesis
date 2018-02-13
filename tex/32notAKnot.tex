@@ -122,6 +122,7 @@ to find a solution.
 Let $S_l^p$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 \begin{equation}
+  \label{eq:fullGridKnots}
   \xi_k := (k - p) h_l,\quad
   k = 0, \dotsc, m + p,\quad
   m := 2^l + p.
@@ -174,12 +175,14 @@ we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
 is continuous at the first $(p-1)/2$ and the last $(p-1)/2$
 inner grid points
 \begin{equation}
+  \label{eq:removedNAKKnots}
   x_{l,i},\quad
   i \in \{1, \dotsc, (p-1)/2\} \cup \{2^l - (p-1)/2, \dotsc, 2^l\},
 \end{equation}
 which is equivalent to removing these knots from the knot sequence $\ß\xi$.
 
-The knot sequence with not-a-knot boundary conditions is defined as follows:
+The knot sequence $\ß\xi_l^{p,\notaknot}$
+with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
   \begin{gather}
     \ß\xi_l^{p,\notaknot}
@@ -198,6 +201,57 @@ The knot sequence with not-a-knot boundary conditions is defined as follows:
     \end{cases}
   \end{gather}
 \end{subequations}
+This knot sequence $\ß\xi_l^{p,\notaknot}$
+can be obtained by removing the knots
+given in \eqref{eq:removedNAKKnots} from the
+knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
+Note that $\ß\xi_l^{p,\notaknot}$ coincides with the
+uniform knot sequence $\ß\xi_l,^p$ of \thmref{cor:nodalBSplineSpace}
+for the piecewise linear case of $p = 1$.
+This is intuitively clear:
+For this case,
+we do not need to remove any knots as the hierarchical splitting already
+holds for the full domain by \cref{cor:hierSplittingHat}.
+
+It is important to observe that the removal of these knots
+is only possible if $p + 1 \le 2^l$,
+which is equivalent to $l \ge \lceil\log_2(p+1)\rceil$.
+For coarser levels,
+there are not enough interior knots that could be removed.
+Without any special treatment,
+we would not be able to obtain enough B-splines to span the spline space.
+Therefore,
+for definition of \term{hierarchical not-a-knot B-splines}
+$\varphi_{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
+we use global Lagrange polynomials for the coarser levels:
+\begin{gather}
+  \varphi_{l,i}^{p,\notaknot}
+  :=
+  \begin{cases}
+    L_{l,i},&
+    l = 0, \dotsc, \lceil\log_2(p+1)\rceil - 1,\\
+    b_{i,\ß\xi_l^{p,\notaknot}}^p,&
+    l \ge \lceil\log_2(p+1)\rceil,
+  \end{cases}\quad
+  l \in \NN_0,\quad
+  i \in I_l,\\
+  L_{l,i}\colon [0, 1] \to \RR,\quad
+  L_{l,i}(x)
+  := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
+  \frac{x - x_{i'}}{x_i - x_{i'}}.
+\end{gather}
+The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
+that is,
+the unique polynomial of degree $\le 2^l$ that interpolates the data
+$\{(x_{l,i'}, \delta_{i,i'}) \mid i' = 0, \dotsc, 2^l\}$.
+Since its degree $\deg L_{l,i}$ is bounded by $2^l$,
+we have $\deg L_{l,i} < p + 1$,
+as the Lagrange polynomials are employed only when
+$l < \lceil\log_2(p+1)\rceil$.
+Due to $2^l$ even (when $l \ge 1$) and $p$ odd,
+we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
+$\deg L_{l,i} \le 2^l < p$
+(for $p > 1$; the case $p = 1$, $l = 0$ is the exception).
 
 \todo{write}
 
