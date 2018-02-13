@@ -318,11 +318,29 @@ $l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
 as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
 $\varphi_{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
-and contained in the space $S_{\ß\xi_l^{p,\notaknot}}^p$.
+and contained in the space $S_l^{p,\notaknot}$.
 
-\todo{introduce Slp, Slpnak, ... --> change Sec. 3.1}
-
-\todo{write about implementation: which basis function change?}
+Note that in each level $l \ge \lceil\log_2(p+1)\rceil$,
+only the first $(p+1)/2$ (indices $i = 1, 3, \dotsc, p$)
+and the last $(p+1)/2$ (indices $i = 2^l - p, 2^l - p + 2, \dotsc, 2^l - 1$)
+hierarchical basis functions $\varphi_{l,i}^{p,\notaknot}$
+differ from $\varphi_{l,i}^p$,
+i.e., we have
+\begin{equation}
+  \varphi_{l,i}^{p,\notaknot} = \varphi_{l,i}^p,\quad
+  i = p + 2,\; p + 4,\; \dotsc,\; 2^l - p - 2.
+\end{equation}
+This means that we can reuse uniform B-spline code
+for the inner functions.
+Due to $\varphi_{l,i}^{p,\notaknot} = \varphi_{l,2^l-i}^{p,\notaknot}$
+(because of the symmetry of $\ß\xi_l^{p,\notaknot}$),
+we only have to implement $(p+1)/2$ not-a-knot B-splines per level $l$.
+As $\varphi_{l,i}^{p,\notaknot}$ and $\varphi_{l+1,i}^{p,\notaknot}$
+use the same knots up to an affine transformation for $l$ large enough
+($l \ge 3$ suffices for $p = 3$),
+we only have to implement a number of special case for coarse levels $l$.
+In other words, the not-a-knot is ``minimally invasive''
+with respect to an implementation that uses uniform B-splines.
 
 \todo{write}
 
