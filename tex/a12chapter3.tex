@@ -1,0 +1,176 @@
+\section{Proofs for Chapter 3}
+
+\subsection[Proof of Proposition~\ref*{prop:hierBSplineLinearlyIndependent}]{%
+  Proof of \texorpdfstring{%
+    \Cref{prop:hierBSplineLinearlyIndependent}%
+  }{%
+    Proposition \ref{prop:hierBSplineLinearlyIndependent}%
+  }%
+}
+\label{sec:proofHierBSplineLinearlyIndependent}
+
+\propHierBSplineLinearlyIndependent*
+
+\begin{proof}
+  The proof is rigorous for the common low B-spline degrees of
+  $p \in \{1, 3, 5, 7\}$.
+  For higher degrees, the proof has to be viewed as a sketch.
+  
+  We follow the presentation in \cite{Valentin16Hierarchical} and
+  prove the assertion by induction over $l \in \NN_0$.
+  For $l = 0$, the B-splines $\varphi_{0,i'}^p$ with $i' \in \{0, 1\}$
+  are linearly independent.
+  For the induction step $(l-1) \to l$, let
+  \begin{equation}
+    \sum_{l'=0}^l \sum_{i' \in I_{l'}} \alpha_{l',i'} \varphi_{l',i'}^p
+    \equiv 0
+  \end{equation}
+  be a linear combination of the zero function.
+  We separate the summands of level $l$
+  from the summands of coarser levels $l' < l$:
+  \begin{equation}
+    \label{eq:hierBSplineLinearlyIndependent3}
+    \sum_{i \in I_l} \alpha_{l,i} \varphi_{l,i}^p
+    =: g_1 \equiv g_2 :=
+    -\sum_{l'=0}^{l-1} \sum_{i' \in I_{l'}} \alpha_{l',i'} \varphi_{l',i'}^p.
+  \end{equation}
+  The right-hand side $g_2$ is smooth in every grid point
+  $x_{l,i}$ ($i \in I_l$) of level $l$,
+  since these grid points are not knots of the hierarchical B-splines
+  $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) of level $l' < l$.
+  This implies that the left-hand $g_1$ side must be smooth there as well:
+  \begin{alignat}{3}
+    &&
+    \partialdiff_-^p g_1(x_{l,i'})
+    &= \partialdiff_+^p g_1(x_{l,i'}),\quad
+    &&i' \in I_l,\\
+    \label{eq:hierBSplineLinearlyIndependent1}
+    \iff\quad&&
+    \sum_{i \in I_l} \alpha_{l,i}
+    \partialdiff_-^p \varphi_{l,i}^p(x_{l,i'})
+    &= \sum_{i \in I_l} \alpha_{l,i}
+    \partialdiff_+^p \varphi_{l,i}^p(x_{l,i'}),\quad
+    &&i' \in I_l,
+  \end{alignat}
+  where $\partialdiff_-^p$ and $\partialdiff_+^p$ denote the left and right
+  derivative of order $p$, respectively.
+  By repeated application of \eqref{eq:cardinalBSplineDerivative},
+  one can show
+  \begin{equation}
+    \partialdiff_-^p b^p(k + 1)
+    = (-1)^k \binom{p}{k}
+    = \partialdiff_+^p b^p(k),\quad
+    k \in \ZZ,
+  \end{equation}
+  where $\binom{p}{k} = 0$ for $k < 0$ or $k > p$
+  \cite{Hoellig13Approximation}.
+  We can insert this relation into
+  \eqref{eq:hierBSplineLinearlyIndependent1}
+  and use \eqref{eq:uniformHierarchicalBSplineUV} to obtain
+  \begin{alignat}{2}
+    \sum_{i \in I_l} \alpha_{l,i} (-1)^{k-1} \binom{p}{k-1}
+    &= \sum_{i \in I_l} \alpha_{l,i} (-1)^k \binom{p}{k},\quad
+    &&i' \in I_l,\quad
+    k := \frac{p+1}{2} + i' - i.
+  \end{alignat}
+  As $\binom{p}{k-1} + \binom{p}{k} = \binom{p+1}{k}$
+  and $(-1)^k$ is constant for $i \in I_l$ when $i'$ is fixed,
+  this is equivalent to
+  \begin{equation}
+    \label{eq:hierBSplineLinearlyIndependent2}
+    \sum_{i \in I_l} \alpha_{l,i}
+    \binom{p+1}{\frac{p+1}{2} + i' - i} = 0,\quad
+    i' \in I_l.
+  \end{equation}
+  
+  This is a quadratic linear system of equations
+  whose system matrix
+  $A(p)$ is a banded symmetric Toeplitz%
+  \footnote{%
+    A Toeplitz matrix is a matrix $A$ whose entries $a_{k,j}$
+    solely depend on $k - j$, i.e.,
+    $a_{k,j} = c_{k-j}$ for some vector $\ßc$.%
+  }
+  matrix of size
+  $2^{l-1} \times 2^{l-1}$ with bandwidth $\lceil(p-1)/4\rceil$.
+  %For $p = 1, 3, 5, 7$, the top rows $a(p)$ of $A(p)$,
+  %which fully determines a symmetric Toeplitz matrix, is given as follows:
+  %\begin{align}
+  %  a(1) &= (\hphantom{7}2, \hphantom{2}0, 0, 0, \dotsc, 0),\\
+  %  a(3) &= (\hphantom{7}6, \hphantom{2}1, 0, 0, \dotsc, 0),\\
+  %  a(5) &= (20, \hphantom{2}6, 0, 0, \dotsc, 0),\\
+  %  a(7) &= (70, 28, 1, 0, \dotsc, 0).
+  %\end{align}
+  %For $p = 1, 3, 5, 7$, $A(p)$ is as follows:
+  %\begin{equation}
+  %  \begin{gathered}
+  %    A(1) =
+  %    \begin{pmatrix}
+  %      2&&\\
+  %      &\ddots&\\
+  %      &&2
+  %    \end{pmatrix},\quad
+  %    A(3) =
+  %    \begin{pmatrix}
+  %      6&1&&\\
+  %      1&\ddots&\ddots\\
+  %      &\ddots&\ddots&1\\
+  %      &&1&6
+  %    \end{pmatrix},\\
+  %    A(5) =
+  %    \begin{pmatrix}
+  %      20&6&&\\
+  %      6&\ddots&\ddots\\
+  %      &\ddots&\ddots&6\\
+  %      &&6&20
+  %    \end{pmatrix},\quad
+  %    A(7) =
+  %    \begin{pmatrix}
+  %      70&28&1&&\\
+  %      28&\ddots&\ddots&\ddots&\\
+  %      1&\ddots&\ddots&\ddots&1\\
+  %      &\ddots&\ddots&\ddots&28\\
+  %      &&1&28&70
+  %    \end{pmatrix},
+  %  \end{gathered}
+  %\end{equation}
+  The non-zero values of $A(p)$ are tabulated for $p = 1, 3, 5, 7$
+  in \cref{tbl:proofHierBSplineLinearlyIndependent}.
+  The corresponding matrices are diagonally dominant and therefore regular.
+  For higher B-spline degrees $p$, the regularity of $A(p)$ has
+  to be shown differently.
+  
+  \begin{table}
+    \begin{tabular}{l@{\hspace{7mm}}ccc}
+      \toprule
+      &$k = 0$&$k = 1$&$k = 2$\\
+      \midrule
+      $p = 1$&2&&\\
+      $p = 3$&6&1&\\
+      $p = 5$&20&6&\\
+      $p = 7$&70&28&1\\
+      \bottomrule
+    \end{tabular}%
+    \caption{%
+      Non-zero values $(A(p))_{j,j+k}$ of the diagonals of $A(p)$
+      obtained in \eqref{eq:hierBSplineLinearlyIndependent2}.%
+    }%
+    \label{tbl:proofHierBSplineLinearlyIndependent}
+  \end{table}
+  
+  Due to the regularity of $A(p)$, we infer from
+  \eqref{eq:hierBSplineLinearlyIndependent2} that
+  $\alpha_{l,i'} = 0$ for $i' \in I_l$.
+  Due to \eqref{eq:hierBSplineLinearlyIndependent3},
+  we obtain
+  a linear combination of the zero function with the hierarchical
+  B-splines of level $< l$, i.e.,
+  \begin{equation}
+  \sum_{l'=0}^{l-1} \sum_{i' \in I_{l'}} \alpha_{l',i'} \varphi_{l',i'}^p
+  = 0,
+  \end{equation}
+  which implies $\alpha_{l',i'} = 0$ for all $l' = 0, \dotsc, l - 1$
+  by the induction hypothesis.
+  Thus, the hierarchical functions $\varphi_{l',i'}^p$
+  ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+\end{proof}
