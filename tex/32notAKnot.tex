@@ -62,7 +62,7 @@ According to \thmref{cor:hierSplittingBSpline},
 we have $S_{\ß\xi_l^p}^p = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
-$f \in S_{\ß\xi_l^p}^p$ and, consequently,
+$f \in S_{\ß\xi_l^p}^p$ and hence
 $f \in \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
 $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
@@ -147,7 +147,8 @@ span the whole spline space $S_\ß\xi^p$.
 The key idea is now to impose additional $(p - 1)$ boundary conditions
 on the basis functions to restrict $S_\ß\xi^p$ to a reasonable subspace
 with the correct dimension $(2^l + p) - (p - 1) = 2^l + 1$.
-``Reasonable'' means that two requirements should be met:
+``Reasonable'' means that besides this dimension constraint,
+two requirements should be met:
 First, the Schoenberg-Whitney conditions should be satisfied for
 the new subspace and the grid of level $l$.
 Second, the new subspace should contain all polynomials of degree $\le p$,
@@ -205,41 +206,68 @@ This knot sequence $\ß\xi_l^{p,\notaknot}$
 can be obtained by removing the knots
 given in \eqref{eq:removedNAKKnots} from the
 knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
-Note that $\ß\xi_l^{p,\notaknot}$ coincides with the
-uniform knot sequence $\ß\xi_l,^p$ of \thmref{cor:nodalBSplineSpace}
+The resulting spline space $S_{\ß\xi_l^{p,\notaknot}}^p$ is a subspace
+of $S_l^p$ with the correct dimensionality:
+\begin{equation}
+  \dim \bigoplus_{l'=0}^l W_l^p
+  = 2^l + 1
+  = \dim S_{\ß\xi_l^{p,\notaknot}}^p.
+\end{equation}
+The new space $S_{\ß\xi_l^{p,\notaknot}}^p$ satisfies our two requirements:
+First, the spline interpolation domain of $S_{\ß\xi_l^{p,\notaknot}}^p$
+equals the whole interval.
+This means that the Schoenberg--Whitney conditions are satisfied
+for $S_{\ß\xi_l^{p,\notaknot}}^p$, since all interpolation grid
+(grid points) lie within $D_{\ß\xi_l^{p,\notaknot}}^p = [0, 1]$.
+Second, $S_{\ß\xi_l^{p,\notaknot}}^p$ still contains all polynomials of
+degree $\le p$, as we have only removed knots compared to $S_l^p$.
+
+However, $\bigoplus_{l'=0}^l W_l^p$ is not a subspace of
+$S_{\ß\xi_l^{p,\notaknot}}^p$ anymore,
+as the hierarchical basis functions $\varphi_{l',i'}^p$ are not
+not-a-knot splines (due to the additional knots that we removed from
+$S_{\ß\xi_l^{p,\notaknot}}^p$).
+For this reason,
+we have to incorporate the not-a-knot boundary conditions into the
+hierarchical basis.
+
+Before defining the new hierarchical basis functions,
+let us first make two additional observations.
+First, $\ß\xi_l^{p,\notaknot}$ coincides with the
+uniform knot sequence $\ß\xi_l^p$ of \thmref{cor:nodalBSplineSpace}
 for the piecewise linear case of $p = 1$.
 This is intuitively clear:
 For this case,
 we do not need to remove any knots as the hierarchical splitting already
 holds for the full domain by \cref{cor:hierSplittingHat}.
-
-It is important to observe that the removal of these knots
-is only possible if $p + 1 \le 2^l$,
+Second, the removal of these knots is only possible if $p + 1 \le 2^l$,
 which is equivalent to $l \ge \lceil\log_2(p+1)\rceil$.
 For coarser levels,
 there are not enough interior knots that could be removed.
 Without any special treatment,
-we would not be able to obtain enough B-splines to span the spline space.
-Therefore,
-for definition of \term{hierarchical not-a-knot B-splines}
+we would not be able to obtain enough basis functions to span the spline space.
+
+For the definition of \term{hierarchical not-a-knot B-splines}
 $\varphi_{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
 we use global Lagrange polynomials for the coarser levels:
-\begin{gather}
-  \varphi_{l,i}^{p,\notaknot}
-  :=
-  \begin{cases}
-    L_{l,i},&
-    l = 0, \dotsc, \lceil\log_2(p+1)\rceil - 1,\\
-    b_{i,\ß\xi_l^{p,\notaknot}}^p,&
-    l \ge \lceil\log_2(p+1)\rceil,
-  \end{cases}\quad
-  l \in \NN_0,\quad
-  i \in I_l,\\
-  L_{l,i}\colon [0, 1] \to \RR,\quad
-  L_{l,i}(x)
-  := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
-  \frac{x - x_{i'}}{x_i - x_{i'}}.
-\end{gather}
+\begin{subequations}
+  \begin{gather}
+    \varphi_{l,i}^{p,\notaknot}
+    :=
+    \begin{cases}
+      L_{l,i},&
+      l = 0, \dotsc, \lceil\log_2(p+1)\rceil - 1,\\
+      b_{i,\ß\xi_l^{p,\notaknot}}^p,&
+      l \ge \lceil\log_2(p+1)\rceil,
+    \end{cases}\quad
+    l \in \NN_0,\quad
+    i \in I_l,\\
+    L_{l,i}\colon [0, 1] \to \RR,\quad
+    L_{l,i}(x)
+    := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
+    \frac{x - x_{l,i'}}{x_{l,i} - x_{l,i'}}.
+  \end{gather}
+\end{subequations}
 The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
@@ -251,7 +279,21 @@ $l < \lceil\log_2(p+1)\rceil$.
 Due to $2^l$ even (when $l \ge 1$) and $p$ odd,
 we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
 $\deg L_{l,i} \le 2^l < p$
-(for $p > 1$; the case $p = 1$, $l = 0$ is the exception).
+(for $p > 1$; for $p = 1$, the case $l = 0$ is the exception).
+
+The motivation for using Lagrange polynomials for coarse levels
+is that they form a basis of the polynomial space
+and that they can be implemented and calculated quickly.
+However, the specific choice of basis functions for the levels
+$l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
+as long as these functions are linearly independent
+(of each other and of the ``true'' not-a-knot B-splines
+$\varphi_{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
+and contained in the space $S_{\ß\xi_l^{p,\notaknot}}^p$.
+
+\todo{introduce Slp, Slpnak, ... --> change Sec. 3.1}
+
+\todo{write about implementation: which basis function change?}
 
 \todo{write}
 
@@ -268,6 +310,9 @@ $\deg L_{l,i} \le 2^l < p$
 
 
 \subsection{Other Approaches to Incorporate Boundary Conditions}
+
+Not-a-knot boundary conditions are not the only approach to obtain
+a subspace of $S_l^p$ with the right dimension.
 
 \todo{write}
 
