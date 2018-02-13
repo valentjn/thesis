@@ -2,3 +2,5 @@
 *.jpg filter=fat -crlf
 *.pdf filter=fat -crlf
 *.png filter=fat -crlf
+
+*.tex diff=tex
