@@ -17,7 +17,7 @@ xtl = [r"$x_{{{},{}}}$".format(n, i) for i in range(2**n + 1)]
 
 
 
-fig = Figure.create(figsize=(3, 2))
+fig = Figure.create(figsize=(3, 2.5))
 ax = fig.gca()
 
 xx = np.linspace(0, 1, 513)
@@ -51,7 +51,7 @@ fig.save()
 
 
 
-fig = Figure.create(figsize=(3, 2))
+fig = Figure.create(figsize=(3, 2.5))
 ax = fig.gca()
 yMin = 1e-5
 
