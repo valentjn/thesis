@@ -638,12 +638,14 @@ knot sequences.
 The \term{hierarchical Clenshaw--Curtis B-spline}
 $\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NN_0$ and index
 $i \in I_l$ is defined as
+\begin{equation}
+  \varphi_{l,i}^{p,\clenshawcurtis}
+  := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,
+\end{equation}
+where
 \begin{subequations}
-  \label{eq:clenshawCurtisBSpline}
+  \label{eq:clenshawCurtisBSplineKnots}
   \begin{gather}
-    \varphi_{l,i}^{p,\clenshawcurtis}
-    := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,\\
-    \intertext{where}
     \xi_{l,k}^{p,\clenshawcurtis}
     :=
     \begin{cases}
@@ -712,7 +714,7 @@ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
 lie outside $[0, 1]$ and are thus uniformly extended according
-to \eqref{eq:clenshawCurtisBSpline},
+to \eqref{eq:clenshawCurtisBSplineKnots},
 the absolute deviation of the second derivative from $0$ is small.
 Again, to enforce the natural boundary condition,
 it is possible to recompute the coefficients
