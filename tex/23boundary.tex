@@ -129,7 +129,7 @@ on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 We have $D_\ß\xi^p = [0, 1]$ for this choice of $\ß\xi$, i.e.,
 the grid points $x_{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^p$,
+Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^p$,
 but it cannot equal $S_l^p$ due to
 \begin{equation}
   \dim \bigoplus_{l'=0}^l W_l^p
@@ -156,6 +156,48 @@ in the process.
 
 
 \subsection{Hierarchical Not-A-Knot B-Splines}
+
+A suitable subspace can be obtained by incorporating the
+so-called \term{not-a-knot boundary conditions} into $S_\ß\xi^p$.
+For the cubic case $p = 2$,
+for which we need two conditions,
+the not-a-knot conditions demand that
+$\frac{\diff^3}{\dx^3} s$ is continuous at the first and last
+interior knot $x_{l,1} = h_l$ and $x_{l,2^l-1} = 1 - h_l$
+for all splines $s$ in the subspace.
+Equivalently, $x_{l,1}$ and $x_{l,2^l-1}$ are effectively removed from the
+knot sequence (hence ``not-a-knot''),
+as this is equivalent to requiring that
+$s$ is a cubic polynomial on $[0, x_{l,2}]$ and $[x_{l,2^l-2}, 1]$.
+For general degree $p$ (in which we need $(p - 1)$ conditions),
+we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
+is continuous at the first $(p-1)/2$ and the last $(p-1)/2$
+inner grid points
+\begin{equation}
+  x_{l,i},\quad
+  i \in \{1, \dotsc, (p-1)/2\} \cup \{2^l - (p-1)/2, \dotsc, 2^l\},
+\end{equation}
+which is equivalent to removing these knots from the knot sequence $\ß\xi$.
+
+The knot sequence with not-a-knot boundary conditions is defined as follows:
+\begin{subequations}
+  \begin{gather}
+    \ß\xi_l^{p,\notaknot}
+    := (\xi_{l,0}^{p,\notaknot}, \dotsc,
+    \xi_{l,m+p}^{p,\notaknot}),\quad
+    m := 2^l + 1,\\
+    \xi_{l,k}^{p,\notaknot}
+    :=
+    \begin{cases}
+      (k - p) h_l,&
+      k = 0, \dotsc, p,\\
+      (k - (p+1)/2) h_l,&
+      k = p + 1, \dotsc, 2^l,\\
+      (k - 1) h_l,&
+      k = 2^l + 1, \dotsc, 2^l + p + 1.
+    \end{cases}
+  \end{gather}
+\end{subequations}
 
 \todo{write}
 
