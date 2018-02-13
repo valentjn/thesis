@@ -1,0 +1,257 @@
+\section{Hierarchical Subspaces}
+
+\newgsymbol{dim}{$\dim$}{Vector space dimension}%
+\newgsymbol{|.|}{$|\cdot|$}{%
+  Absolute value of a scalar or the number of elements of a set%
+}%
+The dimension of the nodal space $V_\ßl$ is given by
+\begin{equation}
+  \label{eq:dimensionFG}
+  \dim V_\ßl
+  = |\Omega_\ßl|
+  = \prod_{t=1}^d (2^{l_t} + 1).
+\end{equation}
+If we choose the same level $n \in \NN_0$ in all dimensions,
+then the dimension of $V_{n,d}$ and the
+number of grid points grow at least as fast as
+$2^{nd} = (h_n^{-1})^d$.
+This exponential dependency between $\dim V_{n,d}$ and $d$ is known as the
+\term{curse of dimensionality}.
+The curse makes interpolation on $V_\ßl$ computationally infeasible
+for dimensionalities $d > 4$,
+as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
+\footnote{%
+  The number of necessary basis evaluations to evaluate the interpolant once
+  would not be as large, as most types of basis functions
+  (like hat functions $\varphi_{l,i}^1$ and higher-order B-splines)
+  are locally supported.%
+}
+
+\subsection{Hierarchical Splitting in the Univariate Case}
+
+In order to reduce the computational effort,
+we first split $V_\ßl$ into smaller subspaces and then identify
+which subspaces are most important and which subspaces can be omitted
+at the cost of a slightly larger error.
+In the univariate case, the key observation is that a grid point of a level $l$
+can be written as a grid point of a higher level $l'$:
+\begin{equation}
+  \label{eq:rewriteGridPoint}
+  x_{l,i} = x_{l',i'},\quad
+  l' \ge l,\quad
+  i' = 2^{l'-l} i.
+\end{equation}
+\newgsymbol{xor}{$\xor$}{Bitwise ``exclusive or''}%
+Conversely, this implies that every grid point $x_{l,i}$ of level $l \ge 1$
+can be uniquely written
+as a grid point of a coarser level $l'$ and an odd index $i'$:
+\begin{equation}
+  x_{l,i} = x_{l',i'},\quad
+  l' = l - \left[\log_2(\xor(i, i-1) + 1) - 1\right],\quad
+  i' = i/2^{l-l'},
+\end{equation}
+% https://mathoverflow.net/a/29973
+where $\xor$ is the bitwise ``exclusive or'' function.
+The term in brackets is the exponent of the
+highest power of two that divides $i$.
+\newgsymbol{u!}{$\dotcup$}{%
+  Disjoint union of sets (union where the pairwise intersection of
+  the joined sets is empty)%
+}%
+\newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
+This implies that $\Omega_l$ decomposes into
+\begin{equation}
+  \Omega_l
+  = \bigdotcup_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
+  I_{l'} :=
+  \begin{cases}
+    \{i = 0, \dotsc, 2^{l'} \mid \text{$i$ odd}\},&l' > 0,\\
+    \{0, 1\},&l' = 0,
+  \end{cases}
+\end{equation}
+where $\dotcup$ indicates the disjoint union.
+\newgsymbol{Wl}{$W_l$}{Hierarchical subspace of level $l$}%
+We call the spaces spanned by the basis functions that correspond to the
+joined sets \term{hierarchical subspaces} $W_l$:
+\begin{equation}
+  W_l
+  := \spn\{\varphi_{l,i} \mid i \in I_l\}.
+\end{equation}
+
+\newgsymbol{oplus}{$\oplus$}{%
+  Direct sum of vector spaces (vector space sum in which the dimension of
+  the sum equals the sum of the summands' dimensions)%
+}%
+For the hat function basis $\varphi_{l,i}^1$ and other basis types,
+one can prove that the corresponding nodal space
+decomposes into the direct sum of all
+hierarchical subspaces of coarser levels or the same level, i.e.,
+\begin{equation}
+  \label{eq:hierSplittingUV}
+  V_l
+  = \bigoplus_{l'=0}^l W_{l'},
+\end{equation}
+Here, the direct sum $\oplus$ is
+the normal vector space sum with the additional indication
+that the dimension of the sum $\sum_{l'=0}^l W_{l'}$ is the sum
+of the dimensions of the summands $W_{l'}$
+(analogously to $|\Omega_l| = \sum_{l'=0}^l |\Omega_{l'}|$,
+where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
+In general, \eqref{eq:hierSplittingUV} may not be true.
+The following lemma provides a characterization,
+which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.
+The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
+
+\begin{figure}
+  \subcaptionbox{%
+    Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
+    \emph{(dots)}.
+    The domain is the unit interval $[0, 1]$.%
+  }[75mm]{%
+    \includegraphics{hierarchicalHat_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Piecewise linear interpolant $f_l$ as a weighted sum
+    of the hierarchical hat functions \emph{(stacked)}.
+    The two boundary functions are combined to a single function
+    \emph{\textcolor{C0}{(blue)}} for simplicity.%
+  }[75mm]{%
+    \includegraphics{hierarchicalHat_2}%
+  }%
+  \caption{Univariate hierarchical hat functions of level $l' = 0, \dotsc, 3$.}
+  \label{fig:hierarchicalHat}
+\end{figure}
+
+\begin{lemma}[univariate hierarchical splitting characterization]
+  \label{lemma:hierSplittingUV}
+  Equivalent to relation \eqref{eq:hierSplittingUV} is the satisfaction of
+  both of the following conditions:
+  \begin{itemize}
+    \item
+    The hierarchical subspaces $W_{l'}$ ($l' \le l$) are subspaces of $V_l$.
+    
+    \item
+    The hierarchical functions
+    $\varphi_{l',i'}$ ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subset V_l$.
+  The second condition is equivalent to
+  $\dim \sum_{l'=0}^l W_{l'} = \sum_{l'=0}^l \dim W_{l'}$,
+  i.e., to the directness of the sum.
+  Therefore, the logical conjunction of both is equivalent to
+  $\bigoplus_{l'=0}^l W_{l'} \subset V_l$.
+  If the sum is direct,
+  the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
+  (due to $\dim W_{l'} = |I_{l'}| = 2^{l'-1}$ for $l' > 0$ and
+  $\dim W_{l'} = 2$ for $l' = 0$),
+  which is also the dimension of $V_l$.
+  The only subspace of $V_l$ that has the same dimension as $V_l$ is $V_l$ itself,
+  so we infer $\bigoplus_{l'=0}^l W_{l'} = V_l$.
+\end{proof}
+\begin{corollary}
+  The hierarchical splitting \eqref{eq:hierSplittingUV}
+  holds for the hat function basis.
+\end{corollary}
+\begin{proof}
+  The first condition of \cref{lemma:hierSplittingUV}
+  is satisfied as piecewise linear splines of level $l'$
+  are also piecewise linear splines of higher levels $l \ge l'$.
+  The linear independence for the second condition can be proved by induction
+  over $l$:
+  If a linear combination of $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+  vanishes everywhere, then the coefficients of level $l$ must be zero,
+  as otherwise the basis functions $\varphi_{l,i'}^1$ ($i' \in I_l$) would
+  introduce kinks at $x_{l,i'}$, which the zero function does not have.
+  This means that we have a zero linear combination of $\varphi_{l',i'}^1$ for
+  $l' \le l - 1$, $i' \in I_{l'}$,
+  and by the induction hypothesis, the other coefficients also vanish.
+\end{proof}
+
+\subsection{Hierarchical Splitting in the Multivariate Case}
+
+\newgsymbol{Wl!}{$W_\ßl$}{Multivariate hierarchical subspace of level $\ßl$}%
+\newgsymbol{Il!}{$I_\ßl$}{%
+  Set $:= I_{l_1} \times \dotsb \times I_{l_d}$ of
+  (odd) multivariate indices for hierarchical basis functions%
+}%
+Multivariate hierarchical subspaces of level $\ßl$
+are defined analogously to the univariate case:
+\begin{equation}
+  W_\ßl
+  := \spn\{\varphi_{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
+  I_\ßl
+  := I_{l_1} \times \dotsb \times I_{l_d}.
+\end{equation}
+The splitting \eqref{eq:hierSplittingUV} can now be generalized to the
+multivariate case:
+\begin{equation}
+  \label{eq:hierSplittingMV}
+  V_\ßl
+  = \bigoplus_{\ßl'=0}^\ßl W_{\ßl'},
+\end{equation}
+Again, this relation does not hold in general.
+A multivariate counterpart of \thmref{lemma:hierSplittingUV} can be used
+to prove that \eqref{eq:hierSplittingMV} holds if
+the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimensions:
+\begin{lemma}[multivariate hierarchical splitting characterization]
+  \label{lemma:hierSplittingMV}
+  Equivalent to relation \eqref{eq:hierSplittingMV} is the satisfaction of
+  both of the following conditions:
+  \begin{itemize}
+    \item
+    The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $V_\ßl$.
+    
+    \item
+    The basis functions $\varphi_{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
+    are linearly independent.
+  \end{itemize}
+\end{lemma}
+\begin{proof}
+  If the sum is direct, then its dimension is given by
+  \begin{equation}
+    \dim \sum_{\ßl'=0}^\ßl W_{\ßl'}
+    = \sum_{l_1'=0}^{l_1} \dotsb \sum_{l_d'=0}^{l_d}
+    \prod_{t=1}^d \dim W_{l_t'}
+    = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim W_{l_t'}
+    = \prod_{t=1}^d (2^{l_t} + 1)
+    = \dim V_\ßl
+  \end{equation}
+  using \eqref{eq:dimensionFG}.
+  The rest is analogous to the proof of \cref{lemma:hierSplittingUV}.
+\end{proof}
+\begin{proposition}[from univariate to multivariate splitting]
+  \label{prop:splittingUVToMV}
+  If univariate splitting \eqref{eq:hierSplittingUV} holds for every dimension,
+  then the multivariate splitting \eqref{eq:hierSplittingMV} holds as well.
+\end{proposition}
+\begin{proof}
+  We check the two conditions of \cref{lemma:hierSplittingMV}
+  given the two univariate conditions of \cref{lemma:hierSplittingUV}:
+  \begin{enumerate}
+    \item
+    The hierarchical basis functions $\varphi_{\ßl',\ßi'}$
+    of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) are tensor products
+    of functions $\varphi_{l_t',i_t'}$.
+    According to the first condition of \cref{lemma:hierSplittingUV},
+    each $\varphi_{l_t',i_t'}$ can be written as a linear combination of
+    the nodal basis $\varphi_{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$).
+    We can expand the tensor product to a linear combination
+    of tensor products of the univariate nodal basis functions.
+    Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
+    multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
+    As this is true for all $\ßi' \in I_{\ßl'}$, we obtain
+    $W_{\ßl'} \subset V_\ßl$.
+    
+    \item
+    The linear independence of the hierarchical functions $\varphi_{\ßl',\ßi'}$
+    ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) can be shown completely analogously
+    to the proof of \thmref{lemma:tensorProductLinearIndependence}.\qedhere
+  \end{enumerate}
+\end{proof}
+\begin{corollary}
+  The multivariate hierarchical splitting \eqref{eq:hierSplittingMV}
+  holds for the hat function basis.\qed
+\end{corollary}

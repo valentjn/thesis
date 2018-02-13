@@ -1,0 +1,267 @@
+\section{Nodal Spaces}
+
+\subsection{Univariate Case}
+
+Let us first consider univariate functions
+that are defined on the unit interval $[0, 1]$.
+\newgsymbol{l}{$l$}{Level $\in \NN_0$}%
+We discretize this domain by splitting it into $2^l$ equally sized segments,
+where $l \in \NN_0$ is the \term{level}.
+\newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
+\newgsymbol{i}{$i$}{Index $= 0, \dotsc, 2^l$}%
+\newgsymbol{hl}{$h_l$}{Mesh size $:= 2^{-l}$}%
+The resulting $2^l + 1$ \term{grid points} are given by
+\begin{equation}
+  x_{l,i} := i \cdot h_l,\quad
+  i = 0, \dotsc, 2^l,
+\end{equation}
+where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.
+\newgsymbol{phili}{$\varphi_{l,i}$}{%
+  Hierarchical basis function of level $l$, index $i$%
+}%
+Every grid point is associated with a \term{basis function}
+\begin{equation}
+  \varphi_{l,i}\colon [0, 1] \to \RR.
+\end{equation}
+In this thesis, we assume $\varphi_{l,i}$ to be arbitrary,
+satisfying required assumptions when needed and stated.
+However, it helps for both the theory and the intuition to have a
+specific example of basis functions in mind.
+\newgsymbol{.1}{$\cdot^1$}{%
+  Superscript for ``Piecewise linear
+  (basis function/function space/interpolant)%
+}%
+The so-called \term{hat functions} (linear B-splines), which are defined as
+\begin{equation}
+  \label{eq:hatFunctionUV}
+  \varphi_{l,i}^1(x)
+  := \max(1 - |x/h_l - i|, 0),
+\end{equation}
+are the most common choice for $\varphi_{l,i}$.
+Here and in the following,
+the superscript ``1'' is the degree of the linear B-spline and
+is not to be read as an exponent.
+We will generalize this notation to B-splines $\varphi_{l,i}^p$ of
+arbitrary degrees $p$ (see \cref{sec:22bSplines}).
+
+\newgsymbol{Vl}{$V_l$}{Nodal space of level $l$}%
+\newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
+The \emph{nodal space} $V_l$ of level $l$
+is defined as the linear span of all basis functions
+$\varphi_{l,i}$:
+\begin{equation}
+  V_l := \spn\{\varphi_{l,i} \mid i = 0, \dotsc, 2^l\}.
+\end{equation}
+We assume that the functions $\varphi_{l,i}$ form a basis of $V_l$, i.e.,
+every linear combination of these functions is unique.
+\newgsymbol{fl}{$f_l$}{Interpolant of $f$ in $V_l$}%
+\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+This ensures that for every objective function $f\colon [0, 1] \to \RR$,
+there is a unique function $f_l\colon [0, 1] \to \RR$ such that
+\begin{equation}
+  \label{eq:interpFullGridUV}
+  f_l
+  = \sum_{i=0}^{2^l} c_i \varphi_{l,i},\quad
+  \fa{i = 0, \dotsc, 2^l}{f_l(x_{l,i}) = f(x_{l,i})},
+\end{equation}
+for some $c_i \in \RR$.
+In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
+The nodal space $V_l^1$ is defined analogously as the span of the
+hat functions $\varphi_{l,i}^1$.
+It is the space of all linear splines,
+that is, the space of all continuous functions on $[0, 1]$ that are
+piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
+$i = 0, \dotsc, 2^l - 1$.
+The nodal hat function basis of level $3$
+and a linear combination are shown in \cref{fig:nodalHat}.
+
+\begin{figure}
+  \subcaptionbox{%
+    Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
+    \emph{(dots)}.%
+  }[75mm]{%
+    \includegraphics{nodalHat_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Piecewise linear interpolant $f_l$ as a weighted sum
+    of the nodal hat functions.%
+  }[75mm]{%
+    \includegraphics{nodalHat_2}%
+  }%
+  \caption{Univariate nodal hat functions of level $l = 3$.}
+  \label{fig:nodalHat}
+\end{figure}
+
+\subsection{Multivariate Case}
+
+\newgsymbol{d}{$d$}{Dimensionality $\in \NN$}%
+For the multivariate case with $d \in \NN$ dimensions,
+we proceed with the usual tensor product approach,
+for which we replace all indices, points, and functions with
+multi-indices, Cartesian products, and tensor products, respectively.
+\newgsymbol{0!}{$\ß0$}{$(0, \dotsc, 0) \in \NN_0^d$}%
+\newgsymbol{1!}{$\ß1$}{$(1, \dotsc, 1) \in \NN^d$}%
+\newgsymbol{01!c}{$[\ß0, \ß1]$}{%
+  Unit hypercube $:= [0, 1]^d := \{x \in \RR \mid 0 \le x \le 1\}^d$%
+}
+\newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NN_0^d$}%
+\newgsymbol{||.||1}{$\norm{\cdot}_1$}{%
+  $\ell_1$ norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$%
+}%
+Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
+which can be partitioned into
+$\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
+where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level
+and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
+\newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{%
+  Multivariate grid point $:= \ßi \cdot \ßh_\ßl$%
+}%
+\newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^l$}%
+\newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^l$}{%
+  For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
+}%
+The corners of the hypercubes are given by the grid points
+\begin{equation}
+  \label{eq:gridPointMultivariate}
+  \ßx_{\ßl,\ßi} := \ßi \cdot \ßh_\ßl,\quad
+  \ßi = \ß0, \dotsc, \ß2^{\ßl}.
+\end{equation}
+To allow for a somewhat intuitive and suggestive notation,
+relations and operations with vectors (in bold face)
+are to be read coordinate-wise in this thesis, unless stated otherwise.
+Bold-faced numbers like $\ß0$ are defined to be the vector $(0, \dotsc, 0)$
+in which every entry is equal to that number.
+\newgsymbol{hl!}{$\ßh_\ßl$}{Multivariate mesh size $:= \ß2^{-\ßl}$}%
+For example, \eqref{eq:gridPointMultivariate} is equivalent to
+\begin{equation}
+  \ßx_{\ßl,\ßi}
+  := (i_1 h_{l_1},\; \dotsc,\; i_d h_{l_d}),\quad
+  i_t = 0, \dotsc, 2^{l_t},\quad
+  t = 1, \dotsc, d,
+\end{equation}
+with the $d$-dimensional mesh size
+$\ßh_\ßl := \ß2^{-\ßl} = (h_{l_1}, \dotsc, h_{l_d})$.
+\newgsymbol{phili!}{$\varphi_{\ßl,\ßi}$}{%
+  Multivariate hierarchical basis function of level $\ßl$, index $\ßi$%
+}%
+Again, every grid point is associated with a basis function that is defined
+as the tensor product of the univariate functions:%
+\footnote{%
+  Note that one could employ basis functions of different types in
+  each dimension, for example B-splines of different degrees.
+  For simplicity, we first restrict ourselves to the case of a single type
+  for all dimensions, but we will treat the more general case in
+  \todo{insert reference}.%
+}
+\begin{equation}
+  \varphi_{\ßl,\ßi}\colon [\ß0, \ß1] \to \RR,\quad
+  \varphi_{\ßl,\ßi}(\ßx)
+  := \prod_{t=1}^d \varphi_{l_t,i_t}(x_t).
+\end{equation}
+\cref{fig:nodalHat2D} shows an example of a bivariate nodal hat function
+$\varphi_{\ßl,\ßi}^1$.
+
+\begin{figure}
+  \includegraphics{nodalHat2D_1}%
+  \caption{%
+    Bivariate nodal hat function of level $\ßl = (2, 1)$ and
+    index $i = (1, 1)$ as the tensor product of two univariate
+    nodal hat functions.%
+  }
+  \label{fig:nodalHat2D}
+\end{figure}
+
+\newgsymbol{Vl!}{$V_\ßl$}{Multivariate nodal space of level $\ßl$}%
+The multivariate nodal space $V_\ßl$ is defined analogously to
+the univariate case:
+\begin{equation}
+  V_\ßl
+  := \spn\{\varphi_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+\end{equation}
+\newgsymbol{ab!}{$[\ßa, \ßb]$}{%
+  Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
+}%
+In the case of hat functions $\varphi_{\ßl,\ßi}^1$,
+the nodal space $V_\ßl^1$ is the $d$-linear spline space, i.e.,
+the space of all continuous functions
+on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
+all hypercubes
+\begin{equation}
+  [\ßx_{\ßl,\ßi}, \ßx_{\ßl,\ßi+\ß1}]
+  := [x_{l_1,i_1}, x_{l_1,i_1+1}] \times \dotsb \times
+  [x_{l_d,i_d}, x_{l_d,i_d+1}],\quad
+  \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
+\end{equation}
+\newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $V_\ßl$}%
+\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
+Analogously to \eqref{eq:interpFullGridUV},
+we can interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
+in the nodal space $V_\ßl$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
+\begin{equation}
+  \label{eq:interpFullGridMV}
+  f_\ßl
+  = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \varphi_{\ßl,\ßi},\quad
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
+\end{equation}
+where $c_\ßi \in \RR$ and
+the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
+\begin{lemma}[linear independence of tensor products]
+  \label{lemma:tensorProductLinearIndependence}
+  The functions $\varphi_{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
+  form a basis of $V_\ßl$, if the univariate functions
+  $\varphi_{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$)
+  form a basis of the univariate nodal space $V_{l_t}$
+  for $t = 1, \dotsc, d$.
+\end{lemma}
+\begin{proof}
+  \newgsymbol{!equiv}{$\equiv$}{%
+    Equality of functions everywhere on their domain
+    (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)%
+  }%
+  Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
+  such that $f_\ßl \equiv 0$.
+  Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
+  we can evaluate \eqref{eq:interpFullGridMV} at $\ßx_{\ßl,\ßi'}$ to obtain
+  \begin{equation}
+    \sum_{i_1=0}^{2^{l_1}}
+    \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
+    \left(\sum_{i_d=0}^{2^{l_d}} c_\ßi \varphi_{l_d,i_d}(x_{l_d,i_d'})\right) \dotsb
+    \varphi_{l_2,i_2}(x_{l_2,i_2'})\right) \varphi_{l_1,i_1}(x_{l_1,i_1'})
+    = 0.
+  \end{equation}
+  We apply the linear independence in 1D ($x_1$ direction) to conclude that
+  the sum over $i_2$ must vanish.
+  Repeating this argument for all dimensions, we infer that $c_\ßi = 0$
+  for all $\ßi = \ß0, \dotsc, \ß2^\ßl$,
+  implying the linear independence of the functions $\varphi_{\ßl,\ßi}$.
+\end{proof}
+\newgsymbol{Omegal!}{$\Omega_\ßl$}{Set of full grid points of level $\ßl$}%
+The lemma is equivalent to the statement that the coefficients $c_\ßi \in \RR$
+exist for every objective function $f$ and are uniquely determined by
+the values at the grid points
+\begin{equation}
+  \Omega_\ßl
+  := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+\end{equation}
+\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}
+A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
+\newgsymbol{Vnd}{$V_{n,d}$}{%
+  Multivariate nodal space
+  $:= V_{n \cdot \ß1}$ of level $n$ with dimensionality $d$%
+}%
+In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
+(for example, $V_{n,d} := V_{n \cdot \ß1}$).
+\newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
+  $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
+  of a function $f\colon \Omega \to \RR$%
+}
+\newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
+For the hat function basis $\varphi_{l,i}^1$,
+it can be shown that the $L^2$ interpolation error of the interpolant
+$f_{n,d}^1$ is given by
+\begin{equation}
+  \norm{f - f_{n,d}^1}_{L^2} = \calO(h_n^2),
+\end{equation}
+i.e., the order of the interpolation error is quadratic in the mesh size
+\cite{Hoellig13Approximation,Bungartz04Sparse}.
