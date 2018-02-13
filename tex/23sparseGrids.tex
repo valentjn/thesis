@@ -9,6 +9,8 @@ regular, dimensionally adaptive, and spatially adaptive.
 
 \subsection{Regular Sparse Grids}
 
+\paragraph{Hierarchical contributions}
+
 To assess the importance of a subspace, we consider again the
 interpolant $f_\ßl \in V_\ßl$ of a function $f\colon [\ß0, \ß1] \to \RR$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
@@ -74,6 +76,8 @@ can be estimated by
 \end{equation}
 for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
+\paragraph{Regular sparse grids}
+
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
 exceeds a certain value $n \in \NN_0$.
@@ -133,6 +137,8 @@ regular sparse grid in two dimensions.
   \label{fig:regularSG}
 \end{figure}
 
+\paragraph{Error and grid size}
+
 \newgsymbol{Omegad}{$\bndry{\Omega}$}{%
   Boundary of the domain $\Omega \subset \RR^d$%
 }%
@@ -187,6 +193,8 @@ a finite subset $L \subset \NN_0^d$
 for which $\forall_{\ßl \in L} \fa{\ßl' \le \ßl}{\ßl' \in L}$.
 Regular sparse grids are a special case by setting
 $L = \{\ßl \in \NN_0^d \mid \norm{\ßl}_1 \le n\}$.
+
+\paragraph{Combination technique}
 
 The key advantage of dimensionally adaptive sparse grids over
 spatially adaptive approaches lies in the

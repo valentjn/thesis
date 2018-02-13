@@ -19,6 +19,8 @@ The multivariate case is treated as usual by the tensor product approach.
 
 \todo{add references}
 
+\paragraph{Cardinal B-splines}
+
 \newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
 \newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \RR$}%
 \newgsymbol{01!h}{$\halfopeninterval{\ß0, \ß1}$}{%
@@ -113,6 +115,8 @@ of the hat function.
   \label{fig:cardinalBSpline}
 \end{figure}
 
+\paragraph{Uniform hierarchical B-splines}
+
 \newgsymbol{.p}{$\cdot^p$}{%
   Superscript for ``B-spline (basis function/function space/interpolant)
   of degree $p$''%
@@ -170,6 +174,8 @@ $\varphi_{l,i}^p$, $l \in \NN_0$, $i \in I_l$.
   \label{fig:hierarchicalBSpline}
 \end{figure}
 
+\paragraph{Odd and even degrees}
+
 In the following, we will only allow odd degrees $p = 1, 3, 5, \dotsc$
 in this thesis.
 Many theoretical considerations would fail for even degrees.
@@ -211,6 +217,8 @@ for the rest of the thesis.
 
 
 \subsection{Non-Uniform B-Splines and Proof of the Hierarchical Splitting}
+
+\paragraph{Non-uniform B-splines and spline space}
 
 With the hierarchical B-splines $\varphi_{l,i}^p$, we can define
 the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
@@ -371,6 +379,11 @@ independent on $[0, 1]$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
 $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 
+\paragraph{Hierarchical splitting for uniform B-splines}
+
+We can use \cref{prop:splineSpace} and \cref{cor:nodalBSplineSpace}
+to prove the hierarchical splitting for the uniform B-spline basis.
+
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
   $W_{l'}^p|_{D_l^p}$ ($l' \le l$) are
@@ -465,6 +478,8 @@ bases.
 
 \subsection{Modification}
 
+\paragraph{Marsden's identity}
+
 Similarly to the piecewise linear case in \cref{sec:24boundary},
 Pflüger defined modified
 hierarchical B-splines to obtain reasonable values on the boundary
@@ -507,6 +522,8 @@ coefficients:
 \begin{proof}
   See \cite{Hoellig13Approximation}.
 \end{proof}
+
+\paragraph{Modified hierarchical B-splines}
 
 By applying Marsden's identity twice,
 \begin{equation}
@@ -590,6 +607,8 @@ if the basis functions are altered accordingly.
 The so-called Chebyshev points $x_{l,i}^\clenshawcurtis$ and the
 resulting Clenshaw--Curtis grids and B-splines will serve as an example.
 
+\paragraph{Chebyshev points and Clenshaw--Curtis grids}
+
 \newgsymbol{.cc}{$\cdot^\clenshawcurtis$}{%
   Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
   function/function space/interpolant)''%
@@ -644,6 +663,8 @@ we have to employ an appropriate basis to ensure that interpolation
 is still possible.
 Fortunately, \cref{def:nonUniformBSpline} specifies B-splines for non-uniform
 knot sequences.
+
+\paragraph{Hierarchical Clenshaw--Curtis B-splines}
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
 $\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NN_0$ and index
@@ -714,6 +735,8 @@ As a result, both implementation effort and evaluation runtime
 are significantly higher for Clenshaw--Curtis B-splines than
 for the standard uniform basis,
 as the Clenshaw--Curtis B-splines cannot be precomputed.
+
+\paragraph{Modification and generalizations}
 
 Like for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}

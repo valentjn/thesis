@@ -81,6 +81,8 @@ There are mainly two solutions to deal with this issue.
 
 \subsection{Sparse Grids with Coarser Boundaries}
 
+\paragraph{Inserting boundary points at finer levels}
+
 The first solution is to insert the boundary level functions and grid points
 at a finer level than $0$.
 A popular choice is the insertion at level $1$, which corresponds to
@@ -112,6 +114,8 @@ as now the mesh size is finer in the interior of the domain than on the
 boundary.
 However, for very high dimensionalities this might still lead to
 computationally infeasible sparse grids.
+
+\paragraph{Regular sparse grids with coarse boundaries}
 
 \newgsymbol{.sb}{$\cdot^{\sparse(b)}$}{%
   Superscript for ``sparse grid with boundary parameter $b$
@@ -514,6 +518,8 @@ Its correctness can be formally proved with the following invariant:
   \label{fig:coarseBoundary}
 \end{figure}
 
+\paragraph{Hierarchization}
+
 An important implication of the regular sparse grids
 $\Omega_{n,d}^{\sparse(b)}$ as defined in \cref{def:coarseBoundary}
 is that in general,
@@ -543,6 +549,8 @@ on the boundary, this does not influence the interpolated values in step~1.
 
 \subsection{Sparse Grids Without Boundary Points and Modified Bases}
 
+\paragraph{Omitting boundary points}
+
 The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
 For the hat function basis $\varphi_{\ßl,\ßi}^1$,
@@ -555,6 +563,8 @@ boundary point.
 Consequently, the surpluses corresponding to boundary points vanish
 for a grid with boundary points,
 implying that these points can be removed from the grid.
+
+\paragraph{Modified linear basis}
 
 Of course, this approach is not viable for functions with non-zero
 boundary values or general hierarchical bases,

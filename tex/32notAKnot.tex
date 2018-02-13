@@ -15,6 +15,8 @@ we introduce a new B-spline basis that does not suffer from this issue.
 
 \subsection{Approximation Power of Uniform Hierarchical B-Splines}
 
+\paragraph{Interpolation of polynomials}
+
 Splines are a piecewise generalization of polynomials.
 Consequently, approximation spaces spanned by splines of degree $p$ should
 at least contain all polynomials of degree $\le p$,
@@ -80,6 +82,8 @@ the resulting interpolant $\tilde{f}$ cannot be the same as the previous
 interpolant,
 which is why $f$ and $\tilde{f}$ differ inside $D_l^p$.
 
+\paragraph{Schoenberg--Whitney conditions}
+
 Formally, the unique existence of an interpolating spline is
 described by the so-called Schoenberg--Whitney conditions:
 
@@ -116,6 +120,8 @@ boundary values.
 In addition, the condition of the interpolation problem will most likely
 worsen if we place interpolation points near the end of the supports
 of the corresponding basis functions.
+
+\paragraph{Restriction to spline subspaces}
 
 As often, taking slightly a different view of the problem helps
 to find a solution.
@@ -162,6 +168,8 @@ in the process.
 
 
 \subsection{Hierarchical Not-A-Knot B-Splines}
+
+\paragraph{Not-a-knot conditions}
 
 A suitable subspace can be obtained by incorporating the
 so-called \term{not-a-knot boundary conditions} into $S_l^{p,[0,1]}$.
@@ -270,6 +278,8 @@ there are not enough interior knots that could be removed.
 Without any special treatment,
 we would not be able to obtain enough basis functions to span the spline space.
 
+\paragraph{Hierarchical not-a-knot B-splines}
+
 \newgsymbol{Lli}{$L_{l,i}$}{%
   Lagrange polynomial of level $l$, index $i$%
 }%
@@ -319,6 +329,8 @@ as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
 $\varphi_{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
 and contained in the space $S_l^{p,\notaknot}$.
+
+\paragraph{Implementation}
 
 Note that in each level $l \ge \lceil\log_2(p+1)\rceil$,
 only the first $(p+1)/2$ (indices $i = 1, 3, \dotsc, p$)
