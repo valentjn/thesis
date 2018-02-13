@@ -11,7 +11,7 @@
 % Galerkin, and Particle-in-Cell Approaches"
 
 \chapter{Hierarchical B-Splines and Sparse Grids}
-\label{sec:20sparseGrids}
+\label{chap:30BSplines}
 
 
 
@@ -36,21 +36,28 @@ In this chapter, we define a hierarchical, higher-order B-spline basis
 to obtain both higher-order approximations
 and continuous gradients and Hessians.
 
+B-spline basis functions generalize the well-known hat functions.
+The first to study B-splines was Schoenberg in 1946,
+but he claimed that they had already been known to Laplace.
+\newgacronym{fem}{FEM}{Finite element method}%
+The possibilities of B-splines were recognized when
+the finite element method (\fem),
+which is still one of the most important applications of B-splines,
+emerged in the 1960s.
+Much important work like finding basic algorithms and proving fundamental
+theoretical results was done by de Boor.
+B-splines have been applied in various fields:
+\fem,
+geometric modeling with non-uniform rational B-splines (NURBS),
+financial mathematics,
+molecular and atomic physics,
+and other scientific and industrial areas.
+
 The aim of this chapter is to define hierarchical B-splines on sparse grids.
-It is structured as follows:
-\Cref{sec:21sparseGrids} provides a consistent notational framework
-for the definition of sparse grids with general basis functions.
-The reason not to employ specific bases such as the common hat functions
-or B-splines of higher degrees is two-fold:
-First, we will define various new ``flavors'' of B-splines,
-which is easier if the basis is left open.
-Second, most of the statements and theorems that we will make in this
-thesis will hold for general basis functions
-(in some cases with additional assumptions)
-and not just for B-splines.
-Next, \cref{sec:22bSplines} defines hierarchical B-splines for both
+It is into two sections:
+First, \cref{sec:31standardBSplines} defines hierarchical B-splines for both
 uniform and non-uniform knot sequences.
-Finally, we see in \cref{sec:23boundary} that the boundary behavior
+Second, we see in \cref{sec:32notAKnot} that the boundary behavior
 of the classical uniform B-spline basis is problematic,
 which is mitigated by incorporating not-a-knot boundary conditions
 into the B-spline basis.

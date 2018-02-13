@@ -1,31 +1,14 @@
 \section{Defining Hierarchical B-Splines}
-\label{sec:22bSplines}
+\label{sec:31standardBSplines}
 
 \todo{add references}
 
 \todo{add glossary entries}
 
-B-spline basis functions generalize the well-known hat functions.
-The first to study B-splines was Schoenberg in 1946,
-but he claimed that they had already been known to Laplace.
-\newgacronym{fem}{FEM}{Finite element method}%
-The possibilities of B-splines were recognized when
-the finite element method (\fem),
-which is still one of the most important applications of B-splines,
-emerged in the 1960s.
-Much important work like finding basic algorithms and proving fundamental
-theoretical results was done by de Boor.
-B-splines have been applied in various fields:
-\fem,
-geometric modeling with non-uniform rational B-splines (NURBS),
-financial mathematics,
-molecular and atomic physics,
-and other scientific and industrial areas.
-
 In this section, we mainly follow the presentation of
 \cite{Valentin14Hierarchische,Valentin16Hierarchical}
 to define hierarchical B-splines.
-Note that thanks to the groundwork laid in \cref{sec:21sparseGrids},
+Note that thanks to the groundwork laid in \cref{chap:20sparseGrids},
 especially \thmref{lemma:tensorProductLinearIndependence} and
 \thmref{prop:splittingUVToMV},
 it completely suffices to study the univariate case
@@ -233,7 +216,7 @@ for the rest of the thesis.
 
 With the hierarchical B-splines $\varphi_{l,i}^p$, we can define
 the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
-as in \cref{sec:21sparseGrids}.
+as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
 to be correct, we have to prove that the conditions of
 \thmref{lemma:hierSplittingUV} are satisfied.
@@ -449,7 +432,7 @@ is correct for hierarchical B-splines:
 This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
 We can now proceed to define multivariate
 nodal spaces $V_\ßl^p$, hierarchical subspaces $W_\ßl^p$, and
-sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{sec:21sparseGrids}.
+sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{chap:20sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
 since the hierarchical splitting \eqref{eq:hierSplittingMV} does not
@@ -472,7 +455,7 @@ bases.
 
 \subsection{Modification}
 
-Similarly to the piecewise linear case in \cref{sec:213boundary},
+Similarly to the piecewise linear case in \cref{sec:24boundary},
 Pflüger defined modified
 hierarchical B-splines to obtain reasonable values on the boundary
 without having to place grid points there \cite{Pflueger10Spatially}.
@@ -588,7 +571,7 @@ must be extended to $(p+1)/2 - 1$.
 \subsection{Non-Uniform Hierarchical B-Splines}
 
 Sparse grid spaces and their corresponding grid point sets,
-as we have defined them in \cref{sec:21sparseGrids},
+as we have defined them in \cref{chap:20sparseGrids},
 are completely independent of the actual location of the grid points
 $x_{l,i}$.
 Therefore, it is possible to use different distributions for the grid points
