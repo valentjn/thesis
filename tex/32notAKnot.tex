@@ -354,19 +354,116 @@ we only have to implement a number of special case for coarse levels $l$.
 In other words, the not-a-knot approach is ``minimally invasive''
 with respect to an implementation that already uses uniform B-splines.
 
-\paragraph{Hierarchical splitting for not-a-knot B-splines}
+\paragraph{Hierarchical splitting}
 
-The hierarchical not-a-knot basis
+The main benefit of the hierarchical not-a-knot B-spline basis
+is the validity of the hierarchical splitting.
+Again usual, we define $V_l^{p,\notaknot}$ and $W_l^{p,\notaknot}$
+as the nodal and the hierarchical not-a-knot subspace of level $l$,
+respectively.
 
-\todo{write}
+\begin{proposition}[hierarchical splitting for not-a-knot B-splines]
+  \label{prop:hierSplittingNAKBSplineUV}
+  \newgsymbol{Pp}{$P^p$}{%
+    Space of all polynomials of degree $\le p$ on $[0, 1]$%
+  }%
+  The hierarchical splitting \eqref{eq:hierSplittingUV}
+  holds for the hierarchical not-a-knot B-spline basis:
+  \begin{equation}
+    S_l^{p,\notaknot}
+    = V_l^{p,\notaknot}
+    = \bigoplus_{l'=0}^l W_{l'}^{p,\notaknot},
+  \end{equation}
+  where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
+  is defined as the space $P^{2^l + 1}$ of polynomials of degree
+  $\le 2^l + 1$ on $[0, 1]$.
+\end{proposition}
 
-\blindtext{}
+\begin{proof}
+  For $l < \lceil\log_2(p+1)\rceil$, all
+  three spaces coincide with $P^{2^l + 1}$ and nothing is to prove.
+  
+  For $l \ge \lceil\log_2(p+1)\rceil$,
+  we check the two conditions of \thmref{lemma:hierSplittingUV}.
+  First, the hierarchical subspace $W_{l'}^{p,\notaknot}$ ($l' \le l$)
+  is a subspace of $S_l^{p,\notaknot} = V_l^{p,\notaknot}$.
+  This is a conclusion of \thmref{prop:splineSpace}, as
+  every function $\varphi_{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
+  is continuous on $[0, 1]$, a polynomial on every knot interval of
+  $\ß\xi_l^{p,\notaknot}$, and at the knots themselves
+  at least $(p - 1)$ times continuously differentiable.
+  
+  Second, the hierarchical functions $\varphi_{l',i'}^{p,\notaknot}$
+  ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+  This can be shown similar to the proof of
+  \thmref{prop:hierBSplineLinearlyIndependent}.
+  The linear independence of the Lagrange polynomials
+  can be checked by inserting grid points into a zero linear combination.
+  The linear combination collapses and only one term remains,
+  the coefficient corresponding to the grid point.
+  Hence, all coefficients must vanish.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:hierSplittingNAKBSplineMV}
+  It holds
+  \begin{equation}
+    S_\ßl^{\ßp,\notaknot}
+    = V_\ßl^{\ßp,\notaknot}
+    = \bigoplus_{\ßl'=\ß0}^\ßl W_{\ßl'}^{\ßp,\notaknot},
+  \end{equation}
+  where is the tensor product space of $S_{l_t}^{p_t,\notaknot}$
+  ($t = 1, \dotsc, d$) as defined in \cref{prop:hierSplittingNAKBSplineUV}.
+\end{corollary}
+
+\begin{proof}
+  Follows directly from \thmref{prop:splittingUVToMV}.
+\end{proof}
+
+\paragraph{Sparse grids with not-a-knot B-splines}
+
+Regular sparse grid spaces using the new hierarchical not-a-knot basis
+are defined analogously to the uniform case, i.e.,
+\begin{equation}
+  \label{eq:sparseGridRegularNAK}
+  V_{n,d}^{\sparse,\ßp,\notaknot}
+  := \bigoplus_{\norm{\ßl}_1 \le n} W_\ßl^{\ßp,\notaknot}.
+\end{equation}
+\newgsymbol{Pp!}{$P^\ßp$}{%
+  Space of all $d$-variate polynomials of
+  coordinate degree $\le \ßp$ on $[\ß0, \ß1]$%
+}%
+If the level $n$ is large enough, then $V_{n,d}^{\sparse,\ßp,\notaknot}$
+contains the space $P^\ßp$ of all $d$-variate polynomials of
+coordinate degree $\le \ßp$ on $[\ß0, \ß1]$
+(i.e., functions $f\colon [0, 1] \to \RR$,
+$f(\ßx) := \sum_{\ßq=\ß0}^\ßp c_\ßq \prod_{t=1}^d x_t^{q_t}$,
+with $c_\ßq \in \RR$).
+This means that in contrast to the uniform B-spline basis,
+hierarchical not-a-knot B-splines on sparse grids are able to exactly
+represent global polynomials on $[\ß0, \ß1]$.
+
+\begin{corollary}
+  If $n \ge \norm{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}_1$,
+  then $P^\ßp \subset V_{n,d}^{\sparse,\ßp,\notaknot}$.
+\end{corollary}
+
+\begin{proof}
+  Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \norm{\ßl}_1$.
+  By \cref{cor:hierSplittingNAKBSplineMV}, we have
+  $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
+  In addition, all $\ßl' \in \NN_0^d$ with $\ßl' \le \ßl$ satisfy
+  $\norm{\ßl'}_1 \le n$ and thus,
+  $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} \subset
+  V_{n,d}^{\sparse,\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
+  We conclude
+  $P^\ßp \subset S_\ßl^{\ßp,\notaknot} \subset
+  V_{n,d}^{\sparse,\ßp,\notaknot}$, which is the asserted claim.
+\end{proof}
 
 
 
 \subsection{Modified and Non-Uniform Hierarchical Not-A-Knot B-Splines}
-
-\todo{write}
 
 \blindtext{}
 
@@ -375,8 +472,6 @@ The hierarchical not-a-knot basis
 \subsection{Other Approaches to Incorporate Boundary Conditions}
 
 Not-a-knot boundary conditions are not the only approach to obtain
-a subspace of $S_l^p$ with the right dimension.
-
-\todo{write}
+a subspace of $S_l^{p,[0,1]}$ with the right dimension.
 
 \blindtext{}
