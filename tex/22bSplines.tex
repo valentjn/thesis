@@ -343,27 +343,29 @@ $D_\ß\xi^p$:
     Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
     for a function space $V$%
   }%
-  The nodal B-splines $\varphi_{l,i}^p$ ($i = 0, \dotsc, 2^l$)
+  \newgsymbol{xilp}{$\ß\xi_l^p$}{%
+    Knot sequence for uniform hierarchical B-splines%
+  }%
+  The restricted nodal B-splines $\varphi_{l,i}^p|_{D_l^p}$
+  ($i = 0, \dotsc, 2^l$)
   of level $l \in \NN_0$ are
-  a basis of the spline space $S_\ß\xi^p$
-  \begin{equation}
+  a basis of the spline space $S_{\ß\xi_l^p}^p$, where
+  \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
-    \xi_k
+    \xi_{l,k}^p
     := (k - (p+1)/2) h_l,\quad
     k = 0, \dotsc, m + p,\quad
-    m := 2^l + 1,
-  \end{equation}
-  and
-  \begin{equation}
-    V_l^p|_{D_l^p} = S_\ß\xi^p,\quad
+    m := 2^l + 1,\\
     D_l^p := \left[h_l \frac{p-1}{2},\; 1 - h_l \frac{p-1}{2}\right],
+  \end{gather}
+  and consequently
+  \begin{equation}
+    V_l^p|_{D_l^p} = S_{\ß\xi_l^p}^p.
   \end{equation}
-  where $V_l^p|_{D_l^p} := \{f_l|_{D_l^p} \mid f_l \in V_l^p\}$
-  is the nodal space restricted to $D_l^p$.
 \end{corollary}
 
 \begin{proof}
-  We have $\varphi_{l,i}^p = b_{i,\ß\xi}^p$ for
+  We have $\varphi_{l,i}^p = b_{i,\ß\xi_l^p}^p$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -385,10 +387,10 @@ $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 \begin{proof}
   Every function $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
-  of $\ß\xi$ as defined in \cref{cor:nodalBSplineSpace} (due to $p$ odd),
+  of $\ß\xi_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
-  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_\ß\xi^p$
+  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_{\ß\xi_l^p}^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
   $\varphi_{l',i'}^p \in V_l^p|_{D_l^p}$.
   As the functions $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) span
@@ -433,11 +435,10 @@ is correct for hierarchical B-splines:
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
   \begin{equation}
-    S_\ß\xi^p
+    S_{\ß\xi_l^p}^p
     = V_l^p|_{D_l^p}
-    = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p},
+    = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}.
   \end{equation}
-  where $\ß\xi$ is as defined in \eqref{eq:nodalBSplineSpaceKnots}.
 \end{corollary}
 
 \begin{proof}
@@ -655,8 +656,8 @@ $\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NN_0$ and index
 $i \in I_l$ is defined as
 \begin{equation}
   \varphi_{l,i}^{p,\clenshawcurtis}
-  := b_{0,\ß\xi}^p,\quad
-  \ß\xi
+  := b_{0,\ß\xi_l^{p,\clenshawcurtis}}^p,\quad
+  \ß\xi_l^{p,\clenshawcurtis}
   := (x_{l,i-(p+1)/2}^\clenshawcurtis,\; \dotsc,\;
   x_{l,i}^\clenshawcurtis,\; \dotsc,\;
   x_{l,i+(p+1)/2}^\clenshawcurtis),
