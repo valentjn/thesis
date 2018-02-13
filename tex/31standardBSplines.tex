@@ -3,8 +3,6 @@
 
 \todo{add references}
 
-\todo{update glossary entries after chapter split...}
-
 In this section, we mainly follow the presentation of
 \cite{Valentin14Hierarchische,Valentin16Hierarchical}
 to define hierarchical B-splines.
@@ -307,6 +305,7 @@ $D_\ß\xi^p$:
     and ends with the first knot interval of the last B-spline
     $b_{m-1,\ß\xi}^p$,
     the B-splines span the spline space $S_\ß\xi^p$.
+    \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
     Elements of this space are splines $s\colon D_\ß\xi^p \to \RR$
     \emph{(black line)},
     which are linear combinations
@@ -327,7 +326,16 @@ $D_\ß\xi^p$:
     for a function space $V$%
   }%
   \newgsymbol{xilp}{$\ß\xi_l^p$}{%
-    Knot sequence for uniform hierarchical B-splines%
+    Knot sequence
+    for uniform nodal B-splines of level $l$, degree $p$%
+  }%
+  \newgsymbol{Slp}{$S_l^p$}{%
+    Spline space $:= S_{\ß\xi_l^p}^p$
+    (spanned by the uniform nodal B-splines of level $l$, degree $p$)%
+  }%
+  \newgsymbol{Dlp}{$D_l^p$}{%
+    Spline interpolation domain of $S_l^p$
+    (uniform nodal B-splines of level $l$, degree $p$)%
   }%
   The restricted nodal B-splines $\varphi_{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
@@ -343,7 +351,9 @@ $D_\ß\xi^p$:
   \end{gather}
   and consequently
   \begin{equation}
-    V_l^p|_{D_l^p} = S_{\ß\xi_l^p}^p.
+    V_l^p|_{D_l^p}
+    = S_l^p
+    := S_{\ß\xi_l^p}^p.
   \end{equation}
 \end{corollary}
 
@@ -373,7 +383,7 @@ $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
   of $\ß\xi_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
-  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_{\ß\xi_l^p}^p$
+  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_l^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
   $\varphi_{l',i'}^p \in V_l^p|_{D_l^p}$.
   As the functions $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) span
@@ -418,7 +428,7 @@ is correct for hierarchical B-splines:
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
   \begin{equation}
-    S_{\ß\xi_l^p}^p
+    S_l^p
     = V_l^p|_{D_l^p}
     = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}.
   \end{equation}

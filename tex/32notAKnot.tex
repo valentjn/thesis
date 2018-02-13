@@ -59,10 +59,10 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $S_{\ß\xi_l^p}^p = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$
+we have $S_l^p = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
-$f \in S_{\ß\xi_l^p}^p$ and hence
+$f \in S_l^p$ and hence
 $f \in \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
 $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
@@ -119,7 +119,11 @@ of the corresponding basis functions.
 
 As often, taking slightly a different view of the problem helps
 to find a solution.
-Let $S_l^p$ denote the space of all splines of degree $p$
+\newgsymbol{Slp01}{$S_l^{p,[0,1]}$}{%
+  Spline space of degree $p$ on the grid
+  $\{x_{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$%
+}%
+Let $S_l^{p,[0,1]}$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 \begin{equation}
   \label{eq:fullGridKnots}
@@ -130,22 +134,22 @@ on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 We have $D_\ß\xi^p = [0, 1]$ for this choice of $\ß\xi$, i.e.,
 the grid points $x_{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^p$,
-but it cannot equal $S_l^p$ due to
+Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^{p,[0,1]}$,
+but it cannot equal $S_l^{p,[0,1]}$ due to
 \begin{equation}
   \dim \bigoplus_{l'=0}^l W_l^p
   = 2^l + 1
   < 2^l + p
   = m
-  = \dim S_\ß\xi^p,\quad
+  = \dim S_l^{p,[0,1]},\quad
   p > 1,
 \end{equation}
 by \thmref{prop:splineSpace}.
 There are too few nodal (and hierarchical) basis functions to
-span the whole spline space $S_\ß\xi^p$.
+span the whole spline space $S_l^{p,[0,1]}$.
 
 The key idea is now to impose additional $(p - 1)$ boundary conditions
-on the basis functions to restrict $S_\ß\xi^p$ to a reasonable subspace
+on the basis functions to restrict $S_l^{p,[0,1]}$ to a reasonable subspace
 with the correct dimension $(2^l + p) - (p - 1) = 2^l + 1$.
 ``Reasonable'' means that besides this dimension constraint,
 two requirements should be met:
@@ -160,7 +164,7 @@ in the process.
 \subsection{Hierarchical Not-A-Knot B-Splines}
 
 A suitable subspace can be obtained by incorporating the
-so-called \term{not-a-knot boundary conditions} into $S_\ß\xi^p$.
+so-called \term{not-a-knot boundary conditions} into $S_l^{p,[0,1]}$.
 For the cubic case $p = 2$,
 for which we need two conditions,
 the not-a-knot conditions demand that
@@ -180,8 +184,22 @@ inner grid points
   x_{l,i},\quad
   i \in \{1, \dotsc, (p-1)/2\} \cup \{2^l - (p-1)/2, \dotsc, 2^l\},
 \end{equation}
-which is equivalent to removing these knots from the knot sequence $\ß\xi$.
+which is equivalent to removing these knots from the knot sequence $\ß\xi$,
+or, alternatively, to requiring that $s$ is a polynomial
+of degree $\le p$ on $[0, x_{l,(p+1)/2}]$ and on $[x_{l,2^l-(p+1)/2}, 1]$.
 
+\newgsymbol{.nak}{$\cdot^\notaknot$}{%
+  Superscript for ``Not-a-knot (knot sequence/basis
+  function/function space/interpolant)''%
+}%
+\newgsymbol{xilpnak}{$\ß\xi_l^{p,\notaknot}$}{%
+  Knot sequence
+  for nodal not-a-knot B-splines of level $l$, degree $p$%
+}%
+\newgsymbol{Slpnak}{$S_l^{p,\notaknot}$}{%
+  Spline space $:= S_{\ß\xi_l^{p,\notaknot}}^p$
+  (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)%
+}%
 The knot sequence $\ß\xi_l^{p,\notaknot}$
 with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
@@ -206,27 +224,32 @@ This knot sequence $\ß\xi_l^{p,\notaknot}$
 can be obtained by removing the knots
 given in \eqref{eq:removedNAKKnots} from the
 knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
-The resulting spline space $S_{\ß\xi_l^{p,\notaknot}}^p$ is a subspace
-of $S_l^p$ with the correct dimensionality:
+The resulting spline space
+\begin{equation}
+  S_l^{p,\notaknot}
+  := S_{\ß\xi_l^{p,\notaknot}}^p
+\end{equation}
+is a subspace
+of $S_l^{p,[0,1]}$ with the correct dimensionality:
 \begin{equation}
   \dim \bigoplus_{l'=0}^l W_l^p
   = 2^l + 1
-  = \dim S_{\ß\xi_l^{p,\notaknot}}^p.
+  = \dim S_l^{p,\notaknot}.
 \end{equation}
-The new space $S_{\ß\xi_l^{p,\notaknot}}^p$ satisfies our two requirements:
-First, the spline interpolation domain of $S_{\ß\xi_l^{p,\notaknot}}^p$
+The new space $S_l^{p,\notaknot}$ satisfies our two requirements:
+First, the spline interpolation domain of $S_l^{p,\notaknot}$
 equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
-for $S_{\ß\xi_l^{p,\notaknot}}^p$, since all interpolation grid
+for $S_l^{p,\notaknot}$, since all interpolation points
 (grid points) lie within $D_{\ß\xi_l^{p,\notaknot}}^p = [0, 1]$.
-Second, $S_{\ß\xi_l^{p,\notaknot}}^p$ still contains all polynomials of
-degree $\le p$, as we have only removed knots compared to $S_l^p$.
+Second, $S_l^{p,\notaknot}$ still contains all polynomials of
+degree $\le p$, as we have only removed knots compared to $S_l^{p,[0,1]}$.
 
 However, $\bigoplus_{l'=0}^l W_l^p$ is not a subspace of
-$S_{\ß\xi_l^{p,\notaknot}}^p$ anymore,
+$S_l^{p,\notaknot}$ anymore,
 as the hierarchical basis functions $\varphi_{l',i'}^p$ are not
 not-a-knot splines (due to the additional knots that we removed from
-$S_{\ß\xi_l^{p,\notaknot}}^p$).
+$S_l^{p,\notaknot}$).
 For this reason,
 we have to incorporate the not-a-knot boundary conditions into the
 hierarchical basis.
@@ -247,6 +270,9 @@ there are not enough interior knots that could be removed.
 Without any special treatment,
 we would not be able to obtain enough basis functions to span the spline space.
 
+\newgsymbol{Lli}{$L_{l,i}$}{%
+  Lagrange polynomial of level $l$, index $i$%
+}%
 For the definition of \term{hierarchical not-a-knot B-splines}
 $\varphi_{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
 we use global Lagrange polynomials for the coarser levels:
@@ -272,6 +298,9 @@ The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
 $\{(x_{l,i'}, \delta_{i,i'}) \mid i' = 0, \dotsc, 2^l\}$.
+\newgsymbol{deg}{$\deg f$}{%
+  Degree of the polynomial $f$%
+}%
 Since its degree $\deg L_{l,i}$ is bounded by $2^l$,
 we have $\deg L_{l,i} < p + 1$,
 as the Lagrange polynomials are employed only when
