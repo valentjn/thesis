@@ -122,6 +122,31 @@ of the hat function.
   \label{fig:cardinalBSpline}
 \end{figure}
 
+\begin{figure}
+  \includegraphics{cardinalBSplineProps_1}%
+  \caption{%
+    Eight properties of cardinal B-splines using the quadratic case
+    $p = 2$ as example.\\
+    \emph{Circle 1:} $b^p$ is compactly supported on $[0, p+1]$.\\
+    \emph{Circle 2:} $b^p$ is symmetric and $0 \le b^p \le 1$.\\
+    \emph{Circle 3:} $b^p$ is a weighted combination of
+    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
+    $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    %where the coefficients \emph{(dashed)} are linear in $x$.\\
+    \emph{Circle 4:} $b^p$ is a piecewise polynomial of degree $p$.\\
+    \emph{Circle 5:} $\frac{\diff}{\dx}$ is the difference of
+    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
+    $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    \emph{Circle 6:} $b^p$ has unit integral.\\
+    \emph{Circle 7:} $b^p$ is the convolution of
+    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and $b^0$.\\
+    \emph{Circle 8:} Hat function \emph{\textcolor{C0}{(blue)}} and
+    Gaussian bell curve \emph{\textcolor{C1}{(red)}} are special cases
+    of $b^p$.%
+  }%
+  \label{fig:cardinalBSplineProps}
+\end{figure}
+
 \paragraph{Uniform hierarchical B-splines}
 
 \newgsymbol{.p}{$\cdot^p$}{%
