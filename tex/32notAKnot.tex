@@ -221,7 +221,7 @@ with not-a-knot boundary conditions is defined as follows:
     \begin{cases}
       (k - p) h_l,&
       k = 0, \dotsc, p,\\
-      (k - (p+1)/2) h_l,&
+      (k - \tfrac{p+1}{2}) h_l,&
       k = p + 1, \dotsc, 2^l,\\
       (k - 1) h_l,&
       k = 2^l + 1, \dotsc, 2^l + p + 1.
@@ -333,8 +333,10 @@ and contained in the space $S_l^{p,\notaknot}$.
 \paragraph{Implementation}
 
 Note that in each level $l \ge \lceil\log_2(p+1)\rceil$,
-only the first $(p+1)/2$ (indices $i = 1, 3, \dotsc, p$)
-and the last $(p+1)/2$ (indices $i = 2^l - p, 2^l - p + 2, \dotsc, 2^l - 1$)
+only the first $\tfrac{p+1}{2}$
+(indices $i = 1, 3, \dotsc, p$)
+and the last $\tfrac{p+1}{2}$
+(indices $i = 2^l - p, 2^l - p + 2, \dotsc, 2^l - 1$)
 hierarchical basis functions $\varphi_{l,i}^{p,\notaknot}$
 differ from $\varphi_{l,i}^p$,
 i.e., we have
@@ -346,7 +348,7 @@ This means that we can reuse uniform B-spline code
 for the inner functions.
 Due to $\varphi_{l,i}^{p,\notaknot} = \varphi_{l,2^l-i}^{p,\notaknot}$
 (because of the symmetry of $\ß\xi_l^{p,\notaknot}$),
-we only have to implement $(p+1)/2$ not-a-knot B-splines per level $l$.
+we only have to implement $\tfrac{p+1}{2}$ not-a-knot B-splines per level $l$.
 As $\varphi_{l,i}^{p,\notaknot}$ and $\varphi_{l+1,i}^{p,\notaknot}$
 use the same knots up to an affine transformation for $l$ large enough
 ($l \ge 3$ suffices for $p = 3$),

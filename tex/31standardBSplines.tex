@@ -178,11 +178,11 @@ $i \in I_l$ via an affine parameter transformation:
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
   \varphi_{l,i}^p(x)
-  := b^p(x/h_l + (p+1)/2 - i).
+  := b^p(\tfrac{x}{h_l} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\varphi_{l,i}^p$ is given
-by $\supp \varphi_{l,i}^p = [0, 1] \cap (h_l \cdot [i \pm (p+1)/2])$,
-where $[i \pm (p+1)/2] := [i - (p+1)/2, i + (p+1)/2]$.
+by $\supp \varphi_{l,i}^p = [0, 1] \cap (h_l \cdot [i \pm \tfrac{p+1}{2}])$,
+where $[i \pm \tfrac{p+1}{2}] := [i - \tfrac{p+1}{2}, i + \tfrac{p+1}{2}]$.
 The hat function basis $\varphi_{l,i}^1$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
 \eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
@@ -401,10 +401,11 @@ $D_\ß\xi^p$:
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
     \xi_{l,k}^p
-    := (k - (p+1)/2) h_l,\quad
+    := (k - \tfrac{p+1}{2}) h_l,\quad
     k = 0, \dotsc, m + p,\quad
     m := 2^l + 1,\\
-    D_l^p := \left[h_l \frac{p-1}{2},\; 1 - h_l \frac{p-1}{2}\right],
+    D_l^p := [h_l \tfrac{p-1}{2},\;
+    1 - h_l \tfrac{p-1}{2}],
   \end{gather}
   and consequently
   \begin{equation}
@@ -546,7 +547,7 @@ Originally, this requirement stems from financial problems
 For the left boundary,
 \eqref{eq:naturalBoundaryConditions} can be satisfied by
 modifying the left-most function $\varphi_{l,1}^p$ such that
-$\varphi_{l,1}^{p,\modified}(x) = 2 - x/h_l$ is a linear polynomial
+$\varphi_{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{h_l}$ is a linear polynomial
 when $x$ is ``near'' the boundary.
 As in \cite{Pflueger10Spatially},
 we append $\varphi_{l,1}^p$ with
@@ -582,7 +583,7 @@ By applying Marsden's identity twice,
   x \in \RR,
 \end{equation}
 we obtain a possible definition for $\varphi_{l,i}^{p,\modified}$.
-Note that only the B-splines with $i \ge 1 - (p+1)/2$
+Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
 are relevant for the unit interval as all other B-splines vanish in $[0, 1]$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
 $\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
@@ -607,7 +608,7 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \end{equation}
 By \thmref{prop:splineSpace},
 this definition implies that
-$\varphi_{l,1}^p(x) = 2 - x/h_l$ ($l \ge 2$)
+$\varphi_{l,1}^p(x) = 2 - \tfrac{x}{h_l}$ ($l \ge 2$)
 is only valid for $x \in [0,\; h_l \cdot (5-p)/2]$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
@@ -615,7 +616,7 @@ in its absolute value.
 If it is desired to enforce natural boundary conditions
 for higher than quintic degrees,
 then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSpline}
-must be extended to $(p+1)/2 - 1$.
+must be extended to $\tfrac{p+1}{2} - 1$.
 
 \begin{figure}
   \subcaptionbox{%
