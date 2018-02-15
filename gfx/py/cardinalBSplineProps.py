@@ -79,19 +79,18 @@ def plotSpline(ax, center, radius, p):
   ax.plot(*t(xx1, yy1), "--", color="C1")
   ax.plot(*t(xx2, yy2), "--", color="C2")
   
-  # TODO
-  h = 0.1
+  h = 0.035
   bPrev = helper.basis.CardinalBSpline(p-1)
   bDeriv = lambda x: bPrev.evaluate(x) - bPrev.evaluate(x - 1)
   for x0 in range(p + 2):
     y0 = b.evaluate(x0)
     d0 = np.array((1, bDeriv(x0)))
+    d0[0] *= globalScale[0] / max(xx)
+    d0[1] *= globalScale[1] / max(yy)
     d0 /= np.sqrt(d0[0]**2 + d0[1]**2)
     d0 = h * np.array((-d0[1], d0[0]))
-    #d0[0] *= (globalScale[1]/max(yy))/(globalScale[0]/max(xx))
-    d0[0] *= max(xx) / globalScale[0]
-    d0[1] *= max(yy) / globalScale[1]
-    ax.plot(*t([x0 - d0[0], x0 + d0[0]], [y0 - d0[1], y0 + d0[1]]), "k-")
+    x0, y0 = t(x0, y0)
+    ax.plot([x0 - d0[0], x0 + d0[0]], [y0 - d0[1], y0 + d0[1]], "k-")
 
 def plotDerivative(ax, center, radius, p):
   b = helper.basis.CardinalBSpline(p)
@@ -139,24 +138,26 @@ def plotConvolution(ax, center, radius, p):
                                np.hstack((np.zeros_like(yyRect), yyRect[::-1]))))
   ax.add_patch(matplotlib.patches.Polygon(xxyyRect, ec="none", fc="C0", alpha=0.5))
   ax.plot(*t(x, b.evaluate(x)), "k.")
+  ax.plot(*t([x-1, x], [0, 0]), "k--")
+  ax.text(*t(x-0.5, -0.05), "$1$", ha="center", va="top")
 
 def plotGeneralization(ax, center, radius, p):
   r = 3
   
-  for p in [7, 6, 5, 4, 3, 2, 1]:
+  for p in [10, 3, 2, 1]:
+    c = np.sqrt((p+1) / 12)
     b = helper.basis.CardinalBSpline(p)
-    xx = np.linspace(max((p+1)/2-r, 0), min((p+1)/2+r, p+1), 100)
-    yy = b.evaluate(xx)
-    yy = yy / np.sqrt(p+1)
-    t = lambda x, y: ((np.array(x) - (p+1)/2) / (2*r) * 1.3 *
+    xx = np.linspace(max(-r, -(p+1)/(2*c)), min(r, (p+1)/(2*c)), 100)
+    yy = c * b.evaluate(c * xx + (p+1)/2)
+    t = lambda x, y: (np.array(x) / (2*r) * 1.0 *
                       globalScale[0] * smallCircleRadius + center[0],
-                      (np.array(y) - 1/(2*np.sqrt(2)) + 0.1) * 1.9 *
+                      (np.array(y) * np.sqrt(6) - 0.5) *
                       globalScale[1] * smallCircleRadius + center[1])
     ax.plot(*t(xx, yy), "-", color=("C0" if p == 1 else "k"))
   
   xx = np.linspace(-r, r, 100)
-  yy = np.exp(-xx**2 / 2) / (2 * np.pi)
-  ax.plot(*t(xx + (p+1)/2, yy), "-", color="C1")
+  yy = np.exp(-xx**2 / 2) / np.sqrt(2*np.pi)
+  ax.plot(*t(xx, yy), "-", color="C1")
 
 p = 2
 largeCircleRadius = 1.5
