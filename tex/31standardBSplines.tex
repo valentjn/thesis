@@ -103,10 +103,24 @@ The cardinal B-spline $b^p$ has the following properties:
   }%
   As a special case, $b^1$ is a hat function interpolating the data
   $\{(k, \delta_{k,1}) \mid k \in \ZZ\}$.
-  One can show that for the limit of $p \to \infty$,
-  $b^p$ converges to the Gaussian bell curve function
-  $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$.
-  \todo{check, more exact}
+  For $p \to \infty$, the normalized cardinal B-splines converge
+  pointwise to the standard Gaussian function
+  $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
+  \footnote{%
+    This can also be seen as a consequence of the central limit theorem
+    applied to uniformly distributed random variables.
+    The pointwise convergence of the probability density functions
+    can be proved from the convergence
+    in distribution using a converse to Scheffé's theorem
+    \cite{Boos85Converse}.%
+  }
+  \begin{equation}
+    \lim_{p \to \infty}
+    c^p b^p(c^p x + \tfrac{p+1}{2})
+    = b^\infty(x),\quad
+    c^p := \sqrt{\frac{p+1}{12}},\quad
+    x \in \RR.
+  \end{equation}
 \end{enumerate}
 The cardinal B-splines of the first degrees are shown in
 \cref{fig:cardinalBSpline}.
