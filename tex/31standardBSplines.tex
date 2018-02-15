@@ -41,7 +41,8 @@ is defined by the recursion
 \end{equation}
 where $\chi_{\halfopeninterval{0, 1}}$ is the characteristic function of
 the half-open unit interval $\halfopeninterval{0, 1}$.
-The cardinal B-spline $b^p$ has the following properties:
+The cardinal B-spline $b^p$ has the following properties,
+which are also shown in \cref{fig:cardinalBSplineProps}:
 \begin{enumerate}
   \item
   \newgsymbol{supp}{$\supp f$}{Support of a function $f$}%
@@ -92,6 +93,7 @@ The cardinal B-spline $b^p$ has the following properties:
   
   \item
   \emph{Convolution:}
+  \newgsymbol{!*}{$\ast$}{Convolution $f \ast g$ of two functions $f$ and $g$}%
   The integral in the definition of $b^p$
   is the convolution $b^{p-1} \ast b^0$ of the B-spline $b^{p-1}$
   of degree $p - 1$ with the B-spline $b^0$ of degree $0$.
@@ -140,7 +142,7 @@ of the hat function.
   \includegraphics{cardinalBSplineProps_1}%
   \caption{%
     Eight properties of cardinal B-splines using the quadratic case
-    $p = 2$ as example.\\
+    $p = 2$ as an example.\\
     \emph{Circle 1:} $b^p$ is compactly supported on $[0, p+1]$.\\
     \emph{Circle 2:} $b^p$ is symmetric and $0 \le b^p \le 1$.\\
     \emph{Circle 3:} $b^p$ is a weighted combination of
@@ -148,15 +150,16 @@ of the hat function.
     $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
     %where the coefficients \emph{(dashed)} are linear in $x$.\\
     \emph{Circle 4:} $b^p$ is a piecewise polynomial of degree $p$.\\
-    \emph{Circle 5:} $\frac{\diff}{\dx}$ is the difference of
+    \emph{Circle 5:} $\frac{\diff}{\dx}$ \emph{(dashed)}
+    is the difference of
     $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
     $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
     \emph{Circle 6:} $b^p$ has unit integral.\\
     \emph{Circle 7:} $b^p$ is the convolution of
     $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and $b^0$.\\
     \emph{Circle 8:} Hat function \emph{\textcolor{C0}{(blue)}} and
-    Gaussian bell curve \emph{\textcolor{C1}{(red)}} are special cases
-    of $b^p$.%
+    Gaussian function \emph{\textcolor{C1}{(red)}}
+    are special cases of $b^p$.%
   }%
   \label{fig:cardinalBSplineProps}
 \end{figure}
