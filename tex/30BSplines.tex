@@ -17,19 +17,22 @@
 
 \todo{some glue is missing here}
 
+\todo{add references}
+
 However, conventional basis functions for sparse grids,
 such as the piecewise linear hat function basis $\varphi_{l,i}^1$,
 share the downside that they are not continuously differentiable.
 This has two important implications.
 
-First, the approximation order of piecewise linear hat functions
-is not as high as the higher order of other basis function types,
+First, the approximation order of hat functions
+is not as high as the order of other basis function types,
 for examples higher-degree splines.
 This issue does not arise for the piecewise polynomial basis
 by Bungartz \cite{Bungartz98Finite}.
 Second, and this also applies to Bungartz's basis,
 we are not able to compute globally continuous gradients of the
-interpolant of a smooth objective function.
+interpolant of a smooth objective function,
+if we use non-smooth basis functions.
 This is essential in the application of gradient-based optimization,
 which we target in this thesis.
 In this chapter, we define a hierarchical, higher-order B-spline basis
@@ -42,7 +45,7 @@ but he claimed that they had already been known to Laplace.
 \newgacronym{fem}{FEM}{Finite element method}%
 The possibilities of B-splines were recognized when
 the finite element method (\fem),
-which is still one of the most important applications of B-splines,
+which is still one of the most significant applications of B-splines,
 emerged in the 1960s.
 Much important work like finding basic algorithms and proving fundamental
 theoretical results was done by de Boor.
@@ -51,13 +54,13 @@ B-splines have been applied in various fields:
 geometric modeling with non-uniform rational B-splines (NURBS),
 financial mathematics,
 molecular and atomic physics,
-and other scientific and industrial areas.
+and other numerous scientific and industrial areas.
 
 The aim of this chapter is to define hierarchical B-splines on sparse grids.
-It is into two sections:
+It is divided into two sections:
 First, \cref{sec:31standardBSplines} defines hierarchical B-splines for both
 uniform and non-uniform knot sequences.
-Second, we see in \cref{sec:32notAKnot} that the boundary behavior
+Second, we learn in \cref{sec:32notAKnot} that the boundary behavior
 of the classical uniform B-spline basis is problematic,
 which is mitigated by incorporating not-a-knot boundary conditions
 into the B-spline basis.

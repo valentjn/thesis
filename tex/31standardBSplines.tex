@@ -150,7 +150,7 @@ of the hat function.
     $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
     %where the coefficients \emph{(dashed)} are linear in $x$.\\
     \emph{Circle 4:} $b^p$ is a piecewise polynomial of degree $p$.\\
-    \emph{Circle 5:} $\frac{\diff}{\dx}$ \emph{(dashed)}
+    \emph{Circle 5:} $\frac{\diff}{\dx} b^p$ \emph{(dashed)}
     is the difference of
     $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
     $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
@@ -181,8 +181,7 @@ $i \in I_l$ via an affine parameter transformation:
   := b^p(\tfrac{x}{h_l} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\varphi_{l,i}^p$ is given
-by $\supp \varphi_{l,i}^p = [0, 1] \cap (h_l \cdot [i \pm \tfrac{p+1}{2}])$,
-where $[i \pm \tfrac{p+1}{2}] := [i - \tfrac{p+1}{2}, i + \tfrac{p+1}{2}]$.
+by $\supp \varphi_{l,i}^p = [0, 1] \cap [x_{l,i-(p+1)/2}, x_{l,i+(p+1)/2}]$.
 The hat function basis $\varphi_{l,i}^1$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
 \eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
@@ -191,7 +190,7 @@ Note that due to the \term{translation invariance} of $\varphi_{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
-$\varphi_{l,i}^p$, $l \in \NN_0$, $i \in I_l$.
+$\varphi_{l,i}^p$ ($l \in \NN_0$, $i \in I_l$).
 
 \begin{figure}
   \subcaptionbox{%
@@ -225,8 +224,7 @@ $\varphi_{l,i}^p$, $l \in \NN_0$, $i \in I_l$.
 
 \paragraph{Odd and even degrees}
 
-In the following, we will only allow odd degrees $p = 1, 3, 5, \dotsc$
-in this thesis.
+In this thesis, we will only allow odd degrees $p = 1, 3, 5, \dotsc$.
 Many theoretical considerations would fail for even degrees.
 The basic reason is that for odd degrees, the knots of
 $\varphi_{l,i}^p$ coincide with the grid points
@@ -247,8 +245,8 @@ the middle between two subsequent grid points:
   \dotsc,\quad
   x_{l,i+p/2} + \frac{h_l}{2}.
 \end{equation}
-As we will see in this thesis,
-this fact would have many adverse implications.
+As we will see,
+this fact has many adverse implications on the hierarchical basis.
 Most crucial among these are
 that the hierarchical splitting \eqref{eq:hierSplittingUV} would not hold,
 \todo{insert reference}
@@ -306,7 +304,8 @@ we introduce the notion of non-uniform B-splines.
 \end{definition}
 Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline $b^p$.
-The definition can be used to characterize the nodal space $V_l^p$:
+\Cref{def:nonUniformBSpline} can be used to characterize
+the nodal space $V_l^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
@@ -320,7 +319,7 @@ The definition can be used to characterize the nodal space $V_l^p$:
     S_\ß\xi^p
     := \spn\{b_{k,\ß\xi}^p \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
-  $S_\ß\xi^p$ contains exactly those functions which are continuous
+  $S_\ß\xi^p$ contains exactly those functions that are continuous
   on $D_\ß\xi^p := [\xi_p, \xi_m]$,
   polynomials of degree $\le p$ on every knot interval
   $[\xi_k, \xi_{k+1}]$ \todo{check half-open interval?} in $D_\ß\xi$
@@ -341,8 +340,8 @@ $[\xi_0, \xi_{m+p}]$ of the B-spline supports,
 but rather on a proper sub-interval $D_\ß\xi^p$.
 Intuitively, for every point in $D_\ß\xi^p$ that is not a knot,
 exactly $(p + 1)$ B-splines must be \term{relevant} (i.e., non-zero)
-to span the spline space as
-on every knot interval, the spline is a polynomial of degree $\le p$
+to span the spline space,
+as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $(p + 1)$ degrees of freedom.
 Outside of $D_\ß\xi^p$, there are too few relevant B-splines
 to span the spline space.
@@ -355,7 +354,7 @@ $D_\ß\xi^p$:
   \caption{%
     Knot sequence $\ß\xi = (\xi_0, \dotsc, \xi_{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
-    $b_{k,\ß\xi}^p$, $k = 0, \dotsc, m - 1$, $p = 3$.
+    $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$, $p = 3$).
     On $D_\ß\xi^p$ \emph{(thick line, delimited by dashed lines)},
     which starts with the last knot interval of the first B-spline
     $b_{0,\ß\xi}^p$
@@ -510,7 +509,8 @@ Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
 since the hierarchical splitting \eqref{eq:hierSplittingMV} does not
 require the bases in each dimension to be the same.
-Consequently, we can define degree-dimension-adaptive sparse grids
+Consequently, we can define degree-dimension-adaptive
+(so-called \term{$hp$-adaptive}) sparse grids
 $V_{n,d}^{\sparse,\ßp}$ for arbitrary odd degree vectors $\ßp$.
 
 In the course of this thesis, we will derive multiple variations
@@ -521,7 +521,7 @@ We will not repeat formal proofs of the hierarchical splitting equation
 for each of theses bases for the sake of brevity.
 The idea of the proof of \cref{prop:hierBSplineLinearlyIndependent},
 which is inductively exploiting the smoothness conditions given by
-B-splines of previous levels, can often be transferred to similar B-spline
+B-splines of previous levels, can be transferred to similar B-spline
 bases.
 
 
@@ -592,7 +592,7 @@ are relevant for the unit interval as all other B-splines vanish in $[0, 1]$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
 $\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
 The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
-analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $0.5$.
+analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
 For $l = 1$, again the ``constant $1$'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
@@ -613,7 +613,7 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 By \thmref{prop:splineSpace},
 this definition implies that
 $\varphi_{l,1}^p(x) = 2 - \tfrac{x}{h_l}$ ($l \ge 2$)
-is only valid for $x \in [0,\; h_l \cdot (5-p)/2]$, i.e.,
+is only valid for $x \in [0,\; h_l \cdot \tfrac{5-p}{2}]$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
 in its absolute value.
@@ -621,6 +621,10 @@ If it is desired to enforce natural boundary conditions
 for higher than quintic degrees,
 then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSpline}
 must be extended to $\tfrac{p+1}{2} - 1$.
+In addition, more than just the left-most and the right-most inner
+hierarchical B-spline must be modified for $p \ge 5$,
+as the size of the supports of $\varphi_{l,i}^p$ increase
+for growing $p$.
 
 \begin{figure}
   \subcaptionbox{%
