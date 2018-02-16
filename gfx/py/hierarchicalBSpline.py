@@ -9,7 +9,8 @@ import helper.basis
 from helper.figure import Figure
 import helper.grid
 
-def plotSubspace(n, p, b, l, nodal=False, modified=False, clenshawCurtis=False):
+def plotSubspace(n, p, b, l, nodal=False, modified=False, clenshawCurtis=False,
+                 drawModifiedOnTop=False):
   hInv = 2**l
   h = 1 / hInv
   I = (list(range(1, hInv, 2)) if l > 0 else [0, 1])
@@ -33,7 +34,7 @@ def plotSubspace(n, p, b, l, nodal=False, modified=False, clenshawCurtis=False):
   spaceSuperscript = superscript
   
   for i in plotI:
-    if clenshawCurtis and modified:
+    if drawModifiedOnTop:
       if (l == 0) or ((l >= 3) and (1 < i < hInv - 1)): continue
       ls = "--"
     else:
@@ -48,7 +49,7 @@ def plotSubspace(n, p, b, l, nodal=False, modified=False, clenshawCurtis=False):
     ax.plot(xx, yy, ls, clip_on=False, color=color)
     maxY = max(max(yy), maxY)
     
-    if clenshawCurtis and modified: continue
+    if drawModifiedOnTop: continue
     
     j = np.argmax(yy)
     x, y = xx[j], yy[j] * 1.05
@@ -151,6 +152,6 @@ bMod = helper.basis.ModifiedHierarchicalBSpline(p, b=b)
 for l in range(n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
   plotSubspace(n, p, b, l, clenshawCurtis=True)
-  plotSubspace(n, p, bMod, l, clenshawCurtis=True, modified=True)
+  plotSubspace(n, p, bMod, l, clenshawCurtis=True, modified=True, drawModifiedOnTop=True)
 
 fig.save(tightLayout=tightLayout)
