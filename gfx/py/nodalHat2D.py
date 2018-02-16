@@ -5,6 +5,7 @@ import numpy as np
 
 import helper.basis
 from   helper.figure import Figure
+import helper.function
 import helper.grid
 
 def removeWhiteLinesinSurfPlot(surf):
@@ -17,7 +18,7 @@ i = [1, 1]
 p = 1
 d = 2
 b1D = helper.basis.HierarchicalBSpline(p)
-b = helper.basis.TensorProduct(b1D, d)
+b = helper.function.TensorProduct(b1D, d)
 
 I = helper.grid.getNodalIndices(l)
 X = helper.grid.getCoordinates(l, I)
