@@ -677,9 +677,9 @@ are defined as
   := \frac{1 - \cos(\pi x_{l,i})}{2},\quad
   i = 0, \dotsc, 2^l.
 \end{equation}
-Chebyshev points are the normalized locations of the extrema of the
-Chebyshev polynomials $T_{2^l}\colon [-1, 1] \to \RR$,
-$T_{2^l}(x) := \cos(2^l \arccos(x))$ \cite{Xu16Chebyshev}.%
+Chebyshev points are the locations of the extrema of the
+Chebyshev polynomials $T_{2^l}\colon [0, 1] \to \RR$,
+$T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$ \cite{Xu16Chebyshev}.%
 \footnote{%
   The literature sometimes uses the name ``Chebyshev points'' for
   the roots of $T_{2^l}$, which are closely connected to the extrema.
@@ -691,8 +691,9 @@ They are obtained by dividing a semicircle into $2^l$ equally sized
 segments and subsequently orthogonally projecting the
 segment endpoints onto the diameter
 (see \cref{fig:chebyshev}).
-The most practical use of Chebyshev points is for
-polynomial interpolation to avoid Runge's phenomenon and for
+The most practical use of Chebyshev points is in
+polynomial interpolation to avoid Runge's phenomenon and in
+numerical integration (quadrature), resulting in the
 so-called Clenshaw--Curtis quadrature rules.
 
 \begin{figure}
@@ -711,10 +712,11 @@ so-called Clenshaw--Curtis quadrature rules.
 In some settings, it can be beneficial to use full or sparse grids consisting
 of Chebyshev points, which are then called \term{Clenshaw--Curtis grids},
 instead of uniform grids.
-Besides the already mentioned advantages for polynomial integration and
+Besides the already mentioned advantages for polynomial interpolation and
 quadrature, Clenshaw--Curtis grids can help to reduce interpolation
 error in a neighborhood of the boundary of the domain due to the increased
-grid point density near the boundary.
+grid point density near the boundary
+(at the cost of a lower grid point density in the interior).
 If we want to use Chebyshev points as grid points for sparse grids,
 we have to employ an appropriate basis to ensure that interpolation
 is still possible.
@@ -757,8 +759,8 @@ $V_l^{p,\clenshawcurtis}$
 and hierarchical subspaces $W_l^{p,\clenshawcurtis}$ as well as
 sparse grid spaces $V_{n,d}^{\sparse,p,\clenshawcurtis}$ and
 grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$
-using Cartesian products of Chebyshev points
-and tensor products of Clenshaw--Curtis B-splines.
+using tensor products of Clenshaw--Curtis B-splines
+and Cartesian products of Chebyshev point sets.
 The one-dimensional cubic Clenshaw--Curtis basis and a two-dimensional
 sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 
@@ -786,7 +788,7 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \end{figure}
 
 Note that in contrast to the standard hierarchical B-spline functions
-$\varphi_{l,i}^p$, the Clenshaw--Curtis functions
+$\varphi_{l,i}^p$, Clenshaw--Curtis B-splines
 $\varphi_{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
 As a result, both implementation effort and evaluation runtime
 are significantly higher for Clenshaw--Curtis B-splines than
@@ -795,18 +797,18 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 
 \paragraph{Modification and generalizations}
 
-Like for uniform B-splines,
+As for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}
 $\varphi_{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
 same method as in \eqref{eq:modifiedBSpline}.
-Here, the second derivative does not vanish exactly at the boundary
-even for degrees $p \le 5$,
+Here, the second derivative of $\varphi_{l,1}^{p,\clenshawcurtis,\modified}$
+does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
-lie outside $[0, 1]$ and are thus uniformly extended according
+lie outside $[0, 1]$ and are thus uniform according
 to \eqref{eq:clenshawCurtisBSplineKnots},
 the absolute deviation of the second derivative from $0$ is small.
-Again, to enforce the natural boundary condition,
+Again, to enforce natural boundary conditions,
 it is possible to recompute the coefficients
 of the components $\varphi_{l,i'}^{p,\clenshawcurtis}$
 dynamically with Marsden's identity using the correct Chebyshev knots
