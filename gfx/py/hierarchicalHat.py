@@ -135,7 +135,7 @@ fig.save(tightLayout={"pad" : 2})
 
 
 
-b = helper.basis.HierarchicalModifiedBSpline(p)
+b = helper.basis.ModifiedHierarchicalBSpline(p)
 fig = Figure.create(figsize=(3.3, 5.0), scale=1.0)
 
 for l in range(1, n+1):

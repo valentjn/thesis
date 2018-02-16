@@ -26,7 +26,7 @@ for i in range(1 - (p+1)//2, 2):
           ha="center", va="bottom", color=color)
 
 i = 1
-b = helper.basis.HierarchicalModifiedBSpline(p)
+b = helper.basis.ModifiedHierarchicalBSpline(p)
 xx = np.linspace(*b.getSupport(l, i), 200)
 yy = b.evaluate(l, i, xx)
 ax.plot(xx, yy, "k--", clip_on=False)

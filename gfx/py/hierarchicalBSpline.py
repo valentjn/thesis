@@ -134,7 +134,7 @@ fig.save(tightLayout=tightLayout)
 
 
 fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
-b = helper.basis.HierarchicalModifiedBSpline(p)
+b = helper.basis.ModifiedHierarchicalBSpline(p)
 
 for l in range(1, n+1):
   ax = fig.add_subplot(n, 1, l)
@@ -146,7 +146,7 @@ fig.save(tightLayout=tightLayout)
 
 fig = Figure.create(figsize=(3.8, 5.0), scale=1.0)
 b = helper.basis.HierarchicalClenshawCurtisBSpline(p)
-bMod = helper.basis.HierarchicalModifiedBSpline(p, b=b)
+bMod = helper.basis.ModifiedHierarchicalBSpline(p, b=b)
 
 for l in range(n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
