@@ -553,7 +553,11 @@ As in \cite{Pflueger10Spatially},
 we append $\varphi_{l,1}^p$ with
 B-splines $\varphi_{l,i}^p$ with index $i \le 0$ and
 use the so-called Marsden's identity to compute the corresponding
-coefficients:
+coefficients.
+The identity enables us to explicitly compute the B-spline coefficients
+of an arbitrary polynomial of degree $\le p$ by giving an explicit formula
+for the B-spline coefficients of shifted monomials $({\cdot} - y)^p$.
+Interestingly, the coefficients are polynomials themselves (in $y$):
 
 \begin{lemma}[Marsden's identity]
   \label{lemma:marsden}
