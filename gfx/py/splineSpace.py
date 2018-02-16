@@ -39,7 +39,7 @@ for k in range(m):
   yy += c[k] * b.evaluate(xx)
 
 yy = splineShift + splineScale * yy
-ax.plot(xx, yy, "k-", clip_on=False)
+ax.plot(xx, yy, "k-", clip_on=False, solid_capstyle="butt")
 ax.text(8, 1, r"$s$", color="k", ha="center", va="bottom")
 
 ax.plot(D, 2*[-0.01], "k-", clip_on=False, lw=2, solid_capstyle="butt")
