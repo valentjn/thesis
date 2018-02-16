@@ -5,6 +5,7 @@ import numpy as np
 
 import helper.basis
 from helper.figure import Figure
+import helper.function
 
 f = lambda x: -10.2 * x**3 + 14.7 * x**2 - 5 * x + 0.7
 n = 3
@@ -27,10 +28,9 @@ ax.text(0.95, 0.6, r"$f$", ha="left", va="bottom", color="C0")
 
 grid = helper.grid.RegularSparseBoundary(n, d, b)
 X, L, I = grid.generate()
-interpolant = helper.basis.Interpolant(basis, X, L, I)
 fX = f(X)
-aX = interpolant.getSurpluses(fX)
-yy2 = interpolant.evaluate(aX, xx)
+interpolant = helper.function.Interpolant(basis, X, L, I, fX)
+yy2 = interpolant.evaluate(xx)
 ax.plot(xx, yy2, "--", clip_on=False, color="C1")
 ax.text(0.91, 0.5, r"$\tilde{f}$", ha="right", va="top", color="C1")
 
