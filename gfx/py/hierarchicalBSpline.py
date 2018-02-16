@@ -42,7 +42,7 @@ def plotSubspace(n, p, b, l, nodal=False, modified=False, clenshawCurtis=False,
     
     color = "C{}".format((i * 2**(n - l)) % 9)
     
-    lb, ub = helper.basis.getSupport(b, l, i)
+    lb, ub = b.getSupport(l, i)
     xx = np.linspace(lb, ub, 200)
     yy = b.evaluate(l, i, xx)
     if (i == 1) or (i == hInv - 1): yy = [modifiedScale * y for y in yy]

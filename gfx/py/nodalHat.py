@@ -22,7 +22,7 @@ xtl = ["$x_{{{},{}}}$".format(l, i) for i in range(hInv + 1)]
 
 for i in range(0, hInv + 1):
   color = "C{}".format(i)
-  xx = np.linspace(*helper.basis.getBSplineSupport(p, l, i), 200)
+  xx = np.linspace(*b.getSupport(l, i), 200)
   yy = b.evaluate(l, i, xx)
   ax.plot(xx, yy, "-", color=color, clip_on=False)
   
@@ -50,7 +50,7 @@ c = [0.3, 0.8, 0.7, 0.7, 0.5, 0.9, 0.8, 0.7, 0.2]
 
 for i in range(0, hInv + 1):
   color = "C{}".format(i)
-  xx = np.linspace(*helper.basis.getBSplineSupport(p, l, i), 200)
+  xx = np.linspace(*b.getSupport(l, i), 200)
   yy = c[i] * b.evaluate(l, i, xx)
   ax.plot(xx, yy, "-", color=color, clip_on=False)
 

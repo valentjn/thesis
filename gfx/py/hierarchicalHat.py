@@ -28,7 +28,7 @@ def plotSubspace(n, p, b, l, modified=False):
   for i in plotI:
     color = "C{}".format((i * 2**(n - l)) % 9)
     
-    lb, ub = helper.basis.getNAKBSplineSupport(p, l, i)
+    lb, ub = b.getSupport(l, i)
     xx = np.linspace(lb, ub, 100)
     yy = b.evaluate(l, i, xx)
     if (i == 1) or (i == hInv - 1): yy = [modifiedScale * y for y in yy]

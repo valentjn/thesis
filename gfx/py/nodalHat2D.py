@@ -28,7 +28,7 @@ fig = Figure.create(figsize=(3, 3))
 ax = fig.add_subplot(111, projection="3d")
 
 for t in range(d):
-  xx = np.linspace(*helper.basis.getBSplineSupport(p, l[t], i[t]), 33)
+  xx = np.linspace(*b1D.getSupport(l[t], i[t]), 33)
   yy = b1D.evaluate(l[t], i[t], xx)
   ax.plot(*((xx, np.ones_like(xx)) if t == 0 else
             (np.zeros_like(xx), xx)), "k-", zs=yy, zorder=-1, clip_on=False)

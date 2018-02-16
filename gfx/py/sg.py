@@ -170,7 +170,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
     maxY[l] = 0
     
     for i in I(l):
-      lb, ub = helper.basis.getSupport(b, l, i)
+      lb, ub = b.getSupport(l, i)
       xx = np.linspace(lb, ub, 33)
       yy = b.evaluate(l, i, xx)
       if (i == 1) or (i == 2**l - 1): yy = [modifiedScale * y for y in yy]
@@ -185,7 +185,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
       s = lambda x, y: (xOffset + subspaceSize * np.array(x),
                         yOffset + basisSize * np.array(y) / maxY[l0])
       
-      lb, ub = helper.basis.getSupport(b, l0, i0)
+      lb, ub = b.getSupport(l0, i0)
       xx = np.linspace(lb, ub, 33)
       yy = b.evaluate(l0, i0, xx)
       if (i0 == 1) or (i0 == 2**l0 - 1): yy = [modifiedScale * y for y in yy]
@@ -201,7 +201,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
       s = lambda x, y: (xOffset - basisSize * np.array(y) / maxY[l1],
                         yOffset + subspaceSize * np.array(x))
       
-      lb, ub = helper.basis.getSupport(b, l1, i1)
+      lb, ub = b.getSupport(l1, i1)
       xx = np.linspace(lb, ub, 200)
       yy = b.evaluate(l1, i1, xx)
       if (i1 == 1) or (i1 == 2**l1 - 1): yy = [modifiedScale * y for y in yy]
