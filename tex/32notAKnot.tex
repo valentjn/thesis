@@ -488,13 +488,207 @@ represent global polynomials on $[\ß0, \ß1]$.
 
 \subsection{Modified and Non-Uniform Hierarchical Not-A-Knot B-Splines}
 
-\blindtext{}
+\paragraph{Modified hierarchical not-a-knot B-splines}
+
+Similar to uniform and Clenshaw--Curtis B-splines
+(\cref{sec:31standardBSplines}),
+it is possible to define a modified version of the
+hierarchical not-a-knot B-spline basis to obtain
+``reasonable'' boundary values without boundary points.
+However, we cannot use \thmref{lemma:marsden} similarly to
+\eqref{eq:modifiedBSplineConstruction}:
+Due to the removal of knots, there is only a single
+not-a-knot B-spline $\varphi_{l,0}^{p,\notaknot}$ left of
+$\varphi_{l,1}^{p,\notaknot}$.
+B-splines $\varphi_{l,i}^{p,\notaknot}$ with index $i < 0$
+would be zero in $[0, 1]$.
+
+While we are therefore not able to construct modified functions
+whose second derivative vanishes in neighborhood of $x = 0$,
+we can at least use $\varphi_{l,0}^{p,\notaknot}$ to let the
+second derivative vanish in $x = 0$ itself:
+\begin{equation}
+  \label{eq:modifiedNotAKnotBSpline}
+  \varphi_{l,i}^{p,\modified,\notaknot}(x)
+  :=
+  \begin{cases}
+    1,&
+    l = 1,\quad i = 1,\\
+    \varphi_{l,1}^{p,\notaknot}(x)
+    - \varphi_{l,0}^{p,\notaknot}(x)
+    \dfrac{\frac{\diff^2}{\dx^2} \varphi_{l,1}^{p,\notaknot}(0)}%
+    {\frac{\diff^2}{\dx^2} \varphi_{l,0}^{p,\notaknot}(0)},&
+    l \ge 2,\quad i = 1,\\
+    \varphi_{l,i}^{p,\notaknot}(x),&
+    l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
+    \varphi_{l,1}^{p,\modified,\notaknot}(1 - x),&
+    l \ge 2,\quad i = 2^l - 1.
+  \end{cases}
+  \hspace*{-2mm}
+\end{equation}
+The resulting modified hierarchical Clenshaw--Curtis not-a-knot B-spline basis
+$\varphi_{l,i}^{p,\modified,\notaknot}$ is shown with dashed lines
+in \cref{fig:notAKnotBSpline}.
+As before, we have to implement $\varphi_{l,1}^{p,\modified,\notaknot}$
+only for a single level $l$, as modified functions of higher levels
+are the same up to an affine parameter transformation.
+Note again that for $p \ge 5$, we would have to modify additional
+interior B-splines as the interior of their support then extends to the
+boundary of $[0, 1]$.
+We refrain from doing so to keep the definition
+\eqref{eq:modifiedNotAKnotBSpline} simple.
+
+\paragraph{Non-uniform hierarchical not-a-knot B-splines}
+
+The not-a-knot construction is completely independent from the
+distribution of the grid points at hand.
+Consequently, we can define hierarchical not-a-knot B-splines
+for non-uniform distributions.
+For instance, to define not-a-knot B-splines for the
+Chebyshev points in \cref{sec:31standardBSplines},
+we first specify the knot sequence as
+\begin{subequations}
+  \begin{gather}
+    \ß\xi_l^{p,\clenshawcurtis,\notaknot}
+    := (\xi_{l,0}^{p,\clenshawcurtis,\notaknot}, \dotsc,
+    \xi_{l,m+p}^{p,\clenshawcurtis,\notaknot}),\quad
+    m := 2^l + 1,\\
+    \xi_{l,k}^{p,\clenshawcurtis,\notaknot}
+    :=
+    \begin{cases}
+      x_{l,k-p}^\clenshawcurtis,&
+      k = 0, \dotsc, p,\\
+      x_{l,k-(p+1)/2}^\clenshawcurtis,&
+      k = p + 1, \dotsc, 2^l,\\
+      x_{l,k-1}^\clenshawcurtis,&
+      k = 2^l + 1, \dotsc, 2^l + p + 1,
+    \end{cases}
+  \end{gather}
+\end{subequations}
+and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
+\begin{subequations}
+  \begin{gather}
+    \varphi_{l,i}^{p,\clenshawcurtis,\notaknot}
+    :=
+    \begin{cases}
+      L_{l,i}^\clenshawcurtis,&
+      l < \lceil\log_2(p+1)\rceil,\\
+      b_{i,\ß\xi_l^{p,\clenshawcurtis,\notaknot}}^p,&
+      l \ge \lceil\log_2(p+1)\rceil,
+    \end{cases}\quad
+    l \in \NN_0,\quad
+    i \in I_l,\\
+    L_{l,i}^\clenshawcurtis\colon [0, 1] \to \RR,\quad
+    L_{l,i}^\clenshawcurtis(x)
+    := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
+    \frac{x - x_{l,i'}^\clenshawcurtis}%
+    {x_{l,i}^\clenshawcurtis - x_{l,i'}^\clenshawcurtis}.
+  \end{gather}
+\end{subequations}
+This definition can even be combined with modification
+of hierarchical not-a-knot B-splines as discussed above.
+We can use exactly the same approach as in
+\eqref{eq:modifiedNotAKnotBSpline}, if we replace the
+not-a-knot basis functions with their non-uniform not-a-knot counterparts
+(not-a-knot Clenshaw--Curtis B-splines in the above example).
+The hierarchical not-a-knot Clenshaw--Curtis B-spline basis of
+cubic degree and the corresponding modified functions are plotted in
+\cref{fig:clenshawCurtisNotAKnotBSpline}.
+
+\begin{figure}
+  \includegraphics{hierarchicalBSpline_6}%
+  \caption{%
+    Hierarchical cubic Clenshaw--Curtis not-a-knot B-splines
+    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$
+    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    grid points $x_{l',i'}^\clenshawcurtis$ \emph{(dots)} up to level $l = 3$.
+    The knots of each level are given by removing the
+    first $(p-1)/2$ and last $(p-1)/2$ points \emph{(crosses)}
+    of the set of inner grid points $x_{l',i'}^\clenshawcurtis$
+    ($i' = 1, \dotsc, 2^{l'} - 1$).
+    We can define modified hierarchical Clenshaw--Curtis not-a-knot B-splines
+    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$ \emph{(dashed)}
+    to obtain reasonable values on the boundary for grids without
+    boundary points.%
+  }%
+  \label{fig:clenshawCurtisNotAKnotBSpline}
+\end{figure}
 
 
 
 \subsection{Other Approaches to Incorporate Boundary Conditions}
 
-Not-a-knot boundary conditions are not the only approach to obtain
-a subspace of $S_l^{p,[0,1]}$ with the right dimension.
+Not-a-knot boundary conditions are not the only approach
+to obtain a subspace of $S_l^{p,[0,1]}$ with the right dimension $2^l - 1$.
+Another possibility, which we want to discuss briefly, are
+\term{natural boundary conditions}.
+In the cubic case, for which they are usually formulated
+\cite{Hoellig13Approximation},
+these boundary conditions require that the
+second derivatives $\frac{\diff^2}{\dx^2} \varphi_{l,i}$ of the
+basis functions vanish at the boundary $x \in \{0, 1\}$.
+To obtain the necessary number of $p - 1$ constraints also
+for higher degrees $p$,
+we require that all derivatives
+$\frac{\diff^q}{\dx^q} \varphi_{l,i}$ of order
+$q = 2, \dotsc, (p+1)/2$ vanish at $x \in \{0, 1\}$.
 
-\blindtext{}
+Consequently, we can define hierarchical natural B-splines as
+\begin{subequations}
+  \begin{gather}
+    \varphi_{l,i}^{p,\ntrl}(x)
+    :=
+    \begin{cases}
+      L_{0,i}(x),&
+      l = 0,\\
+      \varphi_{l,i}^p +
+      \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \varphi_{l,j}^p,&
+      l \ge 1,
+    \end{cases}\quad
+    l \in \NN_0,\quad
+    i \in I_l,\\
+    J_i^{p,\ntrl}
+    := \{i+1-\tfrac{p+1}{2}, \dotsc, i-1\} \cup
+    \{i+1, \dotsc, i-1+\tfrac{p+1}{2}\},
+  \end{gather}
+\end{subequations}
+where the coefficients $c_{l,i,j} \in \RR$ are chosen such that
+the natural boundary conditions are satisfied:
+\begin{equation}
+  \frac{\diff^q}{\dx^q} \varphi_{l,i}^{p,\ntrl}(x)
+  = 0,\quad
+  l \ge 1,\quad
+  i \in I_l,\quad
+  q = 2, \dotsc, \tfrac{p+1}{2},\quad
+  x \in \{0, 1\}.
+\end{equation}
+\newgsymbol{suppo}{$\intsupp$}{%
+  Interior of the support of a function (i.e., the non-zero set)%
+}%
+Note that the first half of the coefficients $c_{l,i,j} \in \RR$
+($j < i$) vanish if the interior of the support of $\varphi_{l,i}^p$
+does not contain $x = 0$
+(i.e., $i > \tfrac{p+1}{2}$).
+The second half of the coefficients ($j > i$) vanishes analogously
+if $1 \notin \intsupp \varphi_{l,i}^p \iff i < 2^l - \tfrac{p+1}{2}$.
+
+\Cref{fig:naturalBSpline} shows the hierarchical natural spline basis.
+The main disadvantage of natural boundary conditions is that
+we are not able to replicate arbitrary polynomials exactly on $[0, 1]$
+with this approach.
+Only polynomials that satisfy natural boundary conditions themselves
+(linear polynomials for example)
+can be represented exactly with hierarchical natural B-splines.
+For this reason, we do not further consider this basis in the
+rest of the thesis.
+
+\begin{figure}
+  \includegraphics{hierarchicalBSpline_7}%
+  \caption{%
+    Hierarchical cubic natural B-splines
+    $\varphi_{l',i'}^{p,\ntrl}$
+    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.%
+  }%
+  \label{fig:naturalBSpline}
+\end{figure}
