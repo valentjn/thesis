@@ -17,7 +17,14 @@ The resulting $2^l + 1$ \term{grid points} are given by
   x_{l,i} := i \cdot h_l,\quad
   i = 0, \dotsc, 2^l,
 \end{equation}
-where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.
+where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.%
+\footnote{%
+  Note that from a strict formal perspective,
+  this equation defined $x_{l,i}$ only for $i = 0, \dotsc, 2^l$,
+  but we will later need $x_{l,i}$ also for $i < 0$ or $i > 2^l$.
+  The convention in this thesis is that all definitions are
+  implicitly generalized whenever needed.%
+}
 \newgsymbol{phili}{$\varphi_{l,i}$}{%
   Hierarchical basis function of level $l$, index $i$%
 }%
