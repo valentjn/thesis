@@ -304,6 +304,8 @@ we use global Lagrange polynomials for the coarser levels:
     \frac{x - x_{l,i'}}{x_{l,i} - x_{l,i'}}.
   \end{gather}
 \end{subequations}
+The hierarchical not-a-knot B-spline basis is shown for the
+cubic case $p = 3$ in \cref{fig:notAKnotBSpline}.
 The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
@@ -319,6 +321,25 @@ Due to $2^l$ even (when $l \ge 1$) and $p$ odd,
 we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
 $\deg L_{l,i} \le 2^l < p$
 (for $p > 1$; for $p = 1$, the case $l = 0$ is the exception).
+
+\begin{figure}
+  \includegraphics{hierarchicalBSpline_5}%
+  \caption{%
+    Hierarchical cubic not-a-knot B-splines
+     $\varphi_{l',i'}^{p,\notaknot}$
+     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.
+    The knots of each level are given by removing the
+    first $(p-1)/2$ and last $(p-1)/2$ points \emph{(crosses)}
+    of the set of inner grid points $x_{l',i'}$
+    ($i' = 1, \dotsc, 2^{l'} - 1$).
+    We can define modified hierarchical not-a-knot B-splines
+    $\varphi_{l',i'}^{p,\modified,\notaknot}$ \emph{(dashed)}
+    to obtain reasonable values on the boundary for grids without
+    boundary points.%
+  }%
+  \label{fig:notAKnotBSpline}
+\end{figure}
 
 The motivation for using Lagrange polynomials for coarse levels
 is that they form a basis of the polynomial space
