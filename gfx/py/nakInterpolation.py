@@ -13,7 +13,8 @@ d = 1
 b = 0
 p = 3
 
-basis = helper.basis.HierarchicalBSpline(p)
+basis1D = helper.basis.HierarchicalBSpline(p)
+basis = helper.basis.TensorProduct(basis1D, d)
 xtl = [r"$x_{{{},{}}}$".format(n, i) for i in range(2**n + 1)]
 
 
@@ -30,7 +31,8 @@ grid = helper.grid.RegularSparseBoundary(n, d, b)
 X, L, I = grid.generate()
 fX = f(X)
 interpolant = helper.function.Interpolant(basis, X, L, I, fX)
-yy2 = interpolant.evaluate(xx)
+XX = np.array([xx]).T
+yy2 = interpolant.evaluate(XX)
 ax.plot(xx, yy2, "--", clip_on=False, color="C1")
 ax.text(0.91, 0.5, r"$\tilde{f}$", ha="right", va="top", color="C1")
 
@@ -56,9 +58,6 @@ ax = fig.gca()
 yMin = 1e-5
 
 err = np.abs((yy - yy2) / yy)
-print(yy[28])
-print(yy2[28])
-print(err[28])
 err = np.maximum(err, yMin)
 ax.plot(xx, err, "k-", clip_on=False)
 
