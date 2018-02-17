@@ -582,6 +582,7 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 
 By applying Marsden's identity twice,
 \begin{equation}
+  \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{h_l}
   = 2 \sum_{i \in \ZZ} \varphi_{l,i}^p(x)
   - \frac{1}{h_l} \sum_{i \in \ZZ} x_{l,i} \varphi_{l,i}^p(x)
@@ -598,7 +599,7 @@ analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
 For $l = 1$, again the ``constant $1$'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
-  \label{eq:modifiedBSpline}
+  \label{eq:modifiedBSplineDefinition}
   \varphi_{l,i}^{p,\modified}(x)
   :=
   \begin{cases}
@@ -621,7 +622,7 @@ For higher degrees, it is non-zero, albeit very small
 in its absolute value.
 If it is desired to enforce natural boundary conditions
 for higher than quintic degrees,
-then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSpline}
+then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplineDefinition}
 must be extended to $\tfrac{p+1}{2} - 1$.
 In addition, more than just the left-most and the right-most inner
 hierarchical B-spline must be modified for $p \ge 5$,
@@ -802,7 +803,7 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 As for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}
 $\varphi_{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
-same method as in \eqref{eq:modifiedBSpline}.
+same method as in \eqref{eq:modifiedBSplineDefinition}.
 Here, the second derivative of $\varphi_{l,1}^{p,\clenshawcurtis,\modified}$
 does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
