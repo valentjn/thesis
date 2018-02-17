@@ -130,8 +130,8 @@ and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
 \newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{%
   Multivariate grid point $:= \ßi \cdot \ßh_\ßl$%
 }%
-\newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^l$}%
-\newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^l$}{%
+\newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^\ßl$}%
+\newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{%
   For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
 }%
 The corners of the hypercubes are given by the grid points
@@ -259,7 +259,7 @@ the values at the grid points
   \Omega_\ßl
   := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}
+\newgsymbol{n}{$n$}{Level $\in \NN_0$ of full or sparse grid}%
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NN_0$.
 \newgsymbol{Vnd}{$V_{n,d}$}{%
   Multivariate nodal space
@@ -270,7 +270,7 @@ In this case, we replace ``$\ßl$'' in the subscripts with ``$n,d$''
 \newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
   $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
   of a function $f\colon \Omega \to \RR$%
-}
+}%
 \newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\varphi_{l,i}^1$,
 it can be shown that the $L^2$ interpolation error of the interpolant
