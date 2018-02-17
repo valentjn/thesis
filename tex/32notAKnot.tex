@@ -219,11 +219,11 @@ with not-a-knot boundary conditions is defined as follows:
     \xi_{l,k}^{p,\notaknot}
     :=
     \begin{cases}
-      (k - p) h_l,&
+      x_{l,k-p},&
       k = 0, \dotsc, p,\\
-      (k - \tfrac{p+1}{2}) h_l,&
+      x_{l,k-(p+1)/2},&
       k = p + 1, \dotsc, 2^l,\\
-      (k - 1) h_l,&
+      x_{l,k-1},&
       k = 2^l + 1, \dotsc, 2^l + p + 1.
     \end{cases}
   \end{gather}
@@ -292,7 +292,7 @@ we use global Lagrange polynomials for the coarser levels:
     :=
     \begin{cases}
       L_{l,i},&
-      l = 0, \dotsc, \lceil\log_2(p+1)\rceil - 1,\\
+      l < \lceil\log_2(p+1)\rceil,\\
       b_{i,\ß\xi_l^{p,\notaknot}}^p,&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
