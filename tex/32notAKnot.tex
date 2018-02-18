@@ -322,12 +322,12 @@ we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
 $\deg L_{l,i} \le 2^l < p$
 (for $p > 1$; for $p = 1$, the case $l = 0$ is the exception).
 
-\begin{figure}
+\begin{SCfigure}
   \includegraphics{hierarchicalBSpline_5}%
   \caption{%
     Hierarchical cubic not-a-knot B-splines
-     $\varphi_{l',i'}^{p,\notaknot}$
-     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    $\varphi_{l',i'}^{p,\notaknot}$
+    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
     grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.
     The knots of each level are given by removing the
     first $(p-1)/2$ and last $(p-1)/2$ points \emph{(crosses)}
@@ -338,8 +338,8 @@ $\deg L_{l,i} \le 2^l < p$
     to obtain reasonable values on the boundary for grids without
     boundary points.%
   }%
-  \label{fig:notAKnotBSpline}
-\end{figure}
+  \label{fig:notAKnotBSpline}%
+\end{SCfigure}
 
 The motivation for using Lagrange polynomials for coarse levels
 is that they form a basis of the polynomial space
@@ -595,7 +595,7 @@ The hierarchical not-a-knot Clenshaw--Curtis B-spline basis of
 cubic degree and the corresponding modified functions are plotted in
 \cref{fig:clenshawCurtisNotAKnotBSpline}.
 
-\begin{figure}
+\begin{SCfigure}
   \includegraphics{hierarchicalBSpline_6}%
   \caption{%
     Hierarchical cubic Clenshaw--Curtis not-a-knot B-splines
@@ -611,8 +611,8 @@ cubic degree and the corresponding modified functions are plotted in
     to obtain reasonable values on the boundary for grids without
     boundary points.%
   }%
-  \label{fig:clenshawCurtisNotAKnotBSpline}
-\end{figure}
+  \label{fig:clenshawCurtisNotAKnotBSpline}%
+\end{SCfigure}
 
 
 
@@ -686,7 +686,7 @@ can be represented exactly with hierarchical natural B-splines.
 For this reason, we do not further consider this basis in the
 rest of the thesis.
 
-\begin{figure}
+\begin{SCfigure}
   \includegraphics{hierarchicalBSpline_7}%
   \caption{%
     Hierarchical cubic natural B-splines
@@ -694,5 +694,5 @@ rest of the thesis.
     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
     grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%
-  \label{fig:naturalBSpline}
-\end{figure}
+  \label{fig:naturalBSpline}%
+\end{SCfigure}
