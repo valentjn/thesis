@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 7
+# number of output figures = 9
 
 import numpy as np
 
@@ -56,10 +56,19 @@ def plotSubspace(basis, l, n, nodal=False, modified=False, clenshawCurtis=False,
       elif l == 3:
         if i == 1:      x, y = 0.20, 1
         if i == hInv-1: x, y = 0.83, 1
+    if notAKnot:
+      if nodal:
+        if i == 2: x -= 0.03
+        if i == 5: x += 0.05
+        if i == 6: x += 0.03
+      else:
+        if (not modified) and (not clenshawCurtis):
+          if (l == 3) and (i == 3): x += 0.03
+          if (l == 3) and (i == 5): x -= 0.03
     ax.text(x, y, "$\\varphi_{{{},{}}}^{{{}}}$".format(l, i, superscript),
             color=color, ha="center", va="bottom")
   
-  if showSubspaces:
+  if showSubspaces and (not notAKnot):
     D = [2**(-n) * (p-1)/2, 1 - 2**(-n) * (p-1)/2]
     ax.plot(D, [0, 0], "k-", clip_on=False, lw=2)
   
@@ -76,7 +85,8 @@ def plotSubspace(basis, l, n, nodal=False, modified=False, clenshawCurtis=False,
     ax.plot(x, 0*x, "x", c=color, clip_on=False)
   
   if showSubspaces:
-    restriction = ("" if modified else r"|_{{D_{{{}}}^{{{}}}}}".format(n, "p"))
+    restriction = ("" if notAKnot or modified else
+                   r"|_{{D_{{{}}}^{{{}}}}}".format(n, "p"))
     spaceSuperscript = superscript
     
     if nodal:
@@ -93,12 +103,11 @@ def plotSubspace(basis, l, n, nodal=False, modified=False, clenshawCurtis=False,
   x = helper.grid.getCoordinates(L, list(range(hInv + 1)), distribution=distribution)
   ax.set_xticks(x)
   ax.set_xticklabels([("$x_{{{},{}}}^{{{}}}$".format(l, i, pointSuperscript)
-                       if i in I else "")
+                       if i in plotI else "")
                       for i in range(hInv + 1)])
   
   ax.set_xlim(0, 1)
   
-  #print(maxY)
   ax.set_yticks([0, 1, 2])
   ax.set_ylim(0, maxY)
 
@@ -111,7 +120,7 @@ tightLayout = {"h_pad" : 0, "pad" : 3}
 
 
 
-fig = Figure.create(figsize=(3.22, 1.74), scale=1)
+fig = Figure.create(figsize=(3.3, 1.74), scale=1)
 ax = fig.gca()
 
 plotSubspace(basis, n, n, nodal=True, showSubspaces=True)
@@ -154,8 +163,27 @@ fig.save(tightLayout=tightLayout)
 
 
 
-fig = Figure.create(figsize=(3.8, 5.0), scale=1.0)
+fig = Figure.create(figsize=(3.3, 1.74), scale=1)
+ax = fig.gca()
 basis = helper.basis.HierarchicalNotAKnotBSpline(p)
+
+plotSubspace(basis, n, n, nodal=True, notAKnot=True, showSubspaces=True)
+
+fig.save(tightLayout=tightLayout)
+
+
+
+fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+
+for l in range(n+1):
+  ax = fig.add_subplot(n+1, 1, l+1)
+  plotSubspace(basis, l, n, notAKnot=True, showSubspaces=True)
+
+fig.save(tightLayout=tightLayout)
+
+
+
+fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
 basisModified = helper.basis.ModifiedHierarchicalNotAKnotBSpline(p)
 
 for l in range(n+1):
@@ -167,7 +195,7 @@ fig.save(tightLayout=tightLayout)
 
 
 
-fig = Figure.create(figsize=(3.8, 5.0), scale=1.0)
+fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
 basis = helper.basis.HierarchicalClenshawCurtisNotAKnotBSpline(p)
 basisModified = helper.basis.ModifiedHierarchicalClenshawCurtisNotAKnotBSpline(p)
 

@@ -204,7 +204,7 @@ $\varphi_{l,i}^p$ ($l \in \NN_0$, $i \in I_l$).
   \hfill%
   \begin{tikzpicture}
     \draw[decorate,thick,decoration={brace,aspect=0.158}] (0,-8.5) -- (0,0);
-    \node[anchor=east] at (-0.1,-7.157) {$= \bigoplus$};
+    \node[anchor=east,inner sep=0mm] at (-0.15,-7.157) {$= \bigoplus$};
   \end{tikzpicture}%
   \hfill%
   \subcaptionbox{%
@@ -632,23 +632,23 @@ for growing $p$.
 \begin{figure}
   \subcaptionbox{%
     Construction of the modified hierarchical cubic B-spline
-    $\varphi_{l,1}^{p,\modified}$ (\emph{dashed}, $l \ge 2$)
-    as a linear combination of neighboring B-splines $\varphi_{l,i'}^p$
+    $\varphi_{l',1}^{p,\modified}$ (\emph{dashed}, $l' \ge 2$)
+    as a linear combination of neighboring B-splines $\varphi_{l',i'}^p$
     using Marsden's identity.%
   }[75mm]{%
     \includegraphics{modifiedBSpline_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Modified hierarchical cubic B-splines $\varphi_{l,i}^{p,\modified}$
-    and grid points $x_{l,i}$
+    Modified hierarchical cubic B-splines $\varphi_{l',i'}^{p,\modified}$
+    ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) and grid points $x_{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_3}%
   }%
   \caption{%
-    Construction of modified hierarchical B-splines and
-    the resulting basis.%
+    Construction of modified hierarchical cubic B-splines ($p = 3$) and
+    the resulting basis up to level $l = 3$.%
   }
   \label{fig:modifiedBSpline}
 \end{figure}
@@ -770,9 +770,10 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \begin{figure}
   \subcaptionbox{%
     Hierarchical cubic Clenshaw--Curtis B-splines
-    $\varphi_{l,i}^{p,\clenshawcurtis}$ and
+    $\varphi_{l',i'}^{p,\clenshawcurtis}$
+    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
-     $\varphi_{l,i}^{p,\clenshawcurtis,\modified}$
+     $\varphi_{l',i'}^{p,\clenshawcurtis,\modified}$
     \emph{(dashed)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_4}%

@@ -36,22 +36,20 @@ def plotSubspace(n, p, b, l, modified=False, showSubspaces=False):
     maxY = max(max(yy), maxY)
     
     j = np.argmax(yy)
-    x, y = xx[j], yy[j]
+    x, y = xx[j], yy[j] * 1.05
     if modified:
-      if l == 1:        x, y = 0.5, 1
+      if l == 1:        x, y = 0.5, 1.02
       elif l == 2:
-        if i == 1:      x, y = 0.32, 1
-        if i == hInv-1: x, y = 0.73, 1
+        if i == 1:      x, y = 0.32, 1.1
+        if i == hInv-1: x, y = 0.73, 1.1
       elif l == 3:
-        if i == 1:      x, y = 0.20, 1
-        if i == hInv-1: x, y = 0.83, 1
-    y *= 1.3
+        if i == 1:      x, y = 0.20, 1.1
+        if i == hInv-1: x, y = 0.83, 1.1
     ax.text(x, y, "$\\varphi_{{{},{}}}^{{{}}}$".format(l, i, superscript),
-            color=color, ha="center")
+            color=color, ha="center", va="bottom")
   
   maxY *= 1.1
   color = "k"
-  if modified: maxY = 2
   
   x = h * np.array(plotI)
   ax.plot(x, 0*x, ".", c=color, clip_on=False)
@@ -65,17 +63,15 @@ def plotSubspace(n, p, b, l, modified=False, showSubspaces=False):
     ax.text(1.05, maxY / 2, "$W_{{{}}}^{{{}}}$".format(l, spaceSuperscript),
             ha="left", va="center", color=color)
   
-  maxY /= 1.1
-  ax.set_xlim((0, 1))
-  ax.set_ylim((0, maxY))
-  
   ax.set_xticks([h*i for i in range(hInv + 1)])
   
   ax.set_xticklabels([("$x_{{{},{}}}$".format(l, i) if i in I else "")
                       for i in range(hInv + 1)])
   
-  yt = ([0, 1, 2] if modified else [0, 1])
-  ax.set_yticks(yt)
+  ax.set_xlim(0, 1)
+  
+  ax.set_yticks([0, 1, 2])
+  ax.set_ylim(0, maxY)
 
 
 
@@ -124,7 +120,7 @@ for l in range(n+1):
 
 line, = ax.plot(X, c, "k.--", clip_on=False)
 line.set_dashes([3, 3])
-ax.text(0.85, 0.85, r"$f_3$", color="k", ha="center", va="bottom")
+ax.text(0.85, 0.85, r"$f_3^1$", color="k", ha="center", va="bottom")
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 0.9)
@@ -137,10 +133,10 @@ fig.save(tightLayout={"pad" : 2})
 
 
 b = helper.basis.ModifiedHierarchicalBSpline(p)
-fig = Figure.create(figsize=(3.3, 5.0), scale=1.0)
+fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
 
 for l in range(1, n+1):
-  ax = fig.add_subplot(n+1, 1, l+1)
+  ax = fig.add_subplot(n, 1, l)
   plotSubspace(n, p, b, l, modified=True)
 
 fig.save(tightLayout=tightLayout)

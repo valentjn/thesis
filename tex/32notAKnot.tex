@@ -322,24 +322,42 @@ we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
 $\deg L_{l,i} \le 2^l < p$
 (for $p > 1$; for $p = 1$, the case $l = 0$ is the exception).
 
-\begin{SCfigure}
-  \includegraphics{hierarchicalBSpline_5}%
+\begin{figure}
+  \subcaptionbox{%
+    Nodal not-a-knot B-splines
+    $\varphi_{l,i}^{p,\notaknot}$ ($i \in I_l$)
+    and grid points $x_{l,i}$ \emph{(dots)}.%
+  }[70mm]{%
+    \includegraphics{hierarchicalBSpline_5}%
+  }%
+  \hfill%
+  \begin{tikzpicture}
+    \draw[decorate,thick,decoration={brace,aspect=0.15}] (0,-8.5) -- (0,0);
+    \node[anchor=east,inner sep=0mm] at (-0.15,-7.225) {$= \bigoplus$};
+  \end{tikzpicture}%
+  \hfill%
+  \subcaptionbox{%
+    Hierarchical not-a-knot B-splines
+    $\varphi_{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in I_{l'}$)
+    and grid points $x_{l',i'}$ \emph{(dots)}.%
+  }[74mm]{%
+    \includegraphics{hierarchicalBSpline_6}%
+  }%
   \caption{%
-    Hierarchical cubic not-a-knot B-splines
-    $\varphi_{l',i'}^{p,\notaknot}$
-    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
-    grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.
-    The knots of each level are given by removing the
-    first $(p-1)/2$ and last $(p-1)/2$ points \emph{(crosses)}
-    of the set of inner grid points $x_{l',i'}$
-    ($i' = 1, \dotsc, 2^{l'} - 1$).
-    We can define modified hierarchical not-a-knot B-splines
-    $\varphi_{l',i'}^{p,\modified,\notaknot}$ \emph{(dashed)}
-    to obtain reasonable values on the boundary for grids without
-    boundary points.%
+    Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
+    up to level $l = 3$.
+    The nodal space $V_l^{p,\notaknot}$,
+    which coincides with the not-a-knot spline space $S_l^{p,\notaknot}$,
+    decomposes into the direct sum
+    of the hierarchical subspaces $W_{l'}^{p,\notaknot}$ ($l' \le l$).
+    The knots of each level $l'$ are given by removing the
+    first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
+    inner points \emph{(crosses)}
+    from the set of grid points $x_{l',i'}$
+    ($i' = 0, \dotsc, 2^{l'}$).%
   }%
   \label{fig:notAKnotBSpline}%
-\end{SCfigure}
+\end{figure}
 
 The motivation for using Lagrange polynomials for coarse levels
 is that they form a basis of the polynomial space
@@ -528,7 +546,7 @@ second derivative vanish in $x = 0$ itself:
 \end{equation}
 The resulting modified hierarchical Clenshaw--Curtis not-a-knot B-spline basis
 $\varphi_{l,i}^{p,\modified,\notaknot}$ is shown with dashed lines
-in \cref{fig:notAKnotBSpline}.
+in \cref{fig:modifiedNotAKnotBSpline}.
 As before, we have to implement $\varphi_{l,1}^{p,\modified,\notaknot}$
 only for a single level $l$, as modified functions of higher levels
 are the same up to an affine parameter transformation.
@@ -595,24 +613,41 @@ The hierarchical not-a-knot Clenshaw--Curtis B-spline basis of
 cubic degree and the corresponding modified functions are plotted in
 \cref{fig:clenshawCurtisNotAKnotBSpline}.
 
-\begin{SCfigure}
-  \includegraphics{hierarchicalBSpline_6}%
-  \caption{%
-    Hierarchical cubic Clenshaw--Curtis not-a-knot B-splines
-    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$
-    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
-    grid points $x_{l',i'}^\clenshawcurtis$ \emph{(dots)} up to level $l = 3$.
-    The knots of each level are given by removing the
-    first $(p-1)/2$ and last $(p-1)/2$ points \emph{(crosses)}
-    of the set of inner grid points $x_{l',i'}^\clenshawcurtis$
-    ($i' = 1, \dotsc, 2^{l'} - 1$).
-    We can define modified hierarchical Clenshaw--Curtis not-a-knot B-splines
-    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$ \emph{(dashed)}
-    to obtain reasonable values on the boundary for grids without
-    boundary points.%
+\begin{figure}
+  \subcaptionbox{%
+    $\varphi_{l',i'}^{p,\notaknot}$,
+    $\varphi_{l',i'}^{p,\modified,\notaknot}$
+    \emph{(dashed)}, and $x_{l',i'}$ \emph{(dots)}.%
+    \label{fig:modifiedNotAKnotBSpline}%
+  }[73mm]{%
+    \includegraphics{hierarchicalBSpline_7}%
   }%
-  \label{fig:clenshawCurtisNotAKnotBSpline}%
-\end{SCfigure}
+  \hfill
+  \subcaptionbox{%
+    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$,
+    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
+    \emph{(dashed)}, and $x_{l',i'}^\clenshawcurtis$ \emph{(dots)}.%
+    \label{fig:clenshawCurtisNotAKnotBSpline}%
+  }[76mm]{%
+    \includegraphics{hierarchicalBSpline_8}%
+  }%
+  \caption{%
+    Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
+    B-splines $\varphi_{l',i'}^{p,\notaknot}$ and
+    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$
+    ($l ' \le l$, $i' \in I_{l'}$, $p = 3$) up to level $l = 3$
+    together with the respective modified versions
+    $\varphi_{l',i'}^{p,\modified,\notaknot}$ and
+    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
+    \emph{(dashed)}.
+    The knots of each level $l'$ are given by removing the
+    first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
+    inner points \emph{(crosses)}
+    from the set of grid points $x_{l',i'}$ or
+    $x_{l',i'}^\clenshawcurtis$
+    ($i' = 0, \dotsc, 2^{l'}$), respectively.%
+  }%
+\end{figure}
 
 
 
@@ -687,7 +722,7 @@ For this reason, we do not further consider this basis in the
 rest of the thesis.
 
 \begin{SCfigure}
-  \includegraphics{hierarchicalBSpline_7}%
+  \includegraphics{hierarchicalBSpline_9}%
   \caption{%
     Hierarchical cubic natural B-splines
     $\varphi_{l',i'}^{p,\ntrl}$

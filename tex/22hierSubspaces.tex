@@ -109,22 +109,22 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 
 \begin{figure}
   \subcaptionbox{%
-    Basis functions $\varphi_{l,i}^1$ and grid points $x_{l,i}$
-    \emph{(dots)}.
+    Basis functions $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+    and grid points $x_{l',i'}$ \emph{(dots)}.
     The domain is the unit interval $[0, 1]$.%
   }[75mm]{%
     \includegraphics{hierarchicalHat_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $f_l$ as a weighted sum
+    Piecewise linear interpolant $f_l^1$ as a linear combination
     of the hierarchical hat functions \emph{(stacked)}.
     The two boundary functions are combined to a single function
     \emph{\textcolor{C0}{(blue)}} for simplicity.%
   }[75mm]{%
     \includegraphics{hierarchicalHat_2}%
   }%
-  \caption{Univariate hierarchical hat functions of level $l' = 0, \dotsc, 3$.}
+  \caption{Univariate hierarchical hat functions up to level $l = 3$.}
   \label{fig:hierarchicalHat}
 \end{figure}
 

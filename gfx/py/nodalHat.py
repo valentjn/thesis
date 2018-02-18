@@ -27,18 +27,18 @@ for i in range(0, hInv + 1):
   ax.plot(xx, yy, "-", color=color, clip_on=False)
   
   j = np.argmax(yy)
-  x, y = xx[j], yy[j]
-  y += 0.1
+  x, y = xx[j], yy[j] * 1.05
   ax.text(x, y, r"$\varphi_{{{},{}}}^{{{}}}$".format(l, i, p),
           color=color, ha="center", va="bottom")
 
 ax.plot(X, np.zeros_like(X), "k.", clip_on=False)
 
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
 ax.set_xticks(X)
 ax.set_xticklabels(xtl)
 ax.set_yticks([0, 1])
+
+ax.set_xlim(0, 1)
+ax.set_ylim(0, 1)
 
 fig.save(tightLayout={"pad" : 2})
 
@@ -56,7 +56,7 @@ for i in range(0, hInv + 1):
 
 line, = ax.plot(X, c, "k.-", clip_on=False)
 line.set_dashes([3, 3])
-ax.text(0.85, 0.85, r"$f_3$", color="k", ha="center", va="bottom")
+ax.text(0.85, 0.85, r"$f_3^1$", color="k", ha="center", va="bottom")
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 0.9)
