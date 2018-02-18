@@ -7,7 +7,7 @@ import helper.basis
 from helper.figure import Figure
 import helper.grid
 
-def plotSubspace(n, p, b, l, modified=False):
+def plotSubspace(n, p, b, l, modified=False, showSubspaces=False):
   hInv = 2**l
   h = 1 / hInv
   I = (list(range(1, hInv, 2)) if l > 0 else [0, 1])
@@ -61,8 +61,9 @@ def plotSubspace(n, p, b, l, modified=False):
                   np.linspace(1 - (p-1)/2 * h, 1 - h, (p-1)/2)])
     ax.plot(x, 0*x, "x", c=color, clip_on=False)
   
-  ax.text(1.05, maxY / 2, "$W_{{{}}}^{{{}}}$".format(l, spaceSuperscript),
-          ha="left", va="center", color=color)
+  if showSubspaces:
+    ax.text(1.05, maxY / 2, "$W_{{{}}}^{{{}}}$".format(l, spaceSuperscript),
+            ha="left", va="center", color=color)
   
   maxY /= 1.1
   ax.set_xlim((0, 1))
@@ -89,7 +90,7 @@ fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
 
 for l in range(n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
-  plotSubspace(n, p, b, l)
+  plotSubspace(n, p, b, l, showSubspaces=True)
 
 fig.save(tightLayout=tightLayout)
 
