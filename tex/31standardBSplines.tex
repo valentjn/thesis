@@ -711,23 +711,25 @@ $T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$ \cite{Xu16Chebyshev}.%
 They are obtained by dividing a semicircle into $2^l$ equally sized
 segments and subsequently orthogonally projecting the
 segment endpoints onto the diameter
-(see \cref{fig:chebyshev}).
+(see \cref{fig:pointSplittingChebyshev}).
 The most practical use of Chebyshev points is in
 polynomial interpolation to avoid Runge's phenomenon and in
 numerical integration (quadrature), resulting in the
 so-called Clenshaw--Curtis quadrature rules.
 
 \begin{figure}
-  \includegraphics{chebyshev_1}%
+  \includegraphics{pointSplitting_2}%
   \caption{%
-    Chebyshev points $x_{l',i'}^\clenshawcurtis$ ($i' \in I_{l'}$)
-    on the unit interval $[0, 1]$ \emph{(black lines)}
-    up to level $l = 4$
-    and their construction as the orthogonal projection of the
+    The set of Chebyshev points $\Omega_l^\clenshawcurtis$ of level
+    $l = 4$ \emph{(top)}
+    decomposes into hierarchical grids of level $l' \le l$
+    (compare with \cref{fig:pointSplittingUniform}).
+    The Chebyshev points are constructed as
+    the orthogonal projection of the
     endpoints of $2^l$ equally sized segments
-    of a semicircle onto its diameter \emph{\textcolor{C0}{(blue)}}.%
+    of a semicircle onto its diameter \emph{\textcolor{C8}{(gray, top)}}.%
   }
-  \label{fig:chebyshev}
+  \label{fig:pointSplittingChebyshev}
 \end{figure}
 
 In some settings, it can be beneficial to use full or sparse grids consisting
