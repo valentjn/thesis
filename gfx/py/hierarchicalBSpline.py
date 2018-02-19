@@ -11,7 +11,7 @@ import helper.grid
 
 def plotSubspace(basis, l, n, nodal=False, modified=False, clenshawCurtis=False,
                  notAKnot=False, natural=False,
-                 drawModifiedOnTop=False, showSubspaces=False):
+                 drawModifiedOnTop=False, showSubspaces=False, whiteCC=False):
   if modified and (l == 0): return
   
   p = basis.p
@@ -27,7 +27,9 @@ def plotSubspace(basis, l, n, nodal=False, modified=False, clenshawCurtis=False,
   if notAKnot:        superscript += r",\mathrm{nak}"
   if natural:         superscript += r",\mathrm{nat}"
   
-  pointSuperscript = (r"\mathrm{cc}" if clenshawCurtis else "")
+  if clenshawCurtis: pointSuperscript = r"\mathrm{cc}"
+  elif whiteCC:      pointSuperscript = r"\textcolor{white}{\mathrm{cc}}"
+  else:              pointSuperscript = ""
   
   for i in plotI:
     if drawModifiedOnTop:
@@ -189,7 +191,7 @@ basisModified = helper.basis.ModifiedHierarchicalNotAKnotBSpline(p)
 for l in range(n+1):
   ax = fig.add_subplot(n+1, 1, l+1)
   plotSubspace(basis, l, n, notAKnot=True)
-  plotSubspace(basisModified, l, n, modified=True, drawModifiedOnTop=True)
+  plotSubspace(basisModified, l, n, modified=True, drawModifiedOnTop=True, whiteCC=True)
 
 fig.save(tightLayout=tightLayout)
 
