@@ -336,6 +336,8 @@ the nodal space $V_l^p$:
 
 This proposition gives the reason for the ``B'' in ``B-splines'',
 which is for ``basis'' (of the space of splines).
+One example of a knot sequence and the corresponding B-splines is
+given in \cref{fig:splineSpaceGeneral}.
 The key observation is that B-splines of a knot sequence $\ß\xi$
 do not form a basis of the spline space on the union
 $[\xi_0, \xi_{m+p}]$ of the B-spline supports,
@@ -347,7 +349,8 @@ as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $(p + 1)$ degrees of freedom.
 Outside of $D_\ß\xi^p$, there are too few relevant B-splines
 to span the spline space.
-This important observation, which is visualized in \cref{fig:splineSpace},
+This important observation,
+which is visualized in \cref{fig:splineSpaceUniform},
 forces us to restrict nodal space and hierarchical subspaces to
 $D_\ß\xi^p$:
 
@@ -370,7 +373,22 @@ $D_\ß\xi^p$:
     $s = \sum_{k=0}^{m-1} c_k b_{k,\ß\xi}^p$
     of the B-splines.%
   }%
-  \label{fig:splineSpace}
+  \label{fig:splineSpaceGeneral}%
+\end{figure}
+
+\begin{figure}
+  \includegraphics{splineSpace_2}%
+  \caption{%
+    Uniform knot sequence $\ß\xi_l^p$ \emph{(ticks on horizontal axis)}
+    and corresponding nodal cubic B-splines ($p = 3$) of level $l = 3$.
+    In the domain $[0, 1]$ \emph{(delimited by dashed lines)},
+    the grid points $\Omega_l$ \emph{\textcolor{mittelblau}{(blue dots)}}
+    coincide with the B-spline knots.
+    The spline interpolation domain $D_l^p := D_{\ß\xi_l^p}^p$
+    \emph{(thick line)}
+    is only a proper subset of $[0, 1]$.%
+  }%
+  \label{fig:splineSpaceUniform}%
 \end{figure}
 
 \begin{corollary}[nodal B-spline space]

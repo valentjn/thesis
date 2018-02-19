@@ -254,6 +254,25 @@ for $S_l^{p,\notaknot}$, since all interpolation points
 Second, $S_l^{p,\notaknot}$ still contains all polynomials of
 degree $\le p$, as we have only removed knots compared to $S_l^{p,[0,1]}$.
 
+\begin{figure}
+  \includegraphics{splineSpace_3}%
+  \caption{%
+    Not-a-knot knot sequence $\ß\xi_l^{p,\notaknot}$
+    \emph{(ticks on horizontal axis)}
+    and corresponding nodal cubic not-a-knot B-splines ($p = 3$)
+    of level $l = 3$.
+    In the domain $[0, 1]$ \emph{(delimited by dashed lines)},
+    the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$ points
+    of the set of grid points $\Omega_l$
+    \emph{\textcolor{mittelblau}{(blue dots)}}
+    have been removed from the set of knots.
+    The spline interpolation domain $D_{\ß\xi_l^{p,\notaknot}}^p$
+    \emph{(thick line)}
+    equals the whole domain $[0, 1]$.%
+  }%
+  \label{fig:splineSpaceNotAKnot}%
+\end{figure}
+
 However, $\bigoplus_{l'=0}^l W_l^p$ is not a subspace of
 $S_l^{p,\notaknot}$ anymore,
 as the hierarchical basis functions $\varphi_{l',i'}^p$ are not
