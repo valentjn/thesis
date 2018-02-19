@@ -4,7 +4,7 @@
 As we have seen in the last section (see \cref{cor:hierSplittingBSpline}),
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
-$D_l^p = [h_l (p-1)/2,\; 1 - h_l (p-1)/2]$,
+$D_l^p = [h_l \tfrac{p-1}{2},\; 1 - h_l \tfrac{p-1}{2}]$,
 which is for $p > 1$ a proper subset of the domain $[0, 1]$.
 The implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
@@ -107,8 +107,8 @@ The Schoenberg--Whitney conditions require that the interpolation points
 are contained in $D_l^p$.
 In the example of $p = 3$ in \cref{fig:nakInterpolation},
 the points $0$ and $1$ do not lie in $D_l^p$.
-For general degree $p$, the first $(p-1)/2$ and the last $(p-1)/2$
-grid points of level $l$ are missing from $D_l^p$,
+For general degree $p$, the first $\tfrac{p-1}{2}$ and the
+last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $D_l^p$,
 thus violating the Schoenberg--Whitney conditions.
 One possible remedy would be to move these interpolation points inside
 $D_l^p$ without changing the corresponding basis functions
@@ -185,12 +185,13 @@ as this is equivalent to requiring that
 $s$ is a cubic polynomial on $[0, x_{l,2}]$ and $[x_{l,2^l-2}, 1]$.
 For general degree $p$ (in which we need $(p - 1)$ conditions),
 we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
-is continuous at the first $(p-1)/2$ and the last $(p-1)/2$
+is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
 inner grid points
 \begin{equation}
   \label{eq:removedNAKKnots}
   x_{l,i},\quad
-  i \in \{1, \dotsc, (p-1)/2\} \cup \{2^l - (p-1)/2, \dotsc, 2^l - 1\},
+  i \in \{1, \dotsc, \tfrac{p-1}{2}\} \cup
+  \{2^l - \tfrac{p-1}{2}, \dotsc, 2^l - 1\},
 \end{equation}
 which is equivalent to removing these knots from the knot sequence $\ß\xi$,
 or, alternatively, to requiring that $s$ is a polynomial
@@ -666,7 +667,7 @@ To obtain the necessary number of $p - 1$ constraints also
 for higher degrees $p$,
 we require that all derivatives
 $\frac{\diff^q}{\dx^q} \varphi_{l,i}$ of order
-$q = 2, \dotsc, (p+1)/2$ vanish at $x \in \{0, 1\}$.
+$q = 2, \dotsc, \tfrac{p+1}{2}$ vanish at $x \in \{0, 1\}$.
 
 \newgsymbol{.nat}{$\cdot^\ntrl$}{%
   Superscript for ``Natural (basis
