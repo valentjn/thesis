@@ -36,11 +36,10 @@ for l in range(n + 1):
   y = (n - l) * margin
   hInv = 2**l
   I = list(range(hInv + 1))
-  L = (hInv + 1) * [l]
-  X = helper.grid.getCoordinates(L, I, distribution="clenshawCurtis")
+  X = helper.grid.getCoordinates(l, I, distribution="clenshawCurtis")
   ax.plot([0, 1], 2 * [y], "k-", clip_on=False)
   ax.plot(X, y * np.ones_like(X), "k.", clip_on=False)
-  ax.text(1 + textMargin, y, r"$\ell = {}$".format(l), ha="left", va="center")
+  ax.text(1 + textMargin, y, r"$\ell' = {}$".format(l), ha="left", va="center")
 
 ax.set_axis_off()
 ax.set_aspect("equal")
