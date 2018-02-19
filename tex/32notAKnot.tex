@@ -386,7 +386,7 @@ i.e., we have
 \end{equation}
 This means that we can reuse uniform B-spline code
 for the inner functions.
-Due to $\varphi_{l,i}^{p,\notaknot} = \varphi_{l,2^l-i}^{p,\notaknot}$
+Due to $\varphi_{l,i}^{p,\notaknot}(x) = \varphi_{l,2^l-i}^{p,\notaknot}(1-x)$
 (because of the symmetry of $\ß\xi_l^{p,\notaknot}$),
 we only have to implement $\tfrac{p+1}{2}$ not-a-knot B-splines per level $l$.
 As $\varphi_{l,i}^{p,\notaknot}$ and $\varphi_{l+1,i}^{p,\notaknot}$
