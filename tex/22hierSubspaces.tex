@@ -61,7 +61,8 @@ highest power of two that divides $i$.
   the joined sets is empty)%
 }%
 \newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
-This implies that $\Omega_l$ decomposes into
+As shown in \cref{fig:pointSplitting},
+this implies that $\Omega_l$ decomposes into
 \begin{equation}
   \Omega_l
   = \bigdotcup_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
@@ -79,6 +80,17 @@ joined sets \term{hierarchical subspaces} $W_l$:
   W_l
   := \spn\{\varphi_{l,i} \mid i \in I_l\}.
 \end{equation}
+
+\begin{figure}
+  \includegraphics{pointSplitting_1}%
+  \caption{%
+    The set of grid points $\Omega_l$ of level $l = 4$ \emph{(top)}
+    decomposes into hierarchical grids of level $l' \le l$,
+    whose grid points $x_{l',i'}$ have odd indices $i' \in I_{l'}$
+    ($x_{0,0}$ being the only exception).%
+  }
+  \label{fig:pointSplitting}
+\end{figure}
 
 \paragraph{Hierarchical splitting}
 
