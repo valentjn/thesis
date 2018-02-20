@@ -36,19 +36,19 @@
 \newtoggle{partialCompileMode}
 \toggletrue{partialCompileMode}
 
-% compileX:
 % select chapters to compile for partialCompileMode = true
-\newtoggle{compileChapter1}
-\newtoggle{compileChapter2}\toggletrue{compileChapter2}
-\newtoggle{compileChapter3}\toggletrue{compileChapter3}
-\newtoggle{compileChapter4}
-\newtoggle{compileChapter5}
-\newtoggle{compileChapter6}
-\newtoggle{compileChapter7}
-\newtoggle{compileChapter8}
-\newtoggle{compileChapter9}
-\newtoggle{compileChapterAppendix1}\toggletrue{compileChapterAppendix1}
-\newtoggle{compileBibliography}
+\includeonly{%
+  %10introduction,
+  %20sparseGrids,
+  30BSplines,
+  %40hierarchization,
+  %50optimization,
+  %60topoOpt,
+  %70muscle,
+  %80finance,
+  %90conclusion,
+  a10proofs,
+}
 
 % ======================================================================
 % Toggle Logic
@@ -62,17 +62,10 @@
   \togglefalse{showGlossaryDefinitionsMode}
 }
 
-% disable compileX if partialCompileMode is disabled
+% compile everything if partialCompileMode is disabled
+\makeatletter
 \iftoggle{partialCompileMode}{}{
-  \toggletrue{compileChapter1}
-  \toggletrue{compileChapter2}
-  \toggletrue{compileChapter3}
-  \toggletrue{compileChapter4}
-  \toggletrue{compileChapter5}
-  \toggletrue{compileChapter6}
-  \toggletrue{compileChapter7}
-  \toggletrue{compileChapter8}
-  \toggletrue{compileChapter9}
-  \toggletrue{compileChapterAppendix1}
-  \toggletrue{compileBibliography}
+  % disable the \includeonly mechanism
+  \@partswfalse
 }
+\makeatother

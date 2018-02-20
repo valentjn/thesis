@@ -43,33 +43,31 @@
   }
   
   % chapters
-  \iftoggle{compileChapter1}{\include{10introduction}}{}
-  \iftoggle{compileChapter2}{\include{20sparseGrids}}{}
-  \iftoggle{compileChapter3}{\include{30BSplines}}{}
-  \iftoggle{compileChapter4}{\include{40hierarchization}}{}
-  \iftoggle{compileChapter5}{\include{50optimization}}{}
-  \iftoggle{compileChapter6}{\include{60topoOpt}}{}
-  \iftoggle{compileChapter7}{\include{70muscle}}{}
-  \iftoggle{compileChapter8}{\include{80finance}}{}
-  \iftoggle{compileChapter9}{\include{90conclusion}}{}
+  \include{10introduction}
+  \include{20sparseGrids}
+  \include{30BSplines}
+  \include{40hierarchization}
+  \include{50optimization}
+  \include{60topoOpt}
+  \include{70muscle}
+  \include{80finance}
+  \include{90conclusion}
   
   % start appendix
   \appendix
   
   % appendix chapters
-  \iftoggle{compileChapterAppendix1}{\include{a10proofs}}{}
+  \include{a10proofs}
   
-  \iftoggle{compileBibliography}{
-    % bibliography
-    \printbibliography[%
-      % change title
-      title=Bibliography,
-      % use custom heading
-      heading=myheading,
-      % print custom note
-      postnote=mypostnote,
-    ]
-  }{}
+  % bibliography
+  \printbibliography[%
+    % change title
+    title=Bibliography,
+    % use custom heading
+    heading=myheading,
+    % print custom note
+    postnote=mypostnote,
+  ]
   
   \iftoggle{partialCompileMode}{}{
     % add all symbols and acronyms that have not been used
