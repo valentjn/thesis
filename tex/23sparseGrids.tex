@@ -262,8 +262,8 @@ In the most general form, their function spaces and grid sets have the form
 \end{equation}
 where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \NN_0^d$ and $\ßi \in I_\ßl$.
-Often, one has to make specific assumptions about $K$ in order for
-sparse grid algorithms to work correctly.
+Algorithms for sparse grids often make specific assumptions about $K$.
+If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 For example for hat functions $\varphi_{\ßl,\ßi}^1$, the grid should contain
 the hierarchical ancestors of every grid point:
