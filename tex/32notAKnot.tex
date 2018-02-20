@@ -437,7 +437,9 @@ respectively.
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
   is defined as the space $P^{2^l + 1}$ of polynomials of degree
-  $\le 2^l + 1$ on $[0, 1]$.
+  $\le 2^l + 1$ on $[0, 1]$
+  (for $l \ge \lceil\log_2(p+1)\rceil$,
+  $S_l^{p,\notaknot}$ is the not-a-knot spline space).
 \end{proposition}
 
 \begin{proof}
@@ -473,7 +475,8 @@ respectively.
     = V_\ßl^{\ßp,\notaknot}
     = \bigoplus_{\ßl'=\ß0}^\ßl W_{\ßl'}^{\ßp,\notaknot},
   \end{equation}
-  where is the tensor product space of $S_{l_t}^{p_t,\notaknot}$
+  where $S_\ßl^{\ßp,\notaknot}$ is the
+  tensor product space of $S_{l_t}^{p_t,\notaknot}$
   ($t = 1, \dotsc, d$) as defined in \cref{prop:hierSplittingNAKBSplineUV}.
 \end{corollary}
 
@@ -730,6 +733,9 @@ does not contain $x = 0$
 (i.e., $i > \tfrac{p+1}{2}$).
 The second half of the coefficients ($j > i$) vanishes analogously
 if $1 \notin \intsupp \varphi_{l,i}^p \iff i < 2^l - \tfrac{p+1}{2}$.
+This means that as for the not-a-knot basis,
+only the first $\tfrac{p+1}{2}$ and the last $\tfrac{p+1}{2}$
+hierarchical functions have to be altered in each level.
 
 \Cref{fig:naturalBSpline} shows the hierarchical natural spline basis.
 The main disadvantage of natural boundary conditions is that
