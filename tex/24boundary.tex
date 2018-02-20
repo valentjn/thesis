@@ -62,13 +62,22 @@ $\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
 For example, the 3D cube decomposes into
-$2^0 \binom{3}{0} = 1$ interior cube $\openinterval{0, 1}^3$,
-$2^1 \binom{3}{1} = 6$ sides (two-dimensional faces)
-like $\openinterval{0, 1}^2 \times \{0\}$,
-$2^2 \binom{3}{2} = 12$ edges (one-dimensional faces)
-like $\openinterval{0, 1} \times \{(0, 0)\}$, and
-$2^3 \binom{3}{3} = 8$ corners (zero-dimensional faces)
-like $(0, 0, 0)$.
+\begin{itemize}
+  \item
+  $2^0 \binom{3}{0} = 1$ interior cube $\openinterval{0, 1}^3$,
+  
+  \item
+  $2^1 \binom{3}{1} = 6$ sides (two-dimensional faces)
+  like $\openinterval{0, 1}^2 \times \{0\}$,
+  
+  \item
+  $2^2 \binom{3}{2} = 12$ edges (one-dimensional faces)
+  like $\openinterval{0, 1} \times \{(0, 0)\}$, and
+  
+  \item
+  $2^3 \binom{3}{3} = 8$ corners (zero-dimensional faces)
+  like $(0, 0, 0)$.
+\end{itemize}
 On each of these $(d-q)$-dimensional faces,
 the sparse grid $\Omega_{n,d}^\sparse$ contains
 the interior of a sparse grid of level $n + q$,
