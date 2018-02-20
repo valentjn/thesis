@@ -41,7 +41,7 @@ of $\Omega_{n,d}^\sparse$ can be shown:
 \begin{proof}
   See \cite{Bungartz04Sparse}.
 \end{proof}
-Here, we define $0$-dimensional grids to contain exactly one grid point
+Here, we define zero-dimensional grids to contain exactly one grid point
 (the empty tuple).
 The number of interior grid points can be calculated as follows:
 \begin{lemma}[number of grid points of $\interior{\Omega}_{n,d}^\sparse$]
@@ -63,11 +63,11 @@ The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
 For example, the 3D cube decomposes into
 $2^0 \binom{3}{0} = 1$ interior cube $\openinterval{0, 1}^3$,
-$2^1 \binom{3}{1} = 6$ sides ($2$-dimensional faces)
+$2^1 \binom{3}{1} = 6$ sides (two-dimensional faces)
 like $\openinterval{0, 1}^2 \times \{0\}$,
-$2^2 \binom{3}{2} = 12$ edges ($1$-dimensional faces)
+$2^2 \binom{3}{2} = 12$ edges (one-dimensional faces)
 like $\openinterval{0, 1} \times \{(0, 0)\}$, and
-$2^3 \binom{3}{3} = 8$ corners ($0$-dimensional faces)
+$2^3 \binom{3}{3} = 8$ corners (zero-dimensional faces)
 like $(0, 0, 0)$.
 On each of these $(d-q)$-dimensional faces,
 the sparse grid $\Omega_{n,d}^\sparse$ contains
@@ -84,8 +84,8 @@ There are mainly two solutions to deal with this issue.
 \paragraph{Inserting boundary points at finer levels}
 
 The first solution is to insert the boundary level functions and grid points
-at a finer level than $0$.
-A popular choice is the insertion at level $1$, which corresponds to
+at a finer level than zero.
+A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
   \Omega_{n,d}^{\sparse(1)}
@@ -95,7 +95,7 @@ A popular choice is the insertion at level $1$, which corresponds to
   := \{\ßl \in \NN_0^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\},
 \end{equation}
 where $\vec{\max}$ is to be read coordinate-wise as usual.
-This choice is equivalent to treating $0$-level components as level $1$
+This choice is equivalent to treating zero-level components as level one
 in the subspace selection.
 This ensures that the finest mesh sizes in interior of $[\ß0, \ß1]$ and
 its boundary coincide to be $h_{n-d+1}$, which reduces the number of grid points
@@ -103,12 +103,12 @@ on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
 hat functions is (in the univariate case)
-to start with the constant function on level $0$ with
+to start with the constant function on level zero with
 corresponding grid point $0.5$,
-then employ the two boundary functions and points on level $1$,
+then employ the two boundary functions and points on level one,
 and finally proceed as usual for the finer levels $\ge 2$.
 Apart from a constant shift in the level of the resulting sparse grids,
-this is equivalent to inserting the boundary functions and points at level $2$.
+this is equivalent to inserting the boundary functions and points at level two.
 This solution leads to even less grid points than the previous approach,
 as now the mesh size is finer in the interior of the domain than on the
 boundary.
@@ -148,7 +148,7 @@ into interior levels ($\ßl \in \NN^d$)
 and boundary levels ($\ßl \in \NN_0^d \setminus \NN^d$).
 By including the levels of the interior grid $\interior{\Omega}_{n,d}^\sparse$,
 the mesh size in the interior is the same as before ($h_{n-d+1}$).
-Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level $1$,
+Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level one,
 but we subtract $b - 1$ from the upper bound to ensure the correct
 mesh size $h_{n-d-b+2}$ on the boundary.
 We append $\ß0$ to the level set to ensure that at least the $2^d$ corner
@@ -546,7 +546,8 @@ $\interior{\Omega}_{n,d}^{\sparse(b)}$.
 Third, we calculate the surpluses of the inner grid points
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
-on the boundary, this does not influence the interpolated values in step~1.
+on the boundary, this does not influence the interpolated values in the
+first step.
 
 \subsection{Sparse Grids Without Boundary Points and Modified Bases}
 
@@ -575,8 +576,8 @@ univariate basis function of each level (with indices $i = 1$ and
 $i = 2^l - 1$ respectively) such that the modified functions
 extrapolate the inner values linearly towards the boundary
 \cite{Pflueger10Spatially}.
-The basis function on level $1$ is replaced by the
-``constant $1$'' function.
+The basis function on level one is replaced by the
+``constant one'' function.
 All other basis functions remain unchanged.
 \newgsymbol{.mod}{$\cdot^\modified$}{%
   Superscript for ``Modified (basis function/function space/interpolant)

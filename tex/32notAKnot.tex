@@ -106,15 +106,15 @@ described by the so-called Schoenberg--Whitney conditions:
 The Schoenberg--Whitney conditions require that the interpolation points
 are contained in $D_l^p$.
 In the example of $p = 3$ in \cref{fig:nakInterpolation},
-the points $0$ and $1$ do not lie in $D_l^p$.
+the points $x = 0$ and $x = 1$ do not lie in $D_l^p$.
 For general degree $p$, the first $\tfrac{p-1}{2}$ and the
 last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $D_l^p$,
 thus violating the Schoenberg--Whitney conditions.
 One possible remedy would be to move these interpolation points inside
 $D_l^p$ without changing the corresponding basis functions
 (i.e., the knots would stay the same) \cite{Hoellig13Approximation}.
-For instance in the cubic case, we could move $0$ and $1$ to
-$1.5 h_l$ and $1 - 1.5 h_l$, respectively.
+For instance in the cubic case, we could move $x = 0$ and $x = 1$ to
+$x = 1.5 h_l$ and $x = 1 - 1.5 h_l$, respectively.
 However, with this approach, we would not be able to interpolate
 boundary values.
 In addition, the condition of the interpolation problem will most likely

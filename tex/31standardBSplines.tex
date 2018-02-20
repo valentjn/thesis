@@ -53,7 +53,7 @@ which are also shown in \cref{fig:cardinalBSplineProps}:
   
   \item
   \emph{Bounds and symmetry:}
-  The cardinal B-spline $b^p$ is non-negative and bounded from above by $1$.
+  The cardinal B-spline $b^p$ is non-negative and bounded from above by one.
   It is symmetric with respect to the center of its support, i.e.,
   $b^p(x) = b^p(p + 1 - x)$.
   
@@ -98,7 +98,7 @@ which are also shown in \cref{fig:cardinalBSplineProps}:
   \newgsymbol{!*}{$\ast$}{Convolution $f \ast g$ of two functions $f$ and $g$}%
   The integral in the definition of $b^p$
   is the convolution $b^{p-1} \ast b^0$ of the B-spline $b^{p-1}$
-  of degree $p - 1$ with the B-spline $b^0$ of degree $0$.
+  of degree $p - 1$ with the B-spline $b^0$ of degree zero.
   
   \item
   \emph{Generalization:}
@@ -614,7 +614,7 @@ Pflüger omits summands with $i > 1$ as he only wants to modify
 $\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
 The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
 analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
-For $l = 1$, again the ``constant $1$'' function is taken for the definition
+For $l = 1$, again the ``constant one'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
   \label{eq:modifiedBSplineDefinition}
@@ -831,7 +831,7 @@ as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
 lie outside $[0, 1]$ and are thus uniform according
 to \eqref{eq:clenshawCurtisBSplineKnots},
-the absolute deviation of the second derivative from $0$ is small.
+the absolute deviation of the second derivative from zero is small.
 Again, to enforce natural boundary conditions,
 it is possible to recompute the coefficients
 of the components $\varphi_{l,i'}^{p,\clenshawcurtis}$
