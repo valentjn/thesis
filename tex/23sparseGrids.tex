@@ -265,25 +265,34 @@ with $\ßl \in \NN_0^d$ and $\ßi \in I_\ßl$.
 Algorithms for sparse grids often make specific assumptions about $K$.
 If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
-For example for hat functions $\varphi_{\ßl,\ßi}^1$, the grid should contain
-the hierarchical ancestors of every grid point:
-\begin{equation}
-  \label{eq:hierAncestors}
-  \forall_{(\ßl,\ßi) \in K}
-  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in K},\quad
-  \ßl' := \ßl - \ße_t,\quad
-  i_{t'}' :=
-  \begin{cases}
-    2 \lfloor i_t/4 \rfloor + 1,&t = t',\\
-    i_{t'},&t \not= t',
-  \end{cases}
-\end{equation}
-where $\ße_t$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
-If \eqref{eq:hierAncestors} is not met, the so-called
+%For example for hat functions $\varphi_{\ßl,\ßi}^1$, the grid should contain
+%the hierarchical ancestors of every grid point:
+%\begin{equation}
+%  \label{eq:hierAncestors}
+%  \forall_{(\ßl,\ßi) \in K}
+%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in K},\quad
+%  \ßl' := \ßl - \ße_t,\quad
+%  i_{t'}' :=
+%  \begin{cases}
+%    2 \lfloor i_t/4 \rfloor + 1,&t = t',\\
+%    i_{t'},&t \not= t',
+%  \end{cases}
+%\end{equation}
+%where $\ße_t$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+%If \eqref{eq:hierAncestors} is not met, the so-called
+%unidirectional principle, which is used for instance to efficiently calculate
+%hierarchical surpluses, does not work.
+%However, as we will see, the unidirectional principle cannot be applied
+%to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
+%Therefore, for most of our considerations, we will not restrict the
+%choice of $K$.
+For example when working with hat functions $\varphi_{\ßl,\ßi}^1$,
+the grid should contain the hierarchical ancestors of every grid point.
+Otherwise, the so-called
 unidirectional principle, which is used for instance to efficiently calculate
 hierarchical surpluses, does not work.
 However, as we will see, the unidirectional principle cannot be applied
-to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
+to B-splines of general degree, even if the hierarchical ancestors exist.
 Therefore, for most of our considerations, we will not restrict the
 choice of $K$.
 
