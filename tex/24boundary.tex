@@ -61,7 +61,8 @@ $\Omega_{n,d}^\sparse$ into lower-dimensional sparse grids
 $\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
-For example, the 3D cube decomposes into
+In the three-dimensional example of \cref{fig:sgDecompose},
+the unit cube decomposes into
 \begin{itemize}
   \item
   $2^0 \binom{3}{0} = 1$ interior cube $\openinterval{0, 1}^3$,
@@ -88,6 +89,25 @@ the size of $\Omega_{n,d}^\sparse$ quickly exhausts the available
 computational memory.
 To deal with this issue, there are mainly two solutions,
 which are described below.
+
+\begin{figure}
+  \raisebox{-0.5\height}{\includegraphics{sgDecompose_1}}%
+  \raisebox{-0.5\height}{$\;\;=\;\;$}%
+  \raisebox{-0.5\height}{\includegraphics{sgDecompose_2}}%
+  \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
+  \raisebox{-0.5\height}{\includegraphics{sgDecompose_3}}%
+  \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
+  \raisebox{-0.5\height}{\includegraphics{sgDecompose_4}}%
+  \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
+  \raisebox{-0.5\height}{\includegraphics{sgDecompose_5}}%
+  \caption{%
+    Decomposition of the three-dimensional sparse grid $\Omega_{n,d}^\sparse$
+    ($n = 4$, $d = 3$) into lower-dimensional sparse sub-grids.
+    The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
+    serve as a visual aid.%
+  }%
+  \label{fig:sgDecompose}%
+\end{figure}
 
 \subsection{Sparse Grids with Coarser Boundaries}
 
