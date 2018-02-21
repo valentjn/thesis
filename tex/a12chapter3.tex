@@ -140,24 +140,6 @@
   For higher B-spline degrees $p$, the regularity of $A(p)$ has
   to be shown differently.
   
-  \begin{table}
-    \begin{tabular}{l@{\hspace{7mm}}ccc}
-      \toprule
-      &$k = 0$&$k = 1$&$k = 2$\\
-      \midrule
-      $p = 1$&2&&\\
-      $p = 3$&6&1&\\
-      $p = 5$&20&6&\\
-      $p = 7$&70&28&1\\
-      \bottomrule
-    \end{tabular}%
-    \caption{%
-      Non-zero values $(A(p))_{j,j+k}$ of the diagonals of $A(p)$
-      obtained in \eqref{eq:hierBSplineLinearlyIndependent2}.%
-    }%
-    \label{tbl:proofHierBSplineLinearlyIndependent}
-  \end{table}
-  
   Due to the regularity of $A(p)$, we infer from
   \eqref{eq:hierBSplineLinearlyIndependent2} that
   $\alpha_{l,i'} = 0$ for $i' \in I_l$.
@@ -174,3 +156,21 @@
   Thus, the hierarchical functions $\varphi_{l',i'}^p$
   ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
 \end{proof}
+
+\begin{table}
+  \begin{tabular}{l@{\hspace{7mm}}ccc}
+    \toprule
+    &$k = 0$&$k = 1$&$k = 2$\\
+    \midrule
+    $p = 1$&2&&\\
+    $p = 3$&6&1&\\
+    $p = 5$&20&6&\\
+    $p = 7$&70&28&1\\
+    \bottomrule
+  \end{tabular}%
+  \caption{%
+    Non-zero values $(A(p))_{j,j+k}$ of the diagonals of $A(p)$
+    obtained in \eqref{eq:hierBSplineLinearlyIndependent2}.%
+  }%
+  \label{tbl:proofHierBSplineLinearlyIndependent}
+\end{table}
