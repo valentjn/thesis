@@ -35,20 +35,13 @@ for b in range(bMax + 1):
 
 
 d = 3
+colorBoundary = Figure.COLORS["mittelblau"]
+colorBoundaryBack = [1 - (1-0.8) * (1-x) for x in colorBoundary]
+colorInterior = "k"
 
 for b in range(bMax + 1):
   fig = Figure.create(figsize=(2, 2), scale=1.0)
   ax = fig.add_subplot(111, projection="3d")
-  
-  xs = [[0, 1, 1, 0, 0], [0, 1, 1, 0, 0], [0, 0], [1, 1], [0, 0], [1, 1]]
-  ys = [[0, 0, 1, 1, 0], [0, 0, 1, 1, 0], [0, 0], [0, 0], [1, 1], [1, 1]]
-  zs = [[0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [0, 1], [0, 1], [0, 1], [0, 1]]
-  for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k-", zs=z, clip_on=False)
-  
-  xs = [[0, 1], [0.5, 0.5], [0.5, 0.5]]
-  ys = [[0.5, 0.5], [0, 1], [0.5, 0.5]]
-  zs = [[0.5, 0.5], [0.5, 0.5], [0, 1]]
-  for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k--", zs=z, clip_on=False)
   
   grid = helper.grid.RegularSparseBoundary(n, d, b)
   X, L, _ = grid.generate()
@@ -58,27 +51,39 @@ for b in range(bMax + 1):
   N = X.shape[0]
   NL = np.sum(L == 0, axis=1)
   
-  for k in range(N - 1, -1, -1):
-    Nl = NL[k]
+  IsBack = np.logical_and(np.any(L == 0, axis=1),
+                          np.logical_and.reduce(X != [1, 0, 1], axis=1))
+  
+  xs = [[0, 1], [0, 0], [0, 0]]
+  ys = [[1, 1], [1, 0], [1, 1]]
+  zs = [[0, 0], [0, 0], [0, 1]]
+  for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k-", zs=z, clip_on=False)
+  
+  for r in range(2):
+    if r == 1:
+      xs = [[0, 1], [0.5, 0.5], [0.5, 0.5]]
+      ys = [[0.5, 0.5], [0, 1], [0.5, 0.5]]
+      zs = [[0.5, 0.5], [0.5, 0.5], [0, 1]]
+      for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k--", zs=z, clip_on=False)
     
-    if (Nl == 1) and ((X[k,0] == 0) or (X[k,1] == 1) or (X[k,2] == 0)):
-      continue
-    elif (Nl == 2) and (((X[k,0] == 0) and (X[k,2] == 0)) or
-                        ((X[k,1] == 1) and (X[k,2] == 0)) or
-                        ((X[k,0] == 0) and (X[k,1] == 1))):
-      continue
-    elif (X[k,0] == 0) and (X[k,1] == 1) and (X[k,2] == 0):
-      continue
-    
-    if Nl == 0:
-      color = "k"
-    else:
-      color = Figure.COLORS["mittelblau"]
-      #factor = X[k,1]
-      #color =  [factor * x + (1 - factor) * y
-      #          for x, y in zip(Figure.COLORS["mittelblau"], Figure.COLORS["hellblau"])]
-     
-    ax.plot([X[k,0]], [X[k,1]], ".", zs=[X[k,2]], clip_on=False, color=color)
+    for k in range(N - 1, -1, -1):
+      isBack = IsBack[k]
+      if r == int(isBack): continue
+      Nl = NL[k]
+      
+      if Nl == 0:
+        color = colorInterior
+      elif isBack:
+        color = colorBoundaryBack
+      else:
+        color = colorBoundary
+      
+      ax.plot([X[k,0]], [X[k,1]], ".", zs=[X[k,2]], clip_on=False, color=color)
+  
+  xs = [[1, 1], [0, 1], [0, 0], [0, 0], [0, 1], [1, 1], [0, 1], [1, 1], [1, 1]]
+  ys = [[0, 1], [0, 0], [0, 0], [0, 1], [1, 1], [0, 1], [0, 0], [0, 0], [1, 1]]
+  zs = [[0, 0], [0, 0], [0, 1], [1, 1], [1, 1], [1, 1], [1, 1], [0, 1], [0, 1]]
+  for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k-", zs=z, clip_on=False)
   
   ax.view_init(30, -65)
   ax.set_axis_off()
