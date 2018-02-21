@@ -63,10 +63,10 @@ for q in range(3):
     h = 2**(-n)
     color = Figure.COLORS["mittelblau"]
     ax.text(0,     -0.2, r"$0$", ha="center", va="top", color=color)
-    ax.text(h,     -0.2, r"$x_{l,1}\vphantom{0}$", ha="center", va="top", color=color)
+    ax.text(h,     -0.2, r"$x_{\ell,1}\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(2*h,   -0.2, r"$\cdots\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(1-2*h, -0.2, r"$\cdots\vphantom{0}$", ha="center", va="top", color=color)
-    ax.text(1-h,   -0.2, r"$x_{l,2^l-1}\vphantom{0}$", ha="center", va="top", color=color)
+    ax.text(1-h,   -0.2, r"$x_{\ell,2^\ell-1}\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(1,     -0.2, r"$1$", ha="center", va="top", color=color)
     ax.text(1+(p+1)*h, -0.082, r"$\vec{\xi}$", ha="center", va="top")
     ax.text(1+(p+1)*h, -0.2, r"$x\vphantom{0}$", ha="center", va="top", color=color)
