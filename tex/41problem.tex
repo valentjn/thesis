@@ -1,3 +1,76 @@
 \section{The Hierarchization Problem}
 
 \blindtext{}
+
+\paragraph{Hierarchization as a linear operator}
+
+The example of hierarchization can be generalized
+to arbitrary linear operators:
+Let $\Omega^\sparse \subset [0, 1]^d$ be a sparse grid that
+may be spatially adaptive (see \cref{sec:23sparseGrids})
+and $K := \{(\ßl, \ßi) \mid \ßx_{\ßl,\ßi} \in \Omega^\sparse\}$.
+We consider linear operators
+\begin{equation}
+  L\colon \RR^N \to \RR^N,\quad
+  \ßu \mapsto \ßy = L[\ßu],\quad
+  N := |\Omega^\sparse|,
+\end{equation}
+where $L$ depends on the grid $\Omega^\sparse$ at hand.
+Input $\ßu$ and output $\ßy$ are scalar-valued data sets%
+\footnote{%
+  The setting could be generalized even more,
+  for example to vector-valued data.
+  We restrict ourselves to the scalar-valued case,
+  keeping hierarchization as our main application in mind.%
+}
+\begin{equation}
+  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,\quad
+  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,
+\end{equation}
+which give one scalar per grid point $\ßx_{\ßl,\ßi} \in \Omega^\sparse$.
+For the case of hierarchization,
+$L$ is the inverse of the interpolation matrix $A$:
+\begin{equation}
+  L = A^{-1},\quad
+  A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi')},\quad
+  \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
+  \ßy = (\alpha_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
+\end{equation}
+
+\paragraph{Notation}
+
+We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
+$\Omega^\sparse$, $K$, $\ßu$, and $\ßy$
+for most of the considerations in this chapter.
+Therefore, we assume that in each dimension $t$, the level-index pairs
+$(l_t, i_t)$ ($l_t \in \NN_0$, $i_t \in I_{l_t}$)
+are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \NN_0$.
+We identify $(\ßl, \ßi)$ with a single index $\ßk$,
+whose $t$-th component is given by $k_t(l_t, i_t)$.
+Consequently,
+we can regard $K$ as a subset $\{\ßk \mid \ßx_\ßk \in \Omega^\sparse\}$
+of $\NN^d$.
+We will switch between the notations whenever appropriate.
+
+In the following, $k_t$ denotes the $t$-th component of a $d$-vector $\ßk$
+as usual.
+With $\ßk_{-t}$, we denote the $(d-1)$-vector that is obtained from $\ßk$
+by omitting the $k$-th component,
+i.e., $\ßk_{-t} := (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$.
+For a $j$-tuple $T = (t_1, \dotsc, t_j) \in \{1, \dotsc, d\}^j$,
+we define $\ßk_T$ to be the $j$-vector $(k_{t_1}, \dotsc, k_{t_j})$
+that only contains the entries of the dimensions listed in $T$.
+Accordingly, $\ßk_{-T}$ is defined as the $(d-j)$-vector
+that contains the entries of the remaining dimensions
+(sorted by the dimension $t$).
+We define $a:b := (a, a + 1, \dotsc, b)$ as a shortcut ($a \le b$).
+
+\paragraph{Overview}
+
+In the rest of this chapter, we find algorithms
+to efficiently calculate $L[\ßu]$ for a given input $\ßu$.
+The type of feasible approaches depend on the ``regularity'' of the
+grid $\Omega^\sparse$
+(full grid/dimensionally adaptive sparse grid/spatially adaptive sparse grid).
+The more assumptions $\Omega^\sparse$ satisfies, the faster and
+easier will the corresponding algorithms be.
