@@ -1,3 +1,80 @@
 \section{Hierarchization on Full Grids (Unidirectional Principle)}
 
+\todo{get acronyms to work}
+If $\Omega^\sparse$ is a full grid $\Omega_\ßl$
+(see \cref{sec:21nodalSpaces}),
+the well-known \emph{unidirectional principle}
+can be used to apply $L$ to input data $\ßu$.
+\todo{get abbreviations to work}
+Its idea is to apply the corresponding one-dimensional operators on the
+one-dimensional subgrids (the \emph{poles}) of $\Omega^\sparse$,
+which is repeated for all dimensions.
+In this section, we first formulate the unidirectional principle for
+general linear operators $L$ and then prove its correctness for
+the case $L = A^{-1}$ of hierarchization.
+The correctness for the general case of arbitrary tensor product operators
+will follow from the considerations in \cref{sec:44spatAdaptive}.
+
+The unidirectional principle is given in \cref{alg:unidirectionalPrinciple}.
+The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
+that specifies the order of dimensions in which the
+unidirectional principle should be applied.
+We denote with $L_{t_j}$ the one-dimensional version of $L$
+applied in dimension $t_j$ ($j = 1, \dotsc, d$).
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\ßy =$ unidirectionalPrinciple}{%
+      $K$, $(t_1, \dotsc, t_d)$, $\ßu$%
+    }
+      \State{$\ßy^{(0)} \gets \ßu$}
+      \For{$j = 1, \dotsc, d$}
+        \State{%
+          Define equivalence relation $\sim$ on $K$
+          as $\ßk \sim \ßk' \iff \ßk_{-t_j} = \ßk'_{-t_j}$%
+        }
+        \For{$K_\mathrm{pole} \in K/{\sim}$}
+          \State{%
+            $(y_\ßk^{(j)})_{\ßk \in K_\mathrm{pole}} \gets
+            L_{t_j}\Big[(y_\ßk^{(j-1)})_{\ßk \in K_\mathrm{pole}}\Big]$%
+          }
+        \EndFor{}
+      \EndFor{}
+      \State{$\ßy \gets \ßy^{(d)}$}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption{%
+    Application of a tensor product operator $L$ with
+    the unidirectional principle.
+    Inputs are the set $K$ of grid indices,
+    the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
+    the one-dimensional operators $L_{t_j}$ should be applied, and
+    the vector $\ßu = (u_\ßk)_{\ßk \in K}$ of input data.
+    The output is the vector $\ßy = (y_\ßk)_{\ßk \in K}$
+    of output data.%
+  }%
+  \label{alg:unidirectionalPrinciple}%
+\end{algorithm}
+
+\begin{proposition}[%
+  invariant of \cref{alg:unidirectionalPrinciple} for hierarchization%
+]
+  Let $T$ be the hierarchization operator and $\Omega^\sparse$ be the
+  full grid $\Omega_\ßl$ of level $\ßl \in \NN_0^d$.
+  After iteration $j$ of \cref{alg:unidirectionalPrinciple}
+  ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
+  \begin{equation}
+    \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
+    \alpha^{(j)}_{\ßk''} \varphi_{\ßk_T}(\ßx_{\ßk'_T})
+    = f_{\ßk'},\quad
+    \ßk' = \ß0, \dotsc, \ß2^\ßl,\quad
+    \ßk''_T := \ßk_T,\quad
+    \ßk''_{-T} := \ßk'_{-T}.
+  \end{equation}
+\end{proposition}
+
+\begin{corollary}
+  \Cref{alg:unidirectionalPrinciple} is correct for the case of hierarchization.
+\end{corollary}
+
 \blindtext{}
