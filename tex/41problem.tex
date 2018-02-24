@@ -2,18 +2,31 @@
 
 \blindtext{}
 
+Let $\Omega^\sparse \subset [0, 1]^d$ be a sparse grid that
+may be spatially adaptive (see \cref{sec:23sparseGrids})
+and $K := \{(\ßl, \ßi) \mid \ßx_{\ßl,\ßi} \in \Omega^\sparse\}$
+with $N := |\Omega^\sparse| = |K| < \infty$.
+The \term{hierarchization problem} is finding
+$(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
+\begin{equation}
+  \label{eq:hierarchizationProblem}
+  \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
+  \varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}) = f_{\ßl,\ßi}
+  \quad\text{for all}\quad
+  (\ßl, \ßi) \in K,
+\end{equation}
+where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N$ is a given set of
+function values $f(\ßx_{\ßl,\ßi})$ at the grid points $\ßx_{\ßl,\ßi}$.
+
+\blindtext{}
+
 \paragraph{Hierarchization as a linear operator}
 
 The example of hierarchization can be generalized
-to arbitrary linear operators:
-Let $\Omega^\sparse \subset [0, 1]^d$ be a sparse grid that
-may be spatially adaptive (see \cref{sec:23sparseGrids})
-and $K := \{(\ßl, \ßi) \mid \ßx_{\ßl,\ßi} \in \Omega^\sparse\}$.
-We consider linear operators
+to arbitrary linear operators
 \begin{equation}
   L\colon \RR^N \to \RR^N,\quad
-  \ßu \mapsto \ßy = L[\ßu],\quad
-  N := |\Omega^\sparse|,
+  \ßu \mapsto \ßy = L[\ßu],
 \end{equation}
 where $L$ depends on the grid $\Omega^\sparse$ at hand.
 Input $\ßu$ and output $\ßy$ are scalar-valued data sets%
@@ -29,12 +42,20 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data sets%
 \end{equation}
 which give one scalar per grid point $\ßx_{\ßl,\ßi} \in \Omega^\sparse$.
 For the case of hierarchization,
-$L$ is the inverse of the interpolation matrix $A$:
+$L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
 \begin{equation}
   L = A^{-1},\quad
-  A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi')},\quad
+  A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
   \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
-  \ßy = (\alpha_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
+  \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
+\end{equation}
+This means that we can determine the $\alpha_{\ßl',\ßi'}$ by solving
+the $N \times N$ system of linear equations
+\begin{equation}
+  \ßy = L[\ßu]
+  \quad\iff\quad
+  A \cdot (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
+  = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
 \end{equation}
 
 \paragraph{Notation}
@@ -51,6 +72,9 @@ Consequently,
 we can regard $K$ as a subset $\{\ßk \mid \ßx_\ßk \in \Omega^\sparse\}$
 of $\NN^d$.
 We will switch between the notations whenever appropriate.
+All statements that are formulated in the $\ßk$ notation are
+valid for both the nodal and the hierarchical basis
+(i.e., for all tensor-product bases).
 
 In the following, $k_t$ denotes the $t$-th component of a $d$-vector $\ßk$
 as usual.
@@ -63,13 +87,13 @@ that only contains the entries of the dimensions listed in $T$.
 Accordingly, $\ßk_{-T}$ is defined as the $(d-j)$-vector
 that contains the entries of the remaining dimensions
 (sorted by the dimension $t$).
-We define $a:b := (a, a + 1, \dotsc, b)$ as a shortcut ($a \le b$).
+We define $a:b := (a, a + 1, \dotsc, b)$ as an indexing shortcut ($a \le b$).
 
 \paragraph{Overview}
 
 In the rest of this chapter, we find algorithms
 to efficiently calculate $L[\ßu]$ for a given input $\ßu$.
-The type of feasible approaches depend on the ``regularity'' of the
+The types of feasible approaches depend on the ``regularity'' of the
 grid $\Omega^\sparse$
 (full grid/dimensionally adaptive sparse grid/spatially adaptive sparse grid).
 The more assumptions $\Omega^\sparse$ satisfies, the faster and
