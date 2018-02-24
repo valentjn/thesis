@@ -1,24 +1,21 @@
 \section{Hierarchization on Full Grids (Unidirectional Principle)}
 
-\todo{get acronyms to work}
 If $\Omega^\sparse$ is a full grid $\Omega_\ßl$
 (see \cref{sec:21nodalSpaces}),
-the well-known \emph{unidirectional principle}
+the well-known \emph{\up}
 can be used to apply $L$ to input data $\ßu$.
-\todo{get abbreviations to work}
 Its idea is to apply the corresponding one-dimensional operators on the
 one-dimensional subgrids (the \emph{poles}) of $\Omega^\sparse$,
 which is repeated for all dimensions.
-In this section, we first formulate the unidirectional principle for
+In this section, we first formulate the \up for
 general linear operators $L$ and then prove its correctness for
 the case $L = A^{-1}$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:44spatAdaptive}.
 
-The unidirectional principle is given in \cref{alg:unidirectionalPrinciple}.
+The \up is given in \cref{alg:unidirectionalPrinciple}.
 The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
-that specifies the order of dimensions in which the
-unidirectional principle should be applied.
+that specifies the order of dimensions in which the \up should be applied.
 We denote with $L_{t_j}$ the one-dimensional version of $L$
 applied in dimension $t_j$ ($j = 1, \dotsc, d$).
 
