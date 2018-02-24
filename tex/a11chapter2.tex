@@ -106,7 +106,7 @@
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
   then we have $\norm{\vecmax(\ßl, \ß1)}_1 \le n+d+t-b$ or
-  $\ßl = \ß0$ by line~\ref{line:algCoarseBoundary1} of
+  $\ßl = \ß0$ by \cref{line:algCoarseBoundary1} of
   \cref{alg:coarseBoundary}.
   In the first case, we have
   \begin{equation}
@@ -125,7 +125,7 @@
     \item
     If $\ßl \in \NN^{t-1}$, then $\ßl' \in \NN^{t-1}$ as well and
     $\norm{\ßl'}_1 \le \norm{\ßl}_1 + l^\ast = n - d + t$
-    due to line~\ref{line:algCoarseBoundary2},
+    due to \cref{line:algCoarseBoundary2},
     i.e., $\ßl'$ is contained in the first set of the RHS of
     \eqref{eq:coarseInvariant}.
     
@@ -134,7 +134,7 @@
     $\norm{\vecmax(\ßl', \ß1)}_1
     \le \norm{\vecmax(\ßl, \ß1)}_1 + l^\ast
     = n - d + t - b + 1$
-    due to line~\ref{line:algCoarseBoundary3},
+    due to \cref{line:algCoarseBoundary3},
     i.e., $\ßl$ is contained in the second set of the RHS of
     \eqref{eq:coarseInvariant}.
   \end{itemize}
@@ -177,7 +177,7 @@
   (due to
   $l_t = \norm{\ßl'}_1 - \norm{\ßl}_1 \le n-d+t - \norm{\ßl}_1 = l^\ast$),
   the level $\ßl'$ is inserted into $L^{(t)}$ during the innermost loop
-  in line~\ref{line:algCoarseBoundary4}.
+  in \cref{line:algCoarseBoundary4}.
   
   Second, let $\ßl' = (\ßl, l_t)$
   be in the second set of the RHS, i.e.,
@@ -196,7 +196,7 @@
     As $l_t \in \{1, \dotsc, l^\ast\}$
     (due to $l_t \le n-d+t-b -
     \norm{\vecmax(\ßl, \ß1)}_1 = l^\ast$),
-    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary4}.
+    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
     \item
     $l_t = 0$ and $\ßl \in \NN^{t-1}$:
@@ -206,7 +206,7 @@
     \le n - d + t - 1$ since $b \ge 1$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary5} due to
+    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5} due to
     $\norm{\vecmax(\ßl, \ß1)}_1
     = \norm{\ßl}_1 \le n - d + t - b$.
     
@@ -217,12 +217,12 @@
     \le n - d + t - b$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $L^{(t)}$ in line~\ref{line:algCoarseBoundary5}.
+    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
   Third, let $\ßl = (\vec{0}, 0) \in \NN_0^t$
   be in the third set of the RHS.
-  This level is appended in line~\ref{line:algCoarseBoundary5}
+  This level is appended in \cref{line:algCoarseBoundary5}
   to $L^{(t)}$, since $\ßl' = \vec{0} \in \NN_0^{t-1}$ is in $L^{(t-1)}$ by 
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}
