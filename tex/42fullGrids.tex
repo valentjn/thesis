@@ -84,45 +84,38 @@ applied in dimension $t_j$ ($j = 1, \dotsc, d$).
   We set $T' := (t_1, \dotsc, t_{j-1})$,
   $T := (t_1, \dotsc, t_{j-1}, t_j)$,
   and we exploit the tensor product structure of the basis
-  to write the \lhs of the assertion for $j$ as
-  \begin{equation}
-    \underbrace{
-      \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
-      \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \varphi_{\ßk_T}(\ßx_{\ßk'_T})
-    }_{{} =: (\ast)}
-    = \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
+  to write the \lhs of the assertion for $j$
+  and arbitrary $\ßk' = \ß0, \dotsc, \ß2^\ßl$ as
+  \begin{align}
+    \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
+    \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \varphi_{\ßk_T}(\ßx_{\ßk'_T})
+    &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
     \varphi_{\ßk_{T'}}(\ßx_{\ßk'_{T'}}) \cdot
-    \underbrace{
-      \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
-      \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \varphi_{k_{t_j}}(x_{k'_{t_j}})
-    }_{{} =: (\ast\ast)},
-  \end{equation}
-  where $\ßk' = \ß0, \dotsc, \ß2^\ßl$ is arbitrary.
-  For the equivalence class $K_\mathrm{pole} := [(\ßk_T,\ßk'_{-T})]_\sim$
-  ($\ßk_T$ arbitrary, $\sim$ as defined in iteration $j$), we have
-  \begin{equation}
-    \label{eq:proofInvariantUnidirectionalPrinciple1}
-    (\ast\ast)
-    = \sum_{\ßk \in K_\mathrm{pole}}
-    \alpha^{(j)}_\ßk \varphi_{k_{t_j}}(x_{k'_{t_j}})
-    %= ((L_{t_j})^{-1}
-    %\Big[(\alpha_\ßk^{(j)})_{\ßk \in K_\mathrm{pole}}\Big])_{k'_{t_j}}
-    %= ((\alpha_\ßk^{(j-1)})_{\ßk \in K_\mathrm{pole}})_{k'_{t_j}}
-    = \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}
-  \end{equation}
-  by the 1D interpolation operator $T_{t_j}$
-  (\cref{line:algUnidirectionalPrinciple1} of
-  \cref{alg:unidirectionalPrinciple}).
-  Consequently,
-  \begin{equation}
-    (\ast)
-    = \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
+    \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
+      \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \varphi_{k_{t_j}}(x_{k'_{t_j}}).\\
+    \intertext{%
+      If we choose the equivalence class
+      $K_\mathrm{pole} := [(\ßk_T,\ßk'_{-T})]_\sim$
+      ($\ßk_T$ arbitrary, $\sim$ as defined in iteration $j$),
+      then the sum over $k_{t_j}$ equals
+      $\sum_{\ßk \in K_\mathrm{pole}}
+      \alpha^{(j)}_\ßk \varphi_{k_{t_j}}(x_{k'_{t_j}})
+      %= ((L_{t_j})^{-1}
+      %\Big[(\alpha_\ßk^{(j)})_{\ßk \in K_\mathrm{pole}}\Big])_{k'_{t_j}}
+      %= ((\alpha_\ßk^{(j-1)})_{\ßk \in K_\mathrm{pole}})_{k'_{t_j}}
+      = \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}$
+      by the 1D interpolation operator $T_{t_j}$
+      (\cref{line:algUnidirectionalPrinciple1} of
+      \cref{alg:unidirectionalPrinciple}).
+      We can conclude that the \lhs equals%
+    }
+    &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
     \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}
     \varphi_{\ßk_{T'}}(\ßx_{\ßk'_{T'}}),
-  \end{equation}
+  \end{align}
   which, by the induction hypothesis, equals $f_{\ßk'}$ as desired.
-  \Cref{eq:proofInvariantUnidirectionalPrinciple1} can be used
-  for $j = 0$ to establish the base case.
+  The same reasoning for $(\ast\ast)$ can be used
+  to establish the base case for $j = 0$.
 \end{proof}
 
 \begin{corollary}
