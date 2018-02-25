@@ -1,13 +1,14 @@
 \section{The Hierarchization Problem}
 \label{sec:41problem}
 
-\blindtext{}
-
-Let $\Omega^\sparse \subset [0, 1]^d$ be a sparse grid that
-may be spatially adaptive (see \cref{sec:23sparseGrids})
-and $K := \{(\ßl, \ßi) \mid \ßx_{\ßl,\ßi} \in \Omega^\sparse\}$
-with $N := |\Omega^\sparse| = |K| < \infty$.
+Let $\Omega^\sparse \subset [0, 1]^d$ be a general (sparse) grid that
+may be spatially adaptive, i.e.,
+of the form $|\Omega^\sparse| = \{\ßx_{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
+where $K$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NN_0$
+and $\ßi \in I_\ßl$ such that $N := |\Omega^\sparse| = |K| < \infty$
+(see \cref{sec:23sparseGrids}).
 The \term{hierarchization problem} is finding
+\term{hierarchical surpluses}
 $(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
@@ -18,8 +19,25 @@ $(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
 \end{equation}
 where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N$ is a given set of
 function values $f(\ßx_{\ßl,\ßi})$ at the grid points $\ßx_{\ßl,\ßi}$.
+The hierarchical surpluses then define the interpolant $f^\sparse$ as
+\begin{equation}
+  f^\sparse\colon [\ß0, \ß1] \to \RR,\quad
+  f^\sparse :=
+  \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
+  \varphi_{\ßl',\ßi'},
+\end{equation}
+which interpolates $f$ at the grid points $\ßx_{\ßl,\ßi}$ of $\Omega^\sparse$.
 
-\blindtext{}
+The basis functions $\varphi_{\ßl',\ßi'}$ are
+arbitrary tensor product functions.
+We explicitly allow $\varphi_{\ßl',\ßi'}$ to be a non-hierarchical
+nodal basis, in which case $\ßl'$ is constant and
+$\Omega^\sparse$ is usually a full grid.
+Strictly speaking, the problem is then a \term{interpolation problem}
+and the $\alpha_{\ßl',\ßi'}$ are \term{interpolation coefficients}.
+However, we still apply the terms
+``hierarchization'' and ``hierarchical surpluses'' in this case
+to keep the terminology consistent.
 
 \paragraph{Hierarchization as a linear operator}
 
@@ -30,13 +48,13 @@ to arbitrary linear operators
   \ßu \mapsto \ßy = L[\ßu],
 \end{equation}
 where $L$ depends on the grid $\Omega^\sparse$ at hand.
-Input $\ßu$ and output $\ßy$ are scalar-valued data sets%
-\footnote{%
-  The setting could be generalized even more,
-  for example to vector-valued data.
-  We restrict ourselves to the scalar-valued case,
-  keeping hierarchization as our main application in mind.%
-}
+Input $\ßu$ and output $\ßy$ are scalar-valued data%
+%\footnote{%
+%  The setting could be generalized even more,
+%  for example to vector-valued data.%
+%  We restrict ourselves to the scalar-valued case,
+%  keeping hierarchization as our main application in mind.%
+%}
 \begin{equation}
   \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,\quad
   \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,
@@ -58,6 +76,10 @@ the $N \times N$ system of linear equations
   A \cdot (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
   = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
 \end{equation}
+
+\paragraph{Complexity of B-spline hierarchization}
+
+\blindtext{}
 
 \paragraph{Notation}
 
