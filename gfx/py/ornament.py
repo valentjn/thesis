@@ -24,4 +24,5 @@ ax.set_xlim(p + 1, p + 2)
 ax.set_ylim(-0.03, max(yy) + 0.03)
 ax.set_position([0, 0, 1, 1])
 
+fig.set_facecolor("none")
 fig.save(appendGraphicsNumber=False, tightLayout=False, crop=False)
