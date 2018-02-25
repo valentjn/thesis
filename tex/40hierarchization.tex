@@ -8,7 +8,50 @@
 \chapter{Algorithms for B-Splines on Sparse Grids}
 \footnotetext{\url{https://xkcd.com/163/}}
 
-\blindtext{}
+
+
+As we have seen in the last chapter,
+hierarchical B-splines constitute an interesting basis on sparse grids,
+enabling smooth approximations of objective functions.
+When correctly incorporating boundary conditions into the hierarchical basis,
+the basis can exactly represent polynomials,
+which is a prerequisite for higher approximation orders.
+
+However, the new basis functions pose new algorithmic challenges
+as we are usually not able to apply the sparse grid algorithms
+that were designed for hat functions.
+We learn in this chapter that the main problem is the larger support
+of higher-order B-splines (degree $p > 1$) when compared to degree $p = 1$.
+Unfortunately, it is not possible to simply ``transform'' the basis
+functions $\varphi_{l,i}^p$ to shrink the size of their support
+to $\supp \varphi_{l,i}^1$.
+
+In this chapter, we give an overview of algorithms for B-splines
+on sparse grids.
+Some algorithms are already known from the literature,
+while others are new.
+In any case, we give correctness results for every algorithm.
+We take hierarchization as the example problem for our algorithms,
+but the algorithms can be generalized to any linear operator.
+Furthermore, most algorithms are not tailored for B-splines $\varphi_{l,i}^p$,
+but applicable for general tensor product basis functions $\varphi_{l,i}$.
+The types of feasible approaches for algorithms
+depend on the ``regularity'' of the sparse grid at hand
+(full grid/dimensionally adaptive sparse grid/spatially adaptive sparse grid).
+Naturally, the more assumptions the grid satisfies, the faster and
+easier will the corresponding algorithms be.
+
+\Cref{sec:41problem} explains hierarchization as our example problem
+and defines the notation used in this chapter.
+The remaining three sections treat the different cases of grids:
+First, \cref{sec:42fullGrids} deals with full grids to formalize and repeat
+the well-known unidirectional principle.
+Second, \cref{sec:43dimAdaptive} studies algorithms for
+sparse grids that have been generated dimensionally adaptively.
+Third, \cref{sec:44spatAdaptive} treats the for us most important case
+of arbitrary (spatially adaptive) sparse grids.
+
+
 
 \input{41problem}
 \input{42fullGrids}
