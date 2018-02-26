@@ -174,7 +174,7 @@ of the hat function.
 }%
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
-$\varphi_{l,i}^p\colon [0, 1] \to \RR$ of level $l \in \NN_0$ and index
+$\varphi_{l,i}^p\colon [0, 1] \to \RR$ of level~$l \in \NN_0$ and index
 $i \in I_l$ via an affine parameter transformation:
 \todo{citation [28] in SGA?}
 \begin{equation}
@@ -258,8 +258,8 @@ simple as for odd degree,
 that the so-called fundamental splines would not be defined at all.
 \todo{insert reference}
 Therefore, and
-as these degrees include the hat function case ($p = 1$) and the
-most common applied cubic degree ($p = 3$),
+as these degrees include the hat function case~($p = 1$) and the
+most common applied cubic degree~($p = 3$),
 it is reasonable to restrict ourselves to odd degrees
 for the rest of the thesis.
 
@@ -290,8 +290,8 @@ we introduce the notion of non-uniform B-splines.
   }%
   For $k = 0, \dotsc, m - 1$,
   the \term{(non-uniform) B-spline} $b_{k,\ß\xi}^p$ of degree $p$
-  with knots $\ß\xi$ and index $k$ is defined by the
-  Cox--de Boor recurrence
+  with knots~$\ß\xi$ and index $k$ is defined by the
+  Cox--de~Boor recurrence
   \cite{Cox72Numerical,Boor72Calculating,Hoellig13Approximation}
   \begin{equation}
     b_{k,\ß\xi}^p(x)
@@ -305,7 +305,7 @@ we introduce the notion of non-uniform B-splines.
   \end{equation}
 \end{definition}
 Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
-$k = 0$, we obtain the cardinal B-spline $b^p$.
+$k = 0$, we obtain the cardinal B-spline~$b^p$.
 \Cref{def:nonUniformBSpline} can be used to characterize
 the nodal space $V_l^p$:
 
@@ -343,10 +343,10 @@ do not form a basis of the spline space on the union
 $[\xi_0, \xi_{m+p}]$ of the B-spline supports,
 but rather on a proper sub-interval $D_\ß\xi^p$.
 Intuitively, for every point in $D_\ß\xi^p$ that is not a knot,
-exactly $(p + 1)$ B-splines must be \term{relevant} (i.e., non-zero)
+exactly $p + 1$ B-splines must be \term{relevant} (i.e., non-zero)
 to span the spline space,
 as on every knot interval, the spline is a polynomial of degree $\le p$
-and therefore, there must be $(p + 1)$ degrees of freedom.
+and therefore, there must be $p + 1$ degrees of freedom.
 Outside of $D_\ß\xi^p$, there are too few relevant B-splines
 to span the spline space.
 This important observation,
@@ -444,7 +444,7 @@ $D_\ß\xi^p$:
 Note that $D_l^p$ might contain only a single point or even be empty,
 if $p$ is too large or $l$ is too small.
 However, the corresponding B-splines $\varphi_{l,i}^p$ are still linearly
-independent on $[0, 1]$ (see \cite{Hoellig13Approximation}).
+independent on~$[0, 1]$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
 $\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 
@@ -614,7 +614,7 @@ Pflüger omits summands with $i > 1$ as he only wants to modify
 $\varphi_{l,1}^p$ left of its grid point $x_{l,1}$.
 The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
 analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
-For $l = 1$, again the ``constant one'' function is taken for the definition
+For~$l = 1$, again the ``constant one'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
   \label{eq:modifiedBSplineDefinition}
@@ -699,7 +699,8 @@ are defined as
   i = 0, \dotsc, 2^l.
 \end{equation}
 Chebyshev points are the locations of the extrema of the
-Chebyshev polynomials $T_{2^l}\colon [0, 1] \to \RR$,
+Chebyshev polynomials $T_{2^l}$, which are defined as
+$T_{2^l}\colon [0, 1] \to \RR$,
 $T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$ \cite{Xu16Chebyshev}.%
 \footnote{%
   The literature sometimes uses the name ``Chebyshev points'' for
