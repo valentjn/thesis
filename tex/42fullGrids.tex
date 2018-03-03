@@ -14,11 +14,14 @@ the case $L = A^{-1}$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
 
+\paragraph{Unidirectional principle and its correctness}
+
 The \up is given in \cref{alg:unidirectionalPrinciple}.
 The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
 that specifies the order of dimensions in which the \up should be applied.
 We denote with $L_{t_j}$ the one-dimensional version of $L$
 applied in dimension $t_j$ ($j = 1, \dotsc, d$).
+With the following invariant, we can prove the correctness of the \up.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -134,5 +137,16 @@ applied in dimension $t_j$ ($j = 1, \dotsc, d$).
   the $\alpha^{(j)}_\ßk$ are the correct interpolation coefficients
   according to \eqref{eq:hierarchizationProblem}.
 \end{proof}
+
+\paragraph{Complexity}
+
+We compare the complexity of the \up for hierarchization compared
+to directly solving the system \eqref{eq:hierarchizationSLE} of
+linear equations.
+If we assume that $L$ and $L_{t_j}$ apply Gaussian elimination to
+solve the multivariate and univariate systems, respectively,
+then directly solving \eqref{eq:hierarchizationSLE} takes
+$\calO(N^3 d)$ time (in 1D basis evaluations) and $\calO(N^2)$ memory.
+In contrast, the unidirectional principle only
 
 \blindtext{}
