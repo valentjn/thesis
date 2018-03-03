@@ -62,24 +62,71 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
 which give one scalar per grid point $\ßx_{\ßl,\ßi} \in \Omega^\sparse$.
 For the case of hierarchization,
 $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
-\begin{equation}
-  L = A^{-1},\quad
-  A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
-  \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
-  \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
-\end{equation}
-This means that we can determine the $\alpha_{\ßl',\ßi'}$ by solving
-the $N \times N$ system of linear equations
-\begin{equation}
-  \ßy = L[\ßu]
-  \quad\iff\quad
-  A \cdot (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
-  = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
-\end{equation}
+\begin{subequations}
+  \label{eq:hierarchizationSLE}
+  \begin{equation}
+    L = A^{-1},\quad
+    A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
+    \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
+    \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
+  \end{equation}
+  This means that we can determine the $\alpha_{\ßl',\ßi'}$ by solving
+  the $N \times N$ system of linear equations
+  \begin{equation}
+    \ßy = L[\ßu]
+    \quad\iff\quad
+    A \cdot (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
+    = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
+  \end{equation}
+\end{subequations}
 
 \paragraph{Complexity of B-spline hierarchization}
 
-\blindtext{}
+As noted in \cite{Valentin18Fundamental},
+hierarchization on sparse grids with hierarchical B-splines
+$\varphi_{\ßl,\ßi}^\ßp$ of degree $\ßp$
+as basis functions $\varphi_{\ßl,\ßi}$ is a tedious task.
+The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
+non-symmetric
+(i.e., $\varphi_{\ßl',\ßi'}^\ßp(\ßx_{\ßl,\ßi}) \not=
+\varphi_{\ßl,\ßi}^\ßp(\ßx_{\ßl',\ßi'})$) and densely populated.
+This is because the matrix entry in the $(\ßl,\ßi)$-th row and
+$(\ßl',\ßi')$-th column vanishes if and only if
+\begin{equation}
+  \ßx_{\ßl,\ßi} \notin \intsupp \varphi_{\ßl',\ßi'}^\ßp
+  \iff
+  \ex{t = 1, \dotsc, d}{
+    x_{l_t,i_t} \notin
+    \openintervalscaled{
+      x_{l'_t,i'_t} - \tfrac{p_t+1}{2} h_{l'_t},\,
+      x_{l'_t,i'_t} + \tfrac{p_t+1}{2} h_{l'_t}
+    }
+  },
+\end{equation}
+where $\intsupp$ is the interior of the support
+\cite{Valentin18Fundamental}.
+For coarse levels $\ßl'$, the mesh size $h_{l'_t}$ is large in
+every dimension $t$, which implies that $\intsupp \varphi_{\ßl',\ßi'}^\ßp$
+contains most of the grid points.
+In contrast to the hat function case ($\ßp = \ß1$),
+the value of $\alpha_{\ßl',\ßi'}$ depends not only on
+$f_{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
+on the boundary of $\supp \varphi_{\ßl',\ßi'}^\ß1$,
+but potentially on the data of the whole grid.
+
+This prohibits the use of the unidirectional principle,
+which will be discussed in \cref{sec:42fullGrids}
+and which takes $\calO(Nd)$ computing time%
+\footnote{in the number of univariate basis evaluations},
+on sparse grids with hierarchical B-splines.
+Consequently, we have to solve the linear system
+\eqref{eq:hierarchizationSLE}, which is significantly more time-consuming,
+as it takes between $\Omega(N^2 d)$ and $\calO(N^3 d)$ time
+(via Gaussian elimination).
+In addition, if we use an explicit solver for the linear system,
+we additionally have to store an $N \times N$ matrix in memory.
+However, a grid of size $N = \num{50000}$ would already exceed the memory
+of a \SI{16}{\gibi\byte} workstation.
 
 \paragraph{Notation}
 
