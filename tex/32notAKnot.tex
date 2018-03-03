@@ -16,6 +16,8 @@ we introduce a new B-spline basis that does not suffer from this issue.
 \subsection{Approximation Power of Uniform Hierarchical B-Splines}
 \label{sec:321approximation}
 
+\todo{add references to Vazipfl paper if published}
+
 \paragraph{Interpolation of polynomials}
 
 Splines are a piecewise generalization of polynomials.
@@ -507,7 +509,7 @@ $f(\ßx) := \sum_{\ßq=\ß0}^\ßp c_\ßq \prod_{t=1}^d x_t^{q_t}$,
 with $c_\ßq \in \RR$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly
-represent global polynomials on $[\ß0, \ß1]$.
+represent global polynomials on $[\ß0, \ß1]$:
 
 \begin{corollary}
   If $n \ge \norm{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}_1$,
