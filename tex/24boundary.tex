@@ -3,7 +3,7 @@
 
 One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
 is that the number of grid points still grows very fast
-with the level $n$ and the dimensionality $d$.
+with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $h_n$ on the
 boundary of the domain $[\ß0, \ß1]$ is finer than
 the finest mesh size $h_{n-d+1}$ that can be found in the interior.
@@ -132,8 +132,9 @@ its boundary coincide to be $h_{n-d+1}$, which reduces the number of grid points
 on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
-hat functions is (in the univariate case)
-to start with the constant function on level zero with
+hat functions \cite{Baar15Gradient}
+is (in the univariate case) to start with the constant
+function on level zero with
 corresponding grid point $0.5$,
 then employ the two boundary functions and points on level one,
 and finally proceed as usual for the finer levels $\ge 2$.
