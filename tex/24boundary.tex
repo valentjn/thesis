@@ -444,8 +444,10 @@ Its correctness can be formally proved with the following invariant:
       $n$, $d$, $b$%
     }
       \State{$L^{(1)} \gets \{0, 1, \dotsc, n - d + 1\}$}
+      \Comment{construct 1D grid}
       \For{$t = 2, \dotsc, d$}
         \State{$L^{(t)} \gets \emptyset$}
+        \Comment{$t$-dimensional grid}
         \For{$\ßl \in L^{(t-1)}$}
           \If{%
             $\norm{\vecmax(\ßl, \ß1)}_1 \le n - d + t - b$ or
@@ -453,16 +455,19 @@ Its correctness can be formally proved with the following invariant:
           }%
           \label{line:algCoarseBoundary1}
             \State{$L^{(t)} \gets L^{(t)} \cup \{(\ßl, 0)\}$}
+            \Comment{add corners}%
             \label{line:algCoarseBoundary5}
           \EndIf{}
           \If{$\ßl \in \NN^{t-1}$}
             \State{$l^\ast \gets n - d + t - \norm{\ßl}_1$}%
+            \Comment{add interior points}%
             \label{line:algCoarseBoundary2}
           \Else{}
             \State{%
               $l^\ast \gets n - d + t - b + 1 -
               \norm{\vecmax(\ßl, \ß1)}_1$%
             }%
+            \Comment{add boundary points}%
             \label{line:algCoarseBoundary3}
           \EndIf{}
           \State{%
