@@ -20,7 +20,7 @@
     &= \sum_{\substack{\ßl \in \NN^d,\\\norm{\ßl}_1 \le n}} |I_\ßl| +
     \sum_{
       \substack{
-        \ßl \in \NN_0^d \setminus \NN^d,\\
+        \ßl \in \NNz^d \setminus \NN^d,\\
         (\norm{\vecmax(\ßl, \ß1)}_1 \le n - b + 1) \lor
         (\ßl = \ß0)
       }
@@ -39,7 +39,7 @@
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
-        \ßl \in \NN_0^d,\\
+        \ßl \in \NNz^d,\\
         N_\ßl = q,\,\norm{\ßl}_1 = m}
     } |I_\ßl|
   \end{align}
@@ -58,7 +58,7 @@
   = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
   = 2^{\norm{\ßl}_1 - d + 2N_\ßl}$.
   The number of innermost summands is given by
-  $|\{\ßl \in \NN_0^d \mid N_\ßl = q,\, \norm{\ßl}_1 = m\}|
+  $|\{\ßl \in \NNz^d \mid N_\ßl = q,\, \norm{\ßl}_1 = m\}|
   = \binom{d}{q} |\{\ßl \in \NN^{d-q} \mid \norm{\ßl}_1 = m\}|
   = \binom{d}{q} \binom{m-1}{d-q-1}$
   by first putting $q$ zeros in $d$ places,
@@ -101,7 +101,7 @@
 \propInvariantCoarseBoundary*
 
 \begin{proof}
-  First, we show that every inserted level $\ßl' \in \NN_0^t$ in the inner loop
+  First, we show that every inserted level $\ßl' \in \NNz^t$ in the inner loop
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
@@ -147,7 +147,7 @@
   are inserted by the algorithm into $L^{(t)}$ eventually.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the \rhs of \eqref{eq:coarseInvariant} equals
-  $\{l \in \NN_0 \mid l \le n-d+1\}$, which is just $L^{(1)}$.
+  $\{l \in \NNz \mid l \le n-d+1\}$, which is just $L^{(1)}$.
   For the induction step $(t - 1) \to t$, we assume
   the validity of the induction hypothesis
   \begin{equation}
@@ -157,13 +157,13 @@
     &= \{\ßl \in \NN^{t-1} \mid
     \norm{\ßl}_1 \le n-d+t-1\} \dotcup {}\\
     &\hphantom{{}={}}
-    \big(\{\ßl \in \NN_0^{t-1} \setminus \NN^{t-1} \mid
+    \big(\{\ßl \in \NNz^{t-1} \setminus \NN^{t-1} \mid
     \norm{\vecmax(\ßl, \ß1)}_1 \le n-d+t-b\} \cup
     \{\vec{0}\}\big).
     \end{aligned}
   \end{equation}
   The \rhs of \eqref{eq:coarseInvariant} has three parts,
-  so we check for elements $\ßl' \in \NN_0^t$
+  so we check for elements $\ßl' \in \NNz^t$
   of each of the three sets that they are appended to $L^{(t)}$
   eventually.
   
@@ -222,9 +222,9 @@
     $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
-  Third, let $\ßl = (\vec{0}, 0) \in \NN_0^t$
+  Third, let $\ßl = (\vec{0}, 0) \in \NNz^t$
   be in the third set of the \rhs.
   This level is appended in \cref{line:algCoarseBoundary5}
-  to $L^{(t)}$, since $\ßl' = \vec{0} \in \NN_0^{t-1}$ is in $L^{(t-1)}$ by 
+  to $L^{(t)}$, since $\ßl' = \vec{0} \in \NNz^{t-1}$ is in $L^{(t-1)}$ by 
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}

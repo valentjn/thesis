@@ -320,7 +320,7 @@ we use global Lagrange polynomials for the coarser levels:
       b_{i,\ß\xi_l^{p,\notaknot}}^p,&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
-    l \in \NN_0,\quad
+    l \in \NNz,\quad
     i \in I_l,\\
     L_{l,i}\colon [0, 1] \to \RR,\quad
     L_{l,i}(x)
@@ -520,7 +520,7 @@ represent global polynomials on $[\ß0, \ß1]$:
   Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \norm{\ßl}_1$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
   $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
-  In addition, all $\ßl' \in \NN_0^d$ with $\ßl' \le \ßl$ satisfy
+  In addition, all $\ßl' \in \NNz^d$ with $\ßl' \le \ßl$ satisfy
   $\norm{\ßl'}_1 \le n$ and thus,
   $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} \subset
   V_{n,d}^{\sparse,\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
@@ -622,7 +622,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
       b_{i,\ß\xi_l^{p,\clenshawcurtis,\notaknot}}^p,&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
-    l \in \NN_0,\quad
+    l \in \NNz,\quad
     i \in I_l,\\
     L_{l,i}^\clenshawcurtis\colon [0, 1] \to \RR,\quad
     L_{l,i}^\clenshawcurtis(x)
@@ -713,7 +713,7 @@ Consequently, we can define hierarchical natural B-splines as
       \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \varphi_{l,j}^p,&
       l \ge 1,
     \end{cases}\quad
-    l \in \NN_0,\quad
+    l \in \NNz,\quad
     i \in I_l,\\
     J_i^{p,\ntrl}
     := \{i+1-\tfrac{p+1}{2}, \dotsc, i-1\} \cup

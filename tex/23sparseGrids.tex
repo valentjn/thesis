@@ -84,7 +84,7 @@ for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
-exceeds a certain value $n \in \NN_0$.
+exceeds a certain value $n \in \NNz$.
 More formally, the selection of the relevant subspaces can be formulated as a
 continuous knapsack problem~\cite{Bungartz04Sparse}.
 \newgsymbol{Vnds}{$V_{n,d}^\sparse$}{%
@@ -186,7 +186,7 @@ to allow for an asymmetric preference.
 \newgsymbol{Omegas}{$\Omega^\sparse$}{%
   Arbitrary sparse grid (possibly spatially adaptive)%
 }%
-\newgsymbol{L}{$L$}{Finite subset $L \subset \NN_0^d$ of levels}%
+\newgsymbol{L}{$L$}{Finite subset $L \subset \NNz^d$ of levels}%
 Generally, function spaces~$V^\sparse$ and grid sets $\Omega^\sparse$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
@@ -196,10 +196,10 @@ of \term{dimensionally adaptive sparse grids} have the form
   = \bigdotcup_{\ßl \in L} \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},
 \end{equation}
 where $L$ is a \term{downward closed} set, i.e.,
-a finite subset $L \subset \NN_0^d$
+a finite subset $L \subset \NNz^d$
 for which $\forall_{\ßl \in L} \fa{\ßl' \le \ßl}{\ßl' \in L}$.
 Regular sparse grids are a special case by setting
-$L = \{\ßl \in \NN_0^d \mid \norm{\ßl}_1 \le n\}$.
+$L = \{\ßl \in \NNz^d \mid \norm{\ßl}_1 \le n\}$.
 
 \paragraph{Combination technique}
 
@@ -271,7 +271,7 @@ and grid sets $\Omega^\sparse$ have the form
   = \{\ßx_{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
 \end{equation}
 where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
-with $\ßl \in \NN_0^d$ and $\ßi \in I_\ßl$.
+with $\ßl \in \NNz^d$ and $\ßi \in I_\ßl$.
 Algorithms for sparse grids often make specific assumptions about $K$.
 If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
