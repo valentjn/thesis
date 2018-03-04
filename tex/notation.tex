@@ -153,6 +153,14 @@
   Number of elements of a set
 }
 
+\newnotationcommand[1]{\his}{I_{#1}}{Il}{$\his{l}$}{
+  Set of (odd) indices for hierarchical basis functions
+}
+
+\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{l}$}{
+  Hierarchical subspace of level $l$
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 
@@ -175,6 +183,9 @@
 \DeclareMathOperator{\supp}{supp}
 
 \DeclareMathOperator{\xor}{xor}
+\makecommandnotation{\xor}{xor}{$\xor$}{
+  Bitwise ``exclusive or''
+}
 
 % subsets
 \renewcommand*{\subset}{\subseteq}
@@ -206,7 +217,11 @@
 \newcommand*{\sparse}{\mathrm{s}}
 
 % disjoint union
-\newcommand*{\dotcup}{\mathbin{\dot{\cup}}}
+\newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{u!}{$\dotcup$}{
+  Disjoint union of sets (union where the pairwise intersection of
+  the joined sets is empty)
+}%
+
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
 
 % interior and boundary

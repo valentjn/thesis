@@ -44,7 +44,6 @@ can be written as a grid point of a higher level~$l'$:
   l' \ge l,\quad
   i' = 2^{l'-l} i.
 \end{equation}
-\newgsymbol{xor}{$\xor$}{Bitwise ``exclusive or''}%
 Conversely, this implies that every grid point $\gp{l,i}$ of level $l \ge 1$
 and index $i \ge 1$ can be uniquely written
 as a grid point of a coarser level $l'$ and an odd index $i'$:
@@ -57,11 +56,6 @@ as a grid point of a coarser level $l'$ and an odd index $i'$:
 where $\xor$ is the bitwise ``exclusive or'' function.
 The term in square brackets is the exponent of the
 highest power of two that divides $i$.
-\newgsymbol{u!}{$\dotcup$}{%
-  Disjoint union of sets (union where the pairwise intersection of
-  the joined sets is empty)%
-}%
-\newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
 As shown in \cref{fig:pointSplittingUniform},
 this implies that $\fgset{l}$ decomposes into
 \begin{equation}
@@ -74,7 +68,6 @@ this implies that $\fgset{l}$ decomposes into
   \end{cases}
 \end{equation}
 where $\dotcup$ indicates the disjoint union.
-\newgsymbol{Wl}{$W_l$}{Hierarchical subspace of level $l$}%
 We call the spaces spanned by the basis functions that correspond to the
 joined sets \term{hierarchical subspaces} $W_l$:
 \begin{equation}
