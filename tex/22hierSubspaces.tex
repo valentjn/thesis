@@ -5,10 +5,10 @@
 \newgsymbol{|.|}{$|\cdot|$}{%
   Absolute value of a scalar or the number of elements of a set%
 }%
-The dimension of the nodal space $V_\ßl$ is given by
+The dimension of the nodal space $\ns{\ßl}$ is given by
 \begin{equation}
   \label{eq:dimensionFG}
-  \dim V_\ßl
+  \dim \ns{\ßl}
   = |\Omega_\ßl|
   = \prod_{t=1}^d (2^{l_t} + 1).
 \end{equation}
@@ -19,9 +19,9 @@ $2^{nd} = (\ms{n}^{-1})^d$.
 This exponential dependency between $\dim V_{n,d}$ and $d$ is known as the
 \term{curse of dimensionality}
 \multicite{Bungartz04Sparse,Pflueger10Spatially}.
-The curse makes interpolation on $V_\ßl$ computationally infeasible
+The curse makes interpolation on $\ns{\ßl}$ computationally infeasible
 for dimensionalities $d > 4$,
-as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
+as we would have to calculate and store $\dim \ns{\ßl}$ coefficients $c_\ßi$.%
 %\footnote{%
 %  The number of necessary basis evaluations to evaluate the interpolant once
 %  would not be as large, as most types of basis functions
@@ -37,7 +37,7 @@ as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
 \paragraph{Hierarchical subspaces}
 
 In order to reduce the computational effort,
-we first split $V_\ßl$ into smaller subspaces and then identify
+we first split $\ns{\ßl}$ into smaller subspaces and then identify
 which subspaces are most important and which subspaces can be omitted
 at the cost of a slightly larger error.
 In the univariate case, the key observation is that a grid point of a level $l$
@@ -109,7 +109,7 @@ decomposes into the direct sum of all
 hierarchical subspaces of coarser levels or the same level, i.e.,
 \begin{equation}
   \label{eq:hierSplittingUV}
-  V_l
+  \ns{l}
   \overset{?}{=} \bigoplus_{l'=0}^l W_{l'},
 \end{equation}
 We call this relation \term{hierarchical splitting}.
@@ -151,7 +151,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   both of the following conditions:
   \begin{itemize}
     \item
-    The hierarchical subspaces $W_{l'}$ ($l' \le l$) are subspaces of $V_l$.
+    The hierarchical subspaces $W_{l'}$ ($l' \le l$) are subspaces of $\ns{l}$.
     
     \item
     The hierarchical functions
@@ -159,19 +159,19 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subset V_l$.
+  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subset \ns{l}$.
   The second condition is equivalent to
   $\dim \sum_{l'=0}^l W_{l'} = \sum_{l'=0}^l \dim W_{l'}$,
   i.e., to the directness of the sum.
   Therefore, the logical conjunction of both is equivalent to
-  $\bigoplus_{l'=0}^l W_{l'} \subset V_l$.
+  $\bigoplus_{l'=0}^l W_{l'} \subset \ns{l}$.
   If the sum is direct,
   the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
   (due to $\dim W_{l'} = |I_{l'}| = 2^{l'-1}$ for $l' > 0$ and
   $\dim W_{l'} = 2$ for $l' = 0$),
-  which is also the dimension of $V_l$.
-  The only subspace of $V_l$ that has the same dimension as $V_l$ is $V_l$ itself,
-  so we infer $\bigoplus_{l'=0}^l W_{l'} = V_l$.
+  which is also the dimension of $\ns{l}$.
+  The only subspace of $\ns{l}$ that has the same dimension as $\ns{l}$ is $\ns{l}$ itself,
+  so we infer $\bigoplus_{l'=0}^l W_{l'} = \ns{l}$.
 \end{proof}
 \begin{corollary}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
@@ -214,7 +214,7 @@ The splitting \eqref{eq:hierSplittingUV} can now be generalized to the
 multivariate case:
 \begin{equation}
   \label{eq:hierSplittingMV}
-  V_\ßl
+  \ns{\ßl}
   \overset{?}{=} \bigoplus_{\ßl'=0}^\ßl W_{\ßl'},
 \end{equation}
 Again, this relation does not hold in general.
@@ -227,7 +227,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   both of the following conditions:
   \begin{itemize}
     \item
-    The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $V_\ßl$.
+    The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $\ns{\ßl}$.
     
     \item
     The basis functions $\basis{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
@@ -243,7 +243,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     \prod_{t=1}^d \dim W_{l_t'}
     = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim W_{l_t'}
     = \prod_{t=1}^d (2^{l_t} + 1)
-    = \dim V_\ßl
+    = \dim \ns{\ßl}
     \hspace*{-5mm}
   \end{equation}
   using \eqref{eq:dimensionFG}.
@@ -268,9 +268,9 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     We can expand the tensor product to a linear combination
     of tensor products of the univariate nodal basis functions.
     Therefore, $\basis{\ßl',\ßi'}$ is a linear combination of
-    multivariate nodal functions, i.e., $\basis{\ßl',\ßi'} \in V_\ßl$.
+    multivariate nodal functions, i.e., $\basis{\ßl',\ßi'} \in \ns{\ßl}$.
     As this is true for all $\ßi' \in I_{\ßl'}$, we obtain
-    $W_{\ßl'} \subset V_\ßl$.
+    $W_{\ßl'} \subset \ns{\ßl}$.
     
     \item
     The linear independence of the hierarchical functions $\basis{\ßl',\ßi'}$

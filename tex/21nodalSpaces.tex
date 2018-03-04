@@ -35,10 +35,6 @@ In this thesis, we assume $\basis{l,i}$ to be arbitrary,
 satisfying required assumptions when needed and stated.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
-\newgsymbol{.1}{$\cdot^1$}{%
-  Superscript for ``Piecewise linear
-  (basis function/function space/interpolant)%
-}%
 The so-called \term{hat functions} (linear B-splines), which are defined as
 \begin{equation}
   \label{eq:hatFunctionUV}
@@ -54,17 +50,16 @@ arbitrary degrees $p$ in \cref{chap:30BSplines}.
 
 \paragraph{Nodal space}
 
-\newgsymbol{Vl}{$V_l$}{Nodal space of level $l$}%
 \newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
-The \emph{nodal space} $V_l$ of level $l$
+The \emph{nodal space} $\ns{l}$ of level $l$
 is defined as the linear span of all basis functions
 $\basis{l,i}$:
 \begin{equation}
-  V_l := \spn\{\basis{l,i} \mid i = 0, \dotsc, 2^l\}.
+  \ns{l} := \spn\{\basis{l,i} \mid i = 0, \dotsc, 2^l\}.
 \end{equation}
-We assume that the functions $\basis{l,i}$ form a basis of $V_l$, i.e.,
+We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 every linear combination of these functions is unique.
-\newgsymbol{fl}{$f_l$}{Interpolant of $f$ in $V_l$}%
+\newgsymbol{fl}{$f_l$}{Interpolant of $f$ in $\ns{l}$}%
 \newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 This ensures that for every objective function $f\colon [0, 1] \to \RR$,
 there is a unique function $f_l\colon [0, 1] \to \RR$ such that
@@ -75,8 +70,8 @@ there is a unique function $f_l\colon [0, 1] \to \RR$ such that
   \fa{i = 0, \dotsc, 2^l}{f_l(\gp{l,i}) = f(\gp{l,i})},
 \end{equation}
 for some $c_i \in \RR$.
-In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
-The nodal space $V_l^1$ is defined analogously as the span of the
+In this case, $f_l$ is called \term{interpolant} of $f$ in $\ns{l}$.
+The nodal space $\ns{l}^1$ is defined analogously as the span of the
 hat functions $\basis{l,i}^1$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $[0, 1]$ that are
@@ -185,18 +180,18 @@ $\basis{\ßl,\ßi}^1$.
 
 \paragraph{Multivariate nodal space}
 
-\newgsymbol{Vl!}{$V_\ßl$}{Multivariate nodal space of level $\ßl$}%
-The multivariate nodal space $V_\ßl$ is defined analogously to
+\newgsymbol{Vl!}{$\ns{\ßl}$}{Multivariate nodal space of level $\ßl$}%
+The multivariate nodal space $\ns{\ßl}$ is defined analogously to
 the univariate case:
 \begin{equation}
-  V_\ßl
+  \ns{\ßl}
   := \spn\{\basis{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
 \newgsymbol{ab!}{$[\ßa, \ßb]$}{%
   Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
 }%
 In the case of hat functions $\basis{\ßl,\ßi}^1$,
-the nodal space $V_\ßl^1$ is the $d$-linear spline space
+the nodal space $\ns{\ßl}^1$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
 on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
@@ -207,11 +202,11 @@ all hypercubes
   [\gp{l_d,i_d}, \gp{l_d,i_d+1}],\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
-\newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $V_\ßl$}%
+\newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $\ns{\ßl}$}%
 \newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 Analogously to \eqref{eq:interpFullGridUV},
 we can interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
-in the nodal space $V_\ßl$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
+in the nodal space $\ns{\ßl}$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
   f_\ßl
@@ -223,7 +218,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
   The functions $\basis{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
-  form a basis of $V_\ßl$, if the univariate functions
+  form a basis of $\ns{\ßl}$, if the univariate functions
   $\basis{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$)
   form a basis of the univariate nodal space $V_{l_t}$
   for $t = 1, \dotsc, d$.

@@ -219,7 +219,7 @@ $\basis{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
     When restricting all functions to $D_l^p$ \emph{(thick black line)},
-    the nodal space $V_l^p|_{D_l^p}$ decomposes into the direct sum
+    the nodal space $\ns{l}^p|_{D_l^p}$ decomposes into the direct sum
     of the hierarchical subspaces $W_{l'}^p|_{D_l^p}$ ($l' \le l$).%
   }
   \label{fig:hierarchicalBSpline}
@@ -270,12 +270,12 @@ for the rest of the thesis.
 \paragraph{Non-uniform B-splines and spline space}
 
 With the hierarchical B-splines $\basis{l,i}^p$, we can define
-the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
+the nodal spaces $\ns{l}^p$ and hierarchical subspaces $W_l^p$
 as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
 to be correct, we have to prove that the conditions of
 \thmref{lemma:hierSplittingUV} are satisfied.
-To investigate how the nodal space $V_l^p$ looks like,
+To investigate how the nodal space $\ns{l}^p$ looks like,
 we introduce the notion of non-uniform B-splines.
 
 \begin{definition}[non-uniform B-splines]
@@ -307,7 +307,7 @@ we introduce the notion of non-uniform B-splines.
 Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline~$b^p$.
 \Cref{def:nonUniformBSpline} can be used to characterize
-the nodal space $V_l^p$:
+the nodal space $\ns{l}^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
@@ -429,7 +429,7 @@ $D_\ß\xi^p$:
   \end{gather}
   and consequently
   \begin{equation}
-    V_l^p|_{D_l^p}
+    \ns{l}^p|_{D_l^p}
     = S_l^p
     := S_{\ß\xi_l^p}^p.
   \end{equation}
@@ -458,7 +458,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
   $W_{l'}^p|_{D_l^p}$ ($l' \le l$) are
-  subspaces of the restricted nodal space $V_l^p|_{D_l^p}$.
+  subspaces of the restricted nodal space $\ns{l}^p|_{D_l^p}$.
 \end{lemma}
 
 \begin{proof}
@@ -469,17 +469,17 @@ to prove the hierarchical splitting for the uniform B-spline basis
   differentiable.
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\basis{l',i'}^p \in V_l^p|_{D_l^p}$.
+  $\basis{l',i'}^p \in \ns{l}^p|_{D_l^p}$.
   As the functions $\basis{l',i'}^p$ ($i' \in I_{l'}$) span
   $W_{l'}^p|_{D_l^p}$, we can conclude
-  $W_{l'}^p|_{D_l^p} \subset V_l^p|_{D_l^p}$.
+  $W_{l'}^p|_{D_l^p} \subset \ns{l}^p|_{D_l^p}$.
 \end{proof}
 
 It is crucial to note that this lemma does not hold for even $p$,
 as the knots of the B-splines of level $l - 1$ are not contained in the
 knots of level $l$.
 This implies that in general,
-$W_{l-1}^p|_{D_l^p}$ is not contained in $V_l^p|_{D_l^p}$
+$W_{l-1}^p|_{D_l^p}$ is not contained in $\ns{l}^p|_{D_l^p}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 does not hold, which is the main reason for us to restrict the
@@ -513,7 +513,7 @@ is correct for hierarchical B-splines:
   if restricting all functions to $D_l^p$:
   \begin{equation}
     S_l^p
-    = V_l^p|_{D_l^p}
+    = \ns{l}^p|_{D_l^p}
     = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}.
   \end{equation}
 \end{corollary}
@@ -525,7 +525,7 @@ is correct for hierarchical B-splines:
 
 This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
 We can now proceed to define multivariate
-nodal spaces $V_\ßl^p$, hierarchical subspaces $W_\ßl^p$, and
+nodal spaces $\ns{\ßl}^p$, hierarchical subspaces $W_\ßl^p$, and
 sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{chap:20sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
@@ -784,7 +784,7 @@ the Chebyshev points $\gp{l,i}^\clenshawcurtis$
 are equidistantly extended onto the real line $\RR$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
-$V_l^{p,\clenshawcurtis}$
+$\ns{l}^{p,\clenshawcurtis}$
 and hierarchical subspaces $W_l^{p,\clenshawcurtis}$ as well as
 sparse grid spaces $V_{n,d}^{\sparse,p,\clenshawcurtis}$ and
 grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$

@@ -370,7 +370,7 @@ $\deg L_{l,i} \le 2^l < p$
   \caption{%
     Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
     up to level $l = 3$.
-    The nodal space $V_l^{p,\notaknot}$,
+    The nodal space $\ns{l}^{p,\notaknot}$,
     which coincides with the not-a-knot spline space $S_l^{p,\notaknot}$,
     decomposes into the direct sum
     of the hierarchical subspaces $W_{l'}^{p,\notaknot}$ ($l' \le l$).
@@ -423,7 +423,7 @@ with respect to an implementation that already uses uniform B-splines.
 
 The main benefit of the hierarchical not-a-knot B-spline basis
 is the validity of the hierarchical splitting.
-Again usual, we define $V_l^{p,\notaknot}$ and $W_l^{p,\notaknot}$
+Again usual, we define $\ns{l}^{p,\notaknot}$ and $W_l^{p,\notaknot}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
@@ -436,7 +436,7 @@ respectively.
   holds for the hierarchical not-a-knot B-spline basis:
   \begin{equation}
     S_l^{p,\notaknot}
-    = V_l^{p,\notaknot}
+    = \ns{l}^{p,\notaknot}
     = \bigoplus_{l'=0}^l W_{l'}^{p,\notaknot},
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
@@ -453,7 +453,7 @@ respectively.
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
   First, the hierarchical subspace $W_{l'}^{p,\notaknot}$ ($l' \le l$)
-  is a subspace of $S_l^{p,\notaknot} = V_l^{p,\notaknot}$.
+  is a subspace of $S_l^{p,\notaknot} = \ns{l}^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
   every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
   is continuous on $[0, 1]$, a polynomial on every knot interval of
@@ -476,7 +476,7 @@ respectively.
   It holds
   \begin{equation}
     S_\ßl^{\ßp,\notaknot}
-    = V_\ßl^{\ßp,\notaknot}
+    = \ns{\ßl}^{\ßp,\notaknot}
     = \bigoplus_{\ßl'=\ß0}^\ßl W_{\ßl'}^{\ßp,\notaknot},
   \end{equation}
   where $S_\ßl^{\ßp,\notaknot}$ is the
