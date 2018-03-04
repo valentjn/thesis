@@ -9,7 +9,7 @@ The dimension of the nodal space $\ns{\ßl}$ is given by
 \begin{equation}
   \label{eq:dimensionFG}
   \dim \ns{\ßl}
-  = |\Omega_\ßl|
+  = |\fgset{\ßl}|
   = \prod_{t=1}^d (2^{l_t} + 1).
 \end{equation}
 If we choose the same level $n \in \NNz$ in all dimensions,
@@ -67,9 +67,9 @@ highest power of two that divides $i$.
 }%
 \newgsymbol{Il}{$I_l$}{Set of (odd) indices for hierarchical basis functions}%
 As shown in \cref{fig:pointSplittingUniform},
-this implies that $\Omega_l$ decomposes into
+this implies that $\fgset{l}$ decomposes into
 \begin{equation}
-  \Omega_l
+  \fgset{l}
   = \bigdotcup_{l'=0}^l \{\gp{l',i'} \mid i' \in I_{l'}\},\quad
   I_{l'} :=
   \begin{cases}
@@ -89,7 +89,7 @@ joined sets \term{hierarchical subspaces} $W_l$:
 \begin{figure}
   \includegraphics{pointSplitting_1}%
   \caption{%
-    The set of grid points $\Omega_l$ of level $l = 4$ \emph{(top)}
+    The set of grid points $\fgset{l}$ of level $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$,
     whose grid points $\gp{l',i'}$ have odd indices $i' \in I_{l'}$
     ($\gp{0,0}$ being the only exception).%
@@ -117,8 +117,8 @@ Here, the direct sum $\oplus$ is
 the normal vector space sum with the additional indication
 that the dimension of the sum $\sum_{l'=0}^l W_{l'}$ is the sum
 of the dimensions of the summands $W_{l'}$
-(analogously to $|\Omega_l| = \sum_{l'=0}^l |\Omega_{l'}|$,
-where $\Omega_l$ is the disjoint union of the sets $\Omega_{l'}$).
+(analogously to $|\fgset{l}| = \sum_{l'=0}^l |\fgset{l'}|$,
+where $\fgset{l}$ is the disjoint union of the sets $\fgset{l'}$).
 In general, \eqref{eq:hierSplittingUV} may not be true.
 The following lemma provides a characterization,
 which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.

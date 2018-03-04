@@ -50,7 +50,6 @@ arbitrary degrees $p$ in \cref{chap:30BSplines}.
 
 \paragraph{Nodal space}
 
-\newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
 The \emph{nodal space} $\ns{l}$ of level $l$
 is defined as the linear span of all basis functions
 $\basis{l,i}$:
@@ -59,8 +58,6 @@ $\basis{l,i}$:
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 every linear combination of these functions is unique.
-\newgsymbol{fl}{$\fgintp{l}$}{Interpolant of $f$ in $\ns{l}$}%
-\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 This ensures that for every objective function $f\colon \clint{0, 1} \to \RR$,
 there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \RR$ such that
 \begin{equation}
@@ -201,10 +198,6 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for $t = 1, \dotsc, d$.
 \end{lemma}
 \begin{proof}
-  \newgsymbol{!equiv}{$\equiv$}{%
-    Equality of functions everywhere on their domain
-    (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)%
-  }%
   Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
   such that $\fgintp{\ßl} \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
@@ -222,12 +215,11 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for all~$\ßi = \ß0, \dotsc, \ß2^\ßl$,
   implying the linear independence of the functions $\basis{\ßl,\ßi}$.
 \end{proof}
-\newgsymbol{Omegal!}{$\Omega_\ßl$}{Set of full grid points of level $\ßl$}%
 The lemma is equivalent to the statement that the coefficients $c_\ßi \in \RR$
 exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
-  \Omega_\ßl
+  \fgset{\ßl}
   := \{\vgp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
 \newgsymbol{n}{$n$}{Level $\in \NNz$ of full or sparse grid}%

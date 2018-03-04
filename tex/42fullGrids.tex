@@ -1,7 +1,7 @@
 \section{Hierarchization on Full Grids (Unidirectional Principle)}
 \label{sec:42fullGrids}
 
-If $\Omega^\sparse$ is a full grid $\Omega_\ßl$
+If $\Omega^\sparse$ is a full grid $\fgset{\ßl}$
 (see \cref{sec:21nodalSpaces}),
 the well-known \emph{\up}
 can be used to apply $L$ to input data $\ßu$.
@@ -70,7 +70,7 @@ With the following invariant, we can prove the correctness of the \up.
   $\ßy = (\alpha_\ßk)_{\ßk \in K}$,
   $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
   $K = \{\ß0, \dotsc, \ß2^\ßl\}$
-  corresponds to a full grid $\Omega_\ßl$ of level $\ßl$.
+  corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
   ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
   \begin{equation}
