@@ -126,7 +126,9 @@
 
 \newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{L^2}}
 
-\makecommandnotation{\equiv}{!equiv}{$\equiv$}{
+\let\equivorig\equiv
+\let\equiv\undefined
+\newnotationcommand{\equiv}{\equivorig}{!equiv}{$\equiv$}{
   Equality of functions everywhere on their domain
   (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)
 }
