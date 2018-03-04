@@ -16,15 +16,15 @@ regular, dimensionally adaptive, and spatially adaptive.
 \paragraph{Hierarchical contributions}
 
 To assess the importance of a subspace, we consider again the
-interpolant $f_\ßl \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \RR$.
+interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \RR$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
   \label{eq:interpHierFullGrid}
-  f_\ßl
+  \fgintp{\ßl}
   = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})}.
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})}.
 \end{equation}
 \newgsymbol{alphali!}{$\alpha_{\ßl,\ßi}$}{%
   Hierarchical surpluses (coefficients of a linear combination of hierarchical

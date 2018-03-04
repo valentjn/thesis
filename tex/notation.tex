@@ -28,6 +28,14 @@
   Index $= 0, \dotsc, 2^l$
 }
 
+\newnotation{i!}{$\ßi$}{
+  Multivariate index $= \ß0, \dotsc, \ß2^\ßl$
+}
+
+\newnotation{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{
+  For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$
+}
+
 \newnotation{d}{$d$}{
   Dimensionality $\in \NN$
 }
@@ -60,6 +68,10 @@
   Hierarchical basis function of level $l$, index $i$
 }
 
+\newnotation{phili!}{$\basis{\ßl,\ßi}$}{
+  Multivariate hierarchical basis function of level $\ßl$, index $\ßi$
+}
+
 \newnotation{.1}{$\cdot^1$}{
   Superscript for ``Piecewise linear
   (basis function/function space/interpolant)''
@@ -74,8 +86,16 @@
   Nodal space of level $l$
 }
 
+\newnotation{Vl!}{$\ns{\ßl}$}{
+  Multivariate nodal space of level $\ßl$
+}
+
 \newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{l}$}{
-  Interpolant of $f$ in $\ns{l}$
+  Full grid interpolant of $f$ in $\ns{l}$
+}
+
+\newnotation{fl!}{$\fgintp{\ßl}$}{
+  Full grid interpolant of $f$ in $\ns{\ßl}$
 }
 
 \newnotationcommand[1]{\clint}{[#1]}{ab!c}{$\clint{\ßa, \ßb}$}{
@@ -91,6 +111,7 @@
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+%\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 
 % calligraphic letters
 % define \calC (C = arbitrary letter)

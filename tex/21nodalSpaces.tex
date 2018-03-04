@@ -105,29 +105,15 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 
 \paragraph{Cartesian and tensor products}
 
-\newgsymbol{d}{$d$}{Dimensionality $\in \NN$}%
 For the multivariate case with $d \in \NN$ dimensions,
 we proceed with the usual tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
-\newgsymbol{0!}{$\ß0$}{$(0, \dotsc, 0) \in \NNz^d$}%
-\newgsymbol{1!}{$\ß1$}{$(1, \dotsc, 1) \in \NN^d$}%
-\newgsymbol{01!c}{$\clint{\ß0, \ß1}$}{%
-  Unit hypercube $:= \clint{0, 1}^d := \{x \in \RR \mid 0 \le x \le 1\}^d$%
-}
-\newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NNz^d$}%
-\newgsymbol{||.||1}{$\normone{\cdot}$}{%
-  $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$%
-}%
 Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
-\newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^\ßl$}%
-\newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{%
-  For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
-}%
 The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
@@ -148,9 +134,6 @@ For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \end{equation}
 with the $d$-dimensional mesh size
 $\vms{ßl} := \ß2^{-\ßl} = (\ms{l_1}, \dotsc, \ms{l_d})$.
-\newgsymbol{phili!}{$\basis{\ßl,\ßi}$}{%
-  Multivariate hierarchical basis function of level $\ßl$, index $\ßi$%
-}%
 Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
@@ -180,16 +163,12 @@ $\basis{\ßl,\ßi}^1$.
 
 \paragraph{Multivariate nodal space}
 
-\newgsymbol{Vl!}{$\ns{\ßl}$}{Multivariate nodal space of level $\ßl$}%
 The multivariate nodal space $\ns{\ßl}$ is defined analogously to
 the univariate case:
 \begin{equation}
   \ns{\ßl}
   := \spn\{\basis{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{ab!}{$\clint{\ßa, \ßb}$}{%
-  Hypercube $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$%
-}%
 In the case of hat functions $\basis{\ßl,\ßi}^1$,
 the nodal space $\ns{\ßl}^1$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
@@ -202,16 +181,14 @@ all hypercubes
   \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
-\newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $\ns{\ßl}$}%
-\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 Analogously to \eqref{eq:interpFullGridUV},
 we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \RR$
-in the nodal space $\ns{\ßl}$ with $f_\ßl\colon \clint{\ß0, \ß1} \to \RR$ satisfying
+in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \RR$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
-  f_\ßl
+  \fgintp{\ßl}
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \basis{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
 \end{equation}
 where $c_\ßi \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
@@ -229,7 +206,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
     (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)%
   }%
   Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
-  such that $f_\ßl \equiv 0$.
+  such that $\fgintp{\ßl} \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
   we can evaluate \eqref{eq:interpFullGridMV} at $\vgp{\ßl,\ßi'}$ to obtain
   \begin{equation}
