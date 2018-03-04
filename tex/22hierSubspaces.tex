@@ -5,7 +5,7 @@ The dimension of the nodal space $\ns{\ßl}$ is given by
 \begin{equation}
   \label{eq:dimensionFG}
   \dim \ns{\ßl}
-  = |\fgset{\ßl}|
+  = \setsize{\fgset{\ßl}}
   = \prod_{t=1}^d (2^{l_t} + 1).
 \end{equation}
 If we choose the same level $n \in \NNz$ in all dimensions,
@@ -113,7 +113,7 @@ Here, the direct sum $\oplus$ is
 the normal vector space sum with the additional indication
 that the dimension of the sum $\sum_{l'=0}^l W_{l'}$ is the sum
 of the dimensions of the summands $W_{l'}$
-(analogously to $|\fgset{l}| = \sum_{l'=0}^l |\fgset{l'}|$,
+(analogously to $\setsize{\fgset{l}} = \sum_{l'=0}^l \setsize{\fgset{l'}}$,
 where $\fgset{l}$ is the disjoint union of the sets $\fgset{l'}$).
 In general, \eqref{eq:hierSplittingUV} may not be true.
 The following lemma provides a characterization,
@@ -163,7 +163,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   $\bigoplus_{l'=0}^l W_{l'} \subset \ns{l}$.
   If the sum is direct,
   the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
-  (due to $\dim W_{l'} = |I_{l'}| = 2^{l'-1}$ for $l' > 0$ and
+  (due to $\dim W_{l'} = \setsize{I_{l'}} = 2^{l'-1}$ for $l' > 0$ and
   $\dim W_{l'} = 2$ for $l' = 0$),
   which is also the dimension of $\ns{l}$.
   The only subspace of $\ns{l}$ that has the same dimension as $\ns{l}$ is $\ns{l}$ itself,

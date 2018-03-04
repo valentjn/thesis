@@ -34,8 +34,8 @@ of $\Omega_{n,d}^\sparse$ can be shown:
   \label{lemma:numberOfGridPointsBoundary}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    |\Omega_{n,d}^\sparse|
-    = \sum_{q=0}^d 2^q \binom{d}{q} |\interior{\Omega}_{n+q,d-q}^\sparse|
+    \setsize{\Omega_{n,d}^\sparse}
+    = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interior{\Omega}_{n+q,d-q}^\sparse}
   \end{equation}
 \end{lemma}
 \begin{proof}
@@ -48,7 +48,7 @@ The number of interior grid points can be calculated as follows:
   \label{lemma:numberOfGridPointsInterior}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    |\interior{\Omega}_{n,d}^\sparse|
+    \setsize{\interior{\Omega}_{n,d}^\sparse}
     = \sum_{q=0}^{n-d} 2^q \binom{d-1+q}{d-1}
   \end{equation}
 \end{lemma}
@@ -208,10 +208,10 @@ can be calculated as follows:
   \label{PROP:GRIDSIZECOARSEBOUNDARY}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    |\Omega_{n,d}^{\sparse(b)}|
-    = |\interior{\Omega}_{n,d}^\sparse| +
+    \setsize{\Omega_{n,d}^{\sparse(b)}}
+    = \setsize{\interior{\Omega}_{n,d}^\sparse} +
     \sum_{q=1}^d 2^q \binom{d}{q}
-    |\interior{\Omega}_{n-q-b+1,d-q}^\sparse|,\quad
+    \setsize{\interior{\Omega}_{n-q-b+1,d-q}^\sparse},\quad
     b \in \NN
   \end{equation}
 \end{restatable}
@@ -228,7 +228,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
   \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
     \toprule
     &
-    {$|\interior{\Omega}_{n,d}^\sparse|$}&
+    {$\setsize{\interior{\Omega}_{n,d}^\sparse}$}&
     {$b = 0$}&
     {$b = 1$}&
     {$b = 2$}&
@@ -307,7 +307,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
     Grid size of the interior grid
     $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
     and ratios
-    $|\Omega_{n,d}^{\sparse(b)}|/|\interior{\Omega}_{n,d}^\sparse|$
+    $\setsize{\Omega_{n,d}^{\sparse(b)}}/\setsize{\interior{\Omega}_{n,d}^\sparse}$
     \emph{(beginning with third column)} of the sizes of
     the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
     to the size of the interior grid of the same level.
@@ -321,7 +321,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
   \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
     \toprule
     &
-    {$|\interior{\Omega}_{n,d}^\sparse|$}&
+    {$\setsize{\interior{\Omega}_{n,d}^\sparse}$}&
     {$b = 0$}&
     {$b = 1$}&
     {$b = 2$}&
@@ -400,7 +400,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
     Grid size of the interior grid
     $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
     and ratios
-    $|\Omega_{n,d}^{\sparse(b)}|/|\interior{\Omega}_{n,d}^\sparse|$
+    $\setsize{\Omega_{n,d}^{\sparse(b)}}/\setsize{\interior{\Omega}_{n,d}^\sparse}$
     \emph{(beginning with third column)} of the sizes of
     the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
     to the size of the interior grid of the same level.
