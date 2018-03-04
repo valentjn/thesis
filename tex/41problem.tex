@@ -1,7 +1,7 @@
 \section{The Hierarchization Problem}
 \label{sec:41problem}
 
-Let $\Omega^\sparse \subset [0, 1]^d$ be a general (sparse) grid that
+Let $\Omega^\sparse \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
 of the form $|\Omega^\sparse| = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
 where $K$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NNz$
@@ -21,7 +21,7 @@ where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N$ is a given set of
 function values $f(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $f^\sparse$ as
 \begin{equation}
-  f^\sparse\colon [\ß0, \ß1] \to \RR,\quad
+  f^\sparse\colon \clint{\ß0, \ß1} \to \RR,\quad
   f^\sparse :=
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
   \basis{\ßl',\ßi'},

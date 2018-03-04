@@ -5,11 +5,11 @@ One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
 is that the number of grid points still grows very fast
 with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $\ms{n}$ on the
-boundary of the domain $[\ß0, \ß1]$ is finer than
+boundary of the domain $\clint{\ß0, \ß1}$ is finer than
 the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
 \newgsymbol{Omegaso}{$\interior{\Omega}^\sparse$}{%
   Interior grid points $:= \Omega^\sparse \cap \openinterval{\ß0, \ß1}$
-  for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
+  for a finite set $\Omega^\sparse \subset \clint{\ß0, \ß1}$ of grid points%
 }%
 \newgsymbol{01o!}{$\openinterval{\ß0, \ß1}$}{%
   Open unit hypercube $:= \openinterval{0, 1}^d := \{x \in \RR \mid 0 < x < 1\}^d$%
@@ -130,7 +130,7 @@ A popular choice is the insertion at level one, which corresponds to
 where $\vec{\max}$ is to be read coordinate-wise as usual.
 This choice is equivalent to treating zero-level components as level one
 in the subspace selection.
-This ensures that the finest mesh sizes in interior of $[\ß0, \ß1]$ and
+This ensures that the finest mesh sizes in interior of $\clint{\ß0, \ß1}$ and
 its boundary coincide to be $\ms{n-d+1}$, which reduces the number of grid points
 on the boundary significantly.
 
@@ -544,9 +544,9 @@ Its correctness can be formally proved with the following invariant:
     in two and three dimensions for different values of the
     boundary parameter $b$.
     For constant $d$ and $n$,
-    the points in the interior of $[\ß0, \ß1]$
+    the points in the interior of $\clint{\ß0, \ß1}$
     (black) are the same,
-    while the points on the boundary of $[\ß0, \ß1]$
+    while the points on the boundary of $\clint{\ß0, \ß1}$
     \emph{\textcolor{mittelblau}{(blue)}} become coarser
     for increasing values of $b$.
     The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
@@ -571,7 +571,7 @@ However, it is possible to calculate the hierarchical surpluses in
 a three-step algorithm.
 \newgsymbol{Omegasd}{$\bndry{\Omega}^\sparse$}{%
   Boundary grid points $:= \Omega^\sparse \setminus \interior{\Omega}^\sparse$
-  for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
+  for a finite set $\Omega^\sparse \subset \clint{\ß0, \ß1}$ of grid points%
 }%
 First, we compute the surpluses of the boundary grid
 $\bndry{\Omega}_{n,d}^{\sparse(b)} :=
@@ -596,8 +596,8 @@ The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
 For the hat function basis $\basis{\ßl,\ßi}^1$,
 this is a feasible option if the objective
-function $f\colon [\ß0, \ß1] \to \RR$
-satisfies homogeneous boundary conditions $f_{\bndry{[\ß0, \ß1]}} \equiv 0$,
+function $f\colon \clint{\ß0, \ß1} \to \RR$
+satisfies homogeneous boundary conditions $f_{\bndry{\clint{\ß0, \ß1}}} \equiv 0$,
 as $\basis{\ßl,\ßi}^1$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.

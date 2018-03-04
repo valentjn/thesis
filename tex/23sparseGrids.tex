@@ -16,7 +16,7 @@ regular, dimensionally adaptive, and spatially adaptive.
 \paragraph{Hierarchical contributions}
 
 To assess the importance of a subspace, we consider again the
-interpolant $f_\ßl \in \ns{\ßl}$ of a function $f\colon [\ß0, \ß1] \to \RR$.
+interpolant $f_\ßl \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \RR$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
@@ -49,11 +49,11 @@ $\frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2} f$
 exists and is continuous.%
 \footnote{%
   Again, the notation implies that the integration domain is
-  the unit hypercube $[\ß0, \ß1]$.%
+  the unit hypercube $\clint{\ß0, \ß1}$.%
 }\multiplefootnoteseparator%
 \footnote{%
   The statement is even valid for functions in the Sobolev space
-  $H_\mathrm{mix}^2([\ß0, \ß1])$ with dominating mixed derivative,
+  $H_\mathrm{mix}^2(\clint{\ß0, \ß1})$ with dominating mixed derivative,
   as its proof mainly relies on integration by parts
   \cite{Bungartz04Sparse}.%
 }
@@ -147,7 +147,7 @@ regular sparse grid in two dimensions.
   Boundary of the domain $\Omega \subset \RR^d$%
 }%
 One can prove that for homogeneous boundary conditions
-$f|_{\bndry{[\ß0,\ß1]}} \equiv 0$,
+$f|_{\bndry{\clint{\ß0,\ß1}}} \equiv 0$,
 the number of required inner grid points
 ($\vgp{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
 grows like $\calO(\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1})$

@@ -4,8 +4,8 @@
 As we have seen in the last section (see \cref{cor:hierSplittingBSpline}),
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
-$D_l^p = [\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}]$,
-which is for $p > 1$ a proper subset of the domain $[0, 1]$.
+$D_l^p = \clint{\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}}$,
+which is for $p > 1$ a proper subset of the domain $\clint{0, 1}$.
 The implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
 In this section, we study the underlying reasons of the restriction and
@@ -75,7 +75,7 @@ that interpolates $f$ exactly on the whole domain $D_l^p$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
 which does not interpolate $f$ exactly in $D_l^p$).
 However, in general, this interpolant is not equal $f$ outside
-of $D_l^p$ (i.e., in $[0, 1] \setminus D_l^p$),
+of $D_l^p$ (i.e., in $\clint{0, 1} \setminus D_l^p$),
 as \thmref{prop:splineSpace} only holds for $D_l^p$.
 In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
 equal to $f(x)$.
@@ -128,11 +128,11 @@ of the corresponding basis functions.
 
 As often, taking slightly a different view of the problem helps
 to find a solution.
-\newgsymbol{Slp01}{$S_l^{p,[0,1]}$}{%
+\newgsymbol{Slp01}{$S_l^{p,\clint{0,1}}$}{%
   Spline space of degree $p$ on the grid
   $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$%
 }%
-Let $S_l^{p,[0,1]}$ denote the space of all splines of degree $p$
+Let $S_l^{p,\clint{0,1}}$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 \begin{equation}
   \label{eq:fullGridKnots}
@@ -140,25 +140,25 @@ on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
   k = 0, \dotsc, m + p,\quad
   m := 2^l + p.
 \end{equation}
-We have $D_\ß\xi^p = [0, 1]$ for this choice of $\ß\xi$, i.e.,
+We have $D_\ß\xi^p = \clint{0, 1}$ for this choice of $\ß\xi$, i.e.,
 the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^{p,[0,1]}$,
-but it cannot equal $S_l^{p,[0,1]}$ due to
+Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^{p,\clint{0,1}}$,
+but it cannot equal $S_l^{p,\clint{0,1}}$ due to
 \begin{equation}
   \dim \bigoplus_{l'=0}^l W_l^p
   = 2^l + 1
   < 2^l + p
   = m
-  = \dim S_l^{p,[0,1]},\quad
+  = \dim S_l^{p,\clint{0,1}},\quad
   p > 1,
 \end{equation}
 by \thmref{prop:splineSpace}.
 There are too few nodal (and hierarchical) basis functions to
-span the whole spline space $S_l^{p,[0,1]}$.
+span the whole spline space $S_l^{p,\clint{0,1}}$.
 
 The key idea is now to impose additional $(p - 1)$ boundary conditions
-on the basis functions to restrict $S_l^{p,[0,1]}$ to a reasonable subspace
+on the basis functions to restrict $S_l^{p,\clint{0,1}}$ to a reasonable subspace
 with the correct dimension $(2^l + p) - (p - 1) = 2^l + 1$.
 ``Reasonable'' means that besides this dimension constraint,
 two requirements should be met:
@@ -176,7 +176,7 @@ in the process.
 \paragraph{Not-a-knot conditions}
 
 A suitable subspace can be obtained by incorporating the
-so-called \term{not-a-knot boundary conditions} into $S_l^{p,[0,1]}$.
+so-called \term{not-a-knot boundary conditions} into $S_l^{p,\clint{0,1}}$.
 For the cubic case $p = 2$,
 for which we need two conditions,
 the not-a-knot conditions demand that
@@ -186,7 +186,7 @@ for all splines $s$ in the subspace.
 Equivalently, $\gp{l,1}$ and $\gp{l,2^l-1}$ are effectively removed from the
 knot sequence (hence ``not-a-knot''),
 as this is equivalent to requiring that
-$s$ is a cubic polynomial on $[0, \gp{l,2}]$ and $[\gp{l,2^l-2}, 1]$.
+$s$ is a cubic polynomial on $\clint{0, \gp{l,2}}$ and $\clint{\gp{l,2^l-2}, 1}$.
 For general degree $p$ (in which we need $(p - 1)$ conditions),
 we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
 is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
@@ -199,7 +199,7 @@ inner grid points
 \end{equation}
 which is equivalent to removing these knots from the knot sequence $\ß\xi$,
 or, alternatively, to requiring that $s$ is a polynomial
-of degree $\le p$ on $[0, \gp{l,(p+1)/2}]$ and on $[\gp{l,2^l-(p+1)/2}, 1]$.
+of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on $\clint{\gp{l,2^l-(p+1)/2}, 1}$.
 
 \newgsymbol{.nak}{$\cdot^\notaknot$}{%
   Superscript for ``Not-a-knot (knot sequence/basis
@@ -243,7 +243,7 @@ The resulting spline space
   := S_{\ß\xi_l^{p,\notaknot}}^p
 \end{equation}
 is a subspace
-of $S_l^{p,[0,1]}$ with the correct dimensionality:
+of $S_l^{p,\clint{0,1}}$ with the correct dimensionality:
 \begin{equation}
   \dim \bigoplus_{l'=0}^l W_l^p
   = 2^l + 1
@@ -254,9 +254,9 @@ First, the spline interpolation domain of $S_l^{p,\notaknot}$
 equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
 for $S_l^{p,\notaknot}$, since all interpolation points
-(grid points) lie within $D_{\ß\xi_l^{p,\notaknot}}^p = [0, 1]$.
+(grid points) lie within $D_{\ß\xi_l^{p,\notaknot}}^p = \clint{0, 1}$.
 Second, $S_l^{p,\notaknot}$ still contains all polynomials of
-degree $\le p$, as we have only removed knots compared to $S_l^{p,[0,1]}$.
+degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
 
 \begin{figure}
   \includegraphics{splineSpace_3}%
@@ -265,14 +265,14 @@ degree $\le p$, as we have only removed knots compared to $S_l^{p,[0,1]}$.
     \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic not-a-knot B-splines ($p = 3$)
     of level $l = 3$.
-    In the domain $[0, 1]$ \emph{(delimited by dashed lines)},
+    In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
     the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$ points
     of the set of grid points $\Omega_l$
     \emph{\textcolor{mittelblau}{(blue dots)}}
     have been removed from the set of knots.
     The spline interpolation domain $D_{\ß\xi_l^{p,\notaknot}}^p$
     \emph{(thick line)}
-    equals the whole domain $[0, 1]$.%
+    equals the whole domain $\clint{0, 1}$.%
   }%
   \label{fig:splineSpaceNotAKnot}%
 \end{figure}
@@ -322,7 +322,7 @@ we use global Lagrange polynomials for the coarser levels:
     \end{cases}\quad
     l \in \NNz,\quad
     i \in I_l,\\
-    L_{l,i}\colon [0, 1] \to \RR,\quad
+    L_{l,i}\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \gp{l,i'}}{\gp{l,i} - \gp{l,i'}}.
@@ -430,7 +430,7 @@ respectively.
 \begin{proposition}[hierarchical splitting for not-a-knot B-splines]
   \label{prop:hierSplittingNAKBSplineUV}
   \newgsymbol{Pp}{$P^p$}{%
-    Space of all polynomials of degree $\le p$ on $[0, 1]$%
+    Space of all polynomials of degree $\le p$ on $\clint{0, 1}$%
   }%
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical not-a-knot B-spline basis:
@@ -441,7 +441,7 @@ respectively.
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
   is defined as the space $P^{2^l + 1}$ of polynomials of degree
-  $\le 2^l + 1$ on $[0, 1]$
+  $\le 2^l + 1$ on $\clint{0, 1}$
   (for $l \ge \lceil\log_2(p+1)\rceil$,
   $S_l^{p,\notaknot}$ is the not-a-knot spline space).
 \end{proposition}
@@ -456,7 +456,7 @@ respectively.
   is a subspace of $S_l^{p,\notaknot} = \ns{l}^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
   every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
-  is continuous on $[0, 1]$, a polynomial on every knot interval of
+  is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
   $\ß\xi_l^{p,\notaknot}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
@@ -499,17 +499,17 @@ are defined analogously to the uniform case, i.e.,
 \end{equation}
 \newgsymbol{Pp!}{$P^\ßp$}{%
   Space of all $d$-variate polynomials of
-  coordinate degree $\le \ßp$ on $[\ß0, \ß1]$%
+  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$%
 }%
 If the level $n$ is large enough, then $V_{n,d}^{\sparse,\ßp,\notaknot}$
 contains the space $P^\ßp$ of all $d$-variate polynomials of
-coordinate degree $\le \ßp$ on $[\ß0, \ß1]$
-(i.e., functions $f\colon [0, 1] \to \RR$,
+coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+(i.e., functions $f\colon \clint{0, 1} \to \RR$,
 $f(\ßx) := \sum_{\ßq=\ß0}^\ßp c_\ßq \prod_{t=1}^d x_t^{q_t}$,
 with $c_\ßq \in \RR$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly
-represent global polynomials on $[\ß0, \ß1]$:
+represent global polynomials on $\clint{\ß0, \ß1}$:
 
 \begin{corollary}
   If $n \ge \norm{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}_1$,
@@ -547,7 +547,7 @@ Due to the removal of knots, there is only a single
 not-a-knot B-spline $\basis{l,0}^{p,\notaknot}$ left of
 $\basis{l,1}^{p,\notaknot}$.
 B-splines $\basis{l,i}^{p,\notaknot}$ with index $i < 0$
-would be zero in $[0, 1]$.
+would be zero in $\clint{0, 1}$.
 
 While we are therefore not able to construct modified functions
 whose second derivative vanishes in neighborhood of $x = 0$,
@@ -580,7 +580,7 @@ only for a single level $l$, as modified functions of higher levels
 are the same up to an affine parameter transformation.
 Note again that for $p \ge 5$, we would have to modify additional
 interior B-splines as the interior of their support then extends to the
-boundary of $[0, 1]$.
+boundary of $\clint{0, 1}$.
 We refrain from doing so to keep the definition
 \eqref{eq:modifiedNotAKnotBSpline} simple.
 
@@ -624,7 +624,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \end{cases}\quad
     l \in \NNz,\quad
     i \in I_l,\\
-    L_{l,i}^\clenshawcurtis\colon [0, 1] \to \RR,\quad
+    L_{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}^\clenshawcurtis(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \gp{l,i'}^\clenshawcurtis}%
@@ -683,7 +683,7 @@ cubic degree and the corresponding modified functions are plotted in
 \label{sec:324naturalBoundary}
 
 Not-a-knot boundary conditions are not the only approach
-to obtain a subspace of $S_l^{p,[0,1]}$ with the right dimension $2^l - 1$.
+to obtain a subspace of $S_l^{p,\clint{0,1}}$ with the right dimension $2^l - 1$.
 Another possibility, which we want to discuss briefly, are
 \term{natural boundary conditions}.
 In the cubic case, for which they are usually formulated
@@ -745,7 +745,7 @@ hierarchical functions have to be altered in each level.
 
 \Cref{fig:naturalBSpline} shows the hierarchical natural spline basis.
 The main disadvantage of natural boundary conditions is that
-we are not able to replicate arbitrary polynomials exactly on $[0, 1]$
+we are not able to replicate arbitrary polynomials exactly on $\clint{0, 1}$
 with this approach.
 Only polynomials that satisfy natural boundary conditions themselves
 (linear polynomials for example)

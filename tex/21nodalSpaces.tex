@@ -9,7 +9,7 @@
 \paragraph{Grid and basis functions}
 
 Let us first consider univariate functions
-that are defined on the unit interval $[0, 1]$.
+that are defined on the unit interval $\clint{0, 1}$.
 \usenotation{l}
 We discretize this domain by splitting it into $2^l$ equally sized segments,
 where $l \in \NNz$ is the \term{level}.
@@ -29,7 +29,7 @@ where $i$ is the \term{index} and $\ms{l} := 2^{-l}$ is the \term{mesh size}.%
 }
 Every grid point is associated with a \term{basis function}
 \begin{equation}
-  \basis{l,i}\colon [0, 1] \to \RR.
+  \basis{l,i}\colon \clint{0, 1} \to \RR.
 \end{equation}
 In this thesis, we assume $\basis{l,i}$ to be arbitrary,
 satisfying required assumptions when needed and stated.
@@ -50,6 +50,7 @@ arbitrary degrees $p$ in \cref{chap:30BSplines}.
 
 \paragraph{Nodal space}
 
+\newgsymbol{span}{$\spn$}{Linear span (set of all linear combinations)}%
 The \emph{nodal space} $\ns{l}$ of level $l$
 is defined as the linear span of all basis functions
 $\basis{l,i}$:
@@ -58,8 +59,10 @@ $\basis{l,i}$:
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 every linear combination of these functions is unique.
-This ensures that for every objective function $f\colon [0, 1] \to \RR$,
-there is a unique function $\fgintp{l}\colon [0, 1] \to \RR$ such that
+\newgsymbol{fl}{$\fgintp{l}$}{Interpolant of $f$ in $\ns{l}$}%
+\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+This ensures that for every objective function $f\colon \clint{0, 1} \to \RR$,
+there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \RR$ such that
 \begin{equation}
   \label{eq:interpFullGridUV}
   \fgintp{l}
@@ -71,8 +74,8 @@ In this case, $\fgintp{l}$ is called \term{interpolant} of $f$ in $\ns{l}$.
 The nodal space $\ns{l}^1$ is defined analogously as the span of the
 hat functions $\basis{l,i}^1$.
 It is the space of all linear splines,
-that is, the space of all continuous functions on $[0, 1]$ that are
-piecewise linear polynomials on $[\gp{l,i}, \gp{l,i+1}]$ for
+that is, the space of all continuous functions on $\clint{0, 1}$ that are
+piecewise linear polynomials on $\clint{\gp{l,i}, \gp{l,i+1}}$ for
 $i = 0, \dotsc, 2^l - 1$ \cite{Hoellig13Approximation}.
 The nodal hat function basis of level~$l = 3$
 and a linear combination are shown in \cref{fig:nodalHat}.
@@ -106,14 +109,11 @@ For the multivariate case with $d \in \NN$ dimensions,
 we proceed with the usual tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
-\newgsymbol{01!c}{$[\ß0, \ß1]$}{%
-  Unit hypercube $:= [0, 1]^d := \{x \in \RR \mid 0 \le x \le 1\}^d$%
-}
 \newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NNz^d$}%
 \newgsymbol{||.||1}{$\norm{\cdot}_1$}{%
   $\ell_1$ norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$%
 }%
-Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
+Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
@@ -155,7 +155,7 @@ as the tensor product of the univariate functions:%
   \todo{insert reference}.%
 }
 \begin{equation}
-  \basis{\ßl,\ßi}\colon [\ß0, \ß1] \to \RR,\quad
+  \basis{\ßl,\ßi}\colon \clint{\ß0, \ß1} \to \RR,\quad
   \basis{\ßl,\ßi}(\ßx)
   := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
 \end{equation}
@@ -181,26 +181,26 @@ the univariate case:
   \ns{\ßl}
   := \spn\{\basis{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{ab!}{$[\ßa, \ßb]$}{%
-  Hypercube $:= [a_1, b_1] \times \dotsb \times [a_d, b_d]$%
+\newgsymbol{ab!}{$\clint{\ßa, \ßb}$}{%
+  Hypercube $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$%
 }%
 In the case of hat functions $\basis{\ßl,\ßi}^1$,
 the nodal space $\ns{\ßl}^1$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
-on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
+on $\clint{\ß0, \ß1}$ that are piecewise $d$-linear polynomials on
 all hypercubes
 \begin{equation}
-  [\vgp{\ßl,\ßi}, \vgp{\ßl,\ßi+\ß1}]
-  := [\gp{l_1,i_1}, \gp{l_1,i_1+1}] \times \dotsb \times
-  [\gp{l_d,i_d}, \gp{l_d,i_d+1}],\quad
+  \clint{\vgp{\ßl,\ßi}, \vgp{\ßl,\ßi+\ß1}}
+  := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
+  \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
 \newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $\ns{\ßl}$}%
 \newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 Analogously to \eqref{eq:interpFullGridUV},
-we can interpolate objective functions $f\colon [\ß0, \ß1] \to \RR$
-in the nodal space $\ns{\ßl}$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
+we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \RR$
+in the nodal space $\ns{\ßl}$ with $f_\ßl\colon \clint{\ß0, \ß1} \to \RR$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
   f_\ßl
