@@ -176,7 +176,7 @@ of the hat function.
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
 $\basis{l,i}^p\colon \clint{0, 1} \to \RR$ of level~$l \in \NNz$ and index
-$i \in I_l$ via an affine parameter transformation
+$i \in \his{l}$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
@@ -193,11 +193,11 @@ Note that due to the \term{translation invariance} of $\basis{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
-$\basis{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
+$\basis{l,i}^p$ ($l \in \NNz$, $i \in \his{l}$).
 
 \begin{figure}
   \subcaptionbox{%
-    Nodal B-splines $\basis{l,i}^p$ ($i \in I_l$) and grid points $\gp{l,i}$
+    Nodal B-splines $\basis{l,i}^p$ ($i \in \his{l}$) and grid points $\gp{l,i}$
     \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_1}%
@@ -209,7 +209,7 @@ $\basis{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
   \end{tikzpicture}%
   \hfill%
   \subcaptionbox{%
-    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
     and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[72mm]{%
@@ -220,7 +220,7 @@ $\basis{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
     up to level $l = 3$.
     When restricting all functions to $D_l^p$ \emph{(thick black line)},
     the nodal space $\ns{l}^p|_{D_l^p}$ decomposes into the direct sum
-    of the hierarchical subspaces $W_{l'}^p|_{D_l^p}$ ($l' \le l$).%
+    of the hierarchical subspaces $\hs{l'}^p|_{D_l^p}$ ($l' \le l$).%
   }
   \label{fig:hierarchicalBSpline}
 \end{figure}
@@ -270,7 +270,7 @@ for the rest of the thesis.
 \paragraph{Non-uniform B-splines and spline space}
 
 With the hierarchical B-splines $\basis{l,i}^p$, we can define
-the nodal spaces $\ns{l}^p$ and hierarchical subspaces $W_l^p$
+the nodal spaces $\ns{l}^p$ and hierarchical subspaces $\hs{l}^p$
 as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
 to be correct, we have to prove that the conditions of
@@ -447,7 +447,7 @@ if $p$ is too large or $l$ is too small.
 However, the corresponding B-splines $\basis{l,i}^p$ are still linearly
 independent on~$\clint{0, 1}$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
-$\basis{l,i}^p$ ($i \in I_l$) are linearly independent on $\clint{0, 1}$.
+$\basis{l,i}^p$ ($i \in \his{l}$) are linearly independent on $\clint{0, 1}$.
 
 \paragraph{Hierarchical splitting for uniform B-splines}
 
@@ -457,12 +457,12 @@ to prove the hierarchical splitting for the uniform B-spline basis
 
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
-  $W_{l'}^p|_{D_l^p}$ ($l' \le l$) are
+  $\hs{l'}^p|_{D_l^p}$ ($l' \le l$) are
   subspaces of the restricted nodal space $\ns{l}^p|_{D_l^p}$.
 \end{lemma}
 
 \begin{proof}
-  Every function $\basis{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
+  Every function $\basis{l',i'}^p$ ($i' \in \his{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
   of $\ß\xi_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
@@ -470,16 +470,16 @@ to prove the hierarchical splitting for the uniform B-spline basis
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
   $\basis{l',i'}^p \in \ns{l}^p|_{D_l^p}$.
-  As the functions $\basis{l',i'}^p$ ($i' \in I_{l'}$) span
-  $W_{l'}^p|_{D_l^p}$, we can conclude
-  $W_{l'}^p|_{D_l^p} \subset \ns{l}^p|_{D_l^p}$.
+  As the functions $\basis{l',i'}^p$ ($i' \in \his{l'}$) span
+  $\hs{l'}^p|_{D_l^p}$, we can conclude
+  $\hs{l'}^p|_{D_l^p} \subset \ns{l}^p|_{D_l^p}$.
 \end{proof}
 
 It is crucial to note that this lemma does not hold for even $p$,
 as the knots of the B-splines of level $l - 1$ are not contained in the
 knots of level $l$.
 This implies that in general,
-$W_{l-1}^p|_{D_l^p}$ is not contained in $\ns{l}^p|_{D_l^p}$
+$\hs{l-1}^p|_{D_l^p}$ is not contained in $\ns{l}^p|_{D_l^p}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 does not hold, which is the main reason for us to restrict the
@@ -493,7 +493,7 @@ theoretic considerations in this thesis to odd $p$.
   \label{prop:hierBSplineLinearlyIndependent}
   \label{PROP:HIERBSPLINELINEARLYINDEPENDENT}
   The hierarchical B-splines
-  $\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+  $\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
   are linearly independent.
 \end{restatable}
 
@@ -514,7 +514,7 @@ is correct for hierarchical B-splines:
   \begin{equation}
     S_l^p
     = \ns{l}^p|_{D_l^p}
-    = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}.
+    = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}.
   \end{equation}
 \end{corollary}
 
@@ -525,7 +525,7 @@ is correct for hierarchical B-splines:
 
 This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
 We can now proceed to define multivariate
-nodal spaces $\ns{\ßl}^p$, hierarchical subspaces $W_\ßl^p$, and
+nodal spaces $\ns{\ßl}^p$, hierarchical subspaces $\hs{\ßl}^p$, and
 sparse grid spaces $V_{n,d}^{\sparse,p}$ as in \cref{chap:20sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
@@ -629,7 +629,7 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
     \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \basis{l,i'}^p(x),&
     l \ge 2,\quad i = 1,\\
     \basis{l,i}^p(x),&
-    l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
+    l \ge 2,\quad i \in \his{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{p,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
@@ -662,7 +662,7 @@ for growing $p$.
   \hfill%
   \subcaptionbox{%
     Modified hierarchical cubic B-splines $\basis{l',i'}^{p,\modified}$
-    ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) and grid points $\gp{l',i'}$
+    ($l' = 1, \dotsc, l$, $i' \in \his{l'}$) and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_3}%
@@ -756,7 +756,7 @@ knot sequences.
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
 $\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \NNz$ and index
-$i \in I_l$ is defined as \cite{Valentin14Hierarchische}
+$i \in \his{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
   := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,
@@ -785,7 +785,7 @@ are equidistantly extended onto the real line $\RR$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
 $\ns{l}^{p,\clenshawcurtis}$
-and hierarchical subspaces $W_l^{p,\clenshawcurtis}$ as well as
+and hierarchical subspaces $\hs{l}^{p,\clenshawcurtis}$ as well as
 sparse grid spaces $V_{n,d}^{\sparse,p,\clenshawcurtis}$ and
 grid point sets $\Omega_{n,d}^{\sparse,\clenshawcurtis}$
 using tensor products of Clenshaw--Curtis B-splines
@@ -797,7 +797,7 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
   \subcaptionbox{%
     Hierarchical cubic Clenshaw--Curtis B-splines
     $\basis{l',i'}^{p,\clenshawcurtis}$
-    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    ($l' \le l$, $i' \in \his{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
      $\basis{l',i'}^{p,\clenshawcurtis,\modified}$
     \emph{(dashed)}.%

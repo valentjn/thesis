@@ -60,8 +60,8 @@ As shown in \cref{fig:pointSplittingUniform},
 this implies that $\fgset{l}$ decomposes into
 \begin{equation}
   \fgset{l}
-  = \bigdotcup_{l'=0}^l \{\gp{l',i'} \mid i' \in I_{l'}\},\quad
-  I_{l'} :=
+  = \bigdotcup_{l'=0}^l \{\gp{l',i'} \mid i' \in \his{l'}\},\quad
+  \his{l'} :=
   \begin{cases}
     \{i' = 0, \dotsc, 2^{l'} \mid \text{$i'$ odd}\},&l' > 0,\\
     \{0, 1\},&l' = 0,
@@ -69,10 +69,10 @@ this implies that $\fgset{l}$ decomposes into
 \end{equation}
 where $\dotcup$ indicates the disjoint union.
 We call the spaces spanned by the basis functions that correspond to the
-joined sets \term{hierarchical subspaces} $W_l$:
+joined sets \term{hierarchical subspaces} $\hs{l}$:
 \begin{equation}
-  W_l
-  := \spn\{\basis{l,i} \mid i \in I_l\}.
+  \hs{l}
+  := \spn\{\basis{l,i} \mid i \in \his{l}\}.
 \end{equation}
 
 \begin{figure}
@@ -80,7 +80,7 @@ joined sets \term{hierarchical subspaces} $W_l$:
   \caption{%
     The set of grid points $\fgset{l}$ of level $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$,
-    whose grid points $\gp{l',i'}$ have odd indices $i' \in I_{l'}$
+    whose grid points $\gp{l',i'}$ have odd indices $i' \in \his{l'}$
     ($\gp{0,0}$ being the only exception).%
   }
   \label{fig:pointSplittingUniform}
@@ -99,13 +99,13 @@ hierarchical subspaces of coarser levels or the same level, i.e.,
 \begin{equation}
   \label{eq:hierSplittingUV}
   \ns{l}
-  \overset{?}{=} \bigoplus_{l'=0}^l W_{l'},
+  \overset{?}{=} \bigoplus_{l'=0}^l \hs{l'},
 \end{equation}
 We call this relation \term{hierarchical splitting}.
 Here, the direct sum $\oplus$ is
 the normal vector space sum with the additional indication
-that the dimension of the sum $\sum_{l'=0}^l W_{l'}$ is the sum
-of the dimensions of the summands $W_{l'}$
+that the dimension of the sum $\sum_{l'=0}^l \hs{l'}$ is the sum
+of the dimensions of the summands $\hs{l'}$
 (analogously to $\setsize{\fgset{l}} = \sum_{l'=0}^l \setsize{\fgset{l'}}$,
 where $\fgset{l}$ is the disjoint union of the sets $\fgset{l'}$).
 In general, \eqref{eq:hierSplittingUV} may not be true.
@@ -115,7 +115,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 
 \begin{figure}
   \subcaptionbox{%
-    Basis functions $\basis{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+    Basis functions $\basis{l',i'}^1$ ($l' \le l$, $i' \in \his{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.
     The domain is the unit interval $\clint{0, 1}$.%
   }[75mm]{%
@@ -140,27 +140,27 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   both of the following conditions:
   \begin{itemize}
     \item
-    The hierarchical subspaces $W_{l'}$ ($l' \le l$) are subspaces of $\ns{l}$.
+    The hierarchical subspaces $\hs{l'}$ ($l' \le l$) are subspaces of $\ns{l}$.
     
     \item
     The hierarchical functions
-    $\basis{l',i'}$ ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+    $\basis{l',i'}$ ($l' \le l$, $i' \in \his{l'}$) are linearly independent.
   \end{itemize}
 \end{lemma}
 \begin{proof}
-  The first condition is equivalent to $\sum_{l'=0}^l W_{l'} \subset \ns{l}$.
+  The first condition is equivalent to $\sum_{l'=0}^l \hs{l'} \subset \ns{l}$.
   The second condition is equivalent to
-  $\dim \sum_{l'=0}^l W_{l'} = \sum_{l'=0}^l \dim W_{l'}$,
+  $\dim \sum_{l'=0}^l \hs{l'} = \sum_{l'=0}^l \dim \hs{l'}$,
   i.e., to the directness of the sum.
   Therefore, the logical conjunction of both is equivalent to
-  $\bigoplus_{l'=0}^l W_{l'} \subset \ns{l}$.
+  $\bigoplus_{l'=0}^l \hs{l'} \subset \ns{l}$.
   If the sum is direct,
   the dimension of the sum is equal to $2 + \sum_{l'=1}^l 2^{l'-1} = 2^l + 1$
-  (due to $\dim W_{l'} = \setsize{I_{l'}} = 2^{l'-1}$ for $l' > 0$ and
-  $\dim W_{l'} = 2$ for $l' = 0$),
+  (due to $\dim \hs{l'} = \setsize{\his{l'}} = 2^{l'-1}$ for $l' > 0$ and
+  $\dim \hs{l'} = 2$ for $l' = 0$),
   which is also the dimension of $\ns{l}$.
   The only subspace of $\ns{l}$ that has the same dimension as $\ns{l}$ is $\ns{l}$ itself,
-  so we infer $\bigoplus_{l'=0}^l W_{l'} = \ns{l}$.
+  so we infer $\bigoplus_{l'=0}^l \hs{l'} = \ns{l}$.
 \end{proof}
 \begin{corollary}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
@@ -172,12 +172,12 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   are also piecewise linear splines of higher levels $l \ge l'$.
   The linear independence for the second condition can be proved by induction
   over $l$:
-  If a linear combination of $\basis{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+  If a linear combination of $\basis{l',i'}^1$ ($l' \le l$, $i' \in \his{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
-  as otherwise the basis functions $\basis{l,i'}^1$ ($i' \in I_l$) would
+  as otherwise the basis functions $\basis{l,i'}^1$ ($i' \in \his{l}$) would
   introduce kinks at $\gp{l,i'}$, which the zero function does not have.
   This means that we have a zero linear combination of $\basis{l',i'}^1$ for
-  $l' \le l - 1$, $i' \in I_{l'}$,
+  $l' \le l - 1$, $i' \in \his{l'}$,
   and by the induction hypothesis, the other coefficients also vanish.
 \end{proof}
 
@@ -186,25 +186,25 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 \subsection{Hierarchical Splitting in the Multivariate Case}
 \label{sec:222hierMV}
 
-\newgsymbol{Wl!}{$W_\ßl$}{Multivariate hierarchical subspace of level $\ßl$}%
-\newgsymbol{Il!}{$I_\ßl$}{%
-  Set $:= I_{l_1} \times \dotsb \times I_{l_d}$ of
+\newgsymbol{Wl!}{$\hs{\ßl}$}{Multivariate hierarchical subspace of level $\ßl$}%
+\newgsymbol{Il!}{$\his{\ßl}$}{%
+  Set $:= \his{l_1} \times \dotsb \times \his{l_d}$ of
   (odd) multivariate indices for hierarchical basis functions%
 }%
 Multivariate hierarchical subspaces of level $\ßl$
 are defined analogously to the 1D case:
 \begin{equation}
-  W_\ßl
-  := \spn\{\basis{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
-  I_\ßl
-  := I_{l_1} \times \dotsb \times I_{l_d}.
+  \hs{\ßl}
+  := \spn\{\basis{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},\quad
+  \his{\ßl}
+  := \his{l_1} \times \dotsb \times \his{l_d}.
 \end{equation}
 The splitting \eqref{eq:hierSplittingUV} can now be generalized to the
 multivariate case:
 \begin{equation}
   \label{eq:hierSplittingMV}
   \ns{\ßl}
-  \overset{?}{=} \bigoplus_{\ßl'=0}^\ßl W_{\ßl'},
+  \overset{?}{=} \bigoplus_{\ßl'=0}^\ßl \hs{\ßl'},
 \end{equation}
 Again, this relation does not hold in general.
 A multivariate counterpart of \thmref{lemma:hierSplittingUV} can be used
@@ -216,10 +216,10 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   both of the following conditions:
   \begin{itemize}
     \item
-    The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $\ns{\ßl}$.
+    The hierarchical subspaces $\hs{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $\ns{\ßl}$.
     
     \item
-    The basis functions $\basis{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
+    The basis functions $\basis{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in \his{\ßl'}$)
     are linearly independent.
   \end{itemize}
 \end{lemma}
@@ -227,10 +227,10 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   If the sum is direct, then its dimension is given by
   \begin{equation}
     \hspace*{-5mm}
-    \dim \sum_{\ßl'=0}^\ßl W_{\ßl'}
+    \dim \sum_{\ßl'=0}^\ßl \hs{\ßl'}
     = \sum_{l_1'=0}^{l_1} \dotsb \sum_{l_d'=0}^{l_d}
-    \prod_{t=1}^d \dim W_{l_t'}
-    = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim W_{l_t'}
+    \prod_{t=1}^d \dim \hs{l_t'}
+    = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim \hs{l_t'}
     = \prod_{t=1}^d (2^{l_t} + 1)
     = \dim \ns{\ßl}
     \hspace*{-5mm}
@@ -249,7 +249,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   \begin{enumerate}
     \item
     The hierarchical basis functions $\basis{\ßl',\ßi'}$
-    of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) are tensor products
+    of $\hs{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in \his{\ßl'}$) are tensor products
     of functions $\basis{l_t',i_t'}$.
     According to the first condition of \cref{lemma:hierSplittingUV},
     each $\basis{l_t',i_t'}$ can be written as a linear combination of
@@ -258,12 +258,12 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     of tensor products of the univariate nodal basis functions.
     Therefore, $\basis{\ßl',\ßi'}$ is a linear combination of
     multivariate nodal functions, i.e., $\basis{\ßl',\ßi'} \in \ns{\ßl}$.
-    As this is true for all $\ßi' \in I_{\ßl'}$, we obtain
-    $W_{\ßl'} \subset \ns{\ßl}$.
+    As this is true for all $\ßi' \in \his{\ßl'}$, we obtain
+    $\hs{\ßl'} \subset \ns{\ßl}$.
     
     \item
     The linear independence of the hierarchical functions $\basis{\ßl',\ßi'}$
-    ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) can be shown completely analogously
+    ($\ßl' \le \ßl$, $\ßi' \in \his{\ßl'}$) can be shown completely analogously
     to the proof of \thmref{lemma:tensorProductLinearIndependence}.\qedhere
   \end{enumerate}
 \end{proof}

@@ -5,7 +5,7 @@ Let $\Omega^\sparse \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
 of the form $\setsize{\Omega^\sparse} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
 where $K$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NNz$
-and $\ßi \in I_\ßl$ such that $N := \setsize{\Omega^\sparse} = \setsize{K} < \infty$
+and $\ßi \in \his{\ßl}$ such that $N := \setsize{\Omega^\sparse} = \setsize{K} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
@@ -134,7 +134,7 @@ We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
 $\Omega^\sparse$, $K$, $\ßu$, and $\ßy$
 for most of the considerations in this chapter.
 Therefore, we assume that in each dimension $t$, the level-index pairs
-$(l_t, i_t)$ ($l_t \in \NNz$, $i_t \in I_{l_t}$)
+$(l_t, i_t)$ ($l_t \in \NNz$, $i_t \in \his{l_t}$)
 are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \NNz$.
 We identify $(\ßl, \ßi)$ with a single index $\ßk$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.

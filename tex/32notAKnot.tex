@@ -54,7 +54,7 @@ for other non-polynomial functions as well.
   }%
   \caption{%
     Hierarchical cubic B-splines $\basis{l',i'}^p$
-    ($l' \le l$, $i' \in I_{l'}$, $p = 3$)
+    ($l' \le l$, $i' \in \his{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
     $f(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
     on the grid of level $l = 3$.%
@@ -64,13 +64,13 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $S_l^p = \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$
+we have $S_l^p = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
 $f \in S_l^p$ and hence
-$f \in \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$.
+$f \in \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
-$\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+$\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
 that interpolates $f$ exactly on the whole domain $D_l^p$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
 which does not interpolate $f$ exactly in $D_l^p$).
@@ -143,10 +143,10 @@ on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 We have $D_\ß\xi^p = \clint{0, 1}$ for this choice of $\ß\xi$, i.e.,
 the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^{p,\clint{0,1}}$,
+Clearly, the sum $\bigoplus_{l'=0}^l \hs{l}^p$ is a subspace of $S_l^{p,\clint{0,1}}$,
 but it cannot equal $S_l^{p,\clint{0,1}}$ due to
 \begin{equation}
-  \dim \bigoplus_{l'=0}^l W_l^p
+  \dim \bigoplus_{l'=0}^l \hs{l}^p
   = 2^l + 1
   < 2^l + p
   = m
@@ -245,7 +245,7 @@ The resulting spline space
 is a subspace
 of $S_l^{p,\clint{0,1}}$ with the correct dimensionality:
 \begin{equation}
-  \dim \bigoplus_{l'=0}^l W_l^p
+  \dim \bigoplus_{l'=0}^l \hs{l}^p
   = 2^l + 1
   = \dim S_l^{p,\notaknot}.
 \end{equation}
@@ -277,7 +277,7 @@ degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
   \label{fig:splineSpaceNotAKnot}%
 \end{figure}
 
-However, $\bigoplus_{l'=0}^l W_l^p$ is not a subspace of
+However, $\bigoplus_{l'=0}^l \hs{l}^p$ is not a subspace of
 $S_l^{p,\notaknot}$ anymore,
 as the hierarchical basis functions $\basis{l',i'}^p$ are not
 not-a-knot splines (due to the additional knots that we removed from
@@ -321,7 +321,7 @@ we use global Lagrange polynomials for the coarser levels:
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in I_l,\\
+    i \in \his{l},\\
     L_{l,i}\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
@@ -349,7 +349,7 @@ $\deg L_{l,i} \le 2^l < p$
 \begin{figure}
   \subcaptionbox{%
     Nodal not-a-knot B-splines
-    $\basis{l,i}^{p,\notaknot}$ ($i \in I_l$)
+    $\basis{l,i}^{p,\notaknot}$ ($i \in \his{l}$)
     and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_5}%
@@ -362,7 +362,7 @@ $\deg L_{l,i} \le 2^l < p$
   \hfill%
   \subcaptionbox{%
     Hierarchical not-a-knot B-splines
-    $\basis{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in I_{l'}$)
+    $\basis{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in \his{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.%
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
@@ -373,7 +373,7 @@ $\deg L_{l,i} \le 2^l < p$
     The nodal space $\ns{l}^{p,\notaknot}$,
     which coincides with the not-a-knot spline space $S_l^{p,\notaknot}$,
     decomposes into the direct sum
-    of the hierarchical subspaces $W_{l'}^{p,\notaknot}$ ($l' \le l$).
+    of the hierarchical subspaces $\hs{l'}^{p,\notaknot}$ ($l' \le l$).
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
@@ -423,7 +423,7 @@ with respect to an implementation that already uses uniform B-splines.
 
 The main benefit of the hierarchical not-a-knot B-spline basis
 is the validity of the hierarchical splitting.
-Again usual, we define $\ns{l}^{p,\notaknot}$ and $W_l^{p,\notaknot}$
+Again usual, we define $\ns{l}^{p,\notaknot}$ and $\hs{l}^{p,\notaknot}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
@@ -437,7 +437,7 @@ respectively.
   \begin{equation}
     S_l^{p,\notaknot}
     = \ns{l}^{p,\notaknot}
-    = \bigoplus_{l'=0}^l W_{l'}^{p,\notaknot},
+    = \bigoplus_{l'=0}^l \hs{l'}^{p,\notaknot},
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
   is defined as the space $P^{2^l + 1}$ of polynomials of degree
@@ -452,16 +452,16 @@ respectively.
   
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
-  First, the hierarchical subspace $W_{l'}^{p,\notaknot}$ ($l' \le l$)
+  First, the hierarchical subspace $\hs{l'}^{p,\notaknot}$ ($l' \le l$)
   is a subspace of $S_l^{p,\notaknot} = \ns{l}^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
-  every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
+  every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in \his{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
   $\ß\xi_l^{p,\notaknot}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
   Second, the hierarchical functions $\basis{l',i'}^{p,\notaknot}$
-  ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+  ($l' \le l$, $i' \in \his{l'}$) are linearly independent.
   This can be shown similar to the proof of
   \thmref{prop:hierBSplineLinearlyIndependent}.
   The linear independence of the Lagrange polynomials
@@ -477,7 +477,7 @@ respectively.
   \begin{equation}
     S_\ßl^{\ßp,\notaknot}
     = \ns{\ßl}^{\ßp,\notaknot}
-    = \bigoplus_{\ßl'=\ß0}^\ßl W_{\ßl'}^{\ßp,\notaknot},
+    = \bigoplus_{\ßl'=\ß0}^\ßl \hs{\ßl'}^{\ßp,\notaknot},
   \end{equation}
   where $S_\ßl^{\ßp,\notaknot}$ is the
   tensor product space of $S_{l_t}^{p_t,\notaknot}$
@@ -495,7 +495,7 @@ are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
   V_{n,d}^{\sparse,\ßp,\notaknot}
-  := \bigoplus_{\normone{\ßl} \le n} W_\ßl^{\ßp,\notaknot}.
+  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\notaknot}.
 \end{equation}
 \newgsymbol{Pp!}{$P^\ßp$}{%
   Space of all $d$-variate polynomials of
@@ -519,10 +519,10 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
 \begin{proof}
   Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \normone{\ßl}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
-  $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
+  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
   In addition, all $\ßl' \in \NNz^d$ with $\ßl' \le \ßl$ satisfy
   $\normone{\ßl'} \le n$ and thus,
-  $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} \subset
+  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} \subset
   V_{n,d}^{\sparse,\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
   $P^\ßp \subset S_\ßl^{\ßp,\notaknot} \subset
@@ -566,7 +566,7 @@ second derivative vanish in $x = 0$ itself:
     {\frac{\diff^2}{\dx^2} \basis{l,0}^{p,\notaknot}(0)},&
     l \ge 2,\quad i = 1,\\
     \basis{l,i}^{p,\notaknot}(x),&
-    l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
+    l \ge 2,\quad i \in \his{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{p,\modified,\notaknot}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
@@ -623,7 +623,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in I_l,\\
+    i \in \his{l},\\
     L_{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}^\clenshawcurtis(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
@@ -663,7 +663,7 @@ cubic degree and the corresponding modified functions are plotted in
     Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
     B-splines $\basis{l',i'}^{p,\notaknot}$ and
     $\basis{l',i'}^{p,\clenshawcurtis,\notaknot}$
-    ($l ' \le l$, $i' \in I_{l'}$, $p = 3$) up to level $l = 3$
+    ($l ' \le l$, $i' \in \his{l'}$, $p = 3$) up to level $l = 3$
     together with the respective modified versions
     $\basis{l',i'}^{p,\modified,\notaknot}$ and
     $\basis{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
@@ -714,7 +714,7 @@ Consequently, we can define hierarchical natural B-splines as
       l \ge 1,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in I_l,\\
+    i \in \his{l},\\
     J_i^{p,\ntrl}
     := \{i+1-\tfrac{p+1}{2}, \dotsc, i-1\} \cup
     \{i+1, \dotsc, i-1+\tfrac{p+1}{2}\},
@@ -726,7 +726,7 @@ the natural boundary conditions are satisfied:
   \frac{\diff^q}{\dx^q} \basis{l,i}^{p,\ntrl}(x)
   = 0,\quad
   l \ge 1,\quad
-  i \in I_l,\quad
+  i \in \his{l},\quad
   q = 2, \dotsc, \tfrac{p+1}{2},\quad
   x \in \{0, 1\}.
 \end{equation}
@@ -758,7 +758,7 @@ rest of the thesis.
   \caption{%
     Hierarchical cubic natural B-splines
     $\basis{l',i'}^{p,\ntrl}$
-    ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
+    ($l' \le l$, $i' \in \his{l'}$, $p = 3$) and
     grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%
   \label{fig:naturalBSpline}%

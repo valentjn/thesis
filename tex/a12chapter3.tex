@@ -22,7 +22,7 @@
   are linearly independent.
   For the induction step $(l-1) \to l$, let
   \begin{equation}
-    \sum_{l'=0}^l \sum_{i' \in I_{l'}} \alpha_{l',i'} \basis{l',i'}^p
+    \sum_{l'=0}^l \sum_{i' \in \his{l'}} \alpha_{l',i'} \basis{l',i'}^p
     \equiv 0
   \end{equation}
   be a linear combination of the zero function.
@@ -30,27 +30,27 @@
   from the summands of coarser levels $l' < l$:
   \begin{equation}
     \label{eq:hierBSplineLinearlyIndependent3}
-    \sum_{i \in I_l} \alpha_{l,i} \basis{l,i}^p
+    \sum_{i \in \his{l}} \alpha_{l,i} \basis{l,i}^p
     =: g_1 \equiv g_2 :=
-    -\sum_{l'=0}^{l-1} \sum_{i' \in I_{l'}} \alpha_{l',i'} \basis{l',i'}^p.
+    -\sum_{l'=0}^{l-1} \sum_{i' \in \his{l'}} \alpha_{l',i'} \basis{l',i'}^p.
   \end{equation}
   The right-hand side $g_2$ is smooth in every grid point
-  $\gp{l,i}$ ($i \in I_l$) of level $l$,
+  $\gp{l,i}$ ($i \in \his{l}$) of level $l$,
   since these grid points are not knots of the hierarchical B-splines
-  $\basis{l',i'}^p$ ($i' \in I_{l'}$) of level $l' < l$.
+  $\basis{l',i'}^p$ ($i' \in \his{l'}$) of level $l' < l$.
   This implies that the left-hand $g_1$ side must be smooth there as well:
   \begin{alignat}{3}
     &&
     \partialdiff_-^p g_1(\gp{l,i'})
     &= \partialdiff_+^p g_1(\gp{l,i'}),\quad
-    &&i' \in I_l,\\
+    &&i' \in \his{l},\\
     \label{eq:hierBSplineLinearlyIndependent1}
     \iff\quad&&
-    \sum_{i \in I_l} \alpha_{l,i}
+    \sum_{i \in \his{l}} \alpha_{l,i}
     \partialdiff_-^p \basis{l,i}^p(\gp{l,i'})
-    &= \sum_{i \in I_l} \alpha_{l,i}
+    &= \sum_{i \in \his{l}} \alpha_{l,i}
     \partialdiff_+^p \basis{l,i}^p(\gp{l,i'}),\quad
-    &&i' \in I_l,
+    &&i' \in \his{l},
   \end{alignat}
   where $\partialdiff_-^p$ and $\partialdiff_+^p$ denote the left and right
   derivative of order $p$, respectively.
@@ -68,19 +68,19 @@
   \eqref{eq:hierBSplineLinearlyIndependent1}
   and use \eqref{eq:uniformHierarchicalBSplineUV} to obtain
   \begin{alignat}{2}
-    \sum_{i \in I_l} \alpha_{l,i} (-1)^{k-1} \binom{p}{k-1}
-    &= \sum_{i \in I_l} \alpha_{l,i} (-1)^k \binom{p}{k},\quad
-    &&i' \in I_l,\quad
+    \sum_{i \in \his{l}} \alpha_{l,i} (-1)^{k-1} \binom{p}{k-1}
+    &= \sum_{i \in \his{l}} \alpha_{l,i} (-1)^k \binom{p}{k},\quad
+    &&i' \in \his{l},\quad
     k := \frac{p+1}{2} + i' - i.
   \end{alignat}
   As $\binom{p}{k-1} + \binom{p}{k} = \binom{p+1}{k}$
-  and $(-1)^k$ is constant for $i \in I_l$ when $i'$ is fixed,
+  and $(-1)^k$ is constant for $i \in \his{l}$ when $i'$ is fixed,
   this is equivalent to
   \begin{equation}
     \label{eq:hierBSplineLinearlyIndependent2}
-    \sum_{i \in I_l} \alpha_{l,i}
+    \sum_{i \in \his{l}} \alpha_{l,i}
     \binom{p+1}{\frac{p+1}{2} + i' - i} = 0,\quad
-    i' \in I_l.
+    i' \in \his{l}.
   \end{equation}
   
   This is a quadratic linear system of equations
@@ -142,19 +142,19 @@
   
   Due to the regularity of $A(p)$, we infer from
   \eqref{eq:hierBSplineLinearlyIndependent2} that
-  $\alpha_{l,i'} = 0$ for $i' \in I_l$.
+  $\alpha_{l,i'} = 0$ for $i' \in \his{l}$.
   Due to \eqref{eq:hierBSplineLinearlyIndependent3},
   we obtain
   a linear combination of the zero function with the hierarchical
   B-splines of level $< l$, i.e.,
   \begin{equation}
-  \sum_{l'=0}^{l-1} \sum_{i' \in I_{l'}} \alpha_{l',i'} \basis{l',i'}^p
+  \sum_{l'=0}^{l-1} \sum_{i' \in \his{l'}} \alpha_{l',i'} \basis{l',i'}^p
   = 0,
   \end{equation}
   which implies $\alpha_{l',i'} = 0$ for all $l' = 0, \dotsc, l - 1$
   by the induction hypothesis.
   Thus, the hierarchical functions $\basis{l',i'}^p$
-  ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+  ($l' \le l$, $i' \in \his{l'}$) are linearly independent.
 \end{proof}
 
 \begin{table}

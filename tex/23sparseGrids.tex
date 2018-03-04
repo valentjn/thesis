@@ -99,10 +99,10 @@ continuous knapsack problem~\cite{Bungartz04Sparse}.
 The resulting function space and grid point set
 \begin{equation}
   V_{n,d}^\sparse
-  := \bigoplus_{\normone{\ßl} \le n} W_{\ßl},\qquad
+  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl},\qquad
   \Omega_{n,d}^\sparse
   := \bigdotcup_{\normone{\ßl} \le n}
-  \{\vgp{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
+  \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
@@ -191,9 +191,9 @@ Generally, function spaces~$V^\sparse$ and grid sets $\Omega^\sparse$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
   V^\sparse
-  = \bigoplus_{\ßl \in L} W_\ßl,\qquad
+  = \bigoplus_{\ßl \in L} \hs{\ßl},\qquad
   \Omega^\sparse
-  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in I_\ßl\},
+  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},
 \end{equation}
 where $L$ is a \term{downward closed} set, i.e.,
 a finite subset $L \subset \NNz^d$
@@ -271,7 +271,7 @@ and grid sets $\Omega^\sparse$ have the form
   = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
 \end{equation}
 where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
-with $\ßl \in \NNz^d$ and $\ßi \in I_\ßl$.
+with $\ßl \in \NNz^d$ and $\ßi \in \his{\ßl}$.
 Algorithms for sparse grids often make specific assumptions about $K$.
 If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
