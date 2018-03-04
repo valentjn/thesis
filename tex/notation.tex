@@ -4,7 +4,6 @@
   \newnamecommand{bb#1}{\mathbb{#1}}%
   \newnamecommand{#1#1}{\mathbb{#1}}%
 }
-%\defbb{N}
 \defbb{R}
 \defbb{Z}
 
@@ -136,6 +135,10 @@
   Set of full grid points of level $\ßl$
 }
 
+\newnotationcommand[1]{\landauO}{\mathcal{O}(#1)}{O}{$\landauO{f(x)}$}{
+  Big-$\mathcal{O}$ Landau notation
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 
@@ -143,7 +146,6 @@
 % define \calC (C = arbitrary letter)
 \newcommand*{\defcal}[1]{\newnamecommand{cal#1}{\mathcal{#1}}}
 \defcal{C}
-\defcal{O}
 
 % defined terms
 \newcommand*{\term}[1]{\emph{#1}}

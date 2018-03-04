@@ -150,9 +150,9 @@ One can prove that for homogeneous boundary conditions
 $f|_{\bndry{\clint{\ß0,\ß1}}} \equiv 0$,
 the number of required inner grid points
 ($\vgp{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
-grows like $\calO(\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1})$
+grows like $\landauO{\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1}}$
 \cite{Bungartz04Sparse}, which is much less than
-the corresponding number $\calO((\ms{n}^{-1})^d)$ in the full grid case
+the corresponding number $\landauO{(\ms{n}^{-1})^d}$ in the full grid case
 (see \eqref{eq:dimensionFG}).
 In particular, the exponential dependency on the dimensionality $d$
 has vanished.
@@ -160,7 +160,7 @@ The corresponding $L^2$ error of the sparse grid interpolant
 $f_{n,d}^{\sparse,1}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
 \begin{equation}
-  \normLtwo{f - f_{n,d}^{\sparse,1}} = \calO(\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}),
+  \normLtwo{f - f_{n,d}^{\sparse,1}} = \landauO{\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}},
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
 $(\log_2 \ms{n}^{-1})^{d-1}$ \cite{Bungartz04Sparse}.

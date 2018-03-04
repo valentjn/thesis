@@ -116,12 +116,12 @@ but potentially on the data of the whole grid.
 
 This prohibits the use of the unidirectional principle,
 which will be discussed in \cref{sec:42fullGrids}
-and which takes $\calO(Nd)$ computing time%
+and which takes $\landauO{Nd}$ computing time%
 \footnote{in the number of univariate basis evaluations},
 on sparse grids with hierarchical B-splines.
 Consequently, we have to solve the linear system
 \eqref{eq:hierarchizationSLE}, which is significantly more time-consuming,
-as it takes between $\Omega(N^2 d)$ and $\calO(N^3 d)$ time
+as it takes between $\Omega(N^2 d)$ and $\landauO{N^3 d}$ time
 (via Gaussian elimination).
 In addition, if we use an explicit solver for the linear system,
 we additionally have to store an $N \times N$ matrix in memory.

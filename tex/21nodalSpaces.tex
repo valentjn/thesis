@@ -225,12 +225,11 @@ the values at the grid points
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NNz$.
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n{,}d$''
 (for example, $\ns{n,d} := \ns{n \cdot \ß1}$).
-\newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\basis{l,i}^1$,
 it can be shown that the $L^2$ interpolation error of the interpolant
 $f_{n,d}^1$ is given by
 \begin{equation}
-  \normLtwo{f - f_{n,d}^1} = \calO(\ms{n}^2),
+  \normLtwo{f - f_{n,d}^1} = \landauO{\ms{n}^2},
 \end{equation}
 i.e., the order of the interpolation error is quadratic in the mesh size
 \multicite{Hoellig13Approximation,Bungartz04Sparse}.
