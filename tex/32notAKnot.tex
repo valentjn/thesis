@@ -80,7 +80,7 @@ as \thmref{prop:splineSpace} only holds for $D_l^p$.
 In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
 equal to $f(x)$.
 If we now force the additional interpolation conditions in
-$x_{l,0} = 0$ and $x_{l,2^l} = 1$,
+$\gp{l,0} = 0$ and $\gp{l,2^l} = 1$,
 the resulting interpolant $\tilde{f}$ cannot be the same as the previous
 interpolant,
 which is why $f$ and $\tilde{f}$ differ inside $D_l^p$.
@@ -130,7 +130,7 @@ As often, taking slightly a different view of the problem helps
 to find a solution.
 \newgsymbol{Slp01}{$S_l^{p,[0,1]}$}{%
   Spline space of degree $p$ on the grid
-  $\{x_{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$%
+  $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$%
 }%
 Let $S_l^{p,[0,1]}$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
@@ -141,7 +141,7 @@ on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
   m := 2^l + p.
 \end{equation}
 We have $D_\ß\xi^p = [0, 1]$ for this choice of $\ß\xi$, i.e.,
-the grid points $x_{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
+the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
 Clearly, the sum $\bigoplus_{l'=0}^l W_l^p$ is a subspace of $S_l^{p,[0,1]}$,
 but it cannot equal $S_l^{p,[0,1]}$ due to
@@ -181,25 +181,25 @@ For the cubic case $p = 2$,
 for which we need two conditions,
 the not-a-knot conditions demand that
 $\frac{\diff^3}{\dx^3} s$ is continuous at the first and last
-interior knot $x_{l,1} = h_l$ and $x_{l,2^l-1} = 1 - h_l$
+interior knot $\gp{l,1} = h_l$ and $\gp{l,2^l-1} = 1 - h_l$
 for all splines $s$ in the subspace.
-Equivalently, $x_{l,1}$ and $x_{l,2^l-1}$ are effectively removed from the
+Equivalently, $\gp{l,1}$ and $\gp{l,2^l-1}$ are effectively removed from the
 knot sequence (hence ``not-a-knot''),
 as this is equivalent to requiring that
-$s$ is a cubic polynomial on $[0, x_{l,2}]$ and $[x_{l,2^l-2}, 1]$.
+$s$ is a cubic polynomial on $[0, \gp{l,2}]$ and $[\gp{l,2^l-2}, 1]$.
 For general degree $p$ (in which we need $(p - 1)$ conditions),
 we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
 is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
 inner grid points
 \begin{equation}
   \label{eq:removedNAKKnots}
-  x_{l,i},\quad
+  \gp{l,i},\quad
   i \in \{1, \dotsc, \tfrac{p-1}{2}\} \cup
   \{2^l - \tfrac{p-1}{2}, \dotsc, 2^l - 1\},
 \end{equation}
 which is equivalent to removing these knots from the knot sequence $\ß\xi$,
 or, alternatively, to requiring that $s$ is a polynomial
-of degree $\le p$ on $[0, x_{l,(p+1)/2}]$ and on $[x_{l,2^l-(p+1)/2}, 1]$.
+of degree $\le p$ on $[0, \gp{l,(p+1)/2}]$ and on $[\gp{l,2^l-(p+1)/2}, 1]$.
 
 \newgsymbol{.nak}{$\cdot^\notaknot$}{%
   Superscript for ``Not-a-knot (knot sequence/basis
@@ -224,11 +224,11 @@ with not-a-knot boundary conditions is defined as follows:
     \xi_{l,k}^{p,\notaknot}
     :=
     \begin{cases}
-      x_{l,k-p},&
+      \gp{l,k-p},&
       k = 0, \dotsc, p,\\
-      x_{l,k-(p+1)/2},&
+      \gp{l,k-(p+1)/2},&
       k = p + 1, \dotsc, 2^l,\\
-      x_{l,k-1},&
+      \gp{l,k-1},&
       k = 2^l + 1, \dotsc, 2^l + p + 1.
     \end{cases}
   \end{gather}
@@ -325,7 +325,7 @@ we use global Lagrange polynomials for the coarser levels:
     L_{l,i}\colon [0, 1] \to \RR,\quad
     L_{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
-    \frac{x - x_{l,i'}}{x_{l,i} - x_{l,i'}}.
+    \frac{x - \gp{l,i'}}{\gp{l,i} - \gp{l,i'}}.
   \end{gather}
 \end{subequations}
 The hierarchical not-a-knot B-spline basis is shown for the
@@ -333,7 +333,7 @@ cubic case $p = 3$ in \cref{fig:notAKnotBSpline}.
 The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
-$\{(x_{l,i'}, \delta_{i,i'}) \mid i' = 0, \dotsc, 2^l\}$.
+$\{(\gp{l,i'}, \delta_{i,i'}) \mid i' = 0, \dotsc, 2^l\}$.
 \newgsymbol{deg}{$\deg f$}{%
   Degree of the polynomial $f$%
 }%
@@ -350,7 +350,7 @@ $\deg L_{l,i} \le 2^l < p$
   \subcaptionbox{%
     Nodal not-a-knot B-splines
     $\varphi_{l,i}^{p,\notaknot}$ ($i \in I_l$)
-    and grid points $x_{l,i}$ \emph{(dots)}.%
+    and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_5}%
   }%
@@ -363,7 +363,7 @@ $\deg L_{l,i} \le 2^l < p$
   \subcaptionbox{%
     Hierarchical not-a-knot B-splines
     $\varphi_{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in I_{l'}$)
-    and grid points $x_{l',i'}$ \emph{(dots)}.%
+    and grid points $\gp{l',i'}$ \emph{(dots)}.%
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
   }%
@@ -377,7 +377,7 @@ $\deg L_{l,i} \le 2^l < p$
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
-    from the set of grid points $x_{l',i'}$
+    from the set of grid points $\gp{l',i'}$
     ($i' = 0, \dotsc, 2^{l'}$).%
   }%
   \label{fig:notAKnotBSpline}%
@@ -602,11 +602,11 @@ we first specify the knot sequence as
     \xi_{l,k}^{p,\clenshawcurtis,\notaknot}
     :=
     \begin{cases}
-      x_{l,k-p}^\clenshawcurtis,&
+      \gp{l,k-p}^\clenshawcurtis,&
       k = 0, \dotsc, p,\\
-      x_{l,k-(p+1)/2}^\clenshawcurtis,&
+      \gp{l,k-(p+1)/2}^\clenshawcurtis,&
       k = p + 1, \dotsc, 2^l,\\
-      x_{l,k-1}^\clenshawcurtis,&
+      \gp{l,k-1}^\clenshawcurtis,&
       k = 2^l + 1, \dotsc, 2^l + p + 1,
     \end{cases}
   \end{gather}
@@ -627,8 +627,8 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     L_{l,i}^\clenshawcurtis\colon [0, 1] \to \RR,\quad
     L_{l,i}^\clenshawcurtis(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
-    \frac{x - x_{l,i'}^\clenshawcurtis}%
-    {x_{l,i}^\clenshawcurtis - x_{l,i'}^\clenshawcurtis}.
+    \frac{x - \gp{l,i'}^\clenshawcurtis}%
+    {\gp{l,i}^\clenshawcurtis - \gp{l,i'}^\clenshawcurtis}.
   \end{gather}
 \end{subequations}
 This definition can even be combined with modification
@@ -645,7 +645,7 @@ cubic degree and the corresponding modified functions are plotted in
   \subcaptionbox{%
     $\varphi_{l',i'}^{p,\notaknot}$,
     $\varphi_{l',i'}^{p,\modified,\notaknot}$
-    \emph{(dashed)}, and $x_{l',i'}$ \emph{(dots)}.%
+    \emph{(dashed)}, and $\gp{l',i'}$ \emph{(dots)}.%
     \label{fig:modifiedNotAKnotBSpline}%
   }[73mm]{%
     \includegraphics{hierarchicalBSpline_7}%
@@ -654,7 +654,7 @@ cubic degree and the corresponding modified functions are plotted in
   \subcaptionbox{%
     $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$,
     $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
-    \emph{(dashed)}, and $x_{l',i'}^\clenshawcurtis$ \emph{(dots)}.%
+    \emph{(dashed)}, and $\gp{l',i'}^\clenshawcurtis$ \emph{(dots)}.%
     \label{fig:clenshawCurtisNotAKnotBSpline}%
   }[76mm]{%
     \includegraphics{hierarchicalBSpline_8}%
@@ -671,8 +671,8 @@ cubic degree and the corresponding modified functions are plotted in
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
-    from the set of grid points $x_{l',i'}$ or
-    $x_{l',i'}^\clenshawcurtis$
+    from the set of grid points $\gp{l',i'}$ or
+    $\gp{l',i'}^\clenshawcurtis$
     ($i' = 0, \dotsc, 2^{l'}$), respectively.%
   }%
 \end{figure}
@@ -759,7 +759,7 @@ rest of the thesis.
     Hierarchical cubic natural B-splines
     $\varphi_{l',i'}^{p,\ntrl}$
     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
-    grid points $x_{l',i'}$ \emph{(dots)} up to level $l = 3$.%
+    grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%
   \label{fig:naturalBSpline}%
 \end{SCfigure}

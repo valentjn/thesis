@@ -24,7 +24,7 @@ be written as
   f_\ßl
   = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \alpha_{\ßl',\ßi'} \varphi_{\ßl',\ßi'},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})}.
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})}.
 \end{equation}
 \newgsymbol{alphali!}{$\alpha_{\ßl,\ßi}$}{%
   Hierarchical surpluses (coefficients of a linear combination of hierarchical
@@ -102,7 +102,7 @@ The resulting function space and grid point set
   := \bigoplus_{\norm{\ßl}_1 \le n} W_{\ßl},\qquad
   \Omega_{n,d}^\sparse
   := \bigdotcup_{\norm{\ßl}_1 \le n}
-  \{\ßx_{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
+  \{\vgp{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
@@ -149,7 +149,7 @@ regular sparse grid in two dimensions.
 One can prove that for homogeneous boundary conditions
 $f|_{\bndry{[\ß0,\ß1]}} \equiv 0$,
 the number of required inner grid points
-($\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
+($\vgp{\ßl,\ßi} \in \Omega_{n,d}^\sparse$ where $\ßl \ge \ß1$)
 grows like $\calO(h_n^{-1} (\log_2 h_n^{-1})^{d-1})$
 \cite{Bungartz04Sparse}, which is much less than
 the corresponding number $\calO((h_n^{-1})^d)$ in the full grid case
@@ -193,7 +193,7 @@ of \term{dimensionally adaptive sparse grids} have the form
   V^\sparse
   = \bigoplus_{\ßl \in L} W_\ßl,\qquad
   \Omega^\sparse
-  = \bigdotcup_{\ßl \in L} \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},
+  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in I_\ßl\},
 \end{equation}
 where $L$ is a \term{downward closed} set, i.e.,
 a finite subset $L \subset \NNz^d$
@@ -220,8 +220,8 @@ $f_{n,d}^\sparse$ can be written as
 where the $c_{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \varphi_{\ßl,\ßi}(\ßx_{\ßl,\ßi'})
-  = f(\ßx_{\ßl,\ßi'})%
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \varphi_{\ßl,\ßi}(\vgp{\ßl,\ßi'})
+  = f(\vgp{\ßl,\ßi'})%
 }$ \multicite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.
@@ -268,7 +268,7 @@ and grid sets $\Omega^\sparse$ have the form
   V^\sparse
   = \spn\{\varphi_{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},\qquad
   \Omega^\sparse
-  = \{\ßx_{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
+  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
 \end{equation}
 where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \NNz^d$ and $\ßi \in I_\ßl$.

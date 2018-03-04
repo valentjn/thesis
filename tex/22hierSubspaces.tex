@@ -44,16 +44,16 @@ In the univariate case, the key observation is that a grid point of a level $l$
 can be written as a grid point of a higher level~$l'$:
 \begin{equation}
   \label{eq:rewriteGridPoint}
-  x_{l,i} = x_{l',i'},\quad
+  \gp{l,i} = \gp{l',i'},\quad
   l' \ge l,\quad
   i' = 2^{l'-l} i.
 \end{equation}
 \newgsymbol{xor}{$\xor$}{Bitwise ``exclusive or''}%
-Conversely, this implies that every grid point $x_{l,i}$ of level $l \ge 1$
+Conversely, this implies that every grid point $\gp{l,i}$ of level $l \ge 1$
 and index $i \ge 1$ can be uniquely written
 as a grid point of a coarser level $l'$ and an odd index $i'$:
 \begin{equation}
-  x_{l,i} = x_{l',i'},\quad
+  \gp{l,i} = \gp{l',i'},\quad
   l' = l - \left[\log_2(\xor(i, i-1) + 1) - 1\right],\quad
   i' = i/2^{l-l'},
 \end{equation}
@@ -70,7 +70,7 @@ As shown in \cref{fig:pointSplittingUniform},
 this implies that $\Omega_l$ decomposes into
 \begin{equation}
   \Omega_l
-  = \bigdotcup_{l'=0}^l \{x_{l',i'} \mid i' \in I_{l'}\},\quad
+  = \bigdotcup_{l'=0}^l \{\gp{l',i'} \mid i' \in I_{l'}\},\quad
   I_{l'} :=
   \begin{cases}
     \{i' = 0, \dotsc, 2^{l'} \mid \text{$i'$ odd}\},&l' > 0,\\
@@ -91,8 +91,8 @@ joined sets \term{hierarchical subspaces} $W_l$:
   \caption{%
     The set of grid points $\Omega_l$ of level $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$,
-    whose grid points $x_{l',i'}$ have odd indices $i' \in I_{l'}$
-    ($x_{0,0}$ being the only exception).%
+    whose grid points $\gp{l',i'}$ have odd indices $i' \in I_{l'}$
+    ($\gp{0,0}$ being the only exception).%
   }
   \label{fig:pointSplittingUniform}
 \end{figure}
@@ -127,7 +127,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 \begin{figure}
   \subcaptionbox{%
     Basis functions $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
-    and grid points $x_{l',i'}$ \emph{(dots)}.
+    and grid points $\gp{l',i'}$ \emph{(dots)}.
     The domain is the unit interval $[0, 1]$.%
   }[75mm]{%
     \includegraphics{hierarchicalHat_1}%
@@ -186,7 +186,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   If a linear combination of $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
   as otherwise the basis functions $\varphi_{l,i'}^1$ ($i' \in I_l$) would
-  introduce kinks at $x_{l,i'}$, which the zero function does not have.
+  introduce kinks at $\gp{l,i'}$, which the zero function does not have.
   This means that we have a zero linear combination of $\varphi_{l',i'}^1$ for
   $l' \le l - 1$, $i' \in I_{l'}$,
   and by the induction hypothesis, the other coefficients also vanish.

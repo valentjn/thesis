@@ -13,10 +13,9 @@ that are defined on the unit interval $[0, 1]$.
 \usenotation{l}
 We discretize this domain by splitting it into $2^l$ equally sized segments,
 where $l \in \NNz$ is the \term{level}.
-\newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
 \usenotation{i}
 \newgsymbol{hl}{$h_l$}{Mesh size $:= 2^{-l}$}%
-The resulting $2^l + 1$ \term{grid points} $x_{l,i}$ are given by
+The resulting $2^l + 1$ \term{grid points} $\gp{l,i}$ are given by
 \begin{equation}
   \gp{l,i} := i \cdot h_l,\quad
   i = 0, \dotsc, 2^l,
@@ -24,8 +23,8 @@ The resulting $2^l + 1$ \term{grid points} $x_{l,i}$ are given by
 where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.%
 \footnote{%
   Note that from a strict formal perspective,
-  this equation defined $x_{l,i}$ only for $i = 0, \dotsc, 2^l$,
-  but we will later need $x_{l,i}$ also for $i < 0$ or $i > 2^l$.
+  this equation defined $\gp{l,i}$ only for $i = 0, \dotsc, 2^l$,
+  but we will later need $\gp{l,i}$ also for $i < 0$ or $i > 2^l$.
   The convention in this thesis is that all definitions are
   implicitly generalized whenever needed.%
 }
@@ -77,7 +76,7 @@ there is a unique function $f_l\colon [0, 1] \to \RR$ such that
   \label{eq:interpFullGridUV}
   f_l
   = \sum_{i=0}^{2^l} c_i \varphi_{l,i},\quad
-  \fa{i = 0, \dotsc, 2^l}{f_l(x_{l,i}) = f(x_{l,i})},
+  \fa{i = 0, \dotsc, 2^l}{f_l(\gp{l,i}) = f(\gp{l,i})},
 \end{equation}
 for some $c_i \in \RR$.
 In this case, $f_l$ is called \term{interpolant} of $f$ in $V_l$.
@@ -85,7 +84,7 @@ The nodal space $V_l^1$ is defined analogously as the span of the
 hat functions $\varphi_{l,i}^1$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $[0, 1]$ that are
-piecewise linear polynomials on $[x_{l,i}, x_{l,i+1}]$ for
+piecewise linear polynomials on $[\gp{l,i}, \gp{l,i+1}]$ for
 $i = 0, \dotsc, 2^l - 1$ \cite{Hoellig13Approximation}.
 The nodal hat function basis of level~$l = 3$
 and a linear combination are shown in \cref{fig:nodalHat}.
@@ -93,7 +92,7 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 \begin{figure}
   \subcaptionbox{%
     Basis functions $\varphi_{l,i}^1$ ($i = 0, \dotsc, 2^l$)
-    and grid points $x_{l,i}$ \emph{(dots)}.%
+    and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{nodalHat_1}%
   }%
@@ -134,9 +133,6 @@ which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
 and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
-\newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{%
-  Multivariate grid point $:= \ßi \cdot \ßh_\ßl$%
-}%
 \newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^\ßl$}%
 \newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{%
   For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%
@@ -144,7 +140,7 @@ and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
 The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
-  \ßx_{\ßl,\ßi} := \ßi \cdot \ßh_\ßl,\quad
+  \vgp{\ßl,\ßi} := \ßi \cdot \ßh_\ßl,\quad
   \ßi = \ß0, \dotsc, \ß2^{\ßl}.
 \end{equation}
 To allow for a somewhat intuitive and suggestive notation,
@@ -155,7 +151,7 @@ in which every entry is equal to that number.
 \newgsymbol{hl!}{$\ßh_\ßl$}{Multivariate mesh size $:= \ß2^{-\ßl}$}%
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \begin{equation}
-  \ßx_{\ßl,\ßi}
+  \vgp{\ßl,\ßi}
   := (i_1 h_{l_1},\; \dotsc,\; i_d h_{l_d}),\quad
   i_t = 0, \dotsc, 2^{l_t},\quad
   t = 1, \dotsc, d,
@@ -211,9 +207,9 @@ the space of all continuous functions
 on $[\ß0, \ß1]$ that are piecewise $d$-linear polynomials on
 all hypercubes
 \begin{equation}
-  [\ßx_{\ßl,\ßi}, \ßx_{\ßl,\ßi+\ß1}]
-  := [x_{l_1,i_1}, x_{l_1,i_1+1}] \times \dotsb \times
-  [x_{l_d,i_d}, x_{l_d,i_d+1}],\quad
+  [\vgp{\ßl,\ßi}, \vgp{\ßl,\ßi+\ß1}]
+  := [\gp{l_1,i_1}, \gp{l_1,i_1+1}] \times \dotsb \times
+  [\gp{l_d,i_d}, \gp{l_d,i_d+1}],\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
 \newgsymbol{fl!}{$f_\ßl$}{Interpolant of $f$ in $V_\ßl$}%
@@ -225,7 +221,7 @@ in the nodal space $V_\ßl$ with $f_\ßl\colon [\ß0, \ß1] \to \RR$ satisfying
   \label{eq:interpFullGridMV}
   f_\ßl
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \varphi_{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\ßx_{\ßl,\ßi}) = f(\ßx_{\ßl,\ßi})},
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{f_\ßl(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
 \end{equation}
 where $c_\ßi \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
@@ -245,12 +241,12 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
   such that $f_\ßl \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
-  we can evaluate \eqref{eq:interpFullGridMV} at $\ßx_{\ßl,\ßi'}$ to obtain
+  we can evaluate \eqref{eq:interpFullGridMV} at $\vgp{\ßl,\ßi'}$ to obtain
   \begin{equation}
     \sum_{i_1=0}^{2^{l_1}}
     \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
-    \left(\sum_{i_d=0}^{2^{l_d}} c_\ßi \varphi_{l_d,i_d}(x_{l_d,i_d'})\right) \dotsb
-    \varphi_{l_2,i_2}(x_{l_2,i_2'})\right) \varphi_{l_1,i_1}(x_{l_1,i_1'})
+    \left(\sum_{i_d=0}^{2^{l_d}} c_\ßi \varphi_{l_d,i_d}(\gp{l_d,i_d'})\right) \dotsb
+    \varphi_{l_2,i_2}(\gp{l_2,i_2'})\right) \varphi_{l_1,i_1}(\gp{l_1,i_1'})
     = 0.
   \end{equation}
   We apply the linear independence in 1D ($x_1$ direction) to conclude that
@@ -265,7 +261,7 @@ exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
   \Omega_\ßl
-  := \{\ßx_{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+  := \{\vgp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
 \newgsymbol{n}{$n$}{Level $\in \NNz$ of full or sparse grid}%
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NNz$.

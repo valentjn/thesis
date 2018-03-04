@@ -3,7 +3,7 @@
 
 Let $\Omega^\sparse \subset [0, 1]^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
-of the form $|\Omega^\sparse| = \{\ßx_{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
+of the form $|\Omega^\sparse| = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
 where $K$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NNz$
 and $\ßi \in I_\ßl$ such that $N := |\Omega^\sparse| = |K| < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
@@ -13,12 +13,12 @@ $(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
-  \varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}) = f_{\ßl,\ßi}
+  \varphi_{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = f_{\ßl,\ßi}
   \quad\text{for all}\quad
   (\ßl, \ßi) \in K,
 \end{equation}
 where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N$ is a given set of
-function values $f(\ßx_{\ßl,\ßi})$ at the grid points $\ßx_{\ßl,\ßi}$.
+function values $f(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $f^\sparse$ as
 \begin{equation}
   f^\sparse\colon [\ß0, \ß1] \to \RR,\quad
@@ -26,7 +26,7 @@ The hierarchical surpluses then define the interpolant $f^\sparse$ as
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
   \varphi_{\ßl',\ßi'},
 \end{equation}
-which interpolates $f$ at the grid points $\ßx_{\ßl,\ßi}$ of $\Omega^\sparse$.
+which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\Omega^\sparse$.
 
 The basis functions $\varphi_{\ßl',\ßi'}$ are
 arbitrary tensor product functions.
@@ -59,14 +59,14 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
   \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,\quad
   \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,
 \end{equation}
-which give one scalar per grid point $\ßx_{\ßl,\ßi} \in \Omega^\sparse$.
+which give one scalar per grid point $\vgp{\ßl,\ßi} \in \Omega^\sparse$.
 For the case of hierarchization,
 $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}
     L = A^{-1},\quad
-    A = (\varphi_{\ßl',\ßi'}(\ßx_{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
+    A = (\varphi_{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
     \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
     \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
   \end{equation}
@@ -88,18 +88,18 @@ $\varphi_{\ßl,\ßi}^\ßp$ of degree $\ßp$
 as basis functions $\varphi_{\ßl,\ßi}$ is a tedious task.
 The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
 non-symmetric
-(i.e., $\varphi_{\ßl',\ßi'}^\ßp(\ßx_{\ßl,\ßi}) \not=
-\varphi_{\ßl,\ßi}^\ßp(\ßx_{\ßl',\ßi'})$) and densely populated.
+(i.e., $\varphi_{\ßl',\ßi'}^\ßp(\vgp{\ßl,\ßi}) \not=
+\varphi_{\ßl,\ßi}^\ßp(\vgp{\ßl',\ßi'})$) and densely populated.
 This is because the matrix entry in the $(\ßl,\ßi)$-th row and
 $(\ßl',\ßi')$-th column vanishes if and only if
 \begin{equation}
-  \ßx_{\ßl,\ßi} \notin \intsupp \varphi_{\ßl',\ßi'}^\ßp
+  \vgp{\ßl,\ßi} \notin \intsupp \varphi_{\ßl',\ßi'}^\ßp
   \iff
   \ex{t = 1, \dotsc, d}{
-    x_{l_t,i_t} \notin
+    \gp{l_t,i_t} \notin
     \openintervalscaled{
-      x_{l'_t,i'_t} - \tfrac{p_t+1}{2} h_{l'_t},\,
-      x_{l'_t,i'_t} + \tfrac{p_t+1}{2} h_{l'_t}
+      \gp{l'_t,i'_t} - \tfrac{p_t+1}{2} h_{l'_t},\,
+      \gp{l'_t,i'_t} + \tfrac{p_t+1}{2} h_{l'_t}
     }
   },
 \end{equation}

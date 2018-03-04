@@ -26,7 +26,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
 \begin{equation}
   \interior{\Omega}_{n,d}^\sparse
   := \Omega_{n,d}^\sparse \cap \openinterval{\ß0, \ß1}
-  = \{\ßx_{\ßl,\ßi} \in \Omega_{n,d}^\sparse \mid \ßl \ge \ß1\},
+  = \{\vgp{\ßl,\ßi} \in \Omega_{n,d}^\sparse \mid \ßl \ge \ß1\},
 \end{equation}
 then the following relation about the number of grid points
 of $\Omega_{n,d}^\sparse$ can be shown:
@@ -123,7 +123,7 @@ A popular choice is the insertion at level one, which corresponds to
   \label{eq:sparseGridB1}
   \Omega_{n,d}^{\sparse(1)}
   := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(1)}}
-  \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
+  \{\vgp{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
   L_{n,d}^{\sparse(1)}
   := \{\ßl \in \NNz^d \mid \norm{\vecmax(\ßl, \ß1)}_1 \le n\},
 \end{equation}
@@ -167,7 +167,7 @@ the boundary functions and points at a level $b \in \NN$:
     \begin{split}
       \Omega_{n,d}^{\sparse(b)}
       := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(b)}}
-      \{\ßx_{\ßl,\ßi} \mid \ßi \in I_\ßl\},&\quad
+      \{\vgp{\ßl,\ßi} \mid \ßi \in I_\ßl\},&\quad
       L_{n,d}^{\sparse(b)}
       := \{\ßl \in \NN^d \mid \norm{\ßl}_1 \le n\} \dotcup {}\\[-1em]
       &\big(\{\ßl \in \NNz^d \setminus \NN^d \mid

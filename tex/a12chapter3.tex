@@ -35,21 +35,21 @@
     -\sum_{l'=0}^{l-1} \sum_{i' \in I_{l'}} \alpha_{l',i'} \varphi_{l',i'}^p.
   \end{equation}
   The right-hand side $g_2$ is smooth in every grid point
-  $x_{l,i}$ ($i \in I_l$) of level $l$,
+  $\gp{l,i}$ ($i \in I_l$) of level $l$,
   since these grid points are not knots of the hierarchical B-splines
   $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) of level $l' < l$.
   This implies that the left-hand $g_1$ side must be smooth there as well:
   \begin{alignat}{3}
     &&
-    \partialdiff_-^p g_1(x_{l,i'})
-    &= \partialdiff_+^p g_1(x_{l,i'}),\quad
+    \partialdiff_-^p g_1(\gp{l,i'})
+    &= \partialdiff_+^p g_1(\gp{l,i'}),\quad
     &&i' \in I_l,\\
     \label{eq:hierBSplineLinearlyIndependent1}
     \iff\quad&&
     \sum_{i \in I_l} \alpha_{l,i}
-    \partialdiff_-^p \varphi_{l,i}^p(x_{l,i'})
+    \partialdiff_-^p \varphi_{l,i}^p(\gp{l,i'})
     &= \sum_{i \in I_l} \alpha_{l,i}
-    \partialdiff_+^p \varphi_{l,i}^p(x_{l,i'}),\quad
+    \partialdiff_+^p \varphi_{l,i}^p(\gp{l,i'}),\quad
     &&i' \in I_l,
   \end{alignat}
   where $\partialdiff_-^p$ and $\partialdiff_+^p$ denote the left and right

@@ -184,7 +184,7 @@ $i \in I_l$ via an affine parameter transformation
   := b^p(\tfrac{x}{h_l} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\varphi_{l,i}^p$ is given
-by $\supp \varphi_{l,i}^p = [0, 1] \cap [x_{l,i-(p+1)/2}, x_{l,i+(p+1)/2}]$.
+by $\supp \varphi_{l,i}^p = [0, 1] \cap [\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}]$.
 The hat function basis $\varphi_{l,i}^1$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
 \eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
@@ -197,7 +197,7 @@ $\varphi_{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
 
 \begin{figure}
   \subcaptionbox{%
-    Nodal B-splines $\varphi_{l,i}^p$ ($i \in I_l$) and grid points $x_{l,i}$
+    Nodal B-splines $\varphi_{l,i}^p$ ($i \in I_l$) and grid points $\gp{l,i}$
     \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_1}%
@@ -210,7 +210,7 @@ $\varphi_{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
   \hfill%
   \subcaptionbox{%
     Hierarchical B-splines $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
-    and grid points $x_{l',i'}$
+    and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[72mm]{%
     \includegraphics{hierarchicalBSpline_2}%
@@ -232,21 +232,21 @@ Many theoretical considerations would fail for even degrees.
 The basic reason is that for odd degrees, the knots of
 $\varphi_{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
 \begin{equation}
-  x_{l,i-(p+1)/2},\quad
+  \gp{l,i-(p+1)/2},\quad
   \dotsc,\quad
-  x_{l,i},\quad
+  \gp{l,i},\quad
   \dotsc,\quad
-  x_{l,i+(p+1)/2}.
+  \gp{l,i+(p+1)/2}.
 \end{equation}
 For even degrees $p$, the knots of $\varphi_{l,i}^p$ lie exactly in
 the middle between two subsequent grid points:
 \begin{equation}
-  x_{l,i-p/2} - \frac{h_l}{2},\quad
+  \gp{l,i-p/2} - \frac{h_l}{2},\quad
   \dotsc,\quad
-  x_{l,i} - \frac{h_l}{2},\quad
-  x_{l,i} + \frac{h_l}{2},\quad
+  \gp{l,i} - \frac{h_l}{2},\quad
+  \gp{l,i} + \frac{h_l}{2},\quad
   \dotsc,\quad
-  x_{l,i+p/2} + \frac{h_l}{2}.
+  \gp{l,i+p/2} + \frac{h_l}{2}.
 \end{equation}
 As we will see,
 this fact has many adverse implications on the hierarchical basis.
@@ -606,7 +606,7 @@ By applying Marsden's identity twice,
   \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{h_l}
   = 2 \sum_{i \in \ZZ} \varphi_{l,i}^p(x)
-  - \frac{1}{h_l} \sum_{i \in \ZZ} x_{l,i} \varphi_{l,i}^p(x)
+  - \frac{1}{h_l} \sum_{i \in \ZZ} \gp{l,i} \varphi_{l,i}^p(x)
   = \sum_{i \in \ZZ} (2 - i) \varphi_{l,i}^p(x),\quad
   x \in \RR,
 \end{equation}
@@ -614,7 +614,7 @@ we obtain a possible definition for $\varphi_{l,i}^{p,\modified}$.
 Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
 are relevant for the unit interval as all other B-splines vanish in $[0, 1]$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
-$\varphi_{l,1}^p$ left of its grid point $x_{l,1}$ \cite{Pflueger10Spatially}.
+$\varphi_{l,1}^p$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
 The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
 analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
 For~$l = 1$, again the ``constant one'' function is taken for the definition
@@ -662,7 +662,7 @@ for growing $p$.
   \hfill%
   \subcaptionbox{%
     Modified hierarchical cubic B-splines $\varphi_{l',i'}^{p,\modified}$
-    ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) and grid points $x_{l',i'}$
+    ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_3}%
@@ -682,12 +682,12 @@ for growing $p$.
 Sparse grid spaces and their corresponding grid point sets,
 as we have defined them in \cref{chap:20sparseGrids},
 are completely independent of the actual location of the grid points
-$x_{l,i}$.
+$\gp{l,i}$.
 Therefore, it is possible to use different distributions for the grid points
-than the standard equidistant choice of $x_{l,i} = i \cdot h_l$,
+than the standard equidistant choice of $\gp{l,i} = i \cdot h_l$,
 if the basis functions are altered accordingly
 \cite{Valentin14Hierarchische}.
-The so-called Chebyshev points $x_{l,i}^\clenshawcurtis$ and the
+The so-called Chebyshev points $\gp{l,i}^\clenshawcurtis$ and the
 resulting Clenshaw--Curtis grids and B-splines will serve as an example.
 
 \paragraph{Chebyshev points and Clenshaw--Curtis grids}
@@ -696,11 +696,11 @@ resulting Clenshaw--Curtis grids and B-splines will serve as an example.
   Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
   function/function space/interpolant)''%
 }%
-The \term{Chebyshev points} $x_{l,i}^\clenshawcurtis$ of level $l \in \NNz$
+The \term{Chebyshev points} $\gp{l,i}^\clenshawcurtis$ of level $l \in \NNz$
 are defined as
 \begin{equation}
-  x_{l,i}^\clenshawcurtis
-  := \frac{1 - \cos(\pi x_{l,i})}{2},\quad
+  \gp{l,i}^\clenshawcurtis
+  := \frac{1 - \cos(\pi \gp{l,i})}{2},\quad
   i = 0, \dotsc, 2^l.
 \end{equation}
 Chebyshev points are the locations of the extrema of the
@@ -768,11 +768,11 @@ where
     \xi_{l,k}^{p,\clenshawcurtis}
     :=
     \begin{cases}
-      (k - \frac{p+1}{2}) \cdot x_{l,1}^\clenshawcurtis,&
+      (k - \frac{p+1}{2}) \cdot \gp{l,1}^\clenshawcurtis,&
       k = 0, \dotsc, \frac{p-1}{2},\\
-      x_{l,k-(p+1)/2}^\clenshawcurtis,&
+      \gp{l,k-(p+1)/2}^\clenshawcurtis,&
       k = \frac{p+1}{2}, \dotsc, 2^l + \frac{p+1}{2},\\
-      1 + (k - 2^l - \frac{p+1}{2}) \cdot x_{l,1}^\clenshawcurtis,&
+      1 + (k - 2^l - \frac{p+1}{2}) \cdot \gp{l,1}^\clenshawcurtis,&
       k = 2^l + \frac{p+3}{2}, \dotsc, 2^l + p + 1,
     \end{cases}\\
     k = 0, \dotsc, m + p,\quad
@@ -780,7 +780,7 @@ where
   \end{gather}
 \end{subequations}
 For the construction of the knot sequence $\ß\xi_l^{p,\clenshawcurtis}$,
-the Chebyshev points $x_{l,i}^\clenshawcurtis$
+the Chebyshev points $\gp{l,i}^\clenshawcurtis$
 are equidistantly extended onto the real line $\RR$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
@@ -845,9 +845,9 @@ dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
 
 Please note that our framework permits arbitrary grid point distributions
-$x_{l,i}^\ast$,
+$\gp{l,i}^\ast$,
 as long as their number grows exponentially
-(i.e., there are $2^l + 1$ points $x_{l,i}^\ast$ in each level $l \in \NNz$)
+(i.e., there are $2^l + 1$ points $\gp{l,i}^\ast$ in each level $l \in \NNz$)
 and they are nested
 (i.e., \eqref{eq:rewriteGridPoint} holds).
 Appropriate non-uniform B-spline bases could be defined analogously
