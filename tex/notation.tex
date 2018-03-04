@@ -20,6 +20,10 @@
   Level $\in \NN_0$
 }
 
+\newnotation{l!}{$\ßl$}{
+  Multivariate level $\in \NNz^d$
+}
+
 \newnotation{i}{$i$}{
   Index $= 0, \dotsc, 2^l$
 }
@@ -75,11 +79,16 @@
 }
 
 \newnotationcommand[1]{\clint}{[#1]}{ab!c}{$\clint{\ßa, \ßb}$}{
-  Closed hyper-rectangle $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
+  Closed hyper-rectangle
+  $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
   with $\clint{a_t, b_t} := \{x_t \in \RR \mid a_t \le x_t \le b_t\}$
 }
 
 \newcommand*{\clintscaled}[1]{\left[#1\right]}
+
+\newnotationcommand[1]{\normone}{\norm{#1}_1}{||.||1}{$\normone{\cdot}$}{
+  $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
+}
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 

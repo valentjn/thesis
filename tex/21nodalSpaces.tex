@@ -105,19 +105,25 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 
 \paragraph{Cartesian and tensor products}
 
+\newgsymbol{d}{$d$}{Dimensionality $\in \NN$}%
 For the multivariate case with $d \in \NN$ dimensions,
 we proceed with the usual tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
+\newgsymbol{0!}{$\ß0$}{$(0, \dotsc, 0) \in \NNz^d$}%
+\newgsymbol{1!}{$\ß1$}{$(1, \dotsc, 1) \in \NN^d$}%
+\newgsymbol{01!c}{$\clint{\ß0, \ß1}$}{%
+  Unit hypercube $:= \clint{0, 1}^d := \{x \in \RR \mid 0 \le x \le 1\}^d$%
+}
 \newgsymbol{l!}{$\ßl$}{Multivariate level $\in \NNz^d$}%
-\newgsymbol{||.||1}{$\norm{\cdot}_1$}{%
-  $\ell_1$ norm $\norm{\ßx}_1 := \sum_{t=1}^d x_t$%
+\newgsymbol{||.||1}{$\normone{\cdot}$}{%
+  $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$%
 }%
 Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
 which can be partitioned into
-$\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
+$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
-and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
+and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
 \newgsymbol{i!}{$\ßi$}{Multivariate index $= \ß0, \dotsc, \ß2^\ßl$}%
 \newgsymbol{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{%
   For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$%

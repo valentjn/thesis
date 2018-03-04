@@ -37,7 +37,7 @@ one can prove the following representation
 for the corresponding surpluses \cite{Bungartz04Sparse}:
 \begin{equation}
   \alpha_{\ßl,\ßi}
-  = (-1)^d 2^{-\norm{\ßl+\ß1}_1}
+  = (-1)^d 2^{-\normone{\ßl+\ß1}}
   \int_\ß0^\ß1 \basis{\ßl,\ßi}^1(\ßx)
   \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
   f(\ßx) \diff{}\ßx,
@@ -65,7 +65,7 @@ exists and is continuous.%
 %where the objective function oscillates strongly.
 %Second, the absolute surpluses decay with
 %increasing level $\ßl$ as both the factor
-%$2^{-\norm{\ßl+\ß1}_1}$ and the size of the support of $\basis{\ßl,\ßi}$
+%$2^{-\normone{\ßl+\ß1}}$ and the size of the support of $\basis{\ßl,\ßi}$
 %are decreasing.
 Consequently, the contribution of the summand of level $\ßl$
 can be estimated by
@@ -73,7 +73,7 @@ can be estimated by
   \label{eq:componentEstimation}
   \bignorm{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}_{L^2}
-  \le 3^{-d} \cdot 2^{-2 \norm{\ßl}_1} \cdot
+  \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
   \bignorm{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
   } f}_{L^2}
@@ -83,7 +83,7 @@ for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 \paragraph{Definition of regular sparse grids}
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
-from the sum \eqref{eq:interpHierFullGrid} whose level sum $\norm{\ßl}_1$
+from the sum \eqref{eq:interpHierFullGrid} whose level sum $\normone{\ßl}$
 exceeds a certain value $n \in \NNz$.
 More formally, the selection of the relevant subspaces can be formulated as a
 continuous knapsack problem~\cite{Bungartz04Sparse}.
@@ -99,9 +99,9 @@ continuous knapsack problem~\cite{Bungartz04Sparse}.
 The resulting function space and grid point set
 \begin{equation}
   V_{n,d}^\sparse
-  := \bigoplus_{\norm{\ßl}_1 \le n} W_{\ßl},\qquad
+  := \bigoplus_{\normone{\ßl} \le n} W_{\ßl},\qquad
   \Omega_{n,d}^\sparse
-  := \bigdotcup_{\norm{\ßl}_1 \le n}
+  := \bigdotcup_{\normone{\ßl} \le n}
   \{\vgp{\ßl,\ßi} \mid \ßi \in I_{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid space} and
@@ -131,7 +131,7 @@ regular sparse grid in two dimensions.
     }\\[5mm]%
     \subcaptionbox{%
       Regular sparse grid obtained by adding all subspaces
-      whose level $\ßl$ satisfies $\norm{\ßl}_1 \le n$
+      whose level $\ßl$ satisfies $\normone{\ßl} \le n$
       \emph{\textcolor{mittelblau}{(blue)}}.%
     }[65mm]{%
       \includegraphics{sg_3}%
@@ -199,7 +199,7 @@ where $L$ is a \term{downward closed} set, i.e.,
 a finite subset $L \subset \NNz^d$
 for which $\forall_{\ßl \in L} \fa{\ßl' \le \ßl}{\ßl' \in L}$.
 Regular sparse grids are a special case by setting
-$L = \{\ßl \in \NNz^d \mid \norm{\ßl}_1 \le n\}$.
+$L = \{\ßl \in \NNz^d \mid \normone{\ßl} \le n\}$.
 
 \paragraph{Combination technique}
 
@@ -214,7 +214,7 @@ $f_{n,d}^\sparse$ can be written as
 \begin{equation}
   \label{eq:combiTechnique}
   f_{n,d}^\sparse
-  = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\norm{\ßl}_1 = n-q}
+  = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\ßl} = n-q}
   \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \basis{\ßl,\ßi},
 \end{equation}
 where the $c_{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)

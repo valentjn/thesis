@@ -495,7 +495,7 @@ are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
   V_{n,d}^{\sparse,\ßp,\notaknot}
-  := \bigoplus_{\norm{\ßl}_1 \le n} W_\ßl^{\ßp,\notaknot}.
+  := \bigoplus_{\normone{\ßl} \le n} W_\ßl^{\ßp,\notaknot}.
 \end{equation}
 \newgsymbol{Pp!}{$P^\ßp$}{%
   Space of all $d$-variate polynomials of
@@ -512,16 +512,16 @@ hierarchical not-a-knot B-splines on sparse grids are able to exactly
 represent global polynomials on $\clint{\ß0, \ß1}$:
 
 \begin{corollary}
-  If $n \ge \norm{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}_1$,
+  If $n \ge \normone{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}$,
   then $P^\ßp \subset V_{n,d}^{\sparse,\ßp,\notaknot}$.
 \end{corollary}
 
 \begin{proof}
-  Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \norm{\ßl}_1$.
+  Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \normone{\ßl}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
   $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
   In addition, all $\ßl' \in \NNz^d$ with $\ßl' \le \ßl$ satisfy
-  $\norm{\ßl'}_1 \le n$ and thus,
+  $\normone{\ßl'} \le n$ and thus,
   $\bigoplus_{\ßl' \le \ßl} W_\ßl^{\ßp,\notaknot} \subset
   V_{n,d}^{\sparse,\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
