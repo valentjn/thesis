@@ -222,24 +222,15 @@ the values at the grid points
   \fgset{\ßl}
   := \{\vgp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
-\newgsymbol{n}{$n$}{Level $\in \NNz$ of full or sparse grid}%
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NNz$.
-\newgsymbol{Vnd}{$\ns{n,d}$}{%
-  Multivariate nodal space
-  $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$%
-}%
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n{,}d$''
 (for example, $\ns{n,d} := \ns{n \cdot \ß1}$).
-\newgsymbol{||.||L2}{$\norm{\cdot}_{L^2}$}{%
-  $L^2$ norm $\norm{f}_{L^2} := \sqrt{\int_\Omega f(x)^2 \dx}$
-  of a function $f\colon \Omega \to \RR$%
-}%
 \newgsymbol{O}{$\calO(f(x))$}{Big-$\calO$ Landau notation}%
 For the hat function basis $\basis{l,i}^1$,
 it can be shown that the $L^2$ interpolation error of the interpolant
 $f_{n,d}^1$ is given by
 \begin{equation}
-  \norm{f - f_{n,d}^1}_{L^2} = \calO(\ms{n}^2),
+  \normLtwo{f - f_{n,d}^1} = \calO(\ms{n}^2),
 \end{equation}
 i.e., the order of the interpolation error is quadratic in the mesh size
 \multicite{Hoellig13Approximation,Bungartz04Sparse}.

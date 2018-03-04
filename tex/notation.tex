@@ -40,6 +40,10 @@
   Dimensionality $\in \NN$
 }
 
+\newnotation{n}{$n$}{
+  Level $\in \NNz$ of full or sparse grid
+}
+
 \newnotation{0!}{$\ß0$}{
   $(0, \dotsc, 0) \in \NNz^d$
 }
@@ -90,6 +94,11 @@
   Multivariate nodal space of level $\ßl$
 }
 
+\newnotation{Vnd}{$\ns{n,d}$}{
+  Multivariate nodal space
+  $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
+}
+
 \newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{l}$}{
   Full grid interpolant of $f$ in $\ns{l}$
 }
@@ -109,6 +118,14 @@
 \newnotationcommand[1]{\normone}{\norm{#1}_1}{||.||1}{$\normone{\cdot}$}{
   $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
 }
+
+\newnotationcommand[1]{\normLtwo}{\norm{#1}_{L^2}}{||.||L2}%
+{$\normLtwo{\cdot}$}{%
+  $L^2$ norm $\normLtwo{f} := \sqrt{\int_\Omega f(x)^2 \dx}$
+  of a function $f\colon \Omega \to \RR$
+}
+
+\newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{L^2}}
 
 \makecommandnotation{\equiv}{!equiv}{$\equiv$}{
   Equality of functions everywhere on their domain
@@ -166,7 +183,7 @@
 
 % norm
 \newcommand*{\norm}[1]{\lVert{#1}\rVert}
-\newcommand*{\bignorm}[1]{\left\lVert{#1}\right\rVert}
+\newcommand*{\normscaled}[1]{\left\lVert{#1}\right\rVert}
 
 % superscripts
 \newcommand*{\clenshawcurtis}{\mathrm{cc}}

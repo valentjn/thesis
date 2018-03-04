@@ -71,12 +71,12 @@ Consequently, the contribution of the summand of level $\ßl$
 can be estimated by
 \begin{equation}
   \label{eq:componentEstimation}
-  \bignorm{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}_{L^2}
+  \normLtwoscaled{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
+  \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}
   \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
-  \bignorm{\frac{\partialdiff^{2d}}{
+  \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
-  } f}_{L^2}
+  } f}
 \end{equation}
 for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
@@ -160,7 +160,7 @@ The corresponding $L^2$ error of the sparse grid interpolant
 $f_{n,d}^{\sparse,1}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
 \begin{equation}
-  \norm{f - f_{n,d}^{\sparse,1}}_{L^2} = \calO(\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}),
+  \normLtwo{f - f_{n,d}^{\sparse,1}} = \calO(\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}),
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
 $(\log_2 \ms{n}^{-1})^{d-1}$ \cite{Bungartz04Sparse}.
