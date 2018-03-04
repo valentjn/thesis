@@ -13,10 +13,10 @@ The dimension of the nodal space $\ns{\ßl}$ is given by
   = \prod_{t=1}^d (2^{l_t} + 1).
 \end{equation}
 If we choose the same level $n \in \NNz$ in all dimensions,
-then the dimension of $V_{n,d}$ and the
+then the dimension of $\ns{n,d}$ and the
 number of grid points grow at least as fast as
 $2^{nd} = (\ms{n}^{-1})^d$.
-This exponential dependency between $\dim V_{n,d}$ and $d$ is known as the
+This exponential dependency between $\dim \ns{n,d}$ and $d$ is known as the
 \term{curse of dimensionality}
 \multicite{Bungartz04Sparse,Pflueger10Spatially}.
 The curse makes interpolation on $\ns{\ßl}$ computationally infeasible
@@ -134,7 +134,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $f_l^1$ as a linear combination
+    Piecewise linear interpolant $\fgintp{l}^1$ as a linear combination
     of the hierarchical hat functions \emph{(stacked)}.
     The two boundary functions are combined to a single function
     \emph{\textcolor{C0}{(blue)}} for simplicity.%

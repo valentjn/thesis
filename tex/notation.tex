@@ -57,6 +57,12 @@
   Nodal space of level $l$
 }
 
+\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{l}$}{
+  Interpolant of $f$ in $\ns{l}$
+}
+
+%\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+
 % calligraphic letters
 % define \calC (C = arbitrary letter)
 \newcommand*{\defcal}[1]{\newnamecommand{cal#1}{\mathcal{#1}}}
@@ -71,8 +77,14 @@
 \makecommandnotation{\intsupp}{supp!}{$\intsupp$}{
   Bla bla blubb
 }
+
 \DeclareMathOperator{\spn}{span}
+\makecommandnotation{\spn}{span}{$\spn$}{
+  Linear span (set of all linear combinations)
+}
+
 \DeclareMathOperator{\supp}{supp}
+
 \DeclareMathOperator{\xor}{xor}
 
 % subsets
