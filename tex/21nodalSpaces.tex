@@ -10,17 +10,15 @@
 
 Let us first consider univariate functions
 that are defined on the unit interval $[0, 1]$.
-\newgsymbol{l}{$l$}{Level $\in \NN_0$}%
-\newgsymbol{N}{$\NN$}{Natural numbers without zero ($1, 2, 3, \dotsc$)}%
-\newgsymbol{N0}{$\NN_0$}{Natural numbers zero ($\NN \cup \{0\}$)}%
+\usenotation{l}
 We discretize this domain by splitting it into $2^l$ equally sized segments,
-where $l \in \NN_0$ is the \term{level}.
+where $l \in \NNz$ is the \term{level}.
 \newgsymbol{xli}{$x_{l,i}$}{Grid point $:= i \cdot h_l$}%
-\newgsymbol{i}{$i$}{Index $= 0, \dotsc, 2^l$}%
+\usenotation{i}
 \newgsymbol{hl}{$h_l$}{Mesh size $:= 2^{-l}$}%
 The resulting $2^l + 1$ \term{grid points} $x_{l,i}$ are given by
 \begin{equation}
-  x_{l,i} := i \cdot h_l,\quad
+  \gp{l,i} := i \cdot h_l,\quad
   i = 0, \dotsc, 2^l,
 \end{equation}
 where $i$ is the \term{index} and $h_l := 2^{-l}$ is the \term{mesh size}.%
@@ -134,7 +132,7 @@ multi-indices, Cartesian products, and tensor products, respectively.
 Therefore, the domain is now $[\ß0, \ß1] := [0, 1]^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\norm{\vec{l}}_1}$ equally sized hypercubes,
-where $\ßl = (l_1, \dotsc, l_d) \in \NN_0^d$ is the $d$-dimensional level
+where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
 and $\norm{\vec{l}}_1 := \sum_{t=1}^d l_t$ is the level sum.
 \newgsymbol{xli!}{$\ßx_{\ßl,\ßi}$}{%
   Multivariate grid point $:= \ßi \cdot \ßh_\ßl$%
