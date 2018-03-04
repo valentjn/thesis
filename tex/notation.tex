@@ -4,9 +4,23 @@
   \newnamecommand{bb#1}{\mathbb{#1}}%
   \newnamecommand{#1#1}{\mathbb{#1}}%
 }
-\defbb{N}
+%\defbb{N}
 \defbb{R}
 \defbb{Z}
+
+\newnotationcommand{\NN}{\mathbb{N}}{N}{$\NN$}{
+  Natural numbers without zero ($1, 2, 3, \dotsc$)
+}
+\newnotationcommand{\NNz}{\mathbb{N}_0}{N0}{$\NNz$}{
+  Natural numbers with zero ($\NN \cup \{0\}$)
+}
+
+\newnotation{l}{$l$}{Level $\in \NN_0$}
+\newnotation{i}{$i$}{Index $= 0, \dotsc, 2^l$}
+
+\newnotationcommand[1]{\gp}{x_{#1}}{xli}{$x_{l,i}$}{
+  Grid point $:= i \cdot h_l$
+}
 
 % calligraphic letters
 % define \calC (C = arbitrary letter)
@@ -19,6 +33,9 @@
 
 % mathematic operators
 \DeclareMathOperator{\intsupp}{\interior{\supp}}
+\makecommandnotation{\intsupp}{supp!}{$\intsupp$}{
+  Bla bla blubb
+}
 \DeclareMathOperator{\spn}{span}
 \DeclareMathOperator{\supp}{supp}
 \DeclareMathOperator{\xor}{xor}
