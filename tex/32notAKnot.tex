@@ -4,7 +4,7 @@
 As we have seen in the last section (see \cref{cor:hierSplittingBSpline}),
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
-$D_l^p = [h_l \tfrac{p-1}{2},\; 1 - h_l \tfrac{p-1}{2}]$,
+$D_l^p = [\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}]$,
 which is for $p > 1$ a proper subset of the domain $[0, 1]$.
 The implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
@@ -117,7 +117,7 @@ One possible remedy would be to move these interpolation points inside
 $D_l^p$ without changing the corresponding basis functions
 (i.e., the knots would stay the same) \cite{Hoellig13Approximation}.
 For instance in the cubic case, we could move $x = 0$ and $x = 1$ to
-$x = 1.5 h_l$ and $x = 1 - 1.5 h_l$, respectively.
+$x = 1.5 \ms{l}$ and $x = 1 - 1.5 \ms{l}$, respectively.
 However, with this approach, we would not be able to interpolate
 boundary values.
 In addition, the condition of the interpolation problem will most likely
@@ -136,7 +136,7 @@ Let $S_l^{p,[0,1]}$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $S_\ß\xi^p$ with
 \begin{equation}
   \label{eq:fullGridKnots}
-  \xi_k := (k - p) h_l,\quad
+  \xi_k := (k - p) \ms{l},\quad
   k = 0, \dotsc, m + p,\quad
   m := 2^l + p.
 \end{equation}
@@ -181,7 +181,7 @@ For the cubic case $p = 2$,
 for which we need two conditions,
 the not-a-knot conditions demand that
 $\frac{\diff^3}{\dx^3} s$ is continuous at the first and last
-interior knot $\gp{l,1} = h_l$ and $\gp{l,2^l-1} = 1 - h_l$
+interior knot $\gp{l,1} = \ms{l}$ and $\gp{l,2^l-1} = 1 - \ms{l}$
 for all splines $s$ in the subspace.
 Equivalently, $\gp{l,1}$ and $\gp{l,2^l-1}$ are effectively removed from the
 knot sequence (hence ``not-a-knot''),

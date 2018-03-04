@@ -4,9 +4,9 @@
 One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
 is that the number of grid points still grows very fast
 with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
-This is mainly because the finest mesh size $h_n$ on the
+This is mainly because the finest mesh size $\ms{n}$ on the
 boundary of the domain $[\ß0, \ß1]$ is finer than
-the finest mesh size $h_{n-d+1}$ that can be found in the interior.
+the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
 \newgsymbol{Omegaso}{$\interior{\Omega}^\sparse$}{%
   Interior grid points $:= \Omega^\sparse \cap \openinterval{\ß0, \ß1}$
   for a finite set $\Omega^\sparse \subset [\ß0, \ß1]$ of grid points%
@@ -20,7 +20,7 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
   Note that in the literature,
   the regular sparse grid space of level $n$ without boundary points is often
   defined via $\norm{\ßl}_1 \le n + d - 1$ to ensure that the finest mesh size
-  is given by $h_n$.
+  is given by $\ms{n}$.
   In our notation, this corresponds to $\interior{\Omega}_{n+d-1,d}^\sparse$.%
 }
 \begin{equation}
@@ -131,7 +131,7 @@ where $\vec{\max}$ is to be read coordinate-wise as usual.
 This choice is equivalent to treating zero-level components as level one
 in the subspace selection.
 This ensures that the finest mesh sizes in interior of $[\ß0, \ß1]$ and
-its boundary coincide to be $h_{n-d+1}$, which reduces the number of grid points
+its boundary coincide to be $\ms{n-d+1}$, which reduces the number of grid points
 on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
@@ -181,10 +181,10 @@ The definition is motivated by partitioning the levels $\ßl \in \NNz^d$
 into interior levels ($\ßl \in \NN^d$)
 and boundary levels ($\ßl \in \NNz^d \setminus \NN^d$).
 By including the levels of the interior grid $\interior{\Omega}_{n,d}^\sparse$,
-the mesh size in the interior is the same as before ($h_{n-d+1}$).
+the mesh size in the interior is the same as before ($\ms{n-d+1}$).
 Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level one,
 but we subtract $b - 1$ from the upper bound to ensure the correct
-mesh size $h_{n-d-b+2}$ on the boundary.
+mesh size $\ms{n-d-b+2}$ on the boundary.
 We append $\ß0$ to the level set to ensure that at least the $2^d$ corner
 points are included in the resulting sparse grid.
 Note that this definition is consistent with \eqref{eq:sparseGridB1} as
@@ -630,7 +630,7 @@ are shown in \cref{fig:modifiedHat} and defined as follows:
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \max(2 - \tfrac{x}{h_l}, 0),&
+    \max(2 - \tfrac{x}{\ms{l}}, 0),&
     l \ge 2,\quad i = 1,\\
     \varphi_{l,i}^1(x),&
     l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\

@@ -181,7 +181,7 @@ $i \in I_l$ via an affine parameter transformation
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
   \varphi_{l,i}^p(x)
-  := b^p(\tfrac{x}{h_l} + \tfrac{p+1}{2} - i).
+  := b^p(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\varphi_{l,i}^p$ is given
 by $\supp \varphi_{l,i}^p = [0, 1] \cap [\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}]$.
@@ -241,12 +241,12 @@ $\varphi_{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
 For even degrees $p$, the knots of $\varphi_{l,i}^p$ lie exactly in
 the middle between two subsequent grid points:
 \begin{equation}
-  \gp{l,i-p/2} - \frac{h_l}{2},\quad
+  \gp{l,i-p/2} - \frac{\ms{l}}{2},\quad
   \dotsc,\quad
-  \gp{l,i} - \frac{h_l}{2},\quad
-  \gp{l,i} + \frac{h_l}{2},\quad
+  \gp{l,i} - \frac{\ms{l}}{2},\quad
+  \gp{l,i} + \frac{\ms{l}}{2},\quad
   \dotsc,\quad
-  \gp{l,i+p/2} + \frac{h_l}{2}.
+  \gp{l,i+p/2} + \frac{\ms{l}}{2}.
 \end{equation}
 As we will see,
 this fact has many adverse implications on the hierarchical basis.
@@ -421,11 +421,11 @@ $D_\ß\xi^p$:
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
     \xi_{l,k}^p
-    := (k - \tfrac{p+1}{2}) h_l,\quad
+    := (k - \tfrac{p+1}{2}) \ms{l},\quad
     k = 0, \dotsc, m + p,\quad
     m := 2^l + 1,\\
-    D_l^p := [h_l \tfrac{p-1}{2},\;
-    1 - h_l \tfrac{p-1}{2}],
+    D_l^p := [\ms{l} \tfrac{p-1}{2},\;
+    1 - \ms{l} \tfrac{p-1}{2}],
   \end{gather}
   and consequently
   \begin{equation}
@@ -570,7 +570,7 @@ Originally, this requirement stems from financial problems
 For the left boundary,
 \eqref{eq:naturalBoundaryConditions} can be satisfied by
 modifying the left-most function $\varphi_{l,1}^p$ such that
-$\varphi_{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{h_l}$ is a linear polynomial
+$\varphi_{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{\ms{l}}$ is a linear polynomial
 when $x$ is ``near'' the boundary.
 As in \cite{Pflueger10Spatially},
 we append $\varphi_{l,1}^p$ with
@@ -604,9 +604,9 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 By applying Marsden's identity twice,
 \begin{equation}
   \label{eq:modifiedBSplineConstruction}
-  2 - \frac{x}{h_l}
+  2 - \frac{x}{\ms{l}}
   = 2 \sum_{i \in \ZZ} \varphi_{l,i}^p(x)
-  - \frac{1}{h_l} \sum_{i \in \ZZ} \gp{l,i} \varphi_{l,i}^p(x)
+  - \frac{1}{\ms{l}} \sum_{i \in \ZZ} \gp{l,i} \varphi_{l,i}^p(x)
   = \sum_{i \in \ZZ} (2 - i) \varphi_{l,i}^p(x),\quad
   x \in \RR,
 \end{equation}
@@ -636,8 +636,8 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \end{equation}
 By \thmref{prop:splineSpace},
 this definition implies that
-$\varphi_{l,1}^p(x) = 2 - \tfrac{x}{h_l}$ ($l \ge 2$)
-is only valid for $x \in [0,\; h_l \cdot \tfrac{5-p}{2}]$, i.e.,
+$\varphi_{l,1}^p(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
+is only valid for $x \in [0,\; \ms{l} \cdot \tfrac{5-p}{2}]$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
 in its absolute value.
@@ -684,7 +684,7 @@ as we have defined them in \cref{chap:20sparseGrids},
 are completely independent of the actual location of the grid points
 $\gp{l,i}$.
 Therefore, it is possible to use different distributions for the grid points
-than the standard equidistant choice of $\gp{l,i} = i \cdot h_l$,
+than the standard equidistant choice of $\gp{l,i} = i \cdot \ms{l}$,
 if the basis functions are altered accordingly
 \cite{Valentin14Hierarchische}.
 The so-called Chebyshev points $\gp{l,i}^\clenshawcurtis$ and the
