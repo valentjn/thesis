@@ -13,7 +13,7 @@ $(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
-  \varphi_{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = f_{\ßl,\ßi}
+  \basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = f_{\ßl,\ßi}
   \quad\text{for all}\quad
   (\ßl, \ßi) \in K,
 \end{equation}
@@ -24,13 +24,13 @@ The hierarchical surpluses then define the interpolant $f^\sparse$ as
   f^\sparse\colon [\ß0, \ß1] \to \RR,\quad
   f^\sparse :=
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
-  \varphi_{\ßl',\ßi'},
+  \basis{\ßl',\ßi'},
 \end{equation}
 which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\Omega^\sparse$.
 
-The basis functions $\varphi_{\ßl',\ßi'}$ are
+The basis functions $\basis{\ßl',\ßi'}$ are
 arbitrary tensor product functions.
-We explicitly allow $\varphi_{\ßl',\ßi'}$ to be a non-hierarchical
+We explicitly allow $\basis{\ßl',\ßi'}$ to be a non-hierarchical
 nodal basis, in which case $\ßl'$ is constant and
 $\Omega^\sparse$ is usually a full grid.
 Strictly speaking, the problem is then a \term{interpolation problem}
@@ -66,7 +66,7 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
   \label{eq:hierarchizationSLE}
   \begin{equation}
     L = A^{-1},\quad
-    A = (\varphi_{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
+    A = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
     \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
     \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
   \end{equation}
@@ -84,16 +84,16 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
 
 As noted in \cite{Valentin18Fundamental},
 hierarchization on sparse grids with hierarchical B-splines
-$\varphi_{\ßl,\ßi}^\ßp$ of degree $\ßp$
-as basis functions $\varphi_{\ßl,\ßi}$ is a tedious task.
+$\basis{\ßl,\ßi}^\ßp$ of degree $\ßp$
+as basis functions $\basis{\ßl,\ßi}$ is a tedious task.
 The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
 non-symmetric
-(i.e., $\varphi_{\ßl',\ßi'}^\ßp(\vgp{\ßl,\ßi}) \not=
-\varphi_{\ßl,\ßi}^\ßp(\vgp{\ßl',\ßi'})$) and densely populated.
+(i.e., $\basis{\ßl',\ßi'}^\ßp(\vgp{\ßl,\ßi}) \not=
+\basis{\ßl,\ßi}^\ßp(\vgp{\ßl',\ßi'})$) and densely populated.
 This is because the matrix entry in the $(\ßl,\ßi)$-th row and
 $(\ßl',\ßi')$-th column vanishes if and only if
 \begin{equation}
-  \vgp{\ßl,\ßi} \notin \intsupp \varphi_{\ßl',\ßi'}^\ßp
+  \vgp{\ßl,\ßi} \notin \intsupp \basis{\ßl',\ßi'}^\ßp
   \iff
   \ex{t = 1, \dotsc, d}{
     \gp{l_t,i_t} \notin
@@ -106,12 +106,12 @@ $(\ßl',\ßi')$-th column vanishes if and only if
 where $\intsupp$ is the interior of the support
 \cite{Valentin18Fundamental}.
 For coarse levels $\ßl'$, the mesh size $\ms{l'_t}$ is large in
-every dimension $t$, which implies that $\intsupp \varphi_{\ßl',\ßi'}^\ßp$
+every dimension $t$, which implies that $\intsupp \basis{\ßl',\ßi'}^\ßp$
 contains most of the grid points.
 In contrast to the hat function case ($\ßp = \ß1$),
 the value of $\alpha_{\ßl',\ßi'}$ depends not only on
 $f_{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
-on the boundary of $\supp \varphi_{\ßl',\ßi'}^\ß1$,
+on the boundary of $\supp \basis{\ßl',\ßi'}^\ß1$,
 but potentially on the data of the whole grid.
 
 This prohibits the use of the unidirectional principle,

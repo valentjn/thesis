@@ -25,7 +25,7 @@ as we would have to calculate and store $\dim V_\ßl$ coefficients $c_\ßi$.%
 %\footnote{%
 %  The number of necessary basis evaluations to evaluate the interpolant once
 %  would not be as large, as most types of basis functions
-%  (like hat functions $\varphi_{l,i}^1$ and higher-order B-splines)
+%  (like hat functions $\basis{l,i}^1$ and higher-order B-splines)
 %  are locally supported.%
 %}
 
@@ -83,7 +83,7 @@ We call the spaces spanned by the basis functions that correspond to the
 joined sets \term{hierarchical subspaces} $W_l$:
 \begin{equation}
   W_l
-  := \spn\{\varphi_{l,i} \mid i \in I_l\}.
+  := \spn\{\basis{l,i} \mid i \in I_l\}.
 \end{equation}
 
 \begin{figure}
@@ -103,7 +103,7 @@ joined sets \term{hierarchical subspaces} $W_l$:
   Direct sum of vector spaces (vector space sum in which the dimension of
   the sum equals the sum of the summands' dimensions)%
 }%
-For the hat function basis $\varphi_{l,i}^1$ and other basis types,
+For the hat function basis $\basis{l,i}^1$ and other basis types,
 we can prove that the corresponding nodal space
 decomposes into the direct sum of all
 hierarchical subspaces of coarser levels or the same level, i.e.,
@@ -126,7 +126,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 
 \begin{figure}
   \subcaptionbox{%
-    Basis functions $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+    Basis functions $\basis{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.
     The domain is the unit interval $[0, 1]$.%
   }[75mm]{%
@@ -155,7 +155,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
     
     \item
     The hierarchical functions
-    $\varphi_{l',i'}$ ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
+    $\basis{l',i'}$ ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
   \end{itemize}
 \end{lemma}
 \begin{proof}
@@ -183,11 +183,11 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   are also piecewise linear splines of higher levels $l \ge l'$.
   The linear independence for the second condition can be proved by induction
   over $l$:
-  If a linear combination of $\varphi_{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
+  If a linear combination of $\basis{l',i'}^1$ ($l' \le l$, $i' \in I_{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
-  as otherwise the basis functions $\varphi_{l,i'}^1$ ($i' \in I_l$) would
+  as otherwise the basis functions $\basis{l,i'}^1$ ($i' \in I_l$) would
   introduce kinks at $\gp{l,i'}$, which the zero function does not have.
-  This means that we have a zero linear combination of $\varphi_{l',i'}^1$ for
+  This means that we have a zero linear combination of $\basis{l',i'}^1$ for
   $l' \le l - 1$, $i' \in I_{l'}$,
   and by the induction hypothesis, the other coefficients also vanish.
 \end{proof}
@@ -206,7 +206,7 @@ Multivariate hierarchical subspaces of level $\ßl$
 are defined analogously to the 1D case:
 \begin{equation}
   W_\ßl
-  := \spn\{\varphi_{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
+  := \spn\{\basis{\ßl,\ßi} \mid \ßi \in I_\ßl\},\quad
   I_\ßl
   := I_{l_1} \times \dotsb \times I_{l_d}.
 \end{equation}
@@ -230,7 +230,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
     The hierarchical subspaces $W_{\ßl'}$ ($\ßl' \le \ßl$) are subspaces of $V_\ßl$.
     
     \item
-    The basis functions $\varphi_{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
+    The basis functions $\basis{\ßl',\ßi'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$)
     are linearly independent.
   \end{itemize}
 \end{lemma}
@@ -259,21 +259,21 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   given the two univariate conditions of \cref{lemma:hierSplittingUV}:
   \begin{enumerate}
     \item
-    The hierarchical basis functions $\varphi_{\ßl',\ßi'}$
+    The hierarchical basis functions $\basis{\ßl',\ßi'}$
     of $W_{\ßl'}$ ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) are tensor products
-    of functions $\varphi_{l_t',i_t'}$.
+    of functions $\basis{l_t',i_t'}$.
     According to the first condition of \cref{lemma:hierSplittingUV},
-    each $\varphi_{l_t',i_t'}$ can be written as a linear combination of
-    the nodal basis $\varphi_{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$).
+    each $\basis{l_t',i_t'}$ can be written as a linear combination of
+    the nodal basis $\basis{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$).
     We can expand the tensor product to a linear combination
     of tensor products of the univariate nodal basis functions.
-    Therefore, $\varphi_{\ßl',\ßi'}$ is a linear combination of
-    multivariate nodal functions, i.e., $\varphi_{\ßl',\ßi'} \in V_\ßl$.
+    Therefore, $\basis{\ßl',\ßi'}$ is a linear combination of
+    multivariate nodal functions, i.e., $\basis{\ßl',\ßi'} \in V_\ßl$.
     As this is true for all $\ßi' \in I_{\ßl'}$, we obtain
     $W_{\ßl'} \subset V_\ßl$.
     
     \item
-    The linear independence of the hierarchical functions $\varphi_{\ßl',\ßi'}$
+    The linear independence of the hierarchical functions $\basis{\ßl',\ßi'}$
     ($\ßl' \le \ßl$, $\ßi' \in I_{\ßl'}$) can be shown completely analogously
     to the proof of \thmref{lemma:tensorProductLinearIndependence}.\qedhere
   \end{enumerate}

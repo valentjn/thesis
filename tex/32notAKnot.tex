@@ -26,7 +26,7 @@ at least contain all polynomials of degree $\le p$,
 since the approximation power of splines should be at least as good
 as that of polynomials.
 Unfortunately, this statement is not true for the uniform B-splines
-$\varphi_{l,i}^p$ as we have defined them in the last section.
+$\basis{l,i}^p$ as we have defined them in the last section.
 A counterexample is given in \cref{fig:nakInterpolation},
 in which a cubic polynomial $f$ is interpolated with
 hierarchical cubic B-splines.
@@ -53,7 +53,7 @@ for other non-polynomial functions as well.
     \includegraphics{nakInterpolation_2}%
   }%
   \caption{%
-    Hierarchical cubic B-splines $\varphi_{l',i'}^p$
+    Hierarchical cubic B-splines $\basis{l',i'}^p$
     ($l' \le l$, $i' \in I_{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
     $f(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
@@ -70,7 +70,7 @@ Since cubic polynomials as $f$ are cubic splines as well,
 $f \in S_l^p$ and hence
 $f \in \bigoplus_{l'=0}^l W_{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
-$\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+$\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
 that interpolates $f$ exactly on the whole domain $D_l^p$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
 which does not interpolate $f$ exactly in $D_l^p$).
@@ -279,7 +279,7 @@ degree $\le p$, as we have only removed knots compared to $S_l^{p,[0,1]}$.
 
 However, $\bigoplus_{l'=0}^l W_l^p$ is not a subspace of
 $S_l^{p,\notaknot}$ anymore,
-as the hierarchical basis functions $\varphi_{l',i'}^p$ are not
+as the hierarchical basis functions $\basis{l',i'}^p$ are not
 not-a-knot splines (due to the additional knots that we removed from
 $S_l^{p,\notaknot}$).
 For this reason,
@@ -308,11 +308,11 @@ we would not be able to obtain enough basis functions to span the spline space.
   Lagrange polynomial of level $l$, index $i$%
 }%
 For the definition of \term{hierarchical not-a-knot B-splines}
-$\varphi_{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
+$\basis{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
 we use global Lagrange polynomials for the coarser levels:
 \begin{subequations}
   \begin{gather}
-    \varphi_{l,i}^{p,\notaknot}
+    \basis{l,i}^{p,\notaknot}
     :=
     \begin{cases}
       L_{l,i},&
@@ -349,7 +349,7 @@ $\deg L_{l,i} \le 2^l < p$
 \begin{figure}
   \subcaptionbox{%
     Nodal not-a-knot B-splines
-    $\varphi_{l,i}^{p,\notaknot}$ ($i \in I_l$)
+    $\basis{l,i}^{p,\notaknot}$ ($i \in I_l$)
     and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_5}%
@@ -362,7 +362,7 @@ $\deg L_{l,i} \le 2^l < p$
   \hfill%
   \subcaptionbox{%
     Hierarchical not-a-knot B-splines
-    $\varphi_{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in I_{l'}$)
+    $\basis{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in I_{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.%
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
@@ -390,7 +390,7 @@ However, the specific choice of basis functions for the levels
 $l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
 as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
-$\varphi_{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
+$\basis{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
 and contained in the space $S_l^{p,\notaknot}$.
 
 \paragraph{Implementation}
@@ -400,19 +400,19 @@ only the first $\tfrac{p+1}{2}$
 (indices $i = 1, 3, \dotsc, p$)
 and the last $\tfrac{p+1}{2}$
 (indices $i = 2^l - p, 2^l - p + 2, \dotsc, 2^l - 1$)
-hierarchical basis functions $\varphi_{l,i}^{p,\notaknot}$
-differ from $\varphi_{l,i}^p$,
+hierarchical basis functions $\basis{l,i}^{p,\notaknot}$
+differ from $\basis{l,i}^p$,
 i.e., we have
 \begin{equation}
-  \varphi_{l,i}^{p,\notaknot} = \varphi_{l,i}^p,\quad
+  \basis{l,i}^{p,\notaknot} = \basis{l,i}^p,\quad
   i = p + 2,\; p + 4,\; \dotsc,\; 2^l - p - 2.
 \end{equation}
 This means that we can reuse uniform B-spline code
 for the inner functions.
-Due to $\varphi_{l,i}^{p,\notaknot}(x) = \varphi_{l,2^l-i}^{p,\notaknot}(1-x)$
+Due to $\basis{l,i}^{p,\notaknot}(x) = \basis{l,2^l-i}^{p,\notaknot}(1-x)$
 (because of the symmetry of $\ß\xi_l^{p,\notaknot}$),
 we only have to implement $\tfrac{p+1}{2}$ not-a-knot B-splines per level $l$.
-As $\varphi_{l,i}^{p,\notaknot}$ and $\varphi_{l+1,i}^{p,\notaknot}$
+As $\basis{l,i}^{p,\notaknot}$ and $\basis{l+1,i}^{p,\notaknot}$
 use the same knots up to an affine transformation for $l$ large enough
 ($l \ge 3$ suffices for $p = 3$),
 we only have to implement a number of special case for coarse levels $l$.
@@ -455,12 +455,12 @@ respectively.
   First, the hierarchical subspace $W_{l'}^{p,\notaknot}$ ($l' \le l$)
   is a subspace of $S_l^{p,\notaknot} = V_l^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
-  every function $\varphi_{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
+  every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in I_{l'}$)
   is continuous on $[0, 1]$, a polynomial on every knot interval of
   $\ß\xi_l^{p,\notaknot}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
-  Second, the hierarchical functions $\varphi_{l',i'}^{p,\notaknot}$
+  Second, the hierarchical functions $\basis{l',i'}^{p,\notaknot}$
   ($l' \le l$, $i' \in I_{l'}$) are linearly independent.
   This can be shown similar to the proof of
   \thmref{prop:hierBSplineLinearlyIndependent}.
@@ -544,38 +544,38 @@ hierarchical not-a-knot B-spline basis to obtain
 However, we cannot use \thmref{lemma:marsden} similarly to
 \eqref{eq:modifiedBSplineConstruction}:
 Due to the removal of knots, there is only a single
-not-a-knot B-spline $\varphi_{l,0}^{p,\notaknot}$ left of
-$\varphi_{l,1}^{p,\notaknot}$.
-B-splines $\varphi_{l,i}^{p,\notaknot}$ with index $i < 0$
+not-a-knot B-spline $\basis{l,0}^{p,\notaknot}$ left of
+$\basis{l,1}^{p,\notaknot}$.
+B-splines $\basis{l,i}^{p,\notaknot}$ with index $i < 0$
 would be zero in $[0, 1]$.
 
 While we are therefore not able to construct modified functions
 whose second derivative vanishes in neighborhood of $x = 0$,
-we can at least use $\varphi_{l,0}^{p,\notaknot}$ to let the
+we can at least use $\basis{l,0}^{p,\notaknot}$ to let the
 second derivative vanish in $x = 0$ itself:
 \begin{equation}
   \label{eq:modifiedNotAKnotBSpline}
-  \varphi_{l,i}^{p,\modified,\notaknot}(x)
+  \basis{l,i}^{p,\modified,\notaknot}(x)
   :=
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \varphi_{l,1}^{p,\notaknot}(x)
-    - \varphi_{l,0}^{p,\notaknot}(x)
-    \dfrac{\frac{\diff^2}{\dx^2} \varphi_{l,1}^{p,\notaknot}(0)}%
-    {\frac{\diff^2}{\dx^2} \varphi_{l,0}^{p,\notaknot}(0)},&
+    \basis{l,1}^{p,\notaknot}(x)
+    - \basis{l,0}^{p,\notaknot}(x)
+    \dfrac{\frac{\diff^2}{\dx^2} \basis{l,1}^{p,\notaknot}(0)}%
+    {\frac{\diff^2}{\dx^2} \basis{l,0}^{p,\notaknot}(0)},&
     l \ge 2,\quad i = 1,\\
-    \varphi_{l,i}^{p,\notaknot}(x),&
+    \basis{l,i}^{p,\notaknot}(x),&
     l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
-    \varphi_{l,1}^{p,\modified,\notaknot}(1 - x),&
+    \basis{l,1}^{p,\modified,\notaknot}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
   \hspace*{-2mm}
 \end{equation}
 The resulting modified hierarchical Clenshaw--Curtis not-a-knot B-spline basis
-$\varphi_{l,i}^{p,\modified,\notaknot}$ is shown with dashed lines
+$\basis{l,i}^{p,\modified,\notaknot}$ is shown with dashed lines
 in \cref{fig:modifiedNotAKnotBSpline}.
-As before, we have to implement $\varphi_{l,1}^{p,\modified,\notaknot}$
+As before, we have to implement $\basis{l,1}^{p,\modified,\notaknot}$
 only for a single level $l$, as modified functions of higher levels
 are the same up to an affine parameter transformation.
 Note again that for $p \ge 5$, we would have to modify additional
@@ -614,7 +614,7 @@ we first specify the knot sequence as
 and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
 \begin{subequations}
   \begin{gather}
-    \varphi_{l,i}^{p,\clenshawcurtis,\notaknot}
+    \basis{l,i}^{p,\clenshawcurtis,\notaknot}
     :=
     \begin{cases}
       L_{l,i}^\clenshawcurtis,&
@@ -643,8 +643,8 @@ cubic degree and the corresponding modified functions are plotted in
 
 \begin{figure}
   \subcaptionbox{%
-    $\varphi_{l',i'}^{p,\notaknot}$,
-    $\varphi_{l',i'}^{p,\modified,\notaknot}$
+    $\basis{l',i'}^{p,\notaknot}$,
+    $\basis{l',i'}^{p,\modified,\notaknot}$
     \emph{(dashed)}, and $\gp{l',i'}$ \emph{(dots)}.%
     \label{fig:modifiedNotAKnotBSpline}%
   }[73mm]{%
@@ -652,8 +652,8 @@ cubic degree and the corresponding modified functions are plotted in
   }%
   \hfill
   \subcaptionbox{%
-    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$,
-    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
+    $\basis{l',i'}^{p,\clenshawcurtis,\notaknot}$,
+    $\basis{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
     \emph{(dashed)}, and $\gp{l',i'}^\clenshawcurtis$ \emph{(dots)}.%
     \label{fig:clenshawCurtisNotAKnotBSpline}%
   }[76mm]{%
@@ -661,12 +661,12 @@ cubic degree and the corresponding modified functions are plotted in
   }%
   \caption{%
     Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
-    B-splines $\varphi_{l',i'}^{p,\notaknot}$ and
-    $\varphi_{l',i'}^{p,\clenshawcurtis,\notaknot}$
+    B-splines $\basis{l',i'}^{p,\notaknot}$ and
+    $\basis{l',i'}^{p,\clenshawcurtis,\notaknot}$
     ($l ' \le l$, $i' \in I_{l'}$, $p = 3$) up to level $l = 3$
     together with the respective modified versions
-    $\varphi_{l',i'}^{p,\modified,\notaknot}$ and
-    $\varphi_{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
+    $\basis{l',i'}^{p,\modified,\notaknot}$ and
+    $\basis{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
     \emph{(dashed)}.
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
@@ -689,12 +689,12 @@ Another possibility, which we want to discuss briefly, are
 In the cubic case, for which they are usually formulated
 \cite{Hoellig13Approximation},
 these boundary conditions require that the
-second derivatives $\frac{\diff^2}{\dx^2} \varphi_{l,i}$ of the
+second derivatives $\frac{\diff^2}{\dx^2} \basis{l,i}$ of the
 basis functions vanish at the boundary $x \in \{0, 1\}$.
 To obtain the necessary number of $p - 1$ constraints also
 for higher degrees $p$,
 we require that all derivatives
-$\frac{\diff^q}{\dx^q} \varphi_{l,i}$ of order
+$\frac{\diff^q}{\dx^q} \basis{l,i}$ of order
 $q = 2, \dotsc, \tfrac{p+1}{2}$ vanish at $x \in \{0, 1\}$.
 
 \newgsymbol{.nat}{$\cdot^\ntrl$}{%
@@ -704,13 +704,13 @@ $q = 2, \dotsc, \tfrac{p+1}{2}$ vanish at $x \in \{0, 1\}$.
 Consequently, we can define hierarchical natural B-splines as
 \begin{subequations}
   \begin{gather}
-    \varphi_{l,i}^{p,\ntrl}(x)
+    \basis{l,i}^{p,\ntrl}(x)
     :=
     \begin{cases}
       L_{0,i}(x),&
       l = 0,\\
-      \varphi_{l,i}^p +
-      \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \varphi_{l,j}^p,&
+      \basis{l,i}^p +
+      \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \basis{l,j}^p,&
       l \ge 1,
     \end{cases}\quad
     l \in \NNz,\quad
@@ -723,7 +723,7 @@ Consequently, we can define hierarchical natural B-splines as
 where the coefficients $c_{l,i,j} \in \RR$ are chosen such that
 the natural boundary conditions are satisfied:
 \begin{equation}
-  \frac{\diff^q}{\dx^q} \varphi_{l,i}^{p,\ntrl}(x)
+  \frac{\diff^q}{\dx^q} \basis{l,i}^{p,\ntrl}(x)
   = 0,\quad
   l \ge 1,\quad
   i \in I_l,\quad
@@ -734,11 +734,11 @@ the natural boundary conditions are satisfied:
   Interior of the support of a function (i.e., the non-zero set)%
 }%
 Note that the first half of the coefficients $c_{l,i,j} \in \RR$
-($j < i$) vanish if the interior of the support of $\varphi_{l,i}^p$
+($j < i$) vanish if the interior of the support of $\basis{l,i}^p$
 does not contain $x = 0$
 (i.e., $i > \tfrac{p+1}{2}$).
 The second half of the coefficients~($j > i$) vanishes analogously
-if $1 \notin \intsupp \varphi_{l,i}^p \iff i < 2^l - \tfrac{p+1}{2}$.
+if $1 \notin \intsupp \basis{l,i}^p \iff i < 2^l - \tfrac{p+1}{2}$.
 This means that as for the not-a-knot basis,
 only the first $\tfrac{p+1}{2}$ and the last $\tfrac{p+1}{2}$
 hierarchical functions have to be altered in each level.
@@ -757,7 +757,7 @@ rest of the thesis.
   \includegraphics{hierarchicalBSpline_9}%
   \caption{%
     Hierarchical cubic natural B-splines
-    $\varphi_{l',i'}^{p,\ntrl}$
+    $\basis{l',i'}^{p,\ntrl}$
     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
     grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%

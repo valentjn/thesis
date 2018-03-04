@@ -175,29 +175,29 @@ of the hat function.
 }%
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
-$\varphi_{l,i}^p\colon [0, 1] \to \RR$ of level~$l \in \NNz$ and index
+$\basis{l,i}^p\colon [0, 1] \to \RR$ of level~$l \in \NNz$ and index
 $i \in I_l$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
-  \varphi_{l,i}^p(x)
+  \basis{l,i}^p(x)
   := b^p(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
 \end{equation}
-The support of $\varphi_{l,i}^p$ is given
-by $\supp \varphi_{l,i}^p = [0, 1] \cap [\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}]$.
-The hat function basis $\varphi_{l,i}^1$ defined in
+The support of $\basis{l,i}^p$ is given
+by $\supp \basis{l,i}^p = [0, 1] \cap [\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}]$.
+The hat function basis $\basis{l,i}^1$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
 \eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
-which allows us to use the same notation $\varphi_{l,i}^p$ for both.
-Note that due to the \term{translation invariance} of $\varphi_{l,i}^p$
+which allows us to use the same notation $\basis{l,i}^p$ for both.
+Note that due to the \term{translation invariance} of $\basis{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
-$\varphi_{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
+$\basis{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
 
 \begin{figure}
   \subcaptionbox{%
-    Nodal B-splines $\varphi_{l,i}^p$ ($i \in I_l$) and grid points $\gp{l,i}$
+    Nodal B-splines $\basis{l,i}^p$ ($i \in I_l$) and grid points $\gp{l,i}$
     \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_1}%
@@ -209,7 +209,7 @@ $\varphi_{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
   \end{tikzpicture}%
   \hfill%
   \subcaptionbox{%
-    Hierarchical B-splines $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
     and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[72mm]{%
@@ -230,7 +230,7 @@ $\varphi_{l,i}^p$ ($l \in \NNz$, $i \in I_l$).
 In this thesis, we will only allow odd degrees $p = 1, 3, 5, \dotsc$.
 Many theoretical considerations would fail for even degrees.
 The basic reason is that for odd degrees, the knots of
-$\varphi_{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
+$\basis{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
 \begin{equation}
   \gp{l,i-(p+1)/2},\quad
   \dotsc,\quad
@@ -238,7 +238,7 @@ $\varphi_{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
   \dotsc,\quad
   \gp{l,i+(p+1)/2}.
 \end{equation}
-For even degrees $p$, the knots of $\varphi_{l,i}^p$ lie exactly in
+For even degrees $p$, the knots of $\basis{l,i}^p$ lie exactly in
 the middle between two subsequent grid points:
 \begin{equation}
   \gp{l,i-p/2} - \frac{\ms{l}}{2},\quad
@@ -269,7 +269,7 @@ for the rest of the thesis.
 
 \paragraph{Non-uniform B-splines and spline space}
 
-With the hierarchical B-splines $\varphi_{l,i}^p$, we can define
+With the hierarchical B-splines $\basis{l,i}^p$, we can define
 the nodal spaces $V_l^p$ and hierarchical subspaces $W_l^p$
 as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
@@ -414,7 +414,7 @@ $D_\ß\xi^p$:
     Spline interpolation domain of $S_l^p$
     (uniform nodal B-splines of level $l$, degree $p$)%
   }%
-  The restricted nodal B-splines $\varphi_{l,i}^p|_{D_l^p}$
+  The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \NNz$ are
   a basis of the spline space $S_{\ß\xi_l^p}^p$, where
@@ -436,7 +436,7 @@ $D_\ß\xi^p$:
 \end{corollary}
 
 \begin{proof}
-  We have $\varphi_{l,i}^p = b_{i,\ß\xi_l^p}^p$ for
+  We have $\basis{l,i}^p = b_{i,\ß\xi_l^p}^p$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -444,10 +444,10 @@ $D_\ß\xi^p$:
 
 Note that $D_l^p$ might contain only a single point or even be empty,
 if $p$ is too large or $l$ is too small.
-However, the corresponding B-splines $\varphi_{l,i}^p$ are still linearly
+However, the corresponding B-splines $\basis{l,i}^p$ are still linearly
 independent on~$[0, 1]$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
-$\varphi_{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
+$\basis{l,i}^p$ ($i \in I_l$) are linearly independent on $[0, 1]$.
 
 \paragraph{Hierarchical splitting for uniform B-splines}
 
@@ -462,15 +462,15 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \end{lemma}
 
 \begin{proof}
-  Every function $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
+  Every function $\basis{l',i'}^p$ ($i' \in I_{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
   of $\ß\xi_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
-  \Cref{prop:splineSpace} implies $\varphi_{l',i'}^p \in S_l^p$
+  \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\varphi_{l',i'}^p \in V_l^p|_{D_l^p}$.
-  As the functions $\varphi_{l',i'}^p$ ($i' \in I_{l'}$) span
+  $\basis{l',i'}^p \in V_l^p|_{D_l^p}$.
+  As the functions $\basis{l',i'}^p$ ($i' \in I_{l'}$) span
   $W_{l'}^p|_{D_l^p}$, we can conclude
   $W_{l'}^p|_{D_l^p} \subset V_l^p|_{D_l^p}$.
 \end{proof}
@@ -493,7 +493,7 @@ theoretic considerations in this thesis to odd $p$.
   \label{prop:hierBSplineLinearlyIndependent}
   \label{PROP:HIERBSPLINELINEARLYINDEPENDENT}
   The hierarchical B-splines
-  $\varphi_{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
+  $\basis{l',i'}^p$ ($l' \le l$, $i' \in I_{l'}$)
   are linearly independent.
 \end{restatable}
 
@@ -558,23 +558,23 @@ Pflüger defined modified
 hierarchical B-splines to obtain reasonable values on the boundary
 without having to place grid points there \cite{Pflueger10Spatially}.
 The main motivation is to define basis
-functions $\varphi_{l,i}^{p,\modified}$ that satisfy natural boundary
+functions $\basis{l,i}^{p,\modified}$ that satisfy natural boundary
 conditions, i.e.,
 \begin{equation}
   \label{eq:naturalBoundaryConditions}
-  \frac{\diff^2}{\dx^2} \varphi_{l,i}^{p,\modified}(x) = 0,\quad
+  \frac{\diff^2}{\dx^2} \basis{l,i}^{p,\modified}(x) = 0,\quad
   x \in \bndry{[0, 1]} = \{0, 1\}.
 \end{equation}
 Originally, this requirement stems from financial problems
 \cite{Pflueger10Spatially}.
 For the left boundary,
 \eqref{eq:naturalBoundaryConditions} can be satisfied by
-modifying the left-most function $\varphi_{l,1}^p$ such that
-$\varphi_{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{\ms{l}}$ is a linear polynomial
+modifying the left-most function $\basis{l,1}^p$ such that
+$\basis{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{\ms{l}}$ is a linear polynomial
 when $x$ is ``near'' the boundary.
 As in \cite{Pflueger10Spatially},
-we append $\varphi_{l,1}^p$ with
-B-splines $\varphi_{l,i}^p$ with index $i \le 0$ and
+we append $\basis{l,1}^p$ with
+B-splines $\basis{l,i}^p$ with index $i \le 0$ and
 use the so-called Marsden's identity to compute the corresponding
 coefficients.
 The identity enables us to explicitly compute the B-spline coefficients
@@ -605,38 +605,38 @@ By applying Marsden's identity twice,
 \begin{equation}
   \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{\ms{l}}
-  = 2 \sum_{i \in \ZZ} \varphi_{l,i}^p(x)
-  - \frac{1}{\ms{l}} \sum_{i \in \ZZ} \gp{l,i} \varphi_{l,i}^p(x)
-  = \sum_{i \in \ZZ} (2 - i) \varphi_{l,i}^p(x),\quad
+  = 2 \sum_{i \in \ZZ} \basis{l,i}^p(x)
+  - \frac{1}{\ms{l}} \sum_{i \in \ZZ} \gp{l,i} \basis{l,i}^p(x)
+  = \sum_{i \in \ZZ} (2 - i) \basis{l,i}^p(x),\quad
   x \in \RR,
 \end{equation}
-we obtain a possible definition for $\varphi_{l,i}^{p,\modified}$.
+we obtain a possible definition for $\basis{l,i}^{p,\modified}$.
 Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
 are relevant for the unit interval as all other B-splines vanish in $[0, 1]$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
-$\varphi_{l,1}^p$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
-The right-most function $\varphi_{l,2^l-1}^{p,\modified}$ can be derived
-analogously by mirroring $\varphi_{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
+$\basis{l,1}^p$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
+The right-most function $\basis{l,2^l-1}^{p,\modified}$ can be derived
+analogously by mirroring $\basis{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
 For~$l = 1$, again the ``constant one'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
   \label{eq:modifiedBSplineDefinition}
-  \varphi_{l,i}^{p,\modified}(x)
+  \basis{l,i}^{p,\modified}(x)
   :=
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \varphi_{l,i'}^p(x),&
+    \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \basis{l,i'}^p(x),&
     l \ge 2,\quad i = 1,\\
-    \varphi_{l,i}^p(x),&
+    \basis{l,i}^p(x),&
     l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
-    \varphi_{l,1}^{p,\modified}(1 - x),&
+    \basis{l,1}^{p,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
 \end{equation}
 By \thmref{prop:splineSpace},
 this definition implies that
-$\varphi_{l,1}^p(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
+$\basis{l,1}^p(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
 is only valid for $x \in [0,\; \ms{l} \cdot \tfrac{5-p}{2}]$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
@@ -647,21 +647,21 @@ then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplineDefinition}
 must be extended to $\tfrac{p+1}{2} - 1$.
 In addition, more than just the left-most and the right-most inner
 hierarchical B-spline must be modified for $p \ge 5$,
-as the size of the supports of $\varphi_{l,i}^p$ increase
+as the size of the supports of $\basis{l,i}^p$ increase
 for growing $p$.
 
 \begin{figure}
   \subcaptionbox{%
     Construction of the modified hierarchical cubic B-spline
-    $\varphi_{l',1}^{p,\modified}$ (\emph{dashed}, $l' \ge 2$)
-    as a linear combination of neighboring B-splines $\varphi_{l',i'}^p$
+    $\basis{l',1}^{p,\modified}$ (\emph{dashed}, $l' \ge 2$)
+    as a linear combination of neighboring B-splines $\basis{l',i'}^p$
     using Marsden's identity.%
   }[75mm]{%
     \includegraphics{modifiedBSpline_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Modified hierarchical cubic B-splines $\varphi_{l',i'}^{p,\modified}$
+    Modified hierarchical cubic B-splines $\basis{l',i'}^{p,\modified}$
     ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
@@ -755,10 +755,10 @@ knot sequences.
 \paragraph{Hierarchical Clenshaw--Curtis B-splines}
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
-$\varphi_{l,i}^{p,\clenshawcurtis}$ of level $l \in \NNz$ and index
+$\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \NNz$ and index
 $i \in I_l$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
-  \varphi_{l,i}^{p,\clenshawcurtis}
+  \basis{l,i}^{p,\clenshawcurtis}
   := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,
 \end{equation}
 where
@@ -796,10 +796,10 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \begin{figure}
   \subcaptionbox{%
     Hierarchical cubic Clenshaw--Curtis B-splines
-    $\varphi_{l',i'}^{p,\clenshawcurtis}$
+    $\basis{l',i'}^{p,\clenshawcurtis}$
     ($l' \le l$, $i' \in I_{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
-     $\varphi_{l',i'}^{p,\clenshawcurtis,\modified}$
+     $\basis{l',i'}^{p,\clenshawcurtis,\modified}$
     \emph{(dashed)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_4}%
@@ -818,8 +818,8 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \end{figure}
 
 Note that in contrast to the standard hierarchical B-spline functions
-$\varphi_{l,i}^p$, Clenshaw--Curtis B-splines
-$\varphi_{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
+$\basis{l,i}^p$, Clenshaw--Curtis B-splines
+$\basis{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
 As a result, both implementation effort and evaluation runtime
 are significantly higher for Clenshaw--Curtis B-splines than
 for the standard uniform basis,
@@ -829,9 +829,9 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 
 As for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}
-$\varphi_{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
+$\basis{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
 same method as in \eqref{eq:modifiedBSplineDefinition}.
-Here, the second derivative of $\varphi_{l,1}^{p,\clenshawcurtis,\modified}$
+Here, the second derivative of $\basis{l,1}^{p,\clenshawcurtis,\modified}$
 does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
@@ -840,7 +840,7 @@ to \eqref{eq:clenshawCurtisBSplineKnots},
 the absolute deviation of the second derivative from zero is small.
 Again, to enforce natural boundary conditions,
 it is possible to recompute the coefficients
-of the components $\varphi_{l,i'}^{p,\clenshawcurtis}$
+of the components $\basis{l,i'}^{p,\clenshawcurtis}$
 dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
 

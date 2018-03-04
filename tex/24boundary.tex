@@ -594,11 +594,11 @@ first step.
 
 The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
-For the hat function basis $\varphi_{\ßl,\ßi}^1$,
+For the hat function basis $\basis{\ßl,\ßi}^1$,
 this is a feasible option if the objective
 function $f\colon [\ß0, \ß1] \to \RR$
 satisfies homogeneous boundary conditions $f_{\bndry{[\ß0, \ß1]}} \equiv 0$,
-as $\varphi_{\ßl,\ßi}^1$ vanishes on the boundary if and only if
+as $\basis{\ßl,\ßi}^1$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.
 Consequently, the surpluses corresponding to boundary points vanish
@@ -622,19 +622,19 @@ All other basis functions remain unchanged.
   Superscript for ``Modified (basis function/function space/interpolant)
   for grids without boundary points''%
 }%
-The resulting \term{modified hat functions} $\varphi_{l,i}^{1,\modified}$
+The resulting \term{modified hat functions} $\basis{l,i}^{1,\modified}$
 are shown in \cref{fig:modifiedHat} and defined as follows:
 \begin{equation}
-  \varphi_{l,i}^{1,\modified}(x)
+  \basis{l,i}^{1,\modified}(x)
   :=
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
     \max(2 - \tfrac{x}{\ms{l}}, 0),&
     l \ge 2,\quad i = 1,\\
-    \varphi_{l,i}^1(x),&
+    \basis{l,i}^1(x),&
     l \ge 2,\quad i \in I_l \setminus \{1, 2^l - 1\},\\
-    \varphi_{l,1}^{1,\modified}(1 - x),&
+    \basis{l,1}^{1,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
 \end{equation}
@@ -646,7 +646,7 @@ which we will discuss when we introduce the corresponding unmodified functions.
 \begin{SCfigure}
   \includegraphics{hierarchicalHat_3}%
   \caption{%
-    Modified hierarchical hat functions $\varphi_{l',i'}^{1,\modified}$
+    Modified hierarchical hat functions $\basis{l',i'}^{1,\modified}$
     ($l' = 1, \dotsc, l$, $i' \in I_{l'}$) up to level $l = 3$.%
   }%
   \label{fig:modifiedHat}%
