@@ -15,20 +15,12 @@
   Natural numbers with zero ($\NN \cup \{0\}$)
 }
 
-\newnotation{l}{$l$}{
-  Level $\in \NN_0$
+\newnotation{l}{$\ßl$}{
+  Level $\ßl \in \NNz^d$
 }
 
-\newnotation{l!}{$\ßl$}{
-  Multivariate level $\in \NNz^d$
-}
-
-\newnotation{i}{$i$}{
-  Index $= 0, \dotsc, 2^l$
-}
-
-\newnotation{i!}{$\ßi$}{
-  Multivariate index $= \ß0, \dotsc, \ß2^\ßl$
+\newnotation{i}{$\ßi$}{
+  Index $\ßi = \ß0, \dotsc, \ß2^\ßl$,
 }
 
 \newnotation{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{
@@ -51,28 +43,20 @@
   $(1, \dotsc, 1) \in \NN^d$
 }
 
-\newnotationcommand[1]{\gp}{x_{#1}}{xli}{$\gp{l,i}$}{
-  Grid point $:= i \cdot \ms{l}$
+\newnotationcommand[1]{\vgp}{\ßx_{#1}}{xli}{$\vgp{\ßl,\ßi}$}{
+  Grid point $\vgp{\ßl,\ßi} := \ßi \cdot \vms{\ßl}$
 }
 
-\newnotationcommand[1]{\vgp}{\ßx_{#1}}{xli!}{$\vgp{\ßl,\ßi}$}{
-  Multivariate grid point $:= \ßi \cdot \vms{\ßl}$
+\newcommand*{\gp}[1]{x_{#1}}
+
+\newnotationcommand[1]{\vms}{\ßh_{#1}}{hl}{$\vms{\ßl}$}{
+  Mesh size $\vms{\ßl} := \ß2^{-\ßl}$
 }
 
-\newnotationcommand[1]{\ms}{h_{#1}}{hl}{$\ms{l}$}{
-  Mesh size $:= 2^{-l}$
-}
+\newcommand{\ms}[1]{h_{#1}}
 
-\newnotationcommand[1]{\vms}{\ßh_{#1}}{hl!}{$\vms{\ßl}$}{
-  Multivariate mesh size $:= \ß2^{-\ßl}$
-}
-
-\newnotationcommand[1]{\basis}{\varphi_{#1}}{phili}{$\basis{l,i}$}{
-  Hierarchical basis function of level $l$, index $i$
-}
-
-\newnotation{phili!}{$\basis{\ßl,\ßi}$}{
-  Multivariate hierarchical basis function of level $\ßl$, index $\ßi$
+\newnotationcommand[1]{\basis}{\varphi_{#1}}{phili}{$\basis{\ßl,\ßi}$}{
+  Hierarchical basis function of level $\ßl$, index $\ßi$
 }
 
 \newnotation{.1}{$\cdot^1$}{
@@ -85,12 +69,8 @@
   (basis function/function space/interpolant)''
 }
 
-\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{l}$}{
-  Nodal space of level $l$
-}
-
-\newnotation{Vl!}{$\ns{\ßl}$}{
-  Multivariate nodal space of level $\ßl$
+\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\ßl}$}{
+  Nodal space of level $\ßl$
 }
 
 \newnotation{Vnd}{$\ns{n,d}$}{
@@ -98,11 +78,7 @@
   $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{l}$}{
-  Full grid interpolant of $f$ in $\ns{l}$
-}
-
-\newnotation{fl!}{$\fgintp{\ßl}$}{
+\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\ßl}$}{
   Full grid interpolant of $f$ in $\ns{\ßl}$
 }
 
@@ -157,8 +133,8 @@
   Set of (odd) indices for hierarchical basis functions
 }
 
-\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{l}$}{
-  Hierarchical subspace of level $l$
+\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\ßl}$}{
+  Hierarchical subspace of level $\ßl$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%

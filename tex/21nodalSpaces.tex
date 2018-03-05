@@ -110,13 +110,11 @@ for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{0!}
 \usenotation{1!}
-\usenotation{l!}
 Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
 where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
-\usenotation{i!}
 \usenotation{i02l!}
 The corners of the hypercubes are given by the grid points
 \begin{equation}
@@ -138,7 +136,6 @@ For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \end{equation}
 with the $d$-dimensional mesh size
 $\vms{\ßl} := \ß2^{-\ßl} = (\ms{l_1}, \dotsc, \ms{l_d})$.
-\usenotation{phili!}
 Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
@@ -168,7 +165,6 @@ $\basis{\ßl,\ßi}^1$.
 
 \paragraph{Multivariate nodal space}
 
-\usenotation{Vl!}
 The multivariate nodal space $\ns{\ßl}$ is defined analogously to
 the univariate case:
 \begin{equation}
@@ -187,7 +183,6 @@ all hypercubes
   \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
-\usenotation{fl!}
 Analogously to \eqref{eq:interpFullGridUV},
 we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \RR$
 in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \RR$ satisfying
