@@ -23,20 +23,16 @@ be written as
   \label{eq:interpHierFullGrid}
   \fgintp{\ßl}
   = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
+  \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
   \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})}.
 \end{equation}
-\newgsymbol{alphali!}{$\alpha_{\ßl,\ßi}$}{%
-  Hierarchical surpluses (coefficients of a linear combination of hierarchical
-  basis functions)%
-}%
-The coefficients $\alpha_{\ßl',\ßi'}$ with respect to the hierarchical basis
+The coefficients $\surplus{\ßl',\ßi'}$ with respect to the hierarchical basis
 $\basis{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
 When using the hat function basis $\basis{\ßl,\ßi}^1$,
 one can prove the following representation
 for the corresponding surpluses \cite{Bungartz04Sparse}:
 \begin{equation}
-  \alpha_{\ßl,\ßi}
+  \surplus{\ßl,\ßi}
   = (-1)^d 2^{-\normone{\ßl+\ß1}}
   \int_\ß0^\ß1 \basis{\ßl,\ßi}^1(\ßx)
   \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
@@ -72,13 +68,13 @@ can be estimated by
 \begin{equation}
   \label{eq:componentEstimation}
   \normLtwoscaled{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \alpha_{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}
+  \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}
   \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
   \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
   } f}
 \end{equation}
-for the hat function surpluses $\alpha_{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
+for the hat function surpluses $\surplus{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
 \paragraph{Definition of regular sparse grids}
 

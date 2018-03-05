@@ -9,10 +9,10 @@ and $\ßi \in \his{\ßl}$ such that $N := \setsize{\Omega^\sparse} = \setsize{K}
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
-$(\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
+$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in K} \in \RR^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
-  \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
+  \sum_{\mathclap{(\ßl', \ßi') \in K}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = f_{\ßl,\ßi}
   \quad\text{for all}\quad
   (\ßl, \ßi) \in K,
@@ -23,7 +23,7 @@ The hierarchical surpluses then define the interpolant $f^\sparse$ as
 \begin{equation}
   f^\sparse\colon \clint{\ß0, \ß1} \to \RR,\quad
   f^\sparse :=
-  \sum_{\mathclap{(\ßl', \ßi') \in K}} \alpha_{\ßl',\ßi'}
+  \sum_{\mathclap{(\ßl', \ßi') \in K}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'},
 \end{equation}
 which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\Omega^\sparse$.
@@ -34,7 +34,7 @@ We explicitly allow $\basis{\ßl',\ßi'}$ to be a non-hierarchical
 nodal basis, in which case $\ßl'$ is constant and
 $\Omega^\sparse$ is usually a full grid.
 Strictly speaking, the problem is then a \term{interpolation problem}
-and the $\alpha_{\ßl',\ßi'}$ are \term{interpolation coefficients}.
+and the $\surplus{\ßl',\ßi'}$ are \term{interpolation coefficients}.
 However, we still apply the terms
 ``hierarchization'' and ``hierarchical surpluses'' in this case
 to keep the terminology consistent.
@@ -68,14 +68,14 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
     L = A^{-1},\quad
     A = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in K},\quad
     \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K},\quad
-    \ßy = (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
+    \ßy = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in K}.
   \end{equation}
-  This means that we can determine the $\alpha_{\ßl',\ßi'}$ by solving
+  This means that we can determine the $\surplus{\ßl',\ßi'}$ by solving
   the $N \times N$ system of linear equations
   \begin{equation}
     \ßy = L[\ßu]
     \quad\iff\quad
-    A \cdot (\alpha_{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
+    A \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in K}
     = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in K}.
   \end{equation}
 \end{subequations}
@@ -109,7 +109,7 @@ For coarse levels $\ßl'$, the mesh size $\ms{l'_t}$ is large in
 every dimension $t$, which implies that $\intsupp \basis{\ßl',\ßi'}^\ßp$
 contains most of the grid points.
 In contrast to the hat function case ($\ßp = \ß1$),
-the value of $\alpha_{\ßl',\ßi'}$ depends not only on
+the value of $\surplus{\ßl',\ßi'}$ depends not only on
 $f_{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \basis{\ßl',\ßi'}^\ß1$,
 but potentially on the data of the whole grid.

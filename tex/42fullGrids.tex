@@ -67,7 +67,7 @@ With the following invariant, we can prove the correctness of the \up.
   i.e.,
   $T = A^{-1}$,
   $\ßu = (f_\ßk)_{\ßk \in K}$,
-  $\ßy = (\alpha_\ßk)_{\ßk \in K}$,
+  $\ßy = (\surplus{\ßk})_{\ßk \in K}$,
   $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
   $K = \{\ß0, \dotsc, \ß2^\ßl\}$
   corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
@@ -105,8 +105,8 @@ With the following invariant, we can prove the correctness of the \up.
       $\sum_{\ßk \in K_\mathrm{pole}}
       \alpha^{(j)}_\ßk \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((L_{t_j})^{-1}
-      %\Big[(\alpha_\ßk^{(j)})_{\ßk \in K_\mathrm{pole}}\Big])_{k'_{t_j}}
-      %= ((\alpha_\ßk^{(j-1)})_{\ßk \in K_\mathrm{pole}})_{k'_{t_j}}
+      %\Big[(\surplus{\ßk}^{(j)})_{\ßk \in K_\mathrm{pole}}\Big])_{k'_{t_j}}
+      %= ((\surplus{\ßk}^{(j-1)})_{\ßk \in K_\mathrm{pole}})_{k'_{t_j}}
       = \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}$
       by the 1D interpolation operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
