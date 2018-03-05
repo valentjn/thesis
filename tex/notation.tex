@@ -129,12 +129,19 @@
   Number of elements of a set
 }
 
-\newnotationcommand[1]{\his}{I_{#1}}{Il}{$\his{l}$}{
+\newnotationcommand[1]{\his}{I_{#1}}{Il}{$\his{\ßl}$}{
   Set of (odd) indices for hierarchical basis functions
 }
 
 \newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\ßl}$}{
   Hierarchical subspace of level $\ßl$
+}
+
+\let\oplusorig\oplus
+\let\oplus\undefined
+\newnotationcommand{\oplus}{\oplusorig}{oplus}{$\oplus$}{%
+  Direct sum of vector spaces (vector space sum in which the dimension of
+  the sum equals the sum of the summands' dimensions)
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
