@@ -1,11 +1,11 @@
 \section{The Hierarchization Problem}
 \label{sec:41problem}
 
-Let $\Omega^\sparse \subset \clint{0, 1}^d$ be a general (sparse) grid that
+Let $\sgset \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
-of the form $\setsize{\Omega^\sparse} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
+of the form $\setsize{\sgset} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in K\}$,
 where $K$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NNz$
-and $\ßi \in \his{\ßl}$ such that $N := \setsize{\Omega^\sparse} = \setsize{K} < \infty$
+and $\ßi \in \his{\ßl}$ such that $N := \setsize{\sgset} = \setsize{K} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
@@ -26,13 +26,13 @@ The hierarchical surpluses then define the interpolant $f^\sparse$ as
   \sum_{\mathclap{(\ßl', \ßi') \in K}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'},
 \end{equation}
-which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\Omega^\sparse$.
+which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\sgset$.
 
 The basis functions $\basis{\ßl',\ßi'}$ are
 arbitrary tensor product functions.
 We explicitly allow $\basis{\ßl',\ßi'}$ to be a non-hierarchical
 nodal basis, in which case $\ßl'$ is constant and
-$\Omega^\sparse$ is usually a full grid.
+$\sgset$ is usually a full grid.
 Strictly speaking, the problem is then a \term{interpolation problem}
 and the $\surplus{\ßl',\ßi'}$ are \term{interpolation coefficients}.
 However, we still apply the terms
@@ -47,7 +47,7 @@ to arbitrary linear operators
   L\colon \RR^N \to \RR^N,\quad
   \ßu \mapsto \ßy = L[\ßu],
 \end{equation}
-where $L$ depends on the grid $\Omega^\sparse$ at hand.
+where $L$ depends on the grid $\sgset$ at hand.
 Input $\ßu$ and output $\ßy$ are scalar-valued data%
 %\footnote{%
 %  The setting could be generalized even more,
@@ -59,7 +59,7 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
   \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,\quad
   \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in K} \in \RR^N,
 \end{equation}
-which give one scalar per grid point $\vgp{\ßl,\ßi} \in \Omega^\sparse$.
+which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
 $L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
 \begin{subequations}
@@ -131,7 +131,7 @@ of a \SI{16}{\gibi\byte} workstation.
 \paragraph{Notation}
 
 We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
-$\Omega^\sparse$, $K$, $\ßu$, and $\ßy$
+$\sgset$, $K$, $\ßu$, and $\ßy$
 for most of the considerations in this chapter.
 Therefore, we assume that in each dimension $t$, the level-index pairs
 $(l_t, i_t)$ ($l_t \in \NNz$, $i_t \in \his{l_t}$)
@@ -139,7 +139,7 @@ are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \NNz$.
 We identify $(\ßl, \ßi)$ with a single index $\ßk$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
 Consequently,
-we can regard $K$ as a subset $\{\ßk \mid \ßx_\ßk \in \Omega^\sparse\}$
+we can regard $K$ as a subset $\{\ßk \mid \ßx_\ßk \in \sgset\}$
 of $\NN^d$.
 We will switch between the notations whenever appropriate.
 All statements that are formulated in the $\ßk$ notation are

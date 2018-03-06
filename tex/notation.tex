@@ -69,6 +69,15 @@
   (basis function/function space/interpolant)''
 }
 
+\newnotation{.s}{$\cdot^\sparse$}{
+  Superscript for ``sparse grid (grid point set/function space/interpolant)''
+}
+
+\newnotation{.sb}{$\cdot^{\sparse(b)}$}{
+  Superscript for ``sparse grid with boundary parameter $b$
+  (grid point set/function space/interpolant)''
+}
+
 \newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\ßl}$}{
   Nodal space of level $\ßl$
 }
@@ -147,6 +156,62 @@
 \newnotationcommand[1]{\surplus}{\alpha_{#1}}{alphali}{$\surplus{\ßl,\ßi}$}{%
   Hierarchical surpluses (coefficients of a linear combination of hierarchical
   basis functions)
+}
+
+\newnotationcommand[3]{\regsgspace}{%
+  V_{#1,#2}^{%
+    \sparse%
+    \if\relax\detokenize{#3}\relax\else,#3\fi%
+  }%
+}{Vnds}{$\regsgspace{n}{d}{}$}{
+  Regular sparse grid space of level $n$ with dimensionality $d$
+}
+
+\newnotationcommand[3]{\regsgset}{%
+  \Omega_{#1,#2}^{%
+    \sparse%
+    \if\relax\detokenize{#3}\relax\else,#3\fi%
+  }%
+}{Omegands}{$\regsgset{n}{d}{}$}{
+  Set of regular sparse grid points of level $n$ with dimensionality $d$
+}
+
+\newnotationcommand[3]{\interiorregsgset}{%
+  \interior{\Omega}_{#1,#2}^{%
+    \sparse%
+    \if\relax\detokenize{#3}\relax\else,#3\fi%
+  }%
+}{Omegandso}{$\interiorregsgset{n}{d}{}$}{
+  Set $:= \regsgset{n}{d}{} \cap \openinterval{\ß0, \ß1}$ of
+  interior regular sparse grid point of level $n$ with dimensionality $d$
+}
+
+%\newnotationcommand[4]{\coarseregsgspace}{%
+%  V_{#1,#2}^{%
+%    \sparse(#3)%
+%    \if\relax\detokenize{#4}\relax\else,#4\fi%
+%  }%
+%}{Vndsb}{$\coarseregsgspace{n}{d}{b}{}$}{
+%  Regular sparse grid space of level $n$ with dimensionality $d$
+%  and boundary parameter $b$
+%}
+
+\newnotationcommand[4]{\coarseregsgset}{%
+  \Omega_{#1,#2}^{%
+    \sparse(#3)%
+    \if\relax\detokenize{#4}\relax\else,#4\fi%
+  }%
+}{Omegandsb}{$\coarseregsgset{n}{d}{b}{}$}{
+  Set of regular sparse grid points of level $n$ with dimensionality $d$
+  and boundary parameter $b$
+}
+
+\newnotationcommand{\sgspace}{V^\sparse}{Vs}{$\sgspace$}{
+  Arbitrary sparse grid space (possibly spatially adaptive)
+}
+
+\newnotationcommand{\sgset}{\Omega^\sparse}{Omegas}{$\sgset$}{
+  Arbitrary sparse grid (possibly spatially adaptive)
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%

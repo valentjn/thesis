@@ -16,7 +16,7 @@
   \eqref{eq:coarseBoundary} is indeed disjoint.
   Therefore,
   \begin{align}
-    \setsize{\Omega_{n,d}^{\sparse(b)}}
+    \setsize{\coarseregsgset{n}{d}{b}{}}
     &= \sum_{\substack{\ßl \in \NN^d,\\\normone{\ßl} \le n}} \setsize{\his{\ßl}} +
     \sum_{
       \substack{
@@ -26,8 +26,8 @@
       }
     } \setsize{\his{\ßl}}.\\
     \intertext{%
-      The first sum is the number $\setsize{\interior{\Omega}_{n,d}^\sparse}$
-      of interior grid points in $\Omega_{n,d}^\sparse$.
+      The first sum is the number $\setsize{\interiorregsgset{n}{d}{}}$
+      of interior grid points in $\regsgset{n}{d}{}$.
       The second sum can be split into summands
       with the same number $q$ of zero entries,
       which we count with
@@ -35,7 +35,7 @@
       = \normone{\vecmax(\ßl, \ß1)} - \normone{\ßl}$,
       and the same level sum $m = \normone{\ßl}$:%
     }
-    &= \setsize{\interior{\Omega}_{n,d}^\sparse} + 2^d +
+    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
@@ -67,21 +67,21 @@
   which can be done in $\binom{m-1}{d-q-1}$ ways.
   Thus,
   \begin{align}
-    \setsize{\Omega_{n,d}^{\sparse(b)}}
-    &= \setsize{\interior{\Omega}_{n,d}^\sparse} + 2^d +
+    \setsize{\coarseregsgset{n}{d}{b}{}}
+    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
     \sum_{q=1}^{d-1} \binom{d}{q} \sum_{m=d-q}^{n-b-q+1}
     2^{m - d + 2q} \binom{m-1}{d-q-1}.\\
     \intertext{%
       Shifting the index $m \to (m + d - q)$ and rearranging the terms
       slightly, we obtain%
     }
-    &= \setsize{\interior{\Omega}_{n,d}^\sparse} + 2^d +
+    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
     \sum_{q=1}^{d-1} 2^q \binom{d}{q} \sum_{m=0}^{n-d-b+1}
     2^m \binom{(d-q)+m-1}{(d-q)-1}.\\
     \intertext{%
       We can now use \thmref{lemma:numberOfGridPointsInterior} to conclude that%
     }
-    &= \setsize{\interior{\Omega}_{n,d}^\sparse} +
+    &= \setsize{\interiorregsgset{n}{d}{}} +
     \sum_{q=1}^d 2^q \binom{d}{q}
     \setsize{\interior{\Omega}_{n-q-b+1,d-q}^\sparse}.\qedhere
   \end{align}

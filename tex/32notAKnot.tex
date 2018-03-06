@@ -494,14 +494,14 @@ Regular sparse grid spaces using the new hierarchical not-a-knot basis
 are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
-  V_{n,d}^{\sparse,\ßp,\notaknot}
+  regsgspace{n}{d}{\ßp,\notaknot}
   := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\notaknot}.
 \end{equation}
 \newgsymbol{Pp!}{$P^\ßp$}{%
   Space of all $d$-variate polynomials of
   coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$%
 }%
-If the level $n$ is large enough, then $V_{n,d}^{\sparse,\ßp,\notaknot}$
+If the level $n$ is large enough, then $regsgspace{n}{d}{\ßp,\notaknot}$
 contains the space $P^\ßp$ of all $d$-variate polynomials of
 coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
 (i.e., functions $f\colon \clint{0, 1} \to \RR$,
@@ -513,7 +513,7 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
 
 \begin{corollary}
   If $n \ge \normone{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}$,
-  then $P^\ßp \subset V_{n,d}^{\sparse,\ßp,\notaknot}$.
+  then $P^\ßp \subset regsgspace{n}{d}{\ßp,\notaknot}$.
 \end{corollary}
 
 \begin{proof}
@@ -523,10 +523,10 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
   In addition, all $\ßl' \in \NNz^d$ with $\ßl' \le \ßl$ satisfy
   $\normone{\ßl'} \le n$ and thus,
   $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} \subset
-  V_{n,d}^{\sparse,\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
+  regsgspace{n}{d}{\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
   $P^\ßp \subset S_\ßl^{\ßp,\notaknot} \subset
-  V_{n,d}^{\sparse,\ßp,\notaknot}$, which is the asserted claim.
+  regsgspace{n}{d}{\ßp,\notaknot}$, which is the asserted claim.
 \end{proof}
 
 

@@ -1,21 +1,17 @@
 \section{Boundary Treatment}
 \label{sec:24boundary}
 
-One issue of regular sparse grids $\Omega_{n,d}^\sparse$ as we have defined them
+One issue of regular sparse grids $\regsgset{n}{d}{}$ as we have defined them
 is that the number of grid points still grows very fast
 with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $\ms{n}$ on the
 boundary of the domain $\clint{\ß0, \ß1}$ is finer than
 the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
-\newgsymbol{Omegaso}{$\interior{\Omega}^\sparse$}{%
-  Interior grid points $:= \Omega^\sparse \cap \openinterval{\ß0, \ß1}$
-  for a finite set $\Omega^\sparse \subset \clint{\ß0, \ß1}$ of grid points%
-}%
 \newgsymbol{01o!}{$\openinterval{\ß0, \ß1}$}{%
   Open unit hypercube $:= \openinterval{0, 1}^d := \{x \in \RR \mid 0 < x < 1\}^d$%
 }%
-If we define $\interior{\Omega}_{n,d}^\sparse$ as the set of
-interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
+If we define $\interiorregsgset{n}{d}{}$ as the set of
+interior grid points in $\regsgset{n}{d}{}$, i.e.,%
 \footnote{%
   Note that in the literature,
   the regular sparse grid space of level $n$ without boundary points is often
@@ -24,17 +20,17 @@ interior grid points in $\Omega_{n,d}^\sparse$, i.e.,%
   In our notation, this corresponds to $\interior{\Omega}_{n+d-1,d}^\sparse$.%
 }
 \begin{equation}
-  \interior{\Omega}_{n,d}^\sparse
-  := \Omega_{n,d}^\sparse \cap \openinterval{\ß0, \ß1}
-  = \{\vgp{\ßl,\ßi} \in \Omega_{n,d}^\sparse \mid \ßl \ge \ß1\},
+  \interiorregsgset{n}{d}{}
+  := \regsgset{n}{d}{} \cap \openinterval{\ß0, \ß1}
+  = \{\vgp{\ßl,\ßi} \in \regsgset{n}{d}{} \mid \ßl \ge \ß1\},
 \end{equation}
 then the following relation about the number of grid points
-of $\Omega_{n,d}^\sparse$ can be shown:
-\begin{lemma}[number of grid points of $\Omega_{n,d}^\sparse$]
+of $\regsgset{n}{d}{}$ can be shown:
+\begin{lemma}[number of grid points of $\regsgset{n}{d}{}$]
   \label{lemma:numberOfGridPointsBoundary}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    \setsize{\Omega_{n,d}^\sparse}
+    \setsize{\regsgset{n}{d}{}}
     = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interior{\Omega}_{n+q,d-q}^\sparse}
   \end{equation}
 \end{lemma}
@@ -44,11 +40,11 @@ of $\Omega_{n,d}^\sparse$ can be shown:
 Here, we define zero-dimensional grids to contain exactly one grid point
 (the empty tuple).
 The number of interior grid points can be calculated as follows:
-\begin{lemma}[number of grid points of $\interior{\Omega}_{n,d}^\sparse$]
+\begin{lemma}[number of grid points of $\interiorregsgset{n}{d}{}$]
   \label{lemma:numberOfGridPointsInterior}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    \setsize{\interior{\Omega}_{n,d}^\sparse}
+    \setsize{\interiorregsgset{n}{d}{}}
     = \sum_{q=0}^{n-d} 2^q \binom{d-1+q}{d-1}
   \end{equation}
 \end{lemma}
@@ -57,7 +53,7 @@ The number of interior grid points can be calculated as follows:
 \end{proof}
 
 Intuitively, \cref{lemma:numberOfGridPointsBoundary} splits the sparse grid
-$\Omega_{n,d}^\sparse$ into lower-dimensional sparse grids
+$\regsgset{n}{d}{}$ into lower-dimensional sparse grids
 $\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
@@ -80,12 +76,12 @@ the unit cube decomposes into
   like $(0, 0, 0)$.
 \end{itemize}
 On each of these $(d-q)$-dimensional faces,
-the sparse grid $\Omega_{n,d}^\sparse$ contains
+the sparse grid $\regsgset{n}{d}{}$ contains
 the interior of a sparse grid of level $n + q$,
 the size of which grows like $\landauO{2^{n+q} n^{d-q-1}}$.
 As the number of boundary faces increases exponentially
 with the dimensionality $d$,
-the size of $\Omega_{n,d}^\sparse$ quickly exhausts the available
+the size of $\regsgset{n}{d}{}$ quickly exhausts the available
 computational memory.
 To deal with this issue, there are mainly two solutions,
 which are described below.
@@ -101,7 +97,7 @@ which are described below.
   \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_5}}%
   \caption{%
-    Decomposition of the three-dimensional sparse grid $\Omega_{n,d}^\sparse$
+    Decomposition of the three-dimensional sparse grid $\regsgset{n}{d}{}$
     ($n = 4$, $d = 3$) into lower-dimensional sparse sub-grids.
     The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
     serve as a visual aid.%
@@ -151,12 +147,9 @@ computationally infeasible sparse grids.
 
 \paragraph{Regular sparse grids with coarse boundaries}
 
-\newgsymbol{.sb}{$\cdot^{\sparse(b)}$}{%
-  Superscript for ``sparse grid with boundary parameter $b$
-  (grid point set/function space/interpolant)''%
-}%
+\usenotation{.sb}
 We generalize these two solutions to the definition of a
-sparse grid $\Omega_{n,d}^{\sparse(b)}$ that is equivalent to inserting
+sparse grid $\coarseregsgset{n}{d}{b}{}$ that is equivalent to inserting
 the boundary functions and points at a level $b \in \NN$:
 \begin{definition}[regular sparse grid with coarse boundary]
   \label{def:coarseBoundary}
@@ -165,7 +158,7 @@ the boundary functions and points at a level $b \in \NN$:
   \begin{equation}
     \label{eq:coarseBoundary}
     \begin{split}
-      \Omega_{n,d}^{\sparse(b)}
+      \coarseregsgset{n}{d}{b}{}
       := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(b)}}
       \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},&\quad
       L_{n,d}^{\sparse(b)}
@@ -175,12 +168,12 @@ the boundary functions and points at a level $b \in \NN$:
     \end{split}
   \end{equation}
   For convenience, we define
-  $\Omega_{n,d}^{\sparse(0)} := \Omega_{n,d}^\sparse$.
+  $\Omega_{n,d}^{\sparse(0)} := \regsgset{n}{d}{}$.
 \end{definition}
 The definition is motivated by partitioning the levels $\ßl \in \NNz^d$
 into interior levels ($\ßl \in \NN^d$)
 and boundary levels ($\ßl \in \NNz^d \setminus \NN^d$).
-By including the levels of the interior grid $\interior{\Omega}_{n,d}^\sparse$,
+By including the levels of the interior grid $\interiorregsgset{n}{d}{}$,
 the mesh size in the interior is the same as before ($\ms{n-d+1}$).
 Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level one,
 but we subtract $b - 1$ from the upper bound to ensure the correct
@@ -191,15 +184,15 @@ Note that this definition is consistent with \eqref{eq:sparseGridB1} as
 $L_{n,d}^{\sparse(b)}
 = \{\ßl \in \NNz^d \mid \normone{\vecmax(\ßl, \ß1)} \le n\}$
 for $b = 1$.
-Examples of~$\Omega_{n,d}^{\sparse(b)}$ are shown
+Examples of~$\coarseregsgset{n}{d}{b}{}$ are shown
 in \cref{fig:coarseBoundary}.
 The flip book animation in the bottom right corner of the
 odd-numbered pages of this thesis
-visualizes $\Omega_{n,d}^{\sparse(b)}$ for $n = 4$, $d = 3$, and $b = 1$.
+visualizes $\coarseregsgset{n}{d}{b}{}$ for $n = 4$, $d = 3$, and $b = 1$.
 
-The number of grid points of $\Omega_{n,d}^{\sparse(b)}$
+The number of grid points of $\coarseregsgset{n}{d}{b}{}$
 can be calculated as follows:
-\begin{restatable}[number of grid points of $\Omega_{n,d}^{\sparse(b)}$]{%
+\begin{restatable}[number of grid points of $\coarseregsgset{n}{d}{b}{}$]{%
   proposition%
 }{%
   propGridSizeCoarseBoundary%
@@ -208,8 +201,8 @@ can be calculated as follows:
   \label{PROP:GRIDSIZECOARSEBOUNDARY}
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
-    \setsize{\Omega_{n,d}^{\sparse(b)}}
-    = \setsize{\interior{\Omega}_{n,d}^\sparse} +
+    \setsize{\coarseregsgset{n}{d}{b}{}}
+    = \setsize{\interiorregsgset{n}{d}{}} +
     \sum_{q=1}^d 2^q \binom{d}{q}
     \setsize{\interior{\Omega}_{n-q-b+1,d-q}^\sparse},\quad
     b \in \NN
@@ -222,13 +215,13 @@ As can be seen in \cref{tbl:coarseBoundary3D} for three dimensions and
 in \cref{tbl:coarseBoundary10D} for ten dimensions,
 the number of grid points decreases drastically for increasing values
 of $b$, especially when compared with
-$\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
+$\regsgset{n}{d}{} = \Omega_{n,d}^{\sparse(0)}$.
 
 \begin{table}
   \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
     \toprule
     &
-    {$\setsize{\interior{\Omega}_{n,d}^\sparse}$}&
+    {$\setsize{\interiorregsgset{n}{d}{}}$}&
     {$b = 0$}&
     {$b = 1$}&
     {$b = 2$}&
@@ -305,14 +298,14 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
   \caption{%
     For $d = 3$:
     Grid size of the interior grid
-    $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
+    $\interiorregsgset{n}{d}{}$ for \emph{(second column)}
     and ratios
-    $\setsize{\Omega_{n,d}^{\sparse(b)}}/\setsize{\interior{\Omega}_{n,d}^\sparse}$
+    $\setsize{\coarseregsgset{n}{d}{b}{}}/\setsize{\interiorregsgset{n}{d}{}}$
     \emph{(beginning with third column)} of the sizes of
-    the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
+    the grid $\coarseregsgset{n}{d}{b}{}$ with boundary points
     to the size of the interior grid of the same level.
     The table begins at the first level $n = 3$ for which
-    the interior grid $\interior{\Omega}_{n,d}^\sparse$ is not empty.%
+    the interior grid $\interiorregsgset{n}{d}{}$ is not empty.%
   }
   \label{tbl:coarseBoundary3D}
 \end{table}
@@ -321,7 +314,7 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
   \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
     \toprule
     &
-    {$\setsize{\interior{\Omega}_{n,d}^\sparse}$}&
+    {$\setsize{\interiorregsgset{n}{d}{}}$}&
     {$b = 0$}&
     {$b = 1$}&
     {$b = 2$}&
@@ -398,14 +391,14 @@ $\Omega_{n,d}^\sparse = \Omega_{n,d}^{\sparse(0)}$.
   \caption{%
     For $d = 10$:
     Grid size of the interior grid
-    $\interior{\Omega}_{n,d}^\sparse$ for \emph{(second column)}
+    $\interiorregsgset{n}{d}{}$ for \emph{(second column)}
     and ratios
-    $\setsize{\Omega_{n,d}^{\sparse(b)}}/\setsize{\interior{\Omega}_{n,d}^\sparse}$
+    $\setsize{\coarseregsgset{n}{d}{b}{}}/\setsize{\interiorregsgset{n}{d}{}}$
     \emph{(beginning with third column)} of the sizes of
-    the grid $\Omega_{n,d}^{\sparse(b)}$ with boundary points
+    the grid $\coarseregsgset{n}{d}{b}{}$ with boundary points
     to the size of the interior grid of the same level.
     The table begins at the first level $n = 10$ for which
-    the interior grid $\interior{\Omega}_{n,d}^\sparse$ is not empty.%
+    the interior grid $\interiorregsgset{n}{d}{}$ is not empty.%
   }
   \label{tbl:coarseBoundary10D}
 \end{table}
@@ -485,7 +478,7 @@ Its correctness can be formally proved with the following invariant:
   \end{algorithmic}
   \caption{%
     Generation of the level set $L_{n,d}^{\sparse(b)}$ corresponding
-    to the sparse grid $\Omega_{n,d}^{\sparse(b)}$ with coarse boundaries.
+    to the sparse grid $\coarseregsgset{n}{d}{b}{}$ with coarse boundaries.
     Inputs are the level $n \ge d$, the dimensionality $d \in \NN$, and
     the boundary parameter $b \in \NN$.%
   }
@@ -540,7 +533,7 @@ Its correctness can be formally proved with the following invariant:
     \includegraphics{coarseBoundary_8}%
   }%
   \caption{%
-    Sparse grids $\Omega_{n,d}^{\sparse(b)}$ of level $n = 3$
+    Sparse grids $\coarseregsgset{n}{d}{b}{}$ of level $n = 3$
     in two and three dimensions for different values of the
     boundary parameter $b$.
     For constant $d$ and $n$,
@@ -558,7 +551,7 @@ Its correctness can be formally proved with the following invariant:
 \paragraph{Hierarchization}
 
 An important implication of the regular sparse grids
-$\Omega_{n,d}^{\sparse(b)}$ as defined in \cref{def:coarseBoundary}
+$\coarseregsgset{n}{d}{b}{}$ as defined in \cref{def:coarseBoundary}
 is that in general,
 the unidirectional principle cannot be directly applied anymore.
 For example, this is relevant when calculating hierarchical surpluses
@@ -570,12 +563,12 @@ this issue is not important in the scope of this thesis.
 However, it is possible to calculate the hierarchical surpluses in
 a three-step algorithm.
 \newgsymbol{Omegasd}{$\bndry{\Omega}^\sparse$}{%
-  Boundary grid points $:= \Omega^\sparse \setminus \interior{\Omega}^\sparse$
-  for a finite set $\Omega^\sparse \subset \clint{\ß0, \ß1}$ of grid points%
+  Boundary grid points $:= \sgset \setminus \interior{\Omega}^\sparse$
+  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points%
 }%
 First, we compute the surpluses of the boundary grid
 $\bndry{\Omega}_{n,d}^{\sparse(b)} :=
-\Omega_{n,d}^{\sparse(b)} \setminus \interior{\Omega}_{n,d}^{\sparse(b)}$.
+\coarseregsgset{n}{d}{b}{} \setminus \interior{\Omega}_{n,d}^{\sparse(b)}$.
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
 $\interior{\Omega}_{n,d}^{\sparse(b)}$.
