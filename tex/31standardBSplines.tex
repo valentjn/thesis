@@ -20,24 +20,23 @@ The multivariate case is treated as usual by the tensor product approach.
 
 \paragraph{Cardinal B-splines}
 
-\newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
 \newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \real$}%
 The \term{cardinal B-spline}
-$b^p\colon \real \to \real$ of \term{degree} $p \in \natz$
+$\cardbspl{p}\colon \real \to \real$ of \term{degree} $p \in \natz$
 is defined by the recursion
 \begin{equation}
   \label{eq:cardinalBSpline}
-  b^p(x)
+  \cardbspl{p}(x)
   :=
   \begin{cases}
-    \displaystyle\int_0^1 b^{p-1}(x - y) \diff{}y,&p \ge 1,\\
+    \displaystyle\int_0^1 \cardbspl{p-1}(x - y) \diff{}y,&p \ge 1,\\
     \chi_{\hopint{0, 1}}(x),&p = 0,
   \end{cases}
 \end{equation}
 where $\chi_{\hopint{0, 1}}$ is the characteristic function of
 the half-open unit interval $\hopint{0, 1}$
 \cite{Hoellig13Approximation}
-The cardinal B-spline $b^p$ has the following properties,
+The cardinal B-spline $\cardbspl{p}$ has the following properties,
 which are also shown in \cref{fig:cardinalBSplineProps}
 \cite{Hoellig03Finite}:
 \begin{enumerate}
@@ -46,67 +45,67 @@ which are also shown in \cref{fig:cardinalBSplineProps}
     Support of a function (i.e., the closure of the non-zero set)%
   }%
   \emph{Compact support:}
-  The support of $b^p$ is given by $\supp b^p = \clint{0, p + 1}$.
+  The support of $\cardbspl{p}$ is given by $\supp \cardbspl{p} = \clint{0, p + 1}$.
   
   \item
   \emph{Bounds and symmetry:}
-  The cardinal B-spline $b^p$ is non-negative and bounded from above by one.
+  The cardinal B-spline $\cardbspl{p}$ is non-negative and bounded from above by one.
   It is symmetric with respect to the center of its support, i.e.,
-  $b^p(x) = b^p(p + 1 - x)$.
+  $\cardbspl{p}(x) = \cardbspl{p}(p + 1 - x)$.
   
   \item
   \emph{Recursion:}
-  The cardinal B-spline $b^p$ ($p \ge 1$) satisfies the following recurrence
+  The cardinal B-spline $\cardbspl{p}$ ($p \ge 1$) satisfies the following recurrence
   relation
   (which could be used as an alternative definition):
   \begin{equation}
-    b^p(x)
-    = \frac{x}{p} b^{p-1}(x) + \frac{p+1-x}{p} b^{p-1}(x-1).
+    \cardbspl{p}(x)
+    = \frac{x}{p} \cardbspl{p-1}(x) + \frac{p+1-x}{p} \cardbspl{p-1}(x-1).
   \end{equation}
   
   \item
   \emph{Spline:}
   On every \term{knot interval} $\hopint{k, k+1}$
-  ($k = 0, \dotsc, p$), $b^p$ is a polynomial of degree~$p$, i.e.,
-  $b^p$ is a spline of degree $p$ (piecewise polynomial).
+  ($k = 0, \dotsc, p$), $\cardbspl{p}$ is a polynomial of degree~$p$, i.e.,
+  $\cardbspl{p}$ is a spline of degree $p$ (piecewise polynomial).
   
   \item
   \emph{Derivative:}
   At the \term{knots} $k = 0, \dotsc, p + 1$,
-  $b^p$ is $(p - 1)$ times continuously differentiable.
+  $\cardbspl{p}$ is $(p - 1)$ times continuously differentiable.
   The derivative can be computed by differentiating
   \eqref{eq:cardinalBSpline}:
   \begin{equation}
     \label{eq:cardinalBSplineDerivative}
-    \frac{\diff}{\dx} b^p(x)
-    = b^{p-1}(x) - b^{p-1}(x-1),\quad
+    \frac{\diff}{\dx} \cardbspl{p}(x)
+    = \cardbspl{p-1}(x) - \cardbspl{p-1}(x-1),\quad
     x \in \real.
   \end{equation}
   
   \item
   \emph{Integral}:
-  The integral of $b^p$ is normalized, i.e.,
+  The integral of $\cardbspl{p}$ is normalized, i.e.,
   \begin{equation}
-    \int_\real b^p(x) \dx = 1.
+    \int_\real \cardbspl{p}(x) \dx = 1.
   \end{equation}
   
   \item
   \emph{Convolution:}
   \newgsymbol{!*}{$\ast$}{Convolution $f \ast g$ of two functions $f$ and $g$}%
-  The integral in the definition of $b^p$
-  is the convolution $b^{p-1} \ast b^0$ of the B-spline $b^{p-1}$
-  of degree $p - 1$ with the B-spline $b^0$ of degree zero.
+  The integral in the definition of $\cardbspl{p}$
+  is the convolution $\cardbspl{p-1} \ast \cardbspl{0}$ of the B-spline $\cardbspl{p-1}$
+  of degree $p - 1$ with the B-spline $\cardbspl{0}$ of degree zero.
   
   \item
   \emph{Generalization:}
   \newgsymbol{dij}{$\delta_{i,j}$}{%
     Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise%
   }%
-  As a special case, $b^1$ is a hat function interpolating the data
+  As a special case, $\cardbspl{1}$ is a hat function interpolating the data
   $\{(k, \delta_{k,1}) \mid k \in \integer\}$.
   For $p \to \infty$, the normalized cardinal B-splines converge
   pointwise to the standard Gaussian function
-  $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
+  $\cardbspl{\infty}(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
   \footnote{%
     This can also be seen as a consequence of the central limit theorem
     applied to uniformly distributed random variables.
@@ -117,8 +116,8 @@ which are also shown in \cref{fig:cardinalBSplineProps}
   }
   \begin{equation}
     \lim_{p \to \infty}
-    c^p b^p(c^p x + \tfrac{p+1}{2})
-    = b^\infty(x),\quad
+    c^p \cardbspl{p}(c^p x + \tfrac{p+1}{2})
+    = \cardbspl{\infty}(x),\quad
     c^p := \sqrt{\frac{p+1}{12}},\quad
     x \in \real.
   \end{equation}
@@ -133,7 +132,7 @@ of the hat function.
 
 \begin{figure}
   \includegraphics{cardinalBSpline_1}%
-  \caption{Cardinal B-splines $b^p$ up to quintic degree $p = 5$.}%
+  \caption{Cardinal B-splines $\cardbspl{p}$ up to quintic degree $p = 5$.}%
   \label{fig:cardinalBSpline}
 \end{figure}
 
@@ -142,23 +141,23 @@ of the hat function.
   \caption{%
     Eight properties of cardinal B-splines using the quadratic case
     $p = 2$ as an example.\\
-    \emph{Circle 1:} $b^p$ is compactly supported on $\clint{0, p+1}$.\\
-    \emph{Circle 2:} $b^p$ is symmetric and $0 \le b^p \le 1$.\\
-    \emph{Circle 3:} $b^p$ is a weighted combination of
-    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
-    $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    \emph{Circle 1:} $\cardbspl{p}$ is compactly supported on $\clint{0, p+1}$.\\
+    \emph{Circle 2:} $\cardbspl{p}$ is symmetric and $0 \le \cardbspl{p} \le 1$.\\
+    \emph{Circle 3:} $\cardbspl{p}$ is a weighted combination of
+    $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and
+    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
     %where the coefficients \emph{(dashed)} are linear in $x$.\\
-    \emph{Circle 4:} $b^p$ is a piecewise polynomial of degree $p$.\\
-    \emph{Circle 5:} $\frac{\diff}{\dx} b^p$ \emph{(dashed)}
+    \emph{Circle 4:} $\cardbspl{p}$ is a piecewise polynomial of degree $p$.\\
+    \emph{Circle 5:} $\frac{\diff}{\dx} \cardbspl{p}$ \emph{(dashed)}
     is the difference of
-    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and
-    $b^{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
-    \emph{Circle 6:} $b^p$ has unit integral.\\
-    \emph{Circle 7:} $b^p$ is the convolution of
-    $b^{p-1}$ \emph{\textcolor{C0}{(blue)}} and $b^0$.\\
+    $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and
+    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    \emph{Circle 6:} $\cardbspl{p}$ has unit integral.\\
+    \emph{Circle 7:} $\cardbspl{p}$ is the convolution of
+    $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and $\cardbspl{0}$.\\
     \emph{Circle 8:} Hat function \emph{\textcolor{C0}{(blue)}} and
     Gaussian function \emph{\textcolor{C1}{(red)}}
-    are special cases of $b^p$.%
+    are special cases of $\cardbspl{p}$.%
   }%
   \label{fig:cardinalBSplineProps}
 \end{figure}
@@ -169,7 +168,7 @@ of the hat function.
   Superscript for ``B-spline (basis function/function space/interpolant)
   of degree $p$''%
 }%
-We can use the cardinal B-spline $b^p$ as a ``mother function'' to
+We can use the cardinal B-spline $\cardbspl{p}$ as a ``mother function'' to
 define the uniform hierarchical B-spline
 $\basis{l,i}^p\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
 $i \in \hiset{l}$ via an affine parameter transformation
@@ -177,7 +176,7 @@ $i \in \hiset{l}$ via an affine parameter transformation
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
   \basis{l,i}^p(x)
-  := b^p(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
+  := \cardbspl{p}(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\basis{l,i}^p$ is given
 by $\supp \basis{l,i}^p = \clint{0, 1} \cap \clint{\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}}$.
@@ -187,7 +186,7 @@ The hat function basis $\basis{l,i}^1$ defined in
 which allows us to use the same notation $\basis{l,i}^p$ for both.
 Note that due to the \term{translation invariance} of $\basis{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
-it suffices to precompute and implement the polynomial pieces of $b^p$
+it suffices to precompute and implement the polynomial pieces of $\cardbspl{p}$
 to enable evaluations of all hierarchical B-splines
 $\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
 
@@ -301,7 +300,7 @@ we introduce the notion of non-uniform B-splines.
   \end{equation}
 \end{definition}
 Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
-$k = 0$, we obtain the cardinal B-spline~$b^p$.
+$k = 0$, we obtain the cardinal B-spline~$\cardbspl{p}$.
 \Cref{def:nonUniformBSpline} can be used to characterize
 the nodal space $\ns{l}^p$:
 
