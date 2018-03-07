@@ -17,7 +17,7 @@ interior grid points in $\regsgset{n}{d}{}$, i.e.,%
   the regular sparse grid space of level $n$ without boundary points is often
   defined via $\normone{\ßl} \le n + d - 1$ to ensure that the finest mesh size
   is given by $\ms{n}$.
-  In our notation, this corresponds to $\interior{\Omega}_{n+d-1,d}^\sparse$.%
+  In our notation, this corresponds to $\interiorregsgset{n+d-1}{d}{}$.%
 }
 \begin{equation}
   \interiorregsgset{n}{d}{}
@@ -31,7 +31,7 @@ of $\regsgset{n}{d}{}$ can be shown:
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
     \setsize{\regsgset{n}{d}{}}
-    = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interior{\Omega}_{n+q,d-q}^\sparse}
+    = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interiorregsgset{n+q}{d-q}{}}
   \end{equation}
 \end{lemma}
 \begin{proof}
@@ -54,7 +54,7 @@ The number of interior grid points can be calculated as follows:
 
 Intuitively, \cref{lemma:numberOfGridPointsBoundary} splits the sparse grid
 $\regsgset{n}{d}{}$ into lower-dimensional sparse grids
-$\interior{\Omega}_{n+q,d-q}^\sparse$ without boundary points.
+$\interiorregsgset{n+q}{d-q}{}$ without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hypercube.
 In the three-dimensional example of \cref{fig:sgDecompose},
@@ -117,7 +117,7 @@ at a finer level than zero.
 A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
-  \Omega_{n,d}^{\sparse(1)}
+  \coarseregsgset{n}{d}{1}{}
   := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(1)}}
   \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},\quad
   L_{n,d}^{\sparse(1)}
@@ -168,7 +168,7 @@ the boundary functions and points at a level $b \in \NN$:
     \end{split}
   \end{equation}
   For convenience, we define
-  $\Omega_{n,d}^{\sparse(0)} := \regsgset{n}{d}{}$.
+  $\coarseregsgset{n}{d}{0}{} := \regsgset{n}{d}{}$.
 \end{definition}
 The definition is motivated by partitioning the levels $\ßl \in \NNz^d$
 into interior levels ($\ßl \in \NN^d$)
@@ -204,7 +204,7 @@ can be calculated as follows:
     \setsize{\coarseregsgset{n}{d}{b}{}}
     = \setsize{\interiorregsgset{n}{d}{}} +
     \sum_{q=1}^d 2^q \binom{d}{q}
-    \setsize{\interior{\Omega}_{n-q-b+1,d-q}^\sparse},\quad
+    \setsize{\interiorregsgset{n-q-b+1}{d-q}{}},\quad
     b \in \NN
   \end{equation}
 \end{restatable}
@@ -215,7 +215,7 @@ As can be seen in \cref{tbl:coarseBoundary3D} for three dimensions and
 in \cref{tbl:coarseBoundary10D} for ten dimensions,
 the number of grid points decreases drastically for increasing values
 of $b$, especially when compared with
-$\regsgset{n}{d}{} = \Omega_{n,d}^{\sparse(0)}$.
+$\regsgset{n}{d}{} = \coarseregsgset{n}{d}{0}{}$.
 
 \begin{table}
   \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
@@ -562,16 +562,13 @@ this issue is not important in the scope of this thesis.
 
 However, it is possible to calculate the hierarchical surpluses in
 a three-step algorithm.
-\newgsymbol{Omegasd}{$\bndry{\Omega}^\sparse$}{%
-  Boundary grid points $:= \sgset \setminus \interior{\Omega}^\sparse$
-  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points%
-}%
 First, we compute the surpluses of the boundary grid
-$\bndry{\Omega}_{n,d}^{\sparse(b)} :=
-\coarseregsgset{n}{d}{b}{} \setminus \interior{\Omega}_{n,d}^{\sparse(b)}$.
+$\bndrycoarseregsgset{n}{d}{b}{} :=
+\coarseregsgset{n}{d}{b}{} \setminus
+\interiorcoarseregsgset{n}{d}{b}{}$.
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
-$\interior{\Omega}_{n,d}^{\sparse(b)}$.
+$\interiorcoarseregsgset{n}{d}{b}{}$.
 Third, we calculate the surpluses of the inner grid points
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
@@ -590,7 +587,8 @@ is to omit boundary points and basis functions altogether.
 For the hat function basis $\basis{\ßl,\ßi}^1$,
 this is a feasible option if the objective
 function $f\colon \clint{\ß0, \ß1} \to \RR$
-satisfies homogeneous boundary conditions $f_{\bndry{\clint{\ß0, \ß1}}} \equiv 0$,
+satisfies homogeneous boundary conditions
+$f_{\bndrydomain{\clint{\ß0, \ß1}}} \equiv 0$,
 as $\basis{\ßl,\ßi}^1$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.

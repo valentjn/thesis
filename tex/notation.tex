@@ -99,6 +99,15 @@
 
 \newcommand*{\clintscaled}[1]{\left[#1\right]}
 
+\newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{ab!o}%
+{$\opint{\ßa, \ßb}$}{
+  Open hyper-rectangle
+  $:= \opint{a_1, b_1} \times \dotsb \times \opint{a_d, b_d}$
+  with $\opint{a_t, b_t} := \{x_t \in \RR \mid a_t < x_t < b_t\}$
+}
+
+\newcommand*{\opintscaled}[1]{\left]#1\right[}
+
 \newnotationcommand[1]{\normone}{\norm{#1}_1}{||.||1}{$\normone{\cdot}$}{
   $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
 }
@@ -158,8 +167,24 @@
   basis functions)
 }
 
+\newcommand*{\gridspace}[3][]{%
+  \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
+}
+
+\newcommand*{\gridset}[3][]{%
+  \if\relax\detokenize{#1}\relax\Omega\else#1{\Omega}\fi_{#2}^{#3}%
+}
+
+\newnotationcommand{\sgspace}{\gridspace{}{\sparse}}{Vs}{$\sgspace$}{
+  Arbitrary sparse grid space (possibly spatially adaptive)
+}
+
+\newnotationcommand{\sgset}{\gridset{}{\sparse}}{Omegas}{$\sgset$}{
+  Arbitrary sparse grid (possibly spatially adaptive)
+}
+
 \newnotationcommand[3]{\regsgspace}{%
-  V_{#1,#2}^{%
+  \gridspace{#1,#2}{%
     \sparse%
     \if\relax\detokenize{#3}\relax\else,#3\fi%
   }%
@@ -168,7 +193,7 @@
 }
 
 \newnotationcommand[3]{\regsgset}{%
-  \Omega_{#1,#2}^{%
+  \gridset{#1,#2}{%
     \sparse%
     \if\relax\detokenize{#3}\relax\else,#3\fi%
   }%
@@ -176,28 +201,8 @@
   Set of regular sparse grid points of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[3]{\interiorregsgset}{%
-  \interior{\Omega}_{#1,#2}^{%
-    \sparse%
-    \if\relax\detokenize{#3}\relax\else,#3\fi%
-  }%
-}{Omegandso}{$\interiorregsgset{n}{d}{}$}{
-  Set $:= \regsgset{n}{d}{} \cap \openinterval{\ß0, \ß1}$ of
-  interior regular sparse grid point of level $n$ with dimensionality $d$
-}
-
-%\newnotationcommand[4]{\coarseregsgspace}{%
-%  V_{#1,#2}^{%
-%    \sparse(#3)%
-%    \if\relax\detokenize{#4}\relax\else,#4\fi%
-%  }%
-%}{Vndsb}{$\coarseregsgspace{n}{d}{b}{}$}{
-%  Regular sparse grid space of level $n$ with dimensionality $d$
-%  and boundary parameter $b$
-%}
-
 \newnotationcommand[4]{\coarseregsgset}{%
-  \Omega_{#1,#2}^{%
+  \gridset{#1,#2}{%
     \sparse(#3)%
     \if\relax\detokenize{#4}\relax\else,#4\fi%
   }%
@@ -206,12 +211,56 @@
   and boundary parameter $b$
 }
 
-\newnotationcommand{\sgspace}{V^\sparse}{Vs}{$\sgspace$}{
-  Arbitrary sparse grid space (possibly spatially adaptive)
+\newcommand*{\interiorgrid}[1]{\mathring{#1}}
+\newcommand*{\bndrygrid}[1]{\mathop{}\!\partial#1}
+
+\newcommand*{\interiorsgset}{\gridset[\interiorgrid]{}{\sparse}}
+\newcommand*{\bndrysgset}{\gridset[\bndrygrid]{}{\sparse}}
+
+\makecommandnotation{\interiorgrid}{Omegaso}{$\interiorsgset$}{
+  Set $:= \sgset \cap \opint{\ß0, \ß1}$ of
+  interior grid points
+  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
 }
 
-\newnotationcommand{\sgset}{\Omega^\sparse}{Omegas}{$\sgset$}{
-  Arbitrary sparse grid (possibly spatially adaptive)
+\makecommandnotation{\bndrygrid}{Omegasd}{$\bndrysgset$}{
+  Set $:= \sgset \cap \bndrydomain{\clint{\ß0, \ß1}}
+  = \sgset \setminus \interiorsgset$ of
+  boundary sparse grid points
+  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+}
+
+\newnotationcommand[1]{\bndrydomain}{\mathop{}\!\partial#1}{Omegad}%
+{$\boundary{\Omega}$}{
+  Topological boundary of a set $\Omega \subset \RR^d$
+}
+
+\newcommand*{\interiorregsgset}[3]{%
+  \gridset[\interiorgrid]{#1,#2}{%
+    \sparse%
+    \if\relax\detokenize{#3}\relax\else,#3\fi%
+  }%
+}
+
+\newcommand*{\bndryregsgset}[3]{%
+  \gridset[\bndrygrid]{#1,#2}{%
+    \sparse%
+    \if\relax\detokenize{#3}\relax\else,#3\fi%
+  }%
+}
+
+\newcommand*{\interiorcoarseregsgset}[4]{%
+  \gridset[\interiorgrid]{#1,#2}{%
+    \sparse(#3)%
+    \if\relax\detokenize{#4}\relax\else,#4\fi%
+  }%
+}
+
+\newcommand*{\bndrycoarseregsgset}[4]{%
+  \gridset[\bndrygrid]{#1,#2}{%
+    \sparse(#3)%
+    \if\relax\detokenize{#4}\relax\else,#4\fi%
+  }%
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
@@ -276,10 +325,6 @@
 }%
 
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
-
-% interior and boundary
-\newcommand*{\interior}[1]{\mathring{#1}}
-\newcommand*{\bndry}[1]{\mathop{}\!\partial#1}
 
 % open interval
 \newcommand*{\openinterval}[1]{\mathopen]#1\mathclose[}
