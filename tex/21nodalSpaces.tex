@@ -64,10 +64,10 @@ there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \RR$ such that
 \begin{equation}
   \label{eq:interpFullGridUV}
   \fgintp{l}
-  = \sum_{i=0}^{2^l} c_i \basis{l,i},\quad
+  = \sum_{i=0}^{2^l} \interpcoeff{i} \basis{l,i},\quad
   \fa{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = f(\gp{l,i})},
 \end{equation}
-for some $c_i \in \RR$.
+for some $\interpcoeff{i} \in \RR$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $f$ in $\ns{l}$.
 The nodal space $\ns{l}^1$ is defined analogously as the span of the
 hat functions $\basis{l,i}^1$.
@@ -189,10 +189,10 @@ in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to 
 \begin{equation}
   \label{eq:interpFullGridMV}
   \fgintp{\ßl}
-  = \sum_{\ßi=\ß0}^{\ß2^\ßl} c_\ßi \basis{\ßl,\ßi},\quad
+  = \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßi} \basis{\ßl,\ßi},\quad
   \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
 \end{equation}
-where $c_\ßi \in \RR$ and
+where $\interpcoeff{\ßi} \in \RR$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
@@ -203,24 +203,24 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for $t = 1, \dotsc, d$.
 \end{lemma}
 \begin{proof}
-  Assume that $c_\ßi \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
+  Assume that $\interpcoeff{\ßi} \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
   such that $\fgintp{\ßl} \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
   we can evaluate \eqref{eq:interpFullGridMV} at $\vgp{\ßl,\ßi'}$ to obtain
   \begin{equation}
     \sum_{i_1=0}^{2^{l_1}}
     \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
-    \left(\sum_{i_d=0}^{2^{l_d}} c_\ßi \basis{l_d,i_d}(\gp{l_d,i_d'})\right) \dotsb
+    \left(\sum_{i_d=0}^{2^{l_d}} \interpcoeff{\ßi} \basis{l_d,i_d}(\gp{l_d,i_d'})\right) \dotsb
     \basis{l_2,i_2}(\gp{l_2,i_2'})\right) \basis{l_1,i_1}(\gp{l_1,i_1'})
     = 0.
   \end{equation}
   We apply the linear independence in 1D ($x_1$ direction) to conclude that
   the sum over $i_2$ must vanish.
-  Repeating this argument for all dimensions, we infer that $c_\ßi = 0$
+  Repeating this argument for all dimensions, we infer that $\interpcoeff{\ßi} = 0$
   for all~$\ßi = \ß0, \dotsc, \ß2^\ßl$,
   implying the linear independence of the functions $\basis{\ßl,\ßi}$.
 \end{proof}
-The lemma is equivalent to the statement that the coefficients $c_\ßi \in \RR$
+The lemma is equivalent to the statement that the coefficients $\interpcoeff{\ßi} \in \RR$
 exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}

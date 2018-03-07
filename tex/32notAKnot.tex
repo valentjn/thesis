@@ -95,7 +95,7 @@ described by the so-called Schoenberg--Whitney conditions:
   and $t_0, \dotsc, t_{m-1}$ a sequence of interpolation points with
   $\xi_p \le t_0 < \dotsb < t_{m-1} \le \xi_m$.
   Then, there exists a unique interpolating spline
-  $s = \sum_{k=0}^{m-1} c_k b_{k,\ß\xi}^p$ for arbitrary data if and only if
+  $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\ß\xi}^p$ for arbitrary data if and only if
   \begin{equation}
     \xi_k < t_k < \xi_{k+p+1},\quad
     k = 0, \dotsc, m - 1.
@@ -505,8 +505,8 @@ If the level $n$ is large enough, then $regsgspace{n}{d}{\ßp,\notaknot}$
 contains the space $P^\ßp$ of all $d$-variate polynomials of
 coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
 (i.e., functions $f\colon \clint{0, 1} \to \RR$,
-$f(\ßx) := \sum_{\ßq=\ß0}^\ßp c_\ßq \prod_{t=1}^d x_t^{q_t}$,
-with $c_\ßq \in \RR$).
+$f(\ßx) := \sum_{\ßq=\ß0}^\ßp \interpcoeff{\ßq} \prod_{t=1}^d x_t^{q_t}$,
+with $\interpcoeff{\ßq} \in \RR$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly
 represent global polynomials on $\clint{\ß0, \ß1}$:

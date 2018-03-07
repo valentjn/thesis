@@ -185,21 +185,18 @@ $L = \{\ßl \in \NNz^d \mid \normone{\ßl} \le n\}$.
 The key advantage of dimensionally adaptive sparse grids over
 spatially adaptive approaches lies in the
 so-called \term{combination technique}.
-\newgsymbol{cli!}{$c_{\ßl,\ßi}$}{%
-  Interpolation coefficients for the full grid $\ns{\ßl}$%
-}%
 For regular sparse grids, one can show that the sparse grid interpolant
 $f_{n,d}^\sparse$ can be written as
 \begin{equation}
   \label{eq:combiTechnique}
   f_{n,d}^\sparse
   = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\ßl} = n-q}
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \basis{\ßl,\ßi},
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi},
 \end{equation}
-where the $c_{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
+where the $\interpcoeff{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} c_{\ßl,\ßi} \basis{\ßl,\ßi}(\vgp{\ßl,\ßi'})
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\vgp{\ßl,\ßi'})
   = f(\vgp{\ßl,\ßi'})%
 }$ \multicite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
