@@ -90,7 +90,7 @@ The resulting function space and grid point set
   := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl},\qquad
   \regsgset{n}{d}{}
   := \bigdotcup_{\normone{\ßl} \le n}
-  \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\}
+  \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
@@ -172,7 +172,7 @@ of \term{dimensionally adaptive sparse grids} have the form
   \sgspace
   = \bigoplus_{\ßl \in L} \hs{\ßl},\qquad
   \sgset
-  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},
+  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
 \end{equation}
 where $L$ is a \term{downward closed} set, i.e.,
 a finite subset $L \subset \NNz^d$
@@ -241,21 +241,21 @@ In the most general form, their function spaces $\sgspace$
 and grid sets $\sgset$ have the form
 \begin{equation}
   \sgspace
-  = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in \lis\},\qquad
+  = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},\qquad
   \sgset
-  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in \lis\},
+  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},
 \end{equation}
-where $\lis$ is a finite set of level-index pairs $(\ßl,\ßi)$
-with $\ßl \in \NNz^d$ and $\ßi \in \his{\ßl}$.
-Algorithms for sparse grids often make specific assumptions about $\lis$.
+where $\liset$ is a finite set of level-index pairs $(\ßl,\ßi)$
+with $\ßl \in \NNz^d$ and $\ßi \in \hiset{\ßl}$.
+Algorithms for sparse grids often make specific assumptions about $\liset$.
 If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 %For example for hat functions $\basis{\ßl,\ßi}^1$, the grid should contain
 %the hierarchical ancestors of every grid point:
 %\begin{equation}
 %  \label{eq:hierAncestors}
-%  \forall_{(\ßl,\ßi) \in \lis}
-%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in \lis},\quad
+%  \forall_{(\ßl,\ßi) \in \liset}
+%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in \liset},\quad
 %  \ßl' := \ßl - \ße_t,\quad
 %  i_{t'}' :=
 %  \begin{cases}
@@ -270,7 +270,7 @@ If they are not met, then the algorithms do not produce the correct results.
 %However, as we will see, the unidirectional principle cannot be applied
 %to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
 %Therefore, for most of our considerations, we will not restrict the
-%choice of $\lis$.
+%choice of $\liset$.
 For example when working with hat functions $\basis{\ßl,\ßi}^1$,
 the grid should contain the hierarchical ancestors of every grid point.
 Otherwise, the so-called
@@ -279,7 +279,7 @@ hierarchical surpluses, does not work.
 However, as we will see, the unidirectional principle cannot be applied
 to B-splines of general degree, even if the hierarchical ancestors exist.
 Therefore, for most of our considerations, we will not restrict the
-choice of $\lis$.
+choice of $\liset$.
 
 \begin{figure}
   \subcaptionbox{%

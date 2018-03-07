@@ -54,7 +54,7 @@ for other non-polynomial functions as well.
   }%
   \caption{%
     Hierarchical cubic B-splines $\basis{l',i'}^p$
-    ($l' \le l$, $i' \in \his{l'}$, $p = 3$)
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
     $f(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
     on the grid of level $l = 3$.%
@@ -70,7 +70,7 @@ Since cubic polynomials as $f$ are cubic splines as well,
 $f \in S_l^p$ and hence
 $f \in \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
-$\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
+$\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
 that interpolates $f$ exactly on the whole domain $D_l^p$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
 which does not interpolate $f$ exactly in $D_l^p$).
@@ -321,7 +321,7 @@ we use global Lagrange polynomials for the coarser levels:
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in \his{l},\\
+    i \in \hiset{l},\\
     L_{l,i}\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
@@ -349,7 +349,7 @@ $\deg L_{l,i} \le 2^l < p$
 \begin{figure}
   \subcaptionbox{%
     Nodal not-a-knot B-splines
-    $\basis{l,i}^{p,\notaknot}$ ($i \in \his{l}$)
+    $\basis{l,i}^{p,\notaknot}$ ($i \in \hiset{l}$)
     and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_5}%
@@ -362,7 +362,7 @@ $\deg L_{l,i} \le 2^l < p$
   \hfill%
   \subcaptionbox{%
     Hierarchical not-a-knot B-splines
-    $\basis{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in \his{l'}$)
+    $\basis{l',i'}^{p,\notaknot}$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.%
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
@@ -455,13 +455,13 @@ respectively.
   First, the hierarchical subspace $\hs{l'}^{p,\notaknot}$ ($l' \le l$)
   is a subspace of $S_l^{p,\notaknot} = \ns{l}^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
-  every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in \his{l'}$)
+  every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in \hiset{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
   $\ß\xi_l^{p,\notaknot}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
   Second, the hierarchical functions $\basis{l',i'}^{p,\notaknot}$
-  ($l' \le l$, $i' \in \his{l'}$) are linearly independent.
+  ($l' \le l$, $i' \in \hiset{l'}$) are linearly independent.
   This can be shown similar to the proof of
   \thmref{prop:hierBSplineLinearlyIndependent}.
   The linear independence of the Lagrange polynomials
@@ -566,7 +566,7 @@ second derivative vanish in $x = 0$ itself:
     {\frac{\diff^2}{\dx^2} \basis{l,0}^{p,\notaknot}(0)},&
     l \ge 2,\quad i = 1,\\
     \basis{l,i}^{p,\notaknot}(x),&
-    l \ge 2,\quad i \in \his{l} \setminus \{1, 2^l - 1\},\\
+    l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{p,\modified,\notaknot}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
@@ -623,7 +623,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in \his{l},\\
+    i \in \hiset{l},\\
     L_{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \RR,\quad
     L_{l,i}^\clenshawcurtis(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
@@ -663,7 +663,7 @@ cubic degree and the corresponding modified functions are plotted in
     Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
     B-splines $\basis{l',i'}^{p,\notaknot}$ and
     $\basis{l',i'}^{p,\clenshawcurtis,\notaknot}$
-    ($l ' \le l$, $i' \in \his{l'}$, $p = 3$) up to level $l = 3$
+    ($l ' \le l$, $i' \in \hiset{l'}$, $p = 3$) up to level $l = 3$
     together with the respective modified versions
     $\basis{l',i'}^{p,\modified,\notaknot}$ and
     $\basis{l',i'}^{p,\modified,\clenshawcurtis,\notaknot}$
@@ -714,7 +714,7 @@ Consequently, we can define hierarchical natural B-splines as
       l \ge 1,
     \end{cases}\quad
     l \in \NNz,\quad
-    i \in \his{l},\\
+    i \in \hiset{l},\\
     J_i^{p,\ntrl}
     := \{i+1-\tfrac{p+1}{2}, \dotsc, i-1\} \cup
     \{i+1, \dotsc, i-1+\tfrac{p+1}{2}\},
@@ -726,7 +726,7 @@ the natural boundary conditions are satisfied:
   \frac{\diff^q}{\dx^q} \basis{l,i}^{p,\ntrl}(x)
   = 0,\quad
   l \ge 1,\quad
-  i \in \his{l},\quad
+  i \in \hiset{l},\quad
   q = 2, \dotsc, \tfrac{p+1}{2},\quad
   x \in \{0, 1\}.
 \end{equation}
@@ -758,7 +758,7 @@ rest of the thesis.
   \caption{%
     Hierarchical cubic natural B-splines
     $\basis{l',i'}^{p,\ntrl}$
-    ($l' \le l$, $i' \in \his{l'}$, $p = 3$) and
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
     grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%
   \label{fig:naturalBSpline}%

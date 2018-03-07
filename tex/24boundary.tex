@@ -119,7 +119,7 @@ A popular choice is the insertion at level one, which corresponds to
   \label{eq:sparseGridB1}
   \coarseregsgset{n}{d}{1}{}
   := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(1)}}
-  \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},\quad
+  \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},\quad
   L_{n,d}^{\sparse(1)}
   := \{\ßl \in \NNz^d \mid \normone{\vecmax(\ßl, \ß1)} \le n\},
 \end{equation}
@@ -160,7 +160,7 @@ the boundary functions and points at a level $b \in \NN$:
     \begin{split}
       \coarseregsgset{n}{d}{b}{}
       := \bigdotcup_{\ßl \in L_{n,d}^{\sparse(b)}}
-      \{\vgp{\ßl,\ßi} \mid \ßi \in \his{\ßl}\},&\quad
+      \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},&\quad
       L_{n,d}^{\sparse(b)}
       := \{\ßl \in \NN^d \mid \normone{\ßl} \le n\} \dotcup {}\\[-1em]
       &\big(\{\ßl \in \NNz^d \setminus \NN^d \mid
@@ -624,7 +624,7 @@ are shown in \cref{fig:modifiedHat} and defined as follows:
     \max(2 - \tfrac{x}{\ms{l}}, 0),&
     l \ge 2,\quad i = 1,\\
     \basis{l,i}^1(x),&
-    l \ge 2,\quad i \in \his{l} \setminus \{1, 2^l - 1\},\\
+    l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{1,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
@@ -638,7 +638,7 @@ which we will discuss when we introduce the corresponding unmodified functions.
   \includegraphics{hierarchicalHat_3}%
   \caption{%
     Modified hierarchical hat functions $\basis{l',i'}^{1,\modified}$
-    ($l' = 1, \dotsc, l$, $i' \in \his{l'}$) up to level $l = 3$.%
+    ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) up to level $l = 3$.%
   }%
   \label{fig:modifiedHat}%
 \end{SCfigure}

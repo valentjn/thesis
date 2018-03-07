@@ -17,14 +17,14 @@
   Therefore,
   \begin{align}
     \setsize{\coarseregsgset{n}{d}{b}{}}
-    &= \sum_{\substack{\ßl \in \NN^d,\\\normone{\ßl} \le n}} \setsize{\his{\ßl}} +
+    &= \sum_{\substack{\ßl \in \NN^d,\\\normone{\ßl} \le n}} \setsize{\hiset{\ßl}} +
     \sum_{
       \substack{
         \ßl \in \NNz^d \setminus \NN^d,\\
         (\normone{\vecmax(\ßl, \ß1)} \le n - b + 1) \lor
         (\ßl = \ß0)
       }
-    } \setsize{\his{\ßl}}.\\
+    } \setsize{\hiset{\ßl}}.\\
     \intertext{%
       The first sum is the number $\setsize{\interiorregsgset{n}{d}{}}$
       of interior grid points in $\regsgset{n}{d}{}$.
@@ -41,10 +41,10 @@
       \substack{
         \ßl \in \NNz^d,\\
         N_\ßl = q,\,\normone{\ßl} = m}
-    } \setsize{\his{\ßl}}
+    } \setsize{\hiset{\ßl}}
   \end{align}
   where $2^d$ is the summand for $\ßl = \ß0$
-  (number $\setsize{\his{\ß0}}$ of corners of $\clint{\ß0, \ß1}$).
+  (number $\setsize{\hiset{\ß0}}$ of corners of $\clint{\ß0, \ß1}$).
   The limits of the $m$ sum are $d-q$,
   since there must be at least $d-q$ entries $\ge 1$ in a level vector
   with $q$ zero entries, and $n-b-q+1$,
@@ -53,8 +53,8 @@
   \le n-b+1 - N_\ßl
   = n-b-q+1$.
   
-  In general, the innermost summand $\setsize{\his{\ßl}}$ can be calculated as
-  $\setsize{\his{\ßl}}
+  In general, the innermost summand $\setsize{\hiset{\ßl}}$ can be calculated as
+  $\setsize{\hiset{\ßl}}
   = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
   = 2^{\normone{\ßl} - d + 2N_\ßl}$.
   The number of innermost summands is given by

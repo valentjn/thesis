@@ -172,7 +172,7 @@ of the hat function.
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
 $\basis{l,i}^p\colon \clint{0, 1} \to \RR$ of level~$l \in \NNz$ and index
-$i \in \his{l}$ via an affine parameter transformation
+$i \in \hiset{l}$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
@@ -189,11 +189,11 @@ Note that due to the \term{translation invariance} of $\basis{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
-$\basis{l,i}^p$ ($l \in \NNz$, $i \in \his{l}$).
+$\basis{l,i}^p$ ($l \in \NNz$, $i \in \hiset{l}$).
 
 \begin{figure}
   \subcaptionbox{%
-    Nodal B-splines $\basis{l,i}^p$ ($i \in \his{l}$) and grid points $\gp{l,i}$
+    Nodal B-splines $\basis{l,i}^p$ ($i \in \hiset{l}$) and grid points $\gp{l,i}$
     \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_1}%
@@ -205,7 +205,7 @@ $\basis{l,i}^p$ ($l \in \NNz$, $i \in \his{l}$).
   \end{tikzpicture}%
   \hfill%
   \subcaptionbox{%
-    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
+    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[72mm]{%
@@ -443,7 +443,7 @@ if $p$ is too large or $l$ is too small.
 However, the corresponding B-splines $\basis{l,i}^p$ are still linearly
 independent on~$\clint{0, 1}$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
-$\basis{l,i}^p$ ($i \in \his{l}$) are linearly independent on $\clint{0, 1}$.
+$\basis{l,i}^p$ ($i \in \hiset{l}$) are linearly independent on $\clint{0, 1}$.
 
 \paragraph{Hierarchical splitting for uniform B-splines}
 
@@ -458,7 +458,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \end{lemma}
 
 \begin{proof}
-  Every function $\basis{l',i'}^p$ ($i' \in \his{l'}$) is continuous on
+  Every function $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
   of $\ß\xi_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
@@ -466,7 +466,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
   and from \cref{cor:nodalBSplineSpace}, it follows
   $\basis{l',i'}^p \in \ns{l}^p|_{D_l^p}$.
-  As the functions $\basis{l',i'}^p$ ($i' \in \his{l'}$) span
+  As the functions $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) span
   $\hs{l'}^p|_{D_l^p}$, we can conclude
   $\hs{l'}^p|_{D_l^p} \subset \ns{l}^p|_{D_l^p}$.
 \end{proof}
@@ -489,7 +489,7 @@ theoretic considerations in this thesis to odd $p$.
   \label{prop:hierBSplineLinearlyIndependent}
   \label{PROP:HIERBSPLINELINEARLYINDEPENDENT}
   The hierarchical B-splines
-  $\basis{l',i'}^p$ ($l' \le l$, $i' \in \his{l'}$)
+  $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
   are linearly independent.
 \end{restatable}
 
@@ -625,7 +625,7 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
     \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \basis{l,i'}^p(x),&
     l \ge 2,\quad i = 1,\\
     \basis{l,i}^p(x),&
-    l \ge 2,\quad i \in \his{l} \setminus \{1, 2^l - 1\},\\
+    l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{p,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
@@ -658,7 +658,7 @@ for growing $p$.
   \hfill%
   \subcaptionbox{%
     Modified hierarchical cubic B-splines $\basis{l',i'}^{p,\modified}$
-    ($l' = 1, \dotsc, l$, $i' \in \his{l'}$) and grid points $\gp{l',i'}$
+    ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_3}%
@@ -752,7 +752,7 @@ knot sequences.
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
 $\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \NNz$ and index
-$i \in \his{l}$ is defined as \cite{Valentin14Hierarchische}
+$i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
   := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,
@@ -793,7 +793,7 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
   \subcaptionbox{%
     Hierarchical cubic Clenshaw--Curtis B-splines
     $\basis{l',i'}^{p,\clenshawcurtis}$
-    ($l' \le l$, $i' \in \his{l'}$, $p = 3$) and
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
      $\basis{l',i'}^{p,\clenshawcurtis,\modified}$
     \emph{(dashed)}.%
