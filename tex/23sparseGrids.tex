@@ -165,20 +165,19 @@ To incorporate dimensional adaptivity into sparse grids,
 one has to generalize the symmetric
 choice of subspaces in the definition of regular sparse grids
 to allow for an asymmetric preference.
-\newgsymbol{L}{$L$}{Finite subset $L \subset \NNz^d$ of levels}%
 Generally, function spaces~$\sgspace$ and grid sets $\sgset$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
   \sgspace
-  = \bigoplus_{\ßl \in L} \hs{\ßl},\qquad
+  = \bigoplus_{\ßl \in \levelset} \hs{\ßl},\qquad
   \sgset
-  = \bigdotcup_{\ßl \in L} \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
+  = \bigdotcup_{\ßl \in \levelset} \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
 \end{equation}
-where $L$ is a \term{downward closed} set, i.e.,
-a finite subset $L \subset \NNz^d$
-for which $\forall_{\ßl \in L} \fa{\ßl' \le \ßl}{\ßl' \in L}$.
+where $\levelset$ is a \term{downward closed} set, i.e.,
+a finite subset $\levelset \subset \NNz^d$
+for which $\forall_{\ßl \in \levelset} \fa{\ßl' \le \ßl}{\ßl' \in \levelset}$.
 Regular sparse grids are a special case by setting
-$L = \{\ßl \in \NNz^d \mid \normone{\ßl} \le n\}$.
+$\levelset = \{\ßl \in \NNz^d \mid \normone{\ßl} \le n\}$.
 
 \paragraph{Combination technique}
 
