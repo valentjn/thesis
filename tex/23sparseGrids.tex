@@ -237,26 +237,25 @@ interpolation error, but rather high accuracy near the optima is important.
 
 This can be achieved by \term{spatially adaptive sparse grids},
 on which this thesis focuses.
-\newgsymbol{K}{$K$}{Finite set of level-index pairs $(\ßl,\ßi)$}%
 In the most general form, their function spaces $\sgspace$
 and grid sets $\sgset$ have the form
 \begin{equation}
   \sgspace
-  = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},\qquad
+  = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in \lis\},\qquad
   \sgset
-  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in K\},
+  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in \lis\},
 \end{equation}
-where $K$ is a finite set of level-index pairs $(\ßl,\ßi)$
+where $\lis$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \NNz^d$ and $\ßi \in \his{\ßl}$.
-Algorithms for sparse grids often make specific assumptions about $K$.
+Algorithms for sparse grids often make specific assumptions about $\lis$.
 If they are not met, then the algorithms do not produce the correct results.
 \newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 %For example for hat functions $\basis{\ßl,\ßi}^1$, the grid should contain
 %the hierarchical ancestors of every grid point:
 %\begin{equation}
 %  \label{eq:hierAncestors}
-%  \forall_{(\ßl,\ßi) \in K}
-%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in K},\quad
+%  \forall_{(\ßl,\ßi) \in \lis}
+%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in \lis},\quad
 %  \ßl' := \ßl - \ße_t,\quad
 %  i_{t'}' :=
 %  \begin{cases}
@@ -271,7 +270,7 @@ If they are not met, then the algorithms do not produce the correct results.
 %However, as we will see, the unidirectional principle cannot be applied
 %to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
 %Therefore, for most of our considerations, we will not restrict the
-%choice of $K$.
+%choice of $\lis$.
 For example when working with hat functions $\basis{\ßl,\ßi}^1$,
 the grid should contain the hierarchical ancestors of every grid point.
 Otherwise, the so-called
@@ -280,7 +279,7 @@ hierarchical surpluses, does not work.
 However, as we will see, the unidirectional principle cannot be applied
 to B-splines of general degree, even if the hierarchical ancestors exist.
 Therefore, for most of our considerations, we will not restrict the
-choice of $K$.
+choice of $\lis$.
 
 \begin{figure}
   \subcaptionbox{%

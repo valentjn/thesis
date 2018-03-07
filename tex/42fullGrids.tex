@@ -26,18 +26,18 @@ With the following invariant, we can prove the correctness of the \up.
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\ßy =$ unidirectionalPrinciple}{%
-      $K$, $(t_1, \dotsc, t_d)$, $\ßu$%
+      $\lis$, $(t_1, \dotsc, t_d)$, $\ßu$%
     }
       \State{$\ßy^{(0)} \gets \ßu$}
       \For{$j = 1, \dotsc, d$}
         \State{%
-          Define equivalence relation $\sim$ on $K$
+          Define equivalence relation $\sim$ on $\lis$
           as $\ßk \sim \ßk' \iff \ßk_{-t_j} = \ßk'_{-t_j}$%
         }
-        \For{$K_\mathrm{pole} \in K/{\sim}$}
+        \For{$\lis_\mathrm{pole} \in \lis/{\sim}$}
           \State{%
-            $(y_\ßk^{(j)})_{\ßk \in K_\mathrm{pole}} \gets
-            L_{t_j}\Big[(y_\ßk^{(j-1)})_{\ßk \in K_\mathrm{pole}}\Big]$%
+            $(y_\ßk^{(j)})_{\ßk \in \lis_\mathrm{pole}} \gets
+            L_{t_j}\Big[(y_\ßk^{(j-1)})_{\ßk \in \lis_\mathrm{pole}}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
@@ -49,11 +49,11 @@ With the following invariant, we can prove the correctness of the \up.
   \caption{%
     Application of a tensor product operator $L$ with
     the unidirectional principle.
-    Inputs are the set $K$ of grid indices,
+    Inputs are the set $\lis$ of grid indices,
     the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
     the one-dimensional operators $L_{t_j}$ should be applied, and
-    the vector $\ßu = (u_\ßk)_{\ßk \in K}$ of input data.
-    The output is the vector $\ßy = (y_\ßk)_{\ßk \in K}$
+    the vector $\ßu = (u_\ßk)_{\ßk \in \lis}$ of input data.
+    The output is the vector $\ßy = (y_\ßk)_{\ßk \in \lis}$
     of output data.%
   }%
   \label{alg:unidirectionalPrinciple}%
@@ -66,10 +66,10 @@ With the following invariant, we can prove the correctness of the \up.
   Let $T$ be the hierarchization operator on a full grid,
   i.e.,
   $T = A^{-1}$,
-  $\ßu = (f_\ßk)_{\ßk \in K}$,
-  $\ßy = (\surplus{\ßk})_{\ßk \in K}$,
+  $\ßu = (f_\ßk)_{\ßk \in \lis}$,
+  $\ßy = (\surplus{\ßk})_{\ßk \in \lis}$,
   $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
-  $K = \{\ß0, \dotsc, \ß2^\ßl\}$
+  $\lis = \{\ß0, \dotsc, \ß2^\ßl\}$
   corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
   ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
@@ -99,14 +99,14 @@ With the following invariant, we can prove the correctness of the \up.
       \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
     \intertext{%
       If we choose the equivalence class
-      $K_\mathrm{pole} := \clint{(\ßk_T,\ßk'_{-T})}_\sim$
+      $\lis_\mathrm{pole} := \clint{(\ßk_T,\ßk'_{-T})}_\sim$
       ($\ßk_T$ arbitrary, $\sim$ as defined in iteration $j$),
       then the sum over $k_{t_j}$ equals
-      $\sum_{\ßk \in K_\mathrm{pole}}
+      $\sum_{\ßk \in \lis_\mathrm{pole}}
       \alpha^{(j)}_\ßk \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((L_{t_j})^{-1}
-      %\Big[(\surplus{\ßk}^{(j)})_{\ßk \in K_\mathrm{pole}}\Big])_{k'_{t_j}}
-      %= ((\surplus{\ßk}^{(j-1)})_{\ßk \in K_\mathrm{pole}})_{k'_{t_j}}
+      %\Big[(\surplus{\ßk}^{(j)})_{\ßk \in \lis_\mathrm{pole}}\Big])_{k'_{t_j}}
+      %= ((\surplus{\ßk}^{(j-1)})_{\ßk \in \lis_\mathrm{pole}})_{k'_{t_j}}
       = \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}$
       by the 1D interpolation operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
