@@ -29,7 +29,7 @@ where $i$ is the \term{index} and $\ms{l} := 2^{-l}$ is the \term{mesh size}.%
 }
 Every grid point is associated with a \term{basis function}
 \begin{equation}
-  \basis{l,i}\colon \clint{0, 1} \to \RR.
+  \basis{l,i}\colon \clint{0, 1} \to \real.
 \end{equation}
 In this thesis, we assume $\basis{l,i}$ to be arbitrary,
 satisfying required assumptions when needed and stated.
@@ -59,15 +59,15 @@ $\basis{l,i}$:
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 every linear combination of these functions is unique.
-This ensures that for every objective function $f\colon \clint{0, 1} \to \RR$,
-there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \RR$ such that
+This ensures that for every objective function $f\colon \clint{0, 1} \to \real$,
+there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 \begin{equation}
   \label{eq:interpFullGridUV}
   \fgintp{l}
   = \sum_{i=0}^{2^l} \interpcoeff{i} \basis{l,i},\quad
   \fa{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = f(\gp{l,i})},
 \end{equation}
-for some $\interpcoeff{i} \in \RR$.
+for some $\interpcoeff{i} \in \real$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $f$ in $\ns{l}$.
 The nodal space $\ns{l}^1$ is defined analogously as the span of the
 hat functions $\basis{l,i}^1$.
@@ -145,7 +145,7 @@ as the tensor product of the univariate functions:%
   \todo{insert reference}.%
 }
 \begin{equation}
-  \basis{\ßl,\ßi}\colon \clint{\ß0, \ß1} \to \RR,\quad
+  \basis{\ßl,\ßi}\colon \clint{\ß0, \ß1} \to \real,\quad
   \basis{\ßl,\ßi}(\ßx)
   := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
 \end{equation}
@@ -183,15 +183,15 @@ all hypercubes
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
 Analogously to \eqref{eq:interpFullGridUV},
-we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \RR$
-in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \RR$ satisfying
+we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \real$
+in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \real$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
   \fgintp{\ßl}
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßi} \basis{\ßl,\ßi},\quad
   \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
 \end{equation}
-where $\interpcoeff{\ßi} \in \RR$ and
+where $\interpcoeff{\ßi} \in \real$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
@@ -202,7 +202,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for $t = 1, \dotsc, d$.
 \end{lemma}
 \begin{proof}
-  Assume that $\interpcoeff{\ßi} \in \RR$ are chosen in \eqref{eq:interpFullGridMV}
+  Assume that $\interpcoeff{\ßi} \in \real$ are chosen in \eqref{eq:interpFullGridMV}
   such that $\fgintp{\ßl} \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
   we can evaluate \eqref{eq:interpFullGridMV} at $\vgp{\ßl,\ßi'}$ to obtain
@@ -219,7 +219,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   for all~$\ßi = \ß0, \dotsc, \ß2^\ßl$,
   implying the linear independence of the functions $\basis{\ßl,\ßi}$.
 \end{proof}
-The lemma is equivalent to the statement that the coefficients $\interpcoeff{\ßi} \in \RR$
+The lemma is equivalent to the statement that the coefficients $\interpcoeff{\ßi} \in \real$
 exist for every objective function $f$ and are uniquely determined by
 the values at the grid points
 \begin{equation}

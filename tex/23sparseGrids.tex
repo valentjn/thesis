@@ -16,7 +16,7 @@ regular, dimensionally adaptive, and spatially adaptive.
 \paragraph{Hierarchical contributions}
 
 To assess the importance of a subspace, we consider again the
-interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \RR$.
+interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \real$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
@@ -192,7 +192,7 @@ $f_{n,d}^\sparse$ can be written as
   = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\ßl} = n-q}
   \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi},
 \end{equation}
-where the $\interpcoeff{\ßl,\ßi} \in \RR$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
+where the $\interpcoeff{\ßl,\ßi} \in \real$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
   \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\vgp{\ßl,\ßi'})

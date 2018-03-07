@@ -21,9 +21,9 @@ The multivariate case is treated as usual by the tensor product approach.
 \paragraph{Cardinal B-splines}
 
 \newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
-\newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \RR$}%
+\newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \real$}%
 The \term{cardinal B-spline}
-$b^p\colon \RR \to \RR$ of \term{degree} $p \in \natz$
+$b^p\colon \real \to \real$ of \term{degree} $p \in \natz$
 is defined by the recursion
 \begin{equation}
   \label{eq:cardinalBSpline}
@@ -80,14 +80,14 @@ which are also shown in \cref{fig:cardinalBSplineProps}
     \label{eq:cardinalBSplineDerivative}
     \frac{\diff}{\dx} b^p(x)
     = b^{p-1}(x) - b^{p-1}(x-1),\quad
-    x \in \RR.
+    x \in \real.
   \end{equation}
   
   \item
   \emph{Integral}:
   The integral of $b^p$ is normalized, i.e.,
   \begin{equation}
-    \int_\RR b^p(x) \dx = 1.
+    \int_\real b^p(x) \dx = 1.
   \end{equation}
   
   \item
@@ -103,7 +103,7 @@ which are also shown in \cref{fig:cardinalBSplineProps}
     Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise%
   }%
   As a special case, $b^1$ is a hat function interpolating the data
-  $\{(k, \delta_{k,1}) \mid k \in \ZZ\}$.
+  $\{(k, \delta_{k,1}) \mid k \in \integer\}$.
   For $p \to \infty$, the normalized cardinal B-splines converge
   pointwise to the standard Gaussian function
   $b^\infty(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
@@ -120,7 +120,7 @@ which are also shown in \cref{fig:cardinalBSplineProps}
     c^p b^p(c^p x + \tfrac{p+1}{2})
     = b^\infty(x),\quad
     c^p := \sqrt{\frac{p+1}{12}},\quad
-    x \in \RR.
+    x \in \real.
   \end{equation}
 \end{enumerate}
 The cardinal B-splines of the first degrees are shown in
@@ -171,7 +171,7 @@ of the hat function.
 }%
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
-$\basis{l,i}^p\colon \clint{0, 1} \to \RR$ of level~$l \in \natz$ and index
+$\basis{l,i}^p\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
 $i \in \hiset{l}$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
@@ -364,7 +364,7 @@ $D_\ß\xi^p$:
     $b_{m-1,\ß\xi}^p$,
     the B-splines span the spline space $S_\ß\xi^p$.
     \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
-    Elements of this space are splines $s\colon D_\ß\xi^p \to \RR$
+    Elements of this space are splines $s\colon D_\ß\xi^p \to \real$
     \emph{(black line)},
     which are linear combinations
     $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\ß\xi}^p$
@@ -391,7 +391,7 @@ $D_\ß\xi^p$:
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
   \newgsymbol{f|D}{$f|_D$}{%
-    Restriction $f|_D\colon D \to \RR$, $f|_D(x) := f(x)$,
+    Restriction $f|_D\colon D \to \real$, $f|_D(x) := f(x)$,
     onto a sub-domain $D$ for a function $f$%
   }%
   \newgsymbol{V|D}{$V|_D$}{%
@@ -582,7 +582,7 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
   \label{lemma:marsden}
   Let $p \in \natz$ and
   $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
-  Then, for all $x \in D_\ß\xi^p$ and $y \in \RR$,
+  Then, for all $x \in D_\ß\xi^p$ and $y \in \real$,
   \begin{equation}
     \label{eq:marsden}
     (x - y)^p
@@ -601,10 +601,10 @@ By applying Marsden's identity twice,
 \begin{equation}
   \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{\ms{l}}
-  = 2 \sum_{i \in \ZZ} \basis{l,i}^p(x)
-  - \frac{1}{\ms{l}} \sum_{i \in \ZZ} \gp{l,i} \basis{l,i}^p(x)
-  = \sum_{i \in \ZZ} (2 - i) \basis{l,i}^p(x),\quad
-  x \in \RR,
+  = 2 \sum_{i \in \integer} \basis{l,i}^p(x)
+  - \frac{1}{\ms{l}} \sum_{i \in \integer} \gp{l,i} \basis{l,i}^p(x)
+  = \sum_{i \in \integer} (2 - i) \basis{l,i}^p(x),\quad
+  x \in \real,
 \end{equation}
 we obtain a possible definition for $\basis{l,i}^{p,\modified}$.
 Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
@@ -701,7 +701,7 @@ are defined as
 \end{equation}
 Chebyshev points are the locations of the extrema of the
 Chebyshev polynomials $T_{2^l}$, which are defined as
-$T_{2^l}\colon \clint{0, 1} \to \RR$,
+$T_{2^l}\colon \clint{0, 1} \to \real$,
 $T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$ \cite{Xu16Chebyshev}.%
 \footnote{%
   The literature sometimes uses the name ``Chebyshev points'' for
@@ -777,7 +777,7 @@ where
 \end{subequations}
 For the construction of the knot sequence $\ß\xi_l^{p,\clenshawcurtis}$,
 the Chebyshev points $\gp{l,i}^\clenshawcurtis$
-are equidistantly extended onto the real line $\RR$.
+are equidistantly extended onto the real line $\real$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
 $\ns{l}^{p,\clenshawcurtis}$

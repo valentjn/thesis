@@ -9,7 +9,7 @@ and $\ßi \in \hiset{\ßl}$ such that $N := \setsize{\sgset} = \setsize{\liset} 
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
-$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \RR^N$ such that
+$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
@@ -17,11 +17,11 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \RR^N$ such that
   \quad\text{for all}\quad
   (\ßl, \ßi) \in \liset,
 \end{equation}
-where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \RR^N$ is a given set of
+where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N$ is a given set of
 function values $f(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $f^\sparse$ as
 \begin{equation}
-  f^\sparse\colon \clint{\ß0, \ß1} \to \RR,\quad
+  f^\sparse\colon \clint{\ß0, \ß1} \to \real,\quad
   f^\sparse :=
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'},
@@ -44,7 +44,7 @@ to keep the terminology consistent.
 The example of hierarchization can be generalized
 to arbitrary linear operators
 \begin{equation}
-  L\colon \RR^N \to \RR^N,\quad
+  L\colon \real^N \to \real^N,\quad
   \ßu \mapsto \ßy = L[\ßu],
 \end{equation}
 where $L$ depends on the grid $\sgset$ at hand.
@@ -56,12 +56,12 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
 %  keeping hierarchization as our main application in mind.%
 %}
 \begin{equation}
-  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \RR^N,\quad
-  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \RR^N,
+  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N,\quad
+  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N,
 \end{equation}
 which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
-$L$ is the inverse of the \term{interpolation matrix} $A \in \RR^{N \times N}$:
+$L$ is the inverse of the \term{interpolation matrix} $A \in \real^{N \times N}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}

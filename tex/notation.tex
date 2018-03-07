@@ -1,20 +1,17 @@
-% black-board letters
-% define \bbN and \nat (N = arbitrary letter)
-\newcommand*{\defbb}[1]{%
-  \newnamecommand{bb#1}{\mathbb{#1}}%
-  \newnamecommand{#1#1}{\mathbb{#1}}%
-}
-\defbb{R}
-\defbb{Z}
-
-% TODO 
-
-\newnotationcommand{\nat}{\mathbb{N}}{N}{$\nat$}{
+\newnotationcommand{\nat}{{\mathbb{N}}}{N}{$\nat$}{
   Natural numbers without zero ($1, 2, 3, \dotsc$)
 }
 
-\newnotationcommand{\natz}{\mathbb{N}_0}{N0}{$\natz$}{
+\newnotationcommand{\natz}{{\mathbb{N}}_0}{N0}{$\natz$}{
   Natural numbers with zero ($\nat \cup \{0\}$)
+}
+
+\newnotationcommand{\integer}{{\mathbb{Z}}}{Z}{\integer}{
+  Integer numbers ($\dotsc, -2, -1, 0, 1, 2, \dotsc$)
+}
+
+\newnotationcommand{\real}{{\mathbb{R}}}{R}{\real}{
+  Real numbers
 }
 
 \newnotation{l}{$\ßl$}{
@@ -99,21 +96,21 @@
 \newnotationcommand[1]{\clint}{[#1]}{ab!c}{$\clint{\ßa, \ßb}$}{
   Closed hyper-rectangle
   $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
-  with $\clint{a_t, b_t} := \{x_t \in \RR \mid a_t \le x_t \le b_t\}$
+  with $\clint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t \le b_t\}$
 }
 
 \newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{ab!o}%
 {$\opint{\ßa, \ßb}$}{
   Open hyper-rectangle
   $:= \opint{a_1, b_1} \times \dotsb \times \opint{a_d, b_d}$
-  with $\opint{a_t, b_t} := \{x_t \in \RR \mid a_t < x_t < b_t\}$
+  with $\opint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t < b_t\}$
 }
 
 \newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{ab!ho}%
 {$\hopint{\ßa, \ßb}$}{
   Half-open hyper-rectangle
   $:= \hopint{a_1, b_1} \times \dotsb \times \hopint{a_d, b_d}$
-  with $\hopint{a_t, b_t} := \{x_t \in \RR \mid a_t \le x_t < b_t\}$
+  with $\hopint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t < b_t\}$
 }
 
 \newcommand*{\clintscaled}[1]{\left[#1\right]}
@@ -127,7 +124,7 @@
 \newnotationcommand[1]{\normLtwo}{\norm{#1}_{L^2}}{||.||L2}%
 {$\normLtwo{\cdot}$}{%
   $L^2$ norm $\normLtwo{f} := \sqrt{\int_\Omega f(x)^2 \dx}$
-  of a function $f\colon \Omega \to \RR$
+  of a function $f\colon \Omega \to \real$
 }
 
 \newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{L^2}}
@@ -267,7 +264,7 @@
 
 \newnotationcommand[1]{\bndrydomain}{\mathop{}\!\partial#1}{Omegad}%
 {$\bndrydomain{\Omega}$}{
-  Topological boundary of a set $\Omega \subset \RR^d$
+  Topological boundary of a set $\Omega \subset \real^d$
 }
 
 \newcommand*{\interiorregsgset}[3]{%
