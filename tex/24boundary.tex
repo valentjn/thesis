@@ -7,9 +7,6 @@ with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $\ms{n}$ on the
 boundary of the domain $\clint{\ß0, \ß1}$ is finer than
 the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
-\newgsymbol{01o!}{$\opint{\ß0, \ß1}$}{%
-  Open unit hypercube $:= \opint{0, 1}^d := \{x \in \RR \mid 0 < x < 1\}^d$%
-}%
 If we define $\interiorregsgset{n}{d}{}$ as the set of
 interior grid points in $\regsgset{n}{d}{}$, i.e.,%
 \footnote{%
@@ -609,10 +606,7 @@ extrapolate the inner values linearly towards the boundary
 The basis function on level one is replaced by the
 ``constant one'' function.
 All other basis functions remain unchanged.
-\newgsymbol{.mod}{$\cdot^\modified$}{%
-  Superscript for ``Modified (basis function/function space/interpolant)
-  for grids without boundary points''%
-}%
+\usenotation{.mod}
 The resulting \term{modified hat functions} $\basis{l,i}^{1,\modified}$
 are shown in \cref{fig:modifiedHat} and defined as follows:
 \begin{equation}
