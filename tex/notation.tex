@@ -215,29 +215,22 @@
   Arbitrary sparse grid (possibly spatially adaptive)
 }
 
+\newcommand*{\appendwithcomma}[1]{\if\relax\detokenize{#1}\relax\else,#1\fi}
+
 \newnotationcommand[3]{\regsgspace}{%
-  \gridspace{#1,#2}{%
-    \sparse%
-    \if\relax\detokenize{#3}\relax\else,#3\fi%
-  }%
+  \gridspace{#1,#2}{\sparse\appendwithcomma{#3}}%
 }{Vnds}{$\regsgspace{n}{d}{}$}{
   Regular sparse grid space of level $n$ with dimensionality $d$
 }
 
 \newnotationcommand[3]{\regsgset}{%
-  \gridset{#1,#2}{%
-    \sparse%
-    \if\relax\detokenize{#3}\relax\else,#3\fi%
-  }%
+  \gridset{#1,#2}{\sparse\appendwithcomma{#3}}%
 }{Omegands}{$\regsgset{n}{d}{}$}{
   Set of regular sparse grid points of level $n$ with dimensionality $d$
 }
 
 \newnotationcommand[4]{\coarseregsgset}{%
-  \gridset{#1,#2}{%
-    \sparse(#3)%
-    \if\relax\detokenize{#4}\relax\else,#4\fi%
-  }%
+  \gridset{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
 }{Omegandsb}{$\coarseregsgset{n}{d}{b}{}$}{
   Set of regular sparse grid points of level $n$ with dimensionality $d$
   and boundary parameter $b$
@@ -268,31 +261,19 @@
 }
 
 \newcommand*{\interiorregsgset}[3]{%
-  \gridset[\interiorgrid]{#1,#2}{%
-    \sparse%
-    \if\relax\detokenize{#3}\relax\else,#3\fi%
-  }%
+  \gridset[\interiorgrid]{#1,#2}{\sparse\appendwithcomma{#3}}%
 }
 
 \newcommand*{\bndryregsgset}[3]{%
-  \gridset[\bndrygrid]{#1,#2}{%
-    \sparse%
-    \if\relax\detokenize{#3}\relax\else,#3\fi%
-  }%
+  \gridset[\bndrygrid]{#1,#2}{\sparse\appendwithcomma{#3}}%
 }
 
 \newcommand*{\interiorcoarseregsgset}[4]{%
-  \gridset[\interiorgrid]{#1,#2}{%
-    \sparse(#3)%
-    \if\relax\detokenize{#4}\relax\else,#4\fi%
-  }%
+  \gridset[\interiorgrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
 }
 
 \newcommand*{\bndrycoarseregsgset}[4]{%
-  \gridset[\bndrygrid]{#1,#2}{%
-    \sparse(#3)%
-    \if\relax\detokenize{#4}\relax\else,#4\fi%
-  }%
+  \gridset[\bndrygrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
