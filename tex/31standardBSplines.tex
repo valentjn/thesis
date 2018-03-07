@@ -522,14 +522,14 @@ is correct for hierarchical B-splines:
 This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
 We can now proceed to define multivariate
 nodal spaces $\ns{\ßl}^p$, hierarchical subspaces $\hs{\ßl}^p$, and
-sparse grid spaces $regsgspace{n}{d}{p}$ as in \cref{chap:20sparseGrids}.
+sparse grid spaces $\regsgspace{n}{d}{p}$ as in \cref{chap:20sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
 since the hierarchical splitting \eqref{eq:hierSplittingMV} does not
 require the bases in each dimension to be the same.
 Consequently, we can define degree-dimension-adaptive
 (so-called \term{$hp$-adaptive}) sparse grids
-$regsgspace{n}{d}{\ßp}$ for arbitrary odd degree vectors $\ßp$.
+$\regsgspace{n}{d}{\ßp}$ for arbitrary odd degree vectors $\ßp$.
 
 In the course of this thesis, we will derive multiple variations
 of the standard hierarchical B-spline basis.
@@ -782,7 +782,7 @@ As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
 $\ns{l}^{p,\clenshawcurtis}$
 and hierarchical subspaces $\hs{l}^{p,\clenshawcurtis}$ as well as
-sparse grid spaces $regsgspace{n}{d}{p,\clenshawcurtis}$ and
+sparse grid spaces $\regsgspace{n}{d}{p,\clenshawcurtis}$ and
 grid point sets $\regsgset{n}{d}{\clenshawcurtis}$
 using tensor products of Clenshaw--Curtis B-splines
 and Cartesian products of Chebyshev point sets.
