@@ -20,7 +20,6 @@ The multivariate case is treated as usual by the tensor product approach.
 
 \paragraph{Cardinal B-splines}
 
-\newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \real$}%
 The \term{cardinal B-spline}
 $\cardbspl{p}\colon \real \to \real$ of \term{degree} $p \in \natz$
 is defined by the recursion
@@ -30,10 +29,10 @@ is defined by the recursion
   :=
   \begin{cases}
     \displaystyle\int_0^1 \cardbspl{p-1}(x - y) \diff{}y,&p \ge 1,\\
-    \chi_{\hopint{0, 1}}(x),&p = 0,
+    \charfun{\hopint{0, 1}}(x),&p = 0,
   \end{cases}
 \end{equation}
-where $\chi_{\hopint{0, 1}}$ is the characteristic function of
+where $\charfun{\hopint{0, 1}}$ is the characteristic function of
 the half-open unit interval $\hopint{0, 1}$
 \cite{Hoellig13Approximation}
 The cardinal B-spline $\cardbspl{p}$ has the following properties,
@@ -295,7 +294,7 @@ we introduce the notion of non-uniform B-splines.
       \dfrac{x - \xi_k}{\xi_{k+p} - \xi_k} b_{k,\ß\xi}^{p-1}(x) +
       \dfrac{\xi_{k+p+1} - x}{\xi_{k+p+1} - \xi_{k+1}}
       b_{k+1,\ß\xi}^{p-1}(x),&p \ge 1,\\
-      \chi_{\hopint{\xi_k, \xi_{k+1}}}(x),&p = 0.
+      \charfun{\hopint{\xi_k, \xi_{k+1}}}(x),&p = 0.
     \end{cases}
   \end{equation}
 \end{definition}
