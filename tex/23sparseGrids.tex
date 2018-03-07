@@ -80,7 +80,7 @@ for the hat function surpluses $\surplus{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
 from the sum \eqref{eq:interpHierFullGrid} whose level sum $\normone{\ßl}$
-exceeds a certain value $n \in \NNz$.
+exceeds a certain value $n \in \natz$.
 More formally, the selection of the relevant subspaces can be formulated as a
 continuous knapsack problem~\cite{Bungartz04Sparse}.
 \usenotation{.s}
@@ -174,10 +174,10 @@ of \term{dimensionally adaptive sparse grids} have the form
   = \bigdotcup_{\ßl \in \levelset} \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
 \end{equation}
 where $\levelset$ is a \term{downward closed} set, i.e.,
-a finite subset $\levelset \subset \NNz^d$
+a finite subset $\levelset \subset \natz^d$
 for which $\forall_{\ßl \in \levelset} \fa{\ßl' \le \ßl}{\ßl' \in \levelset}$.
 Regular sparse grids are a special case by setting
-$\levelset = \{\ßl \in \NNz^d \mid \normone{\ßl} \le n\}$.
+$\levelset = \{\ßl \in \natz^d \mid \normone{\ßl} \le n\}$.
 
 \paragraph{Combination technique}
 
@@ -245,7 +245,7 @@ and grid sets $\sgset$ have the form
   = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},
 \end{equation}
 where $\liset$ is a finite set of level-index pairs $(\ßl,\ßi)$
-with $\ßl \in \NNz^d$ and $\ßi \in \hiset{\ßl}$.
+with $\ßl \in \natz^d$ and $\ßi \in \hiset{\ßl}$.
 Algorithms for sparse grids often make specific assumptions about $\liset$.
 If they are not met, then the algorithms do not produce the correct results.
 %\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%

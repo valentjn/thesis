@@ -23,7 +23,7 @@ The multivariate case is treated as usual by the tensor product approach.
 \newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
 \newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \RR$}%
 The \term{cardinal B-spline}
-$b^p\colon \RR \to \RR$ of \term{degree} $p \in \NNz$
+$b^p\colon \RR \to \RR$ of \term{degree} $p \in \natz$
 is defined by the recursion
 \begin{equation}
   \label{eq:cardinalBSpline}
@@ -171,7 +171,7 @@ of the hat function.
 }%
 We can use the cardinal B-spline $b^p$ as a ``mother function'' to
 define the uniform hierarchical B-spline
-$\basis{l,i}^p\colon \clint{0, 1} \to \RR$ of level~$l \in \NNz$ and index
+$\basis{l,i}^p\colon \clint{0, 1} \to \RR$ of level~$l \in \natz$ and index
 $i \in \hiset{l}$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
@@ -189,7 +189,7 @@ Note that due to the \term{translation invariance} of $\basis{l,i}^p$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $b^p$
 to enable evaluations of all hierarchical B-splines
-$\basis{l,i}^p$ ($l \in \NNz$, $i \in \hiset{l}$).
+$\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
 
 \begin{figure}
   \subcaptionbox{%
@@ -279,7 +279,7 @@ we introduce the notion of non-uniform B-splines.
   \newgsymbol{xi!}{$\ß\xi$}{%
     Knot sequence $:= (\xi_0, \dotsc, \xi_{m+p})$%
   }%
-  Let $m, p \in \NNz$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
+  Let $m, p \in \natz$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
   \newgsymbol{bkxip}{$b_{k,\ß\xi}^p$}{%
     Non-uniform B-spline of degree $p$ with knots $\ß\xi$ and index $k$%
@@ -412,7 +412,7 @@ $D_\ß\xi^p$:
   }%
   The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
-  of level $l \in \NNz$ are
+  of level $l \in \natz$ are
   a basis of the spline space $S_{\ß\xi_l^p}^p$, where
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
@@ -580,7 +580,7 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 
 \begin{lemma}[Marsden's identity]
   \label{lemma:marsden}
-  Let $p \in \NNz$ and
+  Let $p \in \natz$ and
   $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
   Then, for all $x \in D_\ß\xi^p$ and $y \in \RR$,
   \begin{equation}
@@ -692,7 +692,7 @@ resulting Clenshaw--Curtis grids and B-splines will serve as an example.
   Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
   function/function space/interpolant)''%
 }%
-The \term{Chebyshev points} $\gp{l,i}^\clenshawcurtis$ of level $l \in \NNz$
+The \term{Chebyshev points} $\gp{l,i}^\clenshawcurtis$ of level $l \in \natz$
 are defined as
 \begin{equation}
   \gp{l,i}^\clenshawcurtis
@@ -751,7 +751,7 @@ knot sequences.
 \paragraph{Hierarchical Clenshaw--Curtis B-splines}
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
-$\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \NNz$ and index
+$\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
@@ -843,7 +843,7 @@ in \eqref{eq:marsden}.
 Please note that our framework permits arbitrary grid point distributions
 $\gp{l,i}^\ast$,
 as long as their number grows exponentially
-(i.e., there are $2^l + 1$ points $\gp{l,i}^\ast$ in each level $l \in \NNz$)
+(i.e., there are $2^l + 1$ points $\gp{l,i}^\ast$ in each level $l \in \natz$)
 and they are nested
 (i.e., \eqref{eq:rewriteGridPoint} holds).
 Appropriate non-uniform B-spline bases could be defined analogously

@@ -1,5 +1,5 @@
 % black-board letters
-% define \bbN and \NN (N = arbitrary letter)
+% define \bbN and \nat (N = arbitrary letter)
 \newcommand*{\defbb}[1]{%
   \newnamecommand{bb#1}{\mathbb{#1}}%
   \newnamecommand{#1#1}{\mathbb{#1}}%
@@ -7,40 +7,40 @@
 \defbb{R}
 \defbb{Z}
 
-\newnotationcommand{\NN}{\mathbb{N}}{N}{$\NN$}{
+% TODO 
+
+\newnotationcommand{\nat}{\mathbb{N}}{N}{$\nat$}{
   Natural numbers without zero ($1, 2, 3, \dotsc$)
 }
 
-\newnotationcommand{\NNz}{\mathbb{N}_0}{N0}{$\NNz$}{
-  Natural numbers with zero ($\NN \cup \{0\}$)
+\newnotationcommand{\natz}{\mathbb{N}_0}{N0}{$\natz$}{
+  Natural numbers with zero ($\nat \cup \{0\}$)
 }
 
 \newnotation{l}{$\ßl$}{
-  Level $\ßl \in \NNz^d$
+  Level $\ßl \in \natz^d$
 }
 
 \newnotation{i}{$\ßi$}{
-  Index $\ßi = \ß0, \dotsc, \ß2^\ßl$,
-}
-
-\newnotation{i02l!}{$\ßi = \ß0, \dotsc, \ß2^\ßl$}{
-  For all $\ßi$ with $0 \le i_t \le 2^{l_t}$ for all $t = 1, \dotsc, d$
+  Index $\ßi = \ß0, \dotsc, \ß2^\ßl$
+  (i.e., $\ßi \in \natz^d$ with $0 \le i_t \le 2^{l_t}$
+  for all $t = 1, \dotsc, d$)
 }
 
 \newnotation{d}{$d$}{
-  Dimensionality $\in \NN$
+  Dimensionality $\in \nat$
 }
 
 \newnotation{n}{$n$}{
-  Level $\in \NNz$ of full or sparse grid
+  Level $\in \natz$ of full or sparse grid
 }
 
 \newnotation{0!}{$\ß0$}{
-  $(0, \dotsc, 0) \in \NNz^d$
+  $(0, \dotsc, 0) \in \natz^d$
 }
 
 \newnotation{1!}{$\ß1$}{
-  $(1, \dotsc, 1) \in \NN^d$
+  $(1, \dotsc, 1) \in \nat^d$
 }
 
 \newnotationcommand[1]{\vgp}{\ßx_{#1}}{xli}{$\vgp{\ßl,\ßi}$}{
@@ -172,7 +172,7 @@
 }
 
 \newnotationcommand{\levelset}{L}{L}{$\levelset$}{
-  Finite subset $L \subset \NNz^d$ of levels
+  Finite subset $L \subset \natz^d$ of levels
 }
 
 \newnotationcommand[4]{\coarselevelset}{%
@@ -181,7 +181,7 @@
     \if\relax\detokenize{#4}\relax\else,#4\fi%
   }%
 }{L}{$\levelset$}{
-  Finite subset $L \subset \NNz^d$ of levels for the grid
+  Finite subset $L \subset \natz^d$ of levels for the grid
   $\coarseregsgset{n}{d}{b}{}$
 }
 

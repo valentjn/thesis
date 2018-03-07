@@ -12,7 +12,7 @@ Let us first consider univariate functions
 that are defined on the unit interval $\clint{0, 1}$.
 \usenotation{l}
 We discretize this domain by splitting it into $2^l$ equally sized segments,
-where $l \in \NNz$ is the \term{level}.
+where $l \in \natz$ is the \term{level}.
 \usenotation{i}
 The resulting $2^l + 1$ \term{grid points} $\gp{l,i}$ are given by
 \begin{equation}
@@ -104,7 +104,7 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 \paragraph{Cartesian and tensor products}
 
 \usenotation{d}
-For the multivariate case with $d \in \NN$ dimensions,
+For the multivariate case with $d \in \nat$ dimensions,
 we proceed with the usual tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
@@ -113,9 +113,8 @@ multi-indices, Cartesian products, and tensor products, respectively.
 Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
-where $\ßl = (l_1, \dotsc, l_d) \in \NNz^d$ is the $d$-dimensional level
+where $\ßl = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
-\usenotation{i02l!}
 The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
@@ -228,7 +227,7 @@ the values at the grid points
   := \{\vgp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
 \usenotation{n}
-A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \NNz$.
+A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \natz$.
 \usenotation{Vnd}
 In this case, we replace ``$\ßl$'' in the subscripts with ``$n{,}d$''
 (for example, $\ns{n,d} := \ns{n \cdot \ß1}$).

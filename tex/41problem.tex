@@ -4,7 +4,7 @@
 Let $\sgset \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
 of the form $\setsize{\sgset} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
-where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \NNz$
+where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \natz$
 and $\ßi \in \hiset{\ßl}$ such that $N := \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
@@ -134,13 +134,13 @@ We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
 $\sgset$, $\liset$, $\ßu$, and $\ßy$
 for most of the considerations in this chapter.
 Therefore, we assume that in each dimension $t$, the level-index pairs
-$(l_t, i_t)$ ($l_t \in \NNz$, $i_t \in \hiset{l_t}$)
-are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \NNz$.
+$(l_t, i_t)$ ($l_t \in \natz$, $i_t \in \hiset{l_t}$)
+are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \natz$.
 We identify $(\ßl, \ßi)$ with a single index $\ßk$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
 Consequently,
 we can regard $\liset$ as a subset $\{\ßk \mid \ßx_\ßk \in \sgset\}$
-of $\NN^d$.
+of $\nat^d$.
 We will switch between the notations whenever appropriate.
 All statements that are formulated in the $\ßk$ notation are
 valid for both the nodal and the hierarchical basis

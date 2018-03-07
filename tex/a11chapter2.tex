@@ -17,10 +17,10 @@
   Therefore,
   \begin{align}
     \setsize{\coarseregsgset{n}{d}{b}{}}
-    &= \sum_{\substack{\ßl \in \NN^d,\\\normone{\ßl} \le n}} \setsize{\hiset{\ßl}} +
+    &= \sum_{\substack{\ßl \in \nat^d,\\\normone{\ßl} \le n}} \setsize{\hiset{\ßl}} +
     \sum_{
       \substack{
-        \ßl \in \NNz^d \setminus \NN^d,\\
+        \ßl \in \natz^d \setminus \nat^d,\\
         (\normone{\vecmax(\ßl, \ß1)} \le n - b + 1) \lor
         (\ßl = \ß0)
       }
@@ -39,7 +39,7 @@
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
-        \ßl \in \NNz^d,\\
+        \ßl \in \natz^d,\\
         N_\ßl = q,\,\normone{\ßl} = m}
     } \setsize{\hiset{\ßl}}
   \end{align}
@@ -58,8 +58,8 @@
   = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
   = 2^{\normone{\ßl} - d + 2N_\ßl}$.
   The number of innermost summands is given by
-  $\setsize{\{\ßl \in \NNz^d \mid N_\ßl = q,\, \normone{\ßl} = m\}}
-  = \binom{d}{q} \setsize{\{\ßl \in \NN^{d-q} \mid \normone{\ßl} = m\}}
+  $\setsize{\{\ßl \in \natz^d \mid N_\ßl = q,\, \normone{\ßl} = m\}}
+  = \binom{d}{q} \setsize{\{\ßl \in \nat^{d-q} \mid \normone{\ßl} = m\}}
   = \binom{d}{q} \binom{m-1}{d-q-1}$
   by first putting $q$ zeros in $d$ places,
   for which there are $\binom{d}{q}$ possibilities, and then
@@ -101,7 +101,7 @@
 \propInvariantCoarseBoundary*
 
 \begin{proof}
-  First, we show that every inserted level $\ßl' \in \NNz^t$ in the inner loop
+  First, we show that every inserted level $\ßl' \in \natz^t$ in the inner loop
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\ßl' := (\ßl, 0)$
   is inserted for some $\ßl \in L^{(t-1)}$,
@@ -121,17 +121,17 @@
   If $\ßl' := (\ßl, l_t)$ is inserted
   for some $\ßl \in L^{(t-1)}$ and
   $l_t \in \{1, \dotsc, l^\ast\}$, then there are,
-  depending on whether $\ßl \in \NN^{t-1}$ or not, two cases:
+  depending on whether $\ßl \in \nat^{t-1}$ or not, two cases:
   \begin{itemize}
     \item
-    If $\ßl \in \NN^{t-1}$, then $\ßl' \in \NN^{t-1}$ as well and
+    If $\ßl \in \nat^{t-1}$, then $\ßl' \in \nat^{t-1}$ as well and
     $\normone{\ßl'} \le \normone{\ßl} + l^\ast = n - d + t$
     due to \cref{line:algCoarseBoundary2},
     i.e., $\ßl'$ is contained in the first set of the \rhs of
     \eqref{eq:coarseInvariant}.
     
     \item
-    If $\ßl \notin \NN^{t-1}$, then $\ßl' \notin \NN^{t-1}$ as well and
+    If $\ßl \notin \nat^{t-1}$, then $\ßl' \notin \nat^{t-1}$ as well and
     $\normone{\vecmax(\ßl', \ß1)}
     \le \normone{\vecmax(\ßl, \ß1)} + l^\ast
     = n - d + t - b + 1$
@@ -147,31 +147,31 @@
   are inserted by the algorithm into $L^{(t)}$ eventually.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the \rhs of \eqref{eq:coarseInvariant} equals
-  $\{l \in \NNz \mid l \le n-d+1\}$, which is just $L^{(1)}$.
+  $\{l \in \natz \mid l \le n-d+1\}$, which is just $L^{(1)}$.
   For the induction step $(t - 1) \to t$, we assume
   the validity of the induction hypothesis
   \begin{equation}
     \label{eq:proofCoarseInductionHypothesis}
     \begin{aligned}
     L^{(t-1)}
-    &= \{\ßl \in \NN^{t-1} \mid
+    &= \{\ßl \in \nat^{t-1} \mid
     \normone{\ßl} \le n-d+t-1\} \dotcup {}\\
     &\hphantom{{}={}}
-    \big(\{\ßl \in \NNz^{t-1} \setminus \NN^{t-1} \mid
+    \big(\{\ßl \in \natz^{t-1} \setminus \nat^{t-1} \mid
     \normone{\vecmax(\ßl, \ß1)} \le n-d+t-b\} \cup
     \{\vec{0}\}\big).
     \end{aligned}
   \end{equation}
   The \rhs of \eqref{eq:coarseInvariant} has three parts,
-  so we check for elements $\ßl' \in \NNz^t$
+  so we check for elements $\ßl' \in \natz^t$
   of each of the three sets that they are appended to $L^{(t)}$
   eventually.
   
   First, let $\ßl' = (\ßl, l_t)$ be in the first set of the \rhs,
-  i.e., $\ßl' \in \NN^t$ (in particular $l_t \ge 1$) and
+  i.e., $\ßl' \in \nat^t$ (in particular $l_t \ge 1$) and
   $\normone{\ßl'} \le n - d + t$.
   Note that $\ßl$ will be encountered in the inner loop, as
-  $\ßl \in \NN^{t-1}$ and
+  $\ßl \in \nat^{t-1}$ and
   $\normone{\ßl} = \normone{\ßl'} - l_t \le n - d + t - 1$,
   which implies $\ßl \in L^{(t-1)}$ by the induction
   hypothesis \eqref{eq:proofCoarseInductionHypothesis}.
@@ -183,13 +183,13 @@
   
   Second, let $\ßl' = (\ßl, l_t)$
   be in the second set of the \rhs, i.e.,
-  $\ßl' \notin \NN^t$ and
+  $\ßl' \notin \nat^t$ and
   $\normone{\vecmax(\ßl', \ß1)} \le n-d+t-b+1$.
   Here, there are three cases:
   \begin{enumerate}
     \item
     $l_t \ge 1$:
-    This implies $\ßl \notin \NN^{t-1}$ and 
+    This implies $\ßl \notin \nat^{t-1}$ and 
     $\normone{\vecmax(\ßl, \ß1)}
     = \normone{\vecmax(\ßl', \ß1)} - l_t
     \le n-d+t-b$.
@@ -201,7 +201,7 @@
     $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
     \item
-    $l_t = 0$ and $\ßl \in \NN^{t-1}$:
+    $l_t = 0$ and $\ßl \in \nat^{t-1}$:
     This implies $\normone{\ßl} = \normone{\ßl'}
     = \normone{\vecmax(\ßl', \ß1)} - 1
     \le n - d + t - b
@@ -213,7 +213,7 @@
     = \normone{\ßl} \le n - d + t - b$.
     
     \item
-    $l_t = 0$ and $\ßl \notin \NN^{t-1}$:
+    $l_t = 0$ and $\ßl \notin \nat^{t-1}$:
     This implies $\normone{\vecmax(\ßl, \ß1)}
     = \normone{\vecmax(\ßl', \ß1)} - 1
     \le n - d + t - b$.
@@ -222,9 +222,9 @@
     $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
-  Third, let $\ßl = (\vec{0}, 0) \in \NNz^t$
+  Third, let $\ßl = (\vec{0}, 0) \in \natz^t$
   be in the third set of the \rhs.
   This level is appended in \cref{line:algCoarseBoundary5}
-  to $L^{(t)}$, since $\ßl' = \vec{0} \in \NNz^{t-1}$ is in $L^{(t-1)}$ by 
+  to $L^{(t)}$, since $\ßl' = \vec{0} \in \natz^{t-1}$ is in $L^{(t-1)}$ by 
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}
