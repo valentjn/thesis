@@ -93,7 +93,7 @@ non-symmetric
 This is because the matrix entry in the $(\ßl,\ßi)$-th row and
 $(\ßl',\ßi')$-th column vanishes if and only if
 \begin{equation}
-  \vgp{\ßl,\ßi} \notin \intsupp \basis{\ßl',\ßi'}^\ßp
+  \vgp{\ßl,\ßi} \notin \interiorsupp \basis{\ßl',\ßi'}^\ßp
   \iff
   \ex{t = 1, \dotsc, d}{
     \gp{l_t,i_t} \notin
@@ -103,10 +103,10 @@ $(\ßl',\ßi')$-th column vanishes if and only if
     }
   },
 \end{equation}
-where $\intsupp$ is the interior of the support
+where $\interiorsupp$ is the interior of the support
 \cite{Valentin18Fundamental}.
 For coarse levels $\ßl'$, the mesh size $\ms{l'_t}$ is large in
-every dimension $t$, which implies that $\intsupp \basis{\ßl',\ßi'}^\ßp$
+every dimension $t$, which implies that $\interiorsupp \basis{\ßl',\ßi'}^\ßp$
 contains most of the grid points.
 In contrast to the hat function case ($\ßp = \ß1$),
 the value of $\surplus{\ßl',\ßi'}$ depends not only on
