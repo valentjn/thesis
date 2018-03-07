@@ -22,10 +22,6 @@ The multivariate case is treated as usual by the tensor product approach.
 
 \newgsymbol{bp}{$b^p$}{Cardinal B-spline of degree $p$}%
 \newgsymbol{x01}{$\chi_A$}{Characteristic function of the set $A \subset \RR$}%
-\newgsymbol{01!h}{$\halfopeninterval{\ß0, \ß1}$}{%
-  Half-open unit interval $:= \halfopeninterval{0, 1}^d =
-  \{x \in \RR \mid 0 \le x < 1\}^d$%
-}%
 The \term{cardinal B-spline}
 $b^p\colon \RR \to \RR$ of \term{degree} $p \in \NNz$
 is defined by the recursion
@@ -35,11 +31,11 @@ is defined by the recursion
   :=
   \begin{cases}
     \displaystyle\int_0^1 b^{p-1}(x - y) \diff{}y,&p \ge 1,\\
-    \chi_{\halfopeninterval{0, 1}}(x),&p = 0,
+    \chi_{\hopint{0, 1}}(x),&p = 0,
   \end{cases}
 \end{equation}
-where $\chi_{\halfopeninterval{0, 1}}$ is the characteristic function of
-the half-open unit interval $\halfopeninterval{0, 1}$
+where $\chi_{\hopint{0, 1}}$ is the characteristic function of
+the half-open unit interval $\hopint{0, 1}$
 \cite{Hoellig13Approximation}
 The cardinal B-spline $b^p$ has the following properties,
 which are also shown in \cref{fig:cardinalBSplineProps}
@@ -70,7 +66,7 @@ which are also shown in \cref{fig:cardinalBSplineProps}
   
   \item
   \emph{Spline:}
-  On every \term{knot interval} $\halfopeninterval{k, k+1}$
+  On every \term{knot interval} $\hopint{k, k+1}$
   ($k = 0, \dotsc, p$), $b^p$ is a polynomial of degree~$p$, i.e.,
   $b^p$ is a spline of degree $p$ (piecewise polynomial).
   
@@ -300,7 +296,7 @@ we introduce the notion of non-uniform B-splines.
       \dfrac{x - \xi_k}{\xi_{k+p} - \xi_k} b_{k,\ß\xi}^{p-1}(x) +
       \dfrac{\xi_{k+p+1} - x}{\xi_{k+p+1} - \xi_{k+1}}
       b_{k+1,\ß\xi}^{p-1}(x),&p \ge 1,\\
-      \chi_{\halfopeninterval{\xi_k, \xi_{k+1}}}(x),&p = 0.
+      \chi_{\hopint{\xi_k, \xi_{k+1}}}(x),&p = 0.
     \end{cases}
   \end{equation}
 \end{definition}

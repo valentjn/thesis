@@ -97,8 +97,6 @@
   with $\clint{a_t, b_t} := \{x_t \in \RR \mid a_t \le x_t \le b_t\}$
 }
 
-\newcommand*{\clintscaled}[1]{\left[#1\right]}
-
 \newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{ab!o}%
 {$\opint{\ßa, \ßb}$}{
   Open hyper-rectangle
@@ -106,7 +104,16 @@
   with $\opint{a_t, b_t} := \{x_t \in \RR \mid a_t < x_t < b_t\}$
 }
 
+\newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{ab!o}%
+{$\hopint{\ßa, \ßb}$}{
+  Half-open hyper-rectangle
+  $:= \hopint{a_1, b_1} \times \dotsb \times \hopint{a_d, b_d}$
+  with $\hopint{a_t, b_t} := \{x_t \in \RR \mid a_t \le x_t < b_t\}$
+}
+
+\newcommand*{\clintscaled}[1]{\left[#1\right]}
 \newcommand*{\opintscaled}[1]{\left]#1\right[}
+\newcommand*{\hopintscaled}[1]{\left[#1\right[}
 
 \newnotationcommand[1]{\normone}{\norm{#1}_1}{||.||1}{$\normone{\cdot}$}{
   $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
@@ -325,8 +332,3 @@
 }%
 
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
-
-% open interval
-\newcommand*{\openinterval}[1]{\mathopen]#1\mathclose[}
-\newcommand*{\halfopeninterval}[1]{\mathopen[#1\mathclose[}
-\newcommand*{\openintervalscaled}[1]{\left]#1\right[}
