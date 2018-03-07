@@ -300,7 +300,11 @@
 \newcommand*{\term}[1]{\emph{#1}}
 
 % mathematic operators
-\DeclareMathOperator{\intsupp}{\interior{\supp}}
+\DeclareMathOperator{\intsupp}{\mathring{\supp}}
+\makecommandnotation{\intsupp}{suppo}{$\intsupp$}{
+  Interior of the support of a function
+  (i.e., the set where the function does not vanish)
+}
 
 \DeclareMathOperator{\spn}{span}
 \makecommandnotation{\spn}{span}{$\spn$}{
