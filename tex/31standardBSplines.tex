@@ -362,12 +362,12 @@ $D_\knotseq^p$:
 \begin{figure}
   \includegraphics{splineSpace_2}%
   \caption{%
-    Uniform knot sequence $\knotseq_l^p$ \emph{(ticks on horizontal axis)}
+    Uniform knot sequence $\nodalknotseq{l}{p}{}$ \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic B-splines ($p = 3$) of level $l = 3$.
     In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
     the grid points $\fgset{l}$ \emph{\textcolor{mittelblau}{(blue dots)}}
     coincide with the B-spline knots.
-    The spline interpolation domain $D_l^p := D_{\knotseq_l^p}^p$
+    The spline interpolation domain $D_l^p := D_{\nodalknotseq{l}{p}{}}^p$
     \emph{(thick line)}
     is only a proper subset of $\clint{0, 1}$.%
   }%
@@ -384,12 +384,12 @@ $D_\knotseq^p$:
     Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
     for a function space $V$%
   }%
-  \newgsymbol{xilp}{$\knotseq_l^p$}{%
+  \newgsymbol{xilp}{$\nodalknotseq{l}{p}{}$}{%
     Knot sequence
     for uniform nodal B-splines of level $l$, degree $p$%
   }%
   \newgsymbol{Slp}{$S_l^p$}{%
-    Spline space $:= S_{\knotseq_l^p}^p$
+    Spline space $:= S_{\nodalknotseq{l}{p}{}}^p$
     (spanned by the uniform nodal B-splines of level $l$, degree $p$)%
   }%
   \newgsymbol{Dlp}{$D_l^p$}{%
@@ -399,10 +399,10 @@ $D_\knotseq^p$:
   The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
-  a basis of the spline space $S_{\knotseq_l^p}^p$, where
+  a basis of the spline space $S_{\nodalknotseq{l}{p}{}}^p$, where
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
-    \xi_{l,k}^p
+    \nodalknot{l,k}{p}{}
     := (k - \tfrac{p+1}{2}) \ms{l},\quad
     k = 0, \dotsc, m + p,\quad
     m := 2^l + 1,\\
@@ -413,12 +413,12 @@ $D_\knotseq^p$:
   \begin{equation}
     \ns{l}^p|_{D_l^p}
     = S_l^p
-    := S_{\knotseq_l^p}^p.
+    := S_{\nodalknotseq{l}{p}{}}^p.
   \end{equation}
 \end{corollary}
 
 \begin{proof}
-  We have $\basis{l,i}^p = b_{i,\knotseq_l^p}^p$ for
+  We have $\basis{l,i}^p = b_{i,\nodalknotseq{l}{p}{}}^p$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -446,7 +446,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \begin{proof}
   Every function $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
-  of $\knotseq_l^p$ (due to $p$ odd),
+  of $\nodalknotseq{l}{p}{}$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
@@ -741,13 +741,13 @@ $\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
-  := b_{i,\knotseq_l^{p,\clenshawcurtis}}^p,
+  := b_{i,\nodalknotseq{l}{p}{\clenshawcurtis}}^p,
 \end{equation}
 where
 \begin{subequations}
   \label{eq:clenshawCurtisBSplineKnots}
   \begin{gather}
-    \xi_{l,k}^{p,\clenshawcurtis}
+    \nodalknot{l,k}{p}{\clenshawcurtis}
     :=
     \begin{cases}
       (k - \frac{p+1}{2}) \cdot \gp{l,1}^\clenshawcurtis,&
@@ -761,7 +761,7 @@ where
     m := 2^l + 1.
   \end{gather}
 \end{subequations}
-For the construction of the knot sequence $\knotseq_l^{p,\clenshawcurtis}$,
+For the construction of the knot sequence $\nodalknotseq{l}{p}{\clenshawcurtis}$,
 the Chebyshev points $\gp{l,i}^\clenshawcurtis$
 are equidistantly extended onto the real line $\real$.
 As for the standard hierarchical B-spline basis,

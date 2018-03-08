@@ -301,6 +301,19 @@
   Knot sequence $:= (\knot_0, \dotsc, \knot_{m+p})$
 }
 
+\newnotation[3]{\nodalknot}{%
+  \xi_{#1}^{#2\appendwithcommand{#3}}%
+}{xilkp}{$\nodalknot{l,k}{p}{}$}{
+  Knot for uniform nodal B-splines of level $l$, degree $p$
+  ($k$-th entry of $\nodalknotseq{l}{p}{}$)
+}
+
+\newnotation[3]{\nodalknotseq}{%
+  \ß\xi_{#1}^{#2\appendwithcommand{#3}}%
+}{xilkp!}{$\nodalknotseq{l}{p}{}$}{
+  Knot sequence for uniform nodal B-splines of level $l$, degree $p$
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 

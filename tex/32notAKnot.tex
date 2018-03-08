@@ -205,23 +205,23 @@ of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on $\clint{\gp{l,2^l-(p+1)/
   Superscript for ``Not-a-knot (knot sequence/basis
   function/function space/interpolant)''%
 }%
-\newgsymbol{xilpnak}{$\knotseq_l^{p,\notaknot}$}{%
+\newgsymbol{xilpnak}{$\nodalknotseq{l}{p}{\notaknot}$}{%
   Knot sequence
   for nodal not-a-knot B-splines of level $l$, degree $p$%
 }%
 \newgsymbol{Slpnak}{$S_l^{p,\notaknot}$}{%
-  Spline space $:= S_{\knotseq_l^{p,\notaknot}}^p$
+  Spline space $:= S_{\nodalknotseq{l}{p}{\notaknot}}^p$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)%
 }%
-The knot sequence $\knotseq_l^{p,\notaknot}$
+The knot sequence $\nodalknotseq{l}{p}{\notaknot}$
 with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
   \begin{gather}
-    \knotseq_l^{p,\notaknot}
-    := (\xi_{l,0}^{p,\notaknot}, \dotsc,
-    \xi_{l,m+p}^{p,\notaknot}),\quad
+    \nodalknotseq{l}{p}{\notaknot}
+    := (\nodalknot{l,0}{p}{\notaknot}, \dotsc,
+    \nodalknot{l,m+p}{p}{\notaknot}),\quad
     m := 2^l + 1,\\
-    \xi_{l,k}^{p,\notaknot}
+    \nodalknot{l,k}{p}{\notaknot}
     :=
     \begin{cases}
       \gp{l,k-p},&
@@ -233,14 +233,14 @@ with not-a-knot boundary conditions is defined as follows:
     \end{cases}
   \end{gather}
 \end{subequations}
-This knot sequence $\knotseq_l^{p,\notaknot}$
+This knot sequence $\nodalknotseq{l}{p}{\notaknot}$
 can be obtained by removing the knots
 given in \eqref{eq:removedNAKKnots} from the
 knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
 The resulting spline space
 \begin{equation}
   S_l^{p,\notaknot}
-  := S_{\knotseq_l^{p,\notaknot}}^p
+  := S_{\nodalknotseq{l}{p}{\notaknot}}^p
 \end{equation}
 is a subspace
 of $S_l^{p,\clint{0,1}}$ with the correct dimensionality:
@@ -254,14 +254,14 @@ First, the spline interpolation domain of $S_l^{p,\notaknot}$
 equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
 for $S_l^{p,\notaknot}$, since all interpolation points
-(grid points) lie within $D_{\knotseq_l^{p,\notaknot}}^p = \clint{0, 1}$.
+(grid points) lie within $D_{\nodalknotseq{l}{p}{\notaknot}}^p = \clint{0, 1}$.
 Second, $S_l^{p,\notaknot}$ still contains all polynomials of
 degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
 
 \begin{figure}
   \includegraphics{splineSpace_3}%
   \caption{%
-    Not-a-knot knot sequence $\knotseq_l^{p,\notaknot}$
+    Not-a-knot knot sequence $\nodalknotseq{l}{p}{\notaknot}$
     \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic not-a-knot B-splines ($p = 3$)
     of level $l = 3$.
@@ -270,7 +270,7 @@ degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
     of the set of grid points $\fgset{l}$
     \emph{\textcolor{mittelblau}{(blue dots)}}
     have been removed from the set of knots.
-    The spline interpolation domain $D_{\knotseq_l^{p,\notaknot}}^p$
+    The spline interpolation domain $D_{\nodalknotseq{l}{p}{\notaknot}}^p$
     \emph{(thick line)}
     equals the whole domain $\clint{0, 1}$.%
   }%
@@ -288,8 +288,8 @@ hierarchical basis.
 
 Before defining the new hierarchical basis functions,
 let us first make two additional observations.
-First, $\knotseq_l^{p,\notaknot}$ coincides with the
-uniform knot sequence $\knotseq_l^p$ of \thmref{cor:nodalBSplineSpace}
+First, $\nodalknotseq{l}{p}{\notaknot}$ coincides with the
+uniform knot sequence $\nodalknotseq{l}{p}{}$ of \thmref{cor:nodalBSplineSpace}
 for the piecewise linear case of $p = 1$.
 This is intuitively clear:
 For this case,
@@ -317,7 +317,7 @@ we use global Lagrange polynomials for the coarser levels:
     \begin{cases}
       L_{l,i},&
       l < \lceil\log_2(p+1)\rceil,\\
-      b_{i,\knotseq_l^{p,\notaknot}}^p,&
+      b_{i,\nodalknotseq{l}{p}{\notaknot}}^p,&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
@@ -410,7 +410,7 @@ i.e., we have
 This means that we can reuse uniform B-spline code
 for the inner functions.
 Due to $\basis{l,i}^{p,\notaknot}(x) = \basis{l,2^l-i}^{p,\notaknot}(1-x)$
-(because of the symmetry of $\knotseq_l^{p,\notaknot}$),
+(because of the symmetry of $\nodalknotseq{l}{p}{\notaknot}$),
 we only have to implement $\tfrac{p+1}{2}$ not-a-knot B-splines per level $l$.
 As $\basis{l,i}^{p,\notaknot}$ and $\basis{l+1,i}^{p,\notaknot}$
 use the same knots up to an affine transformation for $l$ large enough
@@ -457,7 +457,7 @@ respectively.
   This is a conclusion of \thmref{prop:splineSpace}, as
   every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in \hiset{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
-  $\knotseq_l^{p,\notaknot}$, and at the knots themselves
+  $\nodalknotseq{l}{p}{\notaknot}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
   Second, the hierarchical functions $\basis{l',i'}^{p,\notaknot}$
@@ -595,11 +595,11 @@ Chebyshev points in \cref{sec:314nonUniform},
 we first specify the knot sequence as
 \begin{subequations}
   \begin{gather}
-    \knotseq_l^{p,\clenshawcurtis,\notaknot}
-    := (\xi_{l,0}^{p,\clenshawcurtis,\notaknot}, \dotsc,
-    \xi_{l,m+p}^{p,\clenshawcurtis,\notaknot}),\quad
+    \nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}
+    := (\nodalknot{l,0}{p}{\clenshawcurtis,\notaknot}, \dotsc,
+    \nodalknot{l,m+p}{p}{\clenshawcurtis,\notaknot}),\quad
     m := 2^l + 1,\\
-    \xi_{l,k}^{p,\clenshawcurtis,\notaknot}
+    \nodalknot{l,k}{p}{\clenshawcurtis,\notaknot}
     :=
     \begin{cases}
       \gp{l,k-p}^\clenshawcurtis,&
@@ -619,7 +619,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \begin{cases}
       L_{l,i}^\clenshawcurtis,&
       l < \lceil\log_2(p+1)\rceil,\\
-      b_{i,\knotseq_l^{p,\clenshawcurtis,\notaknot}}^p,&
+      b_{i,\nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}}^p,&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
