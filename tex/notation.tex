@@ -131,7 +131,7 @@
 
 \let\equivorig\equiv
 \let\equiv\undefined
-\newnotationcommand{\equiv}{\equivorig}{!equiv}{$\equiv$}{
+\newnotationcommand{\equiv}{\equivorig}{!equiv}{$\equivorig$}{
   Equality of functions everywhere on their domain
   (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)
 }
@@ -248,15 +248,18 @@
   for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
 }
 
-\makecommandnotation{\bndrygrid}{Omegasd}{$\bndrysgset$}{
+\let\bndrygridorig\bndrygrid
+\newcommand*{\bndrysgsetorig}{\gridset[\bndrygridorig]{}{\sparse}}
+\makecommandnotation{\bndrygrid}{Omegasd}{$\bndrysgsetorig$}{
   Set $:= \sgset \cap \bndrydomain{\clint{\ß0, \ß1}}
   = \sgset \setminus \interiorsgset$ of
   boundary sparse grid points
   for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
 }
 
-\newnotationcommand[1]{\bndrydomain}{\mathop{}\!\partial#1}{Omegad}%
-{$\bndrydomain{\Omega}$}{
+\newcommand*{\bndrydomain}[1]{\mathop{}\!\partial#1}
+\let\bndrydomainorig\bndrydomain
+\makecommandnotation{\bndrydomain}{Omegad}{$\bndrydomainorig{\Omega}$}{
   Topological boundary of a set $\Omega \subset \real^d$
 }
 
@@ -332,23 +335,27 @@
 
 % mathematic operators
 \DeclareMathOperator{\supp}{supp}
-\makecommandnotation{\supp}{supp}{$\supp$}{
+\let\supporig\supp
+\makecommandnotation{\supp}{supp}{$\supporig$}{
   Support of a function (i.e., the closure of the non-zero set)
 }
 
-\DeclareMathOperator{\interiorsupp}{\mathring{\supp}}
-\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupp$}{
+\DeclareMathOperator{\interiorsupp}{\mathring{\supporig}}
+\let\interiorsupporig\interiorsupp
+\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig$}{
   Interior of the support of a function
   (i.e., the set where the function does not vanish)
 }
 
 \DeclareMathOperator{\spn}{span}
-\makecommandnotation{\spn}{span}{$\spn$}{
+\let\spnorig\spn
+\makecommandnotation{\spn}{span}{$\spnorig$}{
   Linear span (set of all linear combinations)
 }
 
 \DeclareMathOperator{\xor}{xor}
-\makecommandnotation{\xor}{xor}{$\xor$}{
+\let\xororig\xor
+\makecommandnotation{\xor}{xor}{$\xororig$}{
   Bitwise ``exclusive or''
 }
 
