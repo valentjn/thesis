@@ -4,7 +4,7 @@
 As we have seen in the last section (see \cref{cor:hierSplittingBSpline}),
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
-$D_l^p = \clint{\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}}$,
+$\restrictedspldomain{l}{p} = \clint{\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}}$,
 which is for $p > 1$ a proper subset of the domain $\clint{0, 1}$.
 The implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
@@ -33,7 +33,7 @@ hierarchical cubic B-splines.
 However, one can clearly deviations of the interpolant from the polynomial
 near the boundary, where the relative error exceeds \SI{10}{\percent}.
 The oscillations occur even in the interior of the
-spline interpolation domain $D_l^p$.
+spline interpolation domain $\restrictedspldomain{l}{p}$.
 Of course, this phenomenon does not improve the approximation quality
 for other non-polynomial functions as well.
 
@@ -42,7 +42,8 @@ for other non-polynomial functions as well.
     Objective function \textcolor{C0}{$f$ \emph{(blue)}},
     interpolant \textcolor{C1}{$\tilde{f}$ \emph{(red, dashed)}},
     grid points \emph{(dots)}, and
-    spline interpolation domain $D_3^p$ \emph{(thick line)}.%
+    spline interpolation domain $\restrictedspldomain{3}{p}$
+    \emph{(thick line)}.%
   }[75mm]{%
     \includegraphics{nakInterpolation_1}%
   }%
@@ -64,26 +65,26 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}$
+we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
 $f \in \restrictedsplspace{l}{p}$ and hence
-$f \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}$.
+$f \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$.
 This means that there is a linear combination of hierarchical B-splines
 $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
-that interpolates $f$ exactly on the whole domain $D_l^p$
+that interpolates $f$ exactly on the whole domain $\restrictedspldomain{l}{p}$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
-which does not interpolate $f$ exactly in $D_l^p$).
+which does not interpolate $f$ exactly in $\restrictedspldomain{l}{p}$).
 However, in general, this interpolant is not equal $f$ outside
-of $D_l^p$ (i.e., in $\clint{0, 1} \setminus D_l^p$),
-as \thmref{prop:splineSpace} only holds for $D_l^p$.
+of $\restrictedspldomain{l}{p}$ (i.e., in $\clint{0, 1} \setminus \restrictedspldomain{l}{p}$),
+as \thmref{prop:splineSpace} only holds for $\restrictedspldomain{l}{p}$.
 In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
 equal to $f(x)$.
 If we now force the additional interpolation conditions in
 $\gp{l,0} = 0$ and $\gp{l,2^l} = 1$,
 the resulting interpolant $\tilde{f}$ cannot be the same as the previous
 interpolant,
-which is why $f$ and $\tilde{f}$ differ inside $D_l^p$.
+which is why $f$ and $\tilde{f}$ differ inside $\restrictedspldomain{l}{p}$.
 
 \paragraph{Schoenberg--Whitney conditions}
 
@@ -108,14 +109,14 @@ described by the so-called Schoenberg--Whitney conditions:
 \end{proof}
 
 The Schoenberg--Whitney conditions require that the interpolation points
-are contained in $D_l^p$.
+are contained in $\restrictedspldomain{l}{p}$.
 In the example of $p = 3$ in \cref{fig:nakInterpolation},
-the points $x = 0$ and $x = 1$ do not lie in~$D_l^p$.
+the points $x = 0$ and $x = 1$ do not lie in~$\restrictedspldomain{l}{p}$.
 For general degree $p$, the first $\tfrac{p-1}{2}$ and the
-last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $D_l^p$,
+last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $\restrictedspldomain{l}{p}$,
 thus violating the Schoenberg--Whitney conditions.
 One possible remedy would be to move these interpolation points inside
-$D_l^p$ without changing the corresponding basis functions
+$\restrictedspldomain{l}{p}$ without changing the corresponding basis functions
 (i.e., the knots would stay the same) \cite{Hoellig13Approximation}.
 For instance in the cubic case, we could move $x = 0$ and $x = 1$ to
 $x = 1.5 \ms{l}$ and $x = 1 - 1.5 \ms{l}$, respectively.
@@ -137,7 +138,7 @@ on the grid of level $l$, i.e., the space $\nonunifsplspace{\knotseq}{p}$ with
   k = 0, \dotsc, m + p,\quad
   m := 2^l + p.
 \end{equation}
-We have $D_\knotseq^p = \clint{0, 1}$ for this choice of $\knotseq$, i.e.,
+We have $\spldomain{\knotseq}{p} = \clint{0, 1}$ for this choice of $\knotseq$, i.e.,
 the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
 Clearly, the sum $\bigoplus_{l'=0}^l \hs{l}^p$ is a subspace of $\wholesplspace{l}{p}$,
@@ -249,9 +250,11 @@ First, the spline interpolation domain of $\naksplspace{l}{p}$
 equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
 for $\naksplspace{l}{p}$, since all interpolation points
-(grid points) lie within $D_{\nodalknotseq{l}{p}{\notaknot}}^p = \clint{0, 1}$.
+(grid points) lie within
+$\spldomain{\nodalknotseq{l}{p}{\notaknot}}{p} = \clint{0, 1}$.
 Second, $\naksplspace{l}{p}$ still contains all polynomials of
-degree $\le p$, as we have only removed knots compared to $\wholesplspace{l}{p}$.
+degree $\le p$, as we have only removed knots compared to
+$\wholesplspace{l}{p}$.
 
 \begin{figure}
   \includegraphics{splineSpace_3}%
@@ -265,7 +268,8 @@ degree $\le p$, as we have only removed knots compared to $\wholesplspace{l}{p}$
     of the set of grid points $\fgset{l}$
     \emph{\textcolor{mittelblau}{(blue dots)}}
     have been removed from the set of knots.
-    The spline interpolation domain $D_{\nodalknotseq{l}{p}{\notaknot}}^p$
+    The spline interpolation domain
+    $\spldomain{\nodalknotseq{l}{p}{\notaknot}}{p}$
     \emph{(thick line)}
     equals the whole domain $\clint{0, 1}$.%
   }%

@@ -203,9 +203,9 @@ $\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
   \caption{%
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
-    When restricting all functions to $D_l^p$ \emph{(thick black line)},
-    the nodal space $\restrictspace{\ns{l}^p}{D_l^p}$ decomposes into the direct sum
-    of the hierarchical subspaces $\restrictspace{\hs{l'}^p}{D_l^p}$ ($l' \le l$).%
+    When restricting all functions to $\restrictedspldomain{l}{p}$ \emph{(thick black line)},
+    the nodal space $\restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$ decomposes into the direct sum
+    of the hierarchical subspaces $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$ ($l' \le l$).%
   }
   \label{fig:hierarchicalBSpline}
 \end{figure}
@@ -298,12 +298,13 @@ the nodal space $\ns{l}^p$:
     := \spn\{\nonunifbspl{k,\knotseq}{p} \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
   $\nonunifsplspace{\knotseq}{p}$ contains exactly those functions that are continuous
-  on $D_\knotseq^p := \clint{\knot{p}, \knot{m}}$,
+  on $\spldomain{\knotseq}{p} := \clint{\knot{p}, \knot{m}}$,
   polynomials of degree $\le p$ on every knot interval
-  $\clint{\knot{k}, \knot{k+1}}$ \todo{check half-open interval?} in $D_\knotseq$
+  $\clint{\knot{k}, \knot{k+1}}$ \todo{check half-open interval?} in
+  $\spldomain{\knotseq}{p}$
   ($k = p, \dotsc, m - 1$) and at least $(p - 1)$ times
   continuously differentiable at every knot $\knot{k}$ in the interior of
-  $D_\knotseq^p$ ($k = p + 1, \dotsc, m - 1$).
+  $\spldomain{\knotseq}{p}$ ($k = p + 1, \dotsc, m - 1$).
 \end{proposition}
 
 \begin{proof}
@@ -318,18 +319,18 @@ given in \cref{fig:splineSpaceGeneral}.
 The key observation is that B-splines of a knot sequence $\knotseq$
 do not form a basis of the spline space on the union
 $\clint{\knot{0}, \knot{m+p}}$ of the B-spline supports,
-but rather on a proper sub-interval $D_\knotseq^p$.
-Intuitively, for every point in $D_\knotseq^p$ that is not a knot,
+but rather on a proper sub-interval $\spldomain{\knotseq}{p}$.
+Intuitively, for every point in $\spldomain{\knotseq}{p}$ that is not a knot,
 exactly $p + 1$ B-splines must be \term{relevant} (i.e., non-zero)
 to span the spline space,
 as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $p + 1$ degrees of freedom.
-Outside of $D_\knotseq^p$, there are too few relevant B-splines
+Outside of $\spldomain{\knotseq}{p}$, there are too few relevant B-splines
 to span the spline space.
 This important observation,
 which is visualized in \cref{fig:splineSpaceUniform},
 forces us to restrict nodal space and hierarchical subspaces to
-$D_\knotseq^p$:
+$\spldomain{\knotseq}{p}$:
 
 \begin{figure}
   \includegraphics{splineSpace_1}%
@@ -337,13 +338,13 @@ $D_\knotseq^p$:
     Knot sequence $\knotseq = (\knot{0}, \dotsc, \knot{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
     $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$, $p = 3$).
-    On $D_\knotseq^p$ \emph{(thick line, delimited by dashed lines)},
+    On $\spldomain{\knotseq}{p}$ \emph{(thick line, delimited by dashed lines)},
     which starts with the last knot interval of the first B-spline
     $\nonunifbspl{0,\knotseq}{p}$
     and ends with the first knot interval of the last B-spline
     $\nonunifbspl{m-1,\knotseq}{p}$,
     the B-splines span the spline space $\nonunifsplspace{\knotseq}{p}$.
-    Elements of this space are splines $\spl\colon D_\knotseq^p \to \real$
+    Elements of this space are splines $\spl\colon \spldomain{\knotseq}{p} \to \real$
     \emph{(black line)},
     which are linear combinations
     $\spl = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
@@ -360,7 +361,8 @@ $D_\knotseq^p$:
     In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
     the grid points $\fgset{l}$ \emph{\textcolor{mittelblau}{(blue dots)}}
     coincide with the B-spline knots.
-    The spline interpolation domain $D_l^p := D_{\nodalknotseq{l}{p}{}}^p$
+    The spline interpolation domain
+    $\restrictedspldomain{l}{p} := \spldomain{\nodalknotseq{l}{p}{}}{p}$
     \emph{(thick line)}
     is only a proper subset of $\clint{0, 1}$.%
   }%
@@ -369,11 +371,7 @@ $D_\knotseq^p$:
 
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
-  \newgsymbol{Dlp}{$D_l^p$}{%
-    Spline interpolation domain of $\restrictedsplspace{l}{p}$
-    (uniform nodal B-splines of level $l$, degree $p$)%
-  }%
-  The restricted nodal B-splines $\restrictfcn{\basis{l,i}^p}{D_l^p}$
+  The restricted nodal B-splines $\restrictfcn{\basis{l,i}^p}{\restrictedspldomain{l}{p}}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
   a basis of the spline space $\nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$,
@@ -384,12 +382,12 @@ $D_\knotseq^p$:
     := (k - \tfrac{p+1}{2}) \ms{l},\quad
     k = 0, \dotsc, m + p,\quad
     m := 2^l + 1,\\
-    D_l^p := [\ms{l} \tfrac{p-1}{2},\;
+    \restrictedspldomain{l}{p} := [\ms{l} \tfrac{p-1}{2},\;
     1 - \ms{l} \tfrac{p-1}{2}],
   \end{gather}
   and consequently
   \begin{equation}
-    \restrictspace{\ns{l}^p}{D_l^p}
+    \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}
     = \restrictedsplspace{l}{p}
     := \nonunifsplspace{\nodalknotseq{l}{p}{}}{p}.
   \end{equation}
@@ -402,7 +400,7 @@ $D_\knotseq^p$:
   The assertions now follow from \thmref{prop:splineSpace}.
 \end{proof}
 
-Note that $D_l^p$ might contain only a single point or even be empty,
+Note that $\restrictedspldomain{l}{p}$ might contain only a single point or even be empty,
 if $p$ is too large or $l$ is too small.
 However, the corresponding B-splines $\basis{l,i}^p$ are still linearly
 independent on~$\clint{0, 1}$ (see \cite{Hoellig13Approximation}).
@@ -417,29 +415,29 @@ to prove the hierarchical splitting for the uniform B-spline basis
 
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
-  $\restrictspace{\hs{l'}^p}{D_l^p}$ ($l' \le l$) are
-  subspaces of the restricted nodal space $\restrictspace{\ns{l}^p}{D_l^p}$.
+  $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$ ($l' \le l$) are
+  subspaces of the restricted nodal space $\restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
 \end{lemma}
 
 \begin{proof}
   Every function $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) is continuous on
-  $D_l^p$, a polynomial of degree $\le p$ on every knot interval
+  $\restrictedspldomain{l}{p}$, a polynomial of degree $\le p$ on every knot interval
   of $\nodalknotseq{l}{p}{}$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in \restrictedsplspace{l}{p}$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\basis{l',i'}^p \in \restrictspace{\ns{l}^p}{D_l^p}$.
+  $\basis{l',i'}^p \in \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
   As the functions $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) span
-  $\restrictspace{\hs{l'}^p}{D_l^p}$, we can conclude
-  $\restrictspace{\hs{l'}^p}{D_l^p} \subset \restrictspace{\ns{l}^p}{D_l^p}$.
+  $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$, we can conclude
+  $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}} \subset \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
 \end{proof}
 
 It is crucial to note that this lemma does not hold for even $p$,
 as the knots of the B-splines of level $l - 1$ are not contained in the
 knots of level $l$.
 This implies that in general,
-$\restrictspace{\hs{l-1}^p}{D_l^p}$ is not contained in $\restrictspace{\ns{l}^p}{D_l^p}$
+$\restrictspace{\hs{l-1}^p}{\restrictedspldomain{l}{p}}$ is not contained in $\restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 does not hold, which is the main reason for us to restrict the
@@ -461,7 +459,7 @@ theoretic considerations in this thesis to odd $p$.
   See \cref{sec:proofHierBSplineLinearlyIndependent}.
 \end{proof}
 
-Although we have to restrict all functions and spaces to $D_l^p$,
+Although we have to restrict all functions and spaces to $\restrictedspldomain{l}{p}$,
 \thmref{lemma:hierSplittingUV} is still applicable to prove that
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 is correct for hierarchical B-splines:
@@ -470,11 +468,11 @@ is correct for hierarchical B-splines:
   \label{cor:hierSplittingBSpline}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical B-spline basis
-  if restricting all functions to $D_l^p$:
+  if restricting all functions to $\restrictedspldomain{l}{p}$:
   \begin{equation}
     \restrictedsplspace{l}{p}
-    = \restrictspace{\ns{l}^p}{D_l^p}
-    = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}.
+    = \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}
+    = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}.
   \end{equation}
 \end{corollary}
 
@@ -546,7 +544,7 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
   \label{lemma:marsden}
   Let $p \in \natz$ and
   $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
-  Then, for all $x \in D_\knotseq^p$ and $y \in \real$,
+  Then, for all $x \in \spldomain{\knotseq}{p}$ and $y \in \real$,
   \begin{equation}
     \label{eq:marsden}
     (x - y)^p
