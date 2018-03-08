@@ -1,41 +1,19 @@
 #!/usr/bin/python3
 # number of output figures = 60
 
+import multiprocessing
+
 import matplotlib.patches
 import numpy as np
 
 import helper.basis
 from helper.figure import Figure
 
-numberOfImages = 60
-pauseStartInXUnits = 0.2
-pauseBetweenInXUnits = 0.2
-pauseEndInXUnits = 0.2
-pMin = 1
-pMax = 3
-colorBase = Figure.COLORS["anthrazit"]
-colorDarkBrightness = 0.3
-colorLightBrightness = 0.6
-
-colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
-colorLight = [x + colorLightBrightness * (1 - x) for x in colorBase]
-startsInXUnits = {pMin : pauseStartInXUnits}
-
-for p in range(pMin + 1, pMax + 1):
-  startsInXUnits[p] = startsInXUnits[p - 1] + p + pauseBetweenInXUnits
-
-lengthInXUnits = startsInXUnits[pMax] + (pMax + 1) + pauseEndInXUnits
-xUnitsPerImage = lengthInXUnits / (numberOfImages - 1)
-
-xLim = [0, pMax + 1]
-yLim = [0, 1]
-aspect = (yLim[1] - yLim[0]) / (xLim[1] - xLim[0])
-
-for i in range(numberOfImages):
+def drawImage(imageNumber):
   fig = Figure.create(figsize=(5, 5 * aspect), scale=0.5)
   ax = fig.gca()
   
-  xUnits = i * xUnitsPerImage
+  xUnits = imageNumber * xUnitsPerImage
   if startsInXUnits[pMin] < xUnits:
     p = max([p for p in range(pMin, pMax + 1) if startsInXUnits[p] < xUnits])
   else:
@@ -76,4 +54,34 @@ for i in range(numberOfImages):
   ax.set_aspect("equal")
   ax.set_axis_off()
   
-  fig.save(crop=False, tightLayout={"pad" : 0, "h_pad" : 0, "w_pad" : 0})
+  fig.save(graphicsNumber=imageNumber+1, crop=False,
+           tightLayout={"pad" : 0, "h_pad" : 0, "w_pad" : 0})
+
+
+
+numberOfImages = 60
+pauseStartInXUnits = 0.2
+pauseBetweenInXUnits = 0.2
+pauseEndInXUnits = 0.2
+pMin = 1
+pMax = 3
+colorBase = Figure.COLORS["anthrazit"]
+colorDarkBrightness = 0.3
+colorLightBrightness = 0.6
+
+colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
+colorLight = [x + colorLightBrightness * (1 - x) for x in colorBase]
+startsInXUnits = {pMin : pauseStartInXUnits}
+
+for p in range(pMin + 1, pMax + 1):
+  startsInXUnits[p] = startsInXUnits[p - 1] + p + pauseBetweenInXUnits
+
+lengthInXUnits = startsInXUnits[pMax] + (pMax + 1) + pauseEndInXUnits
+xUnitsPerImage = lengthInXUnits / (numberOfImages - 1)
+
+xLim = [0, pMax + 1]
+yLim = [0, 1]
+aspect = (yLim[1] - yLim[0]) / (xLim[1] - xLim[0])
+
+with multiprocessing.Pool() as pool:
+  pool.map(drawImage, range(numberOfImages))

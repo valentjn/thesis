@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # number of output figures = 60
 
+import multiprocessing
+
 import numpy as np
 import scipy.linalg
 
@@ -24,31 +26,8 @@ def axisEqual3D(ax):
   ax.set_ylim(centers[1] - maxSizeHalf, centers[1] + maxSizeHalf)
   ax.set_zlim(centers[2] - maxSizeHalf, centers[2] + maxSizeHalf)
 
-
-
-numberOfImages = 60
-numberOfRevolutions = 1.0
-startAngle = 30
-elevation = 20
-prerotationAxis = [0, 1, 0]
-prorotationAngle = 20
-xLim = [-0.3, 1.3]
-#yLim = [0, 1]
-yLim = [-0.3, 1.3]
-zLim = [-0.3, 1.3]
-n = 4
-d = 3
-b = 1
-colorBase = Figure.COLORS["anthrazit"]
-colorDarkBrightness = 0.3
-colorLightBrightness = 0.7
-
-colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
-getBrightness = (lambda x: ((x - xLim[0]) / (xLim[1] - xLim[0])) *
-                          (colorDarkBrightness - colorLightBrightness) + colorLightBrightness)
-
-for i in range(numberOfImages):
-  angle = startAngle + numberOfRevolutions * 360 * i / numberOfImages
+def drawImage(imageNumber):
+  angle = startAngle + numberOfRevolutions * 360 * imageNumber / numberOfImages
   
   fig = Figure.create(figsize=(1, 1.2), scale=1.5)
   ax = fig.add_subplot(111, projection="3d")
@@ -100,4 +79,31 @@ for i in range(numberOfImages):
   
   ax.view_init(0, 0)
   #ax.view_init(elevation, angle)
-  fig.save(crop=False, tightLayout={"pad" : 0, "h_pad" : 0, "w_pad" : 0})
+  fig.save(graphicsNumber=imageNumber+1, crop=False,
+           tightLayout={"pad" : 0, "h_pad" : 0, "w_pad" : 0})
+
+
+
+numberOfImages = 60
+numberOfRevolutions = 1.0
+startAngle = 30
+elevation = 20
+prerotationAxis = [0, 1, 0]
+prorotationAngle = 20
+xLim = [-0.3, 1.3]
+#yLim = [0, 1]
+yLim = [-0.3, 1.3]
+zLim = [-0.3, 1.3]
+n = 4
+d = 3
+b = 1
+colorBase = Figure.COLORS["anthrazit"]
+colorDarkBrightness = 0.3
+colorLightBrightness = 0.7
+
+colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
+getBrightness = (lambda x: ((x - xLim[0]) / (xLim[1] - xLim[0])) *
+                          (colorDarkBrightness - colorLightBrightness) + colorLightBrightness)
+
+with multiprocessing.Pool() as pool:
+  pool.map(drawImage, range(numberOfImages))
