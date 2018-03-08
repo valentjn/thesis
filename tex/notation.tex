@@ -322,13 +322,31 @@
   Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
 }
 
+\newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Sxip}%
+{$\nonunifsplspace{\knotseq}{p}$}{
+  Spline space of degree $p$ with knots $\knotseq$
+}
+
+\newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}%
+{$\restrictedsplspace{l}{p}$}{
+  Spline space $:= S_{\nodalknotseq{l}{p}{}}^p$
+  (spanned by the uniform nodal B-splines of level $l$, degree $p$)
+}
+
+\newnotationcommand[2]{\wholesplspace}{S_{#1}^{#2,\clint{0,1}}}{Slp01}%
+{$\wholesplspace{l}{p}$}{
+  Spline space of degree $p$ on the grid
+  $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$
+}
+
+\newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\notaknot}}{Slpnak}%
+{$\naksplspace{l}{p}$}{
+  Spline space $:= S_{\nodalknotseq{l}{p}{\notaknot}}^p$
+  (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
-
-% calligraphic letters
-% define \calC (C = arbitrary letter)
-\newcommand*{\defcal}[1]{\newnamecommand{cal#1}{\mathcal{#1}}}
-\defcal{C}
 
 % defined terms
 \newcommand*{\term}[1]{\emph{#1}}

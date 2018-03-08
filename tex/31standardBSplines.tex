@@ -267,9 +267,6 @@ we introduce the notion of non-uniform B-splines.
   \label{def:nonUniformBSpline}
   Let $m, p \in \natz$ and $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
-  \newgsymbol{bkxip}{$\nonunifbspl{k,\knotseq}{p}$}{%
-    Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$%
-  }%
   For $k = 0, \dotsc, m - 1$,
   the \term{(non-uniform) B-spline} $\nonunifbspl{k,\knotseq}{p}$ of degree $p$
   with knots~$\knotseq$ and index $k$ is defined by the
@@ -293,17 +290,17 @@ the nodal space $\ns{l}^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
-  \newgsymbol{Sxip}{$S_\knotseq^p$}{%
+  \newgsymbol{Sxip}{$\nonunifsplspace{\knotseq}{p}$}{%
     Spline space of degree $p$ with knots $\knotseq$%
   }%
   Let $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
   Then, the B-splines $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
   \begin{equation}
-    S_\knotseq^p
+    \nonunifsplspace{\knotseq}{p}
     := \spn\{\nonunifbspl{k,\knotseq}{p} \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
-  $S_\knotseq^p$ contains exactly those functions that are continuous
+  $\nonunifsplspace{\knotseq}{p}$ contains exactly those functions that are continuous
   on $D_\knotseq^p := \clint{\knot{p}, \knot{m}}$,
   polynomials of degree $\le p$ on every knot interval
   $\clint{\knot{k}, \knot{k+1}}$ \todo{check half-open interval?} in $D_\knotseq$
@@ -348,7 +345,7 @@ $D_\knotseq^p$:
     $\nonunifbspl{0,\knotseq}{p}$
     and ends with the first knot interval of the last B-spline
     $\nonunifbspl{m-1,\knotseq}{p}$,
-    the B-splines span the spline space $S_\knotseq^p$.
+    the B-splines span the spline space $\nonunifsplspace{\knotseq}{p}$.
     \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
     Elements of this space are splines $s\colon D_\knotseq^p \to \real$
     \emph{(black line)},
@@ -388,18 +385,15 @@ $D_\knotseq^p$:
     Knot sequence
     for uniform nodal B-splines of level $l$, degree $p$%
   }%
-  \newgsymbol{Slp}{$S_l^p$}{%
-    Spline space $:= S_{\nodalknotseq{l}{p}{}}^p$
-    (spanned by the uniform nodal B-splines of level $l$, degree $p$)%
-  }%
   \newgsymbol{Dlp}{$D_l^p$}{%
-    Spline interpolation domain of $S_l^p$
+    Spline interpolation domain of $\restrictedsplspace{l}{p}$
     (uniform nodal B-splines of level $l$, degree $p$)%
   }%
   The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
-  a basis of the spline space $S_{\nodalknotseq{l}{p}{}}^p$, where
+  a basis of the spline space $\nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$,
+  where
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
     \nodalknot{l,k}{p}{}
@@ -412,8 +406,8 @@ $D_\knotseq^p$:
   and consequently
   \begin{equation}
     \ns{l}^p|_{D_l^p}
-    = S_l^p
-    := S_{\nodalknotseq{l}{p}{}}^p.
+    = \restrictedsplspace{l}{p}
+    := \nonunifsplspace{\nodalknotseq{l}{p}{}}{p}.
   \end{equation}
 \end{corollary}
 
@@ -449,7 +443,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
   of $\nodalknotseq{l}{p}{}$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
-  \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
+  \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in \restrictedsplspace{l}{p}$
   and from \cref{cor:nodalBSplineSpace}, it follows
   $\basis{l',i'}^p \in \ns{l}^p|_{D_l^p}$.
   As the functions $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) span
@@ -494,7 +488,7 @@ is correct for hierarchical B-splines:
   holds for the hierarchical B-spline basis
   if restricting all functions to $D_l^p$:
   \begin{equation}
-    S_l^p
+    \restrictedsplspace{l}{p}
     = \ns{l}^p|_{D_l^p}
     = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}.
   \end{equation}

@@ -64,10 +64,10 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $S_l^p = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$
+we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
-$f \in S_l^p$ and hence
+$f \in \restrictedsplspace{l}{p}$ and hence
 $f \in \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
 $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
@@ -128,12 +128,8 @@ of the corresponding basis functions.
 
 As often, taking slightly a different view of the problem helps
 to find a solution.
-\newgsymbol{Slp01}{$S_l^{p,\clint{0,1}}$}{%
-  Spline space of degree $p$ on the grid
-  $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$%
-}%
-Let $S_l^{p,\clint{0,1}}$ denote the space of all splines of degree $p$
-on the grid of level $l$, i.e., the space $S_\knotseq^p$ with
+Let $\wholesplspace{l}{p}$ denote the space of all splines of degree $p$
+on the grid of level $l$, i.e., the space $\nonunifsplspace{\knotseq}{p}$ with
 \begin{equation}
   \label{eq:fullGridKnots}
   \knot{k} := (k - p) \ms{l},\quad
@@ -143,22 +139,22 @@ on the grid of level $l$, i.e., the space $S_\knotseq^p$ with
 We have $D_\knotseq^p = \clint{0, 1}$ for this choice of $\knotseq$, i.e.,
 the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, the sum $\bigoplus_{l'=0}^l \hs{l}^p$ is a subspace of $S_l^{p,\clint{0,1}}$,
-but it cannot equal $S_l^{p,\clint{0,1}}$ due to
+Clearly, the sum $\bigoplus_{l'=0}^l \hs{l}^p$ is a subspace of $\wholesplspace{l}{p}$,
+but it cannot equal $\wholesplspace{l}{p}$ due to
 \begin{equation}
   \dim \bigoplus_{l'=0}^l \hs{l}^p
   = 2^l + 1
   < 2^l + p
   = m
-  = \dim S_l^{p,\clint{0,1}},\quad
+  = \dim \wholesplspace{l}{p},\quad
   p > 1,
 \end{equation}
 by \thmref{prop:splineSpace}.
 There are too few nodal (and hierarchical) basis functions to
-span the whole spline space $S_l^{p,\clint{0,1}}$.
+span the whole spline space $\wholesplspace{l}{p}$.
 
 The key idea is now to impose additional $(p - 1)$ boundary conditions
-on the basis functions to restrict $S_l^{p,\clint{0,1}}$ to a reasonable subspace
+on the basis functions to restrict $\wholesplspace{l}{p}$ to a reasonable subspace
 with the correct dimension $(2^l + p) - (p - 1) = 2^l + 1$.
 ``Reasonable'' means that besides this dimension constraint,
 two requirements should be met:
@@ -176,7 +172,7 @@ in the process.
 \paragraph{Not-a-knot conditions}
 
 A suitable subspace can be obtained by incorporating the
-so-called \term{not-a-knot boundary conditions} into $S_l^{p,\clint{0,1}}$.
+so-called \term{not-a-knot boundary conditions} into $\wholesplspace{l}{p}$.
 For the cubic case $p = 2$,
 for which we need two conditions,
 the not-a-knot conditions demand that
@@ -209,10 +205,6 @@ of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on $\clint{\gp{l,2^l-(p+1)/
   Knot sequence
   for nodal not-a-knot B-splines of level $l$, degree $p$%
 }%
-\newgsymbol{Slpnak}{$S_l^{p,\notaknot}$}{%
-  Spline space $:= S_{\nodalknotseq{l}{p}{\notaknot}}^p$
-  (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)%
-}%
 The knot sequence $\nodalknotseq{l}{p}{\notaknot}$
 with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
@@ -239,24 +231,24 @@ given in \eqref{eq:removedNAKKnots} from the
 knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
 The resulting spline space
 \begin{equation}
-  S_l^{p,\notaknot}
-  := S_{\nodalknotseq{l}{p}{\notaknot}}^p
+  \naksplspace{l}{p}
+  := \nonunifsplspace{\nodalknotseq{l}{p}{\notaknot}}{p}
 \end{equation}
 is a subspace
-of $S_l^{p,\clint{0,1}}$ with the correct dimensionality:
+of $\wholesplspace{l}{p}$ with the correct dimensionality:
 \begin{equation}
   \dim \bigoplus_{l'=0}^l \hs{l}^p
   = 2^l + 1
-  = \dim S_l^{p,\notaknot}.
+  = \dim \naksplspace{l}{p}.
 \end{equation}
-The new space $S_l^{p,\notaknot}$ satisfies our two requirements:
-First, the spline interpolation domain of $S_l^{p,\notaknot}$
+The new space $\naksplspace{l}{p}$ satisfies our two requirements:
+First, the spline interpolation domain of $\naksplspace{l}{p}$
 equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
-for $S_l^{p,\notaknot}$, since all interpolation points
+for $\naksplspace{l}{p}$, since all interpolation points
 (grid points) lie within $D_{\nodalknotseq{l}{p}{\notaknot}}^p = \clint{0, 1}$.
-Second, $S_l^{p,\notaknot}$ still contains all polynomials of
-degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
+Second, $\naksplspace{l}{p}$ still contains all polynomials of
+degree $\le p$, as we have only removed knots compared to $\wholesplspace{l}{p}$.
 
 \begin{figure}
   \includegraphics{splineSpace_3}%
@@ -278,10 +270,10 @@ degree $\le p$, as we have only removed knots compared to $S_l^{p,\clint{0,1}}$.
 \end{figure}
 
 However, $\bigoplus_{l'=0}^l \hs{l}^p$ is not a subspace of
-$S_l^{p,\notaknot}$ anymore,
+$\naksplspace{l}{p}$ anymore,
 as the hierarchical basis functions $\basis{l',i'}^p$ are not
 not-a-knot splines (due to the additional knots that we removed from
-$S_l^{p,\notaknot}$).
+$\naksplspace{l}{p}$).
 For this reason,
 we have to incorporate the not-a-knot boundary conditions into the
 hierarchical basis.
@@ -371,7 +363,7 @@ $\deg L_{l,i} \le 2^l < p$
     Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
     up to level $l = 3$.
     The nodal space $\ns{l}^{p,\notaknot}$,
-    which coincides with the not-a-knot spline space $S_l^{p,\notaknot}$,
+    which coincides with the not-a-knot spline space $\naksplspace{l}{p}$,
     decomposes into the direct sum
     of the hierarchical subspaces $\hs{l'}^{p,\notaknot}$ ($l' \le l$).
     The knots of each level $l'$ are given by removing the
@@ -391,7 +383,7 @@ $l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
 as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
 $\basis{l,i}^{p,\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
-and contained in the space $S_l^{p,\notaknot}$.
+and contained in the space $\naksplspace{l}{p}$.
 
 \paragraph{Implementation}
 
@@ -435,15 +427,15 @@ respectively.
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical not-a-knot B-spline basis:
   \begin{equation}
-    S_l^{p,\notaknot}
+    \naksplspace{l}{p}
     = \ns{l}^{p,\notaknot}
     = \bigoplus_{l'=0}^l \hs{l'}^{p,\notaknot},
   \end{equation}
-  where for $l < \lceil\log_2(p+1)\rceil$, $S_l^{p,\notaknot}$
+  where for $l < \lceil\log_2(p+1)\rceil$, $\naksplspace{l}{p}$
   is defined as the space $P^{2^l + 1}$ of polynomials of degree
   $\le 2^l + 1$ on $\clint{0, 1}$
   (for $l \ge \lceil\log_2(p+1)\rceil$,
-  $S_l^{p,\notaknot}$ is the not-a-knot spline space).
+  $\naksplspace{l}{p}$ is the not-a-knot spline space).
 \end{proposition}
 
 \begin{proof}
@@ -453,7 +445,7 @@ respectively.
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
   First, the hierarchical subspace $\hs{l'}^{p,\notaknot}$ ($l' \le l$)
-  is a subspace of $S_l^{p,\notaknot} = \ns{l}^{p,\notaknot}$.
+  is a subspace of $\naksplspace{l}{p} = \ns{l}^{p,\notaknot}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
   every function $\basis{l',i'}^{p,\notaknot}$ ($i' \in \hiset{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
@@ -475,12 +467,12 @@ respectively.
   \label{cor:hierSplittingNAKBSplineMV}
   It holds
   \begin{equation}
-    S_\ßl^{\ßp,\notaknot}
+    \naksplspace{\ßl}{\ßp}
     = \ns{\ßl}^{\ßp,\notaknot}
     = \bigoplus_{\ßl'=\ß0}^\ßl \hs{\ßl'}^{\ßp,\notaknot},
   \end{equation}
-  where $S_\ßl^{\ßp,\notaknot}$ is the
-  tensor product space of $S_{l_t}^{p_t,\notaknot}$
+  where $\naksplspace{\ßl}{\ßp}$ is the
+  tensor product space of $\naksplspace{l_t}{p_t}$
   ($t = 1, \dotsc, d$) as defined in \cref{prop:hierSplittingNAKBSplineUV}.
 \end{corollary}
 
@@ -519,13 +511,13 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
 \begin{proof}
   Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \normone{\ßl}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
-  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} = S_\ßl^{\ßp,\notaknot}$.
+  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} = \naksplspace{\ßl}{\ßp}$.
   In addition, all $\ßl' \in \natz^d$ with $\ßl' \le \ßl$ satisfy
   $\normone{\ßl'} \le n$ and thus,
   $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} \subset
   \regsgspace{n}{d}{\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
-  $P^\ßp \subset S_\ßl^{\ßp,\notaknot} \subset
+  $P^\ßp \subset \naksplspace{\ßl}{\ßp} \subset
   \regsgspace{n}{d}{\ßp,\notaknot}$, which is the asserted claim.
 \end{proof}
 
@@ -683,7 +675,7 @@ cubic degree and the corresponding modified functions are plotted in
 \label{sec:324naturalBoundary}
 
 Not-a-knot boundary conditions are not the only approach
-to obtain a subspace of $S_l^{p,\clint{0,1}}$ with the right dimension $2^l - 1$.
+to obtain a subspace of $\wholesplspace{l}{p}$ with the right dimension $2^l - 1$.
 Another possibility, which we want to discuss briefly, are
 \term{natural boundary conditions}.
 In the cubic case, for which they are usually formulated
