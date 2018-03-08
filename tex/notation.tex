@@ -276,10 +276,6 @@
   \gridset[\bndrygrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
 }
 
-\newnotationcommand[1]{\cardbspl}{b^{#1}}{bp}{$\cardbspl{p}$}{
-  Cardinal B-spline of degree $p$
-}
-
 \newnotationcommand[1]{\charfun}{\chi_{#1}}{x01}{$\charfun{A}$}{
   Characteristic function of the set $A \subset \real$
 }
@@ -312,6 +308,15 @@
   \ß\xi_{#1}^{#2\appendwithcomma{#3}}%
 }{xilkp!}{$\nodalknotseq{l}{p}{}$}{
   Knot sequence for uniform nodal B-splines of level $l$, degree $p$
+}
+
+\newnotationcommand[1]{\cardbspl}{b^{#1}}{bp}{$\cardbspl{p}$}{
+  Cardinal B-spline of degree $p$
+}
+
+\newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkxip}%
+{$\nonunifbspl{k,\knotseq}{p}$}{
+  Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%

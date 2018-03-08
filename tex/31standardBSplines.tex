@@ -267,21 +267,21 @@ we introduce the notion of non-uniform B-splines.
   \label{def:nonUniformBSpline}
   Let $m, p \in \natz$ and $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
-  \newgsymbol{bkxip}{$b_{k,\knotseq}^p$}{%
+  \newgsymbol{bkxip}{$\nonunifbspl{k,\knotseq}{p}$}{%
     Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$%
   }%
   For $k = 0, \dotsc, m - 1$,
-  the \term{(non-uniform) B-spline} $b_{k,\knotseq}^p$ of degree $p$
+  the \term{(non-uniform) B-spline} $\nonunifbspl{k,\knotseq}{p}$ of degree $p$
   with knots~$\knotseq$ and index $k$ is defined by the
   Cox--de~Boor recurrence
   \multicite{Cox72Numerical,Boor72Calculating,Hoellig13Approximation}
   \begin{equation}
-    b_{k,\knotseq}^p(x)
+    \nonunifbspl{k,\knotseq}{p}(x)
     :=
     \begin{cases}
-      \dfrac{x - \knot{k}}{\knot{k+p} - \knot{k}} b_{k,\knotseq}^{p-1}(x) +
+      \dfrac{x - \knot{k}}{\knot{k+p} - \knot{k}} \nonunifbspl{k,\knotseq}{p-1}(x) +
       \dfrac{\knot{k+p+1} - x}{\knot{k+p+1} - \knot{k+1}}
-      b_{k+1,\knotseq}^{p-1}(x),&p \ge 1,\\
+      \nonunifbspl{k+1,\knotseq}{p-1}(x),&p \ge 1,\\
       \charfun{\hopint{\knot{k}, \knot{k+1}}}(x),&p = 0.
     \end{cases}
   \end{equation}
@@ -297,11 +297,11 @@ the nodal space $\ns{l}^p$:
     Spline space of degree $p$ with knots $\knotseq$%
   }%
   Let $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
-  Then, the B-splines $b_{k,\knotseq}^p$ ($k = 0, \dotsc, m - 1$)
+  Then, the B-splines $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
   \begin{equation}
     S_\knotseq^p
-    := \spn\{b_{k,\knotseq}^p \mid k = 0, \dotsc, m - 1\}.
+    := \spn\{\nonunifbspl{k,\knotseq}{p} \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
   $S_\knotseq^p$ contains exactly those functions that are continuous
   on $D_\knotseq^p := \clint{\knot{p}, \knot{m}}$,
@@ -342,18 +342,18 @@ $D_\knotseq^p$:
   \caption{%
     Knot sequence $\knotseq = (\knot{0}, \dotsc, \knot{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
-    $b_{k,\knotseq}^p$ ($k = 0, \dotsc, m - 1$, $p = 3$).
+    $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$, $p = 3$).
     On $D_\knotseq^p$ \emph{(thick line, delimited by dashed lines)},
     which starts with the last knot interval of the first B-spline
-    $b_{0,\knotseq}^p$
+    $\nonunifbspl{0,\knotseq}{p}$
     and ends with the first knot interval of the last B-spline
-    $b_{m-1,\knotseq}^p$,
+    $\nonunifbspl{m-1,\knotseq}{p}$,
     the B-splines span the spline space $S_\knotseq^p$.
     \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
     Elements of this space are splines $s\colon D_\knotseq^p \to \real$
     \emph{(black line)},
     which are linear combinations
-    $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\knotseq}^p$
+    $s = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
     of the B-splines.%
   }%
   \label{fig:splineSpaceGeneral}%
@@ -418,7 +418,7 @@ $D_\knotseq^p$:
 \end{corollary}
 
 \begin{proof}
-  We have $\basis{l,i}^p = b_{i,\nodalknotseq{l}{p}{}}^p$ for
+  We have $\basis{l,i}^p = \nonunifbspl{i,\nodalknotseq{l}{p}{}}{p}$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -573,7 +573,7 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
     \label{eq:marsden}
     (x - y)^p
     = \sum_{k=0}^{m-1} \big[(\knot{k+1} - y) \dotsm (\knot{k+p} - y)\big]
-    b_{k,\knotseq}^p(x).
+    \nonunifbspl{k,\knotseq}{p}(x).
   \end{equation}
 \end{lemma}
 
@@ -741,7 +741,7 @@ $\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
-  := b_{i,\nodalknotseq{l}{p}{\clenshawcurtis}}^p,
+  := \nonunifbspl{i,\nodalknotseq{l}{p}{\clenshawcurtis}}{p},
 \end{equation}
 where
 \begin{subequations}

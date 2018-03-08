@@ -95,7 +95,7 @@ described by the so-called Schoenberg--Whitney conditions:
   and $t_0, \dotsc, t_{m-1}$ a sequence of interpolation points with
   $\knot{p} \le t_0 < \dotsb < t_{m-1} \le \knot{m}$.
   Then, there exists a unique interpolating spline
-  $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\knotseq}^p$ for arbitrary data if and only if
+  $s = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$ for arbitrary data if and only if
   \begin{equation}
     \knot{k} < t_k < \knot{k+p+1},\quad
     k = 0, \dotsc, m - 1.
@@ -317,7 +317,7 @@ we use global Lagrange polynomials for the coarser levels:
     \begin{cases}
       L_{l,i},&
       l < \lceil\log_2(p+1)\rceil,\\
-      b_{i,\nodalknotseq{l}{p}{\notaknot}}^p,&
+      \nonunifbspl{i,\nodalknotseq{l}{p}{\notaknot}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
@@ -619,7 +619,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \begin{cases}
       L_{l,i}^\clenshawcurtis,&
       l < \lceil\log_2(p+1)\rceil,\\
-      b_{i,\nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}}^p,&
+      \nonunifbspl{i,\nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
