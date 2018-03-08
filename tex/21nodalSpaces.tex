@@ -59,16 +59,16 @@ $\basis{l,i}$:
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 every linear combination of these functions is unique.
-This ensures that for every objective function $f\colon \clint{0, 1} \to \real$,
+This ensures that for every objective function $\objfun\colon \clint{0, 1} \to \real$,
 there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 \begin{equation}
   \label{eq:interpFullGridUV}
   \fgintp{l}
   = \sum_{i=0}^{2^l} \interpcoeff{i} \basis{l,i},\quad
-  \fa{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = f(\gp{l,i})},
+  \fa{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = \objfun(\gp{l,i})},
 \end{equation}
 for some $\interpcoeff{i} \in \real$.
-In this case, $\fgintp{l}$ is called \term{interpolant} of $f$ in $\ns{l}$.
+In this case, $\fgintp{l}$ is called \term{interpolant} of $\objfun$ in $\ns{l}$.
 The nodal space $\ns{l}^1$ is defined analogously as the span of the
 hat functions $\basis{l,i}^1$.
 It is the space of all linear splines,
@@ -183,13 +183,13 @@ all hypercubes
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
 \end{equation}
 Analogously to \eqref{eq:interpFullGridUV},
-we can interpolate objective functions $f\colon \clint{\ß0, \ß1} \to \real$
+we can interpolate objective functions $\objfun\colon \clint{\ß0, \ß1} \to \real$
 in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \real$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
   \fgintp{\ßl}
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßi} \basis{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})},
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = \objfun(\vgp{\ßl,\ßi})},
 \end{equation}
 where $\interpcoeff{\ßi} \in \real$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
@@ -220,7 +220,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   implying the linear independence of the functions $\basis{\ßl,\ßi}$.
 \end{proof}
 The lemma is equivalent to the statement that the coefficients $\interpcoeff{\ßi} \in \real$
-exist for every objective function $f$ and are uniquely determined by
+exist for every objective function $\objfun$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
   \fgset{\ßl}
@@ -235,7 +235,7 @@ For the hat function basis $\basis{l,i}^1$,
 it can be shown that the $L^2$ interpolation error of the interpolant
 $f_{n,d}^1$ is given by
 \begin{equation}
-  \normLtwo{f - f_{n,d}^1} = \landauO{\ms{n}^2},
+  \normLtwo{\objfun - f_{n,d}^1} = \landauO{\ms{n}^2},
 \end{equation}
 i.e., the order of the interpolation error is quadratic in the mesh size
 \multicite{Hoellig13Approximation,Bungartz04Sparse}.

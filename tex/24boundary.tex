@@ -583,9 +583,9 @@ The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
 For the hat function basis $\basis{\ßl,\ßi}^1$,
 this is a feasible option if the objective
-function $f\colon \clint{\ß0, \ß1} \to \real$
+function $\objfun\colon \clint{\ß0, \ß1} \to \real$
 satisfies homogeneous boundary conditions
-$f_{\bndrydomain{\clint{\ß0, \ß1}}} \equiv 0$,
+$\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0, \ß1}}} \equiv 0$,
 as $\basis{\ßl,\ßi}^1$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.

@@ -28,7 +28,7 @@ as that of polynomials.
 Unfortunately, this statement is not true for the uniform B-splines
 $\basis{l,i}^p$ as we have defined them in the last section.
 A counterexample is given in \cref{fig:nakInterpolation},
-in which a cubic polynomial $f$ is interpolated with
+in which a cubic polynomial $\objfun$ is interpolated with
 hierarchical cubic B-splines.
 However, one can clearly deviations of the interpolant from the polynomial
 near the boundary, where the relative error exceeds \SI{10}{\percent}.
@@ -39,7 +39,7 @@ for other non-polynomial functions as well.
 
 \begin{figure}
   \subcaptionbox{%
-    Objective function \textcolor{C0}{$f$ \emph{(blue)}},
+    Objective function \textcolor{C0}{$\objfun$ \emph{(blue)}},
     interpolant \textcolor{C1}{$\tilde{f}$ \emph{(red, dashed)}},
     grid points \emph{(dots)}, and
     spline interpolation domain $\restrictedspldomain{3}{p}$
@@ -49,7 +49,7 @@ for other non-polynomial functions as well.
   }%
   \hfill%
   \subcaptionbox{%
-    Relative error $\abs{(f - \tilde{f})/f}$ on a logarithmic scale.%
+    Relative error $\abs{(\objfun - \tilde{f})/\objfun}$ on a logarithmic scale.%
   }[75mm]{%
     \includegraphics{nakInterpolation_2}%
   }%
@@ -57,7 +57,7 @@ for other non-polynomial functions as well.
     Hierarchical cubic B-splines $\basis{l',i'}^p$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
-    $f(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
+    $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
     on the grid of level $l = 3$.%
   }
   \label{fig:nakInterpolation}
@@ -67,24 +67,24 @@ We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
 we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$
 with $p = 3$.
-Since cubic polynomials as $f$ are cubic splines as well,
-$f \in \restrictedsplspace{l}{p}$ and hence
-$f \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$.
+Since cubic polynomials as $\objfun$ are cubic splines as well,
+$\objfun \in \restrictedsplspace{l}{p}$ and hence
+$\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$.
 This means that there is a linear combination of hierarchical B-splines
 $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
-that interpolates $f$ exactly on the whole domain $\restrictedspldomain{l}{p}$
+that interpolates $\objfun$ exactly on the whole domain $\restrictedspldomain{l}{p}$
 (not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
-which does not interpolate $f$ exactly in $\restrictedspldomain{l}{p}$).
-However, in general, this interpolant is not equal $f$ outside
+which does not interpolate $\objfun$ exactly in $\restrictedspldomain{l}{p}$).
+However, in general, this interpolant is not equal $\objfun$ outside
 of $\restrictedspldomain{l}{p}$ (i.e., in $\clint{0, 1} \setminus \restrictedspldomain{l}{p}$),
 as \thmref{prop:splineSpace} only holds for $\restrictedspldomain{l}{p}$.
 In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
-equal to $f(x)$.
+equal to $\objfun(x)$.
 If we now force the additional interpolation conditions in
 $\gp{l,0} = 0$ and $\gp{l,2^l} = 1$,
 the resulting interpolant $\tilde{f}$ cannot be the same as the previous
 interpolant,
-which is why $f$ and $\tilde{f}$ differ inside $\restrictedspldomain{l}{p}$.
+which is why $\objfun$ and $\tilde{f}$ differ inside $\restrictedspldomain{l}{p}$.
 
 \paragraph{Schoenberg--Whitney conditions}
 
@@ -483,8 +483,8 @@ are defined analogously to the uniform case, i.e.,
 If the level $n$ is large enough, then $\regsgspace{n}{d}{\ßp,\notaknot}$
 contains the space $\polyspace{\ßp}$ of all $d$-variate polynomials of
 coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
-(i.e., functions $f\colon \clint{0, 1} \to \real$,
-$f(\ßx) := \sum_{\ßq=\ß0}^\ßp \interpcoeff{\ßq} \prod_{t=1}^d x_t^{q_t}$,
+(i.e., functions $\objfun\colon \clint{0, 1} \to \real$,
+$\objfun(\ßx) := \sum_{\ßq=\ß0}^\ßp \interpcoeff{\ßq} \prod_{t=1}^d x_t^{q_t}$,
 with $\interpcoeff{\ßq} \in \real$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly

@@ -16,7 +16,7 @@ regular, dimensionally adaptive, and spatially adaptive.
 \paragraph{Hierarchical contributions}
 
 To assess the importance of a subspace, we consider again the
-interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $f\colon \clint{\ß0, \ß1} \to \real$.
+interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $\objfun\colon \clint{\ß0, \ß1} \to \real$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
@@ -24,7 +24,7 @@ be written as
   \fgintp{\ßl}
   = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = f(\vgp{\ßl,\ßi})}.
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = \objfun(\vgp{\ßl,\ßi})}.
 \end{equation}
 The coefficients $\surplus{\ßl',\ßi'}$ with respect to the hierarchical basis
 $\basis{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
@@ -36,12 +36,12 @@ for the corresponding surpluses \cite{Bungartz04Sparse}:
   = (-1)^d 2^{-\normone{\ßl+\ß1}}
   \int_\ß0^\ß1 \basis{\ßl,\ßi}^1(\ßx)
   \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
-  f(\ßx) \diff{}\ßx,
+  \objfun(\ßx) \diff{}\ßx,
 \end{equation}
 if $\ßl \ge \ß1$ and
-$f$ is twice continuously differentiable in every dimension simultaneously,
+$\objfun$ is twice continuously differentiable in every dimension simultaneously,
 i.e.,
-$\frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2} f$
+$\frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2} \objfun$
 exists and is continuous.%
 \footnote{%
   Again, the notation implies that the integration domain is
@@ -72,7 +72,7 @@ can be estimated by
   \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
   \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
-  } f}
+  } \objfun}
 \end{equation}
 for the hat function surpluses $\surplus{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
 
@@ -132,7 +132,7 @@ regular sparse grid in two dimensions.
 \paragraph{Error and grid size}
 
 One can prove that for homogeneous boundary conditions
-$\restrictfcn{f}{\bndrydomain{\clint{\ß0,\ß1}}} \equiv 0$,
+$\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0,\ß1}}} \equiv 0$,
 the number of required inner grid points
 ($\vgp{\ßl,\ßi} \in \regsgset{n}{d}{}$ where $\ßl \ge \ß1$)
 grows like $\landauO{\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1}}$
@@ -145,7 +145,7 @@ The corresponding $L^2$ error of the sparse grid interpolant
 $f_{n,d}^{\sparse,1}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
 \begin{equation}
-  \normLtwo{f - f_{n,d}^{\sparse,1}} = \landauO{\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}},
+  \normLtwo{\objfun - f_{n,d}^{\sparse,1}} = \landauO{\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}},
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
 $(\log_2 \ms{n}^{-1})^{d-1}$ \cite{Bungartz04Sparse}.
@@ -196,7 +196,7 @@ where the $\interpcoeff{\ßl,\ßi} \in \real$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
   \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\vgp{\ßl,\ßi'})
-  = f(\vgp{\ßl,\ßi'})%
+  = \objfun(\vgp{\ßl,\ßi'})%
 }$ \multicite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.

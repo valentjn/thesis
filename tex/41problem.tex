@@ -5,7 +5,8 @@ Let $\sgset \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
 of the form $\setsize{\sgset} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
 where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \natz$
-and $\ßi \in \hiset{\ßl}$ such that $N := \setsize{\sgset} = \setsize{\liset} < \infty$
+and $\ßi \in \hiset{\ßl}$ such that
+$N := \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
@@ -18,7 +19,7 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^N$ such that
   (\ßl, \ßi) \in \liset,
 \end{equation}
 where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N$ is a given set of
-function values $f(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
+function values $\objfun(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $f^\sparse$ as
 \begin{equation}
   f^\sparse\colon \clint{\ß0, \ß1} \to \real,\quad
@@ -26,7 +27,7 @@ The hierarchical surpluses then define the interpolant $f^\sparse$ as
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'},
 \end{equation}
-which interpolates $f$ at the grid points $\vgp{\ßl,\ßi}$ of $\sgset$.
+which interpolates $\objfun$ at the grid points $\vgp{\ßl,\ßi}$ of $\sgset$.
 
 The basis functions $\basis{\ßl',\ßi'}$ are
 arbitrary tensor product functions.

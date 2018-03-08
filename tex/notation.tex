@@ -138,8 +138,8 @@
 
 \newnotationcommand[1]{\normLtwo}{\norm{#1}_{L^2}}{||.||L2}%
 {$\normLtwo{\cdot}$}{%
-  $L^2$ norm $\normLtwo{f} := \sqrt{\int_\Omega f(x)^2 \dx}$
-  of a function $f\colon \Omega \to \real$
+  $L^2$ norm $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(x)^2 \dx}$
+  of a function $\objfun\colon \Omega \to \real$
 }
 
 \newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{L^2}}
@@ -148,14 +148,14 @@
 \let\equiv\undefined
 \newnotationcommand{\equiv}{\equivorig}{!equiv}{$\equivorig$}{
   Equality of functions everywhere on their domain
-  (e.g., $f \equiv 0$ means $f(x) = 0$ for all feasible $x$)
+  (e.g., $\objfun \equiv 0$ means $\objfun(x) = 0$ for all feasible $x$)
 }
 
 \newnotationcommand[1]{\fgset}{\Omega_{#1}}{Omegal!}{$\fgset{\ßl}$}{
   Set of full grid points of level $\ßl$
 }
 
-\newnotationcommand[1]{\landauO}{\mathcal{O}(#1)}{O}{$\landauO{f(x)}$}{
+\newnotationcommand[1]{\landauO}{\mathcal{O}(#1)}{O}{$\landauO{\objfun(x)}$}{
   Big-$\mathcal{O}$ Landau notation
 }
 
@@ -364,15 +364,15 @@
   Spline (piecewise polynomial)
 }
 
-\newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{f|D}{$\restrictfcn{f}{D}$}{
-  Restriction $\restrictfcn{f}{D}\colon D \to \real$,
-  $\restrictfcn{f}{D}(x) := f(x)$,
-  onto a sub-domain $D$ for a function $f$
+\newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{f|D}{$\restrictfcn{\objfun}{D}$}{
+  Restriction $\restrictfcn{\objfun}{D}\colon D \to \real$,
+  $\restrictfcn{\objfun}{D}(x) := \objfun(x)$,
+  onto a sub-domain $D$ for a function $\objfun$
 }
 
 \newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}%
 {$\restrictspace{V}{D}$}{
-  Restriction $:= \{\restrictfcn{f}{D} \mid f \in V\}$ onto a sub-domain $D$
+  Restriction $:= \{\restrictfcn{\objfun}{D} \mid \objfun \in V\}$ onto a sub-domain $D$
   for a function space $V$
 }
 
@@ -394,6 +394,10 @@
 \newnotationcommand[1]{\polyspace}{P^{#1}}{Pp!}{$\polyspace{\ßp}$}{
   Space of all $d$-variate polynomials of
   coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+}
+
+\newnotationcommand{\objfun}{f}{f}{$\objfun$}{
+  Objective function $\objfun\colon \clint{\ß0, \ß1} \to \real$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
@@ -429,8 +433,8 @@
   Bitwise ``exclusive or''
 }
 
-\makecommandnotation{\deg}{deg}{$\deg f$}{
-  Degree of the polynomial $f$
+\makecommandnotation{\deg}{deg}{$\deg \objfun$}{
+  Degree of the polynomial $\objfun$
 }
 
 % subsets
