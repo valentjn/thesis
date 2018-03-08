@@ -142,10 +142,11 @@ the corresponding number $\landauO{(\ms{n}^{-1})^d}$ in the full grid case
 In particular, the exponential dependency on the dimensionality $d$
 has vanished.
 The corresponding $L^2$ error of the sparse grid interpolant
-$f_{n,d}^{\sparse,1}$ using hat functions
+$\regsgintp{n}{d}{} \in \regsgspace{n}{d}{}$ using hat functions
 (still assuming homogeneous boundary conditions) decays like
 \begin{equation}
-  \normLtwo{\objfun - f_{n,d}^{\sparse,1}} = \landauO{\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}},
+  \normLtwo{\objfun - \regsgintp{n}{d}{}}
+  = \landauO{\ms{n}^2 (\log_2 \ms{n}^{-1})^{d-1}},
 \end{equation}
 which is only slightly worse than the full grid error by the factor of
 $(\log_2 \ms{n}^{-1})^{d-1}$ \cite{Bungartz04Sparse}.
@@ -185,10 +186,10 @@ The key advantage of dimensionally adaptive sparse grids over
 spatially adaptive approaches lies in the
 so-called \term{combination technique}.
 For regular sparse grids, one can show that the sparse grid interpolant
-$f_{n,d}^\sparse$ can be written as
+$\regsgintp{n}{d}{}$ can be written as
 \begin{equation}
   \label{eq:combiTechnique}
-  f_{n,d}^\sparse
+  \regsgintp{n}{d}{}
   = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\ßl} = n-q}
   \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi},
 \end{equation}

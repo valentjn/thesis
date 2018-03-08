@@ -400,6 +400,17 @@
   Full grid interpolant of $\objfun$ in $\ns{\ßl}$
 }
 
+\newnotationcommand{\sgintp}{f^\sparse}{fs}{$\sgintp$}{
+  Sparse grid interpolant of $\objfun$ in $\sgspace$
+  (on some grid $\sgset$)
+}
+
+\newnotationcommand[3]{\regsgintp}{%
+  f_{#1,#2}^{\sparse\appendwithcomma{#3}}%
+}{fnds}{$\regsgintp{n}{d}{}$}{
+  Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}{}$
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 %\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
