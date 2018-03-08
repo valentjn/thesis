@@ -66,7 +66,7 @@ With the following invariant, we can prove the correctness of the \up.
   Let $T$ be the hierarchization operator on a full grid,
   i.e.,
   $T = A^{-1}$,
-  $\ßu = (f_\ßk)_{\ßk \in \liset}$,
+  $\ßu = (\fcnval{\ßk})_{\ßk \in \liset}$,
   $\ßy = (\surplus{\ßk})_{\ßk \in \liset}$,
   $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
   $\liset = \{\ß0, \dotsc, \ß2^\ßl\}$
@@ -76,7 +76,7 @@ With the following invariant, we can prove the correctness of the \up.
   \begin{equation}
     \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
     \alpha^{(j)}_{(\ßk_T,\ßk'_{-T})} \basis{\ßk_T}(\vgp{\ßk'_T})
-    = f_{\ßk'},\quad
+    = \fcnval{\ßk'},\quad
     \ßk' = \ß0, \dotsc, \ß2^\ßl,
   \end{equation}
   where $(\ßk_T,\ßk'_{-T})$ is defined to be the index $\ßk''$
@@ -117,7 +117,7 @@ With the following invariant, we can prove the correctness of the \up.
     \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}
     \basis{\ßk_{T'}}(\vgp{\ßk'_{T'}}),
   \end{align}
-  which, by the induction hypothesis, equals $f_{\ßk'}$ as desired
+  which, by the induction hypothesis, equals $\fcnval{\ßk'}$ as desired
   (if $j > 1$).
   The same reasoning for $(\ast\ast)$ can be used
   to establish the base case for $j = 1$.
@@ -132,7 +132,7 @@ With the following invariant, we can prove the correctness of the \up.
   We apply \cref{prop:invariantUnidirectionalPrinciple} to obtain
   $\sum_{\ßk=\ß0}^{\ß2^\ßl}
   \alpha^{(j)}_\ßk \basis{\ßk}(\vgp{\ßk'})
-  = f_{\ßk'}$
+  = \fcnval{\ßk'}$
   for all $\ßk' = \ß0, \dotsc, \ß2^\ßl$, i.e.,
   the $\alpha^{(j)}_\ßk$ are the correct interpolation coefficients
   according to \eqref{eq:hierarchizationProblem}.

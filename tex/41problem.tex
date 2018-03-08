@@ -14,11 +14,11 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^N$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
-  \basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = f_{\ßl,\ßi}
+  \basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = \fcnval{\ßl,\ßi}
   \quad\text{for all}\quad
   (\ßl, \ßi) \in \liset,
 \end{equation}
-where $(f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N$ is a given set of
+where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N$ is a given set of
 function values $\objfun(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $\sgintp$ as
 \begin{equation}
@@ -68,7 +68,7 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \real^{N \times N}$
   \begin{equation}
     L = A^{-1},\quad
     A = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
-    \ßu = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
+    \ßu = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
     \ßy = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
   \end{equation}
   This means that we can determine the $\surplus{\ßl',\ßi'}$ by solving
@@ -77,7 +77,7 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \real^{N \times N}$
     \ßy = L[\ßu]
     \quad\iff\quad
     A \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}
-    = (f_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset}.
+    = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset}.
   \end{equation}
 \end{subequations}
 
@@ -111,7 +111,7 @@ every dimension $t$, which implies that $\interiorsupp \basis{\ßl',\ßi'}^\ßp$
 contains most of the grid points.
 In contrast to the hat function case ($\ßp = \ß1$),
 the value of $\surplus{\ßl',\ßi'}$ depends not only on
-$f_{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
+$\fcnval{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \basis{\ßl',\ßi'}^\ß1$,
 but potentially on the data of the whole grid.
 
