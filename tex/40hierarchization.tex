@@ -8,18 +8,19 @@
 \chapter{Algorithms for B-Splines on Sparse Grids}
 \footnotetext{\url{https://xkcd.com/163/}}
 
+%\lettrine{A}{s} we have seen in the last chapter,
+%hierarchical B-splines constitute an interesting basis on sparse grids,
+%enabling smooth approximations of objective functions.
+%When correctly incorporating boundary conditions into the hierarchical basis,
+%the basis can exactly represent polynomials,
+%which is a prerequisite for higher approximation orders.
 
-
-\lettrine{A}{s} we have seen in the last chapter,
-hierarchical B-splines constitute an interesting basis on sparse grids,
-enabling smooth approximations of objective functions.
-When correctly incorporating boundary conditions into the hierarchical basis,
-the basis can exactly represent polynomials,
-which is a prerequisite for higher approximation orders.
-
-However, the new basis functions pose new algorithmic challenges
-as we are usually not able to apply the sparse grid algorithms
-that were designed for hat functions.
+\lettrine{L}{et}
+us study the algorithmic challenges that the new hierarchical B-spline
+bases pose.
+As we are usually not able to apply the sparse grid algorithms
+that were designed for hat functions, we have to generalize the algorithms
+to higher-order B-splines or even to arbitrary tensor product basis functions.
 We learn in this chapter that the main problem is the larger support
 of higher-order B-splines (degree $p > 1$) when compared to degree $p = 1$.
 Unfortunately, it is not possible to simply ``transform'' the basis
