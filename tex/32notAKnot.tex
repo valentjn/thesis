@@ -296,9 +296,6 @@ we would not be able to obtain enough basis functions to span the spline space.
 
 \paragraph{Definition of hierarchical not-a-knot B-splines}
 
-\newgsymbol{Lli}{$L_{l,i}$}{%
-  Lagrange polynomial of level $l$, index $i$%
-}%
 For the definition of \term{hierarchical not-a-knot B-splines}
 $\basis{l,i}^{p,\notaknot}$ based on \thmref{def:nonUniformBSpline},
 we use global Lagrange polynomials for the coarser levels:
@@ -307,35 +304,35 @@ we use global Lagrange polynomials for the coarser levels:
     \basis{l,i}^{p,\notaknot}
     :=
     \begin{cases}
-      L_{l,i},&
+      \lagrangepoly{l,i},&
       l < \lceil\log_2(p+1)\rceil,\\
       \nonunifbspl{i,\nodalknotseq{l}{p}{\notaknot}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\
-    L_{l,i}\colon \clint{0, 1} \to \real,\quad
-    L_{l,i}(x)
+    \lagrangepoly{l,i}\colon \clint{0, 1} \to \real,\quad
+    \lagrangepoly{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \gp{l,i'}}{\gp{l,i} - \gp{l,i'}}.
   \end{gather}
 \end{subequations}
 The hierarchical not-a-knot B-spline basis is shown for the
 cubic case $p = 3$ in \cref{fig:notAKnotBSpline}.
-The function $L_{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
+The function $\lagrangepoly{l,i}$ is the $i$-th Lagrange polynomial of level $l$,
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
 $\{(\gp{l,i'}, \kronecker{i}{i'}) \mid i' = 0, \dotsc, 2^l\}$.
 \newgsymbol{deg}{$\deg f$}{%
   Degree of the polynomial $f$%
 }%
-Since its degree $\deg L_{l,i}$ is bounded by $2^l$,
-we have $\deg L_{l,i} < p + 1$,
+Since its degree $\deg \lagrangepoly{l,i}$ is bounded by $2^l$,
+we have $\deg \lagrangepoly{l,i} < p + 1$,
 as the Lagrange polynomials are employed only when
 $l < \lceil\log_2(p+1)\rceil$.
 Due to $2^l$ even (when $l \ge 1$) and $p$ odd,
-we can conclude from $\deg L_{l,i} \le 2^l \le p$ that actually
-$\deg L_{l,i} \le 2^l < p$
+we can conclude from $\deg \lagrangepoly{l,i} \le 2^l \le p$ that actually
+$\deg \lagrangepoly{l,i} \le 2^l < p$
 (for $p > 1$; for $p = 1$, the case $l = 0$ is the exception).
 
 \begin{figure}
@@ -609,15 +606,15 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \basis{l,i}^{p,\clenshawcurtis,\notaknot}
     :=
     \begin{cases}
-      L_{l,i}^\clenshawcurtis,&
+      \lagrangepoly{l,i}^\clenshawcurtis,&
       l < \lceil\log_2(p+1)\rceil,\\
       \nonunifbspl{i,\nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\
-    L_{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \real,\quad
-    L_{l,i}^\clenshawcurtis(x)
+    \lagrangepoly{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \real,\quad
+    \lagrangepoly{l,i}^\clenshawcurtis(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \gp{l,i'}^\clenshawcurtis}%
     {\gp{l,i}^\clenshawcurtis - \gp{l,i'}^\clenshawcurtis}.
@@ -696,7 +693,7 @@ Consequently, we can define hierarchical natural B-splines as
     \basis{l,i}^{p,\ntrl}(x)
     :=
     \begin{cases}
-      L_{0,i}(x),&
+      \lagrangepoly{0,i}(x),&
       l = 0,\\
       \basis{l,i}^p +
       \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \basis{l,j}^p,&
