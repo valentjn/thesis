@@ -284,6 +284,23 @@
   Characteristic function of the set $A \subset \real$
 }
 
+\newnotationcommand{\convolution}{\ast}{!*}{$\convolution$}{
+  Convolution $f \ast g$ of two functions $f$ and $g$
+}
+
+\newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{dij}{$\kronecker{i}{j}$}{
+  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
+}
+
+\newnotation{\knot}{\xi}{xi}{$\knot{k}$}{
+  Knot $\in \real$ of a spline space
+  (point where the splines are not smooth)
+}
+
+\newnotation{\knotseq}{\ß\xi}{xi!}{$\knotseq$}{
+  Knot sequence $:= (\knot_0, \dotsc, \knot_{m+p})$
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
 
@@ -296,6 +313,11 @@
 \newcommand*{\term}[1]{\emph{#1}}
 
 % mathematic operators
+\DeclareMathOperator{\supp}{supp}
+\makecommandnotation{\supp}{supp}{$\supp$}{
+  Support of a function (i.e., the closure of the non-zero set)
+}
+
 \DeclareMathOperator{\interiorsupp}{\mathring{\supp}}
 \makecommandnotation{\interiorsupp}{suppo}{$\interiorsupp$}{
   Interior of the support of a function
@@ -306,8 +328,6 @@
 \makecommandnotation{\spn}{span}{$\spn$}{
   Linear span (set of all linear combinations)
 }
-
-\DeclareMathOperator{\supp}{supp}
 
 \DeclareMathOperator{\xor}{xor}
 \makecommandnotation{\xor}{xor}{$\xor$}{

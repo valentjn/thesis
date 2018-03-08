@@ -40,9 +40,6 @@ which are also shown in \cref{fig:cardinalBSplineProps}
 \cite{Hoellig03Finite}:
 \begin{enumerate}
   \item
-  \newgsymbol{supp}{$\supp$}{%
-    Support of a function (i.e., the closure of the non-zero set)%
-  }%
   \emph{Compact support:}
   The support of $\cardbspl{p}$ is given by $\supp \cardbspl{p} = \clint{0, p + 1}$.
   
@@ -90,18 +87,15 @@ which are also shown in \cref{fig:cardinalBSplineProps}
   
   \item
   \emph{Convolution:}
-  \newgsymbol{!*}{$\ast$}{Convolution $f \ast g$ of two functions $f$ and $g$}%
   The integral in the definition of $\cardbspl{p}$
-  is the convolution $\cardbspl{p-1} \ast \cardbspl{0}$ of the B-spline $\cardbspl{p-1}$
+  is the convolution $\cardbspl{p-1} \convolution \cardbspl{0}$
+  of the B-spline $\cardbspl{p-1}$
   of degree $p - 1$ with the B-spline $\cardbspl{0}$ of degree zero.
   
   \item
   \emph{Generalization:}
-  \newgsymbol{dij}{$\delta_{i,j}$}{%
-    Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise%
-  }%
   As a special case, $\cardbspl{1}$ is a hat function interpolating the data
-  $\{(k, \delta_{k,1}) \mid k \in \integer\}$.
+  $\{(k, \kronecker{k}{1}) \mid k \in \integer\}$.
   For $p \to \infty$, the normalized cardinal B-splines converge
   pointwise to the standard Gaussian function
   $\cardbspl{\infty}(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
@@ -163,10 +157,7 @@ of the hat function.
 
 \paragraph{Definition of uniform hierarchical B-splines}
 
-\newgsymbol{.p}{$\cdot^p$}{%
-  Superscript for ``B-spline (basis function/function space/interpolant)
-  of degree $p$''%
-}%
+\usenotation{.p}
 We can use the cardinal B-spline $\cardbspl{p}$ as a ``mother function'' to
 define the uniform hierarchical B-spline
 $\basis{l,i}^p\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
@@ -274,54 +265,51 @@ we introduce the notion of non-uniform B-splines.
 
 \begin{definition}[non-uniform B-splines]
   \label{def:nonUniformBSpline}
-  \newgsymbol{xi!}{$\ß\xi$}{%
-    Knot sequence $:= (\xi_0, \dotsc, \xi_{m+p})$%
-  }%
-  Let $m, p \in \natz$ and $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be an
+  Let $m, p \in \natz$ and $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be an
   increasing sequence of real numbers \term{(knot sequence)}.
-  \newgsymbol{bkxip}{$b_{k,\ß\xi}^p$}{%
-    Non-uniform B-spline of degree $p$ with knots $\ß\xi$ and index $k$%
+  \newgsymbol{bkxip}{$b_{k,\knotseq}^p$}{%
+    Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$%
   }%
   For $k = 0, \dotsc, m - 1$,
-  the \term{(non-uniform) B-spline} $b_{k,\ß\xi}^p$ of degree $p$
-  with knots~$\ß\xi$ and index $k$ is defined by the
+  the \term{(non-uniform) B-spline} $b_{k,\knotseq}^p$ of degree $p$
+  with knots~$\knotseq$ and index $k$ is defined by the
   Cox--de~Boor recurrence
   \multicite{Cox72Numerical,Boor72Calculating,Hoellig13Approximation}
   \begin{equation}
-    b_{k,\ß\xi}^p(x)
+    b_{k,\knotseq}^p(x)
     :=
     \begin{cases}
-      \dfrac{x - \xi_k}{\xi_{k+p} - \xi_k} b_{k,\ß\xi}^{p-1}(x) +
-      \dfrac{\xi_{k+p+1} - x}{\xi_{k+p+1} - \xi_{k+1}}
-      b_{k+1,\ß\xi}^{p-1}(x),&p \ge 1,\\
-      \charfun{\hopint{\xi_k, \xi_{k+1}}}(x),&p = 0.
+      \dfrac{x - \knot{k}}{\knot{k+p} - \knot{k}} b_{k,\knotseq}^{p-1}(x) +
+      \dfrac{\knot{k+p+1} - x}{\knot{k+p+1} - \knot{k+1}}
+      b_{k+1,\knotseq}^{p-1}(x),&p \ge 1,\\
+      \charfun{\hopint{\knot{k}, \knot{k+1}}}(x),&p = 0.
     \end{cases}
   \end{equation}
 \end{definition}
-Note that when choosing $\ß\xi = (0, 1, \dotsc, p + 1)$ and
+Note that when choosing $\knotseq = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline~$\cardbspl{p}$.
 \Cref{def:nonUniformBSpline} can be used to characterize
 the nodal space $\ns{l}^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
-  \newgsymbol{Sxip}{$S_\ß\xi^p$}{%
-    Spline space of degree $p$ with knots $\ß\xi$%
+  \newgsymbol{Sxip}{$S_\knotseq^p$}{%
+    Spline space of degree $p$ with knots $\knotseq$%
   }%
-  Let $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
-  Then, the B-splines $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$)
+  Let $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
+  Then, the B-splines $b_{k,\knotseq}^p$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
   \begin{equation}
-    S_\ß\xi^p
-    := \spn\{b_{k,\ß\xi}^p \mid k = 0, \dotsc, m - 1\}.
+    S_\knotseq^p
+    := \spn\{b_{k,\knotseq}^p \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
-  $S_\ß\xi^p$ contains exactly those functions that are continuous
-  on $D_\ß\xi^p := \clint{\xi_p, \xi_m}$,
+  $S_\knotseq^p$ contains exactly those functions that are continuous
+  on $D_\knotseq^p := \clint{\knot{p}, \knot{m}}$,
   polynomials of degree $\le p$ on every knot interval
-  $\clint{\xi_k, \xi_{k+1}}$ \todo{check half-open interval?} in $D_\ß\xi$
+  $\clint{\knot{k}, \knot{k+1}}$ \todo{check half-open interval?} in $D_\knotseq$
   ($k = p, \dotsc, m - 1$) and at least $(p - 1)$ times
-  continuously differentiable at every knot $\xi_k$ in the interior of
-  $D_\ß\xi^p$ ($k = p + 1, \dotsc, m - 1$).
+  continuously differentiable at every knot $\knot{k}$ in the interior of
+  $D_\knotseq^p$ ($k = p + 1, \dotsc, m - 1$).
 \end{proposition}
 
 \begin{proof}
@@ -333,39 +321,39 @@ which is for ``basis'' (of the space of splines).
 \todo{citation needed for B in B-splines}
 One example of a knot sequence and the corresponding B-splines is
 given in \cref{fig:splineSpaceGeneral}.
-The key observation is that B-splines of a knot sequence $\ß\xi$
+The key observation is that B-splines of a knot sequence $\knotseq$
 do not form a basis of the spline space on the union
-$\clint{\xi_0, \xi_{m+p}}$ of the B-spline supports,
-but rather on a proper sub-interval $D_\ß\xi^p$.
-Intuitively, for every point in $D_\ß\xi^p$ that is not a knot,
+$\clint{\knot{0}, \knot{m+p}}$ of the B-spline supports,
+but rather on a proper sub-interval $D_\knotseq^p$.
+Intuitively, for every point in $D_\knotseq^p$ that is not a knot,
 exactly $p + 1$ B-splines must be \term{relevant} (i.e., non-zero)
 to span the spline space,
 as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $p + 1$ degrees of freedom.
-Outside of $D_\ß\xi^p$, there are too few relevant B-splines
+Outside of $D_\knotseq^p$, there are too few relevant B-splines
 to span the spline space.
 This important observation,
 which is visualized in \cref{fig:splineSpaceUniform},
 forces us to restrict nodal space and hierarchical subspaces to
-$D_\ß\xi^p$:
+$D_\knotseq^p$:
 
 \begin{figure}
   \includegraphics{splineSpace_1}%
   \caption{%
-    Knot sequence $\ß\xi = (\xi_0, \dotsc, \xi_{m+p}$)
+    Knot sequence $\knotseq = (\knot{0}, \dotsc, \knot{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
-    $b_{k,\ß\xi}^p$ ($k = 0, \dotsc, m - 1$, $p = 3$).
-    On $D_\ß\xi^p$ \emph{(thick line, delimited by dashed lines)},
+    $b_{k,\knotseq}^p$ ($k = 0, \dotsc, m - 1$, $p = 3$).
+    On $D_\knotseq^p$ \emph{(thick line, delimited by dashed lines)},
     which starts with the last knot interval of the first B-spline
-    $b_{0,\ß\xi}^p$
+    $b_{0,\knotseq}^p$
     and ends with the first knot interval of the last B-spline
-    $b_{m-1,\ß\xi}^p$,
-    the B-splines span the spline space $S_\ß\xi^p$.
+    $b_{m-1,\knotseq}^p$,
+    the B-splines span the spline space $S_\knotseq^p$.
     \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
-    Elements of this space are splines $s\colon D_\ß\xi^p \to \real$
+    Elements of this space are splines $s\colon D_\knotseq^p \to \real$
     \emph{(black line)},
     which are linear combinations
-    $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\ß\xi}^p$
+    $s = \sum_{k=0}^{m-1} \interpcoeff{k} b_{k,\knotseq}^p$
     of the B-splines.%
   }%
   \label{fig:splineSpaceGeneral}%
@@ -374,12 +362,12 @@ $D_\ß\xi^p$:
 \begin{figure}
   \includegraphics{splineSpace_2}%
   \caption{%
-    Uniform knot sequence $\ß\xi_l^p$ \emph{(ticks on horizontal axis)}
+    Uniform knot sequence $\knotseq_l^p$ \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic B-splines ($p = 3$) of level $l = 3$.
     In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
     the grid points $\fgset{l}$ \emph{\textcolor{mittelblau}{(blue dots)}}
     coincide with the B-spline knots.
-    The spline interpolation domain $D_l^p := D_{\ß\xi_l^p}^p$
+    The spline interpolation domain $D_l^p := D_{\knotseq_l^p}^p$
     \emph{(thick line)}
     is only a proper subset of $\clint{0, 1}$.%
   }%
@@ -396,12 +384,12 @@ $D_\ß\xi^p$:
     Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
     for a function space $V$%
   }%
-  \newgsymbol{xilp}{$\ß\xi_l^p$}{%
+  \newgsymbol{xilp}{$\knotseq_l^p$}{%
     Knot sequence
     for uniform nodal B-splines of level $l$, degree $p$%
   }%
   \newgsymbol{Slp}{$S_l^p$}{%
-    Spline space $:= S_{\ß\xi_l^p}^p$
+    Spline space $:= S_{\knotseq_l^p}^p$
     (spanned by the uniform nodal B-splines of level $l$, degree $p$)%
   }%
   \newgsymbol{Dlp}{$D_l^p$}{%
@@ -411,7 +399,7 @@ $D_\ß\xi^p$:
   The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
-  a basis of the spline space $S_{\ß\xi_l^p}^p$, where
+  a basis of the spline space $S_{\knotseq_l^p}^p$, where
   \begin{gather}
     \label{eq:nodalBSplineSpaceKnots}
     \xi_{l,k}^p
@@ -425,12 +413,12 @@ $D_\ß\xi^p$:
   \begin{equation}
     \ns{l}^p|_{D_l^p}
     = S_l^p
-    := S_{\ß\xi_l^p}^p.
+    := S_{\knotseq_l^p}^p.
   \end{equation}
 \end{corollary}
 
 \begin{proof}
-  We have $\basis{l,i}^p = b_{i,\ß\xi_l^p}^p$ for
+  We have $\basis{l,i}^p = b_{i,\knotseq_l^p}^p$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -458,7 +446,7 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \begin{proof}
   Every function $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) is continuous on
   $D_l^p$, a polynomial of degree $\le p$ on every knot interval
-  of $\ß\xi_l^p$ (due to $p$ odd),
+  of $\knotseq_l^p$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in S_l^p$
@@ -579,13 +567,13 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 \begin{lemma}[Marsden's identity]
   \label{lemma:marsden}
   Let $p \in \natz$ and
-  $\ß\xi = (\xi_0, \dotsc, \xi_{m+p})$ be a knot sequence.
-  Then, for all $x \in D_\ß\xi^p$ and $y \in \real$,
+  $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
+  Then, for all $x \in D_\knotseq^p$ and $y \in \real$,
   \begin{equation}
     \label{eq:marsden}
     (x - y)^p
-    = \sum_{k=0}^{m-1} \big[(\xi_{k+1} - y) \dotsm (\xi_{k+p} - y)\big]
-    b_{k,\ß\xi}^p(x).
+    = \sum_{k=0}^{m-1} \big[(\knot{k+1} - y) \dotsm (\knot{k+p} - y)\big]
+    b_{k,\knotseq}^p(x).
   \end{equation}
 \end{lemma}
 
@@ -753,7 +741,7 @@ $\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \basis{l,i}^{p,\clenshawcurtis}
-  := b_{i,\ß\xi_l^{p,\clenshawcurtis}}^p,
+  := b_{i,\knotseq_l^{p,\clenshawcurtis}}^p,
 \end{equation}
 where
 \begin{subequations}
@@ -773,7 +761,7 @@ where
     m := 2^l + 1.
   \end{gather}
 \end{subequations}
-For the construction of the knot sequence $\ß\xi_l^{p,\clenshawcurtis}$,
+For the construction of the knot sequence $\knotseq_l^{p,\clenshawcurtis}$,
 the Chebyshev points $\gp{l,i}^\clenshawcurtis$
 are equidistantly extended onto the real line $\real$.
 As for the standard hierarchical B-spline basis,
