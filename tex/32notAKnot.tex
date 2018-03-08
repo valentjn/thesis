@@ -40,16 +40,16 @@ for other non-polynomial functions as well.
 \begin{figure}
   \subcaptionbox{%
     Objective function \textcolor{C0}{$\objfun$ \emph{(blue)}},
-    interpolant \textcolor{C1}{$\tilde{f}$ \emph{(red, dashed)}},
+    interpolant \textcolor{C1}{$\fgintp{l}$ \emph{(red, dashed)}},
     grid points \emph{(dots)}, and
-    spline interpolation domain $\restrictedspldomain{3}{p}$
+    spline interpolation domain $\restrictedspldomain{l}{p}$
     \emph{(thick line)}.%
   }[75mm]{%
     \includegraphics{nakInterpolation_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Relative error $\abs{(\objfun - \tilde{f})/\objfun}$ on a logarithmic scale.%
+    Relative error $\abs{(\objfun - \fgintp{l})/\objfun}$ on a logarithmic scale.%
   }[75mm]{%
     \includegraphics{nakInterpolation_2}%
   }%
@@ -73,7 +73,7 @@ $\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l
 This means that there is a linear combination of hierarchical B-splines
 $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
 that interpolates $\objfun$ exactly on the whole domain $\restrictedspldomain{l}{p}$
-(not be confused with $\tilde{f}$ in \cref{fig:nakInterpolation},
+(not be confused with $\fgintp{l}$ in \cref{fig:nakInterpolation},
 which does not interpolate $\objfun$ exactly in $\restrictedspldomain{l}{p}$).
 However, in general, this interpolant is not equal $\objfun$ outside
 of $\restrictedspldomain{l}{p}$ (i.e., in $\clint{0, 1} \setminus \restrictedspldomain{l}{p}$),
@@ -82,9 +82,9 @@ In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
 equal to $\objfun(x)$.
 If we now force the additional interpolation conditions in
 $\gp{l,0} = 0$ and $\gp{l,2^l} = 1$,
-the resulting interpolant $\tilde{f}$ cannot be the same as the previous
+the resulting interpolant $\fgintp{l}$ cannot be the same as the previous
 interpolant,
-which is why $\objfun$ and $\tilde{f}$ differ inside $\restrictedspldomain{l}{p}$.
+which is why $\objfun$ and $\fgintp{l}$ differ inside $\restrictedspldomain{l}{p}$.
 
 \paragraph{Schoenberg--Whitney conditions}
 

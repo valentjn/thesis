@@ -104,10 +104,6 @@
   $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\ßl}$}{
-  Full grid interpolant of $f$ in $\ns{\ßl}$
-}
-
 \newnotationcommand[1]{\clint}{[#1]}{ab!c}{$\clint{\ßa, \ßb}$}{
   Closed hyper-rectangle
   $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
@@ -398,6 +394,10 @@
 
 \newnotationcommand{\objfun}{f}{f}{$\objfun$}{
   Objective function $\objfun\colon \clint{\ß0, \ß1} \to \real$
+}
+
+\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\ßl}$}{
+  Full grid interpolant of $\objfun$ in $\ns{\ßl}$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
