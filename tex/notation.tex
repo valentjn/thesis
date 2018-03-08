@@ -391,8 +391,14 @@
   Lagrange polynomial of level $l$, index $i$
 }
 
+\newnotationcommand[1]{\polyspace}{P^{#1}}{Pp!}{$\polyspace{\ßp}$}{
+  Space of all $d$-variate polynomials of
+  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+}
+
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
+%\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 
 % defined terms
 \newcommand*{\term}[1]{\emph{#1}}
@@ -421,6 +427,10 @@
 \let\xororig\xor
 \makecommandnotation{\xor}{xor}{$\xororig$}{
   Bitwise ``exclusive or''
+}
+
+\makecommandnotation{\deg}{deg}{$\deg f$}{
+  Degree of the polynomial $f$
 }
 
 % subsets

@@ -323,9 +323,6 @@ The function $\lagrangepoly{l,i}$ is the $i$-th Lagrange polynomial of level $l$
 that is,
 the unique polynomial of degree $\le 2^l$ that interpolates the data
 $\{(\gp{l,i'}, \kronecker{i}{i'}) \mid i' = 0, \dotsc, 2^l\}$.
-\newgsymbol{deg}{$\deg f$}{%
-  Degree of the polynomial $f$%
-}%
 Since its degree $\deg \lagrangepoly{l,i}$ is bounded by $2^l$,
 we have $\deg \lagrangepoly{l,i} < p + 1$,
 as the Lagrange polynomials are employed only when
@@ -418,9 +415,6 @@ respectively.
 
 \begin{proposition}[hierarchical splitting for not-a-knot B-splines]
   \label{prop:hierSplittingNAKBSplineUV}
-  \newgsymbol{Pp}{$P^p$}{%
-    Space of all polynomials of degree $\le p$ on $\clint{0, 1}$%
-  }%
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical not-a-knot B-spline basis:
   \begin{equation}
@@ -429,7 +423,7 @@ respectively.
     = \bigoplus_{l'=0}^l \hs{l'}^{p,\notaknot},
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $\naksplspace{l}{p}$
-  is defined as the space $P^{2^l + 1}$ of polynomials of degree
+  is defined as the space $\polyspace{2^l + 1}$ of polynomials of degree
   $\le 2^l + 1$ on $\clint{0, 1}$
   (for $l \ge \lceil\log_2(p+1)\rceil$,
   $\naksplspace{l}{p}$ is the not-a-knot spline space).
@@ -437,7 +431,7 @@ respectively.
 
 \begin{proof}
   For $l < \lceil\log_2(p+1)\rceil$, all
-  three spaces coincide with $P^{2^l + 1}$ and nothing is to prove.
+  three spaces coincide with $\polyspace{2^l + 1}$ and nothing is to prove.
   
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
@@ -486,12 +480,8 @@ are defined analogously to the uniform case, i.e.,
   \regsgspace{n}{d}{\ßp,\notaknot}
   := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\notaknot}.
 \end{equation}
-\newgsymbol{Pp!}{$P^\ßp$}{%
-  Space of all $d$-variate polynomials of
-  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$%
-}%
 If the level $n$ is large enough, then $\regsgspace{n}{d}{\ßp,\notaknot}$
-contains the space $P^\ßp$ of all $d$-variate polynomials of
+contains the space $\polyspace{\ßp}$ of all $d$-variate polynomials of
 coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
 (i.e., functions $f\colon \clint{0, 1} \to \real$,
 $f(\ßx) := \sum_{\ßq=\ß0}^\ßp \interpcoeff{\ßq} \prod_{t=1}^d x_t^{q_t}$,
@@ -502,7 +492,7 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
 
 \begin{corollary}
   If $n \ge \normone{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}$,
-  then $P^\ßp \subset \regsgspace{n}{d}{\ßp,\notaknot}$.
+  then $\polyspace{\ßp} \subset \regsgspace{n}{d}{\ßp,\notaknot}$.
 \end{corollary}
 
 \begin{proof}
@@ -514,7 +504,7 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
   $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} \subset
   \regsgspace{n}{d}{\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
-  $P^\ßp \subset \naksplspace{\ßl}{\ßp} \subset
+  $\polyspace{\ßp} \subset \naksplspace{\ßl}{\ßp} \subset
   \regsgspace{n}{d}{\ßp,\notaknot}$, which is the asserted claim.
 \end{proof}
 
