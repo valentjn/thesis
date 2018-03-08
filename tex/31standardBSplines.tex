@@ -290,9 +290,6 @@ the nodal space $\ns{l}^p$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
-  \newgsymbol{Sxip}{$\nonunifsplspace{\knotseq}{p}$}{%
-    Spline space of degree $p$ with knots $\knotseq$%
-  }%
   Let $\knotseq = (\knot{0}, \dotsc, \knot{m+p})$ be a knot sequence.
   Then, the B-splines $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$)
   form a basis of the \term{spline space}
@@ -346,11 +343,10 @@ $D_\knotseq^p$:
     and ends with the first knot interval of the last B-spline
     $\nonunifbspl{m-1,\knotseq}{p}$,
     the B-splines span the spline space $\nonunifsplspace{\knotseq}{p}$.
-    \newgsymbol{s}{$s$}{Spline (piecewise polynomial)}%
-    Elements of this space are splines $s\colon D_\knotseq^p \to \real$
+    Elements of this space are splines $\spl\colon D_\knotseq^p \to \real$
     \emph{(black line)},
     which are linear combinations
-    $s = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
+    $\spl = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
     of the B-splines.%
   }%
   \label{fig:splineSpaceGeneral}%
@@ -380,10 +376,6 @@ $D_\knotseq^p$:
   \newgsymbol{V|D}{$V|_D$}{%
     Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
     for a function space $V$%
-  }%
-  \newgsymbol{xilp}{$\nodalknotseq{l}{p}{}$}{%
-    Knot sequence
-    for uniform nodal B-splines of level $l$, degree $p$%
   }%
   \newgsymbol{Dlp}{$D_l^p$}{%
     Spline interpolation domain of $\restrictedsplspace{l}{p}$
@@ -668,10 +660,6 @@ resulting Clenshaw--Curtis grids and B-splines will serve as an example.
 
 \paragraph{Chebyshev points and Clenshaw--Curtis grids}
 
-\newgsymbol{.cc}{$\cdot^\clenshawcurtis$}{%
-  Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
-  function/function space/interpolant)''%
-}%
 The \term{Chebyshev points} $\gp{l,i}^\clenshawcurtis$ of level $l \in \natz$
 are defined as
 \begin{equation}

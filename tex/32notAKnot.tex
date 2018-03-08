@@ -95,7 +95,8 @@ described by the so-called Schoenberg--Whitney conditions:
   and $t_0, \dotsc, t_{m-1}$ a sequence of interpolation points with
   $\knot{p} \le t_0 < \dotsb < t_{m-1} \le \knot{m}$.
   Then, there exists a unique interpolating spline
-  $s = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$ for arbitrary data if and only if
+  $\spl = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
+  for arbitrary data if and only if
   \begin{equation}
     \knot{k} < t_k < \knot{k+p+1},\quad
     k = 0, \dotsc, m - 1.
@@ -178,11 +179,12 @@ for which we need two conditions,
 the not-a-knot conditions demand that
 $\frac{\diff^3}{\dx^3} s$ is continuous at the first and last
 interior knot $\gp{l,1} = \ms{l}$ and $\gp{l,2^l-1} = 1 - \ms{l}$
-for all splines $s$ in the subspace.
+for all splines $\spl$ in the subspace.
 Equivalently, $\gp{l,1}$ and $\gp{l,2^l-1}$ are effectively removed from the
 knot sequence (hence ``not-a-knot''),
 as this is equivalent to requiring that
-$s$ is a cubic polynomial on $\clint{0, \gp{l,2}}$ and $\clint{\gp{l,2^l-2}, 1}$.
+$\spl$ is a cubic polynomial on $\clint{0, \gp{l,2}}$ and
+$\clint{\gp{l,2^l-2}, 1}$.
 For general degree $p$ (in which we need $(p - 1)$ conditions),
 we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
 is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
@@ -194,8 +196,9 @@ inner grid points
   \{2^l - \tfrac{p-1}{2}, \dotsc, 2^l - 1\},
 \end{equation}
 which is equivalent to removing these knots from the knot sequence $\knotseq$,
-or, alternatively, to requiring that $s$ is a polynomial
-of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on $\clint{\gp{l,2^l-(p+1)/2}, 1}$.
+or, alternatively, to requiring that $\spl$ is a polynomial
+of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on
+$\clint{\gp{l,2^l-(p+1)/2}, 1}$.
 
 \newgsymbol{.nak}{$\cdot^\notaknot$}{%
   Superscript for ``Not-a-knot (knot sequence/basis
