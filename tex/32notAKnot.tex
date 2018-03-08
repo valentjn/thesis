@@ -64,11 +64,11 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$
+we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}$
 with $p = 3$.
 Since cubic polynomials as $f$ are cubic splines as well,
 $f \in \restrictedsplspace{l}{p}$ and hence
-$f \in \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}$.
+$f \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}$.
 This means that there is a linear combination of hierarchical B-splines
 $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
 that interpolates $f$ exactly on the whole domain $D_l^p$

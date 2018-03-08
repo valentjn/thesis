@@ -204,8 +204,8 @@ $\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
     When restricting all functions to $D_l^p$ \emph{(thick black line)},
-    the nodal space $\ns{l}^p|_{D_l^p}$ decomposes into the direct sum
-    of the hierarchical subspaces $\hs{l'}^p|_{D_l^p}$ ($l' \le l$).%
+    the nodal space $\restrictspace{\ns{l}^p}{D_l^p}$ decomposes into the direct sum
+    of the hierarchical subspaces $\restrictspace{\hs{l'}^p}{D_l^p}$ ($l' \le l$).%
   }
   \label{fig:hierarchicalBSpline}
 \end{figure}
@@ -369,19 +369,11 @@ $D_\knotseq^p$:
 
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
-  \newgsymbol{f|D}{$f|_D$}{%
-    Restriction $f|_D\colon D \to \real$, $f|_D(x) := f(x)$,
-    onto a sub-domain $D$ for a function $f$%
-  }%
-  \newgsymbol{V|D}{$V|_D$}{%
-    Restriction $:= \{f|_D \mid f \in V\}$ onto a sub-domain $D$
-    for a function space $V$%
-  }%
   \newgsymbol{Dlp}{$D_l^p$}{%
     Spline interpolation domain of $\restrictedsplspace{l}{p}$
     (uniform nodal B-splines of level $l$, degree $p$)%
   }%
-  The restricted nodal B-splines $\basis{l,i}^p|_{D_l^p}$
+  The restricted nodal B-splines $\restrictfcn{\basis{l,i}^p}{D_l^p}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
   a basis of the spline space $\nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$,
@@ -397,7 +389,7 @@ $D_\knotseq^p$:
   \end{gather}
   and consequently
   \begin{equation}
-    \ns{l}^p|_{D_l^p}
+    \restrictspace{\ns{l}^p}{D_l^p}
     = \restrictedsplspace{l}{p}
     := \nonunifsplspace{\nodalknotseq{l}{p}{}}{p}.
   \end{equation}
@@ -425,8 +417,8 @@ to prove the hierarchical splitting for the uniform B-spline basis
 
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
-  $\hs{l'}^p|_{D_l^p}$ ($l' \le l$) are
-  subspaces of the restricted nodal space $\ns{l}^p|_{D_l^p}$.
+  $\restrictspace{\hs{l'}^p}{D_l^p}$ ($l' \le l$) are
+  subspaces of the restricted nodal space $\restrictspace{\ns{l}^p}{D_l^p}$.
 \end{lemma}
 
 \begin{proof}
@@ -437,17 +429,17 @@ to prove the hierarchical splitting for the uniform B-spline basis
   differentiable.
   \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in \restrictedsplspace{l}{p}$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\basis{l',i'}^p \in \ns{l}^p|_{D_l^p}$.
+  $\basis{l',i'}^p \in \restrictspace{\ns{l}^p}{D_l^p}$.
   As the functions $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) span
-  $\hs{l'}^p|_{D_l^p}$, we can conclude
-  $\hs{l'}^p|_{D_l^p} \subset \ns{l}^p|_{D_l^p}$.
+  $\restrictspace{\hs{l'}^p}{D_l^p}$, we can conclude
+  $\restrictspace{\hs{l'}^p}{D_l^p} \subset \restrictspace{\ns{l}^p}{D_l^p}$.
 \end{proof}
 
 It is crucial to note that this lemma does not hold for even $p$,
 as the knots of the B-splines of level $l - 1$ are not contained in the
 knots of level $l$.
 This implies that in general,
-$\hs{l-1}^p|_{D_l^p}$ is not contained in $\ns{l}^p|_{D_l^p}$
+$\restrictspace{\hs{l-1}^p}{D_l^p}$ is not contained in $\restrictspace{\ns{l}^p}{D_l^p}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 does not hold, which is the main reason for us to restrict the
@@ -481,8 +473,8 @@ is correct for hierarchical B-splines:
   if restricting all functions to $D_l^p$:
   \begin{equation}
     \restrictedsplspace{l}{p}
-    = \ns{l}^p|_{D_l^p}
-    = \bigoplus_{l'=0}^l \hs{l'}^p|_{D_l^p}.
+    = \restrictspace{\ns{l}^p}{D_l^p}
+    = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{D_l^p}.
   \end{equation}
 \end{corollary}
 

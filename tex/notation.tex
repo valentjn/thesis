@@ -334,7 +334,7 @@
 
 \newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}%
 {$\restrictedsplspace{l}{p}$}{
-  Spline space $:= S_{\nodalknotseq{l}{p}{}}^p$
+  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$
   (spanned by the uniform nodal B-splines of level $l$, degree $p$)
 }
 
@@ -346,12 +346,24 @@
 
 \newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\notaknot}}{Slpnak}%
 {$\naksplspace{l}{p}$}{
-  Spline space $:= S_{\nodalknotseq{l}{p}{\notaknot}}^p$
+  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{\notaknot}}{p}$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
 \newnotationcommand{\spl}{s}{s}{$s$}{
   Spline (piecewise polynomial)
+}
+
+\newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{f|D}{$\restrictfcn{f}{D}$}{
+  Restriction $\restrictfcn{f}{D}\colon D \to \real$,
+  $\restrictfcn{f}{D}(x) := f(x)$,
+  onto a sub-domain $D$ for a function $f$
+}
+
+\newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}%
+{$\restrictspace{V}{D}$}{
+  Restriction $:= \{\restrictfcn{f}{D} \mid f \in V\}$ onto a sub-domain $D$
+  for a function space $V$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
