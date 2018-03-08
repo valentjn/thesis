@@ -292,24 +292,24 @@
   Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
 }
 
-\newnotation{\knot}{\xi}{xi}{$\knot{k}$}{
+\newnotationcommand[1]{\knot}{\xi_{#1}}{xi}{$\knot{k}$}{
   Knot $\in \real$ of a spline space
   (point where the splines are not smooth)
 }
 
-\newnotation{\knotseq}{\ß\xi}{xi!}{$\knotseq$}{
-  Knot sequence $:= (\knot_0, \dotsc, \knot_{m+p})$
+\newnotationcommand{\knotseq}{\ß\xi}{xi!}{$\knotseq$}{
+  Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
 }
 
-\newnotation[3]{\nodalknot}{%
-  \xi_{#1}^{#2\appendwithcommand{#3}}%
+\newnotationcommand[3]{\nodalknot}{%
+  \xi_{#1}^{#2\appendwithcomma{#3}}%
 }{xilkp}{$\nodalknot{l,k}{p}{}$}{
   Knot for uniform nodal B-splines of level $l$, degree $p$
   ($k$-th entry of $\nodalknotseq{l}{p}{}$)
 }
 
-\newnotation[3]{\nodalknotseq}{%
-  \ß\xi_{#1}^{#2\appendwithcommand{#3}}%
+\newnotationcommand[3]{\nodalknotseq}{%
+  \ß\xi_{#1}^{#2\appendwithcomma{#3}}%
 }{xilkp!}{$\nodalknotseq{l}{p}{}$}{
   Knot sequence for uniform nodal B-splines of level $l$, degree $p$
 }
