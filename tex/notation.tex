@@ -15,13 +15,20 @@
 }
 
 \newnotation{l}{$\ßl$}{
-  Level $\ßl \in \natz^d$
+  Hierarchical level $\ßl \in \natz^d$
 }
 
 \newnotation{i}{$\ßi$}{
-  Index $\ßi = \ß0, \dotsc, \ß2^\ßl$
+  Hierarchical index $\ßi = \ß0, \dotsc, \ß2^\ßl$
   (i.e., $\ßi \in \natz^d$ with $0 \le i_t \le 2^{l_t}$
   for all $t = 1, \dotsc, d$)
+}
+
+\newnotation{k}{$\ßk$}{
+  Continuously enumerated index $\in \natz^d$
+  of the hierarchical level-index pairs $(\ßl, \ßi)$ in $\liset$
+  (one possible choice is that $k_t$ the zero-based index of $(l_t, i_t)$ in
+  $(0,0), (0,1), (1,1), (2,1), (2,3), (3,1), (3,3), (3,5), (3,7), \dotsc$)
 }
 
 \newnotation{d}{$d$}{
@@ -38,6 +45,26 @@
 
 \newnotation{1!}{$\ß1$}{
   $(1, \dotsc, 1) \in \nat^d$
+}
+
+\newnotation{k-t}{$\ßk_{-t}$}{
+  Vector of all dimensions except the $t$-th
+  ($\ßk_{-t}
+  := (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d$)
+}
+
+\newnotation{kT}{$\ßk_T$}{
+  Vector of all dimensions that are contained in $T \in \{1, \dotsc, d\}^j$
+  ($\ßk_T
+  := (k_{t_1}, \dotsc, k_{t_j}$ with $T = (t_1, \dotsc, t_j)$)
+}
+
+\newnotation{k-T}{$\ßk_{-T}$}{
+  Vector of all dimensions that are not contained in $T \in \{1, \dotsc, d\}^j$
+  ($\ßk_{-T} := \ßk_{T'}$ for $T = (t_1, \dotsc, t_j)$ and
+  $T' = (t'_1, \dotsc, t'_{d-j})$ with
+  $\{t_1, \dotsc, t_j\} \cup \{t'_1, \dotsc, t'_{d-j}\} = \{1, \dotsc, d\}$ and
+  $t'_1 < \dotsb t'_{d-j}$)
 }
 
 \newnotationcommand[1]{\vgp}{\ßx_{#1}}{xli}{$\vgp{\ßl,\ßi}$}{
@@ -183,7 +210,8 @@
 }
 
 \newnotationcommand{\liset}{K}{K}{$\liset$}{
-  Finite set of level-index pairs $(\ßl, \ßi)$
+  Finite set of hierarchical level-index pairs $(\ßl, \ßi)$
+  or finite subset of continuous indices $\ßk \in \NNz^d$
 }
 
 \newnotationcommand{\levelset}{L}{L}{$\levelset$}{
