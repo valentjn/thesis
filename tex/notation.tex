@@ -132,13 +132,15 @@
   $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
 }
 
-\newnotationcommand[1]{\normLtwo}{\norm{#1}_{L^2}}{||.||L2}%
-{$\normLtwo{\cdot}$}{%
-  $L^2$ norm $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(x)^2 \dx}$
+\newcommand*{\Ltwo}{L^2}
+
+\newnotationcommand[1]{\normLtwo}{\norm{#1}_{\Ltwo}}{||.||L2}%
+{$\normLtwo{\cdot}$}{
+  $\Ltwo$ norm $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(x)^2 \dx}$
   of a function $\objfun\colon \Omega \to \real$
 }
 
-\newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{L^2}}
+\newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{\Ltwo}}
 
 \let\equivorig\equiv
 \let\equiv\undefined
