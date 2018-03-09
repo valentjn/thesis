@@ -45,11 +45,11 @@ to keep the terminology consistent.
 The example of hierarchization can be generalized
 to arbitrary linear operators
 \begin{equation}
-  L\colon \real^\ngp \to \real^\ngp,\quad
-  \ßu \mapsto \ßy = L[\ßu],
+  \linop\colon \real^\ngp \to \real^\ngp,\quad
+  \vlinin \mapsto \vlinout = \linop[\vlinin],
 \end{equation}
-where $L$ depends on the grid $\sgset$ at hand.
-Input $\ßu$ and output $\ßy$ are scalar-valued data%
+where $\linop$ depends on the grid $\sgset$ at hand.
+Input $\vlinin$ and output $\vlinout$ are scalar-valued data%
 %\footnote{%
 %  The setting could be generalized even more,
 %  for example to vector-valued data.%
@@ -57,24 +57,24 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
 %  keeping hierarchization as our main application in mind.%
 %}
 \begin{equation}
-  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,\quad
-  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,
+  \vlinin = (\linin{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,\quad
+  \vlinout = (\linout{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,
 \end{equation}
 which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
-$L$ is the inverse of the \term{interpolation matrix} $A \in \real^{\ngp \times \ngp}$:
+$\linop$ is the inverse of the \term{interpolation matrix} $A \in \real^{\ngp \times \ngp}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}
-    L = A^{-1},\quad
+    \linop = A^{-1},\quad
     A = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
-    \ßu = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
-    \ßy = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
+    \vlinin = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
+    \vlinout = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
   \end{equation}
   This means that we can determine the $\surplus{\ßl',\ßi'}$ by solving
   the $\ngp \times \ngp$ system of linear equations
   \begin{equation}
-    \ßy = L[\ßu]
+    \vlinout = \linop[\vlinin]
     \quad\iff\quad
     A \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}
     = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset}.
@@ -132,7 +132,7 @@ of a \SI{16}{\gibi\byte} workstation.
 \paragraph{Notation}
 
 We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
-$\sgset$, $\liset$, $\ßu$, and $\ßy$
+$\sgset$, $\liset$, $\vlinin$, and $\vlinout$
 for most of the considerations in this chapter.
 Therefore, we assume that in each dimension $t$, the level-index pairs
 $(l_t, i_t)$ ($l_t \in \natz$, $i_t \in \hiset{l_t}$)

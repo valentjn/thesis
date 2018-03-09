@@ -4,13 +4,13 @@
 If $\sgset$ is a full grid $\fgset{\ßl}$
 (see \cref{sec:21nodalSpaces}),
 the well-known \emph{\up}
-can be used to apply $L$ to input data $\ßu$.
+can be used to apply $\linop$ to input data $\vlinin$.
 Its idea is to apply the corresponding one-dimensional operators on the
 one-dimensional subgrids (the \emph{poles}) of $\sgset$,
 which is repeated for all dimensions.
 In this section, we first formulate the \up for
-general linear operators $L$ and then prove its correctness for
-the case $L = A^{-1}$ of hierarchization.
+general linear operators $\linop$ and then prove its correctness for
+the case $\linop = A^{-1}$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
 
@@ -19,16 +19,16 @@ will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
 The \up is given in \cref{alg:unidirectionalPrinciple}.
 The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
 that specifies the order of dimensions in which the \up should be applied.
-We denote with $L_{t_j}$ the one-dimensional version of $L$
+We denote with $\linop_{t_j}$ the one-dimensional version of $\linop$
 applied in dimension $t_j$ ($j = 1, \dotsc, d$).
 With the following invariant, we can prove the correctness of the \up.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
-    \Function{$\ßy =$ unidirectionalPrinciple}{%
-      $\liset$, $(t_1, \dotsc, t_d)$, $\ßu$%
+    \Function{$\vlinout =$ unidirectionalPrinciple}{%
+      $\liset$, $(t_1, \dotsc, t_d)$, $\vlinin$%
     }
-      \State{$\ßy^{(0)} \gets \ßu$}
+      \State{$\vlinout^{(0)} \gets \vlinin$}
       \For{$j = 1, \dotsc, d$}
         \State{%
           Define equivalence relation $\sim$ on $\liset$
@@ -36,24 +36,24 @@ With the following invariant, we can prove the correctness of the \up.
         }
         \For{$\liset_\mathrm{pole} \in \liset/{\sim}$}
           \State{%
-            $(y_\ßk^{(j)})_{\ßk \in \liset_\mathrm{pole}} \gets
-            L_{t_j}\Big[(y_\ßk^{(j-1)})_{\ßk \in \liset_\mathrm{pole}}\Big]$%
+            $(\linout{\ßk}^{(j)})_{\ßk \in \liset_\mathrm{pole}} \gets
+            \linop_{t_j}\Big[(\linout{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
         \EndFor{}
       \EndFor{}
-      \State{$\ßy \gets \ßy^{(d)}$}
+      \State{$\vlinout \gets \vlinout^{(d)}$}
     \EndFunction{}
   \end{algorithmic}
   \caption{%
-    Application of a tensor product operator $L$ with
+    Application of a tensor product operator $\linop$ with
     the unidirectional principle.
     Inputs are the set $\liset$ of grid indices,
     the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
-    the one-dimensional operators $L_{t_j}$ should be applied, and
-    the vector $\ßu = (u_\ßk)_{\ßk \in \liset}$ of input data.
-    The output is the vector $\ßy = (y_\ßk)_{\ßk \in \liset}$
+    the one-dimensional operators $\linop_{t_j}$ should be applied, and
+    the vector $\vlinin = (\linin{\ßk})_{\ßk \in \liset}$ of input data.
+    The output is the vector $\vlinout = (\linout{\ßk})_{\ßk \in \liset}$
     of output data.%
   }%
   \label{alg:unidirectionalPrinciple}%
@@ -66,8 +66,8 @@ With the following invariant, we can prove the correctness of the \up.
   Let $T$ be the hierarchization operator on a full grid,
   i.e.,
   $T = A^{-1}$,
-  $\ßu = (\fcnval{\ßk})_{\ßk \in \liset}$,
-  $\ßy = (\surplus{\ßk})_{\ßk \in \liset}$,
+  $\vlinin = (\fcnval{\ßk})_{\ßk \in \liset}$,
+  $\vlinout = (\surplus{\ßk})_{\ßk \in \liset}$,
   $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
   $\liset = \{\ß0, \dotsc, \ß2^\ßl\}$
   corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
@@ -104,7 +104,7 @@ With the following invariant, we can prove the correctness of the \up.
       then the sum over $k_{t_j}$ equals
       $\sum_{\ßk \in \liset_\mathrm{pole}}
       \alpha^{(j)}_\ßk \basis{k_{t_j}}(\gp{k'_{t_j}})
-      %= ((L_{t_j})^{-1}
+      %= ((\linop_{t_j})^{-1}
       %\Big[(\surplus{\ßk}^{(j)})_{\ßk \in \liset_\mathrm{pole}}\Big])_{k'_{t_j}}
       %= ((\surplus{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}})_{k'_{t_j}}
       = \alpha^{(j-1)}_{(\ßk_{T'},\ßk'_{-T'})}$
@@ -143,7 +143,7 @@ With the following invariant, we can prove the correctness of the \up.
 We compare the complexity of the \up for hierarchization compared
 to directly solving the system \eqref{eq:hierarchizationSLE} of
 linear equations.
-If we assume that $L$ and $L_{t_j}$ apply Gaussian elimination to
+If we assume that $\linop$ and $\linop_{t_j}$ apply Gaussian elimination to
 solve the multivariate and univariate systems, respectively,
 then directly solving \eqref{eq:hierarchizationSLE} takes
 $\landauO{\ngp^3 d}$ time (in 1D basis evaluations) and $\landauO{\ngp^2}$ memory.
