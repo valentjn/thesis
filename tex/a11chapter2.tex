@@ -104,7 +104,7 @@
   First, we show that every inserted level $\ßl' \in \natz^t$ in the inner loop
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\ßl' := (\ßl, 0)$
-  is inserted for some $\ßl \in L^{(t-1)}$,
+  is inserted for some $\ßl \in \levelset^{(t-1)}$,
   then we have $\normone{\vecmax(\ßl, \ß1)} \le n+d+t-b$ or
   $\ßl = \ß0$ by \cref{line:algCoarseBoundary1} of
   \cref{alg:coarseBoundary}.
@@ -119,7 +119,7 @@
   \eqref{eq:coarseInvariant}.
   
   If $\ßl' := (\ßl, l_t)$ is inserted
-  for some $\ßl \in L^{(t-1)}$ and
+  for some $\ßl \in \levelset^{(t-1)}$ and
   $l_t \in \{1, \dotsc, l^\ast\}$, then there are,
   depending on whether $\ßl \in \nat^{t-1}$ or not, two cases:
   \begin{itemize}
@@ -139,21 +139,21 @@
     i.e., $\ßl$ is contained in the second set of the \rhs of
     \eqref{eq:coarseInvariant}.
   \end{itemize}
-  Thus, all levels that the algorithm inserts into $L^{(t)}$
+  Thus, all levels that the algorithm inserts into $\levelset^{(t)}$
   can be found on the \rhs of \eqref{eq:coarseInvariant}.
   
   It remains to prove that all levels on the \rhs of
   \eqref{eq:coarseInvariant}
-  are inserted by the algorithm into $L^{(t)}$ eventually.
+  are inserted by the algorithm into $\levelset^{(t)}$ eventually.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the \rhs of \eqref{eq:coarseInvariant} equals
-  $\{l \in \natz \mid l \le n-d+1\}$, which is just $L^{(1)}$.
+  $\{l \in \natz \mid l \le n-d+1\}$, which is just $\levelset^{(1)}$.
   For the induction step $(t - 1) \to t$, we assume
   the validity of the induction hypothesis
   \begin{equation}
     \label{eq:proofCoarseInductionHypothesis}
     \begin{aligned}
-    L^{(t-1)}
+    \levelset^{(t-1)}
     &= \{\ßl \in \nat^{t-1} \mid
     \normone{\ßl} \le n-d+t-1\} \dotcup {}\\
     &\hphantom{{}={}}
@@ -164,7 +164,7 @@
   \end{equation}
   The \rhs of \eqref{eq:coarseInvariant} has three parts,
   so we check for elements $\ßl' \in \natz^t$
-  of each of the three sets that they are appended to $L^{(t)}$
+  of each of the three sets that they are appended to $\levelset^{(t)}$
   eventually.
   
   First, let $\ßl' = (\ßl, l_t)$ be in the first set of the \rhs,
@@ -173,12 +173,12 @@
   Note that $\ßl$ will be encountered in the inner loop, as
   $\ßl \in \nat^{t-1}$ and
   $\normone{\ßl} = \normone{\ßl'} - l_t \le n - d + t - 1$,
-  which implies $\ßl \in L^{(t-1)}$ by the induction
+  which implies $\ßl \in \levelset^{(t-1)}$ by the induction
   hypothesis \eqref{eq:proofCoarseInductionHypothesis}.
   Since $1 \le l_t \le l^\ast$
   (due to
   $l_t = \normone{\ßl'} - \normone{\ßl} \le n-d+t - \normone{\ßl} = l^\ast$),
-  the level $\ßl'$ is inserted into $L^{(t)}$ during the innermost loop
+  the level $\ßl'$ is inserted into $\levelset^{(t)}$ during the innermost loop
   in \cref{line:algCoarseBoundary4}.
   
   Second, let $\ßl' = (\ßl, l_t)$
@@ -193,12 +193,12 @@
     $\normone{\vecmax(\ßl, \ß1)}
     = \normone{\vecmax(\ßl', \ß1)} - l_t
     \le n-d+t-b$.
-    This means $\ßl \in L^{(t-1)}$ by the induction hypothesis
+    This means $\ßl \in \levelset^{(t-1)}$ by the induction hypothesis
     \eqref{eq:proofCoarseInductionHypothesis}.
     As $l_t \in \{1, \dotsc, l^\ast\}$
     (due to $l_t \le n-d+t-b -
     \normone{\vecmax(\ßl, \ß1)} = l^\ast$),
-    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary4}.
+    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
     \item
     $l_t = 0$ and $\ßl \in \nat^{t-1}$:
@@ -208,7 +208,7 @@
     \le n - d + t - 1$ since $b \ge 1$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5} due to
+    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5} due to
     $\normone{\vecmax(\ßl, \ß1)}
     = \normone{\ßl} \le n - d + t - b$.
     
@@ -219,12 +219,12 @@
     \le n - d + t - b$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $L^{(t)}$ in \cref{line:algCoarseBoundary5}.
+    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
   Third, let $\ßl = (\vec{0}, 0) \in \natz^t$
   be in the third set of the \rhs.
   This level is appended in \cref{line:algCoarseBoundary5}
-  to $L^{(t)}$, since $\ßl' = \vec{0} \in \natz^{t-1}$ is in $L^{(t-1)}$ by 
+  to $\levelset^{(t)}$, since $\ßl' = \vec{0} \in \natz^{t-1}$ is in $\levelset^{(t-1)}$ by
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}

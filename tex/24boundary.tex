@@ -413,7 +413,7 @@ Its correctness can be formally proved with the following invariant:
   \begin{equation}
     \label{eq:coarseInvariant}
     \begin{split}
-      L^{(t)}
+      \levelset^{(t)}
       &= \{\ßl \in \nat^t \mid \normone{\ßl} \le n - d + t\} \dotcup {}\\
       &\hphantom{{}={}} \big(\{\ßl \in \natz^t \setminus \nat^t \mid
       \normone{\vecmax(\ßl, \ß1)} \le n-d+t-b+1\} \cup \{\ß0\}\big).
@@ -436,18 +436,18 @@ Its correctness can be formally proved with the following invariant:
     \Function{$\coarselevelset{n}{d}{b}{} =$ computeSGCoarseBoundary}{%
       $n$, $d$, $b$%
     }
-      \State{$L^{(1)} \gets \{0, 1, \dotsc, n - d + 1\}$}
+      \State{$\levelset^{(1)} \gets \{0, 1, \dotsc, n - d + 1\}$}
       \Comment{construct 1D grid}
       \For{$t = 2, \dotsc, d$}
-        \State{$L^{(t)} \gets \emptyset$}
+        \State{$\levelset^{(t)} \gets \emptyset$}
         \Comment{$t$-dimensional grid}
-        \For{$\ßl \in L^{(t-1)}$}
+        \For{$\ßl \in \levelset^{(t-1)}$}
           \If{%
             $\normone{\vecmax(\ßl, \ß1)} \le n - d + t - b$ or
             $\ßl = \ß0$%
           }%
           \label{line:algCoarseBoundary1}
-            \State{$L^{(t)} \gets L^{(t)} \cup \{(\ßl, 0)\}$}
+            \State{$\levelset^{(t)} \gets \levelset^{(t)} \cup \{(\ßl, 0)\}$}
             \Comment{add corners}%
             \label{line:algCoarseBoundary5}
           \EndIf{}
@@ -464,13 +464,13 @@ Its correctness can be formally proved with the following invariant:
             \label{line:algCoarseBoundary3}
           \EndIf{}
           \State{%
-            $L^{(t)} \gets L^{(t)} \cup
+            $\levelset^{(t)} \gets \levelset^{(t)} \cup
             \{(\ßl, l_t) \mid l_t = 1, \dotsc, l^\ast\}$%
           }
           \label{line:algCoarseBoundary4}
         \EndFor{}
       \EndFor{}
-      \State{$\coarselevelset{n}{d}{b}{} \gets L^{(d)}$}
+      \State{$\coarselevelset{n}{d}{b}{} \gets \levelset^{(d)}$}
     \EndFunction{}
   \end{algorithmic}
   \caption{%
