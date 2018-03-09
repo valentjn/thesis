@@ -62,12 +62,12 @@ Input $\vlinin$ and output $\vlinout$ are scalar-valued data%
 \end{equation}
 which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
-$\linop$ is the inverse of the \term{interpolation matrix} $A \in \real^{\ngp \times \ngp}$:
+$\linop$ is the inverse of the \term{interpolation matrix} $\intpmat \in \real^{\ngp \times \ngp}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}
-    \linop = A^{-1},\quad
-    A = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
+    \linop = \intpmat^{-1},\quad
+    \intpmat = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_{(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
     \vlinin = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
     \vlinout = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
   \end{equation}
@@ -76,7 +76,7 @@ $\linop$ is the inverse of the \term{interpolation matrix} $A \in \real^{\ngp \t
   \begin{equation}
     \vlinout = \linop[\vlinin]
     \quad\iff\quad
-    A \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}
+    \intpmat \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}
     = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset}.
   \end{equation}
 \end{subequations}

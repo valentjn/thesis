@@ -10,7 +10,7 @@ one-dimensional subgrids (the \emph{poles}) of $\sgset$,
 which is repeated for all dimensions.
 In this section, we first formulate the \up for
 general linear operators $\linop$ and then prove its correctness for
-the case $\linop = A^{-1}$ of hierarchization.
+the case $\linop = \intpmat^{-1}$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
 
@@ -65,10 +65,10 @@ With the following invariant, we can prove the correctness of the \up.
   \label{prop:invariantUnidirectionalPrinciple}
   Let $T$ be the hierarchization operator on a full grid,
   i.e.,
-  $T = A^{-1}$,
+  $T = \intpmat^{-1}$,
   $\vlinin = (\fcnval{\ßk})_{\ßk \in \liset}$,
   $\vlinout = (\surplus{\ßk})_{\ßk \in \liset}$,
-  $T_{t_j}$ is the 1D interpolation operator $(A_{t_j})^{-1}$, and
+  $T_{t_j}$ is the 1D interpolation operator $(\intpmat_{t_j})^{-1}$, and
   $\liset = \{\ß0, \dotsc, \ß2^\ßl\}$
   corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
