@@ -6,11 +6,11 @@ may be spatially adaptive, i.e.,
 of the form $\setsize{\sgset} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
 where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \natz$
 and $\ßi \in \hiset{\ßl}$ such that
-$N := \setsize{\sgset} = \setsize{\liset} < \infty$
+$\ngp := \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
-$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^N$ such that
+$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^\ngp$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
@@ -18,7 +18,7 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^N$ such that
   \quad\text{for all}\quad
   (\ßl, \ßi) \in \liset,
 \end{equation}
-where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N$ is a given set of
+where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp$ is a given set of
 function values $\objfun(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $\sgintp$ as
 \begin{equation}
@@ -45,7 +45,7 @@ to keep the terminology consistent.
 The example of hierarchization can be generalized
 to arbitrary linear operators
 \begin{equation}
-  L\colon \real^N \to \real^N,\quad
+  L\colon \real^\ngp \to \real^\ngp,\quad
   \ßu \mapsto \ßy = L[\ßu],
 \end{equation}
 where $L$ depends on the grid $\sgset$ at hand.
@@ -57,12 +57,12 @@ Input $\ßu$ and output $\ßy$ are scalar-valued data%
 %  keeping hierarchization as our main application in mind.%
 %}
 \begin{equation}
-  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N,\quad
-  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^N,
+  \ßu = (u_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,\quad
+  \ßy = (y_{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,
 \end{equation}
 which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
-$L$ is the inverse of the \term{interpolation matrix} $A \in \real^{N \times N}$:
+$L$ is the inverse of the \term{interpolation matrix} $A \in \real^{\ngp \times \ngp}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}
@@ -72,7 +72,7 @@ $L$ is the inverse of the \term{interpolation matrix} $A \in \real^{N \times N}$
     \ßy = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
   \end{equation}
   This means that we can determine the $\surplus{\ßl',\ßi'}$ by solving
-  the $N \times N$ system of linear equations
+  the $\ngp \times \ngp$ system of linear equations
   \begin{equation}
     \ßy = L[\ßu]
     \quad\iff\quad
@@ -122,11 +122,11 @@ and which takes $\landauO{Nd}$ computing time%
 on sparse grids with hierarchical B-splines.
 Consequently, we have to solve the linear system
 \eqref{eq:hierarchizationSLE}, which is significantly more time-consuming,
-as it takes between $\Omega(N^2 d)$ and $\landauO{N^3 d}$ time
+as it takes between $\Omega(\ngp^2 d)$ and $\landauO{\ngp^3 d}$ time
 (via Gaussian elimination).
 In addition, if we use an explicit solver for the linear system,
-we additionally have to store an $N \times N$ matrix in memory.
-However, a grid of size $N = \num{50000}$ would already exceed the memory
+we additionally have to store an $\ngp \times \ngp$ matrix in memory.
+However, a grid of size $\ngp = \num{50000}$ would already exceed the memory
 of a \SI{16}{\gibi\byte} workstation.
 
 \paragraph{Notation}
