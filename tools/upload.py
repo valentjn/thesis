@@ -116,6 +116,3 @@ if __name__ == "__main__":
     print("")
     print("Copying thesis to {}...".format(args.destination))
     shutil.copy(thesisPDFPath, args.destination)
-  
-  print("")
-  print("Thesis successfully uploaded.")
