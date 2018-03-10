@@ -76,7 +76,7 @@ With the following invariant, we can prove the correctness of the \up.
   ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
   \begin{equation}
     \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
-    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\vgp{\ßk'_T})
+    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\gp{\ßk'_T})
     = \fcnval{\ßk'},\quad
     \ßk' = \ß0, \dotsc, \ß2^\ßl,
   \end{equation}
@@ -93,9 +93,9 @@ With the following invariant, we can prove the correctness of the \up.
   and arbitrary $\ßk' = \ß0, \dotsc, \ß2^\ßl$ as
   \begin{align}
     \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
-    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\vgp{\ßk'_T})
+    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\gp{\ßk'_T})
     &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
-    \basis{\ßk_{T'}}(\vgp{\ßk'_{T'}}) \cdot
+    \basis{\ßk_{T'}}(\gp{\ßk'_{T'}}) \cdot
     \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
       \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
     \intertext{%
@@ -116,7 +116,7 @@ With the following invariant, we can prove the correctness of the \up.
     }
     &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
     \surplus{(\ßk_{T'},\ßk'_{-T'})}^{(j-1)}
-    \basis{\ßk_{T'}}(\vgp{\ßk'_{T'}}),
+    \basis{\ßk_{T'}}(\gp{\ßk'_{T'}}),
   \end{align}
   which, by the induction hypothesis, equals $\fcnval{\ßk'}$ as desired
   (if $j > 1$).
@@ -132,7 +132,7 @@ With the following invariant, we can prove the correctness of the \up.
 \begin{proof}
   We apply \cref{prop:invariantUnidirectionalPrinciple} to obtain
   $\sum_{\ßk=\ß0}^{\ß2^\ßl}
-  \surplus{\ßk}^{(j)} \basis{\ßk}(\vgp{\ßk'})
+  \surplus{\ßk}^{(j)} \basis{\ßk}(\gp{\ßk'})
   = \fcnval{\ßk'}$
   for all $\ßk' = \ß0, \dotsc, \ß2^\ßl$, i.e.,
   the $\surplus{\ßk}^{(j)}$ are the correct interpolation coefficients

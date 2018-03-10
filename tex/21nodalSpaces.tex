@@ -118,7 +118,7 @@ and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
 The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
-  \vgp{\ßl,\ßi} := \ßi \cdot \vms{\ßl},\quad
+  \gp{\ßl,\ßi} := \ßi \cdot \vms{\ßl},\quad
   \ßi = \ß0, \dotsc, \ß2^{\ßl}.
 \end{equation}
 To allow for a somewhat intuitive and suggestive notation,
@@ -128,7 +128,7 @@ Bold-faced numbers like $\ß0$ are defined to be the vector $(0, \dotsc, 0)$
 in which every entry is equal to that number.
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \begin{equation}
-  \vgp{\ßl,\ßi}
+  \gp{\ßl,\ßi}
   := (i_1 \ms{l_1},\; \dotsc,\; i_d \ms{l_d}),\quad
   i_t = 0, \dotsc, 2^{l_t},\quad
   t = 1, \dotsc, d,
@@ -177,7 +177,7 @@ the space of all continuous functions
 on $\clint{\ß0, \ß1}$ that are piecewise $d$-linear polynomials on
 all hypercubes
 \begin{equation}
-  \clint{\vgp{\ßl,\ßi}, \vgp{\ßl,\ßi+\ß1}}
+  \clint{\gp{\ßl,\ßi}, \gp{\ßl,\ßi+\ß1}}
   := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
   \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
   \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
@@ -189,7 +189,7 @@ in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to 
   \label{eq:interpFullGridMV}
   \fgintp{\ßl}
   = \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßi} \basis{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = \objfun(\vgp{\ßl,\ßi})},
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\gp{\ßl,\ßi}) = \objfun(\gp{\ßl,\ßi})},
 \end{equation}
 where $\interpcoeff{\ßi} \in \real$ and
 the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
@@ -205,7 +205,7 @@ the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
   Assume that $\interpcoeff{\ßi} \in \real$ are chosen in \eqref{eq:interpFullGridMV}
   such that $\fgintp{\ßl} \equiv 0$.
   Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
-  we can evaluate \eqref{eq:interpFullGridMV} at $\vgp{\ßl,\ßi'}$ to obtain
+  we can evaluate \eqref{eq:interpFullGridMV} at $\gp{\ßl,\ßi'}$ to obtain
   \begin{equation}
     \sum_{i_1=0}^{2^{l_1}}
     \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
@@ -224,7 +224,7 @@ exist for every objective function $\objfun$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
   \fgset{\ßl}
-  := \{\vgp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+  := \{\gp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
 \end{equation}
 \usenotation{n}
 A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \natz$.

@@ -3,7 +3,7 @@
 
 Let $\sgset \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
-of the form $\setsize{\sgset} = \{\vgp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
+of the form $\setsize{\sgset} = \{\gp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
 where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \natz$
 and $\ßi \in \hiset{\ßl}$ such that
 $\ngp := \setsize{\sgset} = \setsize{\liset} < \infty$
@@ -14,12 +14,12 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^\ngp$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
-  \basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}) = \fcnval{\ßl,\ßi}
+  \basis{\ßl',\ßi'}(\gp{\ßl,\ßi}) = \fcnval{\ßl,\ßi}
   \quad\text{for all}\quad
   (\ßl, \ßi) \in \liset,
 \end{equation}
 where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp$ is a given set of
-function values $\objfun(\vgp{\ßl,\ßi})$ at the grid points $\vgp{\ßl,\ßi}$.
+function values $\objfun(\gp{\ßl,\ßi})$ at the grid points $\gp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $\sgintp$ as
 \begin{equation}
   \sgintp\colon \clint{\ß0, \ß1} \to \real,\quad
@@ -27,7 +27,7 @@ The hierarchical surpluses then define the interpolant $\sgintp$ as
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
   \basis{\ßl',\ßi'},
 \end{equation}
-which interpolates $\objfun$ at the grid points $\vgp{\ßl,\ßi}$ of $\sgset$.
+which interpolates $\objfun$ at the grid points $\gp{\ßl,\ßi}$ of $\sgset$.
 
 The basis functions $\basis{\ßl',\ßi'}$ are
 arbitrary tensor product functions.
@@ -60,7 +60,7 @@ Input $\vlinin$ and output $\vlinout$ are scalar-valued data%
   \vlinin = (\linin{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,\quad
   \vlinout = (\linout{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,
 \end{equation}
-which give one scalar per grid point $\vgp{\ßl,\ßi} \in \sgset$.
+which give one scalar per grid point $\gp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
 $\linop$ is the inverse of the \term{interpolation matrix}
 $\intpmat \in \real^{\ngp \times \ngp}$:
@@ -68,7 +68,7 @@ $\intpmat \in \real^{\ngp \times \ngp}$:
   \label{eq:hierarchizationSLE}
   \begin{equation}
     \linop = \intpmat^{-1},\quad
-    \intpmat = (\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi}))_%
+    \intpmat = (\basis{\ßl',\ßi'}(\gp{\ßl,\ßi}))_%
     {(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
     \vlinin = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
     \vlinout = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
@@ -91,12 +91,12 @@ $\basis{\ßl,\ßi}^\ßp$ of degree $\ßp$
 as basis functions $\basis{\ßl,\ßi}$ is a tedious task.
 The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
 non-symmetric
-(i.e., $\basis{\ßl',\ßi'}^\ßp(\vgp{\ßl,\ßi}) \not=
-\basis{\ßl,\ßi}^\ßp(\vgp{\ßl',\ßi'})$) and densely populated.
+(i.e., $\basis{\ßl',\ßi'}^\ßp(\gp{\ßl,\ßi}) \not=
+\basis{\ßl,\ßi}^\ßp(\gp{\ßl',\ßi'})$) and densely populated.
 This is because the matrix entry in the $(\ßl,\ßi)$-th row and
 $(\ßl',\ßi')$-th column vanishes if and only if
 \begin{equation}
-  \vgp{\ßl,\ßi} \notin \interiorsupp \basis{\ßl',\ßi'}^\ßp
+  \gp{\ßl,\ßi} \notin \interiorsupp \basis{\ßl',\ßi'}^\ßp
   \iff
   \ex{t = 1, \dotsc, d}{
     \gp{l_t,i_t} \notin

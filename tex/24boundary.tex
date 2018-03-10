@@ -19,7 +19,7 @@ interior grid points in $\regsgset{n}{d}{}$, i.e.,%
 \begin{equation}
   \interiorregsgset{n}{d}{}
   := \regsgset{n}{d}{} \cap \opint{\ß0, \ß1}
-  = \{\vgp{\ßl,\ßi} \in \regsgset{n}{d}{} \mid \ßl \ge \ß1\},
+  = \{\gp{\ßl,\ßi} \in \regsgset{n}{d}{} \mid \ßl \ge \ß1\},
 \end{equation}
 then the following relation about the number of grid points
 of $\regsgset{n}{d}{}$ can be shown:
@@ -116,7 +116,7 @@ A popular choice is the insertion at level one, which corresponds to
   \label{eq:sparseGridB1}
   \coarseregsgset{n}{d}{1}{}
   := \bigdotcup_{\ßl \in \coarselevelset{n}{d}{1}{}}
-  \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},\quad
+  \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},\quad
   \coarselevelset{n}{d}{1}{}
   := \{\ßl \in \natz^d \mid \normone{\vecmax(\ßl, \ß1)} \le n\},
 \end{equation}
@@ -157,7 +157,7 @@ the boundary functions and points at a level $b \in \nat$:
     \begin{split}
       \coarseregsgset{n}{d}{b}{}
       := \bigdotcup_{\ßl \in \coarselevelset{n}{d}{b}{}}
-      \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},&\quad
+      \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},&\quad
       \coarselevelset{n}{d}{b}{}
       := \{\ßl \in \nat^d \mid \normone{\ßl} \le n\} \dotcup {}\\[-1em]
       &\big(\{\ßl \in \natz^d \setminus \nat^d \mid

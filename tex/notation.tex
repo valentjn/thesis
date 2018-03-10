@@ -1,3 +1,7 @@
+\newcommand*{\containsvector}[3]{%
+ \protect\IfSubStr{\detokenize{#1}}{\detokenize{\ß}}{#2}{#3}%
+}
+
 \newnotationcommand{\nat}{\mathbb{N}}{N}{$\nat$}{
   Natural numbers without zero ($1, 2, 3, \dotsc$)
 }
@@ -67,11 +71,11 @@
   $t'_1 < \dotsb t'_{d-j}$)
 }
 
-\newnotationcommand[1]{\vgp}{\ßx_{#1}}{xli}{$\vgp{\ßl,\ßi}$}{
-  Grid point $\vgp{\ßl,\ßi} := \ßi \cdot \vms{\ßl}$
+\newnotationcommand[1]{\gp}{%
+  \containsvector{#1}{\ßx}{x}_{#1}%
+}{xli}{$\gp{\ßl,\ßi}$}{
+  Grid point $\gp{\ßl,\ßi} := \ßi \cdot \vms{\ßl}$
 }
-
-\newcommand*{\gp}[1]{x_{#1}}
 
 \newnotationcommand[1]{\vms}{\ßh_{#1}}{hl}{$\vms{\ßl}$}{
   Mesh size $\vms{\ßl} := \ß2^{-\ßl}$
@@ -243,7 +247,7 @@
 }
 
 \newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\ßl,\ßi}$}{
-  Function value $\objfun(\vgp{\ßl,\ßi})$ at the grid point $\vgp{\ßl,\ßi}$
+  Function value $\objfun(\gp{\ßl,\ßi})$ at the grid point $\gp{\ßl,\ßi}$
 }
 
 \newnotationcommand[1]{\surplus}{\alpha_{#1}}{alphali}{$\surplus{\ßl,\ßi}$}{
@@ -480,7 +484,7 @@
 \newcommand*{\linout}[1]{y_{#1}}
 
 \newnotationcommand{\intpmat}{A}{A}{$\intpmat$}{
-  Interpolation matrix with entries $\basis{\ßl',\ßi'}(\vgp{\ßl,\ßi})$
+  Interpolation matrix with entries $\basis{\ßl',\ßi'}(\gp{\ßl,\ßi})$
 }
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%

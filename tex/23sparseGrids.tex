@@ -24,7 +24,7 @@ be written as
   \fgintp{\ßl}
   = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
   \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\vgp{\ßl,\ßi}) = \objfun(\vgp{\ßl,\ßi})}.
+  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\gp{\ßl,\ßi}) = \objfun(\gp{\ßl,\ßi})}.
 \end{equation}
 The coefficients $\surplus{\ßl',\ßi'}$ with respect to the hierarchical basis
 $\basis{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
@@ -90,7 +90,7 @@ The resulting function space and grid point set
   := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl},\qquad
   \regsgset{n}{d}{}
   := \bigdotcup_{\normone{\ßl} \le n}
-  \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\}
+  \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\}
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
@@ -134,7 +134,7 @@ regular sparse grid in two dimensions.
 One can prove that for homogeneous boundary conditions
 $\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0,\ß1}}} \equiv 0$,
 the number of required inner grid points
-($\vgp{\ßl,\ßi} \in \regsgset{n}{d}{}$ where $\ßl \ge \ß1$)
+($\gp{\ßl,\ßi} \in \regsgset{n}{d}{}$ where $\ßl \ge \ß1$)
 grows like $\landauO{\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1}}$
 \cite{Bungartz04Sparse}, which is much less than
 the corresponding number $\landauO{(\ms{n}^{-1})^d}$ in the full grid case
@@ -172,7 +172,7 @@ of \term{dimensionally adaptive sparse grids} have the form
   \sgspace
   = \bigoplus_{\ßl \in \levelset} \hs{\ßl},\qquad
   \sgset
-  = \bigdotcup_{\ßl \in \levelset} \{\vgp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
+  = \bigdotcup_{\ßl \in \levelset} \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
 \end{equation}
 where $\levelset$ is a \term{downward closed} set, i.e.,
 a finite subset $\levelset \subset \natz^d$
@@ -196,8 +196,8 @@ $\regsgintp{n}{d}{}$ can be written as
 where the $\interpcoeff{\ßl,\ßi} \in \real$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
 are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
 $\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\vgp{\ßl,\ßi'})
-  = \objfun(\vgp{\ßl,\ßi'})%
+  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\gp{\ßl,\ßi'})
+  = \objfun(\gp{\ßl,\ßi'})%
 }$ \multicite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.
@@ -243,7 +243,7 @@ and grid sets $\sgset$ have the form
   \sgspace
   = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},\qquad
   \sgset
-  = \{\vgp{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},
+  = \{\gp{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},
 \end{equation}
 where $\liset$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \natz^d$ and $\ßi \in \hiset{\ßl}$.
