@@ -581,12 +581,12 @@ first step.
 
 The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
-For the hat function basis $\basis{\ßl,\ßi}^1$,
+For the hat function basis $\hierbspl{\ßl,\ßi}{1}{}$,
 this is a feasible option if the objective
 function $\objfun\colon \clint{\ß0, \ß1} \to \real$
 satisfies homogeneous boundary conditions
 $\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0, \ß1}}} \equiv 0$,
-as $\basis{\ßl,\ßi}^1$ vanishes on the boundary if and only if
+as $\hierbspl{\ßl,\ßi}{1}{}$ vanishes on the boundary if and only if
 $\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
 boundary point.
 Consequently, the surpluses corresponding to boundary points vanish
@@ -617,7 +617,7 @@ are shown in \cref{fig:modifiedHat} and defined as follows:
     l = 1,\quad i = 1,\\
     \max(2 - \tfrac{x}{\ms{l}}, 0),&
     l \ge 2,\quad i = 1,\\
-    \basis{l,i}^1(x),&
+    \hierbspl{l,i}{1}{}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
     \basis{l,1}^{1,\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.

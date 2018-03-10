@@ -18,11 +18,11 @@
   
   We follow the presentation in \cite{Valentin16Hierarchical} and
   prove the assertion by induction over $l \in \natz$.
-  For $l = 0$, the B-splines $\basis{0,i'}^p$ with $i' \in \{0, 1\}$
+  For $l = 0$, the B-splines $\hierbspl{0,i'}{p}{}$ with $i' \in \{0, 1\}$
   are linearly independent.
   For the induction step $(l-1) \to l$, let
   \begin{equation}
-    \sum_{l'=0}^l \sum_{i' \in \hiset{l'}} \surplus{l',i'} \basis{l',i'}^p
+    \sum_{l'=0}^l \sum_{i' \in \hiset{l'}} \surplus{l',i'} \hierbspl{l',i'}{p}{}
     \equiv 0
   \end{equation}
   be a linear combination of the zero function.
@@ -30,14 +30,14 @@
   from the summands of coarser levels $l' < l$:
   \begin{equation}
     \label{eq:hierBSplineLinearlyIndependent3}
-    \sum_{i \in \hiset{l}} \surplus{l,i} \basis{l,i}^p
+    \sum_{i \in \hiset{l}} \surplus{l,i} \hierbspl{l,i}{p}{}
     =: g_1 \equiv g_2 :=
-    -\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \basis{l',i'}^p.
+    -\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \hierbspl{l',i'}{p}{}.
   \end{equation}
   The right-hand side $g_2$ is smooth in every grid point
   $\gp{l,i}$ ($i \in \hiset{l}$) of level $l$,
   since these grid points are not knots of the hierarchical B-splines
-  $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) of level $l' < l$.
+  $\hierbspl{l',i'}{p}{}$ ($i' \in \hiset{l'}$) of level $l' < l$.
   This implies that the left-hand $g_1$ side must be smooth there as well:
   \begin{alignat}{3}
     &&
@@ -47,9 +47,9 @@
     \label{eq:hierBSplineLinearlyIndependent1}
     \iff\quad&&
     \sum_{i \in \hiset{l}} \surplus{l,i}
-    \partialdiff_-^p \basis{l,i}^p(\gp{l,i'})
+    \partialdiff_-^p \hierbspl{l,i}{p}{}(\gp{l,i'})
     &= \sum_{i \in \hiset{l}} \surplus{l,i}
-    \partialdiff_+^p \basis{l,i}^p(\gp{l,i'}),\quad
+    \partialdiff_+^p \hierbspl{l,i}{p}{}(\gp{l,i'}),\quad
     &&i' \in \hiset{l},
   \end{alignat}
   where $\partialdiff_-^p$ and $\partialdiff_+^p$ denote the left and right
@@ -148,12 +148,12 @@
   a linear combination of the zero function with the hierarchical
   B-splines of level $< l$, i.e.,
   \begin{equation}
-  \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \basis{l',i'}^p
+  \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \hierbspl{l',i'}{p}{}
   = 0,
   \end{equation}
   which implies $\surplus{l',i'} = 0$ for all $l' = 0, \dotsc, l - 1$
   by the induction hypothesis.
-  Thus, the hierarchical functions $\basis{l',i'}^p$
+  Thus, the hierarchical functions $\hierbspl{l',i'}{p}{}$
   ($l' \le l$, $i' \in \hiset{l'}$) are linearly independent.
 \end{proof}
 

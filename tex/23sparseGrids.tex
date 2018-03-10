@@ -28,13 +28,13 @@ be written as
 \end{equation}
 The coefficients $\surplus{\ßl',\ßi'}$ with respect to the hierarchical basis
 $\basis{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
-When using the hat function basis $\basis{\ßl,\ßi}^1$,
+When using the hat function basis $\hierbspl{\ßl,\ßi}{1}{}$,
 one can prove the following representation
 for the corresponding surpluses \cite{Bungartz04Sparse}:
 \begin{equation}
   \surplus{\ßl,\ßi}
   = (-1)^d 2^{-\normone{\ßl+\ß1}}
-  \int_\ß0^\ß1 \basis{\ßl,\ßi}^1(\ßx)
+  \int_\ß0^\ß1 \hierbspl{\ßl,\ßi}{1}{}(\ßx)
   \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
   \objfun(\ßx) \diff{}\ßx,
 \end{equation}
@@ -68,7 +68,7 @@ can be estimated by
 \begin{equation}
   \label{eq:componentEstimation}
   \normLtwoscaled{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'}^1}
+  \surplus{\ßl',\ßi'} \hierbspl{\ßl',\ßi'}{1}{}}
   \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
   \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
@@ -97,7 +97,7 @@ are called \term{regular sparse grid space} and
 To better distinguish the different grids,
 we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
-basis $\basis{\ßl,\ßi}^1$,
+basis $\hierbspl{\ßl,\ßi}{1}{}$,
 we generalize the definition to arbitrary bases $\basis{\ßl,\ßi}$.
 \Cref{fig:regularSG} shows the construction of a
 regular sparse grid in two dimensions.
@@ -249,7 +249,7 @@ where $\liset$ is a finite set of level-index pairs $(\ßl,\ßi)$
 with $\ßl \in \natz^d$ and $\ßi \in \hiset{\ßl}$.
 Algorithms for sparse grids often make specific assumptions about $\liset$.
 If they are not met, then the algorithms do not produce the correct results.
-%For example for hat functions $\basis{\ßl,\ßi}^1$, the grid should contain
+%For example for hat functions $\hierbspl{\ßl,\ßi}{1}{}$, the grid should contain
 %the hierarchical ancestors of every grid point:
 %\begin{equation}
 %  \label{eq:hierAncestors}
@@ -270,7 +270,7 @@ If they are not met, then the algorithms do not produce the correct results.
 %to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
 %Therefore, for most of our considerations, we will not restrict the
 %choice of $\liset$.
-For example when working with hat functions $\basis{\ßl,\ßi}^1$,
+For example when working with hat functions $\hierbspl{\ßl,\ßi}{1}{}$,
 the grid should contain the hierarchical ancestors of every grid point.
 Otherwise, the so-called
 unidirectional principle, which is used for instance to efficiently calculate

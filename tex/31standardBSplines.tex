@@ -160,29 +160,29 @@ of the hat function.
 \usenotation{.p}
 We can use the cardinal B-spline $\cardbspl{p}$ as a ``mother function'' to
 define the uniform hierarchical B-spline
-$\basis{l,i}^p\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
+$\hierbspl{l,i}{p}{}\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
 $i \in \hiset{l}$ via an affine parameter transformation
 \cite{Pflueger10Spatially}:
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
-  \basis{l,i}^p(x)
+  \hierbspl{l,i}{p}{}(x)
   := \cardbspl{p}(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
 \end{equation}
-The support of $\basis{l,i}^p$ is given
-by $\supp \basis{l,i}^p = \clint{0, 1} \cap \clint{\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}}$.
-The hat function basis $\basis{l,i}^1$ defined in
+The support of $\hierbspl{l,i}{p}{}$ is given
+by $\supp \hierbspl{l,i}{p}{} = \clint{0, 1} \cap \clint{\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}}$.
+The hat function basis $\hierbspl{l,i}{1}{}$ defined in
 \eqref{eq:hatFunctionUV} is a special case of
 \eqref{eq:uniformHierarchicalBSplineUV} for $p = 1$,
-which allows us to use the same notation $\basis{l,i}^p$ for both.
-Note that due to the \term{translation invariance} of $\basis{l,i}^p$
+which allows us to use the same notation $\hierbspl{l,i}{p}{}$ for both.
+Note that due to the \term{translation invariance} of $\hierbspl{l,i}{p}{}$
 (i.e., the basis functions are the same up to scaling and translation),
 it suffices to precompute and implement the polynomial pieces of $\cardbspl{p}$
 to enable evaluations of all hierarchical B-splines
-$\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
+$\hierbspl{l,i}{p}{}$ ($l \in \natz$, $i \in \hiset{l}$).
 
 \begin{figure}
   \subcaptionbox{%
-    Nodal B-splines $\basis{l,i}^p$ ($i \in \hiset{l}$) and grid points $\gp{l,i}$
+    Nodal B-splines $\hierbspl{l,i}{p}{}$ ($i \in \hiset{l}$) and grid points $\gp{l,i}$
     \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_1}%
@@ -194,7 +194,7 @@ $\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
   \end{tikzpicture}%
   \hfill%
   \subcaptionbox{%
-    Hierarchical B-splines $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
+    Hierarchical B-splines $\hierbspl{l',i'}{p}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[72mm]{%
@@ -215,7 +215,7 @@ $\basis{l,i}^p$ ($l \in \natz$, $i \in \hiset{l}$).
 In this thesis, we will only allow odd degrees $p = 1, 3, 5, \dotsc$.
 Many theoretical considerations would fail for even degrees.
 The basic reason is that for odd degrees, the knots of
-$\basis{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
+$\hierbspl{l,i}{p}{}$ coincide with the grid points \cite{Valentin14Hierarchische}
 \begin{equation}
   \gp{l,i-(p+1)/2},\quad
   \dotsc,\quad
@@ -223,7 +223,7 @@ $\basis{l,i}^p$ coincide with the grid points \cite{Valentin14Hierarchische}
   \dotsc,\quad
   \gp{l,i+(p+1)/2}.
 \end{equation}
-For even degrees $p$, the knots of $\basis{l,i}^p$ lie exactly in
+For even degrees $p$, the knots of $\hierbspl{l,i}{p}{}$ lie exactly in
 the middle between two subsequent grid points:
 \begin{equation}
   \gp{l,i-p/2} - \frac{\ms{l}}{2},\quad
@@ -254,7 +254,7 @@ for the rest of the thesis.
 
 \paragraph{Non-uniform B-splines and spline space}
 
-With the hierarchical B-splines $\basis{l,i}^p$, we can define
+With the hierarchical B-splines $\hierbspl{l,i}{p}{}$, we can define
 the nodal spaces $\ns{l}^p$ and hierarchical subspaces $\hs{l}^p$
 as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
@@ -371,7 +371,7 @@ $\spldomain{\knotseq}{p}$:
 
 \begin{corollary}[nodal B-spline space]
   \label{cor:nodalBSplineSpace}
-  The restricted nodal B-splines $\restrictfcn{\basis{l,i}^p}{\restrictedspldomain{l}{p}}$
+  The restricted nodal B-splines $\restrictfcn{\hierbspl{l,i}{p}{}}{\restrictedspldomain{l}{p}}$
   ($i = 0, \dotsc, 2^l$)
   of level $l \in \natz$ are
   a basis of the spline space $\nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$,
@@ -394,7 +394,7 @@ $\spldomain{\knotseq}{p}$:
 \end{corollary}
 
 \begin{proof}
-  We have $\basis{l,i}^p = \nonunifbspl{i,\nodalknotseq{l}{p}{}}{p}$ for
+  We have $\hierbspl{l,i}{p}{} = \nonunifbspl{i,\nodalknotseq{l}{p}{}}{p}$ for
   $i = 0, \dotsc, m - 1$,
   as the B-splines on both sides have the same knots.
   The assertions now follow from \thmref{prop:splineSpace}.
@@ -402,10 +402,10 @@ $\spldomain{\knotseq}{p}$:
 
 Note that $\restrictedspldomain{l}{p}$ might contain only a single point or even be empty,
 if $p$ is too large or $l$ is too small.
-However, the corresponding B-splines $\basis{l,i}^p$ are still linearly
+However, the corresponding B-splines $\hierbspl{l,i}{p}{}$ are still linearly
 independent on~$\clint{0, 1}$ (see \cite{Hoellig13Approximation}).
 Similarly, the corollary also implies that the hierarchical functions
-$\basis{l,i}^p$ ($i \in \hiset{l}$) are linearly independent on $\clint{0, 1}$.
+$\hierbspl{l,i}{p}{}$ ($i \in \hiset{l}$) are linearly independent on $\clint{0, 1}$.
 
 \paragraph{Hierarchical splitting for uniform B-splines}
 
@@ -420,15 +420,15 @@ to prove the hierarchical splitting for the uniform B-spline basis
 \end{lemma}
 
 \begin{proof}
-  Every function $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) is continuous on
+  Every function $\hierbspl{l',i'}{p}{}$ ($i' \in \hiset{l'}$) is continuous on
   $\restrictedspldomain{l}{p}$, a polynomial of degree $\le p$ on every knot interval
   of $\nodalknotseq{l}{p}{}$ (due to $p$ odd),
   and at the knots themselves at least $(p - 1)$ times continuously
   differentiable.
-  \Cref{prop:splineSpace} implies $\basis{l',i'}^p \in \restrictedsplspace{l}{p}$
+  \Cref{prop:splineSpace} implies $\hierbspl{l',i'}{p}{} \in \restrictedsplspace{l}{p}$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\basis{l',i'}^p \in \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
-  As the functions $\basis{l',i'}^p$ ($i' \in \hiset{l'}$) span
+  $\hierbspl{l',i'}{p}{} \in \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
+  As the functions $\hierbspl{l',i'}{p}{}$ ($i' \in \hiset{l'}$) span
   $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$, we can conclude
   $\restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}} \subset \restrictspace{\ns{l}^p}{\restrictedspldomain{l}{p}}$.
 \end{proof}
@@ -451,7 +451,7 @@ theoretic considerations in this thesis to odd $p$.
   \label{prop:hierBSplineLinearlyIndependent}
   \label{PROP:HIERBSPLINELINEARLYINDEPENDENT}
   The hierarchical B-splines
-  $\basis{l',i'}^p$ ($l' \le l$, $i' \in \hiset{l'}$)
+  $\hierbspl{l',i'}{p}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
   are linearly independent.
 \end{restatable}
 
@@ -516,23 +516,23 @@ Pflüger defined modified
 hierarchical B-splines to obtain reasonable values on the boundary
 without having to place grid points there \cite{Pflueger10Spatially}.
 The main motivation is to define basis
-functions $\basis{l,i}^{p,\modified}$ that satisfy natural boundary
+functions $\hierbspl{l,i}{p}{\modified}$ that satisfy natural boundary
 conditions, i.e.,
 \begin{equation}
   \label{eq:naturalBoundaryConditions}
-  \frac{\diff^2}{\dx^2} \basis{l,i}^{p,\modified}(x) = 0,\quad
+  \frac{\diff^2}{\dx^2} \hierbspl{l,i}{p}{\modified}(x) = 0,\quad
   x \in \bndrydomain{\clint{0, 1}} = \{0, 1\}.
 \end{equation}
 Originally, this requirement stems from financial problems
 \cite{Pflueger10Spatially}.
 For the left boundary,
 \eqref{eq:naturalBoundaryConditions} can be satisfied by
-modifying the left-most function $\basis{l,1}^p$ such that
-$\basis{l,1}^{p,\modified}(x) = 2 - \tfrac{x}{\ms{l}}$ is a linear polynomial
+modifying the left-most function $\hierbspl{l,1}{p}{}$ such that
+$\hierbspl{l,1}{p}{\modified}(x) = 2 - \tfrac{x}{\ms{l}}$ is a linear polynomial
 when $x$ is ``near'' the boundary.
 As in \cite{Pflueger10Spatially},
-we append $\basis{l,1}^p$ with
-B-splines $\basis{l,i}^p$ with index $i \le 0$ and
+we append $\hierbspl{l,1}{p}{}$ with
+B-splines $\hierbspl{l,i}{p}{}$ with index $i \le 0$ and
 use the so-called Marsden's identity to compute the corresponding
 coefficients.
 The identity enables us to explicitly compute the B-spline coefficients
@@ -563,38 +563,38 @@ By applying Marsden's identity twice,
 \begin{equation}
   \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{\ms{l}}
-  = 2 \sum_{i \in \integer} \basis{l,i}^p(x)
-  - \frac{1}{\ms{l}} \sum_{i \in \integer} \gp{l,i} \basis{l,i}^p(x)
-  = \sum_{i \in \integer} (2 - i) \basis{l,i}^p(x),\quad
+  = 2 \sum_{i \in \integer} \hierbspl{l,i}{p}{}(x)
+  - \frac{1}{\ms{l}} \sum_{i \in \integer} \gp{l,i} \hierbspl{l,i}{p}{}(x)
+  = \sum_{i \in \integer} (2 - i) \hierbspl{l,i}{p}{}(x),\quad
   x \in \real,
 \end{equation}
-we obtain a possible definition for $\basis{l,i}^{p,\modified}$.
+we obtain a possible definition for $\hierbspl{l,i}{p}{\modified}$.
 Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
 are relevant for the unit interval as all other B-splines vanish in $\clint{0, 1}$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
-$\basis{l,1}^p$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
-The right-most function $\basis{l,2^l-1}^{p,\modified}$ can be derived
-analogously by mirroring $\basis{l,1}^{p,\modified}$ at $x = \tfrac{1}{2}$.
+$\hierbspl{l,1}{p}{}$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
+The right-most function $\hierbspl{l,2^l-1}{p}{\modified}$ can be derived
+analogously by mirroring $\hierbspl{l,1}{p}{\modified}$ at $x = \tfrac{1}{2}$.
 For~$l = 1$, again the ``constant one'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
 \begin{equation}
   \label{eq:modifiedBSplineDefinition}
-  \basis{l,i}^{p,\modified}(x)
+  \hierbspl{l,i}{p}{\modified}(x)
   :=
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \basis{l,i'}^p(x),&
+    \displaystyle\sum_{i'=1-(p+1)/2}^1 (2 - i') \hierbspl{l,i'}{p}{}(x),&
     l \ge 2,\quad i = 1,\\
-    \basis{l,i}^p(x),&
+    \hierbspl{l,i}{p}{}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \basis{l,1}^{p,\modified}(1 - x),&
+    \hierbspl{l,1}{p}{\modified}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
 \end{equation}
 By \thmref{prop:splineSpace},
 this definition implies that
-$\basis{l,1}^p(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
+$\hierbspl{l,1}{p}{}(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
 is only valid for $x \in \clint{0,\; \ms{l} \cdot \tfrac{5-p}{2}}$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
@@ -605,21 +605,21 @@ then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplineDefinition}
 must be extended to $\tfrac{p+1}{2} - 1$.
 In addition, more than just the left-most and the right-most inner
 hierarchical B-spline must be modified for $p \ge 5$,
-as the size of the supports of $\basis{l,i}^p$ increase
+as the size of the supports of $\hierbspl{l,i}{p}{}$ increase
 for growing $p$.
 
 \begin{figure}
   \subcaptionbox{%
     Construction of the modified hierarchical cubic B-spline
-    $\basis{l',1}^{p,\modified}$ (\emph{dashed}, $l' \ge 2$)
-    as a linear combination of neighboring B-splines $\basis{l',i'}^p$
+    $\hierbspl{l',1}{p}{\modified}$ (\emph{dashed}, $l' \ge 2$)
+    as a linear combination of neighboring B-splines $\hierbspl{l',i'}{p}{}$
     using Marsden's identity.%
   }[75mm]{%
     \includegraphics{modifiedBSpline_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Modified hierarchical cubic B-splines $\basis{l',i'}^{p,\modified}$
+    Modified hierarchical cubic B-splines $\hierbspl{l',i'}{p}{\modified}$
     ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) and grid points $\gp{l',i'}$
     \emph{(dots)}.%
   }[75mm]{%
@@ -710,10 +710,10 @@ knot sequences.
 \paragraph{Hierarchical Clenshaw--Curtis B-splines}
 
 The \term{hierarchical Clenshaw--Curtis B-spline}
-$\basis{l,i}^{p,\clenshawcurtis}$ of level $l \in \natz$ and index
+$\hierbspl{l,i}{p}{\clenshawcurtis}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
-  \basis{l,i}^{p,\clenshawcurtis}
+  \hierbspl{l,i}{p}{\clenshawcurtis}
   := \nonunifbspl{i,\nodalknotseq{l}{p}{\clenshawcurtis}}{p},
 \end{equation}
 where
@@ -751,10 +751,10 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \begin{figure}
   \subcaptionbox{%
     Hierarchical cubic Clenshaw--Curtis B-splines
-    $\basis{l',i'}^{p,\clenshawcurtis}$
+    $\hierbspl{l',i'}{p}{\clenshawcurtis}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
-     $\basis{l',i'}^{p,\clenshawcurtis,\modified}$
+     $\hierbspl{l',i'}{p}{\clenshawcurtis,\modified}$
     \emph{(dashed)}.%
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_4}%
@@ -773,8 +773,8 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 \end{figure}
 
 Note that in contrast to the standard hierarchical B-spline functions
-$\basis{l,i}^p$, Clenshaw--Curtis B-splines
-$\basis{l,i}^{p,\clenshawcurtis}$ are not translation-invariant.
+$\hierbspl{l,i}{p}{}$, Clenshaw--Curtis B-splines
+$\hierbspl{l,i}{p}{\clenshawcurtis}$ are not translation-invariant.
 As a result, both implementation effort and evaluation runtime
 are significantly higher for Clenshaw--Curtis B-splines than
 for the standard uniform basis,
@@ -784,9 +784,9 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 
 As for uniform B-splines,
 \term{modified hierarchical Clenshaw--Curtis B-splines}
-$\basis{l,i}^{p,\clenshawcurtis,\modified}$ can be defined using the
+$\hierbspl{l,i}{p}{\clenshawcurtis,\modified}$ can be defined using the
 same method as in \eqref{eq:modifiedBSplineDefinition}.
-Here, the second derivative of $\basis{l,1}^{p,\clenshawcurtis,\modified}$
+Here, the second derivative of $\hierbspl{l,1}{p}{\clenshawcurtis,\modified}$
 does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
 as the formula derived from \thmref{lemma:marsden} assumes uniform knots.
 However, as most of the B-spline knots in the summation formula
@@ -795,7 +795,7 @@ to \eqref{eq:clenshawCurtisBSplineKnots},
 the absolute deviation of the second derivative from zero is small.
 Again, to enforce natural boundary conditions,
 it is possible to recompute the coefficients
-of the components $\basis{l,i'}^{p,\clenshawcurtis}$
+of the components $\hierbspl{l,i'}{p}{\clenshawcurtis}$
 dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
 

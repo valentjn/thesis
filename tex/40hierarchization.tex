@@ -23,8 +23,8 @@ that were designed for hat functions.
 We learn in this chapter that the main problem is the larger support
 of higher-order B-splines (degree $p > 1$) when compared to degree $p = 1$.
 Unfortunately, it is not possible to simply ``transform'' the basis
-functions $\basis{l,i}^p$ to shrink the size of their support
-to $\supp \basis{l,i}^1$.
+functions $\hierbspl{l,i}{p}{}$ to shrink the size of their support
+to $\supp \hierbspl{l,i}{1}{}$.
 
 In this chapter, we give an overview of algorithms for B-splines
 on sparse grids.
@@ -33,7 +33,7 @@ while others are new.
 In any case, we give correctness results for every algorithm.
 We take hierarchization as the example problem for our algorithms,
 but the algorithms can be generalized to any linear operator.
-Furthermore, most algorithms are not tailored for B-splines $\basis{l,i}^p$,
+Furthermore, most algorithms are not tailored for B-splines $\hierbspl{l,i}{p}{}$,
 but applicable for general tensor product basis functions $\basis{l,i}$.
 The types of feasible approaches for algorithms
 depend on the ``regularity'' of the sparse grid at hand

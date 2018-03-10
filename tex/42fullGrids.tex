@@ -37,7 +37,8 @@ With the following invariant, we can prove the correctness of the \up.
         \For{$\liset_\mathrm{pole} \in \liset/{\sim}$}
           \State{%
             $(\linout{\ßk}^{(j)})_{\ßk \in \liset_\mathrm{pole}} \gets
-            \linop_{t_j}\Big[(\linout{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}}\Big]$%
+            \linop_{t_j}
+            \Big[(\linout{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
