@@ -36,12 +36,18 @@ if __name__ == "__main__":
                       help="upload to bsplines.org (default)")
   parser.add_argument("--no-upload", action="store_false", dest="upload",
                       help="don't upload to bsplines.org")
+  parser.add_argument("--draft-mode", action="store_true", default=True,
+                      help="use draft mode (default)")
+  parser.add_argument("--no-draft-mode", action="store_false", dest="draft_mode",
+                      help="don't use draft mode")
   parser.add_argument("--destination", default=defaultThesisPDFCopyPath, metavar="PATH",
                       help="local destination for compiled thesis")
   parser.add_argument("--copy-gfx", metavar="DIR",
                       help="copy .sconsign.dblite and build/gfx from this thesis folder "
                            "to save time")
   args = parser.parse_args()
+  
+  switches["draftMode"] = args.draft_mode
   
   with tempfile.TemporaryDirectory() as repoPath:
     print("Creating directory...")
