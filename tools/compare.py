@@ -4,6 +4,7 @@ import argparse
 import multiprocessing
 import os
 import shlex
+import shutil
 import subprocess
 
 def run(args, pipe=True, **kwargs):
@@ -12,20 +13,47 @@ def run(args, pipe=True, **kwargs):
   process = subprocess.run(args, check=True, **kwargs)
   if pipe: return process.stdout.decode()
 
-def diffPage(j):
-  imagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, j))
-                for rev in revs]
-  diffPath = os.path.join(directory, "diff_{}_{}-{}.png".format(revs[0], revs[1], j))
+def compileConvert(i):
+  pdfPath = os.path.join(directory, "thesis_{}.pdf".format(revs[i]))
   
-  if os.path.isfile(diffPath):
-    print("{} already exists.".format(diffPath))
+  if os.path.isfile(pdfPath):
+    print("{} already exists.".format(pdfPath))
+  else:
+    print("Compiling PDF for revision {}...".format(revs[i]))
+    uploadPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "upload.py")
+    uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload", "--no-draft-mode",
+                  "--destination", pdfPath]
+    if args.copy_gfx: uploadArgs += ["--copy-gfx", args.copy_gfx]
+    run(uploadArgs, pipe=False)
+  
+  firstImagePath = os.path.join(directory, "thesis_{}-0.png".format(revs[i]))
+  
+  if os.path.isfile(firstImagePath):
+    print("{} already exists.".format(firstImagePath))
+  else:
+    print("Converting to PNGs for revision {}...".format(revs[i]))
+    pngPath = os.path.join(directory, "thesis_{}.png".format(revs[i]))
+    run(["convert", "-density", "100", pdfPath, "-alpha", "flatten", pngPath])
+
+def diffPage(j):
+  if os.path.isfile(diffPaths[j]):
+    print("{} already exists.".format(diffPaths[j]))
   else:
     print("Diffing page {}...".format(j + 1))
-    run(["composite", imagePaths[0], imagePaths[1], "-compose", "difference", diffPath])
+    run(["composite", imagePaths[j][0], imagePaths[j][1],
+         "-compose", "difference", diffPaths[j]])
+  
+  brightness = float(run(["identify", "-format",  "%[fx:maxima]", diffPaths[j]]).strip())
+  return (brightness > brightnessThreshold)
+
+def generateResult(j):
+  run(["convert", imagePaths[j][0], diffPaths[j], imagePaths[j][1],
+       "+append", resultPaths[j]])
 
 
 
 directory = "/tmp/compare"
+brightnessThreshold = 0
 
 
 
@@ -48,34 +76,39 @@ if __name__ == "__main__":
   print("Comparing {} ({}) with {} ({}).".format(
     args.revision1, revs[0], args.revision2, revs[1]))
   
-  for i in range(2):
-    pdfPath = os.path.join(directory, "thesis_{}.pdf".format(revs[i]))
-    
-    if os.path.isfile(pdfPath):
-      print("{} already exists.".format(pdfPath))
-    else:
-      print("Compiling PDF for revision {}...".format(revs[i]))
-      uploadPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "upload.py")
-      uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload", "--destination", pdfPath]
-      if args.copy_gfx: uploadArgs += ["--copy-gfx", args.copy_gfx]
-      run(uploadArgs, pipe=False)
-    
-    firstImagePath = os.path.join(directory, "thesis_{}-0.png".format(revs[i]))
-    
-    if os.path.isfile(firstImagePath):
-      print("{} already exists.".format(firstImagePath))
-    else:
-      print("Converting to PNGs for revision {}...".format(revs[i]))
-      pngPath = os.path.join(directory, "thesis_{}.png".format(revs[i]))
-      run(["convert", "-density", "100", pdfPath, "-alpha", "flatten", pngPath])
+  with multiprocessing.Pool() as pool:
+    pool.map(compileConvert, range(2))
   
   pageCount = 0
+  imagePaths = []
   
   while True:
-    imagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, pageCount))
-                  for rev in revs]
-    if any([not os.path.isfile(x) for x in imagePaths]): break
+    curImagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, pageCount))
+                     for rev in revs]
+    if any([not os.path.isfile(x) for x in curImagePaths]): break
     pageCount += 1
+    imagePaths.append(curImagePaths)
+  
+  diffPaths = [os.path.join(directory, "diff_{}_{}-{}.png".format(*revs, j))
+               for j in range(pageCount)]
   
   with multiprocessing.Pool() as pool:
-    pool.map(diffPage, range(pageCount))
+    pagesChanged = pool.map(diffPage, range(pageCount))
+  
+  pagesChanged = [i for i in range(pageCount) if pagesChanged[i]]
+  resultsDirectory = os.path.join(directory, "results")
+  if os.path.isdir(resultsDirectory): shutil.rmtree(resultsDirectory)
+  os.makedirs(resultsDirectory)
+  
+  resultPaths = [os.path.join(resultsDirectory, "result_{}.png".format(j))
+                 for j in range(pageCount)]
+  
+  with multiprocessing.Pool() as pool:
+    pool.map(generateResult, pagesChanged)
+  
+  if len(pagesChanged) > 0:
+    print("Pages with changes: {}".format(", ".join([str(x+1) for x in pagesChanged])))
+    subprocess.Popen(["gwenview", resultPaths[pagesChanged[0]]],
+                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+  else:
+    print("No changes detected.")
