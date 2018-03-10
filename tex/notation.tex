@@ -74,14 +74,14 @@
 \newnotationcommand[1]{\gp}{%
   \containsvector{#1}{\ßx}{x}_{#1}%
 }{xli}{$\gp{\ßl,\ßi}$}{
-  Grid point $\gp{\ßl,\ßi} := \ßi \cdot \vms{\ßl}$
+  Grid point $\gp{\ßl,\ßi} := \ßi \cdot \ms{\ßl}$
 }
 
-\newnotationcommand[1]{\vms}{\ßh_{#1}}{hl}{$\vms{\ßl}$}{
-  Mesh size $\vms{\ßl} := \ß2^{-\ßl}$
+\newnotationcommand[1]{\ms}{%
+  \containsvector{#1}{\ßh}{h}_{#1}%
+}{hl}{$\ms{\ßl}$}{
+  Mesh size $\ms{\ßl} := \ß2^{-\ßl}$
 }
-
-\newcommand{\ms}[1]{h_{#1}}
 
 \newnotationcommand[1]{\basis}{\varphi_{#1}}{phili}{$\basis{\ßl,\ßi}$}{
   Hierarchical basis function of level $\ßl$, index $\ßi$
