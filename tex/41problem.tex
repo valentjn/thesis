@@ -10,7 +10,7 @@ $\ngp := \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
-$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^\ngp$ such that
+$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^{\ngp}$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
   \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
@@ -18,7 +18,7 @@ $(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^\ngp$ such that
   \quad\text{for all}\quad
   (\ßl, \ßi) \in \liset,
 \end{equation}
-where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp$ is a given set of
+where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp}$ is a given set of
 function values $\objfun(\gp{\ßl,\ßi})$ at the grid points $\gp{\ßl,\ßi}$.
 The hierarchical surpluses then define the interpolant $\sgintp$ as
 \begin{equation}
@@ -45,7 +45,7 @@ to keep the terminology consistent.
 The example of hierarchization can be generalized
 to arbitrary linear operators
 \begin{equation}
-  \linop\colon \real^\ngp \to \real^\ngp,\quad
+  \linop\colon \real^{\ngp} \to \real^{\ngp},\quad
   \vlinin \mapsto \vlinout = \linop[\vlinin],
 \end{equation}
 where $\linop$ depends on the grid $\sgset$ at hand.
@@ -57,8 +57,8 @@ Input $\vlinin$ and output $\vlinout$ are scalar-valued data%
 %  keeping hierarchization as our main application in mind.%
 %}
 \begin{equation}
-  \vlinin = (\linin{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,\quad
-  \vlinout = (\linout{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^\ngp,
+  \vlinin = (\linin{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp},\quad
+  \vlinout = (\linout{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp},
 \end{equation}
 which give one scalar per grid point $\gp{\ßl,\ßi} \in \sgset$.
 For the case of hierarchization,
