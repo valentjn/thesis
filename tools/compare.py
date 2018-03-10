@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import argparse
+import multiprocessing
 import os
 import shlex
 import subprocess
@@ -10,6 +11,17 @@ def run(args, pipe=True, **kwargs):
   if pipe: kwargs["stdout"] = subprocess.PIPE
   process = subprocess.run(args, check=True, **kwargs)
   if pipe: return process.stdout.decode()
+
+def diffPage(j):
+  imagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, j))
+                for rev in revs]
+  diffPath = os.path.join(directory, "diff_{}_{}-{}.png".format(revs[0], revs[1], j))
+  
+  if os.path.isfile(diffPath):
+    print("{} already exists.".format(diffPath))
+  else:
+    print("Diffing page {}...".format(j + 1))
+    run(["composite", imagePaths[0], imagePaths[1], "-compose", "difference", diffPath])
 
 
 
@@ -57,20 +69,13 @@ if __name__ == "__main__":
       pngPath = os.path.join(directory, "thesis_{}.png".format(revs[i]))
       run(["convert", "-density", "100", pdfPath, "-alpha", "flatten", pngPath])
   
-  j = 0
+  pageCount = 0
   
   while True:
-    imagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, j))
+    imagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, pageCount))
                   for rev in revs]
     if any([not os.path.isfile(x) for x in imagePaths]): break
-    
-    diffPath = os.path.join(directory, "diff_{}_{}-{}.png".format(revs[0], revs[1], j))
-    
-    if os.path.isfile(diffPath):
-      print("{} already exists.".format(diffPath))
-    else:
-      print("Diffing page {}...".format(j + 1))
-      subprocess.run(["composite", imagePaths[0], imagePaths[1],
-                      "-compose", "difference", diffPath])
-    
-    j += 1
+    pageCount += 1
+  
+  with multiprocessing.Pool() as pool:
+    pool.map(diffPage, range(pageCount))
