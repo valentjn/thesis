@@ -581,11 +581,11 @@ we first specify the knot sequence as
     \nodalknot{l,k}{p}{\cc,\nak}
     :=
     \begin{cases}
-      \gp{l,k-p}^\cc,&
+      \ccgp{l,k-p},&
       k = 0, \dotsc, p,\\
-      \gp{l,k-(p+1)/2}^\cc,&
+      \ccgp{l,k-(p+1)/2},&
       k = p + 1, \dotsc, 2^l,\\
-      \gp{l,k-1}^\cc,&
+      \ccgp{l,k-1},&
       k = 2^l + 1, \dotsc, 2^l + p + 1,
     \end{cases}
   \end{gather}
@@ -606,8 +606,8 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \lagrangepoly{l,i}^\cc\colon \clint{0, 1} \to \real,\quad
     \lagrangepoly{l,i}^\cc(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
-    \frac{x - \gp{l,i'}^\cc}%
-    {\gp{l,i}^\cc - \gp{l,i'}^\cc}.
+    \frac{x - \ccgp{l,i'}}%
+    {\ccgp{l,i} - \ccgp{l,i'}}.
   \end{gather}
 \end{subequations}
 This definition can even be combined with modification
@@ -633,7 +633,7 @@ cubic degree and the corresponding modified functions are plotted in
   \subcaptionbox{%
     $\bspl{l',i'}{p}{\cc,\nak}$,
     $\bspl{l',i'}{p}{\modified,\cc,\nak}$
-    \emph{(dashed)}, and $\gp{l',i'}^\cc$ \emph{(dots)}.%
+    \emph{(dashed)}, and $\ccgp{l',i'}$ \emph{(dots)}.%
     \label{fig:clenshawCurtisNotAKnotBSpline}%
   }[76mm]{%
     \includegraphics{hierarchicalBSpline_8}%
@@ -651,7 +651,7 @@ cubic degree and the corresponding modified functions are plotted in
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
     from the set of grid points $\gp{l',i'}$ or
-    $\gp{l',i'}^\cc$
+    $\ccgp{l',i'}$
     ($i' = 0, \dotsc, 2^{l'}$), respectively.%
   }%
 \end{figure}

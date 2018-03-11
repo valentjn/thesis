@@ -646,15 +646,15 @@ than the standard equidistant choice of $\gp{l,i} = i \cdot \ms{l}$,
 if the basis functions are altered accordingly
 \cite{Valentin14Hierarchische}.
 \usenotation{.cc}
-The so-called Chebyshev points $\gp{l,i}^\cc$ and the
+The so-called Chebyshev points $\ccgp{l,i}$ and the
 resulting Clenshaw--Curtis grids and B-splines will serve as an example.
 
 \paragraph{Chebyshev points and Clenshaw--Curtis grids}
 
-The \term{Chebyshev points} $\gp{l,i}^\cc$ of level $l \in \natz$
+The \term{Chebyshev points} $\ccgp{l,i}$ of level $l \in \natz$
 are defined as
 \begin{equation}
-  \gp{l,i}^\cc
+  \ccgp{l,i}
   := \frac{1 - \cos(\pi \gp{l,i})}{2},\quad
   i = 0, \dotsc, 2^l.
 \end{equation}
@@ -723,11 +723,11 @@ where
     \nodalknot{l,k}{p}{\cc}
     :=
     \begin{cases}
-      (k - \frac{p+1}{2}) \cdot \gp{l,1}^\cc,&
+      (k - \frac{p+1}{2}) \cdot \ccgp{l,1},&
       k = 0, \dotsc, \frac{p-1}{2},\\
-      \gp{l,k-(p+1)/2}^\cc,&
+      \ccgp{l,k-(p+1)/2},&
       k = \frac{p+1}{2}, \dotsc, 2^l + \frac{p+1}{2},\\
-      1 + (k - 2^l - \frac{p+1}{2}) \cdot \gp{l,1}^\cc,&
+      1 + (k - 2^l - \frac{p+1}{2}) \cdot \ccgp{l,1},&
       k = 2^l + \frac{p+3}{2}, \dotsc, 2^l + p + 1,
     \end{cases}\\
     k = 0, \dotsc, m + p,\quad
@@ -735,7 +735,7 @@ where
   \end{gather}
 \end{subequations}
 For the construction of the knot sequence $\nodalknotseq{l}{p}{\cc}$,
-the Chebyshev points $\gp{l,i}^\cc$
+the Chebyshev points $\ccgp{l,i}$
 are equidistantly extended onto the real line $\real$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
