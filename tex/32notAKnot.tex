@@ -4,7 +4,7 @@
 As we have seen in the last section (see \cref{cor:hierSplittingBSpline}),
 the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
-$\restrictedspldomain{l}{p} = \clint{\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}}$,
+$\rspldomain{l}{p} = \clint{\ms{l} \tfrac{p-1}{2},\; 1 - \ms{l} \tfrac{p-1}{2}}$,
 which is for $p > 1$ a proper subset of the domain $\clint{0, 1}$.
 The implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
@@ -26,14 +26,14 @@ at least contain all polynomials of degree $\le p$,
 since the approximation power of splines should be at least as good
 as that of polynomials.
 Unfortunately, this statement is not true for the uniform B-splines
-$\hierbspl{l,i}{p}{}$ as we have defined them in the last section.
+$\bspl{l,i}{p}{}$ as we have defined them in the last section.
 A counterexample is given in \cref{fig:nakInterpolation},
 in which a cubic polynomial $\objfun$ is interpolated with
 hierarchical cubic B-splines.
 However, one can clearly deviations of the interpolant from the polynomial
 near the boundary, where the relative error exceeds \SI{10}{\percent}.
 The oscillations occur even in the interior of the
-spline interpolation domain $\restrictedspldomain{l}{p}$.
+spline interpolation domain $\rspldomain{l}{p}$.
 Of course, this phenomenon does not improve the approximation quality
 for other non-polynomial functions as well.
 
@@ -42,7 +42,7 @@ for other non-polynomial functions as well.
     Objective function \textcolor{C0}{$\objfun$ \emph{(blue)}},
     interpolant \textcolor{C1}{$\fgintp{l}$ \emph{(red, dashed)}},
     grid points \emph{(dots)}, and
-    spline interpolation domain $\restrictedspldomain{l}{p}$
+    spline interpolation domain $\rspldomain{l}{p}$
     \emph{(thick line)}.%
   }[75mm]{%
     \includegraphics{nakInterpolation_1}%
@@ -54,7 +54,7 @@ for other non-polynomial functions as well.
     \includegraphics{nakInterpolation_2}%
   }%
   \caption{%
-    Hierarchical cubic B-splines $\hierbspl{l',i'}{p}{}$
+    Hierarchical cubic B-splines $\bspl{l',i'}{p}{}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
     $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
@@ -65,26 +65,26 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$
+we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$
 with $p = 3$.
 Since cubic polynomials as $\objfun$ are cubic splines as well,
 $\objfun \in \restrictedsplspace{l}{p}$ and hence
-$\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\restrictedspldomain{l}{p}}$.
+$\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$.
 This means that there is a linear combination of hierarchical B-splines
-$\hierbspl{l',i'}{p}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
-that interpolates $\objfun$ exactly on the whole domain $\restrictedspldomain{l}{p}$
+$\bspl{l',i'}{p}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
+that interpolates $\objfun$ exactly on the whole domain $\rspldomain{l}{p}$
 (not be confused with $\fgintp{l}$ in \cref{fig:nakInterpolation},
-which does not interpolate $\objfun$ exactly in $\restrictedspldomain{l}{p}$).
+which does not interpolate $\objfun$ exactly in $\rspldomain{l}{p}$).
 However, in general, this interpolant is not equal $\objfun$ outside
-of $\restrictedspldomain{l}{p}$ (i.e., in $\clint{0, 1} \setminus \restrictedspldomain{l}{p}$),
-as \thmref{prop:splineSpace} only holds for $\restrictedspldomain{l}{p}$.
+of $\rspldomain{l}{p}$ (i.e., in $\clint{0, 1} \setminus \rspldomain{l}{p}$),
+as \thmref{prop:splineSpace} only holds for $\rspldomain{l}{p}$.
 In particular, the interpolant evaluated at $x \in \{0, 1\}$ is not
 equal to $\objfun(x)$.
 If we now force the additional interpolation conditions in
 $\gp{l,0} = 0$ and $\gp{l,2^l} = 1$,
 the resulting interpolant $\fgintp{l}$ cannot be the same as the previous
 interpolant,
-which is why $\objfun$ and $\fgintp{l}$ differ inside $\restrictedspldomain{l}{p}$.
+which is why $\objfun$ and $\fgintp{l}$ differ inside $\rspldomain{l}{p}$.
 
 \paragraph{Schoenberg--Whitney conditions}
 
@@ -109,14 +109,14 @@ described by the so-called Schoenberg--Whitney conditions:
 \end{proof}
 
 The Schoenberg--Whitney conditions require that the interpolation points
-are contained in $\restrictedspldomain{l}{p}$.
+are contained in $\rspldomain{l}{p}$.
 In the example of $p = 3$ in \cref{fig:nakInterpolation},
-the points $x = 0$ and $x = 1$ do not lie in~$\restrictedspldomain{l}{p}$.
+the points $x = 0$ and $x = 1$ do not lie in~$\rspldomain{l}{p}$.
 For general degree $p$, the first $\tfrac{p-1}{2}$ and the
-last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $\restrictedspldomain{l}{p}$,
+last $\tfrac{p-1}{2}$ grid points of level $l$ are missing from $\rspldomain{l}{p}$,
 thus violating the Schoenberg--Whitney conditions.
 One possible remedy would be to move these interpolation points inside
-$\restrictedspldomain{l}{p}$ without changing the corresponding basis functions
+$\rspldomain{l}{p}$ without changing the corresponding basis functions
 (i.e., the knots would stay the same) \cite{Hoellig13Approximation}.
 For instance in the cubic case, we could move $x = 0$ and $x = 1$ to
 $x = 1.5 \ms{l}$ and $x = 1 - 1.5 \ms{l}$, respectively.
@@ -202,15 +202,15 @@ of degree $\le p$ on $\clint{0, \gp{l,(p+1)/2}}$ and on
 $\clint{\gp{l,2^l-(p+1)/2}, 1}$.
 
 \usenotation{.nak}
-The knot sequence $\nodalknotseq{l}{p}{\notaknot}$
+The knot sequence $\nodalknotseq{l}{p}{\nak}$
 with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
   \begin{gather}
-    \nodalknotseq{l}{p}{\notaknot}
-    := (\nodalknot{l,0}{p}{\notaknot}, \dotsc,
-    \nodalknot{l,m+p}{p}{\notaknot}),\quad
+    \nodalknotseq{l}{p}{\nak}
+    := (\nodalknot{l,0}{p}{\nak}, \dotsc,
+    \nodalknot{l,m+p}{p}{\nak}),\quad
     m := 2^l + 1,\\
-    \nodalknot{l,k}{p}{\notaknot}
+    \nodalknot{l,k}{p}{\nak}
     :=
     \begin{cases}
       \gp{l,k-p},&
@@ -222,14 +222,14 @@ with not-a-knot boundary conditions is defined as follows:
     \end{cases}
   \end{gather}
 \end{subequations}
-This knot sequence $\nodalknotseq{l}{p}{\notaknot}$
+This knot sequence $\nodalknotseq{l}{p}{\nak}$
 can be obtained by removing the knots
 given in \eqref{eq:removedNAKKnots} from the
 knot sequence \eqref{eq:fullGridKnots} for the full grid of level $l$.
 The resulting spline space
 \begin{equation}
   \naksplspace{l}{p}
-  := \nonunifsplspace{\nodalknotseq{l}{p}{\notaknot}}{p}
+  := \nonunifsplspace{\nodalknotseq{l}{p}{\nak}}{p}
 \end{equation}
 is a subspace
 of $\wholesplspace{l}{p}$ with the correct dimensionality:
@@ -244,7 +244,7 @@ equals the whole interval.
 This means that the Schoenberg--Whitney conditions are satisfied
 for $\naksplspace{l}{p}$, since all interpolation points
 (grid points) lie within
-$\spldomain{\nodalknotseq{l}{p}{\notaknot}}{p} = \clint{0, 1}$.
+$\spldomain{\nodalknotseq{l}{p}{\nak}}{p} = \clint{0, 1}$.
 Second, $\naksplspace{l}{p}$ still contains all polynomials of
 degree $\le p$, as we have only removed knots compared to
 $\wholesplspace{l}{p}$.
@@ -252,7 +252,7 @@ $\wholesplspace{l}{p}$.
 \begin{figure}
   \includegraphics{splineSpace_3}%
   \caption{%
-    Not-a-knot knot sequence $\nodalknotseq{l}{p}{\notaknot}$
+    Not-a-knot knot sequence $\nodalknotseq{l}{p}{\nak}$
     \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic not-a-knot B-splines ($p = 3$)
     of level $l = 3$.
@@ -262,7 +262,7 @@ $\wholesplspace{l}{p}$.
     \emph{\textcolor{mittelblau}{(blue dots)}}
     have been removed from the set of knots.
     The spline interpolation domain
-    $\spldomain{\nodalknotseq{l}{p}{\notaknot}}{p}$
+    $\spldomain{\nodalknotseq{l}{p}{\nak}}{p}$
     \emph{(thick line)}
     equals the whole domain $\clint{0, 1}$.%
   }%
@@ -271,7 +271,7 @@ $\wholesplspace{l}{p}$.
 
 However, $\bigoplus_{l'=0}^l \hs{l}^p$ is not a subspace of
 $\naksplspace{l}{p}$ anymore,
-as the hierarchical basis functions $\hierbspl{l',i'}{p}{}$ are not
+as the hierarchical basis functions $\bspl{l',i'}{p}{}$ are not
 not-a-knot splines (due to the additional knots that we removed from
 $\naksplspace{l}{p}$).
 For this reason,
@@ -280,7 +280,7 @@ hierarchical basis.
 
 Before defining the new hierarchical basis functions,
 let us first make two additional observations.
-First, $\nodalknotseq{l}{p}{\notaknot}$ coincides with the
+First, $\nodalknotseq{l}{p}{\nak}$ coincides with the
 uniform knot sequence $\nodalknotseq{l}{p}{}$ of \thmref{cor:nodalBSplineSpace}
 for the piecewise linear case of $p = 1$.
 This is intuitively clear:
@@ -297,16 +297,16 @@ we would not be able to obtain enough basis functions to span the spline space.
 \paragraph{Definition of hierarchical not-a-knot B-splines}
 
 For the definition of \term{hierarchical not-a-knot B-splines}
-$\hierbspl{l,i}{p}{\notaknot}$ based on \thmref{def:nonUniformBSpline},
+$\bspl{l,i}{p}{\nak}$ based on \thmref{def:nonUniformBSpline},
 we use global Lagrange polynomials for the coarser levels:
 \begin{subequations}
   \begin{gather}
-    \hierbspl{l,i}{p}{\notaknot}
+    \bspl{l,i}{p}{\nak}
     :=
     \begin{cases}
       \lagrangepoly{l,i},&
       l < \lceil\log_2(p+1)\rceil,\\
-      \nonunifbspl{i,\nodalknotseq{l}{p}{\notaknot}}{p},&
+      \nonunifbspl{i,\nodalknotseq{l}{p}{\nak}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
@@ -335,7 +335,7 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
 \begin{figure}
   \subcaptionbox{%
     Nodal not-a-knot B-splines
-    $\hierbspl{l,i}{p}{\notaknot}$ ($i \in \hiset{l}$)
+    $\bspl{l,i}{p}{\nak}$ ($i \in \hiset{l}$)
     and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[70mm]{%
     \includegraphics{hierarchicalBSpline_5}%
@@ -348,7 +348,7 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
   \hfill%
   \subcaptionbox{%
     Hierarchical not-a-knot B-splines
-    $\hierbspl{l',i'}{p}{\notaknot}$ ($l' \le l$, $i' \in \hiset{l'}$)
+    $\bspl{l',i'}{p}{\nak}$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.%
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
@@ -356,10 +356,10 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
   \caption{%
     Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
     up to level $l = 3$.
-    The nodal space $\ns{l}^{p,\notaknot}$,
+    The nodal space $\ns{l}^{p,\nak}$,
     which coincides with the not-a-knot spline space $\naksplspace{l}{p}$,
     decomposes into the direct sum
-    of the hierarchical subspaces $\hs{l'}^{p,\notaknot}$ ($l' \le l$).
+    of the hierarchical subspaces $\hs{l'}^{p,\nak}$ ($l' \le l$).
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
@@ -376,7 +376,7 @@ However, the specific choice of basis functions for the levels
 $l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
 as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
-$\hierbspl{l,i}{p}{\notaknot}$, $l \ge \lceil\log_2(p+1)\rceil$)
+$\bspl{l,i}{p}{\nak}$, $l \ge \lceil\log_2(p+1)\rceil$)
 and contained in the space $\naksplspace{l}{p}$.
 
 \paragraph{Implementation}
@@ -386,19 +386,19 @@ only the first $\tfrac{p+1}{2}$
 (indices $i = 1, 3, \dotsc, p$)
 and the last $\tfrac{p+1}{2}$
 (indices $i = 2^l - p, 2^l - p + 2, \dotsc, 2^l - 1$)
-hierarchical basis functions $\hierbspl{l,i}{p}{\notaknot}$
-differ from $\hierbspl{l,i}{p}{}$,
+hierarchical basis functions $\bspl{l,i}{p}{\nak}$
+differ from $\bspl{l,i}{p}{}$,
 i.e., we have
 \begin{equation}
-  \hierbspl{l,i}{p}{\notaknot} = \hierbspl{l,i}{p}{},\quad
+  \bspl{l,i}{p}{\nak} = \bspl{l,i}{p}{},\quad
   i = p + 2,\; p + 4,\; \dotsc,\; 2^l - p - 2.
 \end{equation}
 This means that we can reuse uniform B-spline code
 for the inner functions.
-Due to $\hierbspl{l,i}{p}{\notaknot}(x) = \hierbspl{l,2^l-i}{p}{\notaknot}(1-x)$
-(because of the symmetry of $\nodalknotseq{l}{p}{\notaknot}$),
+Due to $\bspl{l,i}{p}{\nak}(x) = \bspl{l,2^l-i}{p}{\nak}(1-x)$
+(because of the symmetry of $\nodalknotseq{l}{p}{\nak}$),
 we only have to implement $\tfrac{p+1}{2}$ not-a-knot B-splines per level $l$.
-As $\hierbspl{l,i}{p}{\notaknot}$ and $\hierbspl{l+1,i}{p}{\notaknot}$
+As $\bspl{l,i}{p}{\nak}$ and $\bspl{l+1,i}{p}{\nak}$
 use the same knots up to an affine transformation for $l$ large enough
 ($l \ge 3$ suffices for $p = 3$),
 we only have to implement a number of special case for coarse levels $l$.
@@ -409,7 +409,7 @@ with respect to an implementation that already uses uniform B-splines.
 
 The main benefit of the hierarchical not-a-knot B-spline basis
 is the validity of the hierarchical splitting.
-Again usual, we define $\ns{l}^{p,\notaknot}$ and $\hs{l}^{p,\notaknot}$
+Again usual, we define $\ns{l}^{p,\nak}$ and $\hs{l}^{p,\nak}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
@@ -419,8 +419,8 @@ respectively.
   holds for the hierarchical not-a-knot B-spline basis:
   \begin{equation}
     \naksplspace{l}{p}
-    = \ns{l}^{p,\notaknot}
-    = \bigoplus_{l'=0}^l \hs{l'}^{p,\notaknot},
+    = \ns{l}^{p,\nak}
+    = \bigoplus_{l'=0}^l \hs{l'}^{p,\nak},
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $\naksplspace{l}{p}$
   is defined as the space $\polyspace{2^l + 1}$ of polynomials of degree
@@ -435,15 +435,15 @@ respectively.
   
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
-  First, the hierarchical subspace $\hs{l'}^{p,\notaknot}$ ($l' \le l$)
-  is a subspace of $\naksplspace{l}{p} = \ns{l}^{p,\notaknot}$.
+  First, the hierarchical subspace $\hs{l'}^{p,\nak}$ ($l' \le l$)
+  is a subspace of $\naksplspace{l}{p} = \ns{l}^{p,\nak}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
-  every function $\hierbspl{l',i'}{p}{\notaknot}$ ($i' \in \hiset{l'}$)
+  every function $\bspl{l',i'}{p}{\nak}$ ($i' \in \hiset{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
-  $\nodalknotseq{l}{p}{\notaknot}$, and at the knots themselves
+  $\nodalknotseq{l}{p}{\nak}$, and at the knots themselves
   at least $(p - 1)$ times continuously differentiable.
   
-  Second, the hierarchical functions $\hierbspl{l',i'}{p}{\notaknot}$
+  Second, the hierarchical functions $\bspl{l',i'}{p}{\nak}$
   ($l' \le l$, $i' \in \hiset{l'}$) are linearly independent.
   This can be shown similar to the proof of
   \thmref{prop:hierBSplineLinearlyIndependent}.
@@ -459,8 +459,8 @@ respectively.
   It holds
   \begin{equation}
     \naksplspace{\ßl}{\ßp}
-    = \ns{\ßl}^{\ßp,\notaknot}
-    = \bigoplus_{\ßl'=\ß0}^\ßl \hs{\ßl'}^{\ßp,\notaknot},
+    = \ns{\ßl}^{\ßp,\nak}
+    = \bigoplus_{\ßl'=\ß0}^\ßl \hs{\ßl'}^{\ßp,\nak},
   \end{equation}
   where $\naksplspace{\ßl}{\ßp}$ is the
   tensor product space of $\naksplspace{l_t}{p_t}$
@@ -477,10 +477,10 @@ Regular sparse grid spaces using the new hierarchical not-a-knot basis
 are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
-  \regsgspace{n}{d}{\ßp,\notaknot}
-  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\notaknot}.
+  \regsgspace{n}{d}{\ßp,\nak}
+  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\nak}.
 \end{equation}
-If the level $n$ is large enough, then $\regsgspace{n}{d}{\ßp,\notaknot}$
+If the level $n$ is large enough, then $\regsgspace{n}{d}{\ßp,\nak}$
 contains the space $\polyspace{\ßp}$ of all $d$-variate polynomials of
 coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
 (i.e., functions $\objfun\colon \clint{0, 1} \to \real$,
@@ -492,20 +492,20 @@ represent global polynomials on $\clint{\ß0, \ß1}$:
 
 \begin{corollary}
   If $n \ge \normone{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}$,
-  then $\polyspace{\ßp} \subset \regsgspace{n}{d}{\ßp,\notaknot}$.
+  then $\polyspace{\ßp} \subset \regsgspace{n}{d}{\ßp,\nak}$.
 \end{corollary}
 
 \begin{proof}
   Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \normone{\ßl}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
-  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} = \naksplspace{\ßl}{\ßp}$.
+  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\nak} = \naksplspace{\ßl}{\ßp}$.
   In addition, all $\ßl' \in \natz^d$ with $\ßl' \le \ßl$ satisfy
   $\normone{\ßl'} \le n$ and thus,
-  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\notaknot} \subset
-  \regsgspace{n}{d}{\ßp,\notaknot}$ by \eqref{eq:sparseGridRegularNAK}.
+  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\nak} \subset
+  \regsgspace{n}{d}{\ßp,\nak}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
   $\polyspace{\ßp} \subset \naksplspace{\ßl}{\ßp} \subset
-  \regsgspace{n}{d}{\ßp,\notaknot}$, which is the asserted claim.
+  \regsgspace{n}{d}{\ßp,\nak}$, which is the asserted claim.
 \end{proof}
 
 
@@ -523,38 +523,38 @@ hierarchical not-a-knot B-spline basis to obtain
 However, we cannot use \thmref{lemma:marsden} similarly to
 \eqref{eq:modifiedBSplineConstruction}:
 Due to the removal of knots, there is only a single
-not-a-knot B-spline $\hierbspl{l,0}{p}{\notaknot}$ left of
-$\hierbspl{l,1}{p}{\notaknot}$.
-B-splines $\hierbspl{l,i}{p}{\notaknot}$ with index $i < 0$
+not-a-knot B-spline $\bspl{l,0}{p}{\nak}$ left of
+$\bspl{l,1}{p}{\nak}$.
+B-splines $\bspl{l,i}{p}{\nak}$ with index $i < 0$
 would be zero in $\clint{0, 1}$.
 
 While we are therefore not able to construct modified functions
 whose second derivative vanishes in neighborhood of $x = 0$,
-we can at least use $\hierbspl{l,0}{p}{\notaknot}$ to let the
+we can at least use $\bspl{l,0}{p}{\nak}$ to let the
 second derivative vanish in $x = 0$ itself:
 \begin{equation}
   \label{eq:modifiedNotAKnotBSpline}
-  \hierbspl{l,i}{p}{\modified,\notaknot}(x)
+  \bspl{l,i}{p}{\modified,\nak}(x)
   :=
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \hierbspl{l,1}{p}{\notaknot}(x)
-    - \hierbspl{l,0}{p}{\notaknot}(x)
-    \dfrac{\frac{\diff^2}{\dx^2} \hierbspl{l,1}{p}{\notaknot}(0)}%
-    {\frac{\diff^2}{\dx^2} \hierbspl{l,0}{p}{\notaknot}(0)},&
+    \bspl{l,1}{p}{\nak}(x)
+    - \bspl{l,0}{p}{\nak}(x)
+    \dfrac{\frac{\diff^2}{\dx^2} \bspl{l,1}{p}{\nak}(0)}%
+    {\frac{\diff^2}{\dx^2} \bspl{l,0}{p}{\nak}(0)},&
     l \ge 2,\quad i = 1,\\
-    \hierbspl{l,i}{p}{\notaknot}(x),&
+    \bspl{l,i}{p}{\nak}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \hierbspl{l,1}{p}{\modified,\notaknot}(1 - x),&
+    \bspl{l,1}{p}{\modified,\nak}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
   \hspace*{-2mm}
 \end{equation}
 The resulting modified hierarchical Clenshaw--Curtis not-a-knot B-spline basis
-$\hierbspl{l,i}{p}{\modified,\notaknot}$ is shown with dashed lines
+$\bspl{l,i}{p}{\modified,\nak}$ is shown with dashed lines
 in \cref{fig:modifiedNotAKnotBSpline}.
-As before, we have to implement $\hierbspl{l,1}{p}{\modified,\notaknot}$
+As before, we have to implement $\bspl{l,1}{p}{\modified,\nak}$
 only for a single level $l$, as modified functions of higher levels
 are the same up to an affine parameter transformation.
 Note again that for $p \ge 5$, we would have to modify additional
@@ -574,18 +574,18 @@ Chebyshev points in \cref{sec:314nonUniform},
 we first specify the knot sequence as
 \begin{subequations}
   \begin{gather}
-    \nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}
-    := (\nodalknot{l,0}{p}{\clenshawcurtis,\notaknot}, \dotsc,
-    \nodalknot{l,m+p}{p}{\clenshawcurtis,\notaknot}),\quad
+    \nodalknotseq{l}{p}{\cc,\nak}
+    := (\nodalknot{l,0}{p}{\cc,\nak}, \dotsc,
+    \nodalknot{l,m+p}{p}{\cc,\nak}),\quad
     m := 2^l + 1,\\
-    \nodalknot{l,k}{p}{\clenshawcurtis,\notaknot}
+    \nodalknot{l,k}{p}{\cc,\nak}
     :=
     \begin{cases}
-      \gp{l,k-p}^\clenshawcurtis,&
+      \gp{l,k-p}^\cc,&
       k = 0, \dotsc, p,\\
-      \gp{l,k-(p+1)/2}^\clenshawcurtis,&
+      \gp{l,k-(p+1)/2}^\cc,&
       k = p + 1, \dotsc, 2^l,\\
-      \gp{l,k-1}^\clenshawcurtis,&
+      \gp{l,k-1}^\cc,&
       k = 2^l + 1, \dotsc, 2^l + p + 1,
     \end{cases}
   \end{gather}
@@ -593,21 +593,21 @@ we first specify the knot sequence as
 and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
 \begin{subequations}
   \begin{gather}
-    \hierbspl{l,i}{p}{\clenshawcurtis,\notaknot}
+    \bspl{l,i}{p}{\cc,\nak}
     :=
     \begin{cases}
-      \lagrangepoly{l,i}^\clenshawcurtis,&
+      \lagrangepoly{l,i}^\cc,&
       l < \lceil\log_2(p+1)\rceil,\\
-      \nonunifbspl{i,\nodalknotseq{l}{p}{\clenshawcurtis,\notaknot}}{p},&
+      \nonunifbspl{i,\nodalknotseq{l}{p}{\cc,\nak}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\
-    \lagrangepoly{l,i}^\clenshawcurtis\colon \clint{0, 1} \to \real,\quad
-    \lagrangepoly{l,i}^\clenshawcurtis(x)
+    \lagrangepoly{l,i}^\cc\colon \clint{0, 1} \to \real,\quad
+    \lagrangepoly{l,i}^\cc(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
-    \frac{x - \gp{l,i'}^\clenshawcurtis}%
-    {\gp{l,i}^\clenshawcurtis - \gp{l,i'}^\clenshawcurtis}.
+    \frac{x - \gp{l,i'}^\cc}%
+    {\gp{l,i}^\cc - \gp{l,i'}^\cc}.
   \end{gather}
 \end{subequations}
 This definition can even be combined with modification
@@ -622,8 +622,8 @@ cubic degree and the corresponding modified functions are plotted in
 
 \begin{figure}
   \subcaptionbox{%
-    $\hierbspl{l',i'}{p}{\notaknot}$,
-    $\hierbspl{l',i'}{p}{\modified,\notaknot}$
+    $\bspl{l',i'}{p}{\nak}$,
+    $\bspl{l',i'}{p}{\modified,\nak}$
     \emph{(dashed)}, and $\gp{l',i'}$ \emph{(dots)}.%
     \label{fig:modifiedNotAKnotBSpline}%
   }[73mm]{%
@@ -631,27 +631,27 @@ cubic degree and the corresponding modified functions are plotted in
   }%
   \hfill
   \subcaptionbox{%
-    $\hierbspl{l',i'}{p}{\clenshawcurtis,\notaknot}$,
-    $\hierbspl{l',i'}{p}{\modified,\clenshawcurtis,\notaknot}$
-    \emph{(dashed)}, and $\gp{l',i'}^\clenshawcurtis$ \emph{(dots)}.%
+    $\bspl{l',i'}{p}{\cc,\nak}$,
+    $\bspl{l',i'}{p}{\modified,\cc,\nak}$
+    \emph{(dashed)}, and $\gp{l',i'}^\cc$ \emph{(dots)}.%
     \label{fig:clenshawCurtisNotAKnotBSpline}%
   }[76mm]{%
     \includegraphics{hierarchicalBSpline_8}%
   }%
   \caption{%
     Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
-    B-splines $\hierbspl{l',i'}{p}{\notaknot}$ and
-    $\hierbspl{l',i'}{p}{\clenshawcurtis,\notaknot}$
+    B-splines $\bspl{l',i'}{p}{\nak}$ and
+    $\bspl{l',i'}{p}{\cc,\nak}$
     ($l ' \le l$, $i' \in \hiset{l'}$, $p = 3$) up to level $l = 3$
     together with the respective modified versions
-    $\hierbspl{l',i'}{p}{\modified,\notaknot}$ and
-    $\hierbspl{l',i'}{p}{\modified,\clenshawcurtis,\notaknot}$
+    $\bspl{l',i'}{p}{\modified,\nak}$ and
+    $\bspl{l',i'}{p}{\modified,\cc,\nak}$
     \emph{(dashed)}.
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
     from the set of grid points $\gp{l',i'}$ or
-    $\gp{l',i'}^\clenshawcurtis$
+    $\gp{l',i'}^\cc$
     ($i' = 0, \dotsc, 2^{l'}$), respectively.%
   }%
 \end{figure}
@@ -680,13 +680,13 @@ $q = 2, \dotsc, \tfrac{p+1}{2}$ vanish at $x \in \{0, 1\}$.
 Consequently, we can define hierarchical natural B-splines as
 \begin{subequations}
   \begin{gather}
-    \hierbspl{l,i}{p}{\ntrl}(x)
+    \bspl{l,i}{p}{\ntrl}(x)
     :=
     \begin{cases}
       \lagrangepoly{0,i}(x),&
       l = 0,\\
-      \hierbspl{l,i}{p}{} +
-      \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \hierbspl{l,j}{p}{},&
+      \bspl{l,i}{p}{} +
+      \sum_{j \in J_i^{p,\ntrl}} c_{l,i,j} \bspl{l,j}{p}{},&
       l \ge 1,
     \end{cases}\quad
     l \in \natz,\quad
@@ -699,7 +699,7 @@ Consequently, we can define hierarchical natural B-splines as
 where the coefficients $c_{l,i,j} \in \real$ are chosen such that
 the natural boundary conditions are satisfied:
 \begin{equation}
-  \frac{\diff^q}{\dx^q} \hierbspl{l,i}{p}{\ntrl}(x)
+  \frac{\diff^q}{\dx^q} \bspl{l,i}{p}{\ntrl}(x)
   = 0,\quad
   l \ge 1,\quad
   i \in \hiset{l},\quad
@@ -707,11 +707,11 @@ the natural boundary conditions are satisfied:
   x \in \{0, 1\}.
 \end{equation}
 Note that the first half of the coefficients $c_{l,i,j} \in \real$
-($j < i$) vanish if the interior of the support of $\hierbspl{l,i}{p}{}$
+($j < i$) vanish if the interior of the support of $\bspl{l,i}{p}{}$
 does not contain $x = 0$
 (i.e., $i > \tfrac{p+1}{2}$).
 The second half of the coefficients~($j > i$) vanishes analogously
-if $1 \notin \interiorsupp \hierbspl{l,i}{p}{} \iff i < 2^l - \tfrac{p+1}{2}$.
+if $1 \notin \interiorsupp \bspl{l,i}{p}{} \iff i < 2^l - \tfrac{p+1}{2}$.
 This means that as for the not-a-knot basis,
 only the first $\tfrac{p+1}{2}$ and the last $\tfrac{p+1}{2}$
 hierarchical functions have to be altered in each level.
@@ -730,7 +730,7 @@ rest of the thesis.
   \includegraphics{hierarchicalBSpline_9}%
   \caption{%
     Hierarchical cubic natural B-splines
-    $\hierbspl{l',i'}{p}{\ntrl}$
+    $\bspl{l',i'}{p}{\ntrl}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
     grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
   }%

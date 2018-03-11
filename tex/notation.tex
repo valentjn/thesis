@@ -87,9 +87,9 @@
   Hierarchical basis function of level $\ßl$, index $\ßi$
 }
 
-\newnotationcommand[3]{\hierbspl}{%
+\newnotationcommand[3]{\bspl}{%
   \varphi_{#1}^{#2\appendwithcomma{#3}}%
-}{philip}{$\hierbspl{\ßl,\ßi}{\ßp}{}$}{
+}{philip}{$\bspl{\ßl,\ßi}{\ßp}{}$}{
   Hierarchical B-spline basis function of
   level $\ßl$, index $\ßi$, degree $\ßp$
 }
@@ -118,12 +118,12 @@
   for grids without boundary points''
 }
 
-\newnotation{.cc}{$\cdot^\clenshawcurtis$}{
+\newnotation{.cc}{$\cdot^\cc$}{
   Superscript for ``Clenshaw--Curtis (grid point/grid point set/basis
   function/function space/interpolant)''
 }
 
-\newnotation{.nak}{$\cdot^\notaknot$}{
+\newnotation{.nak}{$\cdot^\nak$}{
   Superscript for ``Not-a-knot (knot sequence/basis
   function/function space/interpolant)''
 }
@@ -400,9 +400,9 @@
   $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$
 }
 
-\newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\notaknot}}{Slpnak}%
+\newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}%
 {$\naksplspace{l}{p}$}{
-  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{\notaknot}}{p}$
+  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{\nak}}{p}$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
@@ -427,8 +427,8 @@
   Spline interpolation domain of $\nonunifsplspace{\knotseq}{p}$
 }
 
-\newnotationcommand[2]{\restrictedspldomain}{D_{#1}^{#2}}{Dlp}%
-{$\restrictedspldomain{l}{p}$}{
+\newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{Dlp}%
+{$\rspldomain{l}{p}$}{
   Spline interpolation domain of $\restrictedsplspace{l}{p}$
   (uniform nodal B-splines of level $l$, degree $p$)
 }
@@ -547,10 +547,10 @@
 \newcommand*{\normscaled}[1]{\left\lVert{#1}\right\rVert}
 
 % superscripts
-\newcommand*{\clenshawcurtis}{\mathrm{cc}}
+\newcommand*{\cc}{\mathrm{cc}}
 \newcommand*{\modified}{\mathrm{mod}}
 \newcommand*{\ntrl}{\mathrm{nat}}
-\newcommand*{\notaknot}{\mathrm{nak}}
+\newcommand*{\nak}{\mathrm{nak}}
 \newcommand*{\sparse}{\mathrm{s}}
 
 % disjoint union
