@@ -1,6 +1,6 @@
-\newcommand*{\containsvector}[3]{%
- \protect\IfSubStr{\detokenize{#1}}{\detokenize{\ß}}{#2}{#3}%
-}
+% ======================================================================
+% Number Sets
+% ======================================================================
 
 \newnotationcommand{\nat}{\mathbb{N}}{N1}{$\nat$}{
   Natural numbers without zero ($1, 2, 3, \dotsc$)
@@ -17,6 +17,10 @@
 \newnotationcommand{\real}{\mathbb{R}}{R}{$\real$}{
   Real numbers
 }
+
+% ======================================================================
+% Basic Single-Letter Symbols (Level, Index, ...)
+% ======================================================================
 
 \newnotation{l}{$\ßl$}{
   Hierarchical level $\ßl \in \natz^d$
@@ -42,6 +46,27 @@
 \newnotation{n}{$n$}{
   Level $\in \natz$ of full or sparse grid
 }
+
+\newnotationcommand{\ngp}{N}{N2}{$\ngp$}{
+  Number of grid points
+  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+}
+
+\newnotationcommand{\vlinin}{\ßu}{u}{$\vlinin$}{
+  Input of the linear operator $\linop$
+}
+
+\newcommand*{\linin}[1]{u_{#1}}
+
+\newnotationcommand{\vlinout}{\ßy}{y}{$\vlinout$}{
+  Output of the linear operator $\linop$
+}
+
+\newcommand*{\linout}[1]{y_{#1}}
+
+% ======================================================================
+% Vector Notation
+% ======================================================================
 
 \newnotation{0!}{$\ß0$}{
   $(0, \dotsc, 0) \in \natz^d$
@@ -71,6 +96,10 @@
   $t'_1 < \dotsb t'_{d-j}$)
 }
 
+% ======================================================================
+% Grid Points
+% ======================================================================
+
 \newnotationcommand[1]{\gp}{%
   \containsvector{#1}{\ßx}{x}_{#1}%
 }{xli}{$\gp{\ßl,\ßi}$}{
@@ -83,22 +112,25 @@
   Clenshaw--Curtis grid point
 }
 
+% ======================================================================
+% Mesh Size
+% ======================================================================
+
 \newnotationcommand[1]{\ms}{%
   \containsvector{#1}{\ßh}{h}_{#1}%
 }{hl}{$\ms{\ßl}$}{
   Mesh size $\ms{\ßl} := \ß2^{-\ßl}$
 }
 
-\newnotationcommand[1]{\basis}{\varphi_{#1}}{phili}{$\basis{\ßl,\ßi}$}{
-  Hierarchical basis function of level $\ßl$, index $\ßi$
-}
+% ======================================================================
+% Superscripts
+% ======================================================================
 
-\newnotationcommand[3]{\bspl}{%
-  \varphi_{#1}^{#2\appendwithcomma{#3}}%
-}{philip}{$\bspl{\ßl,\ßi}{\ßp}{}$}{
-  Hierarchical B-spline basis function of
-  level $\ßl$, index $\ßi$, degree $\ßp$
-}
+\newcommand*{\cc}{\mathrm{cc}}
+\newcommand*{\modified}{\mathrm{mod}}
+\newcommand*{\ntrl}{\mathrm{nat}}
+\newcommand*{\nak}{\mathrm{nak}}
+\newcommand*{\sparse}{\mathrm{s}}
 
 \newnotation{.1}{$\cdot^1$}{
   Superscript for ``Piecewise linear
@@ -139,14 +171,9 @@
   function/function space/interpolant)''
 }
 
-\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\ßl}$}{
-  Nodal space of level $\ßl$
-}
-
-\newnotation{Vnd}{$\ns{n,d}$}{
-  Multivariate nodal space
-  $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
-}
+% ======================================================================
+% Intervals
+% ======================================================================
 
 \newnotationcommand[1]{\clint}{[#1]}{ab!c}{$\clint{\ßa, \ßb}$}{
   Closed hyper-rectangle
@@ -172,6 +199,10 @@
 \newcommand*{\opintscaled}[1]{\left]#1\right[}
 \newcommand*{\hopintscaled}[1]{\left[#1\right[}
 
+% ======================================================================
+% Norms
+% ======================================================================
+
 \newnotationcommand[1]{\normone}{\norm{#1}_1}{||.||1}{$\normone{\cdot}$}{
   $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
 }
@@ -186,6 +217,10 @@
 
 \newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{\Ltwo}}
 
+% ======================================================================
+% Relation Symbols
+% ======================================================================
+
 \let\equivorig\equiv
 \let\equiv\undefined
 \newnotationcommand{\equiv}{\equivorig}{!equiv}{$\equivorig$}{
@@ -193,114 +228,14 @@
   (e.g., $\objfun \equiv 0$ means $\objfun(x) = 0$ for all feasible $x$)
 }
 
-\newnotationcommand[1]{\fgset}{\Omega_{#1}}{Omegal!}{$\fgset{\ßl}$}{
-  Set of full grid points of level $\ßl$
-}
-
-\newnotationcommand[1]{\landauO}{\mathcal{O}(#1)}{O}{$\landauO{\objfun(x)}$}{
-  Big-$\mathcal{O}$ Landau notation
-}
-
-\newnotationcommand[1]{\landauOmega}{\Omega(#1)}{Omega}%
-{$\landauOmega{\objfun(x)}$}{
-  Big-$\Omega$ Landau notation
-}
-
-\makecommandnotation{\dim}{dim}{$\dim$}{
-  Vector space dimension
-}
-
-\newnotationcommand[1]{\abs}{|#1|}{|.|}{$\abs{\cdot}$}{
-  Absolute value of a scalar
-}
-
-\newnotationcommand[1]{\setsize}{|#1|}{|.|!}{$\setsize{\cdot}$}{
-  Number of elements of a set
-}
-
-\newnotationcommand[1]{\hiset}{I_{#1}}{Il}{$\hiset{\ßl}$}{
-  Set of (odd) indices for hierarchical basis functions
-}
-
-\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\ßl}$}{
-  Hierarchical subspace of level $\ßl$
-}
-
-\newnotationcommand{\liset}{K}{K}{$\liset$}{
-  Finite set of hierarchical level-index pairs $(\ßl, \ßi)$
-  or finite subset of continuous indices $\ßk \in \natz^d$
-}
-
-\newnotationcommand{\levelset}{L}{L1}{$\levelset$}{
-  Finite subset $\levelset \subset \natz^d$ of levels
-}
-
-\newnotationcommand[4]{\coarselevelset}{%
-  \levelset_{#1,#2}^{%
-    \sparse(#3)%
-    \if\relax\detokenize{#4}\relax\else,#4\fi%
-  }%
-}{Lndbs}{$\levelset$}{
-  Finite subset $\levelset \subset \natz^d$ of levels for the grid
-  $\coarseregsgset{n}{d}{b}{}$
-}
-
-\let\oplusorig\oplus
-\let\oplus\undefined
-\newnotationcommand{\oplus}{\oplusorig}{oplus}{$\oplus$}{%
-  Direct sum of vector spaces (vector space sum in which the dimension of
-  the sum equals the sum of the summands' dimensions)
-}
-
-\newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\ßl,\ßi}$}{
-  Function value $\objfun(\gp{\ßl,\ßi})$ at the grid point $\gp{\ßl,\ßi}$
-}
-
-\newnotationcommand[1]{\surplus}{\alpha_{#1}}{alphali}{$\surplus{\ßl,\ßi}$}{
-  Hierarchical surpluses (coefficients of a linear combination of hierarchical
-  basis functions)
-}
-
-\newnotationcommand[1]{\interpcoeff}{c_{#1}}{cli}{$\interpcoeff{\ßl,\ßi}$}{
-  Full grid interpolation coefficients
-  (coefficients of a linear combination of nodal basis functions)
-}
-
-\newcommand*{\gridspace}[3][]{%
-  \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
-}
-
-\newcommand*{\gridset}[3][]{%
-  \if\relax\detokenize{#1}\relax\Omega\else#1{\Omega}\fi_{#2}^{#3}%
-}
-
-\newnotationcommand{\sgspace}{\gridspace{}{\sparse}}{Vs}{$\sgspace$}{
-  Arbitrary sparse grid space (possibly spatially adaptive)
-}
-
-\newnotationcommand{\sgset}{\gridset{}{\sparse}}{Omegas}{$\sgset$}{
-  Arbitrary sparse grid (possibly spatially adaptive)
-}
+% ======================================================================
+% Grid Sets
+% ======================================================================
 
 \newcommand*{\appendwithcomma}[1]{\if\relax\detokenize{#1}\relax\else,#1\fi}
 
-\newnotationcommand[3]{\regsgspace}{%
-  \gridspace{#1,#2}{\sparse\appendwithcomma{#3}}%
-}{Vnds}{$\regsgspace{n}{d}{}$}{
-  Regular sparse grid space of level $n$ with dimensionality $d$
-}
-
-\newnotationcommand[3]{\regsgset}{%
-  \gridset{#1,#2}{\sparse\appendwithcomma{#3}}%
-}{Omegands}{$\regsgset{n}{d}{}$}{
-  Set of regular sparse grid points of level $n$ with dimensionality $d$
-}
-
-\newnotationcommand[4]{\coarseregsgset}{%
-  \gridset{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
-}{Omegandsb}{$\coarseregsgset{n}{d}{b}{}$}{
-  Set of regular sparse grid points of level $n$ with dimensionality $d$
-  and boundary parameter $b$
+\newcommand*{\gridset}[3][]{%
+  \if\relax\detokenize{#1}\relax\Omega\else#1{\Omega}\fi_{#2}^{#3}%
 }
 
 \newcommand*{\interiorgrid}[1]{\mathring{#1}}
@@ -324,10 +259,25 @@
   for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
 }
 
-\newcommand*{\bndrydomain}[1]{\mathop{}\!\partial#1}
-\let\bndrydomainorig\bndrydomain
-\makecommandnotation{\bndrydomain}{Omegad}{$\bndrydomainorig{\Omega}$}{
-  Topological boundary of a set $\Omega \subset \real^d$
+\newnotationcommand[1]{\fgset}{\Omega_{#1}}{Omegal!}{$\fgset{\ßl}$}{
+  Set of full grid points of level $\ßl$
+}
+
+\newnotationcommand{\sgset}{\gridset{}{\sparse}}{Omegas}{$\sgset$}{
+  Arbitrary sparse grid (possibly spatially adaptive)
+}
+
+\newnotationcommand[3]{\regsgset}{%
+  \gridset{#1,#2}{\sparse\appendwithcomma{#3}}%
+}{Omegands}{$\regsgset{n}{d}{}$}{
+  Set of regular sparse grid points of level $n$ with dimensionality $d$
+}
+
+\newnotationcommand[4]{\coarseregsgset}{%
+  \gridset{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
+}{Omegandsb}{$\coarseregsgset{n}{d}{b}{}$}{
+  Set of regular sparse grid points of level $n$ with dimensionality $d$
+  and boundary parameter $b$
 }
 
 \newcommand*{\interiorregsgset}[3]{%
@@ -346,47 +296,35 @@
   \gridset[\bndrygrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
 }
 
-\newnotationcommand[1]{\charfun}{\chi_{#1}}{x01}{$\charfun{A}$}{
-  Characteristic function of the set $A \subset \real$
+% ======================================================================
+% Function Spaces
+% ======================================================================
+
+\newcommand*{\gridspace}[3][]{%
+  \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
 }
 
-\newnotationcommand{\convolution}{\ast}{!*}{$\convolution$}{
-  Convolution $f \ast g$ of two functions $f$ and $g$
+\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\ßl}$}{
+  Nodal space of level $\ßl$
 }
 
-\newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{dij}{$\kronecker{i}{j}$}{
-  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
+\newnotation{Vnd}{$\ns{n,d}$}{
+  Multivariate nodal space
+  $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[1]{\knot}{\xi_{#1}}{xi}{$\knot{k}$}{
-  Knot $\in \real$ of a spline space
-  (point where the splines are not smooth)
+\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\ßl}$}{
+  Hierarchical subspace of level $\ßl$
 }
 
-\newnotationcommand{\knotseq}{\ß\xi}{xi!}{$\knotseq$}{
-  Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
+\newnotationcommand{\sgspace}{\gridspace{}{\sparse}}{Vs}{$\sgspace$}{
+  Arbitrary sparse grid space (possibly spatially adaptive)
 }
 
-\newnotationcommand[3]{\nodalknot}{%
-  \xi_{#1}^{#2\appendwithcomma{#3}}%
-}{xilkp}{$\nodalknot{l,k}{p}{}$}{
-  Knot for uniform nodal B-splines of level $l$, degree $p$
-  ($k$-th entry of $\nodalknotseq{l}{p}{}$)
-}
-
-\newnotationcommand[3]{\nodalknotseq}{%
-  \ß\xi_{#1}^{#2\appendwithcomma{#3}}%
-}{xilkp!}{$\nodalknotseq{l}{p}{}$}{
-  Knot sequence for uniform nodal B-splines of level $l$, degree $p$
-}
-
-\newnotationcommand[1]{\cardbspl}{b^{#1}}{bp}{$\cardbspl{p}$}{
-  Cardinal B-spline of degree $p$
-}
-
-\newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkxip}%
-{$\nonunifbspl{k,\knotseq}{p}$}{
-  Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
+\newnotationcommand[3]{\regsgspace}{%
+  \gridspace{#1,#2}{\sparse\appendwithcomma{#3}}%
+}{Vnds}{$\regsgspace{n}{d}{}$}{
+  Regular sparse grid space of level $n$ with dimensionality $d$
 }
 
 \newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Sxip}%
@@ -412,14 +350,9 @@
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
-\newnotationcommand{\spl}{s}{s}{$s$}{
-  Spline (piecewise polynomial)
-}
-
-\newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{f|D}{$\restrictfcn{\objfun}{D}$}{
-  Restriction $\restrictfcn{\objfun}{D}\colon D \to \real$,
-  $\restrictfcn{\objfun}{D}(x) := \objfun(x)$,
-  onto a sub-domain $D$ for a function $\objfun$
+\newnotationcommand[1]{\polyspace}{P^{#1}}{Pp!}{$\polyspace{\ßp}$}{
+  Space of all $d$-variate polynomials of
+  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
 }
 
 \newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}%
@@ -428,24 +361,186 @@
   onto a sub-domain $D$ for a function space $V$
 }
 
-\newnotationcommand[2]{\spldomain}{D_{#1}^{#2}}{Dxip}%
-{$\spldomain{\knotseq}{p}$}{
-  Spline interpolation domain of $\nonunifsplspace{\knotseq}{p}$
+% ======================================================================
+% Landau Notation
+% ======================================================================
+
+\newnotationcommand[1]{\landauO}{\mathcal{O}(#1)}{O}{$\landauO{\objfun(x)}$}{
+  Big-$\mathcal{O}$ Landau notation
 }
 
-\newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{Dlp}%
-{$\rspldomain{l}{p}$}{
-  Spline interpolation domain of $\restrictedsplspace{l}{p}$
-  (uniform nodal B-splines of level $l$, degree $p$)
+\newnotationcommand[1]{\landauOmega}{\Omega(#1)}{Omega}%
+{$\landauOmega{\objfun(x)}$}{
+  Big-$\Omega$ Landau notation
 }
 
-\newnotationcommand[1]{\lagrangepoly}{L_{#1}}{Lli}{$\lagrangepoly{l,i}$}{
-  Lagrange polynomial of level $l$, index $i$
+% ======================================================================
+% Unary Operators
+% ======================================================================
+
+\makecommandnotation{\dim}{dim}{$\dim$}{
+  Vector space dimension
 }
 
-\newnotationcommand[1]{\polyspace}{P^{#1}}{Pp!}{$\polyspace{\ßp}$}{
-  Space of all $d$-variate polynomials of
-  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+\newnotationcommand[1]{\abs}{|#1|}{|.|}{$\abs{\cdot}$}{
+  Absolute value of a scalar
+}
+
+\newnotationcommand[1]{\setsize}{|#1|}{|.|!}{$\setsize{\cdot}$}{
+  Number of elements of a set
+}
+
+\newcommand*{\bndrydomain}[1]{\mathop{}\!\partial#1}
+\let\bndrydomainorig\bndrydomain
+\makecommandnotation{\bndrydomain}{Omegad}{$\bndrydomainorig{\Omega}$}{
+  Topological boundary of a set $\Omega \subset \real^d$
+}
+
+\newnotationcommand{\linop}{L}{L2}{$\linop$}{
+  Linear operator $\linop\colon \real^{\ngp} \to \real^{\ngp}$
+  on grid point data
+}
+
+\newnotationcommand{\intpmat}{A}{A}{$\intpmat$}{
+  Interpolation matrix with entries $\basis{\ßl',\ßi'}(\gp{\ßl,\ßi})$
+}
+
+\DeclareMathOperator{\supp}{supp}
+\let\supporig\supp
+\makecommandnotation{\supp}{supp}{$\supporig$}{
+  Support of a function (i.e., the closure of the non-zero set)
+}
+
+\DeclareMathOperator{\interiorsupp}{\mathring{\supporig}}
+\let\interiorsupporig\interiorsupp
+\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig$}{
+  Interior of the support of a function
+  (i.e., the set where the function does not vanish)
+}
+
+\DeclareMathOperator{\spn}{span}
+\let\spnorig\spn
+\makecommandnotation{\spn}{span}{$\spnorig$}{
+  Linear span (set of all linear combinations)
+}
+
+\makecommandnotation{\deg}{deg}{$\deg \objfun$}{
+  Degree of the polynomial $\objfun$
+}
+
+% ======================================================================
+% Binary Operators
+% ======================================================================
+
+\let\oplusorig\oplus
+\let\oplus\undefined
+\newnotationcommand{\oplus}{\oplusorig}{oplus}{$\oplus$}{%
+  Direct sum of vector spaces (vector space sum in which the dimension of
+  the sum equals the sum of the summands' dimensions)
+}
+
+\newnotationcommand{\convolution}{\ast}{!*}{$\convolution$}{
+  Convolution $f \ast g$ of two functions $f$ and $g$
+}
+
+\newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{dij}{$\kronecker{i}{j}$}{
+  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
+}
+
+\DeclareMathOperator{\xor}{xor}
+\let\xororig\xor
+\makecommandnotation{\xor}{xor}{$\xororig$}{
+  Bitwise ``exclusive or''
+}
+
+\newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{f|D}{$\restrictfcn{\objfun}{D}$}{
+  Restriction $\restrictfcn{\objfun}{D}\colon D \to \real$,
+  $\restrictfcn{\objfun}{D}(x) := \objfun(x)$,
+  onto a sub-domain $D$ for a function $\objfun$
+}
+
+\newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{u!}{$\dotcup$}{
+  Disjoint union of sets (union where the pairwise intersection of
+  the joined sets is empty)
+}%
+
+\DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
+
+% ======================================================================
+% Level/Index Sets
+% ======================================================================
+
+\newnotationcommand[1]{\hiset}{I_{#1}}{Il}{$\hiset{\ßl}$}{
+  Set of (odd) indices for hierarchical basis functions
+}
+
+\newnotationcommand{\liset}{K}{K}{$\liset$}{
+  Finite set of hierarchical level-index pairs $(\ßl, \ßi)$
+  or finite subset of continuous indices $\ßk \in \natz^d$
+}
+
+\newnotationcommand{\levelset}{L}{L1}{$\levelset$}{
+  Finite subset $\levelset \subset \natz^d$ of levels
+}
+
+\newnotationcommand[4]{\coarselevelset}{%
+  \levelset_{#1,#2}^{%
+    \sparse(#3)%
+    \if\relax\detokenize{#4}\relax\else,#4\fi%
+  }%
+}{Lndbs}{$\levelset$}{
+  Finite subset $\levelset \subset \natz^d$ of levels for the grid
+  $\coarseregsgset{n}{d}{b}{}$
+}
+
+% ======================================================================
+% Interpolation Coefficients
+% ======================================================================
+
+\newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\ßl,\ßi}$}{
+  Function value $\objfun(\gp{\ßl,\ßi})$ at the grid point $\gp{\ßl,\ßi}$
+}
+
+\newnotationcommand[1]{\surplus}{\alpha_{#1}}{alphali}{$\surplus{\ßl,\ßi}$}{
+  Hierarchical surpluses (coefficients of a linear combination of hierarchical
+  basis functions)
+}
+
+\newnotationcommand[1]{\interpcoeff}{c_{#1}}{cli}{$\interpcoeff{\ßl,\ßi}$}{
+  Full grid interpolation coefficients
+  (coefficients of a linear combination of nodal basis functions)
+}
+
+% ======================================================================
+% Special Functions
+% ======================================================================
+
+\newnotationcommand[1]{\basis}{\varphi_{#1}}{phili}{$\basis{\ßl,\ßi}$}{
+  Hierarchical basis function of level $\ßl$, index $\ßi$
+}
+
+\newnotationcommand[3]{\bspl}{%
+  \varphi_{#1}^{#2\appendwithcomma{#3}}%
+}{philip}{$\bspl{\ßl,\ßi}{\ßp}{}$}{
+  Hierarchical B-spline basis function of
+  level $\ßl$, index $\ßi$, degree $\ßp$
+}
+
+\newnotationcommand[1]{\charfun}{\chi_{#1}}{x01}{$\charfun{A}$}{
+  Characteristic function of the set $A \subset \real$
+}
+
+\newnotationcommand[1]{\cardbspl}{b^{#1}}{bp}{$\cardbspl{p}$}{
+  Cardinal B-spline of degree $p$
+}
+
+\newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkxip}%
+{$\nonunifbspl{k,\knotseq}{p}$}{
+  Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
+}
+
+\newnotationcommand{\spl}{s}{s}{$s$}{
+  Spline (piecewise polynomial)
 }
 
 \newnotationcommand{\objfun}{f}{f}{$\objfun$}{
@@ -467,67 +562,61 @@
   Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}{}$
 }
 
-\newnotationcommand{\ngp}{N}{N2}{$\ngp$}{
-  Number of grid points
-  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+\newnotationcommand[1]{\lagrangepoly}{L_{#1}}{Lli}{$\lagrangepoly{l,i}$}{
+  Lagrange polynomial of level $l$, index $i$
 }
 
-\newnotationcommand{\linop}{L}{L2}{$\linop$}{
-  Linear operator $\linop\colon \real^{\ngp} \to \real^{\ngp}$
-  on grid point data
+% ======================================================================
+% Spline Knots
+% ======================================================================
+
+\newnotationcommand[1]{\knot}{\xi_{#1}}{xi}{$\knot{k}$}{
+  Knot $\in \real$ of a spline space
+  (point where the splines are not smooth)
 }
 
-\newnotationcommand{\vlinin}{\ßu}{u}{$\vlinin$}{
-  Input of the linear operator $\linop$
+\newnotationcommand{\knotseq}{\ß\xi}{xi!}{$\knotseq$}{
+  Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
 }
 
-\newcommand*{\linin}[1]{u_{#1}}
-
-\newnotationcommand{\vlinout}{\ßy}{y}{$\vlinout$}{
-  Output of the linear operator $\linop$
+\newnotationcommand[3]{\nodalknot}{%
+  \xi_{#1}^{#2\appendwithcomma{#3}}%
+}{xilkp}{$\nodalknot{l,k}{p}{}$}{
+  Knot for uniform nodal B-splines of level $l$, degree $p$
+  ($k$-th entry of $\nodalknotseq{l}{p}{}$)
 }
 
-\newcommand*{\linout}[1]{y_{#1}}
-
-\newnotationcommand{\intpmat}{A}{A}{$\intpmat$}{
-  Interpolation matrix with entries $\basis{\ßl',\ßi'}(\gp{\ßl,\ßi})$
+\newnotationcommand[3]{\nodalknotseq}{%
+  \ß\xi_{#1}^{#2\appendwithcomma{#3}}%
+}{xilkp!}{$\nodalknotseq{l}{p}{}$}{
+  Knot sequence for uniform nodal B-splines of level $l$, degree $p$
 }
 
-%\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
-%\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
-%\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
+% ======================================================================
+% Domains
+% ======================================================================
+
+\newnotationcommand[2]{\spldomain}{D_{#1}^{#2}}{Dxip}%
+{$\spldomain{\knotseq}{p}$}{
+  Spline interpolation domain of $\nonunifsplspace{\knotseq}{p}$
+}
+
+\newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{Dlp}%
+{$\rspldomain{l}{p}$}{
+  Spline interpolation domain of $\restrictedsplspace{l}{p}$
+  (uniform nodal B-splines of level $l$, degree $p$)
+}
+
+% ======================================================================
+% Miscellaneous
+% ======================================================================
 
 % defined terms
 \newcommand*{\term}[1]{\emph{#1}}
 
-% mathematic operators
-\DeclareMathOperator{\supp}{supp}
-\let\supporig\supp
-\makecommandnotation{\supp}{supp}{$\supporig$}{
-  Support of a function (i.e., the closure of the non-zero set)
-}
-
-\DeclareMathOperator{\interiorsupp}{\mathring{\supporig}}
-\let\interiorsupporig\interiorsupp
-\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig$}{
-  Interior of the support of a function
-  (i.e., the set where the function does not vanish)
-}
-
-\DeclareMathOperator{\spn}{span}
-\let\spnorig\spn
-\makecommandnotation{\spn}{span}{$\spnorig$}{
-  Linear span (set of all linear combinations)
-}
-
-\DeclareMathOperator{\xor}{xor}
-\let\xororig\xor
-\makecommandnotation{\xor}{xor}{$\xororig$}{
-  Bitwise ``exclusive or''
-}
-
-\makecommandnotation{\deg}{deg}{$\deg \objfun$}{
-  Degree of the polynomial $\objfun$
+% check if argument contains \ß (vector)
+\newcommand*{\containsvector}[3]{%
+  \protect\IfSubStr{\detokenize{#1}}{\detokenize{\ß}}{#2}{#3}%
 }
 
 % subsets
@@ -552,17 +641,8 @@
 \newcommand*{\norm}[1]{\lVert{#1}\rVert}
 \newcommand*{\normscaled}[1]{\left\lVert{#1}\right\rVert}
 
-% superscripts
-\newcommand*{\cc}{\mathrm{cc}}
-\newcommand*{\modified}{\mathrm{mod}}
-\newcommand*{\ntrl}{\mathrm{nat}}
-\newcommand*{\nak}{\mathrm{nak}}
-\newcommand*{\sparse}{\mathrm{s}}
+%\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
+%\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
+%\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 
-% disjoint union
-\newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{u!}{$\dotcup$}{
-  Disjoint union of sets (union where the pairwise intersection of
-  the joined sets is empty)
-}%
-
-\DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
+% TODO: \fcnval and \fgintp have the same name...
