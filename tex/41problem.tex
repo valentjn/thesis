@@ -3,39 +3,39 @@
 
 Let $\sgset \subset \clint{0, 1}^d$ be a general (sparse) grid that
 may be spatially adaptive, i.e.,
-of the form $\setsize{\sgset} = \{\gp{\ßl,\ßi} \mid (\ßl, \ßi) \in \liset\}$,
-where $\liset$ is a set of level-index pairs $(\ßl, \ßi)$ with $\ßl \in \natz$
-and $\ßi \in \hiset{\ßl}$ such that
+of the form $\setsize{\sgset} = \{\gp{\*l,\*i} \mid (\*l, \*i) \in \liset\}$,
+where $\liset$ is a set of level-index pairs $(\*l, \*i)$ with $\*l \in \natz$
+and $\*i \in \hiset{\*l}$ such that
 $\ngp := \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
-$(\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset} \in \real^{\ngp}$ such that
+$(\surplus{\*l',\*i'})_{(\*l',\*i') \in \liset} \in \real^{\ngp}$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
-  \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
-  \basis{\ßl',\ßi'}(\gp{\ßl,\ßi}) = \fcnval{\ßl,\ßi}
+  \sum_{\mathclap{(\*l', \*i') \in \liset}} \surplus{\*l',\*i'}
+  \basis{\*l',\*i'}(\gp{\*l,\*i}) = \fcnval{\*l,\*i}
   \quad\text{for all}\quad
-  (\ßl, \ßi) \in \liset,
+  (\*l, \*i) \in \liset,
 \end{equation}
-where $(\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp}$ is a given set of
-function values $\objfun(\gp{\ßl,\ßi})$ at the grid points $\gp{\ßl,\ßi}$.
+where $(\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset} \in \real^{\ngp}$ is a given set of
+function values $\objfun(\gp{\*l,\*i})$ at the grid points $\gp{\*l,\*i}$.
 The hierarchical surpluses then define the interpolant $\sgintp$ as
 \begin{equation}
-  \sgintp\colon \clint{\ß0, \ß1} \to \real,\quad
+  \sgintp\colon \clint{\*0, \*1} \to \real,\quad
   \sgintp :=
-  \sum_{\mathclap{(\ßl', \ßi') \in \liset}} \surplus{\ßl',\ßi'}
-  \basis{\ßl',\ßi'},
+  \sum_{\mathclap{(\*l', \*i') \in \liset}} \surplus{\*l',\*i'}
+  \basis{\*l',\*i'},
 \end{equation}
-which interpolates $\objfun$ at the grid points $\gp{\ßl,\ßi}$ of $\sgset$.
+which interpolates $\objfun$ at the grid points $\gp{\*l,\*i}$ of $\sgset$.
 
-The basis functions $\basis{\ßl',\ßi'}$ are
+The basis functions $\basis{\*l',\*i'}$ are
 arbitrary tensor product functions.
-We explicitly allow $\basis{\ßl',\ßi'}$ to be a non-hierarchical
-nodal basis, in which case $\ßl'$ is constant and
+We explicitly allow $\basis{\*l',\*i'}$ to be a non-hierarchical
+nodal basis, in which case $\*l'$ is constant and
 $\sgset$ is usually a full grid.
 Strictly speaking, the problem is then a \term{interpolation problem}
-and the $\surplus{\ßl',\ßi'}$ are \term{interpolation coefficients}.
+and the $\surplus{\*l',\*i'}$ are \term{interpolation coefficients}.
 However, we still apply the terms
 ``hierarchization'' and ``hierarchical surpluses'' in this case
 to keep the terminology consistent.
@@ -57,10 +57,10 @@ Input $\vlinin$ and output $\vlinout$ are scalar-valued data%
 %  keeping hierarchization as our main application in mind.%
 %}
 \begin{equation}
-  \vlinin = (\linin{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp},\quad
-  \vlinout = (\linout{\ßl,\ßi})_{(\ßl,\ßi) \in \liset} \in \real^{\ngp},
+  \vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset} \in \real^{\ngp},\quad
+  \vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset} \in \real^{\ngp},
 \end{equation}
-which give one scalar per grid point $\gp{\ßl,\ßi} \in \sgset$.
+which give one scalar per grid point $\gp{\*l,\*i} \in \sgset$.
 For the case of hierarchization,
 $\linop$ is the inverse of the \term{interpolation matrix}
 $\intpmat \in \real^{\ngp \times \ngp}$:
@@ -68,18 +68,18 @@ $\intpmat \in \real^{\ngp \times \ngp}$:
   \label{eq:hierarchizationSLE}
   \begin{equation}
     \linop = \intpmat^{-1},\quad
-    \intpmat = (\basis{\ßl',\ßi'}(\gp{\ßl,\ßi}))_%
-    {(\ßl,\ßi),(\ßl',\ßi') \in \liset},\quad
-    \vlinin = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset},\quad
-    \vlinout = (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}.
+    \intpmat = (\basis{\*l',\*i'}(\gp{\*l,\*i}))_%
+    {(\*l,\*i),(\*l',\*i') \in \liset},\quad
+    \vlinin = (\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset},\quad
+    \vlinout = (\surplus{\*l',\*i'})_{(\*l',\*i') \in \liset}.
   \end{equation}
-  This means that we can determine the $\surplus{\ßl',\ßi'}$ by solving
+  This means that we can determine the $\surplus{\*l',\*i'}$ by solving
   the $\ngp \times \ngp$ system of linear equations
   \begin{equation}
     \vlinout = \linop[\vlinin]
     \quad\iff\quad
-    \intpmat \cdot (\surplus{\ßl',\ßi'})_{(\ßl',\ßi') \in \liset}
-    = (\fcnval{\ßl,\ßi})_{(\ßl,\ßi) \in \liset}.
+    \intpmat \cdot (\surplus{\*l',\*i'})_{(\*l',\*i') \in \liset}
+    = (\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset}.
   \end{equation}
 \end{subequations}
 
@@ -87,16 +87,16 @@ $\intpmat \in \real^{\ngp \times \ngp}$:
 
 As noted in \cite{Valentin18Fundamental},
 hierarchization on sparse grids with hierarchical B-splines
-$\basis{\ßl,\ßi}^\ßp$ of degree $\ßp$
-as basis functions $\basis{\ßl,\ßi}$ is a tedious task.
+$\basis{\*l,\*i}^\*p$ of degree $\*p$
+as basis functions $\basis{\*l,\*i}$ is a tedious task.
 The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
 non-symmetric
-(i.e., $\basis{\ßl',\ßi'}^\ßp(\gp{\ßl,\ßi}) \not=
-\basis{\ßl,\ßi}^\ßp(\gp{\ßl',\ßi'})$) and densely populated.
-This is because the matrix entry in the $(\ßl,\ßi)$-th row and
-$(\ßl',\ßi')$-th column vanishes if and only if
+(i.e., $\basis{\*l',\*i'}^\*p(\gp{\*l,\*i}) \not=
+\basis{\*l,\*i}^\*p(\gp{\*l',\*i'})$) and densely populated.
+This is because the matrix entry in the $(\*l,\*i)$-th row and
+$(\*l',\*i')$-th column vanishes if and only if
 \begin{equation}
-  \gp{\ßl,\ßi} \notin \interiorsupp \basis{\ßl',\ßi'}^\ßp
+  \gp{\*l,\*i} \notin \interiorsupp \basis{\*l',\*i'}^\*p
   \iff
   \ex{t = 1, \dotsc, d}{
     \gp{l_t,i_t} \notin
@@ -108,13 +108,13 @@ $(\ßl',\ßi')$-th column vanishes if and only if
 \end{equation}
 where $\interiorsupp$ is the interior of the support
 \cite{Valentin18Fundamental}.
-For coarse levels $\ßl'$, the mesh size $\ms{l'_t}$ is large in
-every dimension $t$, which implies that $\interiorsupp \basis{\ßl',\ßi'}^\ßp$
+For coarse levels $\*l'$, the mesh size $\ms{l'_t}$ is large in
+every dimension $t$, which implies that $\interiorsupp \basis{\*l',\*i'}^\*p$
 contains most of the grid points.
-In contrast to the hat function case ($\ßp = \ß1$),
-the value of $\surplus{\ßl',\ßi'}$ depends not only on
-$\fcnval{\ßl,\ßi}$ and the data of its $3^d - 1$ neighboring grid points
-on the boundary of $\supp \basis{\ßl',\ßi'}^\ß1$,
+In contrast to the hat function case ($\*p = \*1$),
+the value of $\surplus{\*l',\*i'}$ depends not only on
+$\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
+on the boundary of $\supp \basis{\*l',\*i'}^\*1$,
 but potentially on the data of the whole grid.
 
 This prohibits the use of the unidirectional principle,
@@ -133,35 +133,35 @@ of a \SI{16}{\gibi\byte} workstation.
 
 \paragraph{Notation}
 
-We do not need the hierarchical level-index information $(\ßl, \ßi)$ in
+We do not need the hierarchical level-index information $(\*l, \*i)$ in
 $\sgset$, $\liset$, $\vlinin$, and $\vlinout$
 for most of the considerations in this chapter.
 Therefore, we assume that in each dimension $t$, the level-index pairs
 $(l_t, i_t)$ ($l_t \in \natz$, $i_t \in \hiset{l_t}$)
 are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \natz$.
-We identify $(\ßl, \ßi)$ with a single index $\ßk$,
+We identify $(\*l, \*i)$ with a single index $\*k$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
 Consequently,
-we can regard $\liset$ as a subset $\{\ßk \mid \ßx_\ßk \in \sgset\}$
+we can regard $\liset$ as a subset $\{\*k \mid \*x_\*k \in \sgset\}$
 of $\nat^d$.
 We will switch between the notations whenever appropriate.
-All statements that are formulated in the $\ßk$ notation are
+All statements that are formulated in the $\*k$ notation are
 valid for both the nodal and the hierarchical basis
 (i.e., for all tensor product bases).
 
 \usenotation{k}
-In the following, $k_t$ denotes the $t$-th component of a $d$-vector $\ßk$
+In the following, $k_t$ denotes the $t$-th component of a $d$-vector $\*k$
 as usual.
 \usenotation{kt10}
-With $\ßk_{-t}$, we denote the $(d-1)$-vector that is obtained from $\ßk$
+With $\*k_{-t}$, we denote the $(d-1)$-vector that is obtained from $\*k$
 by omitting the $k$-th component,
-i.e., $\ßk_{-t} := (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$.
+i.e., $\*k_{-t} := (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$.
 \usenotation{kT20}
 For a $j$-tuple $T = (t_1, \dotsc, t_j) \in \{1, \dotsc, d\}^j$,
-we define $\ßk_T$ to be the $j$-vector $(k_{t_1}, \dotsc, k_{t_j})$
+we define $\*k_T$ to be the $j$-vector $(k_{t_1}, \dotsc, k_{t_j})$
 that only contains the entries of the dimensions listed in $T$.
 \usenotation{kT30}
-Accordingly, $\ßk_{-T}$ is defined as the $(d-j)$-vector
+Accordingly, $\*k_{-T}$ is defined as the $(d-j)$-vector
 that contains the entries of the remaining dimensions
 (sorted by the dimension $t$).
 %We define $a:b := (a, a + 1, \dotsc, b)$ as an indexing shortcut ($a \le b$).

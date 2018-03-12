@@ -28,19 +28,19 @@
 % Basic Single-Letter Symbols (Level, Index, ...)
 % ======================================================================
 
-\newnotation{l}{$\ßl$}{
-  Hierarchical level $\ßl \in \natz^d$
+\newnotation{l}{$\*l$}{
+  Hierarchical level $\*l \in \natz^d$
 }
 
-\newnotation{i}{$\ßi$}{
-  Hierarchical index $\ßi = \ß0, \dotsc, \ß2^\ßl$
-  (i.e., $\ßi \in \natz^d$ with $0 \le i_t \le 2^{l_t}$
+\newnotation{i}{$\*i$}{
+  Hierarchical index $\*i = \*0, \dotsc, \*2^\*l$
+  (i.e., $\*i \in \natz^d$ with $0 \le i_t \le 2^{l_t}$
   for all $t = 1, \dotsc, d$)
 }
 
-\newnotation{k}{$\ßk$}{
+\newnotation{k}{$\*k$}{
   Continuously enumerated index $\in \natz^d$
-  of the hierarchical level-index pairs $(\ßl, \ßi)$ in $\liset$
+  of the hierarchical level-index pairs $(\*l, \*i)$ in $\liset$
   (one possible choice is that $k_t$ the zero-based index of $(l_t, i_t)$ in
   $(0,0), (0,1), (1,1), (2,1), (2,3), (3,1), (3,3), (3,5), (3,7), \dotsc$)
 }
@@ -55,16 +55,16 @@
 
 \newnotationcommand{\ngp}{N}{N20}{$\ngp$}{
   Number of grid points
-  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommand{\vlinin}{\ßu}{u}{$\vlinin$}{
+\newnotationcommand{\vlinin}{\*u}{u}{$\vlinin$}{
   Input of the linear operator $\linop$
 }
 
 \newcommand*{\linin}[1]{u_{#1}}
 
-\newnotationcommand{\vlinout}{\ßy}{y}{$\vlinout$}{
+\newnotationcommand{\vlinout}{\*y}{y}{$\vlinout$}{
   Output of the linear operator $\linop$
 }
 
@@ -74,29 +74,29 @@
 % Vector Notation
 % ======================================================================
 
-\newnotation{@0}{$\ß0$}{
+\newnotation{@0}{$\*0$}{
   $(0, \dotsc, 0) \in \natz^d$
 }
 
-\newnotation{@1}{$\ß1$}{
+\newnotation{@1}{$\*1$}{
   $(1, \dotsc, 1) \in \nat^d$
 }
 
-\newnotation{kt10}{$\ßk_{-t}$}{
+\newnotation{kt10}{$\*k_{-t}$}{
   Vector of all dimensions except the $t$-th
-  %($\ßk_{-t}
+  %($\*k_{-t}
   %:= (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$)
 }
 
-\newnotation{kT20}{$\ßk_T$}{
+\newnotation{kT20}{$\*k_T$}{
   Vector of all dimensions that are contained in $T \in \{1, \dotsc, d\}^j$
-  %($\ßk_T
+  %($\*k_T
   %:= (k_{t_1}, \dotsc, k_{t_j}$ with $T = (t_1, \dotsc, t_j)$)
 }
 
-\newnotation{kT30}{$\ßk_{-T}$}{
+\newnotation{kT30}{$\*k_{-T}$}{
   Vector of all dimensions that are not contained in $T \in \{1, \dotsc, d\}^j$
-  %($\ßk_{-T} := \ßk_{T'}$ for $T = (t_1, \dotsc, t_j)$ and
+  %($\*k_{-T} := \*k_{T'}$ for $T = (t_1, \dotsc, t_j)$ and
   %$T' = (t'_1, \dotsc, t'_{d-j})$ with
   %$\{t_1, \dotsc, t_j\} \cup \{t'_1, \dotsc, t'_{d-j}\} = \{1, \dotsc, d\}$ and
   %$t'_1 < \dotsb t'_{d-j}$)
@@ -107,14 +107,14 @@
 % ======================================================================
 
 \newnotationcommand[1]{\gp}{%
-  \containsvector{#1}{\ßx}{x}_{#1}%
-}{xli}{$\gp{\ßl,\ßi}$}{
-  Grid point $\gp{\ßl,\ßi} := \ßi \cdot \ms{\ßl}$
+  \containsvector{#1}{\*x}{x}_{#1}%
+}{xli}{$\gp{\*l,\*i}$}{
+  Grid point $\gp{\*l,\*i} := \*i \cdot \ms{\*l}$
 }
 
 \newnotationcommand[1]{\ccgp}{%
-  \containsvector{#1}{\ßx}{x}_{#1}^\cc%
-}{xlicc}{$\ccgp{\ßl,\ßi}$}{
+  \containsvector{#1}{\*x}{x}_{#1}^\cc%
+}{xlicc}{$\ccgp{\*l,\*i}$}{
   Clenshaw--Curtis grid point
 }
 
@@ -123,9 +123,9 @@
 % ======================================================================
 
 \newnotationcommand[1]{\ms}{%
-  \containsvector{#1}{\ßh}{h}_{#1}%
-}{hl}{$\ms{\ßl}$}{
-  Mesh size $\ms{\ßl} := \ß2^{-\ßl}$
+  \containsvector{#1}{\*h}{h}_{#1}%
+}{hl}{$\ms{\*l}$}{
+  Mesh size $\ms{\*l} := \*2^{-\*l}$
 }
 
 % ======================================================================
@@ -181,21 +181,21 @@
 % Intervals
 % ======================================================================
 
-\newnotationcommand[1]{\clint}{[#1]}{Öab10}{$\clint{\ßa, \ßb}$}{
+\newnotationcommand[1]{\clint}{[#1]}{Öab10}{$\clint{\*a, \*b}$}{
   Closed hyper-rectangle
   $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
   with $\clint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t \le b_t\}$
 }
 
 \newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{Öab20}%
-{$\opint{\ßa, \ßb}$}{
+{$\opint{\*a, \*b}$}{
   Open hyper-rectangle
   $:= \opint{a_1, b_1} \times \dotsb \times \opint{a_d, b_d}$
   with $\opint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t < b_t\}$
 }
 
 \newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{Öab30}%
-{$\hopint{\ßa, \ßb}$}{
+{$\hopint{\*a, \*b}$}{
   Half-open hyper-rectangle
   $:= \hopint{a_1, b_1} \times \dotsb \times \hopint{a_d, b_d}$
   with $\hopint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t < b_t\}$
@@ -210,7 +210,7 @@
 % ======================================================================
 
 \newnotationcommand[1]{\normone}{\norm{#1}_1}{Önorm1}{$\normone{\cdot}$}{
-  $\ell_1$ norm $\normone{\ßx} := \sum_{t=1}^d x_t$
+  $\ell_1$ norm $\normone{\*x} := \sum_{t=1}^d x_t$
 }
 
 \newcommand*{\Ltwo}{L^2}
@@ -251,22 +251,22 @@
 \newcommand*{\bndrysgset}{\gridset[\bndrygrid]{}{\sparse}}
 
 \makecommandnotation{\interiorgrid}{ÄΩso}{$\interiorsgset$}{
-  Set $:= \sgset \cap \opint{\ß0, \ß1}$ of
+  Set $:= \sgset \cap \opint{\*0, \*1}$ of
   interior grid points
-  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
 \let\bndrygridorig\bndrygrid
 \newcommand*{\bndrysgsetorig}{\gridset[\bndrygridorig]{}{\sparse}}
 \makecommandnotation{\bndrygrid}{ÄΩsd}{$\bndrysgsetorig$}{
-  Set $:= \sgset \cap \bndrydomain{\clint{\ß0, \ß1}}
+  Set $:= \sgset \cap \bndrydomain{\clint{\*0, \*1}}
   = \sgset \setminus \interiorsgset$ of
   boundary sparse grid points
-  for a finite set $\sgset \subset \clint{\ß0, \ß1}$ of grid points
+  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommand[1]{\fgset}{\Omega_{#1}}{ÄΩl}{$\fgset{\ßl}$}{
-  Set of full grid points of level $\ßl$
+\newnotationcommand[1]{\fgset}{\Omega_{#1}}{ÄΩl}{$\fgset{\*l}$}{
+  Set of full grid points of level $\*l$
 }
 
 \newnotationcommand{\sgset}{\gridset{}{\sparse}}{ÄΩs}{$\sgset$}{
@@ -310,17 +310,17 @@
   \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
 }
 
-\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\ßl}$}{
-  Nodal space of level $\ßl$
+\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\*l}$}{
+  Nodal space of level $\*l$
 }
 
 \newnotation{Vnd}{$\ns{n,d}$}{
   Multivariate nodal space
-  $:= \ns{n \cdot \ß1}$ of level $n$ with dimensionality $d$
+  $:= \ns{n \cdot \*1}$ of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\ßl}$}{
-  Hierarchical subspace of level $\ßl$
+\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\*l}$}{
+  Hierarchical subspace of level $\*l$
 }
 
 \newnotationcommand{\sgspace}{\gridspace{}{\sparse}}{Vs}{$\sgspace$}{
@@ -356,9 +356,9 @@
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
-\newnotationcommand[1]{\polyspace}{P^{#1}}{Pp}{$\polyspace{\ßp}$}{
+\newnotationcommand[1]{\polyspace}{P^{#1}}{Pp}{$\polyspace{\*p}$}{
   Space of all $d$-variate polynomials of
-  coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+  coordinate degree $\le \*p$ on $\clint{\*0, \*1}$
 }
 
 \newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}%
@@ -408,7 +408,7 @@
 }
 
 \newnotationcommand{\intpmat}{A}{A}{$\intpmat$}{
-  Interpolation matrix with entries $\basis{\ßl',\ßi'}(\gp{\ßl,\ßi})$
+  Interpolation matrix with entries $\basis{\*l',\*i'}(\gp{\*l,\*i})$
 }
 
 \DeclareMathOperator{\supp}{supp}
@@ -476,13 +476,13 @@
 % Level/Index Sets
 % ======================================================================
 
-\newnotationcommand[1]{\hiset}{I_{#1}}{Il}{$\hiset{\ßl}$}{
+\newnotationcommand[1]{\hiset}{I_{#1}}{Il}{$\hiset{\*l}$}{
   Set of (odd) indices for hierarchical basis functions
 }
 
 \newnotationcommand{\liset}{K}{K}{$\liset$}{
-  Finite set of hierarchical level-index pairs $(\ßl, \ßi)$
-  or finite subset of continuous indices $\ßk \in \natz^d$
+  Finite set of hierarchical level-index pairs $(\*l, \*i)$
+  or finite subset of continuous indices $\*k \in \natz^d$
 }
 
 \newnotationcommand{\levelset}{L}{L1}{$\levelset$}{
@@ -503,16 +503,16 @@
 % Interpolation Coefficients
 % ======================================================================
 
-\newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\ßl,\ßi}$}{
-  Function value $\objfun(\gp{\ßl,\ßi})$ at the grid point $\gp{\ßl,\ßi}$
+\newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\*l,\*i}$}{
+  Function value $\objfun(\gp{\*l,\*i})$ at the grid point $\gp{\*l,\*i}$
 }
 
-\newnotationcommand[1]{\surplus}{\alpha_{#1}}{Äαli}{$\surplus{\ßl,\ßi}$}{
+\newnotationcommand[1]{\surplus}{\alpha_{#1}}{Äαli}{$\surplus{\*l,\*i}$}{
   Hierarchical surpluses (coefficients of a linear combination of hierarchical
   basis functions)
 }
 
-\newnotationcommand[1]{\interpcoeff}{c_{#1}}{cli}{$\interpcoeff{\ßl,\ßi}$}{
+\newnotationcommand[1]{\interpcoeff}{c_{#1}}{cli}{$\interpcoeff{\*l,\*i}$}{
   Full grid interpolation coefficients
   (coefficients of a linear combination of nodal basis functions)
 }
@@ -521,15 +521,15 @@
 % Special Functions
 % ======================================================================
 
-\newnotationcommand[1]{\basis}{\varphi_{#1}}{Äφli}{$\basis{\ßl,\ßi}$}{
-  Hierarchical basis function of level $\ßl$, index $\ßi$
+\newnotationcommand[1]{\basis}{\varphi_{#1}}{Äφli}{$\basis{\*l,\*i}$}{
+  Hierarchical basis function of level $\*l$, index $\*i$
 }
 
 \newnotationcommand[3]{\bspl}{%
   \varphi_{#1}^{#2\appendwithcomma{#3}}%
-}{Äφlip}{$\bspl{\ßl,\ßi}{\ßp}{}$}{
+}{Äφlip}{$\bspl{\*l,\*i}{\*p}{}$}{
   Hierarchical B-spline basis function of
-  level $\ßl$, index $\ßi$, degree $\ßp$
+  level $\*l$, index $\*i$, degree $\*p$
 }
 
 \newnotationcommand[1]{\charfun}{\chi_{#1}}{x01}{$\charfun{A}$}{
@@ -550,11 +550,11 @@
 }
 
 \newnotationcommand{\objfun}{f}{f}{$\objfun$}{
-  Objective function $\objfun\colon \clint{\ß0, \ß1} \to \real$
+  Objective function $\objfun\colon \clint{\*0, \*1} \to \real$
 }
 
-\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\ßl}$}{
-  Full grid interpolant of $\objfun$ in $\ns{\ßl}$
+\newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\*l}$}{
+  Full grid interpolant of $\objfun$ in $\ns{\*l}$
 }
 
 \newnotationcommand{\sgintp}{f^\sparse}{fs}{$\sgintp$}{
@@ -581,7 +581,7 @@
   (point where the splines are not smooth)
 }
 
-\newnotationcommand{\knotseq}{\ß\xi}{Äξ20}{$\knotseq$}{
+\newnotationcommand{\knotseq}{\*\xi}{Äξ20}{$\knotseq$}{
   Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
 }
 
@@ -593,7 +593,7 @@
 }
 
 \newnotationcommand[3]{\nodalknotseq}{%
-  \ß\xi_{#1}^{#2\appendwithcomma{#3}}%
+  \*\xi_{#1}^{#2\appendwithcomma{#3}}%
 }{Äξlp}{$\nodalknotseq{l}{p}{}$}{
   Knot sequence for uniform nodal B-splines of level $l$, degree $p$
 }
@@ -620,9 +620,9 @@
 % defined terms
 \newcommand*{\term}[1]{\emph{#1}}
 
-% check if argument contains \ß (vector)
+% check if argument contains \* (vector)
 \newcommand*{\containsvector}[3]{%
-  \protect\IfSubStr{\detokenize{#1}}{\detokenize{\ß}}{#2}{#3}%
+  \protect\IfSubStr{\detokenize{#1}}{\detokenize{\*}}{#2}{#3}%
 }
 
 % subsets
@@ -635,7 +635,7 @@
 
 % vectors
 \renewcommand*{\vec}[1]{{\boldsymbol{#1}}}
-\newcommand*{\ß}[1]{\vec{#1}}
+\def\*#1{\vec{#1}}
 \newcommand*{\veclog}{\mathop{\vec{\log}}}
 \newcommand*{\vecmax}{\mathop{\vec{\max}}}
 
@@ -648,7 +648,7 @@
 \newcommand*{\normscaled}[1]{\left\lVert{#1}\right\rVert}
 
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
-%\newgsymbol{ci!}{$c_\ßi$}{Coefficients of a linear combination}%
-%\newgsymbol{et!}{$\ße_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
+%\newgsymbol{ci!}{$c_\*i$}{Coefficients of a linear combination}%
+%\newgsymbol{et!}{$\*e_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
 
 % TODO: \fcnval and \fgintp have the same name...

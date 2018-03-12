@@ -17,49 +17,49 @@
   Therefore,
   \begin{align}
     \setsize{\coarseregsgset{n}{d}{b}{}}
-    &= \sum_{\substack{\ßl \in \nat^d,\\\normone{\ßl} \le n}} \setsize{\hiset{\ßl}} +
+    &= \sum_{\substack{\*l \in \nat^d,\\\normone{\*l} \le n}} \setsize{\hiset{\*l}} +
     \sum_{
       \substack{
-        \ßl \in \natz^d \setminus \nat^d,\\
-        (\normone{\vecmax(\ßl, \ß1)} \le n - b + 1) \lor
-        (\ßl = \ß0)
+        \*l \in \natz^d \setminus \nat^d,\\
+        (\normone{\vecmax(\*l, \*1)} \le n - b + 1) \lor
+        (\*l = \*0)
       }
-    } \setsize{\hiset{\ßl}}.\\
+    } \setsize{\hiset{\*l}}.\\
     \intertext{%
       The first sum is the number $\setsize{\interiorregsgset{n}{d}{}}$
       of interior grid points in $\regsgset{n}{d}{}$.
       The second sum can be split into summands
       with the same number $q$ of zero entries,
       which we count with
-      $N_\ßl := \setsize{\{t \mid l_t = 0\}}
-      = \normone{\vecmax(\ßl, \ß1)} - \normone{\ßl}$,
-      and the same level sum $m = \normone{\ßl}$:%
+      $N_\*l := \setsize{\{t \mid l_t = 0\}}
+      = \normone{\vecmax(\*l, \*1)} - \normone{\*l}$,
+      and the same level sum $m = \normone{\*l}$:%
     }
     &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
-        \ßl \in \natz^d,\\
-        N_\ßl = q,\,\normone{\ßl} = m}
-    } \setsize{\hiset{\ßl}}
+        \*l \in \natz^d,\\
+        N_\*l = q,\,\normone{\*l} = m}
+    } \setsize{\hiset{\*l}}
   \end{align}
-  where $2^d$ is the summand for $\ßl = \ß0$
-  (number $\setsize{\hiset{\ß0}}$ of corners of $\clint{\ß0, \ß1}$).
+  where $2^d$ is the summand for $\*l = \*0$
+  (number $\setsize{\hiset{\*0}}$ of corners of $\clint{\*0, \*1}$).
   The limits of the $m$ sum are $d-q$,
   since there must be at least $d-q$ entries $\ge 1$ in a level vector
   with $q$ zero entries, and $n-b-q+1$,
-  since $m = \normone{\ßl}
-  = \normone{\vecmax(\ßl, \ß1)} - N_\ßl
-  \le n-b+1 - N_\ßl
+  since $m = \normone{\*l}
+  = \normone{\vecmax(\*l, \*1)} - N_\*l
+  \le n-b+1 - N_\*l
   = n-b-q+1$.
   
-  In general, the innermost summand $\setsize{\hiset{\ßl}}$ can be calculated as
-  $\setsize{\hiset{\ßl}}
+  In general, the innermost summand $\setsize{\hiset{\*l}}$ can be calculated as
+  $\setsize{\hiset{\*l}}
   = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
-  = 2^{\normone{\ßl} - d + 2N_\ßl}$.
+  = 2^{\normone{\*l} - d + 2N_\*l}$.
   The number of innermost summands is given by
-  $\setsize{\{\ßl \in \natz^d \mid N_\ßl = q,\, \normone{\ßl} = m\}}
-  = \binom{d}{q} \setsize{\{\ßl \in \nat^{d-q} \mid \normone{\ßl} = m\}}
+  $\setsize{\{\*l \in \natz^d \mid N_\*l = q,\, \normone{\*l} = m\}}
+  = \binom{d}{q} \setsize{\{\*l \in \nat^{d-q} \mid \normone{\*l} = m\}}
   = \binom{d}{q} \binom{m-1}{d-q-1}$
   by first putting $q$ zeros in $d$ places,
   for which there are $\binom{d}{q}$ possibilities, and then
@@ -101,42 +101,42 @@
 \propInvariantCoarseBoundary*
 
 \begin{proof}
-  First, we show that every inserted level $\ßl' \in \natz^t$ in the inner loop
+  First, we show that every inserted level $\*l' \in \natz^t$ in the inner loop
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
-  If $\ßl' := (\ßl, 0)$
-  is inserted for some $\ßl \in \levelset^{(t-1)}$,
-  then we have $\normone{\vecmax(\ßl, \ß1)} \le n+d+t-b$ or
-  $\ßl = \ß0$ by \cref{line:algCoarseBoundary1} of
+  If $\*l' := (\*l, 0)$
+  is inserted for some $\*l \in \levelset^{(t-1)}$,
+  then we have $\normone{\vecmax(\*l, \*1)} \le n+d+t-b$ or
+  $\*l = \*0$ by \cref{line:algCoarseBoundary1} of
   \cref{alg:coarseBoundary}.
   In the first case, we have
   \begin{equation}
-    \normone{\vecmax(\ßl', \ß1)}
-    = \normone{\vecmax(\ßl, \ß1)} + 1
+    \normone{\vecmax(\*l', \*1)}
+    = \normone{\vecmax(\*l, \*1)} + 1
     \le n - d + t - b + 1,
   \end{equation}
-  and in the second case $\ßl' = \vec{0}$.
-  In either case, $\ßl'$ is contained in the \rhs of
+  and in the second case $\*l' = \vec{0}$.
+  In either case, $\*l'$ is contained in the \rhs of
   \eqref{eq:coarseInvariant}.
   
-  If $\ßl' := (\ßl, l_t)$ is inserted
-  for some $\ßl \in \levelset^{(t-1)}$ and
+  If $\*l' := (\*l, l_t)$ is inserted
+  for some $\*l \in \levelset^{(t-1)}$ and
   $l_t \in \{1, \dotsc, l^\ast\}$, then there are,
-  depending on whether $\ßl \in \nat^{t-1}$ or not, two cases:
+  depending on whether $\*l \in \nat^{t-1}$ or not, two cases:
   \begin{itemize}
     \item
-    If $\ßl \in \nat^{t-1}$, then $\ßl' \in \nat^{t-1}$ as well and
-    $\normone{\ßl'} \le \normone{\ßl} + l^\ast = n - d + t$
+    If $\*l \in \nat^{t-1}$, then $\*l' \in \nat^{t-1}$ as well and
+    $\normone{\*l'} \le \normone{\*l} + l^\ast = n - d + t$
     due to \cref{line:algCoarseBoundary2},
-    i.e., $\ßl'$ is contained in the first set of the \rhs of
+    i.e., $\*l'$ is contained in the first set of the \rhs of
     \eqref{eq:coarseInvariant}.
     
     \item
-    If $\ßl \notin \nat^{t-1}$, then $\ßl' \notin \nat^{t-1}$ as well and
-    $\normone{\vecmax(\ßl', \ß1)}
-    \le \normone{\vecmax(\ßl, \ß1)} + l^\ast
+    If $\*l \notin \nat^{t-1}$, then $\*l' \notin \nat^{t-1}$ as well and
+    $\normone{\vecmax(\*l', \*1)}
+    \le \normone{\vecmax(\*l, \*1)} + l^\ast
     = n - d + t - b + 1$
     due to \cref{line:algCoarseBoundary3},
-    i.e., $\ßl$ is contained in the second set of the \rhs of
+    i.e., $\*l$ is contained in the second set of the \rhs of
     \eqref{eq:coarseInvariant}.
   \end{itemize}
   Thus, all levels that the algorithm inserts into $\levelset^{(t)}$
@@ -154,77 +154,77 @@
     \label{eq:proofCoarseInductionHypothesis}
     \begin{aligned}
     \levelset^{(t-1)}
-    &= \{\ßl \in \nat^{t-1} \mid
-    \normone{\ßl} \le n-d+t-1\} \dotcup {}\\
+    &= \{\*l \in \nat^{t-1} \mid
+    \normone{\*l} \le n-d+t-1\} \dotcup {}\\
     &\hphantom{{}={}}
-    \big(\{\ßl \in \natz^{t-1} \setminus \nat^{t-1} \mid
-    \normone{\vecmax(\ßl, \ß1)} \le n-d+t-b\} \cup
+    \big(\{\*l \in \natz^{t-1} \setminus \nat^{t-1} \mid
+    \normone{\vecmax(\*l, \*1)} \le n-d+t-b\} \cup
     \{\vec{0}\}\big).
     \end{aligned}
   \end{equation}
   The \rhs of \eqref{eq:coarseInvariant} has three parts,
-  so we check for elements $\ßl' \in \natz^t$
+  so we check for elements $\*l' \in \natz^t$
   of each of the three sets that they are appended to $\levelset^{(t)}$
   eventually.
   
-  First, let $\ßl' = (\ßl, l_t)$ be in the first set of the \rhs,
-  i.e., $\ßl' \in \nat^t$ (in particular $l_t \ge 1$) and
-  $\normone{\ßl'} \le n - d + t$.
-  Note that $\ßl$ will be encountered in the inner loop, as
-  $\ßl \in \nat^{t-1}$ and
-  $\normone{\ßl} = \normone{\ßl'} - l_t \le n - d + t - 1$,
-  which implies $\ßl \in \levelset^{(t-1)}$ by the induction
+  First, let $\*l' = (\*l, l_t)$ be in the first set of the \rhs,
+  i.e., $\*l' \in \nat^t$ (in particular $l_t \ge 1$) and
+  $\normone{\*l'} \le n - d + t$.
+  Note that $\*l$ will be encountered in the inner loop, as
+  $\*l \in \nat^{t-1}$ and
+  $\normone{\*l} = \normone{\*l'} - l_t \le n - d + t - 1$,
+  which implies $\*l \in \levelset^{(t-1)}$ by the induction
   hypothesis \eqref{eq:proofCoarseInductionHypothesis}.
   Since $1 \le l_t \le l^\ast$
   (due to
-  $l_t = \normone{\ßl'} - \normone{\ßl} \le n-d+t - \normone{\ßl} = l^\ast$),
-  the level $\ßl'$ is inserted into $\levelset^{(t)}$ during the innermost loop
+  $l_t = \normone{\*l'} - \normone{\*l} \le n-d+t - \normone{\*l} = l^\ast$),
+  the level $\*l'$ is inserted into $\levelset^{(t)}$ during the innermost loop
   in \cref{line:algCoarseBoundary4}.
   
-  Second, let $\ßl' = (\ßl, l_t)$
+  Second, let $\*l' = (\*l, l_t)$
   be in the second set of the \rhs, i.e.,
-  $\ßl' \notin \nat^t$ and
-  $\normone{\vecmax(\ßl', \ß1)} \le n-d+t-b+1$.
+  $\*l' \notin \nat^t$ and
+  $\normone{\vecmax(\*l', \*1)} \le n-d+t-b+1$.
   Here, there are three cases:
   \begin{enumerate}
     \item
     $l_t \ge 1$:
-    This implies $\ßl \notin \nat^{t-1}$ and 
-    $\normone{\vecmax(\ßl, \ß1)}
-    = \normone{\vecmax(\ßl', \ß1)} - l_t
+    This implies $\*l \notin \nat^{t-1}$ and 
+    $\normone{\vecmax(\*l, \*1)}
+    = \normone{\vecmax(\*l', \*1)} - l_t
     \le n-d+t-b$.
-    This means $\ßl \in \levelset^{(t-1)}$ by the induction hypothesis
+    This means $\*l \in \levelset^{(t-1)}$ by the induction hypothesis
     \eqref{eq:proofCoarseInductionHypothesis}.
     As $l_t \in \{1, \dotsc, l^\ast\}$
     (due to $l_t \le n-d+t-b -
-    \normone{\vecmax(\ßl, \ß1)} = l^\ast$),
+    \normone{\vecmax(\*l, \*1)} = l^\ast$),
     $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
     \item
-    $l_t = 0$ and $\ßl \in \nat^{t-1}$:
-    This implies $\normone{\ßl} = \normone{\ßl'}
-    = \normone{\vecmax(\ßl', \ß1)} - 1
+    $l_t = 0$ and $\*l \in \nat^{t-1}$:
+    This implies $\normone{\*l} = \normone{\*l'}
+    = \normone{\vecmax(\*l', \*1)} - 1
     \le n - d + t - b
     \le n - d + t - 1$ since $b \ge 1$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
     $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5} due to
-    $\normone{\vecmax(\ßl, \ß1)}
-    = \normone{\ßl} \le n - d + t - b$.
+    $\normone{\vecmax(\*l, \*1)}
+    = \normone{\*l} \le n - d + t - b$.
     
     \item
-    $l_t = 0$ and $\ßl \notin \nat^{t-1}$:
-    This implies $\normone{\vecmax(\ßl, \ß1)}
-    = \normone{\vecmax(\ßl', \ß1)} - 1
+    $l_t = 0$ and $\*l \notin \nat^{t-1}$:
+    This implies $\normone{\vecmax(\*l, \*1)}
+    = \normone{\vecmax(\*l', \*1)} - 1
     \le n - d + t - b$.
     Again, by the induction hypothesis,
     \eqref{eq:proofCoarseInductionHypothesis} and
     $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
-  Third, let $\ßl = (\vec{0}, 0) \in \natz^t$
+  Third, let $\*l = (\vec{0}, 0) \in \natz^t$
   be in the third set of the \rhs.
   This level is appended in \cref{line:algCoarseBoundary5}
-  to $\levelset^{(t)}$, since $\ßl' = \vec{0} \in \natz^{t-1}$ is in $\levelset^{(t-1)}$ by
+  to $\levelset^{(t)}$, since $\*l' = \vec{0} \in \natz^{t-1}$ is in $\levelset^{(t-1)}$ by
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}

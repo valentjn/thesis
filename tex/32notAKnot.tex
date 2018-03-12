@@ -458,11 +458,11 @@ respectively.
   \label{cor:hierSplittingNAKBSplineMV}
   It holds
   \begin{equation}
-    \naksplspace{\ßl}{\ßp}
-    = \ns{\ßl}^{\ßp,\nak}
-    = \bigoplus_{\ßl'=\ß0}^\ßl \hs{\ßl'}^{\ßp,\nak},
+    \naksplspace{\*l}{\*p}
+    = \ns{\*l}^{\*p,\nak}
+    = \bigoplus_{\*l'=\*0}^\*l \hs{\*l'}^{\*p,\nak},
   \end{equation}
-  where $\naksplspace{\ßl}{\ßp}$ is the
+  where $\naksplspace{\*l}{\*p}$ is the
   tensor product space of $\naksplspace{l_t}{p_t}$
   ($t = 1, \dotsc, d$) as defined in \cref{prop:hierSplittingNAKBSplineUV}.
 \end{corollary}
@@ -477,35 +477,35 @@ Regular sparse grid spaces using the new hierarchical not-a-knot basis
 are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
-  \regsgspace{n}{d}{\ßp,\nak}
-  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl}^{\ßp,\nak}.
+  \regsgspace{n}{d}{\*p,\nak}
+  := \bigoplus_{\normone{\*l} \le n} \hs{\*l}^{\*p,\nak}.
 \end{equation}
-If the level $n$ is large enough, then $\regsgspace{n}{d}{\ßp,\nak}$
-contains the space $\polyspace{\ßp}$ of all $d$-variate polynomials of
-coordinate degree $\le \ßp$ on $\clint{\ß0, \ß1}$
+If the level $n$ is large enough, then $\regsgspace{n}{d}{\*p,\nak}$
+contains the space $\polyspace{\*p}$ of all $d$-variate polynomials of
+coordinate degree $\le \*p$ on $\clint{\*0, \*1}$
 (i.e., functions $\objfun\colon \clint{0, 1} \to \real$,
-$\objfun(\ßx) := \sum_{\ßq=\ß0}^\ßp \interpcoeff{\ßq} \prod_{t=1}^d x_t^{q_t}$,
-with $\interpcoeff{\ßq} \in \real$).
+$\objfun(\*x) := \sum_{\*q=\*0}^\*p \interpcoeff{\*q} \prod_{t=1}^d x_t^{q_t}$,
+with $\interpcoeff{\*q} \in \real$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly
-represent global polynomials on $\clint{\ß0, \ß1}$:
+represent global polynomials on $\clint{\*0, \*1}$:
 
 \begin{corollary}
-  If $n \ge \normone{\lceil\veclog_\ß2(\ßp + \ß1)\rceil}$,
-  then $\polyspace{\ßp} \subset \regsgspace{n}{d}{\ßp,\nak}$.
+  If $n \ge \normone{\lceil\veclog_\*2(\*p + \*1)\rceil}$,
+  then $\polyspace{\*p} \subset \regsgspace{n}{d}{\*p,\nak}$.
 \end{corollary}
 
 \begin{proof}
-  Let $\ßl := \lceil\veclog_\ß2(\ßp + \ß1)\rceil$ and $n \ge \normone{\ßl}$.
+  Let $\*l := \lceil\veclog_\*2(\*p + \*1)\rceil$ and $n \ge \normone{\*l}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
-  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\nak} = \naksplspace{\ßl}{\ßp}$.
-  In addition, all $\ßl' \in \natz^d$ with $\ßl' \le \ßl$ satisfy
-  $\normone{\ßl'} \le n$ and thus,
-  $\bigoplus_{\ßl' \le \ßl} \hs{\ßl}^{\ßp,\nak} \subset
-  \regsgspace{n}{d}{\ßp,\nak}$ by \eqref{eq:sparseGridRegularNAK}.
+  $\bigoplus_{\*l' \le \*l} \hs{\*l}^{\*p,\nak} = \naksplspace{\*l}{\*p}$.
+  In addition, all $\*l' \in \natz^d$ with $\*l' \le \*l$ satisfy
+  $\normone{\*l'} \le n$ and thus,
+  $\bigoplus_{\*l' \le \*l} \hs{\*l}^{\*p,\nak} \subset
+  \regsgspace{n}{d}{\*p,\nak}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
-  $\polyspace{\ßp} \subset \naksplspace{\ßl}{\ßp} \subset
-  \regsgspace{n}{d}{\ßp,\nak}$, which is the asserted claim.
+  $\polyspace{\*p} \subset \naksplspace{\*l}{\*p} \subset
+  \regsgspace{n}{d}{\*p,\nak}$, which is the asserted claim.
 \end{proof}
 
 

@@ -5,21 +5,21 @@ One issue of regular sparse grids $\regsgset{n}{d}{}$ as we have defined them
 is that the number of grid points still grows very fast
 with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $\ms{n}$ on the
-boundary of the domain $\clint{\ß0, \ß1}$ is finer than
+boundary of the domain $\clint{\*0, \*1}$ is finer than
 the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
 If we define $\interiorregsgset{n}{d}{}$ as the set of
 interior grid points in $\regsgset{n}{d}{}$, i.e.,%
 \footnote{%
   Note that in the literature,
   the regular sparse grid space of level $n$ without boundary points is often
-  defined via $\normone{\ßl} \le n + d - 1$ to ensure that the finest mesh size
+  defined via $\normone{\*l} \le n + d - 1$ to ensure that the finest mesh size
   is given by $\ms{n}$.
   In our notation, this corresponds to $\interiorregsgset{n+d-1}{d}{}$.%
 }
 \begin{equation}
   \interiorregsgset{n}{d}{}
-  := \regsgset{n}{d}{} \cap \opint{\ß0, \ß1}
-  = \{\gp{\ßl,\ßi} \in \regsgset{n}{d}{} \mid \ßl \ge \ß1\},
+  := \regsgset{n}{d}{} \cap \opint{\*0, \*1}
+  = \{\gp{\*l,\*i} \in \regsgset{n}{d}{} \mid \*l \ge \*1\},
 \end{equation}
 then the following relation about the number of grid points
 of $\regsgset{n}{d}{}$ can be shown:
@@ -96,7 +96,7 @@ which are described below.
   \caption{%
     Decomposition of the three-dimensional sparse grid $\regsgset{n}{d}{}$
     ($n = 4$, $d = 3$) into lower-dimensional sparse sub-grids.
-    The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
+    The main axes (axis-parallel lines through $0.5 \cdot \*1$, \emph{dashed})
     serve as a visual aid.%
   }%
   \label{fig:sgDecompose}%
@@ -115,15 +115,15 @@ A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
   \coarseregsgset{n}{d}{1}{}
-  := \bigdotcup_{\ßl \in \coarselevelset{n}{d}{1}{}}
-  \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},\quad
+  := \bigdotcup_{\*l \in \coarselevelset{n}{d}{1}{}}
+  \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\},\quad
   \coarselevelset{n}{d}{1}{}
-  := \{\ßl \in \natz^d \mid \normone{\vecmax(\ßl, \ß1)} \le n\},
+  := \{\*l \in \natz^d \mid \normone{\vecmax(\*l, \*1)} \le n\},
 \end{equation}
 where $\vec{\max}$ is to be read coordinate-wise as usual.
 This choice is equivalent to treating zero-level components as level one
 in the subspace selection.
-This ensures that the finest mesh sizes in interior of $\clint{\ß0, \ß1}$ and
+This ensures that the finest mesh sizes in interior of $\clint{\*0, \*1}$ and
 its boundary coincide to be $\ms{n-d+1}$, which reduces the number of grid points
 on the boundary significantly.
 
@@ -156,30 +156,30 @@ the boundary functions and points at a level $b \in \nat$:
     \label{eq:coarseBoundary}
     \begin{split}
       \coarseregsgset{n}{d}{b}{}
-      := \bigdotcup_{\ßl \in \coarselevelset{n}{d}{b}{}}
-      \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},&\quad
+      := \bigdotcup_{\*l \in \coarselevelset{n}{d}{b}{}}
+      \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\},&\quad
       \coarselevelset{n}{d}{b}{}
-      := \{\ßl \in \nat^d \mid \normone{\ßl} \le n\} \dotcup {}\\[-1em]
-      &\big(\{\ßl \in \natz^d \setminus \nat^d \mid
-      \normone{\vecmax(\ßl, \ß1)} \le n-b+1\} \cup \{\ß0\}\big).
+      := \{\*l \in \nat^d \mid \normone{\*l} \le n\} \dotcup {}\\[-1em]
+      &\big(\{\*l \in \natz^d \setminus \nat^d \mid
+      \normone{\vecmax(\*l, \*1)} \le n-b+1\} \cup \{\*0\}\big).
     \end{split}
   \end{equation}
   For convenience, we define
   $\coarseregsgset{n}{d}{0}{} := \regsgset{n}{d}{}$.
 \end{definition}
-The definition is motivated by partitioning the levels $\ßl \in \natz^d$
-into interior levels ($\ßl \in \nat^d$)
-and boundary levels ($\ßl \in \natz^d \setminus \nat^d$).
+The definition is motivated by partitioning the levels $\*l \in \natz^d$
+into interior levels ($\*l \in \nat^d$)
+and boundary levels ($\*l \in \natz^d \setminus \nat^d$).
 By including the levels of the interior grid $\interiorregsgset{n}{d}{}$,
 the mesh size in the interior is the same as before ($\ms{n-d+1}$).
 Like in \eqref{eq:sparseGridB1}, we treat boundary levels as level one,
 but we subtract $b - 1$ from the upper bound to ensure the correct
 mesh size $\ms{n-d-b+2}$ on the boundary.
-We append $\ß0$ to the level set to ensure that at least the $2^d$ corner
+We append $\*0$ to the level set to ensure that at least the $2^d$ corner
 points are included in the resulting sparse grid.
 Note that this definition is consistent with \eqref{eq:sparseGridB1} as
 $\coarselevelset{n}{d}{b}{}
-= \{\ßl \in \natz^d \mid \normone{\vecmax(\ßl, \ß1)} \le n\}$
+= \{\*l \in \natz^d \mid \normone{\vecmax(\*l, \*1)} \le n\}$
 for $b = 1$.
 Examples of~$\coarseregsgset{n}{d}{b}{}$ are shown
 in \cref{fig:coarseBoundary}.
@@ -414,9 +414,9 @@ Its correctness can be formally proved with the following invariant:
     \label{eq:coarseInvariant}
     \begin{split}
       \levelset^{(t)}
-      &= \{\ßl \in \nat^t \mid \normone{\ßl} \le n - d + t\} \dotcup {}\\
-      &\hphantom{{}={}} \big(\{\ßl \in \natz^t \setminus \nat^t \mid
-      \normone{\vecmax(\ßl, \ß1)} \le n-d+t-b+1\} \cup \{\ß0\}\big).
+      &= \{\*l \in \nat^t \mid \normone{\*l} \le n - d + t\} \dotcup {}\\
+      &\hphantom{{}={}} \big(\{\*l \in \natz^t \setminus \nat^t \mid
+      \normone{\vecmax(\*l, \*1)} \le n-d+t-b+1\} \cup \{\*0\}\big).
     \end{split}
   \end{equation}
 \end{restatable}
@@ -441,31 +441,31 @@ Its correctness can be formally proved with the following invariant:
       \For{$t = 2, \dotsc, d$}
         \State{$\levelset^{(t)} \gets \emptyset$}
         \Comment{$t$-dimensional grid}
-        \For{$\ßl \in \levelset^{(t-1)}$}
+        \For{$\*l \in \levelset^{(t-1)}$}
           \If{%
-            $\normone{\vecmax(\ßl, \ß1)} \le n - d + t - b$ or
-            $\ßl = \ß0$%
+            $\normone{\vecmax(\*l, \*1)} \le n - d + t - b$ or
+            $\*l = \*0$%
           }%
           \label{line:algCoarseBoundary1}
-            \State{$\levelset^{(t)} \gets \levelset^{(t)} \cup \{(\ßl, 0)\}$}
+            \State{$\levelset^{(t)} \gets \levelset^{(t)} \cup \{(\*l, 0)\}$}
             \Comment{add corners}%
             \label{line:algCoarseBoundary5}
           \EndIf{}
-          \If{$\ßl \in \nat^{t-1}$}
-            \State{$l^\ast \gets n - d + t - \normone{\ßl}$}%
+          \If{$\*l \in \nat^{t-1}$}
+            \State{$l^\ast \gets n - d + t - \normone{\*l}$}%
             \Comment{add interior points}%
             \label{line:algCoarseBoundary2}
           \Else{}
             \State{%
               $l^\ast \gets n - d + t - b + 1 -
-              \normone{\vecmax(\ßl, \ß1)}$%
+              \normone{\vecmax(\*l, \*1)}$%
             }%
             \Comment{add boundary points}%
             \label{line:algCoarseBoundary3}
           \EndIf{}
           \State{%
             $\levelset^{(t)} \gets \levelset^{(t)} \cup
-            \{(\ßl, l_t) \mid l_t = 1, \dotsc, l^\ast\}$%
+            \{(\*l, l_t) \mid l_t = 1, \dotsc, l^\ast\}$%
           }
           \label{line:algCoarseBoundary4}
         \EndFor{}
@@ -534,12 +534,12 @@ Its correctness can be formally proved with the following invariant:
     in two and three dimensions for different values of the
     boundary parameter $b$.
     For constant $d$ and $n$,
-    the points in the interior of $\clint{\ß0, \ß1}$
+    the points in the interior of $\clint{\*0, \*1}$
     (black) are the same,
-    while the points on the boundary of $\clint{\ß0, \ß1}$
+    while the points on the boundary of $\clint{\*0, \*1}$
     \emph{\textcolor{mittelblau}{(blue)}} become coarser
     for increasing values of $b$.
-    The main axes (axis-parallel lines through $0.5 \cdot \ß1$, \emph{dashed})
+    The main axes (axis-parallel lines through $0.5 \cdot \*1$, \emph{dashed})
     serve as a visual aid.%
   }
   \label{fig:coarseBoundary}
@@ -581,13 +581,13 @@ first step.
 
 The second solution to reduce the number of grid points on the boundary
 is to omit boundary points and basis functions altogether.
-For the hat function basis $\bspl{\ßl,\ßi}{1}{}$,
+For the hat function basis $\bspl{\*l,\*i}{1}{}$,
 this is a feasible option if the objective
-function $\objfun\colon \clint{\ß0, \ß1} \to \real$
+function $\objfun\colon \clint{\*0, \*1} \to \real$
 satisfies homogeneous boundary conditions
-$\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0, \ß1}}} \equiv 0$,
-as $\bspl{\ßl,\ßi}{1}{}$ vanishes on the boundary if and only if
-$\lnot(\ßl \ge \ß1)$, i.e., if the basis function corresponds to a
+$\restrictfcn{\objfun}{\bndrydomain{\clint{\*0, \*1}}} \equiv 0$,
+as $\bspl{\*l,\*i}{1}{}$ vanishes on the boundary if and only if
+$\lnot(\*l \ge \*1)$, i.e., if the basis function corresponds to a
 boundary point.
 Consequently, the surpluses corresponding to boundary points vanish
 for a grid with boundary points,

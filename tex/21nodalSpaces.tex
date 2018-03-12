@@ -110,31 +110,31 @@ for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{@0}
 \usenotation{@1}
-Therefore, the domain is now $\clint{\ß0, \ß1} := \clint{0, 1}^d$,
+Therefore, the domain is now $\clint{\*0, \*1} := \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
-where $\ßl = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
+where $\*l = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
 The corners of the hypercubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
-  \gp{\ßl,\ßi} := \ßi \cdot \ms{\ßl},\quad
-  \ßi = \ß0, \dotsc, \ß2^{\ßl}.
+  \gp{\*l,\*i} := \*i \cdot \ms{\*l},\quad
+  \*i = \*0, \dotsc, \*2^{\*l}.
 \end{equation}
 To allow for a somewhat intuitive and suggestive notation,
 relations and operations with vectors (in bold face)
 are to be read coordinate-wise in this thesis, unless stated otherwise.
-Bold-faced numbers like $\ß0$ are defined to be the vector $(0, \dotsc, 0)$
+Bold-faced numbers like $\*0$ are defined to be the vector $(0, \dotsc, 0)$
 in which every entry is equal to that number.
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
 \begin{equation}
-  \gp{\ßl,\ßi}
+  \gp{\*l,\*i}
   := (i_1 \ms{l_1},\; \dotsc,\; i_d \ms{l_d}),\quad
   i_t = 0, \dotsc, 2^{l_t},\quad
   t = 1, \dotsc, d,
 \end{equation}
 with the $d$-dimensional mesh size
-$\ms{\ßl} := \ß2^{-\ßl} = (\ms{l_1}, \dotsc, \ms{l_d})$.
+$\ms{\*l} := \*2^{-\*l} = (\ms{l_1}, \dotsc, \ms{l_d})$.
 Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
@@ -145,17 +145,17 @@ as the tensor product of the univariate functions:%
   \todo{insert reference}.%
 }
 \begin{equation}
-  \basis{\ßl,\ßi}\colon \clint{\ß0, \ß1} \to \real,\quad
-  \basis{\ßl,\ßi}(\ßx)
+  \basis{\*l,\*i}\colon \clint{\*0, \*1} \to \real,\quad
+  \basis{\*l,\*i}(\*x)
   := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
 \end{equation}
 \cref{fig:nodalHat2D} shows an example of a bivariate nodal hat function
-$\bspl{\ßl,\ßi}{1}{}$.
+$\bspl{\*l,\*i}{1}{}$.
 
 \begin{SCfigure}
   \includegraphics{nodalHat2D_1}%
   \caption{%
-    Bivariate nodal hat function of level $\ßl = (2, 1)$ and
+    Bivariate nodal hat function of level $\*l = (2, 1)$ and
     index $i = (1, 1)$ as the tensor product of two univariate
     nodal hat functions.%
   }%
@@ -164,73 +164,73 @@ $\bspl{\ßl,\ßi}{1}{}$.
 
 \paragraph{Multivariate nodal space}
 
-The multivariate nodal space $\ns{\ßl}$ is defined analogously to
+The multivariate nodal space $\ns{\*l}$ is defined analogously to
 the univariate case:
 \begin{equation}
-  \ns{\ßl}
-  := \spn\{\basis{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+  \ns{\*l}
+  := \spn\{\basis{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
 \end{equation}
-In the case of hat functions $\bspl{\ßl,\ßi}{1}{}$,
-the nodal space $\ns{\ßl}^1$ is the $d$-linear spline space
+In the case of hat functions $\bspl{\*l,\*i}{1}{}$,
+the nodal space $\ns{\*l}^1$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
-on $\clint{\ß0, \ß1}$ that are piecewise $d$-linear polynomials on
+on $\clint{\*0, \*1}$ that are piecewise $d$-linear polynomials on
 all hypercubes
 \begin{equation}
-  \clint{\gp{\ßl,\ßi}, \gp{\ßl,\ßi+\ß1}}
+  \clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}
   := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
   \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
-  \ßi = \ß0, \dotsc, \ß2^\ßl - \ß1.
+  \*i = \*0, \dotsc, \*2^\*l - \*1.
 \end{equation}
 Analogously to \eqref{eq:interpFullGridUV},
-we can interpolate objective functions $\objfun\colon \clint{\ß0, \ß1} \to \real$
-in the nodal space $\ns{\ßl}$ with $\fgintp{\ßl}\colon \clint{\ß0, \ß1} \to \real$ satisfying
+we can interpolate objective functions $\objfun\colon \clint{\*0, \*1} \to \real$
+in the nodal space $\ns{\*l}$ with $\fgintp{\*l}\colon \clint{\*0, \*1} \to \real$ satisfying
 \begin{equation}
   \label{eq:interpFullGridMV}
-  \fgintp{\ßl}
-  = \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßi} \basis{\ßl,\ßi},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\gp{\ßl,\ßi}) = \objfun(\gp{\ßl,\ßi})},
+  \fgintp{\*l}
+  = \sum_{\*i=\*0}^{\*2^\*l} \interpcoeff{\*i} \basis{\*l,\*i},\quad
+  \fa{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})},
 \end{equation}
-where $\interpcoeff{\ßi} \in \real$ and
-the sum is over all $\ßi = \ß0, \dotsc, \ß2^\ßl$.
+where $\interpcoeff{\*i} \in \real$ and
+the sum is over all $\*i = \*0, \dotsc, \*2^\*l$.
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
-  The functions $\basis{\ßl,\ßi}$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
-  form a basis of $\ns{\ßl}$, if the univariate functions
+  The functions $\basis{\*l,\*i}$ ($\*i = \*0, \dotsc, \*2^\*l$)
+  form a basis of $\ns{\*l}$, if the univariate functions
   $\basis{l_t,i_t}$ ($i_t = 0, \dotsc, 2^{l_t}$)
   form a basis of the univariate nodal space $\ns{l_t}$
   for $t = 1, \dotsc, d$.
 \end{lemma}
 \begin{proof}
-  Assume that $\interpcoeff{\ßi} \in \real$ are chosen in \eqref{eq:interpFullGridMV}
-  such that $\fgintp{\ßl} \equiv 0$.
-  Then for all $\ßi' = \ß0, \dotsc, \ß2^\ßl$,
-  we can evaluate \eqref{eq:interpFullGridMV} at $\gp{\ßl,\ßi'}$ to obtain
+  Assume that $\interpcoeff{\*i} \in \real$ are chosen in \eqref{eq:interpFullGridMV}
+  such that $\fgintp{\*l} \equiv 0$.
+  Then for all $\*i' = \*0, \dotsc, \*2^\*l$,
+  we can evaluate \eqref{eq:interpFullGridMV} at $\gp{\*l,\*i'}$ to obtain
   \begin{equation}
     \sum_{i_1=0}^{2^{l_1}}
     \left(\sum_{i_2=0}^{2^{l_2}} \dotsb
-    \left(\sum_{i_d=0}^{2^{l_d}} \interpcoeff{\ßi} \basis{l_d,i_d}(\gp{l_d,i_d'})\right) \dotsb
+    \left(\sum_{i_d=0}^{2^{l_d}} \interpcoeff{\*i} \basis{l_d,i_d}(\gp{l_d,i_d'})\right) \dotsb
     \basis{l_2,i_2}(\gp{l_2,i_2'})\right) \basis{l_1,i_1}(\gp{l_1,i_1'})
     = 0.
   \end{equation}
   We apply the linear independence in 1D ($x_1$ direction) to conclude that
   the sum over $i_2$ must vanish.
-  Repeating this argument for all dimensions, we infer that $\interpcoeff{\ßi} = 0$
-  for all~$\ßi = \ß0, \dotsc, \ß2^\ßl$,
-  implying the linear independence of the functions $\basis{\ßl,\ßi}$.
+  Repeating this argument for all dimensions, we infer that $\interpcoeff{\*i} = 0$
+  for all~$\*i = \*0, \dotsc, \*2^\*l$,
+  implying the linear independence of the functions $\basis{\*l,\*i}$.
 \end{proof}
-The lemma is equivalent to the statement that the coefficients $\interpcoeff{\ßi} \in \real$
+The lemma is equivalent to the statement that the coefficients $\interpcoeff{\*i} \in \real$
 exist for every objective function $\objfun$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
-  \fgset{\ßl}
-  := \{\gp{\ßl,\ßi} \mid \ßi = \ß0, \dotsc, \ß2^{\ßl}\}.
+  \fgset{\*l}
+  := \{\gp{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
 \end{equation}
 \usenotation{n10}
-A common choice for the level $\ßl$ is $n \cdot \ß1$ for some $n \in \natz$.
+A common choice for the level $\*l$ is $n \cdot \*1$ for some $n \in \natz$.
 \usenotation{Vnd}
-In this case, we replace ``$\ßl$'' in the subscripts with ``$n{,}d$''
-(for example, $\ns{n,d} := \ns{n \cdot \ß1}$).
+In this case, we replace ``$\*l$'' in the subscripts with ``$n{,}d$''
+(for example, $\ns{n,d} := \ns{n \cdot \*1}$).
 For the hat function basis $\bspl{l,i}{1}{}$,
 it can be shown that the $\Ltwo$ interpolation error of the interpolant
 $\fgintp{n,d} \in \ns{n,d}$ is given by

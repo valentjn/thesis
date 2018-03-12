@@ -16,40 +16,40 @@ regular, dimensionally adaptive, and spatially adaptive.
 \paragraph{Hierarchical contributions}
 
 To assess the importance of a subspace, we consider again the
-interpolant $\fgintp{\ßl} \in \ns{\ßl}$ of a function $\objfun\colon \clint{\ß0, \ß1} \to \real$.
+interpolant $\fgintp{\*l} \in \ns{\*l}$ of a function $\objfun\colon \clint{\*0, \*1} \to \real$.
 According to the splitting \eqref{eq:hierSplittingMV}, the interpolant can
 be written as
 \begin{equation}
   \label{eq:interpHierFullGrid}
-  \fgintp{\ßl}
-  = \sum_{\ßl'=\ß0}^\ßl \sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \surplus{\ßl',\ßi'} \basis{\ßl',\ßi'},\quad
-  \fa{\ßi = \ß0, \dotsc, \ß2^\ßl}{\fgintp{\ßl}(\gp{\ßl,\ßi}) = \objfun(\gp{\ßl,\ßi})}.
+  \fgintp{\*l}
+  = \sum_{\*l'=\*0}^\*l \sum_{\*i'=\*0}^{\*2^{\*l'}}
+  \surplus{\*l',\*i'} \basis{\*l',\*i'},\quad
+  \fa{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})}.
 \end{equation}
-The coefficients $\surplus{\ßl',\ßi'}$ with respect to the hierarchical basis
-$\basis{\ßl',\ßi'}$ are the \term{hierarchical surpluses}.
-When using the hat function basis $\bspl{\ßl,\ßi}{1}{}$,
+The coefficients $\surplus{\*l',\*i'}$ with respect to the hierarchical basis
+$\basis{\*l',\*i'}$ are the \term{hierarchical surpluses}.
+When using the hat function basis $\bspl{\*l,\*i}{1}{}$,
 one can prove the following representation
 for the corresponding surpluses \cite{Bungartz04Sparse}:
 \begin{equation}
-  \surplus{\ßl,\ßi}
-  = (-1)^d 2^{-\normone{\ßl+\ß1}}
-  \int_\ß0^\ß1 \bspl{\ßl,\ßi}{1}{}(\ßx)
+  \surplus{\*l,\*i}
+  = (-1)^d 2^{-\normone{\*l+\*1}}
+  \int_\*0^\*1 \bspl{\*l,\*i}{1}{}(\*x)
   \frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2}
-  \objfun(\ßx) \diff{}\ßx,
+  \objfun(\*x) \diff{}\*x,
 \end{equation}
-if $\ßl \ge \ß1$ and
+if $\*l \ge \*1$ and
 $\objfun$ is twice continuously differentiable in every dimension simultaneously,
 i.e.,
 $\frac{\partialdiff^{2d}}{\partialdiff x_1^2 \dotsb \partialdiff x_d^2} \objfun$
 exists and is continuous.%
 \footnote{%
   Again, the notation implies that the integration domain is
-  the unit hypercube $\clint{\ß0, \ß1}$.%
+  the unit hypercube $\clint{\*0, \*1}$.%
 }\multiplefootnoteseparator%
 \footnote{%
   The statement is even valid for functions in the Sobolev space
-  $H_\mathrm{mix}^2(\clint{\ß0, \ß1})$ with dominating mixed derivative,
+  $H_\mathrm{mix}^2(\clint{\*0, \*1})$ with dominating mixed derivative,
   as its proof mainly relies on integration by parts
   \cite{Bungartz04Sparse}.%
 }
@@ -60,26 +60,26 @@ exists and is continuous.%
 %the absolute value of the second mixed derivative is large, i.e.,
 %where the objective function oscillates strongly.
 %Second, the absolute surpluses decay with
-%increasing level $\ßl$ as both the factor
-%$2^{-\normone{\ßl+\ß1}}$ and the size of the support of $\basis{\ßl,\ßi}$
+%increasing level $\*l$ as both the factor
+%$2^{-\normone{\*l+\*1}}$ and the size of the support of $\basis{\*l,\*i}$
 %are decreasing.
-Consequently, the contribution of the summand of level $\ßl$
+Consequently, the contribution of the summand of level $\*l$
 can be estimated by
 \begin{equation}
   \label{eq:componentEstimation}
-  \normLtwoscaled{\sum_{\ßi'=\ß0}^{\ß2^{\ßl'}}
-  \surplus{\ßl',\ßi'} \bspl{\ßl',\ßi'}{1}{}}
-  \le 3^{-d} \cdot 2^{-2 \normone{\ßl}} \cdot
+  \normLtwoscaled{\sum_{\*i'=\*0}^{\*2^{\*l'}}
+  \surplus{\*l',\*i'} \bspl{\*l',\*i'}{1}{}}
+  \le 3^{-d} \cdot 2^{-2 \normone{\*l}} \cdot
   \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
   } \objfun}
 \end{equation}
-for the hat function surpluses $\surplus{\ßl',\ßi'}$ \cite{Bungartz04Sparse}.
+for the hat function surpluses $\surplus{\*l',\*i'}$ \cite{Bungartz04Sparse}.
 
 \paragraph{Definition of regular sparse grids}
 
 Equation \eqref{eq:componentEstimation} motivates to omit those summands
-from the sum \eqref{eq:interpHierFullGrid} whose level sum $\normone{\ßl}$
+from the sum \eqref{eq:interpHierFullGrid} whose level sum $\normone{\*l}$
 exceeds a certain value $n \in \natz$.
 More formally, the selection of the relevant subspaces can be formulated as a
 continuous knapsack problem~\cite{Bungartz04Sparse}.
@@ -87,18 +87,18 @@ continuous knapsack problem~\cite{Bungartz04Sparse}.
 The resulting function space and grid point set
 \begin{equation}
   \regsgspace{n}{d}{}
-  := \bigoplus_{\normone{\ßl} \le n} \hs{\ßl},\qquad
+  := \bigoplus_{\normone{\*l} \le n} \hs{\*l},\qquad
   \regsgset{n}{d}{}
-  := \bigdotcup_{\normone{\ßl} \le n}
-  \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\}
+  := \bigdotcup_{\normone{\*l} \le n}
+  \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\}
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
 To better distinguish the different grids,
 we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
-basis $\bspl{\ßl,\ßi}{1}{}$,
-we generalize the definition to arbitrary bases $\basis{\ßl,\ßi}$.
+basis $\bspl{\*l,\*i}{1}{}$,
+we generalize the definition to arbitrary bases $\basis{\*l,\*i}$.
 \Cref{fig:regularSG} shows the construction of a
 regular sparse grid in two dimensions.
 
@@ -113,13 +113,13 @@ regular sparse grid in two dimensions.
   \hfill%
   \begin{minipage}[b]{65mm}
     \subcaptionbox{%
-      Full grid obtained by adding all subspaces of level $\ßl \le n \cdot \ß1$.%
+      Full grid obtained by adding all subspaces of level $\*l \le n \cdot \*1$.%
     }[65mm]{%
       \includegraphics{sg_2}%
     }\\[5mm]%
     \subcaptionbox{%
       Regular sparse grid obtained by adding all subspaces
-      whose level $\ßl$ satisfies $\normone{\ßl} \le n$
+      whose level $\*l$ satisfies $\normone{\*l} \le n$
       \emph{\textcolor{mittelblau}{(blue)}}.%
     }[65mm]{%
       \includegraphics{sg_3}%
@@ -132,9 +132,9 @@ regular sparse grid in two dimensions.
 \paragraph{Error and grid size}
 
 One can prove that for homogeneous boundary conditions
-$\restrictfcn{\objfun}{\bndrydomain{\clint{\ß0,\ß1}}} \equiv 0$,
+$\restrictfcn{\objfun}{\bndrydomain{\clint{\*0,\*1}}} \equiv 0$,
 the number of required inner grid points
-($\gp{\ßl,\ßi} \in \regsgset{n}{d}{}$ where $\ßl \ge \ß1$)
+($\gp{\*l,\*i} \in \regsgset{n}{d}{}$ where $\*l \ge \*1$)
 grows like $\landauO{\ms{n}^{-1} (\log_2 \ms{n}^{-1})^{d-1}}$
 \cite{Bungartz04Sparse}, which is much less than
 the corresponding number $\landauO{(\ms{n}^{-1})^d}$ in the full grid case
@@ -170,15 +170,15 @@ Generally, function spaces~$\sgspace$ and grid sets $\sgset$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
   \sgspace
-  = \bigoplus_{\ßl \in \levelset} \hs{\ßl},\qquad
+  = \bigoplus_{\*l \in \levelset} \hs{\*l},\qquad
   \sgset
-  = \bigdotcup_{\ßl \in \levelset} \{\gp{\ßl,\ßi} \mid \ßi \in \hiset{\ßl}\},
+  = \bigdotcup_{\*l \in \levelset} \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\},
 \end{equation}
 where $\levelset$ is a \term{downward closed} set, i.e.,
 a finite subset $\levelset \subset \natz^d$
-for which $\forall_{\ßl \in \levelset} \fa{\ßl' \le \ßl}{\ßl' \in \levelset}$.
+for which $\forall_{\*l \in \levelset} \fa{\*l' \le \*l}{\*l' \in \levelset}$.
 Regular sparse grids are a special case by setting
-$\levelset = \{\ßl \in \natz^d \mid \normone{\ßl} \le n\}$.
+$\levelset = \{\*l \in \natz^d \mid \normone{\*l} \le n\}$.
 
 \paragraph{Combination technique}
 
@@ -190,14 +190,14 @@ $\regsgintp{n}{d}{}$ can be written as
 \begin{equation}
   \label{eq:combiTechnique}
   \regsgintp{n}{d}{}
-  = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\ßl} = n-q}
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi},
+  = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l} = n-q}
+  \sum_{\*i=\*0}^{\*2^\*l} \interpcoeff{\*l,\*i} \basis{\*l,\*i},
 \end{equation}
-where the $\interpcoeff{\ßl,\ßi} \in \real$ ($\ßi = \ß0, \dotsc, \ß2^\ßl$)
-are the interpolation coefficients on the full grid of level~$\ßl$, i.e.,
-$\fa{\ßi' = \ß0, \dotsc, \ß2^\ßl}{%
-  \sum_{\ßi=\ß0}^{\ß2^\ßl} \interpcoeff{\ßl,\ßi} \basis{\ßl,\ßi}(\gp{\ßl,\ßi'})
-  = \objfun(\gp{\ßl,\ßi'})%
+where the $\interpcoeff{\*l,\*i} \in \real$ ($\*i = \*0, \dotsc, \*2^\*l$)
+are the interpolation coefficients on the full grid of level~$\*l$, i.e.,
+$\fa{\*i' = \*0, \dotsc, \*2^\*l}{%
+  \sum_{\*i=\*0}^{\*2^\*l} \interpcoeff{\*l,\*i} \basis{\*l,\*i}(\gp{\*l,\*i'})
+  = \objfun(\gp{\*l,\*i'})%
 }$ \multicite{Smolyak63Quadrature,Zenger91Sparse}.
 For general dimensionally adaptive sparse grids, a similar formula exists
 \cite{Wasilkowski95Explicit}.
@@ -241,28 +241,28 @@ In the most general form, their function spaces $\sgspace$
 and grid sets $\sgset$ have the form
 \begin{equation}
   \sgspace
-  = \spn\{\basis{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},\qquad
+  = \spn\{\basis{\*l,\*i} \mid (\*l,\*i) \in \liset\},\qquad
   \sgset
-  = \{\gp{\ßl,\ßi} \mid (\ßl,\ßi) \in \liset\},
+  = \{\gp{\*l,\*i} \mid (\*l,\*i) \in \liset\},
 \end{equation}
-where $\liset$ is a finite set of level-index pairs $(\ßl,\ßi)$
-with $\ßl \in \natz^d$ and $\ßi \in \hiset{\ßl}$.
+where $\liset$ is a finite set of level-index pairs $(\*l,\*i)$
+with $\*l \in \natz^d$ and $\*i \in \hiset{\*l}$.
 Algorithms for sparse grids often make specific assumptions about $\liset$.
 If they are not met, then the algorithms do not produce the correct results.
-%For example for hat functions $\bspl{\ßl,\ßi}{1}{}$, the grid should contain
+%For example for hat functions $\bspl{\*l,\*i}{1}{}$, the grid should contain
 %the hierarchical ancestors of every grid point:
 %\begin{equation}
 %  \label{eq:hierAncestors}
-%  \forall_{(\ßl,\ßi) \in \liset}
-%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\ßl',\ßi') \in \liset},\quad
-%  \ßl' := \ßl - \ße_t,\quad
+%  \forall_{(\*l,\*i) \in \liset}
+%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\*l',\*i') \in \liset},\quad
+%  \*l' := \*l - \*e_t,\quad
 %  i_{t'}' :=
 %  \begin{cases}
 %    2 \lfloor i_t/4 \rfloor + 1,&t = t',\\
 %    i_{t'},&t \not= t',
 %  \end{cases}
 %\end{equation}
-%where $\ße_t$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+%where $\*e_t$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
 %If \eqref{eq:hierAncestors} is not met, the so-called
 %unidirectional principle, which is used for instance to efficiently calculate
 %hierarchical surpluses, does not work.
@@ -270,7 +270,7 @@ If they are not met, then the algorithms do not produce the correct results.
 %to B-splines of general degree, even if \eqref{eq:hierAncestors} is satisfied.
 %Therefore, for most of our considerations, we will not restrict the
 %choice of $\liset$.
-For example when working with hat functions $\bspl{\ßl,\ßi}{1}{}$,
+For example when working with hat functions $\bspl{\*l,\*i}{1}{}$,
 the grid should contain the hierarchical ancestors of every grid point.
 Otherwise, the so-called
 unidirectional principle, which is used for instance to efficiently calculate

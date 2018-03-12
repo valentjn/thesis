@@ -1,7 +1,7 @@
 \section{Hierarchization on Full Grids (Unidirectional Principle)}
 \label{sec:42fullGrids}
 
-If $\sgset$ is a full grid $\fgset{\ßl}$
+If $\sgset$ is a full grid $\fgset{\*l}$
 (see \cref{sec:21nodalSpaces}),
 the well-known \emph{\up}
 can be used to apply $\linop$ to input data $\vlinin$.
@@ -32,13 +32,13 @@ With the following invariant, we can prove the correctness of the \up.
       \For{$j = 1, \dotsc, d$}
         \State{%
           Define equivalence relation $\sim$ on $\liset$
-          as $\ßk \sim \ßk' \iff \ßk_{-t_j} = \ßk'_{-t_j}$%
+          as $\*k \sim \*k' \iff \*k_{-t_j} = \*k'_{-t_j}$%
         }
         \For{$\liset_\mathrm{pole} \in \liset/{\sim}$}
           \State{%
-            $(\linout{\ßk}^{(j)})_{\ßk \in \liset_\mathrm{pole}} \gets
+            $(\linout{\*k}^{(j)})_{\*k \in \liset_\mathrm{pole}} \gets
             \linop_{t_j}
-            \Big[(\linout{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}}\Big]$%
+            \Big[(\linout{\*k}^{(j-1)})_{\*k \in \liset_\mathrm{pole}}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
@@ -53,8 +53,8 @@ With the following invariant, we can prove the correctness of the \up.
     Inputs are the set $\liset$ of grid indices,
     the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
     the one-dimensional operators $\linop_{t_j}$ should be applied, and
-    the vector $\vlinin = (\linin{\ßk})_{\ßk \in \liset}$ of input data.
-    The output is the vector $\vlinout = (\linout{\ßk})_{\ßk \in \liset}$
+    the vector $\vlinin = (\linin{\*k})_{\*k \in \liset}$ of input data.
+    The output is the vector $\vlinout = (\linout{\*k})_{\*k \in \liset}$
     of output data.%
   }%
   \label{alg:unidirectionalPrinciple}%
@@ -67,21 +67,21 @@ With the following invariant, we can prove the correctness of the \up.
   Let $\linop$ be the hierarchization operator on a full grid,
   i.e.,
   $\linop = \intpmat^{-1}$,
-  $\vlinin = (\fcnval{\ßk})_{\ßk \in \liset}$,
-  $\vlinout = (\surplus{\ßk})_{\ßk \in \liset}$,
+  $\vlinin = (\fcnval{\*k})_{\*k \in \liset}$,
+  $\vlinout = (\surplus{\*k})_{\*k \in \liset}$,
   $\linop_{t_j}$ is the 1D interpolation operator $(\intpmat_{t_j})^{-1}$, and
-  $\liset = \{\ß0, \dotsc, \ß2^\ßl\}$
-  corresponds to a full grid $\fgset{\ßl}$ of level $\ßl$.
+  $\liset = \{\*0, \dotsc, \*2^\*l\}$
+  corresponds to a full grid $\fgset{\*l}$ of level $\*l$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
   ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
   \begin{equation}
-    \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
-    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\gp{\ßk'_T})
-    = \fcnval{\ßk'},\quad
-    \ßk' = \ß0, \dotsc, \ß2^\ßl,
+    \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
+    \surplus{(\*k_T,\*k'_{-T})}^{(j)} \basis{\*k_T}(\gp{\*k'_T})
+    = \fcnval{\*k'},\quad
+    \*k' = \*0, \dotsc, \*2^\*l,
   \end{equation}
-  where $(\ßk_T,\ßk'_{-T})$ is defined to be the index $\ßk''$
-  with $\ßk''_T := \ßk_T$ and $\ßk''_{-T} := \ßk'_{-T}$.
+  where $(\*k_T,\*k'_{-T})$ is defined to be the index $\*k''$
+  with $\*k''_T := \*k_T$ and $\*k''_{-T} := \*k'_{-T}$.
 \end{proposition}
 
 \begin{proof}
@@ -90,35 +90,35 @@ With the following invariant, we can prove the correctness of the \up.
   $T := (t_1, \dotsc, t_{j-1}, t_j)$,
   and we exploit the tensor product structure of the basis
   to write the \lhs of the assertion for $j$
-  and arbitrary $\ßk' = \ß0, \dotsc, \ß2^\ßl$ as
+  and arbitrary $\*k' = \*0, \dotsc, \*2^\*l$ as
   \begin{align}
-    \sum_{\ßk_T=\ß0}^{\ß2^{\ßl_T}}
-    \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{\ßk_T}(\gp{\ßk'_T})
-    &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
-    \basis{\ßk_{T'}}(\gp{\ßk'_{T'}}) \cdot
+    \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
+    \surplus{(\*k_T,\*k'_{-T})}^{(j)} \basis{\*k_T}(\gp{\*k'_T})
+    &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
+    \basis{\*k_{T'}}(\gp{\*k'_{T'}}) \cdot
     \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
-      \surplus{(\ßk_T,\ßk'_{-T})}^{(j)} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
+      \surplus{(\*k_T,\*k'_{-T})}^{(j)} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
     \intertext{%
       If we choose the equivalence class
-      $\liset_\mathrm{pole} := \clint{(\ßk_T,\ßk'_{-T})}_\sim$
-      ($\ßk_T$ arbitrary, $\sim$ as defined in iteration $j$),
+      $\liset_\mathrm{pole} := \clint{(\*k_T,\*k'_{-T})}_\sim$
+      ($\*k_T$ arbitrary, $\sim$ as defined in iteration $j$),
       then the sum over $k_{t_j}$ equals
-      $\sum_{\ßk \in \liset_\mathrm{pole}}
-      \surplus{\ßk}^{(j)} \basis{k_{t_j}}(\gp{k'_{t_j}})
+      $\sum_{\*k \in \liset_\mathrm{pole}}
+      \surplus{\*k}^{(j)} \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((\linop_{t_j})^{-1}
-      %\Big[(\surplus{\ßk}^{(j)})_{\ßk \in \liset_\mathrm{pole}}\Big])_{k'_{t_j}}
-      %= ((\surplus{\ßk}^{(j-1)})_{\ßk \in \liset_\mathrm{pole}})_{k'_{t_j}}
-      = \surplus{(\ßk_{T'},\ßk'_{-T'})}^{(j-1)}$
+      %\Big[(\surplus{\*k}^{(j)})_{\*k \in \liset_\mathrm{pole}}\Big])_{k'_{t_j}}
+      %= ((\surplus{\*k}^{(j-1)})_{\*k \in \liset_\mathrm{pole}})_{k'_{t_j}}
+      = \surplus{(\*k_{T'},\*k'_{-T'})}^{(j-1)}$
       by the 1D interpolation operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
       \cref{alg:unidirectionalPrinciple}).
       We can conclude that the \lhs equals%
     }
-    &= \sum_{\ßk_{T'}=\ß0}^{\ß2^{\ßl_{T'}}}
-    \surplus{(\ßk_{T'},\ßk'_{-T'})}^{(j-1)}
-    \basis{\ßk_{T'}}(\gp{\ßk'_{T'}}),
+    &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
+    \surplus{(\*k_{T'},\*k'_{-T'})}^{(j-1)}
+    \basis{\*k_{T'}}(\gp{\*k'_{T'}}),
   \end{align}
-  which, by the induction hypothesis, equals $\fcnval{\ßk'}$ as desired
+  which, by the induction hypothesis, equals $\fcnval{\*k'}$ as desired
   (if $j > 1$).
   The same reasoning for $(\ast\ast)$ can be used
   to establish the base case for $j = 1$.
@@ -131,11 +131,11 @@ With the following invariant, we can prove the correctness of the \up.
 
 \begin{proof}
   We apply \cref{prop:invariantUnidirectionalPrinciple} to obtain
-  $\sum_{\ßk=\ß0}^{\ß2^\ßl}
-  \surplus{\ßk}^{(j)} \basis{\ßk}(\gp{\ßk'})
-  = \fcnval{\ßk'}$
-  for all $\ßk' = \ß0, \dotsc, \ß2^\ßl$, i.e.,
-  the $\surplus{\ßk}^{(j)}$ are the correct interpolation coefficients
+  $\sum_{\*k=\*0}^{\*2^\*l}
+  \surplus{\*k}^{(j)} \basis{\*k}(\gp{\*k'})
+  = \fcnval{\*k'}$
+  for all $\*k' = \*0, \dotsc, \*2^\*l$, i.e.,
+  the $\surplus{\*k}^{(j)}$ are the correct interpolation coefficients
   according to \eqref{eq:hierarchizationProblem}.
 \end{proof}
 
