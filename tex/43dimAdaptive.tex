@@ -16,6 +16,106 @@
 
 \subsubsection{Combinatorial Proof of the Inclusion-Exclusion Principle}
 
+\begin{restatable}[weighted number of occurrences of grid points]{%
+  proposition%
+}{%
+  propCombiTechniqueOne%
+}
+  \label{prop:combiTechniqueOne}
+  For every $\gp{\*l,\*i} \in \regsgset{n}{d}{}$, we have
+  \begin{equation}
+    \label{eq:combiTechniqueOne}
+    \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+    \setsize{
+      \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
+    }
+    = 1.
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofInclusionExclusion}.
+\end{proof}
+
+\begin{definition}[relation ``$\sim$'']
+  \label{def:combiTechniqueEquivalenceRelation}
+  Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be fixed and
+  \begin{equation}
+    \levelset
+    := \{\*l' \mid \ex{q=0,\dotsc,d-1}{
+      \normone{\*l'} = n - q,\; \fgset{\*l'} \notni \gp{\*l,\*i}
+    }\}
+  \end{equation}
+  be the set of levels that do not contain $\gp{\*l,\*i}$.
+  We define a relation ``$\sim$'' on $L$ as follows:
+  For $\*l', \*l'' \in L$, we set $\*l' \sim \*l''$ if and only if
+  \begin{equation}
+    \fa{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t},\quad
+    T_{\*l',\*l''}
+    := \{t \mid l'_t = l''_t\}.
+  \end{equation}
+\end{definition}
+
+\begin{restatable}{%
+  shortlemma%
+}{%
+  lemmaCombiTechniqueIdenticalValues%
+}
+  \label{lemma:combiTechniqueIdenticalValues}
+  Let $\*l', \*l'' \in L$ with $\*l' \sim \*l''$.
+  Then, $\fgintp{\*l'}(\gp{\*l,\*i})
+  = \fgintp{\*l''}(\gp{\*l,\*i})$.
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofInclusionExclusion}.
+\end{proof}
+
+\begin{restatable}[characterization of the equivalence classes of ``$\sim$'']{%
+  lemma%
+}{%
+  lemmaCombiTechniqueCharacterization%
+}
+  \label{lemma:combiTechniqueCharacterization}
+  Let $L_0 \in L/{\sim}$ be an equivalence class of ``$\sim$''.
+  If we define
+  \begin{equation}
+    T_{L_0}
+    := \{t \mid \exfa{l^\ast_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
+  \end{equation}
+  as the set of dimension in which all levels in $L_0$
+  have the same levels, then
+  \begin{equation}
+    L_0
+    = \{\*l' \in L \mid
+    \fa{t \in T_{L_0}}{l'_t = l^\ast_t},\;
+    \fa{t \notin T_{L_0}}{l'_t \ge l_t}\}.
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofInclusionExclusion}.
+\end{proof}
+
+\begin{restatable}[weighted sum of function values]{%
+  proposition%
+}{%
+  propCombiTechniqueZero%
+}
+  \label{prop:combiTechniqueZero}
+  For every $\gp{\*l,\*i} \in \regsgset{n}{d}{}$, we have
+  \begin{equation}
+    \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+    \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+    \fgintp{\*l'}(\gp{\*l,\*i})
+    = 0.
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofInclusionExclusion}.
+\end{proof}
+
 \blindtext{}
 
 

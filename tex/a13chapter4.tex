@@ -1,0 +1,139 @@
+\section{Proofs for Chapter 4}
+
+\subsection{Correctness Proof of the Inclusion-Exclusion Principle}
+\label{sec:proofInclusionExclusion}
+
+\begin{lemma}[combinatorial identity]
+  \label{lemma:combinatorialIdentity}
+  For $m \in \natz$ and $r, s \in \integer$, we have
+  \begin{equation}
+  \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{s}
+  = \binom{r-m}{s-m},
+  \end{equation}
+  if we set $\binom{a}{b} := 0$ whenever $a < 0$, $b < 0$, or $b > a$.
+\end{lemma}
+
+\begin{lemma}[number of multi-indices with specific sum]
+  \label{lemma:numberLevelsWithSum}
+  For $m \in \nat$ and $s \in \integer$, it holds
+  \begin{equation}
+  \setsize{\{\*a \in \natz^m \mid \normone{\*a} = s\}}
+  = \binom{s+m-1}{m-1}.
+  \end{equation}
+\end{lemma}
+
+\propCombiTechniqueOne*
+
+\begin{proof}
+  Let $q = 0, \dotsc, d - 1$ and $\gp{\*l,\*i} \in \regsgset{n}{d}{}$, i.e.,
+  $\normone{\*l} \le n$ and $\*i \in \hiset{\*l}$.
+  Note that for $\*l' \in \natz^d$, we have
+  $\fgset{\*l'} \ni \gp{\*l,\*i} \iff \*l' \ge \*l$.
+  Hence,
+  \begin{subequations}
+    \begin{align}
+    \setsize{
+      \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
+    }
+    &= \setsize{
+      \{\*l' \mid \normone{\*l'} = n - q,\; \*l' \ge \*l\}
+    }\\
+    &= \setsize{
+      \{\*a \in \natz^d \mid \normone{\*a} = n - q - \normone{\*l}\}
+    }\\
+    \intertext{%
+      by mapping $\*a := \*l' - \*l$.
+      By \cref{lemma:numberLevelsWithSum}, we obtain
+      that this equals%
+    }
+    &= \binom{n - q - \normone{\*l} + d - 1}{d - 1}
+    \end{align}
+  \end{subequations}
+  Now, we can use \cref{lemma:combinatorialIdentity}
+  with the values
+  $m := d - 1$,
+  $r := n - \normone{\*l} + d - 1$, and
+  $s := d - 1$,
+  to conclude that the \lhs of the assertion
+  \eqref{eq:combiTechniqueOne} equals
+  \begin{equation}
+  \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+  \binom{n - q - \normone{\*l} + d - 1}{d - 1}
+  = \binom{n - \normone{\*l}}{0}
+  = 1
+  \end{equation}
+  due to $n - \normone{\*l} \ge 0$, proving the proposition.
+\end{proof}
+
+\begin{shortlemma}
+  \label{lemma:combiTechniqueEquivalenceRelation}
+  ``$\sim$'' is an equivalence relation.
+\end{shortlemma}
+
+\begin{proof}
+  We check reflexivity, symmetry, and transitivity of ``$\sim$'':
+  \begin{itemize}
+    \item
+    \emph{Reflexivity:}
+    Using the same level $\*l' = \*l''$ implies
+    $T_{\*l',\*l'} = \{1, \dotsc, d\}$,
+    i.e., $\*l' \sim \*l'$.
+    
+    \item
+    \emph{Symmetry:}
+    We have
+    $\*l' \sim \*l'' \iff \*l'' \sim \*l'$, since
+    $T_{\*l',\*l''} = T_{\*l'',\*l'}$ and
+    $\min\{l'_t, l''_t\} = \min\{l''_t, l'_t\}$.
+    
+    \item
+    \emph{Transitivity:}
+    Let $\*l' \sim \hat{\*l}$ and $\hat{\*l} \sim \*l''$.
+    Then, $T_{\*l',\*l''} \supset T_{\*l',\hat{\*l}} \cap T_{\hat{\*l},\*l''}$.
+    Thus, if some $t = 1, \dotsc, d$ with $t \notin T_{\*l',\*l''}$ is given,
+    $t \notin T_{\*l',\hat{\*l}}$ or $t \notin T_{\hat{\*l},\*l''}$ holds.
+    \begin{itemize}
+      \item
+      \emph{Case 1:}
+      $t \notin T_{\*l',\hat{\*l}}$ and $t \in T_{\hat{\*l},\*l''}$.
+      The first statement implies $\min\{l'_t, \hat{l}_t\} \ge l_t$
+      and the second statement implies $\hat{l}_t = l''_t$.
+      Hence,
+      $\min\{l'_t, l''_t\} \ge l_t$.
+      
+      \item
+      \emph{Case 2:}
+      $t \notin T_{\*l',\hat{\*l}}$ and $t \in T_{\hat{\*l},\*l''}$.
+      Analogously to the first case, we conclude $\min\{l'_t, l''_t\} \ge l_t$.
+      
+      \item
+      \emph{Case 3:}
+      $t \notin T_{\*l',\hat{\*l}}$ and $t \notin T_{\hat{\*l},\*l''}$.
+      In this case, we have
+      $\min\{l'_t, \hat{l}_t\} \ge l_t$ and $\min\{\hat{l}_t, l''_t\} \ge l_t$.
+      Hence,
+      $\min\{l'_t, l''_t\} \ge l_t$.
+    \end{itemize}
+    Therefore, it holds $\min\{l'_t, l''_t\} \ge l_t$
+    for all $t \notin T_{\*l',\*l''}$, i.e., $\*l' \sim \*l''$.
+    \qedhere
+  \end{itemize}
+\end{proof}
+
+\lemmaCombiTechniqueIdenticalValues*
+
+\begin{proof}
+  \blindtext{}
+\end{proof}
+
+\lemmaCombiTechniqueCharacterization*
+
+\begin{proof}
+  \blindtext{}
+\end{proof}
+
+\propCombiTechniqueZero*
+
+\begin{proof}
+  \blindtext{}
+\end{proof}
