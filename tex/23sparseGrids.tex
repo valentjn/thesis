@@ -176,7 +176,7 @@ of \term{dimensionally adaptive sparse grids} have the form
 \end{equation}
 where $\levelset$ is a \term{downward closed} set, i.e.,
 a finite subset $\levelset \subset \natz^d$
-for which $\forall_{\*l \in \levelset} \fa{\*l' \le \*l}{\*l' \in \levelset}$.
+for which $\fafa{\*l \in \levelset}{\*l' \le \*l}{\*l' \in \levelset}$.
 Regular sparse grids are a special case by setting
 $\levelset = \{\*l \in \natz^d \mid \normone{\*l} \le n\}$.
 
@@ -253,8 +253,9 @@ If they are not met, then the algorithms do not produce the correct results.
 %the hierarchical ancestors of every grid point:
 %\begin{equation}
 %  \label{eq:hierAncestors}
-%  \forall_{(\*l,\*i) \in \liset}
-%  \fa{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{(\*l',\*i') \in \liset},\quad
+%  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
+%    (\*l',\*i') \in \liset
+%  },\quad
 %  \*l' := \*l - \*e_t,\quad
 %  i_{t'}' :=
 %  \begin{cases}
