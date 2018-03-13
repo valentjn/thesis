@@ -117,10 +117,8 @@ $\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \basis{\*l',\*i'}^\*1$,
 but potentially on the data of the whole grid.
 
-This prohibits the use of the unidirectional principle,
-which will be discussed in \cref{sec:42fullGrids}
-and which takes $\landauO{Nd}$ computing time%
-\footnote{in the number of univariate basis evaluations},
+This prohibits the use of the \up
+(which we will discuss in the next \cref{sec:42fullGrids})
 on sparse grids with hierarchical B-splines.
 Consequently, we have to solve the linear system
 \eqref{eq:hierarchizationSLE}, which is significantly more time-consuming,
@@ -129,7 +127,10 @@ as it takes between $\landauOmega{\ngp^2 d}$ and $\landauO{\ngp^3 d}$ time
 In addition, if we use an explicit solver for the linear system,
 we additionally have to store an $\ngp \times \ngp$ matrix in memory.
 However, a grid of size $\ngp = \num{50000}$ would already exceed the memory
-of a \SI{16}{\gibi\byte} workstation.
+of a \SI{16}{\gibi\byte} workstation
+(if we explicitly store the full matrix in double precision).
+In comparison, for the hat function basis,
+the \up only requires $\landauO{\ngp d}$ time and $\landauO{\ngp}$ memory.
 
 \paragraph{Notation}
 

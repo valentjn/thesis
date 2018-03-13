@@ -144,10 +144,33 @@ With the following invariant, we can prove the correctness of the \up.
 We compare the complexity of the \up for hierarchization compared
 to directly solving the system \eqref{eq:hierarchizationSLE} of
 linear equations.
-If we assume that $\linop$ and $\linop_{t_j}$ apply Gaussian elimination to
+If we assume that $d$ is constant and that
+$\linop$ and $\linop_{t_j}$ apply Gaussian elimination to
 solve the multivariate and univariate systems, respectively,
 then directly solving \eqref{eq:hierarchizationSLE} takes
-$\landauO{\ngp^3 d}$ time (in 1D basis evaluations) and $\landauO{\ngp^2}$ memory.
-In contrast, the unidirectional principle only
-
-\blindtext{}
+$\landauO{\ngp^2 (\ngp + d)}$ time%
+\footnote{%
+  $\landauO{\ngp^2 d}$ for calculating $\intpmat$ and
+  $\landauO{\ngp^3}$ for solving the system.
+}
+and
+$\landauO{\ngp^2}$ memory.
+In contrast, the \up only requires
+$\landauO{\ngp \sum_t \ngp_t^2}$ time%
+\footnote{%
+  There are $\ngp/\ngp_t$ poles in the
+  $t$-th iteration of \cref{alg:unidirectionalPrinciple}.
+  Each pole requires the solution of an $\ngp_t \times \ngp_t$ linear system,
+  which takes $\landauO{\ngp_t^3}$ time.
+},
+if $\ngp_t$ is the grid size
+$\setsize{\{k_t \mid \*k \in \liset\}}$ in dimension $t = 1, \dotsc, d$,
+and $\landauO{\max_t N_t^2}$ memory.
+The dependency from the univariate grid sizes $\ngp_t$ instead of $\ngp$
+makes the \up significantly less computationally expensive.
+As already mentioned,
+the \up is even more efficient for the piecewise linear case
+where the univariate interpolation operators can be applied
+in-place.
+Hence, it only needs $\landauO{Nd}$ time and
+$\landauO{N}$ memory in this case.
