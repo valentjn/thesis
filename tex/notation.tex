@@ -103,6 +103,14 @@
   %$t'_1 < \dotsb t'_{d-j}$)
 }
 
+\newnotationcommand[2]{\range}{{{#1}:{#2}}}{abrange}{$\*k_\range{a}{b}$}{
+  Vector of all dimensions that are contained in $a, a + 1, \dotsc, b$
+}
+
+\newnotationcommand[1]{\unitbasis}{\*e_{#1}}{et}{$\unitbasis{t}$}{
+  $t$-th unit basis vector $:= (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
+}
+
 % ======================================================================
 % Grid Points
 % ======================================================================
