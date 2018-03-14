@@ -14,7 +14,57 @@
 
 \blindtext{}
 
-\begin{restatable}[weighted number of occurrences of grid points]{%
+\paragraph{Formal description and outline of a combinatorial proof}
+
+In the following, we give a formal description of the
+sparse grid combination technique and we outline a combinatorial proof
+for its correctness.
+We discuss a high-level explanation of the proofs in this section
+The proofs themselves can be found in \cref{sec:proofCombiTechnique}
+as most of them are rather technical.
+For simplicity,
+we formulate the combination technique and its proof for regular
+sparse grids (see \cref{sec:231regularSG}).
+However, the main ideas of the proof chain are also applicable
+for dimensionally adaptive sparse grids
+(see \cref{sec:232dimensionallyAdaptiveSG}).
+
+\begin{theorem}[sparse grid combination technique]
+  Let $\liset := \{(\*l, \*i) \mid
+  \normone{\*l} \le n,\; \*i \in \hiset{\*l}\}$
+  correspond to the regular sparse grid
+  $\regsgset{n}{d}{}$ and let $(\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset}$
+  be given function values on $\regsgset{n}{d}{}$.
+  If we define
+  \begin{itemize}
+    \item
+    the combined sparse grid interpolant $\regsgintp{n}{d}{\ct}$ via
+    \eqref{eq:combiTechnique}, i.e.,
+    \begin{equation}
+      \regsgintp{n}{d}{\ct}
+      = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l} = n-q}
+      \fgintp{\*l},
+    \end{equation}
+    where $\fgintp{\*l} \in \ns{\*l}$ is the full grid interpolant
+    of $f$ with level $\*l$, and
+    
+    \item
+    the hierarchical sparse grid interpolant $\regsgintp{n}{d}{}$
+    via \eqref{eq:hierarchizationProblem} and
+    \eqref{eq:hierarchizationInterpolant},
+  \end{itemize}
+  then the combined and the hierarchical sparse grid interpolants coincide:
+  \begin{equation}
+    \regsgintp{n}{d}{}
+    = \regsgintp{n}{d}{\ct}.
+  \end{equation}
+\end{theorem}
+
+\begin{proof}[Proof (sketch)]
+  \blindtext{}
+\end{proof}
+
+\begin{restatable}[inclusion-exclusion principle]{%
   proposition%
 }{%
   propCombiTechniqueOne%
