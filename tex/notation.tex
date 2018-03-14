@@ -513,8 +513,8 @@
 % Interpolation Coefficients
 % ======================================================================
 
-\newnotationcommand[1]{\fcnval}{f_{#1}}{fli}{$\fcnval{\*l,\*i}$}{
-  Function value $\objfun(\gp{\*l,\*i})$ at the grid point $\gp{\*l,\*i}$
+\newnotationcommand[1]{\fcnval}{f(\gp{#1})}{fli}{$\fcnval{\*l,\*i}$}{
+  Value of the objective function $\objfun$ at the grid point $\gp{\*l,\*i}$
 }
 
 \newnotationcommand[1]{\surplus}{\alpha_{#1}}{Äαli}{$\surplus{\*l,\*i}$}{
@@ -673,5 +673,3 @@
 %\newgsymbol{ci}{$c_i$}{Coefficients of a linear combination}%
 %\newgsymbol{ci!}{$c_\*i$}{Coefficients of a linear combination}%
 %\newgsymbol{et!}{$\*e_t$}{$t$-th unit vector $(0, \dotsc, 0, 1, 0, \dotsc, 0)$}%
-
-% TODO: \fcnval and \fgintp have the same name...
