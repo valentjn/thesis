@@ -1,6 +1,10 @@
 \section{Hierarchization on Dimensionally Adaptive Sparse Grids}
 \label{sec:43dimAdaptive}
 
+\todo{mention Delvos/Schempp}
+
+\todo{mention Wasilkowski}
+
 \blindtext{}
 
 
@@ -34,13 +38,14 @@
 \end{restatable}
 
 \begin{proof}
-  See \cref{sec:proofInclusionExclusion}.
+  See \cref{sec:proofCombiTechnique}.
 \end{proof}
 
 \begin{definition}[relation ``$\sim$'']
   \label{def:combiTechniqueEquivalenceRelation}
   Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be fixed and
   \begin{equation}
+    \label{eq:combiTechniqueSpecialLevelSet}
     \levelset
     := \{\*l' \mid \ex{q=0,\dotsc,d-1}{
       \normone{\*l'} = n - q,\; \fgset{\*l'} \notni \gp{\*l,\*i}
@@ -68,8 +73,10 @@
 \end{restatable}
 
 \begin{proof}
-  See \cref{sec:proofInclusionExclusion}.
+  See \cref{sec:proofCombiTechnique}.
 \end{proof}
+
+\todo{add notation for equivalence class, replace}
 
 \begin{restatable}[characterization of the equivalence classes of ``$\sim$'']{%
   lemma%
@@ -83,8 +90,8 @@
     T_{L_0}
     := \{t \mid \exfa{l^\ast_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
   \end{equation}
-  as the set of dimension in which all levels in $L_0$
-  have the same levels, then
+  as the set of dimensions in which all levels in $L_0$
+  have the same entry, then
   \begin{equation}
     L_0
     = \{\*l' \in L \mid
@@ -94,7 +101,7 @@
 \end{restatable}
 
 \begin{proof}
-  See \cref{sec:proofInclusionExclusion}.
+  See \cref{sec:proofCombiTechnique}.
 \end{proof}
 
 \begin{restatable}[weighted sum of function values]{%
@@ -113,7 +120,7 @@
 \end{restatable}
 
 \begin{proof}
-  See \cref{sec:proofInclusionExclusion}.
+  See \cref{sec:proofCombiTechnique}.
 \end{proof}
 
 \blindtext{}
