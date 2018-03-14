@@ -42,17 +42,19 @@ for dimensionally adaptive sparse grids
     \eqref{eq:combiTechnique}, i.e.,
     \begin{equation}
       \regsgintp{n}{d}{\ct}
-      = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l} = n-q}
-      \fgintp{\*l},
+      = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
+      \fgintp{\*l'},
     \end{equation}
-    where $\fgintp{\*l} \in \ns{\*l}$ is the full grid interpolant
-    of $f$ with level $\*l$, and
+    where $\fgintp{\*l'} \in \ns{\*l'}$ is the full grid interpolant
+    of $\objfun$ with level $\*l'$, and
     
     \item
     the hierarchical sparse grid interpolant $\regsgintp{n}{d}{}$
     via \eqref{eq:hierarchizationProblem} and
-    \eqref{eq:hierarchizationInterpolant},
+    \eqref{eq:hierarchizationInterpolant}
   \end{itemize}
+  and assume that the hierarchical splitting equation
+  \eqref{eq:hierSplittingMV} holds,
   then the combined and the hierarchical sparse grid interpolants coincide:
   \begin{equation}
     \regsgintp{n}{d}{}
@@ -61,7 +63,65 @@ for dimensionally adaptive sparse grids
 \end{theorem}
 
 \begin{proof}[Proof (sketch)]
-  \blindtext{}
+  Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be an arbitrary
+  point of the regular sparse grid.
+  First, we split the inner sum of $\regsgintp{n}{d}{\ct}(\gp{\*l,\*i})$
+  into levels $\*l'$ whose full grid sets $\fgset{\*l'}$
+  contain $\gp{\*l,\*i}$ and levels whose full grid sets
+  do not contain $\gp{\*l,\*i}$:
+  \begin{subequations}
+    \begin{align}
+      \regsgintp{n}{d}{\ct}(\gp{\*l,\*i})
+      &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \left(
+      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
+      \fgintp{\*l'}(\gp{\*l,\*i}) +
+      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+      \fgintp{\*l'}(\gp{\*l,\*i})\right).\\
+      \intertext{%
+        The summands $\fgintp{\*l'}(\gp{\*l,\*i})$ of the first inner sum
+        equal $\fcnval{\*l,\*i}$ due to full grid interpolation
+        property \eqref{eq:interpFullGridMV}.
+        Therefore, the first inner sum is equal to the product
+        $\fcnval{\*l,\*i}$ with the number of summands:%
+      }
+      \begin{split}
+        &= \fcnval{\*l,\*i} \cdot \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+        \setsize{
+          \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
+        } +{}\\
+        &\qquad\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+        \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+        \fgintp{\*l'}(\gp{\*l,\*i}).
+      \end{split}
+    \end{align}
+  \end{subequations}
+  We will prove that the sum of the first $\sum$ sign
+  equals one (see \cref{prop:combiTechniqueOne})
+  and the sum of the second $\sum$ sign
+  equals zero (see \cref{prop:combiTechniqueZero}).
+  Consequently, we infer
+  \begin{equation}
+    \regsgintp{n}{d}{\ct}(\gp{\*l,\*i})
+    = \fcnval{\*l,\*i},
+  \end{equation}
+  i.e., $\regsgintp{n}{d}{\ct}$ interpolates $f$ at $\regsgset{n}{d}{}$.
+  Note that $\regsgintp{n}{d}{\ct}$ is contained in $\regsgspace{n}{d}{}$,
+  if the hierarchical splitting equation \eqref{eq:hierSplittingMV} holds,
+  as
+  \begin{equation}
+    \fgintp{\*l'} \in
+    \ns{\*l'}
+    = \bigoplus_{\*l''=\*0}^{\*l'} \hs{\*l''}
+    \subset \regsgspace{n}{d}{},\quad
+    \normone{\*l'} \le n,
+  \end{equation}
+  due to $\normone{\*l''} \le \normone{\*l'} \le n$
+  for $\*l'' \le \*l'$.
+  As both $\regsgintp{n}{d}{\ct}$ and $\regsgintp{n}{d}{}$
+  are contained in $\regsgspace{n}{d}{}$ and
+  interpolate $f$ on $\regsgset{n}{d}{}$, they must coincide
+  due to the uniqueness of sparse grid interpolation
+  (linear independence of the hierarchical basis functions).
 \end{proof}
 
 \begin{restatable}[inclusion-exclusion principle]{%
