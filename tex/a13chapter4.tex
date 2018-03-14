@@ -1,26 +1,38 @@
 \section{Proofs for Chapter 4}
 
-\subsection{Correctness Proof of the Inclusion-Exclusion Principle}
-\label{sec:proofInclusionExclusion}
+\subsection{Combinatorial Proof of the Combination Technique}
+\label{sec:proofCombiTechnique}
 
-\begin{lemma}[combinatorial identity]
+\begin{lemma}[counting lemma for the inclusion-exclusion principle]
   \label{lemma:combinatorialIdentity}
-  For $m \in \natz$ and $r, s \in \integer$, we have
+  For $m, r \in \natz$ with $m \ge r$, we have
   \begin{equation}
-  \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{s}
-  = \binom{r-m}{s-m},
+    \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{m}
+    = 1.
   \end{equation}
-  if we set $\binom{a}{b} := 0$ whenever $a < 0$, $b < 0$, or $b > a$.
 \end{lemma}
 
-\begin{lemma}[number of multi-indices with specific sum]
-  \label{lemma:numberLevelsWithSum}
-  For $m \in \nat$ and $s \in \integer$, it holds
-  \begin{equation}
-  \setsize{\{\*a \in \natz^m \mid \normone{\*a} = s\}}
-  = \binom{s+m-1}{m-1}.
-  \end{equation}
-\end{lemma}
+\begin{proof}
+  We apply the upper negation formula
+  (see Eq. (5.14) of \cite{Graham94Concrete})
+  to the second binomial in the \lhs:
+  \begin{subequations}
+    \begin{align}
+      \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{s}
+      &= (-1)^m \sum_{q=0}^m \binom{m}{0+q} \binom{(m-r)+q}{m} (-1)^q.\\
+      \intertext{%
+        This sum can be simplified using the identity
+        in Eq. (5.24) of \cite{Graham94Concrete}
+        (the sum has already been written in the same way as in
+        \cite{Graham94Concrete}):%
+      }
+      &= (-1)^m (-1)^{m+0} \binom{(m-r)-0}{m-m}
+      = \binom{m-r}{0}
+      = 1,
+    \end{align}
+  \end{subequations}
+  due to $m - r \ge 0$.
+\end{proof}
 
 \propCombiTechniqueOne*
 
@@ -32,37 +44,40 @@
   Hence,
   \begin{subequations}
     \begin{align}
-    \setsize{
-      \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
-    }
-    &= \setsize{
-      \{\*l' \mid \normone{\*l'} = n - q,\; \*l' \ge \*l\}
-    }\\
-    &= \setsize{
-      \{\*a \in \natz^d \mid \normone{\*a} = n - q - \normone{\*l}\}
-    }\\
-    \intertext{%
-      by mapping $\*a := \*l' - \*l$.
-      By \cref{lemma:numberLevelsWithSum}, we obtain
-      that this equals%
-    }
-    &= \binom{n - q - \normone{\*l} + d - 1}{d - 1}
+      \setsize{
+        \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
+      }
+      &= \setsize{
+        \{\*l' \mid \normone{\*l'} = n - q,\; \*l' \ge \*l\}
+      }\\
+      &= \setsize{
+        \{\*a \in \natz^d \mid \normone{\*a} = n - q - \normone{\*l}\}
+      }\\
+      \intertext{%
+        by mapping $\*a := \*l' - \*l$.
+        The size of the last set is
+        known as the number of weak compositions
+        of $n - q - \normone{\*l}$ into $d$ parts
+        and can computed as%
+      }
+      &= \binom{n - q - \normone{\*l} + d - 1}{d - 1},
     \end{align}
   \end{subequations}
+  see Theorem 2.2 of \cite{Miklos15Introduction}.
   Now, we can use \cref{lemma:combinatorialIdentity}
   with the values
-  $m := d - 1$,
-  $r := n - \normone{\*l} + d - 1$, and
-  $s := d - 1$,
+  $m := d - 1$ and
+  $r := n - \normone{\*l} + d - 1$
+  (note that $r \ge m$ due to $\normone{\*l} \le n$)
   to conclude that the \lhs of the assertion
   \eqref{eq:combiTechniqueOne} equals
   \begin{equation}
-  \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
-  \binom{n - q - \normone{\*l} + d - 1}{d - 1}
-  = \binom{n - \normone{\*l}}{0}
-  = 1
+    \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+    \binom{n - q - \normone{\*l} + d - 1}{d - 1}
+    = \binom{n - \normone{\*l}}{0}
+    = 1,
   \end{equation}
-  due to $n - \normone{\*l} \ge 0$, proving the proposition.
+  proving the proposition.
 \end{proof}
 
 \begin{shortlemma}
@@ -123,12 +138,140 @@
 \lemmaCombiTechniqueIdenticalValues*
 
 \begin{proof}
-  \blindtext{}
+  First, we note that $T_{\*l',\*l''} \not= \emptyset$.
+  Otherwise, for $T_{\*l',\*l''} = \emptyset$,
+  we have $\min\{l'_t, l''_t\} \ge l_t$
+  for all $t = 1, \dotsc, d$, which implies $\*l' \ge \*l$, i.e.,
+  $\fgset{\*l'} \ni \gp{\*l,\*i}$.
+  This contradicts the fact that $\*l' \in L$, where $L$ is defined
+  in \eqref{eq:combiTechniqueSpecialLevelSet}
+  (which holds as our equivalence relation is only defined on $L$).
+  Therefore, $T_{\*l',\*l''} \not= \emptyset$ must hold.
+  Without loss of generality,
+  let us assume that $T_{\*l',\*l''} = \{1, \dotsc, m\}$
+  for some $m \in \{1, \dotsc, d\}$.
+  
+  Let
+  \begin{equation}
+    S := \gp{\*l,\*i} + \spn\{\unitbasis{1}, \dotsc, \unitbasis{m}\}
+    = \{\gp{\*l,\*i} + \textstyle\sum_{t=1}^m c_t \unitbasis{t} \mid
+    c_1, \dotsc, c_m \in \real\}
+  \end{equation}
+  be the $m$-dimensional affine subspace of $\real^d$
+  through $\gp{\*l, \*i}$
+  parallel to the dimensions $1, \dotsc, m$,
+  where $\unitbasis{t}$ is the $t$-the unit basis vector.
+  It holds $S \cap \fgset{\*l'} = S \cap \fgset{\*l''}$ due to
+  $l'_t = l''_t$ for $t \le m$.%
+  \footnote{%
+    In more detail:
+    If we have an $\gp{\hat{\*l},\hat{\*i}} \in S \cap \fgset{\*l'}$,
+    then $\fa{t \le m}{\hat{l}_t \le l'_t = l''_t}$ and
+    $\fa{t > m}{\hat{l}_t = l_t \le l''_t}$, i.e.,
+    $\hat{\*l} \le \*l''$ and therefore
+    $\gp{\hat{\*l},\hat{\*i}} \in S \cap \fgset{\*l''}$.%
+  }
+  
+  On this $m$-dimensional grid $S \cap \fgset{\*l'} = S \cap \fgset{\*l''}$,
+  the full grid interpolants $\fgintp{\*l'}$ and $\fgintp{\*l''}$
+  coincide, as both interpolate the function values given by
+  the objective function $\objfun$:
+  \begin{equation}
+    \label{eq:proofCombiTechniqueIdenticalValues1}
+    \restrictfcn{\fgintp{\*l'}}{S \cap \fgset{\*l'}}
+    = \restrictfcn{\objfun}{S \cap \fgset{\*l'}}
+    =  \restrictfcn{\fgintp{\*l''}}{S \cap \fgset{\*l'}}.
+  \end{equation}
+  However, this does not suffice to conclude
+  $\fgintp{\*l'}(\gp{\*l,\*i}) = \fgintp{\*l''}(\gp{\*l,\*i})$,
+  since $\gp{\*l,\*i} \notin \fgset{\*l'}$.
+  
+  To this end, we recall from \eqref{eq:interpFullGridMV} that
+  \begin{equation}
+    \fgintp{\*l'}
+    = \sum_{\*i'=\*0}^{\*2^{\*l'}} \interpcoeff{\*l',\*i'}
+    \basis{\*l',\*i'},\quad
+    \interpcoeff{\*l',\*i'} \in \real.
+  \end{equation}
+  This implies that the $m$-variate function
+  $\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}$ can be written as
+  \begin{subequations}
+    \begin{gather}
+      (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})(\*x_\range{1}{m})
+      = \sum_{\*i'_\range{1}{m}=\*0}^{\*2^{\*l'_\range{1}{m}}}
+      \interpcoefftilde{\*l'_\range{1}{m},\*i'_\range{1}{m}}
+      \basis{\*l'_\range{1}{m},\*i'_\range{1}{m}}(\*x_\range{1}{m}),\quad
+      \*x_\range{1}{m} \in \clint{0, 1}^m,\\
+      \interpcoefftilde{\*l'_\range{1}{m},\*i'_\range{1}{m}}
+      := \sum_{\*i'_\range{m+1}{d}=\*0}^{\*2^{\*l'_\range{m+1}{d}}}
+      \interpcoeff{\*l',\*i'} \cdot
+      \basis{\*l'_\range{m+1}{d},\*i'_\range{m+1}{d}}%
+      (\gp{\*l_\range{m+1}{d},\*i_\range{m+1}{d}})
+    \end{gather}
+  \end{subequations}
+  by factoring out tensor product factors corresponding to dimensions
+  $m + 1, \dotsc, d$.
+  As a result,
+  both $\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}$
+  and, analogously,
+  $\restrictfcn{\fgintp{\*l''}}{S \cap \clint{\*0, \*1}}$
+  are interpolants of $f$ in
+  $\ns{\*l'_\range{1}{m}} = \ns{\*l''_\range{1}{m}}$.
+  Due to \thmref{lemma:tensorProductLinearIndependence},
+  it follows from \eqref{eq:proofCombiTechniqueIdenticalValues1}
+  that they must be the same:
+  \begin{equation}
+    \restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}
+    = \restrictfcn{\fgintp{\*l''}}{S \cap \clint{\*0, \*1}}.
+  \end{equation}
+  Consequently, $\fgintp{\*l'}(\gp{\*l,\*i}) = \fgintp{\*l''}(\gp{\*l,\*i})$
+  as $\gp{\*l,\*i} \in S$.
 \end{proof}
 
 \lemmaCombiTechniqueCharacterization*
 
 \begin{proof}
+  ``$\subset$'':
+  Let $\*l' \in L_0$.
+  We have to prove that
+  $\fa{t \in T_{L_0}}{l'_t = l^\ast_t}$ and
+  $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$.
+  The first statement is clear by the definition of $T_{L_0}$.
+  Therefore, let $t \notin T_{L_0}$.
+  By the definition of $T_{L_0}$,
+  there must be some $\hat{\*l'}', \hat{\*l}'' \in L_0$ with
+  $\hat{l}'_t \not= \hat{l}''_t$.%
+  \footnote{%
+    $T_{L_0}$ is the set of all dimensions on which all levels
+    in $L_0$ coincide.
+    If a dimension $t$ is not in $T_{L_0}$, then there must be two levels
+    that differ in the $t$-th entry.%
+  }
+  One of $l'_t \not= \hat{l}'_t$ or $l'_t \not= \hat{l}''_t$ must be true.
+  Let us assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
+  $t \notin T_{\*l',\hat{\*l}'}$.
+  Due to $\*l' \sim \hat{\*l}'$
+  (since $\*l'$ and $\hat{\*l}'$ are both contained in the same
+  equivalence class $L_0$),
+  we have $\min\{l'_t, \hat{l}'_t\} \ge l_t$.
+  This implies $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$ as desired.
+  
+  ``$\supset$'':
+  Let $\*l' \in L$ such that
+  $\fa{t \in T_{L_0}}{l'_t = l^\ast_t}$ and
+  $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$
+  and let $\*l'' \in L_0$ be an arbitrary representative of $L_0$.
+  We prove that $\*l' \sim \*l''$ (i.e., $\*l' \in L_0$).
+  Note that $T_{L_0} \subset T_{\*l',\*l''}$,
+  as $t \in T_{L_0}$ implies
+  $l''_t = l^\ast_t$, which can be combined with $l'_t = l^\ast_t$
+  to $l'_t = l''_t$, i.e., $t \in T_{\*l',\*l''}$.
+  
+  To prove the equivalence of $\*l'$ and $\*l''$,
+  let $t \notin T_{\*l',\*l''}$.
+  This means that $t \notin T_{L_0}$, i.e.,
+  there exist some
+  
   \blindtext{}
 \end{proof}
 
