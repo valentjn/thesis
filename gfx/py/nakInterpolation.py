@@ -34,7 +34,7 @@ interpolant = helper.function.Interpolant(basis, X, L, I, fX)
 XX = np.array([xx]).T
 yy2 = interpolant.evaluate(XX)
 ax.plot(xx, yy2, "--", clip_on=False, color="C1")
-ax.text(0.91, 0.5, r"$\tilde{f}$", ha="right", va="top", color="C1")
+ax.text(0.91, 0.5, r"$f_3$", ha="right", va="top", color="C1")
 
 ax.plot(X, fX, "k.", clip_on=False)
 
