@@ -216,16 +216,16 @@
   $\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}$ can be written as
   \begin{subequations}
     \begin{gather}
-      (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})(\*x_\range{1}{m})
-      = \sum_{\*i'_\range{1}{m}=\*0}^{\*2^{\*l'_\range{1}{m}}}
-      \interpcoefftilde{\*l'_\range{1}{m},\*i'_\range{1}{m}}
-      \basis{\*l'_\range{1}{m},\*i'_\range{1}{m}}(\*x_\range{1}{m}),\quad
-      \*x_\range{1}{m} \in \clint{0, 1}^m,\\
-      \interpcoefftilde{\*l'_\range{1}{m},\*i'_\range{1}{m}}
-      := \sum_{\*i'_\range{m+1}{d}=\*0}^{\*2^{\*l'_\range{m+1}{d}}}
+      (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})(\*x_{\range{1}{m}})
+      = \sum_{\*i'_{\range{1}{m}}=\*0}^{\*2^{\*l'_{\range{1}{m}}}}
+      \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
+      \basis{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}(\*x_{\range{1}{m}}),\quad
+      \*x_{\range{1}{m}} \in \clint{0, 1}^m,\\
+      \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
+      := \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
       \interpcoeff{\*l',\*i'} \cdot
-      \basis{\*l'_\range{m+1}{d},\*i'_\range{m+1}{d}}%
-      (\gp{\*l_\range{m+1}{d},\*i_\range{m+1}{d}})
+      \basis{\*l'_{\range{m+1}{d}},\*i'_{\range{m+1}{d}}}%
+      (\gp{\*l_{\range{m+1}{d}},\*i_{\range{m+1}{d}}})
     \end{gather}
   \end{subequations}
   by factoring out tensor product factors corresponding to dimensions
@@ -235,7 +235,7 @@
   and, analogously,
   $\restrictfcn{\fgintp{\*l''}}{S \cap \clint{\*0, \*1}}$
   are interpolants of $f$ in
-  $\ns{\*l'_\range{1}{m}} = \ns{\*l''_\range{1}{m}}$.
+  $\ns{\*l'_{\range{1}{m}}} = \ns{\*l''_{\range{1}{m}}}$.
   Due to \thmref{lemma:tensorProductLinearIndependence},
   it follows from \eqref{eq:proofCombiTechniqueIdenticalValues1}
   that they must be the same:
