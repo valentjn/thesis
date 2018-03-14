@@ -258,7 +258,7 @@
   The first statement is clear by the definition of $T_{L_0}$.
   Therefore, let $t \notin T_{L_0}$.
   By the definition of $T_{L_0}$,
-  there must be some $\hat{\*l'}', \hat{\*l}'' \in L_0$ with
+  there must be some $\hat{\*l}', \hat{\*l}'' \in L_0$ with
   $\hat{l}'_t \not= \hat{l}''_t$.%
   \footnote{%
     $T_{L_0}$ is the set of all dimensions on which all levels
@@ -290,12 +290,144 @@
   let $t \notin T_{\*l',\*l''}$.
   This means that $t \notin T_{L_0}$, i.e.,
   there exist some
-  
-  \blindtext{}
+  $\hat{\*l}', \hat{\*l}'' \in L_0$ with
+  $\hat{l}'_t \not= \hat{l}''_t$.
+  As above, we assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
+  $t \notin T_{\*l',\hat{\*l}'}$.
+  From $\*l'' \sim \hat{\*l}'$
+  (since $\*l''$ and $\hat{\*l}'$ are both contained in the same
+  equivalence class $L_0$),
+  we obtain $\min\{l''_t, \hat{l}'_t\} \ge l_t$.
+  Together with $l'_t \ge l_t$ (by the above assumption on $\*l'$),
+  this implies
+  $\fa{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t}$
+  and consequently $\*l' \sim \*l''$,
+  as asserted.
 \end{proof}
 
 \propCombiTechniqueZero*
 
 \begin{proof}
-  \blindtext{}
+  \Cref{lemma:combiTechniqueIdenticalValues}
+  implies that the summands $\fgintp{\*l'}{\gp{\*l,\*i}}$
+  corresponding to levels $\*l'$ of the same equivalence class
+  $L_0 \in L/{\sim}$ are identical.
+  Let $f_{L_0}$ denote the common function value.
+  Hence, the sum in the \lhs of the assertion can be reordered to combine
+  levels of the equivalence classes $L_0 \in L/{\sim}$:
+  \begin{subequations}
+    \begin{align}
+      &\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+      \fgintp{\*l'}(\gp{\*l,\*i})\\
+      \label{eq:proofCombiTechniqueIdenticalValues2}
+      &= \sum_{L_0 \in L/{\sim}} f_{L_0} \sum_{q=0}^{d-1}
+      (-1)^q \binom{d-1}{q} \cdot
+      \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}.
+    \end{align}
+  \end{subequations}
+  It now suffices to show that the inner sum vanishes
+  for every equivalence class $L_0 \in L/{\sim}$.
+  
+  To this end, we have to calculate
+  $\setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}$
+  for a fixed equivalence class $L_0$.
+  Without loss of generality,
+  let $T_{L_0} = \{1, \dotsc, m\}$ in
+  \thmref{lemma:combiTechniqueCharacterization}
+  with $1 \le m \le d$.
+  Note that the case $m = 0$ is impossible:
+  Otherwise, $T_{L_0} = \emptyset$ implies
+  $\fa{\*l' \in L_0}{\*l' \ge \*l}$ by
+  \cref{lemma:combiTechniqueCharacterization}, and
+  as equivalence classes are non-empty,
+  there is at least one $\*l' \in L_0$ with $\*l' \ge \*l$.
+  However, this is equivalent to $\fgset{\*l'} \ni \gp{\*l,\*i}$,
+  which contradicts $\*l' \in L$.
+  
+  To enumerate all the levels $\*l' \in L_0$ with $\normone{\*l'} = n - q$,
+  we exploit the characterization of $L_0$ of
+  \cref{lemma:combiTechniqueCharacterization}.
+  As a shortcut, we define the vector
+  \begin{equation}
+    \hat{\*l}
+    := (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d).
+  \end{equation}
+  We show that $\*a := (l'_t - l_t)_{t = m+1, \dotsc, d}$,
+  constitutes a bijection between
+  \begin{equation}
+    \{\*l' \in L_0 \mid \normone{\*l'} = n - q\}
+    \quad\text{and}\quad
+    \{\*a \in \natz^{d-m} \mid \normone{\*a} = n - q - \normone{\hat{\*l}}\}:
+  \end{equation}
+  \begin{itemize}
+    \item
+    Let $\*l' \in L_0$ with $\normone{\*l'} = n - q$.
+    Then, $\fa{t=m+1,\dotsc,d}{l'_t - l_t \ge 0}$
+    (by \cref{lemma:combiTechniqueCharacterization}), i.e.,
+    $\*a \in \natz^{d-m}$, and
+    \begin{equation}
+      \normone{\*a}
+      = \sum_{t=m+1}^d (l'_t - l_t)
+      = \left(\normone{\*l'} - \sum_{t=1}^m l'_t\right) -
+      \sum_{t=m+1}^d \hat{l}_t
+      = n - q - \normone{\hat{\*l}}.
+    \end{equation}
+    
+    \item
+    Conversely, let $\*a \in \natz^{d-m}$ with
+    $\normone{\*a} = n - q - \normone{\hat{\*l}}$.
+    If we define $\*l'$ as
+    \begin{equation}
+      \*l'
+      = (l^\ast_1, \dotsc, l^\ast_m,\;
+      a_1 + l_{m+1}, \dotsc, a_{d-m} + l_d),
+    \end{equation}
+    then $\fa{t=1,\dotsc,m}{l'_t = l^\ast_t}$ and
+    $\fa{t=m+1,\dotsc,d}{l'_t \ge l_t}$.
+    By \cref{lemma:combiTechniqueCharacterization},
+    we obtain $\*l' \in L_0$ and
+    \begin{equation}
+      \normone{\*l'}
+      = \normone{\hat{\*l}} + \normone{\*a}
+      = n - q.
+    \end{equation}
+  \end{itemize}
+  This bijection implies that
+  \begin{subequations}
+    \begin{align}
+      \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}
+      &= \setsize{
+        \{\*a \in \natz^{d-m} \mid \normone{\*a} = n - q - \normone{\hat{\*l}}\}
+      }.\\
+      \intertext{%
+        This is the number of weak decompositions of
+        $n - q - \normone{\hat{\*l}}$ into $d - m$ parts,
+        which can be calculated as%
+      }
+      &= \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1}.
+    \end{align}
+  \end{subequations}
+  (see Theorem 2.2 of \cite{Miklos15Introduction}).
+  We insert this quantity into the inner sum of
+  \eqref{eq:proofCombiTechniqueIdenticalValues2}:
+  \begin{subequations}
+    \begin{align}
+      &\sum_{q=0}^{d-1}
+      (-1)^q \binom{d-1}{q} \cdot
+      \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}\\
+      &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+      \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1}\\
+      \intertext{%
+        Again, we apply \thmref{lemma:inclusionExclusionCountingLemma}
+        with the values $m := d - 1$,
+        $r := n - \normone{\hat{\*l}} + d - m - 1$, and
+        $s := d - m - 1$ to obtain%
+      }
+      &= \binom{n - \normone{\hat{\*l}} - m}{-m}
+      = 0
+    \end{align}
+  \end{subequations}
+  by the convention for binomial coefficients in \cref{def:binomialCoefficient}
+  as $-m < 0$.
 \end{proof}
