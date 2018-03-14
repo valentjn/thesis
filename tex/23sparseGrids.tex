@@ -86,6 +86,7 @@ continuous knapsack problem~\cite{Bungartz04Sparse}.
 \usenotation{Ës}
 The resulting function space and grid point set
 \begin{equation}
+  \label{eq:regularSG}
   \regsgspace{n}{d}{}
   := \bigoplus_{\normone{\*l} \le n} \hs{\*l},\qquad
   \regsgset{n}{d}{}
@@ -169,6 +170,7 @@ to allow for an asymmetric preference.
 Generally, function spaces~$\sgspace$ and grid sets $\sgset$
 of \term{dimensionally adaptive sparse grids} have the form
 \begin{equation}
+  \label{eq:dimensionallyAdaptiveSG}
   \sgspace
   = \bigoplus_{\*l \in \levelset} \hs{\*l},\qquad
   \sgset
@@ -240,6 +242,7 @@ on which this thesis focuses.
 In the most general form, their function spaces $\sgspace$
 and grid sets $\sgset$ have the form
 \begin{equation}
+  \label{eq:spatiallyAdaptiveSG}
   \sgspace
   = \spn\{\basis{\*l,\*i} \mid (\*l,\*i) \in \liset\},\qquad
   \sgset
