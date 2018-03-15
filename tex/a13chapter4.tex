@@ -311,23 +311,23 @@
   \Cref{lemma:combiTechniqueIdenticalValues}
   implies that the summands $\fgintp{\*l'}{\gp{\*l,\*i}}$
   corresponding to levels $\*l'$ of the same equivalence class
-  $L_0 \in L/{\sim}$ are identical.
+  $L_0 \in \eqclasses{L}{\sim}$ are identical.
   Let $f_{L_0}$ denote the common function value.
   Hence, the sum in the \lhs of the assertion can be reordered to combine
-  levels of the equivalence classes $L_0 \in L/{\sim}$:
+  levels of the equivalence classes $L_0 \in \eqclasses{L}{\sim}$:
   \begin{subequations}
     \begin{align}
       &\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
       \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
       \fgintp{\*l'}(\gp{\*l,\*i})\\
       \label{eq:proofCombiTechniqueIdenticalValues2}
-      &= \sum_{L_0 \in L/{\sim}} f_{L_0} \sum_{q=0}^{d-1}
+      &= \sum_{L_0 \in \eqclasses{L}{\sim}} f_{L_0} \sum_{q=0}^{d-1}
       (-1)^q \binom{d-1}{q} \cdot
       \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}.
     \end{align}
   \end{subequations}
   It now suffices to show that the inner sum vanishes
-  for every equivalence class $L_0 \in L/{\sim}$.
+  for every equivalence class $L_0 \in \eqclasses{L}{\sim}$.
   
   To this end, we have to calculate
   $\setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}$

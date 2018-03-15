@@ -34,7 +34,7 @@ With the following invariant, we can prove the correctness of the \up.
           Define equivalence relation $\sim$ on $\liset$
           as $\*k \sim \*k' \iff \*k_{-t_j} = \*k'_{-t_j}$%
         }
-        \For{$\liset_\mathrm{pole} \in \liset/{\sim}$}
+        \For{$\liset_\mathrm{pole} \in \eqclasses{\liset}{\sim}$}
           \State{%
             $(\linout{\*k}^{(j)})_{\*k \in \liset_\mathrm{pole}} \gets
             \linop_{t_j}
