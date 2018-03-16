@@ -370,31 +370,31 @@ and not the nodal basis
     \Function{$\vlinout =$ combinationTechnique}{%
       $n$, $d$, $\vlinin$%
     }
-    \For{$q = 0, \dotsc, d - 1$}
-      \For{$\*l' \in \natz^d$ with $\normone{\*l'} = n - q$}
-        \State{%
-          Determine $(\surplus{\*l,\*i}^{(\*l')})_{
-            \*l = \*0, \dotsc, \*l'\!,\, \*i \in \hiset{\*l}
-          }$ such that
-          $\sum_{\*l=\*0}^{\*l'} \sum_{\*i \in \hiset{\*l}}
-          \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i} \equiv
-          \fgintp{\*l'}$%
-        }
-        \label{line:algCombiTechnique1}
-        \State{%
-          $\surplus{\*l,\*i}^{(\*l')} \gets 0$
-          for all $(\*l,\*i) \in \liset$
-          that do not satisfy $\*l \le \*l'$%
-        }
-        \label{line:algCombiTechnique2}
+      \For{$q = 0, \dotsc, d - 1$}
+        \For{$\*l' \in \natz^d$ with $\normone{\*l'} = n - q$}
+          \State{%
+            Let $(\surplus{\*l,\*i}^{(\*l')})_{
+              \*l = \*0, \dotsc, \*l'\!,\, \*i \in \hiset{\*l}
+            }$ be such that
+            $\sum_{\*l=\*0}^{\*l'} \sum_{\*i \in \hiset{\*l}}
+            \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i} \equiv
+            \fgintp{\*l'}$%
+          }
+          \label{line:algCombiTechnique1}
+          \State{%
+            $\surplus{\*l,\*i}^{(\*l')} \gets 0$
+            for all $(\*l,\*i) \in \liset$
+            with $\lnot(\*l \le \*l')$%
+          }
+          \label{line:algCombiTechnique2}
+        \EndFor{}
       \EndFor{}
-    \EndFor{}
-    \State{%
-      $\linout{\*l,\*i}
-      = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q}
-      \sum_{\normone{\*l'} = n-q} \surplus{\*l,\*i}^{(\*l')}$
-      for all $(\*l, \*i) \in \liset$%
-    }
+      \State{%
+        $\linout{\*l,\*i}
+        = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q}
+        \sum_{\normone{\*l'} = n-q} \surplus{\*l,\*i}^{(\*l')}$
+        for all $(\*l, \*i) \in \liset$%
+      }
     \EndFunction{}
   \end{algorithmic}
   \caption{%
