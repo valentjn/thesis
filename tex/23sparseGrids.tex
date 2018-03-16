@@ -22,7 +22,7 @@ be written as
 \begin{equation}
   \label{eq:interpHierFullGrid}
   \fgintp{\*l}
-  = \sum_{\*l'=\*0}^\*l \sum_{\*i'=\*0}^{\*2^{\*l'}}
+  = \sum_{\*l'=\*0}^\*l \sum_{\*i' \in \hiset{\*l'}}
   \surplus{\*l',\*i'} \basis{\*l',\*i'},\quad
   \fa{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})}.
 \end{equation}
@@ -67,8 +67,10 @@ Consequently, the contribution of the summand of level $\*l$
 can be estimated by
 \begin{equation}
   \label{eq:componentEstimation}
-  \normLtwoscaled{\sum_{\*i'=\*0}^{\*2^{\*l'}}
-  \surplus{\*l',\*i'} \bspl{\*l',\*i'}{1}{}}
+  \normLtwoscaled{
+    \sum_{\*i' \in \hiset{\*l'}}
+    \surplus{\*l',\*i'} \bspl{\*l',\*i'}{1}{}
+  }
   \le 3^{-d} \cdot 2^{-2 \normone{\*l}} \cdot
   \normLtwoscaled{\frac{\partialdiff^{2d}}{
       \partialdiff x_1^2 \dotsb \partialdiff x_d^2
