@@ -97,6 +97,14 @@ The resulting function space and grid point set
 \end{equation}
 are called \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
+The functions $\regsgintp{n}{d}{}$ contained in
+$\regsgspace{n}{d}{}$ have the form
+\begin{equation}
+  \label{eq:regularSGInterpolant}
+  \regsgintp{n}{d}{}
+  = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+  \surplus{\*l,\*i} \basis{\*l,\*i}.
+\end{equation}
 To better distinguish the different grids,
 we call the nodal spaces and grids \term{full grids}.
 Although sparse grids have been motivated using the hat function
