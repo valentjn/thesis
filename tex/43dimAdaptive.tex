@@ -349,7 +349,138 @@ This proves \thmref{thm:combiTechnique}.
 \subsection{Hierarchization with the Combination Technique}
 \label{sec:432hierarchizationCombiTechnique}
 
-\blindtext{}
+As shown in \cref{alg:combiTechnique},
+it is straightforward to hierarchize function values
+$\fcnval{\*l,\*i}$ on dimensionally adaptive sparse grids
+with the combination technique.
+In \cref{line:algCombiTechnique1},
+the hierarchical surpluses corresponding to the full grid
+interpolant $\fgintp{\*l'} \in \ns{\*l'}$ have to be computed
+(see \eqref{eq:interpFullGridMV}).
+As shown in \cref{sec:42fullGrids}, we can easily calculate these
+surpluses with the unidirectional principle in
+\cref{alg:unidirectionalPrinciple}.
+Note that it is imperative to employ the hierarchical basis functions
+$\basis{\*l,\*i}$ with $\*l = \*0, \dotsc, \*l'$ and $\*i \in I_{\*l}$
+and not the nodal basis
+(which would be $\basis{\*l',\*i'}$ with $\*i' = \*0, \dotsc, \*2^{\*l'}$).
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\vlinout =$ combinationTechnique}{%
+      $n$, $d$, $\vlinin$%
+    }
+    \For{$q = 0, \dotsc, d - 1$}
+      \For{$\*l' \in \natz^d$ with $\normone{\*l'} = n - q$}
+        \State{%
+          Determine $(\surplus{\*l,\*i}^{(\*l')})_{
+            \*l = \*0, \dotsc, \*l'\!,\, \*i \in \hiset{\*l}
+          }$ such that
+          $\sum_{\*l=\*0}^{\*l'} \sum_{\*i \in \hiset{\*l}}
+          \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i} \equiv
+          \fgintp{\*l'}$%
+        }
+        \label{line:algCombiTechnique1}
+        \State{%
+          $\surplus{\*l,\*i}^{(\*l')} \gets 0$
+          for all $(\*l,\*i) \in \liset$
+          that do not satisfy $\*l \le \*l'$%
+        }
+        \label{line:algCombiTechnique2}
+      \EndFor{}
+    \EndFor{}
+    \State{%
+      $\linout{\*l,\*i}
+      = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q}
+      \sum_{\normone{\*l'} = n-q} \surplus{\*l,\*i}^{(\*l')}$
+      for all $(\*l, \*i) \in \liset$%
+    }
+    \EndFunction{}
+  \end{algorithmic}
+  \caption{%
+    Application of the hierarchization operator $\linop = \intpmat^{-1}$
+    with the combination technique.
+    For simplicity,
+    the algorithm is described for regular sparse grids,
+    but it can be generalized to arbitrary dimensionally adaptive sparse grids.
+    Inputs are the level $n$ and dimensionality $d$ of the
+    regular sparse grid and
+    the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points),
+    where $\liset$ is the set of all feasible level-index pairs $(\*l,\*i)$,
+    i.e., $\normone{\*l} \le n$, $\*i \in \hiset{\*l}$.
+    The output is the vector
+    $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of output data (hierarchical surpluses $\surplus{\*l,\*i}$).
+  }%
+  \label{alg:combiTechnique}%
+\end{algorithm}
+
+Of course, the proof of the correctness of \cref{alg:combiTechnique}
+relies on the correctness of the combination technique
+(see \cref{thm:combiTechnique}).
+When determining the combination coefficients correctly
+\cite{Wasilkowski95Explicit}, the algorithm can even be applied to
+all dimensionally adaptive sparse grids.
+The proof of the following proposition can be generalized accordingly.
+
+\begin{proposition}[correctness of \cref{alg:combiTechnique}]
+  \label{prop:correctnessAlgCombiTechnique}
+  \Cref{alg:combiTechnique}
+  is correct for hierarchization on regular sparse grids.
+\end{proposition}
+
+\begin{proof}
+  According to \cref{line:algCombiTechnique1} of \cref{alg:combiTechnique},
+  the full grid interpolants $\fgintp{\*l'}$ can be written as
+  \begin{equation}
+    \fgintp{\*l'}
+    = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+    \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i}
+  \end{equation}
+  where the surpluses have been extended with zero by
+  \cref{line:algCombiTechnique2}.
+  \Thmref{thm:combiTechnique} now allows to write the hierarchical
+  interpolant $\regsgintp{n}{d}{}$ in terms of the full grid components:
+  \begin{subequations}
+    \begin{align}
+      \
+      \regsgintp{n}{d}{}
+      = \regsgintp{n}{d}{\ct}
+      &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
+      \fgintp{\*l'}\\
+      &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
+      \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+      \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i}.\\
+      \intertext{%
+        By rearranging the sums, we obtain%
+      }
+      \label{eq:propCorrectnessAlgCombiTechnique1}
+      &= \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+      \underbrace{
+        \left(\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
+        \surplus{\*l,\*i}^{(\*l')}\right)
+      }_{= \linout{\*l,\*i}}
+      \basis{\*l,\*i},
+    \end{align}
+  \end{subequations}
+  where $\linout{\*l,\*i}$ is the $(\*l,\*i)$-th entry of the output vector
+  of \cref{alg:combiTechnique}.
+  Note that the hierarchical interpolant $\regsgintp{n}{d}{}$
+  can be written as
+  $\regsgintp{n}{d}{} = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+  \surplus{\*l,\*i} \basis{\*l,\*i}$
+  (see \eqref{eq:regularSGInterpolant}),
+  where the surpluses $\surplus{\*l,\*i}$ are unique due to the
+  linear independence of the hierarchical basis.
+  As \eqref{eq:propCorrectnessAlgCombiTechnique1}
+  equals $\regsgintp{n}{d}{}$ and has the same form,
+  the coefficients $\linout{\*l,\*i}$
+  (which are the output of \cref{alg:combiTechnique})
+  must coincide with the surpluses $\surplus{\*l,\*i}$.
+\end{proof}
+
+
 
 \subsection{%
   Hierarchization by Successive Applications of the Unidirectional Principle%
