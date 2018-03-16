@@ -483,8 +483,69 @@ The proof of the following proposition can be generalized accordingly.
 
 
 \subsection{%
-  Hierarchization by Successive Applications of the Unidirectional Principle%
+  Hierarchization by Residual Interpolation%
 }
-\label{sec:433hierarchizationSuccessiveUP}
+\label{sec:433residualInterpolation}
 
 \blindtext{}
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\vlinout =$ residualInterpolation}{%
+      $\levelset$, $\vlinin$%
+    }
+      % renames:
+      % * f^(m) --> r^(m)
+      % * alpha^(m) --> y^(m)
+      % * tilde(g)^(m) --> r_l^(m-1)
+      % * beta^(m) --> alpha^(m)
+      % * tilde(f)^(m) --> f^{s,m}
+      \State{%
+        $\linout{\*l,\*i}^{(0)} \gets 0$ and
+        $r^{(0)}(\gp{\*l,\*i}) \gets \fcnval{\*l,\*i}$
+        for all $(\*l,\*i) \in \liset$%
+      }
+      \State{%
+        Enumerate $\levelset$
+        with $\*l^{(1)}, \dotsc, \*l^{(\setsize{\levelset})}$,
+        where $\normone{\*l^{(m_1)}} \ge \normone{\*l^{(m_2)}}$
+        for all $m_1 \le m_2$%
+      }
+      \For{$m = 1, \dotsc, \setsize{L}$}
+        \State{%
+          Let $r_{\*l^{(m)}}^{(m-1)} \in \ns{\*l^{(m)}}$ be the
+          interpolant of $r^{(m-1)}$ on $\fgset{\*l^{(m)}}$%
+          %(see \eqref{eq:interpFullGridMV})%
+        }
+        \State{%
+          Let $(\surplus{\*l,\*i}^{(m)})_{(\*l,\*i) \in \liset}$ be such that
+          $\sum_{\*l \le \*l^{(m)}} \sum_{\*i \in \hiset{\*l}}
+          \surplus{\*l,\*i}^{(m)} \basis{\*l,\*i}
+          \equiv r_{\*l^{(m)}}^{(m-1)}$%
+        }
+        \State{%
+          $\surplus{\*l,\*i}^{(m)} \gets 0$
+          for all $(\*l,\*i) \in \liset$
+          if $\lnot(\*l \le \*l^{(m)})$%
+        }
+        \State{%
+          $\vlinout^{(m)} \gets
+          \vlinout^{(m-1)} + \vsurplus^{(m)}$%
+          %if necessary)%
+        }
+        \State{%
+          $r^{(m)}(\gp{\*l,\*i}) \gets
+          r^{(m-1)}(\gp{\*l,\*i}) - r_{\*l^{(m)}}^{(m-1)}(\gp{\*l,\*i})$
+          for all $(\*l,\*i) \in \liset$%
+        }
+      \EndFor{}
+      \State{%
+        $\vlinout \gets \vlinout^{(|L|)}$%
+      }
+    \EndFunction{}
+  \end{algorithmic}
+  \caption{%
+    TODO%
+  }%
+  \label{alg:residualInterpolation}%
+\end{algorithm}
