@@ -250,7 +250,8 @@ on the equivalence classes.
 \end{proof}
 
 By exploiting on the tensor product structure of the basis functions,
-the proof shows an even stronger version:
+the proof shows an even stronger version, which is shown
+in \cref{fig:combiTechniqueProof}:
 The components $\fgintp{\*l'}$ and $\fgintp{\*l''}$ are equal
 on the $m$-dimensional subspace through $\gp{\*l,\*i}$
 parallel to the $m$ coordinates in $T_{\*l',\*l''}$.
@@ -260,6 +261,29 @@ Hence, it remains to count the number of levels for
 each equivalence class of ``$\sim$''.
 Therefore, we need a characterization of the structure
 of the equivalence classes:
+
+\begin{SCfigure}
+  \includegraphics{combiTechniqueProof_1}%
+  \caption{%
+    Nodal subspaces $\ns{\*l}$ contributing to the combination
+    technique solution for the two-dimensional regular sparse grid
+    $\regsgspace{n}{d}{}$ of level $n = 3$.
+    After picking a point $\gp{\*l,\*i} \in \regsgspace{n}{d}{}$
+    (\emph{cross}, here $\*l = (2, 1)$, $\*i = (1, 1)$),
+    the set $L$ of levels whose grids do not contain $\gp{\*l,\*i}$
+    \emph{(colored subspaces)}
+    decompose into three disjoint equivalence classes
+    \emph{(colors)} given by the relation ``$\sim$''.
+    In every equivalence class $L_0 \in \eqclasses{L}{\sim}$,
+    the interpolants $\fgintp{\*l'}$ ($\*l' \in L_0$)
+    equal on an affine subspace
+    \emph{(dark lines}), which contains $\gp{\*l,\*i}$.
+    Due to the combination coefficients,
+    the contribution to the combined solution
+    vanishes per equivalence class.%
+  }%
+  \label{fig:combiTechniqueProof}%
+\end{SCfigure}
 
 \begin{restatable}[characterization of the equivalence classes of ``$\sim$'']{%
   lemma%
