@@ -447,3 +447,101 @@
 % * tilde(g)^(m) --> r_{l^(j)}^(j-1)
 % * beta^(m) --> alpha^(j)
 % * tilde(f)^(m) --> f^{s,j}
+% * (1) --> \eqwithref{5}
+% * (4) --> \eqwithref{6}
+% * (5) --> \eqwithref{1}
+% * (6) --> \eqwithref{2}
+% * (7) --> \eqwithref{3}
+
+\begin{proof}
+  \newcommand*{\eqwithref}[1]{%
+    \quad\;%
+    \mathclap{\overset{\eqref{eq:propInvariantResidualInterpolation#1}}{=}}%
+    \quad\;%
+  }%
+  %
+  We prove the assertion by induction over $j = 1, \dotsc, m$.
+  We will need the following equations that follow from the algorithm:
+  \begin{subequations}
+    \begin{alignat}{2}
+      \label{eq:propInvariantResidualInterpolation5}
+      r_{\*l^{(j)}}^{(j-1)}(\gp{\*l,\*i})
+      &= r^{(j-1)}(\gp{\*l,\*i}),\quad
+      &&\*l \le \*l^{(j)},\; \*i \in \hiset{\*l},\\
+      \label{eq:propInvariantResidualInterpolation6}
+      r^{(j)}(\gp{\*l,\*i})
+      &= r^{(j-1)}(\gp{\*l,\*i}) - r_{\*l^{(j)}}^{(j-1)}(\gp{\*l,\*i}),\quad
+      &&\*l \in L,\; \*i \in \hiset{\*l}.
+    \end{alignat}
+  \end{subequations}
+  
+  \noindent
+  \textbf{Induction base case:}
+  For $j = 1$, there is nothing to show for
+  \eqref{eq:propInvariantResidualInterpolation1}.
+  \Cref{eq:propInvariantResidualInterpolation2}
+  can be proved as follows:
+  \begin{subequations}
+    \begin{align}
+      r^{(1)}(\gp{\*l,\*i})
+      &\eqwithref{6}
+      r^{(0)}(\gp{\*l,\*i}) - r_{\*l^{(1)}}^{(0)}(\gp{\*l,\*i})\\
+      &\eqwithref{5}
+      r^{(0)}(\gp{\*l,\*i}) - r^{(0)}(\gp{\*l,\*i})
+      = 0,\qquad
+      \*l \le \*l^{(1)},\; \*i \in \hiset{\*l}.
+    \end{align}
+  \end{subequations}
+  \Cref{eq:propInvariantResidualInterpolation3}
+  holds as $r_{\*l^{(1)}}^{(0)} = f^{\sparse,(1)}$
+  (by \cref{line:algResidualInterpolation2} in
+  \cref{alg:residualInterpolation}) and, therefore,
+  \begin{align}
+    r^{(1)}(\gp{\*l,\*i})
+    \eqwithref{6}
+    r^{(0)}(\gp{\*l,\*i}) - r_{\*l^{(1)}}^{(0)}(\gp{\*l,\*i})
+    = \fcnval{\*l,\*i} - f^{\sparse,(1)}(\gp{\*l,\*i}),\quad
+    \*l \in L,\; \*i \in \hiset{\*l}.
+  \end{align}
+  
+  \noindent
+  \textbf{Induction step case:}
+  We show the induction step $j \to j + 1$.
+  \begin{itemize}
+    \item
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation1}:}
+    Let $j' = 1, \dotsc, j$, $\*l \le \*l^{(j')}$,
+    and $\*i \in \hiset{\*l}$.
+    \todo{write}
+    
+    \item
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation2}:}
+    Let $j' = 1, \dotsc, j + 1$, $\*l \le \*l^{(j')}$,
+    and $\*i \in \hiset{\*l}$.
+    For the case $j' \le j$, we obtain
+    \begin{equation}
+      \label{eq:proofPropInvariantResidualInterpolation1}
+      r^{(j+1)}(\gp{\*l,\*i})
+      \eqwithref{6}
+      r^{(j)}(\gp{\*l,\*i}) - r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i})
+      = 0
+    \end{equation}
+    due to $r^{(j)}(\gp{\*l,\*i}) = 0$ by induction hypothesis
+    (\cref{eq:propInvariantResidualInterpolation2}) and
+    $r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i}) = 0$ as shown above
+    (\cref{eq:propInvariantResidualInterpolation1} for $j + 1$).
+    
+    For the case $j' = j + 1$,
+    \cref{eq:proofPropInvariantResidualInterpolation1}
+    still holds as the difference between
+    $r^{(j)}(\gp{\*l,\*i})$ and $r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i})$
+    vanishes due to \eqref{eq:propInvariantResidualInterpolation5}
+    for $j + 1$
+    (here, we need $\*l \le \*l^{(j+1)}$).
+    
+    \item
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation3}:}
+    Let $\*l \in L$ and $\*i \in \hiset{\*l}$.
+    \todo{write}
+  \end{itemize}
+\end{proof}
