@@ -219,7 +219,7 @@ on the equivalence classes.
   Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be fixed and
   \begin{equation}
     \label{eq:combiTechniqueSpecialLevelSet}
-    \levelset
+    L
     := \{\*l' \mid \ex{q=0,\dotsc,d-1}{
       \normone{\*l'} = n - q,\; \fgset{\*l'} \notni \gp{\*l,\*i}
     }\}
@@ -360,6 +360,8 @@ interpolant $\fgintp{\*l'} \in \ns{\*l'}$ have to be computed
 As shown in \cref{sec:42fullGrids}, we can easily calculate these
 surpluses with the unidirectional principle in
 \cref{alg:unidirectionalPrinciple}.
+The surpluses are then combined with the same combination formula
+as for the combination technique.
 Note that it is imperative to employ the hierarchical basis functions
 $\basis{\*l,\*i}$ with $\*l = \*0, \dotsc, \*l'$ and $\*i \in I_{\*l}$
 and not the nodal basis
@@ -411,7 +413,7 @@ and not the nodal basis
     i.e., $\normone{\*l} \le n$, $\*i \in \hiset{\*l}$.
     The output is the vector
     $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
-    of output data (hierarchical surpluses $\surplus{\*l,\*i}$).
+    of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
   }%
   \label{alg:combiTechnique}%
 \end{algorithm}
