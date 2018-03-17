@@ -244,7 +244,7 @@
     = \restrictfcn{\fgintp{\*l''}}{S \cap \clint{\*0, \*1}}.
   \end{equation}
   Consequently, $\fgintp{\*l'}(\gp{\*l,\*i}) = \fgintp{\*l''}(\gp{\*l,\*i})$
-  as $\gp{\*l,\*i} \in S$.
+  as $\gp{\*l,\*i} \in S \cap \clint{\*0, \*1}$.
 \end{proof}
 
 \lemmaCombiTechniqueCharacterization*
@@ -456,7 +456,11 @@
 \begin{proof}
   \newcommand*{\eqwithref}[1]{%
     \quad\;%
-    \mathclap{\overset{\eqref{eq:propInvariantResidualInterpolation#1}}{=}}%
+    \if\relax\detokenize{#1}\relax%
+      \mathclap{=}%
+    \else%
+      \mathclap{\overset{\eqref{eq:propInvariantResidualInterpolation#1}}{=}}%
+    \fi%
     \quad\;%
   }%
   %
@@ -506,16 +510,89 @@
   
   \noindent
   \textbf{Induction step case:}
-  We show the induction step $j \to j + 1$.
+  We show the three statements for the induction step $j \to j + 1$.
   \begin{itemize}
     \item
-    \emph{Showing \eqref{eq:propInvariantResidualInterpolation1}:}
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation1} for $j + 1$:}
     Let $j' = 1, \dotsc, j$, $\*l \le \*l^{(j')}$,
     and $\*i \in \hiset{\*l}$.
-    \todo{write}
+    Due to the ordering of the levels $\*l^{(1)}, \dotsc, \*l^{(m)}$,
+    we can conclude from $j + 1 > j'$ that
+    $\normone{\*l^{(j+1)}} \le \normone{\*l^{(j')}}$.
+    This implies that there must be a $t' \in \{1, \dotsc, d\}$
+    such that $l_{t'}^{(j+1)} \le l_{t'}^{(j')}$.
+    Let $S$ be the line in $\real^d$ defined by
+    \begin{equation}
+      S
+      := \gp{\*l,\*i} + \spn\{\unitvec{t'}\}.
+    \end{equation}
+    
+    It holds that $S \cap \fgset{\*l^{(j+1)}} \subset \fgset{\*l^{(j')}}$.
+    To show this, let $\gp{\*l',\*i'} \in S \cap \fgset{\*l^{(j+1)}}$
+    be arbitrary (with $\*i' \in \hiset{\*l'}$).
+    Then, $\fa{t \not= t'}{l'_t = l_t \le l_t^{(j')}}$
+    (due to $\gp{\*l',\*i'} \in S$) and
+    $l'_{t'} \le l_{t'}^{(j+1)} \le l_{t'}^{(j')}$
+    (due to $\gp{\*l',\*i'} \in \fgset{\*l^{(j+1)}}$).
+    This means that $\*l' \le \*l^{(j')}$, which implies that
+    $\gp{\*l',\*i'} \in \fgset{\*l^{(j')}}$.
+    As $\gp{\*l',\*i'}$ is arbitrary,
+    this shows $S \cap \fgset{\*l^{(j+1)}} \subset \fgset{\*l^{(j')}}$.
+    
+    Thus, we infer
+    \begin{equation}
+      \label{eq:proofPropInvariantResidualInterpolation2}
+      r_{\*l^{(j+1)}}^{(j)}(\gp{\*l',\*i'})
+      \eqwithref{5}
+      r^{(j)}(\gp{\*l',\*i'})
+      \eqwithref{2}
+      0,\quad
+      \gp{\*l',\*i'} \in S \cap \fgset{\*l^{(j+1)}}
+      \subset \fgset{\*l^{(j')}},\;
+      i' \in \hiset{\*l'},
+    \end{equation}
+    with the induction hypothesis
+    \eqref{eq:propInvariantResidualInterpolation2} for $j$.
+    Unfortunately, this does not suffice to directly conclude that
+    $r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i}) = 0$ as
+    $\gp{\*l,\*i}$ is in general not contained in $\fgset{\*l^{(j+1)}}$.
+    
+    As in the proof of \cref{lemma:combiTechniqueIdenticalValues},
+    we exploit the tensor product nature of the basis functions and
+    restrict $r_{\*l^{(j+1)}}^{(j)}$ to $S \cap \clint{0, 1}$:
+    \begin{subequations}
+      \begin{gather}
+        (\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}})(x_{t'})
+        = \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
+        \sum_{i'_{t'} \in \hiset{l'_{t'}}}
+        \surplustilde{l'_{t'},i'_{t'}}^{(j+1)}
+        \basis{l'_{t'},i'_{t'}}(x_{t'}),\quad
+        x_{t'} \in \clint{0, 1},\\
+        \surplustilde{l'_{t'},i'_{t'}}^{(j+1)}
+        := \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
+        \sum_{\*i'_{-t'} \in \hiset{\*l'_{-t'}}}
+        \surplus{\*l',\*i'}^{(j+1)} \cdot
+        \basis{\*l'_{-t'},\*i'_{-t'}}(\gp{\*l_{-t'},\*i_{-t'}}).
+        %= \sum_{\*l'=\*0}^{\*l^{(j+1)}} \sum_{\*i' \in \hiset{\*l'}}
+        %\surplus{\*l',\*i'}^{(j+1)} \basis{\*l',\*i'}
+      \end{gather}
+    \end{subequations}
+    This shows that
+    $\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}} \in
+    \ns{l_{t'}^{(j+1)}}$ is an interpolant of the zero function
+    (by \eqref{eq:proofPropInvariantResidualInterpolation2}).
+    Due to the linear independence of the univariate basis functions,
+    we conclude
+    \begin{equation}
+      \restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}}
+      \equiv 0.
+    \end{equation}
+    Consequently, we obtain
+    $r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i}) = 0$
+    as $\gp{\*l,\*i} \in S \cap \clint{\*0, \*1}$.
     
     \item
-    \emph{Showing \eqref{eq:propInvariantResidualInterpolation2}:}
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation2} for $j + 1$:}
     Let $j' = 1, \dotsc, j + 1$, $\*l \le \*l^{(j')}$,
     and $\*i \in \hiset{\*l}$.
     For the case $j' \le j$, we obtain
@@ -540,8 +617,32 @@
     (here, we need $\*l \le \*l^{(j+1)}$).
     
     \item
-    \emph{Showing \eqref{eq:propInvariantResidualInterpolation3}:}
+    \emph{Showing \eqref{eq:propInvariantResidualInterpolation3} for $j + 1$:}
     Let $\*l \in L$ and $\*i \in \hiset{\*l}$.
-    \todo{write}
+    Then,
+    \begin{subequations}
+      \begin{align}
+        r^{(j+1)}(\gp{\*l,\*i})
+        &\eqwithref{6}
+        r^{(j)}(\gp{\*l,\*i}) - r_{\*l^{(j+1)}}^{(j)}(\gp{\*l,\*i})\\
+        \intertext{%
+          The first term can replaced with the induction hypothesis
+          (\eqref{eq:propInvariantResidualInterpolation3} for $j$).
+          For the second term, note that
+          $r_{\*l^{(j+1)}}^{(j)}
+          = \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
+          \surplus{\*l',\*i'}^{(j+1)} \basis{\*l',\*i'}
+          = f^{\sparse,(j+1)} - f^{\sparse,(j)}$ by definition.
+          Hence, we obtain%
+        }
+        &\eqwithref{} (\fcnval{\*l,\*i} - f^{\sparse,(j)}(\gp{\*l,\*i})) -
+        (f^{\sparse,(j+1)}(\gp{\*l,\*i}) - f^{\sparse,(j)}(\gp{\*l,\*i}))\\
+        &\eqwithref{} \fcnval{\*l,\*i} - f^{\sparse,(j+1)}(\gp{\*l,\*i}),
+      \end{align}
+    \end{subequations}
+    as desired.
   \end{itemize}
+  This shows the validity of the statements in
+  \eqref{eq:propInvariantResidualInterpolationStatements}
+  for $j + 1$.
 \end{proof}
