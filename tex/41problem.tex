@@ -160,6 +160,36 @@ the value of $\surplus{\*l',\*i'}$ depends not only on
 $\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \basis{\*l',\*i'}^\*1$,
 but potentially on the data of the whole grid.
+This is shown in \cref{fig:matrixDensityPattern}:
+There are at most nine non-zero entries in each row of $\intpmat^{-1}$
+for $p = 1$.
+As soon as the B-spline degree is increased,
+both $\intpmat$ and $\intpmat^{-1}$ become significantly denser.
+
+\begin{SCfigure}
+  \includegraphics{matrixDensityPattern_1}%
+  \caption[%
+    Density pattern of hierarchization matrices and of their inverses%
+  ]{%
+    Density pattern
+    of the hierarchization matrix $\intpmat$
+    \emph{(middle row, \textcolor{C0}{blue})} and
+    of its inverse $\intpmat^{-1}$
+    \emph{(bottom row, \textcolor{C1}{red})}
+    for the regular sparse grid $\regsgset{n}{d}{}$
+    of level $n = 4$ and dimensionality $d = 2$
+    \emph{(top row)}
+    and uniform hierarchical B-splines $\bspl{\*l,\*i}{p}{}$
+    for degrees $p = 1, 3, 5$.
+    The \textcolor{C0}{blue areas} in the top row
+    show the extent of the supports of one specific basis function
+    $\bspl{\*l',\*i'}{p}{}$ with $\*l' = (2, 2)$ and $\*i' = (1, 1)$
+    (\emph{cross:} corresponding grid point $\gp{\*l',\*i'}$).
+    The \textcolor{C0}{blue points} are the grid points at which
+    $\bspl{\*l',\*i'}{p}{}$ is non-zero.%
+  }%
+  \label{fig:matrixDensityPattern}%
+\end{SCfigure}
 
 This prohibits the use of the \up
 (which we will discuss in the next \cref{sec:42fullGrids})
