@@ -104,8 +104,8 @@ for l in range(n+1):
   
   for i in I:
     k = i * 2**(n-l)
-    kl = (i+1) * 2**(n-l)
-    kr = (i-1) * 2**(n-l)
+    kl = (i-1) * 2**(n-l)
+    kr = (i+1) * 2**(n-l)
     color = "C{}".format(k % 9)
     
     if l > 0:
