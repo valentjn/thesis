@@ -84,7 +84,7 @@ def drawImage(imageNumber):
 
 
 
-numberOfImages = 60
+numberOfImages = 100
 numberOfRevolutions = 1.0
 startAngle = 30
 elevation = 20

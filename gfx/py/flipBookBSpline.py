@@ -59,7 +59,7 @@ def drawImage(imageNumber):
 
 
 
-numberOfImages = 60
+numberOfImages = 100
 pauseStartInXUnits = 0.2
 pauseBetweenInXUnits = 0.2
 pauseEndInXUnits = 0.2
