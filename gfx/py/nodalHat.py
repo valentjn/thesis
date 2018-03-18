@@ -46,7 +46,7 @@ fig.save(tightLayout={"pad" : 2})
 
 fig = Figure.create(figsize=(3.3, 2.0))
 ax = fig.gca()
-c = [0.3, 0.8, 0.7, 0.7, 0.5, 0.9, 0.8, 0.7, 0.2]
+c = [0.3, 0.8, 0.6, 0.7, 0.4, 0.9, 0.8, 0.75, 0.2]
 
 for i in range(0, hInv + 1):
   color = "C{}".format(i)
