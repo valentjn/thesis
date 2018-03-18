@@ -30,6 +30,47 @@ The hierarchical surpluses then define the interpolant $\sgintp$ as
 \end{equation}
 which interpolates $\objfun$ at the grid points $\gp{\*l,\*i}$ of $\sgset$.
 
+\begin{figure}
+  \subcaptionbox{%
+    The objective function $f$ is sampled at the grid points
+    $\gp{l,i} \in \sgset$ to obtain function values $\fcnval{l,i}$,
+    which form the input vector $\vlinin$ for the linear operator
+    $\linop = \intpmat^{-1}$.%
+  }[50mm]{%
+    \includegraphics{hierarchization_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    The linear operator $\linop$ is applied to $\vlinin$ to obtain
+    the output vector $\vlinout$, which contains the hierarchical surpluses
+    $\surplus{l,i}$ ($(l,i) \in \liset$).%
+  }[50mm]{%
+    \includegraphics{hierarchization_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    The resulting interpolant $\sgintp$ \emph{(black dashed line)}
+    is evaluated at some point $x \in \clint{0, 1}$
+    by adding the contributions \emph{(black dotted lines)}
+    of the weighted basis functions $\surplus{l,i} \basis{l,i}$
+    \emph{(colored)}, obtaining $\sgintp(x)$ \emph{(cross)} as a result.%
+    %For the piecewise linear basis, the height of the weighted
+    %basis functions \emph{(colored dashed lines)} is given by
+    %the corresponding surpluses \emph{(panel 2)}.%
+  }[50mm]{%
+    \includegraphics{hierarchization_3}%
+  }%
+  \caption[%
+    Hierarchization of function values and evaluation of interpolant%
+  ]{%
+    Transformation of function values $\fcnval{l,i}$ \emph{(left)}
+    to hierarchical surpluses $\surplus{l,i}$ \emph{(center)} and
+    evaluation of the resulting interpolant $\sgintp$ \emph{(right)},
+    using a univariate grid and the piecewise linear basis as an example.%
+  }%
+  \label{fig:hierarchization}%
+\end{figure}
+
 The basis functions $\basis{\*l',\*i'}$ are
 arbitrary tensor product functions.
 We explicitly allow $\basis{\*l',\*i'}$ to be a non-hierarchical
