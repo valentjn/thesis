@@ -125,13 +125,19 @@ of the hat function.
 
 \begin{figure}
   \includegraphics{cardinalBSpline_1}%
-  \caption{Cardinal B-splines $\cardbspl{p}$ up to quintic degree $p = 5$.}%
-  \label{fig:cardinalBSpline}
+  \caption[%
+    Cardinal B-splines%
+  ]{%
+    Cardinal B-splines $\cardbspl{p}$ up to quintic degree $p = 5$.%
+  }%
+  \label{fig:cardinalBSpline}%
 \end{figure}
 
 \begin{figure}
   \includegraphics{cardinalBSplineProps_1}%
-  \caption{%
+  \caption[%
+    Properties of cardinal B-splines%
+  ]{%
     Eight properties of cardinal B-splines using the quadratic case
     $p = 2$ as an example.\\
     \emph{Circle 1:} $\cardbspl{p}$ is compactly supported on $\clint{0, p+1}$.\\
@@ -152,7 +158,7 @@ of the hat function.
     Gaussian function \emph{\textcolor{C1}{(red)}}
     are special cases of $\cardbspl{p}$.%
   }%
-  \label{fig:cardinalBSplineProps}
+  \label{fig:cardinalBSplineProps}%
 \end{figure}
 
 \paragraph{Definition of uniform hierarchical B-splines}
@@ -200,14 +206,16 @@ $\bspl{l,i}{p}{}$ ($l \in \natz$, $i \in \hiset{l}$).
   }[72mm]{%
     \includegraphics{hierarchicalBSpline_2}%
   }%
-  \caption{%
+  \caption[%
+    Nodal and hierarchical B-splines%
+  ]{%
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
     When restricting all functions to $\rspldomain{l}{p}$ \emph{(thick black line)},
     the nodal space $\restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$ decomposes into the direct sum
     of the hierarchical subspaces $\restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$ ($l' \le l$).%
-  }
-  \label{fig:hierarchicalBSpline}
+  }%
+  \label{fig:hierarchicalBSpline}%
 \end{figure}
 
 \paragraph{Odd and even degrees}
@@ -334,7 +342,9 @@ $\spldomain{\knotseq}{p}$:
 
 \begin{figure}
   \includegraphics{splineSpace_1}%
-  \caption{%
+  \caption[%
+    Non-uniform B-splines with knot sequence and interpolation domain%
+  ]{%
     Knot sequence $\knotseq = (\knot{0}, \dotsc, \knot{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
     $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$, $p = 3$).
@@ -355,7 +365,9 @@ $\spldomain{\knotseq}{p}$:
 
 \begin{figure}
   \includegraphics{splineSpace_2}%
-  \caption{%
+  \caption[%
+    Uniform nodal B-splines and knot sequence%
+  ]{%
     Uniform knot sequence $\nodalknotseq{l}{p}{}$ \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic B-splines ($p = 3$) of level $l = 3$.
     In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
@@ -624,11 +636,13 @@ for growing $p$.
   }[75mm]{%
     \includegraphics{hierarchicalBSpline_3}%
   }%
-  \caption{%
+  \caption[%
+    Modified hierarchical B-splines%
+  ]{%
     Construction of modified hierarchical cubic B-splines ($p = 3$) and
     the resulting basis up to level $l = 3$.%
-  }
-  \label{fig:modifiedBSpline}
+  }%
+  \label{fig:modifiedBSpline}%
 \end{figure}
 
 
@@ -679,7 +693,9 @@ so-called Clenshaw--Curtis quadrature rules.
 
 \begin{figure}
   \includegraphics{pointSplitting_2}%
-  \caption{%
+  \caption[%
+    Decomposition of the set of univariate Clenshaw--Curtis grid points%
+  ]{%
     The set of Chebyshev points $\fgset{l}^\cc$ of level
     $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$
@@ -688,8 +704,8 @@ so-called Clenshaw--Curtis quadrature rules.
     the orthogonal projection of the
     endpoints of $2^l$ equally sized segments
     of a semicircle onto its diameter \emph{\textcolor{C8}{(gray, top)}}.%
-  }
-  \label{fig:pointSplittingChebyshev}
+  }%
+  \label{fig:pointSplittingChebyshev}%
 \end{figure}
 
 In some settings, it can be beneficial to use full or sparse grids consisting
@@ -765,10 +781,12 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
   }[75mm]{%
     \includegraphics{sg_7}%
   }%
-  \caption{%
+  \caption[%
+    Clenshaw--Curtis B-splines and sparse grids%
+  ]{%
     Clenshaw--Curtis B-splines and sparse grids.%
-  }
-  \label{fig:clenshawCurtis}
+  }%
+  \label{fig:clenshawCurtis}%
 \end{figure}
 
 Note that in contrast to the standard hierarchical B-spline functions

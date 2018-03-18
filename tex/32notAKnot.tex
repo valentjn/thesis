@@ -53,14 +53,16 @@ for other non-polynomial functions as well.
   }[75mm]{%
     \includegraphics{nakInterpolation_2}%
   }%
-  \caption{%
+  \caption[%
+    Issues when interpolating with uniform hierarchical B-splines%
+  ]{%
     Hierarchical cubic B-splines $\bspl{l',i'}{p}{}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to interpolate the cubic polynomial
     $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
     on the grid of level $l = 3$.%
-  }
-  \label{fig:nakInterpolation}
+  }%
+  \label{fig:nakInterpolation}%
 \end{figure}
 
 We can explain this as follows:
@@ -251,7 +253,9 @@ $\wholesplspace{l}{p}$.
 
 \begin{figure}
   \includegraphics{splineSpace_3}%
-  \caption{%
+  \caption[%
+    Nodal not-a-knot B-splines and knot sequence%
+  ]{%
     Not-a-knot knot sequence $\nodalknotseq{l}{p}{\nak}$
     \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic not-a-knot B-splines ($p = 3$)
@@ -353,7 +357,9 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
   }[74mm]{%
     \includegraphics{hierarchicalBSpline_6}%
   }%
-  \caption{%
+  \caption[%
+    Nodal and hierarchical not-a-knot B-splines%
+  ]{%
     Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
     up to level $l = 3$.
     The nodal space $\ns{l}^{p,\nak}$,
@@ -638,7 +644,10 @@ cubic degree and the corresponding modified functions are plotted in
   }[76mm]{%
     \includegraphics{hierarchicalBSpline_8}%
   }%
-  \caption{%
+  \caption[%
+    Comparison of hierarchical uniform not-a-knot and
+    Clenshaw--Curtis not-a-knot B-splines%
+  ]{%
     Comparison of hierarchical uniform and Clenshaw--Curtis cubic not-a-knot
     B-splines $\bspl{l',i'}{p}{\nak}$ and
     $\bspl{l',i'}{p}{\cc,\nak}$
@@ -654,6 +663,7 @@ cubic degree and the corresponding modified functions are plotted in
     $\ccgp{l',i'}$
     ($i' = 0, \dotsc, 2^{l'}$), respectively.%
   }%
+  \label{fig:uniformAndClenshawCurtisNotAKnotBSpline}%
 \end{figure}
 
 
@@ -728,7 +738,9 @@ rest of the thesis.
 
 \begin{SCfigure}
   \includegraphics{hierarchicalBSpline_9}%
-  \caption{%
+  \caption[%
+    Hierarchical natural B-splines%
+  ]{%
     Hierarchical cubic natural B-splines
     $\bspl{l',i'}{p}{\ntrl}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and

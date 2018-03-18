@@ -135,9 +135,13 @@ regular sparse grid in two dimensions.
     }[65mm]{%
       \includegraphics{sg_3}%
     }%
-  \end{minipage}
-  \caption{Regular sparse grid of level $n = 3$ in two dimensions.}
-  \label{fig:regularSG}
+  \end{minipage}%
+  \caption[%
+    Regular two-dimensional sparse grid%
+  ]{%
+    Regular sparse grid of level $n = 3$ in two dimensions.%
+  }%
+  \label{fig:regularSG}%
 \end{figure}
 
 \paragraph{Error and grid size}
@@ -225,7 +229,9 @@ in a minimally invasive way.
 
 \begin{SCfigure}
   \includegraphics{sg_4}%
-  \caption{%
+  \caption[%
+    Sparse grid combination technique%
+  ]{%
     The combination technique combines nodal subspaces in a weighted
     sum to form a regular sparse grid space of level $n = 3$ in two dimensions.
     The \textcolor{C1}{red subspaces} ($q = 1$ in \eqref{eq:combiTechnique})
@@ -308,10 +314,12 @@ choice of $\liset$.
   }[65mm]{%
     \includegraphics{sg_6}%
   }%
-  \caption{%
+  \caption[%
+    Construction of spatially adaptive sparse grids%
+  ]{%
     Spatially adaptive sparse grid in two dimensions.
     More grid points were generated in the top right corner,
     which can help to resolve fine oscillations of the objective function.%
-  }
-  \label{fig:spatiallyAdaptiveSG}
+  }%
+  \label{fig:spatiallyAdaptiveSG}%
 \end{figure}

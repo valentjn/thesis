@@ -93,7 +93,9 @@ which are described below.
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_4}}%
   \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_5}}%
-  \caption{%
+  \caption[%
+    Decomposition of a sparse grid into lower-dimensional sparse sub-grids%
+  ]{%
     Decomposition of the three-dimensional sparse grid $\regsgset{n}{d}{}$
     ($n = 4$, $d = 3$) into lower-dimensional sparse sub-grids.
     The main axes (axis-parallel lines through $0.5 \cdot \*1$, \emph{dashed})
@@ -142,7 +144,7 @@ boundary.
 However, for very high dimensionalities this might still lead to
 computationally infeasible sparse grids.
 
-\paragraph{Regular sparse grids with coarse boundaries}
+\paragraph{Regular sparse grids with coarse boundary}
 
 \usenotation{Ësb}
 We generalize these two solutions to the definition of a
@@ -291,7 +293,10 @@ $\regsgset{n}{d}{} = \coarseregsgset{n}{d}{0}{}$.
     \num{1.06}\\
     \bottomrule
   \end{tabular}
-  \caption{%
+  \caption[%
+    Comparison of grid sizes for the regular sparse grid with coarse boundary
+    ($d = 3$)%
+  ]{%
     For $d = 3$:
     Grid size of the interior grid
     $\interiorregsgset{n}{d}{}$ for \emph{(second column)}
@@ -302,8 +307,8 @@ $\regsgset{n}{d}{} = \coarseregsgset{n}{d}{0}{}$.
     to the size of the interior grid of the same level.
     The table begins at the first level $n = 3$ for which
     the interior grid $\interiorregsgset{n}{d}{}$ is not empty.%
-  }
-  \label{tbl:coarseBoundary3D}
+  }%
+  \label{tbl:coarseBoundary3D}%
 \end{table}
 
 \begin{table}
@@ -384,7 +389,10 @@ $\regsgset{n}{d}{} = \coarseregsgset{n}{d}{0}{}$.
     \num{6.8}\\
     \bottomrule
   \end{tabular}
-  \caption{%
+  \caption[%
+    Comparison of grid sizes for the regular sparse grid with coarse boundary
+    ($d = 10$)%
+  ]{%
     For $d = 10$:
     Grid size of the interior grid
     $\interiorregsgset{n}{d}{}$ for \emph{(second column)}
@@ -395,8 +403,8 @@ $\regsgset{n}{d}{} = \coarseregsgset{n}{d}{0}{}$.
     to the size of the interior grid of the same level.
     The table begins at the first level $n = 10$ for which
     the interior grid $\interiorregsgset{n}{d}{}$ is not empty.%
-  }
-  \label{tbl:coarseBoundary10D}
+  }%
+  \label{tbl:coarseBoundary10D}%
 \end{table}
 
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
@@ -471,13 +479,15 @@ Its correctness can be formally proved with the following invariant:
       \State{$\coarselevelset{n}{d}{b}{} \gets \levelset^{(d)}$}
     \EndFunction{}
   \end{algorithmic}
-  \caption{%
+  \caption[%
+    Generation of regular sparse grids with coarse boundary%
+  ]{%
     Generation of the level set $\coarselevelset{n}{d}{b}{}$ corresponding
-    to the sparse grid $\coarseregsgset{n}{d}{b}{}$ with coarse boundaries.
+    to the sparse grid $\coarseregsgset{n}{d}{b}{}$ with coarse boundary.
     Inputs are the level $n \ge d$, the dimensionality $d \in \nat$, and
     the boundary parameter $b \in \nat$.%
-  }
-  \label{alg:coarseBoundary}
+  }%
+  \label{alg:coarseBoundary}%
 \end{algorithm}
 
 \begin{figure}
@@ -527,7 +537,10 @@ Its correctness can be formally proved with the following invariant:
   }[35mm]{%
     \includegraphics{coarseBoundary_8}%
   }%
-  \caption{%
+  \caption[%
+    Comparison of regular sparse grids with coarse boundary
+    for different parameters%
+  ]{%
     Sparse grids $\coarseregsgset{n}{d}{b}{}$ of level $n = 3$
     in two and three dimensions for different values of the
     boundary parameter $b$.
@@ -539,8 +552,8 @@ Its correctness can be formally proved with the following invariant:
     for increasing values of $b$.
     The main axes (axis-parallel lines through $0.5 \cdot \*1$, \emph{dashed})
     serve as a visual aid.%
-  }
-  \label{fig:coarseBoundary}
+  }%
+  \label{fig:coarseBoundary}%
 \end{figure}
 
 \paragraph{Hierarchization}
@@ -628,7 +641,9 @@ which we will discuss when we introduce the corresponding unmodified functions.
 
 \begin{SCfigure}
   \includegraphics{hierarchicalHat_3}%
-  \caption{%
+  \caption[%
+    Modified hierarchical hat functions%
+  ]{%
     Modified hierarchical hat functions $\basis{l',i'}^{1,\modified}$
     ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) up to level $l = 3$.%
   }%

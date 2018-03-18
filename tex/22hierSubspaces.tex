@@ -77,13 +77,15 @@ joined sets \term{hierarchical subspaces} $\hs{l}$:
 
 \begin{figure}
   \includegraphics{pointSplitting_1}%
-  \caption{%
+  \caption[%
+    Decomposition of the set of univariate grid points%
+  ]{%
     The set of grid points $\fgset{l}$ of level $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$,
     whose grid points $\gp{l',i'}$ have odd indices $i' \in \hiset{l'}$
     ($\gp{0,0}$ being the only exception).%
-  }
-  \label{fig:pointSplittingUniform}
+  }%
+  \label{fig:pointSplittingUniform}%
 \end{figure}
 
 \paragraph{Hierarchical splitting}
@@ -126,8 +128,12 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   }[75mm]{%
     \includegraphics{hierarchicalHat_2}%
   }%
-  \caption{Univariate hierarchical hat functions up to level $l = 3$.}
-  \label{fig:hierarchicalHat}
+  \caption[%
+    Univariate hierarchical hat functions%
+  ]{%
+    Univariate hierarchical hat functions up to level $l = 3$.%
+  }%
+  \label{fig:hierarchicalHat}%
 \end{figure}
 
 \begin{lemma}[univariate hierarchical splitting characterization]
