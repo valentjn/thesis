@@ -697,3 +697,27 @@ can be used to show its correctness:
   (which are the output of \cref{alg:residualInterpolation})
   must coincide with the surpluses $\surplus{\*l,\*i}$.
 \end{proof}
+
+\begin{SCfigure}
+  \includegraphics{residualInterpolation_1}%
+  \caption[%
+    Hierarchization with residual interpolation%
+  ]{%
+    Hierarchization of function value data on the
+    two-dimensional regular sparse grid
+    $\regsgspace{n}{d}{}$ of level $n = 3$ \emph{(top left)}.
+    In this figure, we use
+    $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$
+    as an abbreviation.
+    The nodal spaces are processed from the bottom left to
+    the top right corner.
+    The data $\linout{\*l,\*i}^{(j)}$
+    corresponding to \textcolor{C0}{blue grid points}
+    will not be modified in the remaining iterations
+    and, therefore, already equals the correct surpluses $\alpha{\*l,\*i}$.
+    The data corresponding to \textcolor{C1}{red grid points}
+    will be modified as the grid points appear in one of the remaining
+    nodal grids.%
+  }%
+  \label{fig:residualInterpolation}%
+\end{SCfigure}
