@@ -8,7 +8,7 @@ from helper.figure import Figure
 import helper.grid
 import helper.misc
 
-def plotNodalSpace(l, pos, size,
+def plotNodalSpace(l, ax, pos, size,
                    color="k", borderColor="k", contourColor="white"):
   xSquare = np.array([0, 1, 1, 0, 0])
   ySquare = np.array([0, 0, 1, 1, 0])
@@ -16,11 +16,26 @@ def plotNodalSpace(l, pos, size,
   
   ax.plot(*s(xSquare, ySquare), "-", clip_on=False, color=borderColor)
   ax.text(*s(0.5, 0),
-          "\\contour{{{}}}{{$V_{{({},{})}}$}}".format(contourColor, l[0], l[1]),
+          r"\contour{{{}}}{{$V_{{({},{})}}$}}".format(contourColor, l[0], l[1]),
           color=color, ha="center", va="bottom")
   
   X = helper.grid.getCoordinates(l, helper.grid.getNodalIndices(l))
   ax.plot(*s(X[:,0], X[:,1]), ".", clip_on=False, color=color)
+  
+  return s
+
+def plotSG(n, d, b, ax, pos, size):
+  xSquare = np.array([0, 1, 1, 0, 0])
+  ySquare = np.array([0, 0, 1, 1, 0])
+  s = lambda x, y: (pos[0] + size * np.array(x), pos[1] + size * np.array(y))
+  
+  ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
+  ax.text(*s(0.5, 0.03), r"$V_{n,d}^{\mathrm{s}}$",
+          ha="center", va="bottom")
+  
+  grid = helper.grid.RegularSparseBoundary(n, d, b)
+  X, L, I = grid.generate()
+  ax.plot(*s(X[:,0], X[:,1]), "k.", clip_on=False)
   
   return s
 
@@ -33,9 +48,11 @@ def isEquivalent(l, lp, xl):
 
 n = 3
 d = 2
+b = 0
 
 subspaceSize = 1
 subspaceMargin = 0.2
+sgSize = 1.5
 
 xl = np.array((2, 1))
 xi = np.array((1, 1))
@@ -53,10 +70,6 @@ schemeSize = (n + 1) * (subspaceSize + subspaceMargin) - subspaceMargin
 xOffsetGlobal = 0
 yOffsetGlobal = schemeSize
 
-xSquare = np.array([0, 1, 1, 0, 0])
-ySquare = np.array([0, 0, 1, 1, 0])
-
-I = helper.grid.getNodalIndices1D
 x = helper.grid.getCoordinates(xl, xi)
 
 figureScale = 1.4
@@ -90,7 +103,7 @@ for l in allL:
   
   borderColor = color
   
-  s = plotNodalSpace(l, (xOffset, yOffset), subspaceSize,
+  s = plotNodalSpace(l, ax, (xOffset, yOffset), subspaceSize,
                      color, borderColor, contourColor)
   
   ax.plot(*s(x[0], x[1]), "x", clip_on=False, color=color, markeredgewidth=2)
@@ -108,6 +121,8 @@ for l in allL:
       ax.plot(*s([0, 1], [x[1], x[1]]), "-", clip_on=False, color=color)
     else:
       ax.plot(*s([x[0], x[0]], [0, 1]), "-", clip_on=False, color=color)
+
+plotSG(n, d, b, ax, (xOffsetGlobal + schemeSize - sgSize, 0), sgSize)
 
 ax.set_xlim([0, xOffsetGlobal + schemeSize])
 ax.set_ylim([0, yOffsetGlobal])
