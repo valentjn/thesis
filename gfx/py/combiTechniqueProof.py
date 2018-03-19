@@ -6,6 +6,7 @@ import matplotlib.patches
 
 from helper.figure import Figure
 import helper.grid
+import helper.misc
 
 def plotNodalSpace(l, pos, size,
                    color="k", borderColor="k", contourColor="white"):
@@ -23,6 +24,11 @@ def plotNodalSpace(l, pos, size,
   
   return s
 
+def isEquivalent(l, lp, xl):
+  d = xl.shape[0]
+  T = [t for t in range(d) if l[t] == lp[t]]
+  return all([min(l[t], lp[t]) >= xl[t] for t in range(d) if t not in T])
+
 
 
 n = 3
@@ -31,31 +37,14 @@ d = 2
 subspaceSize = 1
 subspaceMargin = 0.2
 
-xl = (2, 1)
-xi = (1, 1)
+xl = np.array((2, 1))
+xi = np.array((1, 1))
 
 allL = [(i, n-i) for i in range(n+1)] + [(i, n-i-1) for i in range(n)]
 L = [l for l in allL if not ((l[0] >= xl[0]) and (l[1] >= xl[1]))]
 
-equivClasses = []
-
-for l in L:
-  added = False
-  
-  for equivClass in equivClasses:
-    l2 = equivClass[0]
-    T = [t for t in range(d) if l[t] == l2[t]]
-    isEquivalent = all([min(l[t], l2[t]) >= xl[t] for t in range(d) if t not in T])
-    
-    if isEquivalent:
-      equivClass.append(l)
-      added = True
-      break
-  
-  if not added: equivClasses.append([l])
-
-#print(L)
-#print(equivClasses)
+equivalenceClasses = helper.misc.getEquivalenceClasses(
+  L, (lambda l, lp: isEquivalent(l, lp, xl)))
 
 
 
@@ -81,7 +70,8 @@ for l in allL:
   xOffset = xOffsetGlobal + l[0] * (subspaceSize + subspaceMargin)
   yOffset = yOffsetGlobal - l[1] * (subspaceSize + subspaceMargin) - subspaceSize
   
-  J = [j for j, equivClass in enumerate(equivClasses) if l in equivClass]
+  J = [j for j, equivalenceClass in enumerate(equivalenceClasses)
+       if l in equivalenceClass]
   
   if len(J) == 0:
     j = None
@@ -108,7 +98,7 @@ for l in allL:
   if j is not None:
     lAst = list(l)
     
-    for l2 in equivClasses[j]:
+    for l2 in equivalenceClasses[j]:
       lAst = [(None if lAst[t] is None else
                (lAst[t] if l2[t] == lAst[t] else None)) for t in range(d)]
     
