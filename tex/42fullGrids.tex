@@ -5,7 +5,8 @@ If $\sgset$ is a full grid $\fgset{\*l}$
 (see \cref{sec:21nodalSpaces}),
 the well-known \emph{\up}
 can be used to apply $\linop$ to input data $\vlinin$.
-Its idea is to apply the corresponding one-dimensional operators on the
+As shown in \cref{fig:unidirectionalPrinciple}, the idea of the \up
+is to apply the corresponding one-dimensional operators on the
 one-dimensional subgrids (the \emph{poles}) of $\sgset$,
 which is repeated for all dimensions.
 In this section, we first formulate the \up for
@@ -13,6 +14,34 @@ general linear operators $\linop$ and then prove its correctness for
 the case $\linop = \intpmat^{-1}$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
+
+\begin{figure}
+  \includegraphics{unidirectionalPrinciple_1}\\%
+  \begin{tikzpicture}[>={Stealth[width=1.5mm,length=1.5mm]}]
+    \node (input)        at (0,0) {$\vlinin = \vlinout^{(0)}$};
+    \node (intermediate) at (4.55,0) {$\vlinout^{(1)}$};
+    \node (output)       at (9.1,0) {$\vlinout^{(2)} = \vlinout$};
+    \draw[->] (input) -- node[below] {$\linop_1$} (intermediate);
+    \draw[->] (intermediate) -- node[below] {$\linop_2$} (output);
+    \draw[->] (input) -- (0,-1) -- node[above] {$\linop$} (9.1,-1) -- (output);
+  \end{tikzpicture}%
+  \caption[%
+    Unidirectional principle%
+  ]{%
+    Application of a linear operator $\linop$
+    on two-dimensional sparse grid data with the unidirectional principle.
+    First, the univariate operator $\linop_1$ is applied on
+    the input data $\vlinin$
+    along poles of the first dimension $x_1$ \emph{(left)}.
+    All grid points of the same color are part of the same pole
+    (equivalence classes of ``$\sim$'' in \cref{alg:unidirectionalPrinciple}).
+    Second, the univariate operator $\linop_2$ is applied on the
+    resulting intermediate data $\vlinout^{(1)}$
+    along poles of the second dimension $x_2$ \emph{(center)}.
+    This gives the final values $\vlinout = \linop[\vlinin]$ \emph{(right)}.%
+  }%
+  \label{fig:unidirectionalPrinciple}%
+\end{figure}
 
 \paragraph{Unidirectional principle and its correctness}
 
