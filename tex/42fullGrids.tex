@@ -16,15 +16,7 @@ The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:444weaklyFundamentalSplines}.
 
 \begin{figure}
-  \includegraphics{unidirectionalPrinciple_1}\\%
-  \begin{tikzpicture}[>={Stealth[width=1.5mm,length=1.5mm]}]
-    \node (input)        at (0,0) {$\vlinin = \vlinout^{(0)}$};
-    \node (intermediate) at (4.55,0) {$\vlinout^{(1)}$};
-    \node (output)       at (9.1,0) {$\vlinout^{(2)} = \vlinout$};
-    \draw[->] (input) -- node[below] {$\linop_1$} (intermediate);
-    \draw[->] (intermediate) -- node[below] {$\linop_2$} (output);
-    \draw[->] (input) -- (0,-1) -- node[above] {$\linop$} (9.1,-1) -- (output);
-  \end{tikzpicture}%
+  \includegraphics{unidirectionalPrinciple_1}%
   \caption[%
     Unidirectional principle%
   ]{%
