@@ -37,7 +37,7 @@ def drawPopulationStructure(A, ax, pos, size, color):
           (x, y), h[0], (j - jStart) * h[1], edgecolor="none", facecolor=color))
         jStart = None
 
-def drawSGWithSupport(X, l, i, p, pos, size):
+def drawSGWithSupport(X, l, i, p, ax, pos, size):
   s = lambda x, y: (pos[0] + size[0] * x, pos[1] + size[1] * y)
   basis1D = helper.basis.HierarchicalBSpline(p)
   basis = helper.basis.TensorProduct(basis1D, d)
@@ -109,7 +109,7 @@ for q in range(3):
   y += 1 + yMargin
   drawPopulationStructure(A, ax, (x, y), (1, 1), "C0")
   y += 1 + yMargin
-  drawSGWithSupport(X, l, i, p, (x, y), (1, 1))
+  drawSGWithSupport(X, l, i, p, ax, (x, y), (1, 1))
   y += 1 + yTextMargin
   
   ax.text(x + 0.5, y, "$p = {}$".format(p), ha="center", va="bottom")
