@@ -9,7 +9,7 @@ from helper.figure import Figure
 import helper.function
 import helper.grid
 
-def drawPopulationStructure(A, ax, pos, size, color):
+def plotPopulationStructure(A, ax, pos, size, color):
   tol = 1e-10
   N = A.shape[0]
   h = np.array(size) / N
@@ -37,7 +37,7 @@ def drawPopulationStructure(A, ax, pos, size, color):
           (x, y), h[0], (j - jStart) * h[1], edgecolor="none", facecolor=color))
         jStart = None
 
-def drawSGWithSupport(X, l, i, p, ax, pos, size):
+def plotSGWithSupport(X, l, i, p, ax, pos, size):
   s = lambda x, y: (pos[0] + size[0] * x, pos[1] + size[1] * y)
   basis1D = helper.basis.HierarchicalBSpline(p)
   basis = helper.basis.TensorProduct(basis1D, d)
@@ -105,11 +105,11 @@ for q in range(3):
   AInv = np.linalg.inv(A)
   
   x, y = q * (1 + xMargin), 0
-  drawPopulationStructure(AInv, ax, (x, y), (1, 1), "C1")
+  plotPopulationStructure(AInv, ax, (x, y), (1, 1), "C1")
   y += 1 + yMargin
-  drawPopulationStructure(A, ax, (x, y), (1, 1), "C0")
+  plotPopulationStructure(A, ax, (x, y), (1, 1), "C0")
   y += 1 + yMargin
-  drawSGWithSupport(X, l, i, p, ax, (x, y), (1, 1))
+  plotSGWithSupport(X, l, i, p, ax, (x, y), (1, 1))
   y += 1 + yTextMargin
   
   ax.text(x + 0.5, y, "$p = {}$".format(p), ha="center", va="bottom")
