@@ -161,8 +161,8 @@ $\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \basis{\*l',\*i'}^\*1$,
 but potentially on the data of the whole grid.
 This is shown in \cref{fig:matrixDensityPattern}:
-There are at most nine non-zero entries in each row of $\intpmat^{-1}$
-for $p = 1$.
+There are at most $3^d = 9$ non-zero entries in each row of $\intpmat^{-1}$
+for $p = 1$ and $d = 2$.
 As soon as the B-spline degree is increased,
 both $\intpmat$ and $\intpmat^{-1}$ become significantly denser.
 
@@ -176,7 +176,7 @@ both $\intpmat$ and $\intpmat^{-1}$ become significantly denser.
     \emph{(middle row, \textcolor{C0}{blue})} and
     of its inverse $\intpmat^{-1}$
     \emph{(bottom row, \textcolor{C1}{red})}
-    for the regular sparse grid $\regsgset{n}{d}{}$
+    for the regular sparse grid $\coarseregsgset{n}{d}{1}{}$
     of level $n = 4$ and dimensionality $d = 2$
     \emph{(top row)}
     and uniform hierarchical B-splines $\bspl{\*l,\*i}{p}{}$
