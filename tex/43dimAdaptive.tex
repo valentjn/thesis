@@ -390,6 +390,7 @@ and not the nodal basis
             for all $(\*l,\*i) \in \liset$
             with $\lnot(\*l \le \*l')$%
           }
+          \Comment{extend surpluses}%
           \label{line:algCombiTechnique2}
         \EndFor{}
       \EndFor{}
@@ -399,6 +400,7 @@ and not the nodal basis
         \sum_{\normone{\*l'} = n-q} \surplus{\*l,\*i}^{(\*l')}$
         for all $(\*l, \*i) \in \liset$%
       }
+      \Comment{combine surpluses}%
     \EndFunction{}
   \end{algorithmic}
   \caption[%
@@ -488,9 +490,7 @@ The proof of the following proposition can be generalized accordingly.
 
 
 
-\subsection{%
-  Hierarchization by Residual Interpolation%
-}
+\subsection{Hierarchization with Residual Interpolation}
 \label{sec:433residualInterpolation}
 
 Another possible method to hierarchize function values on
@@ -559,12 +559,14 @@ removing points from the union $\sgset$).
           \surplus{\*l,\*i}^{(j)} \basis{\*l,\*i}
           \equiv r_{\*l^{(j)}}^{(j-1)}$%
         }
+        \Comment{res. interpolation}%
         \label{line:algResidualInterpolation2}
         \State{%
           $r^{(j)}(\gp{\*l,\*i}) \gets
           r^{(j-1)}(\gp{\*l,\*i}) - r_{\*l^{(j)}}^{(j-1)}(\gp{\*l,\*i})$
           for all $(\*l,\*i) \in \liset$%
         }
+        \Comment{new residuals}%
       \EndFor{}
       \State{%
         $\vlinout \gets \sum_{j=1}^{m} \vsurplus^{(j)}$
@@ -572,6 +574,7 @@ removing points from the union $\sgset$).
         $(\*l,\*i) \in \liset$
         if $\lnot(\*l \le \*l^{(j)})$)%
       }
+      \Comment{combine surpluses}%
     \EndFunction{}
   \end{algorithmic}
   \caption[%
