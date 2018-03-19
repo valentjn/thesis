@@ -1,12 +1,14 @@
-\begin{center}%
-  \noindent\small\thispagestyle{plain}%
+\thispagestyle{empty}
+
+\begin{center}
+  \small%
   \tikzfading[%
     name=mytreefade,%
     left color=transparent!30,%
     right color=transparent!100,%
-  ]{}%
+  ]%
   \begin{tikzpicture}[
-    xscale=0.65,
+    xscale=0.649,
     yscale=-0.97,
     every node/.style={inner sep=0.5mm,anchor=base},
     line width=0.25mm,
@@ -18,7 +20,7 @@
     \node[anchor=base east] at (674.5bp,677bp) {%
       \textbf{On the shoulders of giants}%
     };
-    \node[anchor=south west,rotate=90] at (22bp,677bp) {%
+    \node[anchor=south west,rotate=90] at (18.5bp,678bp) {%
       \small\textcolor{gray}{%
         source: \texttt{https://www.genealogy.math.ndsu.nodak.edu/}%
       }%
@@ -245,6 +247,6 @@
     \draw[<-] (laplace) to (dalembert);
     \draw[<-] (vauquelin) to (defourcroy);
     \fill[white,path fading=mytreefade,fading angle=-90,anchor=north west]
-    (0bp,9bp) rectangle (674.5bp,300bp) {};
+    (0bp,9bp) rectangle (675bp,300bp) {};
   \end{tikzpicture}%
 \end{center}
