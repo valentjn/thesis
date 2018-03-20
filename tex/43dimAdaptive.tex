@@ -698,6 +698,35 @@ can be used to show its correctness:
   must coincide with the surpluses $\surplus{\*l,\*i}$.
 \end{proof}
 
+\Cref{prop:invariantResidualInterpolation} shows that
+$r^{(j)}(\gp{\*l,\*i})$ is the residual of the
+interpolant $f^{\sparse,(j)}$ of iteration $j$
+to the objective function $\objfun$ at the grid points $\gp{\*l,\*i}$
+(\cref{eq:propInvariantResidualInterpolation3}).
+After interpolating $r^{(j-1)}$ on the grid $\fgset{\*l^{(j)}}$
+with the function $r_{\*l^{(j)}}^{(j-1)}$
+and subtracting the resulting values from the old residual values,
+the new residual values $r^{(j)}(\gp{\*l,\*i})$ vanish
+not only on the grid $\fgset{\*l^{(j)}}$,
+but also on all previous grids $\fgset{\*l^{(j')}}$, $j' \le j$
+(\cref{eq:propInvariantResidualInterpolation2}).
+The proof of \cref{prop:invariantResidualInterpolation}
+shows this using the auxiliary statement of
+\cref{eq:propInvariantResidualInterpolation1}
+and the tensor product structure of the hierarchical basis.
+
+An example for the application of \cref{alg:residualInterpolation}
+on a two-dimensional sparse grid can be seen in
+\cref{fig:residualInterpolation}.
+Note that
+$\surplus{\*l,\*i}^{(j)} \not= 0$ can only be true if $\*l \le \*l^{(j)}$.
+Therefore, if $(\*l, \*i)$ is not contained in one of the
+grids that are processed in one of the remaining iterations,
+then $\linout{\*l,\*i}^{(j)}$ is already equal to the correct surplus
+$\surplus{\*l,\*i}$,
+where $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$
+denotes the intermediate result obtained after $j$ iterations.
+
 \begin{SCfigure}
   \includegraphics{residualInterpolation_1}%
   \caption[%
@@ -705,7 +734,8 @@ can be used to show its correctness:
   ]{%
     Hierarchization of function value data on the
     two-dimensional regular sparse grid
-    $\regsgspace{n}{d}{}$ of level $n = 3$ \emph{(top left)}.
+    $\regsgspace{n}{d}{}$ of level $n = 3$ \emph{(top left)}
+    using the method of residual interpolation.
     In this figure, we use
     $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$
     as an abbreviation.
