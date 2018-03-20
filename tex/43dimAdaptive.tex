@@ -1,23 +1,39 @@
 \section{Hierarchization on Dimensionally Adaptive Sparse Grids}
 \label{sec:43dimAdaptive}
 
-\blindtext{}
+Dimensionally adaptive sparse grids,
+which are sums of different hierarchical subspaces
+as described in \cref{sec:232dimensionallyAdaptiveSG},
+have the advantage over general spatially adaptive sparse grids
+that algorithms can be formulated and applied more easily.
+In this section, we describe two methods:
+first, the well-known combination technique, which was
+already mentioned in \cref{sec:232dimensionallyAdaptiveSG},
+and second, a new algorithm based on residual interpolation.
 
 
 
 \subsection{Combination Technique and Its Combinatorial Proof}
 \label{sec:431combiTechniqueProof}
 
-\todo{mention Delvos/Schempp}
 
-\todo{mention Wasilkowski}
 
-\blindtext{}
+The combination technique was one of the first algorithms that
+were developed by Griebel et al. in \cite{Griebel92Combination}
+(for two and three dimensions)
+after the term ``sparse grids'' was coined in 1991 \cite{Zenger91Sparse}.
+However, the combination technique predates the development of sparse grids
+by decades.
+According to \cite{Hegland07Combination},
+it was already mentioned by Smolyak in 1963 \cite{Smolyak63Quadrature}.
+Delvos developed and proved the standard combination formula under the
+framework of Boolean interpolation operators in 1982
+\multicite{Delvos82Dvariate,Delvos89Boolean}.
 
 \paragraph{Formal description and outline of a combinatorial proof}
 
 In the following, we give a formal description of the
-sparse grid combination technique and we outline a combinatorial proof
+sparse grid combination technique and we outline a new combinatorial proof
 for its correctness.
 We discuss a high-level explanation of the proofs in this section
 The proofs themselves can be found in \cref{sec:proofCombiTechnique}
@@ -452,7 +468,6 @@ The proof of the following proposition can be generalized accordingly.
   interpolant $\regsgintp{n}{d}{}$ in terms of the full grid components:
   \begin{subequations}
     \begin{align}
-      \
       \regsgintp{n}{d}{}
       = \regsgintp{n}{d}{\ct}
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
