@@ -49,6 +49,7 @@ subspaceMargin = 0.2
 sgSize = 1.5
 arrowMargin = 0.1
 startEndArrowLength = 0.5
+scaleArrowHead = 1
 
 L = [(i, n-i) for i in range(n+1)]
 
@@ -84,7 +85,7 @@ for q in range(len(L)):
   if q == 0:
     arrowEnd = (xOffset + subspaceSize / 2, yOffset + subspaceSize + arrowMargin)
     arrowStart = (arrowEnd[0], arrowEnd[1] + startEndArrowLength)
-    helper.plot.plotArrow(ax, arrowStart, arrowEnd)
+    helper.plot.plotArrow(ax, arrowStart, arrowEnd, scaleHead=scaleArrowHead)
     ax.text(
       arrowStart[0], arrowStart[1] + 0.56,
       r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}} = 0,$".format(0),
@@ -100,7 +101,7 @@ for q in range(len(L)):
   elif q == len(L) - 1:
     arrowStart = (xOffset + subspaceSize / 2, yOffset - arrowMargin)
     arrowEnd = (arrowStart[0], arrowStart[1] - startEndArrowLength)
-    helper.plot.plotArrow(ax, arrowStart, arrowEnd)
+    helper.plot.plotArrow(ax, arrowStart, arrowEnd, scaleHead=scaleArrowHead)
     ax.text(
       arrowEnd[0], arrowEnd[1] - 0.04,
       r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}} = "
@@ -119,7 +120,7 @@ for q in range(len(L)):
     swap = (q == len(L) - 2)
     if swap: center, t = center[::-1], np.pi/2 - t
     circle = lambda t: (center[0] + r * np.cos(t), center[1] + r * np.sin(t))
-    helper.plot.plotArrowPolygon(ax, *circle(t), "k-")
+    helper.plot.plotArrowPolygon(ax, *circle(t), "k-", scaleHead=scaleArrowHead)
     ax.text(
       *circle(-np.pi/4 + (np.pi if swap else 0)),
       r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}},\, "
