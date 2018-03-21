@@ -6,6 +6,318 @@
 }
 \label{sec:44spatAdaptiveBFS}
 
+Unfortunately, we cannot apply the algorithms presented in the last
+sections for spatially adaptive sparse grids with
+hierarchical B-splines.
+The reason is that the algorithms relied on the final interpolant $\sgintp$
+being a linear combination of full grid solutions $\fgintp{\*l}$,
+which is only possible for dimensionally adaptive sparse grids.
+Consequently, the problem of hierarchization becomes significantly
+harder if we operate on spatially adaptive sparse grids.
+An exception is the case of piecewise linear basis functions ($p = 1$),
+where we are still able to apply the \up,
+as we will show in \cref{sec:45spatAdaptiveUP}.
+
+In this section, we study one approach to hierarchize on
+spatially adaptive sparse grids,
+namely transforming the hierarchical basis to so-called fundamental bases
+to enable a \bfs algorithm for hierarchization.
+Another approach, which is based on the \up, will be shown in the next section.
+
+The approach in this section has already been published as
+\cite{Valentin18Fundamental}.
+Again, please note that while B-splines are our target application,
+the considerations in this chapter are fully independent on the choice of
+basis functions $\basis{\*l,\*i}$ 
+(as long as they have tensor product structure).
+Although we do not state it explicitly, it is possible to employ
+different types of basis functions $\basis{l_t,i_t}$ in the different
+dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
+
+\subsection{Hierarchization with Breadth-First Search on Fundamental Bases}
+\label{sec:441bfsFundamentalBases}
+
+\paragraph{Fundamental property}
+
+As we have already discussed in \cref{sec:41problem},
+the main cause of the difficulty of hierarchizing with B-splines
+$\bspl{\*l}{\*i}{}$ is their overlapping support,
+which they need for their approximation order.
+In the univariate case,
+the idea is to transform the B-spline basis to obtain
+new basis functions $\fundbasis{l',i'}\colon \clint{0, 1} \to \real$
+($l' \in \natz$, $i' \in \hiset{l'}$) which satisfy
+\begin{subequations}
+  \label{eq:fundamentalProperty}
+  \begin{alignat}{3}
+    \label{eq:fundamentalProperty1}
+    \fundbasis{l',i'}(\gp{l,i})
+    &= 0,\qquad
+    &&l < l',\quad
+    &&i \in \hiset{l}\\
+    \label{eq:fundamentalProperty2}
+    \fundbasis{l',i'}(\gp{l',i})
+    &= \kronecker{i}{i'},\qquad
+    &&&&i \in \hiset{l'}.
+  \end{alignat}
+\end{subequations}
+We call \eqref{eq:fundamentalProperty} \term{fundamental property}
+and functions $\fundbasis{l',i'}$
+that fulfill this property \term{fundamental basis functions}.
+\todo{check ``that'' comma}
+The first \cref{eq:fundamentalProperty1} ensures that
+basis functions of level $l'$ vanish at
+grid points of coarser levels $l < l'$.
+The second \cref{eq:fundamentalProperty2} requires the
+basis functions $\fundbasis{l',i'}$
+to additionally vanish at all grid points of the same level $l'$
+with different index $i \not= i'$.
+An example for fundamental basis functions are
+the piecewise linear B-splines $\bspl{l,i}{1}{}$.
+
+The statement that $\fundbasis{l',i'}(\gp{l',i'})$ should equal $1$
+is not an additional restriction:
+The value $\fundbasis{l',i'}(\gp{l',i'})$ must be non-zero;
+otherwise, the interpolation problem \eqref{eq:interpFullGridUV}
+of the nodal functions $\fundbasis{l',i'}$ ($i' = 0, \dotsc, 2^{l'}$)
+is ill-posed, as the interpolation coefficients are not uniquely
+determined anymore.
+If $\fundbasis{l',i'}(\gp{l',i'})$ cannot vanish,
+then we can just replace $\fundbasis{l',i'}$ with
+$\fundbasis{l',i'}/\fundbasis{l',i'}(\gp{l',i'})$ to obtain
+$\fundbasis{l',i'}(\gp{l',i'}) = 1$.
+
+\paragraph{Triangular interpolation matrix}
+
+The main motivation for enforcing the fundamental property
+is the fact it results in the univariate hierarchization matrix $\intpmat$
+being triangular, if rows and columns are arranged
+according to monotonously increasing levels.
+To be more precise,
+let $k = k(l, i)$ an continuously enumerated index of
+the level-index pairs $(l, i)$,
+such that
+\begin{equation}
+  k(l, i) \le k(l', i') \implies l \le l',\quad
+  (l, i), (l', i') \in K,
+\end{equation}
+where $\liset$ is the level-index set of the
+spatially adaptive sparse grid at hand
+(see \cref{sec:233spatiallyAdaptiveSG}).
+If $k = k(k, i)$ and $k' = k(l', i')$, then
+the $(k, k')$-th entry of $\intpmat$ vanishes
+for $k < k'$:
+\begin{equation}
+  \label{eq:fundamentalTriangularUV}
+  \intpmatentry{k}{k'}
+  = \fundbasis{k'}(\gp{k})
+  = 0,\quad
+  k < k',
+\end{equation}
+as $k < k'$ implies that either
+$l < l'$ (apply \eqref{eq:fundamentalProperty1})
+or $l = l'$, but $i \not= i'$ (apply \eqref{eq:fundamentalProperty2}).
+Consequently, $\intpmat$ is in lower triangular form
+with diagonal entries
+$\intpmatentry{k}{k} = \fundbasis{k}(\gp{k}) = 1$
+according to \eqref{eq:fundamentalProperty2}.
+This means that the hierarchization system \eqref{eq:hierarchizationSLE}
+can easily be solved via forward substitution.
+
+\paragraph{Multivariate case}
+
+For the multivariate case of $d \in \nat$ dimensions,
+we define as usual tensor product versions
+$\fundbasis{\*l',\*i'}$ of the univariate fundamental bases
+$\fundbasis{l'_t,i'_t}$ ($t = 1, \dotsc, d$).
+\Cref{eq:fundamentalProperty} then implies
+\begin{equation}
+  \label{eq:fundamentalPropertyImplicationMV}
+  \fundbasis{\*l',\*i'}(\gp{\*l,\*i}) \not= 0
+  \implies
+  \falarge{t = 1, \dotsc, d}{
+    \left[(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))\right]
+  },\quad
+  (\*l, \*i), (\*l',\*i') \in \liset.
+\end{equation}
+This means that every basis function
+$\fundbasis{\*l',\*i'}$ can only be non-zero
+at the grid points $\gp{\*l,\*i}$ that, in every dimension $t$,
+are in a strictly finer level $l_t$ or
+have the same level-pair $(l_t, i_t)$ as the basis function.
+
+We can generalize the relation \eqref{eq:fundamentalTriangularUV} about the
+triangular structure of the interpolation matrix to the multivariate case:
+We assume that $k = k(\*l, \*i)$ is a single scalar and
+continuously enumerated index of the level-index pairs $(\*l, \*i) \in K$
+such that
+\begin{equation}
+  k(\*l, \*i) \le k(\*l', \*i') \implies \normone{\*l} \le \normone{\*l'},\quad
+  (\*l, \*i), (\*l', \*i') \in K,
+\end{equation}
+i.e., we sort row indices $k = k(\*l, \*i)$ and
+column indices $k' = k(\*l', \*i')$ of $\intpmat$
+by level sum $\normone{\cdot}$.
+As a consequence,
+$\intpmat$ is in lower block-triangular form:
+\begin{subequations}
+  \begin{alignat}{2}
+    \label{eq:fundamentalTriangularMV}
+    \intpmatentry{k}{k'}
+    &= \fundbasis{k'}(\vgp{k})
+    = 0,\quad
+    &\normone{\*l}
+    &< \normone{\*l'},\\
+    \intertext{%
+      as $\normone{\*l} < \normone{\*l'} \implies \ex{t}{l_t < l'_t}$
+      and using \eqref{eq:fundamentalProperty1}.
+      Additionally, the diagonal blocks are unit matrices due to%
+    }
+    \intpmatentry{k}{k'}
+    &= \fundbasis{k'}(\vgp{k})
+    \overset{(\ast)}{=} \kronecker{(\*l,\*i)}{(\*l',\*i')},\quad
+    &\normone{\*l}
+    &= \normone{\*l'},
+  \end{alignat}
+\end{subequations}
+since $\normone{\*l} = \normone{\*l'}$ implies that
+either $\left[\ex{t = 1, \dotsc, d}{l_t < l'_t}\right]$ or $\*l = \*l'$.
+In the former case, both sides of $(\ast)$ vanish
+(according to \eqref{eq:fundamentalProperty1}),
+and in the latter case, 
+both sides equal $\kronecker{\*i}{\*i'}$
+(according to \eqref{eq:fundamentalProperty2}).
+
+\paragraph{Forward substitution}
+
+The triangular structure of $\intpmat$ implies that
+it is possible to determine the surpluses $\surplus{\*l,\*i}$
+via forward substitution:
+
+\begin{lemma}[forward substitution]
+  \label{lemma:forwardSubstitution}
+  The hierarchical surpluses $\surplus{\*l,\*i}$, which
+  are determined by \eqref{eq:hierarchizationSLE}
+  with respect to $\fundbasis{\*l,\*i}$, satisfy
+  \begin{equation}
+    \surplus{\*l,\*i}
+    = \fcnval{\*l,\*i} -
+    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+    \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
+    (\*l, \*i) \in \liset.
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  The linear system \eqref{eq:hierarchizationSLE} is given by
+  \begin{subequations}
+    \begin{align}
+      \fcnval{\*l,\*i}
+      &= \sum_{(\*l',\*i') \in \liset}
+      \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
+      (\*l, \*i) \in \liset.\\
+      \intertext{%
+        According to \eqref{eq:fundamentalTriangularMV}
+        all summands with $\normone{\*l'} > \normone{\*l}$ vanish
+        and from the summands with $\normone{\*l'} = \normone{\*l}$,
+        only the summand $(\*l, \*i)$ remains
+        with $\fundbasis{\*l,\*i}(\gp{\*l,\*i}) = 1$:%
+      }
+      &= \surplus{\*l,\*i} +
+      \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+      \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),
+    \end{align}
+  \end{subequations}
+  as desired.
+\end{proof}
+
+\paragraph{Breadth-first search}
+
+Exploiting this lemma, we can formulate
+a hierarchization algorithm (see \cref{alg:bfs})
+that applies forward substitution by \bfs in the \dagr of
+the spatially adaptive sparse grid $\sgset$.
+The nodes of the \dagr are the level-index pairs $(\*l, \*i) \in \liset$.
+An edge connects $(\*l, \*i)$ to $(\*l', \*i')$,
+if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e.,
+\begin{equation}
+  \exlarge{t = 1, \dotsc, d}{
+    l'_t = l_t + 1,\;
+    i'_t \in
+    \begin{cases}
+      \{1\},&l_t = 0,\\
+      \{2i_t - 1, 2i_t + 1\},&l_t > 0.
+    \end{cases}
+  }
+\end{equation}
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\vlinout =$ breadthFirstSearch}{%
+      $\liset$, $\vlinin$%
+    }
+      \State{$\vlinout \gets \vlinin$}
+      \State{$K_\mathrm{p} \gets \{\*i \mid \*i \in \{0, 1\}^d\}$}
+      \Comment{set of processed points}%
+      \State{%
+        $q \gets \text{FIFO queue with same contents as } K_\mathrm{p}$%
+      }
+      \Comment{points to be processed next}%
+      \While{$q \not= \emptyset$}
+        \State{$(\*l', \*i') \gets q.\texttt{Pop}()$}
+        \Comment{obtain next point}%
+        \For{%
+          $\{(\*l, \*i) \in \liset \setminus \{(\*l', \*i')\} \mid
+          \fa{t=1,\dotsc,d}{(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))}\}$%
+        }
+          \State{%
+            $\linout{\*l,\*i} \gets \linout{\*l,\*i} -
+            \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i})$%
+          }
+          \Comment{%
+            update surpluses according to \cref{lemma:forwardSubstitution}%
+          }%
+        \EndFor{}
+        \For{%
+          $\{(\*l, \*i) \in \liset \setminus \liset_\mathrm{p} \mid
+          \text{$(\*l, \*i)$ direct child of $(\*l', \*i')$}\}$%
+        }
+          \State{$q.\texttt{Push}((\*l, \*i))$}
+          \Comment{add children to queue}%
+          \State{%
+            $\liset_\mathrm{p} \gets
+            \liset_\mathrm{p} \cup \{(\*l, \*i)\}$%
+          }
+          \Comment{mark as processed}%
+        \EndFor{}
+      \EndWhile{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[%
+    Hierarchization with breadth-first search (BFS)%
+  ]{%
+    Hierarchization with breadth-first search
+    on spatially adaptive sparse grids with fundamental bases.
+    Inputs are the set $\liset$ of level-index pairs of the
+    sparse grid (see \eqref{eq:spatiallyAdaptiveSG}) and
+    the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points),
+    where $\liset$ is the set of all feasible level-index pairs $(\*l,\*i)$,
+    i.e., $\normone{\*l} \le n$, $\*i \in \hiset{\*l}$.
+    The output is the vector
+    $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
+    %
+  }%
+  \label{alg:bfs}%
+\end{algorithm}
+
+\paragraph{Correctness}
+
+\blindtext{}
+
+\paragraph{Complexity}
+
 \blindtext{}
 
 
