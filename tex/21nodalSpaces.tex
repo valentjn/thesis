@@ -65,7 +65,7 @@ there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
   \label{eq:interpFullGridUV}
   \fgintp{l}
   = \sum_{i=0}^{2^l} \interpcoeff{l,i} \basis{l,i},\quad
-  \fa{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = \objfun(\gp{l,i})},
+  \falarge{i = 0, \dotsc, 2^l}{\fgintp{l}(\gp{l,i}) = \objfun(\gp{l,i})},
 \end{equation}
 for some $\interpcoeff{l,i} \in \real$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $\objfun$ in $\ns{l}$.
@@ -195,7 +195,7 @@ in the nodal space $\ns{\*l}$ with $\fgintp{\*l}\colon \clint{\*0, \*1} \to \rea
   \label{eq:interpFullGridMV}
   \fgintp{\*l}
   = \sum_{\*i=\*0}^{\*2^\*l} \interpcoeff{\*l,\*i} \basis{\*l,\*i},\quad
-  \fa{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})},
+  \falarge{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})},
 \end{equation}
 where $\interpcoeff{\*l,\*i} \in \real$ and
 the sum is over all $\*i = \*0, \dotsc, \*2^\*l$.

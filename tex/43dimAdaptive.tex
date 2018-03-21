@@ -244,7 +244,7 @@ on the equivalence classes.
   We define a relation ``$\sim$'' on $L$ as follows:
   For $\*l', \*l'' \in L$, we set $\*l' \sim \*l''$ if and only if
   \begin{equation}
-    \fa{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t},\quad
+    \falarge{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t},\quad
     T_{\*l',\*l''}
     := \{t \mid l'_t = l''_t\}.
   \end{equation}
@@ -526,7 +526,7 @@ The list $\*l^{(1)}, \dotsc, \*l^{(m)}$ of active nodal spaces
 in \cref{line:algResidualInterpolation1} is determined by the condition
 \begin{equation}
   \bigcup_{j=1}^m \{\*l \in \natz^d \mid \*l \le \*l^{(j)}\} = L,\quad
-  \fa{j_1 \not= j_2}{\lnot(\*l^{(j_1)} \le \*l^{(j_2)})}.
+  \falarge{j_1 \not= j_2}{\lnot(\*l^{(j_1)} \le \*l^{(j_2)})}.
 \end{equation}
 This means that the corresponding sparse grid $\sgset$
 is the (non-disjoint) union of the full grid sets $\fgset{\*l^{(j)}}$
