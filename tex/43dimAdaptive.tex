@@ -440,6 +440,8 @@ and not the nodal basis
   \label{alg:combiTechnique}%
 \end{algorithm}
 
+\paragraph{Correctness}
+
 Of course, the proof of the correctness of \cref{alg:combiTechnique}
 relies on the correctness of the combination technique
 (see \cref{thm:combiTechnique}).
@@ -517,6 +519,8 @@ In contrast, the combination technique needs to perform computations
 on additional non-active nodal subspaces
 (for the regular sparse grid case:
 summands with $q \ge 1$ in \eqref{eq:combiTechnique}).
+
+\paragraph{Active nodal spaces}
 
 \Cref{alg:residualInterpolation} describes the procedure of the method,
 given the levels $L$ contained in the sparse grid
@@ -610,6 +614,8 @@ removing points from the union $\sgset$).
   }%
   \label{alg:residualInterpolation}%
 \end{algorithm}
+
+\paragraph{Correctness}
 
 The principle of \Cref{alg:residualInterpolation} is maintaining
 a vector $(r^{(j)}(\gp{\*l,\*i}))_{(\*l,\*i) \in \liset}$ of residuals
