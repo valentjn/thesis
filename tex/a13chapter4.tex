@@ -646,3 +646,107 @@
   \eqref{eq:propInvariantResidualInterpolationStatements}
   for $j + 1$.
 \end{proof}
+
+
+
+\subsection{Correctness Proof of Hierarchization with Breadth-First Search}
+\label{sec:proofBFS}
+
+\propInvariantBFS*
+
+\begin{proof}
+  We make two observations:
+  
+  \begin{itemize}
+    \item
+    First, due to the \bfs nature of \cref{alg:BFS} and the
+    hierarchical relation \eqref{eq:directAncestor},
+    all grid points with level sum $< q$ are \pop{}ped before
+    the first point with level sum $\ge q$ is \pop{}ped.
+    
+    \item
+    Second, after \pop{}ping all grid points with
+    level sum $< q$, the output values of the grid points with
+    level sum $\le q$ remain unchanged for the rest of the algorithm:
+    If \cref{line:algBFS2} of the algorithm updates the output value of a point
+    $(\*l, \*i)$ in the iteration of $(\*l', \*i') \in \liset$ with
+    $\normone{\*l'} \ge q$, then \cref{line:algBFS1} implies
+    $\*l \ge \*l'$ and thus, $\normone{\*l} \ge \normone{\*l'} \ge q$.
+    However, $\normone{\*l} = q$ is not possible as
+    this would imply that $\normone{\*l} = \normone{\*l'}
+    \implies (\*l, \*i) = (\*l', \*i')$ by \cref{line:algBFS1},
+    but $(\*l, \*i) = (\*l', \*i')$ is explicitly excluded in the
+    \texttt{\algorithmicfor} loop of \cref{line:algBFS1}.
+    Therefore, we must have $\normone{\*l} > q$.
+    Hence, if a point $(\*l, \*i)$ with level sum $\ge q$ has been \pop{}ped,
+    only surpluses of points with level sum $> q$ may be updated.
+  \end{itemize}
+  
+  \noindent
+  Now, we prove the asserted claim by induction over $q$.
+  
+  \noindent
+  \textbf{Induction base case:}
+  For $q = 0$, \cref{alg:BFS} sets $\linout{\*l,\*i}$ to
+  $\fcnval{\*l,\*i}$ in \cref{line:algBFS3}.
+  As the sum in \eqref{eq:propInvariantBFS} is empty,
+  the claim is correct for $q = 0$.
+  
+  \noindent
+  \textbf{Induction step case:}
+  Let $\linout{\*l',\*i'}^{(q)}$ and
+  $\linout{\*l',\*i'}^{(q+1)}$
+  be the surpluses after \pop{}ping all
+  grid points with level sum $< q$ and $< q + 1$, respectively.
+  We show the induction step $q \to q + 1$, i.e.,
+  we assume that the assertion is true for $q$
+  and prove that after popping all grid points with level sum $< q + 1$,
+  it holds
+  \begin{equation}
+    \label{eq:proofPropInvariantBFS1}
+    \linout{\*l,\*i}^{(q+1)}
+    = \fcnval{\*l,\*i} -
+    \sum_{\normone{\*l'} < q+1} \linout{\*l',\*i'}^{(q+1)}
+    \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
+    (\*l, \*i) \in \liset,\;\;
+    \normone{\*l} = q+1.
+  \end{equation}
+  %Due to the considerations above,
+  %the surpluses corresponding to points with level sum $\le q$
+  %stay the same.
+  Therefore, let $(\*l, \*i) \in \liset$ with $\normone{\*l} = q+1$.
+  The update in \cref{line:algBFS2} can safely be applied
+  with all grid points $(\*l', \*i')$ with level sum $q$.
+  The grid points $(\*l', \*i')$ that do not satisfy the relation in the set in
+  \cref{line:algBFS1} do not contribute as
+  $\fundbasis{\*l',\*i'}(\gp{\*l,\*i}) = 0$
+  due to the necessary condition \eqref{eq:fundamentalPropertyImplicationMV}.
+  By summing all updates from \cref{line:algBFS2}, we obtain
+  \begin{subequations}
+    \begin{align}
+      \linout{\*l,\*i}^{(q+1)}
+      &= \linout{\*l,\*i}^{(q)} -
+      \sum_{\normone{\*l'} = q} \linout{\*l',\*i'}^{(q)}
+      \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).\\
+      \intertext{%
+        After inserting the induction hypothesis
+        for $\linout{\*l,\*i}^{(q)}$,%
+      }
+      &= \left(\fcnval{\*l,\*i} -
+      \sum_{\normone{\*l'} < q} \linout{\*l',\*i'}^{(q)}
+      \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\right) -
+      \sum_{\normone{\*l'} = q} \linout{\*l',\*i'}^{(q)}
+      \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\\
+      &= \fcnval{\*l,\*i} -
+      \sum_{\normone{\*l'} < q + 1} \linout{\*l',\*i'}^{(q)}
+      \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).
+    \end{align}
+  \end{subequations}
+  As noted above, we have
+  $\fa{(\*l', \*i'),\, \norm{\*l'} < q + 1}{
+    \linout{\*l',\*i'}^{(q)} = \linout{\*l',\*i'}^{(q+1)}
+  }$
+  (the values of points with level sum $< q + 1$
+  do not change after \pop{}ping all points with level sum $< q$).
+  This shows the induction claim \eqref{eq:proofPropInvariantBFS1}.
+\end{proof}

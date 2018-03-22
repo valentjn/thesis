@@ -259,19 +259,21 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
       $\liset$, $\vlinin$%
     }
       \State{$\vlinout \gets \vlinin$}
-      \State{$K_\mathrm{p} \gets \{\*i \mid \*i \in \{0, 1\}^d\}$}
+      \label{line:algBFS3}
+      \State{$K_\mathrm{p} \gets \{0, 1\}^d$}
       \Comment{set of processed points}%
       \State{%
-        $q \gets \text{FIFO queue with same contents as } K_\mathrm{p}$%
+        $Q \gets \text{FIFO queue with same contents as } K_\mathrm{p}$%
       }
       \Comment{points to be processed next}%
-      \While{$q \not= \emptyset$}
-        \State{$(\*l', \*i') \gets q.\texttt{Pop}()$}
+      \While{$Q \not= \emptyset$}
+        \State{$(\*l', \*i') \gets Q.\pop()$}
         \Comment{obtain next point}%
         \For{%
           $\{(\*l, \*i) \in \liset \setminus \{(\*l', \*i')\} \mid
           \fa{t=1,\dotsc,d}{(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))}\}$%
         }
+        \label{line:algBFS1}
           \State{%
             $\linout{\*l,\*i} \gets \linout{\*l,\*i} -
             \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i})$%
@@ -279,12 +281,13 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
           \Comment{%
             update surpluses according to \cref{lemma:forwardSubstitution}%
           }%
+          \label{line:algBFS2}
         \EndFor{}
         \For{%
           $\{(\*l, \*i) \in \liset \setminus \liset_\mathrm{p} \mid
           \text{$(\*l, \*i)$ direct child of $(\*l', \*i')$}\}$%
         }
-          \State{$q.\texttt{Push}((\*l, \*i))$}
+          \State{$Q.\push((\*l, \*i))$}
           \Comment{add children to queue}%
           \State{%
             $\liset_\mathrm{p} \gets
@@ -314,13 +317,95 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
   \label{alg:BFS}%
 \end{algorithm}
 
+We make two assumptions for \cref{alg:BFS}.
+First, $\liset$ contains at least all $2^d$ corners of the
+domain $\clint{\*0, \*1}$:
+\begin{subequations}
+  \label{eq:BFSAssumptions}
+  \begin{equation}
+    \label{eq:BFSAssumption1}
+    \liset \supset \{(\*0, \*i) \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
+  \end{equation}
+  Second, all grid points are reachable from the corners:
+  \begin{equation}
+    \label{eq:bfsAssumption2}
+    \begin{split}
+      \forall_{(\*l', \*i') \in \liset}
+      \exists_{
+        (\*l^{(0)}, \*i^{(0)}), \dotsc, (\*l^{(m)}, \*i^{(m)}) \in \liset
+      }\;\;
+      &\big[(\*l^{(0)}, \*i^{(0)}) \to \dotsb \to (\*l^{(m)}, \*i^{(m)}),\\
+      &\quad \*l^{(0)} = \*0,\; (\*l^{(m)}, \*i^{(m)}) = (\*l', \*i')\big],
+    \end{split}
+  \end{equation}
+\end{subequations}
+where ``$\to$'' is the direct ancestor relation \eqref{eq:directAncestor}.
+%One could also use a different initial set than the corners
+%of $\clint{\*0, \*1}$,
+%as long as all grid points are reachable from the set and
+%the grid points in the set are sorted by increasing level sum
+%(if the set contains grid points with different level sums).
+
 \paragraph{Correctness}
 
-\blindtext{}
+The correctness of \cref{alg:BFS} can be shown with the following invariant:
+
+\begin{restatable}[invariant of \cref{alg:BFS}]{%
+  proposition%
+}{%
+  propInvariantBFS%
+}
+  \label{prop:invariantBFS}
+  Under the assumption \eqref{eq:BFSAssumptions},
+  it holds after \pop{}ping all grid points with level sum $< q$
+  from the queue $Q$ in \cref{alg:BFS}:
+  \begin{equation}
+    \label{eq:propInvariantBFS}
+    \linout{\*l,\*i}
+    = \fcnval{\*l,\*i} -
+    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < q}}
+    \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
+    (\*l, \*i) \in \liset,\;\;
+    \normone{\*l} = q.
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofBFS}.
+\end{proof}
+
+\begin{shortcorollary}[correctness of \cref{alg:BFS}]
+  \label{cor:algBFSCorrectness}
+  \Cref{alg:BFS} is correct.
+\end{shortcorollary}
+
+\begin{proof}
+  As noted in the proof of \cref{prop:invariantBFS},
+  the result after \pop{}ping all grid points with level sum
+  $q$ as stated in \cref{prop:invariantBFS} is also the final result
+  of the algorithm:
+  \begin{equation}
+    \linout{\*l,\*i}
+    = \fcnval{\*l,\*i} -
+    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+    \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
+    (\*l, \*i) \in \liset.
+  \end{equation}
+  By \cref{lemma:forwardSubstitution},
+  the correct hierarchical surpluses $\surplus{\*l,\*i}$
+  satisfy the same relation.
+  Inductively, $\linout{\*l,\*i}$ and $\surplus{\*l,\*i}$ must coincide.
+\end{proof}
 
 \paragraph{Complexity}
 
-\blindtext{}
+The \bfs algorithm in \cref{alg:BFS} is not as efficient as the \up:
+It still needs to perform $\landauO{N^2 d}$ many univariate
+basis evaluations (compared to $\landauO{Nd}$ for the \up).
+However, it only needs linear space $\landauO{N}$ similar to the \up.
+This is a significant advantage over directly solving the system
+\eqref{eq:hierarchizationSLE} of linear equations, which typically
+needs quadratic space $\landauO{N^2}$.
 
 
 
