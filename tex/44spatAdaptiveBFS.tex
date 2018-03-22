@@ -139,6 +139,7 @@ $\fundbasis{l'_t,i'_t}$ ($t = 1, \dotsc, d$).
     \left[(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))\right]
   },\quad
   (\*l, \*i), (\*l',\*i') \in \liset.
+  \hspace*{-1mm}
 \end{equation}
 This means that every basis function
 $\fundbasis{\*l',\*i'}$ can only be non-zero
@@ -161,8 +162,8 @@ by level sum $\normone{\cdot}$.
 As a consequence,
 $\intpmat$ is in lower block-triangular form:
 \begin{subequations}
+  \label{eq:fundamentalTriangularMV}
   \begin{alignat}{2}
-    \label{eq:fundamentalTriangularMV}
     \intpmatentry{k}{k'}
     &= \fundbasis{k'}(\vgp{k})
     = 0,\quad
@@ -217,7 +218,7 @@ via forward substitution:
       \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
       (\*l, \*i) \in \liset.\\
       \intertext{%
-        According to \eqref{eq:fundamentalTriangularMV}
+        According to \eqref{eq:fundamentalTriangularMV},
         all summands with $\normone{\*l'} > \normone{\*l}$ vanish
         and from the summands with $\normone{\*l'} = \normone{\*l}$,
         only the summand $(\*l, \*i)$ remains
@@ -239,8 +240,9 @@ that applies forward substitution by \bfs in the \dagr of
 the spatially adaptive sparse grid $\sgset$.
 The nodes of the \dagr are the level-index pairs $(\*l, \*i) \in \liset$.
 An edge connects $(\*l, \*i)$ to $(\*l', \*i')$,
-if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e.,
+if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
 \begin{equation}
+  \label{eq:directAncestor}
   \exlarge{t = 1, \dotsc, d}{
     l'_t = l_t + 1,\;
     i'_t \in
