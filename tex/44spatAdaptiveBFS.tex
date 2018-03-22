@@ -35,7 +35,7 @@ different types of basis functions $\basis{l_t,i_t}$ in the different
 dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
 
 \subsection{Hierarchization with Breadth-First Search on Fundamental Bases}
-\label{sec:441bfsFundamentalBases}
+\label{sec:441BFSFundamentalBases}
 
 \paragraph{Fundamental property}
 
@@ -234,7 +234,7 @@ via forward substitution:
 \paragraph{Breadth-first search}
 
 Exploiting this lemma, we can formulate
-a hierarchization algorithm (see \cref{alg:bfs})
+a hierarchization algorithm (see \cref{alg:BFS})
 that applies forward substitution by \bfs in the \dagr of
 the spatially adaptive sparse grid $\sgset$.
 The nodes of the \dagr are the level-index pairs $(\*l, \*i) \in \liset$.
@@ -309,7 +309,7 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e.,
     of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
     %
   }%
-  \label{alg:bfs}%
+  \label{alg:BFS}%
 \end{algorithm}
 
 \paragraph{Correctness}
