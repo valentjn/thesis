@@ -290,7 +290,7 @@ for the piecewise linear case of $p = 1$.
 This is intuitively clear:
 For this case,
 we do not need to remove any knots as the hierarchical splitting already
-holds for the full domain by \cref{cor:hierSplittingHat}.
+holds for the full domain by \cref{cor:hierSplittingHatMV}.
 Second, the removal of these knots is only possible if $p + 1 \le 2^l$,
 which is equivalent to $l \ge \lceil\log_2(p+1)\rceil$.
 For coarser levels,
@@ -419,7 +419,9 @@ Again usual, we define $\ns{l}^{p,\nak}$ and $\hs{l}^{p,\nak}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
-\begin{proposition}[hierarchical splitting for not-a-knot B-splines]
+\begin{proposition}[%
+  univariate hierarchical splitting for not-a-knot B-splines%
+]
   \label{prop:hierSplittingNAKBSplineUV}
   The hierarchical splitting \eqref{eq:hierSplittingUV}
   holds for the hierarchical not-a-knot B-spline basis:
@@ -460,7 +462,9 @@ respectively.
   Hence, all coefficients must vanish.
 \end{proof}
 
-\begin{corollary}
+\begin{corollary}[%
+  multivariate hierarchical splitting for not-a-knot B-splines%
+]
   \label{cor:hierSplittingNAKBSplineMV}
   It holds
   \begin{equation}
@@ -496,10 +500,13 @@ This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to exactly
 represent global polynomials on $\clint{\*0, \*1}$:
 
-\begin{corollary}
+\begin{shortcorollary}[%
+  sparse grid with not-a-knot B-splines contains polynomials%
+]
+  \label{cor:sparseGridRegularNAKPolynomials}
   If $n \ge \normone{\lceil\veclog_\*2(\*p + \*1)\rceil}$,
   then $\polyspace{\*p} \subset \regsgspace{n}{d}{\*p,\nak}$.
-\end{corollary}
+\end{shortcorollary}
 
 \begin{proof}
   Let $\*l := \lceil\veclog_\*2(\*p + \*1)\rceil$ and $n \ge \normone{\*l}$.
