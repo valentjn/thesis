@@ -59,17 +59,21 @@
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommandoptarg{1}{\vlinin}{\*u^{#1}}{u}{$\vlinin$}{
+\newnotationcommandoptarg{1}{\vlinin}{%
+  \*u\ifnotempty{#1}{^{#1}}}{u}{$\vlinin$%
+}{
   Input of the linear operator $\linop$
 }
 
-\newcommand*{\linin}[2][]{u_{#2}^{#1}}
+\newcommand*{\linin}[2][]{u_{#2}\ifnotempty{#1}{^{#1}}}
 
-\newnotationcommandoptarg{1}{\vlinout}{\*y^{#1}}{y}{$\vlinout$}{
+\newnotationcommandoptarg{1}{\vlinout}{%
+  \*y\ifnotempty{#1}{^{#1}}}{y}{$\vlinout$%
+}{
   Output of the linear operator $\linop$
 }
 
-\newcommand*{\linout}[2][]{y_{#2}^{#1}}
+\newcommand*{\linout}[2][]{y_{#2}\ifnotempty{#1}{^{#1}}}
 
 % ======================================================================
 % Vector Notation
@@ -265,7 +269,8 @@
 % Grid Sets
 % ======================================================================
 
-\newcommand*{\appendwithcomma}[1]{\if\relax\detokenize{#1}\relax\else,#1\fi}
+\newcommand*{\ifnotempty}[2]{\if\relax\detokenize{#1}\relax\else#2\fi}
+\newcommand*{\appendwithcomma}[1]{\ifnotempty{#1}{,#1}}
 
 \newcommand*{\gridset}[3][]{%
   \if\relax\detokenize{#1}\relax\Omega\else#1{\Omega}\fi_{#2}^{#3}%
@@ -292,7 +297,9 @@
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommandoptarg{2}{\fgset}{\Omega_{#2}^{#1}}{ÄΩl}{$\fgset{\*l}$}{
+\newnotationcommandoptarg{2}{\fgset}{%
+  \Omega_{#2}\ifnotempty{#1}{^{#1}}%
+}{ÄΩl}{$\fgset{\*l}$}{
   Set of full grid points of level $\*l$
 }
 
@@ -339,7 +346,9 @@
   \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
 }
 
-\newnotationcommandoptarg{2}{\ns}{V_{#2}^{#1}}{Vl}{$\ns{\*l}$}{
+\newnotationcommandoptarg{2}{\ns}{%
+  V_{#2}\ifnotempty{#1}{^{#1}}%
+}{Vl}{$\ns{\*l}$}{
   Nodal space of level $\*l$
 }
 
@@ -350,7 +359,9 @@
   $:= \ns{n \cdot \*1}$ of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\*l}$}{
+\newnotationcommandoptarg{2}{\hs}{%
+  W_{#2}\ifnotempty{#1}{^{#1}}%
+}{Wl}{$\hs{\*l}$}{
   Hierarchical subspace of level $\*l$
 }
 
@@ -550,36 +561,36 @@
 % ======================================================================
 
 \newnotationcommandoptarg{2}{\fcnval}{%
-  f^{#1}(\gp{#2})%
+  f\ifnotempty{#1}{^{#1}}(\gp{#2})%
 }{fli}{$\fcnval{\*l,\*i}$}{
   Value of the objective function $\objfun$ at the grid point $\gp{\*l,\*i}$
 }
 
 \newnotationcommandoptarg{2}{\surplus}{%
-  \alpha_{#2}^{#1}%
+  \alpha_{#2}\ifnotempty{#1}{^{#1}}%
 }{Äαli}{$\surplus{\*l,\*i}$}{
   Hierarchical surpluses (coefficients of a linear combination of hierarchical
   basis functions)
 }
 
 \newcommand*{\vsurplus}{\*\alpha}
-\newcommand*{\surplustilde}[2][]{\tilde{\alpha}_{#2}^{#1}}
+\newcommand*{\surplustilde}[2][]{\tilde{\alpha}_{#2}\ifnotempty{#1}{^{#1}}}
 
 \newnotationcommandoptarg{2}{\interpcoeff}{%
-  c_{#2}^{#1}%
+  c_{#2}\ifnotempty{#1}{^{#1}}%
 }{cli}{$\interpcoeff{\*l,\*i}$}{
   Full grid interpolation coefficients
   (coefficients of a linear combination of nodal basis functions)
 }
 
-\newcommand*{\interpcoefftilde}[2][]{\tilde{c}_{#2}^{#1}}
+\newcommand*{\interpcoefftilde}[2][]{\tilde{c}_{#2}\ifnotempty{#1}{^{#1}}}
 
 % ======================================================================
 % Special Functions
 % ======================================================================
 
 \newnotationcommandoptarg{2}{\basis}{%
-  \varphi_{#2}^{#1}%
+  \varphi_{#2}\ifnotempty{#1}{^{#1}}%
 }{Äφli}{$\basis{\*l,\*i}$}{
   Hierarchical basis function of level $\*l$, index $\*i$
 }
@@ -641,7 +652,7 @@
 }
 
 \newnotationcommandoptarg{2}{\lagrangepoly}{%
-  L_{#2}^{#1}%
+  L_{#2}\ifnotempty{#1}{^{#1}}%
 }{Lli}{$\lagrangepoly{l,i}$}{
   Lagrange polynomial of level $l$, index $i$
 }
