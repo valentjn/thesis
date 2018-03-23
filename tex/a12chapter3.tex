@@ -81,7 +81,7 @@
   whose system matrix
   $\mat{A}(p)$ is a banded symmetric Toeplitz matrix%
   \footnote{%
-    A Toeplitz matrix is a matrix $\mat{A}$ whose entries $a_{k,j}$
+    The entries $a_{k,j}$ of a Toeplitz matrix $\mat{A}$
     solely depend on $k - j$, i.e.,
     $a_{k,j} = c_{k-j}$ for some vector $\*c$.%
   }
@@ -148,7 +148,7 @@
     \caption[%
       Non-zero matrix values in the proof of linear independence%
     ]{%
-      Non-zero values $(\mat{A}(p))_{j,j+k}$ of the diagonals of $\mat{A}(p)$
+      Non-zero values $a_{j,j+k}(p)$ of the diagonals of $\mat{A}(p)$
       obtained in \eqref{eq:hierBSplineLinearlyIndependent2}.%
     }%
     \label{tbl:proofHierBSplineLinearlyIndependent}%
@@ -162,8 +162,8 @@
   a linear combination of the zero function with the hierarchical
   B-splines of level $< l$, i.e.,
   \begin{equation}
-  \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \bspl{l',i'}{p}
-  = 0,
+    \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}} \surplus{l',i'} \bspl{l',i'}{p}
+    = 0,
   \end{equation}
   which implies $\surplus{l',i'} = 0$ for all $l' = 0, \dotsc, l - 1$
   by the induction hypothesis.
