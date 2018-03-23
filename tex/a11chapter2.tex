@@ -6,11 +6,11 @@
 \propGridSizeCoarseBoundary*
 
 \begin{proof}
-  Note that the outer union in the definition of $\coarselevelset{n}{d}{b}{}$ in
+  Note that the outer union in the definition of $\coarselevelset{n}{d}{b}$ in
   \eqref{eq:coarseBoundary} is indeed disjoint.
   Therefore,
   \begin{align}
-    \setsize{\coarseregsgset{n}{d}{b}{}}
+    \setsize{\coarseregsgset{n}{d}{b}}
     &= \sum_{\substack{\*l \in \nat^d,\\\normone{\*l} \le n}} \setsize{\hiset{\*l}} +
     \sum_{
       \substack{
@@ -20,8 +20,8 @@
       }
     } \setsize{\hiset{\*l}}.\\
     \intertext{%
-      The first sum is the number $\setsize{\interiorregsgset{n}{d}{}}$
-      of interior grid points in $\regsgset{n}{d}{}$.
+      The first sum is the number $\setsize{\interiorregsgset{n}{d}}$
+      of interior grid points in $\regsgset{n}{d}$.
       The second sum can be split into summands
       with the same number $q$ of zero entries,
       which we count with
@@ -29,7 +29,7 @@
       = \normone{\vecmax(\*l, \*1)} - \normone{\*l}$,
       and the same level sum $m = \normone{\*l}$:%
     }
-    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
+    &= \setsize{\interiorregsgset{n}{d}} + 2^d +
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
@@ -61,23 +61,23 @@
   which can be done in $\binom{m-1}{d-q-1}$ ways.
   Thus,
   \begin{align}
-    \setsize{\coarseregsgset{n}{d}{b}{}}
-    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
+    \setsize{\coarseregsgset{n}{d}{b}}
+    &= \setsize{\interiorregsgset{n}{d}} + 2^d +
     \sum_{q=1}^{d-1} \binom{d}{q} \sum_{m=d-q}^{n-b-q+1}
     2^{m - d + 2q} \binom{m-1}{d-q-1}.\\
     \intertext{%
       Shifting the index $m \to (m + d - q)$ and rearranging the terms
       slightly, we obtain%
     }
-    &= \setsize{\interiorregsgset{n}{d}{}} + 2^d +
+    &= \setsize{\interiorregsgset{n}{d}} + 2^d +
     \sum_{q=1}^{d-1} 2^q \binom{d}{q} \sum_{m=0}^{n-d-b+1}
     2^m \binom{(d-q)+m-1}{(d-q)-1}.\\
     \intertext{%
       We can now use \thmref{lemma:numberOfGridPointsInterior} to conclude that%
     }
-    &= \setsize{\interiorregsgset{n}{d}{}} +
+    &= \setsize{\interiorregsgset{n}{d}} +
     \sum_{q=1}^d 2^q \binom{d}{q}
-    \setsize{\interiorregsgset{n-q-b+1}{d-q}{}}
+    \setsize{\interiorregsgset{n-q-b+1}{d-q}}
   \end{align}
   as desired.
 \end{proof}

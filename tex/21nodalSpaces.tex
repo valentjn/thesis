@@ -39,14 +39,14 @@ specific example of basis functions in mind.
 The so-called \term{hat functions} (linear B-splines), which are defined as
 \begin{equation}
   \label{eq:hatFunctionUV}
-  \bspl{l,i}{1}{}(x)
+  \bspl{l,i}{1}(x)
   := \max(1 - \abs{\tfrac{x}{\ms{l}} - i}, 0),
 \end{equation}
 are the most common choice for $\basis{l,i}$.
 Here and in the following,
 the superscript ``1'' is the degree of the linear B-spline and
 is not to be read as an exponent.
-We generalize this notation to B-splines $\bspl{l,i}{p}{}$ of
+We generalize this notation to B-splines $\bspl{l,i}{p}$ of
 arbitrary degrees $p$ in \cref{chap:30BSplines}.
 
 \paragraph{Nodal space}
@@ -70,7 +70,7 @@ there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 for some $\interpcoeff{l,i} \in \real$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $\objfun$ in $\ns{l}$.
 The nodal space $\ns{l}^1$ is defined analogously as the span of the
-hat functions $\bspl{l,i}{1}{}$.
+hat functions $\bspl{l,i}{1}$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $\clint{0, 1}$ that are
 piecewise linear polynomials on $\clint{\gp{l,i}, \gp{l,i+1}}$ for
@@ -80,7 +80,7 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 
 \begin{figure}
   \subcaptionbox{%
-    Basis functions $\bspl{l,i}{1}{}$ ($i = 0, \dotsc, 2^l$)
+    Basis functions $\bspl{l,i}{1}$ ($i = 0, \dotsc, 2^l$)
     and grid points $\gp{l,i}$ \emph{(dots)}.%
   }[75mm]{%
     \includegraphics{nodalHat_1}%
@@ -154,7 +154,7 @@ as the tensor product of the univariate functions:%
   := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
 \end{equation}
 \cref{fig:nodalHat2D} shows an example of a bivariate nodal hat function
-$\bspl{\*l,\*i}{1}{}$.
+$\bspl{\*l,\*i}{1}$.
 
 \begin{SCfigure}
   \includegraphics{nodalHat2D_1}%
@@ -176,7 +176,7 @@ the univariate case:
   \ns{\*l}
   := \spn\{\basis{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
 \end{equation}
-In the case of hat functions $\bspl{\*l,\*i}{1}{}$,
+In the case of hat functions $\bspl{\*l,\*i}{1}$,
 the nodal space $\ns{\*l}^1$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
@@ -237,7 +237,7 @@ A common choice for the level $\*l$ is $n \cdot \*1$ for some $n \in \natz$.
 \usenotation{Vnd}
 In this case, we replace ``$\*l$'' in the subscripts with ``$n{,}d$''
 (for example, $\ns{n,d} := \ns{n \cdot \*1}$).
-For the hat function basis $\bspl{l,i}{1}{}$,
+For the hat function basis $\bspl{l,i}{1}$,
 it can be shown that the $\Ltwo$ interpolation error of the interpolant
 $\fgintp{n,d} \in \ns{n,d}$ is given by
 \begin{equation}

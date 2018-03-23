@@ -21,7 +21,7 @@ as we would have to calculate and store $\dim \ns{\*l}$ coefficients $\interpcoe
 %\footnote{%
 %  The number of necessary basis evaluations to evaluate the interpolant once
 %  would not be as large, as most types of basis functions
-%  (like hat functions $\bspl{l,i}{1}{}$ and higher-order B-splines)
+%  (like hat functions $\bspl{l,i}{1}$ and higher-order B-splines)
 %  are locally supported.%
 %}
 
@@ -90,7 +90,7 @@ joined sets \term{hierarchical subspaces} $\hs{l}$:
 
 \paragraph{Hierarchical splitting}
 
-For the hat function basis $\bspl{l,i}{1}{}$ and other basis types,
+For the hat function basis $\bspl{l,i}{1}$ and other basis types,
 we can prove that the corresponding nodal space
 decomposes into the direct sum of all
 hierarchical subspaces of coarser levels or the same level, i.e.,
@@ -113,7 +113,7 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 
 \begin{figure}
   \subcaptionbox{%
-    Basis functions $\bspl{l',i'}{1}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
+    Basis functions $\bspl{l',i'}{1}$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$ \emph{(dots)}.
     The domain is the unit interval $\clint{0, 1}$.%
   }[75mm]{%
@@ -174,11 +174,11 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
   are also piecewise linear splines of higher levels $l \ge l'$.
   The linear independence for the second condition can be proved by induction
   over $l$:
-  If a linear combination of $\bspl{l',i'}{1}{}$ ($l' \le l$, $i' \in \hiset{l'}$)
+  If a linear combination of $\bspl{l',i'}{1}$ ($l' \le l$, $i' \in \hiset{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
-  as otherwise the basis functions $\bspl{l,i'}{1}{}$ ($i' \in \hiset{l}$) would
+  as otherwise the basis functions $\bspl{l,i'}{1}$ ($i' \in \hiset{l}$) would
   introduce kinks at $\gp{l,i'}$, which the zero function does not have.
-  This means that we have a zero linear combination of $\bspl{l',i'}{1}{}$ for
+  This means that we have a zero linear combination of $\bspl{l',i'}{1}$ for
   $l' \le l - 1$, $i' \in \hiset{l'}$,
   and by the induction hypothesis, the other coefficients also vanish.
 \end{proof}

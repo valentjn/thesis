@@ -41,7 +41,7 @@ dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
 
 As we have already discussed in \cref{sec:41problem},
 the main cause of the difficulty of hierarchizing with B-splines
-$\bspl{\*l}{\*i}{}$ is their overlapping support,
+$\bspl{\*l}{\*i}$ is their overlapping support,
 which they need for their approximation order.
 In the univariate case,
 the idea is to transform the B-spline basis to obtain
@@ -73,7 +73,7 @@ basis functions $\fundbasis{l',i'}$
 to additionally vanish at all grid points of the same level $l'$
 with different index $i \not= i'$.
 An example for fundamental basis functions are
-the piecewise linear B-splines $\bspl{l,i}{1}{}$
+the piecewise linear B-splines $\bspl{l,i}{1}$
 or Lagrange polynomials $\lagrangepoly{l}{i}$.
 
 The statement that $\fundbasis{l',i'}(\gp{l',i'})$ should equal $1$
@@ -431,7 +431,7 @@ needs quadratic space $\landauO{N^2}$.
 \subsection{Constructing Fundamental Bases}
 \label{sec:442constructingFundamentalBases}
 
-Unfortunately, the hierarchical B-splines $\bspl{l',i'}{p}{}$ do not
+Unfortunately, the hierarchical B-splines $\bspl{l',i'}{p}$ do not
 satisfy the fundamental property \eqref{eq:fundamentalProperty}.
 We now focus on the construction of univariate fundamental bases
 $\fundbasis{l',i'}$ starting from an
@@ -488,15 +488,15 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   is the set of level-index pairs for the regular sparse grid of level $n$
   and dimensionality $d$, then
   \begin{equation}
-    \regsgspace{n}{d}{}
-    = \regsgspace{n}{d}{\hft}
+    \regsgspace{n}{d}
+    = \regsgspace[\hft]{n}{d}
     := \spn\{\hftbasis{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
   \end{equation}
 \end{proposition}
 
 \begin{proof}
-  We have $\regsgspace{n}{d}{} \supset \regsgspace{n}{d}{\hft}$ as
-  $\hftbasis{\*l',\*i'} \in \regsgspace{n}{d}{}$
+  We have $\regsgspace{n}{d} \supset \regsgspace[\hft]{n}{d}$ as
+  $\hftbasis{\*l',\*i'} \in \regsgspace{n}{d}$
   for all $(\*l', \*i') \in \liset$:
   \begin{equation}
     \hftbasis{\*l',\*i'}
@@ -504,14 +504,14 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
     c_{l''_t,i''_t}^{l'_t,i'_t} \basis{l''_t,i''_t}
     = \sum_{\*l''=\*0}^{\*l'} \sum_{\*i'' \in \hiset{\*l''}}
     c_{\*l'',\*i''}^{\*l',\*i'} \basis{\*l'',\*i''}
-    \in \regsgspace{n}{d}{},\quad
+    \in \regsgspace{n}{d},\quad
     c_{\*l'',\*i''}^{\*l',\*i'}
     := \prod_{t=1}^d c_{l''_t,i''_t}^{l'_t,i'_t}.
   \end{equation}
   
-  To prove that $\regsgspace{n}{d}{} \subset \regsgspace{n}{d}{\hft}$,
-  we show that the dimension of $\regsgspace{n}{d}{\hft}$
-  matches $\dim \regsgspace{n}{d}{} = \setsize{\liset}$.
+  To prove that $\regsgspace{n}{d} \subset \regsgspace[\hft]{n}{d}$,
+  we show that the dimension of $\regsgspace[\hft]{n}{d}$
+  matches $\dim \regsgspace{n}{d} = \setsize{\liset}$.
   Therefore, it suffices to show that
   the functions $\hftbasis{\*l',\*i'}$, $(\*l', \*i') \in \liset$,
   are linearly independent.
@@ -645,7 +645,7 @@ is non-zero.
 This means that the series in \eqref{eq:tiftDefinition} collapses to a
 finite sum.
 The condition is met for compactly supported and translation-invariant
-basis functions such as B-splines $\bspl{l',i'}{p}{}$.
+basis functions such as B-splines $\bspl{l',i'}{p}$.
 
 \blindtext{}
 

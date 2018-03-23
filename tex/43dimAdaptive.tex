@@ -50,15 +50,15 @@ for dimensionally adaptive sparse grids
   Let $\liset := \{(\*l, \*i) \mid
   \normone{\*l} \le n,\; \*i \in \hiset{\*l}\}$
   correspond to the regular sparse grid
-  $\regsgset{n}{d}{}$ and let $(\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset}$
-  be given function values on $\regsgset{n}{d}{}$.
+  $\regsgset{n}{d}$ and let $(\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset}$
+  be given function values on $\regsgset{n}{d}$.
   If we define
   \begin{itemize}
     \item
-    the combined sparse grid interpolant $\regsgintp{n}{d}{\ct}$ via
+    the combined sparse grid interpolant $\regsgintp[\ct]{n}{d}$ via
     \eqref{eq:combiTechnique}, i.e.,
     \begin{equation}
-      \regsgintp{n}{d}{\ct}
+      \regsgintp[\ct]{n}{d}
       = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
       \fgintp{\*l'},
     \end{equation}
@@ -66,7 +66,7 @@ for dimensionally adaptive sparse grids
     of $\objfun$ with level $\*l'$, and
     
     \item
-    the hierarchical sparse grid interpolant $\regsgintp{n}{d}{}$
+    the hierarchical sparse grid interpolant $\regsgintp{n}{d}$
     via \eqref{eq:hierarchizationProblem} and
     \eqref{eq:hierarchizationInterpolant}
   \end{itemize}
@@ -74,21 +74,21 @@ for dimensionally adaptive sparse grids
   \eqref{eq:hierSplittingMV} holds,
   then the combined and the hierarchical sparse grid interpolants coincide:
   \begin{equation}
-    \regsgintp{n}{d}{\ct}
-    = \regsgintp{n}{d}{}.
+    \regsgintp[\ct]{n}{d}
+    = \regsgintp{n}{d}.
   \end{equation}
 \end{theorem}
 
 \begin{proof}[Proof (sketch)]
-  Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be an arbitrary
+  Let $\gp{\*l,\*i} \in \regsgset{n}{d}$ be an arbitrary
   point of the regular sparse grid.
-  First, we split the inner sum of $\regsgintp{n}{d}{\ct}(\gp{\*l,\*i})$
+  First, we split the inner sum of $\regsgintp[\ct]{n}{d}(\gp{\*l,\*i})$
   into levels $\*l'$ whose full grid sets $\fgset{\*l'}$
   contain $\gp{\*l,\*i}$ and levels whose full grid sets
   do not contain $\gp{\*l,\*i}$:
   \begin{subequations}
     \begin{align}
-      \regsgintp{n}{d}{\ct}(\gp{\*l,\*i})
+      \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \left(
       \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
       \fgintp{\*l'}(\gp{\*l,\*i}) +
@@ -119,18 +119,18 @@ for dimensionally adaptive sparse grids
   equals zero (see \cref{prop:combiTechniqueZero}).
   Consequently, we infer
   \begin{equation}
-    \regsgintp{n}{d}{\ct}(\gp{\*l,\*i})
+    \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
     = \fcnval{\*l,\*i},
   \end{equation}
-  i.e., $\regsgintp{n}{d}{\ct}$ interpolates $f$ at $\regsgset{n}{d}{}$.
-  Note that $\regsgintp{n}{d}{\ct}$ is contained in $\regsgspace{n}{d}{}$,
+  i.e., $\regsgintp[\ct]{n}{d}$ interpolates $f$ at $\regsgset{n}{d}$.
+  Note that $\regsgintp[\ct]{n}{d}$ is contained in $\regsgspace{n}{d}$,
   if the hierarchical splitting equation \eqref{eq:hierSplittingMV} holds,
   as
   \begin{equation}
     \fgintp{\*l'} \in
     \ns{\*l'}
     = \bigoplus_{\*l''=\*0}^{\*l'} \hs{\*l''}
-    \subset \regsgspace{n}{d}{},\quad
+    \subset \regsgspace{n}{d},\quad
     \normone{\*l'} \le n,
   \end{equation}
   due to $\normone{\*l''} \le \normone{\*l'} \le n$
@@ -141,9 +141,9 @@ for dimensionally adaptive sparse grids
     with downward closed level sets as mentioned in
     \cref{sec:232dimensionallyAdaptiveSG}.%
   }
-  As both $\regsgintp{n}{d}{\ct}$ and $\regsgintp{n}{d}{}$
-  are contained in $\regsgspace{n}{d}{}$ and
-  interpolate $f$ on $\regsgset{n}{d}{}$, they must coincide
+  As both $\regsgintp[\ct]{n}{d}$ and $\regsgintp{n}{d}$
+  are contained in $\regsgspace{n}{d}$ and
+  interpolate $f$ on $\regsgset{n}{d}$, they must coincide
   due to the uniqueness of sparse grid interpolation
   (linear independence of the hierarchical basis functions).
 \end{proof}
@@ -181,7 +181,7 @@ generalizes this argument to higher dimensions:
   propCombiTechniqueOne%
 }
   \label{prop:combiTechniqueOne}
-  For every $\gp{\*l,\*i} \in \regsgset{n}{d}{}$, we have
+  For every $\gp{\*l,\*i} \in \regsgset{n}{d}$, we have
   \begin{equation}
     \label{eq:combiTechniqueOne}
     \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
@@ -232,7 +232,7 @@ on the equivalence classes.
 
 \begin{definition}[relation ``$\sim$'']
   \label{def:combiTechniqueEquivalenceRelation}
-  Let $\gp{\*l,\*i} \in \regsgset{n}{d}{}$ be fixed and
+  Let $\gp{\*l,\*i} \in \regsgset{n}{d}$ be fixed and
   \begin{equation}
     \label{eq:combiTechniqueSpecialLevelSet}
     L
@@ -285,8 +285,8 @@ of the equivalence classes:
   ]{%
     Nodal subspaces $\ns{\*l}$ contributing to the combination
     technique solution for the two-dimensional regular sparse grid
-    $\regsgspace{n}{d}{}$ of level $n = 3$ \emph{(bottom right)}.
-    After picking a point $\gp{\*l,\*i} \in \regsgset{n}{d}{}$
+    $\regsgspace{n}{d}$ of level $n = 3$ \emph{(bottom right)}.
+    After picking a point $\gp{\*l,\*i} \in \regsgset{n}{d}$
     (\emph{cross}, here $\*l = (2, 1)$, $\*i = (1, 1)$),
     the set $L$ of levels whose grids do not contain $\gp{\*l,\*i}$
     \emph{(colored subspaces)}
@@ -344,7 +344,7 @@ Finally, we are now able to show that the second sum in
   propCombiTechniqueZero%
 }
   \label{prop:combiTechniqueZero}
-  For every $\gp{\*l,\*i} \in \regsgset{n}{d}{}$, we have
+  For every $\gp{\*l,\*i} \in \regsgset{n}{d}$, we have
   \begin{equation}
     \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
     \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
@@ -467,11 +467,11 @@ The proof of the following proposition can be generalized accordingly.
   where the surpluses have been extended with zero by
   \cref{line:algCombiTechnique2}.
   \Thmref{thm:combiTechnique} now allows to write the hierarchical
-  interpolant $\regsgintp{n}{d}{}$ in terms of the full grid components:
+  interpolant $\regsgintp{n}{d}$ in terms of the full grid components:
   \begin{subequations}
     \begin{align}
-      \regsgintp{n}{d}{}
-      = \regsgintp{n}{d}{\ct}
+      \regsgintp{n}{d}
+      = \regsgintp[\ct]{n}{d}
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
       \fgintp{\*l'}\\
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
@@ -491,15 +491,15 @@ The proof of the following proposition can be generalized accordingly.
   \end{subequations}
   where $\linout{\*l,\*i}$ is the $(\*l,\*i)$-th entry of the output vector
   of \cref{alg:combiTechnique}.
-  Note that the hierarchical interpolant $\regsgintp{n}{d}{}$
+  Note that the hierarchical interpolant $\regsgintp{n}{d}$
   can be written as
-  $\regsgintp{n}{d}{} = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
+  $\regsgintp{n}{d} = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
   \surplus{\*l,\*i} \basis{\*l,\*i}$
   (see \eqref{eq:regularSGInterpolant}),
   where the surpluses $\surplus{\*l,\*i}$ are unique due to the
   linear independence of the hierarchical basis.
   As \eqref{eq:propCorrectnessAlgCombiTechnique1}
-  equals $\regsgintp{n}{d}{}$ and has the same form,
+  equals $\regsgintp{n}{d}$ and has the same form,
   the coefficients $\linout{\*l,\*i}$
   (which are the output of \cref{alg:combiTechnique})
   must coincide with the surpluses $\surplus{\*l,\*i}$.
@@ -755,7 +755,7 @@ denotes the intermediate result obtained after $j$ iterations.
   ]{%
     Hierarchization of function value data on the
     two-dimensional regular sparse grid
-    $\regsgspace{n}{d}{}$ of level $n = 3$ \emph{(top left)}
+    $\regsgspace{n}{d}$ of level $n = 3$ \emph{(top left)}
     using the method of residual interpolation.
     In this figure, we use
     $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$

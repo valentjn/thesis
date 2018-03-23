@@ -300,33 +300,33 @@
   Arbitrary sparse grid (possibly spatially adaptive)
 }
 
-\newnotationcommand[3]{\regsgset}{%
-  \gridset{#1,#2}{\sparse\appendwithcomma{#3}}%
-}{ÄΩnds}{$\regsgset{n}{d}{}$}{
+\newnotationcommandoptarg{3}{\regsgset}{%
+  \gridset{#2,#3}{\sparse\appendwithcomma{#1}}%
+}{ÄΩnds}{$\regsgset{n}{d}$}{
   Set of regular sparse grid points of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[4]{\coarseregsgset}{%
-  \gridset{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
-}{ÄΩndsb}{$\coarseregsgset{n}{d}{b}{}$}{
+\newnotationcommandoptarg{4}{\coarseregsgset}{%
+  \gridset{#2,#3}{\sparse(#4)\appendwithcomma{#1}}%
+}{ÄΩndsb}{$\coarseregsgset{n}{d}{b}$}{
   Set of regular sparse grid points of level $n$ with dimensionality $d$
   and boundary parameter $b$
 }
 
-\newcommand*{\interiorregsgset}[3]{%
-  \gridset[\interiorgrid]{#1,#2}{\sparse\appendwithcomma{#3}}%
+\newcommand*{\interiorregsgset}[3][]{%
+  \gridset[\interiorgrid]{#2,#3}{\sparse\appendwithcomma{#1}}%
 }
 
-\newcommand*{\bndryregsgset}[3]{%
-  \gridset[\bndrygrid]{#1,#2}{\sparse\appendwithcomma{#3}}%
+\newcommand*{\bndryregsgset}[3][]{%
+  \gridset[\bndrygrid]{#2,#3}{\sparse\appendwithcomma{#1}}%
 }
 
-\newcommand*{\interiorcoarseregsgset}[4]{%
-  \gridset[\interiorgrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
+\newcommand*{\interiorcoarseregsgset}[4][]{%
+  \gridset[\interiorgrid]{#2,#3}{\sparse(#4)\appendwithcomma{#1}}%
 }
 
-\newcommand*{\bndrycoarseregsgset}[4]{%
-  \gridset[\bndrygrid]{#1,#2}{\sparse(#3)\appendwithcomma{#4}}%
+\newcommand*{\bndrycoarseregsgset}[4][]{%
+  \gridset[\bndrygrid]{#2,#3}{\sparse(#4)\appendwithcomma{#1}}%
 }
 
 % ======================================================================
@@ -354,9 +354,9 @@
   Arbitrary sparse grid space (possibly spatially adaptive)
 }
 
-\newnotationcommand[3]{\regsgspace}{%
-  \gridspace{#1,#2}{\sparse\appendwithcomma{#3}}%
-}{Vnds}{$\regsgspace{n}{d}{}$}{
+\newnotationcommandoptarg{3}{\regsgspace}{%
+  \gridspace{#2,#3}{\sparse\appendwithcomma{#1}}%
+}{Vnds}{$\regsgspace{n}{d}$}{
   Regular sparse grid space of level $n$ with dimensionality $d$
 }
 
@@ -367,7 +367,7 @@
 
 \newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}%
 {$\restrictedsplspace{l}{p}$}{
-  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{}}{p}$
+  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}}{p}$
   (spanned by the uniform nodal B-splines of level $l$, degree $p$)
 }
 
@@ -379,7 +379,7 @@
 
 \newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}%
 {$\naksplspace{l}{p}$}{
-  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}{\nak}}{p}$
+  Spline space $:= \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
@@ -527,14 +527,11 @@
   Finite subset $\levelset \subset \natz^d$ of levels
 }
 
-\newnotationcommand[4]{\coarselevelset}{%
-  \levelset_{#1,#2}^{%
-    \sparse(#3)%
-    \if\relax\detokenize{#4}\relax\else,#4\fi%
-  }%
-}{Lndbs}{$\coarselevelset{n}{d}{b}{}$}{
-  Finite subset $\coarselevelset{n}{d}{b}{} \subset \natz^d$ of levels
-  for the grid $\coarseregsgset{n}{d}{b}{}$
+\newnotationcommandoptarg{4}{\coarselevelset}{%
+  \levelset_{#2,#3}^{\sparse(#4)\appendwithcomma{#1}}%
+}{Lndbs}{$\coarselevelset{n}{d}{b}$}{
+  Finite subset $\coarselevelset{n}{d}{b} \subset \natz^d$ of levels
+  for the grid $\coarseregsgset{n}{d}{b}$
 }
 
 \newnotationcommand[1]{\relindexset}{J_{#1}}{Jl}{$\relindexset{l}$}{
@@ -589,9 +586,9 @@
   then the $\basis{l,i}$ are scaled and translated versions of $\parentfcn$)
 }
 
-\newnotationcommand[3]{\bspl}{%
-  \varphi_{#1}^{#2\appendwithcomma{#3}}%
-}{Äφlip}{$\bspl{\*l,\*i}{\*p}{}$}{
+\newnotationcommandoptarg{3}{\bspl}{%
+  \varphi_{#2}^{#3\appendwithcomma{#1}}%
+}{Äφlip}{$\bspl{\*l,\*i}{\*p}$}{
   Hierarchical B-spline basis function of
   level $\*l$, index $\*i$, degree $\*p$
 }
@@ -626,10 +623,10 @@
   (on some grid $\sgset$)
 }
 
-\newnotationcommand[3]{\regsgintp}{%
-  f_{#1,#2}^{\sparse\appendwithcomma{#3}}%
-}{fnds}{$\regsgintp{n}{d}{}$}{
-  Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}{}$
+\newnotationcommandoptarg{3}{\regsgintp}{%
+  f_{#2,#3}^{\sparse\appendwithcomma{#1}}%
+}{fnds}{$\regsgintp{n}{d}$}{
+  Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}$
 }
 
 \newnotationcommand[1]{\lagrangepoly}{L_{#1}}{Lli}{$\lagrangepoly{l,i}$}{
@@ -649,16 +646,16 @@
   Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
 }
 
-\newnotationcommand[3]{\nodalknot}{%
-  \xi_{#1}^{#2\appendwithcomma{#3}}%
-}{Äξlkp}{$\nodalknot{l,k}{p}{}$}{
+\newnotationcommandoptarg{3}{\nodalknot}{%
+  \xi_{#2}^{#3\appendwithcomma{#1}}%
+}{Äξlkp}{$\nodalknot{l,k}{p}$}{
   Knot for uniform nodal B-splines of level $l$, degree $p$
-  ($k$-th entry of $\nodalknotseq{l}{p}{}$)
+  ($k$-th entry of $\nodalknotseq{l}{p}$)
 }
 
-\newnotationcommand[3]{\nodalknotseq}{%
-  \*\xi_{#1}^{#2\appendwithcomma{#3}}%
-}{Äξlp}{$\nodalknotseq{l}{p}{}$}{
+\newnotationcommandoptarg{3}{\nodalknotseq}{%
+  \*\xi_{#2}^{#3\appendwithcomma{#1}}%
+}{Äξlp}{$\nodalknotseq{l}{p}$}{
   Knot sequence for uniform nodal B-splines of level $l$, degree $p$
 }
 
