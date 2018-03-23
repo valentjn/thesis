@@ -561,7 +561,9 @@
   for the grid $\coarseregsgset{n}{d}{b}$
 }
 
-\newnotationcommand[1]{\relindexset}{J_{#1}}{Jl}{$\relindexset{l}$}{
+\newnotationcommandoptarg{2}{\relindexset}{%
+  J_{#2}\ifnotempty{#1}{^{#1}}%
+}{Jl}{$\relindexset{l}$}{
   Set of relevant indices for the translation-invariant
   fundamental transformation
 }
@@ -612,7 +614,9 @@
   (satisfying the fundamental property)
 }
 
-\newnotationcommand{\parentfcn}{\varphi}{Äφ}{$\parentfcn$}{
+\newnotationcommandoptarg{1}{\parentfcn}{%
+  \varphi\ifnotempty{#1}{^{#1}}%
+}{Äφ}{$\parentfcn$}{
   Parent function $\parentfcn\colon \clint{0, 1} \to \real$
   (if $\parentfcn$ is a parent function of $\basis{l,i}$,
   then the $\basis{l,i}$ are scaled and translated versions of $\parentfcn$)
