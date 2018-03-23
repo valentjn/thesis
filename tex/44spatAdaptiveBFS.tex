@@ -714,9 +714,97 @@ is not contained in the nodal space $\ns{l'}$.
 \subsection{Fundamental Splines}
 \label{sec:443fundamentalSplines}
 
-\blindtext{}
-
 \paragraph{Definition}
+
+Let us apply the translation-invariant fundamental transformation
+to hierarchical B-splines $\bspl{l,i}{p}$ of degree $p$.
+The parent function $\parentfcn[p]\colon \real \to \real$ of B-splines
+and the set $\relindexset[p]{l}$ of relevant indices for level $l \in \natz$
+are given by
+\begin{equation}
+  \parentfcn[p](x)
+  := \cardbspl{p}(x + \tfrac{p+1}{2}),\qquad
+  \relindexset[p]{l}
+  := \{-\tfrac{p-1}{2},\;
+  -\tfrac{p-1}{2} + 1,\;
+  \dotsc,\;
+  2^l + \tfrac{p-1}{2}\},
+\end{equation}
+respectively.
+According to \eqref{eq:tiftParentFunctionInterpolation},
+the coefficients $c_i^p \in \real$ of
+the transformed parent function $\parentfcn[p,\tift]$
+in \cref{eq:tiftParentFunctionDefinition} are determined by a
+bi-infinite-dimensional system of linear equations:
+\begin{equation}
+  \label{eq:fundamentalSplineSLE}
+  \newcommand*{\vala}{\cardbspl{p}(\tfrac{p+1}{2} - 2)}
+  \newcommand*{\valb}{\cardbspl{p}(\tfrac{p+1}{2} - 1)}
+  \newcommand*{\valc}{\cardbspl{p}(\tfrac{p+1}{2})}
+  \newcommand*{\vald}{\cardbspl{p}(\tfrac{p+1}{2} + 1)}
+  \newcommand*{\vale}{\cardbspl{p}(\tfrac{p+1}{2} + 2)}
+  \newcommand*{\ddotsr}{\rotatebox{16}{$\ddots$}}
+  \newcommand*{\raiseentry}[1]{\raisebox{0.25em}{$#1$}}
+  \left(
+  \begin{array}{%
+    @{}>{\raggedright\arraybackslash$}m{14mm}<{$}@{}%
+    *{3}{%
+      @{}>{\centering\arraybackslash$}m{23mm}<{$}@{}%
+    }%
+    @{}>{\raggedleft\arraybackslash$}m{14mm}<{$}@{}%
+  }
+    \ddotsr&\ddotsr&\ddotsr&       &       \\
+    \ddotsr&\valc  &\valb  &\vala  &       \\
+    \ddotsr&\vald  &\valc  &\valb  &\ddotsr\\
+           &\vale  &\vald  &\valc  &\ddotsr\\
+           &       &\ddotsr&\ddotsr&\ddotsr
+  \end{array}
+  \right)
+  \cdot
+  \begin{pmatrix}
+    \vphantom{\ddotsr}\raiseentry{\vdots}\\
+    \vphantom{\ddotsr}\raiseentry{c_{-1}^p}\\
+    \vphantom{\ddotsr}\raiseentry{c_0^p}\\
+    \vphantom{\ddotsr}\raiseentry{c_1^p}\\
+    \vphantom{\ddotsr}\raiseentry{\vdots}
+  \end{pmatrix}
+  =
+  \begin{pmatrix}
+    \vphantom{\ddotsr}\raiseentry{\vdots}\\
+    \vphantom{\ddotsr}\raiseentry{0}\\
+    \vphantom{\ddotsr}\raiseentry{1}\\
+    \vphantom{\ddotsr}\raiseentry{0}\\
+    \vphantom{\ddotsr}\raiseentry{\vdots}
+  \end{pmatrix}.
+\end{equation}
+As in every row only $p$ entries are non-zero,
+the system matrix is a symmetric banded Toeplitz matrix%
+\footnote{%
+  A Toeplitz matrix is a matrix $\mat{A}$ whose entries $a_{k,j}$
+  solely depend on $k - j$, i.e.,
+  $a_{k,j} = c_{k-j}$ for some vector $\*c$.%
+}.
+One can show that the linear system \eqref{eq:fundamentalSplineSLE}
+is uniquely solvable:
+
+\begin{theorem}[unique existence of fundamental spline coefficients]
+  The system \eqref{eq:fundamentalSplineSLE} has a unique solution
+  $(c_i^p)_{i \in \integer}$ and the corresponding parent function
+  $\parentfcn[p,\fs]\colon \real \to \real$ defined by
+  $\parentfcn[p,\fs](x) :=
+  \sum_{i \in \integer} c_k^p \parentfcn[p](x - i)$
+  satisfies
+  \begin{equation}
+    \exfalarge{\beta_p, \gamma_p \in \posreal}{x \in \real}{
+      |\parentfcn[p,\fs](x)|
+      \le \beta_p \exp(-\ln(\gamma_p) |x|).
+    }
+  \end{equation}
+\end{theorem}
+
+\begin{proof}
+  See Lecture 4, Theorems 1 and 2 in \cite{Schoenberg72Cardinal}.
+\end{proof}
 
 \blindtext{}
 
