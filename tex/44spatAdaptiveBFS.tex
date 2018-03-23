@@ -354,11 +354,16 @@ domain $\clint{\*0, \*1}$:
   \end{equation}
 \end{subequations}
 where ``$\to$'' is the direct ancestor relation \eqref{eq:directAncestor}.
-%One could also use a different initial set than the corners
-%of $\clint{\*0, \*1}$,
-%as long as all grid points are reachable from the set and
-%the grid points in the set are sorted by increasing level sum
-%(if the set contains grid points with different level sums).
+One can also use a a different initial set than the corners
+of $\clint{\*0, \*1}$, e.g., when working with sparse grids
+without boundary points.
+In general, there are three requirements on the initial set:
+First, all grid points should be reachable from the set.
+Second, the grid points in the set are sorted by increasing level sum
+(if the set contains grid points with different level sums).
+Third, the surpluses corresponding to the initial grid points
+need to be pre-calculated correctly
+before the \texttt{\algorithmicwhile} loop in \cref{alg:BFS}.
 
 \paragraph{Correctness}
 
@@ -426,17 +431,221 @@ needs quadratic space $\landauO{N^2}$.
 \subsection{Constructing Fundamental Bases}
 \label{sec:442constructingFundamentalBases}
 
-\blindtext{}
+Unfortunately, the hierarchical B-splines $\bspl{l',i'}{p}{}$ do not
+satisfy the fundamental property \eqref{eq:fundamentalProperty}.
+We now focus on the construction of univariate fundamental bases
+$\fundbasis{l',i'}$ starting from an
+arbitrary hierarchical basis $\basis{l',i'}$.
+To this end, we study two transformations
+$\basis{l',i'} \mapsto \fundbasis{l',i'}$.
+As usual, the multivariate case is treated with the
+tensor product approach.
 
 \paragraph{Hierarchical fundamental transformation}
 
-\blindtext{}
+\usenotation{Ëhft}
+The canonical way to find a fundamental basis $\fundbasis{l',i'}$ is to
+use a linear combination $\hftbasis{l',i'}$
+of coarser basis functions $\basis{l'',i''}$ as an ansatz
+and require that the fundamental property \eqref{eq:fundamentalProperty}
+is fulfilled:
+\begin{equation}
+  \hftbasis{l',i'}
+  := \sum_{l''=0}^{l'} \sum_{i'' \in \hiset{l''}}
+  c_{l'',i''}^{l',i'} \basis{l'',i''}
+  \quad\text{such that}\quad
+  \fafalarge{l = 0, \dotsc, l'}{i \in \hiset{l}}{
+    \hftbasis{l',i'}(\gp{l,i}) = \kronecker{(l,i)}{(l',i')},
+  }
+\end{equation}
+i.e., $\basis{l',i'}^\hft$ ($l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$)
+interpolates the data
+$\{(\gp{l',i}, \kronecker{i}{i'}) \mid i = 0, \dotsc, 2^{l'}\}$.
+The coefficients $c_{l'',i''}^{l',i'} \in \real$
+are, in general, different for each basis function $\hftbasis{l',i'}$.
+This complicates precomputation and storage of the $2^{l'} + 1$ coefficients,
+as they have to be determined by solving a system of linear equations.
+In addition, the transformation $\basis{l',i'} \mapsto \hftbasis{l',i'}$
+does not preserve the locality of the support the basis functions.
+Consequently, $\hftbasis{l',i'}$ may be globally supported,
+which means that we have to evaluate up to $2^{l'} + 1$ basis functions
+$\basis{l'',i''}$ when evaluating $\hftbasis{l',i'}$ at a single point
+$x \in \clint{0, 1}$.
 
-\paragraph{Nodal fundamental transformation}
+We call the transformation $\basis{l',i'} \mapsto \hftbasis{l',i'}$
+\term{\hftr}.
+The following proposition shows that this is indeed only a change of basis,
+as spanned sparse grid space remains unchanged.
+Note that while the proposition is formulated for regular sparse grids,
+a similar statement can be proved for dimensionally adaptive sparse grids.
 
-\blindtext{}
+\begin{proposition}[%
+  spanned sparse grid space for the HFT%
+]
+  \label{prop:hftSparseGrid}
+  If $\liset := \{(\*l, \*i) \mid
+  \normone{\*l'} \le n,\; \*i' \in \hiset{\*l'}\}$
+  is the set of level-index pairs for the regular sparse grid of level $n$
+  and dimensionality $d$, then
+  \begin{equation}
+    \regsgspace{n}{d}{}
+    = \regsgspace{n}{d}{\hft}
+    := \spn\{\hftbasis{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  We have $\regsgspace{n}{d}{} \supset \regsgspace{n}{d}{\hft}$ as
+  $\hftbasis{\*l',\*i'} \in \regsgspace{n}{d}{}$
+  for all $(\*l', \*i') \in \liset$:
+  \begin{equation}
+    \hftbasis{\*l',\*i'}
+    = \prod_{t=1}^d \sum_{l''_t=0}^{l'_t} \sum_{i''_t \in \hiset{l''_t}}
+    c_{l''_t,i''_t}^{l'_t,i'_t} \basis{l''_t,i''_t}
+    = \sum_{\*l''=\*0}^{\*l'} \sum_{\*i'' \in \hiset{\*l''}}
+    c_{\*l'',\*i''}^{\*l',\*i'} \basis{\*l'',\*i''}
+    \in \regsgspace{n}{d}{},\quad
+    c_{\*l'',\*i''}^{\*l',\*i'}
+    := \prod_{t=1}^d c_{l''_t,i''_t}^{l'_t,i'_t}.
+  \end{equation}
+  
+  To prove that $\regsgspace{n}{d}{} \subset \regsgspace{n}{d}{\hft}$,
+  we show that the dimension of $\regsgspace{n}{d}{\hft}$
+  matches $\dim \regsgspace{n}{d}{} = \setsize{\liset}$.
+  Therefore, it suffices to show that
+  the functions $\hftbasis{\*l',\*i'}$, $(\*l', \*i') \in \liset$,
+  are linearly independent.
+  Let $\surplus{\*l',\*i'} \in \real$ be with
+  $\sum_{(\*l', \*i') \in \liset}
+  \surplus{\*l',\*i'} \hftbasis{\*l',\*i'} \equiv 0$.
+  By evaluating at $\gp{\*l,\*i}$, $(\*l, \*i) \in \liset$, we obtain
+  \begin{equation}
+    \sum_{(\*l', \*i') \in \liset}
+    \surplus{\*l',\*i'} \hftbasis{\*l',\*i'}(\gp{\*l,\*i}) = 0,\quad
+    (\*l, \*i) \in \liset.
+  \end{equation}
+  This is a lower triangular system according to
+  \eqref{eq:fundamentalTriangularMV},
+  which implies $\surplus{\*l',\*i'} = 0$ for all $(\*l, \*i) \in \liset$.
+  Hence, the functions $\hftbasis{\*l',\*i'}$, $(\*l', \*i') \in \liset$,
+  are linearly independent.
+\end{proof}
 
 \paragraph{Translation-invariant fundamental transformation}
+
+Another disadvantage of the \hftr is that it does not preserve
+the so-called \term{translation invariance} of the original basis.
+A~basis $\basis{l,i}$ ($l \in \natz$, $i = 0, \dotsc, 2^l$)
+is translation-invariant, if there is a \term{parent function}
+$\parentfcn\colon \clint{0, 1} \to \real$
+such that
+\begin{equation}
+  \label{eq:translationInvariance}
+  \basis{l,i}(x)
+  = \parentfcn(\tfrac{x}{\ms{l}} - i),\quad
+  l \in \natz,\;
+  i = 0, \dotsc, 2^l,\;
+  x \in \clint{0, 1}.
+\end{equation}
+The fact that \hftr does not preserve translation invariance means
+that for each basis function $\hftbasis{l',i'}$, we have to
+calculate its individual $2^{l'} + 1$ coefficients $c_{l'',i''}^{l',i'}$.
+
+\usenotation{Ëtift}
+To solve this problem,
+we use a similar ansatz as for the \hftr,
+but replace the hierarchical basis functions $\basis{l'',i''}$
+with nodal basis functions $\basis{l',i''}$ and arbitrary general
+integer indices $i'' \in \integer$:
+\begin{equation}
+  \label{eq:tiftDefinition}
+  \tiftbasis{l',i'}
+  := \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}
+  \quad\text{such that}\quad
+  \falarge{i \in \hiset{l'}}{
+    \tiftbasis{l',i'}(\gp{l',i}) = \kronecker{i}{i'},
+  }
+\end{equation}
+where $l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$, and
+$c_{i''}^{l',i'} \in \real$.
+Of course, $\basis{l',i''}$ has to be defined for integer indices
+$i'' \in \integer$, which is the case for translation-invariant bases
+$\basis{l',i''}$, as they can be generalized to $i'' \in \integer$
+via \cref{eq:translationInvariance}.
+
+If $\basis{l',i''}$ is translation-invariant,
+$l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ are arbitrary, and
+$(c_{i''}^{l',i'})_{i'' \in \integer}$
+is chosen such that \eqref{eq:tiftDefinition} golds,
+then $\parentfcn^\tift\colon \clint{0, 1} \to \real$ defined by
+\begin{equation}
+  \label{eq:tiftParentFunctionDefinition}
+  \parentfcn^\tift(x)
+  := \sum_{i'' \in \integer} c_{i''} \parentfcn(x - i''),\quad
+  x \in \clint{0, 1},\quad
+  c_{i''} := c_{i'+i''}^{l',i'},
+\end{equation}
+is a parent function of $\tiftbasis{l',i'}$ that satisfies
+\begin{equation}
+  \label{eq:tiftParentFunctionInterpolation}
+  \falarge{i \in \integer}{
+    \parentfcn^\tift(i) = \kronecker{i}{0}.
+  }
+\end{equation}
+The function $\parentfcn^\tift$ is a parent function, since
+\begin{subequations}
+  \label{eq:tiftParentFunctionProof}
+  \begin{align}
+    \hspace*{-0.6mm}
+    \tiftbasis{l',i'}(x)
+    &
+    \!\overset{\hphantom{\eqref{eq:tiftParentFunctionDefinition}}}{=}\!
+    \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}(x)
+    \!\overset{\eqref{eq:translationInvariance}}{=}\!
+    \sum_{i'' \in \integer} c_{i''}^{l',i'}
+    \parentfcn(\tfrac{x}{\ms{l'}} - i'')
+    = \sum_{i'' \in \integer}
+    \smash{\underbrace{c_{i'+i''}^{l',i'}}_{= c_{i''}}}
+    \parentfcn((\tfrac{x}{\ms{l'}} - i') - i'')
+    \hspace*{-2.3mm}\\
+    &
+    \!\overset{\eqref{eq:tiftParentFunctionDefinition}}{=}\!
+    \parentfcn^\tift(\tfrac{x}{\ms{l'}} - i'),\qquad
+    l' \in \natz,\;
+    i' = 0, \dotsc, 2^{l'},
+  \end{align}
+\end{subequations}
+and it satisfies \eqref{eq:tiftParentFunctionInterpolation}:
+\begin{equation}
+  \parentfcn^\tift(i)
+  = \parentfcn^\tift(\tfrac{\gp{0,i}}{\ms{0}} - 0)
+  \!\overset{\eqref{eq:tiftParentFunctionProof}}{=}\!
+  \tiftbasis{0,0}(\gp{0,i})
+  \!\overset{\eqref{eq:tiftDefinition}}{=}\!
+  \kronecker{i}{0},\quad
+  i \in \integer.
+\end{equation}
+This shows that the transformation $\basis{l',i'} \mapsto \tiftbasis{l',i'}$
+preserves translation-invariance and
+the coefficients $c_{i''}^{l',i'}$ in \eqref{eq:tiftDefinition}
+do not depend on $l'$ or $i'$ if $\basis{l',i'}$ is translation-invariant.
+Therefore, we call the transformation
+$\basis{l',i'} \mapsto \tiftbasis{l',i'}$ \term{\tiftr}.
+
+We assume that the set
+\begin{equation}
+  \relindexset{l'}
+  := \{i' \in \integer \mid
+  \restrictfcn{\basis{l',i'}}{\clint{0, 1}} \not\equiv 0\},\quad
+  l' \in \natz,
+\end{equation}
+of relevant indices is finite, so that in each point $x \in \clint{0, 1}$,
+only a finite number of basis functions $\basis{l',i'}$ of level $l'$
+is non-zero.
+This means that the series in \eqref{eq:tiftDefinition} collapses to a
+finite sum.
+The condition is met for compactly supported and translation-invariant
+basis functions such as B-splines $\bspl{l',i'}{p}{}$.
 
 \blindtext{}
 
