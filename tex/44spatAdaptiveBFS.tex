@@ -482,7 +482,7 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
 \begin{proposition}[%
   spanned sparse grid space for the HFT%
 ]
-  \label{prop:hftSparseGrid}
+  \label{prop:hftSparseGridSpace}
   If $\liset := \{(\*l, \*i) \mid
   \normone{\*l'} \le n,\; \*i' \in \hiset{\*l'}\}$
   is the set of level-index pairs for the regular sparse grid of level $n$
@@ -513,12 +513,12 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   we show that the dimension of $\regsgspace[\hft]{n}{d}$
   matches $\dim \regsgspace{n}{d} = \setsize{\liset}$.
   Therefore, it suffices to show that
-  the functions $\hftbasis{\*l',\*i'}$, $(\*l', \*i') \in \liset$,
+  the functions $\hftbasis{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
   $\sum_{(\*l', \*i') \in \liset}
   \surplus{\*l',\*i'} \hftbasis{\*l',\*i'} \equiv 0$.
-  By evaluating at $\gp{\*l,\*i}$, $(\*l, \*i) \in \liset$, we obtain
+  By evaluating at $\gp{\*l,\*i}$ ($(\*l, \*i) \in \liset$), we obtain
   \begin{equation}
     \sum_{(\*l', \*i') \in \liset}
     \surplus{\*l',\*i'} \hftbasis{\*l',\*i'}(\gp{\*l,\*i}) = 0,\quad
@@ -527,7 +527,7 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   This is a lower triangular system according to
   \eqref{eq:fundamentalTriangularMV},
   which implies $\surplus{\*l',\*i'} = 0$ for all $(\*l, \*i) \in \liset$.
-  Hence, the functions $\hftbasis{\*l',\*i'}$, $(\*l', \*i') \in \liset$,
+  Hence, the functions $\hftbasis{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
   are linearly independent.
 \end{proof}
 
@@ -576,7 +576,7 @@ via \cref{eq:translationInvariance}.
 If $\basis{l',i''}$ is translation-invariant,
 $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ are arbitrary, and
 $(c_{i''}^{l',i'})_{i'' \in \integer}$
-is chosen such that \eqref{eq:tiftDefinition} golds,
+is chosen such that \eqref{eq:tiftDefinition} holds,
 then $\parentfcn^\tift\colon \clint{0, 1} \to \real$ defined by
 \begin{equation}
   \label{eq:tiftParentFunctionDefinition}
@@ -628,7 +628,7 @@ and it satisfies \eqref{eq:tiftParentFunctionInterpolation}:
 This shows that the transformation $\basis{l',i'} \mapsto \tiftbasis{l',i'}$
 preserves translation-invariance and
 the coefficients $c_{i''}^{l',i'}$ in \eqref{eq:tiftDefinition}
-do not depend on $l'$ or $i'$ if $\basis{l',i'}$ is translation-invariant.
+do not depend on $l'$ or $i'$, if $\basis{l',i'}$ is translation-invariant.
 Therefore, we call the transformation
 $\basis{l',i'} \mapsto \tiftbasis{l',i'}$ \term{\tiftr}.
 
@@ -643,11 +643,71 @@ of relevant indices is finite, so that in each point $x \in \clint{0, 1}$,
 only a finite number of basis functions $\basis{l',i'}$ of level $l'$
 is non-zero.
 This means that the series in \eqref{eq:tiftDefinition} collapses to a
-finite sum.
+finite sum over $i'' \in \relindexset{l'}$.
 The condition is met for compactly supported and translation-invariant
 basis functions such as B-splines $\bspl{l',i'}{p}$.
+For $d \in \natz$ dimensions and $\*l' \in \natz^d$, we define
+$\relindexset{\*l'} :=
+\relindexset{l'_1} \times \dotsb \times \relindexset{l'_d}$.
 
-\blindtext{}
+In contrast to the \hftr, the \tiftr is only a change of basis
+if we consider the extended nodal spaces that also include
+basis functions with indices outside of $\{0, \dotsc, 2^{l'}\}$,
+which is the statement of the following proposition.
+We cannot formulate an equivalent version of \cref{prop:hftSparseGridSpace},
+as it might be that $\basis{l',i''}$ ($i'' < 0$ or $i'' > 2^{l'}$)
+is not contained in the nodal space $\ns{l'}$.
+
+\begin{proposition}[%
+  spanned nodal space for the TIFT%
+]
+  \label{prop:tiftNodalSpace}
+  We have
+  \begin{equation}
+    \spn\{\basis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\}
+    =: \ns{\*l'}^\mathrm{ext}
+    = \ns{\*l'}^{\tift,\mathrm{ext}}
+    := \spn\{\tiftbasis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
+    \*l' \in \natz^d.
+  \end{equation}
+\end{proposition}
+
+\begin{proof}
+  We have $\ns{\*l'}^\mathrm{ext} \supset \ns{\*l'}^{\tift,\mathrm{ext}}$ as
+  $\tiftbasis{\*l',\*i'} \in \ns{\*l'}^\mathrm{ext}$
+  for all $\*i' \in \relindexset{\*l'}$:
+  \begin{equation}
+    \tiftbasis{\*l',\*i'}
+    = \prod_{t=1}^d \sum_{i''_t \in \relindexset{l'_t}}
+    c_{i''_t}^{l'_t,i'_t} \basis{l'_t,i''_t}
+    = \sum_{\*i'' \in \relindexset{\*l'}}
+    c_{\*i''}^{\*l',\*i'} \basis{\*l',\*i''}
+    \in \regsgspace{n}{d},\quad
+    c_{\*i''}^{\*l',\*i'}
+    := \prod_{t=1}^d c_{i''_t}^{l'_t,i'_t}.
+  \end{equation}
+  
+  To prove that
+  $\ns{\*l'}^\mathrm{ext} \subset \ns{\*l'}^{\tift,\mathrm{ext}}$,
+  we show that the dimensions of the two spaces match.
+  Therefore, it suffices to show that
+  the functions $\tiftbasis{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$),
+  are linearly independent.
+  Let $\surplus{\*l',\*i'} \in \real$ be with
+  $\sum_{\*i' \in \relindexset{\*l'}}
+  \surplus{\*l',\*i'} \tiftbasis{\*l',\*i'} \equiv 0$.
+  By evaluating at $\gp{\*l',\*i}$ ($\*i \in \relindexset{\*l'}$), we obtain
+  \begin{equation}
+    0
+    = \sum_{\*i' \in \relindexset{\*l'}} \surplus{\*l',\*i'}
+    \underbrace{\tiftbasis{\*l',\*i'}(\gp{\*l',\*i})}_{=\kronecker{\*i}{\*i'}}
+    = \surplus{\*l',\*i},\quad
+    \*i \in \relindexset{\*l'},
+  \end{equation}
+  i.e., all coefficients $\surplus{\*l',\*i'}$ must vanish.
+  Hence, the functions $\tiftbasis{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$)
+  are linearly independent.
+\end{proof}
 
 
 
