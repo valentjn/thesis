@@ -88,42 +88,42 @@ then we can just replace $\fundbasis{l',i'}$ with
 $\fundbasis{l',i'}/\fundbasis{l',i'}(\gp{l',i'})$ to obtain
 $\fundbasis{l',i'}(\gp{l',i'}) = 1$.
 
-\paragraph{Triangular interpolation matrix}
-
-The main motivation for enforcing the fundamental property
-is the fact it results in the univariate hierarchization matrix $\intpmat$
-being triangular, if rows and columns are arranged
-according to monotonously increasing levels.
-To be more precise,
-let $k = k(l, i)$ an continuously enumerated index of
-the level-index pairs $(l, i)$,
-such that
-\begin{equation}
-  k(l, i) \le k(l', i') \implies l \le l',\quad
-  (l, i), (l', i') \in K,
-\end{equation}
-where $\liset$ is the level-index set of the
-spatially adaptive sparse grid at hand
-(see \cref{sec:233spatiallyAdaptiveSG}).
-If $k = k(k, i)$ and $k' = k(l', i')$, then
-the $(k, k')$-th entry of $\intpmat$ vanishes
-for $k < k'$:
-\begin{equation}
-  \label{eq:fundamentalTriangularUV}
-  \intpmatentry{k}{k'}
-  = \fundbasis{k'}(\gp{k})
-  = 0,\quad
-  k < k',
-\end{equation}
-as $k < k'$ implies that either
-$l < l'$ (apply \eqref{eq:fundamentalProperty1})
-or $l = l'$, but $i \not= i'$ (apply \eqref{eq:fundamentalProperty2}).
-Consequently, $\intpmat$ is in lower triangular form
-with diagonal entries
-$\intpmatentry{k}{k} = \fundbasis{k}(\gp{k}) = 1$
-according to \eqref{eq:fundamentalProperty2}.
-This means that the hierarchization system \eqref{eq:hierarchizationSLE}
-can easily be solved via forward substitution.
+%\paragraph{Triangular interpolation matrix}
+%
+%The main motivation for enforcing the fundamental property
+%is the fact it results in the univariate hierarchization matrix $\intpmat$
+%being triangular, if rows and columns are arranged
+%according to monotonously increasing levels.
+%To be more precise,
+%let $k = k(l, i)$ an continuously enumerated index of
+%the level-index pairs $(l, i)$,
+%such that
+%\begin{equation}
+%  k(l, i) \le k(l', i') \implies l \le l',\quad
+%  (l, i), (l', i') \in K,
+%\end{equation}
+%where $\liset$ is the level-index set of the
+%spatially adaptive sparse grid at hand
+%(see \cref{sec:233spatiallyAdaptiveSG}).
+%If $k = k(k, i)$ and $k' = k(l', i')$, then
+%the $(k, k')$-th entry of $\intpmat$ vanishes
+%for $k < k'$:
+%\begin{equation}
+%  \label{eq:fundamentalTriangularUV}
+%  \intpmatentry{k}{k'}
+%  = \fundbasis{k'}(\gp{k})
+%  = 0,\quad
+%  k < k',
+%\end{equation}
+%as $k < k'$ implies that either
+%$l < l'$ (apply \eqref{eq:fundamentalProperty1})
+%or $l = l'$, but $i \not= i'$ (apply \eqref{eq:fundamentalProperty2}).
+%Consequently, $\intpmat$ is in lower triangular form
+%with diagonal entries
+%$\intpmatentry{k}{k} = \fundbasis{k}(\gp{k}) = 1$
+%according to \eqref{eq:fundamentalProperty2}.
+%This means that the hierarchization system \eqref{eq:hierarchizationSLE}
+%can easily be solved via forward substitution.
 
 \paragraph{Multivariate case}
 
@@ -148,11 +148,17 @@ at the grid points $\gp{\*l,\*i}$ that, in every dimension $t$,
 are in a strictly finer level $l_t$ or
 have the same level-pair $(l_t, i_t)$ as the basis function.
 
-We can generalize the relation \eqref{eq:fundamentalTriangularUV} about the
-triangular structure of the interpolation matrix to the multivariate case:
-We assume that $k = k(\*l, \*i)$ is a single scalar and
-continuously enumerated index of the level-index pairs $(\*l, \*i) \in K$
-such that
+\paragraph{Triangular interpolation matrix}
+
+%We can generalize the relation \eqref{eq:fundamentalTriangularUV} about the
+%triangular structure of the interpolation matrix to the multivariate case:
+The main motivation for enforcing the fundamental property
+is the fact it results in the hierarchization matrix $\intpmat$
+being triangular, if rows and columns are arranged
+according to monotonously increasing level sum.
+We assume that $k = k(\*l, \*i) \in \{1, \dotsc, N\}$ is a single scalar and
+continuously enumerated index of the level-index pairs $(\*l, \*i) \in \liset$
+(where $N = \setsize{\liset}$) such that
 \begin{equation}
   k(\*l, \*i) \le k(\*l', \*i') \implies \normone{\*l} \le \normone{\*l'},\quad
   (\*l, \*i), (\*l', \*i') \in K,
@@ -161,7 +167,8 @@ i.e., we sort row indices $k = k(\*l, \*i)$ and
 column indices $k' = k(\*l', \*i')$ of $\intpmat$
 by level sum $\normone{\cdot}$.
 As a consequence,
-$\intpmat$ is in lower block-triangular form:
+$\intpmat = (\intpmatentry{k}{k'})_{k=1,\dotsc,N,\, k'=1,\dotsc,N}$
+is in lower block-triangular form:
 \begin{subequations}
   \label{eq:fundamentalTriangularMV}
   \begin{alignat}{2}
@@ -183,7 +190,13 @@ $\intpmat$ is in lower block-triangular form:
   \end{alignat}
 \end{subequations}
 since $\normone{\*l} = \normone{\*l'}$ implies that
-either $\left[\ex{t = 1, \dotsc, d}{l_t < l'_t}\right]$ or $\*l = \*l'$.
+either $\left[\ex{t = 1, \dotsc, d}{l_t < l'_t}\right]$ or $\*l = \*l'$.%
+\footnote{%
+  Note that as specified in the list of symbols at the beginning
+  of this thesis, the Kronecker delta $\kronecker{X}{Y}$
+  is defined for arbitrary objects $X$ and $Y$
+  that can be compared with ``$=$''.%
+}
 In the former case, both sides of $(\ast)$ vanish
 (according to \eqref{eq:fundamentalProperty1}),
 and in the latter case, 
