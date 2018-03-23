@@ -537,7 +537,7 @@ Another disadvantage of the \hftr is that it does not preserve
 the so-called \term{translation invariance} of the original basis.
 A~basis $\basis{l,i}$ ($l \in \natz$, $i = 0, \dotsc, 2^l$)
 is translation-invariant, if there is a \term{parent function}
-$\parentfcn\colon \clint{0, 1} \to \real$
+$\parentfcn\colon \real \to \real$
 such that
 \begin{equation}
   \label{eq:translationInvariance}
@@ -555,8 +555,8 @@ calculate its individual $2^{l'} + 1$ coefficients $c_{l'',i''}^{l',i'}$.
 To solve this problem,
 we use a similar ansatz as for the \hftr,
 but replace the hierarchical basis functions $\basis{l'',i''}$
-with nodal basis functions $\basis{l',i''}$ and arbitrary general
-integer indices $i'' \in \integer$:
+with nodal basis functions $\basis{l',i''}$ and
+allow general integer indices $i'' \in \integer$:
 \begin{equation}
   \label{eq:tiftDefinition}
   \basis[\tift]{l',i'}
@@ -577,10 +577,10 @@ If $\basis{l',i''}$ is translation-invariant,
 $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ are arbitrary, and
 $(c_{i''}^{l',i'})_{i'' \in \integer}$
 is chosen such that \eqref{eq:tiftDefinition} holds,
-then $\parentfcn^\tift\colon \clint{0, 1} \to \real$ defined by
+then $\parentfcn[\tift]\colon \clint{0, 1} \to \real$ defined by
 \begin{equation}
   \label{eq:tiftParentFunctionDefinition}
-  \parentfcn^\tift(x)
+  \parentfcn[\tift](x)
   := \sum_{i'' \in \integer} c_{i''} \parentfcn(x - i''),\quad
   x \in \clint{0, 1},\quad
   c_{i''} := c_{i'+i''}^{l',i'},
@@ -589,10 +589,10 @@ is a parent function of $\basis[\tift]{l',i'}$ that satisfies
 \begin{equation}
   \label{eq:tiftParentFunctionInterpolation}
   \falarge{i \in \integer}{
-    \parentfcn^\tift(i) = \kronecker{i}{0}.
+    \parentfcn[\tift](i) = \kronecker{i}{0}.
   }
 \end{equation}
-The function $\parentfcn^\tift$ is a parent function, since
+The function $\parentfcn[\tift]$ is a parent function, since
 \begin{subequations}
   \label{eq:tiftParentFunctionProof}
   \begin{align}
@@ -610,15 +610,15 @@ The function $\parentfcn^\tift$ is a parent function, since
     \hspace*{-2.3mm}\\
     &
     \!\overset{\eqref{eq:tiftParentFunctionDefinition}}{=}\!
-    \parentfcn^\tift(\tfrac{x}{\ms{l'}} - i'),\qquad
+    \parentfcn[\tift](\tfrac{x}{\ms{l'}} - i'),\qquad
     l' \in \natz,\;
     i' = 0, \dotsc, 2^{l'},
   \end{align}
 \end{subequations}
 and it satisfies \eqref{eq:tiftParentFunctionInterpolation}:
 \begin{equation}
-  \parentfcn^\tift(i)
-  = \parentfcn^\tift(\tfrac{\gp{0,i}}{\ms{0}} - 0)
+  \parentfcn[\tift](i)
+  = \parentfcn[\tift](\tfrac{\gp{0,i}}{\ms{0}} - 0)
   \!\overset{\eqref{eq:tiftParentFunctionProof}}{=}\!
   \basis[\tift]{0,0}(\gp{0,i})
   \!\overset{\eqref{eq:tiftDefinition}}{=}\!
