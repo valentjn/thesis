@@ -618,10 +618,10 @@ The basis function on level one is replaced by the
 ``constant one'' function.
 All other basis functions remain unchanged.
 \usenotation{Ëmod}
-The resulting \term{modified hat functions} $\basis{l,i}^{1,\modified}$
+The resulting \term{modified hat functions} $\bspl[\modified]{l,i}{1}$
 are shown in \cref{fig:modifiedHat} and defined as follows:
 \begin{equation}
-  \basis{l,i}^{1,\modified}(x)
+  \bspl[\modified]{l,i}{1}(x)
   :=
   \begin{cases}
     1,&
@@ -630,7 +630,7 @@ are shown in \cref{fig:modifiedHat} and defined as follows:
     l \ge 2,\quad i = 1,\\
     \bspl{l,i}{1}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \basis{l,1}^{1,\modified}(1 - x),&
+    \basis[\modified]{l,1}{1}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
 \end{equation}
@@ -644,7 +644,7 @@ which we will discuss when we introduce the corresponding unmodified functions.
   \caption[%
     Modified hierarchical hat functions%
   ]{%
-    Modified hierarchical hat functions $\basis{l',i'}^{1,\modified}$
+    Modified hierarchical hat functions $\basis[\modified]{l',i'}{1}$
     ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) up to level $l = 3$.%
   }%
   \label{fig:modifiedHat}%

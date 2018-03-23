@@ -565,16 +565,16 @@
         (\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}})(x_{t'})
         = \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
         \sum_{i'_{t'} \in \hiset{l'_{t'}}}
-        \surplustilde{l'_{t'},i'_{t'}}^{(j+1)}
+        \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
         \basis{l'_{t'},i'_{t'}}(x_{t'}),\quad
         x_{t'} \in \clint{0, 1},\\
-        \surplustilde{l'_{t'},i'_{t'}}^{(j+1)}
+        \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
         := \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
         \sum_{\*i'_{-t'} \in \hiset{\*l'_{-t'}}}
-        \surplus{\*l',\*i'}^{(j+1)} \cdot
+        \surplus[(j+1)]{\*l',\*i'} \cdot
         \basis{\*l'_{-t'},\*i'_{-t'}}(\gp{\*l_{-t'},\*i_{-t'}}).
         %= \sum_{\*l'=\*0}^{\*l^{(j+1)}} \sum_{\*i' \in \hiset{\*l'}}
-        %\surplus{\*l',\*i'}^{(j+1)} \basis{\*l',\*i'}
+        %\surplus[(j+1)]{\*l',\*i'} \basis{\*l',\*i'}
       \end{gather}
     \end{subequations}
     This shows that
@@ -631,7 +631,7 @@
           For the second term, note that
           $r_{\*l^{(j+1)}}^{(j)}
           = \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
-          \surplus{\*l',\*i'}^{(j+1)} \basis{\*l',\*i'}
+          \surplus[(j+1)]{\*l',\*i'} \basis{\*l',\*i'}
           = f^{\sparse,(j+1)} - f^{\sparse,(j)}$ by definition.
           Hence, we obtain%
         }
@@ -694,8 +694,8 @@
   
   \noindent
   \textbf{Induction step case:}
-  Let $\linout{\*l',\*i'}^{(q)}$ and
-  $\linout{\*l',\*i'}^{(q+1)}$
+  Let $\linout[(q)]{\*l',\*i'}$ and
+  $\linout[(q+1)]{\*l',\*i'}$
   be the surpluses after \pop{}ping all
   grid points with level sum $< q$ and $< q + 1$, respectively.
   We show the induction step $q \to q + 1$, i.e.,
@@ -704,9 +704,9 @@
   it holds
   \begin{equation}
     \label{eq:proofPropInvariantBFS1}
-    \linout{\*l,\*i}^{(q+1)}
+    \linout[(q+1)]{\*l,\*i}
     = \fcnval{\*l,\*i} -
-    \sum_{\normone{\*l'} < q+1} \linout{\*l',\*i'}^{(q+1)}
+    \sum_{\normone{\*l'} < q+1} \linout[(q+1)]{\*l',\*i'}
     \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset,\;\;
     \normone{\*l} = q+1.
@@ -724,27 +724,27 @@
   By summing all updates from \cref{line:algBFS2}, we obtain
   \begin{subequations}
     \begin{align}
-      \linout{\*l,\*i}^{(q+1)}
-      &= \linout{\*l,\*i}^{(q)} -
-      \sum_{\normone{\*l'} = q} \linout{\*l',\*i'}^{(q)}
+      \linout[(q+1)]{\*l,\*i}
+      &= \linout[(q)]{\*l,\*i} -
+      \sum_{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).\\
       \intertext{%
         After inserting the induction hypothesis
-        for $\linout{\*l,\*i}^{(q)}$,%
+        for $\linout[(q)]{\*l,\*i}$,%
       }
       &= \left(\fcnval{\*l,\*i} -
-      \sum_{\normone{\*l'} < q} \linout{\*l',\*i'}^{(q)}
+      \sum_{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\right) -
-      \sum_{\normone{\*l'} = q} \linout{\*l',\*i'}^{(q)}
+      \sum_{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\\
       &= \fcnval{\*l,\*i} -
-      \sum_{\normone{\*l'} < q + 1} \linout{\*l',\*i'}^{(q)}
+      \sum_{\normone{\*l'} < q + 1} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).
     \end{align}
   \end{subequations}
   As noted above, we have
   $\fa{(\*l', \*i'),\, \norm{\*l'} < q + 1}{
-    \linout{\*l',\*i'}^{(q)} = \linout{\*l',\*i'}^{(q+1)}
+    \linout[(q)]{\*l',\*i'} = \linout[(q+1)]{\*l',\*i'}
   }$
   (the values of points with level sum $< q + 1$
   do not change after \pop{}ping all points with level sum $< q$).

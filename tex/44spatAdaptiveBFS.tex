@@ -445,34 +445,34 @@ tensor product approach.
 
 \usenotation{Ëhft}
 The canonical way to find a fundamental basis $\fundbasis{l',i'}$ is to
-use a linear combination $\hftbasis{l',i'}$
+use a linear combination $\basis[\hft]{l',i'}$
 of coarser basis functions $\basis{l'',i''}$ as an ansatz
 and require that the fundamental property \eqref{eq:fundamentalProperty}
 is fulfilled:
 \begin{equation}
-  \hftbasis{l',i'}
+  \basis[\hft]{l',i'}
   := \sum_{l''=0}^{l'} \sum_{i'' \in \hiset{l''}}
   c_{l'',i''}^{l',i'} \basis{l'',i''}
   \quad\text{such that}\quad
   \fafalarge{l = 0, \dotsc, l'}{i \in \hiset{l}}{
-    \hftbasis{l',i'}(\gp{l,i}) = \kronecker{(l,i)}{(l',i')},
+    \basis[\hft]{l',i'}(\gp{l,i}) = \kronecker{(l,i)}{(l',i')},
   }
 \end{equation}
-i.e., $\basis{l',i'}^\hft$ ($l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$)
+i.e., $\basis[\hft]{l',i'}$ ($l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$)
 interpolates the data
 $\{(\gp{l',i}, \kronecker{i}{i'}) \mid i = 0, \dotsc, 2^{l'}\}$.
 The coefficients $c_{l'',i''}^{l',i'} \in \real$
-are, in general, different for each basis function $\hftbasis{l',i'}$.
+are, in general, different for each basis function $\basis[\hft]{l',i'}$.
 This complicates precomputation and storage of the $2^{l'} + 1$ coefficients,
 as they have to be determined by solving a system of linear equations.
-In addition, the transformation $\basis{l',i'} \mapsto \hftbasis{l',i'}$
+In addition, the transformation $\basis{l',i'} \mapsto \basis[\hft]{l',i'}$
 does not preserve the locality of the support the basis functions.
-Consequently, $\hftbasis{l',i'}$ may be globally supported,
+Consequently, $\basis[\hft]{l',i'}$ may be globally supported,
 which means that we have to evaluate up to $2^{l'} + 1$ basis functions
-$\basis{l'',i''}$ when evaluating $\hftbasis{l',i'}$ at a single point
+$\basis{l'',i''}$ when evaluating $\basis[\hft]{l',i'}$ at a single point
 $x \in \clint{0, 1}$.
 
-We call the transformation $\basis{l',i'} \mapsto \hftbasis{l',i'}$
+We call the transformation $\basis{l',i'} \mapsto \basis[\hft]{l',i'}$
 \term{\hftr}.
 The following proposition shows that this is indeed only a change of basis,
 as spanned sparse grid space remains unchanged.
@@ -490,16 +490,16 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   \begin{equation}
     \regsgspace{n}{d}
     = \regsgspace[\hft]{n}{d}
-    := \spn\{\hftbasis{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
+    := \spn\{\basis[\hft]{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
   \end{equation}
 \end{proposition}
 
 \begin{proof}
   We have $\regsgspace{n}{d} \supset \regsgspace[\hft]{n}{d}$ as
-  $\hftbasis{\*l',\*i'} \in \regsgspace{n}{d}$
+  $\basis[\hft]{\*l',\*i'} \in \regsgspace{n}{d}$
   for all $(\*l', \*i') \in \liset$:
   \begin{equation}
-    \hftbasis{\*l',\*i'}
+    \basis[\hft]{\*l',\*i'}
     = \prod_{t=1}^d \sum_{l''_t=0}^{l'_t} \sum_{i''_t \in \hiset{l''_t}}
     c_{l''_t,i''_t}^{l'_t,i'_t} \basis{l''_t,i''_t}
     = \sum_{\*l''=\*0}^{\*l'} \sum_{\*i'' \in \hiset{\*l''}}
@@ -513,21 +513,21 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   we show that the dimension of $\regsgspace[\hft]{n}{d}$
   matches $\dim \regsgspace{n}{d} = \setsize{\liset}$.
   Therefore, it suffices to show that
-  the functions $\hftbasis{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
+  the functions $\basis[\hft]{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
   $\sum_{(\*l', \*i') \in \liset}
-  \surplus{\*l',\*i'} \hftbasis{\*l',\*i'} \equiv 0$.
+  \surplus{\*l',\*i'} \basis[\hft]{\*l',\*i'} \equiv 0$.
   By evaluating at $\gp{\*l,\*i}$ ($(\*l, \*i) \in \liset$), we obtain
   \begin{equation}
     \sum_{(\*l', \*i') \in \liset}
-    \surplus{\*l',\*i'} \hftbasis{\*l',\*i'}(\gp{\*l,\*i}) = 0,\quad
+    \surplus{\*l',\*i'} \basis[\hft]{\*l',\*i'}(\gp{\*l,\*i}) = 0,\quad
     (\*l, \*i) \in \liset.
   \end{equation}
   This is a lower triangular system according to
   \eqref{eq:fundamentalTriangularMV},
   which implies $\surplus{\*l',\*i'} = 0$ for all $(\*l, \*i) \in \liset$.
-  Hence, the functions $\hftbasis{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
+  Hence, the functions $\basis[\hft]{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
   are linearly independent.
 \end{proof}
 
@@ -548,7 +548,7 @@ such that
   x \in \clint{0, 1}.
 \end{equation}
 The fact that \hftr does not preserve translation invariance means
-that for each basis function $\hftbasis{l',i'}$, we have to
+that for each basis function $\basis[\hft]{l',i'}$, we have to
 calculate its individual $2^{l'} + 1$ coefficients $c_{l'',i''}^{l',i'}$.
 
 \usenotation{Ëtift}
@@ -559,11 +559,11 @@ with nodal basis functions $\basis{l',i''}$ and arbitrary general
 integer indices $i'' \in \integer$:
 \begin{equation}
   \label{eq:tiftDefinition}
-  \tiftbasis{l',i'}
+  \basis[\tift]{l',i'}
   := \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}
   \quad\text{such that}\quad
   \falarge{i \in \hiset{l'}}{
-    \tiftbasis{l',i'}(\gp{l',i}) = \kronecker{i}{i'},
+    \basis[\tift]{l',i'}(\gp{l',i}) = \kronecker{i}{i'},
   }
 \end{equation}
 where $l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$, and
@@ -585,7 +585,7 @@ then $\parentfcn^\tift\colon \clint{0, 1} \to \real$ defined by
   x \in \clint{0, 1},\quad
   c_{i''} := c_{i'+i''}^{l',i'},
 \end{equation}
-is a parent function of $\tiftbasis{l',i'}$ that satisfies
+is a parent function of $\basis[\tift]{l',i'}$ that satisfies
 \begin{equation}
   \label{eq:tiftParentFunctionInterpolation}
   \falarge{i \in \integer}{
@@ -597,7 +597,7 @@ The function $\parentfcn^\tift$ is a parent function, since
   \label{eq:tiftParentFunctionProof}
   \begin{align}
     \hspace*{-0.6mm}
-    \tiftbasis{l',i'}(x)
+    \basis[\tift]{l',i'}(x)
     &
     \!\overset{\hphantom{\eqref{eq:tiftParentFunctionDefinition}}}{=}\!
     \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}(x)
@@ -620,17 +620,17 @@ and it satisfies \eqref{eq:tiftParentFunctionInterpolation}:
   \parentfcn^\tift(i)
   = \parentfcn^\tift(\tfrac{\gp{0,i}}{\ms{0}} - 0)
   \!\overset{\eqref{eq:tiftParentFunctionProof}}{=}\!
-  \tiftbasis{0,0}(\gp{0,i})
+  \basis[\tift]{0,0}(\gp{0,i})
   \!\overset{\eqref{eq:tiftDefinition}}{=}\!
   \kronecker{i}{0},\quad
   i \in \integer.
 \end{equation}
-This shows that the transformation $\basis{l',i'} \mapsto \tiftbasis{l',i'}$
+This shows that the transformation $\basis{l',i'} \mapsto \basis[\tift]{l',i'}$
 preserves translation-invariance and
 the coefficients $c_{i''}^{l',i'}$ in \eqref{eq:tiftDefinition}
 do not depend on $l'$ or $i'$, if $\basis{l',i'}$ is translation-invariant.
 Therefore, we call the transformation
-$\basis{l',i'} \mapsto \tiftbasis{l',i'}$ \term{\tiftr}.
+$\basis{l',i'} \mapsto \basis[\tift]{l',i'}$ \term{\tiftr}.
 
 We assume that the set
 \begin{equation}
@@ -665,19 +665,19 @@ is not contained in the nodal space $\ns{l'}$.
   We have
   \begin{equation}
     \spn\{\basis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\}
-    =: \ns{\*l'}^\mathrm{ext}
-    = \ns{\*l'}^{\tift,\mathrm{ext}}
-    := \spn\{\tiftbasis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
+    =: \ns[\mathrm{ext}]{\*l'}
+    = \ns[\tift,\mathrm{ext}]{\*l'}
+    := \spn\{\basis[\tift]{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
     \*l' \in \natz^d.
   \end{equation}
 \end{proposition}
 
 \begin{proof}
-  We have $\ns{\*l'}^\mathrm{ext} \supset \ns{\*l'}^{\tift,\mathrm{ext}}$ as
-  $\tiftbasis{\*l',\*i'} \in \ns{\*l'}^\mathrm{ext}$
+  We have $\ns[\mathrm{ext}]{\*l'} \supset \ns[\tift,\mathrm{ext}]{\*l'}$ as
+  $\basis[\tift]{\*l',\*i'} \in \ns[\mathrm{ext}]{\*l'}$
   for all $\*i' \in \relindexset{\*l'}$:
   \begin{equation}
-    \tiftbasis{\*l',\*i'}
+    \basis[\tift]{\*l',\*i'}
     = \prod_{t=1}^d \sum_{i''_t \in \relindexset{l'_t}}
     c_{i''_t}^{l'_t,i'_t} \basis{l'_t,i''_t}
     = \sum_{\*i'' \in \relindexset{\*l'}}
@@ -688,24 +688,24 @@ is not contained in the nodal space $\ns{l'}$.
   \end{equation}
   
   To prove that
-  $\ns{\*l'}^\mathrm{ext} \subset \ns{\*l'}^{\tift,\mathrm{ext}}$,
+  $\ns[\mathrm{ext}]{\*l'} \subset \ns[\tift,\mathrm{ext}]{\*l'}$,
   we show that the dimensions of the two spaces match.
   Therefore, it suffices to show that
-  the functions $\tiftbasis{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$),
+  the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$),
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
   $\sum_{\*i' \in \relindexset{\*l'}}
-  \surplus{\*l',\*i'} \tiftbasis{\*l',\*i'} \equiv 0$.
+  \surplus{\*l',\*i'} \basis[\tift]{\*l',\*i'} \equiv 0$.
   By evaluating at $\gp{\*l',\*i}$ ($\*i \in \relindexset{\*l'}$), we obtain
   \begin{equation}
     0
     = \sum_{\*i' \in \relindexset{\*l'}} \surplus{\*l',\*i'}
-    \underbrace{\tiftbasis{\*l',\*i'}(\gp{\*l',\*i})}_{=\kronecker{\*i}{\*i'}}
+    \underbrace{\basis[\tift]{\*l',\*i'}(\gp{\*l',\*i})}_{=\kronecker{\*i}{\*i'}}
     = \surplus{\*l',\*i},\quad
     \*i \in \relindexset{\*l'},
   \end{equation}
   i.e., all coefficients $\surplus{\*l',\*i'}$ must vanish.
-  Hence, the functions $\tiftbasis{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$)
+  Hence, the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$)
   are linearly independent.
 \end{proof}
 

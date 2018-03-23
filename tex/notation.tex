@@ -59,17 +59,17 @@
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommand{\vlinin}{\*u}{u}{$\vlinin$}{
+\newnotationcommandoptarg{1}{\vlinin}{\*u^{#1}}{u}{$\vlinin$}{
   Input of the linear operator $\linop$
 }
 
-\newcommand*{\linin}[1]{u_{#1}}
+\newcommand*{\linin}[2][]{u_{#2}^{#1}}
 
-\newnotationcommand{\vlinout}{\*y}{y}{$\vlinout$}{
+\newnotationcommandoptarg{1}{\vlinout}{\*y^{#1}}{y}{$\vlinout$}{
   Output of the linear operator $\linop$
 }
 
-\newcommand*{\linout}[1]{y_{#1}}
+\newcommand*{\linout}[2][]{y_{#2}^{#1}}
 
 % ======================================================================
 % Vector Notation
@@ -292,11 +292,13 @@
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\newnotationcommand[1]{\fgset}{\Omega_{#1}}{ÄΩl}{$\fgset{\*l}$}{
+\newnotationcommandoptarg{2}{\fgset}{\Omega_{#2}^{#1}}{ÄΩl}{$\fgset{\*l}$}{
   Set of full grid points of level $\*l$
 }
 
-\newnotationcommand{\sgset}{\gridset{}{\sparse}}{ÄΩs}{$\sgset$}{
+\newnotationcommandoptarg{1}{\sgset}{%
+  \gridset{}{\sparse\appendwithcomma{#1}}%
+}{ÄΩs}{$\sgset$}{
   Arbitrary sparse grid (possibly spatially adaptive)
 }
 
@@ -337,9 +339,11 @@
   \if\relax\detokenize{#1}\relax V\else#1{V}\fi_{#2}^{#3}%
 }
 
-\newnotationcommand[1]{\ns}{V_{#1}}{Vl}{$\ns{\*l}$}{
+\newnotationcommandoptarg{2}{\ns}{V_{#2}^{#1}}{Vl}{$\ns{\*l}$}{
   Nodal space of level $\*l$
 }
+
+\newcommand*{\nsbspl}[3][]{\ns[#3\appendwithcomma{#1}]{#2}}
 
 \newnotation{Vnd}{$\ns{n,d}$}{
   Multivariate nodal space
@@ -349,6 +353,8 @@
 \newnotationcommand[1]{\hs}{W_{#1}}{Wl}{$\hs{\*l}$}{
   Hierarchical subspace of level $\*l$
 }
+
+\newcommand*{\hsbspl}[3][]{\hs[#3\appendwithcomma{#1}]{#2}}
 
 \newnotationcommand{\sgspace}{\gridspace{}{\sparse}}{Vs}{$\sgspace$}{
   Arbitrary sparse grid space (possibly spatially adaptive)
@@ -540,33 +546,41 @@
 }
 
 % ======================================================================
-% Interpolation Coefficients
+% Interpolation Values and Coefficients
 % ======================================================================
 
-\newnotationcommand[1]{\fcnval}{f(\gp{#1})}{fli}{$\fcnval{\*l,\*i}$}{
+\newnotationcommandoptarg{2}{\fcnval}{%
+  f^{#1}(\gp{#2})%
+}{fli}{$\fcnval{\*l,\*i}$}{
   Value of the objective function $\objfun$ at the grid point $\gp{\*l,\*i}$
 }
 
-\newnotationcommand[1]{\surplus}{\alpha_{#1}}{Äαli}{$\surplus{\*l,\*i}$}{
+\newnotationcommandoptarg{2}{\surplus}{%
+  \alpha_{#2}^{#1}%
+}{Äαli}{$\surplus{\*l,\*i}$}{
   Hierarchical surpluses (coefficients of a linear combination of hierarchical
   basis functions)
 }
 
 \newcommand*{\vsurplus}{\*\alpha}
-\newcommand*{\surplustilde}[1]{\tilde{\alpha}_{#1}}
+\newcommand*{\surplustilde}[2][]{\tilde{\alpha}_{#2}^{#1}}
 
-\newnotationcommand[1]{\interpcoeff}{c_{#1}}{cli}{$\interpcoeff{\*l,\*i}$}{
+\newnotationcommandoptarg{2}{\interpcoeff}{%
+  c_{#2}^{#1}%
+}{cli}{$\interpcoeff{\*l,\*i}$}{
   Full grid interpolation coefficients
   (coefficients of a linear combination of nodal basis functions)
 }
 
-\newcommand*{\interpcoefftilde}[1]{\tilde{c}_{#1}}
+\newcommand*{\interpcoefftilde}[2][]{\tilde{c}_{#2}^{#1}}
 
 % ======================================================================
 % Special Functions
 % ======================================================================
 
-\newnotationcommand[1]{\basis}{\varphi_{#1}}{Äφli}{$\basis{\*l,\*i}$}{
+\newnotationcommandoptarg{2}{\basis}{%
+  \varphi_{#2}^{#1}%
+}{Äφli}{$\basis{\*l,\*i}$}{
   Hierarchical basis function of level $\*l$, index $\*i$
 }
 
@@ -576,9 +590,6 @@
   Fundamental hierarchical basis function of level $\*l$, index $\*i$
   (satisfying the fundamental property)
 }
-
-\newcommand*{\hftbasis}[1]{\varphi_{#1}^{\hft}}
-\newcommand*{\tiftbasis}[1]{\varphi_{#1}^{\tift}}
 
 \newnotationcommand{\parentfcn}{\varphi}{Äφ}{$\parentfcn$}{
   Parent function $\parentfcn\colon \clint{0, 1} \to \real$
@@ -629,7 +640,9 @@
   Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}$
 }
 
-\newnotationcommand[1]{\lagrangepoly}{L_{#1}}{Lli}{$\lagrangepoly{l,i}$}{
+\newnotationcommandoptarg{2}{\lagrangepoly}{%
+  L_{#2}^{#1}%
+}{Lli}{$\lagrangepoly{l,i}$}{
   Lagrange polynomial of level $l$, index $i$
 }
 

@@ -212,8 +212,8 @@ $\bspl{l,i}{p}$ ($l \in \natz$, $i \in \hiset{l}$).
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
     When restricting all functions to $\rspldomain{l}{p}$ \emph{(thick black line)},
-    the nodal space $\restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$ decomposes into the direct sum
-    of the hierarchical subspaces $\restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$ ($l' \le l$).%
+    the nodal space $\restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$ decomposes into the direct sum
+    of the hierarchical subspaces $\restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$ ($l' \le l$).%
   }%
   \label{fig:hierarchicalBSpline}%
 \end{figure}
@@ -263,12 +263,12 @@ for the rest of the thesis.
 \paragraph{Non-uniform B-splines and spline space}
 
 With the hierarchical B-splines $\bspl{l,i}{p}$, we can define
-the nodal spaces $\ns{l}^p$ and hierarchical subspaces $\hs{l}^p$
+the nodal spaces $\nsbspl{l}{p}$ and hierarchical subspaces $\hsbspl{l}{p}$
 as in \cref{chap:20sparseGrids}.
 However, in order for the hierarchical splitting \eqref{eq:hierSplittingUV}
 to be correct, we have to prove that the conditions of
 \thmref{lemma:hierSplittingUV} are satisfied.
-To investigate how the nodal space $\ns{l}^p$ looks like,
+To investigate how the nodal space $\nsbspl{l}{p}$ looks like,
 we introduce the notion of non-uniform B-splines.
 
 \begin{definition}[non-uniform B-splines]
@@ -294,7 +294,7 @@ we introduce the notion of non-uniform B-splines.
 Note that when choosing $\knotseq = (0, 1, \dotsc, p + 1)$ and
 $k = 0$, we obtain the cardinal B-spline~$\cardbspl{p}$.
 \Cref{def:nonUniformBSpline} can be used to characterize
-the nodal space $\ns{l}^p$:
+the nodal space $\nsbspl{l}{p}$:
 
 \begin{proposition}[spline space]
   \label{prop:splineSpace}
@@ -399,7 +399,7 @@ $\spldomain{\knotseq}{p}$:
   \end{gather}
   and consequently
   \begin{equation}
-    \restrictspace{\ns{l}^p}{\rspldomain{l}{p}}
+    \restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}
     = \restrictedsplspace{l}{p}
     := \nonunifsplspace{\nodalknotseq{l}{p}}{p}.
   \end{equation}
@@ -427,8 +427,8 @@ to prove the hierarchical splitting for the uniform B-spline basis
 
 \begin{lemma}[first condition of \cref{lemma:hierSplittingUV}]
   The restricted hierarchical subspaces
-  $\restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$ ($l' \le l$) are
-  subspaces of the restricted nodal space $\restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$.
+  $\restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$ ($l' \le l$) are
+  subspaces of the restricted nodal space $\restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$.
 \end{lemma}
 
 \begin{proof}
@@ -439,17 +439,17 @@ to prove the hierarchical splitting for the uniform B-spline basis
   differentiable.
   \Cref{prop:splineSpace} implies $\bspl{l',i'}{p} \in \restrictedsplspace{l}{p}$
   and from \cref{cor:nodalBSplineSpace}, it follows
-  $\bspl{l',i'}{p} \in \restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$.
+  $\bspl{l',i'}{p} \in \restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$.
   As the functions $\bspl{l',i'}{p}$ ($i' \in \hiset{l'}$) span
-  $\restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$, we can conclude
-  $\restrictspace{\hs{l'}^p}{\rspldomain{l}{p}} \subset \restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$.
+  $\restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$, we can conclude
+  $\restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}} \subset \restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$.
 \end{proof}
 
 It is crucial to note that this lemma does not hold for even $p$,
 as the knots of the B-splines of level $l - 1$ are not contained in the
 knots of level $l$.
 This implies that in general,
-$\restrictspace{\hs{l-1}^p}{\rspldomain{l}{p}}$ is not contained in $\restrictspace{\ns{l}^p}{\rspldomain{l}{p}}$
+$\restrictspace{\hsbspl{l-1}{p}}{\rspldomain{l}{p}}$ is not contained in $\restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 does not hold, which is the main reason for us to restrict the
@@ -482,8 +482,8 @@ is correct for hierarchical B-splines:
   if restricting all functions to $\rspldomain{l}{p}$:
   \begin{equation}
     \restrictedsplspace{l}{p}
-    = \restrictspace{\ns{l}^p}{\rspldomain{l}{p}}
-    = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}.
+    = \restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}
+    = \bigoplus_{l'=0}^l \restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}.
   \end{equation}
 \end{corollary}
 
@@ -494,7 +494,7 @@ is correct for hierarchical B-splines:
 
 This corollary is also visualized in \cref{fig:hierarchicalBSpline}.
 We can now proceed to define multivariate
-nodal spaces $\ns{\*l}^p$, hierarchical subspaces $\hs{\*l}^p$, and
+nodal spaces $\nsbspl{\*l}{p}$, hierarchical subspaces $\hsbspl{\*l}{p}$, and
 sparse grid spaces $\regsgspace[p]{n}{d}$ as in \cref{chap:20sparseGrids}.
 Note that it is possible to choose different degrees $p_t$ for
 different dimensions $t = 1, \dotsc, d$,
@@ -696,7 +696,7 @@ so-called Clenshaw--Curtis quadrature rules.
   \caption[%
     Decomposition of the set of univariate Clenshaw--Curtis grid points%
   ]{%
-    The set of Chebyshev points $\fgset{l}^\cc$ of level
+    The set of Chebyshev points $\fgset[\cc]{l}$ of level
     $l = 4$ \emph{(top)}
     decomposes into hierarchical grids of level $l' \le l$
     (compare with \cref{fig:pointSplittingUniform}).
@@ -754,8 +754,8 @@ the Chebyshev points $\ccgp{l,i}$
 are equidistantly extended onto the real line $\real$.
 As for the standard hierarchical B-spline basis,
 it is now straightforward to define nodal spaces
-$\ns{l}^{p,\cc}$
-and hierarchical subspaces $\hs{l}^{p,\cc}$ as well as
+$\nsbspl[\cc]{l}{p}$
+and hierarchical subspaces $\hsbspl[\cc]{l}{p}$ as well as
 sparse grid spaces $\regsgspace[p,\cc]{n}{d}$ and
 grid point sets $\regsgset[\cc]{n}{d}$
 using tensor products of Clenshaw--Curtis B-splines

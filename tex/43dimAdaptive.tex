@@ -393,16 +393,16 @@ and not the nodal basis
       \For{$q = 0, \dotsc, d - 1$}
         \For{$\*l' \in \natz^d$ with $\normone{\*l'} = n - q$}
           \State{%
-            Let $(\surplus{\*l,\*i}^{(\*l')})_{
+            Let $(\surplus[(\*l')]{\*l,\*i})_{
               \*l = \*0, \dotsc, \*l'\!,\, \*i \in \hiset{\*l}
             }$ be such that
             $\sum_{\*l=\*0}^{\*l'} \sum_{\*i \in \hiset{\*l}}
-            \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i} \equiv
+            \surplus[(\*l')]{\*l,\*i} \basis{\*l,\*i} \equiv
             \fgintp{\*l'}$%
           }
           \label{line:algCombiTechnique1}
           \State{%
-            $\surplus{\*l,\*i}^{(\*l')} \gets 0$
+            $\surplus[(\*l')]{\*l,\*i} \gets 0$
             for all $(\*l,\*i) \in \liset$
             with $\lnot(\*l \le \*l')$%
           }
@@ -413,7 +413,7 @@ and not the nodal basis
       \State{%
         $\linout{\*l,\*i}
         = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q}
-        \sum_{\normone{\*l'} = n-q} \surplus{\*l,\*i}^{(\*l')}$
+        \sum_{\normone{\*l'} = n-q} \surplus[(\*l')]{\*l,\*i}$
         for all $(\*l, \*i) \in \liset$%
       }
       \Comment{combine surpluses}%
@@ -462,7 +462,7 @@ The proof of the following proposition can be generalized accordingly.
   \begin{equation}
     \fgintp{\*l'}
     = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
-    \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i}
+    \surplus[(\*l')]{\*l,\*i} \basis{\*l,\*i}
   \end{equation}
   where the surpluses have been extended with zero by
   \cref{line:algCombiTechnique2}.
@@ -476,7 +476,7 @@ The proof of the following proposition can be generalized accordingly.
       \fgintp{\*l'}\\
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
       \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
-      \surplus{\*l,\*i}^{(\*l')} \basis{\*l,\*i}.\\
+      \surplus[(\*l')]{\*l,\*i} \basis{\*l,\*i}.\\
       \intertext{%
         By rearranging the sums, we obtain%
       }
@@ -484,7 +484,7 @@ The proof of the following proposition can be generalized accordingly.
       &= \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
       \underbrace{
         \left(\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
-        \surplus{\*l,\*i}^{(\*l')}\right)
+        \surplus[(\*l')]{\*l,\*i}\right)
       }_{= \linout{\*l,\*i}}
       \basis{\*l,\*i},
     \end{align}
@@ -573,9 +573,9 @@ removing points from the union $\sgset$).
           %(see \eqref{eq:interpFullGridMV})%
         }
         \State{%
-          Let $(\surplus{\*l,\*i}^{(j)})_{(\*l,\*i) \in \liset}$ be such that
+          Let $(\surplus[(j)]{\*l,\*i})_{(\*l,\*i) \in \liset}$ be such that
           $\sum_{\*l=\*0}^{\*l^{(j)}} \sum_{\*i \in \hiset{\*l}}
-          \surplus{\*l,\*i}^{(j)} \basis{\*l,\*i}
+          \surplus[(j)]{\*l,\*i} \basis{\*l,\*i}
           \equiv r_{\*l^{(j)}}^{(j-1)}$%
         }
         \Comment{res. interpolation}%
@@ -589,7 +589,7 @@ removing points from the union $\sgset$).
       \EndFor{}
       \State{%
         $\vlinout \gets \sum_{j=1}^{m} \vsurplus^{(j)}$
-        (where $\surplus{\*l,\*i}^{(j)} = 0$
+        (where $\surplus[(j)]{\*l,\*i} = 0$
         $(\*l,\*i) \in \liset$
         if $\lnot(\*l \le \*l^{(j)})$)%
       }
@@ -621,7 +621,7 @@ The principle of \Cref{alg:residualInterpolation} is maintaining
 a vector $(r^{(j)}(\gp{\*l,\*i}))_{(\*l,\*i) \in \liset}$ of residuals
 and subsequently interpolating the residual data on the active nodal spaces.
 Again, note that it is necessary to compute the coefficients
-$\surplus{\*l,\*i}^{(j)}$ in the hierarchical basis, despite interpolating
+$\surplus[(j)]{\*l,\*i}$ in the hierarchical basis, despite interpolating
 on the nodal space.
 In the Appendix, we prove the following invariant of the algorithm that
 can be used to show its correctness:
@@ -667,7 +667,7 @@ can be used to show its correctness:
     \label{eq:propInvariantResidualInterpolation4}
     f^{\sparse,(j)}
     := \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
-    \left(\sum_{j'=1}^{j} \surplus{\*l',\*i'}^{(j')}\right) \basis{\*l',\*i'}.
+    \left(\sum_{j'=1}^{j} \surplus[(j')]{\*l',\*i'}\right) \basis{\*l',\*i'}.
   \end{equation}
 \end{restatable}
 
@@ -691,7 +691,7 @@ can be used to show its correctness:
       \sum_{\*l' \in L} \sum_{\*i' \in \hiset{\*l'}}
       \smash{
         \underbrace{
-          \left(\sum_{j''=1}^{m} \surplus{\*l',\*i'}^{(j'')}\right)
+          \left(\sum_{j''=1}^{m} \surplus[(j'')]{\*l',\*i'}\right)
         }_{= \linout{\*l',\*i'}}
       }
       \basis{\*l',\*i'}(\gp{\*l,\*i})
@@ -740,12 +740,12 @@ An example for the application of \cref{alg:residualInterpolation}
 on a two-dimensional sparse grid can be seen in
 \cref{fig:residualInterpolation}.
 Note that
-$\surplus{\*l,\*i}^{(j)} \not= 0$ can only be true if $\*l \le \*l^{(j)}$.
+$\surplus[(j)]{\*l,\*i} \not= 0$ can only be true if $\*l \le \*l^{(j)}$.
 Therefore, if $(\*l, \*i)$ is not contained in one of the
 grids that are processed in one of the remaining iterations,
-then $\linout{\*l,\*i}^{(j)}$ is already equal to the correct surplus
+then $\linout[(j)]{\*l,\*i}$ is already equal to the correct surplus
 $\surplus{\*l,\*i}$,
-where $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$
+where $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
 denotes the intermediate result obtained after $j$ iterations.
 
 \begin{SCfigure}
@@ -758,11 +758,11 @@ denotes the intermediate result obtained after $j$ iterations.
     $\regsgspace{n}{d}$ of level $n = 3$ \emph{(top left)}
     using the method of residual interpolation.
     In this figure, we use
-    $\linout{\*l,\*i}^{(j)} := \sum_{j'=1}^j \surplus{\*l,\*i}^{(j')}$
+    $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
     as an abbreviation.
     The nodal spaces are processed from the bottom left to
     the top right corner.
-    The data $\linout{\*l,\*i}^{(j)}$
+    The data $\linout[(j)]{\*l,\*i}$
     corresponding to \textcolor{C0}{blue grid points}
     will not be modified in the remaining iterations
     and, therefore, already equals the correct surpluses $\alpha{\*l,\*i}$.

@@ -132,16 +132,16 @@ $\intpmat \in \real^{\ngp \times \ngp}$:
 
 As noted in \cite{Valentin18Fundamental},
 hierarchization on sparse grids with hierarchical B-splines
-$\basis{\*l,\*i}^\*p$ of degree $\*p$
+$\bspl{\*l,\*i}{\*p}$ of degree $\*p$
 as basis functions $\basis{\*l,\*i}$ is a tedious task.
 The corresponding linear system \eqref{eq:hierarchizationSLE} is in general
 non-symmetric
-(i.e., $\basis{\*l',\*i'}^\*p(\gp{\*l,\*i}) \not=
-\basis{\*l,\*i}^\*p(\gp{\*l',\*i'})$) and densely populated.
+(i.e., $\bspl{\*l',\*i'}{\*p}(\gp{\*l,\*i}) \not=
+\bspl{\*l,\*i}{\*p}(\gp{\*l',\*i'})$) and densely populated.
 This is because the matrix entry in the $(\*l,\*i)$-th row and
 $(\*l',\*i')$-th column vanishes if and only if
 \begin{equation}
-  \gp{\*l,\*i} \notin \interiorsupp \basis{\*l',\*i'}^\*p
+  \gp{\*l,\*i} \notin \interiorsupp \bspl{\*l',\*i'}{\*p}
   \iff
   \exlarge{t = 1, \dotsc, d}{
     \gp{l_t,i_t} \notin
@@ -154,12 +154,12 @@ $(\*l',\*i')$-th column vanishes if and only if
 where $\interiorsupp$ is the interior of the support
 \cite{Valentin18Fundamental}.
 For coarse levels $\*l'$, the mesh size $\ms{l'_t}$ is large in
-every dimension $t$, which implies that $\interiorsupp \basis{\*l',\*i'}^\*p$
+every dimension $t$, which implies that $\interiorsupp \bspl{\*l',\*i'}{\*p}$
 contains most of the grid points.
 In contrast to the hat function case ($\*p = \*1$),
 the value of $\surplus{\*l',\*i'}$ depends not only on
 $\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
-on the boundary of $\supp \basis{\*l',\*i'}^\*1$,
+on the boundary of $\supp \bspl{\*l',\*i'}{\*1}$,
 but potentially on the data of the whole grid.
 This is shown in \cref{fig:matrixDensityPattern}:
 There are at most $3^d = 9$ non-zero entries in each row of $\intpmat^{-1}$

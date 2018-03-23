@@ -67,11 +67,11 @@ for other non-polynomial functions as well.
 
 We can explain this as follows:
 According to \thmref{cor:hierSplittingBSpline},
-we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$
+we have $\restrictedsplspace{l}{p} = \bigoplus_{l'=0}^l \restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$
 with $p = 3$.
 Since cubic polynomials as $\objfun$ are cubic splines as well,
 $\objfun \in \restrictedsplspace{l}{p}$ and hence
-$\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hs{l'}^p}{\rspldomain{l}{p}}$.
+$\objfun \in \bigoplus_{l'=0}^l \restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$.
 This means that there is a linear combination of hierarchical B-splines
 $\bspl{l',i'}{p}$ ($l' \le l$, $i' \in \hiset{l'}$)
 that interpolates $\objfun$ exactly on the whole domain $\rspldomain{l}{p}$
@@ -143,10 +143,10 @@ on the grid of level $l$, i.e., the space $\nonunifsplspace{\knotseq}{p}$ with
 We have $\spldomain{\knotseq}{p} = \clint{0, 1}$ for this choice of $\knotseq$, i.e.,
 the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
-Clearly, the sum $\bigoplus_{l'=0}^l \hs{l}^p$ is a subspace of $\wholesplspace{l}{p}$,
+Clearly, the sum $\bigoplus_{l'=0}^l \hsbspl{l}{p}$ is a subspace of $\wholesplspace{l}{p}$,
 but it cannot equal $\wholesplspace{l}{p}$ due to
 \begin{equation}
-  \dim \bigoplus_{l'=0}^l \hs{l}^p
+  \dim \bigoplus_{l'=0}^l \hsbspl{l}{p}
   = 2^l + 1
   < 2^l + p
   = m
@@ -236,7 +236,7 @@ The resulting spline space
 is a subspace
 of $\wholesplspace{l}{p}$ with the correct dimensionality:
 \begin{equation}
-  \dim \bigoplus_{l'=0}^l \hs{l}^p
+  \dim \bigoplus_{l'=0}^l \hsbspl{l}{p}
   = 2^l + 1
   = \dim \naksplspace{l}{p}.
 \end{equation}
@@ -273,7 +273,7 @@ $\wholesplspace{l}{p}$.
   \label{fig:splineSpaceNotAKnot}%
 \end{figure}
 
-However, $\bigoplus_{l'=0}^l \hs{l}^p$ is not a subspace of
+However, $\bigoplus_{l'=0}^l \hsbspl{l}{p}$ is not a subspace of
 $\naksplspace{l}{p}$ anymore,
 as the hierarchical basis functions $\bspl{l',i'}{p}$ are not
 not-a-knot splines (due to the additional knots that we removed from
@@ -362,10 +362,10 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
   ]{%
     Univariate nodal and hierarchical cubic not-a-knot B-splines ($p = 3$)
     up to level $l = 3$.
-    The nodal space $\ns{l}^{p,\nak}$,
+    The nodal space $\nsbspl[\nak]{l}{p}$,
     which coincides with the not-a-knot spline space $\naksplspace{l}{p}$,
     decomposes into the direct sum
-    of the hierarchical subspaces $\hs{l'}^{p,\nak}$ ($l' \le l$).
+    of the hierarchical subspaces $\hsbspl[\nak]{l'}{p}$ ($l' \le l$).
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
     inner points \emph{(crosses)}
@@ -415,7 +415,7 @@ with respect to an implementation that already uses uniform B-splines.
 
 The main benefit of the hierarchical not-a-knot B-spline basis
 is the validity of the hierarchical splitting.
-Again usual, we define $\ns{l}^{p,\nak}$ and $\hs{l}^{p,\nak}$
+Again usual, we define $\nsbspl[\nak]{l}{p}$ and $\hsbspl[\nak]{l}{p}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
@@ -427,8 +427,8 @@ respectively.
   holds for the hierarchical not-a-knot B-spline basis:
   \begin{equation}
     \naksplspace{l}{p}
-    = \ns{l}^{p,\nak}
-    = \bigoplus_{l'=0}^l \hs{l'}^{p,\nak},
+    = \nsbspl[\nak]{l}{p}
+    = \bigoplus_{l'=0}^l \hsbspl[\nak]{l'}{p},
   \end{equation}
   where for $l < \lceil\log_2(p+1)\rceil$, $\naksplspace{l}{p}$
   is defined as the space $\polyspace{2^l + 1}$ of polynomials of degree
@@ -443,8 +443,8 @@ respectively.
   
   For $l \ge \lceil\log_2(p+1)\rceil$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
-  First, the hierarchical subspace $\hs{l'}^{p,\nak}$ ($l' \le l$)
-  is a subspace of $\naksplspace{l}{p} = \ns{l}^{p,\nak}$.
+  First, the hierarchical subspace $\hsbspl[\nak]{l'}{p}$ ($l' \le l$)
+  is a subspace of $\naksplspace{l}{p} = \nsbspl[\nak]{l}{p}$.
   This is a conclusion of \thmref{prop:splineSpace}, as
   every function $\bspl[\nak]{l',i'}{p}$ ($i' \in \hiset{l'}$)
   is continuous on $\clint{0, 1}$, a polynomial on every knot interval of
@@ -469,8 +469,8 @@ respectively.
   It holds
   \begin{equation}
     \naksplspace{\*l}{\*p}
-    = \ns{\*l}^{\*p,\nak}
-    = \bigoplus_{\*l'=\*0}^\*l \hs{\*l'}^{\*p,\nak},
+    = \nsbspl[\nak]{\*l}{\*p}
+    = \bigoplus_{\*l'=\*0}^\*l \hsbspl[\nak]{\*l'}{\*p},
   \end{equation}
   where $\naksplspace{\*l}{\*p}$ is the
   tensor product space of $\naksplspace{l_t}{p_t}$
@@ -488,7 +488,7 @@ are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
   \regsgspace[\*p,\nak]{n}{d}
-  := \bigoplus_{\normone{\*l} \le n} \hs{\*l}^{\*p,\nak}.
+  := \bigoplus_{\normone{\*l} \le n} \hsbspl[\nak]{\*l}{\*p}.
 \end{equation}
 If the level $n$ is large enough, then $\regsgspace[\*p,\nak]{n}{d}$
 contains the space $\polyspace{\*p}$ of all $d$-variate polynomials of
@@ -511,10 +511,10 @@ represent global polynomials on $\clint{\*0, \*1}$:
 \begin{proof}
   Let $\*l := \lceil\veclog_\*2(\*p + \*1)\rceil$ and $n \ge \normone{\*l}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
-  $\bigoplus_{\*l' \le \*l} \hs{\*l}^{\*p,\nak} = \naksplspace{\*l}{\*p}$.
+  $\bigoplus_{\*l' \le \*l} \hsbspl[\nak]{\*l}{\*p} = \naksplspace{\*l}{\*p}$.
   In addition, all $\*l' \in \natz^d$ with $\*l' \le \*l$ satisfy
   $\normone{\*l'} \le n$ and thus,
-  $\bigoplus_{\*l' \le \*l} \hs{\*l}^{\*p,\nak} \subset
+  $\bigoplus_{\*l' \le \*l} \hsbspl[\nak]{\*l}{\*p} \subset
   \regsgspace[\*p,\nak]{n}{d}$ by \eqref{eq:sparseGridRegularNAK}.
   We conclude
   $\polyspace{\*p} \subset \naksplspace{\*l}{\*p} \subset
@@ -609,15 +609,15 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     \bspl[\cc,\nak]{l,i}{p}
     :=
     \begin{cases}
-      \lagrangepoly{l,i}^\cc,&
+      \lagrangepoly[\cc]{l,i},&
       l < \lceil\log_2(p+1)\rceil,\\
       \nonunifbspl{i,\nodalknotseq[\cc,\nak]{l}{p}}{p},&
       l \ge \lceil\log_2(p+1)\rceil,
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\
-    \lagrangepoly{l,i}^\cc\colon \clint{0, 1} \to \real,\quad
-    \lagrangepoly{l,i}^\cc(x)
+    \lagrangepoly[\cc]{l,i}\colon \clint{0, 1} \to \real,\quad
+    \lagrangepoly[\cc]{l,i}(x)
     := \prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \ccgp{l,i'}}%
     {\ccgp{l,i} - \ccgp{l,i'}}.

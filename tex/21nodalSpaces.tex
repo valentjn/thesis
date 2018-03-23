@@ -69,7 +69,7 @@ there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 \end{equation}
 for some $\interpcoeff{l,i} \in \real$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $\objfun$ in $\ns{l}$.
-The nodal space $\ns{l}^1$ is defined analogously as the span of the
+The nodal space $\nsbspl{l}{1}$ is defined analogously as the span of the
 hat functions $\bspl{l,i}{1}$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $\clint{0, 1}$ that are
@@ -87,7 +87,7 @@ and a linear combination are shown in \cref{fig:nodalHat}.
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $\fgintp{l}^1$ as a weighted sum
+    Piecewise linear interpolant $\fgintp{l}$ as a weighted sum
     of the nodal hat functions.%
   }[75mm]{%
     \includegraphics{nodalHat_2}%
@@ -177,7 +177,7 @@ the univariate case:
   := \spn\{\basis{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
 \end{equation}
 In the case of hat functions $\bspl{\*l,\*i}{1}$,
-the nodal space $\ns{\*l}^1$ is the $d$-linear spline space
+the nodal space $\nsbspl{\*l}{1}$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
 on $\clint{\*0, \*1}$ that are piecewise $d$-linear polynomials on
