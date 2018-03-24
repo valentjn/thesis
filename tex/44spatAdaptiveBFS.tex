@@ -74,7 +74,32 @@ to additionally vanish at all grid points of the same level $l'$
 with different index $i \not= i'$.
 An example for fundamental basis functions are
 the piecewise linear B-splines $\bspl{l',i'}{1}$
-or Lagrange polynomials $\lagrangepoly{l',i'}$.
+or Lagrange polynomials $\lagrangepoly{l',i'}$
+(see \cref{fig:fundamentalProperty}, left).
+
+\begin{SCfigure}
+  \includegraphics{hierarchicalBasis_13}\quad%
+  \includegraphics{matrixDensityPattern_2}%
+  \caption[%
+    Fundamental property with Lagrange polynomials as fundamental basis%
+  ]{%
+    Fundamental property with Lagrange polynomials.\\
+    \emph{Left:}
+    Univariate Lagrange polynomials up to level $l = 2$.\\
+    \emph{Top right:}
+    Regular sparse grid $\coarseregsgset{n}{d}{1}$
+    ($n = 4$, $d = 2$).
+    The fundamental basis function $\fundbasis{\*l',\*i'}$ corresponding
+    to the marked grid point \emph{(cross)} does not vanish
+    at the \textcolor{C0}{blue points} $\gp{\*l,\*i}$
+    (which satisfy \eqref{eq:fundamentalPropertyImplicationMV}).\\
+    \emph{Bottom right:}
+    Corresponding density pattern of $\intpmat$
+    when sorting rows and columns by increasing level sum
+    $\normone{\*l} = 0, \dotsc, n$ \emph{(black bars)}.%
+  }%
+  \label{fig:fundamentalProperty}%
+\end{SCfigure}
 
 The statement that $\fundbasis{l',i'}(\gp{l',i'})$ should equal $1$
 is not an additional restriction:
@@ -147,6 +172,8 @@ $\fundbasis{\*l',\*i'}$ can only be non-zero
 at the grid points $\gp{\*l,\*i}$ that, in every dimension $t$,
 are in a strictly finer level $l_t$ or
 have the same level-pair $(l_t, i_t)$ as the basis function.
+We show an example for this relation in
+\cref{fig:fundamentalProperty} (top right).
 
 \paragraph{Triangular interpolation matrix}
 
@@ -202,6 +229,9 @@ In the former case, both sides of $(\ast)$ vanish
 and in the latter case, 
 both sides equal $\kronecker{\*i}{\*i'}$
 (according to \eqref{eq:fundamentalProperty2}).
+Consequently, $\intpmat$ is a lower-triangular matrix.
+This is visualized for a two-dimensional example in
+\cref{fig:fundamentalProperty} (bottom right).
 
 \paragraph{Forward substitution}
 
