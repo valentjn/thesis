@@ -298,6 +298,8 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
     \end{cases}
   }
 \end{equation}
+An example for the resulting \dagr for a regular sparse grid
+in two dimensions is shown in \cref{fig:DAG}.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -362,6 +364,23 @@ if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
   }%
   \label{alg:BFS}%
 \end{algorithm}
+
+\begin{SCfigure}
+  \includegraphics{dag_1}%
+  \caption[%
+    Sparse grid as directed acyclic graph%
+  ]{%
+    Ancestor relationships \emph{(arrows)} in a
+    regular sparse grid $\coarseregsgset{n}{d}{1}$ \emph{(points)}
+    of level $n = 4$ and dimensionality $d = 2$.
+    The color indicates the level sum $\normone{\*l}$.
+    Breadth-first search, as implemented in \cref{alg:BFS},
+    visits all grid points $\gp{\*l,\*i}$ with level sum
+    $\normone{\*l} = 0$ first,
+    then those with $\normone{\*l} = 1$, and so on.%
+  }%
+  \label{fig:DAG}%
+\end{SCfigure}
 
 We make two assumptions for \cref{alg:BFS}.
 First, $\liset$ contains at least all $2^d$ corners of the
