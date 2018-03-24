@@ -54,18 +54,20 @@ def plotSubspace(ax, basis, l, n,
     j = np.argmax(yy)
     x, y = xx[j], yy[j] * 1.05
     if modified:
-      if l == 1:        x, y = 0.5, 1.02
+      if l == 1:     x, y = 0.5, 1.02
       elif l == 2:
-        if i == 1:      x, y = 0.32, 1
-        if i == hInv-1: x, y = 0.73, 1
+        if   i == 1: x, y = 0.32, 1
+        elif i == 3: x, y = 0.73, 1
       elif l == 3:
-        if i == 1:      x, y = 0.20, 1
-        if i == hInv-1: x, y = 0.83, 1
+        if   i == 1: x, y = 0.20, 1
+        elif i == 3: x += 0.03
+        elif i == 5: pass
+        elif i == 7: x, y = 0.83, 1
     if notAKnot:
       if nodal:
-        if i == 2: x -= 0.03
-        if i == 5: x += 0.05
-        if i == 6: x += 0.03
+        if   i == 2: x -= 0.03
+        elif i == 5: x += 0.05
+        elif i == 6: x += 0.03
       else:
         if (not modified) and (not clenshawCurtis):
           if (l == 3) and (i == 3): x += 0.03
@@ -118,7 +120,7 @@ def plotSubspace(ax, basis, l, n,
 
 
 def plotNodalHatFunctions(q):
-  fig = Figure.create(figsize=(3.3, 1.74), scale=1)
+  fig = Figure.create(figsize=(3.6, 1.9), scale=1)
   basis = helper.basis.HierarchicalBSpline(1)
   ax = fig.gca()
   plotSubspace(ax, basis, n, n, nodal=True, showSubspaces=True)
