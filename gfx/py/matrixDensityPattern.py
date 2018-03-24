@@ -10,7 +10,7 @@ import helper.function
 import helper.grid
 
 def plotPopulationStructure(A, ax, pos, size, color):
-  tol = 1e-10
+  tol = 1e-8
   N = A.shape[0]
   h = np.array(size) / N
   
@@ -37,6 +37,8 @@ def plotPopulationStructure(A, ax, pos, size, color):
           (x, y), h[0], (j - jStart) * h[1], edgecolor="none", facecolor=color))
         jStart = None
 
+
+
 def plotSGWithSupport(X, l, i, p, ax, pos, size):
   s = lambda x, y: (pos[0] + size[0] * x, pos[1] + size[1] * y)
   basis1D = helper.basis.HierarchicalBSpline(p)
@@ -56,17 +58,42 @@ def plotSGWithSupport(X, l, i, p, ax, pos, size):
   ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
   
   if p == 1:
-    K = np.logical_and((lb < X).all(axis=1), (X < ub).all(axis=1))
+    K = np.logical_and((lb < X), (X < ub)).all(axis=1)
   else:
-    K = np.logical_and((lb <= X).all(axis=1), (X < ub).all(axis=1))
+    K = np.logical_and((lb <= X), (X < ub)).all(axis=1)
   
   K[k] = False
   ax.plot(*s(X[K,0], X[K,1]), ".", clip_on=False, color=edgeColor)
+  ax.plot(*s(*x), "x", clip_on=False, mew=2, color=edgeColor)
   
   K = np.logical_not(K)
   K[k] = False
   ax.plot(*s(X[K,0], X[K,1]), "k.", clip_on=False)
-  ax.plot(*s(*x), "x", clip_on=False, mew=2, color=edgeColor)
+
+
+
+def plotSGWithVanishingPoints(X, L, I, l, i, ax, pos, size):
+  s = lambda x, y: (pos[0] + size[0] * x, pos[1] + size[1] * y)
+  basis1D = helper.basis.HierarchicalBSpline(p)
+  basis = helper.basis.TensorProduct(basis1D, d)
+  lb, ub = basis.getSupport(l, i)
+  
+  x = helper.grid.getCoordinates(l, i)
+  k = np.where((X == x).all(axis=1))[0][0]
+  
+  xSquare, ySquare = np.array([0, 1, 1, 0, 0]), np.array([0, 0, 1, 1, 0])
+  ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
+  
+  color = "C0"
+  K = np.logical_or((l < L), np.equal(x, X)).all(axis=1)
+  
+  K[k] = False
+  ax.plot(*s(X[K,0], X[K,1]), ".", clip_on=False, color=color)
+  ax.plot(*s(*x), "x", clip_on=False, mew=2, color=color)
+  
+  K = np.logical_not(K)
+  K[k] = False
+  ax.plot(*s(X[K,0], X[K,1]), "k.", clip_on=False)
 
 
 
@@ -122,6 +149,45 @@ ax.text(-xTextMargin, 0.5, "$A^{-1}$",
 ax.set_aspect("equal")
 ax.set_xlim(-1, 3 + 2 * xMargin)
 ax.set_ylim(0, 4 + 2 * yMargin + yTextMargin)
+ax.set_axis_off()
+
+fig.save()
+
+
+
+l = np.array([2, 1])
+i = np.array([1, 1])
+
+fig = Figure.create(figsize=(2, 2), scale=2.0)
+ax = fig.gca()
+
+basis1D = helper.basis.HierarchicalLagrangePolynomial()
+basis = helper.basis.TensorProduct(basis1D, d)
+interpolant = helper.function.Interpolant(basis, X, L, I, fX)
+A = interpolant.getInterpolationMatrix()
+AInv = np.linalg.inv(A)
+
+h = (1/N, 1/N)
+K = 1 + np.where(np.diff(np.sum(L, axis=1)))[0]
+
+#x, y = 0, 0
+#plotPopulationStructure(AInv, ax, (x, y), (1, 1), "C1")
+#for k in K:
+#  xLine, yLine = x + k * h[0], y + (N - k) * h[1]
+#  ax.plot([x, x+1], [yLine, yLine], "k-")
+#  ax.plot([xLine, xLine], [y, y+1], "k-")
+
+y += 1 + yMargin
+plotPopulationStructure(A, ax, (x, y), (1, 1), "C0")
+for k in K:
+  xLine, yLine = x + k * h[0], y + (N - k) * h[1]
+  ax.plot([x, x+1], [yLine, yLine], "k-")
+  ax.plot([xLine, xLine], [y, y+1], "k-")
+
+y += 1 + yMargin
+plotSGWithVanishingPoints(X, L, I, l, i, ax, (x, y), (1, 1))
+
+ax.set_aspect("equal")
 ax.set_axis_off()
 
 fig.save()
