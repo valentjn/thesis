@@ -52,9 +52,6 @@ for t in range(d+1):
   else:        text = r"$\vec{y}^{(2)} = \vec{y}$"
   ax.text(t * 1.3 + 0.5, -0.06, text, ha="center", va="top")
 
-arrowProperties = {"head_width" : 0.03, "head_length" : 0.03, "overhang" : 0.3,
-                   "length_includes_head" : True, "fc" : "k", "clip_on" : False,
-                   "lw" : 0.9}
 helper.plot.plotArrow(ax, (0.74, -0.12), (1.66, -0.12))
 ax.text(1.2, -0.15, r"$\mathfrak{L}_1$", ha="center", va="top")
 helper.plot.plotArrow(ax, (1.94, -0.12), (2.86, -0.12))
@@ -65,7 +62,7 @@ ax.text(1.8, -0.37, r"$\mathfrak{L}$", ha="center", va="bottom")
 
 ax.set_aspect("equal")
 ax.set_xlim(0, 3.8)
-ax.set_ylim(-0.4, 1)
+ax.set_ylim(-0.42, 1)
 ax.set_axis_off()
 
 fig.save()
