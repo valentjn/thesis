@@ -14,21 +14,25 @@ import helper.grid
 def plotSubspace(ax, basis, l, n,
                  nodal=False, modified=False, clenshawCurtis=False,
                  notAKnot=False, natural=False, drawModifiedOnTop=False,
-                 showSubspaces=False, whiteCC=False, showD=False):
+                 showSubspaces=False, whiteCC=False, showD=False,
+                 basisSymbol=r"\varphi", superscript=None):
   if modified and (l == 0): return
   
-  p = basis.p
+  try:    p = basis.p
+  except: p = None
+  
   hInv = 2**l
   h = 1 / hInv
   I = (list(range(1, hInv, 2)) if l > 0 else [0, 1])
   plotI = (list(range(hInv + 1)) if nodal else I)
   maxY = 0
   
-  superscript = ("p" if p > 1 else "1")
+  if superscript is None: superscript = ("p" if p > 1 else "1")
   if modified:        superscript += r",\mathrm{{mod}}".format("p")
   if clenshawCurtis:  superscript += r",\mathrm{cc}"
   if notAKnot:        superscript += r",\mathrm{nak}"
   if natural:         superscript += r",\mathrm{nat}"
+  if superscript != "": superscript = r"^{{{}}}".format(superscript)
   
   if clenshawCurtis: pointSuperscript = r"^{\mathrm{cc}}"
   elif whiteCC:      pointSuperscript = r"^{\textcolor{white}{\mathrm{cc}}}"
@@ -72,7 +76,7 @@ def plotSubspace(ax, basis, l, n,
         if (not modified) and (not clenshawCurtis):
           if (l == 3) and (i == 3): x += 0.03
           if (l == 3) and (i == 5): x -= 0.03
-    ax.text(x, y, "$\\varphi_{{{},{}}}^{{{}}}$".format(l, i, superscript),
+    ax.text(x, y, "${}_{{{},{}}}{}$".format(basisSymbol, l, i, superscript),
             color=color, ha="center", va="bottom")
   
   if showD:
@@ -221,6 +225,15 @@ def plotHierarchicalNaturalBSplines(q):
     plotSubspace(ax, basis, l, n, natural=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
+def plotHierarchicalLagrangePolynomials(q):
+  fig = Figure.create(figsize=(3.3, 4.0), scale=1.0)
+  basis = helper.basis.HierarchicalLagrangePolynomial()
+  n = 2
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, basisSymbol="L", superscript="")
+  fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
+
 
 
 def callMethod(qAndMethod):
@@ -241,6 +254,7 @@ def main():
     plotModifiedHierarchicalNotAKnotBSplines,
     plotHierarchicalClenshawCurtisNotAKnotBSplines,
     plotHierarchicalNaturalBSplines,
+    plotHierarchicalLagrangePolynomials,
   ]
   
   with multiprocessing.Pool() as pool:
