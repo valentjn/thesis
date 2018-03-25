@@ -902,8 +902,51 @@ is uniquely solvable:
 The function $\parentfcn[p,\fs]$ from \cref{thm:fundamentalSplineExistence}
 is well-known as the \term{fundamental spline} of degree~$p$
 \multicite{Schoenberg72Cardinal,Schoenberg73Cardinal}.
-In particular, fundamental splines were applied to define spline wavelets
-\cite{Chui92Introduction}.
+Applications of fundamental splines are interpolation and
+the definition of spline wavelets \cite{Chui92Introduction}.
+The fundamental splines $\parentfcn[p,\fs]$ of low degrees $p$ and
+their bound functions $\beta_p \cdot (\gamma_p)^{-|x|}$
+are plotted in \cref{fig:fundamentalSpline}.
+
+\begin{figure}
+  \subcaptionbox{%
+    $p = 1$%
+  }[75mm]{%
+    \includegraphics{fundamentalSpline_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $p = 3$%
+  }[75mm]{%
+    \includegraphics{fundamentalSpline_2}%
+  }\\[4mm]%
+  \subcaptionbox{%
+    $p = 5$%
+  }[75mm]{%
+    \includegraphics{fundamentalSpline_3}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $p = 7$%
+  }[75mm]{%
+    \includegraphics{fundamentalSpline_4}%
+  }%
+  \caption[%
+    Fundamental splines and their B-spline coefficients%
+  ]{%
+    \colorlet{lightC0}{C0!50!white}%
+    The fundamental spline $\parentfcn[p,\fs]$ \emph{\textcolor{C0}{(blue)}}
+    is a linear combination of cardinal B-splines $\cardbspl{p}({\cdot} - k)$,
+    $k \in \integer$ \emph{\textcolor{lightC0}{(light blue)}},
+    with coefficients $\fundsplcoeff{k}{p}$ \emph{\textcolor{C1}{(red points)}}.
+    The absolute values of the fundamental spline $\parentfcn[p,\fs]$ and
+    its coefficients are bounded by a multiple of $(\gamma_p)^{-|k|}$
+    \emph{(\textcolor{C0}{blue}-\textcolor{C1}{red}-dashed line)}.
+    The axis for $\fundsplcoeff{k}{p}$ (on the right side) is scaled such that
+    both bounding functions are on top of each other.%
+  }%
+  \label{fig:fundamentalSpline}%
+\end{figure}
 
 \paragraph{Hierarchical fundamental splines}
 
@@ -945,7 +988,8 @@ as the fundamental spline itself due to the stability of the B-spline basis
   \le \beta'_p (\gamma_p)^{-|k|},\quad
   k \in \integer,
 \end{equation}
-for some $\beta'_p > 0$ independent of $k$.
+for some $\beta'_p > 0$ independent of $k$,
+which is also shown in \cref{fig:fundamentalSpline}.
 For $p > 1$,
 there is a surprising relationship between the optimal (i.e., largest)
 decay rate $\gamma_p$ and the polynomial
