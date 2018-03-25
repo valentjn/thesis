@@ -835,7 +835,7 @@ bi-infinite-dimensional system of linear equations:
   \newcommand*{\vald}{\cardbspl{p}(\tfrac{p+1}{2} + 1)}
   \newcommand*{\vale}{\cardbspl{p}(\tfrac{p+1}{2} + 2)}
   \newcommand*{\ddotsr}{\rotatebox{16}{$\ddots$}}
-  \newcommand*{\raiseentry}[1]{\raisebox{0.25em}{$#1$}}
+  \newcommand*{\raiseentry}[1]{\raisebox{0.3em}{$#1$}}
   \left(
   \begin{array}{%
     @{}>{\raggedright\arraybackslash$}m{14mm}<{$}@{}%
@@ -1021,7 +1021,7 @@ we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
 if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $|k| \ge \fundsplcutoff{p}$,
-where $\fundsplcutoff{p} \in \natural$ is some truncation index.
+where $\fundsplcutoff{p} \in \nat$ is some truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate the fundamental spline $\parentfcn[p,\fs]$ once,
 due to the local support of B-splines.
