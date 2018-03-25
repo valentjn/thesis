@@ -890,7 +890,7 @@ is uniquely solvable:
   \begin{equation}
     \exfalarge{\beta_p, \gamma_p \in \posreal}{x \in \real}{
       |\parentfcn[p,\fs](x)|
-      \le \beta_p \exp(-\gamma_p |x|).
+      \le \beta_p \cdot (\gamma_p)^{-|x|}.
     }
   \end{equation}
 \end{theorem}
@@ -942,7 +942,7 @@ as the fundamental spline itself due to the stability of the B-spline basis
 \begin{equation}
   \label{eq:fundamentalSplineCoefficientsDecay}
   |c_k^p|
-  \le \tilde{\beta}_p \exp(-\gamma_p |k|),\quad
+  \le \tilde{\beta}_p (\gamma_p)^{-|k|},\quad
   k \in \integer,
 \end{equation}
 for some $\tilde{\beta}_p > 0$ independent of $k$.
