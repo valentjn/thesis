@@ -1025,6 +1025,36 @@ where $\fundsplcutoff{p} \in \natural$ is some truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate the fundamental spline $\parentfcn[p,\fs]$ once,
 due to the local support of B-splines.
+In \cref{tbl:fundamentalSplineDecay}, we list the decay rates $\gamma_p$,
+the factors $\beta_p$, $\beta'_p$, and the truncation indices
+$\fundsplcutoff{p}$ for the different degrees $p$.
+
+\begin{table}
+  \begin{tabular}{p{12mm}*{8}{C{10mm}}}
+    \toprule
+    $p$&$1$&$3$&$5$&$7$&$9$&$11$&$13$&$15$\\
+    \midrule
+    $\gamma_p$&$2.718$&$3.732$&$2.322$&$1.868$&$1.645$&$1.512$&$1.425$&$1.363$\\
+    $\beta_p$&$1$&$1.241$&$1.104$&$1.058$&$1.037$&$1.026$&$1.019$&$1.014$\\
+    $\beta'_p$&$1$&$1.732$&$3.095$&$6.016$&$12.27$&$25.82$&$55.56$&$121.6$\\
+    $\fundsplcutoff{p}$&$1$&$18$&$29$&$40$&$52$&$64$&$77$&$90$\\
+    \bottomrule
+  \end{tabular}%
+  \caption[%
+    TODO%
+  ]{%
+    Optimal decay rates $\gamma_p$ and corresponding factors
+    $\beta_p$ and $\beta'_p$, for the bound functions of
+    the fundamental spline $\parentfcn[p,\fs]$ and
+    its coefficients $\fundsplcoeff{k}{p}$, i.e.,
+    $\fa{x \in \real}{|\parentfcn[p,\fs](x)| \le \beta_p (\gamma_p)^{-|x|}}$
+    and
+    $\fa{k \in \integer}{|\fundsplcoeff{k}{p}| \le \beta'_p (\gamma_p)^{-|k|}}$.
+    The truncation indices $\fundsplcutoff{p}$ are the smallest numbers such that
+    $\fa{|k| \ge \fundsplcutoff{p}}{|\fundsplcoeff{k}{p}| < 10^{-10}}$.%
+  }%
+  \label{tbl:fundamentalSplineDecay}%
+\end{table}
 
 \paragraph{Modified fundamental splines}
 
