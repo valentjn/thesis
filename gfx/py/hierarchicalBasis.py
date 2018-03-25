@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 9
+# number of output figures = 15
 
 import multiprocessing
 
@@ -31,7 +31,6 @@ def plotSubspace(ax, basis, l, n,
   if modified:        superscript += r",\mathrm{{mod}}".format("p")
   if clenshawCurtis:  superscript += r",\mathrm{cc}"
   if notAKnot:        superscript += r",\mathrm{nak}"
-  if natural:         superscript += r",\mathrm{nat}"
   if superscript != "": superscript = r"^{{{}}}".format(superscript)
   
   if clenshawCurtis: pointSuperscript = r"^{\mathrm{cc}}"
@@ -101,12 +100,12 @@ def plotSubspace(ax, basis, l, n,
     
     if nodal:
       ax.text(1.05, maxY / 2,
-              "$V_{{{}}}^{{{}}}{}$".format(l, spaceSuperscript, restriction),
+              "$V_{{{}}}{}{}$".format(l, spaceSuperscript, restriction),
               ha="left", va="center", color=color)
     else:
       x = (-0.05 if modified else -0.1)
       ax.text(x, maxY / 2,
-              "$W_{{{}}}^{{{}}}{}$".format(l, spaceSuperscript, restriction),
+              "$W_{{{}}}{}{}$".format(l, spaceSuperscript, restriction),
               ha="right", va="center", color=color)
   
   L = (hInv + 1) * [l]
@@ -222,8 +221,10 @@ def plotHierarchicalNaturalBSplines(q):
   basis = helper.basis.HierarchicalNaturalBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
-    plotSubspace(ax, basis, l, n, natural=True)
-  fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
+    plotSubspace(ax, basis, l, n, superscript=r"p,\mathrm{nat}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalLagrangePolynomials(q):
   fig = Figure.create(figsize=(3.3, 4.0), scale=1.0)
@@ -233,6 +234,27 @@ def plotHierarchicalLagrangePolynomials(q):
     ax = fig.add_subplot(n+1, 1, l+1)
     plotSubspace(ax, basis, l, n, basisSymbol="L", superscript="")
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
+
+def plotHierarchicalFundamentalTransformedBSplines(q):
+  fig = Figure.create(figsize=(3.3, 4.6), scale=1.0)
+  origBasis = helper.basis.HierarchicalBSpline(p)
+  basis = helper.basis.HierarchicalFundamentalTransformed(origBasis)
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, superscript=r"p,\mathrm{hft}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
+
+def plotHierarchicalFundamentalSplines(q):
+  fig = Figure.create(figsize=(3.3, 4.6), scale=1.0)
+  basis = helper.basis.HierarchicalFundamentalSpline(p)
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, superscript=r"p,\mathrm{fs}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 
 
@@ -255,6 +277,8 @@ def main():
     plotHierarchicalClenshawCurtisNotAKnotBSplines,
     plotHierarchicalNaturalBSplines,
     plotHierarchicalLagrangePolynomials,
+    plotHierarchicalFundamentalTransformedBSplines,
+    plotHierarchicalFundamentalSplines,
   ]
   
   with multiprocessing.Pool() as pool:
