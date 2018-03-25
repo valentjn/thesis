@@ -522,6 +522,24 @@ Consequently, $\basis[\hft]{l',i'}$ may be globally supported,
 which means that we have to evaluate up to $2^{l'} + 1$ basis functions
 $\basis{l'',i''}$ when evaluating $\basis[\hft]{l',i'}$ at a single point
 $x \in \clint{0, 1}$.
+The global support of the resulting transformed basis
+for uniform hierarchical B-splines (which a locally supported)
+can be seen in \cref{fig:hftBSpline}.
+
+\begin{SCfigure}
+  \includegraphics{hierarchicalBasis_14}%
+  \caption[%
+    Hierarchical B-splines transformed via the hierarchical fundamental
+    transformation%
+  ]{%
+    Resulting basis functions $\bspl[\hft]{l',i'}{p}$
+    ($l' \le l$, $i' \in \hiset{l'}$)
+    after applying the hierarchical fundamental transformation
+    to hierarchical cubic B-splines ($p = 3$) and
+    grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
+  }%
+  \label{fig:hftBSpline}%
+\end{SCfigure}
 
 We call the transformation $\basis{l',i'} \mapsto \basis[\hft]{l',i'}$
 \term{\hftr}.
