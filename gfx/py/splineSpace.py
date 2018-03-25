@@ -38,7 +38,7 @@ for q in range(3):
     ax.plot(xx, yy, "-", color=color, clip_on=False)
     
     r = np.argmax(yy)
-    ax.text(xx[r], yy[r] + 0.02, r"$b_{{{},\ß\xi}}^p$".format(k),
+    ax.text(xx[r], yy[r] + 0.02, r"$b_{{{},\*\xi}}^p$".format(k),
             color=color, ha="center", va="bottom")
   
   if q == 0:
@@ -54,7 +54,7 @@ for q in range(3):
     ax.text(8, 1, r"$s$", color="k", ha="center", va="bottom")
   
   ax.plot(D, 2*[-0.01], "k-", clip_on=False, lw=2, solid_capstyle="butt")
-  ax.text(sum(D) / 2, -0.08, r"$D_\ß\xi^p$", color="k", ha="center", va="top")
+  ax.text(sum(D) / 2, -0.08, r"$D_\*\xi^p$", color="k", ha="center", va="top")
   
   for x in (D if q == 0 else [0, 1]):
     ax.plot([x, x], [0, yMax], "k--", clip_on=False)
