@@ -935,18 +935,19 @@ at least $(\*p - \*1)$ times continuously partially differentiable at
 all interior knots $\gp{\*l,\*i}$ ($\*i = \*1, \dotsc, \*2^\*l - \*1$,
 see \cite{Hoellig13Approximation}).
 
-The B-spline coefficients $(c_k^p)_{k \in \integer}$ of the
+The B-spline coefficients $(\fundsplcoeff{k}{p})_{k \in \integer}$ of the
 fundamental spline $\parentfcn[p,\fs]$ decay with the same rate
 as the fundamental spline itself due to the stability of the B-spline basis
 \cite{Hoellig13Approximation}, i.e.,
 \begin{equation}
   \label{eq:fundamentalSplineCoefficientsDecay}
-  |c_k^p|
-  \le \tilde{\beta}_p (\gamma_p)^{-|k|},\quad
+  |\fundsplcoeff{k}{p}|
+  \le \beta'_p (\gamma_p)^{-|k|},\quad
   k \in \integer,
 \end{equation}
-for some $\tilde{\beta}_p > 0$ independent of $k$.
-There is a surprising relationship between the optimal (i.e., largest)
+for some $\beta'_p > 0$ independent of $k$.
+For $p > 1$,
+there is a surprising relationship between the optimal (i.e., largest)
 decay rate $\gamma_p$ and the polynomial
 $\sum_{k=1}^p \cardbspl{p}(k) x^{k-1}$,
 whose coefficients are the values of the
@@ -957,9 +958,9 @@ than $-1$ of said polynomial
 Due to \eqref{eq:fundamentalSplineCoefficientsDecay},
 we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
-if we truncate the linear system to $2n_p - 1$ dimensions
-and set $c_k^p := 0$ for all $|k| \ge n_p$,
-where $n_p \in \natural$ is some truncation index.
+if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
+and set $\fundsplcoeff{k}{p} := 0$ for all $|k| \ge \fundsplcutoff{p}$,
+where $\fundsplcutoff{p} \in \natural$ is some truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate the fundamental spline $\parentfcn[p,\fs]$ once,
 due to the local support of B-splines.
