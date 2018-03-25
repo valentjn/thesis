@@ -1057,6 +1057,59 @@ $\fundsplcutoff{p}$ for the different degrees $p$.
   \label{tbl:fundamentalSplineDecay}%
 \end{table}
 
-\paragraph{Modified fundamental splines}
+\paragraph{Modified hierarchical fundamental splines}
+
+Similar to the B-spline bases introduced in \cref{chap:30BSplines},
+it is possible to define a modified version of the
+hierarchical fundamental spline basis to obtain reasonable
+boundary values when working with sparse grids without boundary points.
+The definition of the modified fundamental spline
+$\bspl[\fs,\modified]{l,i}{p}$ of level $l \in \nat$,
+index $i \in \hiset{l}$, and degree $p$ is as follows:
+\begin{equation}
+  \bspl[\fs,\modified]{l,i}{p}(x)
+  :=
+  \begin{cases}
+    1,&
+    l = 1,\quad i = 1,\\
+    \psi_l^{p,\fs}(x),&
+    l \ge 2,\quad i = 1,\\
+    \bspl[\fs]{l,i}{p}(x),&
+    l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
+    \psi_l^{p,\fs}(1 - x),&
+    l \ge 2,\quad i = 2^l - 1,
+  \end{cases}
+\end{equation}
+where $\psi_l^{p,\fs}$ ($l \in \nat$) is a linear combination
+\begin{equation}
+  \psi_l^{p,\fs}\colon \clint{0, 1} \to \real,\quad
+  \psi_l^{p,\fs}
+  := \sum_{i'=1-(p+1)/2}^\infty
+  \fundsplcoeff{i'}{p}^\modified \bspl{l,i}{p},
+\end{equation}
+whose coefficients $\fundsplcoeff{i'}{p}^\modified \in \real$
+are chosen such that
+\begin{subequations}
+  \begin{alignat}{2}
+    \psi_l^{p,\fs}(\gp{l,i})
+    &= \kronecker{i}{1},\quad
+    &&i \in \nat,\\
+    \tfrac{\diff^2}{\dx^2} \psi_l^{p,\fs}(\gp{l,1})
+    &= 0,\quad&&\\
+    \tfrac{\diff^q}{\dx^q} \psi_l^{p,\fs}(0)
+    &= 0,\quad
+    &&q = 2, 3, \dotsc, \tfrac{p+1}{2},
+  \end{alignat}
+\end{subequations}
+if $p > 1$.
+For $p = 1$, we define $\psi_l^{p,\fs} := \bspl[\modified]{l,1}{p}$.
+The coefficients $\fundsplcoeff{i'}{p}^\modified$ of $\psi_l^{p,\fs}$
+do not depend on the level $l$, as $\psi_l^{p,\fs}$ is the same
+for different levels $l$ up to parameter scaling.
+Since the coefficients $\fundsplcoeff{i'}{p}^\modified$ of the modification
+experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
+fundamental spline,
+we can approximate $\fundsplcoeff{i'}{p}^\modified$ by solving
+a truncated system of linear equations.
 
 \blindtext{}
