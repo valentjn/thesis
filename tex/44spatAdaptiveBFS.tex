@@ -805,7 +805,7 @@ are given by
 \end{equation}
 respectively.
 According to \eqref{eq:tiftParentFunctionInterpolation},
-the coefficients $c_i^p \in \real$ of
+the coefficients $\fundsplcoeff{k}{p} \in \real$ of
 the transformed parent function $\parentfcn[p,\tift]$
 in \cref{eq:tiftParentFunctionDefinition} are determined by a
 bi-infinite-dimensional system of linear equations:
@@ -836,9 +836,9 @@ bi-infinite-dimensional system of linear equations:
   \cdot
   \begin{pmatrix}
     \vphantom{\ddotsr}\raiseentry{\vdots}\\
-    \vphantom{\ddotsr}\raiseentry{c_{-1}^p}\\
-    \vphantom{\ddotsr}\raiseentry{c_0^p}\\
-    \vphantom{\ddotsr}\raiseentry{c_1^p}\\
+    \vphantom{\ddotsr}\raiseentry{\fundsplcoeff{-1}{p}}\\
+    \vphantom{\ddotsr}\raiseentry{\fundsplcoeff{0}{p}}\\
+    \vphantom{\ddotsr}\raiseentry{\fundsplcoeff{1}{p}}\\
     \vphantom{\ddotsr}\raiseentry{\vdots}
   \end{pmatrix}
   =
@@ -864,10 +864,10 @@ is uniquely solvable:
   \label{thm:fundamentalSplineExistence}
   \usenotation{Ëfs}
   The system \eqref{eq:fundamentalSplineSLE} has a unique solution
-  $(c_i^p)_{k \in \integer}$ and the corresponding parent function
+  $(\fundsplcoeff{k}{p})_{k \in \integer}$ and the corresponding parent function
   $\parentfcn[p,\fs]\colon \real \to \real$ defined by
   $\parentfcn[p,\fs](x) :=
-  \sum_{i \in \integer} c_k^p \parentfcn[p](x - k)$
+  \sum_{k \in \integer} \fundsplcoeff{k}{p} \parentfcn[p](x - k)$
   satisfies
   \begin{equation}
     \exfalarge{\beta_p, \gamma_p \in \posreal}{x \in \real}{
