@@ -961,8 +961,24 @@ $\bspl[\fs]{l,i}{p}\colon \clint{0, 1} \to \real$ via
   i = 0, \dotsc, 2^l,\;
   x \in \clint{0, 1}.
 \end{equation}
-The $d$-variate fundamental spline basis is defined as usual
-as tensor products of univariate hierarchical fundamental splines.
+The cubic hierarchical fundamental spline basis is depicted in
+\cref{fig:hierarchicalFundamentalSpline}.
+
+\begin{SCfigure}
+  \includegraphics{hierarchicalBasis_15}%
+  \caption[%
+    Hierarchical fundamental splines%
+  ]{%
+    Hierarchical cubic fundamental splines
+    $\bspl[\fs]{l',i'}{p}$
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
+    grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
+  }%
+  \label{fig:hierarchicalFundamentalSpline}%
+\end{SCfigure}
+
+As usual, we define $d$-variate hierarchical fundamental splines
+as tensor products of their univariate counterparts.
 According to \thmref{prop:splineSpace} and \thmref{prop:tiftNodalSpace},
 the common extended nodal space
 $\nsbspl[\ext]{\*l}{\*p} = \nsbspl[\fs,\ext]{\*l}{\*p}$
