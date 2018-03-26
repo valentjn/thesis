@@ -598,7 +598,7 @@
 
 \newcommand*{\interpcoefftilde}[2][]{\tilde{c}_{#2}\ifnotempty{#1}{^{#1}}}
 
-\newcommand*{\fundsplcoeff}[2]{c_{#1,#2}}
+\newcommand*{\fundsplcoeff}[3][]{c_{#2,#3}\ifnotempty{#1}{^{#1}}}
 \newcommand*{\fundsplcutoff}[1]{n_{#1}}
 
 % ======================================================================
@@ -633,12 +633,22 @@
   level $\*l$, index $\*i$, degree $\*p$
 }
 
-\newnotationcommand[1]{\charfun}{\chi_{#1}}{ÄχA}{$\charfun{A}$}{
-  Characteristic function of the set $A \subset \real$
-}
-
 \newnotationcommand[1]{\cardbspl}{b^{#1}}{bp}{$\cardbspl{p}$}{
   Cardinal B-spline of degree $p$
+}
+
+\newnotationcommandoptarg{2}{\parentbspl}{%
+  \parentfcn[#2\appendwithcomma{#1}]%
+}{Äφp}{$\parentbspl{p}$}{
+  Centralized cardinal B-spline
+  $\parentbspl{p} := \cardbspl{p}({\cdot} + \tfrac{p+1}{2})$
+  of degree $p$
+}
+
+\newnotationcommandoptarg{2}{\parentfundspl}{%
+  \parentfcn[#2,\fs\appendwithcomma{#1}]%
+}{Äφpfs}{$\parentfundspl{p}$}{
+  Fundamental spline of degree $p$
 }
 
 \newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkξp}%
@@ -648,6 +658,10 @@
 
 \newnotationcommand{\spl}{s}{s}{$s$}{
   Spline (piecewise polynomial)
+}
+
+\newnotationcommand[1]{\charfun}{\chi_{#1}}{ÄχA}{$\charfun{A}$}{
+  Characteristic function of the set $A \subset \real$
 }
 
 \newnotationcommand{\objfun}{f}{f}{$\objfun$}{

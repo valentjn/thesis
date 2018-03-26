@@ -809,11 +809,11 @@ is not contained in the nodal space $\ns{l'}$.
 
 Let us apply the translation-invariant fundamental transformation
 to hierarchical B-splines $\bspl{l,i}{p}$ of degree $p$.
-The parent function $\parentfcn[p]\colon \real \to \real$ of B-splines
+The parent function $\parentbspl{p}\colon \real \to \real$ of B-splines
 and the set $\relindexset[p]{l}$ of relevant indices for level $l \in \natz$
 are given by
 \begin{equation}
-  \parentfcn[p](x)
+  \parentbspl{p}(x)
   := \cardbspl{p}(x + \tfrac{p+1}{2}),\qquad
   \relindexset[p]{l}
   := \{-\tfrac{p-1}{2},\;
@@ -883,13 +883,13 @@ is uniquely solvable:
   \usenotation{Ëfs}
   The system \eqref{eq:fundamentalSplineSLE} has a unique solution
   $(\fundsplcoeff{k}{p})_{k \in \integer}$ and the corresponding parent function
-  $\parentfcn[p,\fs]\colon \real \to \real$ defined by
-  $\parentfcn[p,\fs](x) :=
-  \sum_{k \in \integer} \fundsplcoeff{k}{p} \parentfcn[p](x - k)$
+  $\parentfundspl{p}\colon \real \to \real$ defined by
+  $\parentfundspl{p}(x) :=
+  \sum_{k \in \integer} \fundsplcoeff{k}{p} \parentbspl{p}(x - k)$
   satisfies
   \begin{equation}
     \exfalarge{\beta_p, \gamma_p \in \posreal}{x \in \real}{
-      |\parentfcn[p,\fs](x)|
+      |\parentfundspl{p}(x)|
       \le \beta_p \cdot (\gamma_p)^{-|x|}.
     }
   \end{equation}
@@ -899,12 +899,12 @@ is uniquely solvable:
   See Theorems 1 and 2 in \cite{Schoenberg72Cardinal}.
 \end{proof}
 
-The function $\parentfcn[p,\fs]$ from \cref{thm:fundamentalSplineExistence}
+The function $\parentfundspl{p}$ from \cref{thm:fundamentalSplineExistence}
 is well-known as the \term{fundamental spline} of degree~$p$
 \multicite{Schoenberg72Cardinal,Schoenberg73Cardinal}.
 Applications of fundamental splines are interpolation and
 the definition of spline wavelets \cite{Chui92Introduction}.
-The fundamental splines $\parentfcn[p,\fs]$ of low degrees $p$ and
+The fundamental splines $\parentfundspl{p}$ of low degrees $p$ and
 their bound functions $\beta_p \cdot (\gamma_p)^{-|x|}$
 are plotted in \cref{fig:fundamentalSpline}.
 
@@ -935,11 +935,11 @@ are plotted in \cref{fig:fundamentalSpline}.
     Fundamental splines and their B-spline coefficients%
   ]{%
     \colorlet{lightC0}{C0!50!white}%
-    The fundamental spline $\parentfcn[p,\fs]$ \emph{\textcolor{C0}{(blue)}}
+    The fundamental spline $\parentfundspl{p}$ \emph{\textcolor{C0}{(blue)}}
     is a linear combination of cardinal B-splines $\cardbspl{p}({\cdot} - k)$,
     $k \in \integer$ \emph{\textcolor{lightC0}{(light blue)}},
     with coefficients $\fundsplcoeff{k}{p}$ \emph{\textcolor{C1}{(red points)}}.
-    The absolute values of the fundamental spline $\parentfcn[p,\fs]$ and
+    The absolute values of the fundamental spline $\parentfundspl{p}$ and
     its coefficients are bounded by a multiple of $(\gamma_p)^{-|k|}$
     \emph{(\textcolor{C0}{blue}-\textcolor{C1}{red}-dashed line)}.
     The axis for $\fundsplcoeff{k}{p}$ (on the right side) is scaled such that
@@ -950,13 +950,13 @@ are plotted in \cref{fig:fundamentalSpline}.
 
 \paragraph{Hierarchical fundamental splines}
 
-The fundamental spline $\parentfcn[p,\fs]$ defines
+The fundamental spline $\parentfundspl{p}$ defines
 hierarchical fundamental spline functions
 $\bspl[\fs]{l,i}{p}\colon \clint{0, 1} \to \real$ via
 \cref{eq:translationInvariance}, i.e.,
 \begin{equation}
   \bspl[\fs]{l,i}{p}(x)
-  := \parentfcn[p,\fs](\tfrac{x}{\ms{l}} - i),\quad
+  := \parentfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
   l \in \natz,\;
   i = 0, \dotsc, 2^l,\;
   x \in \clint{0, 1}.
@@ -995,7 +995,7 @@ all interior knots $\gp{\*l,\*i}$ ($\*i = \*1, \dotsc, \*2^\*l - \*1$,
 see \cite{Hoellig13Approximation}).
 
 The B-spline coefficients $(\fundsplcoeff{k}{p})_{k \in \integer}$ of the
-fundamental spline $\parentfcn[p,\fs]$ decay with the same rate
+fundamental spline $\parentfundspl{p}$ decay with the same rate
 as the fundamental spline itself due to the stability of the B-spline basis
 \cite{Hoellig13Approximation}, i.e.,
 \begin{equation}
@@ -1023,7 +1023,7 @@ if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $|k| \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is some truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
-to evaluate the fundamental spline $\parentfcn[p,\fs]$ once,
+to evaluate the fundamental spline $\parentfundspl{p}$ once,
 due to the local support of B-splines.
 In \cref{tbl:fundamentalSplineDecay}, we list the decay rates $\gamma_p$,
 the factors $\beta_p$, $\beta'_p$, and the truncation indices
@@ -1045,9 +1045,9 @@ $\fundsplcutoff{p}$ for the different degrees $p$.
   ]{%
     Optimal decay rates $\gamma_p$ and corresponding factors
     $\beta_p$ and $\beta'_p$, for the bound functions of
-    the fundamental spline $\parentfcn[p,\fs]$ and
+    the fundamental spline $\parentfundspl{p}$ and
     its coefficients $\fundsplcoeff{k}{p}$, i.e.,
-    $\fa{x \in \real}{|\parentfcn[p,\fs](x)| \le \beta_p (\gamma_p)^{-|x|}}$
+    $\fa{x \in \real}{|\parentfundspl{p}(x)| \le \beta_p (\gamma_p)^{-|x|}}$
     and
     $\fa{k \in \integer}{|\fundsplcoeff{k}{p}| \le \beta'_p (\gamma_p)^{-|k|}}$
     (approximated values).
