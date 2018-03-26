@@ -1072,44 +1072,76 @@ index $i \in \hiset{l}$, and degree $p$ is as follows:
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
-    \psi_l^{p,\fs}(x),&
+    \parentfundspl[\modified]{p}(\tfrac{x}{\ms{l}}),&
     l \ge 2,\quad i = 1,\\
     \bspl[\fs]{l,i}{p}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \psi_l^{p,\fs}(1 - x),&
+    \bspl[\fs,\modified]{l,1}{p}(1 - x),&
     l \ge 2,\quad i = 2^l - 1,
   \end{cases}
 \end{equation}
-where $\psi_l^{p,\fs}$ ($l \in \nat$) is a linear combination
+where $\parentfundspl[\modified]{p}$ is a linear combination
 \begin{equation}
-  \psi_l^{p,\fs}\colon \clint{0, 1} \to \real,\quad
-  \psi_l^{p,\fs}
-  := \sum_{i'=1-(p+1)/2}^\infty
-  \fundsplcoeff{i'}{p}^\modified \bspl{l,i}{p},
+  \parentfundspl[\modified]{p}\colon \nonnegreal \to \real,\quad
+  \parentfundspl[\modified]{p}(x)
+  := \sum_{k=1-(p+1)/2}^\infty
+  \fundsplcoeff[\modified]{k}{p} \parentbspl{p}(x - k),
 \end{equation}
-whose coefficients $\fundsplcoeff{i'}{p}^\modified \in \real$
+whose coefficients $\fundsplcoeff[\modified]{k}{p} \in \real$
 are chosen such that
 \begin{subequations}
+  \label{eq:modifiedFundamentalSplineConditions}
   \begin{alignat}{2}
-    \psi_l^{p,\fs}(\gp{l,i})
+    \parentfundspl[\modified]{p}(i)
     &= \kronecker{i}{1},\quad
     &&i \in \nat,\\
-    \tfrac{\diff^2}{\dx^2} \psi_l^{p,\fs}(\gp{l,1})
+    \tfrac{\diff^2}{\dx^2} \parentfundspl[\modified]{p}(1)
     &= 0,\quad&&\\
-    \tfrac{\diff^q}{\dx^q} \psi_l^{p,\fs}(0)
+    \tfrac{\diff^q}{\dx^q} \parentfundspl[\modified]{p}(0)
     &= 0,\quad
     &&q = 2, 3, \dotsc, \tfrac{p+1}{2},
   \end{alignat}
 \end{subequations}
 if $p > 1$.
-For $p = 1$, we define $\psi_l^{p,\fs} := \bspl[\modified]{l,1}{p}$.
-The coefficients $\fundsplcoeff{i'}{p}^\modified$ of $\psi_l^{p,\fs}$
-do not depend on the level $l$, as $\psi_l^{p,\fs}$ is the same
-for different levels $l$ up to parameter scaling.
-Since the coefficients $\fundsplcoeff{i'}{p}^\modified$ of the modification
+For $p = 1$, we define $\parentfundspl[\modified]{p}
+:= \bspl[\modified]{2,1}{p}(\tfrac{{\cdot}}{4})$.
+Since the coefficients $\fundsplcoeff[\modified]{k}{p}$ of the modification
 experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
 fundamental spline,
-we can approximate $\fundsplcoeff{i'}{p}^\modified$ by solving
+we can approximate $\fundsplcoeff[\modified]{k}{p}$ by solving
 a truncated system of linear equations.
 
-\blindtext{}
+The conditions stated in \eqref{eq:modifiedFundamentalSplineConditions}
+are motivated by the case $p = 3$ of cubic fundamental splines.
+The first relevant cardinal B-spline is the one with
+index $k = 1 - \tfrac{p+1}{2}$ ($k = -1$ in the cubic case),
+as the B-splines with indices $\le -\tfrac{p+1}{2}$ vanish on $\nonnegreal$.
+The modified function $\parentfundspl[\modified]{p}$
+should satisfy the fundamental property \eqref{eq:tiftDefinition}
+at all positive integer points $k \in \nat$.
+In contrast to the standard fundamental spline $\parentfundspl{p}$,
+we do not enforce the fundamental property at $k = 0$,
+as our aim is to obtain non-zero boundary values.
+This leaves us exactly two degrees of freedom in the cubic case,
+namely $k = -1$ and $k = 0$.
+We use these to let $\parentfundspl[\modified]{p}$ extrapolate
+linearly on $\clint{0, 1}$, as we did for uniform hierarchical
+B-splines (see \cref{sec:313modification}).
+Therefore, in the cubic case, we set the second derivative
+$\tfrac{\diff^2}{\dx^2} \parentfundspl[\modified]{p}$ to zero
+in $x = 0$ and in $x = 1$.
+This suffices since
+$\tfrac{\diff^2}{\dx^2} \parentfundspl[\modified]{p}$ is piecewise
+linear for $p = 3$.
+For higher degrees $p > 3$,
+we use the additional degrees of freedom (in total $\tfrac{p+1}{2}$)
+to increase the multiplicity of the root of
+$\tfrac{\diff^2}{\dx^2} \parentfundspl[\modified]{p}$ in $x = 0$.
+This ensures that $\parentfundspl[\modified]{p}$ is
+``as linear as possible'' near $x = 0$.
+Note that we cannot maintain
+$\tfrac{\diff^2}{\dx^2} \parentfundspl[\modified]{p} \equiv 0$
+on $\clint{0, 1}$ for higher degrees $p > 3$,
+since this would require $p - 1$ conditions
+and we only have $\tfrac{p+1}{2}$ degrees of freedom left,
+after taking the fundamental conditions into account.
