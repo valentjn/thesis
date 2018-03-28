@@ -802,7 +802,7 @@ is not contained in the nodal space $\ns{l'}$.
 
 
 
-\subsection{Fundamental Splines}
+\subsection{Hierarchical Fundamental Splines}
 \label{sec:443fundamentalSplines}
 
 \paragraph{Definition}
@@ -948,7 +948,7 @@ are plotted in \cref{fig:fundamentalSpline}.
   \label{fig:fundamentalSpline}%
 \end{figure}
 
-\paragraph{Hierarchical fundamental splines}
+\paragraph{Definition of hierarchical fundamental splines}
 
 The fundamental spline $\parentfundspl{p}$ defines
 hierarchical fundamental spline functions
@@ -1059,7 +1059,10 @@ $\fundsplcutoff{p}$ for the different degrees $p$.
   \label{tbl:fundamentalSplineDecay}%
 \end{table}
 
-\paragraph{Modified hierarchical fundamental splines}
+
+
+\subsection{Modified Hierarchical Fundamental Splines}
+\label{sec:444modifiedFundamentalSplines}
 
 Similar to the B-spline bases introduced in \cref{chap:30BSplines},
 it is possible to define a modified version of the
@@ -1185,3 +1188,21 @@ on $\clint{0, 1}$ for higher degrees $p > 3$,
 since this would require $p - 1$ conditions
 and we only have $\tfrac{p+1}{2}$ degrees of freedom left,
 after taking the fundamental conditions into account.
+
+
+
+\subsection{Fundamental Not-A-Knot Splines}
+\label{sec:445fundamentalNotAKnotSplines}
+
+The hierarchical fundamental spline basis suffers from the same problem
+as the uniform hierarchical B-spline basis.
+As explained in \cref{sec:321approximation}, there is a mismatch
+of dimensions of the nodal B-spline space $\nsbspl{l}{p}$ of level $l$
+and the spline space $\wholesplspace{l}{p}$ on the grid
+$\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$.
+This issue also affects the fundamental spline basis.
+
+It is possible to combine the idea of fundamental splines
+with the not-a-knot approach from \cref{sec:32notAKnot}.
+
+\blindtext{}
