@@ -247,14 +247,15 @@ def plotHierarchicalFundamentalTransformedBSplines(q):
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalFundamentalSplines(q):
-  fig = Figure.create(figsize=(3.3, 4.6), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 5.5), scale=1.0)
   basis = helper.basis.HierarchicalFundamentalSpline(p)
+  basisModified = helper.basis.ModifiedHierarchicalFundamentalSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
     plotSubspace(ax, basis, l, n, superscript=r"p,\mathrm{fs}")
-  myTightLayout = dict(tightLayout)
-  myTightLayout["h_pad"] = 0.5
-  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
+    plotSubspace(ax, basisModified, l, n, superscript=r"p,\mathrm{fs}",
+                 modified=True, drawModifiedOnTop=True)
+  fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 
 
