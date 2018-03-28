@@ -23,10 +23,9 @@ home_dir = (os.environ["HOME"] if sys.platform.startswith("linux") else
             os.path.join(os.environ["HOMEDRIVE"], os.environ["HOMEPATH"], "Documents"))
 
 # search for helper Python scripts
-tools_dir = env.Dir(os.path.join(home_dir, "git", "prog", "python", "tools"))
-tools_files = []
-for root, dirs, files in os.walk(tools_dir.abspath):
-  tools_files.extend([os.path.join(root, x) for x in files])
+py_dir = env.Dir(os.path.join("..", "py"))
+for root, dirs, files in os.walk(os.path.join(py_dir.abspath, "helper")):
+  helper_pys.extend([os.path.join(root, x) for x in files if x.endswith(".py")])
 
 # set environment variables
 sgpp_dir = os.path.join(home_dir, "sgpp", "sgopt")
@@ -35,18 +34,13 @@ py_env["ENV"]["BUILD_DIR"]       = env["BUILD_DIR"].abspath
 py_env["ENV"]["LD_LIBRARY_PATH"] = ":".join([py_env["ENV"].get("LD_LIBRARY_PATH", ""),
                                              os.path.join(sgpp_dir, "lib", "sgpp")])
 py_env["ENV"]["PYTHONPATH"]      = ":".join([py_env["ENV"].get("PYTHONPATH", ""),
-                                             tools_dir.abspath,
+                                             py_dir.abspath,
                                              os.path.join(sgpp_dir, "lib"),
                                              os.path.join(sgpp_dir, "lib", "pysgpp")])
 
 for py in pys:
   # determine number of generated images by script
   name = os.path.splitext(py.name)[0]
-  
-  if name.startswith("helper_"):
-    helper_pys.append(py)
-    continue
-  
   with open(py.abspath, "r") as f: py_code = f.readlines()
   pdf_count = 1
   
@@ -70,7 +64,7 @@ for py in pys:
   pgfs.extend([x[:-4] + ".pgf" for x in cur_pdfs])
 
 # *.pdf files depend on helper scripts (local helper *.py files and global tools)
-env.Depends(pdfs, [helper_pys, tools_files])
+env.Depends(pdfs, helper_pys)
 
 # don't delete PDFs before calling Python scripts
 env.Precious(pdfs)
