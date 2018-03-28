@@ -1112,6 +1112,44 @@ experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
 fundamental spline,
 we can approximate $\fundsplcoeff[\modified]{k}{p}$ by solving
 a truncated system of linear equations.
+The resulting function $\parentfundspl[\modified]{p}$ is shown in
+\cref{fig:modifiedFundamentalSpline}.
+
+\begin{figure}
+  \subcaptionbox{%
+    $p = 3$%
+  }[50mm]{%
+    \includegraphics{modifiedFundamentalSpline_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $p = 5$%
+  }[50mm]{%
+    \includegraphics{modifiedFundamentalSpline_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $p = 7$%
+  }[50mm]{%
+    \includegraphics{modifiedFundamentalSpline_3}%
+  }%
+  \caption[%
+    Modified fundamental spline and its derivatives%
+  ]{%
+    Modified fundamental spline $\parentfundspl[\modified]{p}$
+    \emph{\textcolor{C0}{(blue)}} together with its
+    first \emph{\textcolor{C1}{(red)}} and
+    second \emph{\textcolor{C2}{(yellow)}} derivatives
+    and the function value interpolation conditions from
+    \cref{eq:modifiedFundamentalSplineConditions}
+    \emph{\textcolor{C0}{(blue dots)}}.
+    For $p = 3$, the second derivative vanishes on
+    $\clint{0, 1}$.
+    For higher degrees $p > 3$, the second derivative is close to zero
+    on this interval, vanishing at $x = 0$.%
+  }%
+  \label{fig:modifiedFundamentalSpline}%
+\end{figure}
 
 The conditions stated in \eqref{eq:modifiedFundamentalSplineConditions}
 are motivated by the case $p = 3$ of cubic fundamental splines.
