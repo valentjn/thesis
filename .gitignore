@@ -4,4 +4,4 @@
 /.sconsign.dblite
 /tex/thesis.txss
 /**/__pycache__/
-*.bib.sav
+/bib/*.bib.sav
