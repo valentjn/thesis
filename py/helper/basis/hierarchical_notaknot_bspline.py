@@ -12,9 +12,8 @@ from .non_uniform_bspline import NonUniformBSpline
 class HierarchicalNotAKnotBSpline(HierarchicalBasis):
   def __init__(self, p, nu=0):
     super().__init__(nu=nu)
-    assert nu == 0
     self.p = p
-    self.lagrangeBasis = HierarchicalLagrangePolynomial()
+    self.lagrangeBasis = HierarchicalLagrangePolynomial(nu=nu)
   
   def getCoordinates(self, l, I):
     X = helper.grid.getCoordinates(l, I)
@@ -35,7 +34,7 @@ class HierarchicalNotAKnotBSpline(HierarchicalBasis):
       yy = self.lagrangeBasis.evaluate(l, i, xx)
     else:
       xi = self.getKnots(l, i)
-      basis = NonUniformBSpline(self.p, xi)
+      basis = NonUniformBSpline(self.p, xi, nu=self.nu)
       yy = basis.evaluate(xx)
     
     return yy

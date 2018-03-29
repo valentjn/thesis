@@ -8,8 +8,8 @@ import helper.grid
 from .hierarchical_fundamental_transformed import HierarchicalFundamentalTransformed
 
 class NodalFundamentalTransformed(HierarchicalFundamentalTransformed):
-  def __init__(self, basis):
-    super().__init__(basis)
+  def __init__(self, basis, evaluationBasis=None):
+    super().__init__(basis, evaluationBasis=evaluationBasis)
   
   def getCoefficients(self, l, i):
     hInv = 2**l
