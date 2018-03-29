@@ -5,8 +5,6 @@ import multiprocessing
 
 import numpy as np
 
-import pysgpp
-
 import helper.basis
 from helper.figure import Figure
 import helper.grid
