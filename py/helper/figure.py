@@ -9,8 +9,8 @@ import sys
 
 import cycler
 import matplotlib as mpl
-mpl.use("pgf")
 import matplotlib.pyplot as plt
+plt.switch_backend("pgf")
 from mpl_toolkits.mplot3d import Axes3D
 
 
