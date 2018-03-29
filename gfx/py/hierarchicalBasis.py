@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 15
+# number of output figures = 16
 
 import multiprocessing
 
@@ -72,7 +72,8 @@ def plotSubspace(ax, basis, l, n,
         elif i == 5: x += 0.05
         elif i == 6: x += 0.03
       else:
-        if (not modified) and (not clenshawCurtis):
+        if ((not modified) and (not clenshawCurtis) and
+            ("{fs}" not in superscript)):
           if (l == 3) and (i == 3): x += 0.03
           if (l == 3) and (i == 5): x -= 0.03
     ax.text(x, y, "${}_{{{},{}}}{}$".format(basisSymbol, l, i, superscript),
@@ -257,6 +258,18 @@ def plotHierarchicalFundamentalSplines(q):
                  modified=True, drawModifiedOnTop=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
+def plotHierarchicalFundamentalNotAKnotSplines(q):
+  fig = Figure.create(figsize=(3.3, 5.0), scale=1.0)
+  origBasis = helper.basis.HierarchicalNotAKnotBSpline(p)
+  basis = helper.basis.NodalFundamentalTransformed(origBasis)
+  basis.p = p
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, notAKnot=True, superscript=r"p,\mathrm{fs}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
+
 
 
 def callMethod(qAndMethod):
@@ -280,6 +293,7 @@ def main():
     plotHierarchicalLagrangePolynomials,
     plotHierarchicalFundamentalTransformedBSplines,
     plotHierarchicalFundamentalSplines,
+    plotHierarchicalFundamentalNotAKnotSplines,
   ]
   
   with multiprocessing.Pool() as pool:
