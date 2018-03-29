@@ -13,8 +13,7 @@ d = 1
 b = 0
 p = 3
 
-basis1D = helper.basis.HierarchicalBSpline(p)
-basis = helper.basis.TensorProduct(basis1D, d)
+basis = helper.basis.HierarchicalBSpline(p)
 xtl = [r"$x_{{{},{}}}$".format(n, i) for i in range(2**n + 1)]
 
 

@@ -16,6 +16,7 @@ class HierarchicalFundamentalTransformed(HierarchicalBasis):
     X, L, I = helper.grid.RegularSparseBoundary(l, 1, 0).generate()
     fX = [int((l == l2) and (i == i2)) for l2, i2 in zip(L, I)]
     c = helper.function.Interpolant(self.basis, X, L, I, fX).aX
+    X, L, I = X.flatten(), L.flatten(), I.flatten()
     return c, L, I
   
   def evaluate(self, l, i, XX):

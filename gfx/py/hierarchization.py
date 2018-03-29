@@ -23,8 +23,7 @@ X, L, I = X[K,:], L[K,:], I[K,:]
 N = X.shape[0]
 
 for pCurrent in [1, p]:
-  basis1D = helper.basis.HierarchicalNotAKnotBSpline(pCurrent)
-  basis = helper.basis.TensorProduct(basis1D, d)
+  basis = helper.basis.HierarchicalNotAKnotBSpline(pCurrent)
   interpolant = helper.function.Interpolant(basis, X, L, I, fX)
   if pCurrent == 1: aX = np.array(interpolant.aX)
 

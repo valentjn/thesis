@@ -51,12 +51,19 @@ class Interpolant(Function):
     aX = np.linalg.solve(A, self.fX)
     return aX
   
+  def _evaluateBasis(self, k, XX):
+    l, i = self.L[k,:], self.I[k,:]
+    if l.shape[0] == 1: l, i = l[0], i[0]
+    YY = self.basis.evaluate(l, i, XX)
+    YY = YY.flatten()
+    return YY
+  
   def getInterpolationMatrix(self):
     N = self.X.shape[0]
     A = np.zeros((N, N))
     
     for k in range(N):
-      A[:,k] = self.basis.evaluate(self.L[k,:], self.I[k,:], self.X)
+      A[:,k] = self._evaluateBasis(k, self.X)
     
     return A
   
@@ -65,7 +72,7 @@ class Interpolant(Function):
     YY = np.zeros((XX.shape[0],))
     
     for k in range(N):
-      YY += self.aX[k] * self.basis.evaluate(self.L[k,:], self.I[k,:], XX)
+      YY += self.aX[k] * self._evaluateBasis(k, XX)
     
     return YY
 
