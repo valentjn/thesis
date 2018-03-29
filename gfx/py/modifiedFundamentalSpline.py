@@ -20,6 +20,15 @@ for p in [3, 5, 7]:
   
   ax.plot([1, 2, 3, 4], [1, 0, 0, 0], ".", clip_on=False, color="C0")
   
+  ax.text(0.45, 1.8, r"$\varphi^{p,\mathrm{fs},\mathrm{mod}}$",
+          color="C0", ha="left", va="bottom")
+  ax.text(1.8, -0.8, r"$\tfrac{\mathop{}\!\mathrm{d}}{\mathop{}\!\mathrm{d}x} "
+                  r"\varphi^{p,\mathrm{fs},\mathrm{mod}}$",
+          color="C1", ha="left", va="top")
+  ax.text(2.45, 1, r"$\tfrac{\mathop{}\!\mathrm{d}^2}{\mathop{}\!\mathrm{d}x^2} "
+                  r"\varphi^{p,\mathrm{fs},\mathrm{mod}}$",
+          color="C2", ha="left", va="bottom")
+  
   ax.set_xticks(list(range(0, 5)))
   ax.set_xticklabels([""] + [str(k) for k in range(1, 5)])
   ax.set_xlim(0, 4.5)
