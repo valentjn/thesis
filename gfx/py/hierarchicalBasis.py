@@ -218,7 +218,7 @@ def plotHierarchicalClenshawCurtisNotAKnotBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalNaturalBSplines(q):
-  fig = Figure.create(figsize=(3.8, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
   basis = helper.basis.HierarchicalNaturalBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
@@ -259,7 +259,7 @@ def plotHierarchicalFundamentalSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalFundamentalNotAKnotSplines(q):
-  fig = Figure.create(figsize=(3.3, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
   origBasis = helper.basis.HierarchicalNotAKnotBSpline(p)
   basis = helper.basis.NodalFundamentalTransformed(origBasis)
   basis.p = p
