@@ -29,6 +29,7 @@ def drawImage(imageNumber):
       color = (colorDark if pCur < p else colorLight)
     b = helper.basis.CardinalBSpline(pCur)
     yy = b.evaluate(xx)
+    if pCur == 0: yy[-1] = 1
     ax.plot(xx, yy, "-", color=color, clip_on=False)
   
   b = helper.basis.CardinalBSpline(p)
