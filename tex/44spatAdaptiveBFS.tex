@@ -431,12 +431,14 @@ The correctness of \cref{alg:BFS} can be shown with the following invariant:
   from the queue $Q$ in \cref{alg:BFS}:
   \begin{equation}
     \label{eq:propInvariantBFS}
+    \hspace*{-2mm}
     \linout{\*l,\*i}
     = \fcnval{\*l,\*i} -
     \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < q}}
     \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset,\;\;
     \normone{\*l} = q.
+    \hspace*{-2mm}
   \end{equation}
 \end{restatable}
 
@@ -749,11 +751,13 @@ is not contained in the nodal space $\ns{l'}$.
   \label{prop:tiftNodalSpace}
   We have
   \begin{equation}
+    \hspace*{-10mm}
     \spn\{\basis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\}
     =: \ns[\ext]{\*l'}
     = \ns[\tift,\ext]{\*l'}
     := \spn\{\basis[\tift]{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
     \*l' \in \natz^d.
+    \hspace*{-20mm}
   \end{equation}
 \end{proposition}
 
