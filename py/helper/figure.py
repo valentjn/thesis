@@ -154,7 +154,8 @@ class Figure(mpl.figure.Figure):
     self._saveDisabled = False
   
   def save(self, graphicsNumber=None, appendGraphicsNumber=True,
-           hideSpines=True, tightLayout=True, crop=True, close=True):
+           hideSpines=True, tightLayout=True, crop=True, close=True,
+           transparent=True):
     plt.figure(self.number)
     
     if graphicsNumber is None:
@@ -185,8 +186,12 @@ class Figure(mpl.figure.Figure):
     if appendGraphicsNumber: basename += "_{}".format(graphicsNumber)
     basename = os.path.join(buildDir, basename)
     
-    savefigFcn = lambda path: plt.savefig(path, facecolor=self.get_facecolor(),
-                                          transparent=True)
+    if transparent:
+      savefigFcn = (
+        lambda path: plt.savefig(path, facecolor="none", transparent=True))
+    else:
+      savefigFcn = (
+        lambda path: plt.savefig(path, facecolor=self.get_facecolor()))
     
     pgfPath = "{}.pgf".format(basename)
     print("Saving {}...".format(os.path.split(pgfPath)[1]))
