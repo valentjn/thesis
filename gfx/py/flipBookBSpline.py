@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 60
+# number of output figures = 100
 
 import multiprocessing
 
