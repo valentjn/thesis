@@ -122,14 +122,14 @@ def plotSubspace(ax, basis, l, n,
 
 
 def plotNodalHatFunctions(q):
-  fig = Figure.create(figsize=(3.6, 1.9), scale=1)
+  fig = Figure.create(figsize=(3.5, 1.9), scale=1)
   basis = helper.basis.HierarchicalBSpline(1)
   ax = fig.gca()
   plotSubspace(ax, basis, n, n, nodal=True, showSubspaces=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalHatFunctions(q):
-  fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
   basis = helper.basis.HierarchicalBSpline(1)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
@@ -137,7 +137,7 @@ def plotHierarchicalHatFunctions(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotModifiedHierarchicalHatFunctions(q):
-  fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
   basis = helper.basis.ModifiedHierarchicalBSpline(1)
   for l in range(1, n+1):
     ax = fig.add_subplot(n, 1, l)
@@ -145,14 +145,14 @@ def plotModifiedHierarchicalHatFunctions(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotNodalUniformBSplines(q):
-  fig = Figure.create(figsize=(3.3, 1.74), scale=1)
+  fig = Figure.create(figsize=(3.2, 1.74), scale=1.0)
   basis = helper.basis.HierarchicalBSpline(p)
   ax = fig.gca()
   plotSubspace(ax, basis, n, n, nodal=True, showSubspaces=True, showD=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalUniformBSplines(q):
-  fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
   basis = helper.basis.HierarchicalBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
@@ -160,7 +160,7 @@ def plotHierarchicalUniformBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotModifiedHierarchicalBSplines(q):
-  fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
   basis = helper.basis.ModifiedHierarchicalBSpline(p)
   for l in range(1, n+1):
     ax = fig.add_subplot(n, 1, l)
@@ -168,7 +168,7 @@ def plotModifiedHierarchicalBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalClenshawCurtisBSplines(q):
-  fig = Figure.create(figsize=(3.8, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
   basis = helper.basis.HierarchicalClenshawCurtisBSpline(p)
   basisModified = helper.basis.ModifiedHierarchicalClenshawCurtisBSpline(p)
   for l in range(n+1):
@@ -179,14 +179,14 @@ def plotHierarchicalClenshawCurtisBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotNodalNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.3, 1.74), scale=1)
+  fig = Figure.create(figsize=(3.2, 1.74), scale=1)
   basis = helper.basis.HierarchicalNotAKnotBSpline(p)
   ax = fig.gca()
   plotSubspace(ax, basis, n, n, nodal=True, notAKnot=True, showSubspaces=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.3, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
   basis = helper.basis.HierarchicalNotAKnotBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
@@ -226,7 +226,7 @@ def plotHierarchicalNaturalBSplines(q):
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalLagrangePolynomials(q):
-  fig = Figure.create(figsize=(3.3, 4.0), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.0), scale=1.0)
   basis = helper.basis.HierarchicalLagrangePolynomial()
   n = 2
   for l in range(n+1):
@@ -235,7 +235,7 @@ def plotHierarchicalLagrangePolynomials(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalFundamentalTransformedBSplines(q):
-  fig = Figure.create(figsize=(3.3, 4.6), scale=1.0)
+  fig = Figure.create(figsize=(3.2, 4.6), scale=1.0)
   origBasis = helper.basis.HierarchicalBSpline(p)
   basis = helper.basis.HierarchicalFundamentalTransformed(origBasis)
   for l in range(n+1):

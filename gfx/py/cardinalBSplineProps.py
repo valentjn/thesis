@@ -186,7 +186,7 @@ plotFunctions = [
   plotGeneralization,
 ]
 
-fig = Figure.create(figsize=(4, 8), scale=1.79)
+fig = Figure.create(figsize=(4, 8), scale=1.725)
 ax = fig.gca()
 
 for k in range(8):

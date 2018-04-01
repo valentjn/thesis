@@ -15,7 +15,7 @@ colorBoundaryBack = [1 - (1-0.8) * (1-x) for x in colorBoundary]
 colorInterior = "k"
 
 for q in range(d + 2):
-  fig = Figure.create(figsize=(2, 2), scale=0.9)
+  fig = Figure.create(figsize=(2, 2), scale=0.89)
   ax = fig.add_subplot(111, projection="3d")
   
   grid = helper.grid.RegularSparseBoundary(n, d, b)

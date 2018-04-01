@@ -7,7 +7,7 @@ import helper.basis
 from helper.figure import Figure
 
 for p in [3, 5, 7]:
-  fig = Figure.create(figsize=(2, 2), scale=1.15)
+  fig = Figure.create(figsize=(2, 2), scale=1.1)
   ax = fig.gca()
   
   xx = np.linspace(0, 4.5, 361)
