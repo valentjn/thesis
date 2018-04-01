@@ -2,8 +2,6 @@
 
 import numpy as np
 
-import pysgpp
-
 from .hierarchical_basis import HierarchicalBasis
 from .hierarchical_bspline import HierarchicalBSpline
 from .hierarchical_lagrange_spline import HierarchicalLagrangeSpline
@@ -12,24 +10,25 @@ from .hierarchical_notaknot_bspline import HierarchicalNotAKnotBSpline
 from .modified_hierarchical_notaknot_bspline import ModifiedHierarchicalNotAKnotBSpline
 
 class SGppBasis(HierarchicalBasis):
-  # format: {testFunctionName : (sgppClass, pythonClass)}
-  BASIS_TYPES = {
-    "hierarchicalBSpline" :
-      (pysgpp.SBsplineBase, HierarchicalBSpline),
-    "hierarchicalNotAKnotBSpline" :
-      (pysgpp.SNotAKnotBsplineBase, HierarchicalNotAKnotBSpline),
-    "modifiedHierarchicalNotAKnotBSpline" :
-      (pysgpp.SNotAKnotBsplineModifiedBase, ModifiedHierarchicalNotAKnotBSpline),
-    "hierarchicalLagrangeSpline" :
-      (pysgpp.SLagrangeSplineBase, HierarchicalLagrangeSpline),
-    "hierarchicalLagrangeNotAKnotSpline" :
-      (pysgpp.SLagrangeNotAKnotSplineBase, HierarchicalLagrangeNotAKnotSpline),
-  }
-  
   def __init__(self, basis, nu=0):
     super().__init__(nu=nu)
     assert nu == 0
-    if type(basis) is str: basis = SGppBasis.BASIS_TYPES[basis][0](p)
+    
+    if type(basis) is str:
+      import pysgpp
+      basisTypes = {
+        "hierarchicalBSpline" :
+          (pysgpp.SBsplineBase, HierarchicalBSpline),
+        "hierarchicalNotAKnotBSpline" :
+          (pysgpp.SNotAKnotBsplineBase, HierarchicalNotAKnotBSpline),
+        "modifiedHierarchicalNotAKnotBSpline" :
+          (pysgpp.SNotAKnotBsplineModifiedBase, ModifiedHierarchicalNotAKnotBSpline),
+        "hierarchicalLagrangeSpline" :
+          (pysgpp.SLagrangeSplineBase, HierarchicalLagrangeSpline),
+        "hierarchicalLagrangeNotAKnotSpline" :
+          (pysgpp.SLagrangeNotAKnotSplineBase, HierarchicalLagrangeNotAKnotSpline),
+      }
+      basis = basisTypes[basis][0](p)
     self.basis = basis
   
   def evaluate(self, l, i, xx):

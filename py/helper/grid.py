@@ -203,10 +203,7 @@ class DimensionallyAdaptiveSparse(object):
 
 
 class SGppGrid(object):
-  # format: {gridName : factoryMethod}
-  
   def __init__(self, grid, *args):
-    
     if type(grid) is str:
       import pysgpp
       self.label = "{}({})".format(grid, ", ".join([str(arg) for arg in args]))

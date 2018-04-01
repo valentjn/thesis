@@ -5,11 +5,10 @@ import warnings
 
 import numpy as np
 
-import pysgpp
-
 
 
 def sgpp2np(x):
+  import pysgpp
   if type(x) is pysgpp.DataMatrix:
     return np.array([[x.get(k, j) for j in range(x.getNcols())]
                      for k in range(x.getNrows())])
@@ -17,6 +16,7 @@ def sgpp2np(x):
     return np.array([x[k] for k in range(x.getSize())])
 
 def np2sgpp(x):
+  import pysgpp
   return (pysgpp.DataVector(x) if x.ndim == 1 else pysgpp.DataMatrix(x))
 
 
@@ -84,6 +84,7 @@ class SGppFunction(Function):
     self.f = f
   
   def evaluate(self, XX):
+    import pysgpp
     #yy = np.array([self.f.eval(X) for X in XX])
     yy = pysgpp.DataVector(XX.shape[0])
     self.f.eval(np2sgpp(XX), yy)
@@ -94,6 +95,7 @@ class SGppFunction(Function):
 
 class SGppInterpolant(SGppFunction):
   def __init__(self, grid, fX):
+    import pysgpp
     self.grid = grid
     self.fX = fX
     self.aX = self._getSurpluses()
@@ -101,6 +103,7 @@ class SGppInterpolant(SGppFunction):
     super(SGppInterpolant, self).__init__(f)
   
   def _getSurpluses(self):
+    import pysgpp
     aX = pysgpp.DataVector(self.fX.size)
     hierarchizationSLE = pysgpp.OptHierarchisationSLE(self.grid)
     sleSolver = pysgpp.OptAutoSLESolver()
@@ -110,59 +113,58 @@ class SGppInterpolant(SGppFunction):
 
 
 class SGppTestFunction(SGppFunction):
-  # format: {testFunctionName : (sgppClass, needsDimension, isTrivial)}
-  TEST_FUNCTION_TYPES = {
-    "ackley" :
-      (pysgpp.OptAckley,            True,   False),
-    "absoluteValue" :
-      (pysgpp.OptAbsoluteValue,     True,   True),
-    "beale" :
-      (pysgpp.OptBeale,             False,  False),
-    "branin" :
-      (pysgpp.OptBranin,            False,  True),
-    "bubbleWrap" :
-      (pysgpp.OptBubbleWrap,        True,   False),
-    "easomYang" :
-      (pysgpp.OptEasomYang,         True,   False),
-    "eggholder" :
-      (pysgpp.OptEggholder,         False,  False),
-    "goldsteinPrice" :
-      (pysgpp.OptGoldsteinPrice,    False,  False),
-    "griewank" :
-      (pysgpp.OptGriewank,          True,   False),
-    "hartman3" :
-      (pysgpp.OptHartman3,          False,  False),
-    "hartman6" :
-      (pysgpp.OptHartman6,          False,  False),
-    "himmelblau" :
-      (pysgpp.OptHimmelblau,        False,  True),
-    "hoelderTable" :
-      (pysgpp.OptHoelderTable,      False,  False),
-    "increasingPower" :
-      (pysgpp.OptIncreasingPower,   True,   True),
-    "michalewicz" :
-      (pysgpp.OptMichalewicz,       False,  True),
-    "mladineo" :
-      (pysgpp.OptMladineo,          False,  False),
-    "perm" :
-      (pysgpp.OptPerm,              True,   True),
-    "rastrigin" :
-      (pysgpp.OptRastrigin,         True,   True),
-    "rosenbrock" :
-      (pysgpp.OptRosenbrock,        True,   True),
-    "schwefel" :
-      (pysgpp.OptSchwefel,          True,   True),
-    "shcb" :
-      (pysgpp.OptSHCB,              False,  True),
-    "sphere" :
-      (pysgpp.OptSphere,            True,   True),
-    "tremblingParabola" :
-      (pysgpp.OptTremblingParabola, True,   True),
-  }
-  
   def __init__(self, f, d):
     if type(f) is str:
-      fInfo = SGppTestFunction.TEST_FUNCTION_TYPES[f]
+      import pysgpp
+      testFunctionTypes = {
+        "ackley" :
+          (pysgpp.OptAckley,            True,   False),
+        "absoluteValue" :
+          (pysgpp.OptAbsoluteValue,     True,   True),
+        "beale" :
+          (pysgpp.OptBeale,             False,  False),
+        "branin" :
+          (pysgpp.OptBranin,            False,  True),
+        "bubbleWrap" :
+          (pysgpp.OptBubbleWrap,        True,   False),
+        "easomYang" :
+          (pysgpp.OptEasomYang,         True,   False),
+        "eggholder" :
+          (pysgpp.OptEggholder,         False,  False),
+        "goldsteinPrice" :
+          (pysgpp.OptGoldsteinPrice,    False,  False),
+        "griewank" :
+          (pysgpp.OptGriewank,          True,   False),
+        "hartman3" :
+          (pysgpp.OptHartman3,          False,  False),
+        "hartman6" :
+          (pysgpp.OptHartman6,          False,  False),
+        "himmelblau" :
+          (pysgpp.OptHimmelblau,        False,  True),
+        "hoelderTable" :
+          (pysgpp.OptHoelderTable,      False,  False),
+        "increasingPower" :
+          (pysgpp.OptIncreasingPower,   True,   True),
+        "michalewicz" :
+          (pysgpp.OptMichalewicz,       False,  True),
+        "mladineo" :
+          (pysgpp.OptMladineo,          False,  False),
+        "perm" :
+          (pysgpp.OptPerm,              True,   True),
+        "rastrigin" :
+          (pysgpp.OptRastrigin,         True,   True),
+        "rosenbrock" :
+          (pysgpp.OptRosenbrock,        True,   True),
+        "schwefel" :
+          (pysgpp.OptSchwefel,          True,   True),
+        "shcb" :
+          (pysgpp.OptSHCB,              False,  True),
+        "sphere" :
+          (pysgpp.OptSphere,            True,   True),
+        "tremblingParabola" :
+          (pysgpp.OptTremblingParabola, True,   True),
+      }
+      fInfo = testFunctionTypes[f]
       if fInfo[2]: warnings.warn("Using trivial test function {}.".format(f))
       args = ([d] if fInfo[1] else [])
       problem = fInfo[0](*args)
