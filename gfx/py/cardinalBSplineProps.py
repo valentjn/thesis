@@ -9,8 +9,8 @@ from helper.figure import Figure
 
 globalScale = [1.2, 0.75]
 
-def plotCircle(ax, center, radius, color):
-  ax.add_artist(matplotlib.patches.Circle(center, radius, ec="none", fc=color, zorder=-1))
+def plotCircle(ax, center, radius, color, zorder=-1):
+  ax.add_artist(matplotlib.patches.Circle(center, radius, ec="none", fc=color, zorder=zorder))
 
 def plotSupport(ax, center, radius, p):
   b = helper.basis.CardinalBSpline(p)
@@ -195,9 +195,9 @@ for k in range(8):
   smallCircleCenter = largeCircleRadius * np.array((np.cos(t), np.sin(t)))
   tinyCircleCenter = smallCircleCenter * (1 + smallCircleRadius / largeCircleRadius)
   plotCircle(ax, smallCircleCenter, smallCircleRadius, smallCircleColor)
-  plotCircle(ax, tinyCircleCenter, tinyCircleRadius, tinyCircleColor)
+  plotCircle(ax, tinyCircleCenter, tinyCircleRadius, tinyCircleColor, zorder=10)
   plotFunction(ax, smallCircleCenter, smallCircleRadius, p)
-  ax.text(*tinyCircleCenter, "${}$".format(k+1), color="w", ha="center", va="center", size=20)
+  ax.text(*tinyCircleCenter, "${}$".format(k+1), color="w", ha="center", va="center", size=20, zorder=11)
 
 plotCircle(ax, (0, 0), largeCircleRadius - smallCircleRadius, Figure.COLORS["mittelblau"])
 b = helper.basis.CardinalBSpline(p)
