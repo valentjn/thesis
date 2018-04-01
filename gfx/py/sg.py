@@ -86,12 +86,13 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
           contourColor = "C1"
           color = [brightness * x for x in matplotlib.colors.to_rgba(contourColor)[:3]]
         else:
-          contourColor = "white"
+          contourColor = "mittelblau!10"
           color = "k"
-        rect = matplotlib.patches.Rectangle(
-          (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
-          facecolor=contourColor)
-        ax.add_patch(rect)
+        if contourColor != "mittelblau!10":
+          rect = matplotlib.patches.Rectangle(
+            (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
+            facecolor=contourColor)
+          ax.add_patch(rect)
       elif (((highlightedSubspaces is not None) and
            ((l0, l1) in highlightedSubspaces)) or
           ((highlightedSubspaces is None) and
@@ -104,7 +105,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
           facecolor=hellhellblau)
         ax.add_patch(rect)
       else:
-        contourColor = "white"
+        contourColor = "mittelblau!10"
         color = "k"
       
       if whiteMode:
