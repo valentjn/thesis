@@ -88,7 +88,7 @@ for l in allL:
   
   if len(J) == 0:
     j = None
-    contourColor = "white"
+    contourColor = "mittelblau!10"
     color = "k"
   else:
     j = J[0]
@@ -96,10 +96,11 @@ for l in allL:
     contourColor = "C{}".format(colorIndices[j])
     color = [brightness * x for x in matplotlib.colors.to_rgba(contourColor)[:3]]
   
-  rect = matplotlib.patches.Rectangle(
-    (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
-    facecolor=contourColor)
-  ax.add_patch(rect)
+  if contourColor != "mittelblau!10":
+    rect = matplotlib.patches.Rectangle(
+      (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
+      facecolor=contourColor)
+    ax.add_patch(rect)
   
   borderColor = color
   
