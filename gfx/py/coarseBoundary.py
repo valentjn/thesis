@@ -36,7 +36,7 @@ for b in range(bMax + 1):
 
 d = 3
 colorBoundary = Figure.COLORS["mittelblau"]
-colorBoundaryBack = [1 - (1-0.8) * (1-x) for x in colorBoundary]
+colorBoundaryBack = [1 - (1-0.7) * (1-x) for x in colorBoundary]
 colorInterior = "k"
 
 for b in range(bMax + 1):
