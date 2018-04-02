@@ -6,14 +6,172 @@
 }
 \label{sec:45spatAdaptiveUP}
 
-\blindtext{}
+In this final section of the chapter,
+we study two algorithms based on the unidirectional principle
+for applying the linear operator $\linop$ on spatially adaptive sparse grids.
 
 
 
-\subsection{Iterative Application of the Unidirectional Principle}
-\label{sec:451iterativeUnidirectionalPrinciple}
+\subsection{%
+  Iteratively Applying the Unidirectional Principle with Iterative Refinement%
+}
+\label{sec:451iterativeRefinement}
 
-\blindtext{}
+The first algorithm can be applied if two requirements are met:
+\begin{itemize}
+  \item
+  The inverse $\linop^{-1}$ is known and can be applied fast.
+  
+  \item
+  There is an operator $\linop'$
+  that is ``sufficiently close'' to $\linop$ and can be applied fast.
+\end{itemize}
+For hierarchization with B-splines on sparse grids,
+we choose $\linop$ to be the hierarchization
+operator given in \cref{eq:hierarchizationSLE} and
+$\linop'$ to be the unidirectional principle directly applied on the
+sparse grid.
+Both of the assumptions are then satisfied,
+as $\linop^{-1}$ is known
+(interpolation matrix $\intpmat$ of basis function evaluations)
+and $\linop'$ can be applied fast.
+The unidirectional principle $\linop'$ generally produces wrong
+results for hierarchical B-splines due to missing coupling points.
+However, especially for low B-spline degrees,
+$\linop'$ does not deviate too much from the true operator $\linop$.
+Below, we will specify a sufficient criterion for the ``closeness''.
+
+Under these assumptions, we can apply the procedure given in
+\cref{alg:iterativeRefinement}.
+The algorithm is equivalent to the well-known method of
+\term{iterative refinement}, which has been developed to
+stabilize the numerical solution of a linear system when solving
+with rounding errors \cite{Higham02Accuracy}.
+The operator $\linop'$ acts like a preconditioner,
+which is why it is required to be close to $\linop$.
+Note that the algorithm is similar to the repeated application
+of the method of residual interpolation
+(see \cref{sec:433residualInterpolation}) on the whole sparse grid.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\vlinout =$ iterativeRefinement}{%
+      $\vlinin$, $\vlinout[(0)]$%
+    }
+      \State{$\*r^{(0)} \gets \vlinin - \linop^{-1}[\vlinout[(0)]]$}
+      \Comment{Initial residual}%
+      \For{$m = 0, 1, 2, \dotsc$}
+        \State{$\vlinout[(m+1)] \gets \vlinout[(m)] + \linop' \*r^{(m)}$}
+        \Comment{Update solution}%
+        \State{$\*r^{(m+1)} \gets \*r^{(m)} - \linop^{-1} \linop' \*r^{(m)}$}
+        \Comment{Update residual}%
+      \EndFor{}
+      \State{$\vlinout \gets \text{last computed } \vlinout[(m)]$}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[%
+    Iterative refinement%
+  ]{%
+    Application of a tensor product operator $\linop$
+    on spatially adaptive sparse grids with iterative refinement,
+    where $\linop'$ is an approximation of $\linop$.
+    Inputs are the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points) and
+    an initial solution $\vlinout[(0)]$.
+    The output is the vector
+    $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
+    of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
+  }%
+  \label{alg:iterativeRefinement}%
+\end{algorithm}
+
+The loop in \cref{alg:iterativeRefinement} has to be terminated
+after some iterations.
+The following lemma allows to use a stopping criterion based on the
+size of the residual $\*r^{(m)}$.
+
+\begin{shortlemma}[equivalent convergence in \cref{alg:iterativeRefinement}]
+  \label{lemma:iterativeRefinementEquivalent}
+  In \cref{alg:iterativeRefinement}, we have
+  $\vlinout[(m)] \to \vlinout[\ast] \iff \*r^{(m)} \to \*0$ for
+  $m \to \infty$.
+\end{shortlemma}
+
+\begin{proof}
+  It suffices to prove $\linop \*r^{(m)} = \vlinout[\ast] - \vlinout[(m)]$
+  for $m \in \nat$ by induction.
+  For $m = 0$, we have
+  $\linop \*r^{(0)}
+  = \linop \vlinin - \linop^{-1} \vlinout[(0)]
+  = \vlinout[\ast] - \vlinout[(0)]$.
+  For $m \to m+1$, it holds
+  $\linop \*r^{(m+1)}
+  = \linop \*r^{(m)} - \linop^{-1} \linop' \*r^{(m)}
+  = (\vlinout[\ast] - \vlinout[(m)]) - \linop' \*r^{(m)}
+  = \vlinout[\ast] - \vlinout[(m+1)]$.
+\end{proof}
+
+Next, we give a sufficient condition for the
+convergence of \cref{alg:iterativeRefinement} to the true
+solution, which we denote with $\vlinout[\ast] := \linop \vlinin$.
+
+\begin{proposition}[%
+  sufficient criterion for the convergence of \ref{alg:iterativeRefinement}%
+]
+  \label{prop:iterativeRefinementSufficient}
+  If we have $\limsup_{m \to \infty}
+  \sqrt[m]{\norm{(\idop - \linop^{-1} \linop')^m}} < 1$
+  with an arbitrary operator matrix norm $\norm{\cdot}$ and the
+  identity operator $\idop$,
+  then $\vlinout[(m)] \to \vlinout[\ast]$ for $m \to \infty$
+  in \cref{alg:iterativeRefinement}.
+\end{proposition}
+
+\begin{proof}
+  A short induction proof shows that
+  %the explicit representations of $\vlinout[(m)]$ and $\*r^{(m)}$:
+  %\begin{subequations}
+  %  \begin{align}
+  %    \vlinout[(m)]
+  %    &= \vlinout[(0)] + \linop' \cdot \sum_{m'=0}^m \*r^{(m')},\\
+  %    \*r^{(m)}
+  %    &= (\idop - \linop^{-1} \linop')^m \*r^{(0)},
+  %  \end{align}
+  %\end{subequations}
+  %which implies
+  \begin{equation}
+    \label{eq:proofPropIterativeRefinementSufficient}
+    \vlinout[(m)]
+    = \vlinout[(0)] + \linop' \cdot
+    \sum_{m'=0}^m (\idop - \linop^{-1} \linop')^{m'} \*r^{(0)},
+  \end{equation}
+  where $(\idop - \linop^{-1} \linop')^{m'} \*r^{(0)} = \*r^{(m')}$.
+  For $m \to \infty$ and the assumption on
+  $\norm{(\idop - \linop^{-1} \linop')^m}$,
+  the sum converges to the Neumann series
+  $\sum_{m'=0}^\infty (\idop - \linop^{-1} \linop')^{m'}
+  = (\idop - (\idop - \linop^{-1} \linop'))^{-1} = (\linop')^{-1} \linop$
+  (see, e.g., \cite{Werner11Funktionalanalysis}).
+  In this case, we infer that the limit of $\vlinout[(m)]$ is given by
+  \begin{equation}
+    \vlinout[(0)] + \linop' \cdot (\linop')^{-1} \linop \*r^{(0)}
+    = \vlinout[(0)] + \linop \vlinin - \linop^{-1} \vlinout[(0)]
+    = \linop \vlinin
+    = \vlinout[\ast],
+  \end{equation}
+  as claimed.
+\end{proof}
+
+The sufficient condition given in \cref{prop:iterativeRefinementSufficient}
+is quite strong, as it can be shown that $\limsup_{m \to \infty}
+\sqrt[m]{\norm{(\idop - \linop^{-1} \linop')^m}} \le 1$ is necessary for
+convergence.
+Unfortunately, in the case of hierarchization with B-splines,
+numerical experiments showed that
+this condition is only met for low dimensionalities $d$ and low
+B-spline degrees $p$.
+\Cref{alg:iterativeRefinement} generally diverges
+for higher dimensionalities or higher degrees.
 
 
 
