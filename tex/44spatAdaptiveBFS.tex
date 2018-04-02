@@ -34,6 +34,8 @@ Although we do not state it explicitly, it is possible to employ
 different types of basis functions $\basis{l_t,i_t}$ in the different
 dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
 
+
+
 \subsection{Hierarchization with Breadth-First Search on Fundamental Bases}
 \label{sec:441BFSFundamentalBases}
 
@@ -354,13 +356,10 @@ in two dimensions is shown in \cref{fig:DAG}.
     Inputs are the set $\liset$ of level-index pairs of the
     sparse grid (see \eqref{eq:spatiallyAdaptiveSG}) and
     the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
-    of input data (function values $\fcnval{\*l,\*i}$ at the grid points),
-    where $\liset$ is the set of all feasible level-index pairs $(\*l,\*i)$,
-    i.e., $\normone{\*l} \le n$, $\*i \in \hiset{\*l}$.
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points).
     The output is the vector
     $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
     of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
-    %
   }%
   \label{alg:BFS}%
 \end{algorithm}
