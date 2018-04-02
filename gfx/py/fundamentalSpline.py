@@ -54,7 +54,7 @@ for p in ps:
   
   xx = np.linspace(*xl, 441)
   centralizedCardinalBSpline = helper.basis.CentralizedCardinalBSpline(p)
-  brightness = 0.65
+  brightness = 0.5
   color = [x + brightness * (1 - x)
            for x in matplotlib.colors.to_rgba("C0")[:3]]
   
