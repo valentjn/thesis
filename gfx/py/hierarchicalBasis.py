@@ -246,7 +246,7 @@ def plotHierarchicalFundamentalTransformedBSplines(q):
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalFundamentalSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.5), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 5.2), scale=1.0)
   basis = helper.basis.HierarchicalFundamentalSpline(p)
   basisModified = helper.basis.ModifiedHierarchicalFundamentalSpline(p)
   for l in range(n+1):
