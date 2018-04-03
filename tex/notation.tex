@@ -545,11 +545,13 @@
 \newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{Öunion}{$\dotcup$}{
   Disjoint union of sets (union where the pairwise intersection of
   the joined sets is empty)
-}%
+}
 
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
 
-\makecommandnotation{\sim}{Ösim}{$\sim$}{
+\let\simorig\sim
+\let\sim\undefined
+\newnotationcommand{\sim}{\simorig}{Ösim}{$\sim$}{
   Equivalence relation where
   $a \sim b$ denotes that two elements $a, b$ are equivalent
 }
