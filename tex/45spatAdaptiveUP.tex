@@ -7,7 +7,7 @@
 \label{sec:45spatAdaptiveUP}
 
 In this final section of the chapter,
-we study two algorithms based on the unidirectional principle
+we study two algorithms based on the \up
 for applying the linear operator $\linop$ on spatially adaptive sparse grids.
 \todo{mention Vazipfl if published}
 
@@ -30,13 +30,13 @@ The first algorithm can be applied if two requirements are met:
 For hierarchization with B-splines on sparse grids,
 we choose $\linop$ to be the hierarchization
 operator given in \cref{eq:hierarchizationSLE} and
-$\linop'$ to be the unidirectional principle directly applied on the
+$\linop'$ to be the \up directly applied on the
 sparse grid.
 Both of the assumptions are then satisfied,
 as $\linop^{-1}$ is known
 (interpolation matrix $\intpmat$ of basis function evaluations)
 and $\linop'$ can be applied fast.
-The unidirectional principle $\linop'$ generally produces wrong
+The \up $\linop'$ generally produces wrong
 results for hierarchical B-splines due to missing coupling points.
 However, especially for low B-spline degrees,
 $\linop'$ does not deviate too much from the true operator $\linop$.
