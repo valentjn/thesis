@@ -574,31 +574,29 @@
 
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
 
-\let\simorig\sim
-\let\sim\undefined
-\newnotationcommand{\sim}{\simorig}{Ösim}{$\sim$}{
+\newnotationcommand{\eq}{\eq}{Öeq}{$\eq$}{
   Equivalence relation where
-  $a \sim b$ denotes that two elements $a, b$ are equivalent
+  $a \eq b$ denotes that two elements $a, b$ are equivalent
 }
 
-\newnotationcommand[1]{\samepole}{\sim_{#1}}{Ösimt}{$\samepole{t}$}{
+\newnotationcommand[1]{\samepole}{\eq_{#1}}{Ösimt}{$\samepole{t}$}{
   Pole equivalence relation with respect to dimension $t = 1, \dotsc, d$
   ($\*k \samepole{t} \*k'$ if $\*k$ and $\*k'$ are on the same pole
   $\lisetpole \in \eqclasses{\liset}{\samepole{t}}$ in dimension $t$)
 }
 
 \newnotationcommand[2]{\eqclasses}{{#1}/{#2}}{Öeqclasses}{%
-  $\eqclasses{\cdot}{\sim}$%
+  $\eqclasses{\cdot}{\eq}$%
 }{
-  Set of equivalence classes for an equivalence relation $\sim$ on
+  Set of equivalence classes for an equivalence relation $\eq$ on
   a set $\cdot$
 }
 
 \newnotationcommand[2]{\eqclass}{[#1]_{#2}}{Öeqclass}{%
-  $\eqclass{\cdot}{\sim}$%
+  $\eqclass{\cdot}{\eq}$%
 }{
   Equivalence class of $\cdot$ (set of all elements equivalent to $\cdot$)
-  with respect to an equivalence relation $\sim$
+  with respect to an equivalence relation $\eq$
 }
 
 % ======================================================================
