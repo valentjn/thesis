@@ -233,15 +233,17 @@
   with $\clint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t \le b_t\}$
 }
 
-\newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{Öab20}%
-{$\opint{\*a, \*b}$}{
+\newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{Öab20}{%
+  $\opint{\*a, \*b}$%
+}{
   Open hyper-rectangle
   $:= \opint{a_1, b_1} \times \dotsb \times \opint{a_d, b_d}$
   with $\opint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t < b_t\}$
 }
 
-\newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{Öab30}%
-{$\hopint{\*a, \*b}$}{
+\newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{Öab30}{%
+  $\hopint{\*a, \*b}$%
+}{
   Half-open hyper-rectangle
   $:= \hopint{a_1, b_1} \times \dotsb \times \hopint{a_d, b_d}$
   with $\hopint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t < b_t\}$
@@ -261,8 +263,9 @@
 
 \newcommand*{\Ltwo}{L^2}
 
-\newnotationcommand[1]{\normLtwo}{\norm{#1}_{\Ltwo}}{ÖnormL2}%
-{$\normLtwo{\cdot}$}{
+\newnotationcommand[1]{\normLtwo}{\norm{#1}_{\Ltwo}}{ÖnormL2}{%
+  $\normLtwo{\cdot}$%
+}{
   $\Ltwo$ norm $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(x)^2 \dx}$
   of a function $\objfun\colon \Omega \to \real$
 }
@@ -392,25 +395,29 @@
   Regular sparse grid space of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Sxip}%
-{$\nonunifsplspace{\knotseq}{p}$}{
+\newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Sxip}{%
+  $\nonunifsplspace{\knotseq}{p}$%
+}{
   Spline space of degree $p$ with knots $\knotseq$
 }
 
-\newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}%
-{$\restrictedsplspace{l}{p}$}{
+\newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}{%
+  $\restrictedsplspace{l}{p}$%
+}{
   Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}}{p}$
   (spanned by the uniform nodal B-splines of level $l$, degree $p$)
 }
 
-\newnotationcommand[2]{\wholesplspace}{S_{#1}^{#2,\clint{0,1}}}{Slp01}%
-{$\wholesplspace{l}{p}$}{
+\newnotationcommand[2]{\wholesplspace}{S_{#1}^{#2,\clint{0,1}}}{Slp01}{%
+  $\wholesplspace{l}{p}$%
+}{
   Spline space of degree $p$ on the grid
   $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$
 }
 
-\newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}%
-{$\naksplspace{l}{p}$}{
+\newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}{%
+  $\naksplspace{l}{p}$%
+}{
   Spline space $:= \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
@@ -420,8 +427,9 @@
   coordinate degree $\le \*p$ on $\clint{\*0, \*1}$
 }
 
-\newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}%
-{$\restrictspace{V}{D}$}{
+\newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}{%
+  $\restrictspace{V}{D}$%
+}{
   Restriction $:= \{\restrictfcn{\objfun}{D} \mid \objfun \in V\}$
   onto a sub-domain $D$ for a function space $V$
 }
@@ -434,8 +442,9 @@
   Big-$\mathcal{O}$ Landau notation
 }
 
-\newnotationcommand[1]{\landauOmega}{\Omega(#1)}{ÄΩ}%
-{$\landauOmega{\objfun(x)}$}{
+\newnotationcommand[1]{\landauOmega}{\Omega(#1)}{ÄΩ}{%
+  $\landauOmega{\objfun(x)}$%
+}{
   Big-$\Omega$ Landau notation
 }
 
@@ -551,8 +560,9 @@
   in dimension $t$)
 }
 
-\newnotationcommand[2]{\eqclasses}{{#1}/{#2}}{Öeqclasses}%
-{$\eqclasses{\cdot}{\sim}$}{
+\newnotationcommand[2]{\eqclasses}{{#1}/{#2}}{Öeqclasses}{%
+  $\eqclasses{\cdot}{\sim}$%
+}{
   Set of equivalence classes for an equivalence relation $\sim$ on
   a set $\cdot$
 }
@@ -670,8 +680,9 @@
   Fundamental spline of degree $p$
 }
 
-\newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkξp}%
-{$\nonunifbspl{k,\knotseq}{p}$}{
+\newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkξp}{%
+  $\nonunifbspl{k,\knotseq}{p}$%
+}{
   Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
 }
 
@@ -738,13 +749,15 @@
 % Domains
 % ======================================================================
 
-\newnotationcommand[2]{\spldomain}{D_{#1}^{#2}}{D10}%
-{$\spldomain{\knotseq}{p}$}{
+\newnotationcommand[2]{\spldomain}{D_{#1}^{#2}}{D10}{%
+  $\spldomain{\knotseq}{p}$%
+}{
   Spline interpolation domain of $\nonunifsplspace{\knotseq}{p}$
 }
 
-\newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{D20}%
-{$\rspldomain{l}{p}$}{
+\newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{D20}{%
+  $\rspldomain{l}{p}$%
+}{
   Spline interpolation domain of $\restrictedsplspace{l}{p}$
   (uniform nodal B-splines of level $l$, degree $p$)
 }
