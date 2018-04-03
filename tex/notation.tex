@@ -479,6 +479,25 @@
   Interpolation matrix with entries $\basis{\*l',\*i'}(\gp{\*l,\*i})$
 }
 
+\newnotationcommand[1]{\upopmv}{\linop^{(#1)}}{Lt1}{%
+  $\upopmv{t_1, \tosc, t_j}$%
+}{
+  Operator $\upopmv{t_1, \dotsc, t_j}\colon \real^{\ngp} \to \real^{\ngp}$
+  corresponding to the application of the unidirectional principle in the
+  dimensions $t_1, \dotsc, t_j$ on the $d$-dimensional sparse grid
+}
+
+\newcommand*{\upopmvinv}[1]{(\upopmv{#1})^{-1}}
+
+\newnotationcommand[1]{\upopuv}{\linop^{(#1),\mathrm{1D}}}{Lt1D}{%
+  $\upopuv{t}$%
+}{
+  One-dimensional operator $\upopuv{t}\colon
+  \real^{\setsize{\lisetpole}} \to \real^{\setsize{\lisetpole}}$
+  corresponding to the application of the unidirectional principle in the
+  $t$-th dimension on a pole $\lisetpole$ of the sparse grid
+}
+
 \newnotationcommand{\idop}{\mathrm{id}}{id}{$\idop$}{
   Identity operator $\idop\colon \real^{\ngp} \to \real^{\ngp}$
 }
