@@ -449,7 +449,7 @@
 }
 
 % ======================================================================
-% Unary Operators
+% Unary Operators and Matrices
 % ======================================================================
 
 \makecommandnotation{\dim}{dim}{$\dim$}{
@@ -479,7 +479,9 @@
   Interpolation matrix with entries $\basis{\*l',\*i'}(\gp{\*l,\*i})$
 }
 
-\newnotationcommand[1]{\upopmv}{\linop^{(#1)}}{Lt1}{%
+\newcommand*{\intpmatuv}[1]{\mat{A}^{(#1)}}
+
+\newnotationcommand[1]{\upop}{\linop^{(#1)}}{Lt1}{%
   $\upopmv{t_1, \tosc, t_j}$%
 }{
   Operator $\upopmv{t_1, \dotsc, t_j}\colon \real^{\ngp} \to \real^{\ngp}$
@@ -487,16 +489,20 @@
   dimensions $t_1, \dotsc, t_j$ on the $d$-dimensional sparse grid
 }
 
-\newcommand*{\upopmvinv}[1]{(\upopmv{#1})^{-1}}
-
-\newnotationcommand[1]{\upopuv}{\linop^{(#1),\mathrm{1D}}}{Lt1D}{%
-  $\upopuv{t}$%
+\newnotationcommand[2]{\upopuv}{\linop^{(#1),#2}}{LtKpole}{%
+  $\upopuv{t}{\lisetpole}$%
 }{
-  One-dimensional operator $\upopuv{t}\colon
+  One-dimensional operator $\upopuv{t}{\lisetpole}\colon
   \real^{\setsize{\lisetpole}} \to \real^{\setsize{\lisetpole}}$
   corresponding to the application of the unidirectional principle in the
   $t$-th dimension on a pole $\lisetpole$ of the sparse grid
 }
+
+\newcommand*{\linopinv}{\linop^{-1}}
+\newcommand*{\intpmatinv}{\intpmat^{-1}}
+\newcommand*{\intpmatuvinv}[1]{(\intpmatuv{#1})^{-1}}
+\newcommand*{\upopinv}[1]{(\upop{#1})^{-1}}
+\newcommand*{\upopuvinv}[2]{(\linop^{(#1),#2})^{-1}}
 
 \newnotationcommand{\idop}{\mathrm{id}}{id}{$\idop$}{
   Identity operator $\idop\colon \real^{\ngp} \to \real^{\ngp}$
