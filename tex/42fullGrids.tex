@@ -26,7 +26,7 @@ will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
     the input data $\vlinin$
     along poles of the first dimension $x_1$ \emph{(left)}.
     All grid points of the same color are part of the same pole
-    (equivalence classes of ``$\samepole{t}$'' in
+    (equivalence classes of $\samepole{t}$ in
     \cref{alg:unidirectionalPrinciple}).
     Second, the univariate operator $\linop_2$ is applied on the
     resulting intermediate data $\vlinout[(1)]$
@@ -56,11 +56,11 @@ With the following invariant, we can prove the correctness of the \up.
           Define equivalence relation $\samepole{t_j}$ on $\liset$
           as $\*k \samepole{t_j} \*k' \iff \*k_{-t_j} = \*k'_{-t_j}$%
         }
-        \For{$\liset_\mathrm{pole} \in \eqclasses{\liset}{\samepole{t_j}}$}
+        \For{$\lisetpole \in \eqclasses{\liset}{\samepole{t_j}}$}
           \State{%
-            $(\linout[(j)]{\*k})_{\*k \in \liset_\mathrm{pole}} \gets
+            $(\linout[(j)]{\*k})_{\*k \in \lisetpole} \gets
             \linop_{t_j}
-            \Big[(\linout[(j-1)]{\*k})_{\*k \in \liset_\mathrm{pole}}\Big]$%
+            \Big[(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
@@ -124,14 +124,14 @@ With the following invariant, we can prove the correctness of the \up.
     \surplus[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
     \intertext{%
       If we choose the equivalence class
-      $\liset_\mathrm{pole} := \clint{(\*k_T,\*k'_{-T})}_{\samepole{t_j}}$
+      $\lisetpole := \clint{(\*k_T,\*k'_{-T})}_{\samepole{t_j}}$
       ($\*k_T$ arbitrary),
       then the sum over $k_{t_j}$ equals
-      $\sum_{\*k \in \liset_\mathrm{pole}}
+      $\sum_{\*k \in \lisetpole}
       \surplus[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((\linop_{t_j})^{-1}
-      %\Big[(\surplus[(j)]{\*k})_{\*k \in \liset_\mathrm{pole}}\Big])_{k'_{t_j}}
-      %= ((\surplus[(j-1)]{\*k})_{\*k \in \liset_\mathrm{pole}})_{k'_{t_j}}
+      %\Big[(\surplus[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
+      %= ((\surplus[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
       = \surplus[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
       by the 1D interpolation operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
