@@ -103,28 +103,28 @@
 
 \begin{shortlemma}
   \label{lemma:combiTechniqueEquivalenceRelation}
-  $\sim$ is an equivalence relation.
+  $\eq$ is an equivalence relation.
 \end{shortlemma}
 
 \begin{proof}
-  We check reflexivity, symmetry, and transitivity of $\sim$:
+  We check reflexivity, symmetry, and transitivity of $\eq$:
   \begin{itemize}
     \item
     \emph{Reflexivity:}
     Using the same level $\*l' = \*l''$ implies
     $T_{\*l',\*l'} = \{1, \dotsc, d\}$,
-    i.e., $\*l' \sim \*l'$.
+    i.e., $\*l' \eq \*l'$.
     
     \item
     \emph{Symmetry:}
     We have
-    $\*l' \sim \*l'' \iff \*l'' \sim \*l'$, since
+    $\*l' \eq \*l'' \iff \*l'' \eq \*l'$, since
     $T_{\*l',\*l''} = T_{\*l'',\*l'}$ and
     $\min\{l'_t, l''_t\} = \min\{l''_t, l'_t\}$.
     
     \item
     \emph{Transitivity:}
-    Let $\*l' \sim \hat{\*l}$ and $\hat{\*l} \sim \*l''$.
+    Let $\*l' \eq \hat{\*l}$ and $\hat{\*l} \eq \*l''$.
     Then, $T_{\*l',\*l''} \supset T_{\*l',\hat{\*l}} \cap T_{\hat{\*l},\*l''}$.
     Thus, if some $t = 1, \dotsc, d$ with $t \notin T_{\*l',\*l''}$ is given,
     $t \notin T_{\*l',\hat{\*l}}$ or $t \notin T_{\hat{\*l},\*l''}$ holds.
@@ -151,9 +151,9 @@
       $\min\{l'_t, l''_t\} \ge l_t$.
     \end{itemize}
     Therefore, it holds $\min\{l'_t, l''_t\} \ge l_t$
-    for all $t \notin T_{\*l',\*l''}$, i.e., $\*l' \sim \*l''$.
+    for all $t \notin T_{\*l',\*l''}$, i.e., $\*l' \eq \*l''$.
   \end{itemize}
-  This shows that $\sim$ is an equivalence relation.
+  This shows that $\eq$ is an equivalence relation.
 \end{proof}
 
 \lemmaCombiTechniqueIdenticalValues*
@@ -271,7 +271,7 @@
   One of $l'_t \not= \hat{l}'_t$ or $l'_t \not= \hat{l}''_t$ must be true.
   Let us assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
   $t \notin T_{\*l',\hat{\*l}'}$.
-  Due to $\*l' \sim \hat{\*l}'$
+  Due to $\*l' \eq \hat{\*l}'$
   (since $\*l'$ and $\hat{\*l}'$ are both contained in the same
   equivalence class $L_0$),
   we have $\min\{l'_t, \hat{l}'_t\} \ge l_t$.
@@ -282,7 +282,7 @@
   $\fa{t \in T_{L_0}}{l'_t = l^\ast_t}$ and
   $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$
   and let $\*l'' \in L_0$ be an arbitrary representative of $L_0$.
-  We prove that $\*l' \sim \*l''$ (i.e., $\*l' \in L_0$).
+  We prove that $\*l' \eq \*l''$ (i.e., $\*l' \in L_0$).
   Note that $T_{L_0} \subset T_{\*l',\*l''}$,
   as $t \in T_{L_0}$ implies
   $l''_t = l^\ast_t$, which can be combined with $l'_t = l^\ast_t$
@@ -296,14 +296,14 @@
   $\hat{l}'_t \not= \hat{l}''_t$.
   As above, we assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
   $t \notin T_{\*l',\hat{\*l}'}$.
-  From $\*l'' \sim \hat{\*l}'$
+  From $\*l'' \eq \hat{\*l}'$
   (since $\*l''$ and $\hat{\*l}'$ are both contained in the same
   equivalence class $L_0$),
   we obtain $\min\{l''_t, \hat{l}'_t\} \ge l_t$.
   Together with $l'_t \ge l_t$ (by the above assumption on $\*l'$),
   this implies
   $\fa{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t}$
-  and consequently $\*l' \sim \*l''$,
+  and consequently $\*l' \eq \*l''$,
   as asserted.
 \end{proof}
 
@@ -313,23 +313,23 @@
   \Cref{lemma:combiTechniqueIdenticalValues}
   implies that the summands $\fgintp{\*l'}(\gp{\*l,\*i})$
   corresponding to levels $\*l'$ of the same equivalence class
-  $L_0 \in \eqclasses{L}{\sim}$ are identical.
+  $L_0 \in \eqclasses{L}{\eq}$ are identical.
   Let $f_{L_0}$ denote the common function value.
   Hence, the sum in the \lhs of the assertion can be reordered to combine
-  levels of the equivalence classes $L_0 \in \eqclasses{L}{\sim}$:
+  levels of the equivalence classes $L_0 \in \eqclasses{L}{\eq}$:
   \begin{subequations}
     \begin{align}
       &\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
       \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
       \fgintp{\*l'}(\gp{\*l,\*i})\\
       \label{eq:proofCombiTechniqueIdenticalValues2}
-      &= \sum_{L_0 \in \eqclasses{L}{\sim}} f_{L_0} \sum_{q=0}^{d-1}
+      &= \sum_{L_0 \in \eqclasses{L}{\eq}} f_{L_0} \sum_{q=0}^{d-1}
       (-1)^q \binom{d-1}{q} \cdot
       \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}.
     \end{align}
   \end{subequations}
   It now suffices to show that the inner sum vanishes
-  for every equivalence class $L_0 \in \eqclasses{L}{\sim}$.
+  for every equivalence class $L_0 \in \eqclasses{L}{\eq}$.
   
   To this end, we have to calculate
   $\setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}$
