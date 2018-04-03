@@ -559,7 +559,7 @@
 \newnotationcommand[1]{\samepole}{\sim_{#1}}{Ösimt}{$\samepole{t}$}{
   Pole equivalence relation with respect to dimension $t = 1, \dotsc, d$
   ($\*k \samepole{t} \*k'$ if $\*k$ and $\*k'$ are on the same pole
-  in dimension $t$)
+  $\lisetpole \in \eqclasses{\liset}{\samepole{t}}$ in dimension $t$)
 }
 
 \newnotationcommand[2]{\eqclasses}{{#1}/{#2}}{Öeqclasses}{%
@@ -580,6 +580,12 @@
 \newnotationcommand{\liset}{K}{K}{$\liset$}{
   Finite set of hierarchical level-index pairs $(\*l, \*i)$
   or finite subset of continuous indices $\*k \in \natz^d$
+}
+
+\newnotationcommand{\lisetpole}{\liset_\mathrm{pole}}{Kpole}{$\lisetpole$}{
+  Pole $\lisetpole \in \eqclasses{\liset}{\samepole{t}}$
+  in some dimension $t$
+  ($\lisetpole$ is a subset of $\liset$)
 }
 
 \newnotationcommand{\levelset}{L}{L1}{$\levelset$}{
