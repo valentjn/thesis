@@ -11,7 +11,7 @@ one-dimensional subgrids (the \emph{poles}) of $\sgset$,
 which is repeated for all dimensions.
 In this section, we first formulate the \up for
 general linear operators $\linop$ and then prove its correctness for
-the case $\linop = \intpmat^{-1}$ of hierarchization.
+the case $\linop = \intpmatinv$ of hierarchization.
 The correctness for the general case of arbitrary tensor product operators
 will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
 
@@ -90,7 +90,7 @@ With the following invariant, we can prove the correctness of the \up.
   \label{prop:invariantUnidirectionalPrinciple}
   Let $\linop$ be the hierarchization operator on a full grid,
   i.e.,
-  $\linop = \intpmat^{-1}$,
+  $\linop = \intpmatinv$,
   $\vlinin = (\fcnval{\*k})_{\*k \in \liset}$,
   $\vlinout = (\surplus{\*k})_{\*k \in \liset}$,
   $\upopuv{t_j}$ is the 1D interpolation operator $(\intpmat_{t_j})^{-1}$, and

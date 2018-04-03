@@ -37,7 +37,7 @@ function values and evaluating the resulting interpolant.
     The objective function $f$ is sampled at the grid points
     $\gp{l,i} \in \sgset$ to obtain function values $\fcnval{l,i}$,
     which form the input vector $\vlinin$ for the linear operator
-    $\linop = \intpmat^{-1}$.%
+    $\linop = \intpmatinv$.%
   }[48mm]{%
     \includegraphics{hierarchization_1}%
   }%
@@ -111,7 +111,7 @@ $\intpmat \in \real^{\ngp \times \ngp}$:
 \begin{subequations}
   \label{eq:hierarchizationSLE}
   \begin{equation}
-    \linop = \intpmat^{-1},\quad
+    \linop = \intpmatinv,\quad
     \intpmat = (\basis{\*l',\*i'}(\gp{\*l,\*i}))_%
     {(\*l,\*i),(\*l',\*i') \in \liset},\quad
     \vlinin = (\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset},\quad
@@ -162,10 +162,10 @@ $\fcnval{\*l,\*i}$ and the data of its $3^d - 1$ neighboring grid points
 on the boundary of $\supp \bspl{\*l',\*i'}{\*1}$,
 but potentially on the data of the whole grid.
 This is shown in \cref{fig:matrixDensityPattern}:
-There are at most $3^d = 9$ non-zero entries in each row of $\intpmat^{-1}$
+There are at most $3^d = 9$ non-zero entries in each row of $\intpmatinv$
 for $p = 1$ and $d = 2$.
 As soon as the B-spline degree is increased,
-both $\intpmat$ and $\intpmat^{-1}$ become significantly denser.
+both $\intpmat$ and $\intpmatinv$ become significantly denser.
 
 \begin{SCfigure}
   \includegraphics{matrixDensityPattern_1}%
@@ -175,7 +175,7 @@ both $\intpmat$ and $\intpmat^{-1}$ become significantly denser.
     Density pattern
     of the hierarchization matrix $\intpmat$
     \emph{(middle row, \textcolor{C0}{blue})} and
-    of its inverse $\intpmat^{-1}$
+    of its inverse $\intpmatinv$
     \emph{(bottom row, \textcolor{C1}{red})}
     for the regular sparse grid $\coarseregsgset{n}{d}{1}$
     of level $n = 4$ and dimensionality $d = 2$
