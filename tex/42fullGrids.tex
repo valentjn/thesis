@@ -22,15 +22,15 @@ will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
   ]{%
     Application of a linear operator $\linop$
     on two-dimensional sparse grid data with the unidirectional principle.
-    First, the univariate operator $\upopuv{1}$ is applied on
+    First, the univariate operator $\upopuv{1}{\lisetpole}$ is applied on
     the input data $\vlinin$
-    along poles of the first dimension $x_1$ \emph{(left)}.
+    along poles $\lisetpole$ of the first dimension $x_1$ \emph{(left)}.
     All grid points of the same color are part of the same pole
     (equivalence classes of $\samepole{t}$ in
     \cref{alg:unidirectionalPrinciple}).
-    Second, the univariate operator $\upopuv{2}$ is applied on the
+    Second, the univariate operator $\upopuv{2}{\lisetpole}$ is applied on the
     resulting intermediate data $\vlinout[(1)]$
-    along poles of the second dimension $x_2$ \emph{(center)}.
+    along poles $\lisetpole$ of the second dimension $x_2$ \emph{(center)}.
     This gives the final values $\vlinout = \linop[\vlinin]$ \emph{(right)}.%
   }%
   \label{fig:unidirectionalPrinciple}%
@@ -41,9 +41,17 @@ will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
 The \up is given in \cref{alg:unidirectionalPrinciple}.
 The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
 that specifies the order of dimensions in which the \up should be applied.
-We denote with $\upopuv{t_j}$ the one-dimensional version of $\linop$
-applied in dimension $t_j$ ($j = 1, \dotsc, d$).
-With the following invariant, we can prove the correctness of the \up.
+We denote with $\upopuv{t_j}{\lisetpole}$ the one-dimensional version of $\linop$
+applied in dimension $t_j$ ($j = 1, \dotsc, d$) on the pole $\lisetpole$.
+Formally, a pole is an equivalence class of the
+\term{pole equivalence relation} $\samepole{t_j}$ on $\liset$
+(i.e., a subset of $\samepole{t_j}$
+in which all points are in relation to each other):
+\begin{equation}
+  \label{eq:poleEquivalenceRelation}
+  \*k' \samepole{t_j} \*k'' \iff \*k'_{-t_j} = \*k''_{-t_j},\quad
+  \*k', \*k'' \in \liset.
+\end{equation}
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -52,14 +60,14 @@ With the following invariant, we can prove the correctness of the \up.
     }
       \State{$\vlinout[(0)] \gets \vlinin$}
       \For{$j = 1, \dotsc, d$}
-        \State{%
-          Define equivalence relation $\samepole{t_j}$ on $\liset$
-          as $\*k \samepole{t_j} \*k' \iff \*k_{-t_j} = \*k'_{-t_j}$%
-        }
+        %\State{%
+        %  Define equivalence relation $\samepole{t_j}$ on $\liset$
+        %  as $\*k \samepole{t_j} \*k' \iff \*k_{-t_j} = \*k'_{-t_j}$%
+        %}
         \For{$\lisetpole \in \eqclasses{\liset}{\samepole{t_j}}$}
           \State{%
             $(\linout[(j)]{\*k})_{\*k \in \lisetpole} \gets
-            \upopuv{t_j}
+            \upopuv{t_j}{\lisetpole}
             \Big[(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}\Big]$%
           }
           \Comment{apply 1D operator on pole}%
@@ -76,13 +84,15 @@ With the following invariant, we can prove the correctness of the \up.
     the unidirectional principle.
     Inputs are the set $\liset$ of grid indices,
     the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
-    the one-dimensional operators $\upopuv{t_j}$ should be applied, and
+    the one-dimensional operators $\upopuv{t_j}{\lisetpole}$ should be applied, and
     the vector $\vlinin = (\linin{\*k})_{\*k \in \liset}$ of input data.
     The output is the vector $\vlinout = (\linout{\*k})_{\*k \in \liset}$
     of output data.%
   }%
   \label{alg:unidirectionalPrinciple}%
 \end{algorithm}
+
+We prove the correctness of the \up with the following invariant:
 
 \begin{proposition}[%
   invariant of \cref{alg:unidirectionalPrinciple} for hierarchization%
@@ -93,7 +103,8 @@ With the following invariant, we can prove the correctness of the \up.
   $\linop = \intpmatinv$,
   $\vlinin = (\fcnval{\*k})_{\*k \in \liset}$,
   $\vlinout = (\surplus{\*k})_{\*k \in \liset}$,
-  $\upopuv{t_j}$ is the 1D interpolation operator $(\intpmat_{t_j})^{-1}$, and
+  $\upopuv{t_j}{\lisetpole}$ is the 1D interpolation operator
+  $\intpmatuvinv{t_j}$, and
   $\liset = \{\*0, \dotsc, \*2^\*l\}$
   corresponds to a full grid $\fgset{\*l}$ of level $\*l$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
@@ -129,7 +140,7 @@ With the following invariant, we can prove the correctness of the \up.
       then the sum over $k_{t_j}$ equals
       $\sum_{\*k \in \lisetpole}
       \surplus[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
-      %= ((\upopuv{t_j})^{-1}
+      %= ((\upopuv{t_j}{\lisetpole})^{-1}
       %\Big[(\surplus[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
       %= ((\surplus[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
       = \surplus[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
@@ -170,7 +181,7 @@ We compare the complexity of the \up for hierarchization compared
 to directly solving the system \eqref{eq:hierarchizationSLE} of
 linear equations.
 If we assume that $d$ is constant and that
-$\linop$ and $\upopuv{t_j}$ apply Gaussian elimination to
+$\linop$ and $\upopuv{t_j}{\lisetpole}$ apply Gaussian elimination to
 solve the multivariate and univariate systems, respectively,
 then directly solving \eqref{eq:hierarchizationSLE} takes
 $\landauO{\ngp^2 (\ngp + d)}$ time%
