@@ -179,7 +179,111 @@ for higher dimensionalities or higher degrees.
 \subsection{Duality of the Unidirectional Principle}
 \label{sec:452duality}
 
-\blindtext{}
+To find the second algorithm that we present in this section,
+we study why we cannot directly apply the \up
+(as introduced in \cref{sec:42fullGrids}) on spatially adaptive sparse grids.
+As before, we denote with $\liset$ the level-index set of
+the spatially adaptive sparse grid (see \cref{sec:41problem}).
+
+The \up, as stated in
+\cref{alg:unidirectionalPrinciple} for the full grid case,
+subsequently applies one-dimensional operators
+$\upopuv{t_j}{\lisetpole}\colon \real^{\setsize{\lisetpole}} \to
+\real^{\setsize{\lisetpole}}$
+on the poles $\lisetpole$ of the sparse grid at hand,
+looping over a permutation $t_1, \dotsc, t_d$
+of the dimensions $1, \dotsc, d$.
+Let us recall the pole equivalence relation $\samepole{t_j}$
+from \cref{eq:poleEquivalenceRelation}, defined on $\liset$:
+\begin{equation}
+  \*k' \samepole{t_j} \*k'' \iff \*k'_{-t_j} = \*k''_{-t_j},\quad
+  \*k', \*k'' \in \liset.
+\end{equation}
+Two points $\*k', \*k'' \in \liset$ are equivalent with respect to
+$\samepole{t_j}$, if $\*k'$ is contained in the pole through $\*k''$
+with respect to the $t_j$-th dimension.
+
+The applications of the one-dimensional operators
+$\upopuv{t_j}{\lisetpole}$
+($\lisetpole \in \eqclasses{\liset}{\samepole{t_j}}$)
+in the $j$-th iteration of \cref{alg:unidirectionalPrinciple}
+are equivalent to a single application of the following operator
+$\upop{t_j}\colon \real^{\setsize{\liset}} \to \real^{\setsize{\liset}}$:
+\begin{equation}
+  \label{eq:upopDefinition}
+  (\upop{t_j})_{\*k'',\*k'}
+  :=
+  \begin{cases}
+    (\upopuv{t_j}{\lisetpole})_{k''_{t_j},k'_{t_j}},&
+    \ex{\lisetpole \in \eqclasses{\liset}{\samepole{t_j}}}{
+      \*k', \*k'' \in \lisetpole
+    },\\
+    0,&\*k' \not\samepole{t_j} \*k'',
+  \end{cases}
+\end{equation}
+where $(\upop{t_j})_{\*k'',\*k'}$ denotes the entry of row $\*k''$
+and column $\*k'$ of the matrix corresponding to $\upop{t_j}$
+(similar for $(\upopuv{t_j}{\lisetpole})_{k''_{t_j},k'_{t_j}}$).
+This is because the poles $\lisetpole$ are pairwise disjoint
+as equivalence classes.
+Consequently, every point $\*k$ is only acted upon by a single
+one-dimensional operator $\upopuv{t_j}{\lisetpole}$,
+namely the pole $\eqclass{\*k}{\samepole{t_j}}$ through $\*k$.
+This leads to the block-diagonal structure
+of $\upop{t_j}$ given in \eqref{eq:upopDefinition},
+if the rows of the matrix of $\upop{t_j}$
+are grouped by poles $\lisetpole$ and the columns are arranged accordingly.
+In the following, we assume that the one-dimensional operators
+$\upopuv{t_j}{\lisetpole}$ are invertible.
+In this case, $\upop{t_j}$ is also invertible and
+$\upopinv{t_j}$ is given by the block-diagonal matrix of
+the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
+
+Now, we can describe the whole \up of
+\cref{alg:unidirectionalPrinciple} as the operator
+$\upop{t_1,\dotsc,t_d}\colon \real^{\setsize{\liset}} \to
+\real^{\setsize{\liset}}$ given by:
+\begin{equation}
+  \upop{t_1,\dotsc,t_d}
+  := \upop{t_d} \dotsm \upop{t_1}.
+\end{equation}
+The right-most operator is $\upop{t_1}$, since it is applied first.
+We say that the \up is \term{correct} for $\linop$ and
+$(t_1, \dotsc, t_d)$, if
+\begin{equation}
+  \upop{t_1,\dotsc,t_d}
+  \overset{?}{=} \linop.
+\end{equation}
+Note that this relation is not satisfied in general,
+especially for B-spline hierarchization with the operator
+$\linop = \intpmatinv$.
+However, for operators like these, whose inverse
+$\linopinv = \intpmat$ can be much easier described and applied,
+we can make use of the so-called \term{duality of the \up}:
+
+\begin{lemma}[duality of the unidirectional principle]
+  \label{lemma:dualityUnidirectionalPrinciple}
+  The \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
+  if and only if the \up is correct for $\linopinv$ and $(t_d, \dotsc, t_1)$.
+\end{lemma}
+
+\begin{proof}
+  The correctness of the \up for $\linop$ and $(t_1, \dotsc, t_d)$
+  is by definition equivalent to
+  \begin{equation}
+    \upop{t_d} \dotsm \upop{t_1} = \linop.
+  \end{equation}
+  By inverting both sides, we obtain the definition of the
+  correctness of the \up for $\linopinv$ and $(t_d, \dotsc, t_1)$.
+\end{proof}
+
+The duality given in \cref{lemma:dualityUnidirectionalPrinciple}
+means that in order to establish the correctness of $\linop$
+for some arbitrary permutation $(t_1, \dotsc, t_d)$ of $1, \dotsc, d$,
+it suffices to establish the \up's correctness for the
+inverse operator $\linopinv$ and the reverse permutation $(t_d, \dotsc, t_1)$.
+This is especially of interest for our main application,
+the hierarchization operator $\linop = \intpmatinv$ for B-splines.
 
 
 
