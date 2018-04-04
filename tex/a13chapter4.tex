@@ -752,3 +752,210 @@
   do not change after \pop{}ping all points with level sum $< q$).
   This shows the induction claim \eqref{eq:proofPropInvariantBFS1}.
 \end{proof}
+
+
+
+\printornamentsfalse
+\subsection{%
+  Proof for the Correctness of the UnidirectionalPrinciple on
+  Spatially Adaptive Sparse Grids%
+}
+\label{sec:proofCorrectnessUnidirectionalPrincipleSASG}
+\printornamentstrue
+
+\lemmaChainExistenceSufficient*
+
+\begin{proof}
+  We prove the assertion by induction over $j = 0, \dotsc, d$.
+  
+  For $j = 0$, the operator $\upop{\emptyset}$ is by definition
+  \eqref{eq:upopProduct} the identity operator $\idop$.
+  The assumption $(\upop{\emptyset})_{\*k'',\*k'} \not= 0$
+  implies that $\*k' = \*k''$, since the identity matrix is diagonal.
+  Therefore, the chain $(\chain{0})$ from $\*k'$ to $\*k''$ is given by
+  $\chain{0} = \*k'$, which is contained in $\liset$.
+  
+  For the induction step $j \to (j+1)$, we split \cref{eq:upopProduct},
+  i.e.,
+  \begin{equation}
+    \upop{t_1,\dotsc,t_{j+1}}
+    = \upop{t_{j+1}} \upop{t_j} \dotsm \upop{t_1}
+    = \upop{t_{j+1}} \upop{t_1,\dotsc,t_j},
+  \end{equation}
+  and infer, by assumption,
+  \begin{equation}
+    \label{eq:proofLemmaChainExistenceSufficient1}
+    0
+    \not= (\upop{t_1,\dotsc,t_{j+1}})_{\*k'',\*k'}
+    = \sum_{\*k \in \liset} (\upop{t_{j+1}})_{\*k'',\*k}
+    (\upop{t_1,\dotsc,t_j})_{\*k,\*k'}.
+  \end{equation}
+  Consequently,
+  there is at least one value for the summation index $\*k$
+  for which both factors do not vanish.
+  The first factor $(\upop{t_{j+1}})_{\*k'',\*k}$ can by definition
+  only be non-zero if $\*k \samepole{t_{j+1}} \*k''$.
+  The second factor $(\upop{t_1,\dotsc,t_j})_{\*k,\*k'}$ being
+  non-zero implies that by induction hypothesis,
+  $\liset$ contains the chain $(\chain{0}, \dotsc, \chain{j})$
+  from $\*k'$ to $\*k$ with respect to $(t_1, \dotsc, t_j)$.
+  The combination of both statements leads to
+  the chain $(\chain{0}, \dotsc, \chain{j}, \chain{j+1})$ from $\*k'$
+  to $\*k''$ with respect to $(t_1, \dotsc, t_{j+1})$.
+  All points of the chain are contained in $\liset$.
+\end{proof}
+
+\lemmaChainExistenceNecessary*
+
+\begin{proof}
+  Again, we prove the claim by induction over $j = 0, \dotsc, d$.
+  
+  For $j = 0$, the operator $\upop{\emptyset}$ is the identity operator.
+  Therefore, the \lhs of \eqref{eq:lemmaChainExistenceNecessary} is $1$
+  (due to $\chain{0} = \*k'$).
+  The \rhs is by convention also $1$, as it is an empty product.
+  
+  For the induction step $j \to (j+1)$, we consider again
+  \begin{equation}
+    \label{eq:ProofLemmaChainExistenceNecessary1}
+    (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
+    = \sum_{\*k \in \liset} (\upop{t_{j+1}})_{\chain{j+1},\*k}
+    (\upop{t_1,\dotsc,t_j})_{\*k,\*k'}
+  \end{equation}
+  similar to \eqref{eq:proofLemmaChainExistenceSufficient1}.
+  Recall that
+  \begin{equation}
+    (\textcolor{C0}{\chainuv{j}_t},
+    \textcolor{C1}{\chainuv{j+1}_t})
+    =
+    \begin{cases}
+      (\textcolor{C0}{k''_t}, \textcolor{C1}{k''_t}),&
+      t \in \{t_1, \dotsc, t_j\},\\
+      (\textcolor{C0}{k'_t}, \textcolor{C1}{k''_t}),&
+      t = t_{j+1},\\
+      (\textcolor{C0}{k'_t}, \textcolor{C1}{k'_t}),&
+      t \notin \{t_1, \dotsc, t_j, t_{j+1}\}.
+    \end{cases}
+  \end{equation}
+  We now argue that all summands of
+  \eqref{eq:ProofLemmaChainExistenceNecessary1} vanish.
+  There are two cases for the summation index $\*k$:
+  \begin{itemize}
+    \item
+    If there is a $t \in \{t_1, \dotsc, t_j\}$ with $k_t \not= k''_t$,
+    then we have $k_t \not= k''_t = \chainuv{j+1}_t$.
+    Consequently, $\chain{j+1} \not\samepole{t_{j+1}} \*k$ and
+    $(\upop{t_{j+1}})_{\chain{j+1},\*k} = 0$ due to \eqref{eq:upopEntries},
+    i.e., the first factor of the $\*k$-th summand in
+    \eqref{eq:ProofLemmaChainExistenceNecessary1} vanishes.
+    
+    \item
+    If there is a $t \notin \{t_1, \dotsc, t_j\}$ with $k_t \not= k'_t$,
+    then the second factor $(\upop{t_1,\dotsc,t_j})_{\*k,\*k'}$
+    of the $\*k$-th summand in
+    \eqref{eq:ProofLemmaChainExistenceNecessary1} vanishes.
+    Indeed, if we assume the contrary,
+    then \cref{lemma:chainExistenceSufficient} implies that there is
+    a chain from $\*k'$ to $\*k$ with respect to $(t_1, \dotsc, t_j)$.
+    However, by definition of a chain, this means that
+    $\*k'$ and $\*k$ coincide in all other dimensions
+    (which are not in $\{t_1, \dotsc, t_j\}$).
+    This contradicts $k_t \not= k'_t$ and therefore
+    $(\upop{t_1,\dotsc,t_j})_{\*k,\*k'}$ must vanish.
+  \end{itemize}
+  
+  We infer that only the summand $\*k = \chain{j}$ remains in
+  \eqref{eq:ProofLemmaChainExistenceNecessary1}:
+  \begin{equation}
+    (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
+    = (\upop{t_{j+1}})_{\chain{j+1},\chain{j}}
+    (\upop{t_1,\dotsc,t_j})_{\chain{j},\*k'}.
+  \end{equation}
+  The first factor equals
+  \begin{equation}
+    (\upop{t_{j+1}})_{\chain{j+1},\chain{j}}
+    = (\upopuv{t_{j+1}}{\eqclass{\chain{j+1}}{\samepole{t_{j+1}}}})%
+    _{\chainuv{j+1}_{t_{j+1}},\chainuv{j}_{t_{j+1}}}
+    = (\upopuv{t_{j+1}}{\eqclass{\chain{j+1}}{\samepole{t_{j+1}}}})%
+    _{k''_{t_{j+1}},k'_{t_{j+1}}}
+  \end{equation}
+  by \eqref{eq:upopEntries} and
+  due to $\chain{j} \samepole{t_{j+1}} \chain{j+1}$.
+  The second factor equals
+  \begin{equation}
+    (\upop{t_1,\dotsc,t_j})_{\chain{j},\*k'}
+    =
+    (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+    \dotsm
+    (\upopuv{t_j}{\eqclass{\chain{j}}{\samepole{t_j}}})_{k''_{t_j},k'_{t_j}}
+  \end{equation}
+  by induction hypothesis.
+  Hence, the product of both factors is
+  \begin{equation}
+    (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
+    =
+    (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+    \dotsm
+    (\upopuv{t_{j+1}}{\eqclass{\chain{j+1}}{\samepole{t_{j+1}}}})%
+    _{k''_{t_{j+1}},k'_{t_{j+1}}}
+  \end{equation}
+  as desired.
+\end{proof}
+
+\propCorrectnessUPCharacterization*
+
+\begin{proof}
+  ``$\implies$'':
+  Let the \up be correct for $\linop$ and $(t_1, \dotsc, t_d)$
+  and $\*k', \*k'' \in \liset$ with $(\linop)_{\*k'',\*k'} \not= 0$.
+  Then, we obtain
+  \begin{equation}
+    (\upop{t_1,\dotsc,t_d})_{\*k'',\*k'}
+    = (\linop)_{\*k'',\*k'}
+    \not= 0.
+  \end{equation}
+  By \cref{lemma:chainExistenceSufficient},
+  this implies that $\liset$ contains the chain from $\*k'$ to $\*k''$
+  with respect to $(t_1, \dotsc, t_d)$.
+  
+  ``$\impliedby$'':
+  For the converse direction, let us assume that there are chains
+  from $\*k'$ to $\*k''$ with respect to $(t_1, \dotsc, t_d)$
+  for all $\*k', \*k'' \in \liset$ with $(\linop)_{\*k'',\*k'} \not= 0$.
+  Let $\*k', \*k'' \in \liset$ be arbitrary.
+  There are two cases:
+  \begin{itemize}
+    \item
+    $(\linop)_{\*k'',\*k'} \not= 0$:
+    By assumption, $\liset$ contains the chain from $\*k'$ to $\*k''$
+    with respect to $(t_1, \dotsc, t_d)$.
+    We apply \cref{lemma:chainExistenceNecessary} with $j = d$
+    to infer
+    \begin{equation}
+      (\upop{t_1,\dotsc,t_d})_{\*k'',\*k'}
+      =
+      (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+      \dotsm
+      (\upopuv{t_d}{\eqclass{\chain{d}}{\samepole{t_d}}})_{k''_{t_d},k'_{t_d}}
+      = (\linop)_{\*k'',\*k'}
+    \end{equation}
+    by the assumption \cref{eq:tensorProductOperator} on
+    the tensor product structure of $\linop$.
+    
+    \item
+    $(\linop)_{\*k'',\*k'} = 0$:
+    In this case, $(\upop{t_1,\dotsc,t_d})_{\*k'',\*k'}$ must vanish as well.
+    Indeed, if we assume the contrary
+    $(\upop{t_1,\dotsc,t_d})_{\*k'',\*k'} \not= 0$,
+    then we can apply \cref{lemma:chainExistenceSufficient}
+    to obtain that $\liset$ contains the chain from $\*k'$ to $\*k''$
+    with respect to $(t_1, \dotsc, t_d)$.
+    We conclude with \cref{lemma:chainExistenceNecessary} as in the first case
+    that $(\upop{t_1,\dotsc,t_d})_{\*k'',\*k'} = (\linop)_{\*k'',\*k'} = 0$,
+    which is a contradiction.
+  \end{itemize}
+  In any case, we obtain
+  $(\upop{t_1,\dotsc,t_d})_{\*k'',\*k'} = (\linop)_{\*k'',\*k'}$,
+  from which follows the correctness of the \up,
+  as $\*k'$ and $\*k''$ are arbitrary.
+\end{proof}
