@@ -620,10 +620,11 @@
   or finite subset of continuous indices $\*k \in \natz^d$
 }
 
-\newnotationcommand{\lisetpole}{\liset_\mathrm{pole}}{Kpole}{$\lisetpole$}{
+\newnotationcommandoptarg{1}{\lisetpole}{%
+  \liset_\mathrm{pole}\ifnotempty{#1}{^{#1}}%
+}{Kpole}{$\lisetpole$}{
   Pole $\lisetpole \in \eqclasses{\liset}{\samepole{t}}$
-  in some dimension $t$
-  ($\lisetpole$ is a subset of $\liset$)
+  in some dimension $t$ ($\lisetpole$ is a subset of $\liset$)
 }
 
 \newnotationcommand{\levelset}{L}{L1}{$\levelset$}{
