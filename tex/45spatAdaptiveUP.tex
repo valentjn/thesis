@@ -461,8 +461,9 @@ the number of points to be inserted can be very large.
 The worst case is that the final grid is a full grid, i.e.,
 the Cartesian product of the union of the poles in the different dimensions:
 \begin{equation}
-  \bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{1}} \times \dotsb \times
-  \bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{d}}.
+  \left(\bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{1}}\right)
+  \times \dotsb \times
+  \left(\bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{d}}\right).
 \end{equation}
 In this case, we lose the advantage of sparse grids,
 whose goal is to ease the curse of dimensionality.
@@ -478,25 +479,138 @@ in the corresponding interpolation matrices $\intpmat$
 
 \paragraph{Motivation}
 
-\blindtext{}
+In order to reduce the number of chain points to be inserted,
+we have to use other spline bases such that
+the resulting interpolation matrices $\intpmat$ have more zero entries.
+One possibility are the hierarchical fundamental splines
+as introduced in \cref{sec:443fundamentalSplines}.
+However, they are globally supported, which implies a number
+of disadvantages concerning algorithms and implementations.
+The most significant disadvantage is that although
+we can use \bfs for the univariate interpolation operators
+(see \cref{sec:441BFSFundamentalBases}),
+the time complexity for the univariate interpolation is still quadratic.
+We now want to construct a locally supported spline basis for which
+the univariate interpolation can be done in linear time.
+
+To meet these goals, we have to relax the fundamental property
+to a weaker version, which results in the so-called
+\term{weakly fundamental property}.
+A univariate hierarchical basis
+$\wfundbasis{l',i'}\colon \clint{0, 1} \to \real$
+is called \term{weakly fundamental}, if
+\begin{equation}
+  \label{eq:weaklyFundamentalProperty}
+  \wfundbasis{l',i'}(\gp{l,i}) = 0,\quad
+  l < l',\;\;
+  i \in \hiset{l}.
+\end{equation}
+This is exactly the first condition \eqref{eq:fundamentalProperty1}
+of the fundamental property \eqref{eq:fundamentalProperty}.
+In other words, we drop the requirement that the basis functions
+should vanish at the other grid points of the same level.
+The relation \eqref{eq:fundamentalPropertyImplicationMV} from the
+fundamental case becomes
+\begin{equation}
+  \label{eq:weaklyFundamentalPropertyImplicationMV}
+  \wfundbasis{l',i'}(\gp{\*l,\*i})
+  \not= 0
+  \implies
+  \*l' \le \*l,
+\end{equation}
+i.e., every basis function $\wfundbasis{l',i'}$
+can only be non-zero at grid points $\gp{\*l,\*i}$ with
+finer or equal level $\*l$.
 
 \paragraph{Definition of hierarchical weakly fundamental splines}
 
-\blindtext{}
+We construct the \term{weakly fundamental spline parent function}
+$\parentwfundspl{p}\colon \real \to \real$
+by forming a linear combination of as few neighboring
+uniform B-splines as possible such that $\parentwfundspl{p}$
+satisfies the weakly fundamental property
+\eqref{eq:weaklyFundamentalProperty}:
+\begin{subequations}
+  \begin{gather}
+    \parentwfundspl{p}(x)
+    := \sum_{k=-(p-1)/2}^{(p-1)/2}
+    \wfundsplcoeff{k}{p} \parentbspl{p}(x - k)
+    \quad\text{such that}\\
+    \wfundsplcoeff{0}{p} = 1,\quad
+    \parentwfundspl{p}(k') = 0,\;\;
+    k' = -p + 2,\; -p + 4,\; \dotsc,\; p - 2.
+  \end{gather}
+\end{subequations}
+\usenotation{Ëwfs}
+The parent function canonically defines
+\term{hierarchical weakly fundamental splines}
+$\bspl[\wfs]{l,i}{p}\colon \clint{0, 1} \to \real$
+via an affine parameter transformation
+\begin{equation}
+  \bspl[\wfs]{l,i}{p}(x)
+  := \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i).
+\end{equation}
+Note that the hierarchical weakly fundamental splines are
+translation-invariant by construction (see \cref{eq:translationInvariance}).
+As the weakly fundamental parent spline $\parentwfundspl{p}$
+vanishes at all even integers and as support of $\bspl[\wfs]{l,i}{p}$ is local
+($\supp \bspl[\wfs]{l,i}{p} = \clint{\gp{l,i-p}, \gp{l,i+p}}$),
+this implies that the weakly fundamental property
+\eqref{eq:weaklyFundamentalProperty} is fulfilled.
 
-\paragraph{Chains points for weakly fundamental splines}
+\paragraph{Chain points for weakly fundamental splines}
 
-\todo{insert statements from last two paragraphs in Sec. 4.4 of Vazipfl draft}
+The advantage of the weakly fundamental spline basis $\bspl[\wfs]{l,i}{p}$
+over the standard uniform B-splines $\bspl{l,i}{p}$ is that
+the condition $\basis{\*k'}(\gp{\*k''}) \not= 0$ in
+\cref{cor:equivalentCorrectnessUPHierarchization} will be
+satisfied much more rarely.
+Consequently, fewer chain grid points have to be inserted to
+ensure the correctness of the \up for hierarchization.
 
-\blindtext{}
-
-\paragraph{Hierarchical weakly fundamental not-a-knot splines}
-
-\blindtext{}
+In the special case of regular sparse grids $\regsgset{n}{d}$,
+%(i.e., $\regsgspace[\*p,\wfs]{n}{d}$ defined analogously to
+%$\regsgspace{n}{d}$),
+we do not have to insert any grid points for the correctness of the \up.
+We can verify this statement with
+\thmref{cor:equivalentCorrectnessUPHierarchization}:
+Let $(\*l',\*i')$ and $(\*l'',\*i'')$ with
+$\normone{\*l'}, \normone{\*l''} \le n$ and
+$\*i' \in \hiset{\*l'}$, $\*i'' \in \hiset{\*l''}$,
+such that $\bspl[\wfs]{\*l',\*i'}{\*p}(\gp{\*l'',\*i''}) \not= 0$.
+Furthermore, let $((\chain[\*l]{0}, \chain[\*i]{0}), \dotsc,
+(\chain[\*l]{d}, \chain[\*i]{d}))$ be the chain
+from $\*k'$ to $\*k''$ with respect to $t_1, \dotsc, t_d$.
+Note that $\chain[\*l]{j} \le \vecmax\{\*l', \*l''\}$ due to the
+definition of chain points (\cref{def:chain}).
+Therefore, we have for $j = 0, \dotsc, d$
+by \eqref{eq:weaklyFundamentalPropertyImplicationMV}
+\begin{equation}
+  \*l' \le \*l''
+  \implies
+  \chain[\*l]{j} \le \vecmax\{\*l', \*l''\} \le \*l''
+  \implies
+  \normone{\chain[\*l]{j}} \le \normone{\*l''} \le n.
+\end{equation}
+Hence, $\regsgset{n}{d}$ contains the grid points corresponding to
+$(\chain[\*l]{j}, \chain[\*i]{j})$ for all $j = 0, \dotsc, d$.
+Consequently, the conditions of
+\cref{cor:equivalentCorrectnessUPHierarchization} are satisfied without
+inserting any additional chain points.
+This statement is even valid for arbitrary
+dimensionally adaptive sparse grids.
 
 
 
 \subsection{Hermite Hierarchization}
 \label{sec:455hermiteHierarchization}
+
+\blindtext{}
+
+
+
+
+\subsection{Hierarchical Weakly Fundamental Not-A-Knot Splines}
+\label{sec:456wfsNotAKnot}
 
 \blindtext{}
