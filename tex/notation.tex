@@ -5,6 +5,10 @@
 % Ö --> symbols that are not letters or digits
 % Ü --> acronyms
 
+\newcommand*{\ifempty}[2]{\if\relax\detokenize{#1}\relax#2\fi}
+\newcommand*{\ifnotempty}[2]{\if\relax\detokenize{#1}\relax\else#2\fi}
+\newcommand*{\appendwithcomma}[1]{\ifnotempty{#1}{,#1}}
+
 % ======================================================================
 % Number Sets
 % ======================================================================
@@ -286,9 +290,6 @@
 % ======================================================================
 % Grid Sets
 % ======================================================================
-
-\newcommand*{\ifnotempty}[2]{\if\relax\detokenize{#1}\relax\else#2\fi}
-\newcommand*{\appendwithcomma}[1]{\ifnotempty{#1}{,#1}}
 
 \newcommand*{\gridset}[3][]{%
   \if\relax\detokenize{#1}\relax\Omega\else#1{\Omega}\fi_{#2}^{#3}%
