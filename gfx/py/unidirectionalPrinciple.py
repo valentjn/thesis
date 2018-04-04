@@ -53,9 +53,11 @@ for t in range(d+1):
   ax.text(t * 1.3 + 0.5, -0.06, text, ha="center", va="top")
 
 helper.plot.plotArrow(ax, (0.74, -0.12), (1.66, -0.12))
-ax.text(1.2, -0.15, r"$\mathfrak{L}_1$", ha="center", va="top")
+ax.text(1.2, -0.15, r"$\mathfrak{L}^{(1),K_\mathrm{pole}}$",
+        ha="center", va="top")
 helper.plot.plotArrow(ax, (1.94, -0.12), (2.86, -0.12))
-ax.text(2.4, -0.15, r"$\mathfrak{L}_2$", ha="center", va="top")
+ax.text(2.4, -0.15, r"$\mathfrak{L}^{(2),K_\mathrm{pole}}$",
+        ha="center", va="top")
 helper.plot.plotArrowPolygon(
   ax, [0.5, 0.5, 3.1, 3.1], [-0.21, -0.4, -0.4, -0.21], "k-", cutOff=1)
 ax.text(1.8, -0.37, r"$\mathfrak{L}$", ha="center", va="bottom")
