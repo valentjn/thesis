@@ -214,7 +214,7 @@ in the $j$-th iteration of \cref{alg:unidirectionalPrinciple}
 are equivalent to a single application of the following operator
 $\upop{t_j}\colon \real^{\setsize{\liset}} \to \real^{\setsize{\liset}}$:
 \begin{equation}
-  \label{eq:upopDefinition}
+  \label{eq:upopEntries}
   (\upop{t_j})_{\*k'',\*k'}
   :=
   \begin{cases}
@@ -235,23 +235,49 @@ one-dimensional operator $\upopuv{t_j}{\lisetpole}$,
 namely the one where $\lisetpole$ is the
 pole $\eqclass{\*k}{\samepole{t_j}}$ through $\*k$.
 This leads to the block-diagonal structure
-of $\upop{t_j}$ given in \eqref{eq:upopDefinition},
+of $\upop{t_j}$ given in \eqref{eq:upopEntries},
 if the rows of the matrix of $\upop{t_j}$
 are grouped by poles $\lisetpole$ and the columns are arranged accordingly.
-In the following, we assume that the one-dimensional operators
-$\upopuv{t_j}{\lisetpole}$ are invertible.
-In this case, $\upop{t_j}$ is also invertible and
-$\upopinv{t_j}$ is given by the block-diagonal matrix of
-the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
-This regularity assumption is satisfied by hierarchization
-operators due to the linear independence of the
-hierarchical basis functions.
+
+\paragraph{Assumptions}
+
+We make two assumptions on $\linop$ and $\upopuv{t_j}{\lisetpole}$
+for the remaining considerations:
+\begin{itemize}
+  \item
+  The operator $\linop$ has tensor product structure.
+  This means that
+  \begin{equation}
+    \label{eq:tensorProductOperator}
+    (\linop)_{\*k'',\*k'}
+    =
+    (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+    \dotsm
+    (\upopuv{t_d}{\eqclass{\chain{d}}{\samepole{t_d}}})_{k''_{t_d},k'_{t_d}},
+    \quad
+    \*k', \*k'' \in \liset.
+  \end{equation}
+  
+  \item
+  The operators $\linop$ and are $\upopuv{t_j}{\lisetpole}$ invertible.
+  In this case, $\upop{t_j}$ is also invertible and
+  $\upopinv{t_j}$ is given by the block-diagonal matrix of
+  the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
+\end{itemize}
+Both assumptions are satisfied by dehierarchization
+operators $\intpmat$ due to the tensor product structure and the
+linear independence of the hierarchical basis functions.
+However, we formulate the following results for arbitrary
+linear invertible tensor product operators $\linop$.
+
+\paragraph{Correctness and duality of the unidirectional principle}
 
 Now, we can describe the whole \up of
 \cref{alg:unidirectionalPrinciple} as the operator
 $\upop{t_1,\dotsc,t_d}\colon \real^{\setsize{\liset}} \to
 \real^{\setsize{\liset}}$ given by:
 \begin{equation}
+  \label{eq:upopProduct}
   \upop{t_1,\dotsc,t_d}
   := \upop{t_d} \dotsm \upop{t_1}.
 \end{equation}
@@ -298,12 +324,173 @@ the hierarchization operator $\linop = \intpmatinv$ for B-splines.
 \subsection{Chains and Equivalent Correctness Conditions}
 \label{sec:453chains}
 
-\blindtext{}
+Let us first define the notion of a chain between two grid points
+$\*k'$ and $\*k''$.
+
+\begin{definition}[chain]
+  \label{def:chain}
+  Let $\*k', \*k'' \in \liset$ and
+  $(t_1, \dotsc, t_j)$ be a permutation of $j$ of the
+  dimensions $1, \dotsc, d$.
+  The \term{chain} from $\*k'$ to $\*k''$ with respect to
+  $T := (t_1, \dotsc, t_j)$ is defined as the sequence
+  $(\chain{0}, \dotsc, \chain{j})$, where
+  \begin{equation}
+    \chain{j'}_{T_{j'}}
+    := \*k''_{T_{j'}},\quad
+    \chain{j'}_{-T_{j'}}
+    := \*k'_{-T_{j'}},\quad
+    T_{j'}
+    := (t_1, \dotsc, t_{j'}),\quad
+    j' = 0, \dotsc, j,
+    \hspace*{-10mm}
+  \end{equation}
+  if $\chain{j} = \*k''$ and
+  $\chain{j'} \in \liset$ for all $j' = 0, \dotsc, j$.
+\end{definition}
+
+It is easy to see that this definition is equivalent to
+$\chain{j'-1} \samepole{t_{j'}} \chain{j'}$ for $j' = 1, \dotsc, j$.
+We now show two lemmas.
+First, we prove that $(\upop{t_1,\dotsc,t_j})_{\*k'',\*k'} \not= 0$
+is sufficient for the existence of a chain from $\*k'$ to $\*k''$:
+
+\begin{restatable}[sufficient condition for chain existence]{%
+  lemma%
+}{%
+  lemmaChainExistenceSufficient%
+}
+  \label{lemma:chainExistenceSufficient}
+  If $(\upop{t_1,\dotsc,t_j})_{\*k'',\*k'} \not= 0$
+  for some $j = 0, \dotsc, d$,
+  then the grid $\liset$ contains the chain from $\*k'$ to $\*k''$
+  with respect to $(t_1, \dotsc, t_j)$.
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofCorrectnessUnidirectionalPrincipleSASG}.
+\end{proof}
+
+Second, we show that the equality of
+$(\upop{t_1,\dotsc,t_j})_{\chain{j},\*k'}$ and the product of
+the unidimensional operators is necessary for the
+existence of a chain from $\*k'$ to $\*k''$:
+
+\begin{restatable}[necessary condition for chain existence]{%
+  lemma%
+}{%
+  lemmaChainExistenceNecessary%
+}
+  \label{lemma:chainExistenceNecessary}
+  If the grid $\liset$ contains the chain $(\chain{0}, \dotsc, \chain{j})$
+  from $\*k'$ to $\*k''$ with respect to $(t_1, \dotsc, t_j)$
+  for some $j = 0, \dotsc, d$, then
+  \begin{equation}
+    \label{eq:lemmaChainExistenceNecessary}
+    (\upop{t_1,\dotsc,t_j})_{\chain{j},\*k'}
+    = (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+    \dotsm
+    (\upopuv{t_j}{\eqclass{\chain{j}}{\samepole{t_j}}})_{k''_{t_j},k'_{t_j}}.
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofCorrectnessUnidirectionalPrincipleSASG}.
+\end{proof}
+
+The two lemmas can now be used to prove the following characterization
+of the correctness of the UP:
+
+\begin{restatable}[characterization of the correctness of the UP]{%
+  proposition%
+}{%
+  propCorrectnessUPCharacterization%
+}
+  \label{prop:correctnessUPCharacterization}
+  The \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
+  if and only if the grid $\liset$ contains the chain from $\*k'$ to $\*k''$
+  with respect to $(t_1, \dotsc, t_d)$ for all $\*k', \*k'' \in \liset$
+  for which $(\linop)_{\*k'',\*k'} \not= 0$.
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofCorrectnessUnidirectionalPrincipleSASG}.
+\end{proof}
+
+When applied to the hierarchization operator,
+the combination of \cref{prop:correctnessUPCharacterization} with
+\thmref{lemma:dualityUnidirectionalPrinciple} can be summarized in
+the following corollary:
+
+\begin{corollary}[%
+  equivalent statements for correctness of UP for hierarchization%
+]
+  \label{cor:equivalentCorrectnessUPHierarchization}
+  The following statements are equivalent:
+  \begin{itemize}
+    \item
+    The \up is correct for $\intpmatinv$ and $(t_1, \dotsc, t_d)$.
+    
+    \item
+    The \up is correct for $\intpmat$ and $(t_d, \dotsc, t_1)$.
+    
+    \item
+    The grid $\liset$ contains the chain from $\*k'$ to $\*k''$
+    with respect to $(t_1, \dotsc, t_d)$ for all $\*k', \*k'' \in \liset$
+    for which $\basis{\*k'}(\gp{\*k''}) \not= 0$.
+  \end{itemize}
+\end{corollary}
+
+\begin{proof}
+  The corollary is a direct consequence of
+  \cref{lemma:dualityUnidirectionalPrinciple} and
+  \cref{prop:correctnessUPCharacterization},
+  applied to the dehierarchization operator $\linop = \intpmat$.
+\end{proof}
+
+\paragraph{Inserting chain points}
+
+This means that we can establish the correctness of the \up
+for the hierarchization operator $\linop = \intpmatinv$,
+if we insert all missing chain points that are specified by
+\cref{prop:correctnessUPCharacterization} into the grid.
+As it is necessary to insert these points recursively
+(e.g., the inserted points may generate new chains,
+for which other missing points have to be inserted),
+the number of points to be inserted can be very large.
+The worst case is that the final grid is a full grid, i.e.,
+the Cartesian product of the union of the poles in the different dimensions:
+\begin{equation}
+  \bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{1}} \times \dotsb \times
+  \bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{d}}.
+\end{equation}
+In this case, we lose the advantage of sparse grids,
+whose goal is to ease the curse of dimensionality.
+For the standard hierarchical B-spline basis $\bspl{l,i}{p}$,
+this worst case often occurs as there are many non-zero entries
+in the corresponding interpolation matrices $\intpmat$
+(see \cref{sec:41problem}).
 
 
 
 \subsection{Weakly Fundamental Splines}
 \label{sec:454wfs}
+
+\paragraph{Motivation}
+
+\blindtext{}
+
+\paragraph{Definition of hierarchical weakly fundamental splines}
+
+\blindtext{}
+
+\paragraph{Chains points for weakly fundamental splines}
+
+\todo{insert statements from last two paragraphs in Sec. 4.4 of Vazipfl draft}
+
+\blindtext{}
+
+\paragraph{Hierarchical weakly fundamental not-a-knot splines}
 
 \blindtext{}
 
