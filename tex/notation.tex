@@ -127,12 +127,12 @@
   $t$-th unit basis vector $:= (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
 }
 
-\newnotationcommand[1]{\chain}{\*k^{(#1)}}{kt}{$\chain{t_{j'}}$}{
+\newnotationcommandoptarg[\*k]{2}{\chain}{#1^{(#2)}}{kt}{$\chain{t_{j'}}$}{
   Point on chain $(\chain{t_1}, \dotsc, \chain{t_j})$
   between $\*k'$ and $\*k''$
 }
 
-\newcommand*{\chainuv}[1]{k^{(#1)}}
+\newcommand*{\chainuv}[1]{\chain[k]{#1}}
 
 % ======================================================================
 % Grid Points
