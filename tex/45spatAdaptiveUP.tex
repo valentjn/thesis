@@ -559,8 +559,9 @@ linear Lagrange polynomial of level $0$, i.e.,
 \end{equation}
 to simplify the description of the
 Hermite hierarchization algorithm in \cref{sec:455hermiteHierarchization}.
-Note that the hierarchical weakly fundamental splines are,
-starting with level $l \ge 1$,
+The hierarchical weakly fundamental spline basis is shown in
+\cref{fig:hierarchicalWeaklyFundamentalSpline}.
+Note that these basis functions are, starting with level $l \ge 1$,
 translation-invariant by construction.
 %(see \cref{eq:translationInvariance}).
 As the weakly fundamental parent spline $\parentwfundspl{p}$
@@ -569,6 +570,19 @@ vanishes at all even integers and as support of $\bspl[\wfs]{l,i}{p}$ is local
 = \clint{\gp{l,i-p}, \gp{l,i+p}} \cap \clint{0, 1}$),
 this implies that the weakly fundamental property
 \eqref{eq:weaklyFundamentalProperty} is fulfilled.
+
+\begin{SCfigure}
+  \includegraphics{hierarchicalBasis_17}%
+  \caption[%
+    Hierarchical weakly fundamental splines%
+  ]{%
+    Hierarchical cubic weakly fundamental splines
+    $\bspl[\wfs,\nak]{l',i'}{p}$
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
+    grid points $\gp{l',i'}$ \emph{(dots)} up to level $l = 3$.%
+  }%
+  \label{fig:hierarchicalWeaklyFundamentalSpline}%
+\end{SCfigure}
 
 \paragraph{Chain points for weakly fundamental splines}
 
