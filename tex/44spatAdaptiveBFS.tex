@@ -965,6 +965,23 @@ $\bspl[\fs]{l,i}{p}\colon \clint{0, 1} \to \real$ via
 \end{equation}
 The cubic hierarchical fundamental spline basis is depicted in
 \cref{fig:hierarchicalFundamentalSpline}.
+As usual, we define $d$-variate hierarchical fundamental splines
+as tensor products of their univariate counterparts.
+According to \thmref{prop:splineSpace} and \thmref{prop:tiftNodalSpace},
+the common extended nodal space
+$\nsbspl[\ext]{\*l}{\*p} = \nsbspl[\fs,\ext]{\*l}{\*p}$
+is equal to the spline space $\wholesplspace{\*l}{\*p}$
+defined by the Cartesian product of
+knot sequences of the form \eqref{eq:fullGridKnots},
+i.e., the space of all splines of degree $\*p$ on the full grid of level $\*l$.
+%The spline space $\wholesplspace{\*l}{\*p}$ is the space of
+%all continuous functions on $\clint{\*0, \*1}$
+%that are piecewise $d$-variate polynomials of coordinate degree
+%$\le \*p$ on all hypercubes $\clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}$
+%($\*i = \*0, \dotsc, \*2^\*l - \*1$) and
+%at least $(\*p - \*1)$ times continuously partially differentiable at
+%all interior knots $\gp{\*l,\*i}$ ($\*i = \*1, \dotsc, \*2^\*l - \*1$,
+%see \cite{Hoellig13Approximation}).
 
 \begin{SCfigure}
   \includegraphics{hierarchicalBasis_15}%
@@ -980,23 +997,6 @@ The cubic hierarchical fundamental spline basis is depicted in
   }%
   \label{fig:hierarchicalFundamentalSpline}%
 \end{SCfigure}
-
-As usual, we define $d$-variate hierarchical fundamental splines
-as tensor products of their univariate counterparts.
-According to \thmref{prop:splineSpace} and \thmref{prop:tiftNodalSpace},
-the common extended nodal space
-$\nsbspl[\ext]{\*l}{\*p} = \nsbspl[\fs,\ext]{\*l}{\*p}$
-is equal to the spline space $\wholesplspace{\*l}{\*p}$
-defined by the Cartesian product of
-knot sequences of the form \cref{eq:fullGridKnots}.
-The spline space $\wholesplspace{\*l}{\*p}$ is the space of
-all continuous functions on $\clint{\*0, \*1}$
-that are piecewise $d$-variate polynomials of coordinate degree
-$\le \*p$ on all hypercubes $\clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}$
-($\*i = \*0, \dotsc, \*2^\*l - \*1$) and
-at least $(\*p - \*1)$ times continuously partially differentiable at
-all interior knots $\gp{\*l,\*i}$ ($\*i = \*1, \dotsc, \*2^\*l - \*1$,
-see \cite{Hoellig13Approximation}).
 
 The B-spline coefficients $(\fundsplcoeff{k}{p})_{k \in \integer}$ of the
 fundamental spline $\parentfundspl{p}$ decay with the same rate
@@ -1025,13 +1025,13 @@ we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
 if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $|k| \ge \fundsplcutoff{p}$,
-where $\fundsplcutoff{p} \in \nat$ is some truncation index.
+where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
-to evaluate the fundamental spline $\parentfundspl{p}$ once,
-due to the local support of B-splines.
+to evaluate the fundamental spline $\parentfundspl{p}$ once.
+%due to the local support of B-splines.
 In \cref{tbl:fundamentalSplineDecay}, we list the decay rates $\gamma_p$,
 the factors $\beta_p$, $\beta'_p$, and the truncation indices
-$\fundsplcutoff{p}$ for the different degrees $p$.
+$\fundsplcutoff{p}$ for the different degrees.
 
 \begin{table}
   \begin{tabular}{p{12mm}*{8}{C{10mm}}}
