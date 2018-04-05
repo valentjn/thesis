@@ -872,17 +872,14 @@ with the following invariant.
   \end{equation}
   as $\bspl[\wfs]{l',i'}{p}(\gp{l,i}) = 0$ if $l' > l$
   (weakly fundamental property \eqref{eq:weaklyFundamentalProperty}).
-  We have by \cref{line:algHermiteHierarchization8}
-  \begin{equation}
-    \fgintp{l}(\gp{l,i})
-    = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i}).
-  \end{equation}
-  By \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
-  the second summand equals $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
+  \Cref{line:algHermiteHierarchization8} implies
+  $\fgintp{l}(\gp{l,i})
+  = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i})$,
+  and by \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
+  the second summand $r^{(l)}_l$ equals $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
   which cancels out the first summand, resulting in
   $\fgintp{l}(\gp{l,i}) = \fcnval{l,i}$.
-  
-  Combining these statements, it holds
+  Combining these statements, we obtain
   \begin{equation}
     \sgintp(\gp{l,i})
     = \fcnval{l,i},\quad
