@@ -4,9 +4,9 @@ import numpy as np
 
 from .hierarchical_basis import HierarchicalBasis
 from .hierarchical_bspline import HierarchicalBSpline
-from .hierarchical_lagrange_spline import HierarchicalLagrangeSpline
-from .hierarchical_lagrange_notaknot_spline import HierarchicalLagrangeNotAKnotSpline
 from .hierarchical_notaknot_bspline import HierarchicalNotAKnotBSpline
+from .hierarchical_weakly_fundamental_spline import HierarchicalWeaklyFundamentalSpline
+#from .hierarchical_weakly_fundamental_notaknot_spline import HierarchicalWeaklyFundamentalNotAKnotSpline
 from .modified_hierarchical_notaknot_bspline import ModifiedHierarchicalNotAKnotBSpline
 
 class SGppBasis(HierarchicalBasis):
@@ -24,9 +24,9 @@ class SGppBasis(HierarchicalBasis):
         "modifiedHierarchicalNotAKnotBSpline" :
           (pysgpp.SNotAKnotBsplineModifiedBase, ModifiedHierarchicalNotAKnotBSpline),
         "hierarchicalLagrangeSpline" :
-          (pysgpp.SLagrangeSplineBase, HierarchicalLagrangeSpline),
-        "hierarchicalLagrangeNotAKnotSpline" :
-          (pysgpp.SLagrangeNotAKnotSplineBase, HierarchicalLagrangeNotAKnotSpline),
+          (pysgpp.SLagrangeSplineBase, HierarchicalWeaklyFundamentalSpline),
+        #"hierarchicalLagrangeNotAKnotSpline" :
+        #  (pysgpp.SLagrangeNotAKnotSplineBase, HierarchicalWeaklyFundamentalNotAKnotSpline),
       }
       basis = basisTypes[basis][0](p)
     self.basis = basis
