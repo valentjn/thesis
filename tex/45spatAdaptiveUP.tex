@@ -62,12 +62,12 @@ of the method of residual interpolation
       $\vlinin$, $\vlinout[(0)]$%
     }
       \State{$\*r^{(0)} \gets \vlinin - \linop^{-1}[\vlinout[(0)]]$}
-      \Comment{Initial residual}%
+      \Comment{initial residual}%
       \For{$m = 0, 1, 2, \dotsc$}
         \State{$\vlinout[(m+1)] \gets \vlinout[(m)] + \linop' \*r^{(m)}$}
-        \Comment{Update solution}%
+        \Comment{update solution}%
         \State{$\*r^{(m+1)} \gets \*r^{(m)} - \linop^{-1} \linop' \*r^{(m)}$}
-        \Comment{Update residual}%
+        \Comment{update residual}%
       \EndFor{}
       \State{$\vlinout \gets \text{last computed } \vlinout[(m)]$}
     \EndFunction{}
