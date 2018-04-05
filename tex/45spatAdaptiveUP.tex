@@ -619,8 +619,274 @@ dimensionally adaptive sparse grids.
 \subsection{Hermite Hierarchization}
 \label{sec:455hermiteHierarchization}
 
-\blindtext{}
+\paragraph{Hermite interpolation}
 
+The second advantage of the weakly fundamental spline basis
+is that due to the reduced coupling,
+the univariate hierarchization operators can be applied easier
+than those for standard uniform B-splines.
+This results in the formulation of the so-called
+\term{Hermite hierarchization} algorithm.
+We first recall higher-order Hermite interpolation:
+
+\begin{lemma}[higher-order Hermite interpolation]
+  \label{lemma:hermiteInterpolation}
+  Let $p \in \nat$ be odd and $a, b \in \real$ with $a < b$.
+  Furthermore, let
+  $\frac{\diff^q}{\dx^q} \objfun(a) \in \real$ and
+  $\frac{\diff^q}{\dx^q} \objfun(b) \in \real$ be given data
+  for $q = 0, \dotsc, \frac{p-1}{2}$.
+  Then there is a unique polynomial $\spl \in \polyspace{p}$ such that
+  \begin{equation}
+    \frac{\diff^q}{\dx^q} \objfun(a)
+    = \frac{\diff^q}{\dx^q} \spl(a),\quad
+    \frac{\diff^q}{\dx^q} \objfun(b)
+    = \frac{\diff^q}{\dx^q} \spl(b),\quad
+    q = 0, \dotsc, \frac{q-1}{2}.
+    \hspace*{-10mm}
+  \end{equation}
+\end{lemma}
+
+\begin{proof}
+  See \cite{Freund07Stoer}.
+\end{proof}
+
+\paragraph{Hermite hierarchization algorithm}
+
+Note that the interpolating polynomial $\spl$ and its derivatives can be
+efficiently evaluated using Hermite basis functions
+(generalized Lagrange polynomials \cite{Freund07Stoer}).
+With Hermite interpolation, we design
+in \cref{alg:hermiteHierarchization} an algorithm
+for the hierarchization with hierarchical weakly fundamental splines.
+While we formulate \cref{alg:hermiteHierarchization}
+only for regular univariate grids and weakly fundamental splines,
+keep in mind that the algorithm, when reformulated slightly,
+also correctly operates
+on spatially adaptive univariate grids
+(with the assumption that the grids contain the parents of their grid points)
+and other weakly fundamental bases that are
+piecewise polynomial of degree $\le p$.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\vlinout =$ hermiteHierarchization1D}{%
+      $n$, $\vlinin$%
+    }
+      \For{$i = 0, 1$}
+      \Comment{set values for level $0$}%
+        \State{%
+          $\linout{0,i} \gets \fcnval{0,i}$%
+        }
+        \label{line:algHermiteHierarchization1}
+        \State{%
+          $\fgintp{0}(\gp{0,i}) \gets \fcnval{0,i}$%
+        }
+        \label{line:algHermiteHierarchization2}
+        \State{%
+          $\frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i})
+          \gets \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})$
+          for all $q = 1, \dotsc, \frac{p-1}{2}$%
+        }
+        \label{line:algHermiteHierarchization3}
+      \EndFor{}
+      %\For{$l = 0, \dotsc, \max\{l \in \natz \mid (l, i) \in \liset\}$}
+      \For{$l = 0, \dotsc, n$}
+        %\State{%
+        %  $J_l \gets \{i \in \hiset{l} \mid (l, i) \in \liset\}$%
+        %}
+        %\Comment{index set of level $l$}%
+        %\For{$i \in J_l$}
+        \For{$i \in \hiset{l}$}
+          \State{%
+            $\fgintp{l-1}(\gp{l,i}) \gets \text{Hermite interpolation of}$
+            %$\fcnval{l,i\pm1}$,
+            $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i\pm1})$
+            ($q = 0, \dotsc, \frac{p-1}{2}$)%
+          }
+          \label{line:algHermiteHierarchization4}
+          \State{%
+            $r^{(l)}(\gp{l,i})
+            \gets \fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$%
+          }
+          \label{line:algHermiteHierarchization5}
+          \Comment{residual to be interpolated}%
+        \EndFor{}
+        \State{%
+          Let $r^{(l)}_l$ be of the form
+          %$\sum_{i' \in J_l} \linout{l,i'} \bspl[\wfs]{l,i'}{p}$%
+          $\sum_{i' \in \hiset{l}} \linout{l,i'} \bspl[\wfs]{l,i'}{p}$%
+        }
+        \Comment{contribution of level $l$}%
+        \label{line:algHermiteHierarchization6}
+        \State{%
+          %Choose $(\linout{l,i'})_{i' \in J_l}$ such that
+          %$r^{(l)}_l(\gp{l,i}) = r^{(l)}(\gp{l,i})$ for all $i \in J_l$%
+          Choose $(\linout{l,i'})_{i' \in \hiset{l}}$ such that
+          $r^{(l)}_l(\gp{l,i}) = r^{(l)}(\gp{l,i})$ for all $i \in \hiset{l}$%
+        }
+        \label{line:algHermiteHierarchization7}
+        %\For{%
+        %  $\{(l', i') \in \liset \mid
+        %  \ex{i \in \hiset{l}}{(l',i') \to^\ast (l,i)}\}$%
+        %}
+        %\Comment{for all ancestors}%
+        \For{$i = 0, \dotsc, 2^l$}
+        \Comment{for all points (current level and ancestors)}%
+          \For{$q = 0, \dotsc, \frac{p-1}{2}$}
+            \State{%
+              %$\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l',i'})
+              %\gets \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l',i'}) +
+              %\frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l',i'})$%
+              $\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+              \gets \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i}) +
+              \frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l,i})$%
+            }
+            \Comment{update values}%
+            \label{line:algHermiteHierarchization8}
+          \EndFor{}
+        \EndFor{}
+      \EndFor{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[%
+    Hermite hierarchization%
+  ]{%
+    %Hermite hierarchization on
+    %one-dimensional spatially adaptive sparse grids.
+    %Inputs are the set $\liset$ of level-index pairs of the
+    %sparse grid (see \eqref{eq:spatiallyAdaptiveSG}) and
+    Hermite hierarchization on one-dimensional regular grids.
+    Inputs are the level $n$ of the regular grid
+    the vector $\vlinin = (\linin{l,i})_{(l,i) \in \liset}$
+    of input data (function values $\fcnval{l,i}$ at the grid points),
+    where $\liset = \{(l, i) \mid l = 0, \dotsc, n,\; i \in \hiset{l}\}$.
+    The output is the vector
+    $\vlinout = (\linout{l,i})_{(l,i) \in \liset}$
+    of output data (hierarchical surpluses $\surplus{l,i}$).%
+  }%
+  \label{alg:hermiteHierarchization}%
+\end{algorithm}
+
+The idea of \cref{alg:hermiteHierarchization} is to
+hierarchize the function value data level by level,
+which is only possible because of the weakly fundamental property
+\eqref{eq:weaklyFundamentalProperty}.
+For each level $l$, we calculate surpluses
+$\surplus{l,i} = \linout{l,i}$, while keeping track of
+the values and derivatives
+$\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})$ of the
+``current'' interpolant $\fgintp{l}$ (up to level $l$).
+Hermite interpolation is used to determine the ``delta''
+to the interpolant of the next level.
+Note that in \cref{line:algHermiteHierarchization8},
+we have to evaluate the derivatives of
+$\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$ of the Hermite interpolant
+determined in \cref{line:algHermiteHierarchization4}.
+This is not an issue as in an implementation,
+one would typically simultaneously evaluate the
+Hermite interpolant and its derivatives in
+\cref{line:algHermiteHierarchization4}.
+
+For hierarchical weakly fundamental splines,
+the complexity of the $l$-th iteration of \cref{alg:hermiteHierarchization}
+is linear in the number of grid points of level $l$, i.e., $\landauO{2^l}$.
+The reason for this is the bandedness (with bandwidth $\landauO{p}$) of the
+system of linear equations corresponding to the interpolation problem of
+\cref{line:algHermiteHierarchization6,line:algHermiteHierarchization7},
+which means that the interpolation problem can be solved in
+linear time and memory.
+In total, the complexity of \cref{alg:hermiteHierarchization} is
+given by $\landauO{\sum_{l=0}^n 2^l} = \landauO{2^n}$, i.e.,
+\cref{alg:hermiteHierarchization} only requires linear time and memory.
+
+\paragraph{Correctness}
+
+We prove the correctness of Hermite hierarchization
+with the following invariant.
+
+\begin{restatable}[invariant of \cref{alg:hermiteHierarchization}]{%
+  proposition%
+}{%
+  propInvariantHermiteHierarchization%
+}
+  \label{prop:invariantHermiteHierarchization}
+  In \cref{alg:hermiteHierarchization}, it holds
+  for $l = 0, \dotsc, n$ and $i = 0, \dotsc, 2^l$
+%  \begin{subequations}
+%    \begin{alignat}{2}
+%      \label{eq:propInvariantHermiteHierarchization1}
+%      \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+%      &= \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+%      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}),
+%      &\quad&q = 0, \dotsc, \frac{p-1}{2},\\
+%      \label{eq:propInvariantHermiteHierarchization2}
+%      \fcnval{l,i}
+%      &= \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+%      \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i}).
+%      &&
+%    \end{alignat}
+%  \end{subequations}
+  \begin{equation}
+    \label{eq:propInvariantHermiteHierarchization}
+    \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+    = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \frac{\diff^q}{\dx^q}
+    \bspl[\wfs]{l',i'}{p}(\gp{l,i}),\quad
+    q = 0, \dotsc, \frac{p-1}{2}.
+    \hspace*{-6mm}
+  \end{equation}
+\end{restatable}
+
+\begin{proof}
+  See \cref{sec:proofHermiteHierarchization}.
+\end{proof}
+
+\begin{shortcorollary}[correctness of \cref{alg:hermiteHierarchization}]
+  \label{cor:algHermiteHierarchizationCorrectness}
+  \Cref{alg:hermiteHierarchization} is correct.
+\end{shortcorollary}
+
+\begin{proof}
+  By \cref{prop:invariantHermiteHierarchization} ($q = 0$), we have
+  \begin{equation}
+    \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+    = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+    = \fgintp{l}(\gp{l,i}),\quad
+    l \le n,\; i \in \hiset{l}
+  \end{equation}
+  as $\bspl[\wfs]{l',i'}{p}(\gp{l,i}) = 0$ if $l' > l$
+  (weakly fundamental property \eqref{eq:weaklyFundamentalProperty}).
+  We have by \cref{line:algHermiteHierarchization8}
+  \begin{equation}
+    \fgintp{l}(\gp{l,i})
+    = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i}).
+  \end{equation}
+  By \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
+  the second summand equals $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
+  which cancels out the first summand, resulting in
+  $\fgintp{l}(\gp{l,i}) = \fcnval{l,i}$.
+  
+  Combining these statements, it holds
+  \begin{equation}
+    \sgintp(\gp{l,i})
+    = \fcnval{l,i},\quad
+    l \le n,\; i \in \hiset{l},
+    \quad\text{where}\quad
+    \sgintp
+    := \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}.
+  \end{equation}
+  This means that $\sgintp$ is the correct hierarchical interpolant
+  of the given function values
+  (see \cref{eq:hierarchizationInterpolant}).
+  Due to the uniqueness of hierarchical surpluses,
+  the coefficients $\linout{l,i}$
+  (which are the output of \cref{alg:hermiteHierarchization})
+  must coincide with the surpluses $\surplus{l,i}$.
+\end{proof}
 
 
 
