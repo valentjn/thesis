@@ -1099,3 +1099,43 @@
   In both cases, we obtain the desired relation
   \eqref{eq:proofPropInvariantHermiteHierarchization1}.
 \end{proof}
+
+\corAlgHermiteHierarchizationCorrectness*
+
+\begin{proof}
+  By \cref{prop:invariantHermiteHierarchization} ($q = 0$), we have
+  \begin{equation}
+  \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+  \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+  = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+  \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+  = \fgintp{l}(\gp{l,i}),\quad
+  l \le n,\; i \in \hiset{l}
+  \end{equation}
+  as $\bspl[\wfs]{l',i'}{p}(\gp{l,i}) = 0$ if $l' > l$
+  (weakly fundamental property \eqref{eq:weaklyFundamentalProperty}).
+  \Cref{line:algHermiteHierarchization8} implies
+  $\fgintp{l}(\gp{l,i})
+  = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i})$,
+  and by \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
+  the second summand $r^{(l)}_l$ equals $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
+  which cancels out the first summand, resulting in
+  $\fgintp{l}(\gp{l,i}) = \fcnval{l,i}$.
+  Combining these statements, we obtain
+  \begin{equation}
+  \sgintp(\gp{l,i})
+  = \fcnval{l,i},\quad
+  l \le n,\; i \in \hiset{l},
+  \quad\text{where}\quad
+  \sgintp
+  := \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+  \linout{l',i'} \bspl[\wfs]{l',i'}{p}.
+  \end{equation}
+  This means that $\sgintp$ is the correct hierarchical interpolant
+  of the given function values
+  (see \cref{eq:hierarchizationInterpolant}).
+  Due to the uniqueness of hierarchical surpluses,
+  the coefficients $\linout{l,i}$
+  (which are the output of \cref{alg:hermiteHierarchization})
+  must coincide with the surpluses $\surplus{l,i}$.
+\end{proof}
