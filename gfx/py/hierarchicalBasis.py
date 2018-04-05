@@ -268,6 +268,28 @@ def plotHierarchicalFundamentalNotAKnotSplines(q):
   myTightLayout["h_pad"] = 0.5
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
+def plotHierarchicalWeaklyFundamentalSplines(q):
+  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  basis = helper.basis.HierarchicalWeaklyFundamentalSpline(p)
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, superscript=r"p,\mathrm{wfs}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
+
+def plotHierarchicalWeaklyFundamentalNotAKnotSplines(q):
+  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  origBasis = helper.basis.HierarchicalNotAKnotBSpline(p)
+  basis = helper.basis.NodalWeaklyFundamentalTransformed(origBasis)
+  basis.p = p
+  for l in range(n+1):
+    ax = fig.add_subplot(n+1, 1, l+1)
+    plotSubspace(ax, basis, l, n, notAKnot=True, superscript=r"p,\mathrm{wfs}")
+  myTightLayout = dict(tightLayout)
+  myTightLayout["h_pad"] = 0.5
+  fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
+
 
 
 def callMethod(qAndMethod):
@@ -292,6 +314,8 @@ def main():
     plotHierarchicalFundamentalTransformedBSplines,
     plotHierarchicalFundamentalSplines,
     plotHierarchicalFundamentalNotAKnotSplines,
+    plotHierarchicalWeaklyFundamentalSplines,
+    plotHierarchicalWeaklyFundamentalNotAKnotSplines,
   ]
   
   with multiprocessing.Pool() as pool:
