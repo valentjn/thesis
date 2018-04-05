@@ -49,7 +49,7 @@ for p in ps:
   
   
   
-  fig = Figure.create(figsize=(3.12, 2.5))
+  fig = Figure.create(figsize=(3.12, 2.4))
   ax1 = fig.gca()
   
   xx = np.linspace(*xl, 441)
