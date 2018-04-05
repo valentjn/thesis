@@ -959,3 +959,143 @@
   from which follows the correctness of the \up,
   as $\*k'$ and $\*k''$ are arbitrary.
 \end{proof}
+
+
+
+\subsection{Correctness Proof of Hermite Hierarchization}
+\label{sec:proofHermiteHierarchization}
+
+\propInvariantHermiteHierarchization*
+
+\begin{proof}
+  We prove the assertion by induction over $l = 0, \dotsc, n$.
+  
+  For the induction base case $l = 0$ and $i = 0, 1$, we have
+%  \begin{subequations}
+%    \begin{alignat}{2}
+%      \sum_{i'=0}^1
+%      \linout{0,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
+%      &= \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
+%      &&= \frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i}),\\
+%      \sum_{i'=0}^1
+%      \linout{0,i'} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
+%      &= \fcnval{0,0} \kronecker{i}{0} +
+%      \fcnval{0,1} \kronecker{i}{1}
+%      &&= \fcnval{0,i}
+%    \end{alignat}
+%  \end{subequations}
+  \begin{equation}
+    \sum_{i'=0}^1
+    \linout{0,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
+    = \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
+    = \frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i})
+  \end{equation}
+  for $q = 1, \dotsc, \frac{p-1}{2}$ by
+  \cref{%
+    line:algHermiteHierarchization1,%
+    line:algHermiteHierarchization2,%
+    line:algHermiteHierarchization3%
+  }
+  of \cref{alg:hermiteHierarchization}.
+  
+  For the induction step case $(l-1) \to l$,
+  it suffices to show that
+  \begin{equation}
+    \label{eq:proofPropInvariantHermiteHierarchization1}
+    \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})
+    \overset{!}{=} \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+  \end{equation}
+  for $i = 0, \dotsc, 2^l$ and $q = 0, \dotsc, \frac{p-1}{2}$.
+  Indeed, if \eqref{eq:proofPropInvariantHermiteHierarchization1} holds,
+  then we obtain by \cref{line:algHermiteHierarchization6}
+  of \cref{alg:hermiteHierarchization}
+  \begin{subequations}
+    \begin{align}
+      \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+      &= \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i}) +
+      \frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l,i})\\
+      &= \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}) +
+      \sum_{i' \in \hiset{l}}
+      \linout{l,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l,i'}{p}(\gp{l,i})\\
+      &= \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}),
+    \end{align}
+  \end{subequations}
+  which is the desired relation
+  \eqref{eq:propInvariantHermiteHierarchization}
+  for level $l$.
+  
+  To prove \eqref{eq:proofPropInvariantHermiteHierarchization1},
+  we separate two cases:
+  \begin{itemize}
+    \item
+    $i \notin \hiset{l}$:
+    In this case, the ``true'' level of $\gp{l,i}$ is actually $\le l - 1$.
+    Therefore, we can apply the induction hypothesis
+    for \cref{eq:propInvariantHermiteHierarchization} to
+    obtain \eqref{eq:proofPropInvariantHermiteHierarchization1}.
+    
+    \item
+    $i \in \hiset{l}$:
+    In this case, we cannot directly apply the induction hypothesis,
+    as it only holds for grid points of levels $\le l - 1$.
+    However, we note that in
+    \eqref{eq:proofPropInvariantHermiteHierarchization1},
+    the term $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$
+    is the $q$-th derivative of the Hermite interpolant of
+    the data $\frac{\diff^{q'}}{\dx^{q'}} \fgintp{l-1}(\gp{l,i\pm1})$
+    ($q' = 0, \dotsc, \frac{p-1}{2}$),
+    as determined in \cref{line:algHermiteHierarchization4}
+    of \cref{alg:hermiteHierarchization}.
+    The ``true'' level of the grid points $\gp{l,i\pm1}$ is
+    actually $\le l - 1$ due to $i \in \hiset{l}$.
+    Hence, we can apply the induction hypothesis
+    for \cref{eq:propInvariantHermiteHierarchization}
+    to conclude that the interpolated data of
+    $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$ are given by
+    \begin{equation}
+      \frac{\diff^{q'}}{\dx^{q'}} \fgintp{l-1}(\gp{l,i\pm1})
+      = \frac{\diff^{q'}}{\dx^{q'}}
+      \left[\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+      \linout{l',i'} \bspl[\wfs]{l',i'}{p}\right]\!(\gp{l,i\pm1}),\quad
+      q' = 0, \dotsc, \frac{q-1}{2}.
+    \end{equation}
+    The linear combination in square brackets
+    is a polynomial of degree $\le p$ on the interval
+    $\clint{\gp{l,i-1}, \gp{l,i+1}}$
+    by construction of the hierarchical basis functions
+    $\bspl[\wfs]{l',i'}{p}$ ($l' = 0, \dotsc, l - 1$, $i' \in \hiset{l'}$).
+    Due to the uniqueness of Hermite interpolation,
+    the interpolation polynomial of the data must,
+    on $\clint{\gp{l,i-1}, \gp{l,i+1}}$,
+    coincide with the term in square brackets.
+    In particular, as $\gp{l,i} \in \clint{\gp{l,i-1}, \gp{l,i+1}}$,
+    we obtain the claim \eqref{eq:proofPropInvariantHermiteHierarchization1}:
+    \begin{equation}
+      \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})
+      = \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}).
+    \end{equation}
+%    To prove \cref{eq:propInvariantHermiteHierarchization2},
+%    we split the summands of its \rhs into
+%    the levels $\le l - 1$ and level $l$:
+%    \begin{equation}
+%      \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+%      \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+%      = \underbrace{
+%        \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+%        \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+%      }_{(\ast)} +
+%      \underbrace{
+%        \sum_{i' \in \hiset{l}}
+%        \linout{l,i'} \bspl[\wfs]{l,i'}{p}(\gp{l,i})
+%      }_{(\ast\ast)}.
+%    \end{equation}
+%    For the first summand $(\ast)$,
+%    we apply the induction hypothesis
+  \end{itemize}
+  In both cases, we obtain the desired relation
+  \eqref{eq:proofPropInvariantHermiteHierarchization1}.
+\end{proof}
