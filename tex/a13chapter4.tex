@@ -757,7 +757,7 @@
 
 \printornamentsfalse
 \subsection{%
-  Proof for the Correctness of the UnidirectionalPrinciple on
+  Proof for the Correctness of the Unidirectional Principle on
   Spatially Adaptive Sparse Grids%
 }
 \label{sec:proofCorrectnessUnidirectionalPrincipleSASG}
@@ -817,7 +817,7 @@
   
   For the induction step $j \to (j+1)$, we consider again
   \begin{equation}
-    \label{eq:ProofLemmaChainExistenceNecessary1}
+    \label{eq:proofLemmaChainExistenceNecessary1}
     (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
     = \sum_{\*k \in \liset} (\upop{t_{j+1}})_{\chain{j+1},\*k}
     (\upop{t_1,\dotsc,t_j})_{\*k,\*k'}
@@ -838,7 +838,7 @@
     \end{cases}
   \end{equation}
   We now argue that all summands of
-  \eqref{eq:ProofLemmaChainExistenceNecessary1} vanish.
+  \eqref{eq:proofLemmaChainExistenceNecessary1} vanish.
   There are two cases for the summation index $\*k$:
   \begin{itemize}
     \item
@@ -847,13 +847,13 @@
     Consequently, $\chain{j+1} \not\samepole{t_{j+1}} \*k$ and
     $(\upop{t_{j+1}})_{\chain{j+1},\*k} = 0$ due to \eqref{eq:upopEntries},
     i.e., the first factor of the $\*k$-th summand in
-    \eqref{eq:ProofLemmaChainExistenceNecessary1} vanishes.
+    \eqref{eq:proofLemmaChainExistenceNecessary1} vanishes.
     
     \item
     If there is a $t \notin \{t_1, \dotsc, t_j\}$ with $k_t \not= k'_t$,
     then the second factor $(\upop{t_1,\dotsc,t_j})_{\*k,\*k'}$
     of the $\*k$-th summand in
-    \eqref{eq:ProofLemmaChainExistenceNecessary1} vanishes.
+    \eqref{eq:proofLemmaChainExistenceNecessary1} vanishes.
     Indeed, if we assume the contrary,
     then \cref{lemma:chainExistenceSufficient} implies that there is
     a chain from $\*k'$ to $\*k$ with respect to $(t_1, \dotsc, t_j)$.
@@ -865,7 +865,7 @@
   \end{itemize}
   
   We infer that only the summand $\*k = \chain{j}$ remains in
-  \eqref{eq:ProofLemmaChainExistenceNecessary1}:
+  \eqref{eq:proofLemmaChainExistenceNecessary1}:
   \begin{equation}
     (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
     = (\upop{t_{j+1}})_{\chain{j+1},\chain{j}}
