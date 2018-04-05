@@ -530,17 +530,16 @@ by forming a linear combination of as few neighboring
 uniform B-splines as possible such that $\parentwfundspl{p}$
 satisfies the weakly fundamental property
 \eqref{eq:weaklyFundamentalProperty}:
-\begin{subequations}
-  \begin{gather}
-    \parentwfundspl{p}(x)
-    := \sum_{k=-(p-1)/2}^{(p-1)/2}
-    \wfundsplcoeff{k}{p} \parentbspl{p}(x - k)
-    \quad\text{such that}\\
-    \wfundsplcoeff{0}{p} = 1,\quad
-    \parentwfundspl{p}(k') = 0,\;\;
-    k' = -p + 2,\; -p + 4,\; \dotsc,\; p - 2.
-  \end{gather}
-\end{subequations}
+\begin{gather}
+  \label{eq:weaklyFundamentalSplineParent}
+  \parentwfundspl{p}(x)
+  := \sum_{k=-(p-1)/2}^{(p-1)/2}
+  \wfundsplcoeff{k}{p} \parentbspl{p}(x - k)
+  \quad\text{such that}\\
+  \wfundsplcoeff{0}{p} = 1,\quad
+  \parentwfundspl{p}(k') = 0,\;\;
+  k' = -p + 2,\; -p + 4,\; \dotsc,\; p - 2.
+\end{gather}
 \usenotation{Ëwfs}
 The parent function canonically defines
 \term{hierarchical weakly fundamental splines}
