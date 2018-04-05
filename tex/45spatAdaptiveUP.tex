@@ -903,4 +903,44 @@ with the following invariant.
 \subsection{Hierarchical Weakly Fundamental Not-A-Knot Splines}
 \label{sec:456wfsNotAKnot}
 
-\blindtext{}
+Finally, we note that as for fundamental splines,
+it is possible to combine the weakly fundamental basis
+with the not-a-knot idea from \cref{sec:32notAKnot} to construct
+hierarchical weakly fundamental not-a-knot spline functions
+$\bspl[\wfs,\nak]{l',i'}{p}$.
+The approach is similar to the fundamental not-a-knot splines
+in \cref{sec:445fundamentalNotAKnotSplines}
+(see \cref{eq:fundamentalNotAKnotSplines}):
+Instead of combining uniform B-splines as in
+\eqref{eq:weaklyFundamentalSplineParent},
+we combine not-a-knot B-splines such that the
+weakly fundamental property is satisfied.
+
+However, the exact construction is somewhat complicated,
+as one has to carefully consider which conditions to enforce
+with which basis functions.
+There are some special cases, if the index of the basis function
+$\bspl[\wfs,\nak]{l',i'}{p}$ is near the boundary
+(near $i' = 0$ or near $i' = 2^{l'}$).
+Nevertheless, there are only finitely many special cases
+as, for higher levels $l'$, one can just scale the basis functions
+of coarser levels.
+For the scope of this thesis,
+it suffices to show the resulting basis functions for
+the cubic case ($p = 3$) in
+\cref{fig:hierarchicalWeaklyFundamentalNotAKnotSpline},
+instead of rigorously stating the technical formulas.
+
+\begin{SCfigure}
+  \includegraphics{hierarchicalBasis_18}%
+  \caption[%
+    Hierarchical weakly fundamental not-a-knot splines%
+  ]{%
+    Hierarchical cubic weakly fundamental not-a-knot splines
+    $\bspl[\wfs,\nak]{l',i'}{p}$
+    ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$),
+    grid points $\gp{l',i'}$ \emph{(dots)}, and
+    removed knots \emph{(crosses)} up to level $l = 3$.%
+  }%
+  \label{fig:hierarchicalWeaklyFundamentalNotAKnotSpline}%
+\end{SCfigure}
