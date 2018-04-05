@@ -548,19 +548,33 @@ $\bspl[\wfs]{l,i}{p}\colon \clint{0, 1} \to \real$
 via an affine parameter transformation
 \begin{equation}
   \bspl[\wfs]{l,i}{p}(x)
-  := \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i).
+  := \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
+  l \ge 1.
 \end{equation}
-Note that the hierarchical weakly fundamental splines are
-translation-invariant by construction (see \cref{eq:translationInvariance}).
+For $l = 0$, we define $\bspl[\wfs]{l,i}{p}$ to be the
+linear Lagrange polynomial of level $0$, i.e.,
+\begin{equation}
+  \bspl[\wfs]{0,i}{p}
+  := \lagrangepoly{0,i},\quad
+  i = 0, 1,
+\end{equation}
+to simplify the description of the
+Hermite hierarchization algorithm in \cref{sec:455hermiteHierarchization}.
+Note that the hierarchical weakly fundamental splines are,
+starting with level $l \ge 1$,
+translation-invariant by construction.
+%(see \cref{eq:translationInvariance}).
 As the weakly fundamental parent spline $\parentwfundspl{p}$
 vanishes at all even integers and as support of $\bspl[\wfs]{l,i}{p}$ is local
-($\supp \bspl[\wfs]{l,i}{p} = \clint{\gp{l,i-p}, \gp{l,i+p}}$),
+($\supp \bspl[\wfs]{l,i}{p}
+= \clint{\gp{l,i-p}, \gp{l,i+p}} \cap \clint{0, 1}$),
 this implies that the weakly fundamental property
 \eqref{eq:weaklyFundamentalProperty} is fulfilled.
 
 \paragraph{Chain points for weakly fundamental splines}
 
-The advantage of the weakly fundamental spline basis $\bspl[\wfs]{l,i}{p}$
+The first advantage of the
+weakly fundamental spline basis $\bspl[\wfs]{l,i}{p}$
 over the standard uniform B-splines $\bspl{l,i}{p}$ is that
 the condition $\basis{\*k'}(\gp{\*k''}) \not= 0$ in
 \cref{cor:equivalentCorrectnessUPHierarchization} will be
