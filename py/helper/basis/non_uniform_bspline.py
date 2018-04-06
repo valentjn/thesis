@@ -13,6 +13,8 @@ class NonUniformBSpline(ParentFunction):
       fakeC = np.zeros((2*p+1,))
       fakeC[p] = 1
       self.bSpline = scipy.interpolate.BSpline(fakeXi, fakeC, p)
+      if nu > 0:   self.bSpline = self.bSpline.derivative(nu)
+      elif nu < 0: self.bSpline = self.bSpline.antiderivative(-nu)
       self.support = [xi[0], xi[-1]]
     else:
       self.__init__(p, xi[k:k+p+2], nu=nu)
@@ -21,7 +23,8 @@ class NonUniformBSpline(ParentFunction):
     xx = np.array(xx).flatten().astype(float)
     K = np.logical_and(xx >= self.support[0], xx < self.support[1])
     yy = np.zeros_like(xx)
-    yy[K] = self.bSpline(xx[K], nu=self.nu)
+    if self.nu < 0: yy[xx >= self.support[1]] = 1
+    yy[K] = self.bSpline(xx[K])
     return yy
   
   def getSupport(self):
