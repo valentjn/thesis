@@ -11,34 +11,36 @@
   Note that the outer union in the definition of $\coarselevelset{n}{d}{b}$ in
   \eqref{eq:coarseBoundary} is indeed disjoint.
   Therefore,
-  \begin{align}
+  \begin{equation}
     \setsize{\coarseregsgset{n}{d}{b}}
-    &= \sum_{\substack{\*l \in \nat^d,\\\normone{\*l} \le n}} \setsize{\hiset{\*l}} +
+    = \sum_{\substack{\*l \in \nat^d,\\\normone{\*l} \le n}}
+    \setsize{\hiset{\*l}} +
     \sum_{
       \substack{
         \*l \in \natz^d \setminus \nat^d,\\
         (\normone{\vecmax(\*l, \*1)} \le n - b + 1) \lor
         (\*l = \*0)
       }
-    } \setsize{\hiset{\*l}}.\\
-    \intertext{%
-      The first sum is the number $\setsize{\interiorregsgset{n}{d}}$
-      of interior grid points in $\regsgset{n}{d}$.
-      The second sum can be split into summands
-      with the same number $q$ of zero entries,
-      which we count with
-      $N_\*l := \setsize{\{t \mid l_t = 0\}}
-      = \normone{\vecmax(\*l, \*1)} - \normone{\*l}$,
-      and the same level sum $m = \normone{\*l}$:%
-    }
-    &= \setsize{\interiorregsgset{n}{d}} + 2^d +
+    } \setsize{\hiset{\*l}}.
+  \end{equation}
+  The first sum is the number $\setsize{\interiorregsgset{n}{d}}$
+  of interior grid points in $\regsgset{n}{d}$.
+  The second sum can be split into summands
+  with the same number $q$ of zero entries,
+  which we count with
+  $N_\*l := \setsize{\{t \mid l_t = 0\}}
+  = \normone{\vecmax(\*l, \*1)} - \normone{\*l}$,
+  and the same level sum $m = \normone{\*l}$:
+  \begin{equation}
+    \setsize{\coarseregsgset{n}{d}{b}}
+    = \setsize{\interiorregsgset{n}{d}} + 2^d +
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
         \*l \in \natz^d,\\
         N_\*l = q,\,\normone{\*l} = m}
-    } \setsize{\hiset{\*l}}
-  \end{align}
+    } \setsize{\hiset{\*l}},
+  \end{equation}
   where $2^d$ is the summand for $\*l = \*0$
   (number $\setsize{\hiset{\*0}}$ of corners of $\clint{\*0, \*1}$).
   The limits of the $m$ sum are $d-q$,
