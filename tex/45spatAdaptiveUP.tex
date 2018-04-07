@@ -258,8 +258,10 @@ for the remaining considerations:
     \dotsm
     (\upopuv{t_d}{\eqclass{\chain{d}}{\samepole{t_d}}})_{k''_{t_d},k'_{t_d}},
     \quad
-    \*k', \*k'' \in \liset.
+    \*k', \*k'' \in \liset,
   \end{equation}
+  where $(\chain{0}, \dotsc, \chain{d})$ is the chain
+  from $\*k'$ to $\*k''$ with respect to $1, \dotsc, d$.
   
   \item
   The operators $\linop$ and are $\upopuv{t_j}{\lisetpole}$ invertible.
@@ -474,6 +476,24 @@ For the standard hierarchical B-spline basis $\bspl{l,i}{p}$,
 this worst case often occurs as there are many non-zero entries
 in the corresponding interpolation matrices $\intpmat$
 (see \cref{sec:41problem}).
+
+Note that for the case $p = 1$ of piecewise linear
+standard B-splines $\bspl{\*l,\*i}{1}$, the conditions in
+\cref{cor:equivalentCorrectnessUPHierarchization}
+are equivalent to the requiring that the grid should contain
+the hierarchical ancestors of every grid point:
+\begin{equation}
+  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
+    (\*l',\*i') \in \liset
+  },\quad
+  \*l' := \*l - \stdbasis{t},\quad
+  i_{t'}' :=
+  \begin{cases}
+    2 \lfloor \tfrac{i_t}{4} \rfloor + 1,&t = t',\\
+    i_{t'},&t \not= t',
+  \end{cases}
+\end{equation}
+where $\stdbasis{t}$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
 
 
 
