@@ -9,12 +9,12 @@ import re
 def main():
   parser = argparse.ArgumentParser(
     description="Count notation LaTeX commands.")
-  parser.add_argument("--keystrokes", action="store_true",
-                      help="Display number of keystrokes instead "
-                           "(occurences times length).")
+  parser.add_argument("--count-type",
+      choices=["uses", "keystrokes", "files"], default="uses",
+      help="Determine what to count: Uses (default), keystrokes "
+           "(occurences times length), or files.")
   parser.add_argument("--all-commands", action="store_true",
-                      help="Count all commands, not only the ones "
-                           "defined in notation.tex")
+      help="Count all commands, not only the ones defined in notation.tex")
   args = parser.parse_args()
   
   texPath = os.path.join(os.path.dirname(
@@ -42,9 +42,14 @@ def main():
   
   for texFile in texFiles:
     with open(texFile, "r") as f: tex = f.read()
+    fileCommands = []
+    
     for command in re.findall(r"\\([A-Za-z]+)", tex):
       if not args.all_commands:
         if command not in possibleCommands: continue
+      if args.count_type == "files":
+        if command in fileCommands: continue
+        fileCommands.append(command)
       commandCounts[command] = commandCounts.get(command, 0) + 1
   
   notationTexFile = os.path.join(texPath, "notation.tex")
@@ -54,7 +59,7 @@ def main():
     if command not in notationTex:
       del commandCounts[command]
   
-  if args.keystrokes:
+  if args.count_type == "keystrokes":
     output = {x : commandCounts[x] * len(x) for x in commandCounts}
   else:
     output = commandCounts
