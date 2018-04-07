@@ -197,7 +197,9 @@ for k in range(8):
   plotCircle(ax, smallCircleCenter, smallCircleRadius, smallCircleColor)
   plotCircle(ax, tinyCircleCenter, tinyCircleRadius, tinyCircleColor, zorder=10)
   plotFunction(ax, smallCircleCenter, smallCircleRadius, p)
-  ax.text(*tinyCircleCenter, "${}$".format(k+1), color="w", ha="center", va="center", size=20, zorder=11)
+  ax.text(*tinyCircleCenter, r"$\mathbf{{{}}}$".format(k+1),
+          color="w", ha="center", va="center",
+          size=20, zorder=11)
 
 plotCircle(ax, (0, 0), largeCircleRadius - smallCircleRadius, Figure.COLORS["mittelblau"])
 b = helper.basis.CardinalBSpline(p)
