@@ -292,7 +292,7 @@ For this case,
 we do not need to remove any knots as the hierarchical splitting already
 holds for the full domain by \cref{cor:hierSplittingHatMV}.
 Second, the removal of these knots is only possible if $p + 1 \le 2^l$,
-which is equivalent to $l \ge \lceil\log_2(p+1)\rceil$.
+which is equivalent to $l \ge \ceil{\log_2(p+1)}$.
 For coarser levels,
 there are not enough interior knots that could be removed.
 Without any special treatment,
@@ -310,9 +310,9 @@ we use global Lagrange polynomials for the coarser levels:
     :=
     \begin{cases}
       \lagrangepoly{l,i},&
-      l < \lceil\log_2(p+1)\rceil,\\
+      l < \ceil{\log_2(p+1)},\\
       \nonunifbspl{i,\nodalknotseq[\nak]{l}{p}}{p},&
-      l \ge \lceil\log_2(p+1)\rceil,
+      l \ge \ceil{\log_2(p+1)},
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\
@@ -331,7 +331,7 @@ $\{(\gp{l,i'}, \kronecker{i}{i'}) \mid i' = 0, \dotsc, 2^l\}$.
 Since its degree $\deg \lagrangepoly{l,i}$ is bounded by $2^l$,
 we have $\deg \lagrangepoly{l,i} < p + 1$,
 as the Lagrange polynomials are employed only when
-$l < \lceil\log_2(p+1)\rceil$.
+$l < \ceil{\log_2(p+1)}$.
 Due to $2^l$ even (when $l \ge 1$) and $p$ odd,
 we can conclude from $\deg \lagrangepoly{l,i} \le 2^l \le p$ that actually
 $\deg \lagrangepoly{l,i} \le 2^l < p$
@@ -380,15 +380,15 @@ The motivation for using Lagrange polynomials for coarse levels
 is that they form a basis of the polynomial space
 and that they can be implemented and calculated quickly.
 However, the specific choice of basis functions for the levels
-$l < \lceil\log_2(p + 1)\rceil$ is arbitrary,
+$l < \ceil{\log_2(p + 1)}$ is arbitrary,
 as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
-$\bspl[\nak]{l,i}{p}$, $l \ge \lceil\log_2(p+1)\rceil$)
+$\bspl[\nak]{l,i}{p}$, $l \ge \ceil{\log_2(p+1)}$)
 and contained in the space $\naksplspace{l}{p}$.
 
 \paragraph{Implementation}
 
-Note that in each level $l \ge \lceil\log_2(p+1)\rceil$,
+Note that in each level $l \ge \ceil{\log_2(p+1)}$,
 only the first $\tfrac{p+1}{2}$
 (indices $i = 1, 3, \dotsc, p$)
 and the last $\tfrac{p+1}{2}$
@@ -431,18 +431,18 @@ respectively.
     = \nsbspl[\nak]{l}{p}
     = \bigoplus_{l'=0}^l \hsbspl[\nak]{l'}{p},
   \end{equation}
-  where for $l < \lceil\log_2(p+1)\rceil$, $\naksplspace{l}{p}$
+  where for $l < \ceil{\log_2(p+1)}$, $\naksplspace{l}{p}$
   is defined as the space $\polyspace{2^l + 1}$ of polynomials of degree
   $\le 2^l + 1$ on $\clint{0, 1}$
-  (for $l \ge \lceil\log_2(p+1)\rceil$,
+  (for $l \ge \ceil{\log_2(p+1)}$,
   $\naksplspace{l}{p}$ is the not-a-knot spline space).
 \end{proposition}
 
 \begin{proof}
-  For $l < \lceil\log_2(p+1)\rceil$, all
+  For $l < \ceil{\log_2(p+1)}$, all
   three spaces coincide with $\polyspace{2^l + 1}$ and nothing is to prove.
   
-  For $l \ge \lceil\log_2(p+1)\rceil$,
+  For $l \ge \ceil{\log_2(p+1)}$,
   we check the two conditions of \thmref{lemma:hierSplittingUV}.
   First, the hierarchical subspace $\hsbspl[\nak]{l'}{p}$ ($l' \le l$)
   is a subspace of $\naksplspace{l}{p} = \nsbspl[\nak]{l}{p}$.
@@ -505,12 +505,12 @@ represent global polynomials on $\clint{\*0, \*1}$:
   sparse grid with not-a-knot B-splines contains polynomials%
 ]
   \label{cor:sparseGridRegularNAKPolynomials}
-  If $n \ge \normone{\lceil\veclog_\*2(\*p + \*1)\rceil}$,
+  If $n \ge \normone{\ceil{\veclog_\*2(\*p + \*1)}}$,
   then $\polyspace{\*p} \subset \regsgspace[\*p,\nak]{n}{d}$.
 \end{shortcorollary}
 
 \begin{proof}
-  Let $\*l := \lceil\veclog_\*2(\*p + \*1)\rceil$ and $n \ge \normone{\*l}$.
+  Let $\*l := \ceil{\veclog_\*2(\*p + \*1)}$ and $n \ge \normone{\*l}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
   $\bigoplus_{\*l' \le \*l} \hsbspl[\nak]{\*l}{\*p} = \naksplspace{\*l}{\*p}$.
   In addition, all $\*l' \in \natz^d$ with $\*l' \le \*l$ satisfy
@@ -611,9 +611,9 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     :=
     \begin{cases}
       \lagrangepoly[\cc]{l,i},&
-      l < \lceil\log_2(p+1)\rceil,\\
+      l < \ceil{\log_2(p+1)},\\
       \nonunifbspl{i,\nodalknotseq[\cc,\nak]{l}{p}}{p},&
-      l \ge \lceil\log_2(p+1)\rceil,
+      l \ge \ceil{\log_2(p+1)},
     \end{cases}\quad
     l \in \natz,\quad
     i \in \hiset{l},\\

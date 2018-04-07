@@ -489,7 +489,7 @@ the hierarchical ancestors of every grid point:
   \*l' := \*l - \stdbasis{t},\quad
   i_{t'}' :=
   \begin{cases}
-    2 \lfloor \tfrac{i_t}{4} \rfloor + 1,&t = t',\\
+    2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
     i_{t'},&t \not= t',
   \end{cases}
 \end{equation}
