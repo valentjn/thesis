@@ -8,9 +8,11 @@ import subprocess
 import tempfile
 import time
 
-def run(args, **kwargs):
+def run(args, pipe=False, **kwargs):
   print("Running \"{}\"...".format(" ".join([shlex.quote(arg) for arg in args])))
-  subprocess.run(args, check=True, **kwargs)
+  if pipe: kwargs["stdout"] = subprocess.PIPE
+  process = subprocess.run(args, check=True, **kwargs)
+  if pipe: return process.stdout.decode()
 
 
 
@@ -42,8 +44,9 @@ if __name__ == "__main__":
                       help="don't use draft mode")
   parser.add_argument("--destination", default=defaultThesisPDFCopyPath, metavar="PATH",
                       help="local destination for compiled thesis")
-  parser.add_argument("--copy-gfx", metavar="DIR",
-                      help="copy .sconsign.dblite and build/gfx from this thesis folder "
+  parser.add_argument("--copy-stuff", metavar="DIR",
+                      help="copy .sconsign.dblite, build/gfx, and "
+                           "git-fat files from this thesis folder "
                            "to save time")
   args = parser.parse_args()
   
@@ -73,6 +76,16 @@ if __name__ == "__main__":
     print("Initializing git-fat...")
     run(["git", "fat", "init"], cwd=repoPath)
     
+    if args.copy_stuff is not None:
+      print("")
+      print("Copying git-fat files...")
+      gitDirSrc = run(["git", "rev-parse", "--git-dir"], pipe=True,
+                      cwd=args.copy_stuff).strip()
+      gitDirDst = os.path.join(repoPath, ".git")
+      os.rmdir(os.path.join(gitDirDst, "fat", "objects"))
+      shutil.copytree(os.path.join(gitDirSrc, "fat", "objects"),
+                      os.path.join(gitDirDst, "fat", "objects"))
+    
     print("")
     print("Pulling git-fat files...")
     run(["git", "fat", "pull"], cwd=repoPath)
@@ -93,11 +106,11 @@ if __name__ == "__main__":
     
     with open(switchesPath, "w") as f: f.write(switchesTex)
     
-    if args.copy_gfx is not None:
+    if args.copy_stuff is not None:
       print("")
       print("Copying .sconsign.dblite file and build/gfx directory...")
-      shutil.copy(os.path.join(args.copy_gfx, ".sconsign.dblite"), repoPath)
-      shutil.copytree(os.path.join(args.copy_gfx, "build", "gfx"),
+      shutil.copy(os.path.join(args.copy_stuff, ".sconsign.dblite"), repoPath)
+      shutil.copytree(os.path.join(args.copy_stuff, "build", "gfx"),
                       os.path.join(repoPath, "build", "gfx"),
                       copy_function=shutil.copy)
     

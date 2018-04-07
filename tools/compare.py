@@ -23,7 +23,7 @@ def compileConvert(i):
     uploadPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "upload.py")
     uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload", "--no-draft-mode",
                   "--destination", pdfPath]
-    if args.copy_gfx: uploadArgs += ["--copy-gfx", args.copy_gfx]
+    if args.copy_stuff: uploadArgs += ["--copy-stuff", args.copy_stuff]
     run(uploadArgs, pipe=False)
   
   firstImagePath = os.path.join(directory, "thesis_{}-0.png".format(revs[i]))
