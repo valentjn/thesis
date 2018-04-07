@@ -174,14 +174,14 @@
   
   Let
   \begin{equation}
-    S := \gp{\*l,\*i} + \spn\{\unitvec{1}, \dotsc, \unitvec{m}\}
-    = \{\gp{\*l,\*i} + \textstyle\sum_{t=1}^m c_t \unitvec{t} \mid
+    S := \gp{\*l,\*i} + \spn\{\stdbasis{1}, \dotsc, \stdbasis{m}\}
+    = \{\gp{\*l,\*i} + \textstyle\sum_{t=1}^m c_t \stdbasis{t} \mid
     c_1, \dotsc, c_m \in \real\}
   \end{equation}
   be the $m$-dimensional affine subspace of $\real^d$
   through $\gp{\*l, \*i}$
   parallel to the dimensions $1, \dotsc, m$,
-  where $\unitvec{t}$ is the $t$-th unit basis vector.
+  where $\stdbasis{t}$ is the $t$-th unit basis vector.
   It holds $S \cap \fgset{\*l'} = S \cap \fgset{\*l''}$ due to
   $l'_t = l''_t$ for $t \le m$.%
   \footnote{%
@@ -526,7 +526,7 @@
     Let $S$ be the line in $\real^d$ defined by
     \begin{equation}
       S
-      := \gp{\*l,\*i} + \spn\{\unitvec{t'}\}.
+      := \gp{\*l,\*i} + \spn\{\stdbasis{t'}\}.
     \end{equation}
     
     It holds that $S \cap \fgset{\*l^{(j+1)}} \subset \fgset{\*l^{(j')}}$.
