@@ -172,7 +172,8 @@ smallCircleCenters = [
   (2, 3),
 ]
 smallCircleRadius = 0.8
-smallCircleColor = 3 * [0.8]
+smallCircleColor = [0.7 + 0.3 * x
+                    for x in Figure.COLORS["mittelblau"]]
 tinyCircleRadius = 0.2
 tinyCircleColor = Figure.COLORS["mittelblau"]
 plotFunctions = [
