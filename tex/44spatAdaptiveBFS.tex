@@ -895,8 +895,8 @@ is uniquely solvable:
   satisfies
   \begin{equation}
     \exfalarge{\beta_p, \gamma_p \in \posreal}{x \in \real}{
-      |\parentfundspl{p}(x)|
-      \le \beta_p \cdot (\gamma_p)^{-|x|}.
+      \abs{\parentfundspl{p}(x)}
+      \le \beta_p \cdot (\gamma_p)^{-\abs{x}}.
     }
   \end{equation}
 \end{theorem}
@@ -911,7 +911,7 @@ is well-known as the \term{fundamental spline} of degree~$p$
 Applications of fundamental splines are interpolation and
 the definition of spline wavelets \cite{Chui92Introduction}.
 The fundamental splines $\parentfundspl{p}$ of low degrees $p$ and
-their bound functions $\beta_p \cdot (\gamma_p)^{-|x|}$
+their bound functions $\beta_p \cdot (\gamma_p)^{-\abs{x}}$
 are plotted in \cref{fig:fundamentalSpline}.
 
 \begin{figure}
@@ -945,7 +945,7 @@ are plotted in \cref{fig:fundamentalSpline}.
     $k \in \integer$ \emph{\textcolor{C0!50}{(light blue)}},
     with coefficients $\fundsplcoeff{k}{p}$ \emph{\textcolor{C1}{(red points)}}.
     The absolute values of the fundamental spline $\parentfundspl{p}$ and
-    its coefficients are bounded by a multiple of $(\gamma_p)^{-|k|}$
+    its coefficients are bounded by a multiple of $(\gamma_p)^{-\abs{k}}$
     \emph{(\textcolor{C0}{blue}-\textcolor{C1}{red}-dashed line)}.
     The axis for $\fundsplcoeff{k}{p}$ (on the right side) is scaled such that
     both bounding functions are on top of each other.%
@@ -1007,8 +1007,8 @@ as the fundamental spline itself due to the stability of the B-spline basis
 \cite{Hoellig13Approximation}, i.e.,
 \begin{equation}
   \label{eq:fundamentalSplineCoefficientsDecay}
-  |\fundsplcoeff{k}{p}|
-  \le \beta'_p (\gamma_p)^{-|k|},\quad
+  \abs{\fundsplcoeff{k}{p}}
+  \le \beta'_p (\gamma_p)^{-\abs{k}},\quad
   k \in \integer,
 \end{equation}
 for some $\beta'_p > 0$ independent of $k$,
@@ -1027,7 +1027,7 @@ Due to \eqref{eq:fundamentalSplineCoefficientsDecay},
 we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
 if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
-and set $\fundsplcoeff{k}{p} := 0$ for all $|k| \ge \fundsplcutoff{p}$,
+and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate the fundamental spline $\parentfundspl{p}$ once.
@@ -1054,12 +1054,12 @@ $\fundsplcutoff{p}$ for the different degrees.
     $\beta_p$, $\beta'_p$, for the bound functions of
     the fundamental spline $\parentfundspl{p}$ and
     its coefficients $\fundsplcoeff{k}{p}$, i.e.,
-    $\fa{x \in \real}{|\parentfundspl{p}(x)| \le \beta_p (\gamma_p)^{-|x|}}$
+    $\fa{x \in \real}{\abs{\parentfundspl{p}(x)} \le \beta_p (\gamma_p)^{-\abs{x}}}$
     and
-    $\fa{k \in \integer}{|\fundsplcoeff{k}{p}| \le \beta'_p (\gamma_p)^{-|k|}}$
+    $\fa{k \in \integer}{\abs{\fundsplcoeff{k}{p}} \le \beta'_p (\gamma_p)^{-\abs{k}}}$
     (approximated values).
     The truncation indices $\fundsplcutoff{p}$ are the smallest numbers such that
-    $\fa{|k| \ge \fundsplcutoff{p}}{|\fundsplcoeff{k}{p}| < 10^{-10}}$.%
+    $\fa{\abs{k} \ge \fundsplcutoff{p}}{\abs{\fundsplcoeff{k}{p}} < 10^{-10}}$.%
   }%
   \label{tbl:fundamentalSplineDecay}%
 \end{table}
