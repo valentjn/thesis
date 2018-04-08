@@ -10,7 +10,8 @@ class WeaklyFundamentalSpline(ParentFunction):
   def __init__(self, p, nu=0):
     super().__init__(nu)
     self.p = p
-    self.centralizedCardinalBSpline = CentralizedCardinalBSpline(p, nu=nu)
+    self.centralizedCardinalBSpline = CentralizedCardinalBSpline(p)
+    self.evaluationBasis = CentralizedCardinalBSpline(p, nu=nu)
     self.c = self._calculateCoefficients()
   
   def _calculateCoefficients(self):
@@ -34,7 +35,7 @@ class WeaklyFundamentalSpline(ParentFunction):
     
     for k in range(-(self.p-1)//2, (self.p+1)//2):
       yy += (self.c[k+(self.p-1)//2] *
-             self.centralizedCardinalBSpline.evaluate(xx - k))
+             self.evaluationBasis.evaluate(xx - k))
     
     return yy
   
