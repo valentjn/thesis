@@ -390,7 +390,7 @@ and not the nodal basis
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout =$ combinationTechnique}{%
-      $n$, $d$, $\vlinin$%
+      $\vlinin$, $n$, $d$%
     }
       \For{$q = 0, \dotsc, d - 1$}
         \For{$\*l' \in \natz^d$ with $\normone{\*l'} = n - q$}
@@ -429,10 +429,10 @@ and not the nodal basis
     For simplicity,
     the algorithm is described for regular sparse grids,
     but it can be generalized to arbitrary dimensionally adaptive sparse grids.
-    Inputs are the level $n$ and dimensionality $d$ of the
-    regular sparse grid and
+    Inputs are
     the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
     of input data (function values $\fcnval{\*l,\*i}$ at the grid points),
+    the level $n$, and the dimensionality $d$ of the regular sparse grid,
     where $\liset$ is the set of all feasible level-index pairs $(\*l,\*i)$,
     i.e., $\normone{\*l} \le n$, $\*i \in \hiset{\*l}$.
     The output is the vector
@@ -544,7 +544,7 @@ removing points from the union $\sgset$).
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout =$ residualInterpolation}{%
-      $\levelset$, $\vlinin$%
+      $\vlinin$, $\levelset$%
     }
       % renames:
       % * m --> j
@@ -604,10 +604,11 @@ removing points from the union $\sgset$).
     Application of the hierarchization operator $\linop = \intpmatinv$
     with residual interpolation
     for dimensionally adaptive sparse grids.
-    Inputs are the set $\levelset$ of levels that are part of
-    the sparse grid (see \eqref{eq:dimensionallyAdaptiveSG}) and
+    Inputs are
     the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
-    of input data (function values $\fcnval{\*l,\*i}$ at the grid points),
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points) and
+    the set $\levelset$ of levels that are part of
+    the sparse grid (see \eqref{eq:dimensionallyAdaptiveSG}),
     where $\liset$ is the set of all feasible level-index pairs $(\*l,\*i)$,
     i.e., $\*l \in \levelset$, $\*i \in \hiset{\*l}$.
     The output is the vector

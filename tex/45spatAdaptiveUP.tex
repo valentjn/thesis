@@ -707,7 +707,7 @@ piecewise polynomial of degree $\le p$.
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout =$ hermiteHierarchization1D}{%
-      $n$, $\vlinin$%
+      $\vlinin$, $n$%
     }
       \For{$i = 0, 1$}
       \Comment{set values for level $0$}%
@@ -793,9 +793,10 @@ piecewise polynomial of degree $\le p$.
     %Inputs are the set $\liset$ of level-index pairs of the
     %sparse grid (see \eqref{eq:spatiallyAdaptiveSG}) and
     Hermite hierarchization on one-dimensional regular grids.
-    Inputs are the level $n$ of the regular grid
+    Inputs are
     the vector $\vlinin = (\linin{l,i})_{(l,i) \in \liset}$
-    of input data (function values $\fcnval{l,i}$ at the grid points),
+    of input data (function values $\fcnval{l,i}$ at the grid points) and
+    the level $n$ of the regular grid,
     where $\liset = \{(l, i) \mid l = 0, \dotsc, n,\; i \in \hiset{l}\}$.
     The output is the vector
     $\vlinout = (\linout{l,i})_{(l,i) \in \liset}$

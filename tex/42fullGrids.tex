@@ -56,7 +56,7 @@ in which all points are in relation to each other):
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout =$ unidirectionalPrinciple}{%
-      $\liset$, $(t_1, \dotsc, t_d)$, $\vlinin$%
+      $\vlinin$, $\liset$, $(t_1, \dotsc, t_d)$%
     }
       \State{$\vlinout[(0)] \gets \vlinin$}
       \For{$j = 1, \dotsc, d$}
@@ -82,10 +82,11 @@ in which all points are in relation to each other):
   ]{%
     Application of a tensor product operator $\linop$ with
     the unidirectional principle.
-    Inputs are the set $\liset$ of grid indices,
+    Inputs are
+    the vector $\vlinin = (\linin{\*k})_{\*k \in \liset}$ of input data,
+    the set $\liset$ of grid indices, and
     the permutation $(t_1, \dotsc, t_d)$ specifying the order in which
-    the one-dimensional operators $\upopuv{t_j}{\lisetpole}$ should be applied, and
-    the vector $\vlinin = (\linin{\*k})_{\*k \in \liset}$ of input data.
+    the one-dimensional operators $\upopuv{t_j}{\lisetpole}$ should be applied.
     The output is the vector $\vlinout = (\linout{\*k})_{\*k \in \liset}$
     of output data.%
   }%

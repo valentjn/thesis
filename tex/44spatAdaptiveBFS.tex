@@ -309,7 +309,7 @@ in two dimensions is shown in \cref{fig:DAG}.
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout =$ breadthFirstSearch}{%
-      $\liset$, $\vlinin$%
+      $\vlinin$, $\liset$%
     }
       \State{$\vlinout \gets \vlinin$}
       \label{line:algBFS3}
@@ -356,10 +356,11 @@ in two dimensions is shown in \cref{fig:DAG}.
   ]{%
     Hierarchization with breadth-first search
     on spatially adaptive sparse grids with fundamental bases.
-    Inputs are the set $\liset$ of level-index pairs of the
-    sparse grid (see \eqref{eq:spatiallyAdaptiveSG}) and
+    Inputs are
     the vector $\vlinin = (\linin{\*l,\*i})_{(\*l,\*i) \in \liset}$
-    of input data (function values $\fcnval{\*l,\*i}$ at the grid points).
+    of input data (function values $\fcnval{\*l,\*i}$ at the grid points) and
+    the set $\liset$ of level-index pairs of the
+    sparse grid (see \eqref{eq:spatiallyAdaptiveSG}).
     The output is the vector
     $\vlinout = (\linout{\*l,\*i})_{(\*l,\*i) \in \liset}$
     of output data (hierarchical surpluses $\surplus{\*l,\*i}$).%
