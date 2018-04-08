@@ -138,6 +138,27 @@ class Test45SpatAdaptiveUP(unittest.TestCase):
       
       self.assertAllClose(Yl, fl[l][Kl,q])
   
+  def testLemmaIterativeRefinementEquivalent(self):
+    raise NotImplementedError
+  
+  def testPropIterativeRefinementSufficient(self):
+    raise NotImplementedError
+  
+  def testLemmaDualityUnidirectionalPrinciple(self):
+    raise NotImplementedError
+  
+  def testLemmaChainExistenceSufficient(self):
+    raise NotImplementedError
+  
+  def testLemmaChainExistenceNecessary(self):
+    raise NotImplementedError
+  
+  def testPropCorrectnessUPCharacterization(self):
+    raise NotImplementedError
+  
+  def testCorEquivalentCorrectnessUPHierarchization(self):
+    raise NotImplementedError
+  
   def testLemmaHermiteInterpolation(self):
     random.seed(42)
     a = random.uniform(0, 3)
