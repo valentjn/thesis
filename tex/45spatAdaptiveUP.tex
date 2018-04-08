@@ -678,7 +678,7 @@ We first recall higher-order Hermite interpolation:
     = \frac{\diff^q}{\dx^q} \spl(a),\quad
     \frac{\diff^q}{\dx^q} \objfun(b)
     = \frac{\diff^q}{\dx^q} \spl(b),\quad
-    q = 0, \dotsc, \frac{q-1}{2}.
+    q = 0, \dotsc, \frac{p-1}{2}.
     \hspace*{-10mm}
   \end{equation}
 \end{lemma}
@@ -726,8 +726,8 @@ piecewise polynomial of degree $\le p$.
         }
         \label{line:algHermiteHierarchization3}
       \EndFor{}
-      %\For{$l = 0, \dotsc, \max\{l \in \natz \mid (l, i) \in \liset\}$}
-      \For{$l = 0, \dotsc, n$}
+      %\For{$l = 1, \dotsc, \max\{l \in \natz \mid (l, i) \in \liset\}$}
+      \For{$l = 1, \dotsc, n$}
         %\State{%
         %  $J_l \gets \{i \in \hiset{l} \mid (l, i) \in \liset\}$%
         %}
