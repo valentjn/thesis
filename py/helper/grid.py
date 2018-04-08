@@ -25,6 +25,16 @@ def getHierarchicalIndices1D(l):
   i = (list(range(1, 2**l, 2)) if l > 0 else [0, 1])
   return i
 
+def reduceLevelIndex1D(l, i):
+  if l == 0:
+    return l, i
+  elif i == 0:
+    return 0, 0
+  else:
+    lp = l - int(np.log2((i ^ (i-1)) + 1) - 1)
+    ip = i // 2**(l - lp)
+    return lp, ip
+
 def getCoordinates(L, I, distribution="uniform"):
   L, I = np.array(L), np.array(I)
   if L.size == 1: L = L * np.ones_like(I)
