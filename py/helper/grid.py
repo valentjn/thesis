@@ -86,7 +86,7 @@ def generateMeshGrid(nns):
   return XX0, XX1, XX
 
 def flattenMeshGrid(XXs):
-  XX = np.stack([XXt.flatten() for XXt in XXs], axis=1)
+  XX = np.column_stack([XXt.flatten() for XXt in XXs])
   return XX
 
 
