@@ -195,7 +195,7 @@ class RegularSparseBoundary(object):
     else:
       raise ValueError("Invalid value for b.")
   
-  def generate(self):
+  def generate(self, testCallback=None):
     n, d, b = self.n, self.d, self.b
     
     if self.b == 0:
@@ -211,6 +211,7 @@ class RegularSparseBoundary(object):
           newL.extend([(*l, lt) for lt in range(0, lStar+1)])
         
         oldL = list(newL)
+        if testCallback is not None: testCallback(n, d, b, t, newL)
       
       L = np.array(newL)
     
@@ -233,6 +234,7 @@ class RegularSparseBoundary(object):
           newL.extend([(*l, lt) for lt in range(1, lStar+1)])
         
         oldL = list(newL)
+        if testCallback is not None: testCallback(n, d, b, t, newL)
       
       L = np.array(newL)
     
