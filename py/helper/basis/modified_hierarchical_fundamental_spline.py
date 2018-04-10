@@ -17,7 +17,7 @@ class ModifiedHierarchicalFundamentalSpline(HierarchicalBasis):
     self.c, self.cutoff = self._calculateCoefficients()
   
   def _calculateCoefficients(self):
-    if self.p == 1: return np.array([2, 1]), 1
+    if self.p == 1: return np.array([2, 1]), 2
     
     cardinalBSpline = CardinalBSpline(self.p)
     valuesBSpline = cardinalBSpline.evaluate(np.array(range(1, self.p+1)))
