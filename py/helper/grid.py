@@ -91,6 +91,34 @@ def flattenMeshGrid(XXs):
 
 
 
+class Full(object):
+  def __init__(self, l):
+    self.l = l
+  
+  def generate1D(self, l1D):
+    return RegularSparse(l1D, 1).generate()
+  
+  def generate(self):
+    X1Ds, L1Ds, I1Ds = [], [], []
+    
+    for l1D in self.l:
+      X1D, L1D, I1D = self.generate1D(l1D)
+      X1Ds.append(X1D.flatten())
+      L1Ds.append(L1D.flatten())
+      I1Ds.append(I1D.flatten())
+    
+    X = flattenMeshGrid(np.meshgrid(*X1Ds))
+    L = flattenMeshGrid(np.meshgrid(*L1Ds))
+    I = flattenMeshGrid(np.meshgrid(*I1Ds))
+    
+    return X, L, I
+
+class FullBoundary(Full):
+  def generate1D(self, l1D):
+    return RegularSparseBoundary(l1D, 1, 0).generate()
+
+
+
 class RegularSparse(object):
   def __init__(self, n, d):
     self.n = n
