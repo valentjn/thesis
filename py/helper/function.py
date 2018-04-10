@@ -53,7 +53,9 @@ class Interpolant(Function):
   
   def _evaluateBasis(self, k, XX):
     l, i = self.L[k,:], self.I[k,:]
-    if l.shape[0] == 1: l, i = l[0], i[0]
+    if l.shape[0] == 1:
+      l, i = l[0], i[0]
+      if XX.ndim == 2: XX = XX[:,0]
     YY = self.basis.evaluate(l, i, XX)
     YY = YY.flatten()
     return YY
