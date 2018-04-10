@@ -11,6 +11,7 @@ class HierarchicalNaturalBSpline(HierarchicalBasis):
     super().__init__(nu=nu)
     assert nu == 0
     self.p = p
+    self.basisCache = {}
   
   def getKnots(self, l, i=None):
     hInv = 2**l
@@ -25,27 +26,38 @@ class HierarchicalNaturalBSpline(HierarchicalBasis):
     if l == 0:
       yy = i * xx + (1 - i) * (1 - xx)
     elif (i - (self.p+1)//2 < 0) or (i + (self.p+1)//2 > hInv):
-      xi = self.getKnots(l, i)
-      basis = helper.symbolicSplines.BSpline(xi)
-      basesToAdd = []
-      conditions = []
+      if (l, i) in self.basisCache:
+        basis = self.basisCache[(l, i)]
+      else:
+        xi = self.getKnots(l, i)
+        basis = helper.symbolicSplines.BSpline(xi)
+        basesToAdd = []
+        conditions = []
+        
+        if i - (self.p+1)//2 < 0:
+          for j in range((self.p-1)//2):
+            xi = self.getKnots(l, i-j-1)
+            basesToAdd.append(helper.symbolicSplines.BSpline(xi))
+            conditions.append((0, 0, j+2))
+        
+        if i + (self.p+1)//2 > hInv:
+          for j in range((self.p-1)//2):
+            xi = self.getKnots(l, i+j+1)
+            basesToAdd.append(helper.symbolicSplines.BSpline(xi))
+            conditions.append((1, 0, j+2))
+        
+        basis, _ = basis.addSplinesForInterpolation(basesToAdd, conditions)
+        self.basisCache[(l, i)] = basis
       
-      if i - (self.p+1)//2 < 0:
-        for j in range((self.p-1)//2):
-          xi = self.getKnots(l, i-j-1)
-          basesToAdd.append(helper.symbolicSplines.BSpline(xi))
-          conditions.append((0, 0, j+2))
-      
-      if i + (self.p+1)//2 > hInv:
-        for j in range((self.p-1)//2):
-          xi = self.getKnots(l, i+j+1)
-          basesToAdd.append(helper.symbolicSplines.BSpline(xi))
-          conditions.append((1, 0, j+2))
-      
-      basis, _ = basis.addSplinesForInterpolation(basesToAdd, conditions)
       yy = basis.evaluate(xx)
     else:
-      yy = HierarchicalBSpline(self.p).evaluate(l, i, xx)
+      if (l, i) in self.basisCache:
+        basis = self.basisCache[(l, i)]
+      else:
+        basis = HierarchicalBSpline(self.p)
+        self.basisCache[(l, i)] = basis
+      
+      yy = basis.evaluate(l, i, xx)
     
     return yy
   
