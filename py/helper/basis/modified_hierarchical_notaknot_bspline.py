@@ -43,7 +43,7 @@ class ModifiedHierarchicalNotAKnotBSpline(HierarchicalBasis):
           
           yy = basis.evaluate(xx)
       else:
-        yy = unmodifiedBasis.evaluate(l, i, xx)
+        yy = self.unmodifiedBasis.evaluate(l, i, xx)
     
     return yy
   
