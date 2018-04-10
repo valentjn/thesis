@@ -111,11 +111,11 @@ class RegularSparse(object):
     n = self.n
     d = self.d
     N = self.getSize()
-    L = np.zeros((N, d))
-    I = np.zeros((N, d))
-    l = np.ones((d,))
+    L = np.zeros((N, d), dtype=int)
+    I = np.zeros((N, d), dtype=int)
+    l = np.ones((d,), dtype=int)
     l1 = d
-    i = np.ones((d,))
+    i = np.ones((d,), dtype=int)
     t = 0
     m = 0
     
@@ -142,7 +142,7 @@ class RegularSparse(object):
         t -= 1
     
     generateRecursively()
-    X = I * 2**(-L)
+    X = I / 2**L
     
     return X, L, I
 
