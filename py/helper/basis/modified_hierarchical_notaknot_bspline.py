@@ -35,7 +35,12 @@ class ModifiedHierarchicalNotAKnotBSpline(HierarchicalBasis):
           xi = self.unmodifiedBasis.getKnots(l, 1)
           basisLeft = helper.symbolicSplines.BSpline(xiLeft)
           basis = helper.symbolicSplines.BSpline(xi)
-          basis, _ = basis.addSplinesForInterpolation([basisLeft], [(0, 0, 2)])
+          
+          if self.p > 1:
+            basis, _ = basis.addSplinesForInterpolation([basisLeft], [(0, 0, 2)])
+          else:
+            basis += basisLeft * (xi[2] / (xi[2] - xi[1]))
+          
           yy = basis.evaluate(xx)
       else:
         yy = unmodifiedBasis.evaluate(l, i, xx)
