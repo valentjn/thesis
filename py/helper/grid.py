@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import numpy as np
-import scipy.misc
+import scipy.special
 
 
 
@@ -82,7 +82,7 @@ class RegularSparse(object):
     elif self.d < 0:
       return 0
     else:
-      return sum([2**q * scipy.misc.comb(self.d - 1 + q, self.d - 1, exact=True)
+      return sum([2**q * scipy.special.comb(self.d - 1 + q, self.d - 1, exact=True)
                   for q in range(self.n - self.d + 1)])
   
   def generate(self):
@@ -134,12 +134,12 @@ class RegularSparseBoundary(object):
   
   def getSize(self):
     if self.b == 0:
-      return sum([2**q * scipy.misc.comb(self.d, q, exact=True) *
+      return sum([2**q * scipy.special.comb(self.d, q, exact=True) *
                   RegularSparse(self.n, self.d - q).getSize()
                   for q in range(self.d + 1)])
     elif self.b >= 1:
       return (RegularSparse(self.n, self.d).getSize() +
-              sum([2**q * scipy.misc.comb(self.d, q, exact=True) *
+              sum([2**q * scipy.special.comb(self.d, q, exact=True) *
                    RegularSparse(self.n - q - self.b + 1, self.d - q).getSize()
                    for q in range(1, self.d + 1)]))
     else:
