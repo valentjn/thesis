@@ -15,6 +15,8 @@ def getNodalIndices1D(l):
   i = list(range(2**l + 1))
   return i
 
+
+
 def getHierarchicalIndices(l):
   i1D = [getHierarchicalIndices1D(l1D) for l1D in l]
   meshGrid = np.meshgrid(*i1D, indexing="ij")
@@ -25,7 +27,9 @@ def getHierarchicalIndices1D(l):
   i = (list(range(1, 2**l, 2)) if l > 0 else [0, 1])
   return i
 
-def reduceLevelIndex1D(l, i):
+
+
+def convertNodalToHierarchical1D(l, i):
   if l == 0:
     return l, i
   elif i == 0:
@@ -34,6 +38,22 @@ def reduceLevelIndex1D(l, i):
     lp = l - int(np.log2((i ^ (i-1)) + 1) - 1)
     ip = i // 2**(l - lp)
     return lp, ip
+
+def convertNodalToHierarchical(L, I):
+  L, I = np.array(L), np.array(I)
+  N, d = L.shape
+  for k in range(N):
+    for t in range(d):
+      L[k,t], I[k,t] = convertNodalToHierarchical1D(L[k,t], I[k,t])
+  return L, I
+
+def convertHierarchicalToNodal(L, I, lp):
+  L, I = np.array(L), np.array(I)
+  I *= 2**(lp - L)
+  L = lp * np.ones_like(L)
+  return L, I
+
+
 
 def getCoordinates(L, I, distribution="uniform"):
   L, I = np.array(L), np.array(I)
@@ -54,6 +74,8 @@ def getCoordinates(L, I, distribution="uniform"):
     raise NotImplementedError("Unknown grid point distribution.")
   
   return X
+
+
 
 def generateMeshGrid(nns):
   assert len(nns) == 2
