@@ -17,10 +17,10 @@ class NodalWeaklyFundamentalTransformed(HierarchicalFundamentalTransformed):
     
     iLeft, iRight = i-(p-1)//2, i+(p-1)//2
     omitLeft, omitRight = max(-iLeft, 0), max(iRight - hInv, 0)
-    N = iRight - iLeft + 1
     
     iLeft += omitLeft
     iRight -= omitRight
+    N = iRight - iLeft + 1
     
     x = np.linspace(i-self.p+2, i+self.p-2, N-1) / hInv
     x = (x[omitLeft:-omitRight] if omitRight > 0 else
