@@ -8,9 +8,9 @@ import helper.basis
 import tests.misc
 
 class Test31StandardBSplines(tests.misc.CustomTestCase):
-  def testPropSplineSpace(self):
-    # copied from Höllig
-    pass
+  # copied from Höllig
+  #def testPropSplineSpace(self):
+  #  raise NotImplementedError
   
   def testCorNodalBSplineSpace(self):
     xx = np.random.random((10,))

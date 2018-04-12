@@ -210,9 +210,9 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
         
         self.assertAlmostEqual(lhsYY, rhsYY)
   
-  def testPropTiftNodalSpace(self):
-    # cannot be tested (too theoretical)
-    pass
+  # cannot be tested (too theoretical)
+  #def testPropTiftNodalSpace(self):
+  #  raise NotImplementedError
   
   def testThmFundamentalSplineExistence(self):
     for p in range(1, 16, 2):

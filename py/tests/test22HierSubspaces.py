@@ -9,9 +9,9 @@ import helper.basis
 import tests.misc
 
 class Test22HierSubspaces(tests.misc.CustomTestCase):
-  def testLemmaHierSplittingUV(self):
-    # cannot be tested (too theoretical)
-    pass
+  # cannot be tested (too theoretical)
+  #def testLemmaHierSplittingUV(self):
+  #  raise NotImplementedError
   
   def testCorHierSplittingHatUV(self):
     p = 1
@@ -53,13 +53,13 @@ class Test22HierSubspaces(tests.misc.CustomTestCase):
           
           self.assertAlmostEqual(yyNodal, yyHier)
   
-  def testLemmaHierSplittingMV(self):
-    # cannot be tested (too theoretical)
-    pass
+  # cannot be tested (too theoretical)
+  #def testLemmaHierSplittingMV(self):
+  #  raise NotImplementedError
   
-  def testPropSplittingUVToMV(self):
-    # cannot be tested (too theoretical)
-    pass
+  # cannot be tested (too theoretical)
+  #def testPropSplittingUVToMV(self):
+  #  raise NotImplementedError
   
   def testCorHierSplittingHatMV(self):
     nPreset, p = [3, 2, 1, 2], 1
