@@ -112,7 +112,7 @@ We prove the correctness of the \up with the following invariant:
   ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
   \begin{equation}
     \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
-    \surplus[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
+    \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
     = \fcnval{\*k'},\quad
     \*k' = \*0, \dotsc, \*2^\*l,
   \end{equation}
@@ -129,29 +129,29 @@ We prove the correctness of the \up with the following invariant:
   and arbitrary $\*k' = \*0, \dotsc, \*2^\*l$ as
   \begin{align}
     \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
-    \surplus[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
+    \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
     &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
     \basis{\*k_{T'}}(\gp{\*k'_{T'}}) \cdot
     \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
-    \surplus[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
+    \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
     \intertext{%
       If we choose the equivalence class
       $\lisetpole := \eqclass{(\*k_T,\*k'_{-T})}{\samepole{t_j}}$
       ($\*k_T$ arbitrary),
       then the sum over $k_{t_j}$ equals
       $\sum_{\*k \in \lisetpole}
-      \surplus[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
+      \linout[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((\upopuv{t_j}{\lisetpole})^{-1}
-      %\Big[(\surplus[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
-      %= ((\surplus[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
-      = \surplus[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
+      %\Big[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
+      %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
+      = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
       by the 1D interpolation operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
       \cref{alg:unidirectionalPrinciple}).
       We can conclude that the \lhs equals%
     }
     &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
-    \surplus[(j-1)]{(\*k_{T'},\*k'_{-T'})}
+    \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}
     \basis{\*k_{T'}}(\gp{\*k'_{T'}}),
   \end{align}
   which, by the induction hypothesis, equals $\fcnval{\*k'}$ as desired
@@ -169,10 +169,10 @@ We prove the correctness of the \up with the following invariant:
 \begin{proof}
   We apply \cref{prop:invariantUnidirectionalPrinciple} to obtain
   $\sum_{\*k=\*0}^{\*2^\*l}
-  \surplus[(j)]{\*k} \basis{\*k}(\gp{\*k'})
+  \linout[(j)]{\*k} \basis{\*k}(\gp{\*k'})
   = \fcnval{\*k'}$
   for all $\*k' = \*0, \dotsc, \*2^\*l$, i.e.,
-  the $\surplus[(j)]{\*k}$ are the correct interpolation coefficients
+  the $\linout[(j)]{\*k}$ are the correct interpolation coefficients
   according to \eqref{eq:hierarchizationProblem}.
 \end{proof}
 
