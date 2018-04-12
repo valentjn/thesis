@@ -35,17 +35,20 @@
     \midrule
   }%
   \luaexec{require("progressTable")}%
-  \newcommand*{\tfoot}{\luadirect{generateTotalRow()}}
-  \begin{tabular}{%
-    @{\hspace{2mm}}%
-    c%
-    *{2}{@{\hspace{10mm}}r@{/}r@{\hspace{3mm}}r}%
-    @{\hspace{7mm}}%
-    *{6}{C{8mm}}%
-    r%
-    @{\hspace{8mm}}%
-    c%
-    @{\hspace{2mm}}%
+  \newcommand*{\tfoot}{\luadirect{generateTotalRow()}}%
+  \begin{tabular}{
+    @{\hspace{2mm}}
+    c
+    @{\hspace{6mm}}
+    r@{/}r@{\hspace{3mm}}r
+    @{\hspace{9mm}}
+    r@{/}r@{\hspace{3mm}}r
+    @{\hspace{7mm}}
+    *{6}{C{8mm}}
+    r
+    @{\hspace{5mm}}
+    c
+    @{\hspace{2mm}}
   }
   	\toprule
   	\thead 1.0 & 0  &  0 &   \pr{0} & 0 &  0 & \pr{100} & \no  & \no & \no & \no  & \no & \no & \pr{0}  &        \\ \midrule
