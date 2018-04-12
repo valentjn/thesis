@@ -23,7 +23,7 @@ class Test42FullGrids(tests.misc.CustomTestCase):
     summand = np.zeros((K.shape[0],))
     
     for kt in KT:
-      lt, it = Test42FullGrids.convertContinuousToHierarchical(kt)
+      lt, it = tests.misc.convertContinuousToHierarchical(kt)
       if not hierarchical:
         lt, it = helper.grid.convertHierarchicalToNodal(lt, it, l[curT])
       
