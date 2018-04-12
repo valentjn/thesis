@@ -10,14 +10,12 @@ import scipy.special
 import helper.basis
 import helper.grid
 import helper.misc
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test43DimAdaptive(CustomTestCase):
+class Test43DimAdaptive(tests.misc.CustomTestCase):
   @staticmethod
   def computeContribution(basisName, basis, distribution, f, XX, l):
-    A, L, I = HelperChap2.computeFullGridMatrix(
+    A, L, I = tests.misc.computeFullGridMatrix(
         basisName, basis, l, distribution=distribution,
         hierarchical=True, parallel=False)
     X = helper.grid.getCoordinates(L, I, distribution=distribution)
@@ -115,7 +113,7 @@ class Test43DimAdaptive(CustomTestCase):
   
   def testThmCombiTechnique(self):
     n, b = 4, 0
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
       basis1D = (basis.basis1D[0]
@@ -142,7 +140,7 @@ class Test43DimAdaptive(CustomTestCase):
         else:
           distribution = "uniform"
         
-        f = HelperChap2.getObjectiveFunction(d)
+        f = tests.misc.getObjectiveFunction(d)
         XX = np.random.random((10, d))
         if d == 1: XX = XX.flatten()
         fctXX = np.zeros((XX.shape[0],))
@@ -223,7 +221,7 @@ class Test43DimAdaptive(CustomTestCase):
     
     for d in range(1, 4):
       basis = helper.basis.TensorProduct(basis1D, d)
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       
       for n in range(7-d):
         with self.subTest(d=d, n=n):
@@ -319,7 +317,7 @@ class Test43DimAdaptive(CustomTestCase):
     
     for d in range(1, 4):
       basis = helper.basis.TensorProduct(basis1D, d)
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       
       for n in range(7-d):
         with self.subTest(d=d, n=n):
@@ -363,10 +361,10 @@ class Test43DimAdaptive(CustomTestCase):
     pass
   
   def testPropInvariantResidualInterpolation(self):
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       modified = ("Modified" in basisName)
       if "ClenshawCurtis" in basisName: distribution = "clenshawCurtis"
       else:                             distribution = "uniform"

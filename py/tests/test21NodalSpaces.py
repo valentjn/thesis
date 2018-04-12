@@ -5,19 +5,17 @@ import unittest
 import numpy as np
 
 import helper.basis
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test21NodalSpaces(CustomTestCase):
+class Test21NodalSpaces(tests.misc.CustomTestCase):
   def testLemmaTensorProductLinearIndependence(self):
     lPreset = [3, 1, 1, 2]
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
       with self.subTest(basis=basisName, d=d):
         l = lPreset[:d]
-        A, L, I = HelperChap2.computeFullGridMatrix(basisName, basis, l)
+        A, L, I = tests.misc.computeFullGridMatrix(basisName, basis, l)
         rank = np.linalg.matrix_rank(A)
         self.assertEqual(rank, L.shape[0])
 

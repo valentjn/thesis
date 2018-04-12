@@ -8,11 +8,9 @@ import scipy.optimize
 
 import helper.basis
 import helper.function
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test44SpatAdaptiveBFS(CustomTestCase):
+class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
   @staticmethod
   def getExampleHierarchicalFundamentalBases():
     bases1D = [[
@@ -124,7 +122,7 @@ class Test44SpatAdaptiveBFS(CustomTestCase):
     bases = self.getExampleHierarchicalFundamentalBases()
     
     for basisName, d, basis in bases:
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       modified = ("Modified" in basisName)
       if "ClenshawCurtis" in basisName: distribution = "clenshawCurtis"
       else:                             distribution = "uniform"
@@ -132,7 +130,7 @@ class Test44SpatAdaptiveBFS(CustomTestCase):
       if d >= 4: continue
       
       with self.subTest(basis=basisName, d=d):
-        X, L, I = HelperChap2.generateSpatiallyAdaptiveSparseGrid(
+        X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
             d, 100, distribution=distribution, withBoundary=(not modified))
         fX = f(X)
         interpolant = helper.function.Interpolant(basis, X, L, I, fX)
@@ -156,13 +154,13 @@ class Test44SpatAdaptiveBFS(CustomTestCase):
     bases = self.getExampleHierarchicalFundamentalBases()
     
     for basisName, d, basis in bases:
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       modified = ("Modified" in basisName)
       if "ClenshawCurtis" in basisName: distribution = "clenshawCurtis"
       else:                             distribution = "uniform"
       
       with self.subTest(basis=basisName, d=d):
-        X, L, I = HelperChap2.generateSpatiallyAdaptiveSparseGrid(
+        X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
             d, 100, distribution=distribution, withBoundary=(not modified))
         fX = f(X)
         interpolant = helper.function.Interpolant(basis, X, L, I, fX)
@@ -182,7 +180,7 @@ class Test44SpatAdaptiveBFS(CustomTestCase):
   
   def testPropHftSparseGridSpace(self):
     n, b = 4, 0
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
       if "ClenshawCurtis" in basisName: continue
@@ -190,7 +188,7 @@ class Test44SpatAdaptiveBFS(CustomTestCase):
       if ("HierarchicalNaturalBSpline" in basisName) and (d >= 2): continue
       if d >= 4: continue
       
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       XX = np.random.random((10, d))
       
       with self.subTest(basis=basisName, d=d):

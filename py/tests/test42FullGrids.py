@@ -8,11 +8,9 @@ import numpy as np
 
 import helper.basis
 import helper.grid
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test42FullGrids(CustomTestCase):
+class Test42FullGrids(tests.misc.CustomTestCase):
   def upCallback(self, X, fX, bases1D, l, hierarchical, y, q, K, T):
     d = len(T)
     curT = T[:q+1]
@@ -46,7 +44,7 @@ class Test42FullGrids(CustomTestCase):
   
   def testPropInvariantUnidirectionalPrinciple(self):
     lPreset = [3, 1, 1, 2]
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
       if ("Natural" in basisName) and (d >= 3): continue
@@ -73,20 +71,20 @@ class Test42FullGrids(CustomTestCase):
           fX = 2 * np.random.random((N,)) - 1
           
           u = np.array(fX)
-          K = HelperChap2.convertToContinuous(L, I)
+          K = tests.misc.convertToContinuous(L, I)
           T = np.arange(d)
           np.random.shuffle(T)
-          L1D = functools.partial(HelperChap2.hierarchize1D,
+          L1D = functools.partial(tests.misc.hierarchize1D,
                                   basis, distribution, hierarchical)
           bases1D = (basis.basis1D if d > 1 else [basis])
           testCallback = (functools.partial(
               self.upCallback, X, fX, bases1D, l, hierarchical) if d < 4 else
               None)
-          y = HelperChap2.unidirectionalPrinciple(
+          y = tests.misc.unidirectionalPrinciple(
             u, K, T, L1D, testCallback=testCallback)
           
           if d == 1: X, L, I = X.flatten(), L.flatten(), I.flatten()
-          A = HelperChap2.computeInterpolationMatrix(basis, X, L, I)
+          A = tests.misc.computeInterpolationMatrix(basis, X, L, I)
           aX = np.linalg.solve(A, fX)
           
           self.assertAlmostEqual(y, aX)

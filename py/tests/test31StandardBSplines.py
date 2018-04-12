@@ -5,11 +5,9 @@ import unittest
 import numpy as np
 
 import helper.basis
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test31StandardBSplines(CustomTestCase):
+class Test31StandardBSplines(tests.misc.CustomTestCase):
   def testPropSplineSpace(self):
     # copied from Höllig
     pass
@@ -53,9 +51,9 @@ class Test31StandardBSplines(CustomTestCase):
         
         for moveXIntoD in [True, False]:
           with self.subTest(n=n, p=p, moveXIntoD=moveXIntoD):
-            ANodal, LNodal, INodal = HelperChap2.computeFullGridMatrix(
+            ANodal, LNodal, INodal = tests.misc.computeFullGridMatrix(
               basisName, basis, [n], hierarchical=False, moveXIntoD=moveXIntoD)
-            AHier,  LHier,  IHier  = HelperChap2.computeFullGridMatrix(
+            AHier,  LHier,  IHier  = tests.misc.computeFullGridMatrix(
               basisName, basis, [n], hierarchical=True, moveXIntoD=moveXIntoD)
             
             N = ANodal.shape[0]

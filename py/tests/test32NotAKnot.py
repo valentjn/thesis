@@ -5,11 +5,9 @@ import unittest
 import numpy as np
 
 import helper.basis
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test32NotAKnot(CustomTestCase):
+class Test32NotAKnot(tests.misc.CustomTestCase):
   @staticmethod
   def prepareEvaluatePolynomial(C):
     p = np.array(C.shape) - 1
@@ -77,9 +75,9 @@ class Test32NotAKnot(CustomTestCase):
           h = 1 / 2**n
           
           with self.subTest(n=n, p=p, distribution=distribution):
-            ANodal, LNodal, INodal = HelperChap2.computeFullGridMatrix(
+            ANodal, LNodal, INodal = tests.misc.computeFullGridMatrix(
               basisName, basis, [n], distribution=distribution, hierarchical=False)
-            AHier,  LHier,  IHier  = HelperChap2.computeFullGridMatrix(
+            AHier,  LHier,  IHier  = tests.misc.computeFullGridMatrix(
               basisName, basis, [n], distribution=distribution, hierarchical=True)
             
             N = ANodal.shape[0]
@@ -122,9 +120,9 @@ class Test32NotAKnot(CustomTestCase):
     for basisName, d, distribution, basis in bases:
       with self.subTest(basis=basisName, d=d):
         n = nPreset[:d]
-        ANodal, LNodal, INodal = HelperChap2.computeFullGridMatrix(
+        ANodal, LNodal, INodal = tests.misc.computeFullGridMatrix(
           basisName, basis, n, distribution=distribution, hierarchical=False)
-        AHier,  LHier,  IHier  = HelperChap2.computeFullGridMatrix(
+        AHier,  LHier,  IHier  = tests.misc.computeFullGridMatrix(
           basisName, basis, n, distribution=distribution, hierarchical=True)
         
         N = ANodal.shape[0]
@@ -172,7 +170,7 @@ class Test32NotAKnot(CustomTestCase):
             if N > 10000: continue
             
             with self.subTest(d=d, n=n, p=pScalar, distribution=distribution):
-              A = HelperChap2.computeInterpolationMatrix(basis, X, L, I)
+              A = tests.misc.computeInterpolationMatrix(basis, X, L, I)
               fX = self.evaluatePolynomial(C, K, X)
               aX = np.linalg.solve(A, fX)
               

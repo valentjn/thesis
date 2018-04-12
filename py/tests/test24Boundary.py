@@ -3,10 +3,9 @@
 import unittest
 
 import helper.grid
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-
-class Test24Boundary(CustomTestCase):
+class Test24Boundary(tests.misc.CustomTestCase):
   def checkGridSizes(self, gridFunction, examples=[], skipFunction=None):
     for d in range(1, 6):
       for n in range(7):

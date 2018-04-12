@@ -10,11 +10,9 @@ import scipy.special
 
 import helper.basis
 import helper.grid
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test45SpatAdaptiveUP(CustomTestCase):
+class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
   @staticmethod
   def createDataHermiteHierarchization(p):
     n, d, b = 4, 1, 0
@@ -185,21 +183,21 @@ class Test45SpatAdaptiveUP(CustomTestCase):
       basis1D = helper.basis.HierarchicalBSpline(p)
       
       for d in range(1, 5):
-        f = HelperChap2.getObjectiveFunction(d)
+        f = tests.misc.getObjectiveFunction(d)
         basisLin = (helper.basis.TensorProduct(basisLin1D, d) if d > 1 else
                     basisLin1D)
         basis = (helper.basis.TensorProduct(basis1D, d) if d > 1 else
                  basis1D)
         
         with self.subTest(p=p, d=d):
-          X, L, I = HelperChap2.generateSpatiallyAdaptiveSparseGrid(
+          X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
               d, 500)
           fX = f(X)
           
-          A = HelperChap2.computeInterpolationMatrix(basis, X, L, I)
+          A = tests.misc.computeInterpolationMatrix(basis, X, L, I)
           aX = np.linalg.solve(A, fX)
           
-          ALin = HelperChap2.computeInterpolationMatrix(basisLin, X, L, I)
+          ALin = tests.misc.computeInterpolationMatrix(basisLin, X, L, I)
           ALinInv = np.linalg.inv(ALin)
           
           Linv = (lambda x: np.dot(A, x))
@@ -225,16 +223,16 @@ class Test45SpatAdaptiveUP(CustomTestCase):
   def testLemmaDualityUnidirectionalPrinciple(self):
     n, b = 4, 0
     hierarchical = True
-    bases = HelperChap2.getExampleHierarchicalBases()
+    bases = tests.misc.getExampleHierarchicalBases()
     
     for basisName, d, basis in bases:
-      f = HelperChap2.getObjectiveFunction(d)
+      f = tests.misc.getObjectiveFunction(d)
       modified = ("Modified" in basisName)
       if "ClenshawCurtis" in basisName: distribution = "clenshawCurtis"
       else:                             distribution = "uniform"
       
       with self.subTest(basis=basisName, d=d):
-        #X, L, I = HelperChap2.generateSpatiallyAdaptiveSparseGrid(
+        #X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
         #    d, 500)
         grid = (helper.grid.RegularSparse(n, d) if modified else
                 helper.grid.RegularSparseBoundary(n, d, b))
@@ -245,22 +243,22 @@ class Test45SpatAdaptiveUP(CustomTestCase):
         fX = f(X)
         
         u = np.array(fX)
-        K = HelperChap2.convertToContinuous(L, I)
+        K = tests.misc.convertToContinuous(L, I)
         T = np.arange(d)
         np.random.shuffle(T)
-        L1D = functools.partial(HelperChap2.hierarchize1D,
+        L1D = functools.partial(tests.misc.hierarchize1D,
                                 basis, distribution, hierarchical)
         bases1D = (basis.basis1D if d > 1 else [basis])
-        y = HelperChap2.unidirectionalPrinciple(u, K, T, L1D)
+        y = tests.misc.unidirectionalPrinciple(u, K, T, L1D)
         
         TRev = T[::-1]
-        LInv1D = functools.partial(HelperChap2.hierarchize1D,
+        LInv1D = functools.partial(tests.misc.hierarchize1D,
                                    basis, distribution, hierarchical,
                                    mode="dehierarchize")
-        u2 = HelperChap2.unidirectionalPrinciple(y, K, TRev, LInv1D)
+        u2 = tests.misc.unidirectionalPrinciple(y, K, TRev, LInv1D)
         
         if d == 1: X, L, I = X.flatten(), L.flatten(), I.flatten()
-        A = HelperChap2.computeInterpolationMatrix(basis, X, L, I)
+        A = tests.misc.computeInterpolationMatrix(basis, X, L, I)
         aX = np.linalg.solve(A, fX)
         fX2 = np.dot(A, y)
         
@@ -329,7 +327,7 @@ class Test45SpatAdaptiveUP(CustomTestCase):
                basis1D)
       
       with self.subTest(d=d):
-        X, L, I = HelperChap2.generateSpatiallyAdaptiveSparseGrid(
+        X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
             d, 200)
         #grid = (helper.grid.RegularSparse(n, d) if modified else
         #        helper.grid.RegularSparseBoundary(n, d, b))
@@ -337,10 +335,10 @@ class Test45SpatAdaptiveUP(CustomTestCase):
         if distribution != "uniform":
           X = helper.grid.getCoordinates(L, I, distribution=distribution)
         
-        K = HelperChap2.convertToContinuous(L, I)
+        K = tests.misc.convertToContinuous(L, I)
         T = np.arange(d)
         np.random.shuffle(T)
-        getL1D = functools.partial(HelperChap2.hierarchize1D,
+        getL1D = functools.partial(tests.misc.hierarchize1D,
             basis, distribution, hierarchical, None, mode="matrix")
         N = X.shape[0]
         As = [np.eye(N)]
@@ -349,7 +347,7 @@ class Test45SpatAdaptiveUP(CustomTestCase):
         allKPoles = []
         
         for t in T:
-          isOnSamePole = functools.partial(HelperChap2.isOnSamePole,
+          isOnSamePole = functools.partial(tests.misc.isOnSamePole,
                                            t, d)
           KPoles = helper.misc.getEquivalenceClasses(KTuples, isOnSamePole)
           allKPoles.extend([(t, tuple(sorted(KPole))) for KPole in KPoles])
@@ -361,7 +359,7 @@ class Test45SpatAdaptiveUP(CustomTestCase):
         A1Ds = dict(zip(allKPoles, A1Ds))
         
         for t in T:
-          isOnSamePole = functools.partial(HelperChap2.isOnSamePole,
+          isOnSamePole = functools.partial(tests.misc.isOnSamePole,
                                            t, d)
           KPoles = helper.misc.getEquivalenceClasses(K, isOnSamePole)
           At = np.zeros((N, N))
@@ -387,7 +385,7 @@ class Test45SpatAdaptiveUP(CustomTestCase):
               chain = self.getChain(L[k1,:], I[k1,:],
                                     L[k2,:], I[k2,:], T[:j])
               if chain is not None:
-                chain = HelperChap2.convertToContinuous(
+                chain = tests.misc.convertToContinuous(
                     np.array([x[0] for x in chain]),
                     np.array([x[1] for x in chain]))
                 containsChain = all([np.any(np.all(K == k, axis=1))
@@ -402,7 +400,7 @@ class Test45SpatAdaptiveUP(CustomTestCase):
                 rhs = 1
                 
                 for t, kj in zip(T[:j], chain[1:]):
-                  isOnSamePole = functools.partial(HelperChap2.isOnSamePole,
+                  isOnSamePole = functools.partial(tests.misc.isOnSamePole,
                                                    t, d)
                   KPole = [k for k in K if isOnSamePole(k, kj)]
                   KPoleTuple = tuple(sorted([tuple(k.tolist())

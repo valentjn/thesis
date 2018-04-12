@@ -6,11 +6,9 @@ import unittest
 import numpy as np
 
 import helper.basis
+import tests.misc
 
-from tests.CustomTestCase import CustomTestCase
-import tests.HelperChap2 as HelperChap2
-
-class Test22HierSubspaces(CustomTestCase):
+class Test22HierSubspaces(tests.misc.CustomTestCase):
   def testLemmaHierSplittingUV(self):
     # cannot be tested (too theoretical)
     pass
@@ -34,9 +32,9 @@ class Test22HierSubspaces(CustomTestCase):
     for basisName, basis in bases:
       for n in range(5):
         with self.subTest(basis=basisName, n=n):
-          ANodal, LNodal, INodal = HelperChap2.computeFullGridMatrix(
+          ANodal, LNodal, INodal = tests.misc.computeFullGridMatrix(
             basisName, basis, [n], hierarchical=False)
-          AHier,  LHier,  IHier  = HelperChap2.computeFullGridMatrix(
+          AHier,  LHier,  IHier  = tests.misc.computeFullGridMatrix(
             basisName, basis, [n], hierarchical=True)
           
           N = ANodal.shape[0]
@@ -83,9 +81,9 @@ class Test22HierSubspaces(CustomTestCase):
     for basisName, d, basis in bases:
       with self.subTest(basis=basisName, d=d):
         n = nPreset[:d]
-        ANodal, LNodal, INodal = HelperChap2.computeFullGridMatrix(
+        ANodal, LNodal, INodal = tests.misc.computeFullGridMatrix(
           basisName, basis, n, hierarchical=False)
-        AHier,  LHier,  IHier  = HelperChap2.computeFullGridMatrix(
+        AHier,  LHier,  IHier  = tests.misc.computeFullGridMatrix(
           basisName, basis, n, hierarchical=True)
         
         N = ANodal.shape[0]
