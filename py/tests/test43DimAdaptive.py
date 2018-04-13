@@ -349,7 +349,7 @@ class Test43DimAdaptive(tests.misc.CustomTestCase):
                 
                 for l in curLs:
                   if not np.all(L[k,:] <= l):
-                    innerSum += flxs[r][0]
+                    innerSum += flxs[r][0][0]
                     r += 1
                 
                 lhs += (-1)**q * scipy.special.binom(d-1, q) * innerSum
