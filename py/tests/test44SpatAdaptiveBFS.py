@@ -159,9 +159,10 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
       if "ClenshawCurtis" in basisName: distribution = "clenshawCurtis"
       else:                             distribution = "uniform"
       
+      X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
+          d, 100, distribution=distribution, withBoundary=(not modified))
+      
       with self.subTest(basis=basisName, d=d):
-        X, L, I = tests.misc.generateSpatiallyAdaptiveSparseGrid(
-            d, 100, distribution=distribution, withBoundary=(not modified))
         fX = f(X)
         interpolant = helper.function.Interpolant(basis, X, L, I, fX)
         aX = interpolant.aX
@@ -172,7 +173,7 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
         y = self.breadthFirstSearch(u, X, L, I, basis, modified=modified,
                                     testCallback=testCallback)
         
-        self.assertAlmostEqual(y, aX)
+        self.assertAlmostEqual(y, aX, atol=1e-10)
   
   def testCorAlgBFSCorrectness(self):
     # tested in testPropInvariantBFS
