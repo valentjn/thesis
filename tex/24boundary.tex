@@ -216,8 +216,12 @@ of $b$, especially when compared with
 $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 
 \begin{table}
-  \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
-    \toprule
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l<{\kern5mm}+r<{\kern5mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \headerrow
     &
     {$\setsize{\interiorregsgset{n}{d}}$}&
     {$b = 0$}&
@@ -226,7 +230,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
     {$b = 3$}&
     {$b = 4$}&
     {$b = 5$}\\
-    \midrule
+    \midrulec
     $n = 3$&
     \num{1}&
     \num{123.0}&
@@ -291,7 +295,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
     \num{1.36}&
     \num{1.16}&
     \num{1.06}\\
-    \bottomrule
+    \bottomrulec
   \end{tabular}
   \caption[%
     Comparison of regular sparse grid sizes with coarse boundary
@@ -312,8 +316,12 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 \end{table}
 
 \begin{table}
-  \begin{tabular}{l@{\hspace{10mm}}r@{\hspace{10mm}}rrrrrr}
-    \toprule
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l<{\kern5mm}+r<{\kern5mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \headerrow
     &
     {$\setsize{\interiorregsgset{n}{d}}$}&
     {$b = 0$}&
@@ -322,7 +330,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
     {$b = 3$}&
     {$b = 4$}&
     {$b = 5$}\\
-    \midrule
+    \midrulec
     $n = 10$&
     \num{1}&
     \num{3.3e+08}&
@@ -387,7 +395,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
     \num{86.5}&
     \num{24.2}&
     \num{6.8}\\
-    \bottomrule
+    \bottomrulec
   \end{tabular}
   \caption[%
     Comparison of regular sparse grid sizes with coarse boundary

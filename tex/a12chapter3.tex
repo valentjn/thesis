@@ -137,15 +137,17 @@
   to be shown differently.
   
   \begin{table}
-    \begin{tabular}{l@{\hspace{7mm}}ccc}
-      \toprule
+    \setnumberoftableheaderrows{1}%
+    \begin{tabular}{>{\kern\tabcolsep}=l<{\kern7mm}+c+c+c<{\kern\tabcolsep}}
+      \toprulec
+      \headerrow
       &$k = 0$&$k = 1$&$k = 2$\\
-      \midrule
+      \midrulec
       $p = 1$&2&&\\
       $p = 3$&6&1&\\
       $p = 5$&20&6&\\
       $p = 7$&70&28&1\\
-      \bottomrule
+      \bottomrulec
     \end{tabular}%
     \caption[%
       Non-zero matrix values in the proof of linear independence%

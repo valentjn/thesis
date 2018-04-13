@@ -1038,15 +1038,19 @@ the factors $\beta_p$, $\beta'_p$, and the truncation indices
 $\fundsplcutoff{p}$ for the different degrees.
 
 \begin{table}
-  \begin{tabular}{p{12mm}*{8}{C{10mm}}}
-    \toprule
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l<{\kern5mm}*{8}{+c}<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \headerrow
     $p$&$1$&$3$&$5$&$7$&$9$&$11$&$13$&$15$\\
-    \midrule
+    \midrulec
     $\gamma_p$&$2.718$&$3.732$&$2.322$&$1.868$&$1.645$&$1.512$&$1.425$&$1.363$\\
     $\beta_p$&$1$&$1.241$&$1.104$&$1.058$&$1.037$&$1.026$&$1.019$&$1.014$\\
     $\beta'_p$&$1$&$1.732$&$3.095$&$6.016$&$12.27$&$25.82$&$55.56$&$121.6$\\
     $\fundsplcutoff{p}$&$1$&$18$&$29$&$40$&$52$&$64$&$77$&$90$\\
-    \bottomrule
+    \bottomrulec
   \end{tabular}%
   \caption[%
     Decay rates of fundamental splines%
