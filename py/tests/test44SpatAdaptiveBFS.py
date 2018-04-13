@@ -44,8 +44,7 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
   @staticmethod
   def isChild1D(l, i, lp, ip):
     if lp == 0:
-      if ip == 0: return (l == 0) and (i == 1)
-      else:       return (l == 1) and (i == 1)
+      return (l == 1) and (i == 1)
     else:
       return (l == lp + 1) and ((i == 2*ip-1) or (i == 2*ip+1))
   
