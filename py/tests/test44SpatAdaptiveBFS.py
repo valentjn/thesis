@@ -58,8 +58,8 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
     else:
       return Test44SpatAdaptiveBFS.isChild1D(l, i, lp, ip)
   
-  @staticmethod
-  def breadthFirstSearch(u, X, L, I, basis, modified=False, testCallback=None):
+  def breadthFirstSearch(self, u, X, L, I, basis,
+                         modified=False, testCallback=None):
     y = np.array(u)
     d = (L.shape[1] if L.ndim > 1 else 1)
     N = L.shape[0]
@@ -95,10 +95,11 @@ class Test44SpatAdaptiveBFS(tests.misc.CustomTestCase):
           y[k] -= y[kp] * basis.evaluate(L[kp], I[kp], np.array([X[k]]))[0]
       
       for k in range(N):
-        if ((k not in Kp) and
-            Test44SpatAdaptiveBFS.isChild(L[k], I[k], L[kp], I[kp])):
+        if (k not in Kp) and self.isChild(L[k], I[k], L[kp], I[kp]):
           Q.put(k)
           Kp.append(k)
+    
+    self.assertEqual(len(Kp), N)
     
     return y
   
