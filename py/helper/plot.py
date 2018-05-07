@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
+import matplotlib as mpl
 import numpy as np
 import scipy.misc
+
+import helper.figure
 
 DEFAULT_ARROW_PROPERTIES = {
   "head_width" : 0.04,
@@ -87,3 +90,17 @@ def getAngle(u, v):
   angle = np.arccos(np.dot(u, v) / (uNorm * vNorm))
   if np.cross(u, v) < 0: angle = 2 * np.pi - angle
   return angle
+
+
+
+def convertColorToRGB(color):
+  color = helper.figure.Figure.COLORS.get(color, color)
+  color = mpl.colors.to_rgba(color)[:3]
+  return color
+
+def mixColors(color1, t, color2="white"):
+  color1 = convertColorToRGB(color1)
+  color2 = convertColorToRGB(color2)
+  mixedColor = tuple([t * c1 + (1 - t) * c2
+                      for c1, c2 in zip(color1, color2)])
+  return mixedColor
