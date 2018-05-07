@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # number of output figures = 1
 
+import matplotlib as mpl
 import numpy as np
 
 from helper.figure import Figure
@@ -14,23 +15,33 @@ def plotSG(X, L, I, t, ax, pos, size):
   xSquare, ySquare = np.array([0, 1, 1, 0, 0]), np.array([0, 0, 1, 1, 0])
   ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
   
-  N = X.shape[0]
-  K = np.ones((N,), dtype=bool)
-  color = "k"
-  
+  #if t < d:
+  #  isEquivalent = lambda x, y: (np.all(x[:t] == y[:t]) and
+  #                               np.all(x[t+1:] == y[t+1:]))
+  #  equivalenceClasses = helper.misc.getEquivalenceClasses(X, isEquivalent)
+  #  equivalenceClasses.sort(key=lambda x: x[0][1-t])
+  #  
+  #  for j, equivalenceClass in enumerate(equivalenceClasses):
+  #    color = "C{}".format(j % 9)
+  #    XClass = np.vstack(equivalenceClass)
+  #    ax.plot(*s(XClass[:,0], XClass[:,1]), ".", clip_on=False, color=color)
+  #else:
+  #  ax.plot(*s(X[:,0], X[:,1]), "k.", clip_on=False)
   
   if t < d:
-    isEquivalent = lambda x, y: (np.all(x[:t] == y[:t]) and
-                                 np.all(x[t+1:] == y[t+1:]))
-    equivalenceClasses = helper.misc.getEquivalenceClasses(X, isEquivalent)
-    equivalenceClasses.sort(key=lambda x: x[0][1-t])
+    h = 1 / 2**np.max(L)
+    hMargin = 0.05
+    brightness = 0.3
+    X1D = np.unique(X[:,1-t])
     
-    for j, equivalenceClass in enumerate(equivalenceClasses):
-      color = "C{}".format(j % 9)
-      XClass = np.vstack(equivalenceClass)
-      ax.plot(*s(XClass[:,0], XClass[:,1]), ".", clip_on=False, color=color)
-  else:
-    ax.plot(*s(X[:,0], X[:,1]), "k.", clip_on=False)
+    for x1D in X1D:
+      x, y, width, height = -hMargin, x1D-h*0.4, 1+2*hMargin, 0.8*h
+      if t == 1: x, y, width, height = y, x, height, width
+      color = helper.plot.mixColors("C{}".format(int(8*x1D) % 9), 1-brightness)
+      width, height = width * size[0], height * size[1]
+      ax.add_patch(mpl.patches.Rectangle(s(x, y), width, height, color=color))
+  
+  ax.plot(*s(X[:,0], X[:,1]), "k.", clip_on=False)
 
 
 
@@ -63,8 +74,8 @@ helper.plot.plotArrowPolygon(
 ax.text(1.8, -0.37, r"$\mathfrak{L}$", ha="center", va="bottom")
 
 ax.set_aspect("equal")
-ax.set_xlim(0, 3.8)
-ax.set_ylim(-0.42, 1)
+ax.set_xlim(-0.05, 3.8)
+ax.set_ylim(-0.42, 1.05)
 ax.set_axis_off()
 
 fig.save()
