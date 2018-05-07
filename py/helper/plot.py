@@ -56,14 +56,30 @@ def getBezierCurve(C, tt=201):
   XX = np.dot(TT, C)
   return XX
 
-def getQuadraticBezierCurveViaAngle(a, b, angle, tt):
+def getQuadraticBezierCurveViaAngle(a, b, angle, tt, c=None):
   a, b = np.array(a), np.array(b)
-  angle += getAngle([1, 0], b - a)
-  r = np.linalg.norm(b - a, ord=2) / 2
-  p = a + r * np.array([np.cos(angle), np.sin(angle)])
-  C = np.array([a, p, b])
-  XX = getBezierCurve(C, tt)
-  return XX
+  d = len(a)
+  
+  if d == 2:
+    angle += getAngle([1, 0], b - a)
+    r = np.linalg.norm(b - a, ord=2) / 2
+    p = a + r * np.array([np.cos(angle), np.sin(angle)])
+    C = np.array([a, p, b])
+    XX = getBezierCurve(C, tt)
+    return XX
+  elif d == 3:
+    if c is None: raise ValueError("c required for 3D Bezier curves.")
+    c = np.array(c)
+    scaling1 = np.linalg.norm(b - a, ord=2)
+    scaling2 = np.linalg.norm(c, ord=2)
+    A = np.array([(b-a)/scaling1, c/scaling2]).T  # 3x2 matrix (from 2D to 3D)
+    a2D = np.zeros((2,))
+    b2D = scaling1 * np.array([1, 0])
+    XX2D = getQuadraticBezierCurveViaAngle(a2D, b2D, angle, tt)
+    XX = a + np.dot(A, XX2D.T).T
+    return XX
+  else:
+    raise ValueError("Unsupported dimensionality.")
 
 def getAngle(u, v):
   u, v = np.array(u), np.array(v)
