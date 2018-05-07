@@ -16,7 +16,7 @@ class HierarchicalLagrangePolynomial(HierarchicalBasis):
     return X
   
   def evaluate(self, l, i, xx):
-    I = helper.grid.getNodalIndices1D(l)
+    I = helper.grid.getNodalIndices(l)
     X = self.getCoordinates(l, I)
     yy = np.ones_like(xx)
     
