@@ -85,5 +85,5 @@ def getAngle(u, v):
   u, v = np.array(u), np.array(v)
   uNorm, vNorm = np.linalg.norm(u, ord=2), np.linalg.norm(v, ord=2)
   angle = np.arccos(np.dot(u, v) / (uNorm * vNorm))
-  if np.cross(u, v) < 0: angle += np.pi
+  if np.cross(u, v) < 0: angle = 2 * np.pi - angle
   return angle
