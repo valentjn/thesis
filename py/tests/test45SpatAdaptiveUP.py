@@ -22,7 +22,7 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
     X, L, I = grid.generate()
     X, L, I = X.flatten(), L.flatten(), I.flatten()
     K = np.column_stack((L, I))
-    f = (lambda x: 0.3 + np.sin(2.3*np.pi*(X-0.2)))
+    f = (lambda X: 0.3 + np.sin(2.3*np.pi*(X-0.2)))
     fX = f(X)
     
     return bases, n, X, L, I, K, fX
@@ -64,9 +64,9 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
       if len(dataRight[0]) > 2: dataRight[0] = dataRight[0][:-1]
       else:                     del dataRight[0]
       
-      return((Test45SpatAdaptiveUP.dividedDifference(dataRight) -
-              Test45SpatAdaptiveUP.dividedDifference(dataLeft)) /
-            (data[-1][0] - data[0][0]))
+      return ((Test45SpatAdaptiveUP.dividedDifference(dataRight) -
+               Test45SpatAdaptiveUP.dividedDifference(dataLeft)) /
+              (data[-1][0] - data[0][0]))
 
   @staticmethod
   def hermiteInterpolation1D(xx, data, nu=0):
