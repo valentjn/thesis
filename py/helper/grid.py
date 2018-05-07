@@ -247,7 +247,7 @@ class RegularSparseBoundary(object):
 
 class DimensionallyAdaptiveSparse(object):
   def __init__(self, L):
-    self.L = L
+    self.L = np.array(L)
   
   def generate(self):
     I = [getHierarchicalIndices(self.L[k,:]) for k in range(self.L.shape[0])]
