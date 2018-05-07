@@ -64,7 +64,7 @@ for q in range(3):
     XX = np.array([xx]).T
     
     for l in range(n+1):
-      I = helper.grid.getHierarchicalIndices1D(l)
+      I = helper.grid.getHierarchicalIndices(l)
       
       for i in I:
         k = i * 2**(n-l)

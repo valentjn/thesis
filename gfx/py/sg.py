@@ -34,8 +34,8 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
   xSquare = np.array([0, 1, 1, 0, 0])
   ySquare = np.array([0, 0, 1, 1, 0])
   
-  I = (helper.grid.getNodalIndices1D if combinationTechnique else
-       helper.grid.getHierarchicalIndices1D)
+  I = (helper.grid.getNodalIndices if combinationTechnique else
+       helper.grid.getHierarchicalIndices)
   
   hellhellblau = [x + 0.5 * (1 - x) for x in Figure.COLORS["hellblau"]]
   figureScale = (0.4 if whiteMode else 1.2)

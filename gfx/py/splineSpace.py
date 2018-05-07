@@ -70,7 +70,7 @@ for q in range(3):
     ax.text(1,     -0.2, r"$1$", ha="center", va="top", color=color)
     ax.text(1+(p+1)*h, -0.082, r"$\vec{\xi}$", ha="center", va="top")
     ax.text(1+(p+1)*h, -0.2, r"$x\vphantom{0}$", ha="center", va="top", color=color)
-    I = helper.grid.getNodalIndices1D(n)
+    I = helper.grid.getNodalIndices(n)
     X = helper.grid.getCoordinates(n, I)
     ax.plot(X, 0*X, ".", color=color, clip_on=False, zorder=10)
   

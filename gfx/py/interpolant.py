@@ -47,7 +47,7 @@ fig = Figure.create(figsize=(3.3, 2.0), scale=1.0)
 ax = fig.gca()
 
 for l in range(n+1):
-  I = helper.grid.getHierarchicalIndices1D(l)
+  I = helper.grid.getHierarchicalIndices(l)
   
   for i in I:
     k = i * 2**(n-l)

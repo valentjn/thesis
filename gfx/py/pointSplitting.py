@@ -48,7 +48,7 @@ for q in range(2):
   for l in range(n + 1):
     y = (n - l) * margin
     hInv = 2**l
-    I = helper.grid.getHierarchicalIndices1D(l)
+    I = helper.grid.getHierarchicalIndices(l)
     X = helper.grid.getCoordinates(l, I, distribution=distribution)
     for x in X: ax.plot([x, x], [y, yTop], "-", color=circleColor)
   
@@ -62,7 +62,7 @@ for q in range(2):
   for l in range(n + 1):
     y = (n - l) * margin
     hInv = 2**l
-    I = helper.grid.getHierarchicalIndices1D(l)
+    I = helper.grid.getHierarchicalIndices(l)
     X = helper.grid.getCoordinates(l, I, distribution=distribution)
     ax.plot([0, 1], 2 * [y], "k-", clip_on=False)
     ax.plot(X, y * np.ones_like(X), "k.", clip_on=False)
