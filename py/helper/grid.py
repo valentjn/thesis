@@ -264,6 +264,38 @@ class DimensionallyAdaptiveSparse(object):
 
 
 
+class SpatiallyAdaptiveSparse(object):
+  def __init__(self, L, I, distribution="uniform"):
+    self.L, self.I = np.array(L), np.array(I)
+    self.distribution = distribution
+  
+  def getGrid(self):
+    X = getCoordinates(self.L, self.I, distribution=self.distribution)
+    return X, self.L, self.I
+  
+  def refine(self, k):
+    d = self.L.shape[1]
+    LI = [tuple([*l, *i]) for l, i in zip(self.L, self.I)]
+    li = LI[k]
+    LIC = []
+    lic = list(li)
+    
+    for t in range(d):
+      lic[t] += 1
+      
+      for s in [-1, 1]:
+        if (li[t] == 0) and (2*li[d+t]-1 == s): continue
+        lic[d+t] = 2 * li[d+t] + s
+        if tuple(lic) not in LI: LIC.append(list(lic))
+      
+      lic[t], lic[d+t] = li[t], li[d+t]
+    
+    if len(LIC) > 0:
+      LI = np.vstack((LI, LIC))
+      self.L, self.I = LI[:,:d], LI[:,d:]
+
+
+
 class SGppGrid(object):
   def __init__(self, grid, *args):
     if type(grid) is str:
