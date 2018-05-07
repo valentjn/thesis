@@ -356,6 +356,47 @@ $\*k'$ and $\*k''$.
 
 It is easy to see that this definition is equivalent to
 $\chain{j'-1} \samepole{t_{j'}} \chain{j'}$ for $j' = 1, \dotsc, j$.
+\Cref{fig:chainDefinition} shows examples of chains in
+two and three dimensions.
+As it is shown in \cref{fig:chainDefinition2},
+the order $(t_1, \dotsc, t_j)$ of the dimensions is important
+for the statement whether the grid contains the chain from
+$\*k'$ to $\*k''$.
+The grid must contain all intermediate points, otherwise
+it is not a chain.
+
+\begin{figure}
+  \subcaptionbox{%
+    2D, $(t_1, t_2) = (2, 1)$%
+  }[47mm]{%
+    \includegraphics{chainDefinition_1}%
+    \label{fig:chainDefinition1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    2D, $(t_1, t_2) = (1, 2)$%
+  }[47mm]{%
+    \includegraphics{chainDefinition_2}%
+    \label{fig:chainDefinition2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    3D, $(t_1, t_2, t_3) = (2, 3, 1)$%
+    \label{fig:chainDefinition3}%
+  }[50mm]{%
+    \includegraphics{chainDefinition_3}%
+  }%
+  \caption[%
+    Examples for the definition of chains%
+  ]{%
+    Examples for chains in two- and three-dimensional
+    sparse grids \emph{(left, right)}.
+    There is no chain from $\chain{0}$ to $\chain{2}$ in the center grid,
+    because the corresponding chain point $\chain{1}$ is missing in the grid.%
+  }%
+  \label{fig:chainDefinition}%
+\end{figure}
+
 We now show two lemmas.
 First, we prove that $(\upop{t_1,\dotsc,t_j})_{\*k'',\*k'} \not= 0$
 is sufficient for the existence of a chain from $\*k'$ to $\*k''$:
