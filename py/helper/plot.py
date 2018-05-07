@@ -46,8 +46,11 @@ def plotArrowPolygon(ax, xx, yy, lineStyle, scaleHead=1,
   plotFunction(ax, xx, yy)
   plotArrow(ax, virtualHeadStart, virtualHeadEnd, scaleHead=scaleHead, **kwargs)
 
-def getBezierCurve(C, tt):
+
+
+def getBezierCurve(C, tt=201):
   n = C.shape[0] - 1
+  if isinstance(tt, int): tt = np.linspace(0, 1, tt)
   TT = np.column_stack([scipy.misc.comb(n, i) * (1-tt)**(n-i) * tt**i
                         for i in range(n+1)])
   XX = np.dot(TT, C)
