@@ -29,7 +29,7 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
   
   def hermiteHierarchizationCallback(self, fl, y, l, K, bases):
     p = bases[0].p
-    nodalIl = helper.grid.getNodalIndices1D(l)
+    nodalIl = helper.grid.getNodalIndices(l)
     Kl = np.array([self.findLevelIndex(K, l, i) for i in nodalIl])
     Xl = helper.grid.getCoordinates(l, nodalIl)
     
@@ -37,7 +37,7 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
       Yl = np.zeros_like(Xl)
       
       for lp in range(l+1):
-        hierIlp = helper.grid.getHierarchicalIndices1D(lp)
+        hierIlp = helper.grid.getHierarchicalIndices(lp)
         for ip in hierIlp:
           Yl += (y[self.findLevelIndex(K, lp, ip)] *
                  bases[q].evaluate(lp, ip, Xl))
@@ -46,7 +46,7 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
   
   @staticmethod
   def findLevelIndex(K, l, i):
-    lp, ip = helper.grid.convertNodalToHierarchical1D(l, i)
+    lp, ip = helper.grid.convertNodalToHierarchical(l, i)
     return (np.where((K == (lp, ip)).all(axis=1))[0][0])
   
   @staticmethod
@@ -109,12 +109,12 @@ class Test45SpatAdaptiveUP(tests.misc.CustomTestCase):
       if p > 1: fl[0][k][1] = (u[k1] - u[k0])
     
     for l in range(1, n+1):
-      nodalIl = helper.grid.getNodalIndices1D(l)
+      nodalIl = helper.grid.getNodalIndices(l)
       Kl = np.array([Test45SpatAdaptiveUP.findLevelIndex(K, l, i)
                      for i in nodalIl])
       Xl = helper.grid.getCoordinates(l, nodalIl)
       
-      hierIl = np.array(helper.grid.getHierarchicalIndices1D(l))
+      hierIl = np.array(helper.grid.getHierarchicalIndices(l))
       flm1 = np.zeros((len(nodalIl), (p+1)//2))
       
       evenIl = [i for i in nodalIl if i not in hierIl]
