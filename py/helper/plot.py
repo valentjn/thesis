@@ -13,6 +13,8 @@ DEFAULT_ARROW_PROPERTIES = {
   "fc" : "k",
 }
 
+
+
 def plotArrow(ax, start, end, scaleHead=1, **kwargs):
   for name, value in DEFAULT_ARROW_PROPERTIES.items():
     kwargs.setdefault(name, value)
@@ -20,7 +22,12 @@ def plotArrow(ax, start, end, scaleHead=1, **kwargs):
   kwargs["head_width"] *= scaleHead
   kwargs["head_length"] *= scaleHead
   start, end = np.array(start), np.array(end)
-  ax.arrow(*start, *(end - start), **kwargs)
+  d = len(start)
+  
+  if d == 2:
+    ax.arrow(*start, *(end - start), **kwargs)
+  else:
+    raise ValueError("Unsupported dimensionality.")
 
 def plotArrowPolygon(ax, xx, yy, lineStyle, scaleHead=1,
                      virtualHeadLength=0.01, cutOff=6, **kwargs):
