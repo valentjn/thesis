@@ -500,10 +500,82 @@ This means that we can establish the correctness of the \up
 for the hierarchization operator $\linop = \intpmatinv$,
 if we insert all missing chain points that are specified by
 \cref{prop:correctnessUPCharacterization} into the grid.
-As it is necessary to insert these points recursively
-(e.g., the inserted points may generate new chains,
-for which other missing points have to be inserted),
-the number of points to be inserted can be very large.
+
+For the case $p = 1$ of piecewise linear
+standard B-splines $\bspl{\*l,\*i}{1}$, the conditions in
+\cref{cor:equivalentCorrectnessUPHierarchization}
+are equivalent to the requirement that the grid should contain
+the hierarchical ancestors of every grid point:
+\begin{equation}
+\fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
+  (\*l',\*i') \in \liset
+},\quad
+\*l' := \*l - \stdbasis{t},\quad
+i_{t'}' :=
+\begin{cases}
+2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
+i_{t'},&t \not= t',
+\end{cases}
+\end{equation}
+where $\stdbasis{t}$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+\Cref{fig:chainInsertionBSpline} shows the necessary ancestor chain points
+(colored points in \cref{fig:chainInsertionBSpline2})
+for an example of a two-dimensional spatially adaptive sparse grid
+(\cref{fig:chainInsertionBSpline1}).
+
+\begin{figure}
+  \subcaptionbox{%
+    Original grid ($N = 85$)%
+    \label{fig:chainInsertionBSpline1}%
+  }[48mm]{%
+    \includegraphics{chainInsertion_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Chain points for $p = 1$\\
+    ($N = 121$)%
+    \label{fig:chainInsertionBSpline2}%
+  }[48mm]{%
+    \includegraphics{chainInsertion_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Chain points for $p = 3$\\
+    ($N = 17 \times 17 = 289$)%
+    \label{fig:chainInsertionBSpline3}%
+  }[48mm]{%
+    \includegraphics{chainInsertion_3}%
+  }%
+  \caption[%
+    Chain points for hierarchical B-splines on a sparse grid%
+  ]{%
+    Necessary chain points for the correctness of the unidirectional principle
+    for hierarchical B-splines $\bspl{l,i}{p}$ on a
+    two-dimensional spatially adaptive sparse grid.
+    The colors indicate the recursion depth in which the
+    chain points have been inserted.
+    Black points are contained in the original grid
+    (``zero-order points'').
+    \textcolor{C0}{Blue points} are part of chains
+    between original grid points (``first-order chain points'').
+    \textcolor{C1}{Red points} are second-order chain points,
+    i.e., they are part of chains
+    from $\*k'$ to $\*k''$ where $\*k'$ and $\*k''$ are
+    original grid points or first-order chain points
+    and at least one of them is a first-order chain point.
+    Analogously,
+    \textcolor{C2}{yellow points} are third-order chain points.
+    $N$ is the number of points in the final grid.%
+  }%
+  \label{fig:chainInsertionBSpline}%
+\end{figure}
+
+It is necessary to insert these points recursively,
+e.g., the inserted points may generate new chains,
+for which other missing points have to be inserted and so on
+(these points are called ``second-order chain points''
+in \cref{fig:chainInsertionBSpline}).
+Therefore, the number of points to be inserted may be very large.
 The worst case is that the final grid is a full grid, i.e.,
 the Cartesian product of the union of the poles in the different dimensions:
 \begin{equation}
@@ -517,24 +589,7 @@ For the standard hierarchical B-spline basis $\bspl{l,i}{p}$,
 this worst case often occurs as there are many non-zero entries
 in the corresponding interpolation matrices $\intpmat$
 (see \cref{sec:41problem}).
-
-Note that for the case $p = 1$ of piecewise linear
-standard B-splines $\bspl{\*l,\*i}{1}$, the conditions in
-\cref{cor:equivalentCorrectnessUPHierarchization}
-are equivalent to the requiring that the grid should contain
-the hierarchical ancestors of every grid point:
-\begin{equation}
-  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
-    (\*l',\*i') \in \liset
-  },\quad
-  \*l' := \*l - \stdbasis{t},\quad
-  i_{t'}' :=
-  \begin{cases}
-    2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
-    i_{t'},&t \not= t',
-  \end{cases}
-\end{equation}
-where $\stdbasis{t}$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+An example for this is shown in \cref{fig:chainInsertionBSpline3}.
 
 
 
@@ -658,6 +713,25 @@ the condition $\basis{\*k'}(\gp{\*k''}) \not= 0$ in
 satisfied much more rarely.
 Consequently, fewer chain grid points have to be inserted to
 ensure the correctness of the \up for hierarchization.
+\Cref{fig:chainInsertionWeaklyFundamentalSpline} shows the inserted points
+for the same grid as in \cref{fig:chainInsertionBSpline}.
+
+\begin{SCfigure}
+  \includegraphics{chainInsertion_4}%
+  \caption[%
+    Chain points for hierarchical weakly fundamental splines on a
+    sparse grid%
+  ]{%
+    Necessary chain points for the correctness of the unidirectional principle
+    for cubic hierarchical weakly fundamental splines
+    $\bspl[\wfs]{l,i}{p}$ ($p = 3$)
+    on a two-dimensional spatially adaptive sparse grid.
+    The colors indicate the recursion depth in which the
+    chain points have been inserted (see \cref{fig:chainInsertionBSpline}).
+    The number of points in the final grid is $N = 157$.%
+  }%
+  \label{fig:chainInsertionWeaklyFundamentalSpline}%
+\end{SCfigure}
 
 In the special case of regular sparse grids $\regsgset{n}{d}$,
 %(i.e., $\regsgspace[\*p,\wfs]{n}{d}$ defined analogously to
