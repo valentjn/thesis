@@ -6,45 +6,45 @@ import scipy.special
 
 
 def getNodalIndices(l):
-  i1D = [getNodalIndices1D(l1D) for l1D in l]
-  meshGrid = np.meshgrid(*i1D, indexing="ij")
-  I = np.column_stack([grid.flatten() for grid in meshGrid])
+  if np.isscalar(l):
+    I = list(range(2**l + 1))
+  else:
+    i1D = [getNodalIndices(l1D) for l1D in l]
+    meshGrid = np.meshgrid(*i1D, indexing="ij")
+    I = np.column_stack([grid.flatten() for grid in meshGrid])
+  
   return I
-
-def getNodalIndices1D(l):
-  i = list(range(2**l + 1))
-  return i
-
-
 
 def getHierarchicalIndices(l):
-  i1D = [getHierarchicalIndices1D(l1D) for l1D in l]
-  meshGrid = np.meshgrid(*i1D, indexing="ij")
-  I = np.column_stack([grid.flatten() for grid in meshGrid])
+  if np.isscalar(l):
+    I = (list(range(1, 2**l, 2)) if l > 0 else [0, 1])
+  else:
+    i1D = [getHierarchicalIndices(l1D) for l1D in l]
+    meshGrid = np.meshgrid(*i1D, indexing="ij")
+    I = np.column_stack([grid.flatten() for grid in meshGrid])
+  
   return I
 
-def getHierarchicalIndices1D(l):
-  i = (list(range(1, 2**l, 2)) if l > 0 else [0, 1])
-  return i
 
-
-
-def convertNodalToHierarchical1D(l, i):
-  if l == 0:
-    return l, i
-  elif i == 0:
-    return 0, 0
-  else:
-    lp = l - int(np.log2((i ^ (i-1)) + 1) - 1)
-    ip = i // 2**(l - lp)
-    return lp, ip
 
 def convertNodalToHierarchical(L, I):
-  L, I = np.array(L), np.array(I)
-  N, d = L.shape
-  for k in range(N):
-    for t in range(d):
-      L[k,t], I[k,t] = convertNodalToHierarchical1D(L[k,t], I[k,t])
+  if np.isscalar(L):
+    if L == 0:
+      pass
+    elif I == 0:
+      L, I = 0, 0
+    else:
+      Lp = L - int(np.log2((I ^ (I-1)) + 1) - 1)
+      Ip = I // 2**(L - Lp)
+      L, I = Lp, Ip
+  else:
+    L, I = np.array(L), np.array(I)
+    N, d = L.shape
+    
+    for k in range(N):
+      for t in range(d):
+        L[k,t], I[k,t] = convertNodalToHierarchical(L[k,t], I[k,t])
+  
   return L, I
 
 def convertHierarchicalToNodal(L, I, lp):
