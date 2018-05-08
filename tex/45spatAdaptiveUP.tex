@@ -920,8 +920,9 @@ piecewise polynomial of degree $\le p$.
   \label{alg:hermiteHierarchization}%
 \end{algorithm}
 
-The idea of \cref{alg:hermiteHierarchization} is to
-hierarchize the function value data level by level,
+The idea of \cref{alg:hermiteHierarchization},
+which is illustrated in \cref{fig:hermiteHierarchization},
+is to hierarchize the function value data level by level,
 which is only possible because of the weakly fundamental property
 \eqref{eq:weaklyFundamentalProperty}.
 For each level $l$, we calculate surpluses
@@ -939,6 +940,36 @@ This is not an issue as in an implementation,
 one would typically simultaneously evaluate the
 Hermite interpolant and its derivatives in
 \cref{line:algHermiteHierarchization4}.
+
+\begin{SCfigure}
+  \includegraphics{hermiteHierarchization_1}%
+  \caption[%
+    Hermite hierarchization%
+  ]{%
+    Hermite hierarchization on a regular grid in one dimension
+    with cubic weakly fundamental splines $\bspl[\wfs]{l,i}{p}$ ($p = 3$).
+    The interpolants $\fgintp{l}$ \emph{\textcolor{C0}{(blue)}}
+    of the objective function \emph{\textcolor{C1}{(red)}}
+    are computed level by level.
+    For each level $l$,
+    the values $\fgintp{l}(\gp{l,i})$ and the derivatives
+    $\frac{\diff}{\dx} \fgintp{l}(\gp{l,i})$ of the
+    current interpolant $\fgintp{l}$ at the
+    grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) are saved
+    \emph{(black dots and bars)}.
+    The values and derivatives are used for Hermite interpolation
+    of the residual $\objfun - \fgintp{l}$.
+    The interpolated residual is then added to the current interpolant
+    such that the sum vanishes in the grid points of the next level $l + 1$
+    \emph{%
+      (black dashed lines between \textcolor{C0}{blue} and
+      \textcolor{C1}{red} dots)%
+    }.
+    Due to the weakly fundamental property, the previously
+    interpolated values of $\objfun$ remain unchanged.%
+  }%
+  \label{fig:hermiteHierarchization}%
+\end{SCfigure}
 
 For hierarchical weakly fundamental splines,
 the complexity of the $l$-th iteration of \cref{alg:hermiteHierarchization}
