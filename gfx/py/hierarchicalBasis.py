@@ -91,7 +91,7 @@ def plotSubspace(ax, basis, l, n,
   if notAKnot and (l > 0):
     nakI = list(range(1, (p+1)//2)) + list(range(hInv - (p-1)//2, hInv))
     x = helper.grid.getCoordinates(l, nakI, distribution=distribution)
-    ax.plot(x, 0*x, "x", c=color, clip_on=False)
+    ax.plot(x, 0*x, "x", c=color, clip_on=False, ms=5)
   
   if showSubspaces:
     restriction = (r"|_{{D_{{{}}}^{{{}}}}}".format(n, "p") if showD else "")
