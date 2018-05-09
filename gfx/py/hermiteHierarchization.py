@@ -155,10 +155,8 @@ for l in range(n+1):
       
       x = (xl + xr) / 2
       ax.plot([x, x], [f(x), yy[100]], "k--", clip_on=False)
-      
-      if i % 2 == 0:
-        ax.plot(x, yy[100], ".", color="C1", clip_on=False)
-        ax.plot(x, f(x), ".", color="C0", clip_on=False)
+      ax.plot(x, yy[100], ".", color="C1", clip_on=False)
+      ax.plot(x, f(x), ".", color="C0", clip_on=False)
     
     x = Xl[i]
     k = np.where(X == x)[0][0]
