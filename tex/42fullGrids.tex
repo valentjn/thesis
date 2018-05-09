@@ -38,7 +38,7 @@ will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
 
 \paragraph{Unidirectional principle and its correctness}
 
-The \up is given in \cref{alg:unidirectionalPrinciple}.
+We state the \up in \cref{alg:unidirectionalPrinciple}.
 The algorithm is given a permutation $(t_1, \dotsc, t_d)$ of $(1, \dotsc, d)$
 that specifies the order of dimensions in which the \up should be applied.
 We denote with $\upopuv{t_j}{\lisetpole}$ the one-dimensional version of $\linop$
@@ -145,7 +145,7 @@ We prove the correctness of the \up with the following invariant:
       %\Big[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
       %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
       = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
-      by the 1D interpolation operator $T_{t_j}$
+      by the 1D operator $T_{t_j}$
       (\cref{line:algUnidirectionalPrinciple1} of
       \cref{alg:unidirectionalPrinciple}).
       We can conclude that the \lhs equals%
@@ -167,7 +167,7 @@ We prove the correctness of the \up with the following invariant:
 \end{shortcorollary}
 
 \begin{proof}
-  We apply \cref{prop:invariantUnidirectionalPrinciple} to obtain
+  We apply \cref{prop:invariantUnidirectionalPrinciple} for $j = d$ to obtain
   $\sum_{\*k=\*0}^{\*2^\*l}
   \linout[(j)]{\*k} \basis{\*k}(\gp{\*k'})
   = \fcnval{\*k'}$
@@ -199,14 +199,14 @@ $\landauO{\ngp \sum_t \ngp_t^2}$ time%
   $t$-th iteration of \cref{alg:unidirectionalPrinciple}.
   Each pole requires the solution of an $\ngp_t \times \ngp_t$ linear system,
   which takes $\landauO{\ngp_t^3}$ time.
-},
-if $\ngp_t$ is the grid size
-$\setsize{\{k_t \mid \*k \in \liset\}}$ in dimension $t = 1, \dotsc, d$,
-and $\landauO{\max_t N_t^2}$ memory.
+}
+and $\landauO{\max\{N_1^2, \dotsc, N_d^2, N\}}$ memory,
+where $\ngp_t$ is the grid size
+$\setsize{\{k_t \mid \*k \in \liset\}}$ in dimension $t = 1, \dotsc, d$.
 The dependency from the univariate grid sizes $\ngp_t$ instead of $\ngp$
 makes the \up significantly less computationally expensive.
 As already mentioned,
-the \up is even more efficient for the piecewise linear case
+the \up is even more efficient in the piecewise linear case,
 where the univariate interpolation operators can be applied
 in-place.
 Hence, it only needs $\landauO{Nd}$ time and

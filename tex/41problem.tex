@@ -29,8 +29,8 @@ The hierarchical surpluses then define the interpolant $\sgintp$ as
   \basis{\*l',\*i'},
 \end{equation}
 which interpolates $\objfun$ at the grid points $\gp{\*l,\*i}$ of $\sgset$.
-\Cref{fig:hierarchization} shows the process of hierarchizing given
-function values and evaluating the resulting interpolant.
+\Cref{fig:hierarchization} shows the process of hierarchization of given
+function values and evaluation of the resulting interpolant.
 
 \begin{figure}
   \subcaptionbox{%
@@ -192,8 +192,8 @@ both $\intpmat$ and $\intpmatinv$ become significantly denser.
   \label{fig:matrixDensityPattern}%
 \end{SCfigure}
 
-This prohibits the use of the \up
-(which we will discuss in the next \cref{sec:42fullGrids})
+This prohibits the use of the \up,
+which we will discuss in the next \cref{sec:42fullGrids},
 on sparse grids with hierarchical B-splines.
 Consequently, we have to solve the linear system
 \eqref{eq:hierarchizationSLE}, which is significantly more time-consuming,
@@ -202,8 +202,8 @@ as it takes between $\landauOmega{\ngp^2 d}$ and $\landauO{\ngp^3 d}$ time
 In addition, if we use an explicit solver for the linear system,
 we additionally have to store an $\ngp \times \ngp$ matrix in memory.
 However, a grid of size $\ngp = \num{50000}$ would already exceed the memory
-of a \SI{16}{\gibi\byte} workstation
-(if we explicitly store the full matrix in double precision).
+of a \SI{16}{\gibi\byte} workstation,
+if we explicitly store the full matrix in double precision.
 In comparison, for the hat function basis,
 the \up only requires $\landauO{\ngp d}$ time and $\landauO{\ngp}$ memory.
 
@@ -212,14 +212,14 @@ the \up only requires $\landauO{\ngp d}$ time and $\landauO{\ngp}$ memory.
 We do not need the hierarchical level-index information $(\*l, \*i)$ in
 $\sgset$, $\liset$, $\vlinin$, and $\vlinout$
 for most of the considerations in this chapter.
-Therefore, we assume that in each dimension $t$, the level-index pairs
+In these cases, we assume that in each dimension $t$, the level-index pairs
 $(l_t, i_t)$ ($l_t \in \natz$, $i_t \in \hiset{l_t}$)
 are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \natz$.
 We identify $(\*l, \*i)$ with a single index $\*k$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
 Consequently,
 we can regard $\liset$ as a subset $\{\*k \mid \*x_\*k \in \sgset\}$
-of $\nat^d$.
+of $\natz^d$.
 We will switch between the notations whenever appropriate.
 All statements that are formulated in the $\*k$ notation are
 valid for both the nodal and the hierarchical basis
