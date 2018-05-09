@@ -126,7 +126,6 @@ f = (lambda X: 1.2 + np.sin(2.3*np.pi*(X-0.4)) +
 fX = f(X)
 
 fl = hermiteHierarchization1D(fX, n, K, bases)
-print(fl)
 
 
 
@@ -140,7 +139,7 @@ for l in range(n+1):
   ax.set_ylim(ylim)
   
   xx = np.linspace(0, 1, 200)
-  ax.plot(xx, f(xx), "-", color="C1", clip_on=False)
+  ax.plot(xx, f(xx), "-", color="C0", clip_on=False)
   
   Il = helper.grid.getNodalIndices(l)
   Xl = helper.grid.getCoordinates(l, Il)
@@ -152,14 +151,14 @@ for l in range(n+1):
       kl, kr = np.where(X == xl)[0][0], np.where(X == xr)[0][0]
       data = [np.hstack((xl, fl[l][kl])), np.hstack((xr, fl[l][kr]))]
       yy = hermiteInterpolation1D(xx, data)
-      ax.plot(xx, yy, "-", color="C0", clip_on=False)
+      ax.plot(xx, yy, "-", color="C1", clip_on=False)
       
       x = (xl + xr) / 2
       ax.plot([x, x], [f(x), yy[100]], "k--", clip_on=False)
       
       if i % 2 == 0:
-        ax.plot(x, yy[100], ".", color="C0", clip_on=False)
-        ax.plot(x, f(x), ".", color="C1", clip_on=False)
+        ax.plot(x, yy[100], ".", color="C1", clip_on=False)
+        ax.plot(x, f(x), ".", color="C0", clip_on=False)
     
     x = Xl[i]
     k = np.where(X == x)[0][0]
@@ -175,14 +174,14 @@ for l in range(n+1):
   elif l == 3: x, y = 0.1, 0.75
   
   ax.text(x, y, r"$f_{{{}}}$".format(l),
-          color="C0", ha="center", va="bottom")
+          color="C1", ha="center", va="bottom")
   
   if l == 0:   x, y = 0.5, 2
   elif l == 1: x, y = 0.5, 2
   elif l == 2: x, y = 0.5, 2
   elif l == 3: x, y = 0.5, 2
   
-  ax.text(x, y, r"$f$", color="C1", ha="center", va="bottom")
+  ax.text(x, y, r"$f$", color="C0", ha="center", va="bottom")
   
   ax.set_xticks(Xl)
   ax.set_xticklabels(["$x_{{{},{}}}$".format(l, i) for i in Il])
