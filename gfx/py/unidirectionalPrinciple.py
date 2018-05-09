@@ -61,21 +61,21 @@ for t in range(d+1):
   if t == 0:   text = r"$\vec{u} = \vec{y}^{(0)}$"
   elif t == 1: text = r"$\vec{y}^{(1)}$"
   else:        text = r"$\vec{y}^{(2)} = \vec{y}$"
-  ax.text(t * 1.3 + 0.5, -0.06, text, ha="center", va="top")
+  ax.text(t * 1.3 + 0.5, -0.08, text, ha="center", va="top")
 
-helper.plot.plotArrow(ax, (0.74, -0.12), (1.66, -0.12))
-ax.text(1.2, -0.15, r"$\mathfrak{L}^{(1),K_\mathrm{pole}}$",
+helper.plot.plotArrow(ax, (0.74, -0.14), (1.66, -0.14))
+ax.text(1.2, -0.17, r"$\mathfrak{L}^{(1),K_\mathrm{pole}}$",
         ha="center", va="top")
-helper.plot.plotArrow(ax, (1.94, -0.12), (2.86, -0.12))
-ax.text(2.4, -0.15, r"$\mathfrak{L}^{(2),K_\mathrm{pole}}$",
+helper.plot.plotArrow(ax, (1.94, -0.14), (2.86, -0.14))
+ax.text(2.4, -0.17, r"$\mathfrak{L}^{(2),K_\mathrm{pole}}$",
         ha="center", va="top")
 helper.plot.plotArrowPolygon(
-  ax, [0.5, 0.5, 3.1, 3.1], [-0.21, -0.4, -0.4, -0.21], "k-", cutOff=1)
+  ax, [0.5, 0.5, 3.1, 3.1], [-0.23, -0.42, -0.42, -0.23], "k-", cutOff=1)
 ax.text(1.8, -0.37, r"$\mathfrak{L}$", ha="center", va="bottom")
 
 ax.set_aspect("equal")
 ax.set_xlim(-0.05, 3.8)
-ax.set_ylim(-0.42, 1.05)
+ax.set_ylim(-0.44, 1.05)
 ax.set_axis_off()
 
 fig.save()
