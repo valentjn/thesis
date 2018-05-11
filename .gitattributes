@@ -1,6 +1,7 @@
-*.eps filter=fat -crlf
-*.jpg filter=fat -crlf
-*.pdf filter=fat -crlf
-*.png filter=fat -crlf
+*.eps  filter=fat -crlf
+*.svgz filter=fat -crlf
+*.jpg  filter=fat -crlf
+*.pdf  filter=fat -crlf
+*.png  filter=fat -crlf
 
 *.tex diff=tex
