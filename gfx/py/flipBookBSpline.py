@@ -8,6 +8,7 @@ import numpy as np
 
 import helper.basis
 from helper.figure import Figure
+import helper.plot
 
 def drawImage(imageNumber):
   fig = Figure.create(figsize=(5, 5 * aspect), scale=0.5)
@@ -44,7 +45,7 @@ def drawImage(imageNumber):
     xxyy = np.column_stack((np.hstack((xx, xx[::-1])),
                             np.hstack((np.zeros_like(yy), yy[::-1]))))
     ax.add_patch(matplotlib.patches.Polygon(
-      xxyy, ec="none", fc=colorLight, alpha=0.5, clip_on=False))
+      xxyy, ec="none", fc=colorFace, clip_on=False))
     
     x = np.array([xUnits])
     y = b.evaluate(x)
@@ -67,11 +68,10 @@ pauseEndInXUnits = 0.2
 pMin = 1
 pMax = 3
 colorBase = Figure.COLORS["anthrazit"]
-colorDarkBrightness = 0.3
-colorLightBrightness = 0.6
+colorDark  = helper.plot.mixColors(colorBase, 0.7)
+colorLight = helper.plot.mixColors(colorBase, 0.4)
+colorFace  = helper.plot.mixColors(colorBase, 0.2)
 
-colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
-colorLight = [x + colorLightBrightness * (1 - x) for x in colorBase]
 startsInXUnits = {pMin : pauseStartInXUnits}
 
 for p in range(pMin + 1, pMax + 1):
