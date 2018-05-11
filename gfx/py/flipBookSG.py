@@ -44,7 +44,8 @@ def drawImage(imageNumber):
   xs = [[0, 1, 1, 0, 0], [0, 1, 1, 0, 0], [0, 0], [1, 1], [0, 0], [1, 1]]
   ys = [[0, 0, 1, 1, 0], [0, 0, 1, 1, 0], [0, 0], [0, 0], [1, 1], [1, 1]]
   zs = [[0, 0, 0, 0, 0], [1, 1, 1, 1, 1], [0, 1], [0, 1], [0, 1], [0, 1]]
-  lines = []
+  pointsAndLines = []
+  
   for x, y, z in zip(xs, ys, zs):
     for i in range(len(x) - 1):
       xx = np.linspace(x[i], x[i + 1], 10)
@@ -53,23 +54,34 @@ def drawImage(imageNumber):
       for j in range(xx.shape[0] - 1):
         xCur, yCur, zCur = xx[j:j+2], yy[j:j+2], zz[j:j+2]
         xCur, yCur, zCur = rotate(rotationMatrix, xCur, yCur, zCur)
-        brightness = getBrightness(xCur[0])
-        color = [x + brightness * (1 - x) for x in colorBase]
-        lines.append([xCur[0], xCur, yCur, zCur, color])
-  
-  lines.sort(key=lambda x: x[0])
-  for _, xCur, yCur, zCur, color in lines:
-    ax.plot(xCur, yCur, zs=zCur, ls="-", marker="", color=color)
+        pointsAndLines.append({
+          "type" : "line",
+          "key" : xCur[0],
+          "data" : (xCur, yCur, zCur),
+        })
   
   x, y, z = X[:,0], X[:,1], X[:,2]
   x, y, z = rotate(rotationMatrix, x, y, z)
-  k = x.argsort()
-  x, y, z = x[k], y[k], z[k]
-  for xCur, yCur, zCur in zip(x, y, z):
-    markerSize = 2 + 1.0 * xCur**2
-    brightness = getBrightness(xCur)
-    color = [x + brightness * (1 - x) for x in colorBase]
-    ax.plot([xCur], [yCur], zs=[zCur], color=color, marker="o", ls="", ms=markerSize)
+  pointsAndLines += [
+    {"type" : "point", "key" : xCur, "data" : (xCur, yCur, zCur)}
+    for xCur, yCur, zCur in zip(x, y, z)
+  ]
+  
+  pointsAndLines.sort(key=lambda x: x["key"])
+  
+  for pointOrLine in pointsAndLines:
+    xCur, yCur, zCur = pointOrLine["data"]
+    
+    if pointOrLine["type"] == "point":
+      markerSize = 2 + 1.0 * xCur**2
+      brightness = getBrightness(xCur)
+      color = [x + brightness * (1 - x) for x in colorBase]
+      ax.plot([xCur], [yCur], zs=[zCur], marker="o", ls="", ms=markerSize,
+              color=color)
+    else:
+      brightness = getBrightness(xCur[0])
+      color = [x + brightness * (1 - x) for x in colorBase]
+      ax.plot(xCur, yCur, zs=zCur, ls="-", marker="", color=color)
   
   ax.set_xlim(*xLim)
   ax.set_ylim(*yLim)
