@@ -6,6 +6,7 @@ import numpy as np
 
 import helper.basis
 from helper.figure import Figure
+import helper.plot
 
 globalScale = [1.2, 0.75]
 
@@ -116,7 +117,8 @@ def plotIntegral(ax, center, radius, p):
                     (np.array(y) / max(yy) - 0.5) * globalScale[1] * smallCircleRadius + center[1])
   xxyy = np.column_stack(t(np.hstack((xx, xx[::-1])),
                            np.hstack((np.zeros_like(yy), yy[::-1]))))
-  ax.add_patch(matplotlib.patches.Polygon(xxyy, ec="none", fc="C0", alpha=0.5))
+  fc = helper.plot.mixColors("C0", 0.5, smallCircleColor)
+  ax.add_patch(matplotlib.patches.Polygon(xxyy, ec="none", fc=fc))
   ax.plot(*t(xx, yy), "k-")
   ax.text(*t((p+1)/2, max(yy) / 2 - 0.05), "$1$", ha="center", va="center")
 
@@ -136,7 +138,8 @@ def plotConvolution(ax, center, radius, p):
   yyRect = bPrev.evaluate(xxRect)
   xxyyRect = np.column_stack(t(np.hstack((xxRect, xxRect[::-1])),
                                np.hstack((np.zeros_like(yyRect), yyRect[::-1]))))
-  ax.add_patch(matplotlib.patches.Polygon(xxyyRect, ec="none", fc="C0", alpha=0.5))
+  fc = helper.plot.mixColors("C0", 0.5, smallCircleColor)
+  ax.add_patch(matplotlib.patches.Polygon(xxyyRect, ec="none", fc=fc))
   ax.plot(*t(x, b.evaluate(x)), "k.")
   ax.plot(*t([x-1, x], [0, 0]), "k--")
   ax.text(*t(x-0.5, -0.05), "$1$", ha="center", va="top")
@@ -172,8 +175,7 @@ smallCircleCenters = [
   (2, 3),
 ]
 smallCircleRadius = 0.8
-smallCircleColor = [0.7 + 0.3 * x
-                    for x in Figure.COLORS["mittelblau"]]
+smallCircleColor = helper.plot.mixColors(Figure.COLORS["mittelblau"], 0.3)
 tinyCircleRadius = 0.2
 tinyCircleColor = Figure.COLORS["mittelblau"]
 plotFunctions = [
