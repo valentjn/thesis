@@ -25,7 +25,7 @@ switches = {
   "flipBookMode" : True,
   "partialCompileMode" : False,
 }
-defaultThesisPDFCopyPath = "/tmp/thesis.pdf"
+defaultThesisPDFCopyPath = "/tmp/thesis/"
 
 
 
@@ -117,13 +117,15 @@ if __name__ == "__main__":
     try:
       print("")
       print("Compiling thesis...")
-      run(["scons", "-j", str(os.cpu_count())], cwd=repoPath)
-      thesisPDFPath = os.path.join(repoPath, "pdf", "thesis.pdf")
+      run(["scons", "-j", str(os.cpu_count()), "all"], cwd=repoPath)
+      outDir = os.path.join(repoPath, "out")
+      thesisPDFPath = os.path.join(outDir, "thesisManuscriptScreen.pdf")
       
       if args.upload:
         print("")
         print("Uploading thesis...")
-        run(["scp", thesisPDFPath, "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/"])
+        run(["scp", thesisPDFPath,
+             "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/thesis.pdf"])
     except subprocess.CalledProcessError:
       print("")
       print("Error while compiling or uploading the thesis.")
@@ -134,4 +136,8 @@ if __name__ == "__main__":
     
     print("")
     print("Copying thesis to {}...".format(args.destination))
-    shutil.copy(thesisPDFPath, args.destination)
+    os.makedirs(args.destination, exist_ok=True)
+    
+    for filename in os.listdir(outDir):
+      if filename.endswith(".pdf"):
+        shutil.copy(os.path.join(outDir, filename), args.destination)
