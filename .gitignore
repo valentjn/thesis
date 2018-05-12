@@ -2,6 +2,6 @@
 /.spyproject/
 /bib/*.bib.sav
 /build/
-/pdf/thesis.pdf
+/out/*.pdf
 /tex/thesis.txss
 /**/__pycache__/
