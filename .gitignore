@@ -1,7 +1,7 @@
+/.sconsign.dblite
 /.spyproject/
+/bib/*.bib.sav
 /build/
 /pdf/thesis.pdf
-/.sconsign.dblite
 /tex/thesis.txss
 /**/__pycache__/
-/bib/*.bib.sav
