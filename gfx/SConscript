@@ -2,6 +2,7 @@ import os
 import sys
 
 Import("env")
+Import("Helper")
 env = env.Clone()
 
 # install pre-made graphics
@@ -35,6 +36,10 @@ pyEnv["ENV"]["LD_LIBRARY_PATH"] = ":".join(
 pyEnv["ENV"]["PYTHONPATH"] = ":".join(
   [pyEnv["ENV"].get("PYTHONPATH", ""), pyDir,
    os.path.join(sgppDir, "lib"), os.path.join(sgppDir, "lib", "pysgpp")])
+
+# check for dependencies
+Helper.checkProgramInstalled(env, "pdfcrop", fail=True)
+Helper.checkProgramInstalled(env, "python3", fail=True)
 
 for py in pys:
   # determine number of generated images by script
