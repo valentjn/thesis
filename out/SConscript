@@ -40,18 +40,24 @@ env = env.Clone()
 programs = ["convert", "gs", "inkscape", "pdfjam", "pdfsizeopt", "pdftk"]
 programInstalled = {x : Helper.checkProgramInstalled(env, x)
                     for x in programs}
-canRasterizeCover = all([programInstalled[x]
-                         for x in ["convert", "inkscape", "pdfjam"]])
-canModifyPageLabels = all([programInstalled[x]
-                           for x in ["gs", "pdftk"]])
+canRasterizeCover = (programInstalled["convert"] and
+                     programInstalled["inkscape"] and
+                     programInstalled["pdfjam"])
+canJoinCoverAndThesis = canRasterizeCover and programInstalled["pdftk"]
+canModifyPageLabels = (canJoinCoverAndThesis and programInstalled["gs"] and
+                       programInstalled["pdftk"])
 hasPDFJam = programInstalled["pdfjam"]
 canCompressPDFs = programInstalled["pdfsizeopt"]
+
 if not canRasterizeCover:
   warnings.warn("convert, inkscape, and pdfjam required for "
                 "the rasterization of the cover SVG. "
                 "Skipping this, the output PDFs won't have the book cover "
                 "included.")
-if canRasterizeCover and (not canModifyPageLabels):
+if not canJoinCoverAndThesis:
+  warnings.warn("pdftk required for inserting the cover into the thesis. "
+                "The screen PDF won't include the book cover.")
+if not canModifyPageLabels:
   warnings.warn("gs and pdftk required to modify the PDF page labels "
                 "after inserting the book cover. The PDF page labels "
                 "will be different from the page numbers.")
@@ -100,9 +106,8 @@ def joinCoverAndThesis(target, source, env):
   thesisWithCover = os.path.join(env["BUILD_DIR"].abspath,
                                  "thesisWithCover.pdf")
   
-  Helper.runCommand(["pdfjam", "--quiet", "--keepinfo",
-                     "--outfile", thesisWithCover,
-                     coverScreenPDFA4, buildPDF])
+  Helper.runCommand(["pdftk", coverScreenPDFA4, buildPDF,
+                     "cat", "output", thesisWithCover])
   
   if canModifyPageLabels:
     metaData = Helper.runCommand(["pdftk", buildPDF, "dump_data"],
@@ -171,7 +176,7 @@ def joinCoverAndThesis(target, source, env):
     env.InstallAs(thesisManuscriptScreen, thesisWithCover)
 
 thesisManuscriptScreen = "thesisManuscriptScreen.pdf"
-if canRasterizeCover:
+if canJoinCoverAndThesis:
   env.Command(thesisManuscriptScreen, [coverScreenPDFA4, env["BUILD_PDF"]],
               joinCoverAndThesis)
 else:
