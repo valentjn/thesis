@@ -226,7 +226,7 @@ def plotHierarchicalNaturalBSplines(q):
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalLagrangePolynomials(q):
-  fig = Figure.create(figsize=(3.2, 4.0), scale=1.0)
+  fig = Figure.create(figsize=(3.0, 4.0), scale=1.0)
   basis = helper.basis.HierarchicalLagrangePolynomial()
   n = 2
   for l in range(n+1):
