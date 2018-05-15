@@ -10,7 +10,7 @@
 \label{sec:44spatAdaptiveBFS}
 
 Unfortunately, we cannot apply the algorithms presented in the last
-sections for spatially adaptive sparse grids with
+sections to spatially adaptive sparse grids with
 hierarchical B-splines.
 The reason is that the algorithms relied on the final interpolant $\sgintp$
 being a linear combination of full grid solutions $\fgintp{\*l}$,
@@ -27,14 +27,14 @@ namely transforming the hierarchical basis to so-called fundamental bases
 to enable a \bfs algorithm for hierarchization.
 Another approach, which is based on the \up, will be shown in the next section.
 
-The approach in this section has already been published as
+The approach in this section has already been published
 \cite{Valentin18Fundamental}.
 Again, please note that while B-splines are our target application,
-the considerations in this chapter are fully independent on the choice of
+the considerations in this chapter are fully independent of the choice of
 basis functions $\basis{\*l,\*i}$ 
 (as long as they have tensor product structure).
 Although we do not state it explicitly, it is possible to employ
-different types of basis functions $\basis{l_t,i_t}$ in the different
+different types of basis functions $\basis{l_t,i_t}$ in different
 dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
 
 
@@ -46,7 +46,7 @@ dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
 
 As we have already discussed in \cref{sec:41problem},
 the main cause of the difficulty of hierarchizing with B-splines
-$\bspl{\*l}{\*i}$ is their overlapping support,
+$\bspl{\*l,\*i}{\*p}$ is their overlapping support,
 which they need for their approximation order.
 In the univariate case,
 the idea is to transform the B-spline basis to obtain
@@ -56,10 +56,10 @@ new basis functions $\fundbasis{l',i'}\colon \clint{0, 1} \to \real$
   \label{eq:fundamentalProperty}
   \begin{alignat}{3}
     \label{eq:fundamentalProperty1}
-    \fundbasis{l',i'}(\gp{l,i})
+    \fundbasis{l',i'}(\centerhphantom{\gp{l,i}}{\gp{l',i}})
     &= 0,\qquad
     &&l < l',\quad
-    &&i \in \hiset{l}\\
+    &&i \in \hiset{l},\\
     \label{eq:fundamentalProperty2}
     \fundbasis{l',i'}(\gp{l',i})
     &= \kronecker{i}{i'},\qquad
@@ -79,7 +79,7 @@ to additionally vanish at all grid points of the same level $l'$
 with different index $i \not= i'$.
 An example for fundamental basis functions are
 the piecewise linear B-splines $\bspl{l',i'}{1}$
-or Lagrange polynomials $\lagrangepoly{l',i'}$
+or the Lagrange polynomials $\lagrangepoly{l',i'}$
 (see \cref{fig:fundamentalProperty}, left).
 
 \begin{SCfigure}
@@ -106,7 +106,7 @@ or Lagrange polynomials $\lagrangepoly{l',i'}$
   \label{fig:fundamentalProperty}%
 \end{SCfigure}
 
-The statement that $\fundbasis{l',i'}(\gp{l',i'})$ should equal $1$
+The statement that $\fundbasis{l',i'}(\gp{l',i'})$ should equal one
 is not an additional restriction:
 The value $\fundbasis{l',i'}(\gp{l',i'})$ must be non-zero;
 otherwise, the interpolation problem \eqref{eq:interpFullGridUV}
@@ -185,18 +185,18 @@ We show an example for this relation in
 %We can generalize the relation \eqref{eq:fundamentalTriangularUV} about the
 %triangular structure of the interpolation matrix to the multivariate case:
 The main motivation for enforcing the fundamental property
-is the fact it results in the hierarchization matrix $\intpmat$
-being triangular, if rows and columns are arranged
-according to monotonously increasing level sum.
-We assume that $k = k(\*l, \*i) \in \{1, \dotsc, N\}$ is a single scalar and
+is the fact that it results in the hierarchization matrix $\intpmat$
+being triangular, if the rows and columns are arranged
+in the order of monotonously increasing level sum:
+We assume that $k = k(\*l, \*i) \in \{1, \dotsc, N\}$ is a single
 continuously enumerated index of the level-index pairs $(\*l, \*i) \in \liset$
 (where $N = \setsize{\liset}$) such that
 \begin{equation}
   k(\*l, \*i) \le k(\*l', \*i') \implies \normone{\*l} \le \normone{\*l'},\quad
   (\*l, \*i), (\*l', \*i') \in K,
 \end{equation}
-i.e., we sort row indices $k = k(\*l, \*i)$ and
-column indices $k' = k(\*l', \*i')$ of $\intpmat$
+i.e., we sort the row indices $k = k(\*l, \*i)$ and
+the column indices $k' = k(\*l', \*i')$ of $\intpmat$
 by level sum $\normone{\cdot}$.
 As a consequence,
 $\intpmat = (\intpmatentry{k}{k'})_{k=1,\dotsc,N,\, k'=1,\dotsc,N}$
@@ -316,9 +316,9 @@ in two dimensions is shown in \cref{fig:DAG}.
       \State{$K_\mathrm{p} \gets \{0\} \times \{0, 1\}^d$}
       \Comment{set of processed points}%
       \State{%
-        $Q \gets \text{FIFO queue with same contents as } K_\mathrm{p}$%
+        $Q \gets \text{FIFO queue initialized with contents of } K_\mathrm{p}$%
       }
-      \Comment{points to be processed next}%
+      \Comment{points to be processed}%
       \While{$Q \not= \emptyset$}
         \State{$(\*l', \*i') \gets Q.\pop()$}
         \Comment{obtain next point}%
@@ -386,29 +386,30 @@ in two dimensions is shown in \cref{fig:DAG}.
 \end{SCfigure}
 
 We make two assumptions for \cref{alg:BFS}.
-First, $\liset$ contains at least all $2^d$ corners of the
+First, $\liset$ should contain at least all $2^d$ corners of the
 domain $\clint{\*0, \*1}$:
 \begin{subequations}
   \label{eq:BFSAssumptions}
   \begin{equation}
     \label{eq:BFSAssumption1}
-    \liset \supset \{(\*0, \*i) \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
+    \liset \supset \{(\*0, \*i) \mid \*i \in \{0, 1\}^d\}.
   \end{equation}
-  Second, all grid points are reachable from the corners:
+  Second, all grid points should be reachable from the corners:
   \begin{equation}
     \label{eq:bfsAssumption2}
     \begin{split}
       \forall_{(\*l', \*i') \in \liset}
+      \exists_{m \in \natz}
       \exists_{
         (\*l^{(0)}, \*i^{(0)}), \dotsc, (\*l^{(m)}, \*i^{(m)}) \in \liset
       }\;\;
       &\big[(\*l^{(0)}, \*i^{(0)}) \to \dotsb \to (\*l^{(m)}, \*i^{(m)}),\\
-      &\quad \*l^{(0)} = \*0,\; (\*l^{(m)}, \*i^{(m)}) = (\*l', \*i')\big],
+      &\hspace{3mm} \*l^{(0)} = \*0,\; (\*l^{(m)}, \*i^{(m)}) = (\*l', \*i')\big],
     \end{split}
   \end{equation}
 \end{subequations}
 where ``$\to$'' is the direct ancestor relation \eqref{eq:directAncestor}.
-One can also use a a different initial set than the corners
+One can also use a different initial set than the corners
 of $\clint{\*0, \*1}$, e.g., when working with sparse grids
 without boundary points.
 In general, there are three requirements on the initial set:
@@ -430,7 +431,7 @@ The correctness of \cref{alg:BFS} can be shown with the following invariant:
 }
   \label{prop:invariantBFS}
   Under the assumption \eqref{eq:BFSAssumptions},
-  it holds after \pop{}ping all grid points with level sum $< q$
+  it holds after \pop{}\,ping all grid points with level sum $< q$
   from the queue $Q$ in \cref{alg:BFS}:
   \begin{equation}
     \label{eq:propInvariantBFS}
@@ -455,7 +456,7 @@ The correctness of \cref{alg:BFS} can be shown with the following invariant:
 
 \begin{proof}
   As noted in the proof of \cref{prop:invariantBFS},
-  the result after \pop{}ping all grid points with level sum
+  the result $\linout{\*l,\*i}$ after \pop{}ping all grid points with level sum
   $q$ as stated in \cref{prop:invariantBFS} is also the final result
   of the algorithm:
   \begin{equation}
@@ -511,10 +512,11 @@ is fulfilled:
   c_{l'',i''}^{l',i'} \basis{l'',i''}
   \quad\text{such that}\quad
   \fafalarge{l = 0, \dotsc, l'}{i \in \hiset{l}}{
-    \basis[\hft]{l',i'}(\gp{l,i}) = \kronecker{(l,i)}{(l',i')},
+    \basis[\hft]{l',i'}(\gp{l,i}) = \kronecker{(l,i)}{(l',i')}.
   }
 \end{equation}
-i.e., $\basis[\hft]{l',i'}$ ($l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$)
+This means that
+$\basis[\hft]{l',i'}$ ($l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$)
 interpolates the data
 $\{(\gp{l',i}, \kronecker{i}{i'}) \mid i = 0, \dotsc, 2^{l'}\}$.
 The coefficients $c_{l'',i''}^{l',i'} \in \real$
@@ -528,7 +530,7 @@ which means that we have to evaluate up to $2^{l'} + 1$ basis functions
 $\basis{l'',i''}$ when evaluating $\basis[\hft]{l',i'}$ at a single point
 $x \in \clint{0, 1}$.
 The global support of the resulting transformed basis
-for uniform hierarchical B-splines (which a locally supported)
+for uniform hierarchical B-splines (which are locally supported)
 can be seen in \cref{fig:hftBSpline}.
 
 \begin{SCfigure}
@@ -573,9 +575,9 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   for all $(\*l', \*i') \in \liset$:
   \begin{equation}
     \basis[\hft]{\*l',\*i'}
-    = \prod_{t=1}^d \sum_{l''_t=0}^{l'_t} \sum_{i''_t \in \hiset{l''_t}}
+    = \prod_{t=1}^d \, \sum_{l''_t=0}^{l'_t} \, \sum_{i''_t \in \hiset{l''_t}}
     c_{l''_t,i''_t}^{l'_t,i'_t} \basis{l''_t,i''_t}
-    = \sum_{\*l''=\*0}^{\*l'} \sum_{\*i'' \in \hiset{\*l''}}
+    = \sum_{\*l''=\*0}^{\*l'} \, \sum_{\*i'' \in \hiset{\*l''}}
     c_{\*l'',\*i''}^{\*l',\*i'} \basis{\*l'',\*i''}
     \in \regsgspace{n}{d},\quad
     c_{\*l'',\*i''}^{\*l',\*i'}
@@ -585,7 +587,7 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   To prove that $\regsgspace{n}{d} \subset \regsgspace[\hft]{n}{d}$,
   we show that the dimension of $\regsgspace[\hft]{n}{d}$
   matches $\dim \regsgspace{n}{d} = \setsize{\liset}$.
-  Therefore, it suffices to show that
+  For that, it suffices to show that
   the functions $\basis[\hft]{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
@@ -600,7 +602,7 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   This is a lower triangular system according to
   \eqref{eq:fundamentalTriangularMV},
   which implies $\surplus{\*l',\*i'} = 0$ for all $(\*l, \*i) \in \liset$.
-  Hence, the functions $\basis[\hft]{\*l',\*i'}$ ($(\*l', \*i') \in \liset$),
+  Hence, the functions $\basis[\hft]{\*l',\*i'}$ ($(\*l', \*i') \in \liset$)
   are linearly independent.
 \end{proof}
 
@@ -616,18 +618,18 @@ such that
   \label{eq:translationInvariance}
   \basis{l,i}(x)
   = \parentfcn(\tfrac{x}{\ms{l}} - i),\quad
-  l \in \natz,\;
-  i = 0, \dotsc, 2^l,\;
+  l \in \natz,\;\;
+  i = 0, \dotsc, 2^l,\;\;
   x \in \clint{0, 1}.
 \end{equation}
-The fact that \hftr does not preserve translation invariance means
+The fact that the \hftr does not preserve translation invariance means
 that for each basis function $\basis[\hft]{l',i'}$, we have to
 calculate its individual $2^{l'} + 1$ coefficients $c_{l'',i''}^{l',i'}$.
 
 \usenotation{Ëtift}
 To solve this problem,
 we use a similar ansatz as for the \hftr,
-but replace the hierarchical basis functions $\basis{l'',i''}$
+but we replace the hierarchical basis functions $\basis{l'',i''}$
 with nodal basis functions $\basis{l',i''}$ and
 allow general integer indices $i'' \in \integer$:
 \begin{equation}
@@ -641,7 +643,7 @@ allow general integer indices $i'' \in \integer$:
 \end{equation}
 where $l' \in \natz$, $i' = 0, \dotsc, 2^{l'}$, and
 $c_{i''}^{l',i'} \in \real$.
-We have to make two assumptions for \eqref{eq:tiftDefinition} to make sense:
+We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
 
 \begin{itemize}
   \item
@@ -658,33 +660,70 @@ We have to make two assumptions for \eqref{eq:tiftDefinition} to make sense:
   The set
   \begin{equation}
     \relindexset{l'}
-    := \{i'' \in \integer \mid
-    \restrictfcn{\basis{l',i''}}{\clint{0, 1}} \not\equiv 0\},\quad
+    := \big\{i'' \in \integer \bigm\vert
+    \restrictfcn{\basis{l',i''}}{\clint{0, 1}} \not\equiv 0\big\},\quad
     l' \in \natz,
   \end{equation}
-  of relevant indices is finite, so that in each point $x \in \clint{0, 1}$,
+  of relevant indices should be finite,
+  so that in each point $x \in \clint{0, 1}$,
   only a finite number of basis functions $\basis{l',i''}$ of level $l'$
   is non-zero.
   This means that the series in \eqref{eq:tiftDefinition} collapses to a
   finite sum over $i'' \in \relindexset{l'}$.
   The condition is met for compactly supported and translation-invariant
   basis functions such as B-splines $\bspl{l',i''}{p}$.
-  For $d \in \natz$ dimensions and $\*l' \in \natz^d$, we define
+  For $d \in \nat$ dimensions and $\*l' \in \natz^d$, we define
   $\relindexset{\*l'} :=
   \relindexset{l'_1} \times \dotsb \times \relindexset{l'_d}$.
+  
+  \item
+  The coefficients $c_{i''}^{l',i'} \basis{l',i''}$, such that
+  \eqref{eq:tiftDefinition} holds, exist and are uniquely determined.
 \end{itemize}
 
-If $\basis{l',i''}$ is translation-invariant,
-$l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ are arbitrary, and
-$(c_{i''}^{l',i'})_{i'' \in \integer}$
-is chosen such that \eqref{eq:tiftDefinition} holds,
+Let $\basis{l',i''}$ be translation-invariant and
+let $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ be arbitrary.
+Then we have
+\begin{equation}
+  \label{eq:tiftParentFunctionDerivation}
+  \basis[\tift]{l',i'}(x)
+  = \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}(x)
+  \!\overset{\eqref{eq:translationInvariance}}{=}\!
+  \sum_{i'' \in \integer} c_{i''}^{l',i'}
+  \parentfcn(\tfrac{x}{\ms{l'}} - i'')
+  = \sum_{i'' \in \integer}
+  c_{i'+i''}^{l',i'} \parentfcn((\tfrac{x}{\ms{l'}} - i') - i''),
+\end{equation}
+where the function defined by
+$\sum_{i'' \in \integer} c_{i'+i''}^{l',i'} \parentfcn({\cdot} - i'')$
+satisfies
+\begin{subequations}
+  \label{eq:tiftParentFunctionConditions}
+  \begin{align}
+    \sum_{i'' \in \integer} c_{i'+i''}^{l',i'} \parentfcn(i - i'')
+    &= \sum_{i'' \in \integer} c_{i'+i''}^{l',i'}
+    \parentfcn((\tfrac{\gp{l',i+i'}}{\ms{l'}} - i') - i'')
+    \!\overset{\eqref{eq:tiftParentFunctionDerivation}}{=}\!
+    \basis[\tift]{l',i'}(\gp{l',i+i'})
+    \!\overset{\eqref{eq:tiftDefinition}}{=}\!
+    \kronecker{i'}{i+i'}\\
+    &= \kronecker{i}{0},\quad
+    i \in \integer.
+  \end{align}
+\end{subequations}
+Due to the translation invariance and the third assumption in the list above,
+there is only one unique set of coefficients of $\parentfcn({\cdot} - i'')$
+such that \eqref{eq:tiftParentFunctionConditions} holds.
+This means that $c_{i'+i''}^{l',i'}$ do not depend on $l'$ or $i'$,
+if $\basis{l',i'}$ is translation-invariant.
+Consequently, if we set $c_{i''} := c_{i'+i''}^{l',i'}$
+for some arbitrary $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$,
 then $\parentfcn[\tift]\colon \real \to \real$ defined by
 \begin{equation}
   \label{eq:tiftParentFunctionDefinition}
   \parentfcn[\tift](x)
   := \sum_{i'' \in \integer} c_{i''} \parentfcn(x - i''),\quad
-  x \in \clint{0, 1},\quad
-  c_{i''} := c_{i'+i''}^{l',i'},
+  x \in \clint{0, 1},
 \end{equation}
 is a parent function of $\basis[\tift]{l',i'}$ that satisfies
 \begin{equation}
@@ -693,57 +732,29 @@ is a parent function of $\basis[\tift]{l',i'}$ that satisfies
     \parentfcn[\tift](i) = \kronecker{i}{0}.
   }
 \end{equation}
-The function $\parentfcn[\tift]$ is a parent function, since
-\begin{subequations}
-  \label{eq:tiftParentFunctionProof}
-  \begin{align}
-    \hspace*{-0.6mm}
-    \basis[\tift]{l',i'}(x)
-    &
-    \!\overset{\hphantom{\eqref{eq:tiftParentFunctionDefinition}}}{=}\!
-    \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}(x)
-    \!\overset{\eqref{eq:translationInvariance}}{=}\!
-    \sum_{i'' \in \integer} c_{i''}^{l',i'}
-    \parentfcn(\tfrac{x}{\ms{l'}} - i'')
-    = \sum_{i'' \in \integer}
-    \smash{\underbrace{c_{i'+i''}^{l',i'}}_{= c_{i''}}}
-    \parentfcn((\tfrac{x}{\ms{l'}} - i') - i'')
-    \hspace*{-2.3mm}\\
-    &
-    \!\overset{\eqref{eq:tiftParentFunctionDefinition}}{=}\!
-    \parentfcn[\tift](\tfrac{x}{\ms{l'}} - i'),\qquad
-    l' \in \natz,\;
-    i' = 0, \dotsc, 2^{l'},
-  \end{align}
-\end{subequations}
-and it satisfies \eqref{eq:tiftParentFunctionInterpolation}:
-\begin{equation}
-  \parentfcn[\tift](i)
-  = \parentfcn[\tift](\tfrac{\gp{0,i}}{\ms{0}} - 0)
-  \!\overset{\eqref{eq:tiftParentFunctionProof}}{=}\!
-  \basis[\tift]{0,0}(\gp{0,i})
-  \!\overset{\eqref{eq:tiftDefinition}}{=}\!
-  \kronecker{i}{0},\quad
-  i \in \integer.
-\end{equation}
+The fact that $\parentfcn[\tift]$ is the parent function of
+$\basis[\tift]{l',i'}$ easily follows from
+\eqref{eq:tiftParentFunctionDerivation}
+as the \rhs is exactly $\parentfcn[\tift](\tfrac{x}{\ms{l'}} - i')$,
+as required by \eqref{eq:translationInvariance}.
 This shows that the transformation $\basis{l',i'} \mapsto \basis[\tift]{l',i'}$
-preserves translation-invariance and
-the coefficients $c_{i''}^{l',i'}$ in \eqref{eq:tiftDefinition}
-do not depend on $l'$ or $i'$, if $\basis{l',i'}$ is translation-invariant.
+preserves translation-invariance.
 Therefore, we call the transformation
 $\basis{l',i'} \mapsto \basis[\tift]{l',i'}$ \term{\tiftr}.
 
 In contrast to the \hftr, the \tiftr is only a change of basis
 if we consider the extended nodal spaces that also include
-basis functions with indices outside of $\{0, \dotsc, 2^{l'}\}$,
-which is the statement of the following proposition
+basis functions with indices outside of $\{0, \dotsc, 2^{l'}\}$.
+This is the statement of the following proposition
 (generalized to the $d$-variate case).
-Note that although the proposition involves basis functions outside
-the domain $\clint{0, 1}$
+Note that although the proposition involves basis functions
+$\basis{\*l',\*i'}$ and $\basis[\tift]{\*l',\*i'}$
+outside the domain $\clint{0, 1}$
 (in the sense that $\gp{\*l',\*i'} \notin \clint{0, 1}$),
 we still restrict all functions to $\clint{0, 1}$.
-We cannot formulate an equivalent version of \cref{prop:hftSparseGridSpace},
-as it might be that $\basis{l',i''}$ ($i'' < 0$ or $i'' > 2^{l'}$)
+We cannot formulate an equivalent version of \thmref{prop:hftSparseGridSpace},
+as it might be that, in one dimension,
+$\basis{l',i''}$ ($i'' < 0$ or $i'' > 2^{l'}$)
 is not contained in the nodal space $\ns{l'}$.
 
 \begin{proposition}[%
@@ -780,7 +791,7 @@ is not contained in the nodal space $\ns{l'}$.
   To prove that
   $\ns[\ext]{\*l'} \subset \ns[\tift,\ext]{\*l'}$,
   we show that the dimensions of the two spaces match.
-  Therefore, it suffices to show that
+  As before, it suffices to show that
   the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$),
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
@@ -962,11 +973,11 @@ $\bspl[\fs]{l,i}{p}\colon \clint{0, 1} \to \real$ via
 \begin{equation}
   \bspl[\fs]{l,i}{p}(x)
   := \parentfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
-  l \in \natz,\;
-  i = 0, \dotsc, 2^l,\;
+  l \in \natz,\;\;
+  i = 0, \dotsc, 2^l,\;\;
   x \in \clint{0, 1}.
 \end{equation}
-The cubic hierarchical fundamental spline basis is depicted in
+The hierarchical cubic fundamental spline basis is depicted in
 \cref{fig:hierarchicalFundamentalSpline}.
 As usual, we define $d$-variate hierarchical fundamental splines
 as tensor products of their univariate counterparts.
@@ -1008,7 +1019,7 @@ as the fundamental spline itself due to the stability of the B-spline basis
 \begin{equation}
   \label{eq:fundamentalSplineCoefficientsDecay}
   \abs{\fundsplcoeff{k}{p}}
-  \le \beta'_p (\gamma_p)^{-\abs{k}},\quad
+  \le \beta'_p \cdot (\gamma_p)^{-\abs{k}},\quad
   k \in \integer,
 \end{equation}
 for some $\beta'_p > 0$ independent of $k$,
@@ -1026,15 +1037,16 @@ than $-1$ of said polynomial
 Due to \eqref{eq:fundamentalSplineCoefficientsDecay},
 we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
-if we truncate the linear system to $2\fundsplcutoff{p} - 1$ dimensions
+if we symetrically truncate the linear system to
+$2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate the fundamental spline $\parentfundspl{p}$ once.
 %due to the local support of B-splines.
 In \cref{tbl:fundamentalSplineDecay}, we list the decay rates $\gamma_p$,
-the factors $\beta_p$, $\beta'_p$, and the truncation indices
-$\fundsplcutoff{p}$ for the different degrees.
+the factors $\beta_p$ and $\beta'_p$, and the truncation indices
+$\fundsplcutoff{p}$ for different degrees.
 
 \begin{table}
   \setnumberoftableheaderrows{1}%
@@ -1055,7 +1067,7 @@ $\fundsplcutoff{p}$ for the different degrees.
     Decay rates of fundamental splines%
   ]{%
     Optimal decay rates $\gamma_p$ and corresponding factors
-    $\beta_p$, $\beta'_p$, for the bound functions of
+    $\beta_p$ and $\beta'_p$ for the bound functions of
     the fundamental spline $\parentfundspl{p}$ and
     its coefficients $\fundsplcoeff{k}{p}$, i.e.,
     $\fa{x \in \real}{\abs{\parentfundspl{p}(x)} \le \beta_p (\gamma_p)^{-\abs{x}}}$
@@ -1119,10 +1131,10 @@ are chosen such that
 if $p > 1$.
 For $p = 1$, we define $\parentfundspl[\modified]{p}
 := \bspl[\modified]{2,1}{p}(\tfrac{{\cdot}}{4})$.
-Since the coefficients $\fundsplcoeff[\modified]{k}{p}$ of the modification
+Since the modification coefficients $\fundsplcoeff[\modified]{k}{p}$
 experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
 fundamental spline,
-we can approximate $\fundsplcoeff[\modified]{k}{p}$ by solving
+we can also approximate $\fundsplcoeff[\modified]{k}{p}$ by solving
 a truncated system of linear equations.
 The resulting function $\parentfundspl[\modified]{p}$ and the hierarchical
 basis $\bspl[\fs,\modified]{l,i}{p}$ are shown in
@@ -1209,7 +1221,7 @@ The hierarchical fundamental spline basis suffers from the same problem
 as the uniform hierarchical B-spline basis.
 As explained in \cref{sec:321approximation}, there is a mismatch
 of dimensions of the nodal B-spline space $\nsbspl{l}{p}$ of level $l$
-and the spline space $\wholesplspace{l}{p}$ on the grid
+when compared with the spline space $\wholesplspace{l}{p}$ on the grid
 $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$.
 This issue also affects the fundamental spline basis.
 
@@ -1242,16 +1254,14 @@ of cubic degree in \cref{fig:hierarchicalFundamentalNotAKnotSpline}.
 
 The fundamental not-a-knot splines $\bspl[\fs,\nak]{l',i'}{p}$
 of level $l' < \ceil{\log_2(p+1)}$ equal the Lagrange polynomials
-$\lagrangepoly{l',i'}$ ($i' = 0, \dotsc, 2^l$),
+$\lagrangepoly{l',i'}$ ($i' = 0, \dotsc, 2^{l'}$),
 This is because the $i'$-th summand $\bspl[\nak]{l',i'}{p}$
 of \eqref{eq:fundamentalNotAKnotSplines} equals $\lagrangepoly{l',i'}$ and
 as $\lagrangepoly{l',i'}$ already fulfills the
 fundamental interpolation conditions given in
 \eqref{eq:fundamentalNotAKnotSplines}
 (see \cref{eq:hierarchicalNotAKnotBSpline}),
-we obtain $\fundsplcoeff[l',i',\fs]{i''}{p} = 1$
-for $i'' = i'$ and $\fundsplcoeff[l',i',\fs]{i''}{p} = 0$ for
-$i'' \not= i'$, i.e.,
+we obtain $\fundsplcoeff[l',i',\fs]{i''}{p} = \kronecker{i'}{i''}$, i.e.,
 $\bspl[\fs,\nak]{l',i'}{p} = \lagrangepoly{l',i'}$.
 
 \begin{SCfigure}
@@ -1273,9 +1283,9 @@ $\bspl[\fs,\nak]{l',i'}{p} = \lagrangepoly{l',i'}$.
 We make two remarks with respect to the efficient implementation
 of hierarchical fundamental not-a-knot splines.
 First,
-\Cref{eq:fundamentalNotAKnotSplines} requires the solution of a system
-of linear equations with dimension $2^l + 1$,
-which grows exponentially in the level $l$.
+\cref{eq:fundamentalNotAKnotSplines} requires the solution of a system
+of linear equations with dimension $2^{l'} + 1$,
+which grows exponentially in the level~$l'$.
 However, as the coefficients decay roughly in the same order
 as the fundamental spline coefficients $\fundsplcoeff{k}{p}$ in
 \cref{eq:fundamentalSplineCoefficientsDecay},
