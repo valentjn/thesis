@@ -1,4 +1,125 @@
 \section{Homogenization and the Two-Scale Approach}
 \label{sec:61homogenization}
 
+We roughly follow the presentation given in
+\multicite{%
+  Huebner14Mehrdimensionale,%
+  Valentin14Hierarchische,%
+  Valentin16Hierarchical%
+}.
+Let $\domain \subset \real^\dimdomain$ be the optimization domain
+(which later contains the optimal shape) and
+$\densfcn\colon \domain \to \clint{0, 1}$ a function,
+which is called \term{density function}.
+Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
+although the method can be generalized to
+arbitrary dimensionalities $\dimdomain \in \nat$.
+The function values $\densfcn(\tilde{\*x})$ tell if $\tilde{\*x}$
+is contained in the object (value of one) or not (value of zero).
+The approach of \term{homogenization} now also allows values between
+zero and one, giving the density of the material in that point.
+
+Furthermore, for each density function $\densfcn$,
+let $\compliance(\densfcn)$ be an objective function value.
+In our setting,
+we exert one force or multiple forces on specific points,
+measure the resulting deformation of the object, and
+compute the \term{compliance} (i.e., the inverse of the stiffness) as
+the objective function value $\compliance(\densfcn)$.
+The problem of topology optimization is to find the density function
+with minimal objective function value:
+\begin{equation}
+  \label{eq:topoOptProblemContinuous}
+  \min_{\densfcn} \compliance(\densfcn).
+\end{equation}
+Often, there are trivial solutions, if we do not impose additional conditions.
+For example, when minimizing compliance function values,
+choosing $\densfcn :\equiv 1$ will most likely lead to the shape with the
+highest stiffness.
+Therefore, we introduce the following volume constraint:
+\begin{equation}
+  \frac{\voldens{\densfcn}{\domain}}{\vol{\domain}} \le \volfracub,\quad
+  \voldens{\densfcn}{\domain}
+  := \int_{\domain} \densfcn(\tilde{\*x}) \diff\tilde{\*x},\quad
+  \vol{\domain}
+  := \voldens{1}{\domain},
+\end{equation}
+where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
+is the volume of the domain and
+$\volfracub \in \clint{0, 1}$ is an upper bound on the volume fraction.
+
+Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
+directly on computers,
+as there are infinitely many density functions $\densfcn$.
+To be able to discretize the domain $\domain \subset \real^\dimdomain$
+more easily, we assume that $\domain$ is some hyper-rectangle
+$\clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
+\clint{\tilde{a}_\dimdomain, \tilde{b}_\dimdomain}$;
+if it is not, we can replace $\domain$ with its bounding box.
+We can then split $\domain$ into $N_1 \times \dotsb \times N_\dimdomain$
+equally sized and axis-aligned sub-hyper-rectangles,
+which we call \term{macro-cells}.
+In the \term{two-scale approach},
+we assume the material of the macro-cells to be
+repetitions of infinitesimally small periodic structures
+(i.e., they are identical for each macro-cell),
+called \term{micro-cells}.
+These micro-cells have a specific shape, which is parametrized by $d$ so-called
+\term{micro-cell parameters} $x_1, \dotsc, x_d$.
+The parameters are assumed to be normalized to values in the
+unit interval $\clint{0, 1}$.
+For instance, in $\dimdomain = 2$ dimensions,
+this shape could be an axis-aligned cross of two bars
+with thicknesses $x_1$ and $x_2$.
+
+Note that while the shape of all micro-cells in one macro-cell is identical,
+the micro-cell parameters corresponding to different macro-cells will differ.
+This enables varying densities in different regions of $\domain$.
+We denote the parameters of the $j$-th macro-cell
+with $x_1^{(j)}, \dotsc, x_d^{(j)} \in \clint{0, 1}$
+($j = 1, \dotsc, N_1 \dotsm N_\dimdomain$).
+
 \blindtext{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
