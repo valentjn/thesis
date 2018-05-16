@@ -118,10 +118,10 @@ multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{@1}
 Therefore, the domain is now $\clint{\*0, \*1} := \clint{0, 1}^d$,
 which can be partitioned into
-$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hypercubes,
+$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hyper-cubes,
 where $\*l = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
-The corners of the hypercubes are given by the grid points
+The corners of the hyper-cubes are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
   \gp{\*l,\*i} := \*i \cdot \ms{\*l},\quad
@@ -183,7 +183,7 @@ the nodal space $\nsbspl{\*l}{1}$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
 on $\clint{\*0, \*1}$ that are piecewise $d$-linear polynomials on
-all hypercubes
+all hyper-cubes
 \begin{equation}
   \clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}
   := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
