@@ -843,36 +843,36 @@
 % Application 1: Topology Optimization
 % ======================================================================
 
-\newnotationcommand{\dimdomain}{{\tilde{d}}}{d~}{$\dimdomain$}{%
-  Dimensionality of $\domain$%
+\newnotationcommand{\dimdomain}{\tilde{d}}{dtilde}{$\dimdomain$}{
+  Dimensionality of $\domain$
 }
 
-\newnotationcommand{\domain}{\tilde{\Omega}}{ÄΩ~}{$\domain$}{%
-  Domain $\domain \subset \real^\dimdomain$%
+\newnotationcommand{\domain}{\tilde{\Omega}}{ÄΩtilde}{$\domain$}{
+  Domain $\domain \subset \real^\dimdomain$
 }
 
-\newnotationcommand{\densfcn}{\varrho}{Äρ}{$\densfcn$}{%
-  Density function $\densfcn\colon \domain \to \clint{0, 1}$%
+\newnotationcommand{\densfcn}{\varrho}{Äρ}{$\densfcn$}{
+  Density function $\densfcn\colon \domain \to \clint{0, 1}$
 }
 
-\newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\densfcn)$}{%
-  Compliance of the density function $\densfcn$%
+\newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\densfcn)$}{
+  Compliance of the density function $\densfcn$
 }
 
-\newnotationcommand[1]{\vol}{\mathrm{vol}(#1)}{volΩ}{$\vol{\domain}$}{%
-  Volume (Lebesgue measure) of $\domain \subset \real^\dimdomain$%
+\newnotationcommand[1]{\vol}{\mathrm{vol}(#1)}{volΩ}{$\vol{\domain}$}{
+  Volume (Lebesgue measure) of $\domain \subset \real^\dimdomain$
 }
 
-\newnotationcommand[2]{\voldens}{\mathrm{vol}_{#1}(#2)}{volρΩ}{%
-  $\voldens{\densfcn}{\domain}$%
+\newnotationcommand[2]{\voldens}{\mathrm{vol}_{#1}(#2)}{volρΩ}{
+  $\voldens{\densfcn}{\domain}$
 }{%
   Volume of $\domain \subet \real^\dimdomain$ with respect to the
-  density function $\densfcn$%
+  density function $\densfcn$
 }
 
-\newnotationcommand{\volfracub}{r^\ast}{r*}{$\volfracub$}{%
+\newnotationcommand{\volfracub}{r^\ast}{r*}{$\volfracub$}{
   Upper bound on the volume fraction
-  $\voldens{\densfcn}{\domain}/\volume{\domain}$%
+  $\voldens{\densfcn}{\domain}/\volume{\domain}$
 }
 
 % ======================================================================
