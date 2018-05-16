@@ -7,7 +7,7 @@ We roughly follow the presentation given in
   Valentin14Hierarchische,%
   Valentin16Hierarchical%
 }.
-Let $\domain \subset \real^\dimdomain$ be the optimization domain
+Let $\domain \subset \real^{\dimdomain}$ be the optimization domain
 (which later contains the optimal shape) and
 $\densfcn\colon \domain \to \clint{0, 1}$ a function,
 which is called \term{density function}.
@@ -51,12 +51,12 @@ $\volfracub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 directly on computers,
 as there are infinitely many density functions $\densfcn$.
-To be able to discretize the domain $\domain \subset \real^\dimdomain$
+To be able to discretize the domain $\domain \subset \real^{\dimdomain}$
 more easily, we assume that $\domain$ is some hyper-rectangle
 $\clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
-\clint{\tilde{a}_\dimdomain, \tilde{b}_\dimdomain}$;
+\clint{\tilde{a}_{\dimdomain}, \tilde{b}_{\dimdomain}}$;
 if it is not, we can replace $\domain$ with its bounding box.
-We can then split $\domain$ into $N_1 \times \dotsb \times N_\dimdomain$
+We can then split $\domain$ into $N_1 \times \dotsb \times N_{\dimdomain}$
 equally sized and axis-aligned sub-hyper-rectangles,
 which we call \term{macro-cells}.
 In the \term{two-scale approach},
@@ -77,7 +77,7 @@ the micro-cell parameters corresponding to different macro-cells will differ.
 This enables varying densities in different regions of $\domain$.
 We denote the parameters of the $j$-th macro-cell
 with $x_1^{(j)}, \dotsc, x_d^{(j)} \in \clint{0, 1}$
-($j = 1, \dotsc, N_1 \dotsm N_\dimdomain$).
+($j = 1, \dotsc, N_1 \dotsm N_{\dimdomain}$).
 
 \blindtext{}
 
