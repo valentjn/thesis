@@ -1,6 +1,8 @@
 \section{Homogenization and the Two-Scale Approach}
 \label{sec:61homogenization}
 
+\paragraph{Density function}
+
 We roughly follow the presentation given in
 \multicite{%
   Huebner14Mehrdimensionale,%
@@ -18,6 +20,8 @@ The function values $\densfcn(\tilde{\*x})$ tell if $\tilde{\*x}$
 is contained in the object (value of one) or not (value of zero).
 The approach of \term{homogenization} now also allows values between
 zero and one, giving the density of the material in that point.
+
+\paragraph{Optimization of compliance values}
 
 Furthermore, for each density function $\densfcn$,
 let $\compliance(\densfcn)$ be an objective function value.
@@ -48,6 +52,8 @@ where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
 is the volume of the domain and
 $\volfracub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
+\paragraph{Discretization and two-scale approach}
+
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 directly on computers,
 as there are infinitely many density functions $\densfcn$.
@@ -71,6 +77,8 @@ unit interval $\clint{0, 1}$.
 For instance, in $\dimdomain = 2$ dimensions,
 this shape could be an axis-aligned cross of two bars
 with thicknesses $x_1$ and $x_2$.
+
+\paragraph{Elasticity tensors}
 
 Note that while the shape of all micro-cells in one macro-cell is identical,
 the micro-cell parameters corresponding to different macro-cells will differ.
