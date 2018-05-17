@@ -418,7 +418,9 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
 hierarchical levels.
 Its correctness can be formally proved with the following invariant:
-\begin{restatable}[invariant of \cref{alg:coarseBoundary}]{proposition}{%
+\begin{restatable}[invariant of coarse boundary SG generation]{%
+  proposition%
+}{%
   propInvariantCoarseBoundary%
 }
   \label{prop:invariantCoarseBoundary}
@@ -437,7 +439,7 @@ Its correctness can be formally proved with the following invariant:
 \begin{proof}
   See \cref{sec:proofInvariantCoarseBoundary}.
 \end{proof}
-\begin{shortcorollary}[correctness of \cref{alg:coarseBoundary}]
+\begin{shortcorollary}[correctness of coarse boundary SG generation]
   \label{cor:algCoarseBoundaryCorrectness}
   \Cref{alg:coarseBoundary} is correct.
 \end{shortcorollary}
