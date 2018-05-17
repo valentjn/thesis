@@ -62,7 +62,7 @@ more easily, we assume that $\domain$ is some hyper-rectangle
 $\clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
 \clint{\tilde{a}_{\dimdomain}, \tilde{b}_{\dimdomain}}$;
 if it is not, we can replace $\domain$ with its bounding box.
-We can then split $\domain$ into $N_1 \times \dotsb \times N_{\dimdomain}$
+We can then split $\domain$ into $M_1 \times \dotsb \times M_{\dimdomain}$
 equally sized and axis-aligned sub-hyper-rectangles,
 which we call \term{macro-cells}.
 In the \term{two-scale approach},
@@ -84,8 +84,40 @@ Note that while the shape of all micro-cells in one macro-cell is identical,
 the micro-cell parameters corresponding to different macro-cells will differ.
 This enables varying densities in different regions of $\domain$.
 We denote the parameters of the $j$-th macro-cell
-with $x_1^{(j)}, \dotsc, x_d^{(j)} \in \clint{0, 1}$
-($j = 1, \dotsc, N_1 \dotsm N_{\dimdomain}$).
+with $\*x^{(j)} = (x_1^{(j)}, \dotsc, x_d^{(j)}) \in \clint{0, 1}^d$,
+where $j = 1, \dotsc, N$ and
+$M := M_1 \dotsm M_{\dimdomain}$ is the number of macro-cells.
+With linear elasticity,
+one can compute so-called \term{elasticity tensors} $\etensor_j$,
+which can be written as
+symmetric $3 \times 3$ or $6 \times 6$ matrices
+(for $\dimdomain = 2$ or $3$ dimensions, respectively).%
+\footnote{%
+  In general, the elasticity tensor is a fourth-order tensor in
+  $\real^{\dimdomain \times \dimdomain \times \dimdomain \times \dimdomain}$.
+  One can reduce the size of the tensor by exploiting various symmetries
+  \cite{Huebner14Mehrdimensionale}
+  to obtain $6$ or $21$ stiffness coefficients.%
+}
+The elasticity tensors encode information about the material properties
+of the different macro-cells.
+They are usually computed as the solution of a \fem problem,
+the \term{micro-problem}.
+Once all elasticity tensors $\etensor_j$ are known,
+we can compute the compliance value corresponding to the macro-shape
+by solving another \fem problem, the \term{macro-problem}.
+
+The new optimization problem following from the
+two-scale discretization process has the form
+\begin{equation}
+  \min J(\*x^{(1)}, \dotsc, \*x^{(M)}),\quad
+  \*x^{(1)}, \dotsc, \*x^{(M)} \in \clint{0, 1}^d
+  \quad\text{s.t.}\quad
+  \frac{1}{M} \sum_{j=1}^M \volcell{\*x^{(j)}}
+  \le \volfracub,
+\end{equation}
+where $\volcell{\*x^{(j)}}$ is the fraction of the material volume of a
+micro-cell of the $j$-th macro-cell with micro-cell parameter $\*x^{(j)}$.
 
 \blindtext{}
 
