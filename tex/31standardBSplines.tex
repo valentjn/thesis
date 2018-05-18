@@ -249,13 +249,13 @@ the middle between two subsequent grid points:
   \dotsc,\quad
   \gp{l,i+p/2} + \frac{\ms{l}}{2}.
 \end{equation}
-As we will see,
-this fact has many adverse implications on the hierarchical basis.
+This fact has many adverse implications on the hierarchical basis.
 Most crucial among these are
-that the hierarchical splitting \eqref{eq:hierSplittingUV} would not hold,
-that non-uniform hierarchical B-splines would not be able to be defined as
+that for even degrees $p$,
+the hierarchical splitting \eqref{eq:hierSplittingUV} would not hold,
+non-uniform hierarchical B-splines would not be able to be defined as
 simple as for odd degrees, and
-that fundamental splines would not be defined at all
+fundamental splines would not be defined at all
 (as we will see in \cref{sec:443fundamentalSplines}).
 Therefore, and
 as the odd degrees include the hat function case~($p = 1$) and the
@@ -334,11 +334,12 @@ One example of a knot sequence and the corresponding B-splines is
 given in \cref{fig:splineSpaceGeneral}.
 The key observation is that B-splines of a knot sequence $\knotseq$
 do not form a basis of the spline space on the union
-$\clint{\knot{0}, \knot{m+p}}$ of the B-spline supports,
-but rather on a proper sub-interval $\spldomain{\knotseq}{p}$.
+$\clint{\knot{0}, \knot{m+p}}$ of the B-spline supports.
+Instead, they form a basis of the spline space
+on a proper sub-interval $\spldomain{\knotseq}{p}$.
 Intuitively, for every point in $\spldomain{\knotseq}{p}$ that is not a knot,
 exactly $p + 1$ B-splines must be \term{relevant} (non-zero)
-to span the spline space,
+to uniquely span the spline space,
 as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $p + 1$ degrees of freedom.
 Outside of $\spldomain{\knotseq}{p}$, there are too few relevant B-splines
@@ -584,9 +585,17 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 
 \paragraph{Modified hierarchical B-splines}
 
-By comparing the coefficients of $y^p$ and $y^{p-1}$ of
-both sides of Marsden's identity,
-we obtain a possible definition for $\bspl[\modified]{l,i}{p}$:
+By extending the sum in Marsden's identity to $i \in \integer$ and
+comparing the coefficients of $y^p$ and $y^{p-1}$ of both sides,
+we obtain representations for the first two monomials:
+\begin{equation}
+  1
+  = \sum_{i \in \integer} \bspl{l,i}{p}(x),\quad
+  x
+  = \sum_{i \in \integer} \gp{l,i} \bspl{l,i}{p}(x),\quad
+  x \in \real.
+\end{equation}
+This can be used to derive a definition for $\bspl[\modified]{l,i}{p}$:
 \begin{equation}
   \label{eq:modifiedBSplineConstruction}
   2 - \frac{x}{\ms{l}}
@@ -625,9 +634,9 @@ is only valid for $x \in \clint{0, \tfrac{5-p}{2} \ms{l}}$, i.e.,
 the second derivative at $x = 0$ vanishes only for $p \le 5$.
 For higher degrees, it is non-zero, albeit very small
 in its absolute value.
-If it is desired to enforce natural boundary conditions
+To enforce natural boundary conditions
 for higher than quintic degrees,
-then the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplineDefinition}
+the upper bound of $i'$ in the sum in \eqref{eq:modifiedBSplineDefinition}
 must be extended to $\tfrac{p+1}{2}$.
 In addition, more than just the left-most and the right-most inner
 hierarchical B-spline must be modified for $p \ge 5$,
@@ -723,12 +732,12 @@ so-called Clenshaw--Curtis quadrature rules.
   \label{fig:pointSplittingChebyshev}%
 \end{SCfigure}
 
-In some settings, it can be beneficial to use full or sparse grids consisting
+In some settings, it may be beneficial to use full or sparse grids consisting
 of Chebyshev points, which are then called \term{Clenshaw--Curtis grids},
 instead of uniform grids.
-Besides the already mentioned advantages for polynomial interpolation and
+Besides the already mentioned advantages for polynomials and
 quadrature, Clenshaw--Curtis grids can help to reduce interpolation
-error in a neighborhood of the boundary of the domain due to the increased
+errors in a neighborhood of the boundary of the domain due to the increased
 grid point density near the boundary
 (at the cost of a lower grid point density in the interior).
 If we want to use Chebyshev points as grid points for sparse grids,
@@ -775,7 +784,7 @@ sparse grid spaces $\regsgspace[p,\cc]{n}{d}$ and
 grid point sets $\regsgset[\cc]{n}{d}$
 using tensor products of Clenshaw--Curtis B-splines
 and Cartesian products of Chebyshev point sets.
-The one-dimensional cubic Clenshaw--Curtis basis and a two-dimensional
+The one-dimensional cubic Clenshaw--Curtis basis and a
 sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
 
 \begin{figure}
@@ -804,9 +813,9 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
   \label{fig:clenshawCurtis}%
 \end{figure}
 
-Note that in contrast to the standard hierarchical B-spline functions
-$\bspl{l,i}{p}$, Clenshaw--Curtis B-splines
-$\bspl[\cc]{l,i}{p}$ are not translation-invariant.
+Note that Clenshaw--Curtis B-splines
+$\bspl[\cc]{l,i}{p}$ are not translation-invariant,
+in contrast to $\bspl{l,i}{p}$.
 As a result, both implementation effort and evaluation runtime
 are significantly higher for Clenshaw--Curtis B-splines than
 for the standard uniform basis,
@@ -814,9 +823,8 @@ as the Clenshaw--Curtis B-splines cannot be precomputed.
 
 \paragraph{Modification and generalizations}
 
-As for uniform B-splines,
-\term{modified hierarchical Clenshaw--Curtis B-splines}
-$\bspl[\cc,\modified]{l,i}{p}$ can be defined using the
+We define \term{modified hierarchical Clenshaw--Curtis B-splines}
+$\bspl[\cc,\modified]{l,i}{p}$ using the
 same method as in \eqref{eq:modifiedBSplineDefinition}.
 Here, the second derivative of $\bspl[\cc,\modified]{l,1}{p}$
 does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
@@ -827,7 +835,7 @@ lie outside $\clint{0, 1}$ and are thus uniform according
 to \eqref{eq:clenshawCurtisBSplineKnots},
 the absolute deviation of the second derivative from zero is small.
 Again, to enforce natural boundary conditions,
-it is possible to recompute the coefficients
+we can recompute the coefficients
 of the components $\bspl[\cc]{l,i'}{p}$
 dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
