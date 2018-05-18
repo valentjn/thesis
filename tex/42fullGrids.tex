@@ -68,7 +68,7 @@ in which all points are in relation to each other):
           \State{%
             $(\linout[(j)]{\*k})_{\*k \in \lisetpole} \gets
             \upopuv{t_j}{\lisetpole}
-            \Big[(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}\Big]$%
+            \Bigl[(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}\Bigr]$%
           }
           \Comment{apply 1D operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
@@ -140,7 +140,7 @@ We prove the correctness of the \up with the following invariant:
       $\sum_{\*k \in \lisetpole}
       \linout[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
       %= ((\upopuv{t_j}{\lisetpole})^{-1}
-      %\Big[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Big])_{k'_{t_j}}
+      %\Bigl[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Bigr])_{k'_{t_j}}
       %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
       = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
       by the 1D operator $T_{t_j}$
