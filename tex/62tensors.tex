@@ -1,4 +1,114 @@
 \section{Approximating Elasticity Tensors}
 \label{sec:62tensors}
 
+\paragraph{Optimization process}
+
+When solving a topology optimization problem of the form
+\eqref{eq:topoOptProblemDiscrete}, the optimization algorithm typically
+evaluates the objective function $\compliance(\*x^{(1)}, \dotsc, \*x^{(M)})$
+at iteratively different \term{micro-cell parameter combinations}
+$(\*x^{(1)}, \dotsc, \*x^{(M)}) \in (\real^d)^M$.
+Every evaluation of $\compliance$ corresponds to the solution of a
+macro-problem.
+To solve the macro-problem once, however, the elasticity tensors
+$\etensor_j$ of all $M$ macro-cells need to be known.
+Hence, in every optimization iteration, it is necessary to solve
+one macro-problem and $M$ micro-cell problems with \fem techniques.
+This naive approach of solving \eqref{eq:topoOptProblemDiscrete}
+has two major drawbacks:
+
+\paragraph{Drawback 1: Computation time}
+
+First, the naive approach is typically computationally infeasible.
+The computation of a single elasticity tensor usually takes seconds to
+minutes.
+Although all $M$ micro-cell problems can be solved in parallel without any
+communication (``embarrassingly parallel''), this might still be too long,
+as $M$ is usually in the range of thousands and
+as this has to be repeated for every optimization iteration.
+The optimizer often needs thousands or tens of thousands iterations
+(keep in mind that the optimization is $(d \cdot M)$-dimensional),
+so that users have to wait long before their optimal result is computed.
+
+\paragraph{Drawback 2: Approximation of gradients}
+
+Second, most optimization algorithms require gradients of the
+objective function and of the constraints.
+This means that we would need the gradients%
+\footnote{%
+  By convention, the gradient $\nabla_{\*x} f(\*x)$ of a
+  scalar-valued function $f$ is the column vector of partial derivatives.
+  For vector-valued functions $\*f$, the gradient $\nabla_{\*x} \*f(\*x)$
+  is defined as the transposed Jacobian, i.e., the matrix whose columns
+  are the gradients $\nabla_{\*x} f_j(\*x)$ of single components of
+  $\*f$.%
+}
+\begin{equation}
+  \nabla_{\*x^{(j)}} \etensor_j(\*x^{(j)}),\quad
+  \nabla_{\*x^{(j)}} \dens_j(\*x^{(j)})
+\end{equation}
+of the elasticity tensor $\etensor_j$ and
+the density $\dens_j$ of the $j$-th macro-cell for $j = 1, \dotsc, M$.
+However, in general, both gradients are not available,
+such that they have to be approximated with finite differences.
+This introduces new error sources and implies that
+per optimization iteration and macro-cell,
+$2d$ additional elasticity tensors have to be evaluated
+(if central differences are employed), i.e.,
+the time-to-solution increases by the factor of $2d$.
+Additionally, if there are discontinuities in the objective function
+or its gradient (which could already be caused by small numeric instabilities
+due to the solution with the \fem),
+the number of optimization iterations to achieve convergence might
+increase.
+These considerations do not take Hessians or other higher-order derivatives
+into account, for which all the mentioned issues even worsen.
+
 \blindtext{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
