@@ -58,5 +58,11 @@ ax.set_ylabel(r"$x_2$", labelpad=-8)
 ax.xaxis.set_rotate_label(False)
 ax.yaxis.set_rotate_label(False)
 ax.grid(False)
+# left pane
+ax.w_xaxis.set_pane_color((0.96, 0.96, 0.96, 1.0))
+# right pane
+ax.w_yaxis.set_pane_color((0.92, 0.92, 0.92, 1.0))
+# bottom pane
+ax.w_zaxis.set_pane_color((0.94, 0.94, 0.94, 1.0))
 
 fig.save()
