@@ -114,60 +114,29 @@ the \term{micro-problem}.
 Once all elasticity tensors $\etensor_j$ are known,
 we can compute the compliance value corresponding to the macro-shape
 by solving another \fem problem, the \term{macro-problem}.
+We refer to \cite{Allaire04Topology} and \cite{Huebner14Mehrdimensionale}
+for more details.
+
+\paragraph{Discretized optimization problem}
 
 The new optimization problem following from the
 two-scale discretization process has the form
-\begin{equation}
-  \min J(\*x^{(1)}, \dotsc, \*x^{(M)}),\quad
-  \*x^{(1)}, \dotsc, \*x^{(M)} \in \clint{0, 1}^d
-  \quad\text{s.t.}\quad
-  \frac{1}{M} \sum_{j=1}^M \volcell{\*x^{(j)}}
-  \le \volfracub,
-\end{equation}
-where $\volcell{\*x^{(j)}}$ is the fraction of the material volume of a
-micro-cell of the $j$-th macro-cell with micro-cell parameter $\*x^{(j)}$.
-
-\blindtext{}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{subequations}
+  \label{eq:topoOptProblemDiscrete}
+  \begin{gather}
+    \min J(\*x^{(1)}, \dotsc, \*x^{(M)}),\quad
+    \*x^{(1)}, \dotsc, \*x^{(M)} \in \clint{0, 1}^d
+    \quad\text{s.t.}\quad
+    \densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \le \densub,\\
+    \densmean(\*x^{(1)}, \dotsc, \*x^{(M)})
+    := \frac{1}{M} \sum_{j=1}^M \dens(\*x^{(j)}),
+  \end{gather}
+\end{subequations}
+where $\dens(\*x^{(j)}) \in \clint{0, 1}$ is the
+density of the $j$-th macro cell with micro-cell parameter $\*x^{(j)}$
+(i.e., the fraction of material volume of one micro-cell
+with respect to its total volume)
+and $\densmean(\*x^{(1)}, \dotsc, \*x^{(M)})$ is the resulting
+total mean density.
+This discretized optimization problem can be implemented and
+solved with computers.
