@@ -60,7 +60,6 @@ N = X.shape[0]
 fig = Figure.create(figsize=(3, 3), scale=1.5)
 ax = fig.gca()
 
-tt = np.linspace(0, 1, 100)
 angle = 35 / 180 * np.pi
 colormap = mpl.cm.get_cmap("viridis")
 
@@ -70,14 +69,16 @@ for k1 in range(N):
     
     if parentDimension is not None:
       l = L[k1,parentDimension]
+      nn = int(125 * np.linalg.norm(X[k2,:] - X[k1,:]))
+      tt = np.linspace(0, 1, nn)
       XX = helper.plot.getQuadraticBezierCurveViaAngle(X[k1,:], X[k2,:], angle, tt)
-      XX = XX[:-4*2**l,:]
+      XX = XX[:-2,:]
       curPlotLine = (lambda ax, xx, yy: plotLine(ax, xx, yy, np.sum(L[k1,:]), n))
       levelSum = np.sum(L[k2,:])
       headColor = colormap(levelSum / n)
       helper.plot.plotArrowPolygon(
-        ax, XX[:,0], XX[:,1], curPlotLine, scaleHead=0.5,
-        ec=headColor, fc=headColor, zorder=levelSum)
+        ax, XX[:,0], XX[:,1], curPlotLine, scaleHead=0.5, virtualHeadLength=0.015,
+        ec=headColor, fc=headColor, zorder=levelSum, cutOff=1)
 
 ax.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], "k-", clip_on=False)
 
