@@ -42,7 +42,7 @@ choosing $\dens :\equiv 1$ will most likely lead to the shape with the
 highest stiffness.
 Therefore, we introduce the following volume constraint:
 \begin{equation}
-  \frac{\voldens{\dens}{\domain}}{\vol{\domain}} \le \volfracub,\quad
+  \frac{\voldens{\dens}{\domain}}{\vol{\domain}} \le \densub,\quad
   \voldens{\dens}{\domain}
   := \int_{\domain} \dens(\tilde{\*x}) \diff\tilde{\*x},\quad
   \vol{\domain}
@@ -50,7 +50,7 @@ Therefore, we introduce the following volume constraint:
 \end{equation}
 where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
 is the volume of the domain and
-$\volfracub \in \clint{0, 1}$ is an upper bound on the volume fraction.
+$\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
 \paragraph{Discretization and two-scale approach}
 
