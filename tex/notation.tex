@@ -274,20 +274,20 @@
 % Norms
 % ======================================================================
 
-\newnotationcommand[1]{\normone}{\norm{#1}_1}{Önorm1}{$\normone{\cdot}$}{
+\newnotationcommand[1]{\normone}{\norm[1]{#1}}{Önorm1}{$\normone{\cdot}$}{
   $\ell_1$ norm $\normone{\*x} := \sum_{t=1}^d x_t$
 }
 
 \newcommand*{\Ltwo}{L^2}
 
-\newnotationcommand[1]{\normLtwo}{\norm{#1}_{\Ltwo}}{ÖnormL2}{%
+\newnotationcommand[1]{\normLtwo}{\norm[\Ltwo]{#1}}{ÖnormL2}{%
   $\normLtwo{\cdot}$%
 }{
   $\Ltwo$ norm $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(x)^2 \dx}$
   of a function $\objfun\colon \Omega \to \real$
 }
 
-\newcommand*{\normLtwoscaled}[1]{\normscaled{#1}_{\Ltwo}}
+\newcommand*{\normLtwoscaled}[1]{\normscaled[\Ltwo]{#1}}
 
 % ======================================================================
 % Relation Symbols
@@ -930,8 +930,12 @@
 \newcommand*{\exexlarge}[3]{\exists_{#1} \exists_{#2}\;\;#3}
 
 % norm
-\newcommand*{\norm}[1]{\lVert{#1}\rVert}
-\newcommand*{\normscaled}[1]{\left\lVert{#1}\right\rVert}
+\newcommand*{\norm}[2][]{%
+  \lVert{#2}\rVert\ifnotempty{#1}{_{#1}}%
+}
+\newcommand*{\normscaled}[2][]{%
+  \left\lVert{#2}\right\rVert\ifnotempty{#1}{_{#1}}%
+}
 
 % equivalent of \notin for \ni
 \newcommand*{\notni}{\not\ni}
