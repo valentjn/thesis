@@ -26,10 +26,18 @@ zero and one, giving the density of the material in that point.
 Furthermore, for each density function $\dens$,
 let $\compliance(\dens)$ be an objective function value.
 In our setting,
-we exert one force or multiple forces on specific points,
+we exert one force $\force$ (or multiple forces),
 measure the resulting deformation of the object, and
 compute the \term{compliance} (i.e., the inverse of the stiffness) as
-the objective function value $\compliance(\dens)$.
+the objective function value $\compliance(\dens)$:
+\begin{equation}
+  \compliance(\dens)
+  = \int_{\domain} \innerprod[2]{\force}{\displacement_{\dens}(\tilde{\*x})}
+  \diff\tilde{\*x},
+\end{equation}
+where $\displacement_{\dens}\colon \domain \to \real^{\dimdomain}$
+is the \term{displacement function}, depending on the density
+\cite{Huebner14Mehrdimensionale}.
 The problem of topology optimization is to find the density function
 with minimal objective function value:
 \begin{equation}
@@ -39,7 +47,7 @@ with minimal objective function value:
 Often, there are trivial solutions, if we do not impose additional conditions.
 For example, when minimizing compliance function values,
 choosing $\dens :\equiv 1$ will most likely lead to the shape with the
-highest stiffness.
+highest stiffness and, thus, the smallest displacement and compliance value.
 Therefore, we introduce the following volume constraint:
 \begin{equation}
   \frac{\voldens{\dens}{\domain}}{\vol{\domain}} \le \densub,\quad
