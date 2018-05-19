@@ -11,40 +11,40 @@ We roughly follow the presentation given in
 }.
 Let $\domain \subset \real^{\dimdomain}$ be the optimization domain
 (which later contains the optimal shape) and
-$\densfcn\colon \domain \to \clint{0, 1}$ a function,
+$\dens\colon \domain \to \clint{0, 1}$ a function,
 which is called \term{density function}.
 Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
 although the method can be generalized to
 arbitrary dimensionalities $\dimdomain \in \nat$.
-The function values $\densfcn(\tilde{\*x})$ tell if $\tilde{\*x}$
+The function values $\dens(\tilde{\*x})$ tell if $\tilde{\*x}$
 is contained in the object (value of one) or not (value of zero).
 The approach of \term{homogenization} now also allows values between
 zero and one, giving the density of the material in that point.
 
 \paragraph{Optimization of compliance values}
 
-Furthermore, for each density function $\densfcn$,
-let $\compliance(\densfcn)$ be an objective function value.
+Furthermore, for each density function $\dens$,
+let $\compliance(\dens)$ be an objective function value.
 In our setting,
 we exert one force or multiple forces on specific points,
 measure the resulting deformation of the object, and
 compute the \term{compliance} (i.e., the inverse of the stiffness) as
-the objective function value $\compliance(\densfcn)$.
+the objective function value $\compliance(\dens)$.
 The problem of topology optimization is to find the density function
 with minimal objective function value:
 \begin{equation}
   \label{eq:topoOptProblemContinuous}
-  \min_{\densfcn} \compliance(\densfcn).
+  \min_{\dens} \compliance(\dens).
 \end{equation}
 Often, there are trivial solutions, if we do not impose additional conditions.
 For example, when minimizing compliance function values,
-choosing $\densfcn :\equiv 1$ will most likely lead to the shape with the
+choosing $\dens :\equiv 1$ will most likely lead to the shape with the
 highest stiffness.
 Therefore, we introduce the following volume constraint:
 \begin{equation}
-  \frac{\voldens{\densfcn}{\domain}}{\vol{\domain}} \le \volfracub,\quad
-  \voldens{\densfcn}{\domain}
-  := \int_{\domain} \densfcn(\tilde{\*x}) \diff\tilde{\*x},\quad
+  \frac{\voldens{\dens}{\domain}}{\vol{\domain}} \le \volfracub,\quad
+  \voldens{\dens}{\domain}
+  := \int_{\domain} \dens(\tilde{\*x}) \diff\tilde{\*x},\quad
   \vol{\domain}
   := \voldens{1}{\domain},
 \end{equation}
@@ -56,7 +56,7 @@ $\volfracub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 directly on computers,
-as there are infinitely many density functions $\densfcn$.
+as there are infinitely many density functions $\dens$.
 To be able to discretize the domain $\domain \subset \real^{\dimdomain}$
 more easily, we assume that $\domain$ is some hyper-rectangle
 $\clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
