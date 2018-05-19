@@ -870,13 +870,21 @@
   density function $\dens$
 }
 
-\newnotationcommand[1]{\volcell}{\mathrm{vol}(#1)}{volx}{$\volcell{\*x}$}{
-  Volume fraction of the material in a micro-cell with parameter $\*x$
-}
-
 \newnotationcommand{\densub}{\varrho^\ast}{r*}{$\densub$}{
   Upper bound on the volume fraction
   $\voldens{\dens}{\domain}/\vol{\domain}$
+}
+
+\newnotationcommand{\densmean}{\bar{\varrho}}{rbar}{$\densmean$}{
+  Mean density of all macro-cells%
+}
+
+\newnotationcommand{\force}{\vec{F}}{F}{$\force$}{
+  Force $\force \in \real^{\dimdomain}$
+}
+
+\newnotationcommand{\displacement}{\vec{u}}{u2}{$\displacement$}{
+  Displacement $\displacement\colon \domain \to \real^{\dimdomain}$
 }
 
 \newnotationcommand{\etensor}{\mat{E}}{E}{$\etensor$}{
