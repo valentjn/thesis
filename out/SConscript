@@ -2,23 +2,75 @@ import os
 import subprocess
 import warnings
 
-# paper size of manuscript version (here A4),
-# additional page margins for each side
-manuscriptPaperWidth   = 210
-manuscriptPaperHeight  = 297
-manuscriptMarginLeft   = 3
-manuscriptMarginBottom = 3
-manuscriptMarginRight  = 3
-manuscriptMarginTop    = 3
+# paper size of manuscript version in mm (A4), width/height
+manuscriptPaperSize = (210, 297)
+# additional page margins for each side in mm, left/bottom/right/top
+manuscriptMargins   = (3, 3, 3, 3)
 
-# paper size of published version (here A5),
-# additional page margins for each side
-publishedPaperWidth   = 148
-publishedPaperHeight  = 210
-publishedMarginLeft   = 3
-publishedMarginBottom = 3
-publishedMarginRight  = 3
-publishedMarginTop    = 3
+# paper size of published version in mm (A5), width/height
+publishedPaperSize  = (148, 210)
+# additional page margins for each side in mm, left/bottom/right/top
+publishedMargins    = (3, 3, 3, 3)
+
+# metadata for the print-version PDFs
+metaData = {
+  "title" : "B-Splines for Sparse Grids: "
+            "Algorithms and Application to Higher-Dimensional Optimization",
+  "author" : "Julian Valentin",
+  "keywords" : ["B-splines", "sparse grids", "optimization"],
+}
+
+# ICC color profile
+iccProfile = {
+  "path" : os.path.join("..", "..", "misc", "ISOcoated_v2_300_eci.icc"),
+  "outputIntent" : r"ISO Coated v2 300\% (ECI)",
+  "identifier"   : r"ISO Coated v2 300\% (ECI)",
+  "registryURL"  : "http://www.fogra.org/"
+}
+
+
+
+def generatePrintTex(target, source, env):
+  pdf, tex = source[0].abspath, target[0].abspath
+  print(pdf, tex)
+  
+  if "manuscript" in os.path.basename(tex).lower():
+    paperSize, margins = manuscriptPaperSize, manuscriptMargins
+  else:
+    paperSize, margins = publishedPaperSize,  publishedMargins
+  
+  pointsPerMillimeter = 72 / 25.4
+  texContents = r"""
+\RequirePackage{{filecontents}}
+\begin{{filecontents*}}{{\jobname.xmpdata}}
+  \Title{{{}}}
+  \Author{{{}}}
+  \Keywords{{{}}}
+  \setCMYKcolorprofile{{{}}}{{{}}}{{{}}}{{{}}}
+\end{{filecontents*}}
+\documentclass{{article}}
+\usepackage[papersize={{{}mm,{}mm}}]{{geometry}}
+\usepackage[x-3]{{pdfx}}
+\pdfpageattr{{/TrimBox [{} {} {} {}]}}
+\usepackage{{pdfpages}}
+\begin{{document}}
+  \includepdfmerge[trim=-{}mm -{}mm -{}mm -{}mm,clip=true]{{{},3-}}
+\end{{document}}
+""".format(
+      metaData["title"], metaData["author"],
+      r"\sep ".join(metaData["keywords"]),
+      iccProfile["path"], iccProfile["outputIntent"],
+      iccProfile["identifier"], iccProfile["registryURL"],
+      paperSize[0] + margins[0] + margins[2],
+      paperSize[1] + margins[1] + margins[3],
+      pointsPerMillimeter * margins[0],
+      pointsPerMillimeter * margins[1],
+      pointsPerMillimeter * (paperSize[0] + margins[0]),
+      pointsPerMillimeter * (paperSize[1] + margins[1]),
+      *margins, pdf,
+  )
+  with open(tex, "w") as f: f.write(texContents)
+
 
 
 
@@ -52,31 +104,95 @@ env.AddPostAction(thesisManuscriptScreen, Helper.compressPDFs)
 pdfsScreen.append(thesisManuscriptScreen)
 
 if hasPDFJam:
-  # generate manuscript print version
-  thesisManuscriptPrint = env.Command(
-      "thesisManuscriptPrint.pdf", env["BUILD_PDF"],
-      "pdfjam --quiet --keepinfo --papersize '{{{}mm,{}mm}}' "
-      "--trim '{}mm {}mm {}mm {}mm' --clip true "
-      "--outfile $TARGET $SOURCE '3-'".format(
-        manuscriptPaperWidth + manuscriptMarginLeft + manuscriptMarginRight,
-        manuscriptPaperHeight + manuscriptMarginTop + manuscriptMarginBottom,
-        -manuscriptMarginLeft, -manuscriptMarginBottom,
-        -manuscriptMarginRight, -manuscriptMarginTop))
-  env.AddPostAction(thesisManuscriptPrint, Helper.compressPDFs)
-  pdfsPrint.append(thesisManuscriptPrint)
+  env.Replace(PDFLATEX="python3 ../../tools/filterOutput.py pdflatex")
   
-  # generate published print version
-  thesisPublishedPrintA5 = env.Command(
-      "thesisPublishedPrintA5.pdf", env["BUILD_PDF"],
-      "pdfjam --quiet --keepinfo --paper a5paper --papersize '{{{}mm,{}mm}}' "
-      "--trim '{}mm {}mm {}mm {}mm' --clip true "
-      "--outfile $TARGET $SOURCE '3-'".format(
-        publishedPaperWidth + publishedMarginLeft + publishedMarginRight,
-        publishedPaperHeight + publishedMarginTop + publishedMarginBottom,
-        -publishedMarginLeft, -publishedMarginBottom,
-        -publishedMarginRight, -publishedMarginTop))
-  env.AddPostAction(thesisPublishedPrintA5, Helper.compressPDFs)
-  pdfsPrint.append(thesisPublishedPrintA5)
+  for name, paperSize, margins in zip(
+            ["thesisManuscriptPrint", "thesisPublishedPrintA5"],
+            [manuscriptPaperSize, publishedPaperSize],
+            [manuscriptMargins,   publishedMargins]):
+    printTex = env.Command(
+        os.path.join(env["BUILD_DIR"].abspath, "{}.bla.tex".format(name)),
+        env["BUILD_PDF"], generatePrintTex)
+    pdf = env.PDF(
+        os.path.join(env["BUILD_DIR"].abspath, "{}.bla.pdf".format(name)),
+        printTex)
+    pdf = env.InstallAs(os.path.join(".", "{}.pdf".format(name)), pdf)
+    pdfsPrint.append(pdf)
+  
+  #def calculateTrimBox(paperSize, margins):
+    #pointsPerMillimeter = 72 / 25.4
+    #left   = pointsPerMillimeter * margins[0]
+    #bottom = pointsPerMillimeter * margins[1]
+    #right  = pointsPerMillimeter * (paperSize[0] + margins[0])
+    #top    = pointsPerMillimeter * (paperSize[1] + margins[1])
+    #return "\pdfpageattr{{/TrimBox [{} {} {} {}]}}".format(
+        #left, bottom, right, top)
+  #for pdf, additionalOptions, paperSize, margins in zip(
+        #["thesisManuscriptPrint.pdf", "thesisPublishedPrintA5.pdf"],
+        #["", "--a5paper"],
+        #[manuscriptPaperSize, publishedPaperSize],
+        #[manuscriptMargins,   publishedMargins]):
+    #pdfJamPaperSizeHack = (r"{{{}mm,{}mm}}".format(
+        #paperSize[0] + margins[0] + margins[2],
+        #paperSize[1] + margins[1] + margins[3]) +
+        #r"]{geometry}\usepackage[x-3]{pdfx}" +
+        #calculateTrimBox(paperSize, margins) + "%")
+    #pdf = env.Command(pdf, env["BUILD_PDF"],
+        #"pdfjam --quiet --keepinfo {} --papersize '{}' "
+        #"--trim '{}mm {}mm {}mm {}mm' --clip true "
+        #"--outfile $TARGET $SOURCE '3-'".format(
+          #additionalOptions, pdfJamPaperSizeHack,
+          #-margins[0], -margins[1], -margins[2], -margins[3]))
+    #env.AddPostAction(pdf, Helper.compressPDFs)
+    #pdfsPrint.append(pdf)
+  
+  #for pdf, additionalOptions, paperSize, margins in zip(
+        #["thesisManuscriptPrint.pdf", "thesisPublishedPrintA5.pdf"],
+        #["", "--a5paper"],
+        #[manuscriptPaperSize, publishedPaperSize],
+        #[manuscriptMargins,   publishedMargins]):
+    #pdf = env.Command(pdf, env["BUILD_PDF"],
+        #"pdfjam --quiet --keepinfo {} --papersize '{{{}mm,{}mm}}' "
+        #"--trim '{}mm {}mm {}mm {}mm' --clip true --preamble '{}' "
+        #"--outfile $TARGET $SOURCE '3-'".format(additionalOptions,
+          #paperSize[0] + margins[0] + margins[2],
+          #paperSize[1] + margins[1] + margins[3],
+          #-margins[0], -margins[1], -margins[2], -margins[3],
+          #calculateTrimBox(paperSize, margins)))
+    #env.AddPostAction(pdf, Helper.compressPDFs)
+    #pdfsPrint.append(pdf)
+  
+  ## generate manuscript print version
+  #thesisManuscriptPrint = env.Command(
+      #"thesisManuscriptPrint.pdf", env["BUILD_PDF"],
+      #"pdfjam --quiet --keepinfo --papersize '{{{}mm,{}mm}}' "
+      #"--trim '{}mm {}mm {}mm {}mm' --clip true --preamble '{}' "
+      #"--outfile $TARGET $SOURCE '3-'".format(
+        #manuscriptPaperWidth + manuscriptMarginLeft + manuscriptMarginRight,
+        #manuscriptPaperHeight + manuscriptMarginTop + manuscriptMarginBottom,
+        #-manuscriptMarginLeft, -manuscriptMarginBottom,
+        #-manuscriptMarginRight, -manuscriptMarginTop,
+        #calculateTrimBox(manuscriptPaperWidth, manuscriptPaperHeight,
+                         #manuscriptMarginLeft, manuscriptMarginBottom,
+                         #manuscriptMarginRight, manuscriptMarginTop)))
+  #env.AddPostAction(thesisManuscriptPrint, Helper.compressPDFs)
+  #pdfsPrint.append(thesisManuscriptPrint)
+  
+  ## generate published print version
+  #thesisPublishedPrintA5 = env.Command(
+      #"thesisPublishedPrintA5.pdf", env["BUILD_PDF"],
+      #"pdfjam --quiet --keepinfo --paper a5paper --papersize '{{{}mm,{}mm}}' "
+      #"--trim '{}mm {}mm {}mm {}mm' --clip true --preamble '{}' "
+      #"--outfile $TARGET $SOURCE '3-'".format(
+        #publishedPaperWidth + publishedMarginLeft + publishedMarginRight,
+        #publishedPaperHeight + publishedMarginTop + publishedMarginBottom,
+        #-publishedMarginLeft, -publishedMarginBottom,
+        #-publishedMarginRight, -publishedMarginTop,
+        #calculateTrimBox(publishedPaperWidth, publishedPaperHeight,
+                         #publishedMarginLeft, publishedMarginBottom,
+                         #publishedMarginRight, publishedMarginTop)))
+  #env.AddPostAction(thesisPublishedPrintA5, Helper.compressPDFs)
+  #pdfsPrint.append(thesisPublishedPrintA5)
   
   # generate published 2-up version
   thesisNupRotated = os.path.join(env["BUILD_DIR"].abspath,
