@@ -30,15 +30,17 @@ iccProfile = {
 
 
 
+# generate *.tex file for print-version PDFs
 def generatePrintTex(target, source, env):
   pdf, tex = source[0].abspath, target[0].abspath
-  print(pdf, tex)
   
+  # get paper size and margins
   if "manuscript" in os.path.basename(tex).lower():
     paperSize, margins = manuscriptPaperSize, manuscriptMargins
   else:
     paperSize, margins = publishedPaperSize,  publishedMargins
   
+  # construct and save *.tex contents
   pointsPerMillimeter = 72 / 25.4
   texContents = r"""
 \RequirePackage{{filecontents}}
@@ -106,16 +108,23 @@ pdfsScreen.append(thesisManuscriptScreen)
 if hasPDFJam:
   env.Replace(PDFLATEX="python3 ../../tools/filterOutput.py pdflatex")
   
+  # generate print versions (manuscript/published)
   for name, paperSize, margins in zip(
             ["thesisManuscriptPrint", "thesisPublishedPrintA5"],
             [manuscriptPaperSize, publishedPaperSize],
             [manuscriptMargins,   publishedMargins]):
+    # generate *.tex file
     printTex = env.Command(
         os.path.join(env["BUILD_DIR"].abspath, "{}.bla.tex".format(name)),
         env["BUILD_PDF"], generatePrintTex)
+    # compile *.tex file
     pdf = env.PDF(
         os.path.join(env["BUILD_DIR"].abspath, "{}.bla.pdf".format(name)),
         printTex)
+    # copy resulting *.pdf to out/
+    # (somehow the name of the two PDFs have to be different,
+    # otherwise there is the error "scons: *** Multiple ways to build the
+    # same target were specified for: thesisManuscriptPrint.pdf")
     pdf = env.InstallAs(os.path.join(".", "{}.pdf".format(name)), pdf)
     pdfsPrint.append(pdf)
   
