@@ -929,6 +929,14 @@
 \newcommand*{\exfalarge}[3]{\exists_{#1} \forall_{#2}\;\;#3}
 \newcommand*{\exexlarge}[3]{\exists_{#1} \exists_{#2}\;\;#3}
 
+% inner product
+\newcommand*{\innerprod}[3][]{%
+  \langle{#2,#3}\rangle\ifnotempty{#1}{_{#1}}
+}
+\newcommand*{\innerprodscaled}[3][]{%
+  \left\langle{#2,#3}\right\rangle\ifnotempty{#1}{_{#1}}
+}
+
 % norm
 \newcommand*{\norm}[2][]{%
   \lVert{#2}\rVert\ifnotempty{#1}{_{#1}}%
