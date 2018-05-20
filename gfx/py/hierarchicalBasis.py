@@ -32,7 +32,7 @@ def plotSubspace(ax, basis, l, n,
   if superscript != "": superscript = r"^{{{}}}".format(superscript)
   
   if clenshawCurtis: pointSuperscript = r"^{\mathrm{cc}}"
-  elif whiteCC:      pointSuperscript = r"^{\textcolor{white}{\mathrm{cc}}}"
+  elif whiteCC:      pointSuperscript = r"^{\vphantom{\mathrm{cc}}}"
   else:              pointSuperscript = ""
   
   for i in plotI:
@@ -199,7 +199,7 @@ def plotModifiedHierarchicalNotAKnotBSplines(q):
   basisModified = helper.basis.ModifiedHierarchicalNotAKnotBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
-    plotSubspace(ax, basis, l, n, notAKnot=True)
+    plotSubspace(ax, basis, l, n, notAKnot=True, whiteCC=True)
     plotSubspace(ax, basisModified, l, n, modified=True, drawModifiedOnTop=True,
                  whiteCC=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
