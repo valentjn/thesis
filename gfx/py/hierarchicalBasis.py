@@ -175,7 +175,7 @@ def plotHierarchicalClenshawCurtisBSplines(q):
     ax = fig.add_subplot(n+1, 1, l+1)
     plotSubspace(ax, basis, l, n, clenshawCurtis=True)
     plotSubspace(ax, basisModified, l, n, modified=True, clenshawCurtis=True,
-                drawModifiedOnTop=True)
+                 drawModifiedOnTop=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotNodalNotAKnotBSplines(q):
@@ -201,7 +201,7 @@ def plotModifiedHierarchicalNotAKnotBSplines(q):
     ax = fig.add_subplot(n+1, 1, l+1)
     plotSubspace(ax, basis, l, n, notAKnot=True)
     plotSubspace(ax, basisModified, l, n, modified=True, drawModifiedOnTop=True,
-                whiteCC=True)
+                 whiteCC=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalClenshawCurtisNotAKnotBSplines(q):
@@ -212,7 +212,7 @@ def plotHierarchicalClenshawCurtisNotAKnotBSplines(q):
     ax = fig.add_subplot(n+1, 1, l+1)
     plotSubspace(ax, basis, l, n, clenshawCurtis=True, notAKnot=True)
     plotSubspace(ax, basisModified, l, n, modified=True, clenshawCurtis=True,
-                drawModifiedOnTop=True)
+                 drawModifiedOnTop=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalNaturalBSplines(q):
