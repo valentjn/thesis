@@ -1,14 +1,18 @@
 \section{Homogenization and the Two-Scale Approach}
 \label{sec:61homogenization}
 
-\paragraph{Density function}
-
 We roughly follow the presentation given in
 \multicite{%
   Huebner14Mehrdimensionale,%
   Valentin14Hierarchische,%
   Valentin16Hierarchical%
 }.
+
+\subsection{Homogenization}
+\label{sec:611homogenization}
+
+\paragraph{Density function}
+
 Let $\domain \subset \real^{\dimdomain}$ be the optimization domain
 (which later contains the optimal shape) and
 $\dens\colon \domain \to \clint{0, 1}$ a function,
@@ -59,6 +63,9 @@ Therefore, we introduce the following volume constraint:
 where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
 is the volume of the domain and
 $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
+
+\subsection{Two-Scale Approach}
+\label{sec:612twoScale}
 
 \paragraph{Discretization and two-scale approach}
 
