@@ -110,7 +110,27 @@ The parameters are assumed to be normalized to values in the
 unit interval $\clint{0, 1}$.
 For instance, in $\dimdomain = 2$ dimensions,
 this shape could be an axis-aligned cross of two bars
-with thicknesses $x_1$ and $x_2$.
+with thicknesses $x_1$ and $x_2$, as shown in \cref{fig:twoScale}.
+
+\begin{figure}
+  \includegraphics{twoScale_1}%
+  \caption[%
+    Two-scale approach for topology optimization%
+  ]{%
+    Two-scale approach to discretize the homogenized topology
+    optimization problem in two dimensions ($\dimdomain = 2$).
+    \emph{Left:} The domain $\domain$ is subdivided into $M_1 \times M_2$
+    macro-cells, each with its own material properties such as density
+    \emph{(colors)}.
+    \emph{Center:} Every macro-cell is the repetition of infinitesimally small
+    periodic micro-cells.
+    \emph{Right:} The shape of the structure in every micro-cell is
+    described by a micro-cell model with $d$ parameters $x_1, \dotsc, x_d$.
+    Here, the micro-cell model is a cross with two parameters
+    that represent the thickness of each crossbar.%
+  }%
+  \label{fig:twoScale}%
+\end{figure}
 
 \paragraph{Elasticity tensors}
 
