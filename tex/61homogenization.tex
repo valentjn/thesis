@@ -29,8 +29,8 @@ zero and one, giving the density of the material in that point.
 
 Furthermore, for each density function $\dens$,
 let $\compliance(\dens)$ be an objective function value.
-In our setting,
-we exert one force $\force$ (or multiple forces),
+In our setting, which is shown in \cref{fig:topoOptExampleScenario},
+we exert a force $\force$ (or multiple forces),
 measure the resulting deformation of the object, and
 compute the \term{compliance} (i.e., the inverse of the stiffness) as
 the objective function value $\compliance(\dens)$:
@@ -63,6 +63,24 @@ Therefore, we introduce the following volume constraint:
 where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
 is the volume of the domain and
 $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
+
+\begin{SCfigure}
+  \includegraphics{topoOptScenarios_1}%
+  \caption[%
+    Example scenario for topology optimization%
+  ]{%
+    Example scenario for topology optimization.
+    An object \emph{\textcolor{hellblau}{(light blue)}}
+    is fixed on the left side
+    of the domain $\domain$
+    \emph{\textcolor{mittelblau!50}{(darker blue)}}
+    and deformed by a force $\force$, resulting in a displaced object
+    \emph{(dashed)}.
+    The density function $\dens(\tilde{\*x})$ is one inside the object
+    and zero outside.%
+  }%
+  \label{fig:topoOptExampleScenario}%
+\end{SCfigure}
 
 \subsection{Two-Scale Approach}
 \label{sec:612twoScale}
