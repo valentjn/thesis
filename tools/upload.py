@@ -92,7 +92,7 @@ if __name__ == "__main__":
     
     print("")
     print("Setting switches...")
-    switchesPath = os.path.join(repoPath, "tex", "switches.tex")
+    switchesPath = os.path.join(repoPath, "tex", "preamble", "switches.tex")
     with open(switchesPath, "r") as f: switchesTex = f.read()
     
     for switchName, switchValue in switches.items():
