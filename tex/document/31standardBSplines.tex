@@ -11,7 +11,7 @@ especially \thmref{lemma:tensorProductLinearIndependence} and
 \thmref{prop:splittingUVToMV},
 it suffices to study the univariate case
 of all bases that will be defined in the rest of this thesis.
-The multivariate case is treated as usual by tensor products.
+The multivariate case is treated canonically by tensor products.
 
 
 
@@ -22,7 +22,7 @@ The multivariate case is treated as usual by tensor products.
 
 The \term{cardinal B-spline}
 $\cardbspl{p}\colon \real \to \real$ of \term{degree} $p \in \natz$
-is defined by the recursion
+is defined by
 \begin{equation}
   \label{eq:cardinalBSpline}
   \cardbspl{p}(x)
@@ -38,100 +38,6 @@ the half-open unit interval $\hopint{0, 1}$
 The cardinal B-spline $\cardbspl{p}$ has the following properties
 \cite{Hoellig03Finite},
 which are shown in \cref{fig:cardinalBSplineProps}:
-\begin{enumerate}
-  \item
-  \emph{Compact support:}
-  The support of $\cardbspl{p}$ is given by $\supp \cardbspl{p} = \clint{0, p + 1}$.
-  
-  \item
-  \emph{Bounds and symmetry:}
-  The cardinal B-spline $\cardbspl{p}$ is non-negative and bounded from above by one.
-  It is symmetric with respect to the center of its support, i.e.,
-  $\cardbspl{p}(x) = \cardbspl{p}(p + 1 - x)$.
-  
-  \item
-  \emph{Recursion:}
-  The cardinal B-spline $\cardbspl{p}$ ($p \ge 1$)
-  satisfies the following recurrence relation
-  (which could be used as an alternative definition):
-  \begin{equation}
-    \cardbspl{p}(x)
-    = \frac{x}{p} \cardbspl{p-1}(x) + \frac{p+1-x}{p} \cardbspl{p-1}(x-1).
-  \end{equation}
-  
-  \item
-  \emph{Spline:}
-  On every \term{knot interval} $\hopint{k, k+1}$
-  ($k = 0, \dotsc, p$), $\cardbspl{p}$ is a polynomial of degree~$p$, i.e.,
-  $\cardbspl{p}$ is a spline of degree $p$ (piecewise polynomial).
-  
-  \item
-  \emph{Derivative:}
-  At the \term{knots} $k = 0, \dotsc, p + 1$,
-  $\cardbspl{p}$ is $(p - 1)$ times continuously differentiable (if $p \ge 1$).
-  The derivative can be computed by differentiating
-  \eqref{eq:cardinalBSpline}:
-  \begin{equation}
-    \label{eq:cardinalBSplineDerivative}
-    \frac{\diff}{\dx} \cardbspl{p}(x)
-    = \cardbspl{p-1}(x) - \cardbspl{p-1}(x-1),\quad
-    x \in \real.
-  \end{equation}
-  
-  \item
-  \emph{Integral}:
-  The integral of $\cardbspl{p}$ is normalized, i.e.,
-  \begin{equation}
-    \int_{\real} \cardbspl{p}(x) \dx = 1.
-  \end{equation}
-  
-  \item
-  \emph{Convolution:}
-  The integral in the definition of $\cardbspl{p}$
-  is the convolution $\cardbspl{p-1} \convolution \cardbspl{0}$
-  of the B-spline $\cardbspl{p-1}$
-  of degree $p - 1$ with the B-spline $\cardbspl{0}$ of degree zero.
-  
-  \item
-  \emph{Generalization:}
-  As a special case, $\cardbspl{1}$ is a hat function interpolating the data
-  $\{(k, \kronecker{k}{1}) \mid k \in \integer\}$.
-  For $p \to \infty$, the normalized cardinal B-splines converge
-  pointwise to the standard Gaussian function
-  $\cardbspl{\infty}(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
-  \footnote{%
-    This can also be seen as a consequence of the central limit theorem
-    applied to uniformly distributed random variables.
-    The pointwise convergence of the probability density functions
-    can be proved from the convergence
-    in distribution using a converse to Scheffé's theorem
-    \cite{Boos85Converse}.%
-  }
-  \begin{equation}
-    \lim_{p \to \infty}
-    c^p \cardbspl{p}(c^p x + \tfrac{p+1}{2})
-    = \cardbspl{\infty}(x),\quad
-    c^p := \sqrt{\frac{p+1}{12}},\quad
-    x \in \real.
-  \end{equation}
-\end{enumerate}
-The cardinal B-splines of the first degrees are shown in
-\cref{fig:cardinalBSpline}.
-Due to the convolution property,
-which is visualized with the flip book animation in the bottom left corner
-of the even-numbered pages of this thesis,
-cardinal B-splines of degree $p \ge 2$ are ``smoothed versions''
-of the hat function.
-
-\begin{figure}
-  \includegraphics{cardinalBSpline_1}%
-  \caption[%
-    Cardinal B-splines%
-  ]{%
-    Cardinal B-splines $\cardbspl{p}$ up to quintic degree $p = 5$.%
-  }%
-  \label{fig:cardinalBSpline}%
-\end{figure}
 
 \begin{figure}
   \includegraphics{cardinalBSplineProps_1}%
@@ -169,10 +75,111 @@ of the hat function.
   \label{fig:cardinalBSplineProps}%
 \end{figure}
 
+\begin{enumerate}
+  \setlength\itemsep{0.0em}
+  \item
+  \emph{Compact support:}
+  The support of $\cardbspl{p}$ is given by $\supp \cardbspl{p} = \clint{0, p + 1}$.
+  
+  \item
+  \emph{Bounds and symmetry:}
+  The cardinal B-spline $\cardbspl{p}$ is non-negative and bounded from above by one.
+  It is symmetric with respect to $x = \tfrac{p+1}{2}$, i.e.,
+  $\cardbspl{p}(x) = \cardbspl{p}(p + 1 - x)$.
+  
+  \item
+  \emph{Recursion:}
+  The cardinal B-spline $\cardbspl{p}$ ($p \ge 1$)
+  satisfies the following recurrence relation
+  (which can be used as an alternative definition):
+  \begin{equation}
+    \cardbspl{p}(x)
+    = \frac{x}{p} \cardbspl{p-1}(x) + \frac{p+1-x}{p} \cardbspl{p-1}(x-1).
+  \end{equation}
+  
+  \item
+  \emph{Spline:}
+  On every \term{knot interval} $\hopint{k, k+1}$ for $k = 0, \dotsc, p$,
+  $\cardbspl{p}$ is a polynomial of degree~$p$, i.e.,
+  $\cardbspl{p}$ is a spline of degree $p$ (piecewise polynomial).
+  
+  \item
+  \emph{Derivative:}
+  At the \term{knots} $k = 0, \dotsc, p + 1$,
+  $\cardbspl{p}$ is $(p - 1)$ times continuously differentiable (if $p \ge 1$).
+  The derivative can be computed by differentiating
+  \eqref{eq:cardinalBSpline}:
+  \begin{equation}
+    \label{eq:cardinalBSplineDerivative}
+    \frac{\diff}{\dx} \cardbspl{p}(x)
+    = \cardbspl{p-1}(x) - \cardbspl{p-1}(x-1),\quad
+    x \in \real.
+  \end{equation}
+  
+  \item
+  \emph{Integral}:
+  The B-spline $\cardbspl{p}$ is normalized with respect to its integral, i.e.,
+  $\int_{\real} \cardbspl{p}(x) \dx = 1$.
+  %\vspace{-0.5em}
+  %\begin{equation}
+  %  \int_{\real} \cardbspl{p}(x) \dx = 1.
+  %\end{equation}
+  
+  \item
+  \emph{Convolution:}
+  The integral in the definition of $\cardbspl{p}$
+  is the convolution $\cardbspl{p-1} \convolution \cardbspl{0}$
+  of the B-spline $\cardbspl{p-1}$
+  of degree $p - 1$ with the B-spline $\cardbspl{0}$ of degree zero.
+  
+  \item
+  \emph{Generalization:}
+  As a special case, $\cardbspl{1}$ is a hat function interpolating the data
+  $\{(k, \kronecker{k}{1}) \mid k \in \integer\}$.
+  For $p \to \infty$, the normalized cardinal B-splines converge
+  pointwise to the standard Gaussian function
+  $\cardbspl{\infty}(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
+  \footnote{%
+    This can also be seen as a consequence of the central limit theorem
+    applied to uniformly distributed random variables.
+    The pointwise convergence of the probability density functions
+    can be proved from the convergence
+    in distribution using a converse to Scheffé's theorem
+    \cite{Boos85Converse}.%
+  }
+  \vspace{-0.5em}
+  \begin{equation}
+    \lim_{p \to \infty}
+    c^p \cardbspl{p}(c^p x + \tfrac{p+1}{2})
+    = \cardbspl{\infty}(x),\quad
+    c^p := \sqrt{\frac{p+1}{12}},\quad
+    x \in \real.
+  \end{equation}
+\end{enumerate}
+
+The cardinal B-splines of the first degrees are shown in
+\cref{fig:cardinalBSpline}.
+Due to the convolution property,
+cardinal B-splines of degree $p \ge 2$ are ``smoothed versions''
+of the hat function.
+This is shown in the flip book animation in the bottom left corner
+of the even-numbered pages of this thesis.
+
+\begin{figure}
+  \includegraphics{cardinalBSpline_1}%
+  \caption[%
+    Cardinal B-splines%
+  ]{%
+    Cardinal B-splines $\cardbspl{p}$ up to quintic degree $p = 5$.%
+  }%
+  \label{fig:cardinalBSpline}%
+\end{figure}
+
 \paragraph{Definition of uniform hierarchical B-splines}
 
 \usenotation{Ëp}
-We can use the cardinal B-spline $\cardbspl{p}$ as a ``parent function'' to
+As for the hat functions in \cref{chap:20sparseGrids},
+we can use the cardinal B-spline $\cardbspl{p}$ as a ``parent function'' to
 define the uniform hierarchical B-spline
 $\bspl{l,i}{p}\colon \clint{0, 1} \to \real$ of level~$l \in \natz$ and index
 $i \in \hiset{l}$ via an affine parameter transformation
@@ -250,16 +257,18 @@ the middle between two subsequent grid points:
   \gp{l,i+p/2} + \frac{\ms{l}}{2}.
 \end{equation}
 This fact has many adverse implications on the hierarchical basis.
-Most crucial among these are
+The most crucial implication is
 that for even degrees $p$,
-the hierarchical splitting \eqref{eq:hierSplittingUV} would not hold,
-non-uniform hierarchical B-splines would not be able to be defined as
-simple as for odd degrees, and
+the hierarchical splitting \eqref{eq:hierSplittingUV} does not hold.
+Furthermore,
+we would not be able to define non-uniform hierarchical B-splines as
+simple as for odd degrees and
 fundamental splines would not be defined at all
 (as we will see in \cref{sec:443fundamentalSplines}).
-Therefore, and
-as the odd degrees include the hat function case~($p = 1$) and the
-most commonly applied cubic degree~($p = 3$),
+Additionally,
+odd degrees include the hat function case~($p = 1$) and the
+most commonly applied cubic degree~($p = 3$).
+Therefore,
 it is reasonable to restrict ourselves to odd degrees
 for the rest of the thesis.
 
@@ -344,8 +353,8 @@ as on every knot interval, the spline is a polynomial of degree $\le p$
 and therefore, there must be $p + 1$ degrees of freedom.
 Outside of $\spldomain{\knotseq}{p}$, there are too few relevant B-splines
 to span the spline space.
-This important observation,
-which is visualized in \cref{fig:splineSpaceUniform},
+This fact,
+which is shown in \cref{fig:splineSpaceUniform},
 forces us to restrict the nodal space and the hierarchical subspaces to
 $\spldomain{\knotseq}{p}$:
 
@@ -465,8 +474,7 @@ $\restrictspace{\hsbspl{l-1}{p}}{\rspldomain{l}{p}}$
 is not contained in $\restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$
 for even degrees $p$.
 Therefore, the hierarchical splitting equation \eqref{eq:hierSplittingUV}
-does not hold, which is the main reason for us to restrict the
-theoretic considerations in this thesis to odd $p$.
+does not hold.
 
 \begin{restatable}[hierarchical B-splines are linearly independent]{%
   proposition%
@@ -558,8 +566,7 @@ when $x$ is ``near'' the boundary.
 As in \cite{Pflueger10Spatially},
 we append $\bspl{l,1}{p}$ with
 B-splines $\bspl{l,i}{p}$ with index $i \le 0$ and
-use the so-called Marsden's identity to compute the corresponding
-coefficients.
+use \term{Marsden's identity} to compute the corresponding coefficients.
 The identity enables us to explicitly compute the B-spline coefficients
 of an arbitrary polynomial of degree $\le p$ by giving an explicit formula
 for the B-spline coefficients of shifted monomials $({\cdot} - y)^p$.
@@ -693,23 +700,27 @@ are defined as
 \begin{equation}
   \ccgp{l,i}
   := \frac{1 - \cos(\pi \gp{l,i})}{2},\quad
-  i = 0, \dotsc, 2^l.
+  i = 0, \dotsc, 2^l,
 \end{equation}
-Chebyshev points are the locations of the extrema of the
-Chebyshev polynomials $T_{2^l}$, which are defined as
-$T_{2^l}\colon \clint{0, 1} \to \real$,
-$T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$ \cite{Xu16Chebyshev}.%
+see \cite{Xu16Chebyshev} for example.
+Chebyshev points are the locations of the extrema%
 \footnote{%
   The literature sometimes uses the name ``Chebyshev points'' for
-  the roots of $T_{2^l}$, which are closely connected to the extrema.
+  the roots of $T_{2^l}$, which are closely connected with the extrema.
   One way to distinguish them is to call the extrema
   ``Chebyshev--Lobatto points'' and the roots
   ``Chebyshev--Gauss points'' \cite{Xu16Chebyshev}.%
 }
-They are obtained by dividing a semicircle into $2^l$ equally sized
+of the Chebyshev polynomials $T_{2^l}$, which are defined as
+$T_{2^l}\colon \clint{0, 1} \to \real$,
+$T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$.
+They are obtained
+geometrically by dividing a semicircle into $2^l$ equally sized
 segments and subsequently orthogonally projecting the
 segment endpoints onto the diameter
 (see \cref{fig:pointSplittingChebyshev}).
+Analytically, they are determined by minimizing
+the interpolation error term in polynomial interpolation.
 The most practical use of Chebyshev points is in
 polynomial interpolation to avoid Runge's phenomenon and in
 numerical integration (quadrature), resulting in the
@@ -743,8 +754,6 @@ grid point density near the boundary
 If we want to use Chebyshev points as grid points for sparse grids,
 we have to employ an appropriate basis to ensure that interpolation
 is still possible.
-Fortunately, \cref{def:nonUniformBSpline} specifies B-splines for non-uniform
-knot sequences.
 
 \paragraph{Hierarchical Clenshaw--Curtis B-splines}
 
@@ -827,7 +836,7 @@ We define \term{modified hierarchical Clenshaw--Curtis B-splines}
 $\bspl[\cc,\modified]{l,i}{p}$ using the
 same method as in \eqref{eq:modifiedBSplineDefinition}.
 Here, the second derivative of $\bspl[\cc,\modified]{l,1}{p}$
-does not vanish exactly at $x = 0$ even for degrees $p \le 5$,
+does not vanish at $x = 0$ even for degrees $p \le 5$,
 as the formula \eqref{eq:modifiedBSplineConstruction}
 derived from \thmref{lemma:marsden} assumes uniform knots.
 However, since most of the B-spline knots in the summation formula
@@ -840,12 +849,12 @@ of the components $\bspl[\cc]{l,i'}{p}$
 dynamically with Marsden's identity using the correct Chebyshev knots
 in \eqref{eq:marsden}.
 
-Please note that our framework permits arbitrary grid point distributions
+Note that our framework permits arbitrary grid point distributions
 $\gp{l,i}^\ast$,
 as long as two requirements are met:
 First, their number should grow exponentially
 (i.e., there are $2^l + 1$ points $\gp{l,i}^\ast$ in each level $l \in \natz$),
 and second, they should be nested
 (i.e., \eqref{eq:rewriteGridPoint} holds).
-Appropriate non-uniform B-spline bases could be defined analogously
+Appropriate non-uniform B-spline bases can be defined analogously
 to Clenshaw--Curtis B-splines.

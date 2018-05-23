@@ -7,7 +7,7 @@ only holds when restricting the function spaces to
 $\rspldomain{l}{p} =
 \clint{\tfrac{p-1}{2} \ms{l},\; 1 - \tfrac{p-1}{2} \ms{l}}$,
 which is a proper subset of the domain $\clint{0, 1}$ (for $p > 1$).
-The implications of this fact on the approximation quality
+As we will see, the implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
 In this section, we study the underlying reasons of the restriction and
 we introduce a new hierarchical B-spline basis
@@ -15,7 +15,7 @@ that does not suffer from this issue.
 
 
 
-\subsection{Approximation Power of Uniform Hierarchical B-Splines}
+\subsection{Approximation Quality of Uniform Hierarchical B-Splines}
 \label{sec:321approximation}
 
 \todo{add references to Vazipfl paper if published}
@@ -24,9 +24,9 @@ that does not suffer from this issue.
 
 Splines are a piecewise generalization of polynomials.
 Approximation spaces spanned by splines of degree $p$ should
-at least contain all polynomials of degree $\le p$,
-since the ``approximation power'' of splines should be better than
-that of polynomials.
+at least contain all polynomials of degree $\le p$.
+%since the ``approximation quality'' of splines should be better than
+%that of polynomials.
 Unfortunately, this statement is not true for uniform B-splines
 $\bspl{l,i}{p}$ as we have defined them in the last section.
 A counterexample is given in \cref{fig:nakInterpolation},
@@ -62,8 +62,8 @@ for other non-polynomial functions as well.
   ]{%
     Hierarchical cubic B-splines $\bspl{l',i'}{p}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
-    fail to replicate the cubic polynomial
-    $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$
+    fail to replicate a cubic polynomial $\objfun$
+    (here: $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$)
     when interpolating on the grid of level $l = 3$.%
   }%
   \label{fig:nakInterpolation}%
@@ -96,7 +96,7 @@ which is why $\objfun$ and $\fgintp{l}$ differ inside $\rspldomain{l}{p}$.
 \paragraph{Schoenberg--Whitney conditions}
 
 Formally, the unique existence of an interpolating spline is
-described by the so-called Schoenberg--Whitney conditions:
+described by the \term{Schoenberg--Whitney conditions}:
 
 \begin{proposition}[Schoenberg--Whitney conditions]
   \label{prop:schoenbergWhitneyConditions}
@@ -196,10 +196,9 @@ interior knot $\gp{l,1} = \ms{l}$ and $\gp{l,2^l-1} = 1 - \ms{l}$
 \cite{Hoellig13Approximation}.
 This means that
 $\gp{l,1}$ and $\gp{l,2^l-1}$ are effectively removed from the
-knot sequence (hence ``not-a-knot''),
-as this is equivalent to requiring that
+knot sequence, as this is equivalent to requiring that
 $\spl$ is a cubic polynomial on $\clint{0, \gp{l,2}}$ and
-$\clint{\gp{l,2^l-2}, 1}$.
+$\clint{\gp{l,2^l-2}, 1}$ (hence ``not-a-knot'').
 For general degree $p$ (for which we need $(p - 1)$ conditions),
 we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
 is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
@@ -427,14 +426,14 @@ As $\bspl[\nak]{l,i}{p}$ and $\bspl[\nak]{l+1,i}{p}$
 use the same knots up to an affine transformation for $l$ large enough
 ($l \ge 3$ suffices for $p = 3$),
 only a number of special cases for coarse levels $l$ must be implemented.
-In other words, the not-a-knot approach is ``minimally invasive''
-with respect to an implementation that already uses uniform B-splines.
+%In other words, the not-a-knot approach is ``minimally invasive''
+%with respect to an implementation that already uses uniform B-splines.
 
 \paragraph{Hierarchical splitting}
 
 The main benefit of the hierarchical not-a-knot B-spline basis
 is the validity of the hierarchical splitting.
-Again usual, we define $\nsbspl[\nak]{l}{p}$ and $\hsbspl[\nak]{l}{p}$
+As usual, we define $\nsbspl[\nak]{l}{p}$ and $\hsbspl[\nak]{l}{p}$
 as the nodal and the hierarchical not-a-knot subspace of level $l$,
 respectively.
 
@@ -650,7 +649,7 @@ We can use exactly the same approach as in
 not-a-knot basis functions with their non-uniform not-a-knot counterparts
 (not-a-knot Clenshaw--Curtis B-splines in the above example).
 The hierarchical not-a-knot Clenshaw--Curtis B-spline basis of
-cubic degree and the corresponding modified functions are plotted in
+cubic degree and the corresponding modified functions are shown in
 \cref{fig:clenshawCurtisNotAKnotBSpline}.
 
 \begin{figure}

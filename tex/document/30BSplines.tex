@@ -28,14 +28,17 @@ such as higher-degree splines \cite{Sickel11Spline}
 or the piecewise polynomial basis by Bungartz \cite{Bungartz98Finite}.
 Second, we cannot compute globally continuous gradients of the
 interpolant of a smooth objective function,
-if we use non-smooth basis functions
-(which include the piecewise polynomials by Bungartz).
+if we use non-smooth basis functions%
+\footnote{%
+  \dots{} which include the hat function basis as well as
+  the piecewise polynomials by Bungartz.%
+}.
 However, the availability of continuous gradients is
 crucial in gradient-based optimization,
 which we target in this thesis.
 In this chapter, we define a hierarchical and
 higher-order B-spline basis
-(generalizing the well-known hat functions)
+as a generalization of the well-known hat functions
 to obtain both higher-order approximations
 and continuous derivatives.
 
@@ -43,15 +46,16 @@ The first to study B-splines was Schoenberg in 1946
 \cite{Schoenberg46Contributions},
 but he claimed that they had already been known to Laplace
 \cite{Boor76Splines}.
-It was also Schoenberg who coined the term ``B-splines''
-\cite{Schoenberg67Spline}.
-Research and industry recognized the possibilities of B-splines when
-the \fem, which is still the most significant application of B-splines,
-emerged in the 1960s.
+It was also Schoenberg who coined the term ``B-splines'',
+which is short for ``basis splines'' \cite{Schoenberg67Spline}.
 De~Boor pioneered B-splines, developed basic algorithms, and
 proved fundamental theoretical results \cite{Boor72Calculating}.
-Researchers have applied B-splines in
-\fem \cite{Hoellig03Finite} and \iga \cite{Hoellig12Finite},
+Research and industry recognized the possibilities of B-splines when
+the \fem emerged in the 1960s.
+The \fem remains one of the driving forces behind the research of
+B-splines \cite{Hoellig03Finite} as the recent rise of \iga shows
+\multicite{Cottrell09Isogeometric,Hoellig12Finite}.
+Researchers have applied B-splines also in
 geometric modeling with \nurbs
 \multicite{Cohen01Geometric,Hoellig13Approximation},
 financial mathematics \cite{Pflueger10Spatially},
