@@ -25,11 +25,13 @@
 about the algorithmic challenges
 that hierarchical bases of B-spline type (or even of general type) pose
 on sparse grids.
-As we are usually not able to apply the sparse grid algorithms
-that were designed for hat functions, we have to generalize these algorithms
-to higher-order B-splines or even to arbitrary tensor product basis functions.
-We learn in this chapter that the main problem is the larger support
-of higher-order B-splines (degree $p > 1$) when compared to degree $p = 1$.
+Usually, we are not able to directly apply the sparse grid algorithms
+that were designed for hat functions $\bspl{l,i}{1}$.
+Hence, we have to generalize these algorithms
+to higher-order B-splines $\bspl{l,i}{p}$
+or even to arbitrary tensor product basis functions.
+The main problem is the larger support
+of higher-order B-splines when compared to degree $p = 1$.
 Unfortunately, it is not possible to simply ``transform'' the basis
 functions $\bspl{l,i}{p}$ to shrink the size of their support
 to the size of $\supp \bspl{l,i}{1}$.
@@ -40,7 +42,7 @@ Some algorithms are already known from the literature,
 while others are new.
 In any case, we give correctness results for every algorithm.
 We take hierarchization as the example problem for our algorithms,
-but the algorithms can be generalized to any linear operator.
+but the ideas of the algorithms can be generalized to any linear operator.
 Furthermore, most algorithms are not tailored for B-splines $\bspl{l,i}{p}$,
 but applicable for general tensor product basis functions $\basis{l,i}$.
 The types of feasible approaches for algorithms
@@ -54,14 +56,14 @@ easier the corresponding algorithms will be.
 and defines the notation used in this chapter.
 The remaining four sections treat the three different cases of grids:
 First, \cref{sec:42fullGrids} deals with full grids to formalize and repeat
-the well-known \up.
+the well-known \up. % remove space below if this is removed
 Second, \cref{sec:43dimAdaptive} studies algorithms for
 sparse grids that have been generated dimensionally adaptively.
 Third, \cref{sec:44spatAdaptiveBFS} and \cref{sec:45spatAdaptiveUP}
-treat the for us most important case
-of arbitrary (spatially adaptive) sparse grids.
+treat arbitrary (spatially adaptive) sparse grids,
+which is for us the most interesting case.
 \Cref{sec:44spatAdaptiveBFS} employs \bfs for hierarchization,
-while \cref{sec:45spatAdaptiveUP} uses the \up.
+while \cref{sec:45spatAdaptiveUP} uses the \up\periodafterPspace.
 
 This original chapter is the main theoretical contribution of this thesis.
 Although the unidirectional principle in \cref{sec:42fullGrids} and
