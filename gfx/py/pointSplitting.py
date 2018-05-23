@@ -9,7 +9,7 @@ import helper.grid
 topMargin = 0.15
 margin = 0.1
 textMarginX = 0.05
-circleColor = 3 * [0.8]
+circleColor = 3 * [0.6]
 n = 4
 
 for q in range(2):
