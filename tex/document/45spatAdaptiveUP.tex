@@ -47,7 +47,7 @@ Below, we will specify a sufficient criterion for the ``closeness''.
 
 \paragraph{Iterative refinement}
 
-Under these assumptions, we can apply the procedure given in
+Under the above two assumptions, we can apply the procedure given in
 \cref{alg:iterativeRefinement}.
 The algorithm is equivalent to the well-known method of
 \term{iterative refinement}, which has been developed to
@@ -64,7 +64,7 @@ of the method of residual interpolation
     \Function{$\vlinout =$ iterativeRefinement}{%
       $\vlinin$, $\vlinout[(0)]$%
     }
-      \State{$\*r^{(0)} \gets \vlinin - \linop^{-1}[\vlinout[(0)]]$}
+      \State{$\*r^{(0)} \gets \vlinin - \linop^{-1}\vlinout[(0)]$}
       \Comment{initial residual}%
       \For{$m = 0, 1, 2, \dotsc$}
         \State{$\vlinout[(m+1)] \gets \vlinout[(m)] + \linop' \*r^{(m)}$}
@@ -93,7 +93,7 @@ of the method of residual interpolation
 
 The loop in \cref{alg:iterativeRefinement} has to be terminated
 after some iterations.
-The following lemma allows to use a stopping criterion based on the
+The following simple lemma allows to use a stopping criterion based on the
 size of the residual $\*r^{(m)}$.
 
 \begin{shortlemma}[equivalent convergence for iterative refinement]
@@ -130,7 +130,8 @@ solution, which we denote with $\vlinout[\ast] := \linop \vlinin$.
   with an arbitrary operator matrix norm $\norm{\cdot}$ and the
   identity operator $\idop$,
   then $\vlinout[(m)] \to \vlinout[\ast]$ for $m \to \infty$
-  in \cref{alg:iterativeRefinement}.
+  in \cref{alg:iterativeRefinement}
+  for every initial solution $\vlinout[(0)]$.
 \end{proposition}
 
 \begin{proof}
@@ -152,7 +153,7 @@ solution, which we denote with $\vlinout[\ast] := \linop \vlinin$.
     \sum_{m'=0}^m (\idop - \linop^{-1} \linop')^{m'} \*r^{(0)},
   \end{equation}
   where $(\idop - \linop^{-1} \linop')^{m'} \*r^{(0)} = \*r^{(m')}$.
-  For $m \to \infty$ and the assumption on
+  For $m \to \infty$ and with the assumption on
   $\norm{(\idop - \linop^{-1} \linop')^m}$,
   the sum converges to the Neumann series
   $\sum_{m'=0}^\infty (\idop - \linop^{-1} \linop')^{m'}
@@ -161,7 +162,7 @@ solution, which we denote with $\vlinout[\ast] := \linop \vlinin$.
   In this case, we infer that the limit of $\vlinout[(m)]$ is given by
   \begin{equation}
     \vlinout[(0)] + \linop' \cdot (\linop')^{-1} \linop \*r^{(0)}
-    = \vlinout[(0)] + \linop \vlinin - \linop^{-1} \vlinout[(0)]
+    = \vlinout[(0)] + \linop \vlinin - \linop \linop^{-1} \vlinout[(0)]
     = \linop \vlinin
     = \vlinout[\ast],
   \end{equation}
@@ -173,7 +174,7 @@ is quite strong, as it can be shown that $\limsup_{m \to \infty}
 \sqrt[m]{\norm{(\idop - \linop^{-1} \linop')^m}} \le 1$ is necessary for
 convergence.
 Unfortunately, in the case of hierarchization with B-splines,
-numerical experiments showed that
+numerical experiments show that
 this condition is only met for low dimensionalities $d$ and low
 B-spline degrees $p$.
 \Cref{alg:iterativeRefinement} generally diverges
@@ -186,7 +187,8 @@ for higher dimensionalities or higher degrees.
 
 To find the second algorithm that we present in this section,
 we study why we cannot directly apply the \up
-(as introduced in \cref{sec:42fullGrids}) on spatially adaptive sparse grids.
+(as introduced in \cref{alg:unidirectionalPrinciple})
+on spatially adaptive sparse grids.
 As before, we denote with $\liset$ the level-index set of
 the spatially adaptive sparse grid (see \cref{sec:41problem}).
 
@@ -196,17 +198,17 @@ subsequently applies one-dimensional operators
 $\upopuv{t_j}{\lisetpole}\colon \real^{\setsize{\lisetpole}} \to
 \real^{\setsize{\lisetpole}}$
 on the poles $\lisetpole$ of the sparse grid at hand,
-looping over a permutation $t_1, \dotsc, t_d$
+iterating over a permutation $t_1, \dotsc, t_d$
 of the dimensions $1, \dotsc, d$.
 We recall the pole equivalence relation $\samepole{t_j}$
-from \cref{eq:poleEquivalenceRelation}, defined on $\liset$:
+from \cref{eq:poleEquivalenceRelation}.
+Two points $\*k', \*k'' \in \liset$ are $\samepole{t_j}$-equivalent,
+if $\*k'$ is contained in the pole through $\*k''$
+with respect to the $t_j$-th dimension:
 \begin{equation}
   \*k' \samepole{t_j} \*k'' \iff \*k'_{-t_j} = \*k''_{-t_j},\quad
   \*k', \*k'' \in \liset.
 \end{equation}
-Two points $\*k', \*k'' \in \liset$ are equivalent with respect to
-$\samepole{t_j}$, if $\*k'$ is contained in the pole through $\*k''$
-with respect to the $t_j$-th dimension.
 
 \paragraph{Operators for the unidirectional principle}
 
@@ -232,55 +234,60 @@ where $(\upop{t_j})_{\*k'',\*k'}$ denotes the entry of row $\*k''$
 and column $\*k'$ of the matrix corresponding to $\upop{t_j}$
 (similar for $(\upopuv{t_j}{\lisetpole})_{k''_{t_j},k'_{t_j}}$).
 This is because the poles $\lisetpole$ are pairwise disjoint
-as equivalence classes.
+equivalence classes.
 Consequently, every point $\*k$ is only acted upon by a single
 one-dimensional operator $\upopuv{t_j}{\lisetpole}$,
-namely the one where $\lisetpole$ is the
-pole $\eqclass{\*k}{\samepole{t_j}}$ through $\*k$.
+namely the one with $\lisetpole = \eqclass{\*k}{\samepole{t_j}}$.
 This leads to the block-diagonal structure
 of $\upop{t_j}$ given in \eqref{eq:upopEntries},
 if the rows of the matrix of $\upop{t_j}$
 are grouped by poles $\lisetpole$ and the columns are arranged accordingly.
 
-\paragraph{Assumptions}
-
-We make two assumptions on $\linop$ and $\upopuv{t_j}{\lisetpole}$
-for the remaining considerations:
-\begin{itemize}
-  \item
-  The operator $\linop$ has tensor product structure.
-  This means that
-  \begin{equation}
-    \label{eq:tensorProductOperator}
-    (\linop)_{\*k'',\*k'}
-    =
-    (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
-    \dotsm
-    (\upopuv{t_d}{\eqclass{\chain{d}}{\samepole{t_d}}})_{k''_{t_d},k'_{t_d}},
-    \quad
-    \*k', \*k'' \in \liset,
-  \end{equation}
-  where $(\chain{0}, \dotsc, \chain{d})$ is the chain
-  from $\*k'$ to $\*k''$ with respect to $1, \dotsc, d$.
-  
-  \item
-  The operators $\linop$ and are $\upopuv{t_j}{\lisetpole}$ invertible.
-  In this case, $\upop{t_j}$ is also invertible and
-  $\upopinv{t_j}$ is given by the block-diagonal matrix of
-  the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
-\end{itemize}
-Both assumptions are satisfied by dehierarchization
-operators $\intpmat$ due to the tensor product structure and the
-linear independence of the hierarchical basis functions.
-However, we formulate the following results for arbitrary
-linear invertible tensor product operators $\linop$.
+%We make two assumptions on $\linop$ and $\upopuv{t_j}{\lisetpole}$
+%for the remaining considerations:
+%\begin{itemize}
+%  \item
+%  The operator $\linop$ has tensor product structure.
+%  This means that
+%  \begin{equation}
+%    \label{eq:tensorProductOperator}
+%    (\linop)_{\*k'',\*k'}
+%    =
+%    (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
+%    \dotsm
+%    (\upopuv{t_d}{\eqclass{\chain{d}}{\samepole{t_d}}})_{k''_{t_d},k'_{t_d}},
+%    \quad
+%    \*k', \*k'' \in \liset,
+%  \end{equation}
+%  where $(\chain{0}, \dotsc, \chain{d})$ is the chain
+%  from $\*k'$ to $\*k''$ with respect to $1, \dotsc, d$.
+%  
+%  \item
+%  The operators $\linop$ and are $\upopuv{t_j}{\lisetpole}$ invertible.
+%  In this case, $\upop{t_j}$ is also invertible and
+%  $\upopinv{t_j}$ is given by the block-diagonal matrix of
+%  the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
+%\end{itemize}
+%Both assumptions are satisfied by dehierarchization
+%operators $\intpmat$ due to the tensor product structure and the
+%linear independence of the hierarchical basis functions.
+%However, we formulate the following results for arbitrary
+%linear invertible tensor product operators $\linop$.
 
 \paragraph{Correctness and duality of the unidirectional principle}
 
-Now, we can describe the whole \up of
+For the remaining considerations, we assume that
+the operators $\linop$ and $\upopuv{t_j}{\lisetpole}$ are invertible.
+In this case, $\upop{t_j}$ is also invertible and
+$\upopinv{t_j}$ is given by the block-diagonal matrix of
+the inverses of the blocks $\upopuv{t_j}{\lisetpole}$ of $\upop{t_j}$.
+This satisfied by dehierarchization operators $\intpmat$ due to the
+linear independence of the hierarchical basis functions.
+
+We can now describe the whole \up of
 \cref{alg:unidirectionalPrinciple} as the operator
 $\upop{t_1,\dotsc,t_d}\colon \real^{\setsize{\liset}} \to
-\real^{\setsize{\liset}}$ given by:
+\real^{\setsize{\liset}}$ given by
 \begin{equation}
   \label{eq:upopProduct}
   \upop{t_1,\dotsc,t_d}
@@ -297,12 +304,14 @@ Note that this relation is not satisfied in general,
 especially for B-spline hierarchization with the operator
 $\linop = \intpmatinv$.
 However, for operators like these, whose inverse
-$\linopinv = \intpmat$ can be much easier described and applied,
+$\linopinv = \intpmat$ can be described and applied much easier,
 we can make use of the so-called \term{duality of the \up}:
 
 \begin{lemma}[duality of the unidirectional principle]
   \label{lemma:dualityUnidirectionalPrinciple}
-  The \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
+  Let the operators $\linop$ and $\upopuv{t_j}{\lisetpole}$ be invertible
+  for all poles $\lisetpole$ in $\liset$.
+  Then the \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
   if and only if the \up is correct for $\linopinv$ and $(t_d, \dotsc, t_1)$.
 \end{lemma}
 
@@ -360,8 +369,7 @@ $\chain{j'-1} \samepole{t_{j'}} \chain{j'}$ for $j' = 1, \dotsc, j$.
 two and three dimensions.
 As it is shown in \cref{fig:chainDefinition2},
 the order $(t_1, \dotsc, t_j)$ of the dimensions is important
-for the statement whether the grid contains the chain from
-$\*k'$ to $\*k''$.
+for whether the grid contains the chain from $\*k'$ to $\*k''$ or not.
 The grid must contain all intermediate points, otherwise
 it is not a chain.
 
@@ -389,10 +397,15 @@ it is not a chain.
   \caption[%
     Examples for the definition of chains%
   ]{%
-    Examples for chains in two- and three-dimensional
-    sparse grids \emph{(left, right)}.
-    There is no chain from $\chain{0}$ to $\chain{2}$ in the center grid,
-    because the corresponding chain point $\chain{1}$ is missing in the grid.%
+    Examples for chains in two and three dimensions.
+    \emph{Left:} A chain from $\chain{0}$ to $\chain{2}$
+    with respect to $(t_1, t_2) = (2, 1)$ in a two-dimensional sparse grid.
+    \emph{Center:}
+    With respect to the reverse permutation
+    $(t_1, t_2) = (1, 2)$ of the dimensions,
+    there is no chain from $\chain{0}$ to $\chain{2}$,
+    because the corresponding chain point $\chain{1}$ is missing in the grid.
+    \emph{Right:} A chain in three dimensions.%
   }%
   \label{fig:chainDefinition}%
 \end{figure}
@@ -445,7 +458,9 @@ existence of a chain from $\*k'$ to $\*k''$:
 \end{proof}
 
 The two lemmas can now be used to prove the following characterization
-of the correctness of the UP:
+of the correctness of the \up\punctfix{.}
+Here, we need an additional assumption on the structure of the
+operator $\linop$, which we call \term{tensor product structure}:
 
 \begin{restatable}[characterization of the correctness of the UP]{%
   proposition%
@@ -453,7 +468,18 @@ of the correctness of the UP:
   propCorrectnessUPCharacterization%
 }
   \label{prop:correctnessUPCharacterization}
-  The \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
+  Let $\linop$ have tensor product structure:
+  For all $\*k', \*k'' \in \liset$ and chains
+  $(\chain{0}, \dotsc, \chain{d})$ from $\*k'$ to $\*k''$
+  with respect to $(t_1, \dotsc, t_d)$,
+  we assume that
+  \begin{equation}
+    \label{eq:tensorProductOperator}
+    (\linop)_{\*k'',\*k'}
+    = \prod_{j=1}^d
+    (\upopuv{t_j}{\eqclass{\chain{j}}{\samepole{t_j}}})_{k''_{t_j},k'_{t_j}}.
+  \end{equation}
+  Then the \up is correct for $\linop$ and $(t_1, \dotsc, t_d)$
   if and only if the grid $\liset$ contains the chain from $\*k'$ to $\*k''$
   with respect to $(t_1, \dotsc, t_d)$ for all $\*k', \*k'' \in \liset$
   for which $(\linop)_{\*k'',\*k'} \not= 0$.
@@ -482,7 +508,7 @@ the following corollary:
     
     \item
     The grid $\liset$ contains the chain from $\*k'$ to $\*k''$
-    with respect to $(t_1, \dotsc, t_d)$ for all $\*k', \*k'' \in \liset$
+    with respect to $(t_d, \dotsc, t_1)$ for all $\*k', \*k'' \in \liset$
     for which $\basis{\*k'}(\gp{\*k''}) \not= 0$.
   \end{itemize}
 \end{corollary}
@@ -492,6 +518,23 @@ the following corollary:
   \cref{lemma:dualityUnidirectionalPrinciple} and
   \cref{prop:correctnessUPCharacterization},
   applied to the dehierarchization operator $\linop = \intpmat$.
+  
+  The assumption of \cref{lemma:dualityUnidirectionalPrinciple}
+  is satisfied:
+  $\linop$ and $\upopuv{t_j}{\lisetpole}$ are invertible
+  for all poles $\lisetpole$ in $\liset$
+  due to the uniqueness of the interpolant in $d$ and in one dimension
+  (linear independence of the basis functions).
+  In addition, the assumption of \cref{prop:correctnessUPCharacterization}
+  is satisfied, since
+  \begin{equation}
+    (\linop)_{\*k'',\*k'}
+    = (\intpmat)_{\*k'',\*k'}
+    = \prod_{j=1}^d \basis{k'_{t_j}}(\gp{k''_{t_j}})
+    = \prod_{j=1}^d
+    (\upopuv{t_j}{\eqclass{\chain{j}}{\samepole{t_j}}})_{k''_{t_j},k'_{t_j}}
+  \end{equation}
+  due to the tensor product basis functions.
 \end{proof}
 
 \paragraph{Inserting chain points}
@@ -502,20 +545,20 @@ if we insert all missing chain points that are specified by
 \cref{prop:correctnessUPCharacterization} into the grid.
 
 For the case $p = 1$ of piecewise linear
-standard B-splines $\bspl{\*l,\*i}{1}$, the conditions in
+standard B-splines $\bspl{\*l,\*i}{1}$, the conditions of
 \cref{cor:equivalentCorrectnessUPHierarchization}
 are equivalent to the requirement that the grid should contain
 the hierarchical ancestors of every grid point:
 \begin{equation}
-\fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
-  (\*l',\*i') \in \liset
-},\quad
-\*l' := \*l - \stdbasis{t},\quad
-i_{t'}' :=
-\begin{cases}
-2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
-i_{t'},&t \not= t',
-\end{cases}
+  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 2\}}{
+    (\*l',\*i') \in \liset
+  },\quad
+  \*l' := \*l - \stdbasis{t},\quad
+  i_{t'}' :=
+  \begin{cases}
+    2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
+    i_{t'},&t \not= t',
+  \end{cases}
 \end{equation}
 where $\stdbasis{t}$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
 \Cref{fig:chainInsertionBSpline} shows the necessary ancestor chain points

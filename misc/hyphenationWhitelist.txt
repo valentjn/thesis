@@ -51,7 +51,7 @@ meth-ods
 non-uniform
 not-a-knot
 ob-ser-va-tions
-one-dimensional
+one-dimen-sional
 op-ti-miza-tion
 or-thog-o-nal
 out-put
