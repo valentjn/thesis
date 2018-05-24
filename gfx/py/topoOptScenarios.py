@@ -84,10 +84,21 @@ ax.plot(domainWidth, 0, "k.", clip_on=False)
 helper.plot.plotArrow(ax, (domainWidth, 0), (domainWidth, -0.5))
 ax.text(domainWidth + 0.06, -0.25, r"$\vec{F}$", ha="left", va="center")
 
-ax.plot([0, 0], [-0.2, domainHeight + 0.2], "k-", clip_on=False)
-for y in np.linspace(-0.1, domainHeight + 0.1, 15):
-  ax.plot([-0.3, 0], [y - 0.3, y], "k-", clip_on=False,
-          solid_capstyle="butt")
+hatchWidth = 0.3
+hatchMargin = 0.2
+
+ax.plot([0, 0], [-hatchMargin, domainHeight + hatchMargin], "k-",
+        clip_on=False)
+for y in np.linspace(-hatchMargin,
+                     domainHeight + hatchMargin + hatchWidth, 20):
+  xx, yy = [-hatchWidth, 0], [y - hatchWidth, y]
+  if y - hatchWidth < -hatchMargin:
+    xx, yy = [-y - hatchMargin, 0], [-hatchMargin, y]
+  elif y > domainHeight + hatchMargin:
+    xx = [-hatchWidth, domainHeight + hatchMargin - y]
+    yy = [y - hatchWidth, domainHeight + hatchMargin]
+  if (xx[0] > xx[1]) or (yy[0] > yy[1]): continue
+  ax.plot(xx, yy, "k-", clip_on=False, solid_capstyle="butt")
 
 ax.text(1.2, 1.6, r"$\varrho(\tilde{\vec{x}}) = 1$",
         ha="center", va="center", rotation=-22)
@@ -97,7 +108,7 @@ ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\tilde{\Omega}$",
         ha="right", va="top")
 
 ax.set_aspect("equal")
-ax.set_xlim(0, domainWidth + 0.1)
+ax.set_xlim(-0.3, domainWidth + 0.1)
 ax.set_ylim(0, domainHeight + 0.1)
 ax.set_axis_off()
 
