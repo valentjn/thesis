@@ -25,7 +25,7 @@ In this section, we study one approach to hierarchize on
 spatially adaptive sparse grids,
 namely transforming the hierarchical basis to so-called fundamental bases
 to enable a \bfs algorithm for hierarchization.
-Another approach, which is based on the \up\periodafterPspace,
+Another approach, which is based on the \up\punctfix{,}
 will be shown in the next section.
 
 The approach in this section has already been published
@@ -480,7 +480,7 @@ The \bfs algorithm in \cref{alg:BFS} is not as efficient as the \up:
 It still needs to perform $\landauO{N^2 d}$ many univariate
 basis evaluations (compared to $\landauO{Nd}$ for the \up).
 However, it only needs linear space $\landauO{N}$ similar to the
-\up\periodafterPspace.
+\up\punctfix{.}
 This is a significant advantage over directly solving the system
 \eqref{eq:hierarchizationSLE} of linear equations, which typically
 needs quadratic space $\landauO{N^2}$.
