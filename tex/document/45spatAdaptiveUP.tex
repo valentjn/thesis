@@ -542,23 +542,40 @@ for the hierarchization operator $\linop = \intpmatinv$,
 if we insert all missing chain points that are specified by
 \cref{prop:correctnessUPCharacterization} into the grid.
 
-For the case $p = 1$ of piecewise linear
-standard B-splines $\bspl{\*l,\*i}{1}$, the conditions of
-\cref{cor:equivalentCorrectnessUPHierarchization}
-are equivalent to the requirement that the grid should contain
-the hierarchical ancestors of every grid point:
-\begin{equation}
-  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 2\}}{
-    (\*l',\*i') \in \liset
-  },\quad
-  \*l' := \*l - \stdbasis{t},\quad
-  i_{t'}' :=
-  \begin{cases}
-    2 \floor{\tfrac{i_t}{4}} + 1,&t = t',\\
-    i_{t'},&t \not= t',
-  \end{cases}
-\end{equation}
-where $\stdbasis{t}$ is the $t$-th unit vector and $t' = 1, \dotsc, d$.
+We take the case $p = 1$ of piecewise linear
+standard B-splines $\bspl{\*l,\*i}{1}$ as an example.
+We assume that we iteratively generated a spatially adaptive sparse grid
+such that all grid points are reachable from the corners of $\clint{\*0, \*1}$
+in the sense of \cref{eq:bfsAssumption2}.
+If we want to ensure the correctness of the \up for all possible permutations
+$(t_1, \dotsc, t_d)$ of the dimensions $(1, \dotsc, d)$,
+then the existence of the necessary chains in
+\cref{cor:equivalentCorrectnessUPHierarchization} is equivalent to the
+requirement that the grid should contain
+the hierarchical ancestors of every grid point in every direction:
+\begin{subequations}
+  \begin{alignat}{4}
+    \fafa{(\*l',\*i') \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
+      (\*l,\*i) \in \liset
+    },\quad
+    &&&\*l := \*l' - \stdbasis{t},\quad
+    &&i_t := 2 \floor{\tfrac{i'_t}{4}} + 1,\quad
+    &&\*i_{-t} = \*i'_{-t},\\
+    \fafa{(\*l',\*i') \in \liset}{\{t = 1, \dotsc, d \mid l_t = 1\}}{
+      (\*l,\*i) \in \liset
+    },\quad
+    &&&\*l := \*l' - \stdbasis{t},\quad
+    &&i_t := 0,\quad
+    &&\*i_{-t} = \*i'_{-t},
+  \end{alignat}
+\end{subequations}
+where $\stdbasis{t}$ is the $t$-th unit vector.
+This is a standard assumption on spatially adaptive sparse grids with
+piecewise linear basis functions \cite{Pflueger10Spatially}.
+However, we only have to satisfy the conditions of
+\cref{cor:equivalentCorrectnessUPHierarchization} for a single permutation
+$(t_1, \dotsc, t_d)$ of the dimensions
+in order to hierarchize with the \up\punctfix{.}
 \Cref{fig:chainInsertionBSpline} shows the necessary ancestor chain points
 (colored points in \cref{fig:chainInsertionBSpline2})
 for an example of a two-dimensional spatially adaptive sparse grid
@@ -574,7 +591,7 @@ for an example of a two-dimensional spatially adaptive sparse grid
   \hfill%
   \subcaptionbox{%
     Chain points for $p = 1$\\
-    ($N = 121$)%
+    \rlap{\hspace*{10.5mm}($N = 121$)}%
     \label{fig:chainInsertionBSpline2}%
   }[48mm]{%
     \includegraphics{chainInsertion_2}%
@@ -582,7 +599,7 @@ for an example of a two-dimensional spatially adaptive sparse grid
   \hfill%
   \subcaptionbox{%
     Chain points for $p = 3$\\
-    ($N = 17 \times 17 = 289$)%
+    \rlap{\hspace*{10.5mm}($N = 289 = 17 \times 17$)}%
     \label{fig:chainInsertionBSpline3}%
   }[48mm]{%
     \includegraphics{chainInsertion_3}%
@@ -591,6 +608,7 @@ for an example of a two-dimensional spatially adaptive sparse grid
     Chain points for hierarchical B-splines on a sparse grid%
   ]{%
     Necessary chain points for the correctness of the unidirectional principle
+    with respect to $(t_1, t_2) = (1, 2)$
     for hierarchical B-splines $\bspl{l,i}{p}$ on a
     two-dimensional spatially adaptive sparse grid.
     The colors indicate the recursion depth in which the
@@ -611,7 +629,7 @@ for an example of a two-dimensional spatially adaptive sparse grid
   \label{fig:chainInsertionBSpline}%
 \end{figure}
 
-It is necessary to insert these points recursively,
+Unfortunately, we have to insert these points recursively,
 e.g., the inserted points may generate new chains,
 for which other missing points have to be inserted and so on
 (these points are called ``second-order chain points''
@@ -630,7 +648,7 @@ For the standard hierarchical B-spline basis $\bspl{l,i}{p}$,
 this worst case often occurs as there are many non-zero entries
 in the corresponding interpolation matrices $\intpmat$
 (see \cref{sec:41problem}).
-An example for this is shown in \cref{fig:chainInsertionBSpline3}.
+An example for this worst case is shown in \cref{fig:chainInsertionBSpline3}.
 
 
 
@@ -642,16 +660,16 @@ An example for this is shown in \cref{fig:chainInsertionBSpline3}.
 In order to reduce the number of chain points to be inserted,
 we have to use other spline bases such that
 the resulting interpolation matrices $\intpmat$ have more zero entries.
-One possibility are the hierarchical fundamental splines
-as introduced in \cref{sec:443fundamentalSplines}.
+The hierarchical fundamental splines
+as introduced in \cref{sec:443fundamentalSplines} are one possibility.
 However, they are globally supported, which implies a number
-of disadvantages concerning algorithms and implementations.
+of disadvantages concerning the algorithms and the implementations.
 The most significant disadvantage is that although
-we can use \bfs for the univariate interpolation operators
+we can use \bfs for the univariate hierarchization operators
 (see \cref{sec:441BFSFundamentalBases}),
-the time complexity for the univariate interpolation is still quadratic.
+the time complexity for the univariate hierarchization is still quadratic.
 We now want to construct a locally supported spline basis for which
-the univariate interpolation can be done in linear time.
+the univariate hierarchization can be done in linear time.
 
 To meet these goals, we have to relax the fundamental property
 to a weaker version, which results in the so-called
@@ -667,7 +685,7 @@ is called \term{weakly fundamental}, if
 \end{equation}
 This is exactly the first condition \eqref{eq:fundamentalProperty1}
 of the fundamental property \eqref{eq:fundamentalProperty}.
-In other words, we drop the requirement that the basis functions
+We drop the requirement that the basis functions
 should vanish at the other grid points of the same level.
 The relation \eqref{eq:fundamentalPropertyImplicationMV} from the
 fundamental case becomes
@@ -693,7 +711,7 @@ satisfies the weakly fundamental property
 \begin{gather}
   \label{eq:weaklyFundamentalSplineParent}
   \parentwfundspl{p}(x)
-  := \sum_{k=-(p-1)/2}^{(p-1)/2}
+  := \!\!\sum_{k=-(p-1)/2}^{(p-1)/2}\!\!\!
   \wfundsplcoeff{k}{p} \parentbspl{p}(x - k)
   \quad\text{such that}\\
   \wfundsplcoeff{0}{p} = 1,\quad
@@ -701,10 +719,9 @@ satisfies the weakly fundamental property
   k' = -p + 2,\; -p + 4,\; \dotsc,\; p - 2.
 \end{gather}
 \usenotation{Ëwfs}
-The parent function canonically defines
-\term{hierarchical weakly fundamental splines}
+\term{Hierarchical weakly fundamental splines}
 $\bspl[\wfs]{l,i}{p}\colon \clint{0, 1} \to \real$
-via an affine parameter transformation
+are now defined canonically via an affine parameter transformation:
 \begin{equation}
   \bspl[\wfs]{l,i}{p}(x)
   := \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
@@ -725,7 +742,8 @@ Note that these basis functions are, starting with level $l \ge 1$,
 translation-invariant by construction.
 %(see \cref{eq:translationInvariance}).
 As the weakly fundamental parent spline $\parentwfundspl{p}$
-vanishes at all even integers and as support of $\bspl[\wfs]{l,i}{p}$ is local
+vanishes at all even integers and as the
+support of $\bspl[\wfs]{l,i}{p}$ is local
 ($\supp \bspl[\wfs]{l,i}{p}
 = \clint{\gp{l,i-p}, \gp{l,i+p}} \cap \clint{0, 1}$),
 this implies that the weakly fundamental property
@@ -764,11 +782,14 @@ for the same grid as in \cref{fig:chainInsertionBSpline}.
     sparse grid%
   ]{%
     Necessary chain points for the correctness of the unidirectional principle
+    with respect to $(t_1, t_2) = (1, 2)$
     for hierarchical cubic weakly fundamental splines
     $\bspl[\wfs]{l,i}{p}$ ($p = 3$)
-    on a two-dimensional spatially adaptive sparse grid.
+    on the same two-dimensional spatially adaptive sparse grid
+    as in \cref{fig:chainInsertionBSpline1}.
     The colors indicate the recursion depth in which the
-    chain points have been inserted (see \cref{fig:chainInsertionBSpline}).
+    chain points have been inserted
+    (see the caption of \cref{fig:chainInsertionBSpline}).
     The number of points in the final grid is $N = 157$.%
   }%
   \label{fig:chainInsertionWeaklyFundamentalSpline}%
@@ -785,13 +806,13 @@ Let $(\*l',\*i')$ and $(\*l'',\*i'')$ with
 $\normone{\*l'}, \normone{\*l''} \le n$ and
 $\*i' \in \hiset{\*l'}$, $\*i'' \in \hiset{\*l''}$,
 such that $\bspl[\wfs]{\*l',\*i'}{\*p}(\gp{\*l'',\*i''}) \not= 0$.
-Furthermore, let $((\chain[\*l]{0}, \chain[\*i]{0}), \dotsc,
-(\chain[\*l]{d}, \chain[\*i]{d}))$ be the chain
+Furthermore, let $(\chain[\*l]{0}, \chain[\*i]{0}), \dotsc,
+(\chain[\*l]{d}, \chain[\*i]{d})$ be the chain
 from $\*k'$ to $\*k''$ with respect to $t_1, \dotsc, t_d$.
 Note that $\chain[\*l]{j} \le \vecmax\{\*l', \*l''\}$ due to the
 definition of chain points (\cref{def:chain}).
 Therefore, we have for $j = 0, \dotsc, d$
-by \eqref{eq:weaklyFundamentalPropertyImplicationMV}
+by \eqref{eq:weaklyFundamentalPropertyImplicationMV}:
 \begin{equation}
   \*l' \le \*l''
   \implies
@@ -817,7 +838,7 @@ dimensionally adaptive sparse grids.
 The second advantage of the weakly fundamental spline basis
 is that due to the reduced coupling,
 the univariate hierarchization operators can be applied easier
-than those for standard uniform B-splines.
+than for standard uniform B-splines.
 This results in the formulation of the so-called
 \term{Hermite hierarchization} algorithm.
 We first recall higher-order Hermite interpolation:
@@ -854,9 +875,8 @@ in \cref{alg:hermiteHierarchization} an algorithm
 for the hierarchization with hierarchical weakly fundamental splines.
 While we formulate \cref{alg:hermiteHierarchization}
 only for regular univariate grids and weakly fundamental splines,
-keep in mind that the algorithm, when reformulated slightly,
-also correctly operates
-on spatially adaptive univariate grids
+keep in mind that a slightly reformulated version of the algorithm
+also correctly operates on spatially adaptive univariate grids
 (with the assumption that the grids contain the parents of their grid points)
 and other weakly fundamental bases that are
 piecewise polynomial of degree $\le p$.
@@ -963,7 +983,7 @@ piecewise polynomial of degree $\le p$.
 \end{algorithm}
 
 The idea of \cref{alg:hermiteHierarchization},
-which is illustrated in \cref{fig:hermiteHierarchization},
+which is also illustrated in \cref{fig:hermiteHierarchization},
 is to hierarchize the function value data level by level,
 which is only possible because of the weakly fundamental property
 \eqref{eq:weaklyFundamentalProperty}.
@@ -980,8 +1000,7 @@ $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$ of the Hermite interpolant
 determined in \cref{line:algHermiteHierarchization4}.
 This is not an issue as in an implementation,
 one would typically simultaneously evaluate the
-Hermite interpolant and its derivatives in
-\cref{line:algHermiteHierarchization4}.
+Hermite interpolant and its derivatives.
 
 \begin{SCfigure}
   \includegraphics{hermiteHierarchization_1}%
@@ -999,7 +1018,7 @@ Hermite interpolant and its derivatives in
     current interpolant $\fgintp{l}$ at the
     grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) are saved
     \emph{(black dots and bars)}.
-    The values and derivatives are used for Hermite interpolation
+    The values and derivatives are used for the Hermite interpolation
     of the residual $\objfun - \fgintp{l}$.
     The interpolated residual is then added to the current interpolant
     such that the sum vanishes in the grid points of the next level $l + 1$
@@ -1104,10 +1123,10 @@ with which basis functions.
 There are some special cases, if the index of the basis function
 $\bspl[\wfs,\nak]{l',i'}{p}$ is near the boundary
 (near $i' = 0$ or near $i' = 2^{l'}$).
-Nevertheless, there are only finitely many special cases
-as, for higher levels $l'$, one can just scale the basis functions
+Nevertheless, there are only finitely many special cases;
+for higher levels $l'$, one can just scale the basis functions
 of coarser levels.
-For the scope of this thesis,
+In the scope of this thesis,
 it suffices to show the resulting basis functions for
 the cubic case ($p = 3$) in
 \cref{fig:hierarchicalWeaklyFundamentalNotAKnotSpline},
