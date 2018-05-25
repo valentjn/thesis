@@ -10,7 +10,7 @@ the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
 If we define $\interiorregsgset{n}{d}$ as the set of
 interior grid points in $\regsgset{n}{d}$, i.e.,%
 \footnote{%
-  Note that in the literature,
+  Note that in the literature (e.g., \cite{Pflueger10Spatially}),
   the regular sparse grid space of level $n$ without boundary points is often
   defined via $\normone{\*l} \le n + d - 1$ to ensure that the finest mesh size
   is given by $\ms{n}$.
@@ -28,7 +28,7 @@ of $\regsgset{n}{d}$ can be shown:
   \setlength{\abovedisplayskip}{0pt}
   \begin{equation}
     \setsize{\regsgset{n}{d}}
-    = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interiorregsgset{n+q}{d-q}}
+    = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interiorregsgset{n}{d-q}}
   \end{equation}
 \end{lemma}
 \begin{proof}
@@ -51,7 +51,7 @@ The number of interior grid points can be calculated as follows:
 
 Intuitively, \cref{lemma:numberOfGridPointsBoundary} splits the sparse grid
 $\regsgset{n}{d}$ into lower-dimensional sparse grids
-$\interiorregsgset{n+q}{d-q}$ without boundary points.
+$\interiorregsgset{n}{d-q}$ of the same level, but without boundary points.
 The factor $2^q \binom{d}{q}$ is the number of $(d-q)$-dimensional faces
 of the $d$-dimensional unit hyper-cube.
 In the three-dimensional example of \cref{fig:sgDecompose},
@@ -74,8 +74,8 @@ the unit cube decomposes into
 \end{itemize}
 On each of these $(d-q)$-dimensional faces,
 the sparse grid $\regsgset{n}{d}$ contains
-the interior of a sparse grid of level $n + q$,
-the size of which grows like $\landauO{2^{n+q} n^{d-q-1}}$.
+the interior of a sparse grid of level $n$ and dimensionality $d - q$,
+the size of which grows like $\landauO{2^n n^{d-q-1}}$.
 As the number of boundary faces increases exponentially
 with the dimensionality $d$,
 the size of $\regsgset{n}{d}$ quickly exhausts the available
@@ -85,7 +85,7 @@ which are described below.
 
 \begin{figure}
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_1}}%
-  \raisebox{-0.5\height}{$\;\;=\;\;$}%
+  \raisebox{-0.5\height-0.5mm}{$\;\;=\;\;$}%
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_2}}%
   \raisebox{-0.5\height}{$\;\;\dotcup\;\;$}%
   \raisebox{-0.5\height}{\includegraphics{sgDecompose_3}}%
@@ -112,7 +112,7 @@ which are described below.
 \paragraph{Inserting boundary points at finer levels}
 
 The first solution is to insert the boundary level functions and grid points
-at a finer level than zero.
+at a finer level than at level zero.
 A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
@@ -131,12 +131,11 @@ on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
 hat functions \cite{Baar15Gradient}
-is (in the univariate case) to start with the constant
-function on level zero with
+is to start with the ``constant one'' function on level zero with
 corresponding grid point $0.5$,
 then employ the two boundary functions and points on level one,
 and finally proceed as usual for the finer levels $\ge 2$.
-Apart from a constant shift in the level of the resulting sparse grids,
+Apart from a constant shift of the resulting sparse grid levels,
 this is equivalent to inserting the boundary functions and points at level two.
 This solution leads to even less grid points than the previous approach,
 as now the mesh size is finer in the interior of the domain than on the
@@ -149,11 +148,11 @@ computationally infeasible sparse grids.
 \usenotation{Ësb}
 We generalize these two solutions to the definition of a
 sparse grid $\coarseregsgset{n}{d}{b}$ that is equivalent to inserting
-the boundary functions and points at a level $b \in \nat$:
+the boundary functions and points at an arbitrary level $b \in \nat$:
 \begin{definition}[regular sparse grid with coarse boundary]
   \label{def:coarseBoundary}
-  The regular sparse grid of level $n \ge d$,
-  dimensionality $d \in \nat$, and boundary parameter $b \in \nat$ is defined as
+  The regular sparse grid of level $n \in \nat$,
+  dimensionality $d \le n$, and boundary parameter $b \in \nat$ is defined as
   \begin{equation}
     \label{eq:coarseBoundary}
     \begin{split}
@@ -303,7 +302,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
   ]{%
     For $d = 3$:
     Grid size of the interior grid
-    $\interiorregsgset{n}{d}$ for \emph{(second column)}
+    $\interiorregsgset{n}{d}$ \emph{(second column)}
     and ratios
     $\setsize{\coarseregsgset{n}{d}{b}}/\setsize{\interiorregsgset{n}{d}}$
     \emph{(beginning with third column)} of the sizes of
@@ -403,7 +402,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
   ]{%
     For $d = 10$:
     Grid size of the interior grid
-    $\interiorregsgset{n}{d}$ for \emph{(second column)}
+    $\interiorregsgset{n}{d}$ \emph{(second column)}
     and ratios
     $\setsize{\coarseregsgset{n}{d}{b}}/\setsize{\interiorregsgset{n}{d}}$
     \emph{(beginning with third column)} of the sizes of
@@ -454,7 +453,7 @@ Its correctness can be formally proved with the following invariant:
       $n$, $d$, $b$%
     }
       \State{$\levelset^{(1)} \gets \{0, 1, \dotsc, n - d + 1\}$}
-      \Comment{construct 1D grid}
+      \Comment{one-dimensional grid}
       \For{$t = 2, \dotsc, d$}
         \State{$\levelset^{(t)} \gets \emptyset$}
         \Comment{$t$-dimensional grid}
@@ -495,7 +494,7 @@ Its correctness can be formally proved with the following invariant:
   ]{%
     Generation of the level set $\coarselevelset{n}{d}{b}$ corresponding
     to the sparse grid $\coarseregsgset{n}{d}{b}$ with coarse boundary.
-    Inputs are the level $n \ge d$, the dimensionality $d \in \nat$, and
+    Inputs are the level $n \in \nat$, the dimensionality $d \le n$, and
     the boundary parameter $b \in \nat$.%
   }%
   \label{alg:coarseBoundary}%
@@ -566,7 +565,7 @@ Its correctness can be formally proved with the following invariant:
   \label{fig:coarseBoundary}%
 \end{figure}
 
-\paragraph{Hierarchization}
+\paragraph{Hierarchization and other algorithms}
 
 An important implication of the regular sparse grids
 $\coarseregsgset{n}{d}{b}$ as defined in \cref{def:coarseBoundary}
@@ -578,15 +577,13 @@ As we mostly deal with B-splines, for which the unidirectional
 principle cannot be applied even on regular sparse grids,
 this issue is not important in the scope of this thesis.
 
-However, it is possible to calculate the hierarchical surpluses in
-a three-step algorithm.
+However, it is possible to calculate the hierarchical surpluses
+of hat functions on $\coarseregsgset{n}{d}{b}$ in a three-step algorithm.
 First, we compute the surpluses of the boundary grid
-$\bndrycoarseregsgset{n}{d}{b} :=
-\coarseregsgset{n}{d}{b} \setminus
-\interiorcoarseregsgset{n}{d}{b}$.
+$\coarseregsgset{n}{d}{b} \setminus \interiorregsgset{n}{d}$.
 Second, we subtract the values of the resulting ``boundary interpolant'' at
 the inner grid points
-$\interiorcoarseregsgset{n}{d}{b}$.
+$\interiorregsgset{n}{d}$.
 Third, we calculate the surpluses of the inner grid points
 as usual with the unidirectional principle.
 As the corresponding ``inner interpolant'' vanishes
@@ -601,17 +598,16 @@ first step.
 \paragraph{Omitting boundary points}
 
 The second solution to reduce the number of grid points on the boundary
-is to omit boundary points and basis functions altogether.
+is to omit the boundary points and the basis functions altogether.
 For the hat function basis $\bspl{\*l,\*i}{1}$,
 this is a feasible option if the objective
 function $\objfun\colon \clint{\*0, \*1} \to \real$
 satisfies homogeneous boundary conditions
 $\restrictfcn{\objfun}{\bndrydomain{\clint{\*0, \*1}}} \equiv 0$,
 as $\bspl{\*l,\*i}{1}$ vanishes on the boundary if and only if
-$\lnot(\*l \ge \*1)$, i.e., if the basis function corresponds to a
-boundary point.
+$\*l \ge \*1$, i.e., if the basis function corresponds to an inner grid point.
 Consequently, the surpluses corresponding to boundary points vanish
-for a grid with boundary points,
+for a grid with boundary points and homogeneous boundary conditions,
 implying that these points can be removed from the grid.
 
 \paragraph{Modified linear basis}
@@ -628,7 +624,8 @@ The basis function on level one is replaced by the
 ``constant one'' function.
 All other basis functions remain unchanged.
 \usenotation{Ëmod}
-The resulting \term{modified hat functions} $\bspl[\modified]{l,i}{1}$
+The resulting \term{modified hat functions}
+$\bspl[\modified]{l,i}{1}\colon \clint{0, 1} \to \real$
 are shown in \cref{fig:modifiedHat} and defined as follows:
 \begin{equation}
   \bspl[\modified]{l,i}{1}(x)
@@ -647,7 +644,8 @@ are shown in \cref{fig:modifiedHat} and defined as follows:
 The modified linear basis provides ``reasonable'' boundary values
 without the need to insert basis functions and grid points on the boundary.
 For other bases such as B-splines, similar modifications are possible,
-which we will discuss when we introduce the corresponding unmodified functions.
+which we will discuss when we introduce the corresponding unmodified functions
+(see \cref{chap:30BSplines,chap:40hierarchization}).
 
 \begin{SCfigure}
   \includegraphics{hierarchicalBasis_3}%
@@ -655,7 +653,7 @@ which we will discuss when we introduce the corresponding unmodified functions.
     Modified hierarchical hat functions%
   ]{%
     Modified hierarchical hat functions $\bspl[\modified]{l',i'}{1}$
-    ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) up to level $l = 3$.%
+    ($l' \le l$, $i' \in \hiset{l'}$) up to level $l = 3$.%
   }%
   \label{fig:modifiedHat}%
 \end{SCfigure}

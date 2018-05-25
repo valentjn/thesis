@@ -33,20 +33,20 @@ Every grid point is associated with a \term{basis function}
 \begin{equation}
   \basis{l,i}\colon \clint{0, 1} \to \real.
 \end{equation}
-In this thesis, we assume $\basis{l,i}$ to be arbitrary,
+We assume $\basis{l,i}$ to be arbitrary,
 satisfying required assumptions when needed and stated.
 However, it helps for both the theory and the intuition to have a
 specific example of basis functions in mind.
 \usenotation{Ë1}
-The so-called \term{hat functions} (linear B-splines), which are defined as
+The so-called \term{hat functions} (linear B-splines)
+are the most common choice for $\basis{l,i}$:
 \begin{equation}
   \label{eq:hatFunctionUV}
   \bspl{l,i}{1}(x)
-  := \max(1 - \abs{\tfrac{x}{\ms{l}} - i}, 0),
+  := \max(1 - \abs{\tfrac{x}{\ms{l}} - i}, 0).
 \end{equation}
-are the most common choice for $\basis{l,i}$.
 Here and in the following,
-the superscript ``1'' is the degree of the linear B-spline and
+the superscript ``1'' stands for the degree of the linear B-spline and
 is not to be read as an exponent.
 We generalize this notation to B-splines $\bspl{l,i}{p}$ of
 arbitrary degrees $p$ in \cref{chap:30BSplines}.
@@ -60,7 +60,8 @@ $\basis{l,i}$:
   \ns{l} := \spn\{\basis{l,i} \mid i = 0, \dotsc, 2^l\}.
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
-every linear combination of these functions is unique.
+they are linearly independent.
+Consequently, every linear combination of these functions is unique.
 This ensures that for every objective function $\objfun\colon \clint{0, 1} \to \real$,
 there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 \begin{equation}
@@ -71,8 +72,8 @@ there is a unique function $\fgintp{l}\colon \clint{0, 1} \to \real$ such that
 \end{equation}
 for some $\interpcoeff{l,i} \in \real$.
 In this case, $\fgintp{l}$ is called \term{interpolant} of $\objfun$ in $\ns{l}$.
-The nodal space $\nsbspl{l}{1}$ is defined analogously as the span of the
-hat functions $\bspl{l,i}{1}$.
+The nodal space $\nsbspl{l}{1}$ is defined analogously to $\ns{l}$
+as the span of the hat functions $\bspl{l,i}{1}$.
 It is the space of all linear splines,
 that is, the space of all continuous functions on $\clint{0, 1}$ that are
 piecewise linear polynomials on $\clint{\gp{l,i}, \gp{l,i+1}}$ for
@@ -111,28 +112,29 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 
 \usenotation{d}
 For the multivariate case with $d \in \nat$ dimensions,
-we proceed with the usual tensor product approach,
+we proceed with the tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{@0}
 \usenotation{@1}
 Therefore, the domain is now $\clint{\*0, \*1} := \clint{0, 1}^d$,
 which can be partitioned into
-$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hyper-cubes,
+$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hyper-rectangles,
 where $\*l = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
-The corners of the hyper-cubes are given by the grid points
+The corners of the hyper-rectangles are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
   \gp{\*l,\*i} := \*i \cdot \ms{\*l},\quad
   \*i = \*0, \dotsc, \*2^{\*l}.
 \end{equation}
-To allow a somewhat intuitive and suggestive notation,
-relations and operations with vectors (in bold face)
+Relations and operations with vectors in bold face
 are to be read coordinate-wise in this thesis, unless stated otherwise.
 Bold-faced numbers like $\*0$ are defined to be the vector $(0, \dotsc, 0)$
 in which every entry is equal to that number.
+This is to allow a somewhat intuitive and suggestive notation.
 For example, \eqref{eq:gridPointMultivariate} is equivalent to
+the much longer formula
 \begin{equation}
   \gp{\*l,\*i}
   := (i_1 \ms{l_1},\; \dotsc,\; i_d \ms{l_d}),\quad
@@ -144,13 +146,17 @@ $\ms{\*l} := \*2^{-\*l} = (\ms{l_1}, \dotsc, \ms{l_d})$.
 Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
-  Note that one could employ basis functions of different types in
+  Note that,
+  although \cref{eq:tensorProduct} does not allow it,
+  one could employ basis functions of different types in
   each dimension, for example B-splines of different degrees.
-  For simplicity, we first restrict ourselves to the case of a single type
-  for all dimensions, but we will treat the more general case in
-  \todo{insert reference}.%
+  All remaining considerations in this thesis
+  regarding tensor product basis functions are independent
+  of whether we use the same function type or
+  different types in each dimension.%
 }
 \begin{equation}
+  \label{eq:tensorProduct}
   \basis{\*l,\*i}\colon \clint{\*0, \*1} \to \real,\quad
   \basis{\*l,\*i}(\*x)
   := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
@@ -183,7 +189,7 @@ the nodal space $\nsbspl{\*l}{1}$ is the $d$-linear spline space
 \cite{Hoellig13Approximation}, i.e.,
 the space of all continuous functions
 on $\clint{\*0, \*1}$ that are piecewise $d$-linear polynomials on
-all hyper-cubes
+all hyper-rectangles
 \begin{equation}
   \clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}
   := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
@@ -200,7 +206,8 @@ in the nodal space $\ns{\*l}$ with $\fgintp{\*l}\colon \clint{\*0, \*1} \to \rea
   \falarge{\*i = \*0, \dotsc, \*2^\*l}{\fgintp{\*l}(\gp{\*l,\*i}) = \objfun(\gp{\*l,\*i})},
 \end{equation}
 where $\interpcoeff{\*l,\*i} \in \real$ and
-the sum is over all $\*i = \*0, \dotsc, \*2^\*l$.
+the sum is over all $\*i = \*0, \dotsc, \*2^\*l$
+(i.e., $i_t = 0, \dotsc, 2^{l_t}$, $t = 1, \dotsc, d$).
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
   The functions $\basis{\*l,\*i}$ ($\*i = \*0, \dotsc, \*2^\*l$)
@@ -221,10 +228,10 @@ the sum is over all $\*i = \*0, \dotsc, \*2^\*l$.
     \basis{l_2,i_2}(\gp{l_2,i_2'})\right) \basis{l_1,i_1}(\gp{l_1,i_1'})
     = 0.
   \end{equation}
-  We apply the linear independence in 1D ($x_1$ direction) to conclude that
-  the sum over $i_2$ must vanish.
-  Repeating this argument for all dimensions, we infer that $\interpcoeff{\*l,\*i} = 0$
-  for all~$\*i = \*0, \dotsc, \*2^\*l$,
+  We apply the univariate linear independence ($x_1$ direction) to infer
+  that the sum over $i_2$ must vanish for all $i_1 = 0, \dotsc, 2^{l_1}$.
+  Repeating this argument for all dimensions, we have
+  $\interpcoeff{\*l,\*i} = 0$ for all~$\*i = \*0, \dotsc, \*2^\*l$,
   implying the linear independence of the functions $\basis{\*l,\*i}$.
 \end{proof}
 The lemma is equivalent to the statement that the coefficients $\interpcoeff{\*l,\*i} \in \real$

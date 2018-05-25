@@ -34,8 +34,7 @@ as we would have to calculate and store $\dim \ns{\*l}$ coefficients $\interpcoe
 
 In order to reduce the computational effort,
 we first split $\ns{\*l}$ into smaller subspaces and then identify
-which subspaces are most important and which subspaces can be omitted
-at the cost of a slightly larger error.
+subspaces that we can omit at the cost of a slightly larger error.
 In the univariate case, the key observation is that a grid point of a level $l$
 can be written as a grid point of a higher level~$l'$:
 \begin{equation}
@@ -69,11 +68,15 @@ this implies that $\fgset{l}$ decomposes into
 \end{equation}
 where $\dotcup$ indicates the disjoint union.
 We call the spaces spanned by the basis functions that correspond to the
-joined sets \term{hierarchical subspaces} $\hs{l}$:
+joined sets \term{hierarchical subspaces} $\hs{l'}$:
 \begin{equation}
-  \hs{l}
-  := \spn\{\basis{l,i} \mid i \in \hiset{l}\}.
+  \hs{l'}
+  := \spn\{\basis{l',i'} \mid i' \in \hiset{l'}\}.
 \end{equation}
+The corresponding basis functions
+$\basis{l',i'}$, $l' = 0, \dotsc, l$, $i' \in \hiset{l'}$,
+are called \term{hierarchical basis functions}.
+The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 
 \begin{SCfigure}
   \includegraphics{pointSplitting_1}%
@@ -87,6 +90,31 @@ joined sets \term{hierarchical subspaces} $\hs{l}$:
   }%
   \label{fig:pointSplittingUniform}%
 \end{SCfigure}
+
+\begin{figure}
+  \subcaptionbox{%
+    Basis functions $\bspl{l',i'}{1}$ ($l' \le l$, $i' \in \hiset{l'}$)
+    and grid points $\gp{l',i'}$ \emph{(dots)}.
+    The domain is the unit interval $\clint{0, 1}$.%
+  }[72mm]{%
+    \includegraphics{hierarchicalBasis_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Piecewise linear interpolant $\fgintp{l}$ as a linear combination
+    of hierarchical hat functions \emph{(stacked)}.
+    The two boundary functions are combined to a single function
+    \emph{\textcolor{C0}{(blue)}} for simplicity.%
+  }[72mm]{%
+    \includegraphics{interpolant_2}%
+  }%
+  \caption[%
+    Univariate hierarchical hat functions%
+  ]{%
+    Univariate hierarchical hat functions up to level $l = 3$.%
+  }%
+  \label{fig:hierarchicalHat}%
+\end{figure}
 
 \paragraph{Hierarchical splitting}
 
@@ -104,37 +132,15 @@ Here, the direct sum $\oplus$ is
 the normal vector space sum with the additional indication
 that the dimension of the sum $\sum_{l'=0}^l \hs{l'}$ is the sum
 of the dimensions of the summands $\hs{l'}$
-(analogously to $\setsize{\fgset{l}} = \sum_{l'=0}^l \setsize{\fgset{l'}}$,
-where $\fgset{l}$ is the disjoint union of the sets $\fgset{l'}$).
-In general, \eqref{eq:hierSplittingUV} may not be true.
+(analogously to
+$\setsize{\fgset{l}}
+= \sum_{l'=0}^l \setsize{\{\gp{l',i'} \mid i' \in \hiset{l'}\}}$,
+where $\fgset{l}$ is the disjoint union of the sets
+$\{\gp{l',i'} \mid i' \in \hiset{l'}\}$).
+In general, \eqref{eq:hierSplittingUV} may not be true,
+depending on the type of basis functions.
 The following lemma provides a characterization,
 which can be used to prove \eqref{eq:hierSplittingUV} for hat functions.
-The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
-
-\begin{figure}
-  \subcaptionbox{%
-    Basis functions $\bspl{l',i'}{1}$ ($l' \le l$, $i' \in \hiset{l'}$)
-    and grid points $\gp{l',i'}$ \emph{(dots)}.
-    The domain is the unit interval $\clint{0, 1}$.%
-  }[72mm]{%
-    \includegraphics{hierarchicalBasis_2}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    Piecewise linear interpolant $\fgintp{l}$ as a linear combination
-    of the hierarchical hat functions \emph{(stacked)}.
-    The two boundary functions are combined to a single function
-    \emph{\textcolor{C0}{(blue)}} for simplicity.%
-  }[72mm]{%
-    \includegraphics{interpolant_2}%
-  }%
-  \caption[%
-    Univariate hierarchical hat functions%
-  ]{%
-    Univariate hierarchical hat functions up to level $l = 3$.%
-  }%
-  \label{fig:hierarchicalHat}%
-\end{figure}
 
 \begin{lemma}[univariate hierarchical splitting characterization]
   \label{lemma:hierSplittingUV}
@@ -172,8 +178,8 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 \begin{proof}
   The first condition of \cref{lemma:hierSplittingUV}
   is satisfied as piecewise linear splines of level~$l'$
-  are also piecewise linear splines of higher levels $l \ge l'$.
-  The linear independence for the second condition can be proved by induction
+  are also piecewise linear splines of finer levels $l \ge l'$.
+  We can prove the linear independence for the second condition by induction
   over $l$:
   If a linear combination of $\bspl{l',i'}{1}$ ($l' \le l$, $i' \in \hiset{l'}$)
   vanishes everywhere, then the coefficients of level $l$ must be zero,
@@ -189,25 +195,27 @@ The hierarchical hat function basis is shown in \cref{fig:hierarchicalHat}.
 \subsection{Hierarchical Splitting in the Multivariate Case}
 \label{sec:222hierMV}
 
-Multivariate hierarchical subspaces of level $\*l$
-are defined analogously to the 1D case:
+Multivariate hierarchical subspaces are defined analogously
+to the univariate case:
 \begin{equation}
   \hs{\*l}
   := \spn\{\basis{\*l,\*i} \mid \*i \in \hiset{\*l}\},\quad
   \hiset{\*l}
-  := \hiset{l_1} \times \dotsb \times \hiset{l_d}.
+  := \hiset{l_1} \times \dotsb \times \hiset{l_d},\quad
+  \*l \in \natz^d.
 \end{equation}
-The splitting \eqref{eq:hierSplittingUV} can now be generalized to the
-multivariate case:
+The univariate hierarchical splitting \eqref{eq:hierSplittingUV}
+can now be generalized to
 \begin{equation}
   \label{eq:hierSplittingMV}
   \ns{\*l}
-  \overset{?}{=} \bigoplus_{\*l'=0}^\*l \hs{\*l'},
+  \overset{?}{=} \bigoplus_{\*l'=\*0}^\*l \hs{\*l'},
 \end{equation}
 Again, this relation does not hold in general.
 A multivariate counterpart of \thmref{lemma:hierSplittingUV} can be used
 to prove that \eqref{eq:hierSplittingMV} holds if
-the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimensions:
+the corresponding univariate relation \eqref{eq:hierSplittingUV}
+holds for all dimensions:
 \begin{lemma}[multivariate hierarchical splitting characterization]
   \label{lemma:hierSplittingMV}
   Equivalent to relation \eqref{eq:hierSplittingMV} is the satisfaction of
@@ -225,7 +233,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   If the sum is direct, then its dimension is given by
   \begin{equation}
     \hspace*{-5mm}
-    \dim \sum_{\*l'=0}^\*l \hs{\*l'}
+    \dim \sum_{\*l'=\*0}^\*l \hs{\*l'}
     = \sum_{l_1'=0}^{l_1} \dotsb \sum_{l_d'=0}^{l_d}
     \prod_{t=1}^d \dim \hs{l_t'}
     = \prod_{t=1}^d \sum_{l_t'=0}^{l_t} \dim \hs{l_t'}
@@ -272,3 +280,7 @@ the corresponding 1D relation \eqref{eq:hierSplittingUV} holds for all dimension
   The multivariate hierarchical splitting \eqref{eq:hierSplittingMV}
   holds for the hat function basis.
 \end{corollary}
+\begin{proof}
+  Follows directly by applying
+  \thmref{cor:hierSplittingHatUV} to \cref{prop:splittingUVToMV}.
+\end{proof}
