@@ -8,6 +8,7 @@ import numpy as np
 import helper.basis
 from helper.figure import Figure
 import helper.grid
+import helper.plot
 
 
 
@@ -92,6 +93,12 @@ for q in range(4):
                           np.hstack((L, I))[:,np.newaxis], axis=2), axis=1)
         notK = np.logical_not(K)
         ax.plot(X[notK,0], X[notK,1], ".", clip_on=False)
+  
+  if q in [0, 3]:
+    helper.plot.plotArrow(ax, [0.27, 0.81], [0.39, 0.81], scaleHead=0.5)
+    helper.plot.plotArrow(ax, [0.29, 0.79], [0.29, 0.91], scaleHead=0.5)
+    ax.text(0.41, 0.81, r"$x_1$", ha="left", va="center")
+    ax.text(0.29, 0.92, r"$x_2$", ha="center", va="bottom")
   
   ax.set_axis_off()
   
