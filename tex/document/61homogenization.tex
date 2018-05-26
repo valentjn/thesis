@@ -147,13 +147,13 @@ Note that while the shape of all micro-cells in one macro-cell is identical,
 the micro-cell parameters corresponding to different macro-cells differ
 in general.
 This enables varying densities in different regions of $\domain$.
-We denote the parameters of the $j$-th macro-cell
-with $\*x^{(j)} = (x_1^{(j)}, \dotsc, x_d^{(j)}) \in
+We denote the parameters of the $q$-th macro-cell
+with $\*x^{(q)} = (x_1^{(q)}, \dotsc, x_d^{(q)}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
-where $j = 1, \dotsc, M$ and
+where $q = 1, \dotsc, M$ and
 $M := M_1 \dotsm M_{\dimdomain}$ is the number of macro-cells.
 With linear elasticity,
-one can compute so-called \term{elasticity tensors} $\etensor_j$,
+one can compute so-called \term{elasticity tensors} $\etensor_q$,
 which encode information about the material properties
 of the different macro-cells.
 The elasticity tensors can be written as symmetric matrices
@@ -170,7 +170,7 @@ in $\real^{6 \times 6}$ (for $\dimdomain = 3$).%
 }
 They are usually computed as the solution of a \fem problem
 \term{(micro-problem)}.
-Once all elasticity tensors $\etensor_j$ are known,
+Once all elasticity tensors $\etensor_q$ are known,
 we can compute the compliance value corresponding to the macro-shape
 by solving another \fem problem \term{(macro-problem)}.
 We refer to \cite{Allaire04Topology} and \cite{Huebner14Mehrdimensionale}
@@ -188,11 +188,11 @@ two-scale discretization process has the form
     \quad\text{s.t.}\quad
     \densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \le \densub,\\
     \densmean(\*x^{(1)}, \dotsc, \*x^{(M)})
-    := \frac{1}{M} \sum_{j=1}^M \dens(\*x^{(j)}).
+    := \frac{1}{M} \sum_{q=1}^M \dens(\*x^{(q)}).
   \end{gather}
 \end{subequations}
-Here, $\dens(\*x^{(j)}) \in \clint{0, 1}$ is the
-density of the $j$-th macro cell with micro-cell parameter $\*x^{(j)}$
+Here, $\dens(\*x^{(q)}) \in \clint{0, 1}$ is the
+density of the $q$-th macro cell with micro-cell parameter $\*x^{(q)}$
 (i.e., the fraction of material volume of one micro-cell
 with respect to its total volume)
 and $\densmean(\*x^{(1)}, \dotsc, \*x^{(M)})$ is the resulting
