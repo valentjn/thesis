@@ -7,5 +7,6 @@
 
 /data/topoOpt/**/*.density.xml filter=fat -crlf
 /data/topoOpt/**/*.h5          filter=fat -crlf
+/data/topoOpt/stats/*          filter=fat -crlf
 
 *.tex diff=tex
