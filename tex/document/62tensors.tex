@@ -94,6 +94,8 @@ $\etensor\colon \clint{\*0, \*1} \to \real^m$
 gives $m \in \nat$ values from which the symmetric elasticity tensor
 can be uniquely reconstructed,
 e.g., $m = 6$ for $\dimdomain = 2$ and $m = 21$ for $\dimdomain = 3$.
+The vector-valued and the matrix-valued version of $\etensor$
+will be used interchangeably.
 
 \paragraph{Elasticity tensor surrogate}
 
@@ -155,6 +157,34 @@ Our approach has multiple obvious advantages:
 \subsection{Cholesky Factor Interpolation}
 \label{sec:623cholesky}
 
+Unfortunately, just replacing the elasticity tensor with
+the B-spline surrogate often does not lead to correct results in practice.
+Experiments show that only for most regular sparse grids and
+for some spatially adaptive sparse grids \cite{Valentin16Hierarchical},
+the optimization algorithm converges to an optimal point.
+The optimization algorithm crashes for most spatially adaptive grids,
+not able to find any meaningful optimum.
+
+\paragraph{Positive definiteness of elasticity tensors}
+
+The root of the problem proves to be that for specific
+$\*x \in \clint{\*0, \*1}$,
+the interpolated elasticity tensors $\etensorsgintp(\*x)$ are not
+positive definite.
+However, indefinite or even negative definite tensors $\etensorsgintp$
+would mimic unphysical behavior.%
+\footnote{%
+  In the scalar case, this is analogous to Hooke's law for linear springs,
+  where the force $F = kx$ needed to displace the end of a spring
+  (fixed at the other end) by $x$ is proportional to $x$.
+  The proportionality constant $k$ (which corresponds to the elasticity tensor)
+  has to be positive.%
+}
+Therefore, it is imperative for the optimization process that
+the interpolated elasticity tensors are \spd.
+
+\blindtext{}
+
 \begin{figure}
   \subcaptionbox{%
     Minimal eigenvalue of $\etensorsgintp(\*x)$%
@@ -187,6 +217,8 @@ Our approach has multiple obvious advantages:
   }%
   \label{fig:cholesky}%
 \end{figure}
+
+\paragraph{Interpolation of Cholesky factors}
 
 \usenotation{Ëchol}
 
