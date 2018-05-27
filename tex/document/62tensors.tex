@@ -77,7 +77,78 @@ then all the mentioned issues even worsen.
 \subsection{B-Splines on Sparse Grids for Topology Optimization}
 \label{sec:622BSplines}
 
-\blindtext{}
+\paragraph{Elasticity tensor function}
+
+As a remedy, we replace the costly evaluation of the
+elasticity tensors $\etensor^{(q)}$ with cheap surrogates.
+We assume that all macro-cells use the same micro-cell model.
+Consequently, the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro cell
+with the micro-cell parameter $\*x^{(q)} \in \clint{\*0, \*1}$
+can be written as the value $\etensor(\*x^{(q)})$ of some function
+$\etensor\colon \clint{\*0, \*1} \to \real^{3 \times 3}$
+(for $\dimdomain = 2$) or
+$\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
+(for $\dimdomain = 3$) at the point $\*x^{(q)}$.
+In the following,
+$\etensor\colon \clint{\*0, \*1} \to \real^m$
+gives $m \in \nat$ values from which the symmetric elasticity tensor
+can be uniquely reconstructed,
+e.g., $m = 6$ for $\dimdomain = 2$ and $m = 21$ for $\dimdomain = 3$.
+
+\paragraph{Elasticity tensor surrogate}
+
+The idea is now to use B-splines on sparse grids to approximate
+the elasticity tensor function $\etensor$.
+In contrast to the theoretical framework that we derived in
+\cref{chap:20sparseGrids,chap:30BSplines,chap:40hierarchization},
+the function to be interpolated is not scalar-valued, but vector-valued.
+This means that we have to construct $m$ sparse grid interpolants
+$\etensorentrysgintp{j}$
+for the $m$ components $\etensorentry{j}$ of $\etensor$ ($j = 1, \dotsc, m$).
+Note that one could generate different sparse grids for the
+different components $\etensorentrysgintp{j}$.
+However, it is not possible to evaluate only specific entries of $\etensor$
+without also evaluating all other entries,
+which means that we would waste computation time by selecting only
+a subset of the calculated entries.
+Therefore, we use the same grid for all components.
+
+Additionally, we approximate the density $\dens^{(q)}$
+of the $q$-th macro-cell with a surrogate using
+B-splines on the same sparse grid for reasons of implementation,
+resulting in $m + 1$ sparse grid interpolants in total.
+From a theoretical perspective, this is not necessary,
+since the density can be calculated explicitly with simple formulas
+for most micro-cell models, independently of evaluations of the
+elasticity tensor.
+
+\paragraph{Advantages}
+
+Our approach has multiple obvious advantages:
+\begin{itemize}
+  \item
+  The sparse grid interpolant $\etensorsgintp$ has to be generated only
+  once in an \term{offline step} before the optimization algorithm starts.
+  During the optimization \term{(online phase)},
+  only inexpensive evaluations of $\etensorsgintp$ are performed,
+  which saves much time.
+  
+  \item
+  Sparse grids help to reduce the curse of dimensionality, which prohibits
+  conventional full grid interpolation methods if $d > 4$.
+  
+  \item
+  With spatially adaptive sparse grids and a suitable refinement criterion,
+  we can spend more grid points in regions of interest of $\etensor$,
+  e.g., regions with large oscillations.
+  
+  \item
+  By using B-splines as basis functions,
+  the interpolant $\etensorsgintp$ will be smoother and more accurate.
+  In addition, we can calculate its gradient
+  $\nabla_{\*x^{(q)}} \etensorsgintp(\*x^{(q)})$ fast and explicitly,
+  accelerating the speed of convergence of the optimization method.
+\end{itemize}
 
 
 
