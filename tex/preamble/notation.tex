@@ -177,6 +177,7 @@
 \newcommand*{\ext}{\mathrm{ext}}
 \newcommand*{\fs}{\mathrm{fs}}
 \newcommand*{\wfs}{\mathrm{wfs}}
+\newcommand*{\chol}{\mathrm{chol}}
 
 \newnotation{Ë1}{$\cdot^1$}{
   Superscript for ``Piecewise linear''
@@ -238,6 +239,10 @@
 \newnotation{Ëwfs}{$\cdot^\wfs$}{
   Superscript for ``Weakly fundamental spline''
   %(basis function/function space/interpolant)''
+}
+
+\newnotation{Ëchol}{$\cdot^\chol$}{
+  Superscript for ``Cholesky''
 }
 
 % ======================================================================
@@ -884,6 +889,11 @@
   $\real^{3 \times 3}$ (two dimensions) or in
   $\real^{6 \times 6}$ (three dimensions)
 }
+
+\newcommand*{\etensorentry}[1]{E_{#1}}
+\newcommand*{\etensorsgintp}{\mat{E}^\sparse}
+\newcommand*{\etensorentrysgintp}[1]{E_{#1}^\sparse}
+\newcommand*{\etensorcholsgintp}{\mat{E}^{\chol,\sparse}}
 
 % ======================================================================
 % Miscellaneous
