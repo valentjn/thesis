@@ -153,7 +153,7 @@ with $\*x^{(q)} = (x_1^{(q)}, \dotsc, x_d^{(q)}) \in
 where $q = 1, \dotsc, M$ and
 $M := M_1 \dotsm M_{\dimdomain}$ is the number of macro-cells.
 With linear elasticity,
-one can compute so-called \term{elasticity tensors} $\etensor_q$,
+one can compute so-called \term{elasticity tensors} $\etensor^{(q)}$,
 which encode information about the material properties
 of the different macro-cells.
 The elasticity tensors can be written as symmetric matrices
@@ -170,7 +170,7 @@ in $\real^{6 \times 6}$ (for $\dimdomain = 3$).%
 }
 They are usually computed as the solution of a \fem problem
 \term{(micro-problem)}.
-Once all elasticity tensors $\etensor_q$ are known,
+Once all elasticity tensors $\etensor^{(q)}$ are known,
 we can compute the compliance value corresponding to the macro-shape
 by solving another \fem problem \term{(macro-problem)}.
 We refer to \cite{Allaire04Topology} and \cite{Huebner14Mehrdimensionale}
@@ -188,10 +188,10 @@ two-scale discretization process has the form
     \quad\text{s.t.}\quad
     \densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \le \densub,\\
     \densmean(\*x^{(1)}, \dotsc, \*x^{(M)})
-    := \frac{1}{M} \sum_{q=1}^M \dens(\*x^{(q)}).
+    := \frac{1}{M} \sum_{q=1}^M \dens^{(q)}(\*x^{(q)}).
   \end{gather}
 \end{subequations}
-Here, $\dens(\*x^{(q)}) \in \clint{0, 1}$ is the
+Here, $\dens^{(q)}(\*x^{(q)}) \in \clint{0, 1}$ is the
 density of the $q$-th macro cell with micro-cell parameter $\*x^{(q)}$
 (i.e., the fraction of material volume of one micro-cell
 with respect to its total volume)

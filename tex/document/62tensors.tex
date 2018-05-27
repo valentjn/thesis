@@ -10,7 +10,7 @@ at iteratively different \term{micro-cell parameter combinations}
 $(\*x^{(1)}, \dotsc, \*x^{(M)}) \in (\real^d)^M$.
 Every evaluation of $\compliance$ corresponds to the solution of a
 macro-problem.
-However, the elasticity tensors $\etensor_q$ of all $M$ macro-cells
+However, the elasticity tensors $\etensor^{(q)}$ of all $M$ macro-cells
 need to be known to solve the macro-problem.
 Hence, in every optimization iteration, it is necessary to solve
 one macro-problem and $M$ micro-cell problems,
@@ -52,12 +52,12 @@ objective function and of the constraints, i.e.,%
   gradient of its vectorization.%
 }
 \begin{equation}
-\nabla_{\*x^{(q)}} \etensor_q(\*x^{(q)}),\quad
-\nabla_{\*x^{(q)}} \dens_q(\*x^{(q)}),\qquad
-q = 1, \dotsc, M,
+  \nabla_{\*x^{(q)}} \etensor^{(q)}(\*x^{(q)}),\quad
+  \nabla_{\*x^{(q)}} \dens^{(q)}(\*x^{(q)}),\qquad
+  q = 1, \dotsc, M,
 \end{equation}
-where $\etensor_q$ is the elasticity tensor and
-$\dens_q$ is the density of the $q$-th macro-cell.
+where $\etensor^{(q)}$ is the elasticity tensor and
+$\dens^{(q)}$ is the density of the $q$-th macro-cell.
 However, in general, both gradients are unavailable and
 have to be approximated by finite differences.
 This introduces new error sources and
