@@ -2,7 +2,6 @@
 
 import xml.etree.ElementTree as ET
 
-import h5py
 import numpy as np
 
 
@@ -39,6 +38,9 @@ def readDensityFile(path):
 
 
 def readH5(path):
+  # local import as h5py triggers a warning when importing on Python 3.6
+  import h5py
+  
   result = {}
   
   with h5py.File(path, "r") as f:
