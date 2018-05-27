@@ -70,11 +70,18 @@ class Interpolant(Function):
     return A
   
   def evaluate(self, XX):
-    N = self.X.shape[0]
-    YY = np.zeros((XX.shape[0],))
+    N, NN = self.X.shape[0], XX.shape[0]
     
-    for k in range(N):
-      YY += self.aX[k] * self._evaluateBasis(k, XX)
+    if self.aX.ndim == 1:
+      YY = np.zeros((NN,))
+      for k in range(N): YY += self.aX[k] * self._evaluateBasis(k, XX)
+    else:
+      m = self.aX.shape[1]
+      YY = np.zeros((NN, m))
+      
+      for k in range(N):
+        YY += (np.reshape(self.aX[k,:], (1, m)) *
+               np.reshape(self._evaluateBasis(k, XX), (NN, 1)))
     
     return YY
 
