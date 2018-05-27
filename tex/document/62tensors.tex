@@ -155,6 +155,41 @@ Our approach has multiple obvious advantages:
 \subsection{Cholesky Factor Interpolation}
 \label{sec:623cholesky}
 
+\begin{figure}
+  \subcaptionbox{%
+    Minimal eigenvalue of $\etensorsgintp(\*x)$%
+  }[65mm]{%
+    \includegraphics{cholesky_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Minimal eigenvalue of $\etensorcholsgintp(\*x)$%
+  }[65mm]{%
+    \includegraphics{cholesky_2}%
+  }%
+  \hfill\hfill%
+  \raisebox{2.2mm}{\includegraphics{cholesky_3}}%
+  \caption[%
+    Minimal eigenvalue of interpolated elasticity tensors%
+  ]{%
+    Minimal eigenvalue \emph{(colored contour lines)}
+    of elasticity tensor surrogates
+    for the ``cross'' model ($\dimdomain = 2$, $d = 2$)
+    and cubic hierarchical B-splines $\bspl{l,i}{p}$ ($p = 3$) on
+    the regular sparse grid $\coarseregsgset{n}{d}{b}$ \emph{(dots)}
+    with $n = 7$ and $b = 4$.
+    \emph{Left:} The minimal eigenvalue of $\etensorsgintp(\*x)$
+    becomes negative in some regions \emph{\textcolor{C1}{(red areas)}}
+    of the domain $\clint{\*0, \*1}$,
+    indicating that $\etensorsgintp(\*x)$ is not positive definite.
+    \emph{Right:} The minimal eigenvalue of $\etensorcholsgintp(\*x)$
+    is non-negative in the whole domain $\clint{\*0, \*1}$.%
+  }%
+  \label{fig:cholesky}%
+\end{figure}
+
+\usenotation{Ëchol}
+
 \blindtext{}
 
 
