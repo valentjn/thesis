@@ -39,12 +39,12 @@ class Function(abc.ABC):
 
 
 class Interpolant(Function):
-  def __init__(self, basis, X, L, I, fX):
+  def __init__(self, basis, X, L, I, fX, aX=None):
     super(Interpolant, self).__init__(X.shape[1])
     self.basis = basis
     self.X, self.L, self.I = X, L, I
     self.fX = fX
-    self.aX = self._getSurpluses()
+    self.aX = (aX if aX is not None else self._getSurpluses())
   
   def _getSurpluses(self):
     A = self.getInterpolationMatrix()
