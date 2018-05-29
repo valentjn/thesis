@@ -974,9 +974,9 @@
 %  \begin{subequations}
 %    \begin{alignat}{2}
 %      \sum_{i'=0}^1
-%      \linout{0,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
+%      \linout{0,i'} \deriv[q]{x}{\bspl[\wfs]{0,i'}{p}}(\gp{0,i})
 %      &= \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
-%      &&= \frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i}),\\
+%      &&= \deriv[q]{x}{\fgintp{0}}(\gp{0,i}),\\
 %      \sum_{i'=0}^1
 %      \linout{0,i'} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
 %      &= \fcnval{0,0} \kronecker{i}{0} +
@@ -986,9 +986,9 @@
 %  \end{subequations}
   \begin{equation}
     \sum_{i'=0}^1
-    \linout{0,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{0,i'}{p}(\gp{0,i})
+    \linout{0,i'} \deriv[q]{x}{\bspl[\wfs]{0,i'}{p}}(\gp{0,i})
     = \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
-    = \frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i})
+    = \deriv[q]{x}{\fgintp{0}}(\gp{0,i})
   \end{equation}
   for $q = 1, \dotsc, \frac{p-1}{2}$ by
   \cref{%
@@ -1002,9 +1002,9 @@
   it suffices to show that
   \begin{equation}
     \label{eq:proofPropInvariantHermiteHierarchization1}
-    \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})
+    \deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})
     \overset{!}{=} \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-    \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+    \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i})
   \end{equation}
   for $i = 0, \dotsc, 2^l$ and $q = 0, \dotsc, \frac{p-1}{2}$.
   Indeed, if \eqref{eq:proofPropInvariantHermiteHierarchization1} holds,
@@ -1012,15 +1012,15 @@
   of \cref{alg:hermiteHierarchization}
   \begin{subequations}
     \begin{align}
-      \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
-      &= \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i}) +
-      \frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l,i})\\
+      \deriv[q]{x}{\fgintp{l}}(\gp{l,i})
+      &= \deriv[q]{x}{\fgintp{l-1}}(\gp{l,i}) +
+      \deriv[q]{x}{r^{(l)}_l}(\gp{l,i})\\
       &= \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}) +
+      \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}) +
       \sum_{i' \in \hiset{l}}
-      \linout{l,i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l,i'}{p}(\gp{l,i})\\
+      \linout{l,i'} \deriv[q]{x}{\bspl[\wfs]{l,i'}{p}}(\gp{l,i})\\
       &= \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
-      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}),
+      \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}),
     \end{align}
   \end{subequations}
   which is the desired relation
@@ -1043,9 +1043,9 @@
     as it only holds for grid points of levels $\le l - 1$.
     However, we note that in
     \eqref{eq:proofPropInvariantHermiteHierarchization1},
-    the term $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$
+    the term $\deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})$
     is the $q$-th derivative of the Hermite interpolant of
-    the data $\frac{\diff^{q'}}{\dx^{q'}} \fgintp{l-1}(\gp{l,i\pm1})$
+    the data $\deriv[q']{x}{\fgintp{l-1}}(\gp{l,i\pm1})$
     ($q' = 0, \dotsc, \frac{p-1}{2}$),
     as determined in \cref{line:algHermiteHierarchization4}
     of \cref{alg:hermiteHierarchization}.
@@ -1054,12 +1054,13 @@
     Hence, we can apply the induction hypothesis
     for \cref{eq:propInvariantHermiteHierarchization}
     to conclude that the interpolated data of
-    $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$ are given by
+    $\deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})$ are given by
     \begin{equation}
-      \frac{\diff^{q'}}{\dx^{q'}} \fgintp{l-1}(\gp{l,i\pm1})
-      = \frac{\diff^{q'}}{\dx^{q'}}
-      \left[\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-      \linout{l',i'} \bspl[\wfs]{l',i'}{p}\right]\!(\gp{l,i\pm1}),\quad
+      \deriv[q']{x}{\fgintp{l-1}}(\gp{l,i\pm1})
+      = \deriv[q']{x}{
+        \left[\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+        \linout{l',i'} \bspl[\wfs]{l',i'}{p}\right]
+      }\!(\gp{l,i\pm1}),\quad
       q' = 0, \dotsc, \frac{q-1}{2}.
     \end{equation}
     The linear combination in square brackets
@@ -1074,9 +1075,9 @@
     In particular, as $\gp{l,i} \in \clint{\gp{l,i-1}, \gp{l,i+1}}$,
     we obtain the claim \eqref{eq:proofPropInvariantHermiteHierarchization1}:
     \begin{equation}
-      \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})
+      \deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})
       = \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}).
+      \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}).
     \end{equation}
 %    To prove \cref{eq:propInvariantHermiteHierarchization2},
 %    we split the summands of its \rhs into

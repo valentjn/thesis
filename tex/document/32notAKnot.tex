@@ -191,7 +191,7 @@ For the cubic case $p = 3$
 (for which we need two conditions),
 the not-a-knot conditions demand that
 for all splines $\spl$ in the subspace,
-$\frac{\diff^3}{\dx^3} s$ is continuous at the first and at the last
+$\deriv[3]{x}{s}$ is continuous at the first and at the last
 interior knot $\gp{l,1} = \ms{l}$ and $\gp{l,2^l-1} = 1 - \ms{l}$
 \cite{Hoellig13Approximation}.
 This means that
@@ -200,7 +200,7 @@ knot sequence, as this is equivalent to requiring that
 $\spl$ is a cubic polynomial on $\clint{0, \gp{l,2}}$ and
 $\clint{\gp{l,2^l-2}, 1}$ (hence ``not-a-knot'').
 For general degree $p$ (for which we need $(p - 1)$ conditions),
-we require that the $p$-th derivative $\frac{\diff^p}{\dx^p} s$
+we require that the $p$-th derivative $\deriv[p]{x}{s}$
 is continuous at the first $\tfrac{p-1}{2}$ and the last $\tfrac{p-1}{2}$
 inner grid points
 \begin{equation}
@@ -571,8 +571,8 @@ second derivative vanish in $x = 0$ itself:
     1,&
     l = 1,\quad i = 1,\\
     \bspl[\nak]{l,1}{p}(x)
-    - \dfrac{\frac{\diff^2}{\dx^2} \bspl[\nak]{l,1}{p}(0)}%
-    {\frac{\diff^2}{\dx^2} \bspl[\nak]{l,0}{p}(0)}
+    - \dfrac{\deriv[2]{x}{\bspl[\nak]{l,1}{p}}(0)}%
+    {\deriv[2]{x}{\bspl[\nak]{l,0}{p}}(0)}
     \bspl[\nak]{l,0}{p}(x),&
     l \ge 2,\quad i = 1,\\
     \bspl[\nak]{l,i}{p}(x),&
@@ -704,12 +704,12 @@ Another possibility, which we want to discuss briefly, are
 In the cubic case, for which they are usually formulated
 \cite{Hoellig13Approximation},
 these boundary conditions require that the
-second derivatives $\frac{\diff^2}{\dx^2} \basis{l,i}$ of the
+second derivatives $\deriv[2]{x}{\basis{l,i}}$ of the
 basis functions vanish at the boundary $x \in \{0, 1\}$.
 To obtain the necessary number of $p - 1$ constraints also
 for higher degrees $p$,
 we require that all derivatives
-$\frac{\diff^q}{\dx^q} \basis{l,i}$ of order
+$\deriv[q]{x}{\basis{l,i}}$ of order
 $q = 2, \dotsc, \tfrac{p+1}{2}$ vanish at $x \in \{0, 1\}$.
 
 \usenotation{Ënat}
@@ -735,7 +735,7 @@ Consequently, we can define hierarchical natural B-splines as
 where the coefficients $c_{l,i,j} \in \real$ are chosen such that
 the natural boundary conditions are satisfied:
 \begin{equation}
-  \frac{\diff^q}{\dx^q} \bspl[\ntrl]{l,i}{p}(x)
+  \deriv[q]{x}{\bspl[\ntrl]{l,i}{p}}(x)
   = 0,\quad
   l \ge 1,\quad
   i \in \hiset{l},\quad

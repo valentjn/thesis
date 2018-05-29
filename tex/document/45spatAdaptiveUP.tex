@@ -847,15 +847,15 @@ We first recall higher-order Hermite interpolation:
   \label{lemma:hermiteInterpolation}
   Let $p \in \nat$ be odd and $a, b \in \real$ with $a < b$.
   Furthermore, let
-  $\frac{\diff^q}{\dx^q} \objfun(a) \in \real$ and
-  $\frac{\diff^q}{\dx^q} \objfun(b) \in \real$ be given data
+  $\deriv[q]{x}{\objfun}(a) \in \real$ and
+  $\deriv[q]{x}{\objfun}(b) \in \real$ be given data
   for $q = 0, \dotsc, \frac{p-1}{2}$.
   Then there is a unique polynomial $\spl \in \polyspace{p}$ such that
   \begin{equation}
-    \frac{\diff^q}{\dx^q} \objfun(a)
-    = \frac{\diff^q}{\dx^q} \spl(a),\quad
-    \frac{\diff^q}{\dx^q} \objfun(b)
-    = \frac{\diff^q}{\dx^q} \spl(b),\quad
+    \deriv[q]{x}{\objfun}(a)
+    = \deriv[q]{x}{\spl}(a),\quad
+    \deriv[q]{x}{\objfun}(b)
+    = \deriv[q]{x}{\spl}(b),\quad
     q = 0, \dotsc, \frac{p-1}{2}.
     \hspace*{-10mm}
   \end{equation}
@@ -897,7 +897,7 @@ piecewise polynomial of degree $\le p$.
         }
         \label{line:algHermiteHierarchization2}
         \State{%
-          $\frac{\diff^q}{\dx^q} \fgintp{0}(\gp{0,i})
+          $\deriv[q]{x}{\fgintp{0}}(\gp{0,i})
           \gets \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})$
           for all $q = 1, \dotsc, \frac{p-1}{2}$%
         }
@@ -914,7 +914,7 @@ piecewise polynomial of degree $\le p$.
           \State{%
             $\fgintp{l-1}(\gp{l,i}) \gets \text{Hermite interpolation of}$
             %$\fcnval{l,i\pm1}$,
-            $\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i\pm1})$
+            $\deriv[q]{x}{\fgintp{l-1}}(\gp{l,i\pm1})$
             ($q = 0, \dotsc, \frac{p-1}{2}$)%
           }
           \label{line:algHermiteHierarchization4}
@@ -948,12 +948,12 @@ piecewise polynomial of degree $\le p$.
         \Comment{for all points (current level and ancestors)}%
           \For{$q = 0, \dotsc, \frac{p-1}{2}$}
             \State{%
-              %$\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l',i'})
-              %\gets \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l',i'}) +
-              %\frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l',i'})$%
-              $\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
-              \gets \frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i}) +
-              \frac{\diff^q}{\dx^q} r^{(l)}_l(\gp{l,i})$%
+              %$\deriv[q]{x}{\fgintp{l}}(\gp{l',i'})
+              %\gets \deriv[q]{x}{\fgintp{l-1}}(\gp{l',i'}) +
+              %\deriv[q]{x}{r^{(l)}_l}(\gp{l',i'})$%
+              $\deriv[q]{x}{\fgintp{l}}(\gp{l,i})
+              \gets \deriv[q]{x}{\fgintp{l-1}}(\gp{l,i}) +
+              \deriv[q]{x}{r^{(l)}_l}(\gp{l,i})$%
             }
             \Comment{update values}%
             \label{line:algHermiteHierarchization8}
@@ -990,13 +990,13 @@ which is only possible because of the weakly fundamental property
 For each level $l$, we calculate surpluses
 $\surplus{l,i} = \linout{l,i}$, while keeping track of
 the values and derivatives
-$\frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})$ of the
+$\deriv[q]{x}{\fgintp{l}}(\gp{l,i})$ of the
 ``current'' interpolant $\fgintp{l}$ (up to level $l$).
 Hermite interpolation is used to determine the ``delta''
 to the interpolant of the next level.
 Note that in \cref{line:algHermiteHierarchization8},
 we have to evaluate the derivatives of
-$\frac{\diff^q}{\dx^q} \fgintp{l-1}(\gp{l,i})$ of the Hermite interpolant
+$\deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})$ of the Hermite interpolant
 determined in \cref{line:algHermiteHierarchization4}.
 This is not an issue as in an implementation,
 one would typically simultaneously evaluate the
@@ -1014,7 +1014,7 @@ Hermite interpolant and its derivatives.
     are computed level by level.
     For each level $l$,
     the values $\fgintp{l}(\gp{l,i})$ and the derivatives
-    $\frac{\diff}{\dx} \fgintp{l}(\gp{l,i})$ of the
+    $\deriv{x}{\fgintp{l}}(\gp{l,i})$ of the
     current interpolant $\fgintp{l}$ at the
     grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) are saved
     \emph{(black dots and bars)}.
@@ -1060,9 +1060,9 @@ with the following invariant.
 %  \begin{subequations}
 %    \begin{alignat}{2}
 %      \label{eq:propInvariantHermiteHierarchization1}
-%      \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+%      \deriv[q]{x}{\fgintp{l}}(\gp{l,i})
 %      &= \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
-%      \linout{l',i'} \frac{\diff^q}{\dx^q} \bspl[\wfs]{l',i'}{p}(\gp{l,i}),
+%      \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}),
 %      &\quad&q = 0, \dotsc, \frac{p-1}{2},\\
 %      \label{eq:propInvariantHermiteHierarchization2}
 %      \fcnval{l,i}
@@ -1073,10 +1073,9 @@ with the following invariant.
 %  \end{subequations}
   \begin{equation}
     \label{eq:propInvariantHermiteHierarchization}
-    \frac{\diff^q}{\dx^q} \fgintp{l}(\gp{l,i})
+    \deriv[q]{x}{\fgintp{l}}(\gp{l,i})
     = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
-    \linout{l',i'} \frac{\diff^q}{\dx^q}
-    \bspl[\wfs]{l',i'}{p}(\gp{l,i}),\quad
+    \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}),\quad
     q = 0, \dotsc, \frac{p-1}{2}.
     \hspace*{-6mm}
   \end{equation}

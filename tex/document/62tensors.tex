@@ -42,18 +42,18 @@ several days to complete.
 Second, most optimization algorithms require gradients of the
 objective function and of the constraints, i.e.,%
 \footnote{%
-  By convention, the gradient $\nabla_{\*x} f(\*x)$ of a
+  By convention, the gradient $\gradient{\*x}{f}(\*x)$ of a
   scalar-valued function $f$ is the column vector of partial derivatives.
-  For vector-valued functions $\*f$, the gradient $\nabla_{\*x} \*f(\*x)$
+  For vector-valued functions $\*f$, the gradient $\gradient{\*x}{\*f}(\*x)$
   is defined as the transposed Jacobian of $\*f$, i.e.,
-  the matrix whose columns are the gradients $\nabla_{\*x} f_j(\*x)$ of
+  the matrix whose columns are the gradients $\gradient{\*x}{f_j}(\*x)$ of
   single components of $\*f$.
   If $\*f$ is matrix-valued, then its gradient is defined as the
   gradient of its vectorization.%
 }
 \begin{equation}
-  \nabla_{\*x^{(q)}} \etensor^{(q)}(\*x^{(q)}),\quad
-  \nabla_{\*x^{(q)}} \dens^{(q)}(\*x^{(q)}),\qquad
+  \gradient{\*x^{(q)}}{\etensor^{(q)}}(\*x^{(q)}),\quad
+  \gradient{\*x^{(q)}}{\dens^{(q)}}(\*x^{(q)}),\qquad
   q = 1, \dotsc, M,
 \end{equation}
 where $\etensor^{(q)}$ is the elasticity tensor and

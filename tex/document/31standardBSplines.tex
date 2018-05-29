@@ -58,7 +58,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
     \lefthphantom{4.}{5.}\,
     $\cardbspl{p}$ is a piecewise polynomial of degree $p$.\\
     \lefthphantom{5.}{5.}\,
-    $\frac{\diff}{\dx} \cardbspl{p}$ \emph{(dashed)}
+    $\deriv{x}{\cardbspl{p}}$ \emph{(dashed)}
     is the difference of
     $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and
     $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
@@ -110,7 +110,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
   \eqref{eq:cardinalBSpline}:
   \begin{equation}
     \label{eq:cardinalBSplineDerivative}
-    \frac{\diff}{\dx} \cardbspl{p}(x)
+    \deriv{x}{\cardbspl{p}}(x)
     = \cardbspl{p-1}(x) - \cardbspl{p-1}(x-1),\quad
     x \in \real.
   \end{equation}
@@ -552,7 +552,7 @@ functions $\bspl[\modified]{l,i}{p}$ that satisfy natural boundary
 conditions, i.e.,
 \begin{equation}
   \label{eq:naturalBoundaryConditions}
-  \frac{\diff^2}{\dx^2} \bspl[\modified]{l,i}{p}(x) = 0,\quad
+  \deriv[2]{x}{\bspl[\modified]{l,i}{p}}(x) = 0,\quad
   x \in \bndrydomain{\clint{0, 1}} = \{0, 1\}.
 \end{equation}
 Originally, this requirement stems from financial problems
