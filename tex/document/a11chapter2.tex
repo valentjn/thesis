@@ -13,15 +13,15 @@
   Therefore,
   \begin{equation}
     \setsize{\coarseregsgset{n}{d}{b}}
-    = \sum_{\substack{\*l \in \nat^d,\\\normone{\*l} \le n}}
+    = \sum_{\substack{\*l \in \nat^d\\\normone{\*l} \le n}}
     \setsize{\hiset{\*l}} +
-    \sum_{
+    \hspace*{-5mm}\sum_{
       \substack{
-        \*l \in \natz^d \setminus \nat^d,\\
+        \*l \in \natz^d \setminus \nat^d\\
         (\normone{\vecmax(\*l, \*1)} \le n - b + 1) \lor
         (\*l = \*0)
       }
-    } \setsize{\hiset{\*l}}.
+    }\hspace*{-10mm} \setsize{\hiset{\*l}}.
   \end{equation}
   The first sum is the number $\setsize{\interiorregsgset{n}{d}}$
   of interior grid points in $\regsgset{n}{d}$.
@@ -37,9 +37,9 @@
     \sum_{q=1}^{d-1} \sum_{m=d-q}^{n-b-q+1}
     \sum_{
       \substack{
-        \*l \in \natz^d,\\
+        \*l \in \natz^d\\
         N_\*l = q,\,\normone{\*l} = m}
-    } \setsize{\hiset{\*l}},
+    }\hspace*{-4mm} \setsize{\hiset{\*l}},
   \end{equation}
   where $2^d$ is the summand for $\*l = \*0$
   (number $\setsize{\hiset{\*0}}$ of corners of $\clint{\*0, \*1}$).

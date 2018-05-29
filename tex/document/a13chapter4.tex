@@ -708,7 +708,7 @@
     \label{eq:proofPropInvariantBFS1}
     \linout[(q+1)]{\*l,\*i}
     = \fcnval{\*l,\*i} -
-    \sum_{\normone{\*l'} < q+1} \linout[(q+1)]{\*l',\*i'}
+    \largesum{\normone{\*l'} < q+1} \linout[(q+1)]{\*l',\*i'}
     \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset,\;\;
     \normone{\*l} = q+1.
@@ -728,19 +728,19 @@
     \begin{align}
       \linout[(q+1)]{\*l,\*i}
       &= \linout[(q)]{\*l,\*i} -
-      \sum_{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
+      \largesum{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).\\
       \intertext{%
         After inserting the induction hypothesis
         for $\linout[(q)]{\*l,\*i}$,%
       }
       &= \left(\fcnval{\*l,\*i} -
-      \sum_{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
+      \largesum{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\right) -
-      \sum_{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
+      \largesum{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\\
       &= \fcnval{\*l,\*i} -
-      \sum_{\normone{\*l'} < q + 1} \linout[(q)]{\*l',\*i'}
+      \largesum{\normone{\*l'} < q + 1} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).
     \end{align}
   \end{subequations}

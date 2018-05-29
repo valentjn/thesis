@@ -253,7 +253,7 @@ via forward substitution:
   \begin{equation}
     \surplus{\*l,\*i}
     = \fcnval{\*l,\*i} -
-    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+    \largesum{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
     \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset.
   \end{equation}
@@ -264,7 +264,7 @@ via forward substitution:
   \begin{subequations}
     \begin{align}
       \fcnval{\*l,\*i}
-      &= \sum_{(\*l',\*i') \in \liset}
+      &= \largesum{(\*l',\*i') \in \liset}
       \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
       (\*l, \*i) \in \liset.\\
       \intertext{%
@@ -275,7 +275,7 @@ via forward substitution:
         with $\fundbasis{\*l,\*i}(\gp{\*l,\*i}) = 1$:%
       }
       &= \surplus{\*l,\*i} +
-      \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+      \largesum{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
       \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),
     \end{align}
   \end{subequations}
@@ -439,7 +439,7 @@ The correctness of \cref{alg:BFS} can be shown with the following invariant:
     \label{eq:propInvariantBFS}
     \linout{\*l,\*i}
     = \fcnval{\*l,\*i} -
-    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < q}}
+    \largesum{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < q}}
     \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset,\;\;
     \normone{\*l} = q.
@@ -464,7 +464,7 @@ The correctness of \cref{alg:BFS} can be shown with the following invariant:
   \begin{equation}
     \linout{\*l,\*i}
     = \fcnval{\*l,\*i} -
-    \sum_{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
+    \largesum{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
     \linout{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),\quad
     (\*l, \*i) \in \liset.
   \end{equation}
@@ -598,7 +598,7 @@ a similar statement can be proved for dimensionally adaptive sparse grids.
   \surplus{\*l',\*i'} \basis[\hft]{\*l',\*i'} \equiv 0$.
   By evaluating at $\gp{\*l,\*i}$ ($(\*l, \*i) \in \liset$), we obtain
   \begin{equation}
-    \sum_{(\*l', \*i') \in \liset}
+    \largesum{(\*l', \*i') \in \liset}
     \surplus{\*l',\*i'} \basis[\hft]{\*l',\*i'}(\gp{\*l,\*i}) = 0,\quad
     (\*l, \*i) \in \liset.
   \end{equation}
@@ -1113,7 +1113,7 @@ where $\parentfundspl[\modified]{p}$ is a linear combination
 \begin{equation}
   \parentfundspl[\modified]{p}\colon \nonnegreal \to \real,\quad
   \parentfundspl[\modified]{p}(x)
-  := \sum_{k=1-(p+1)/2}^\infty
+  := \largesum[\infty]{k=1-(p+1)/2}
   \fundsplcoeff[\modified]{k}{p} \parentbspl{p}(x - k),
 \end{equation}
 whose coefficients $\fundsplcoeff[\modified]{k}{p} \in \real$

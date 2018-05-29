@@ -13,7 +13,7 @@ The \term{hierarchization problem} is finding
 $(\surplus{\*l',\*i'})_{(\*l',\*i') \in \liset} \in \real^{\ngp}$ such that
 \begin{equation}
   \label{eq:hierarchizationProblem}
-  \sum_{\mathclap{(\*l', \*i') \in \liset}} \surplus{\*l',\*i'}
+  \largesum{(\*l', \*i') \in \liset} \surplus{\*l',\*i'}
   \basis{\*l',\*i'}(\gp{\*l,\*i}) = \fcnval{\*l,\*i}
   \quad\text{for all}\quad
   (\*l, \*i) \in \liset,
@@ -25,7 +25,7 @@ The hierarchical surpluses then define the interpolant $\sgintp$ as
   \label{eq:hierarchizationInterpolant}
   \sgintp\colon \clint{\*0, \*1} \to \real,\quad
   \sgintp :=
-  \sum_{\mathclap{(\*l', \*i') \in \liset}} \surplus{\*l',\*i'}
+  \largesum{(\*l', \*i') \in \liset} \surplus{\*l',\*i'}
   \basis{\*l',\*i'},
 \end{equation}
 which interpolates $\objfun$ at the grid points $\gp{\*l,\*i}$ of $\sgset$.
