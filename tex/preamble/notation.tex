@@ -1002,6 +1002,11 @@
   \left\lVert{#2}\right\rVert\ifnotempty{#1}{_{#1}}%
 }
 
+% sum with large summation index
+\newcommand*{\largesum}[2][]{%
+  \;\;\sum_{\mathclap{#2}}\ifnotempty{#1}{^{\mathclap{#1}}}\;\;%
+}
+
 % equivalent of \notin for \ni
 \newcommand*{\notni}{\not\ni}
 
