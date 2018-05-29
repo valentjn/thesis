@@ -104,10 +104,10 @@ In contrast to the theoretical framework that we derived in
 \cref{chap:20sparseGrids,chap:30BSplines,chap:40hierarchization},
 the function to be interpolated is not scalar-valued, but vector-valued.
 This means that we have to construct $m$ sparse grid interpolants
-$\etensorentrysgintp{j}$
+$\etensorentry[\sparse]{j}$
 for the $m$ components $\etensorentry{j}$ of $\etensor$ ($j = 1, \dotsc, m$).
 Note that one could generate different sparse grids for the
-different components $\etensorentrysgintp{j}$.
+different components $\etensorentry[\sparse]{j}$.
 However, it is not possible to evaluate only specific entries of $\etensor$
 without also evaluating all other entries,
 which means that we would waste computation time by selecting only
@@ -128,10 +128,10 @@ elasticity tensor.
 Our approach has multiple obvious advantages:
 \begin{itemize}
   \item
-  The sparse grid interpolant $\etensorsgintp$ has to be generated only
+  The sparse grid interpolant $\etensor[\sparse]$ has to be generated only
   once in an \term{offline step} before the optimization algorithm starts.
   During the optimization \term{(online phase)},
-  only inexpensive evaluations of $\etensorsgintp$ are performed,
+  only inexpensive evaluations of $\etensor[\sparse]$ are performed,
   which saves much time.
   
   \item
@@ -145,9 +145,9 @@ Our approach has multiple obvious advantages:
   
   \item
   By using B-splines as basis functions,
-  the interpolant $\etensorsgintp$ will be smoother and more accurate.
+  the interpolant $\etensor[\sparse]$ will be smoother and more accurate.
   In addition, we can calculate its derivatives
-  $\tpartialderiv{\partialdiff{} x_t}{\etensorsgintp}(\*x^{(q)})$
+  $\tpartialderiv{\partialdiff{} x_t}{\etensor[\sparse]}(\*x^{(q)})$
   fast and explicitly,
   accelerating the speed of convergence of the optimization method.
 \end{itemize}
@@ -169,9 +169,9 @@ not able to find any meaningful optimum.
 
 The root of the problem proves to be that for specific
 $\*x \in \clint{\*0, \*1}$,
-the interpolated elasticity tensors $\etensorsgintp(\*x)$ are not
+the interpolated elasticity tensors $\etensor[\sparse](\*x)$ are not
 positive definite.
-However, indefinite or even negative definite tensors $\etensorsgintp$
+However, indefinite or even negative definite tensors $\etensor[\sparse]$
 would mimic unphysical behavior.%
 \footnote{%
   In the scalar case, this is analogous to Hooke's law for linear springs,
@@ -187,13 +187,15 @@ the interpolated elasticity tensors are \spd.
 
 \begin{figure}
   \subcaptionbox{%
-    Minimal eigenvalue of $\etensorsgintp(\*x)$%
+    Minimal eigenvalue of $\etensor[\sparse](\*x)$%
+    \label{fig:cholesky1}%
   }[65mm]{%
     \includegraphics{cholesky_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Minimal eigenvalue of $\etensorcholsgintp(\*x)$%
+    Minimal eigenvalue of $\etensor[\chol,\sparse](\*x)$%
+    \label{fig:cholesky2}%
   }[65mm]{%
     \includegraphics{cholesky_2}%
   }%
@@ -208,11 +210,11 @@ the interpolated elasticity tensors are \spd.
     and cubic hierarchical B-splines $\bspl{l,i}{p}$ ($p = 3$) on
     the regular sparse grid $\coarseregsgset{n}{d}{b}$ \emph{(dots)}
     with $n = 7$ and $b = 4$.
-    \emph{Left:} The minimal eigenvalue of $\etensorsgintp(\*x)$
+    \emph{Left:} The minimal eigenvalue of $\etensor[\sparse](\*x)$
     becomes negative in some regions \emph{\textcolor{C1}{(red areas)}}
     of the domain $\clint{\*0, \*1}$,
-    indicating that $\etensorsgintp(\*x)$ is not positive definite.
-    \emph{Right:} The minimal eigenvalue of $\etensorcholsgintp(\*x)$
+    indicating that $\etensor[\sparse](\*x)$ is not positive definite.
+    \emph{Right:} The minimal eigenvalue of $\etensor[\chol,\sparse](\*x)$
     is non-negative in the whole domain $\clint{\*0, \*1}$.%
   }%
   \label{fig:cholesky}%
