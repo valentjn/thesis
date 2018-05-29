@@ -934,6 +934,14 @@
 
 \newcommand*{\etensorentry}[2][]{E_{#2}\ifnotempty{#1}{^{#1}}}
 
+\newnotationcommandoptarg{1}{\cholfactor}{%
+  \mat{R}\ifnotempty{#1}{^{#1}}%
+}{R2}{$\cholfactor$}{
+  Cholesky factor of $\etensor$ in
+  $\real^{3 \times 3}$ (two dimensions) or in
+  $\real^{6 \times 6}$ (three dimensions)
+}
+
 % ======================================================================
 % Miscellaneous
 % ======================================================================
