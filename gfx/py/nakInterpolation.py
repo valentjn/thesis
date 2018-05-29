@@ -56,7 +56,7 @@ fig = Figure.create(figsize=(3, 2.5))
 ax = fig.gca()
 yMin = 1e-5
 
-err = np.abs((yy - yy2) / yy)
+err = np.abs((yy - yy2.flatten()) / yy)
 err = np.maximum(err, yMin)
 ax.plot(xx, err, "k-", clip_on=False)
 
