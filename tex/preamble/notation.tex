@@ -924,16 +924,15 @@
   Displacement $\displacement\colon \domain \to \real^{\dimdomain}$
 }
 
-\newnotationcommand{\etensor}{\mat{E}}{E}{$\etensor$}{
+\newnotationcommandoptarg{1}{\etensor}{%
+  \mat{E}\ifnotempty{#1}{^{#1}}%
+}{E}{$\etensor$}{
   Elasticity tensor in
   $\real^{3 \times 3}$ (two dimensions) or in
   $\real^{6 \times 6}$ (three dimensions)
 }
 
-\newcommand*{\etensorentry}[1]{E_{#1}}
-\newcommand*{\etensorsgintp}{\mat{E}^\sparse}
-\newcommand*{\etensorentrysgintp}[1]{E_{#1}^\sparse}
-\newcommand*{\etensorcholsgintp}{\mat{E}^{\chol,\sparse}}
+\newcommand*{\etensorentry}[2][]{E_{#2}\ifnotempty{#1}{^{#1}}}
 
 % ======================================================================
 % Miscellaneous
