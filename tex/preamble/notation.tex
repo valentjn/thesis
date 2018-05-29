@@ -560,6 +560,40 @@
   (greatest/smallest integer smaller/greater or equal than $\cdot$)
 }
 
+\hidenextnotation
+\newnotationcommandoptarg{3}{\deriv}{%
+  \frac{\diff\ifnotempty{#1}{^{#1}}}{\diff{}#2\ifnotempty{#1}{^{#1}}} #3%
+}{Öderivative}{$\deriv[q]{x}{f}$}{
+  $q$-th derivative of $f$ with respect to $x$
+}
+
+\hidenextnotation
+\newnotationcommandoptarg{3}{\tderiv}{%
+  \tfrac{\diff\ifnotempty{#1}{^{#1}}}{\diff{}#2\ifnotempty{#1}{^{#1}}} #3%
+}{Öderivativesmall}{$\tderiv[q]{x}{f}$}{
+  $q$-th derivative of $f$ with respect to $x$
+}
+
+\hidenextnotation
+\newnotationcommandoptarg[3]{\partialderiv}{%
+  \frac{\partialdiff\ifnotempty{#1}{^{#1}}}{#2} #3%
+}{Öderivative}{$\partialderiv{\partialdiff{}x}{f}$}{
+  Partial derivative of $f$ with respect to $x$
+}
+
+\hidenextnotation
+\newnotationcommandoptarg[3]{\tpartialderiv}{%
+  \tfrac{\partialdiff\ifnotempty{#1}{^{#1}}}{#2} #3%
+}{Öderivativesmall}{$\tpartialderiv{\partialdiff{}x}{f}$}{
+  Partial derivative of $f$ with respect to $x$
+}
+
+\newnotationcommand[2]{\gradient}{\mathop{\*\nabla\!_{#1}} #2}{Ögradient}{%
+  $\gradient{\*x}{f}$%
+}{
+  Gradient of a function $f$ with respect to $\*x$
+}
+
 % ======================================================================
 % Binary Operators
 % ======================================================================
