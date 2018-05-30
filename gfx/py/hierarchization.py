@@ -40,7 +40,7 @@ xtl2 = xtl[:k] + ["$x$"] + xtl[k:]
 
 
 for q in range(3):
-  fig = Figure.create(figsize=(2.2, 2.3))
+  fig = Figure.create(figsize=(2.1, 2.3))
   ax = fig.gca()
   
   if q == 0:
