@@ -13,7 +13,7 @@ and second, a new algorithm based on residual interpolation.
 
 
 
-\subsection{Combination Technique and Its Combinatorial Proof}
+\subsection{The Combination Technique and Its Combinatorial Proof}
 \label{sec:431combiTechniqueProof}
 
 
@@ -23,9 +23,8 @@ were developed by Griebel et al. in \cite{Griebel92Combination}
 (for two and three dimensions)
 after the term ``sparse grids'' was coined in 1991 \cite{Zenger91Sparse}.
 However, the combination technique predates the development of sparse grids
-by decades.
-According to \cite{Hegland07Combination},
-it was already mentioned by Smolyak in 1963 \cite{Smolyak63Quadrature}.
+by decades, as it was already mentioned by Smolyak in 1963
+\multicite{Smolyak63Quadrature,Hegland07Combination}.
 Delvos developed and proved the standard combination formula in the
 framework of Boolean interpolation operators in 1982
 \multicite{Delvos82Dvariate,Delvos89Boolean}.
@@ -34,9 +33,9 @@ framework of Boolean interpolation operators in 1982
 
 In the following, we give a formal description of the
 sparse grid combination technique and we outline a new combinatorial proof
-for its correctness.
-We discuss a high-level explanation of the proofs in this section.
-The proofs themselves can be found in \cref{sec:proofCombiTechnique}
+of its correctness.
+While we discuss a high-level explanation of the proofs in this section,
+the proofs themselves can be found in \cref{sec:proofCombiTechnique},
 since most of them are rather technical.
 For simplicity,
 we formulate the combination technique and its proof for regular
@@ -70,7 +69,7 @@ to dimensionally adaptive sparse grids
     via \eqref{eq:hierarchizationProblem} and
     \eqref{eq:hierarchizationInterpolant}
   \end{itemize}
-  and assume that the hierarchical splitting equation
+  and if we assume that the hierarchical splitting equation
   \eqref{eq:hierSplittingMV} holds,
   then the combined and the hierarchical sparse grid interpolants coincide:
   \begin{equation}
@@ -96,9 +95,9 @@ to dimensionally adaptive sparse grids
       \fgintp{\*l'}(\gp{\*l,\*i})\right).\\
       \intertext{%
         The summands $\fgintp{\*l'}(\gp{\*l,\*i})$ of the first inner sum
-        equal $\fcnval{\*l,\*i}$ due to the full grid interpolation
+        each equal $\fcnval{\*l,\*i}$ due to the full grid interpolation
         property \eqref{eq:interpFullGridMV}.
-        Therefore, the first inner sum is equal to the product
+        Therefore, the first inner sum is equal to the product of
         $\fcnval{\*l,\*i}$ with the number of summands:%
       }
       \label{eq:combiTechniqueSplitSum}
@@ -113,10 +112,10 @@ to dimensionally adaptive sparse grids
       \end{split}
     \end{align}
   \end{subequations}
-  We will prove that the sum of the first $\sum$ sign in
+  We will prove that first of the two summands in
   \cref{eq:combiTechniqueSplitSum}
   equals one (see \cref{prop:combiTechniqueOne})
-  and that the sum of the second $\sum$ sign
+  and that the second of the two summands
   equals zero (see \cref{prop:combiTechniqueZero}).
   Consequently, we infer
   \begin{equation}
@@ -202,19 +201,20 @@ generalizes this argument to higher dimensions:
 \paragraph{Canceling out function values}
 
 The second statement about the vanishing second sum in
-\eqref{eq:combiTechniqueSplitSum} is harder to prove.
-It says that the contributions $\fgintp{\*l'}$ of levels $\*l'$
-that do not contain a specific point $\gp{\*l,\*i}$ cancel out,
+\eqref{eq:combiTechniqueSplitSum} is much harder to prove.
+It says that at every grid point $\gp{\*l,\*i}$,
+the contributions $\fgintp{\*l'}$ of levels $\*l'$
+that do not contain that point cancel out,
 which may seem quite surprising.
 The key observation is as follows:
 The values of $\fgintp{\*l'}, \fgintp{\*l''}$ for two levels
 $\*l', \*l''$ are the same at $\gp{\*l,\*i}$,
-if the non-equal entries $l'_t, l''_t$ of the levels are
-greater or equal to $l_t$.
+if all non-equal entries $l'_t, l''_t$ of the levels are
+each greater or equal to $l_t$.
 
 For a higher-level explanation,
 note that the statement $l'_t \ge l_t$ is equivalent to
-$\gp{l_t,i_t} \in \fgset{l'_t}$.
+$\fgset{l'_t} \ni \gp{l_t,i_t}$.
 %i.e., the projection of the grid point $\gp{\*l,\*i}$ onto the
 %$t$-th dimension is contained in the projection of $\fgset{\*l'}$.
 Both $\fgintp{\*l'}, \fgintp{\*l''}$ interpolate at
@@ -222,14 +222,14 @@ $\gp{\*l,\*i}$ when projected onto the $t$-th dimension,
 so their contribution to $\fgintp{\*l'}(\gp{\*l,\*i})$ and
 $\fgintp{\*l''}(\gp{\*l,\*i})$ must be the same.
 Although there may be dimensions $t$ for which
-$\gp{l_t,i_t} \notin \fgset{l'_t}$,
+$\fgset{l'_t} \notni \gp{l_t,i_t}$,
 these dimensions do not matter if $l'_t = l''_t$,
 as the univariate restrictions of $\fgintp{\*l'}, \fgintp{\*l''}$
 interpolate the same data and they are evaluated at the same point
 $\gp{l_t,i_t}$.
 
 One can formalize these considerations by defining an
-equivalence relation on the set of levels, such that the values of
+equivalence relation on the set of levels such that the values of
 $\fgintp{\*l'}$ at $\gp{\*l,\*i}$ are constant
 on the equivalence classes.
 
@@ -270,7 +270,7 @@ on the equivalence classes.
   See \cref{sec:proofCombiTechnique}.
 \end{proof}
 
-By exploiting on the tensor product structure of the basis functions,
+By exploiting the tensor product structure of the basis functions,
 the proof shows an even stronger version, which is shown
 in \cref{fig:combiTechniqueProof}:
 The components $\fgintp{\*l'}$ and $\fgintp{\*l''}$ are equal
@@ -338,7 +338,7 @@ of the equivalence classes:
 The lemma states that every equivalence class $L_0$ is exactly the
 set of the levels whose entries are equal in some dimensions
 (which are contained in $T_{L_0}$)
-and whose entries are greater or equal than $l_t$ in all the other dimensions.
+and whose entries are greater or equal than $l_t$ in all other dimensions.
 While this statement may seem intuitively correct,
 the proof is rather technical.
 Finally, we are now able to show that the second sum in
@@ -385,7 +385,7 @@ As shown in \cref{sec:42fullGrids}, we can easily calculate these
 surpluses with the unidirectional principle in
 \cref{alg:unidirectionalPrinciple}.
 The surpluses are then combined with the same combination formula
-as for in \thmref{thm:combiTechnique}.
+as in \thmref{thm:combiTechnique}.
 Note that it is imperative to employ the hierarchical basis functions
 $\basis{\*l,\*i}$ with $\*l = \*0, \dotsc, \*l'$ and $\*i \in I_{\*l}$
 and not the nodal basis
@@ -470,9 +470,10 @@ The proof of the following proposition can be generalized accordingly.
     = \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
     \surplus[(\*l')]{\*l,\*i} \basis{\*l,\*i}
   \end{equation}
-  where the surpluses have been extended with zero by
-  \cref{line:algCombiTechnique2}.
-  \Thmref{thm:combiTechnique} now allows to write the hierarchical
+  where the surpluses have been extended
+  from $\*l = \*0, \dotsc, \*l'$ to all $\*l$ with $\normone{\*l} \le n$
+  by zero in \cref{line:algCombiTechnique2}.
+  \Cref{thm:combiTechnique} now allows to write the hierarchical
   interpolant $\regsgintp{n}{d}$ in terms of the full grid components:
   \begin{subequations}
     \begin{align}
@@ -504,7 +505,6 @@ The proof of the following proposition can be generalized accordingly.
   As \eqref{eq:propCorrectnessAlgCombiTechnique1}
   equals $\regsgintp{n}{d}$ and has the same form,
   the coefficients $\linout{\*l,\*i}$
-  (which are the output of \cref{alg:combiTechnique})
   must coincide with the surpluses $\surplus{\*l,\*i}$.
 \end{proof}
 
@@ -513,7 +513,7 @@ The proof of the following proposition can be generalized accordingly.
 \subsection{Hierarchization with Residual Interpolation}
 \label{sec:433residualInterpolation}
 
-Another possible method to hierarchize function values on
+Another method to hierarchize function values on
 dimensionally adaptive sparse grids is the
 \term{method of residual interpolation}.
 The advantage over the combination technique is that
@@ -526,21 +526,22 @@ summands with $q \ge 1$ in \eqref{eq:combiTechnique}).
 \paragraph{Active nodal spaces}
 
 \Cref{alg:residualInterpolation} describes the procedure of the method,
-given the levels $L$ contained in the sparse grid
-(see \eqref{eq:dimensionallyAdaptiveSG})
-and function values $\vlinin$ corresponding to the grid points.
+given the function values $\vlinin$ corresponding to the grid points
+and the levels $L$ contained in the sparse grid
+(see \eqref{eq:dimensionallyAdaptiveSG}).
 The list $\*l^{(1)}, \dotsc, \*l^{(m)}$ of active nodal spaces
 in \cref{line:algResidualInterpolation1} is determined by the condition
 \begin{equation}
+  \label{eq:activeNodalSpaces}
   \bigcup_{j=1}^m \{\*l \in \natz^d \mid \*l \le \*l^{(j)}\} = L,\quad
   \falarge{j_1 \not= j_2}{\lnot(\*l^{(j_1)} \le \*l^{(j_2)})}.
 \end{equation}
 This means that the corresponding sparse grid $\sgset$
 is the (non-disjoint) union of the full grid sets $\fgset{\*l^{(j)}}$
 ($j = 1, \dotsc, m$)
-and no full grid set is contained is another
-(no full grid set can be omitted without
-removing points from the union $\sgset$).
+and no full grid set is contained is another, i.e.,
+no full grid set can be omitted without
+removing points from the union $\sgset$.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -560,7 +561,7 @@ removing points from the union $\sgset$).
       }
       \State{%
         Compute list $\*l^{(1)}, \dotsc, \*l^{(m)}$
-        of active nodal spaces (see text)%
+        of active nodal spaces from $L$ (see \eqref{eq:activeNodalSpaces})%
         %(such that $\bigcup_{j=1}^m \{\*l \mid \*l \le \*l^{(j)}\} = L$)%
       }
       \label{line:algResidualInterpolation1}
@@ -626,9 +627,9 @@ a vector $(r^{(j)}(\gp{\*l,\*i}))_{(\*l,\*i) \in \liset}$ of residuals
 and interpolating the residual data subsequently on the active nodal spaces.
 Again, note that it is necessary to compute the coefficients
 $\surplus[(j)]{\*l,\*i}$ in the hierarchical basis, despite interpolating
-on the nodal space.
-In \cref{chap:a0proofs}, we prove the following invariant of the algorithm that
-can be used to show its correctness:
+on the full grid $\fgset{\*l^{(j)}}$.
+In \cref{chap:a0proofs}, we prove that the algorithm satisfies
+the following invariant, which can be used to show its correctness:
 
 \begin{restatable}[invariant of residual interpolation]{%
   proposition%
@@ -647,24 +648,27 @@ can be used to show its correctness:
   For $j = 1, \dotsc, m$, it holds
   \begin{subequations}
     \label{eq:propInvariantResidualInterpolationStatements}
-    \begin{align}
+    \begin{alignat}{4}
       \label{eq:propInvariantResidualInterpolation1}
       r_{\*l^{(j)}}^{(j-1)}(\gp{\*l,\*i})
-      &= 0,
-      &&\*l \le \*l^{(j')},\; \*i \in \hiset{\*l},
+      &= 0,\quad
+      &&\*l \le \*l^{(j')},\;
+      &&\*i \in \hiset{\*l},\quad
       &j'
       &= 1, \dotsc, j - 1,\\
       \label{eq:propInvariantResidualInterpolation2}
       r^{(j)}(\gp{\*l,\*i})
-      &= 0,
-      &&\*l \le \*l^{(j')},\; \*i \in \hiset{\*l},
+      &= 0,\quad
+      &&\*l \le \*l^{(j')},\;
+      &&\*i \in \hiset{\*l},\quad
       &j'
       &= 1, \dotsc, j,\\
       \label{eq:propInvariantResidualInterpolation3}
       r^{(j)}(\gp{\*l,\*i})
-      &= \fcnval{\*l,\*i} - f^{\sparse,(j)}(\gp{\*l,\*i}),
-      &&\*l \in L,\; \*i \in \hiset{\*l},&&
-    \end{align}
+      &= \fcnval{\*l,\*i} - f^{\sparse,(j)}(\gp{\*l,\*i}),\quad
+      &&\*l \in L,\;
+      &&\*i \in \hiset{\*l},&&
+    \end{alignat}
   \end{subequations}
   where
   \begin{equation}
@@ -721,9 +725,9 @@ can be used to show its correctness:
   \eqref{eq:proofCorAlgResidualInterpolationCorrectness1}
   with unique surpluses $\surplus{\*l',\*i'}$ such that the function values
   are interpolated (see \eqref{eq:hierarchizationProblem}),
-  the coefficients $\linout{\*l,\*i}$
+  the coefficients $\linout{\*l',\*i'}$
   (which are the output of \cref{alg:residualInterpolation})
-  must coincide with the surpluses $\surplus{\*l,\*i}$.
+  must coincide with the surpluses $\surplus{\*l',\*i'}$.
 \end{proof}
 
 \Cref{prop:invariantResidualInterpolation} shows that
@@ -735,11 +739,12 @@ After interpolating $r^{(j-1)}$ on the grid $\fgset{\*l^{(j)}}$
 to obtain the function $r_{\*l^{(j)}}^{(j-1)}$
 and subtracting the resulting values from the old residual values,
 the new residual values $r^{(j)}(\gp{\*l,\*i})$ vanish
-not only on the grid $\fgset{\*l^{(j)}}$,
-but also on all previous grids $\fgset{\*l^{(j')}}$, $j' \le j$
+not only on the grid $\{(\*l^{(j)}, \*i) \mid \*i \in \hiset{\*l^{(j)}}\}$,
+but also on all previous grids
+$\{(\*l^{(j')}, \*i) \mid \*i \in \hiset{\*l^{(j')}}\}$, $j' \le j$
 (\cref{eq:propInvariantResidualInterpolation2}).
 The proof of \cref{prop:invariantResidualInterpolation}
-shows this exploiting the auxiliary statement of
+shows this by exploiting the auxiliary statement of
 \cref{eq:propInvariantResidualInterpolation1}
 and the tensor product structure of the hierarchical basis.
 
@@ -749,7 +754,7 @@ on a two-dimensional sparse grid can be seen in
 Note that
 $\surplus[(j)]{\*l,\*i} \not= 0$ can only be true if $\*l \le \*l^{(j)}$.
 Therefore, if $(\*l, \*i)$ is not contained in one of the
-grids that are processed in one of the remaining iterations,
+grids that are processed in one of the remaining iterations $j+1, \dotsc, m$,
 then $\linout[(j)]{\*l,\*i}$ is already equal to the correct surplus
 $\surplus{\*l,\*i}$,
 where $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
@@ -767,8 +772,8 @@ denotes the intermediate result obtained after $j$ iterations.
     In this figure, we use
     $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
     as an abbreviation.
-    The nodal spaces are processed from the bottom left to
-    the top right corner.
+    The order of the nodal spaces (here: bottom left to top right)
+    does not matter.
     The data $\linout[(j)]{\*l,\*i}$
     corresponding to \textcolor{C0}{blue grid points}
     will not be modified in the remaining iterations

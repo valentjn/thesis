@@ -22,16 +22,20 @@ will follow from the considerations in \cref{sec:45spatAdaptiveUP}.
   ]{%
     Application of a linear operator $\linop$
     on two-dimensional sparse grid data with the unidirectional principle.
-    First, the univariate operator $\upopuv{1}{\lisetpole}$ is applied on
+    \emph{Left:}
+    The univariate operator $\upopuv{1}{\lisetpole}$ is applied on
     the input data $\vlinin$
-    along poles $\lisetpole$ of the first dimension $x_1$ \emph{(left)}.
-    All grid points of the same color are part of the same pole
-    (equivalence classes of $\samepole{t}$ in
-    \cref{alg:unidirectionalPrinciple}).
-    Second, the univariate operator $\upopuv{2}{\lisetpole}$ is applied on the
+    along poles $\lisetpole$ of the first dimension $x_1$.
+    \emph{Center:}
+    The univariate operator $\upopuv{2}{\lisetpole}$ is applied on the
     resulting intermediate data $\vlinout[(1)]$
-    along poles $\lisetpole$ of the second dimension $x_2$ \emph{(center)}.
-    This gives the final values $\vlinout = \linop[\vlinin]$ \emph{(right)}.%
+    along poles $\lisetpole$ of the second dimension $x_2$.
+    \emph{Right:}
+    Final values $\vlinout = \linop[\vlinin]$ after the application
+    on both dimensions.
+    All grid points of the same color are part of the same pole $\lisetpole$
+    (equivalence classes of $\samepole{t}$ in
+    \cref{alg:unidirectionalPrinciple}).%
   }%
   \label{fig:unidirectionalPrinciple}%
 \end{figure}
@@ -44,14 +48,15 @@ that specifies the order of dimensions in which the \up should be applied.
 We denote with $\upopuv{t_j}{\lisetpole}$ the one-dimensional version of $\linop$
 applied in dimension $t_j$ ($j = 1, \dotsc, d$) on the pole $\lisetpole$.
 Formally, a pole is an equivalence class of the
-\term{pole equivalence relation} $\samepole{t_j}$ on $\liset$
-(i.e., a subset of $\samepole{t_j}$
-in which all points are in relation to each other):
+\term{pole equivalence relation} $\samepole{t_j}$ on $\liset$:
+%(i.e., a subset of $\liset$
+%of all points that are in relation to each other):
 \begin{equation}
   \label{eq:poleEquivalenceRelation}
   \*k' \samepole{t_j} \*k'' \iff \*k'_{-t_j} = \*k''_{-t_j},\quad
   \*k', \*k'' \in \liset.
 \end{equation}
+We prove the correctness of the \up with the following invariant:
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -93,8 +98,6 @@ in which all points are in relation to each other):
   \label{alg:unidirectionalPrinciple}%
 \end{algorithm}
 
-We prove the correctness of the \up with the following invariant:
-
 \begin{proposition}[invariant of unidirectional principle for hierarchization]
   \label{prop:invariantUnidirectionalPrinciple}
   Let $\linop$ be the hierarchization operator on a full grid,
@@ -114,7 +117,7 @@ We prove the correctness of the \up with the following invariant:
     = \fcnval{\*k'},\quad
     \*k' = \*0, \dotsc, \*2^\*l,
   \end{equation}
-  where $(\*k_T,\*k'_{-T})$ is defined to be the index $\*k''$
+  where ``$(\*k_T,\*k'_{-T})$'' is shorthand for the index $\*k''$
   with $\*k''_T := \*k_T$ and $\*k''_{-T} := \*k'_{-T}$.
 \end{proposition}
 
@@ -125,36 +128,44 @@ We prove the correctness of the \up with the following invariant:
   and we exploit the tensor product structure of the basis
   to write the \lhs of the assertion for $j$
   and arbitrary $\*k' = \*0, \dotsc, \*2^\*l$ as
-  \begin{align}
+  \begin{equation}
+    \label{eq:proofPropInvariantUnidirectionalPrinciple1}
     \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
     \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
-    &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
-    \basis{\*k_{T'}}(\gp{\*k'_{T'}}) \cdot
+    = \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
+    \basis{\*k_{T'}}(\gp{\*k'_{T'}})
     \sum_{k_{t_j}=0}^{2^{l_{t_j}}}
-    \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).\\
-    \intertext{%
-      If we choose the equivalence class
-      $\lisetpole := \eqclass{(\*k_T,\*k'_{-T})}{\samepole{t_j}}$
-      ($\*k_T$ arbitrary),
-      then the sum over $k_{t_j}$ equals
-      $\sum_{\*k \in \lisetpole}
-      \linout[(j)]{\*k} \basis{k_{t_j}}(\gp{k'_{t_j}})
-      %= ((\upopuv{t_j}{\lisetpole})^{-1}
-      %\Bigl[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Bigr])_{k'_{t_j}}
-      %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
-      = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}$ ($\ast$)
-      by the univariate operator $T_{t_j}$
-      (\cref{line:algUnidirectionalPrinciple1} of
-      \cref{alg:unidirectionalPrinciple}).
-      We can conclude that the \lhs equals%
-    }
-    &= \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
+    \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).
+  \end{equation}
+  If we choose the equivalence class
+  $\lisetpole := \eqclass{(\*k_T,\*k'_{-T})}{\samepole{t_j}}$
+  ($\*k_T$ arbitrary),
+  then the inner sum over $k_{t_j}$ equals
+  \begin{equation}
+    \label{eq:proofPropInvariantUnidirectionalPrinciple2}
+    \sum_{\*k'' \in \lisetpole}
+    \linout[(j)]{\*k''} \basis{k''_{t_j}}(\gp{k'_{t_j}})
+    %= ((\upopuv{t_j}{\lisetpole})^{-1}
+    %\Bigl[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Bigr])_{k'_{t_j}}
+    %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
+    = \Bigl((\upopuv{t_j}{\lisetpole})^{-1}
+    \Bigl[(\linout[(j)]{\*k''})_{\*k'' \in \lisetpole}\Bigr]
+    \Bigr)_{k'_{t_j}}
+    = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}
+  \end{equation}
+  by \cref{line:algUnidirectionalPrinciple1} of
+  \cref{alg:unidirectionalPrinciple}.
+  We can conclude that the \lhs
+  \cref{eq:proofPropInvariantUnidirectionalPrinciple1} equals
+  \begin{equation}
+    \sum_{\*k_{T'}=\*0}^{\*2^{\*l_{T'}}}
     \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}
     \basis{\*k_{T'}}(\gp{\*k'_{T'}}),
-  \end{align}
+  \end{equation}
   which, by the induction hypothesis, equals $\fcnval{\*k'}$ as desired
   (if $j > 1$).
-  The same reasoning for $(\ast)$ can be used
+  The same reasoning for
+  \eqref{eq:proofPropInvariantUnidirectionalPrinciple2} can be used
   to establish the base case for $j = 1$.
 \end{proof}
 
@@ -178,19 +189,14 @@ We prove the correctness of the \up with the following invariant:
 
 \paragraph{Complexity}
 
-We compare the complexity of the \up for hierarchization compared
-to directly solving the system \eqref{eq:hierarchizationSLE} of
+We compare the complexity of the \up for hierarchization with
+the direct solution of the system \eqref{eq:hierarchizationSLE} of
 linear equations.
 If we assume that $d$ is constant and that
 $\linop$ and $\upopuv{t_j}{\lisetpole}$ apply Gaussian elimination to
 solve the multivariate and univariate systems, respectively,
 then directly solving \eqref{eq:hierarchizationSLE} takes
-$\landauO{\ngp^2 (\ngp + d)}$ time%
-\footnote{%
-  $\landauO{\ngp^2 d}$ for calculating $\intpmat$ and
-  $\landauO{\ngp^3}$ for solving the system.
-}
-and
+$\landauO{\ngp^2 (\ngp + d)}$ time and
 $\landauO{\ngp^2}$ memory.
 In contrast, the \up only requires
 $\landauO{\ngp \sum_t \ngp_t^2}$ time%
