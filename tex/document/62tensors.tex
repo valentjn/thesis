@@ -3,10 +3,10 @@
 
 \paragraph{Optimization process}
 
-During the solution process of \eqref{eq:topoOptProblemDiscrete},
+During the process of solving \eqref{eq:topoOptProblemDiscrete},
 optimization algorithms typically
 evaluate the objective function $\compliance(\*x^{(1)}, \dotsc, \*x^{(M)})$
-at iteratively different \term{micro-cell parameter combinations}
+iteratively at different \term{micro-cell parameter combinations}
 $(\*x^{(1)}, \dotsc, \*x^{(M)}) \in (\real^d)^M$.
 Every evaluation of $\compliance$ corresponds to the solution of a
 macro-problem.
@@ -25,13 +25,14 @@ the following.
 
 \paragraph{Drawback 1: Computation time}
 
-First, this approach is typically computationally infeasible.
+First, this approach is computationally infeasible
+even for simple micro-cell models and optimization scenarios.
 The computation of a single elasticity tensor usually takes seconds to
 minutes.
-All $M$ micro-cell problems per optimization iterations
+All $M$ micro-cell problems per optimization iteration
 can be solved in parallel without any
 communication (embarrassingly parallel).
-However, $M$ is usually in the range of thousands and
+However, $M$ is typically in the range of thousands and
 there are thousands or tens of thousands optimization iterations
 (the optimization problem is $(d \cdot M)$-dimensional!).
 This implies that the overall computation may still take
@@ -55,21 +56,21 @@ objective function and of the constraints, i.e.,%
   \partialderiv{\partialdiff{} x_t}{\etensor^{(q)}}(\*x^{(q)}),\quad
   \partialderiv{\partialdiff{} x_t}{\dens^{(q)}}(\*x^{(q)}),\qquad
   q = 1, \dotsc, M,\quad
-  t = 1, \dotsc, d,
+  t = 1, \dotsc, d.
 \end{equation}
-where $\etensor^{(q)}$ is the elasticity tensor and
-$\dens^{(q)}$ is the density of the $q$-th macro-cell.
+%where $\etensor^{(q)}$ is the elasticity tensor and
+%$\dens^{(q)}$ is the density of the $q$-th macro-cell.
 However, in general, both gradients are unavailable and
 have to be approximated by finite differences.
 This introduces new error sources and
 increases the number of elasticity tensors to be evaluated
-by the factor of $2d$ (central differences),
+by the factor of $2d + 1$ (central differences),
 further increasing the time-to-solution.
-Additionally, the number of optimization iterations to
+Additionally, the number of optimization iterations necessary to
 achieve convergence might increase,
 if there are discontinuities in the objective function
-or its gradient
-(which could already be caused by the inexact solution of the \fem).
+or its gradient.
+Such discontinuities can already be caused by the inexact solution of the \fem.
 If we need Hessians or other higher-order derivatives,
 then all the mentioned issues even worsen.
 
@@ -83,7 +84,7 @@ then all the mentioned issues even worsen.
 As a remedy, we replace the costly evaluation of the
 elasticity tensors $\etensor^{(q)}$ with cheap surrogates.
 We assume that all macro-cells use the same micro-cell model.
-Consequently, the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro cell
+Consequently, the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro-cell
 with the micro-cell parameter $\*x^{(q)} \in \clint{\*0, \*1}$
 can be written as the value $\etensor(\*x^{(q)})$ of some function
 $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
@@ -106,17 +107,18 @@ the function to be interpolated is not scalar-valued, but vector-valued.
 This means that we have to construct $m$ sparse grid interpolants
 $\etensorentry[\sparse]{j}$
 for the $m$ components $\etensorentry{j}$ of $\etensor$ ($j = 1, \dotsc, m$).
-Note that one could generate different sparse grids for the
+Note that one could generate different spatially adaptive sparse grids for the
 different components $\etensorentry[\sparse]{j}$.
 However, it is not possible to evaluate only specific entries of $\etensor$
 without also evaluating all other entries,
-which means that we would waste computation time by selecting only
+which means that we would waste computation resources by selecting only
 a subset of the calculated entries.
 Therefore, we use the same grid for all components.
 
 Additionally, we approximate the density $\dens^{(q)}$
 of the $q$-th macro-cell with a surrogate using
-B-splines on the same sparse grid for reasons of implementation,
+B-splines on the same sparse grid as for $\etensorentry[\sparse]{j}$
+for reasons of implementation,
 resulting in $m + 1$ sparse grid interpolants in total.
 From a theoretical perspective, this is not necessary,
 since the density can be calculated explicitly with simple formulas
@@ -132,7 +134,7 @@ Our approach has multiple obvious advantages:
   once in an \term{offline step} before the optimization algorithm starts.
   During the optimization \term{(online phase)},
   only inexpensive evaluations of $\etensor[\sparse]$ are performed,
-  which saves much time.
+  saving much computation time.
   
   \item
   Sparse grids help to reduce the curse of dimensionality, which prohibits
@@ -149,7 +151,7 @@ Our approach has multiple obvious advantages:
   In addition, we can calculate its derivatives
   $\tpartialderiv{\partialdiff{} x_t}{\etensor[\sparse]}(\*x^{(q)})$
   fast and explicitly,
-  accelerating the speed of convergence of the optimization method.
+  accelerating the speed of convergence of the optimization algorithm.
 \end{itemize}
 
 
@@ -159,13 +161,14 @@ Our approach has multiple obvious advantages:
 
 \paragraph{Positive definiteness of elasticity tensors}
 
-Unfortunately, just replacing the elasticity tensor with
-the B-spline surrogate often does not lead to correct results in practice.
+Unfortunately, just replacing elasticity tensors with
+B-spline surrogates often does not lead to correct results in practice.
 Experiments show that only for most regular sparse grids and
-for some spatially adaptive sparse grids \cite{Valentin16Hierarchical},
-the optimization algorithm converges to an optimal point.
+for some spatially adaptive sparse grids,
+the optimization algorithm converges to an optimal point
+\cite{Valentin16Hierarchical}.
 The optimization algorithm crashes for most spatially adaptive grids,
-not able to find any meaningful optimum.
+not being able to find any meaningful optimum.
 %
 The root of the problem proves to be that for specific
 $\*x \in \clint{\*0, \*1}$,
@@ -190,9 +193,9 @@ positive definiteness.
 A counterexample is shown in \cref{fig:cholesky1},
 which displays the minimal eigenvalue of the elasticity tensor surrogate
 resulting from interpolation on a regular sparse grid.
-The positivity of the diagonal is a necessary condition
-for positive definiteness.
-This means that small oscillations of the interpolant of some entries
+As the positivity of the diagonal is a necessary condition
+for positive definiteness,
+small oscillations of the interpolant of some entries
 already make the whole elasticity tensor non-positive-definite.
 
 \begin{figure}
@@ -234,26 +237,27 @@ These oscillations occur preferably near the boundary of the domain
 $\clint{\*0, \*1}$, such that there are larger regions
 where the interpolated tensor is not positive definite anymore.
 The reason is two-fold:
-First, sparse grids notoriously have a bias for the center of the domain,
-as they place only few points near the boundary \cite{Pflueger10Spatially},
-which leads to a loss of interpolation accuracy near the boundary,
-compared to the center of $\clint{\*0, \*1}$.
+First, sparse grids are notoriously biased towards the center of the domain,
+as they place only few points near the boundary \cite{Pflueger10Spatially}.
+This leads to a loss of interpolation accuracy near the boundary
+when compared to the center of $\clint{\*0, \*1}$.
 Second, both the minimal eigenvalue of $\etensor(\*x)$ and the norm of its
 gradient with respect to $\*x$ is small near $x_1 = 0$ or $x_2 = 0$.
-Consequently, the ``surface'' of $\etensor(\*x)$ is rather flat in these
-regions and almost vanishes, making it easy for the eigenvalues of a
-surrogate function $\etensor[\sparse](\*x)$ to drop below zero.
+Consequently, the ``surface'' of the minimal eigenvalue function
+is rather flat in these regions and almost vanishes,
+facilitating the existence of negative eigenvalues of
+surrogate functions $\etensor[\sparse](\*x)$.
 
 Note that for most micro-cell models,
 the optimization algorithm often queries the objective function
 $\compliance(\*x^{(1)}, \dotsc, \*x^{(M)})$ for micro-cell parameter
-combinations where many of the points $\*x^{(j)}$ are near the boundary
+combinations for which many of the points $\*x^{(j)}$ are near the boundary
 of $\clint{\*0, \*1}$.
 This is because many of the macro-cells will either be empty or
 fully filled with material, which usually corresponds to micro-cell
 parameters near zero or one, respectively.
-Thus, $\etensor[\sparse]$ is often evaluated in the regions of indefiniteness,
-which further worsens the issue.
+Thus, $\etensor[\sparse]$ is frequently evaluated in the regions of
+indefiniteness, which further worsens the issue.
 
 \paragraph{Positivity-preserving methods}
 
@@ -261,20 +265,26 @@ Even in one dimension, it cannot be guaranteed that the interpolant of
 positive data remains positive,
 which is a key problem in the estimation of probability densities
 \multicite{Pflueger10Spatially,Franzelin16From,Griebel10Finite}.
-Just clamping the interpolated values via $\max(\cdot, 0)$ often
-does not help:
+Just clamping the interpolated values via $\max(\cdot, 0)$ does not help:
 In our application, the tensor may still be indefinite;
 additionally, the calculated gradients of the interpolants do not match
 the actual gradients anymore.
 In density estimation, clamping a density-like function changes its
-integral, making it necessary to calculate a normalization constant
+integral, making it necessary to recalculate its normalization constant
 \cite{Franzelin17Data}.
 
 One possible workaround is applying an injective and continuous transformation
-$T\colon \posreal \to \real$ on the density values (e.g., $\ln$),
+$T\colon \posreal \to \real$ on the positive values (e.g., $\ln$),
 then interpolating the resulting values, and finally
-applying the inverse transformation $T^{-1}\colon T(\posreal) \to \posreal$
-on the interpolated values (e.g., $\exp$).
+applying the inverse transformation $T^{-1}\colon \real \to \posreal$
+on the interpolated values (e.g., $\exp$).%
+\footnote{%
+  Formally, the inverse function $T^{-1}\colon T(\posreal) \to \posreal$
+  is only defined on the image $T(\posreal)$ of $T$,
+  which might not be the whole real line.
+  However, we assume that $T^{-1}$ can be ``reasonably'' extended to $\real$
+  (e.g., $T := \sqrt{\cdot}$ and $T^{-1} = ({\cdot})^2$).%
+}
 %In density estimation, this method might introduce new unwanted modes into the
 %probability distribution.
 For the piecewise linear basis on sparse grids, another approach has been
@@ -351,8 +361,8 @@ the resulting elasticity tensor surrogate $\etensor[\chol,\sparse]$
 is positive semidefinite on the whole domain and
 positive definite almost everywhere:
 The surrogate $\etensor[\chol,\sparse](\*x)$ is singular if and only if
-$\cholfactor[\sparse](\*x)$ is singular, which is only the case on a
-null set of $\clint{\*0, \*1}$.
+$\cholfactor[\sparse](\*x)$ is singular, which is in general
+only the case on a negligible null set of $\clint{\*0, \*1}$.
 
 Another advantage of this approach is that not only the
 positive definiteness, but also the explicit differentiability

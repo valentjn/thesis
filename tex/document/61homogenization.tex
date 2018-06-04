@@ -165,12 +165,13 @@ in $\real^{6 \times 6}$ (for $\dimdomain = 3$).%
   One can reduce the size of the tensor by exploiting various symmetries
   \cite{Huebner14Mehrdimensionale}
   to obtain $6$ or $21$ stiffness coefficients
-  in two or three dimensions, respectively,
-  which can then be written as a symmetric matrix.%
+  in two or three dimensions, respectively.
+  These coefficients can then be expressed as a symmetric matrix.%
 }
 To simplify the following considerations,
 we assume that $\dimdomain = 3$, i.e.,
-$\etensor{(q)} \in \real^{6 \times 6}$.
+$\etensor^{(q)} \in \real^{6 \times 6}$.
+% caution: if not first \fem, then we need "an" before it
 They are usually computed as the solution of a \fem problem
 \term{(micro-problem)}.
 Once all elasticity tensors $\etensor^{(q)}$ are known,
@@ -195,10 +196,10 @@ two-scale discretization process has the form
   \end{gather}
 \end{subequations}
 Here, $\dens^{(q)}(\*x^{(q)}) \in \clint{0, 1}$ is the
-density of the $q$-th macro cell with micro-cell parameter $\*x^{(q)}$
+density of the $q$-th macro-cell with micro-cell parameter $\*x^{(q)}$
 (i.e., the fraction of material volume of one micro-cell
 with respect to its total volume)
-and $\densmean(\*x^{(1)}, \dotsc, \*x^{(M)})$ is the resulting
-total mean density.
+and $\densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \in \clint{0, 1}$
+is the resulting total mean density.
 This discretized optimization problem can now be implemented and
 solved numerically.
