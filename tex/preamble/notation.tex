@@ -812,6 +812,12 @@
   Objective function $\objfun\colon \clint{\*0, \*1} \to \real$
 }
 
+\newnotationcommand{\confun}{\*g}{g}{$\confun$}{
+  Constraint function $\confun\colon \clint{\*0, \*1} \to \real^m$
+  (optimal solutions $\*x \in \clint{\*0, \*1}$ must satisfy
+  $\confun(\*x) \le \*0$)
+}
+
 \newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\*l}$}{
   Full grid interpolant of $\objfun$ in $\ns{\*l}$
 }
