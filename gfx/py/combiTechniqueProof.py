@@ -72,7 +72,7 @@ yOffsetGlobal = schemeSize
 
 x = helper.grid.getCoordinates(xl, xi)
 
-figureScale = 1.4
+figureScale = 1.39
 fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none", preamble=r"""
 \usepackage{contour}
 \contourlength{1.5pt}
