@@ -20,20 +20,20 @@ harder if we operate on spatially adaptive sparse grids.
 An exception is the case of piecewise linear basis functions ($p = 1$),
 where we are still able to apply the \up,
 as we will show in \cref{sec:45spatAdaptiveUP}.
-
+%
 In this section, we study one approach to hierarchize on
 spatially adaptive sparse grids,
 namely transforming the hierarchical basis to so-called fundamental bases
 to enable a \bfs algorithm for hierarchization.
-Another approach, which is based on the \up\punctfix{,}
-will be shown in the next section.
+%Another approach, which is based on the \up\punctfix{,}
+%will be shown in the next section.
 
 The approach in this section has already been published
 \cite{Valentin18Fundamental}.
 Again, note that while B-splines are our target application,
 the considerations in this chapter are fully independent of the choice of
-basis functions $\basis{\*l,\*i}$ 
-(as long as they have tensor product structure).
+basis functions $\basis{\*l,\*i}$,
+as long as they have tensor product structure.
 Although we do not state it explicitly, it is possible to employ
 different types of basis functions $\basis{l_t,i_t}$ in different
 dimensions, e.g., B-splines of different degrees to enable $p$-adaptivity.
@@ -70,7 +70,6 @@ new basis functions $\fundbasis{l',i'}\colon \clint{0, 1} \to \real$
 We call \eqref{eq:fundamentalProperty} \term{fundamental property}
 and functions $\fundbasis{l',i'}$
 that fulfill this property \term{fundamental basis functions.}
-\todo{check ``that'' comma}
 The first \cref{eq:fundamentalProperty1} ensures that
 basis functions of level $l'$ vanish at
 grid points of coarser levels $l < l'$.

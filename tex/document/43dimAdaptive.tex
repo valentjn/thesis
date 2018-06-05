@@ -85,34 +85,34 @@ to dimensionally adaptive sparse grids
   into levels $\*l'$ whose full grid sets $\fgset{\*l'}$
   contain $\gp{\*l,\*i}$ and levels whose full grid sets
   do not contain $\gp{\*l,\*i}$:
-  \begin{subequations}
-    \begin{align}
+  \begin{equation}
+    \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
+    = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \left(
+    \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
+    \fgintp{\*l'}(\gp{\*l,\*i}) +
+    \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+    \fgintp{\*l'}(\gp{\*l,\*i})\right).
+  \end{equation}
+  The summands $\fgintp{\*l'}(\gp{\*l,\*i})$ of the first inner sum
+  each equal $\fcnval{\*l,\*i}$ due to the full grid interpolation
+  property \eqref{eq:interpFullGridMV}.
+  Therefore, the first inner sum is equal to the product of
+  $\fcnval{\*l,\*i}$ with the number of summands:
+  \begin{equation}
+    \label{eq:combiTechniqueSplitSum}
+    \begin{split}
       \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
-      &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \left(
-      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
-      \fgintp{\*l'}(\gp{\*l,\*i}) +
+      &= \fcnval{\*l,\*i} \cdot \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+      \setsize{
+        \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
+      } +{}\\
+      &\qquad\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
       \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
-      \fgintp{\*l'}(\gp{\*l,\*i})\right).\\
-      \intertext{%
-        The summands $\fgintp{\*l'}(\gp{\*l,\*i})$ of the first inner sum
-        each equal $\fcnval{\*l,\*i}$ due to the full grid interpolation
-        property \eqref{eq:interpFullGridMV}.
-        Therefore, the first inner sum is equal to the product of
-        $\fcnval{\*l,\*i}$ with the number of summands:%
-      }
-      \label{eq:combiTechniqueSplitSum}
-      \begin{split}
-        &= \fcnval{\*l,\*i} \cdot \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
-        \setsize{
-          \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
-        } +{}\\
-        &\qquad\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
-        \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
-        \fgintp{\*l'}(\gp{\*l,\*i}).
-      \end{split}
-    \end{align}
-  \end{subequations}
-  We will prove that first of the two summands in
+      \fgintp{\*l'}(\gp{\*l,\*i}).
+    \end{split}
+  \end{equation}
+  After this sketch of proof,
+  we will prove that the first of the two summands in
   \cref{eq:combiTechniqueSplitSum}
   equals one (see \cref{prop:combiTechniqueOne})
   and that the second of the two summands
@@ -388,8 +388,8 @@ The surpluses are then combined with the same combination formula
 as in \thmref{thm:combiTechnique}.
 Note that it is imperative to employ the hierarchical basis functions
 $\basis{\*l,\*i}$ with $\*l = \*0, \dotsc, \*l'$ and $\*i \in I_{\*l}$
-and not the nodal basis
-(which would be $\basis{\*l',\*i'}$ with $\*i' = \*0, \dotsc, \*2^{\*l'}$).
+and not the nodal basis,
+i.e., $\basis{\*l',\*i'}$ with $\*i' = \*0, \dotsc, \*2^{\*l'}$.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -517,7 +517,7 @@ Another method to hierarchize function values on
 dimensionally adaptive sparse grids is the
 \term{method of residual interpolation.}
 The advantage over the combination technique is that
-it only needs to operate on the so-called \term{active nodal spaces.}
+it only needs to operate on so-called \term{active nodal spaces.}
 In contrast, the combination technique needs to perform computations
 on additional non-active nodal subspaces
 (for the regular sparse grid case:
@@ -525,7 +525,8 @@ summands with $q \ge 1$ in \eqref{eq:combiTechnique}).
 
 \paragraph{Active nodal spaces}
 
-\Cref{alg:residualInterpolation} describes the procedure of the method,
+\Cref{alg:residualInterpolation} describes the procedure of
+the method of residual interpolation,
 given the function values $\vlinin$ corresponding to the grid points
 and the levels $L$ contained in the sparse grid
 (see \eqref{eq:dimensionallyAdaptiveSG}).
@@ -539,7 +540,7 @@ in \cref{line:algResidualInterpolation1} is determined by the condition
 This means that the corresponding sparse grid $\sgset$
 is the (non-disjoint) union of the full grid sets $\fgset{\*l^{(j)}}$
 ($j = 1, \dotsc, m$)
-and no full grid set is contained is another, i.e.,
+and no full grid set is contained in another, i.e.,
 no full grid set can be omitted without
 removing points from the union $\sgset$.
 
