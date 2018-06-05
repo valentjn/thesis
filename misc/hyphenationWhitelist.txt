@@ -74,7 +74,7 @@ sur-plus-es
 tech-nique
 the-sis
 translation-invariant
-two-dimensional
+two-dimen-sional
 uni-vari-ate
 us-ing
 ver-sion
