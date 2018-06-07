@@ -43,7 +43,7 @@
   \end{equation}
   where $2^d$ is the summand for $\*l = \*0$
   (number $\setsize{\hiset{\*0}}$ of corners of $\clint{\*0, \*1}$).
-  The limits of the $m$ sum are $d-q$,
+  The limits of the sum over $m$ are $d-q$,
   since there must be at least $d-q$ entries $\ge 1$ in a level vector
   with $q$ zero entries, and $n-b-q+1$,
   since $m = \normone{\*l}
@@ -56,9 +56,11 @@
   = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
   = 2^{\normone{\*l} - d + 2N_\*l}$.
   The number of innermost summands is given by
-  $\setsize{\{\*l \in \natz^d \mid N_\*l = q,\; \normone{\*l} = m\}}
-  = \binom{d}{q} \setsize{\{\*l \in \nat^{d-q} \mid \normone{\*l} = m\}}
-  = \binom{d}{q} \binom{m-1}{d-q-1}$
+  \begin{equation}
+    \setsize{\{\*l \in \natz^d \mid N_\*l = q,\; \normone{\*l} = m\}}
+    = \binom{d}{q} \setsize{\{\*l \in \nat^{d-q} \mid \normone{\*l} = m\}}
+    = \binom{d}{q} \binom{m-1}{d-q-1}
+  \end{equation}
   by first putting $q$ zeros in $d$ places,
   for which there are $\binom{d}{q}$ possibilities, and then
   counting all positive vectors of length $d - q$ with level sum $m$,
@@ -178,7 +180,7 @@
   in \cref{line:algCoarseBoundary4}.
   
   Second, let $\*l' = (\*l, l_t)$
-  be in the second set of the \rhs, i.e.,
+  be in the second set of the \rhs, i.e., we have
   $\*l' \notin \nat^t$ and
   $\normone{\vecmax(\*l', \*1)} \le n-d+t-b+1$.
   Here, there are three cases:
@@ -189,12 +191,12 @@
     $\normone{\vecmax(\*l, \*1)}
     = \normone{\vecmax(\*l', \*1)} - l_t
     \le n-d+t-b$.
-    This means $\*l \in \levelset^{(t-1)}$ by the induction hypothesis
+    Consequently, $\*l \in \levelset^{(t-1)}$ by the induction hypothesis
     \eqref{eq:proofCoarseInductionHypothesis}.
     As $l_t \in \{1, \dotsc, l^\ast\}$
     (due to $l_t \le n-d+t-b -
     \normone{\vecmax(\*l, \*1)} = l^\ast$),
-    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary4}.
+    $\*l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
     \item
     $l_t = 0$ and $\*l \in \nat^{t-1}$:
@@ -202,9 +204,10 @@
     = \normone{\vecmax(\*l', \*1)} - 1
     \le n - d + t - b
     \le n - d + t - 1$ since $b \ge 1$.
-    Again, by the induction hypothesis,
-    \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5} due to
+    Again, by the induction hypothesis
+    \eqref{eq:proofCoarseInductionHypothesis},
+    $\*l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5}
+    due to
     $\normone{\vecmax(\*l, \*1)}
     = \normone{\*l} \le n - d + t - b$.
     
@@ -213,14 +216,15 @@
     This implies $\normone{\vecmax(\*l, \*1)}
     = \normone{\vecmax(\*l', \*1)} - 1
     \le n - d + t - b$.
-    Again, by the induction hypothesis,
-    \eqref{eq:proofCoarseInductionHypothesis} and
-    $l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5}.
+    Again, by the induction hypothesis
+    \eqref{eq:proofCoarseInductionHypothesis},
+    $\*l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary5}.
   \end{enumerate}
   
   Third, let $\*l = (\vec{0}, 0) \in \natz^t$
   be in the third set of the \rhs.
   This level is appended in \cref{line:algCoarseBoundary5}
-  to $\levelset^{(t)}$, since $\*l' = \vec{0} \in \natz^{t-1}$ is in $\levelset^{(t-1)}$ by
+  to $\levelset^{(t)}$, since $\*l' = \vec{0} \in \natz^{t-1}$
+  is in $\levelset^{(t-1)}$ by the
   induction hypothesis~\eqref{eq:proofCoarseInductionHypothesis}.
 \end{proof}
