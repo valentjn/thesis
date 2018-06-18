@@ -434,22 +434,28 @@
       (-1)^q \binom{d-1}{q} \cdot
       \setsize{\{\*l' \in L_0 \mid \normone{\*l'} = n - q\}}\\
       &= \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
-      \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1}\\
-      \intertext{%
-        Again, we apply \thmref{lemma:inclusionExclusionCountingLemma}
-        with the values $a := d - 1$,
-        $r := n - \normone{\hat{\*l}} + d - m - 1$, and
-        $s := d - m - 1$ to obtain%
-      }
-      &= \binom{n - \normone{\hat{\*l}} - m}{-m}
-      = 0
+      \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1}
     \end{align}
   \end{subequations}
+  Again, we apply \thmref{lemma:inclusionExclusionCountingLemma}
+  with the values $a := d - 1$,
+  $r := n - \normone{\hat{\*l}} + d - m - 1$, and
+  $s := d - m - 1$ to infer that as claimed,
+  \eqref{eq:proofCombiTechniqueIdenticalValues3} is equal to
+  \begin{equation}
+  \label{eq:proofCombiTechniqueIdenticalValues4}
+    \binom{n - \normone{\hat{\*l}} - m}{-m}
+    = 0
+  \end{equation}
   by the convention for binomial coefficients in \cref{def:binomialCoefficient}
   as $-m < 0$.
   
   Note that for the calculation in
-  \eqref{eq:proofCombiTechniqueIdenticalValues3} to be correct,
+  \cref{%
+    eq:proofCombiTechniqueIdenticalValues3,%
+    eq:proofCombiTechniqueIdenticalValues4%
+  }
+  to be correct,
   we have to ensure that $n - \normone{\hat{\*l}} - m \ge 0$;
   otherwise, the binomial coefficients would not be well-defined.
   This is a direct consequence of the fact that $l^\ast_t < l_t$
