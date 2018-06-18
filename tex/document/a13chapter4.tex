@@ -10,24 +10,24 @@
 \begin{definition}[binomial coefficient for integer parameters]
   \label{def:binomialCoefficient}
   The binomial coefficient $\binom{n}{k}$ is defined for
-  $n, k \in \integer$ as
+  $n \in \natz$ and $k \in \integer$ as
   \begin{equation}
     \binom{n}{k}
     :=
     \begin{cases}
-      \frac{n (n - 1) \dotsm (n - (k-1))}{k!},&k > 0,\\
-      1,&k = 0,\\
-      0,&k < 0.
+      \frac{n (n - 1) \dotsm (n - (k-1))}{k!},&0 < k < n,\\
+      1,&(k = 0) \lor (k = n),\\
+      0,&(k < 0) \lor (k > n).
     \end{cases}
   \end{equation}
 \end{definition}
 
 \begin{lemma}[inclusion-exclusion counting lemma]
   \label{lemma:inclusionExclusionCountingLemma}
-  For $m \in \natz$ and $r, s \in \integer$, we have
+  For $a \in \natz$, $r \ge a$, and $s \in \integer$, we have
   \begin{equation}
-    \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{s}
-    = \binom{r-m}{s-m}.
+    \sum_{q=0}^a (-1)^q \binom{a}{q} \binom{r-q}{s}
+    = \binom{r-a}{s-a}.
   \end{equation}
 \end{lemma}
 
@@ -37,21 +37,21 @@
   to the second binomial in the \lhs:
   \begin{subequations}
     \begin{align}
-      \sum_{q=0}^m (-1)^q \binom{m}{q} \binom{r-q}{s}
-      &= (-1)^s \sum_{q=0}^m \binom{m}{0+q} \binom{(s-r-1)+q}{s} (-1)^q.\\
+      \sum_{q=0}^a (-1)^q \binom{a}{q} \binom{r-q}{s}
+      &= (-1)^s \sum_{q=0}^a \binom{a}{0+q} \binom{(s-r-1)+q}{s} (-1)^q.\\
       \intertext{%
         This sum can be simplified using the identity
-        in Eq. (5.24) of \cite{Graham94Concrete}
+        in Eq.\ (5.24) of \cite{Graham94Concrete}
         (the sum has already been written in the same way as in
         \cite{Graham94Concrete}):%
       }
-      %&= (-1)^s (-1)^{m+0} \binom{(s-r-1)-0}{s-m}\\
-      &= (-1)^{s+m} \binom{s-r-1}{s-m}.\\
+      %&= (-1)^s (-1)^{a+0} \binom{(s-r-1)-0}{s-a}\\
+      &= (-1)^{s+a} \binom{s-r-1}{s-a}.\\
       \intertext{%
         Applying the upper negation formula again,%
       }
-      %&= (-1)^{s+m} (-1)^{s-m} \binom{(s-m) - (s-r-1) - 1}{s-m}\\
-      &= \binom{r-m}{s-m},
+      %&= (-1)^{s+a} (-1)^{s-a} \binom{(s-a) - (s-r-1) - 1}{s-a}\\
+      &= \binom{r-a}{s-a},
     \end{align}
   \end{subequations}
   we obtain the desired quantity.
@@ -91,7 +91,7 @@
   see Theorem 2.2 of \cite{Bona15Introduction}.
   Now, we can use \cref{lemma:inclusionExclusionCountingLemma}
   with the values
-  $m := s := d - 1$ and
+  $a := s := d - 1$ and
   $r := n - \normone{\*l} + d - 1$
   %(note that $r \ge m$ due to $\normone{\*l} \le n$)
   to conclude that the \lhs of the assertion
@@ -118,8 +118,9 @@
     \item
     \emph{Reflexivity:}
     Using the same level $\*l' = \*l''$ implies
-    $T_{\*l',\*l'} = \{1, \dotsc, d\}$,
-    i.e., $\*l' \eq \*l'$.
+    $T_{\*l',\*l'} = \{t \mid l'_t < l_t\}$.
+    For all $t \notin T_{\*l',\*l'}$, we have $l'_t \ge l_t$.
+    Consequently, $\*l' \eq \*l'$.
     
     \item
     \emph{Symmetry:}
@@ -130,31 +131,32 @@
     
     \item
     \emph{Transitivity:}
-    Let $\*l' \eq \hat{\*l}$ and $\hat{\*l} \eq \*l''$.
-    Then, $T_{\*l',\*l''} \supset T_{\*l',\hat{\*l}} \cap T_{\hat{\*l},\*l''}$.
-    Thus, if some $t = 1, \dotsc, d$ with $t \notin T_{\*l',\*l''}$ is given,
-    $t \notin T_{\*l',\hat{\*l}}$ or $t \notin T_{\hat{\*l},\*l''}$ holds.
+    Let $\*l' \eq \hat{\*l}$, $\hat{\*l} \eq \*l''$, and
+    $t \notin T_{\*l',\*l''}$.
+    From the definition of $T_{\*l',\*l''}$,
+    it holds either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
+    As $l'_t = l''_t \ge l_t$ already implies $\min\{l'_t, l''_t\} \ge l_t$,
+    we assume that $l'_t \not= l''_t$.
+    Here, we have three cases:
     \begin{itemize}
       \item
-      \emph{Case 1:}
-      $t \notin T_{\*l',\hat{\*l}}$ and $t \in T_{\hat{\*l},\*l''}$.
-      The first statement implies $\min\{l'_t, \hat{l}_t\} \ge l_t$
-      and the second statement implies $\hat{l}_t = l''_t$.
-      Hence,
-      $\min\{l'_t, l''_t\} \ge l_t$.
+      \emph{Case 1}:
+      ${l'_t \not= \hat{l}_t = l''_t}$.
+      $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
+      $l''_t = \hat{l}_t \ge l_t$.
+      Hence, $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \emph{Case 2:}
-      $t \notin T_{\*l',\hat{\*l}}$ and $t \in T_{\hat{\*l},\*l''}$.
+      \emph{Case 2}:
+      ${l'_t = \hat{l}_t \not= l''_t}$.
       Analogously to the first case, we conclude $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \emph{Case 3:}
-      $t \notin T_{\*l',\hat{\*l}}$ and $t \notin T_{\hat{\*l},\*l''}$.
-      In this case, we have
-      $\min\{l'_t, \hat{l}_t\} \ge l_t$ and $\min\{\hat{l}_t, l''_t\} \ge l_t$.
-      Hence,
-      $\min\{l'_t, l''_t\} \ge l_t$.
+      \emph{Case 3}:
+      ${l'_t \not= \hat{l}_t \not= l''_t}$.
+      $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
+      $t \notin T_{\*l'',\hat{\*l}}$ implies $l''_t \ge l_t$.
+      Hence, $\min\{l'_t, l''_t\} \ge l_t$.
     \end{itemize}
     Therefore, it holds $\min\{l'_t, l''_t\} \ge l_t$
     for all $t \notin T_{\*l',\*l''}$, i.e., $\*l' \eq \*l''$.
@@ -268,22 +270,18 @@
   The first statement is clear by the definition of $T_{L_0}$.
   Therefore, let $t \notin T_{L_0}$.
   By the definition of $T_{L_0}$,
-  there must be some $\hat{\*l}', \hat{\*l}'' \in L_0$ with
-  $\hat{l}'_t \not= \hat{l}''_t$.%
-  \footnote{%
-    $T_{L_0}$ is the set of all dimensions on which all levels
-    in $L_0$ coincide.
-    If a dimension $t$ is not in $T_{L_0}$, then there must be two levels
-    that differ in the $t$-th entry.%
-  }
-  One of $l'_t \not= \hat{l}'_t$ or $l'_t \not= \hat{l}''_t$ must be true.
-  We assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
-  $t \notin T_{\*l',\hat{\*l}'}$.
-  Due to $\*l' \eq \hat{\*l}'$
-  (since $\*l'$ and $\hat{\*l}'$ are both contained in the same
-  equivalence class $L_0$),
-  we have $\min\{l'_t, \hat{l}'_t\} \ge l_t$.
-  This implies $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$ as desired.
+  we have either
+  $\ex{\hat{\*l} \in L_0}{l'_t \not= \hat{l}_t}$ or
+  $\fa{\hat{\*l} \in L_0}{l'_t = \hat{l}_t \ge l_t}$.
+  In the latter case, we obtain $l'_t \ge l_t$
+  (e.g., by setting $\hat{\*l}$ to $\*l'$).
+  In the former case, there is an $\hat{\*l} \in L_0$ such that
+  $l'_t \not= \hat{l}_t$.
+  Due to $\*l' \eq \hat{\*l}$
+  (since $\*l'$ and $\hat{\*l}$ are both contained in the same
+  equivalence class $L_0$) and $t \notin T_{\*l',\hat{\*l}}$,
+  we have $\min\{l'_t, \hat{l}_t\} \ge l_t$.
+  This implies $\fa{t \notin T_{L_0}}{l'_t \ge l_t}$, as desired.
   
   ``$\supset$'':
   Let $\*l' \in L$ such that
@@ -294,25 +292,30 @@
   We prove that $\*l' \eq \*l''$ (i.e., $\*l' \in L_0$).
   Note that $T_{L_0} \subset T_{\*l',\*l''}$,
   as $t \in T_{L_0}$ implies
-  $l''_t = l^\ast_t$, which can be combined with $l'_t = l^\ast_t$
-  to $l'_t = l''_t$, i.e., $t \in T_{\*l',\*l''}$.
+  $l''_t = l^\ast_t < l_t$, which can be combined with $l'_t = l^\ast_t$
+  to $l'_t = l''_t < l_t$, i.e., $t \in T_{\*l',\*l''}$.
   
   To prove the equivalence of $\*l'$ and $\*l''$,
   let $t \notin T_{\*l',\*l''}$.
-  This means that $t \notin T_{L_0}$, i.e.,
-  there exist some
-  $\hat{\*l}', \hat{\*l}'' \in L_0$ with
-  $\hat{l}'_t \not= \hat{l}''_t$.
-  As above, we assume $l'_t \not= \hat{l}'_t$ without loss of generality, i.e.,
-  $t \notin T_{\*l',\hat{\*l}'}$.
-  From $\*l'' \eq \hat{\*l}'$
-  (since $\*l''$ and $\hat{\*l}'$ are both contained in the same
-  equivalence class $L_0$),
-  we obtain $\min\{l''_t, \hat{l}'_t\} \ge l_t$.
-  Together with $l'_t \ge l_t$ (by the above assumption on $\*l'$),
-  this implies
-  $\fa{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t}$
-  and consequently $\*l' \eq \*l''$,
+  This implies either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
+  In the latter case, we trivially obtain $\min\{l''_t, \hat{l}'_t\} \ge l_t$.
+  Therefore, we assume that $l'_t \not= l''_t$.
+  As $t \notin T_{\*l',\*l''}$, we must have $t \notin T_{L_0}$.
+  By assumption on $\*l'$, it holds $l'_t \ge l_t$.
+  Hence, it remains to show that $l''_t \ge l_t$ as well.
+  Again, by definition of $T_{L_0}$, we have either
+  $\ex{\hat{\*l} \in L_0}{l''_t \not= \hat{l}_t}$ or
+  $\fa{\hat{\*l} \in L_0}{l''_t = \hat{l}_t \ge l_t}$.
+  In the second case, it holds $l''_t \ge l_t$.
+  In the first case, there is an $\hat{\*l} \in L_0$ such that
+  $l''_t \not= \hat{l}_t$.
+  Due to $\*l'' \eq \hat{\*l}$
+  (since $\*l''$ and $\hat{\*l}$ are both contained in the same
+  equivalence class $L_0$) and $t \notin T_{\*l'',\hat{\*l}}$,
+  we have $\min\{l''_t, \hat{l}_t\} \ge l_t$.
+  In particular, $l''_t \ge l_t$.
+  In total, we have $\min\{l'_t, l''_t\} \ge l_t$ for all
+  $t \notin T_{\*l',\*l''}$, proving that $\*l'$ and $\*l''$ are equivalent,
   as asserted.
 \end{proof}
 
@@ -363,8 +366,9 @@
   For notational convenience, we define the vector
   \begin{equation}
     \hat{\*l}
-    := (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d).
+    := (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d),
   \end{equation}
+  where $\*l^\ast$ is given as in \cref{lemma:combiTechniqueCharacterization}.
   We show that $\*a := (l'_t - l_t)_{t = m+1, \dotsc, d}$,
   constitutes a bijection between
   \begin{equation}
@@ -424,6 +428,7 @@
   We insert this quantity into the inner sum of
   \eqref{eq:proofCombiTechniqueIdenticalValues2}:
   \begin{subequations}
+    \label{eq:proofCombiTechniqueIdenticalValues3}
     \begin{align}
       &\sum_{q=0}^{d-1}
       (-1)^q \binom{d-1}{q} \cdot
@@ -432,7 +437,7 @@
       \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1}\\
       \intertext{%
         Again, we apply \thmref{lemma:inclusionExclusionCountingLemma}
-        with the values $m := d - 1$,
+        with the values $a := d - 1$,
         $r := n - \normone{\hat{\*l}} + d - m - 1$, and
         $s := d - m - 1$ to obtain%
       }
@@ -442,6 +447,23 @@
   \end{subequations}
   by the convention for binomial coefficients in \cref{def:binomialCoefficient}
   as $-m < 0$.
+  
+  Note that for the calculation in
+  \eqref{eq:proofCombiTechniqueIdenticalValues3} to be correct,
+  we have to ensure that $n - \normone{\hat{\*l}} - m \ge 0$;
+  otherwise, the binomial coefficients would not be well-defined.
+  This is a direct consequence of the fact that $l^\ast_t < l_t$
+  for all $t = 1, \dotsc, m$
+  (see \cref{lemma:combiTechniqueCharacterization}) as
+  \begin{equation}
+    n - \normone{\hat{\*l}} - m
+    = n - \sum_{t=1}^m l^\ast_t - \sum_{\mathclap{t=m+1}}^d l_t - m
+    \ge n - \sum_{t=1}^m (l_t - 1) - \sum_{\mathclap{t=m+1}}^d l_t - m
+    = n - \normone{\*l}
+    \ge 0,
+  \end{equation}
+  where we have used $l^\ast_t \le l_t - 1$ for $t = 1, \dotsc, m$
+  and $\normone{\*l} \le n$.
 \end{proof}
 
 

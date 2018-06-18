@@ -251,7 +251,7 @@ on the equivalence classes.
   \begin{equation}
     \falarge{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t},\quad
     T_{\*l',\*l''}
-    := \{t \mid l'_t = l''_t\}.
+    := \{t \mid l'_t = l''_t < l_t\}.
   \end{equation}
 \end{definition}
 
@@ -319,7 +319,7 @@ of the equivalence classes:
   If we define
   \begin{equation}
     T_{L_0}
-    := \{t \mid \exfa{l^\ast_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
+    := \{t \mid \exfa{l^\ast_t < l_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
   \end{equation}
   as the set of dimensions $t$ in which all levels in $L_0$
   have the same entry $l^\ast_t$, then
@@ -336,7 +336,8 @@ of the equivalence classes:
 \end{proof}
 
 The lemma states that every equivalence class $L_0$ is exactly the
-set of the levels whose entries are equal in some dimensions
+set of the levels whose entries are equal
+and smaller than $l_t$ in some dimensions
 (which are contained in $T_{L_0}$)
 and whose entries are greater or equal than $l_t$ in all other dimensions.
 While this statement may seem intuitively correct,
