@@ -334,10 +334,6 @@ class Test43DimAdaptive(tests.misc.CustomTestCase):
               
               if len(Ls) == 0: continue
               
-              isEquivalent = (lambda l1, l2:
-                  all([((l1[t] == l2[t]) or (min(l1[t], l2[t]) >= L[k,t]))
-                      for t in range(d)]))
-              
               flxs = pool.map(functools.partial(
                   self.computeContribution, basisName, basis,
                   distribution, f, np.array([X[k,:]])), Ls)
