@@ -62,7 +62,7 @@ if __name__ == "__main__":
     run(["git", "clone", repoURL, repoPath])
     
     print("")
-    print("Checking out revision \"{}\"...")
+    print("Checking out revision \"{}\"...".format(args.revision))
     run(["git", "checkout", args.revision], cwd=repoPath)
     
     print("")
