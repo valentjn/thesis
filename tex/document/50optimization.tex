@@ -13,8 +13,39 @@
 }
 \label{chap:50optimization}
 
-\initial{0em}{I}{n this chapter}
-\blindtext{}
+\initial{0em}{I}{n this chapter,}
+we apply the hierarchical B-spline bases derived in
+\cref{chap:30BSplines,chap:40algorithms} to optimization,
+which is a major task in simulation technology,
+for instance in inverse problems (see \cref{chap:10introduction}).
+One of the key advantages of B-splines over common hierarchical bases for
+sparse grids is their continuous differentiability.
+The gradients of B-spline surrogates on sparse grids are not only continuous,
+but also explicitly known and can be evaluated fast.
+This gives the opportunity to employ gradient-based optimization techniques,
+which usually converge significantly faster than gradient-free alternatives.
+
+The outline of this chapter is as follows:
+We start in \cref{sec:51algorithms}
+with a compact overview of textbook optimization algorithms,
+which comprises gradient-free and gradient-based optimization methods
+for unconstrained problems as well as algorithms for constrained optimization.
+\Cref{sec:52testProblems} continues with a small array of test problems.
+In \cref{sec:53results}, we apply the presented algorithms
+to the test problems, studying the effects of the different
+hierarchical B-splines to optimization errors and conducting various
+numerical experiments.
+Finally, in \cref{sec:54fuzzy}, we examine with the fuzzy extension principle
+an example application of optimization of hierarchical B-spline surrogates on
+sparse grids.
+
+Parts of this chapter have already been published in previous work
+of the author \cite{Valentin14Hierarchische}, especially
+the overview of optimization algorithms (\cref{sec:51algorithms})
+and the library of test problems (\cref{sec:52testProblems}).
+However, as the previous work included other basis functions as well,
+this thesis represents the first comprehensive study
+that focuses on the application of hierarchical B-splines to optimization.
 
 \input{document/51algorithms}
 \input{document/52testProblems}
