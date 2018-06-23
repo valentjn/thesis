@@ -837,9 +837,11 @@
   Objective function $\objfun\colon \clint{\*0, \*1} \to \real$
 }
 
-\newnotationcommand{\ineqconfun}{\*g}{g}{$\ineqconfun$}{
+\newnotationcommandoptarg{1}{\ineqconfun}{%
+  \ifempty{#1}{\*g}\ifnotempty{#1}{g_{#1}}%
+}{g}{$\ineqconfun$}{
   Inequality constraint function
-  $\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_\ineqconfun}$
+  $\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$
   (optimal solutions $\*x$ must satisfy $\ineqconfun(\*x) \le \*0$)
 }
 }
