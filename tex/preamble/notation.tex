@@ -844,6 +844,13 @@
   $\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$
   (optimal solutions $\*x$ must satisfy $\ineqconfun(\*x) \le \*0$)
 }
+
+\newnotationcommandoptarg{1}{\eqconfun}{
+  \ifempty{#1}{\*h}\ifnotempty{#1}{h_{#1}}%
+}{h}{$\eqconfun$}{
+  Equality constraint function
+  $\eqconfun\colon \clint{\*0, \*1} \to \real^{m_{\eqconfun}}$
+  (optimal solutions $\*x$ must satisfy $\eqconfun(\*x) \le \*0$)
 }
 
 \newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\*l}$}{
