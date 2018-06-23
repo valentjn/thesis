@@ -314,7 +314,7 @@ approach based on Cholesky factorization:
   with positive diagonal entries such that
   \begin{equation}
     \etensor
-    = \cholfactor^\tr \cholfactor.
+    = \tr{\cholfactor} \cholfactor.
   \end{equation}
 \end{proposition}
 
@@ -332,7 +332,7 @@ Our approach is as follows:
   Define $\cholfactor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
   as the Cholesky factor of
   $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$, i.e.,
-  $\etensor(\*x) = \cholfactor(\*x)^\tr \cholfactor(\*x)$
+  $\etensor(\*x) = \tr{\cholfactor(\*x)} \cholfactor(\*x)$
   for all $\*x \in \clint{\*0, \*1}$.
   
   \item
@@ -350,7 +350,7 @@ Our approach is as follows:
   the interpolant $\cholfactor[\sparse](\*x)$ is evaluated and we return
   \begin{equation}
     \etensor[\chol,\sparse](\*x)
-    := \cholfactor[\sparse](\*x)^\tr \cholfactor[\sparse](\*x).
+    := \tr{\cholfactor[\sparse](\*x)} \cholfactor[\sparse](\*x).
   \end{equation}
 \end{enumerate}
 
@@ -370,9 +370,9 @@ of the surrogate $\etensor[\chol,\sparse]$ is preserved.
 The gradient can be computed easily and fast with the product rule:
 \begin{equation}
   \partialderiv{\partialdiff{} x_t}{\etensor[\chol,\sparse]}(\*x)
-  = \cholfactor[\sparse](\*x)^\tr \cdot
+  = \tr{\cholfactor[\sparse](\*x)} \cdot
   \partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x) +
-  \partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x)^\tr \cdot
+  \tr{\partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x)} \cdot
   \cholfactor[\sparse](\*x),\quad
   t = 1, \dotsc, d,
 \end{equation}
