@@ -87,6 +87,13 @@ if __name__ == "__main__":
                       os.path.join(gitDirDst, "fat", "objects"))
     
     print("")
+    print("Excluding bibliography from git-fat...")
+    for root, dirs, files in os.walk(os.path.join(repoPath, "bib")):
+      for file_ in files:
+        if os.path.splitext(file_)[1] == ".pdf":
+          with open(os.path.join(root, file_), "w") as f: f.truncate()
+    
+    print("")
     print("Pulling git-fat files...")
     run(["git", "fat", "pull"], cwd=repoPath)
     
