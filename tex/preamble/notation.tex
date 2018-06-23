@@ -546,6 +546,13 @@
   Degree of the polynomial $\objfun$
 }
 
+\DeclareMathOperator*{\argmin}{arg\,min}
+\let\argminorig\argmin
+\hidenextnotation
+\makecommandnotation{\argmin}{argmin}{$\argminorig$}{
+  Point where the minimum is attained
+}
+
 \newcommand*{\floor}[1]{\lfloor#1\rfloor}
 
 \newnotationcommand[1]{\ceil}{\lceil#1\rceil}{Öceil}{%
