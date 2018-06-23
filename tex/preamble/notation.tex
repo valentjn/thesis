@@ -178,7 +178,6 @@
 \newcommand*{\fs}{\mathrm{fs}}
 \newcommand*{\wfs}{\mathrm{wfs}}
 \newcommand*{\chol}{\mathrm{chol}}
-\newcommand*{\tr}{\mathrm{T}}
 
 \newnotation{Ë1}{$\cdot^1$}{
   Superscript for ``Piecewise linear''
@@ -244,10 +243,6 @@
 
 \newnotation{Ëchol}{$\cdot^\chol$}{
   Superscript for ``Cholesky''
-}
-
-\newnotation{Ëtr}{$\mat{A}^\tr$}{
-  Transpose of the matrix $\mat{A}$
 }
 
 % ======================================================================
@@ -592,6 +587,10 @@
   $\gradient{\*x}{f}$%
 }{
   Gradient of a function $f$ with respect to $\*x$
+}
+
+\newnotationcommand[1]{\tr}{#1^\mathrm{T}}{ËT}{\tr{{\cdot}}}{
+  Transpose of a vector or matrix
 }
 
 % ======================================================================
