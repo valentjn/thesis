@@ -33,11 +33,11 @@ Inverse problems are equivalent to optimization problems of the form
   \label{eq:generalOptimizationProblem}
   \min \objfun(\*x),\quad
   \*x \in \real^d\;\;\text{s.t.}\;\;
-  \confun(\*x) \le \*0,
+  \ineqconfun(\*x) \le \*0,
 \end{equation}
 where $\objfun(\*x)$ gives the error of the simulation for the model with
 the parameter $\*x$ to experimental real-world data and
-$\confun$ constrains the set of feasible model parameters.
+$\ineqconfun$ constrains the set of feasible model parameters.
 Since simulations are often time-consuming,
 simple trial-and-error or full-grid-based approaches fail
 if the dimensionality $d$ is already moderately large ($d > 4$):
