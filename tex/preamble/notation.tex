@@ -1054,3 +1054,15 @@
 % for the BFS algorithm
 \newcommand*{\pop}{\texttt{pop}}
 \newcommand*{\push}{\texttt{push}}
+
+% ticks/crosses for tables
+\newcommand*{\yes}{%
+  \tikz[x=0.7em,y=0.7em]{
+    \draw[C4,line width=1.4pt] (0,0.3) -- (0.3,0) -- (1,1);
+  }%
+}
+\newcommand*{\no}{%
+  \tikz[x=0.7em,y=0.7em]{
+    \draw[C1,line width=1.4pt] (0,0) -- (1,1) (0,1) -- (1,0);
+  }%
+}
