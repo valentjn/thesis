@@ -31,8 +31,9 @@ this results in a \term{box-constrained optimization problem.}
 A simple method of applying algorithms for unconstrained problems
 to box-constraints is extending $\objfun$ to $\real^d$ by
 $\objfun(\*x) = +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
-However, more sophisticated, algorithm-tailored approaches
-are also available \cite{More87Optimization}.
+However, more sophisticated
+%, algorithm-tailored
+approaches are also available \cite{More87Optimization}.
 
 \paragraph{Black-box optimization methods}
 
@@ -86,7 +87,7 @@ highlighting the key ingredients for each method.
     CMA-ES&                 Evolutionary&            \no&  0&  \yes& \yes\\
     Simulated annealing&    Temperature heuristic&   \no&  0&  \yes& \no\\
     PSO&                    Swarm heuristic&         \no&  0&  \yes& \no\\
-    GP-UCB&                 Bayesian&                \no&  0&  \yes& \no\\
+    GP-LCB&                 Bayesian&                \no&  0&  \yes& \no\\
     \midrulec
     Gradient descent&       Descent&                 \no&  1&  \no&  \yes\\
     NLCG&                   Descent&                 \no&  1&  \no&  \yes\\
@@ -172,8 +173,8 @@ However, there are counterexamples where the method converges to
 a non-critical point even for an only bivariate, strictly convex, and
 twice continuously differentiable objective function
 \cite{McKinnon98Convergence}.
-For higher dimensionalities, the method quickly suffers from
-the curse of dimensionality \cite{Gao12Implementing}.
+%For higher dimensionalities, the method quickly suffers from
+%the curse of dimensionality \cite{Gao12Implementing}.
 
 \paragraph{Differential evolution}
 
@@ -191,9 +192,9 @@ The mutational increments are weighted differences (``cross\-overs'') of
 the points of the previous generation.
 The offsprings are only accepted if they lead to an improvement in
 terms of objective function value.
-There are various stopping criteria
-that are based on the function value or on the location of the population
-\cite{Zielinski09Optimizing}.
+%There are various stopping criteria
+%that are based on the function value or on the location of the population
+%\cite{Zielinski09Optimizing}.
 
 \paragraph{CMA-ES}
 
@@ -225,8 +226,9 @@ The temperature is slowly decreased in the course of the algorithm.
 Simulated annealing is closely connected to the
 Metropolis--Hastings algorithm for drawing random samples of arbitrary
 probability distributions.
-For arbitrary runtime (e.g., if the decrease rate of the temperature
-is small enough), simulated annealing is guaranteed to find the global
+For arbitrary runtime,
+%(e.g., if the decrease rate of the temperature is small enough),
+simulated annealing is guaranteed to find the global
 optimum \cite{Toussaint15Introduction}.
 
 \paragraph{Particle swarm optimization (PSO)}
@@ -241,11 +243,10 @@ but also a current velocity $\*v_k$,
 the best known position in a neighborhood of $\*x_k$
 (which can be the whole swarm), and
 the best known position of the $k$-th particle.
-The velocity $\*v_{k+1}$ of the next iteration is calculated as
-the weighted sum of $\*v_k$,
+The next velocity $\*v_{k+1}$ is calculated as
+the pseudo-randomly weighted sum of $\*v_k$,
 the vector from $\*x_k$ to the best neighborhood position, and
 the vector from $\*x_k$ to the best own position.
-To add a stochastic component, the weights are chosen pseudo-randomly.
 
 \paragraph{GP-UCB}
 
@@ -258,13 +259,10 @@ evaluations to calculate the posterior distribution.
 The posterior distribution is used to form the acquisition function,
 which is turn determines the point at which the objective
 function is evaluated next.
-A common choice for the family of stochastic processes and
-for the acquisition function are Gaussian processes
-%(characterized by the mean function and
-%the covariance matrix function)
-and upper confidence bounds (which are the sum of the mean
-and a multiple of the standard deviation), respectively,
-in which case we obtain the GP-UCB method.
+The GP-UCB is obtained by choosing
+Gaussian processes for the family of stochastic processes and
+lower confidence bounds (which are the sum of the mean
+and a multiple of the standard deviation) for the acquisition function.
 
 
 
@@ -277,7 +275,9 @@ each iteration $k$ a normed search direction $\*d_k$
 \begin{equation}
   \*x_k
   \to \*x_{k+1}
-  := \*x_k + \alpha_k \*d_k,
+  := \*x_k + \alpha_k \*d_k,\qquad
+  \alpha_k
+  := \argmin_{\alpha \in \posreal} \objfun(\*x_k + \alpha \*d_k),
 \end{equation}
 where $\alpha_k \in \posreal$ is the step size.
 The various algorithms differ in the choice of the search direction
@@ -285,15 +285,9 @@ $\*d_k \in \real^d$,
 which is commonly chosen such that it points in negative gradient
 direction ($\innerprod[2]{\*d_k}{\gradient{\*x}{\objfun}(\*x_k)} < 0$).
 The step size $\alpha_k$ can then be determined independently of the
-algorithm; the best choice is the solution of the univariate
-\term{line search problem:}
-\begin{equation}
-  \alpha_k
-  = \argmin_{\alpha \in \posreal} \objfun(\*x_k + \alpha \*d_k).
-\end{equation}
-While there are various line search algorithms,
-the most common among these is the \term{Armijo line search algorithm}
-\multicite{Nocedal99Numerical,Ulbrich12Nichtlineare},
+algorithm via a \term{line search algorithm.}
+One of the most common is the \term{Armijo line search algorithm}
+\multicite{Nocedal99Numerical,Ulbrich12Nichtlineare,Valentin14Hierarchische},
 which uses a heuristic acceptance criterion
 to find $\alpha_k$ with good enough improvement.
 
@@ -364,9 +358,9 @@ the minimum of the approximation, i.e.,
 $\*d_k = -(\hessian{\*x}{\objfun}(\*x_k))^{-1} \gradient{\*x}{\objfun}(\*x_k)$.
 Despite converging for strictly convex quadratic functions in a single step,
 the Hessian must not be ill-conditioned for the Newton method as well,
-as we have to solve a linear system with system matrix
+as we have to solve a linear system with matrix
 $\hessian{\*x}{\objfun}(\*x_k)$.
-Therefore, often a regularization or damping term $\lambda \eye$
+Hence, often a regularization or damping term $\lambda \eye$
 for some $\lambda > 0$ is added to the Hessian.
 
 \paragraph{BFGS}
@@ -385,7 +379,7 @@ approximate the Hessian by a solution of the secant equation
 $\hessian{\*x}{\objfun}(\*x_k) (\*x_k - \*x_{k-1}) \approx
 \gradient{\*x}{\objfun}(\*x_k) - \gradient{\*x}{\objfun}(\*x_{k-1})$.
 As the solution is not unique for $d > 1$,
-Quasi-Newton methods only differ in which solution to choose.
+Quasi-Newton methods differ in which solution to choose.
 The BFGS method performs a simple rank-one update.
 
 \paragraph{Rprop}
