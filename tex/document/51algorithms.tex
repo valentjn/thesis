@@ -70,7 +70,10 @@ and the best local minimum is chosen.
 
 In the following,
 we give a brief survey of a small selection of optimization methods
-(see \cref{tbl:optimizationMethods}),
+(see
+\cref{tbl:optimizationMethods},
+\cref{fig:optimizationMethodsGradientFree}, and
+\cref{fig:optimizationMethodsGradientBased}),
 highlighting the key ingredients for each method.
 
 \begin{table}
@@ -113,48 +116,24 @@ highlighting the key ingredients for each method.
   \label{tbl:optimizationMethods}%
 \end{table}
 
-\begin{figure}
-  \subcaptionbox{%
-    $p = 1$%
-  }[72mm]{%
-    \includegraphics{fundamentalSpline_1}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    $p = 3$%
-  }[72mm]{%
-    \includegraphics{fundamentalSpline_2}%
-  }\\[4mm]%
-  \subcaptionbox{%
-    $p = 5$%
-  }[72mm]{%
-    \includegraphics{fundamentalSpline_3}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    $p = 7$%
-  }[72mm]{%
-    \includegraphics{fundamentalSpline_4}%
-  }%
-  \caption[%
-  Fundamental splines and their B-spline coefficients%
-  ]{%
-    The fundamental spline $\parentfundspl{p}$ \emph{\textcolor{C0}{(blue)}}
-    is a linear combination of cardinal B-splines $\cardbspl{p}({\cdot} - k)$,
-    $k \in \integer$ \emph{\textcolor{C0!50}{(light blue)}},
-    with coefficients $\fundsplcoeff{k}{p}$ \emph{\textcolor{C1}{(red points)}}.
-    The absolute values of the fundamental spline $\parentfundspl{p}$ and
-    its coefficients are bounded by a multiple of $(\gamma_p)^{-\abs{k}}$
-    \emph{(\textcolor{C0}{blue}-\textcolor{C1}{red}-dashed line)}.
-    The axis for $\fundsplcoeff{k}{p}$ (on the right side) is scaled such that
-    both bounding functions are on top of each other.%
-  }%
-  \label{fig:fundamentalSpline}%
-\end{figure}
 
 
 \subsection{Gradient-Free Unconstrained Optimization Methods}
 \label{sec:511gradientFree}
+
+\newcommand*{\optImage}[1]{%
+  \raisebox{-0.5\height}{\includegraphics{optimizationMethods_#1}}%
+}
+
+\begin{figure}
+  \optImage{1}\quad\optImage{2}\quad\optImage{3}%
+  \\[3mm]%
+  \optImage{4}\qquad\optImage{5}\qquad\optImage{6}%
+  \caption[Ideas of various gradient-free optimization methods]{%
+    Sketch of the ideas of gradient-free optimization methods.%
+  }%
+  \label{fig:optimizationMethodsGradientFree}%
+\end{figure}
 
 \paragraph{Nelder--Mead}
 
@@ -269,6 +248,17 @@ and a multiple of the standard deviation) for the acquisition function.
 
 \subsection{Gradient-Based Unconstrained Optimization Methods}
 \label{sec:512gradientBasedUnconstrained}
+
+\begin{figure}
+  \optImage{7}\qquad\optImage{8}\qquad\optImage{9}%
+  \\[3mm]%
+  \optImage{10}\quad\optImage{11}\quad\optImage{12}%
+  \caption[Ideas of various gradient-based optimization methods]{%
+    Sketch of the ideas of gradient-based or constrained
+    optimization methods.%
+  }%
+  \label{fig:optimizationMethodsGradientBased}%
+\end{figure}
 
 Most gradient-based optimization algorithms determine in
 each iteration $k$ a normed search direction $\*d_k$
