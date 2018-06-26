@@ -104,3 +104,13 @@ def mixColors(color1, t, color2="white"):
   mixedColor = tuple([t * c1 + (1 - t) * c2
                       for c1, c2 in zip(color1, color2)])
   return mixedColor
+
+def createLinearColormap(name, color1, color2):
+  color1 = convertColorToRGB(color1)
+  color2 = convertColorToRGB(color2)
+  data = {
+    c : [(0, c1, c1), (1, c2, c2)]
+    for c, c1, c2 in zip(["red", "green", "blue"], color1[:3], color2[:3])
+  }
+  colormap = mpl.colors.LinearSegmentedColormap(name, data)
+  return colormap
