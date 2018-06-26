@@ -114,3 +114,15 @@ def createLinearColormap(name, color1, color2):
   }
   colormap = mpl.colors.LinearSegmentedColormap(name, data)
   return colormap
+
+
+
+def transform(ax, offset, scale, plot):
+  if isinstance(plot, list):
+    for plot2 in plot: transform(ax, offset, scale, plot2)
+  else:
+    transformation = mpl.transforms.Affine2D()
+    if isinstance(scale, float): scale = [scale]
+    transformation.scale(*scale)
+    transformation.translate(*offset)
+    plot.set_transform(transformation + ax.transData)
