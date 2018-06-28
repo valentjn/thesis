@@ -5,6 +5,7 @@ import numpy as np
 
 from helper.figure import Figure
 import helper.grid
+import helper.plot
 
 d = 2
 n = 4
@@ -20,7 +21,7 @@ for b in range(bMax + 1):
   X, L, _ = grid.generate()
   K1 = np.any(L == 0, axis=1)
   K2 = np.logical_not(K1)
-  ax.plot(X[K1,0], X[K1,1], ".", clip_on=False, color=Figure.COLORS["mittelblau"])
+  ax.plot(X[K1,0], X[K1,1], ".", clip_on=False, color="mittelblau")
   ax.plot(X[K2,0], X[K2,1], "k.", clip_on=False)
   
   ax.set_xlim([0, 1])
@@ -35,8 +36,8 @@ for b in range(bMax + 1):
 
 
 d = 3
-colorBoundary = Figure.COLORS["mittelblau"]
-colorBoundaryBack = [1 - (1-0.7) * (1-x) for x in colorBoundary]
+colorBoundary = "mittelblau"
+colorBoundaryBack = helper.plot.mixColors(colorBoundary, 0.3)
 colorInterior = "k"
 
 for b in range(bMax + 1):

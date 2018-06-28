@@ -175,9 +175,9 @@ smallCircleCenters = [
   (2, 3),
 ]
 smallCircleRadius = 0.8
-smallCircleColor = helper.plot.mixColors(Figure.COLORS["mittelblau"], 0.3)
+smallCircleColor = helper.plot.mixColors("mittelblau", 0.3)
 tinyCircleRadius = 0.2
-tinyCircleColor = Figure.COLORS["mittelblau"]
+tinyCircleColor = "mittelblau"
 plotFunctions = [
   plotSupport,
   plotBoundsSymmetry,
@@ -204,7 +204,7 @@ for k in range(8):
           color="w", ha="center", va="center",
           size=20, zorder=11)
 
-plotCircle(ax, (0, 0), largeCircleRadius - smallCircleRadius, Figure.COLORS["mittelblau"])
+plotCircle(ax, (0, 0), largeCircleRadius - smallCircleRadius, "mittelblau")
 b = helper.basis.CardinalBSpline(p)
 xx = np.linspace(0, p+1, 100)
 yy = b.evaluate(xx)

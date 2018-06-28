@@ -41,7 +41,6 @@ A = helper.topo_opt.readH5("./data/topoOpt/560/oneload-40.h5")
 np.set_printoptions(threshold=np.nan)
 M1, M2 = 40, 26
 displacementFactor = 0.005
-mittelblau, hellblau = Figure.COLORS["mittelblau"], Figure.COLORS["hellblau"]
 
 displacement = np.reshape(A["displacement"], (M2+1, M1+1, 2))
 displacement = np.transpose(displacement, (1, 0, 2))
@@ -54,7 +53,7 @@ macroCellWidth, macroCellHeight = domainWidth / M1, domainHeight / M2
 
 ax.add_patch(mpl.patches.Rectangle(
     (0, 0), domainWidth+0.016, domainHeight+0.016, edgecolor="none",
-    facecolor=helper.plot.mixColors(mittelblau, 0.5)))
+    facecolor=helper.plot.mixColors("mittelblau", 0.5)))
 
 verticesOuter = np.vstack([getVertices(line) for line in linesOuter])
 verticesInner = np.vstack([getVertices(line) for line in linesInner])
@@ -65,7 +64,7 @@ codes[[0,verticesOuter.shape[0]]] = mpl.path.Path.MOVETO
 
 path = mpl.path.Path(vertices, codes)
 ax.add_patch(mpl.patches.PathPatch(
-    path, edgecolor=mittelblau, facecolor=hellblau, clip_on=False))
+    path, edgecolor="mittelblau", facecolor="hellblau", clip_on=False))
 
 splines = [scipy.interpolate.RectBivariateSpline(
               np.linspace(0, domainWidth,  M1+1),

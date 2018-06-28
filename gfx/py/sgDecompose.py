@@ -5,13 +5,16 @@ import numpy as np
 
 from helper.figure import Figure
 import helper.grid
+import helper.plot
+
+
 
 d = 3
 n = 4
 b = 0
 
-colorBoundary = Figure.COLORS["mittelblau"]
-colorBoundaryBack = [1 - (1-0.8) * (1-x) for x in colorBoundary]
+colorBoundary = "mittelblau"
+colorBoundaryBack = helper.plot.mixColors(colorBoundary, 0.2)
 colorInterior = "k"
 
 for q in range(d + 2):

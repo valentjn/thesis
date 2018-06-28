@@ -7,6 +7,9 @@ import matplotlib.patches
 import helper.basis
 from helper.figure import Figure
 import helper.grid
+import helper.plot
+
+
 
 def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
                  highlightedPoints=None, whiteMode=False, withBoundary=True,
@@ -37,7 +40,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
   I = (helper.grid.getNodalIndices if combinationTechnique else
        helper.grid.getHierarchicalIndices)
   
-  hellhellblau = [x + 0.5 * (1 - x) for x in Figure.COLORS["hellblau"]]
+  hellhellblau = helper.plot.mixColors("hellblau", 0.5)
   figureScale = (0.4 if whiteMode else 1.2)
   fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none", preamble=r"""
 \usepackage{{contour}}
@@ -99,7 +102,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
            (highlightedPoints is None) and
            (l0 + l1 <= levelSumDiagonal))):
         contourColor = "hellhellblau"
-        color = Figure.COLORS["mittelblau"]
+        color = "mittelblau"
         rect = matplotlib.patches.Rectangle(
           (xOffset, yOffset), subspaceSize, subspaceSize, edgecolor="none",
           facecolor=hellhellblau)
@@ -140,7 +143,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
                 color=color, ha="center", va="bottom")
       
       ax.plot(*s(Xl[K,0], Xl[K,1]), ".", clip_on=False,
-              color=Figure.COLORS["mittelblau"])
+              color="mittelblau")
       ax.plot(*s(Xl[np.invert(K),0], Xl[np.invert(K),1]), ".", clip_on=False,
               color=color)
       

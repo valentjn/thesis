@@ -15,7 +15,7 @@ def plotZoomBox(ax, s1, s2):
   corners1 = s1(xCorners, yCorners)
   corners2 = s2(xCorners, yCorners)
   
-  darkColor = Figure.COLORS["mittelblau"]
+  darkColor = "mittelblau"
   backgroundColor = helper.plot.mixColors(darkColor, 0.1)
   brightness = 0.8
   lightColor = helper.plot.mixColors(backgroundColor, 0.8, "k")
@@ -123,8 +123,8 @@ macroCellN = 11
 kp1, kp2 = 7, 5
 microCellMargin = 0.5
 microCellSize = 1.5
-edgeColor = Figure.COLORS["mittelblau"]
-backgroundColor = helper.plot.mixColors(Figure.COLORS["mittelblau"], 0.1)
+edgeColor = "mittelblau"
+backgroundColor = helper.plot.mixColors("mittelblau", 0.1)
 textMargin = 0.05
 
 xSquare, ySquare = [0, 1, 1, 0, 0], [0, 0, 1, 1, 0]

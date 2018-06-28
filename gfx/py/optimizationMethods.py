@@ -514,13 +514,11 @@ def plotLogBarrier():
   ax.spines["bottom"].set_position("zero")
   ax.set_xticklabels([])
   ax.set_yticklabels([])
-  mittelblau = Figure.COLORS["mittelblau"]
-  hellblau   = Figure.COLORS["hellblau"]
   
   ax.text(0.1, 0.1, "$0$", ha="left", va="bottom")
   ax.text(-0.1, -0.1, "$g(x)$", ha="right", va="top")
   ax.text(-1.6, -1.7, r"$-\mu_k \log(-g(x))$", ha="center", va="center",
-          rotation=40, color=mittelblau)
+          rotation=40, color="mittelblau")
   
   xx = np.linspace(-3, 0, 501)[:-1]
   
@@ -528,7 +526,7 @@ def plotLogBarrier():
     mu = 2.5 * 0.5**i
     yy = -mu * np.log(-xx)
     ax.plot(xx, yy, "-",
-            color=helper.plot.mixColors(hellblau, i/4, mittelblau))
+            color=helper.plot.mixColors("hellblau", i/4, "mittelblau"))
   
   plotTitle(ax, -1.5, 2.8, "Log-barrier", ha="center", va="top")
   fig.save()
@@ -545,13 +543,11 @@ def plotSquaredPenalty():
   ax.spines["bottom"].set_position("zero")
   ax.set_xticklabels([])
   ax.set_yticklabels([])
-  mittelblau = Figure.COLORS["mittelblau"]
-  hellblau   = Figure.COLORS["hellblau"]
   
   ax.text(-0.1, -0.1, "$0$", ha="right", va="top")
   ax.text(2.9, -0.1, "$g(x)$", ha="right", va="top")
   ax.text(1.9, 2.6, r"$\mu_k \cdot ((g(x))_{+})^2$",
-          ha="center", va="center", rotation=57, color=mittelblau)
+          ha="center", va="center", rotation=57, color="mittelblau")
   
   xx = np.linspace(0, 3, 501)
   
@@ -559,7 +555,7 @@ def plotSquaredPenalty():
     mu = 1 * 2**i
     yy = mu * xx**2
     ax.plot(xx, yy, "-",
-            color=helper.plot.mixColors(hellblau, i/4, mittelblau))
+            color=helper.plot.mixColors("hellblau", i/4, "mittelblau"))
   
   plotTitle(ax, 1.5, 5.8, "Squared penalty", ha="center", va="top")
   fig.save()

@@ -8,6 +8,9 @@ import scipy.linalg
 
 from helper.figure import Figure
 import helper.grid
+import helper.plot
+
+
 
 def createRotationMatrix(axis, angle):
   return scipy.linalg.expm(np.cross(
@@ -75,12 +78,12 @@ def drawImage(imageNumber):
     if pointOrLine["type"] == "point":
       markerSize = 2 + 1.0 * xCur**2
       brightness = getBrightness(xCur)
-      color = [x + brightness * (1 - x) for x in colorBase]
+      color = helper.plot.mixColors(colorBase, 1-brightness)
       ax.plot([xCur], [yCur], zs=[zCur], marker="o", ls="", ms=markerSize,
               color=color)
     else:
       brightness = getBrightness(xCur[0])
-      color = [x + brightness * (1 - x) for x in colorBase]
+      color = helper.plot.mixColors(colorBase, 1-brightness)
       ax.plot(xCur, yCur, zs=zCur, ls="-", marker="", color=color)
   
   ax.set_xlim(*xLim)
@@ -109,11 +112,11 @@ zLim = [-0.3, 1.3]
 n = 4
 d = 3
 b = 1
-colorBase = Figure.COLORS["anthrazit"]
+colorBase = "anthrazit"
 colorDarkBrightness = 0.3
 colorLightBrightness = 0.7
 
-colorDark =  [x + colorDarkBrightness  * (1 - x) for x in colorBase]
+colorDark = helper.plot.mixColors(colorBase, 1-colorDarkBrightness)
 getBrightness = (lambda x: ((x - xLim[0]) / (xLim[1] - xLim[0])) *
                           (colorDarkBrightness - colorLightBrightness) + colorLightBrightness)
 

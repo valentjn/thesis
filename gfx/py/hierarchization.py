@@ -106,7 +106,7 @@ for q in range(3):
   
   #center = (0.1, 0.93)
   #radius = 0.07
-  #color = Figure.COLORS["mittelblau"]
+  #color = "mittelblau"
   #ax.add_artist(matplotlib.patches.Circle(center, radius, ec="none", fc=color))
   #ax.text(*center, r"$\mathbf{{{}}}$".format(q+1),
   #        ha="center", va="center", color="w")
