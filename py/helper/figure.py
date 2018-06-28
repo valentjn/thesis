@@ -15,6 +15,12 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
+COLORS = {
+  "anthrazit"  : ( 62/255,  68/255,  76/255),
+  "mittelblau" : (  0/255,  81/255, 158/255),
+  "hellblau"   : (  0/255, 190/255, 255/255),
+}
+
 LINE_COLORS = [
   (0.000, 0.447, 0.741),
   (0.850, 0.325, 0.098),
@@ -35,15 +41,13 @@ mpl.rcParams.update({
   "text.usetex" : True,
 })
 
+mpl.colors.ColorConverter.colors.update(COLORS)
+mpl.colors.ColorConverter.cache.update(
+  {(name, None) : color + (1,) for name, color in COLORS.items()})
+
 
 
 class Figure(mpl.figure.Figure):
-  COLORS = {
-    "anthrazit" :  ( 62/255,  68/255,  76/255),
-    "mittelblau" : (  0/255,  81/255, 158/255),
-    "hellblau"   : (  0/255, 190/255, 255/255),
-  }
-
   _TEX_PREAMBLE_COMMON = r"""
 \usepackage[ngerman,american]{babel}
 \usepackage{mathtools}
