@@ -1,7 +1,50 @@
 \section{Test Problems}
 \label{sec:52testProblems}
 
-\blindtext{}
+It is impossible to assess the capability of optimization methods
+for every possible optimization problem.
+The most widespread approach in literature
+is the selection of a subset of specific problems
+with different characteristics \term{(test problems)} and
+the application of the methods to only these problems,
+in the hope that the methods perform similarly in
+actual application settings.
+In the following, we select five unconstrained problems
+and three constrained problems.
+For the unconstrained case and the standard hierarchical
+B-spline basis, a more exhaustive list of test functions has been
+studied previously \cite{Valentin14Hierarchische}.
+
+\paragraph{Trivial test functions}
+
+When testing methods that involve sparse grid interpolation,
+one has to consider that the function to be interpolated
+does not satisfy a specific \term{trivial property.}
+A test function $\objfun\colon \clint{\*0, \*1} \to \real$ is trivial, if
+$f$ is of the form
+\begin{equation}
+  \objfun \equiv \sum_{q=1}^m \prod_{t=1}^d \objfun_{q,t},\quad
+  m \in \natz,\;\;
+  \objfun_{q,t}\colon \clint{\*0, \*1} \to \real,\;\;
+  \faex{q = 1, \dotsc, m}{t \in \{1, \dotsc, d\}}{
+    \objfun_{q,t} \in \polyspace{1},
+  }
+\end{equation}
+where $\polyspace{1}$ is the space of polynomials up to linear degree,
+i.e., sums of tensor products of which at least one factor is a
+linear polynomial.
+Note that this is already fulfilled if the summands of $\objfun(\*x)$
+do not depend on all coordinates $x_t$ of $\*x$.
+One can show that for hat functions on sparse grids,
+the hierarchical surpluses $\surplus{\*l,\*i}$ for trivial functions
+vanish if $\*l \ge \*1$.
+This means that trivial functions can well be approximated by hat functions
+on sparse grids with boundary points, without placing any points
+in the interior.
+As this would distort our results,
+we avoid trivial test functions in the following,
+which include popular function such as the
+Branin, Rosenbrock, and Schwefel functions.
 
 \subsection{Unconstrained Problems}
 \label{sec:511unconstrainedProblems}
