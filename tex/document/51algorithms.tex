@@ -49,7 +49,7 @@ Gradient-based methods differ from gradient-free approaches
 in the way that they also take values of the gradient
 $\gradient{\*x}{\objfun}(\*x_k)$ or of the Hessian
 $\hessian{\*x}{\objfun}(\*x_k)$ into account.
-A vast array of optimization method exists in literature.
+A vast array of optimization methods exists in literature.
 Some methods are better suited for specific optimization problems
 than others.
 However, according to the No Free Lunch theorem \cite{Wolpert97No},
@@ -409,21 +409,21 @@ Gauss--Newton method with a trust-region approach.
 \label{sec:513gradientBasedConstrained}
 
 Algorithms for constrained optimization usually
-solve a series unconstrained auxiliary problems with an arbitrary
+solve a series of unconstrained auxiliary problems with an arbitrary
 unconstrained optimization method.
 The auxiliary function to be minimized is
 the sum of the objective function and non-negative penalty terms,
 which penalize if the current point $\*x_k$ is near the boundary
 of the feasible domain or even outside.
-The magnitude of the penalty terms slowly increase to enforce
+The magnitude of the penalty terms slowly increases to enforce
 the feasibility of the final solution.
 Constrained optimization algorithms can roughly be divided
 into \term{interior-point or barrier methods,}
 where $\*x_k$ always stays in the feasible domain,
 and \term{penalty methods,}
 where intermediate solutions $\*x_k$ can be infeasible,
-in which case the penalty term is applied
-(the penalty vanishes inside the domain).
+in which case the penalty term is applied.
+%(the penalty vanishes inside the domain).
 
 At least for the interior-point methods,
 a feasible initial solution is required.
@@ -438,7 +438,7 @@ This can be found by solving another auxiliary problem
 \end{equation}
 where $\*1_{m_{\ineqconfun}} \in \real^{m_{\ineqconfun}}$ and
 $\*1_{m_{\eqconfun}} \in \real^{m_{\eqconfun}}$ are all-ones vectors.
-Initial solution for this problem can be explicitly given
+An initial solution for this problem can be explicitly given
 (for example, $\*x_0 = \*0$ and
 $s_0 = \max(\max(\ineqconfun(\*x_0)), \norm[\infty]{\eqconfun(\*x_0)})$).
 
