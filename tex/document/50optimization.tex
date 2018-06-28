@@ -18,7 +18,15 @@ we apply the hierarchical B-spline bases derived in
 \cref{chap:30BSplines,chap:40algorithms} to optimization,
 which is a major task in simulation technology,
 for instance in inverse problems (see \cref{chap:10introduction}).
-One of the key advantages of B-splines over common hierarchical bases for
+We pursue a surrogate-based optimization approach:
+First, we sample the objective function at specific sparse grid points
+to retrieve objective function values.
+Second, by interpolating these values with hierarchical bases,
+we obtain a surrogate for the objective function.
+Finally, we discard the original objective function and apply
+already existing optimization methods to the surrogate.
+One of the key advantages of hierarchical B-splines
+over common hierarchical bases for
 sparse grids is their continuous differentiability.
 The gradients of B-spline surrogates on sparse grids are not only continuous,
 but also explicitly known and can be evaluated fast.
