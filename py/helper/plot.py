@@ -94,7 +94,6 @@ def getAngle(u, v):
 
 
 def convertColorToRGB(color):
-  color = helper.figure.Figure.COLORS.get(color, color)
   color = mpl.colors.to_rgba(color)[:3]
   return color
 
