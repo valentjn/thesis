@@ -15,6 +15,28 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
+LINE_COLORS = [
+  (0.000, 0.447, 0.741),
+  (0.850, 0.325, 0.098),
+  (0.929, 0.694, 0.125),
+  (0.494, 0.184, 0.556),
+  (0.466, 0.674, 0.188),
+  (0.301, 0.745, 0.933),
+  (0.635, 0.078, 0.184),
+  (0.887, 0.465, 0.758),
+  (0.496, 0.496, 0.496),
+]
+
+mpl.rcParams.update({
+  "axes.prop_cycle" : cycler.cycler(color=LINE_COLORS),
+  "lines.linewidth" : 1,
+  "pgf.texsystem" : "lualatex",
+  "pgf.rcfonts" : False,
+  "text.usetex" : True,
+})
+
+
+
 class Figure(mpl.figure.Figure):
   COLORS = {
     "anthrazit" :  ( 62/255,  68/255,  76/255),
@@ -68,18 +90,6 @@ class Figure(mpl.figure.Figure):
 """,
   }
   
-  _LINE_COLORS = [
-    (0.000, 0.447, 0.741),
-    (0.850, 0.325, 0.098),
-    (0.929, 0.694, 0.125),
-    (0.494, 0.184, 0.556),
-    (0.466, 0.674, 0.188),
-    (0.301, 0.745, 0.933),
-    (0.635, 0.078, 0.184),
-    (0.887, 0.465, 0.758),
-    (0.496, 0.496, 0.496),
-  ]
-  
   graphicsCounter = 0
   
   def __init__(self, *args, fontSize=11, preamble="", mode=None, **kwargs):
@@ -101,14 +111,9 @@ class Figure(mpl.figure.Figure):
                 preamble)
     
     mpl.rcParams.update({
-      "axes.prop_cycle" : cycler.cycler(color=Figure._LINE_COLORS),
       "font.family" : fontFamily,
       "font.size" : fontSize,
-      "lines.linewidth" : 1,
-      "pgf.texsystem" : "lualatex",
-      "pgf.rcfonts" : False,
       "pgf.preamble" : preamble.splitlines(),
-      "text.usetex" : True,
     })
     
     self._saveDisabled = (platform.node() == "neon")
