@@ -17,7 +17,7 @@ class WeaklyFundamentalSpline(ParentFunction):
   def _calculateCoefficients(self):
     N = self.p
     A = np.zeros((N-1, N))
-    x = np.linspace(-self.p + 2, self.p - 2, N - 1)
+    x = np.linspace(2.0 - self.p, self.p - 2, N - 1)
     center = (self.p-1)//2
     
     for j in range(N):
