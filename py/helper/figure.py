@@ -194,7 +194,7 @@ class Figure(mpl.figure.Figure):
         lambda path: plt.savefig(path, facecolor=self.get_facecolor()))
     
     pgfPath = "{}.pgf".format(basename)
-    print("Saving {}...".format(os.path.split(pgfPath)[1]))
+    print("Saving {}...".format(os.path.split(pgfPath)[1]), flush=True)
     savefigFcn(pgfPath)
     
     pgfXzPath = "{}.pgf.xz".format(basename)
@@ -207,15 +207,15 @@ class Figure(mpl.figure.Figure):
     pdfPath = "{}.pdf".format(basename)
     
     if (oldHash == newHash) and os.path.isfile(pdfPath):
-      print("No changes since last run.")
+      print("No changes since last run.", flush=True)
       pathlib.Path(pdfPath).touch()
     else:
-      print("Compiling to {}...".format(os.path.split(pdfPath)[1]))
+      print("Compiling to {}...".format(os.path.split(pdfPath)[1]), flush=True)
       savefigFcn(pdfPath)
       if crop: subprocess.run(["pdfcrop", pdfPath, pdfPath], check=True)
       
       datPath = "{}.pickle.xz".format(basename)
-      print("Saving {}...".format(os.path.split(datPath)[1]))
+      print("Saving {}...".format(os.path.split(datPath)[1]), flush=True)
       with lzma.open(datPath, "wb") as f: pickle.dump(self, f)
     
     if close: plt.close(self)
