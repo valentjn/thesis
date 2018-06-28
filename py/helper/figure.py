@@ -147,10 +147,10 @@ class Figure(mpl.figure.Figure):
     print("Loading {}...".format(datPath))
     with lzma.open(datPath, "rb") as f: return pickle.load(f)
   
-  def disableSave():
+  def disableSave(self):
     self._saveDisabled = True
   
-  def enableSave():
+  def enableSave(self):
     self._saveDisabled = False
   
   def save(self, graphicsNumber=None, appendGraphicsNumber=True,
