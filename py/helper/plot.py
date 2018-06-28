@@ -125,3 +125,30 @@ def transform(ax, offset, scale, plot):
     transformation.scale(*scale)
     transformation.translate(*offset)
     plot.set_transform(transformation + ax.transData)
+
+
+
+def computeZOrderValue(ax, X):
+  aspectRatio = np.array([1, 1, 1])
+  elev, azim = np.pi*ax.elev/180, np.pi*ax.azim/180
+  xl, yl, zl = ax.get_xlim3d(), ax.get_ylim3d(), ax.get_zlim3d()
+  aspectFactor = (aspectRatio /
+                  np.array([np.diff(xl), np.diff(yl), np.diff(zl)]).flatten())
+  center = np.array([np.mean(xl), np.mean(yl), np.mean(zl)])
+  
+  RAzim = np.array([[ np.cos(azim), np.sin(azim), 0],
+                    [-np.sin(azim), np.cos(azim), 0], [0, 0, 1]])
+  RElev = np.array([[ np.cos(elev), 0, np.sin(elev)], [0, 1, 0],
+                    [-np.sin(elev), 0, np.cos(elev)]])
+  R = np.dot(RElev, RAzim)
+  
+  XRotated = np.dot(R, (aspectFactor*(X-center)).T).T
+  
+  #ax.plot(XRotated[:,0], XRotated[:,1], "r.", zs=XRotated[:,2])
+  #ax.view_init(azim=0, elev=0)
+  
+  zOrderValue = XRotated[:,0]
+  zOrderValue = ((zOrderValue + np.min(zOrderValue)) /
+                 (np.max(zOrderValue) - np.min(zOrderValue)))
+  
+  return zOrderValue
