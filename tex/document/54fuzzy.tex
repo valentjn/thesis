@@ -1,17 +1,123 @@
 \section{Example Application: Fuzzy Extension Principle}
 \label{sec:54fuzzy}
 
-\blindtext{}
+To conclude this chapter, we consider the fuzzy extension principle
+as an example application of the optimization of B-spline surrogates
+on sparse grids.
+
+\paragraph{Aleatoric and epistemic uncertainties}
+
+Classical uncertainty quantification distinguishes between
+aleatoric and epistemic uncertainties \cite{Walz16Fuzzy}.
+Aleatoric uncertainties result from variability of inputs or
+model components and from the ``intrinsic randomness''
+of quantities and are best described by probability theory,
+giving exact probabilities.
+Epistemic uncertainties arise from subjectivity,
+simplifying modeling assumptions, and incomplete knowledge.
+These uncertainties are better captured by fuzzy theory,
+which is more imprecise than the ``exact'' stochastic assumptions
+of probabilities \cite{Walz16Fuzzy}.
+
+\paragraph{Uncertainty quantification with fuzzy uncertainties}
+
+In uncertainty quantification, a key question is as follows:
+Given a model and uncertain input parameters for the model,
+how is the model output distributed?
+While there are many approaches available
+for probabilistic uncertainties,
+it is not straightforward to see how to solve this task
+for fuzzy uncertainties.
+Fortunately, Zadeh proposed in 1975
+the \term{fuzzy extension principle} \cite{Zadeh75Concept},
+which addresses this very question.
+
+\paragraph{Sparse grids and B-splines for fuzzy uncertainties}
+
+As we will explain in this section,
+the fuzzy extension principle requires the solution of numerous
+optimization problems that involve the original objective function
+$\objfun$.
+This predestines the use of sparse grid surrogates instead of
+$\objfun$, as explained in the beginning of the chapter.
+Previous work by Klimke \cite{Klimke06Uncertainty} already
+studied this approach for piecewise linear functions on uniform sparse grids
+and for global polynomials on sparse Clenshaw--Curtis grids.
+We will assess the suitability of interpolation with (higher-order)
+hierarchical B-splines on sparse grids for the fuzzy extension principle.
+It should be mentioned that there is also work
+directly incorporating (non-hierarchical) B-splines
+into the framework of fuzzy theory for modeling uncertain surfaces
+\multicite{Anile00Modeling,Zakaria14Fuzzy}.
+
+
 
 \subsection{Fuzzy Sets and Fuzzy Intervals}
 \label{sec:541fuzzySets}
 
-\blindtext{}
+In the following, we repeat very briefly the necessary
+definitions of fuzzy theory.
+A more in-depth introduction can be found in
+\multicite{Klimke06Uncertainty,Walz16Fuzzy}.
+
+\paragraph{Fuzzy sets}
+
+Let $X \subset \real$ be a closed interval on the real line
+and $\memfun{x}\colon X \to \clint{0, 1}$ be a function.
+We call the graph $\fuzzy{x} := \{(x, \memfun{x}(x) \mid x \in X\}$
+of $\memfun{x}$ a \term{fuzzy set} with
+\term{membership function} $\memfun{x}$.
+Fuzzy sets generalize ordinary subsets of $X$,
+which can be obtained by requiring $\memfun{x}(X) \subset \{0, 1\}$.
+In this case, the fuzzy set is called \term{crisp} and
+$\fuzzy{x}$ can be identified with the ordinary set
+$\{x \in X \mid \memfun{x}(x) = 1\}$.
+A fuzzy set $\fuzzy{x}$ is \term{normalized}
+if $\max_{x \in X} \memfun{x}(x) = 1$.
+A \term{convex} fuzzy set $\fuzzy{x}$ satisfies
+$\min(\memfun{x}(a), \memfun{x}(c)) \le \memfun{x}(b)$ for all $a, b, c \in X$
+with $a \le b \le c$.
+
+\paragraph{Fuzzy intervals and $\alpha$-cuts}
+
+A convex and normalized fuzzy set $\fuzzy{x}$ with
+piecewise continuous membership function $\memfun{x}$ is called
+\term{fuzzy interval}.
+If $\{x \in X \mid \memfun{x}(x) = 1\} = \{a\}$ for some $a \in X$,
+then the fuzzy interval $\fuzzy{x}$ is called \term{fuzzy number}.
+
+For $\alpha \in \clint{0, 1}$, the $\alpha$-cut of $\fuzzy{x}$ is
+defined as $\acut{x}{\alpha} := \{x \in X \mid \memfun{x}(x) \ge \alpha\}$
+for $\alpha > 0$ and $\acut{x}{0} := \supp \memfun{x}$ for $\alpha = 0$.
+The $\alpha$-cuts of fuzzy intervals $\fuzzy{x}$ are always
+nested closed intervals $\acut{x}{\alpha} = [a, b]$, i.e.,
+$\acut{x}{\alpha_1} \supset \acut{x}{\alpha_2}$ for $\alpha_1 \le \alpha_2$.
+
+\paragraph{Common types of fuzzy numbers and intervals}
+
+There various types of fuzzy numbers and intervals \cite{Klimke06Uncertainty}.
+Most common are
+\term{triangular fuzzy numbers} (i.e., linear B-splines),
+\term{trapezoidal fuzzy intervals}
+(where a plateau of height one is inserted at the peak), and
+\term{Gaussian fuzzy numbers} with membership function
+$\memfun{x}(x) = \exp(-(x - \mu)^2/(2\sigma)^2)$.
+As the support of Gaussian fuzzy numbers is unbounded,
+\term{quasi-Gaussian fuzzy numbers} truncate the support
+to a fixed multip1le of the standard deviation $\sigma$
+\cite{Klimke06Uncertainty}.
+However, it would be more natural to directly employ B-splines of
+higher degree (normalized adequately), since they are a generalization
+of triangular fuzzy numbers and their limit is a Gaussian fuzzy number.
+
+
 
 \subsection{Fuzzy Extension Principle}
 \label{sec:542fuzzyExtensionPrinciple}
 
 \blindtext{}
+
+
 
 \subsection{Using B-Splines on Sparse Grids to Propagate Fuzzy Uncertainties}
 \label{sec:543fuzzyBSplines}
