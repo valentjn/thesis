@@ -918,6 +918,23 @@
 }
 
 % ======================================================================
+% Application 0: Fuzzy Extension Principle
+% ======================================================================
+
+\newnotationcommand[1]{\fuzzy}{\tilde{#1}}{xtilde}{$\fuzzy{x}$}{
+  Fuzzy set
+}
+
+\newnotationcommand[1]{\memfun}{\mu_{\fuzzy{#1}}}{Äµtilde}{$\mf{x}$}{
+  Membership function $\memfun{x}\colon X \to \clint{0, 1}$ of the
+  fuzzy set $\fuzzy{x}$
+}
+
+\newnotationcommand[2]{\acut}{\tilde{#1}_{#2}}{xtildeα}{$\acut{x}{\alpha}$}{
+  $\alpha$-cut of $\fuzzy{x}$ for $\alpha \in \clint{0, 1}$
+}
+
+% ======================================================================
 % Application 1: Topology Optimization
 % ======================================================================
 
