@@ -144,7 +144,97 @@ of triangular fuzzy numbers and their limit is a Gaussian fuzzy number.
 \subsection{Fuzzy Extension Principle}
 \label{sec:542fuzzyExtensionPrinciple}
 
-\blindtext{}
+Let $\objfun\colon \clint{\*0, \*1} \to \real$ be an objective function,
+whose values $y = \objfun(\*x)$ represent the results of the
+simulation of a model with input parameters $\*x = (x_1, \dotsc, x_d)$.
+If the input parameters are uncertain and
+given as fuzzy sets $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$,
+what is the resulting uncertain outcome
+``$\fuzzy{y} = \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$''?
+Note that there is no definite answer to this question,
+as ``$\objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$'' is not well-defined.
+The fuzzy extension principle, suggested by Zadeh \cite{Zadeh75Concept},
+provides one possible definition.
+
+\paragraph{Alternative fuzzy extension principle}
+
+We use an alternative formulation of the fuzzy extension principle,
+both of which are stated in \cite{Klimke06Uncertainty}.
+The original formulation is computationally more complex,
+as it requires the solution of equality-constrained optimization problems
+and one needs to know the range of $\objfun$, which might not be given.
+The two formulations are equivalent,
+if $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$ are (compactly supported)
+fuzzy intervals and $\objfun$ is continuous \cite{Buckley90Using},
+which we assume in the following.
+
+The alternative fuzzy extension principle defines
+``$\fuzzy{y} = \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$'' as the fuzzy set
+$\fuzzy{y}$ with
+\begin{subequations}
+  \begin{alignat}{2}
+    \memfun{y}(y)
+    &:= \sup\{\alpha \in \clint{0, 1} \mid y \in \acut{y}{\alpha}\},\quad
+    &&y \in \real,\\
+    \acut{y}{\alpha}
+    &:= \Bigl[
+      \min_{\*x \in \Omega_\alpha} \objfun(\*x),\;
+      \max_{\*x \in \Omega_\alpha} \objfun(\*x)
+    \Bigr],\quad
+    &&\alpha \in \clint{0, 1},\\
+    \Omega_\alpha
+    &:= \acut[1]{x}{\alpha} \times \dotsb \times \acut[d]{x}{\alpha},\quad
+    &&\alpha \in \clint{0, 1}.
+  \end{alignat}
+\end{subequations}
+This definition is visualized in \cref{fig:fuzzyExtensionPrinciple}.
+The first equation defines $\fuzzy{y}$ by specifying its $\alpha$-cuts,
+which are given in the second equation as the closed interval
+between the minimum and the maximum value of $\objfun$ on some
+hyper-rectangular domain $\Omega_\alpha$.
+The third equation specifies this domain $\Omega_\alpha$ as the
+Cartesian product of the univariate $\alpha$-cuts.
+Hence, we only have to solve box-constrained optimization problems,
+as opposed to the general equality-constrained problems
+in the original formulation of the fuzzy extension principle.
+
+\begin{figure}
+  \includegraphics{fuzzyExtensionPrinciple_1}%
+  \caption[%
+    Alternative fuzzy extension principle%
+  ]{%
+    Example of the application of the alternative formulation
+    of the fuzzy extension principle to the bivariate objective function
+    $\objfun(\*x) = 6.4 x_1 x_2$ \emph{(bottom)}
+    and triangular fuzzy interval inputs
+    $\fuzzy{x}_1$ and $\fuzzy{x}_2$ \emph{(top and left).}
+    Adapted from \cite{Klimke06Uncertainty}.%
+  }%
+  \label{fig:fuzzyExtensionPrinciple}%
+\end{figure}
+
+\paragraph{Implementation}
+
+The implementation of the alternative fuzzy extension principle
+is straightforward:
+\begin{enumerate}
+  \item
+  Discretize $\clint{0, 1}$ with discrete values
+  $\alpha_j \in \clint{0, 1}$ with $N$ segments
+  (e.g., $\alpha_j := j/N$ for $j = 0, \dotsc, N$)
+  and compute $\acut[t]{x}{\alpha_j}$ for all $t = 1, \dotsc, d$
+  and $j = 0, \dotsc, N$ to obtain $\Omega_{\alpha_j}$.
+  
+  \item
+  Compute $\acut{y}{\alpha_j}$ by solving
+  $\min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ and
+  $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ ($j = 0, \dotsc, N$).
+  
+  \item
+  Approximate $\memfun{y}(y)$ by interpolating the data
+  $\{(\min(\acut{y}{\alpha_j}), \alpha_j) \mid j = 0, 1, \dotsc, N\} \cup
+  \{(\max(\acut{y}{\alpha_j}), \alpha_j) \mid j = N, N - 1, \dotsc, 0\}$.
+\end{enumerate}
 
 
 
@@ -152,3 +242,44 @@ of triangular fuzzy numbers and their limit is a Gaussian fuzzy number.
 \label{sec:543fuzzyBSplines}
 
 \blindtext{}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
