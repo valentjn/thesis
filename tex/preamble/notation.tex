@@ -930,7 +930,9 @@
   fuzzy set $\fuzzy{x}$
 }
 
-\newnotationcommand[2]{\acut}{\tilde{#1}_{#2}}{xtildeα}{$\acut{x}{\alpha}$}{
+\newnotationcommandoptarg{3}{\acut}{%
+  (\tilde{#2}\ifnotempty{#1}{_{#1}})_{#3}%
+}{xtildeα}{$\acut{x}{\alpha}$}{
   $\alpha$-cut of $\fuzzy{x}$ for $\alpha \in \clint{0, 1}$
 }
 
