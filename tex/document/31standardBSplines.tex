@@ -53,7 +53,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
     \lefthphantom{3.}{5.}\,
     $\cardbspl{p}$ is a weighted combination of
     $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and
-    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}.}\\
     %where the coefficients \emph{(dashed)} are linear in $x$.\\
     \lefthphantom{4.}{5.}\,
     $\cardbspl{p}$ is a piecewise polynomial of degree $p$.\\
@@ -61,7 +61,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
     $\deriv{x}{\cardbspl{p}}$ \emph{(dashed)}
     is the difference of
     $\cardbspl{p-1}$ \emph{\textcolor{C0}{(blue)}} and
-    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}}.\\
+    $\cardbspl{p-1}({\cdot} - 1)$ \emph{\textcolor{C1}{(red)}.}\\
     \lefthphantom{6.}{5.}\,
     $\cardbspl{p}$ has unit integral.\\
     \lefthphantom{7.}{5.}\,
@@ -203,7 +203,7 @@ $\bspl{l,i}{p}$ ($l \in \natz$, $i \in \hiset{l}$).
 \begin{figure}
   \subcaptionbox{%
     Nodal B-splines $\bspl{l,i}{p}$ ($i \in \hiset{l}$) and grid points $\gp{l,i}$
-    \emph{(dots)}.%
+    \emph{(dots).}%
   }[67mm]{%
     \includegraphics{hierarchicalBasis_4}%
   }%
@@ -216,7 +216,7 @@ $\bspl{l,i}{p}$ ($l \in \natz$, $i \in \hiset{l}$).
   \subcaptionbox{%
     Hierarchical B-splines $\bspl{l',i'}{p}$ ($l' \le l$, $i' \in \hiset{l'}$)
     and grid points $\gp{l',i'}$
-    \emph{(dots)}.%
+    \emph{(dots).}%
   }[69mm]{%
     \includegraphics{hierarchicalBasis_5}%
   }%
@@ -225,7 +225,7 @@ $\bspl{l,i}{p}$ ($l \in \natz$, $i \in \hiset{l}$).
   ]{%
     Univariate nodal and hierarchical cubic B-splines ($p = 3$)
     up to level $l = 3$.
-    When restricting all functions to $\rspldomain{l}{p}$ \emph{(thick black line)},
+    When restricting all functions to $\rspldomain{l}{p}$ \emph{(thick black line),}
     the nodal space $\restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}$ decomposes into the direct sum
     of the hierarchical subspaces $\restrictspace{\hsbspl{l'}{p}}{\rspldomain{l}{p}}$ ($l' \le l$).%
   }%
@@ -365,14 +365,14 @@ $\spldomain{\knotseq}{p}$:
     Knot sequence $\knotseq = (\knot{0}, \dotsc, \knot{m+p}$)
     with the corresponding $m = 7$ non-uniform cubic B-splines
     $\nonunifbspl{k,\knotseq}{p}$ ($k = 0, \dotsc, m - 1$, $p = 3$).
-    On $\spldomain{\knotseq}{p}$ \emph{(thick line, delimited by dashed lines)},
+    On $\spldomain{\knotseq}{p}$ \emph{(thick line, delimited by dashed lines),}
     which starts with the last knot interval of the first B-spline
     $\nonunifbspl{0,\knotseq}{p}$
     and ends with the first knot interval of the last B-spline
     $\nonunifbspl{m-1,\knotseq}{p}$,
     the B-splines span the spline space $\nonunifsplspace{\knotseq}{p}$.
     Elements of this space are splines $\spl\colon \spldomain{\knotseq}{p} \to \real$
-    \emph{(black line)},
+    \emph{(black line),}
     which are linear combinations
     $\spl = \sum_{k=0}^{m-1} \interpcoeff{k} \nonunifbspl{k,\knotseq}{p}$
     of the B-splines.%
@@ -387,7 +387,7 @@ $\spldomain{\knotseq}{p}$:
   ]{%
     Uniform knot sequence $\nodalknotseq{l}{p}$ \emph{(ticks on horizontal axis)}
     and corresponding nodal cubic B-splines ($p = 3$) of level $l = 3$.
-    In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines)},
+    In the domain $\clint{0, 1}$ \emph{(delimited by dashed lines),}
     the grid points $\fgset{l}$ \emph{\textcolor{mittelblau}{(blue dots)}}
     coincide with the B-spline knots.
     The spline interpolation domain
@@ -652,7 +652,7 @@ for growing $p$.
 \begin{figure}
   \subcaptionbox{%
     Construction of the modified hierarchical cubic B-spline
-    $\bspl[\modified]{l',1}{p}$ (\emph{dashed}, $l' \ge 2$)
+    $\bspl[\modified]{l',1}{p}$ (\emph{dashed,} $l' \ge 2$)
     as a linear combination of neighboring B-splines $\bspl{l',i'}{p}$
     using Marsden's identity.%
   }[72mm]{%
@@ -662,7 +662,7 @@ for growing $p$.
   \subcaptionbox{%
     Modified hierarchical cubic B-splines $\bspl[\modified]{l',i'}{p}$
     ($l' = 1, \dotsc, l$, $i' \in \hiset{l'}$) and grid points $\gp{l',i'}$
-    \emph{(dots)}.%
+    \emph{(dots).}%
   }[72mm]{%
     \includegraphics{hierarchicalBasis_6}%
   }%
@@ -737,7 +737,7 @@ so-called Clenshaw--Curtis quadrature rules.
     The Chebyshev points are constructed as
     the orthogonal projection of the
     endpoints of $2^l$ equally sized segments
-    of a semicircle onto its diameter \emph{\textcolor{C8}{(gray, top)}}.%
+    of a semicircle onto its diameter \emph{\textcolor{C8}{(gray, top)}.}%
   }%
   \label{fig:pointSplittingChebyshev}%
 \end{SCfigure}
@@ -802,7 +802,7 @@ sparse Clenshaw--Curtis grid are shown in \cref{fig:clenshawCurtis}.
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$) and
     modified Clenshaw--Curtis B-splines
      $\bspl[\cc,\modified]{l',i'}{p}$
-    \emph{(dashed)}.%
+    \emph{(dashed).}%
   }[72mm]{%
     \includegraphics{hierarchicalBasis_7}%
   }%
