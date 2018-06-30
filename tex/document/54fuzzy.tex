@@ -118,21 +118,22 @@ For $\alpha \in \clint{0, 1}$, the $\alpha$-cut of $\fuzzy{x}$ is
 defined as $\acut{x}{\alpha} := \{x \in X \mid \memfun{x}(x) \ge \alpha\}$
 for $\alpha > 0$ and $\acut{x}{0} := \supp \memfun{x}$ for $\alpha = 0$.
 The $\alpha$-cuts of fuzzy intervals $\fuzzy{x}$ are always
-nested closed intervals $\acut{x}{\alpha} = [a, b]$, i.e.,
+nested closed intervals, i.e.,
+$\acut{x}{\alpha} = [a, b]$ for some $a \le b$ and
 $\acut{x}{\alpha_1} \supset \acut{x}{\alpha_2}$ for $\alpha_1 \le \alpha_2$.
 
 \paragraph{Common types of fuzzy numbers and intervals}
 
 There various types of fuzzy numbers and intervals \cite{Klimke06Uncertainty}.
 Most common are
-\term{triangular fuzzy numbers} (i.e., linear B-splines),
+\term{triangular fuzzy numbers} (TFNs, i.e., linear B-splines),
 \term{trapezoidal fuzzy intervals}
-(where a plateau of height one is inserted at the peak), and
-\term{Gaussian fuzzy numbers} with membership function
+(TFIs, where a plateau of height one is inserted at the peak), and
+\term{Gaussian fuzzy numbers} (GFNs) with membership function
 $\memfun{x}(x) = \exp(-(x - \mu)^2/(2\sigma)^2)$.
 As the support of Gaussian fuzzy numbers is unbounded,
-\term{quasi-Gaussian fuzzy numbers} truncate the support
-to a fixed multip1le of the standard deviation $\sigma$
+\term{quasi-Gaussian fuzzy numbers} (QGFNs) truncate the support
+to a fixed multiple of the standard deviation $\sigma$
 \cite{Klimke06Uncertainty}.
 However, it would be more natural to directly employ B-splines of
 higher degree (normalized adequately), since they are a generalization
