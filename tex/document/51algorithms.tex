@@ -23,14 +23,14 @@ $\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$ and
 $\eqconfun\colon \clint{\*0, \*1} \to \real^{m_{\eqconfun}}$
 ($m_{\ineqconfun}, m_{\eqconfun} \in \natz$)
 are the \term{inequality and equality constraint functions,} respectively.
-As sparse grid surrogates $f$ are only defined on the
+As sparse grid surrogates $\objfun = \sgintp$ are only defined on the
 unit hyper-cube $\clint{\*0, \*1}$,
 the choice of $\*x$ has to be restricted to $\clint{\*0, \*1}$.
 In the case of \eqref{eq:unconstrainedOptimization},
 this results in a \term{box-constrained optimization problem.}
 A simple method of applying algorithms for unconstrained problems
-to box-constraints is extending $\objfun$ to $\real^d$ by
-$\objfun(\*x) = +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
+to box-constraints is extending $\sgintp$ to $\real^d$ by
+$\sgintp(\*x) = +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
 However, more sophisticated
 %, algorithm-tailored
 approaches are also available \cite{More87Optimization}.

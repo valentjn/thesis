@@ -122,7 +122,7 @@ to dimensionally adaptive sparse grids
     \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
     = \fcnval{\*l,\*i},
   \end{equation}
-  i.e., $\regsgintp[\ct]{n}{d}$ interpolates $f$ at $\regsgset{n}{d}$.
+  i.e., $\regsgintp[\ct]{n}{d}$ interpolates $\objfun$ at $\regsgset{n}{d}$.
   Note that $\regsgintp[\ct]{n}{d}$ is contained in $\regsgspace{n}{d}$,
   if the hierarchical splitting equation \eqref{eq:hierSplittingMV} holds,
   as
@@ -145,7 +145,7 @@ to dimensionally adaptive sparse grids
   }
   As both $\regsgintp[\ct]{n}{d}$ and $\regsgintp{n}{d}$
   are contained in $\regsgspace{n}{d}$ and
-  interpolate $f$ on $\regsgset{n}{d}$, they must coincide
+  interpolate $\objfun$ on $\regsgset{n}{d}$, they must coincide
   due to the uniqueness of sparse grid interpolation
   (linear independence of the hierarchical basis functions).
 \end{proof}
