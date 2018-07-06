@@ -71,9 +71,9 @@ and the best local minimum is chosen.
 In the following,
 we give a brief survey of a small selection of optimization methods
 (see
-\cref{tbl:optimizationMethods},
-\cref{fig:optimizationMethodsGradientFree}, and
-\cref{fig:optimizationMethodsGradientBased}),
+\cref{tbl:optimizationMethod},
+\cref{fig:optimizationMethodGradientFree}, and
+\cref{fig:optimizationMethodGradientBased}),
 highlighting the key ingredients for each method.
 
 \begin{table}
@@ -113,7 +113,7 @@ highlighting the key ingredients for each method.
     (S) if the algorithm is stochastic, and
     (I) if the algorithm has been implemented in \sgpp.%
   }%
-  \label{tbl:optimizationMethods}%
+  \label{tbl:optimizationMethod}%
 \end{table}
 
 
@@ -122,7 +122,7 @@ highlighting the key ingredients for each method.
 \label{sec:511gradientFree}
 
 \newcommand*{\optImage}[1]{%
-  \raisebox{-0.5\height}{\includegraphics{optimizationMethods_#1}}%
+  \raisebox{-0.5\height}{\includegraphics{optimizationMethod_#1}}%
 }
 
 \begin{figure}
@@ -132,7 +132,7 @@ highlighting the key ingredients for each method.
   \caption[Ideas of various gradient-free optimization methods]{%
     Sketch of the ideas of gradient-free optimization methods.%
   }%
-  \label{fig:optimizationMethodsGradientFree}%
+  \label{fig:optimizationMethodGradientFree}%
 \end{figure}
 
 \paragraph{Nelder--Mead}
@@ -257,7 +257,7 @@ and a multiple of the standard deviation) for the acquisition function.
     Sketch of the ideas of gradient-based or constrained
     optimization methods.%
   }%
-  \label{fig:optimizationMethodsGradientBased}%
+  \label{fig:optimizationMethodGradientBased}%
 \end{figure}
 
 Most gradient-based optimization algorithms determine in
