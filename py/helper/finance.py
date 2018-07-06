@@ -99,20 +99,25 @@ class FinanceInterpolant(helper.function.Interpolant):
 
 
 def createJInterpolant(solution, t, discreteStateName, name="interpOptJ"):
+  if t < 0: t += solution.size
   return FinanceInterpolant.fromStruct(
       solution[0,t][name][discreteStateName][0,0][0,0],
-      info={"name" : name, "t" : t, "discreteStateName" : discreteStateName})
+      info={"name" : name, "t" : t, "T" : solution.size,
+            "discreteStateName" : discreteStateName})
 
 def createGradJInterpolant(
       solution, t, discreteStateName, gradientStateName, name="interpGradJ"):
+  if t < 0: t += solution.size
   return FinanceInterpolant.fromStruct(
       solution[0,t][name][discreteStateName][0,0][gradientStateName][0,0][0,0],
-      info={"name" : name, "t" : t, "discreteStateName" : discreteStateName,
+      info={"name" : name, "t" : t, "T" : solution.size,
+            "discreteStateName" : discreteStateName,
             "gradientStateName" : gradientStateName})
 
 def createPolicyInterpolant(interpPolicy, t, discreteStateName, policyName):
+  if t < 0: t += interpPolicy.size
   return FinanceInterpolant.fromStruct(
       interpPolicy[0,t][discreteStateName][0,0][policyName][0,0],
-      info={"name" : "interpPolicy", "t" : t,
+      info={"name" : "interpPolicy", "t" : t, "T" : interpPolicy.size,
             "discreteStateName" : discreteStateName,
             "policyName" : policyName})
