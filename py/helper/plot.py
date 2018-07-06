@@ -148,7 +148,7 @@ def computeZOrderValue(ax, X):
   #ax.view_init(azim=0, elev=0)
   
   zOrderValue = XRotated[:,0]
-  zOrderValue = ((zOrderValue + np.min(zOrderValue)) /
+  zOrderValue = ((zOrderValue - np.min(zOrderValue)) /
                  (np.max(zOrderValue) - np.min(zOrderValue)))
   
   return zOrderValue
