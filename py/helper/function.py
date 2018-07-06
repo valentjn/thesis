@@ -94,7 +94,6 @@ class SGppFunction(Function):
   
   def evaluate(self, XX):
     import pysgpp
-    #yy = np.array([self.f.eval(X) for X in XX])
     yy = pysgpp.DataVector(XX.shape[0])
     self.f.eval(np2sgpp(XX), yy)
     yy = sgpp2np(yy)
@@ -127,57 +126,58 @@ class SGppTestFunction(SGppFunction):
       import pysgpp
       testFunctionTypes = {
         "ackley" :
-          (pysgpp.OptAckley,            True,   False),
+          (pysgpp.OptAckleyObjective,            True,   False),
         "absoluteValue" :
-          (pysgpp.OptAbsoluteValue,     True,   True),
+          (pysgpp.OptAbsoluteValueObjective,     True,   True),
         "beale" :
-          (pysgpp.OptBeale,             False,  False),
+          (pysgpp.OptBealeObjective,             False,  False),
         "branin" :
-          (pysgpp.OptBranin,            False,  True),
+          (pysgpp.OptBraninObjective,            False,  True),
         "bubbleWrap" :
-          (pysgpp.OptBubbleWrap,        True,   False),
+          (pysgpp.OptBubbleWrapObjective,        True,   False),
         "easomYang" :
-          (pysgpp.OptEasomYang,         True,   False),
+          (pysgpp.OptEasomYangObjective,         True,   False),
         "eggholder" :
-          (pysgpp.OptEggholder,         False,  False),
+          (pysgpp.OptEggholderObjective,         False,  False),
         "goldsteinPrice" :
-          (pysgpp.OptGoldsteinPrice,    False,  False),
+          (pysgpp.OptGoldsteinPriceObjective,    False,  False),
         "griewank" :
-          (pysgpp.OptGriewank,          True,   False),
+          (pysgpp.OptGriewankObjective,          True,   False),
         "hartman3" :
-          (pysgpp.OptHartman3,          False,  False),
+          (pysgpp.OptHartman3Objective,          False,  False),
         "hartman6" :
-          (pysgpp.OptHartman6,          False,  False),
+          (pysgpp.OptHartman6Objective,          False,  False),
         "himmelblau" :
-          (pysgpp.OptHimmelblau,        False,  True),
+          (pysgpp.OptHimmelblauObjective,        False,  True),
         "hoelderTable" :
-          (pysgpp.OptHoelderTable,      False,  False),
+          (pysgpp.OptHoelderTableObjective,      False,  False),
         "increasingPower" :
-          (pysgpp.OptIncreasingPower,   True,   True),
+          (pysgpp.OptIncreasingPowerObjective,   True,   True),
         "michalewicz" :
-          (pysgpp.OptMichalewicz,       False,  True),
+          (pysgpp.OptMichalewiczObjective,       False,  True),
         "mladineo" :
-          (pysgpp.OptMladineo,          False,  False),
+          (pysgpp.OptMladineoObjective,          False,  False),
         "perm" :
-          (pysgpp.OptPerm,              True,   True),
+          (pysgpp.OptPermObjective,              True,   True),
         "rastrigin" :
-          (pysgpp.OptRastrigin,         True,   True),
+          (pysgpp.OptRastriginObjective,         True,   True),
         "rosenbrock" :
-          (pysgpp.OptRosenbrock,        True,   True),
+          (pysgpp.OptRosenbrockObjective,        True,   True),
         "schwefel" :
-          (pysgpp.OptSchwefel,          True,   True),
+          (pysgpp.OptSchwefelObjective,          True,   True),
         "shcb" :
-          (pysgpp.OptSHCB,              False,  True),
+          (pysgpp.OptSHCBObjective,              False,  True),
         "sphere" :
-          (pysgpp.OptSphere,            True,   True),
+          (pysgpp.OptSphereObjective,            True,   True),
         "tremblingParabola" :
-          (pysgpp.OptTremblingParabola, True,   True),
+          (pysgpp.OptTremblingParabolaObjective, True,   True),
       }
       fInfo = testFunctionTypes[f]
       if fInfo[2]: warnings.warn("Using trivial test function {}.".format(f))
       args = ([d] if fInfo[1] else [])
-      problem = fInfo[0](*args)
-      f = problem.getObjectiveFunction()
+      f = fInfo[0](*args)
     
-    if f.getNumberOfParameters() != d: raise ValueError("Invalid dimensionality.")
+    if f.getNumberOfParameters() != d:
+      raise ValueError("Invalid dimensionality.")
+    
     super(SGppTestFunction, self).__init__(f)
