@@ -78,12 +78,11 @@ def getCoordinates(L, I, distribution="uniform"):
 
 
 def generateMeshGrid(nns):
-  assert len(nns) == 2
-  xx0 = np.linspace(0, 1, nns[0])
-  xx1 = np.linspace(0, 1, nns[1])
-  XX0, XX1 = np.meshgrid(xx0, xx1)
-  XX = flattenMeshGrid((XX0, XX1))
-  return XX0, XX1, XX
+  xxs = [np.linspace(0, 1, nn) if np.isscalar(nn) else nn
+         for nn in nns]
+  XXs = np.meshgrid(*xxs)
+  XX = flattenMeshGrid(XXs)
+  return XXs + [XX]
 
 def flattenMeshGrid(XXs):
   XX = np.column_stack([XXt.flatten() for XXt in XXs])
