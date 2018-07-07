@@ -1046,6 +1046,11 @@
 \newcommand*{\exfalarge}[3]{\exists_{#1} \forall_{#2}\;\;#3}
 \newcommand*{\exexlarge}[3]{\exists_{#1} \exists_{#2}\;\;#3}
 
+% delimiters
+\DeclarePairedDelimiter{\braced}{\{}{\}}
+\DeclarePairedDelimiter{\bracket}{[}{]}
+\DeclarePairedDelimiter{\paren}{(}{)}
+
 % inner product
 \newcommand*{\innerprod}[3][]{%
   \langle{#2,#3}\rangle\ifnotempty{#1}{_{#1}}
