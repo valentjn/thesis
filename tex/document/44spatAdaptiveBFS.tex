@@ -167,7 +167,7 @@ $\fundbasis{l'_t,i'_t}$ ($t = 1, \dotsc, d$).
   \fundbasis{\*l',\*i'}(\gp{\*l,\*i}) \not= 0
   \implies
   \falarge{t = 1, \dotsc, d}{
-    \left[(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))\right]
+    \bracket*{(l'_t < l_t) \lor ((l'_t, i'_t) = (l_t, i_t))}
   },\quad
   (\*l, \*i), (\*l',\*i') \in \liset.
   \hspace*{-1mm}
@@ -222,7 +222,7 @@ is in lower block-triangular form:
   \end{alignat}
 \end{subequations}
 since $\normone{\*l} = \normone{\*l'}$ implies that
-either $\left[\ex{t = 1, \dotsc, d}{l_t < l'_t}\right]$ or $\*l = \*l'$.%
+either $\bracket*{\ex{t = 1, \dotsc, d}{l_t < l'_t}}$ or $\*l = \*l'$.%
 \footnote{%
   Note that as specified in the list of symbols at the beginning
   of this thesis, the Kronecker delta $\kronecker{X}{Y}$
@@ -662,8 +662,10 @@ We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
   The set
   \begin{equation}
     \relindexset{l'}
-    := \bigl\{i'' \in \integer \bigm\vert
-    \restrictfcn{\basis{l',i''}}{\clint{0, 1}} \not\equiv 0\bigr\},\quad
+    := \braced*{
+      i'' \in \integer \bigm\vert
+      \restrictfcn{\basis{l',i''}}{\clint{0, 1}} \not\equiv 0
+    },\quad
     l' \in \natz,
   \end{equation}
   of relevant indices should be finite,
@@ -855,21 +857,21 @@ bi-infinite-dimensional system of linear equations:
   \newcommand*{\vale}{\cardbspl{p}(\tfrac{p+1}{2} + 2)}
   \newcommand*{\ddotsr}{\rotatebox{16}{$\ddots$}}
   \newcommand*{\raiseentry}[1]{\raisebox{0.3em}{$#1$}}
-  \left(
-  \begin{array}{%
-    @{}>{\raggedright\arraybackslash$}m{14mm}<{$}@{}%
-    *{3}{%
-      @{}>{\centering\arraybackslash$}m{23mm}<{$}@{}%
-    }%
-    @{}>{\raggedleft\arraybackslash$}m{14mm}<{$}@{}%
+  \paren*{
+    \begin{array}{%
+      @{}>{\raggedright\arraybackslash$}m{14mm}<{$}@{}%
+      *{3}{%
+        @{}>{\centering\arraybackslash$}m{23mm}<{$}@{}%
+      }%
+      @{}>{\raggedleft\arraybackslash$}m{14mm}<{$}@{}%
+    }
+      \ddotsr&\ddotsr&\ddotsr&       &       \\
+      \ddotsr&\valc  &\valb  &\vala  &       \\
+      \ddotsr&\vald  &\valc  &\valb  &\ddotsr\\
+             &\vale  &\vald  &\valc  &\ddotsr\\
+             &       &\ddotsr&\ddotsr&\ddotsr
+    \end{array}
   }
-    \ddotsr&\ddotsr&\ddotsr&       &       \\
-    \ddotsr&\valc  &\valb  &\vala  &       \\
-    \ddotsr&\vald  &\valc  &\valb  &\ddotsr\\
-           &\vale  &\vald  &\valc  &\ddotsr\\
-           &       &\ddotsr&\ddotsr&\ddotsr
-  \end{array}
-  \right)
   \cdot
   \begin{pmatrix}
     \vphantom{\ddotsr}\raiseentry{\vdots}\\

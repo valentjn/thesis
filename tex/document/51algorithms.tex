@@ -479,12 +479,12 @@ The method of the augmented Lagrangian
 \multicite{Reinhardt13Nichtlineare,Toussaint15Introduction}
 considers the auxiliary problem
 \begin{equation}
-  \min_{\*x \in \real^d} \left[
+  \min_{\*x \in \real^d} \bracket*{
     \objfun(\*x) + \mu_k \sum_{i=1}^{m_{\ineqconfun}} [\lambda_{k,i} > 0]
     ((\ineqconfun[i](\*x))_{+})^2 + \tr{\*\lambda_k} \ineqconfun(\*x) +
     \mu_k \norm[2]{\eqconfun(\*x)}^2 +
     \tr{\*\kappa_k} \eqconfun(\*x)
-  \right],
+  },
 \end{equation}
 where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is one if $\lambda_{k,i} > 0$ and
 $\*\lambda_k \in \nonnegreal^{m_{\ineqconfun}}$ and

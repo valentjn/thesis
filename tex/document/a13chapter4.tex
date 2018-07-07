@@ -385,7 +385,7 @@
     \begin{equation}
       \normone{\*a}
       = \sum_{t=m+1}^d (l'_t - l_t)
-      = \left(\normone{\*l'} - \sum_{t=1}^m l'_t\right) -
+      = \paren*{\normone{\*l'} - \sum_{t=1}^m l'_t} -
       \sum_{t=m+1}^d \hat{l}_t
       = n - q - \normone{\hat{\*l}}.
     \end{equation}
@@ -771,9 +771,11 @@
         After inserting the induction hypothesis
         for $\linout[(q)]{\*l,\*i}$, we have%
       }
-      &= \Biggl(\fcnval{\*l,\*i} -
-      \largesum{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
-      \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\Biggr) -
+      &= \paren*{
+        \fcnval{\*l,\*i} -
+        \largesum{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
+        \fundbasis{\*l',\*i'}(\gp{\*l,\*i})
+      } -
       \largesum{\normone{\*l'} = q} \linout[(q)]{\*l',\*i'}
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i})\\
       &= \hphantom{\Biggl(}\fcnval{\*l,\*i} -
@@ -1103,8 +1105,10 @@
     \begin{equation}
       \deriv[q']{x}{\fgintp{l-1}}(\gp{l,i\pm1})
       = \deriv[q']{x}{
-        \Biggl[\sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-        \linout{l',i'} \bspl[\wfs]{l',i'}{p}\Biggr]
+        \bracket*{
+          \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
+          \linout{l',i'} \bspl[\wfs]{l',i'}{p}
+        }
       }(\gp{l,i\pm1}),\quad
       q' = 0, \dotsc, \frac{q-1}{2}.
     \end{equation}

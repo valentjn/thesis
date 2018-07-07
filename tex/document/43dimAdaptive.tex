@@ -87,11 +87,12 @@ to dimensionally adaptive sparse grids
   do not contain $\gp{\*l,\*i}$:
   \begin{equation}
     \regsgintp[\ct]{n}{d}(\gp{\*l,\*i})
-    = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \left(
-    \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
-    \fgintp{\*l'}(\gp{\*l,\*i}) +
-    \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
-    \fgintp{\*l'}(\gp{\*l,\*i})\right).
+    = \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot \paren*{
+      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \ni \gp{\*l,\*i}}}
+      \fgintp{\*l'}(\gp{\*l,\*i}) +
+      \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
+      \fgintp{\*l'}(\gp{\*l,\*i})
+    }.
   \end{equation}
   The summands $\fgintp{\*l'}(\gp{\*l,\*i})$ of the first inner sum
   each equal $\fcnval{\*l,\*i}$ due to the full grid interpolation
@@ -488,8 +489,10 @@ The proof of the following proposition can be generalized accordingly.
       \label{eq:propCorrectnessAlgCombiTechnique1}
       &= \sum_{\normone{\*l} \le n} \sum_{\*i \in \hiset{\*l}}
       \underbrace{
-        \left(\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
-        \surplus[(\*l')]{\*l,\*i}\right)
+        \paren*{
+          \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \sum_{\normone{\*l'} = n-q}
+          \surplus[(\*l')]{\*l,\*i}
+        }
       }_{= \linout{\*l,\*i}}
       \basis{\*l,\*i},
     \end{align}
@@ -677,7 +680,7 @@ the following invariant, which can be used to show its correctness:
     \label{eq:propInvariantResidualInterpolation4}
     f^{\sparse,(j)}
     := \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
-    \left(\sum_{j'=1}^{j} \surplus[(j')]{\*l',\*i'}\right) \basis{\*l',\*i'}.
+    \paren*{\sum_{j'=1}^{j} \surplus[(j')]{\*l',\*i'}} \basis{\*l',\*i'}.
   \end{equation}
 \end{restatable}
 
@@ -703,7 +706,7 @@ the following invariant, which can be used to show its correctness:
       \sum_{\*l' \in L} \sum_{\*i' \in \hiset{\*l'}}
       \smash{
         \underbrace{
-          \left(\sum_{j''=1}^{m} \surplus[(j'')]{\*l',\*i'}\right)
+          \paren*{\sum_{j''=1}^{m} \surplus[(j'')]{\*l',\*i'}}
         }_{= \linout{\*l',\*i'}}
       }
       \basis{\*l',\*i'}(\gp{\*l,\*i})

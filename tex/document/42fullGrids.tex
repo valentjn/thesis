@@ -73,7 +73,7 @@ We prove the correctness of the \up with the following invariant:
           \State{%
             $(\linout[(j)]{\*k})_{\*k \in \lisetpole} \gets
             \upopuv{t_j}{\lisetpole}
-            \Bigl[(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}\Bigr]$%
+            \bracket*{(\linout[(j-1)]{\*k})_{\*k \in \lisetpole}}$%
           }
           \Comment{apply univariate operator on pole}%
           \label{line:algUnidirectionalPrinciple1}
@@ -146,11 +146,12 @@ We prove the correctness of the \up with the following invariant:
     \sum_{\*k'' \in \lisetpole}
     \linout[(j)]{\*k''} \basis{k''_{t_j}}(\gp{k'_{t_j}})
     %= ((\upopuv{t_j}{\lisetpole})^{-1}
-    %\Bigl[(\linout[(j)]{\*k})_{\*k \in \lisetpole}\Bigr])_{k'_{t_j}}
+    %\bracket*{(\linout[(j)]{\*k})_{\*k \in \lisetpole}})_{k'_{t_j}}
     %= ((\linout[(j-1)]{\*k})_{\*k \in \lisetpole})_{k'_{t_j}}
-    = \Bigl((\upopuv{t_j}{\lisetpole})^{-1}
-    \Bigl[(\linout[(j)]{\*k''})_{\*k'' \in \lisetpole}\Bigr]
-    \Bigr)_{k'_{t_j}}
+    = \paren*{
+      (\upopuv{t_j}{\lisetpole})^{-1}
+      \bracket*{(\linout[(j)]{\*k''})_{\*k'' \in \lisetpole}}
+    }_{k'_{t_j}}
     = \linout[(j-1)]{(\*k_{T'},\*k'_{-T'})}
   \end{equation}
   by \cref{line:algUnidirectionalPrinciple1} of

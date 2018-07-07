@@ -155,9 +155,11 @@
       &= \{\*l \in \nat^{t-1} \mid
       \normone{\*l} \le n-d+t-1\} \dotcup {}\\
       &\hphantom{{}={}}
-      \bigl(\{\*l \in \natz^{t-1} \setminus \nat^{t-1} \mid
-      \normone{\vecmax(\*l, \*1)} \le n-d+t-b\} \cup
-      \{\vec{0}\}\bigr).
+      \paren*{
+        \{\*l \in \natz^{t-1} \setminus \nat^{t-1} \mid
+        \normone{\vecmax(\*l, \*1)} \le n-d+t-b\} \cup
+        \{\vec{0}\}
+      }.
     \end{aligned}
   \end{equation}
   The \rhs of \eqref{eq:coarseInvariant} has three parts,
