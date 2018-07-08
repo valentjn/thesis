@@ -40,7 +40,7 @@ class Function(abc.ABC):
 
 class Interpolant(Function):
   def __init__(self, basis, X, L, I, fX, aX=None):
-    super(Interpolant, self).__init__(X.shape[1])
+    super().__init__(X.shape[1])
     self.basis = basis
     self.X, self.L, self.I = X, L, I
     self.fX = fX
@@ -89,7 +89,7 @@ class Interpolant(Function):
 
 class SGppFunction(Function):
   def __init__(self, f):
-    super(SGppFunction, self).__init__(f.getNumberOfParameters())
+    super().__init__(f.getNumberOfParameters())
     self.f = f
   
   def evaluate(self, XX):
@@ -108,7 +108,7 @@ class SGppInterpolant(SGppFunction):
     self.fX = fX
     self.aX = self._getSurpluses()
     f = pysgpp.OptInterpolantScalarFunction(grid, np2sgpp(self.aX))
-    super(SGppInterpolant, self).__init__(f)
+    super().__init__(f)
   
   def _getSurpluses(self):
     import pysgpp
