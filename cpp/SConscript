@@ -30,8 +30,8 @@ def buildSGpp(sgppModules):
             sgppSourceFiles.append(os.path.join(root, file_))
   
   sgppOutputFiles = [
-    os.path.join(sgppDir.abspath, "lib", "libsgpp{}.so".format(module))
-    for module in sgppModules
+    os.path.join(sgppDir.abspath, "lib", "sgpp",
+                 "libsgpp{}.so".format(module)) for module in sgppModules
   ] + [
     os.path.join(sgppDir.abspath, "lib", "__init__.py"),
     os.path.join(sgppDir.abspath, "lib", "pysgpp", "__init__.py"),
