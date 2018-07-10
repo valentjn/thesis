@@ -72,6 +72,8 @@ def buildPrograms(sgppModules, sgppDir, sgppFiles):
         CPPPATH=cppPath, LIBS=libs, LIBPATH=libPath))
   
   env.Depends(programs, sgppFiles)
+  
+  return programs
 
 
 
