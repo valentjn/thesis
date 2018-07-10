@@ -16,19 +16,16 @@ pdfs = []
 pgfs = []
 helperPys = []
 
-# home or Documents directory
-homeDir = (os.environ["HOME"] if sys.platform.startswith("linux") else
-           os.path.join(os.environ["HOMEDRIVE"], os.environ["HOMEPATH"],
-                        "Documents"))
-
 # search for helper Python scripts
 pyDir = env.Dir(os.path.join("..", "py")).abspath
 for root, dirs, files in os.walk(os.path.join(pyDir, "helper")):
   helperPys.extend([os.path.join(root, x) for x in files
                     if x.endswith(".py")])
 
+# SG++ directory
+sgppDir = os.path.join(env["BUILD_DIR"].abspath, "..", "cpp", "sgpp")
+
 # set environment variables
-sgppDir = os.path.join(homeDir, "sgpp", "sgopt")
 pyEnv = env.Clone()
 pyEnv["ENV"]["BUILD_DIR"] = env["BUILD_DIR"].abspath
 pyEnv["ENV"]["LD_LIBRARY_PATH"] = ":".join(
