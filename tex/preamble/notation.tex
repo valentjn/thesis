@@ -766,6 +766,20 @@
   $\xopt = \argmin \objfun(\*x)$
 }
 
+\newnotationcommandoptarg{1}{\xoptscaled}{%
+  \ifempty{#1}{\bar{\*x}^\mathrm{opt}}%
+  \ifnotempty{#1}{\bar{x}^\mathrm{opt}_{#1}}%
+}{xoptbar}{$\xoptscaled$}{
+  Scaled solution of an optimization problem
+}
+
+\newnotationcommandoptarg{1}{\xscaled}{%
+  \ifempty{#1}{\bar{\*x}}\ifnotempty{#1}{\bar{x}_{#1}}%
+}{xbar}{$\xscaled$}{
+  Scaled $\xscaled \in \clint{a, b}$
+  for the definition of test functions
+}
+
 % ======================================================================
 % Special Functions
 % ======================================================================
