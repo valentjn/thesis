@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # number of output figures = 8
+# dependencies = SG++
 
 import multiprocessing
 

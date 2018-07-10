@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 # number of output figures = 1
+# dependencies = SG++
 
 import matplotlib as mpl
 import numpy as np
