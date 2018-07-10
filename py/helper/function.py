@@ -157,10 +157,14 @@ class SGppTestFunction(SGppScalarFunction):
           (pysgpp.OptAckleyObjective,            True,   False),
         "absoluteValue" :
           (pysgpp.OptAbsoluteValueObjective,     True,   True),
+        "alpine02" :
+          (pysgpp.OptAlpine02Objective,          True,   False),
         "beale" :
           (pysgpp.OptBealeObjective,             False,  False),
-        "branin" :
-          (pysgpp.OptBraninObjective,            False,  True),
+        "branin01" :
+          (pysgpp.OptBranin01Objective,          False,  True),
+        "branin02" :
+          (pysgpp.OptBranin02Objective,          False,  False),
         "bubbleWrap" :
           (pysgpp.OptBubbleWrapObjective,        True,   False),
         "easomYang" :
@@ -191,8 +195,12 @@ class SGppTestFunction(SGppScalarFunction):
           (pysgpp.OptRastriginObjective,         True,   True),
         "rosenbrock" :
           (pysgpp.OptRosenbrockObjective,        True,   True),
-        "schwefel" :
-          (pysgpp.OptSchwefelObjective,          True,   True),
+        "schwefel06" :
+          (pysgpp.OptSchwefel06Objective,        False,  False),
+        "schwefel22" :
+          (pysgpp.OptSchwefel22Objective,        True,   False),
+        "schwefel26" :
+          (pysgpp.OptSchwefel26Objective,        True,   True),
         "shcb" :
           (pysgpp.OptSHCBObjective,              False,  True),
         "sphere" :
