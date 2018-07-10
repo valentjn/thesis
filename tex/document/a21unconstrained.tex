@@ -1,0 +1,170 @@
+\section{Unconstrained Problems}
+\label{sec:a21unconstrained}
+
+\printornamentsfalse
+\vspace{-5mm}
+\subsection{Bivariate Unconstrained Problems}
+\label{sec:a211bivariateUnconstrained}
+\printornamentstrue
+
+\paragraph{Branin02}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \vspace*{-10mm}
+      \testobjfunscaled{Bra02}(\xscaled)
+      := \paren*{
+        -\frac{51\xscaled[1]^2}{40\pi^2} + \frac{5\xscaled[1]}{\pi} + \xscaled[2] - 6
+      }^2 +
+      \paren*{10 - \frac{5}{4\pi}} \cos(\xscaled[1]) \cos(\xscaled[2])
+    }\\
+    \centertestfunline{
+      {} + \ln(\xscaled[1]^2 + \xscaled[2]^2 + 1) + 10,\hspace*{35mm}
+    }\notag\\
+    \centertestfunline{
+      \xscaled \in \clint{-5, 15}^2,\quad
+      \xoptscaled = (-3.196988424804, 12.52625788532),
+    }\\
+    \centertestfunline{
+      \testobjfunscaled{Bra02}(\xoptscaled) = 5.558914403894
+    }
+  \end{gather}
+\end{subequations}
+
+\paragraph{Eggholder}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{Egg}(\xscaled)
+      := -\xscaled[1] \sin(\sqrt{\abs{\xscaled[1] - \xscaled[2] - 47}}) -
+      (\xscaled[2] + 47)
+      \sin\paren*{\sqrt{\abs{\frac{\xscaled[1]}{2} + \xscaled[2] + 47}}},
+    }\\  
+    \centertestfunline{
+      \xscaled \in \clint{-512, 512}^2,\quad
+      \xoptscaled = (512, 404.2318051143),
+    }\\
+    \centertestfunline{
+      \testobjfunscaled{Egg}(\xoptscaled) = -959.6406627209
+    }
+  \end{gather}
+\end{subequations}
+
+\paragraph{Schwefel06}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{Sch06}(\xscaled)
+      := \max(
+        \abs{\xscaled[1] + 2\xscaled[2] - 7},
+        \abs{2\xscaled[1] + \xscaled[2] - 5}
+      ),
+    }\\
+    \centertestfunline{
+      \xscaled \in \clint{-6, 4}^2,\quad
+      \xoptscaled = (1, 3),\quad
+      \testobjfunscaled{Sch06}(\xoptscaled) = 0
+    }
+  \end{gather}
+\end{subequations}
+
+\subsection{\texorpdfstring{$d$}{d}-Variate Unconstrained Problems}
+\label{sec:a212dvariateUnconstrained}
+
+\paragraph{Ackley}
+
+\begin{subequations}
+  \begin{gather}
+   \centertestfunline{
+      \testobjfunscaled{Ack}(\xscaled)
+      := -20 \exp\paren*{-\frac{\norm[2]{\xscaled}}{5\sqrt{d}}} -
+      \exp\paren*{\frac{1}{d} \sum_{t=1}^d \cos(2\pi \xscaled[t])} +
+      20 + \econst,
+    }\\
+    \centertestfunline{
+      \xscaled \in \clint{-1, 9}^d,\quad
+      \xoptscaled = \*0,\quad
+      \testobjfunscaled{Ack}(\xoptscaled) = 0
+    }
+  \end{gather}
+\end{subequations}
+
+\paragraph{Alpine02}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{Alp02}(\xscaled)
+      := (-1)^{d+1} \prod_{t=1}^d \sqrt{\xscaled[t]} \sin(\xscaled[t]),\qquad
+      \xscaled \in \clint{0, 10}^d,
+    }\\
+    \centertestfunline{
+      \xoptscaled = 7.917052684666 \cdot \*1,\quad
+      \testobjfunscaled{Alp02}(\xoptscaled) = -2.808131180070^d
+    }
+  \end{gather}
+\end{subequations}
+
+\paragraph{Schwefel22}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{Sch22}(\xscaled)
+      := \sum_{t=1}^d \abs{\xscaled[t]} +
+      \prod_{t=1}^d \abs{\xscaled[t]},\qquad
+      \xscaled \in \clint{-3, 7}^d,
+    }\\
+    \centertestfunline{
+      \xoptscaled = \*0,\quad
+      \testobjfunscaled{Sch22}(\xoptscaled) = 0
+    }
+  \end{gather}
+\end{subequations}
+
+\begin{figure}
+  \subcaptionbox{%
+    Branin02%
+  }[71mm]{%
+    \includegraphics{optimizationProblem_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Eggholder%
+  }[76mm]{%
+    \includegraphics{optimizationProblem_2}%
+  }\\[2.5mm]%
+  \subcaptionbox{%
+    Schwefel06%
+  }[71mm]{%
+    \includegraphics{optimizationProblem_3}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Ackley for $d = 2$%
+  }[76mm]{%
+    \includegraphics{optimizationProblem_4}%
+  }\\[2.5mm]%
+  \subcaptionbox{%
+    Alpine02 for $d = 2$%
+  }[71mm]{%
+    \includegraphics{optimizationProblem_5}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Schwefel22 for $d = 2$%
+  }[76mm]{%
+    \includegraphics{optimizationProblem_6}%
+  }%
+  \caption[%
+    Unconstrained test problems%
+  ]{%
+    Bivariate test functions in unconstrained optimization.
+    The \textcolor{C1}{red dot} indicates the location of the
+    global minimum.%
+  }%
+  \label{fig:unconstrainedOptimizationProblem}%
+\end{figure}

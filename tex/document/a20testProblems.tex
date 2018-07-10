@@ -1,0 +1,32 @@
+\chapter{Test Problems for Optimization}
+\label{chap:a20testProblems}
+
+In the following, we give formal definitions of the test problems
+mentioned in \cref{sec:52testProblems}.
+For each problem, we state the objective function
+$\objfunscaled\colon \clint{\*a, \*b} \to \real$,
+$\xscaled \to \objfunscaled(\xscaled)$,
+its domain $\clint{\*a, \*b} \ni \xscaled$,
+the location $\xoptscaled$ of its global minimum, and
+its minimal value $\objfunscaled(\xoptscaled)$
+(and, if any, the constraint functions
+$\ineqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\ineqconfunscaled}}$
+and $\eqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\eqconfunscaled}}$).
+Plots of the test problems are given in
+\cref{%
+  fig:unconstrainedOptimizationProblem,%
+  fig:constrainedOptimizationProblem%
+}.
+
+{
+  \setlength{\abovedisplayskip}{5pt plus 1pt minus 2.5pt}
+  
+  \newcommand*{\centertestfunline}[1]{%
+    \mathclap{\hphantom{\mathrm{(B.99a)}}#1}%
+  }
+  
+  \input{document/a21unconstrained}
+  \input{document/a22constrained}
+}
+
+\cleardoublepage

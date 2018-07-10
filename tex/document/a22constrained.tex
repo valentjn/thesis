@@ -1,0 +1,150 @@
+\section{Constrained Problems}
+\label{sec:a22constrained}
+
+\paragraph{G08}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{G08}(\xscaled)
+      := -\frac{
+        \sin^3(2\pi\xscaled[1]) \sin(2\pi\xscaled[2])
+      }{
+        \xscaled[1]^3 (\xscaled[1] + \xscaled[2])
+      },\quad
+      \testineqconfunscaled{G08}(\xscaled)
+      := \begin{pmatrix}
+        \xscaled[1]^2 - \xscaled[2] + 1\\
+        1 - \xscaled[1] + (\xscaled[2] - 4)^2
+      \end{pmatrix},
+    }\\
+    \centertestfunline{
+      \xscaled \in \clint{0.5, 2.5} \times \clint{3, 6},\quad
+      \xoptscaled = (1.227971358337, 4.245373366474),
+    }\\
+    \centertestfunline{
+      \testobjfunscaled{G08}(\xoptscaled) = -0.09582504141804
+    }
+  \end{gather}
+\end{subequations}
+
+\paragraph{G13}
+
+\begin{subequations}
+  \begin{gather}
+    \centertestfunline{
+      \testobjfunscaled{G13}(\xscaled)
+      := \exp\paren*{\prod_{t=1}^5 \xscaled[t]},\quad
+      \testeqconfunscaled{G13}(\xscaled)
+      := \begin{pmatrix}
+        \norm[2]{\xscaled}^2 - 10\\
+        \xscaled[2] \xscaled[3] - 5 \xscaled[4] \xscaled[5]\\
+        \xscaled[1]^3 + \xscaled[2]^3 + 1
+      \end{pmatrix},
+    }\\
+    \centertestfunline{
+      \xscaled \in \clint{-2.3, 2.3}^2 \times \clint{-3.2, 3.2}^3,
+    }\\
+    \centertestfunline{
+      \xoptscaled = (-1.717143572170, 1.595709692240, 1.827245749628,
+    }\\
+    \centertestfunline{
+      {-0.7636430779867}, -0.7636430779867),\hspace*{9.5mm}
+    }\notag\\
+    \centertestfunline{
+      \testobjfunscaled{G13}(\xoptscaled) = 0.05394984777027
+    }
+  \end{gather}
+\end{subequations}
+% f(x1, x2, x3, x4, x5) = exp(x1*x2*x3*x4*x5)
+% x1^2 + x2^2 + x3^2 + x4^2 + x5^2 = 10
+% x2*x3 = 5*x4*x5
+% x1^3 + x2^3 + 1 = 0
+% 
+% symmetry: x4 = x5
+% 
+% f(x1, x2, x3, x4) = exp(x1*x2*x3*x4^2)
+% x1^2 + x2^2 + x3^2 + 2*x4^2 = 10
+% x2*x3 = 5*x4^2
+% x1^3 + x2^3 + 1 = 0
+% 
+% x3 = 5*x4^2/x2
+% 
+% f(x1, x2, x4) = exp(5*x1*x4^4)
+% x1^2 + x2^2 + 25*x4^4/x2^2 + 2*x4^2 = 10
+% x1^3 + x2^3 + 1 = 0
+% 
+% solution: x1 < 0, x2 > 0
+% ==> x1 = -(x2^3+1)^(1/3)
+% 
+% f(x2, x4) = exp(-5*(x2^3+1)^(1/3)*x4^4)
+% (x2^3+1)^(2/3) + x2^2 + 25*x4^4/x2^2 + 2*x4^2 = 10
+% 
+% f(x2, x4) = exp(-5*(x2^3+1)^(1/3)*(x4^2)^2)
+% 25/x2^2*(x4^2)^2 + 2*(x4^2) + ((x2^3+1)^(2/3) + x2^2 - 10) = 0
+% 
+% a(x2) = 25/x2^2,  b = 2,  c(x2) = (x2^3+1)^(2/3) + x2^2 - 10
+% u = x4^2
+% 
+% f(x2, x4) = exp(-5*(x2^3+1)^(1/3)*u^2)
+% a(x2)*u^2 + b*u + c(x2) = 0
+% 
+% u1 = (-2 + sqrt(4 - 4*a(x2)*c(x2))) / (2*a(x2))
+% u2 = (-2 - sqrt(4 - 4*a(x2)*c(x2))) / (2*a(x2))
+% 
+% u = x4^2 > 0,  [a(x2) > 0 ==> u2 < 0]  ==>  u = u1
+% 
+% solution: x4 < 0
+% ==> x4 = -sqrt(u) = -sqrt(u1)
+%        = -sqrt((-2 + sqrt(4 - 4*a(x2)*c(x2))) / (2*a(x2)))
+% 
+% f(x2) = exp(-5*(x2^3+1)^(1/3)*u1^2)
+% = exp(-5*(x2^3+1)^(1/3) * (-2 + sqrt(4 - 4*a(x2)*c(x2)))^2 / (4*a(x2)^2))
+% = exp(-5*(x2^3+1)^(1/3) *
+%       (-2 + sqrt(4 - 100*((x2^3+1)^(2/3) + x2^2 - 10)/x2^2))^2 / (2500/x2^4))
+% 
+% minimize near x2 = 1.6
+% 
+% in sagemath:
+% var("x2)
+% f = exp(-5*(x2^3+1)^(1/3) * 
+%         (-2 + sqrt(4 - 100*((x2^3+1)^(2/3) + x2^2 - 10)/x2^2))^2 /
+%         (2500/x2^4))
+% x2opt = minimize(f, [1.6], algorithm="simplex", xtol=1e-20,
+%                  ftol=1e-20, maxfun=1000000, maxiter=1000000)[0]
+% 
+% x2 = 1.5957096922397616
+% x4 = -0.763643077986713
+% x5 = -0.763643077986713
+% x1 = -1.71714357217005
+% x3 = 1.82724574962787
+% 
+% x = (-1.71714357217005, 1.5957096922397616, 1.82724574962787,
+%      -0.763643077986713, -0.763643077986713)
+% f(x) = 0.05394984777027191
+
+\begin{figure}
+  \subcaptionbox{%
+    G08.
+    The \textcolor{C0}{blue areas} denote the inequality constraints.%
+  }[72mm]{%
+    \includegraphics{optimizationProblem_7}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    G13.
+    Shown is a bivariate projection over $\xscaled[1]$ and $\xscaled[2]$
+    onto $\xscaled[t] = \xoptscaled[t]$ for $t = 3, 4, 5$.
+    The \textcolor{C0}{blue lines} denote the equality constraints.%
+  }[72mm]{%
+    \includegraphics{optimizationProblem_8}%
+  }%
+  \caption[%
+    Constrained test problems%
+  ]{%
+    Test problems in constrained optimization.
+    The \textcolor{C1}{red dot} indicates the location of the
+    global minimum.%
+  }%
+  \label{fig:constrainedOptimizationProblem}%
+\end{figure}
