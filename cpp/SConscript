@@ -1,0 +1,85 @@
+import shlex
+import os
+
+Import("env")
+Import("Helper")
+env = env.Clone()
+
+
+def buildSGpp(sgppModules):
+  # set SCons flags for SG++
+  sgppDir = Dir("sgpp")
+  sgppSConsFlags = ["SG_ALL=0", "SG_PYTHON=1", "USE_PYTHON3_FOR_PYSGPP=1",
+                    "USE_EIGEN=1", "USE_ARMADILLO=1", "USE_UMFPACK=1"]
+  sgppArgs = (["scons", "-C", sgppDir.abspath,
+              "-j", str(env.GetOption("num_jobs"))] + sgppSConsFlags +
+              ["SG_{}=1".format(module.upper()) for module in sgppModules])
+
+  sgppSourceFiles = []
+  
+  for module in sgppModules:
+    moduleSourceDirs = [
+      os.path.join(sgppDir.abspath, module, "src"),
+      os.path.join(sgppDir.abspath, module, "build", "pysgpp"),
+    ]
+    
+    for moduleSourceDir in moduleSourceDirs:
+      for root, dirs, files in os.walk(moduleSourceDir):
+        for file_ in files:
+          if os.path.splitext(file_)[1] in [".cpp", ".hpp", ".i"]:
+            sgppSourceFiles.append(os.path.join(root, file_))
+  
+  sgppOutputFiles = [
+    os.path.join(sgppDir.abspath, "lib", "libsgpp{}.so".format(module))
+    for module in sgppModules
+  ] + [
+    os.path.join(sgppDir.abspath, "lib", "__init__.py"),
+    os.path.join(sgppDir.abspath, "lib", "pysgpp", "__init__.py"),
+    os.path.join(sgppDir.abspath, "lib", "pysgpp", "pysgpp_swig.py"),
+    os.path.join(sgppDir.abspath, "lib", "pysgpp", "_pysgpp_swig.so"),
+  ]
+  
+  sgppCommandLine = " ".join([shlex.quote(arg) for arg in sgppArgs])
+  env.Command(sgppOutputFiles, sgppSourceFiles, sgppCommandLine)
+  sgppFiles = []
+  
+  for outputFile in sgppOutputFiles:
+    installedFile = (os.path.join(env["BUILD_DIR"].abspath, "sgpp") +
+                    outputFile[len(sgppDir.abspath):])
+    env.InstallAs(installedFile, outputFile)
+    sgppFiles.append(installedFile)
+  
+  return sgppDir, sgppFiles
+
+
+
+def buildPrograms(sgppModules, sgppDir, sgppFiles):
+  cppPath = [os.path.join(sgppDir.abspath, module, "src")
+            for module in sgppModules]
+  libPath = os.path.join(env["BUILD_DIR"].abspath, "sgpp", "lib", "sgpp")
+  libs = ["sgpp{}".format(module) for module in sgppModules]
+  
+  env.VariantDir(env["BUILD_DIR"], ".", duplicate=False)
+  
+  cpps = env.Glob(os.path.join(env["BUILD_DIR"].abspath, "*.cpp"))
+  programs = []
+  
+  for cpp in cpps:
+    program = os.path.join(
+        env["BUILD_DIR"].abspath,
+        os.path.splitext(os.path.basename(cpp.abspath))[0])
+    programs.append(env.Program(program, cpp,
+        CPPPATH=cppPath, LIBS=libs, LIBPATH=libPath))
+  
+  env.Depends(programs, sgppFiles)
+
+
+
+# build SG++
+sgppModules = ["base", "optimization"]
+sgppDir, sgppFiles = buildSGpp(sgppModules)
+
+# build programs
+programs = buildPrograms(sgppModules, sgppDir, sgppFiles)
+
+Return("sgppFiles", "programs")
