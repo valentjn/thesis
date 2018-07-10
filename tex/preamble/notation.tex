@@ -759,7 +759,9 @@
 % Special Points
 % ======================================================================
 
-\newnotationcommand{\xopt}{\*x^\mathrm{opt}}{xopt}{$\xopt$}{
+\newnotationcommandoptarg{1}{\xopt}{%
+  \ifempty{#1}{\*x^\mathrm{opt}}\ifnotempty{#1}{x^\mathrm{opt}_{#1}}%
+}{xopt}{$\xopt$}{
   Solution of an optimization problem of the form
   $\xopt = \argmin \objfun(\*x)$
 }
