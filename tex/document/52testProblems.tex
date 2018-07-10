@@ -9,11 +9,6 @@ with different characteristics \term{(test problems)} and
 the application of the methods to only these problems,
 in the hope that the methods perform similarly in
 actual application settings.
-In the following, we select five unconstrained problems
-and three constrained problems.
-For the unconstrained case and the standard hierarchical
-B-spline basis, a more exhaustive list of test functions has been
-studied previously \cite{Valentin14Hierarchische}.
 
 \paragraph{Trivial test functions}
 
@@ -46,19 +41,70 @@ we avoid trivial test functions in the following,
 which include popular functions such as the
 Branin, Rosenbrock, and Schwefel functions.
 
+\paragraph{General remarks}
 
+In the following, we select six unconstrained problems
+and two constrained problems, which are listed in
+\cref{tbl:optimizationProblem}.
+For the unconstrained case and the standard hierarchical
+B-spline basis, a more exhaustive list of test functions has been
+studied previously \cite{Valentin14Hierarchische}.
 
-\subsection{Unconstrained Problems}
-\label{sec:511unconstrainedProblems}
+For each test problem, we state unscaled versions of objective functions
+$\objfunscaled\colon \clint{\*a, \*b} \to \real$,
+$\xscaled \to \objfunscaled(\xscaled)$
+(and, if present, unscaled constraint functions
+$\ineqconfunscaled$ and $\eqconfunscaled$).
+The actual objective function $\objfun\colon \clint{\*0, \*1} \to \real$
+can be obtained by $\objfun(\*x) := \objfunscaled(\xscaled)$
+with the affine parameter transformation
+$\*x = (\xscaled - \*a)/(\*b - \*a)$
+(similarly for the constraint functions).
 
-% 5 unconstrained: Ackley, Eggholder, ?, ?, ?
-% 3 constrained: ?, ?, ?
+The parameter domain of some objective functions have been translated slightly
+(when compared with the literature)
+to avoid that the minimum is located exactly at or close to
+the center of the domain.
+In this case, sparse grids would be in advantage as
+they tend to place more points near the center of the domain
+(especially for high dimensionalities).
+
+\todo{fill out table with test problems}
+\todo{cite Jamil13Literature and other literature (to be added)}
+
+% http://infinity77.net/global_optimization/test_functions.html
+\begin{table}
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+      >{\kern\tabcolsep}=l<{\kern5mm}*{6}{+c}+l<{\kern\tabcolsep}%
+    }
+    \toprulec
+    \headerrow
+    Name&                         $d$& $m_{\ineqconfun}$& $m_{\eqconfun}$& C&    CD&   MM&  Ref.\\
+    \midrulec
+    % Beale(2)?
+    \textbf{Bra}nin\textbf{02}&   2&   0&                 0&               \yes& \yes& \yes& ?\\
+    \textbf{Egg}holder&           2&   0&                 0&               \yes& \no&  \yes& ?\\
+    \textbf{Sch}wefel\textbf{06}& 2&   0&                 0&               \yes& \no&  \no&  ?\\
+    \midrulec
+    \textbf{Ack}ley&              $d$& 0&                 0&               \yes& \no&  \yes& ?\\
+    \textbf{Alp}ine\textbf{02}&   $d$& 0&                 0&               \yes& \yes& \yes& ?\\
+    \textbf{Sch}wefel\textbf{22}& $d$& 0&                 0&               \yes& \no&  \no&  ?\\
+    \midrulec
+    \textbf{G08}&                 2&   2&                 0&               \yes& \yes& ?&    ?\\
+    \textbf{G13}&                 5&   0&                 3&               \yes& \yes& \yes& ?\\
+    \bottomrulec
+  \end{tabular}
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{tbl:optimizationProblem}%
+\end{table}
+
+\paragraph{Unconstrained problems}
 
 \blindtext{}
 
-
-
-\subsection{Constrained Problems}
-\label{sec:512constrainedProblems}
+\paragraph{Constrained problems}
 
 \blindtext{}
