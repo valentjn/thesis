@@ -169,7 +169,7 @@ class SGppTestFunction(SGppScalarFunction):
           (pysgpp.OptBubbleWrapObjective,        True,   False),
         "easomYang" :
           (pysgpp.OptEasomYangObjective,         True,   False),
-        "eggholder" :
+        "eggHolder" :
           (pysgpp.OptEggholderObjective,         False,  False),
         "goldsteinPrice" :
           (pysgpp.OptGoldsteinPriceObjective,    False,  False),
