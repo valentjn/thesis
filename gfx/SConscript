@@ -22,17 +22,18 @@ for root, dirs, files in os.walk(os.path.join(pyDir, "helper")):
   helperPys.extend([os.path.join(root, x) for x in files
                     if x.endswith(".py")])
 
-# SG++ directory
-sgppDir = os.path.join(env["BUILD_DIR"].abspath, "..", "cpp", "sgpp")
+# cpp directory
+cppDir = os.path.join(env["BUILD_DIR"].abspath, "..", "cpp")
 
 # set environment variables
 env["ENV"]["BUILD_DIR"] = env["BUILD_DIR"].abspath
 env["ENV"]["LD_LIBRARY_PATH"] = ":".join(
   [env["ENV"].get("LD_LIBRARY_PATH", ""),
-   os.path.join(sgppDir, "lib", "sgpp")])
+   os.path.join(cppDir, "sgpp", "lib", "sgpp")])
 env["ENV"]["PYTHONPATH"] = ":".join(
   [env["ENV"].get("PYTHONPATH", ""), pyDir,
-   os.path.join(sgppDir, "lib"), os.path.join(sgppDir, "lib", "pysgpp")])
+   os.path.join(cppDir, "sgpp", "lib"),
+   os.path.join(cppDir, "sgpp", "lib", "pysgpp")])
 
 # check for dependencies
 Helper.checkProgramInstalled(env, "pdfcrop", fail=True)
@@ -61,6 +62,11 @@ for py in pys:
         
         if dependencyName == "SG++":
           dependencies.extend(env["SGPP_FILES"])
+        elif dependencyName.startswith("cpp"):
+          program = os.path.join(cppDir, os.path.basename(dependencyName))
+          dummy = program + ".dummy"
+          dependencies.append(env.Command(dummy, program,
+              program + " && touch $TARGET"))
         else:
           raise ValueError("Unknown dependency \"{}\".".format(
               dependencyName))
