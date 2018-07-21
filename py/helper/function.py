@@ -130,11 +130,11 @@ class SGppVectorFunction(Function):
 
 
 class SGppInterpolant(SGppScalarFunction):
-  def __init__(self, grid, fX):
+  def __init__(self, grid, fX, aX=None):
     import pysgpp
     self.grid = grid
     self.fX = fX
-    self.aX = self._getSurpluses()
+    self.aX = (aX if aX is not None else self._getSurpluses())
     f = pysgpp.OptInterpolantScalarFunction(grid, np2sgpp(self.aX))
     super().__init__(f)
   
