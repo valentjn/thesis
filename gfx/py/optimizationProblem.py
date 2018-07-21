@@ -36,7 +36,7 @@ def plotUnconstrainedProblem(params):
   
   YYMin, YYMax = min(np.amin(YY), fOpt), np.amax(YY)
   v = np.linspace(0, 1, 20)
-  if fStr == "eggholder":
+  if fStr == "eggHolder":
     v = -2*v**3 + 3*v**2
   else:
     v = v**contourExponent
@@ -203,7 +203,7 @@ def plotConstrainedProblem(q):
 
 
 def main():
-  fStrs = ["branin02", "eggholder", "schwefel06",
+  fStrs = ["branin02", "eggHolder", "schwefel06",
           "ackley", "alpine02", "schwefel22"]
   xOpts = np.array([
     [-3.1970, 12.5263],
