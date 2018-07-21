@@ -58,6 +58,7 @@ def buildPrograms(sgppModules, sgppDir, sgppFiles):
             for module in sgppModules]
   libPath = os.path.join(env["BUILD_DIR"].abspath, "sgpp", "lib", "sgpp")
   libs = ["sgpp{}".format(module) for module in sgppModules]
+  linkFlags = ["-fopenmp"]
   
   env.VariantDir(env["BUILD_DIR"], ".", duplicate=False)
   
@@ -69,7 +70,7 @@ def buildPrograms(sgppModules, sgppDir, sgppFiles):
         env["BUILD_DIR"].abspath,
         os.path.splitext(os.path.basename(cpp.abspath))[0])
     programs.append(env.Program(program, cpp,
-        CPPPATH=cppPath, LIBS=libs, LIBPATH=libPath))
+        CPPPATH=cppPath, LIBS=libs, LIBPATH=libPath, LINKFLAGS=linkFlags))
   
   env.Depends(programs, sgppFiles)
   
