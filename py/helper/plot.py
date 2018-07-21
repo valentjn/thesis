@@ -93,6 +93,28 @@ def getAngle(u, v):
 
 
 
+def plotConvergenceTriangle(ax, x, y, width, order, side="lower",
+                            ec="k", fc=None):
+  y0 = y / 2**(order*x)
+  if (order > 0) == (side == "lower"): x2 = x + width
+  else:                                x2 = x - width
+  y2 = y0 * 2**(order*x2)
+  
+  if side not in ["lower", "upper"]:
+    raise ValueError("Invalid value for \"side\".")
+  
+  xx, yy = [x2, x, x2, x2], [y, y, y2, y]
+  XY = np.array([[x2, y], [x, y], [x2, y2]])
+  
+  ax.add_artist(mpl.patches.Polygon(XY, ec=ec, fc=fc,
+                                    fill=(fc is not None)))
+  center = ax.transData.inverted().transform(
+    np.mean(ax.transData.transform(XY), axis=0))
+  ax.text(*center, "${:g}$".format(abs(order)),
+          ha="center", va="center", color=ec)
+
+
+
 def convertColorToRGB(color):
   color = mpl.colors.to_rgba(color)[:3]
   return color
