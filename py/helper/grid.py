@@ -311,9 +311,9 @@ class SGppGrid(object):
     
     self.grid = grid
   
-  def generateRegular(self, n):
+  def generateRegular(self, *args):
     self.grid.getStorage().clear()
-    self.grid.getGenerator().regular(n)
+    self.grid.getGenerator().regular(*args)
     return self.getPoints()
   
   def getPoints(self):
