@@ -77,11 +77,11 @@ if __name__ == "__main__":
     run(["git", "fat", "init"], cwd=repoPath)
     
     if args.copy_stuff is not None:
-      print("")
-      print("Copying git-fat files...")
       gitDirSrc = run(["git", "rev-parse", "--git-dir"], pipe=True,
                       cwd=args.copy_stuff).strip()
       gitDirDst = os.path.join(repoPath, ".git")
+      print("")
+      print("Copying git-fat files...")
       os.rmdir(os.path.join(gitDirDst, "fat", "objects"))
       shutil.copytree(os.path.join(gitDirSrc, "fat", "objects"),
                       os.path.join(gitDirDst, "fat", "objects"))
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     
     if args.copy_stuff is not None:
       print("")
-      print("Copying .sconsign.dblite file and build/gfx directory...")
+      print("Copying .sconsign.dblite and build/gfx/...")
       shutil.copy(os.path.join(args.copy_stuff, ".sconsign.dblite"), repoPath)
       shutil.copytree(os.path.join(args.copy_stuff, "build", "gfx"),
                       os.path.join(repoPath, "build", "gfx"),
