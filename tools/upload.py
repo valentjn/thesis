@@ -120,6 +120,13 @@ if __name__ == "__main__":
       shutil.copytree(os.path.join(args.copy_stuff, "build", "gfx"),
                       os.path.join(repoPath, "build", "gfx"),
                       copy_function=shutil.copy)
+      
+      print("")
+      print("Copying cpp/sgpp/...")
+      os.rmdir(os.path.join(repoPath, "cpp", "sgpp"))
+      shutil.copytree(os.path.join(args.copy_stuff, "cpp", "sgpp"),
+                      os.path.join(repoPath, "cpp", "sgpp"),
+                      copy_function=shutil.copy)
     
     try:
       print("")
