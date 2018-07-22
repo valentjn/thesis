@@ -41,14 +41,18 @@ we avoid trivial test functions in the following,
 which include popular functions such as the
 Branin01, Rosenbrock, and Schwefel26 functions.
 
-\paragraph{General remarks}
+\paragraph{Selection of test problems}
 
 In the following, we select six unconstrained problems
 and two constrained problems, which are listed in
 \cref{tbl:optimizationProblem}.
+The definitions of the problems are given in \cref{chap:a20testProblems}.
 For the unconstrained case and the standard hierarchical
 B-spline basis, a more exhaustive list of test functions has been
 studied previously \cite{Valentin14Hierarchische}.
+Gavana \cite{Gavana13Global} and Runarsson/Yao \cite{Runarsson00Stochastic}
+provide a good overview of unconstrained and constrained test problems,
+respectively.
 
 For each test problem, we state unscaled versions of objective functions
 $\objfunscaled\colon \clint{\*a, \*b} \to \real$,
@@ -62,17 +66,21 @@ $\*x = (\xscaled - \*a)/(\*b - \*a)$
 (similarly for the constraint functions).
 
 The parameter domain of some objective functions have been translated slightly
-(when compared with the literature)
+compared to the literature
 to avoid that the minimum is located exactly at or close to
 the center of the domain.
 In this case, sparse grids would be in advantage as
 they tend to place more points near the center of the domain
 (especially for high dimensionalities).
 
-\todo{fill out table with test problems}
-\todo{cite Jamil13Literature and other literature (to be added)}
+\todo{
+  borrow book for G13;
+  %https://stg.ibs-bw.de/aDISWeb/app?service=direct/0/Home/$DirectLink&sp=SOPAC02&sp=SAKSWB-IdNr002379740,
+  check if it contains G13;
+  check for changes and list them in a22*.tex
+  (otherwise use An Ideal Penalty Function for Constrained Optimization)
+}
 
-% http://infinity77.net/global_optimization/test_functions.html
 \begin{table}
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
@@ -80,31 +88,42 @@ they tend to place more points near the center of the domain
     }
     \toprulec
     \headerrow
-    Name&                         $d$& $m_{\ineqconfun}$& $m_{\eqconfun}$& C&    CD&   MM&  Ref.\\
+    Name&                         $d$& $m_{\ineqconfun}$& $m_{\eqconfun}$& C&    CD&   MM&   Reference\\
     \midrulec
     % Beale(2)?
-    \textbf{Bra}nin\textbf{02}&   2&   0&                 0&               \yes& \yes& \yes& ?\\
-    \textbf{Egg} Holder&          2&   0&                 0&               \yes& \no&  \yes& ?\\
-    \textbf{Sch}wefel\textbf{06}& 2&   0&                 0&               \yes& \no&  \no&  ?\\
+    \textbf{Bra}nin\textbf{02}&   2&   0&                 0&               \yes& \yes& \yes& \cite{Munteanu98Global}\\
+    \textbf{Egg}Holder&           2&   0&                 0&               \yes& \no&  \yes& \cite{Whitley96Evaluating}\\
+    \textbf{Sch}wefel\textbf{06}& 2&   0&                 0&               \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
+    \textbf{Ack}ley&              $d$& 0&                 0&               \yes& \no&  \yes& \cite{Ackley87Connectionist}\\
+    \textbf{Alp}ine\textbf{02}&   $d$& 0&                 0&               \yes& \yes& \yes& \cite{Clerc99Swarm}\\
+    \textbf{Sch}wefel\textbf{22}& $d$& 0&                 0&               \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
     \midrulec
-    \textbf{Ack}ley&              $d$& 0&                 0&               \yes& \no&  \yes& ?\\
-    \textbf{Alp}ine\textbf{02}&   $d$& 0&                 0&               \yes& \yes& \yes& ?\\
-    \textbf{Sch}wefel\textbf{22}& $d$& 0&                 0&               \yes& \no&  \no&  ?\\
-    \midrulec
-    \textbf{G08}&                 2&   2&                 0&               \yes& \yes& \yes& ?\\
-    \textbf{G13}&                 5&   0&                 3&               \yes& \yes& \yes& ?\\
+    \textbf{G08}&                 2&   2&                 0&               \yes& \yes& \yes& \cite{Schoenauer93Constrained}\\
+    \textbf{G13}&                 5&   0&                 3&               \yes& \yes& \yes& \cite{Powell69Method}\\
     \bottomrulec
   \end{tabular}
   \caption[TODO]{%
-    TODO%
+    Unconstrained \emph{(top)} and constrained \emph{(bottom)} test problems.
+    The bold-faced part of the name will be used as an abbreviation.
+    The remaining columns state
+    the dimensionality $d$ of the objective function $\objfun$,
+    the numbers $m_{\ineqconfun}$ and $m_{\eqconfun}$ of
+    inequality and equality constraints,
+    whether $\objfun$ is continuous in the domain
+    $\clint{\*0, \*1}$ (C),
+    whether $\objfun$ is continuously differentiable in
+    the interior of the domain $\opint{\*0, \*1}$ (CD),
+    whether $\objfun$ is multi-modal (MM, i.e.,
+    whether there are multiple local minima), and
+    a reference to the original literature that defines the problem.%
   }%
   \label{tbl:optimizationProblem}%
 \end{table}
 
-\paragraph{Unconstrained problems}
-
-\blindtext{}
-
-\paragraph{Constrained problems}
-
-\blindtext{}
+%\paragraph{Unconstrained problems}
+%
+%\blindtext{}
+%
+%\paragraph{Constrained problems}
+%
+%\blindtext{}
