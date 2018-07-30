@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 
+import numpy as np
 
 
 
+def argLexSortRows(A):
+  return np.lexsort(A.T[::-1])
 
 
 
