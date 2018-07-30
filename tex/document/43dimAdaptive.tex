@@ -106,8 +106,8 @@ to dimensionally adaptive sparse grids
       &= \fcnval{\*l,\*i} \cdot \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
       \setsize{
         \{\*l' \mid \normone{\*l'} = n - q,\; \fgset{\*l'} \ni \gp{\*l,\*i}\}
-      } +{}\\
-      &\qquad\sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
+      }\\
+      &\qquad{} {} + \sum_{q=0}^{d-1} (-1)^q \binom{d-1}{q} \cdot
       \sum_{\substack{\normone{\*l'} = n - q\\\fgset{\*l'} \notni \gp{\*l,\*i}}}
       \fgintp{\*l'}(\gp{\*l,\*i}).
     \end{split}
