@@ -40,6 +40,8 @@ def buildSGpp(sgppModules):
   ]
   
   sgppCommandLine = " ".join([shlex.quote(arg) for arg in sgppArgs])
+  sgppCommandLine += " && touch {}".format(" ".join(
+      [shlex.quote(x) for x in sgppOutputFiles]))
   env.Command(sgppOutputFiles, sgppSourceFiles, sgppCommandLine)
   sgppFiles = []
   
