@@ -52,16 +52,18 @@ def cacheToFile(func, path=None):
   def cacheLookup(*args, **kwargs):
     spec = inspect.getfullargspec(func)
     allArgs = frozenset(list(zip(spec.args, args)) + list(kwargs.items()))
-    if allArgs not in funcCache: funcCache[allArgs] = func(*args, **kwargs)
+    if allArgs not in funcCache:
+      funcCache[allArgs] = func(*args, **kwargs)
+      cache["__modified__"] = True
     return funcCache[allArgs]
   
   @atexit.register
   def saveCache():
-    if not cache.get("__saved__", False):
+    if cache.get("__modified__", False):
+      del cache["__modified__"]
       while True:
         try:
           with lzma.open(path, "wb") as f: pickle.dump(cache, f)
-          cache["__saved__"] = True
           break
         except KeyboardInterrupt:
           pass
