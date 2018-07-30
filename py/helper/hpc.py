@@ -47,15 +47,27 @@ def cacheToFile(func, path=None):
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
   funcCache = cache[funcName]
-  
+  funcSignature = inspect.signature(func)
+    
   @functools.wraps(func)
   def cacheLookup(*args, **kwargs):
-    spec = inspect.getfullargspec(func)
-    allArgs = frozenset(list(zip(spec.args, args)) + list(kwargs.items()))
-    if allArgs not in funcCache:
-      funcCache[allArgs] = func(*args, **kwargs)
+    boundArgs = funcSignature.bind(*args, **kwargs)
+    boundArgs.apply_defaults()
+    boundArgsOrderedDict = boundArgs.arguments
+    boundArgsTuple = tuple(boundArgsOrderedDict.items())
+    
+    callString = "{}({})".format(funcName,
+        ", ".join(["{}={}".format(x, repr(y))
+                   for x, y in boundArgsOrderedDict.items()]))
+    
+    if boundArgsTuple in funcCache:
+      print("Cache hit: {}".format(callString))
+    else:
+      print("Cache miss: {}".format(callString))
+      funcCache[boundArgsTuple] = func(*args, **kwargs)
       cache["__modified__"] = True
-    return funcCache[allArgs]
+    
+    return funcCache[boundArgsTuple]
   
   @atexit.register
   def saveCache():
