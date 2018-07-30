@@ -9,6 +9,9 @@ import pickle
 
 
 
+
+cacheCache = {}
+
 def getCachePath(path=None):
   if (path is None) and ("BUILD_DIR" in os.environ):
     path = os.environ["BUILD_DIR"]
@@ -29,10 +32,17 @@ def getCachePath(path=None):
 def cacheToFile(func, path=None):
   path = getCachePath(path)
   
-  if os.path.isfile(path):
-    with lzma.open(path, "rb") as f: cache = pickle.load(f)
+  if path in cacheCache:
+    cache = cacheCache[path]
   else:
-    cache = {}
+    if os.path.isfile(path):
+      print("Reading cache file \"{}\"...".format(path))
+      with lzma.open(path, "rb") as f: cache = pickle.load(f)
+    else:
+      print("Using new cache file \"{}\".".format(path))
+      cache = {}
+    
+    cacheCache[path] = cache
   
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
