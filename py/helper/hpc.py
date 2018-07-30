@@ -6,7 +6,13 @@ import inspect
 import lzma
 import os
 import pickle
+import secrets
+import socket
+import subprocess
+import time
+import warnings
 
+import helper.remotely
 
 
 
@@ -85,3 +91,117 @@ def cacheToFile(func, path=None):
 def clearCacheFile(path=None):
   path = getCachePath(path)
   if os.path.isfile(path): os.remove(path)
+
+
+
+DEFAULT_REMOTELY_URL  = "neon.informatik.uni-stuttgart.de"
+DEFAULT_REMOTELY_PORT = 8075
+
+remotelyServerCache = {}
+
+def readRemotelyKey():
+  keyPath = os.path.expanduser("~/.remotely_key.txt")
+  
+  if os.path.isfile(keyPath):
+    with open(keyPath, "r") as f: key = f.read().strip()
+  else:
+    key = secrets.token_hex(32)
+    with open(keyPath, "w") as f: f.write(key)
+  
+  return key
+
+def checkRemotelyConnection(url, port, key):
+  previousTimeout = socket.getdefaulttimeout()
+  socket.setdefaulttimeout(0.1)
+  
+  @helper.remotely.remotely(key, url, port)
+  def dummyFunction(a, b):
+    return a + b
+  
+  try:
+    result = dummyFunction(3, 4)
+    return (result == 7)
+  except Exception as exception:
+    return False
+  finally:
+    socket.setdefaulttimeout(previousTimeout)
+
+def startRemotelyServer(url, port, key):
+  cmd =  ("PYTHONPATH=\""
+            "$REAL_HOME/git/thesis/py:"
+            "$REAL_HOME/git/thesis/gfx/py:"
+            "$REAL_HOME/git/thesis/cpp/sgpp/lib:"
+            "$REAL_HOME/git/thesis/cpp/sgpp/lib/pysgpp:"
+            "$PYTHONPATH"
+          "\" "
+          "LD_LIBRARY_PATH=\""
+            "$REAL_HOME/git/thesis/cpp/sgpp/lib/sgpp:"
+            "$LD_LIBRARY_PATH"
+          "\" "
+          "REMOTELY_KEY=\"{}\" "
+          "nice -n 19 python3 -c '"
+            "import pysgpp; import multiprocessing; "
+            "import helper.remotely; import os; "
+            "pysgpp.omp_set_num_threads(multiprocessing.cpu_count()); "
+            "server = helper.remotely.create_remotely_server("
+                "os.environ[\"REMOTELY_KEY\"], {}); "
+            "server.serve_forever()"
+          "' </dev/null >/dev/null 2>&1 &").format(key, port)
+  args = ["ssh", url, cmd]
+  subprocess.run(args, check=True)
+  print("Starting remotely server on {} with port {} and key {}.".format(
+      url, port, key))
+  time.sleep(1.0)
+
+def executeRemotely(func, url=DEFAULT_REMOTELY_URL,
+                    autoStart=2, fallback=True):
+  if "REMOTELY_KEY" in os.environ:
+    warnings.warn("Environment variable REMOTELY_KEY is set, "
+                  "which means that we are already running remotely. "
+                  "Using local fallback.")
+    return func
+  
+  if url in remotelyServerCache:
+    cache = remotelyServerCache[url]
+    isConnected = cache["isConnected"]
+    if isConnected: port, key = cache["port"], cache["key"]
+  else:
+    isConnected = False
+  
+  if (not isConnected) and (autoStart >= 1):
+    startPort = DEFAULT_REMOTELY_PORT
+    key = readRemotelyKey()
+    
+    for port in range(startPort, startPort+5):
+      if checkRemotelyConnection(url, port, key):
+        isConnected = True
+        break
+      
+      try:
+        startRemotelyServer(url, port, key)
+      except Exception as exception:
+        pass
+      else:
+        if checkRemotelyConnection(url, port, key):
+          isConnected = True
+          break
+      
+      if autoStart < 2: break
+    
+    if isConnected:
+      remotelyServerCache[url] = {"isConnected" : True,
+                                  "port" : port, "key" : key}
+    else:
+      remotelyServerCache[url] = {"isConnected" : False}
+  
+  if isConnected:
+    print("Connected to remotely server on {} "
+          "with port {} and key {}.".format(url, port, key))
+    return helper.remotely.remotely(key, url, port)(func)
+  else:
+    if fallback:
+      warnings.warn("Could not connect to remotely server, "
+                    "using local fallback.")
+      return func
+    else:
+      raise RuntimeError("Could not connect to remotely server.")
