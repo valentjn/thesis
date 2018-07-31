@@ -61,6 +61,7 @@ def cacheToFile(func, path=None):
   if funcName not in cache: cache[funcName] = {}
   funcCache = multiprocessingManager.dict(cache[funcName])
   cache[funcName] = funcCache
+  cache["__info__"] = {"modified" : False}
   funcSignature = inspect.signature(func)
   
   @functools.wraps(func)
@@ -79,14 +80,14 @@ def cacheToFile(func, path=None):
     else:
       print("Cache miss: {}".format(callString))
       funcCache[boundArgsTuple] = func(*args, **kwargs)
-      cache["__modified__"] = True
+      cache["__info__"]["modified"] = True
     
     return funcCache[boundArgsTuple]
   
   @atexit.register
   def saveCache():
-    if cache.get("__modified__", False):
-      del cache["__modified__"]
+    if ("__info__" in cache) and cache["__info__"]["modified"]:
+      del cache["__info__"]
       cacheToSave = {x : dict(y) for x, y in cache.items()}
       while True:
         try:
