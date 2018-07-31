@@ -130,8 +130,9 @@ def generatePlot(q):
       
       stats = getInterpolationStats(gridStr, fStr, nMax, NMax, d, b, p, NN)
       x = sorted(list(stats.keys()))
+      x = [N for N in x if N > 0]
       xs2.append(x)
-      y = [stats[n][2] for n in x]
+      y = [stats[N][2] for N in x]
       ax2.plot(x, y, ls, clip_on=False, color=currentColor)
       print(x)
       print(y)
@@ -144,6 +145,8 @@ def generatePlot(q):
     
     #helper.plot.plotConvergenceTriangle(ax, 5.5, 1e-2, 2, -2)
     #helper.plot.plotConvergenceTriangle(ax, 5, 1e1, 2.5, -1, side="upper")
+  
+  ax2.set_xscale("log")
   
   fig1.save(graphicsNumber=2*q+1)
   fig2.save(graphicsNumber=2*q+2)
