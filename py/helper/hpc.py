@@ -4,9 +4,12 @@ import atexit
 import functools
 import inspect
 import lzma
+import multiprocessing
+import multiprocessing.managers
 import os
 import pickle
 import secrets
+import signal
 import socket
 import subprocess
 import time
@@ -35,6 +38,9 @@ def getCachePath(path=None):
   
   return path
 
+multiprocessingManager = multiprocessing.managers.SyncManager()
+multiprocessingManager.start(signal.signal, (signal.SIGINT, signal.SIG_IGN))
+
 def cacheToFile(func, path=None):
   path = getCachePath(path)
   
@@ -48,13 +54,15 @@ def cacheToFile(func, path=None):
       print("Using new cache file \"{}\".".format(path))
       cache = {}
     
+    cache = multiprocessingManager.dict(cache)
     cacheCache[path] = cache
   
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
-  funcCache = cache[funcName]
+  funcCache = multiprocessingManager.dict(cache[funcName])
+  cache[funcName] = funcCache
   funcSignature = inspect.signature(func)
-    
+  
   @functools.wraps(func)
   def cacheLookup(*args, **kwargs):
     boundArgs = funcSignature.bind(*args, **kwargs)
@@ -79,9 +87,10 @@ def cacheToFile(func, path=None):
   def saveCache():
     if cache.get("__modified__", False):
       del cache["__modified__"]
+      cacheToSave = {x : dict(y) for x, y in cache.items()}
       while True:
         try:
-          with lzma.open(path, "wb") as f: pickle.dump(cache, f)
+          with lzma.open(path, "wb") as f: pickle.dump(cacheToSave, f)
           break
         except KeyboardInterrupt:
           pass
