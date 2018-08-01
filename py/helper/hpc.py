@@ -56,7 +56,7 @@ def cacheToFile(func, path=None):
     
     cache = multiprocessingManager.dict(cache)
     cacheCache[path] = cache
-    cache["__info__"] = {"modified" : False}
+    cache["__info__"] = multiprocessingManager.dict({"modified" : False})
   
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
