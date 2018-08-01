@@ -48,10 +48,10 @@ def cacheToFile(func, path=None):
     cache = cacheCache[path]
   else:
     if os.path.isfile(path):
-      print("Reading cache file \"{}\"...".format(path))
+      print("Reading cache file {}...".format(path))
       with lzma.open(path, "rb") as f: cache = pickle.load(f)
     else:
-      print("Using new cache file \"{}\".".format(path))
+      print("Using new cache file {}.".format(path))
       cache = {}
     
     cache = multiprocessingManager.dict(cache)
