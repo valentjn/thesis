@@ -56,7 +56,8 @@ def cacheToFile(func, path=None):
     
     cache = multiprocessingManager.dict(cache)
     cacheCache[path] = cache
-    cache["__info__"] = multiprocessingManager.dict({"modified" : False})
+    cache["__info__"] = multiprocessingManager.dict(
+        {"modified" : False, "depth" : 0, "ignoreDepth" : 0})
   
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
@@ -77,11 +78,18 @@ def cacheToFile(func, path=None):
         ", ".join(["{}={}".format(x, repr(y))
                    for x, y in boundArgsOrderedDict.items()]))
     
-    if boundArgsTuple in funcCache:
+    if ((boundArgsTuple in funcCache) and
+        (cache["__info__"]["depth"] >= cache["__info__"]["ignoreDepth"])):
       print("Cache hit: {}".format(callString))
     else:
       print("Cache miss: {}".format(callString))
-      funcCache[boundArgsTuple] = func(*args, **kwargs)
+      
+      try:
+        cache["__info__"]["depth"] += 1
+        funcCache[boundArgsTuple] = func(*args, **kwargs)
+      finally:
+        cache["__info__"]["depth"] -= 1
+      
       cache["__info__"]["modified"] = True
     
     return funcCache[boundArgsTuple]
@@ -96,6 +104,7 @@ def cacheToFile(func, path=None):
         while True:
           try:
             with lzma.open(path, "wb") as f: pickle.dump(cacheToSave, f)
+            cache["__info__"]["modified"] = False
             break
           except KeyboardInterrupt:
             pass
@@ -111,6 +120,22 @@ def cacheToFile(func, path=None):
 def clearCacheFile(path=None):
   path = getCachePath(path)
   if os.path.isfile(path): os.remove(path)
+
+class CacheFileIgnorer(object):
+  def __init__(path=None, delta=None):
+    path = getCachePath(path)
+    self.cache = cacheCache[path]
+    self.delta = delta
+  
+  def __enter__(self):
+    self.cache["__info__"]["ignore_depth"] += self.delta
+    print("Increasing ignore depth of cache file {} to {}.".format(
+        self.path, self.cache["__info__"]["ignore_depth"]))
+  
+  def __exit__(self, exceptionType, exceptionValue, traceback):
+    self.cache["__info__"]["ignore_depth"] -= self.delta
+    print("Decrasing ignore depth of cache file {} to {}.".format(
+        self.path, self.cache["__info__"]["ignore_depth"]))
 
 
 
