@@ -83,7 +83,7 @@ for p in ps:
   
   ax1.text(-5.1, 1.2, r"$\parentfundspl{p}(x),$",
            ha="left", va="center", color="C0")
-  ax1.text(-2.6, 1.2, r"$\parentfundspl{p\vphantom{,\fs}}(x - k)$",
+  ax1.text(-2.6, 1.2, r"$\parentbspl{p\vphantom{,\fs}}(x - k)$",
            ha="left", va="center", color=color)
   ax1.text(-5.1, 1.05, r"$\pm\beta_p \cdot (\gamma_p)^{-|x|}$",
            ha="left", va="center", color="C0")

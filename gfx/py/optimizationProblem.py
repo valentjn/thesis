@@ -71,8 +71,8 @@ def plotUnconstrainedProblem(params):
   ax.tick_params(axis="y", pad=-5)
   ax.tick_params(axis="z", pad=2)
   
-  ax.set_xlabel(r"$\xoptscaled[1]$", labelpad=-13)
-  ax.set_ylabel(r"$\xoptscaled[2]$", labelpad=-10)
+  ax.set_xlabel(r"$\xscaled[1]$", labelpad=-13)
+  ax.set_ylabel(r"$\xscaled[2]$", labelpad=-10)
   
   ax.xaxis.set_rotate_label(False)
   ax.yaxis.set_rotate_label(False)
@@ -183,8 +183,8 @@ def plotConstrainedProblem(q):
   ax.set_xlim(bounds[:,T[0]])
   ax.set_ylim(bounds[:,T[1]])
   
-  ax.set_xlabel(r"$\xoptscaled[1]$", labelpad=-7)
-  ax.set_ylabel(r"$\xoptscaled[2]$", labelpad=(-4 if q == 0 else -18))
+  ax.set_xlabel(r"$\xscaled[1]$", labelpad=-7)
+  ax.set_ylabel(r"$\xscaled[2]$", labelpad=(-4 if q == 0 else -18))
   
   ax.set_xticks(np.linspace(*bounds[:,T[0]], 5))
   ax.set_yticks(np.linspace(*bounds[:,T[1]], 5))
