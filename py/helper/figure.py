@@ -90,6 +90,8 @@ class Figure(mpl.figure.Figure):
     "thesis" : r"""
 \usepackage[bitstream-charter]{mathdesign}
 
+% set dummy values for necessary switches to enable loading of
+% glossary/notation
 \usepackage{etoolbox}
 \newtoggle{partialCompileMode}
 \toggletrue{partialCompileMode}
@@ -97,7 +99,16 @@ class Figure(mpl.figure.Figure):
 \togglefalse{showGlossaryDefinitionsMode}
 
 \makeatletter
-\input{preamble/settings/glossary}
+  % prepare loading of notation
+  \input{preamble/settings/glossary}
+
+  % automatically replace "l" with \ell in math mode
+  \mathcode`l="8000
+  \begingroup
+  \lccode`\~=`\l
+  \DeclareMathSymbol{\lsb@l}{\mathalpha}{letters}{`l}
+  \lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \ell \else \lsb@l \fi}}%
+  \endgroup
 \makeatother
 
 \input{preamble/notation}
