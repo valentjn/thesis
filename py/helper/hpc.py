@@ -88,15 +88,22 @@ def cacheToFile(func, path=None):
   
   @atexit.register
   def saveCache():
-    if ("__info__" in cache) and cache["__info__"]["modified"]:
-      del cache["__info__"]
-      cacheToSave = {x : dict(y) for x, y in cache.items()}
-      while True:
-        try:
-          with lzma.open(path, "wb") as f: pickle.dump(cacheToSave, f)
-          break
-        except KeyboardInterrupt:
-          pass
+    if "__info__" in cache:
+      if cache["__info__"]["modified"]:
+        del cache["__info__"]
+        cacheToSave = {x : dict(y) for x, y in cache.items()}
+        while True:
+          try:
+            with lzma.open(path, "wb") as f: pickle.dump(cacheToSave, f)
+            break
+          except KeyboardInterrupt:
+            pass
+      else:
+        print("Not saving cache file {}, as it doesn't seem to be "
+              "modified.".format(path))
+    else:
+      print("Not saving cache file {}, as it already seems to be "
+            "saved.".format(path))
   
   return cacheLookup
 
