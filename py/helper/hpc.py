@@ -90,8 +90,9 @@ def cacheToFile(func, path=None):
   def saveCache():
     if "__info__" in cache:
       if cache["__info__"]["modified"]:
-        del cache["__info__"]
-        cacheToSave = {x : dict(y) for x, y in cache.items()}
+        print("Saving cache file \"{}\"...".format(path))
+        cacheToSave = {x : dict(y) for x, y in cache.items()
+                       if x is not "__info__"}
         while True:
           try:
             with lzma.open(path, "wb") as f: pickle.dump(cacheToSave, f)
