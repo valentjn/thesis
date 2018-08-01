@@ -89,8 +89,18 @@ class Figure(mpl.figure.Figure):
     "paper" : "",
     "thesis" : r"""
 \usepackage[bitstream-charter]{mathdesign}
-\renewcommand*{\vec}[1]{{\boldsymbol{#1}}}
-\renewcommand*{\*}[1]{\vec{#1}}
+
+\usepackage{etoolbox}
+\newtoggle{partialCompileMode}
+\toggletrue{partialCompileMode}
+\newtoggle{showGlossaryDefinitionsMode}
+\togglefalse{showGlossaryDefinitionsMode}
+
+\makeatletter
+\input{preamble/settings/glossary}
+\makeatother
+
+\input{preamble/notation}
 """,
   }
   
