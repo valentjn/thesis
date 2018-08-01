@@ -56,12 +56,12 @@ def cacheToFile(func, path=None):
     
     cache = multiprocessingManager.dict(cache)
     cacheCache[path] = cache
+    cache["__info__"] = {"modified" : False}
   
   funcName = func.__name__
   if funcName not in cache: cache[funcName] = {}
   funcCache = multiprocessingManager.dict(cache[funcName])
   cache[funcName] = funcCache
-  cache["__info__"] = {"modified" : False}
   funcSignature = inspect.signature(func)
   
   @functools.wraps(func)
