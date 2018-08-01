@@ -281,9 +281,9 @@ def plotPSO():
     helper.plot.plotArrow(ax, arrowStart, arrowEnd, scaleHead=5,
                           color="C0")
   
-  ax.text(4.5, 7.2, r"$\vec{x}_k$", ha="left", va="bottom", color="C0")
-  ax.text(5, 2, r"$\vec{x}_{k+1}$", ha="left", va="bottom", color="C1")
-  ax.text(6.5, 5, r"$\vec{v}_k$", ha="left", va="bottom", color="C0")
+  ax.text(4.5, 7.2, r"$\*x_k$", ha="left", va="bottom", color="C0")
+  ax.text(5, 2, r"$\*x_{k+1}$", ha="left", va="bottom", color="C1")
+  ax.text(6.5, 5, r"$\*v_k$", ha="left", va="bottom", color="C0")
   
   plotTitle(ax, 5.2, 10, "PSO", ha="center", va="top")
   fig.save()

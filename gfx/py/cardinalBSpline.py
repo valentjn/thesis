@@ -31,7 +31,7 @@ for p in range(pMax + 1):
   elif p == 1: x, y = 1.23,    0.85
   else:        x, y = (p+1)/2, max(yy)
   y += 0.05
-  ax.text(x, y, "$b^{}$".format(p), color=color, ha="center")
+  ax.text(x, y, r"$\cardbspl{{{}}}$".format(p), color=color, ha="center")
 
 ax.set_xlim((0, pMax+1))
 ax.set_ylim((0, 1))

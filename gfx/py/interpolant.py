@@ -16,7 +16,7 @@ basis = helper.basis.HierarchicalBSpline(p)
 
 hInv = 2**n
 X = helper.grid.getCoordinates(n, list(range(hInv + 1)))
-xtl = ["$x_{{{},{}}}$".format(n, i) for i in range(hInv + 1)]
+xtl = [r"$\gp{{{},{}}}$".format(n, i) for i in range(hInv + 1)]
 
 
 
@@ -31,7 +31,7 @@ for i in range(0, hInv + 1):
 
 line, = ax.plot(X, c, "k.-", clip_on=False)
 line.set_dashes([3, 3])
-ax.text(0.85, 0.85, r"$f_3^1$", color="k", ha="center", va="bottom")
+ax.text(0.85, 0.85, r"$\fgintp{3}$", color="k", ha="center", va="bottom")
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 0.9)
@@ -67,7 +67,7 @@ for l in range(n+1):
 
 line, = ax.plot(X, c, "k.--", clip_on=False)
 line.set_dashes([3, 3])
-ax.text(0.85, 0.85, r"$f_3$", color="k", ha="center", va="bottom")
+ax.text(0.85, 0.85, r"$\fgintp{3}$", color="k", ha="center", va="bottom")
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 0.9)

@@ -126,8 +126,8 @@ contourLevels.sort()
 ax.contour(XX0, XX1, YY, levels=contourLevels, cmap=colormap,
            vmin=min(contourLevels), vmax=max(contourLevels))
 
-ax.text(0.05, 0.05, r"\contour{mittelblau!10}{$f$}", size=16, ha="left", va="bottom",
-        zorder=100)
+ax.text(0.05, 0.05, r"\contour{mittelblau!10}{$\objfun$}", size=16,
+        ha="left", va="bottom", zorder=100)
 
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
@@ -189,14 +189,14 @@ for r in range(3):
     left = (figureMarginLeft + plotSize + plotMargin) / figureWidth
     bottom = (figureMarginBottom + plotSize + plotMargin) / figureHeight
     curFuzzy = x0Fuzzy
-    curFuzzyName = r"\tilde{x}_1"
+    curFuzzyName = r"\fuzzy{x}_1"
     curFuzzyBounds = (0, 1)
     s = lambda x, y: (x, clip(y))
   elif r == 1:
     left = figureMarginLeft / figureWidth
     bottom = figureMarginBottom / figureHeight
     curFuzzy = x1Fuzzy
-    curFuzzyName = r"\tilde{x}_2"
+    curFuzzyName = r"\fuzzy{x}_2"
     curFuzzyBounds = (0, 1)
     s = lambda x, y: (clip(y), x)
   else:
@@ -204,7 +204,7 @@ for r in range(3):
             colorbarWidth + colorbarMarginRight) / figureWidth
     bottom = figureMarginBottom / figureHeight
     curFuzzy = yFuzzy
-    curFuzzyName = r"\tilde{y}"
+    curFuzzyName = r"\fuzzy{y}"
     curFuzzyBounds = (min(contourLevels), max(contourLevels))
     s = lambda x, y: (clip(y), x)
   

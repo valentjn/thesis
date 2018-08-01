@@ -38,7 +38,8 @@ for q in range(3):
     ax.plot(xx, yy, "-", color=color, clip_on=False)
     
     r = np.argmax(yy)
-    ax.text(xx[r], yy[r] + 0.02, r"$b_{{{},\*\xi}}^p$".format(k),
+    ax.text(xx[r], yy[r] + 0.02,
+            r"$\nonunifbspl{{{},\knotseq}}{{p}}$".format(k),
             color=color, ha="center", va="bottom")
   
   if q == 0:
@@ -51,10 +52,11 @@ for q in range(3):
     
     yy = splineShift + splineScale * yy
     ax.plot(xx, yy, "k-", clip_on=False, solid_capstyle="butt")
-    ax.text(8, 1, r"$s$", color="k", ha="center", va="bottom")
+    ax.text(8, 1, r"$\spl$", color="k", ha="center", va="bottom")
   
   ax.plot(D, 2*[-0.01], "k-", clip_on=False, lw=2, solid_capstyle="butt")
-  ax.text(sum(D) / 2, -0.08, r"$D_\*\xi^p$", color="k", ha="center", va="top")
+  ax.text(sum(D) / 2, -0.08, r"$\spldomain{\knotseq}{p}$", color="k",
+          ha="center", va="top")
   
   for x in (D if q == 0 else [0, 1]):
     ax.plot([x, x], [0, yMax], "k--", clip_on=False)
@@ -63,22 +65,22 @@ for q in range(3):
     h = 2**(-n)
     color = "mittelblau"
     ax.text(0,     -0.2, r"$0$", ha="center", va="top", color=color)
-    ax.text(h,     -0.2, r"$x_{\ell,1}\vphantom{0}$", ha="center", va="top", color=color)
+    ax.text(h,     -0.2, r"$\gp{l,1}\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(2*h,   -0.2, r"$\cdots\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(1-2*h, -0.2, r"$\cdots\vphantom{0}$", ha="center", va="top", color=color)
-    ax.text(1-h,   -0.2, r"$x_{\ell,2^\ell-1}\vphantom{0}$", ha="center", va="top", color=color)
+    ax.text(1-h,   -0.2, r"$\gp{l,2^l-1}\vphantom{0}$", ha="center", va="top", color=color)
     ax.text(1,     -0.2, r"$1$", ha="center", va="top", color=color)
-    ax.text(1+(p+1)*h, -0.082, r"$\vec{\xi}$", ha="center", va="top")
+    ax.text(1+(p+1)*h, -0.082, r"$\knotseq$", ha="center", va="top")
     ax.text(1+(p+1)*h, -0.2, r"$x\vphantom{0}$", ha="center", va="top", color=color)
     I = helper.grid.getNodalIndices(n)
     X = helper.grid.getCoordinates(n, I)
     ax.plot(X, 0*X, ".", color=color, clip_on=False, zorder=10)
   
   xtl = len(xi) * [""]
-  xtl[0] = r"$\xi_0$"
-  xtl[p] = r"$\xi_p$"
-  xtl[m] = r"$\xi_m$"
-  xtl[m+p] = r"$\xi_{m+p}$"
+  xtl[0] = r"$\knot{0}$"
+  xtl[p] = r"$\knot{p}$"
+  xtl[m] = r"$\knot{m}$"
+  xtl[m+p] = r"$\knot{m+p}$"
   
   ax.set_xticks(xi)
   ax.set_xticklabels(xtl)

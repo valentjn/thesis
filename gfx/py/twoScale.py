@@ -148,7 +148,7 @@ for j2 in range(M2+1):
   ax.plot([0, domainWidth], [y, y], "-", color=edgeColor, clip_on=False)
 
 ax.text(M1/2 * macroCellWidth, domainHeight + textMargin,
-        r"\textbf{Domain} $\tilde{\Omega}$", ha="center", va="bottom")
+        r"\textbf{Domain} $\domain$", ha="center", va="bottom")
 ax.text(M1/2 * macroCellWidth, -textMargin,
         r"$M_1$ macro-cells", ha="center", va="top")
 ax.text(-textMargin, M2/2 * macroCellHeight,

@@ -22,7 +22,7 @@ for q in range(3):
     ax.plot([0, 1, 2, 3,   4, 5.5,  7, 8, 9],
             c([0, 0, 1, 0.5, 1, 0.25, 1, 0, 0]), "-",
             clip_on=False, color="C0")
-    ax.text(5.3, 0.75, r"$\mu_{\tilde{x}}$",
+    ax.text(5.3, 0.75, r"$\memfun{x}$",
             color="C0", ha="center", va="center")
   elif q == 1:
     #ax.plot([3, 3], [0, 1], "-", clip_on=False, color=3*[0.7])
@@ -46,7 +46,7 @@ for q in range(3):
     ax.plot([7.2, 8, 9], c([0.3, 0, 0]), "-", clip_on=False, color="C0")
     ax.plot(7.2, 0.5, "o", fillstyle="none", ms=5, color="C0")
     ax.plot(7.2, 0.3, ".", ms=8, color="C0")
-    ax.text(1.2, 0.8, r"$\mu_{\tilde{x}}$", color="C0", ha="center", va="center")
+    ax.text(1.2, 0.8, r"$\memfun{x}$", color="C0", ha="center", va="center")
   else:
     ax.plot([0, 0.5, 2, 3, 9], c([0, 0, 1, 0, 0]), "-", clip_on=False)
     ax.plot([0, 1.5, 3, 4, 6.5, 9], c([0, 0, 1, 1, 0, 0]), "-", clip_on=False)
@@ -63,7 +63,7 @@ for q in range(3):
   
   if q == 0:
     ax.plot([0, 8], [alpha, alpha], "-", clip_on=False, color=3*[0.7])
-    ax.text(4, alpha - 0.04, r"$(\tilde{x})_\alpha$", color="C1",
+    ax.text(4, alpha - 0.04, r"$\acut{x}{\alpha}$", color="C1",
             ha="center", va="top")
     
     for k in range(len(xAlpha) // 2):

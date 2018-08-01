@@ -139,12 +139,12 @@ for q in range(3):
   plotSGWithSupport(X, l, i, p, ax, (x, y), (1, 1))
   y += 1 + yTextMargin
   
-  ax.text(x + 0.5, y, r"$\vec{{p}} = \vec{{{}}}$".format(p),
+  ax.text(x + 0.5, y, r"$\*p = \vec{{{}}}$".format(p),
           ha="center", va="bottom")
 
-ax.text(-xTextMargin-0.05, 1.5 + yMargin, r"$\vec{A}$",
+ax.text(-xTextMargin-0.05, 1.5 + yMargin, r"$\intpmat$",
         ha="right", va="center", color="C0")
-ax.text(-xTextMargin, 0.5, r"$\vec{A}^{-1}$",
+ax.text(-xTextMargin, 0.5, r"$\intpmatinv$",
         ha="right", va="center", color="C1")
 
 ax.set_aspect("equal")

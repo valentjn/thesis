@@ -24,7 +24,7 @@ for q in range(2):
   ax = fig.gca()
   
   yTop = n * margin + topMargin
-  superscript = (r"\mathrm{cc}" if q == 1 else "")
+  gridPointCommand = (r"\ccgp" if q == 1 else r"\gp")
   distribution = ("clenshawCurtis" if q == 1 else "uniform")
   
   if q == 1:
@@ -57,7 +57,7 @@ for q in range(2):
   X = helper.grid.getCoordinates(n, I, distribution=distribution)
   ax.plot([0, 1], 2 * [yTop], "k-", clip_on=False)
   ax.plot(X, yTop * np.ones_like(X), "k.", clip_on=False)
-  ax.text(1 + textMarginX, yTop, r"$\ell = {}$".format(n), ha="left", va="center")
+  ax.text(1 + textMarginX, yTop, r"$l = {}$".format(n), ha="left", va="center")
   
   for l in range(n + 1):
     y = (n - l) * margin
@@ -66,7 +66,7 @@ for q in range(2):
     X = helper.grid.getCoordinates(l, I, distribution=distribution)
     ax.plot([0, 1], 2 * [y], "k-", clip_on=False)
     ax.plot(X, y * np.ones_like(X), "k.", clip_on=False)
-    ax.text(1 + textMarginX, y, r"$\ell' = {}$".format(l), ha="left", va="center")
+    ax.text(1 + textMarginX, y, r"$l' = {}$".format(l), ha="left", va="center")
     x = (2**(n-1)+1)/2**n
     #if l > 0: ax.text(x, y + margin/2, r"$\dot{\cup}$", ha="center", va="center")
     #else:     ax.text(x, y + topMargin/2, r"\rotatebox{90}{$=$}", ha="center", va="center")
@@ -76,7 +76,8 @@ for q in range(2):
         if i == 3:  x += 0.02
         if i == 13: x -= 0.02
         if i == 15: x += 0.02
-      ax.text(x, y - textMarginY, r"$x_{{{},{}}}^{{{}}}$".format(l, i, superscript),
+      ax.text(x, y - textMarginY,
+              r"${}{{{},{}}}$".format(gridPointCommand, l, i),
               ha="center", va="top")
   
   ax.set_axis_off()

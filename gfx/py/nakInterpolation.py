@@ -14,7 +14,7 @@ b = 0
 p = 3
 
 basis = helper.basis.HierarchicalBSpline(p)
-xtl = [r"$x_{{{},{}}}$".format(n, i) for i in range(2**n + 1)]
+xtl = [r"$\gp{{{},{}}}$".format(n, i) for i in range(2**n + 1)]
 
 
 
@@ -24,7 +24,7 @@ ax = fig.gca()
 xx = np.linspace(0, 1, 513)
 yy = f(xx)
 ax.plot(xx, yy, "-", clip_on=False, color="C0")
-ax.text(0.95, 0.6, r"$f$", ha="left", va="bottom", color="C0")
+ax.text(0.95, 0.6, r"$\objfun$", ha="left", va="bottom", color="C0")
 
 grid = helper.grid.RegularSparseBoundary(n, d, b)
 X, L, I = grid.generate()
@@ -33,13 +33,14 @@ interpolant = helper.function.Interpolant(basis, X, L, I, fX)
 XX = np.array([xx]).T
 yy2 = interpolant.evaluate(XX)
 ax.plot(xx, yy2, "--", clip_on=False, color="C1")
-ax.text(0.91, 0.5, r"$f_3$", ha="right", va="top", color="C1")
+ax.text(0.91, 0.5, r"$\fgintp{3}$", ha="right", va="top", color="C1")
 
 ax.plot(X, fX, "k.", clip_on=False)
 
 D = [2**(-n) * (p-1)/2, 1 - 2**(-n) * (p-1)/2]
 ax.plot(D, [0, 0], "k-", clip_on=False, lw=2, solid_capstyle="butt")
-ax.text(0.5, 0.05, r"$D_{{{}}}^{{{}}}$".format(n, "p"), ha="center", va="bottom")
+ax.text(0.5, 0.05, r"$\rspldomain{{{}}}{{{}}}$".format(n, "p"),
+        ha="center", va="bottom")
 
 ax.set_xlim(0, 1)
 ax.set_xticks(np.sort(X.flatten()))

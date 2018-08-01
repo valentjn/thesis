@@ -211,7 +211,7 @@ yy = b.evaluate(xx)
 t = lambda x, y: ((np.array(x) / max(xx) - 0.5) * globalScale[0] * smallCircleRadius,
                   (np.array(y) / max(yy) - 0.5) * globalScale[1] * smallCircleRadius + 0.1)
 ax.plot(*t(xx, yy), "w-")
-ax.text(0, 0, "$b^p$", color="w", ha="center", va="center", size=20)
+ax.text(0, 0, r"$\cardbspl{p}$", color="w", ha="center", va="center", size=20)
 
 ax.set_axis_off()
 ax.set_xlim(-largeCircleRadius - smallCircleRadius - tinyCircleRadius,

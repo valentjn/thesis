@@ -15,7 +15,7 @@ def plotNodalSpace(X, ax, pos, size, K=None, KColor="r", notKColor="b"):
   
   ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
   ax.text(*s(0.5, 0.02),
-          r"$V_{{({},{})}}$".format(*l), ha="center", va="bottom")
+          r"$\ns{{({},{})}}$".format(*l), ha="center", va="bottom")
   
   N = X.shape[0]
   if K is None: K = np.zeros((N,), dtype=bool)
@@ -31,7 +31,7 @@ def plotSG(n, d, b, ax, pos, size):
   s = lambda x, y: (pos[0] + size * np.array(x), pos[1] + size * np.array(y))
   
   ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
-  ax.text(*s(0.5, 0.03), r"$V_{n,d}^{\mathrm{s}}$",
+  ax.text(*s(0.5, 0.03), r"$\regsgspace{n}{d}$",
           ha="center", va="bottom")
   
   grid = helper.grid.RegularSparseBoundary(n, d, b)
@@ -88,15 +88,15 @@ for q in range(len(L)):
     helper.plot.plotArrow(ax, arrowStart, arrowEnd, scaleHead=scaleArrowHead)
     ax.text(
       arrowStart[0], arrowStart[1] + 0.56,
-      r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}} = 0,$".format(0),
+      r"$y^{{({})}}_{{\*l,\*i}} = 0,$".format(0),
       ha="center", va="bottom")
     ax.text(
       arrowStart[0], arrowStart[1] + 0.28,
-      r"$r^{{({})}}(\vec{{x}}_{{\vec{{\ell}},\vec{{i}}}})\hspace{{5mm}}$".format(0),
+      r"$r^{{({})}}(\gp{{\*l,\*i}})\hspace{{5mm}}$".format(0),
       ha="center", va="bottom")
     ax.text(
       arrowStart[0], arrowStart[1] + 0.04,
-      r"$\hspace{{5mm}}{{}}= f(\vec{{x}}_{{\vec{{\ell}},\vec{{i}}}})$".format(),
+      r"$\hspace{{5mm}}{{}}= \objfun(\gp{{\*l,\*i}})$".format(),
       ha="center", va="bottom")
   elif q == len(L) - 1:
     arrowStart = (xOffset + subspaceSize / 2, yOffset - arrowMargin)
@@ -104,12 +104,12 @@ for q in range(len(L)):
     helper.plot.plotArrow(ax, arrowStart, arrowEnd, scaleHead=scaleArrowHead)
     ax.text(
       arrowEnd[0], arrowEnd[1] - 0.04,
-      r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}} = "
-      r"\alpha_{{\vec{{\ell}},\vec{{i}}}},$".format(q+1),
+      r"$y^{{({})}}_{{\*l,\*i}} = "
+      r"\surplus{{\*l,\*i}},$".format(q+1),
       ha="center", va="top")
     ax.text(
       arrowEnd[0], arrowEnd[1] - 0.36,
-      r"$r^{{({})}}(\vec{{x}}_{{\vec{{\ell}},\vec{{i}}}}) = 0$".format(q+1),
+      r"$r^{{({})}}(\gp{{\*l,\*i}}) = 0$".format(q+1),
       ha="center", va="top")
   
   if q < len(L) - 1:
@@ -123,8 +123,8 @@ for q in range(len(L)):
     helper.plot.plotArrowPolygon(ax, *circle(t), "k-", scaleHead=scaleArrowHead)
     ax.text(
       *circle(-np.pi/4 + (np.pi if swap else 0)),
-      r"$y^{{({})}}_{{\vec{{\ell}},\vec{{i}}}},\, "
-      r"r^{{({})}}(\vec{{x}}_{{\vec{{\ell}},\vec{{i}}}})$".format(q+1, q+1),
+      r"$y^{{({})}}_{{\*l,\*i}},\, "
+      r"r^{{({})}}(\gp{{\*l,\*i}})$".format(q+1, q+1),
       ha=("right" if swap else "left"), va=("bottom" if swap else "top"))
 
 plotSG(n, d, b, ax, (0, yOffsetGlobal - sgSize), sgSize)

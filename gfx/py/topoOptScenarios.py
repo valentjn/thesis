@@ -81,7 +81,7 @@ ax.add_patch(mpl.patches.PathPatch(
 
 ax.plot(domainWidth, 0, "k.", clip_on=False)
 helper.plot.plotArrow(ax, (domainWidth, 0), (domainWidth, -0.5))
-ax.text(domainWidth + 0.06, -0.25, r"$\vec{F}$", ha="left", va="center")
+ax.text(domainWidth + 0.06, -0.25, r"$\force$", ha="left", va="center")
 
 hatchWidth = 0.3
 hatchMargin = 0.2
@@ -99,11 +99,11 @@ for y in np.linspace(-hatchMargin,
   if (xx[0] > xx[1]) or (yy[0] > yy[1]): continue
   ax.plot(xx, yy, "k-", clip_on=False, solid_capstyle="butt")
 
-ax.text(1.2, 1.6, r"$\varrho(\tilde{\vec{x}}) = 1$",
+ax.text(1.2, 1.6, r"$\dens(\tilde{\*x}) = 1$",
         ha="center", va="center", rotation=-22)
-ax.text(0.65, 1.1, r"$\varrho(\tilde{\vec{x}}) = 0$",
+ax.text(0.65, 1.1, r"$\dens(\tilde{\*x}) = 0$",
         ha="center", va="center")
-ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\tilde{\Omega}$",
+ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\domain$",
         ha="right", va="top")
 
 ax.set_aspect("equal")

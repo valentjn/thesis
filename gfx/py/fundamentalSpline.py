@@ -81,13 +81,13 @@ for p in ps:
   ax2 = ax1.twinx()
   ax2.plot(kk, coeffs, ".", color="C1")
   
-  ax1.text(-5.1, 1.2, r"$\varphi^{p,\mathrm{fs}}(x),$",
+  ax1.text(-5.1, 1.2, r"$\parentfundspl{p}(x),$",
            ha="left", va="center", color="C0")
-  ax1.text(-2.6, 1.2, r"$\varphi^{p\vphantom{,\mathrm{fs}}}(x - k)$",
+  ax1.text(-2.6, 1.2, r"$\parentfundspl{p\vphantom{,\fs}}(x - k)$",
            ha="left", va="center", color=color)
   ax1.text(-5.1, 1.05, r"$\pm\beta_p \cdot (\gamma_p)^{-|x|}$",
            ha="left", va="center", color="C0")
-  ax1.text(5.1, 1.2, r"$c_{k,p}$",
+  ax1.text(5.1, 1.2, r"$\fundsplcoeff{k}{p}$",
            ha="right", va="center", color="C1")
   ax1.text(5.1, 1.05, r"$\pm\beta'_p \cdot (\gamma_p)^{-|k|}$",
            ha="right", va="center", color="C1")
@@ -128,7 +128,7 @@ print(r"  $\beta_p$&" +
       "&".join([formatFloat(x) for x in betas]) + r"\\")
 print(r"  $\beta'_p$&" +
       "&".join([formatFloat(x) for x in betaTildes]) + r"\\")
-print(r"  $n_p$&" +
+print(r"  $\fundsplcutoff{p}$&" +
       "&".join(["${}$".format(x) for x in cutoffs]) + r"\\")
 print(r"  \bottomrule")
 print(r"\end{tabular}")

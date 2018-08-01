@@ -16,7 +16,8 @@ def plotNodalSpace(l, ax, pos, size,
   
   ax.plot(*s(xSquare, ySquare), "-", clip_on=False, color=borderColor)
   ax.text(*s(0.5, 0),
-          r"\contour{{{}}}{{$V_{{({},{})}}$}}".format(contourColor, l[0], l[1]),
+          r"\contour{{{}}}{{$\ns{{({},{})}}$}}".format(
+              contourColor, l[0], l[1]),
           color=color, ha="center", va="bottom")
   
   X = helper.grid.getCoordinates(l, helper.grid.getNodalIndices(l))
@@ -30,7 +31,7 @@ def plotSG(n, d, b, ax, pos, size):
   s = lambda x, y: (pos[0] + size * np.array(x), pos[1] + size * np.array(y))
   
   ax.plot(*s(xSquare, ySquare), "k-", clip_on=False)
-  ax.text(*s(0.5, 0.03), r"$V_{n,d}^{\mathrm{s}}$",
+  ax.text(*s(0.5, 0.03), r"$\regsgspace{n}{d}$",
           ha="center", va="bottom")
   
   grid = helper.grid.RegularSparseBoundary(n, d, b)

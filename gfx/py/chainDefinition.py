@@ -68,7 +68,7 @@ for q in range(2):
     if not ((q == 0) and (j == 1)):
       x += (-0.03 if ha == "right" else (0.03 if ha == "left" else 0))
       y += (-0.03 if va == "top" else (0.03 if va == "bottom" else 0))
-    ax.text(x, y, r"$\vec{{k}}^{{({})}}$".format(j), ha=ha, va=va)
+    ax.text(x, y, r"$\chain{{{}}}$".format(j), ha=ha, va=va)
   
   ax.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], "k-")
   X, L, I = helper.grid.RegularSparseBoundary(n, d, b).generate()
@@ -148,7 +148,7 @@ ax.add_collection3d(poly3DCollection)
 for j, x in enumerate(chain):
   ax.plot([x[0]], [x[1]], ".", zs=[x[2]], color="k", clip_on=False,
           zorder=10)
-  ax.text(x[0], x[1], x[2], r"\;\;$\vec{{k}}^{{({})}}$".format(j),
+  ax.text(x[0], x[1], x[2], r"\;\;$\chain{{{}}}$".format(j),
           ha="left", va="center", zorder=10)
 
 ax.set_axis_off()

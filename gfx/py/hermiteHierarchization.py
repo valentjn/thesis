@@ -164,14 +164,14 @@ for l in range(n+1):
             clip_on=(not (0.2 < x < 0.8)))
   
   ax.plot(Xl, f(Xl), "k.", clip_on=False)
-  ax.text(1, 2.4, r"$\ell = {}$".format(l), ha="right", va="top")
+  ax.text(1, 2.4, r"$l = {}$".format(l), ha="right", va="top")
   
   if l == 0:   x, y = 0.2, 0.95
   elif l == 1: x, y = 0.2, 1.55
   elif l == 2: x, y = 0.15, 0.7
   elif l == 3: x, y = 0.1, 0.75
   
-  ax.text(x, y, r"$f_{{{}}}$".format(l),
+  ax.text(x, y, r"$\fgintp{{{}}}$".format(l),
           color="C1", ha="center", va="bottom")
   
   if l == 0:   x, y = 0.5, 2
@@ -179,9 +179,9 @@ for l in range(n+1):
   elif l == 2: x, y = 0.5, 2
   elif l == 3: x, y = 0.5, 2
   
-  ax.text(x, y, r"$f$", color="C0", ha="center", va="bottom")
+  ax.text(x, y, r"$\objfun$", color="C0", ha="center", va="bottom")
   
   ax.set_xticks(Xl)
-  ax.set_xticklabels(["$x_{{{},{}}}$".format(l, i) for i in Il])
+  ax.set_xticklabels([r"$\gp{{{},{}}}$".format(l, i) for i in Il])
 
 fig.save()

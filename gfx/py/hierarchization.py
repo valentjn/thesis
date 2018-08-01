@@ -28,7 +28,7 @@ for pCurrent in [1, p]:
   if pCurrent == 1: aX = np.array(interpolant.aX)
 
 xt = np.array(X).flatten()
-xtl = [(r"$x_{\ell,i} \in \Omega^{\mathrm{s}}$" if i == 2**(n-1) else "")
+xtl = [(r"$\gp{l,i} \in \sgset$" if i == 2**(n-1) else "")
        for i in range(2**n + 1)]
 xtl[0] = "$0$"
 xtl[-1] = "$1$"
@@ -49,7 +49,7 @@ for q in range(3):
     yy2 = interpolant.evaluate(XX)
     ax.plot(xx, yy2, "k-", clip_on=False)
     ax.plot(X, fX, "k.", clip_on=False)
-    ax.text(0.67, 0.4, r"$f(x_{\ell,i})$", ha="center", va="center")
+    ax.text(0.67, 0.4, r"$\objfun(\gp{l,i})$", ha="center", va="center")
   elif q == 1:
     for k in range(N):
       i = I[k,0] * 2**(n-L[k,0])
@@ -58,7 +58,7 @@ for q in range(3):
               zorder=10)
     
     ax.plot(X, aX, "ko", clip_on=False, ms=3, fillstyle="none", zorder=20)
-    ax.text(0.65, 0.5, r"$\alpha_{\ell,i}$", ha="center", va="center")
+    ax.text(0.65, 0.5, r"$\surplus{l,i}$", ha="center", va="center")
   else:
     xx = np.linspace(0, 1, 513)
     XX = np.array([xx]).T
@@ -101,8 +101,8 @@ for q in range(3):
     
     ax.plot([xq, xq], [0, yq], "k:", clip_on=False)
     ax.plot(xq, yq, "kx", clip_on=False, mew=2)
-    ax.text(0.535, 0.8, r"$f^{\mathrm{s}}$", ha="center", va="center")
-    ax.text(xq, yq + 0.05, r"$f^{\mathrm{s}}(x)$", ha="left", va="bottom")
+    ax.text(0.535, 0.8, r"$\sgintp$", ha="center", va="center")
+    ax.text(xq, yq + 0.05, r"$\sgintp(x)$", ha="left", va="bottom")
   
   #center = (0.1, 0.93)
   #radius = 0.07

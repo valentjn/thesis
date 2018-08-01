@@ -116,6 +116,6 @@ norm = mpl.colors.Normalize(0, n)
 colorbar = mpl.colorbar.ColorbarBase(
   cax, cmap=colormap, boundaries=bounds, ticks=ticks, norm=norm)
 cax.set_position(pos)
-cax.text(0.55, 1.02, r"$\lVert\vec{\ell}\rVert_1$", ha="center", va="bottom")
+cax.text(0.55, 1.02, r"$\normone{\*l}$", ha="center", va="bottom")
 
 fig.save(tightLayout=False)

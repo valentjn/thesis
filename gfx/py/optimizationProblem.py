@@ -71,8 +71,8 @@ def plotUnconstrainedProblem(params):
   ax.tick_params(axis="y", pad=-5)
   ax.tick_params(axis="z", pad=2)
   
-  ax.set_xlabel(r"$\bar{x}_1$", labelpad=-13)
-  ax.set_ylabel(r"$\bar{x}_2$", labelpad=-10)
+  ax.set_xlabel(r"$\xoptscaled[1]$", labelpad=-13)
+  ax.set_ylabel(r"$\xoptscaled[2]$", labelpad=-10)
   
   ax.xaxis.set_rotate_label(False)
   ax.yaxis.set_rotate_label(False)
@@ -162,20 +162,20 @@ def plotConstrainedProblem(q):
     YY = np.reshape(gXXBoth, XX0.shape)
     ax.contourf(XX0, XX1, YY, [0, 1e-12], extend="min", cmap=colormap)
     
-    ax.text(2.0,  5.5, r"$\bar{g}_1 \le 0$",
+    ax.text(2.0,  5.5, r"$\ineqconfunscaled[1] \le 0$",
             color="C0", ha="center", va="center", rotation=70)
-    ax.text(2.25, 4.9, r"$\bar{g}_2 \le 0$",
+    ax.text(2.25, 4.9, r"$\ineqconfunscaled[2] \le 0$",
             color="C0", ha="center", va="center", rotation=15)
   else:
     for j in range(h.m):
       YY = np.reshape(hXX[:,j], XX0.shape)
       ax.contour(XX0, XX1, YY, [0], colors="C0")
     
-    ax.text(1.7, 1.0, r"\contour{mittelblau!10}{$\bar{h}_1 = 0$}",
+    ax.text(1.7, 1.0, r"\contour{mittelblau!10}{$\eqconfunscaled[1] = 0$}",
             color="C0", ha="center", va="center", rotation=-60)
-    ax.text(0,   1.3, r"\contour{mittelblau!10}{$\bar{h}_2 = 0$}",
+    ax.text(0,   1.3, r"\contour{mittelblau!10}{$\eqconfunscaled[2] = 0$}",
             color="C0", ha="center", va="center", rotation=0)
-    ax.text(0,  -1.3, r"\contour{mittelblau!10}{$\bar{h}_3 = 0$}",
+    ax.text(0,  -1.3, r"\contour{mittelblau!10}{$\eqconfunscaled[3] = 0$}",
             color="C0", ha="center", va="center", rotation=0)
   
   ax.plot(xOpt[T[0]], xOpt[T[1]], ".", mec="w", mfc="C1", ms=10, mew=1)
@@ -183,8 +183,8 @@ def plotConstrainedProblem(q):
   ax.set_xlim(bounds[:,T[0]])
   ax.set_ylim(bounds[:,T[1]])
   
-  ax.set_xlabel(r"$\bar{x}_1$", labelpad=-7)
-  ax.set_ylabel(r"$\bar{x}_2$", labelpad=(-4 if q == 0 else -18))
+  ax.set_xlabel(r"$\xoptscaled[1]$", labelpad=-7)
+  ax.set_ylabel(r"$\xoptscaled[2]$", labelpad=(-4 if q == 0 else -18))
   
   ax.set_xticks(np.linspace(*bounds[:,T[0]], 5))
   ax.set_yticks(np.linspace(*bounds[:,T[1]], 5))
