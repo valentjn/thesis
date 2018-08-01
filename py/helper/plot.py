@@ -138,6 +138,60 @@ def createLinearColormap(name, color1, color2):
 
 
 
+def addCustomLegend(ax, elements, *args, transpose=True,
+                    outside=False, outsideDistance=0.05, **kwargs):
+  if transpose:
+    nCols = kwargs.get("ncol", 1)
+    nRows = int(np.ceil(len(elements) / nCols))
+    I = np.array(list(range(nRows * nCols)), dtype=int)
+    I = np.reshape(np.reshape(I, (nRows, nCols)).T, (-1,))
+    elements = [elements[i] for i in I if i < len(elements)]
+  
+  kwargs = {
+    "borderaxespad" : 0,
+    "borderpad"     : 0.25,
+    "handletextpad" : 0.25,
+    "columnspacing" : 0.5,
+    "edgecolor"     : "mittelblau",
+    "facecolor"     : "none",
+    **kwargs,
+  }
+  
+  if outside:
+    assert "loc" in kwargs, (
+        "Cannot place legend outside of axis if loc is not given.")
+    assert "bbox_to_anchor" not in kwargs, (
+        "Cannot place legend outside of axis if bbox_to_anchor is given.")
+    loc = kwargs["loc"]
+    assert isinstance(loc, (str, int)), (
+        "Cannot place legend outside of axis if is a point "
+        "(need location code integer or string).")
+    locationStrings = ["best", "upper right", "upper left", "lower left",
+                       "lower right", "right", "center left", "center right",
+                       "lower center", "upper center", "center"]
+    if isinstance(loc, int): loc = locationStrings[loc]
+    assert loc not in ["best", "center"], (
+        "Cannot place legend outside of axis if loc is best or center.")
+    if loc == "right": loc = "center right"
+    locY, locX = loc.split(" ")
+    point = [0.5, 0.5]
+    newLocY, newLocX = "center", "center"
+    eps = outsideDistance
+    if np.isscalar(eps): eps = [eps, eps]
+    if locX == "left":    point[0], newLocX = -eps[0], "right"
+    elif locX == "right": point[0], newLocX = 1+eps[0], "left"
+    if locY == "lower":   point[1], newLocY = -eps[1], "upper"
+    elif locY == "upper": point[1], newLocY = 1+eps[1], "lower"
+    kwargs["loc"] = "{} {}".format(newLocY, newLocX)
+    kwargs["bbox_to_anchor"] = point
+  
+  labels = [x["label"] for x in elements]
+  for x in elements: del x["label"]
+  handles = [mpl.lines.Line2D([0], [0], **x) for x in elements]
+  ax.legend(handles, labels, *args, **kwargs)
+
+
+
 def transform(ax, offset, scale, plot):
   if isinstance(plot, list):
     for plot2 in plot: transform(ax, offset, scale, plot2)
