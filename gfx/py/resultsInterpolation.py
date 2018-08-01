@@ -11,12 +11,14 @@ import pysgpp
 from helper.figure import Figure
 import helper.function
 import helper.grid
+import helper.hpc
 import helper.plot
 
 import helperInterpolation
 
 
 
+@helper.hpc.cacheToFile
 def getSurplusStats(gridStr, fStr, nMax, NMax, d, b, p):
   n = helperInterpolation.getLevelRegularSparseGrid(
       gridStr, nMax, NMax, d, b, p)
@@ -40,6 +42,7 @@ def getSurplusStats(gridStr, fStr, nMax, NMax, d, b, p):
   
   return stats
 
+@helper.hpc.cacheToFile
 def getInterpolationStats(gridStr, fStr, nMax, NMax, d, b, p, NN):
   nMax2 = helperInterpolation.getLevelRegularSparseGrid(
       gridStr, nMax, NMax, d, b, p)
