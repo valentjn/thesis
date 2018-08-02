@@ -11,17 +11,17 @@
 % https://visca.com/regexdict/
 \initial{0.1em}{B}{efore simulation became available}
 as a widespread tool,
-knowledge could only advance through theoretical or
-experimental considerations.
-Nowadays, relations can be simulated
-that would be too complicated, expensive, or even impossible
-to be studied theoretically or experimentally.
-This justifies that simulation is widely viewed as the
+knowledge in science and engineering could only advance through
+theoretical or experimental considerations.
+Nowadays, processes can be simulated
+that would be too complicated or even impossible
+to be studied theoretically or experimentally,
+justifying that simulation is widely viewed as the
 ``third pillar in knowledge acquisition''
 besides theory and experiments \cite{Bungartz14Modeling}.
 
 However, simulations cannot be performed without constructing
-a suitable model beforehand.
+a suitable model beforehand (e.g., based on first principles).
 Such a model often depends on a number of uncertain or unknown parameters.
 Simulations can only represent the real-world circumstances well,
 if the parameters are well-chosen.
@@ -35,18 +35,19 @@ Inverse problems are equivalent to optimization problems of the form
   \*x \in \real^d\;\;\text{s.t.}\;\;
   \ineqconfun(\*x) \le \*0,
 \end{equation}
-where $\objfun(\*x)$ gives the error of the simulation for the model with
-the parameter $\*x$ to experimental real-world data and
+where $\objfun(\*x)$ gives, for instance,
+a measure for the error between the simulation for the model with
+the parameter $\*x$ and experimental real-world data and
 $\ineqconfun$ constrains the set of feasible parameters.
 Since simulations are often time-consuming,
-simple trial-and-error or full-grid-based approaches fail
+exhaustive search fails
 if the dimensionality $d$ is already moderately large ($d > 4$):
 Full grid approaches sample each dimension of the domain
 independently and construct the Cartesian product of the univariate
 samples.
 The number of resulting full grid points
 grows exponentially in the dimensionality $d$,
-which is known as the \term{curse of dimensionality.}
+which is known as the \term{curse of dimensionality} \cite{Bellman61Adaptive}.
 
 Inverse problems are a motivating example for optimization problems
 of the form \eqref{eq:generalOptimizationProblem}, which we consider in
@@ -92,9 +93,9 @@ objective function $\objfun$ to update the search direction.
 Employing finite differences as a remedy
 is time-consuming and introduces new error sources.
 
-Previous theoretical \cite{Sickel11Spline} and practical
-\multicite{Pflueger10Spatially,Valentin14Hierarchische} studies suggest that
-using \term{hierarchical B-splines}
+Previous studies
+\multicite{Pflueger10Spatially,Sickel11Spline,Valentin14Hierarchische}
+suggest that using \term{hierarchical B-splines}
 as sparse grid basis functions helps to improve results.
 B-splines of degree~$p$ are $(p-1)$ times continuously differentiable
 piecewise polynomials of degree $p$ that form a basis of the space of splines.
@@ -115,20 +116,20 @@ This thesis addresses this very intersection of theory and practice of
 The main goals of the thesis are
 \begin{itemize}
   \item
-  establishing a consistent notational and theoretical
+  to establish a consistent notational and theoretical
   framework for sparse grids with general basis functions,
   
   \item
-  constructing various new B-spline-based basis function types for
-  sparse grids,
+  to construct new algorithmically efficient
+  B-spline-based basis function types for sparse grids,
   
   \item
-  studying the algorithmic properties of the new bases and
-  formulating suitable new algorithms,
+  to study the algorithmic properties of the new bases and
+  to formulate suitable new algorithms,
   while proving their formal correctness, and
   
   \item
-  applying the new bases and algorithms to different real-world
+  to apply the new bases and algorithms to different real-world
   optimization scenarios.
 \end{itemize}
 These goals set the agenda for the outline of the rest of the thesis,
@@ -138,10 +139,10 @@ which we describe in the following.
 
 We start in \cref{chap:20sparseGrids} by defining sparse grids
 for arbitrary tensor product basis functions.
-The advantage of introducing the necessary notation independently
+The advantage of introducing the notation independently
 of the type of basis functions is that
 different hierarchical B-spline bases can be substituted easily
-for the following considerations.
+for the following chapters.
 %Due to the tensor product approach,
 %we only have to treat the univariate case.
 %As we will see (and prove), the tensor product allows to maintain all
@@ -154,7 +155,7 @@ since this is the somewhat more natural approach.
 
 In \cref{chap:30BSplines}, we define
 the standard hierarchical B-spline basis for sparse grids.
-In addition, we construct various other hierarchical
+In addition, we construct various new hierarchical
 B-spline basis types, such as
 non-uniform B-splines (e.g., Clenshaw--Curtis B-splines) and
 modified B-splines.
@@ -173,9 +174,9 @@ to solve numerical tasks such as
 hierarchization (interpolation) on sparse grids.
 Based on existing algorithms,
 which work for B-splines only in specific special cases,
-we develop in \cref{chap:40algorithms} new algorithms for
+we show in \cref{chap:40algorithms} new algorithms for
 spatially adaptive sparse grids with the example problem of hierarchization.
-In the course of this chapter, we construct several new
+In the course of \cref{chap:40algorithms}, we construct several new
 hierarchical B-spline basis types to enable the
 applicability of the new algorithms.
 As mentioned above, we prove the formal correctness of every algorithm
@@ -188,8 +189,8 @@ with various gradient-free and gradient-based optimization techniques.
 Numerical results are given for a number of test scenarios as well
 as for an example application from fuzzy arithmetic.
 
-Starting with \cref{chap:60topoOpt}, three chapters
-based on real-world applications follow,
+Three real-world applications follow in
+\cref{chap:60topoOpt,chap:70muscle,chap:80finance},
 where the theoretical knowledge gained in the first half of the thesis
 is applied to the solution of three different real-world optimization problems.
 %
@@ -238,13 +239,15 @@ The notation of this thesis should be intuitive and suggestive.
 It is designed to be as natural as possible (i.e., not distracting)
 and as clear as necessary.
 One example is that vectors are written in bold face, which leads to
-very similar formulas for the univariate and the multivariate case.
-For instance, $\clint{0, 1}$, $\sum_{l=0}^n$, and $a \le b$ become
-$\clint{\*0, \*1} = \clint{0, 1}^d$,
-$\sum_{\*l=\*0}^{\*n} = \sum_{l_1=0}^{n_1} \dotsb \sum_{l_d=0}^{n_d}$, and
-$\*a \le \*b \iff (a_1 \le b_1) \land \dotsb \land (a_d \le b_d)$,
+very similar formulas for the univariate and the multivariate cases.
+For instance, $\clint{0, 1}$ and $\sum_{l=0}^n$
+%and $a \le b$
+become
+$\clint{\*0, \*1} = \clint{0, 1}^d$ and
+$\sum_{\*l=\*0}^{\*n} = \sum_{l_1=0}^{n_1} \dotsb \sum_{l_d=0}^{n_d}$
+%$\*a \le \*b \iff (a_1 \le b_1) \land \dotsb \land (a_d \le b_d)$,
 respectively.
-Other necessary notation is introduced in the text when needed.
+This and other necessary notation is introduced in the text when needed.
 If a symbol or an abbreviation is unclear,
 it is likely explained in the glossary at the beginning of the thesis.
 
