@@ -132,7 +132,8 @@ def createLinearColormap(name, color1, color2):
 
 
 def addCustomLegend(ax, elements, *args, transpose=True,
-                    outside=False, outsideDistance=0.05, **kwargs):
+                    outside=False, outsideDistance=0.05, shift=None,
+                    **kwargs):
   if transpose:
     nCols = kwargs.get("ncol", 1)
     nRows = int(np.ceil(len(elements) / nCols))
@@ -175,6 +176,7 @@ def addCustomLegend(ax, elements, *args, transpose=True,
     elif locX == "right": point[0], newLocX = 1+eps[0], "left"
     if locY == "lower":   point[1], newLocY = -eps[1], "upper"
     elif locY == "upper": point[1], newLocY = 1+eps[1], "lower"
+    if shift is not None: point = np.array(point) + np.array(shift)
     kwargs["loc"] = "{} {}".format(newLocY, newLocX)
     kwargs["bbox_to_anchor"] = point
   
