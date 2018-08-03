@@ -35,6 +35,7 @@ def plotUnconstrainedProblem(params):
   fOpt = f.evaluate((xOpt-bounds[0])/(bounds[1]-bounds[0]))
   
   YYMin, YYMax = min(np.amin(YY), fOpt), np.amax(YY)
+  if fStr == "goldsteinPrice": YYMax += 10
   v = np.linspace(0, 1, 20)
   if fStr == "eggHolder":
     v = -2*v**3 + 3*v**2
@@ -203,11 +204,11 @@ def plotConstrainedProblem(q):
 
 
 def main():
-  fStrs = ["branin02", "eggHolder", "schwefel06",
-          "ackley", "alpine02", "schwefel22"]
+  fStrs = ["branin02", "goldsteinPrice", "schwefel06",
+           "ackley", "alpine02", "schwefel22"]
   xOpts = np.array([
     [-3.1970, 12.5263],
-    [512, 404.2318],
+    [0, -1],
     [1, 3],
     [2, 2],
     [7.9171, 7.9171],
@@ -215,14 +216,14 @@ def main():
   ])
   boundss = [
     np.array([[-5, -5], [15, 15]]),
-    np.array([[-512, -512], [512, 512]]),
+    np.array([[-2, -2], [2, 2]]),
     np.array([[-6, -6], [4, 4]]),
     np.array([[1.5, 1.5], [5.5, 5.5]]),
     np.array([[2, 2], [10, 10]]),
     np.array([[-3, -3], [7, 7]]),
   ]
   contourOnTops = [True, True, False, False, False, True]
-  contourExponents = [2.5, 1, 1, 1, 1, 2]
+  contourExponents = [2.5, 4, 1, 1, 1, 2]
   lightOrigins = [(90, -45), None, (225, -85), None, None, None]
   cameraPositions = [None, None, (120, 30), None, None, None]
   
