@@ -98,6 +98,9 @@ class Figure(mpl.figure.Figure):
 \newtoggle{showGlossaryDefinitionsMode}
 \togglefalse{showGlossaryDefinitionsMode}
 
+% needed for some of the notation definitions
+\usepackage{xstring}
+
 \makeatletter
   % prepare loading of notation
   \input{preamble/settings/glossary}
