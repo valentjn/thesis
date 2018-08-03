@@ -193,10 +193,10 @@ def startRemotelyServer(url, port, key):
             "server.serve_forever()"
           "' </dev/null >/dev/null 2>&1 &").format(key, port)
   args = ["ssh", url, cmd]
-  subprocess.run(args, check=True)
+  subprocess.run(args, check=True, timeout=2)
   print("Starting remotely server on {} with port {} and key {}.".format(
       url, port, key))
-  time.sleep(1.0)
+  time.sleep(1)
 
 def executeRemotely(func, url=DEFAULT_REMOTELY_URL,
                     autoStart=2, fallback=True):
