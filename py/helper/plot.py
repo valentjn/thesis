@@ -113,6 +113,19 @@ def plotConvergenceTriangle(ax, x, y, width, order, side="lower",
   ax.text(*center, "${:g}$".format(abs(order)),
           ha="center", va="center", color=ec)
 
+def plotConvergenceLine(ax, x, y, order, tx=None, ty=None, **kwargs):
+  x1, x2 = ax.get_xlim()
+  isXLogScale = (ax.get_xscale() == "log")
+  xFcn = ((lambda x: np.log2(x)) if isXLogScale else (lambda x: x))
+  y0 = y / 2**(-order*xFcn(x))
+  yFcn = (lambda x: y0 * 2**(-order*xFcn(x)))
+  y1, y2 = yFcn(x1), yFcn(x2)
+  color = 3*[0.5]
+  ax.plot([x1, x2], [y1, y2], "-", color=color, zorder=-1000)
+  if tx is not None:
+    kwargs = {"clip_on" : False, "color" : color, **kwargs}
+    ax.text(tx, ty, "${}$".format(order), **kwargs)
+
 
 
 def convertColorToRGB(color):
