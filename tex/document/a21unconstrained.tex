@@ -39,26 +39,37 @@ reciprocal function value)
 
 \pagebreak
 
-\paragraph{EggHolder}
+\paragraph{GoldsteinPrice}
 
-\cite{Whitley96Evaluating}
-(slightly changed domain from $\clint{-512, 511}^2$)
+\cite{Goldstein71Descent}
+(changed scaling of function values)
 \vspace{-1.6em}
 
 \begin{subequations}
   \begin{gather}
     \centertestfunline{
-      \testobjfunscaled{Egg}(\xscaled)
-      := -\xscaled[1] \sin(\sqrt{\abs{\xscaled[1] - \xscaled[2] - 47}}) -
-      (\xscaled[2] + 47)
-      \sin\paren*{\sqrt{\abs{\frac{\xscaled[1]}{2} + \xscaled[2] + 47}}},
-    }\\  
-    \centertestfunline{
-      \xscaled \in \clint{-512, 512}^2,\quad
-      \xoptscaled = (512, 404.2318051143),
+      \testobjfunscaled{GoP}(\xscaled)
+      := 10^{-4} \cdot \paren*{
+        1 + (\xscaled[1] + \xscaled[2] + 1)^2
+        (19 - 14\xscaled[1] + 3\xscaled[1]^2 - 14\xscaled[2] +
+        6\xscaled[1]\xscaled[2] + 3\xscaled[2]^2)
+      }
     }\\
     \centertestfunline{
-      \testobjfunscaled{Egg}(\xoptscaled) = -959.6406627209
+      \hspace*{25mm}
+      {} \cdot
+      \paren*{
+        30 + (2\xscaled[1] - 3\xscaled[2])^2
+        (18 - 32\xscaled[1] + 12\xscaled[1]^2 + 48\xscaled[2] -
+        36\xscaled[1]\xscaled[2] + 27\xscaled[2]^2)
+      },
+    }\notag\\
+    \centertestfunline{
+      \xscaled \in \clint{-2, 2}^2,\quad
+      \xoptscaled = (0, -1),
+    }\\
+    \centertestfunline{
+      \testobjfunscaled{GoP}(\xoptscaled) = 3
     }
   \end{gather}
 \end{subequations}
@@ -161,7 +172,7 @@ reciprocal function value)
   }%
   \hfill%
   \subcaptionbox{%
-    EggHolder%
+    GoldsteinPrice%
   }[76mm]{%
     \includegraphics{optimizationProblem_2}%
   }\\[2.5mm]%
