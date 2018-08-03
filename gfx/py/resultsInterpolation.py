@@ -148,11 +148,74 @@ def generatePlot(q):
     print(x)
     ax.set_xlim(x[0], x[-1])
     ax.set_yscale("log")
-    
-    #helper.plot.plotConvergenceTriangle(ax, 5.5, 1e-2, 2, -2)
-    #helper.plot.plotConvergenceTriangle(ax, 5, 1e1, 2.5, -1, side="upper")
   
   ax2.set_xscale("log")
+  
+  ax1.set_xlabel("$N$")
+  ax1.set_ylabel("Mean absolute value of surpluses")
+  ax2.set_xlabel("$N$")
+  ax2.set_ylabel("Relative $\Ltwo$ interp. error")
+  
+  if q == 0:
+    yl = [1e-10, 5e0]
+    yt = [1e-10, 1e-8, 1e-6, 1e-4, 1e-2, 1e0]
+  elif q == 1:
+    yl = [1e-10, 5e0]
+    yt = [1e-10, 1e-8, 1e-6, 1e-4, 1e-2, 1e0]
+  elif q == 2:
+    yl = [1e-3, 1e1]
+    yt = [1e-3, 1e-2, 1e-1, 1e0, 1e1]
+  elif q == 3:
+    yl = [1e-2, 1e1]
+    yt = [1e-2, 1e-1, 1e0, 1e1]
+  elif q == 4:
+    yl = [1e-5, 1e1]
+    yt = [1e-5, 1e-3, 1e-1, 1e1]
+  
+  ax2.set_yticks(yt)
+  ax2.set_ylim(yl)
+  
+  if q == 0:
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 1e-2, 2, tx=4e3, ty=1e-1)
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 2e-8, 4, tx=1.8e3, ty=2e-5)
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 1e-12, 6, tx=1.3e3, ty=1e-7, ha="right", va="top")
+  elif q == 1:
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 1e-2, 2, tx=4e3, ty=1e-1)
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 5e-7, 4, tx=1.8e3, ty=2e-5)
+    helper.plot.plotConvergenceLine(
+        ax2, 1e4, 1e-12, 6, tx=1.3e3, ty=1e-7, ha="right", va="top")
+  
+  functionNames = {
+    "branin02"       : "Bra02",
+    "goldsteinPrice" : "GoP",
+    "schwefel06"     : "Sch06",
+    "ackley"         : "Ack",
+    "alpine02"       : "Alp02",
+    "schwefel22"     : "Sch22",
+  }
+  
+  if q < 4:
+    helper.plot.addCustomLegend(ax, (
+      [{
+        "label"  : functionNames[functionTypes[r][0]],
+        "ls"     : "-",
+        "color"  : "C{}".format(r),
+      } for r in range(len(functionTypes))] +
+      [{
+        "label"  : "$p = {}$".format(x[1]),
+        "marker" : {1 : ".", 3 : "^", 5 : "v"}[x[1]],
+        "ms"     : (4.5 if x[1] == 1 else 2.5),
+        "ls"     : x[2][1:],
+        "color"  : "k",
+      } for x in gridTypes]
+    ), ncol=3, loc="upper center", outside=True, shift=(-0.1, 0))
+  else:
+    pass
   
   fig1.save(graphicsNumber=2*q+1)
   fig2.save(graphicsNumber=2*q+2)
