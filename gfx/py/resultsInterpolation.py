@@ -81,9 +81,9 @@ def generatePlot(q):
   NN = 10000
   
   gridTypes = [
-    ("bSpline", 1, "--", None),
-    ("notAKnotBSpline", 3, "-", None),
-    ("notAKnotBSpline", 5, ":", None),
+    ("bSpline", 1, ".-", None),
+    ("notAKnotBSpline", 3, ".--", None),
+    ("notAKnotBSpline", 5, ".:", None),
   ]
   
   if q == 0:
@@ -101,14 +101,14 @@ def generatePlot(q):
   elif q == 4:
     p = 3
     gridTypes = [
-      ("notAKnotBSpline", p, "-", "C0"),
-      ("modifiedNotAKnotBSpline", p, ":", "C0"),
-      ("bSpline", 1, "-", "C1"),
-      ("modifiedBSpline", 1, ":", "C1"),
-      ("bSplineNoBoundary", 1, "--", "C1"),
-      ("bSpline", p, "-", "C2"),
-      ("modifiedBSpline", p, ":", "C2"),
-      ("bSplineNoBoundary", p, "--", "C2"),
+      ("bSpline", 1, ".-", "C0"),
+      ("modifiedBSpline", 1, ".-", "C1"),
+      ("bSplineNoBoundary", 1, ".-", "C2"),
+      ("bSpline", p, ".--", "C0"),
+      ("notAKnotBSpline", p, "o--", "C0"),
+      ("modifiedBSpline", p, ".--", "C1"),
+      ("modifiedNotAKnotBSpline", p, "o--", "C1"),
+      ("bSplineNoBoundary", p, ".--", "C2"),
     ]
     functionTypes = [("alpine02", 2)]
     nMax, NMax, b = None, 10000, 0
