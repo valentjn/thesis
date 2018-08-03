@@ -115,18 +115,19 @@ if __name__ == "__main__":
     
     if args.copy_stuff is not None:
       print("")
-      print("Copying .sconsign.dblite and build/gfx/...")
-      shutil.copy(os.path.join(args.copy_stuff, ".sconsign.dblite"), repoPath)
-      shutil.copytree(os.path.join(args.copy_stuff, "build", "gfx"),
-                      os.path.join(repoPath, "build", "gfx"),
-                      copy_function=shutil.copy)
-      
-      print("")
       print("Copying cpp/sgpp/...")
       os.rmdir(os.path.join(repoPath, "cpp", "sgpp"))
       shutil.copytree(os.path.join(args.copy_stuff, "cpp", "sgpp"),
                       os.path.join(repoPath, "cpp", "sgpp"),
-                      copy_function=shutil.copy)
+                      copy_function=shutil.copy2)
+      
+      print("")
+      print("Copying .sconsign.dblite, build/cpp/, and build/gfx/...")
+      shutil.copy(os.path.join(args.copy_stuff, ".sconsign.dblite"), repoPath)
+      for x in ["cpp", "gfx"]:
+        shutil.copytree(os.path.join(args.copy_stuff, "build", x),
+                        os.path.join(repoPath, "build", x),
+                        copy_function=shutil.copy)
     
     try:
       print("")
