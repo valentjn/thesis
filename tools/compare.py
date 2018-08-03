@@ -43,7 +43,7 @@ def diffPage(j):
     run(["composite", imagePaths[j][0], imagePaths[j][1],
          "-compose", "difference", diffPaths[j]])
   
-  brightness = float(run(["identify", "-format",  "%[fx:maxima]", diffPaths[j]]).strip())
+  brightness = float(run(["identify", "-format", "%[fx:maxima]", diffPaths[j]]).strip())
   return (brightness > brightnessThreshold)
 
 def generateResult(j):
