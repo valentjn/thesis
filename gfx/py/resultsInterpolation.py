@@ -87,7 +87,8 @@ def generatePlot(q):
   ]
   
   if q == 0:
-    functionTypes = [("branin02", 2), ("eggHolder", 2), ("schwefel06", 2)]
+    functionTypes = [("branin02", 2), ("goldsteinPrice", 2),
+                     ("schwefel06", 2)]
     nMax, NMax, b = None, 10000, 0
   elif q == 1:
     functionTypes = [("ackley", 2), ("alpine02", 2), ("schwefel22", 2)]
@@ -137,7 +138,8 @@ def generatePlot(q):
       x = [N for N in x if N > 0]
       xs2.append(x)
       y = [stats[N][2] for N in x]
-      ax2.plot(x, y, ls, clip_on=False, color=currentColor, ms=markerSize)
+      clipOn = ((fStr == "goldsteinPrice") and (p == 5))
+      ax2.plot(x, y, ls, clip_on=clipOn, color=currentColor, ms=markerSize)
       print(x)
       print(y)
   
