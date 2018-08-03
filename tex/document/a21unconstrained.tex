@@ -9,9 +9,13 @@
 
 \paragraph{Branin02}
 
-\cite{Munteanu98Global}
-(changed domain from $\clint{-5, 10} \times \clint{0, 15}$,
-reciprocal function value)
+The function originates from \cite{Munteanu98Global}.
+Compared to \cite{Munteanu98Global},
+we changed the domain from $\clint{-5, 10} \times \clint{0, 15}$
+to $\clint{-5, 15}^2$,
+which seems more common in recent literature \cite{Gavana13Global}.
+In addition, \cite{Munteanu98Global} uses the reciprocal function value,
+while searching for the maximum instead of the minimum.
 \vspace{-1.6em}
 
 \begin{subequations}
@@ -41,8 +45,11 @@ reciprocal function value)
 
 \paragraph{GoldsteinPrice}
 
-\cite{Goldstein71Descent}
-(changed scaling of function values)
+This function originates from \cite{Goldstein71Descent},
+where the function was stated without bounds for the optimization domain.
+We took the domain $\clint{-2, 2}^2$ from \cite{Gavana13Global}.
+In addition, we scaled the function values by the factor $10^{-4}$
+for the sake of plotting.
 \vspace{-1.6em}
 
 \begin{subequations}
@@ -69,15 +76,17 @@ reciprocal function value)
       \xoptscaled = (0, -1),
     }\\
     \centertestfunline{
-      \testobjfunscaled{GoP}(\xoptscaled) = 3
+      \testobjfunscaled{GoP}(\xoptscaled) = 3 \cdot 10^{-4}
     }
   \end{gather}
 \end{subequations}
 
 \paragraph{Schwefel06}
 
-\cite{Schwefel77Numerische}
-(changed domain from $\clint{-3, 5} \times \clint{-1, 7}$)
+This function originates from \cite{Schwefel77Numerische}.
+We changed the domain from $\clint{-3, 5} \times \clint{-1, 7}$ to
+$\clint{-6, 4}^2$, such that the optimum point is not located at the
+center of the optimization domain.
 \vspace{-1.6em}
 
 \begin{subequations}
@@ -102,8 +111,14 @@ reciprocal function value)
 
 \paragraph{Ackley}
 
-\cite{Ackley87Connectionist}
-(generalized function to $d$ variables, changed domain and frequencies)
+The form of this function originates from \cite{Ackley87Connectionist},
+where it was stated only for two variables.
+We use the generalization to $d$ variables from \cite{Gavana13Global}.
+The optimization domain $\clint{1.5, 5.5}^d$
+was chosen such that it does not contain $\*0$,
+where the gradient of the objective function becomes singular.
+Otherwise, the function would not be continuously differentiable and
+hard to be interpolated by spline-based approaches.
 \vspace{-1.6em}
 
 \begin{subequations}
@@ -124,8 +139,13 @@ reciprocal function value)
 
 \paragraph{Alpine02}
 
-\cite{Clerc99Swarm}
-(changed domain from $\clint{0, 10}^2$)
+This function originates from \cite{Clerc99Swarm}.
+We changed the domain from $\clint{0, 10}^d$ to $\clint{2, 10}^d$
+to exclude the singularities of the derivative of the objective function
+at $\xscaled[t] = 0$.
+In addition, the author of \cite{Clerc99Swarm} searched for maximal points.
+For minimization, we have to change the sign of the objective function
+for even dimensionalities $d$.
 \vspace{-1.6em}
 
 \begin{subequations}
@@ -143,9 +163,11 @@ reciprocal function value)
 \end{subequations}
 
 \paragraph{Schwefel22}
-(changed domain from $\clint{-10, 10}^d$)
 
-\cite{Schwefel77Numerische}
+This function originates from \cite{Schwefel77Numerische}.
+We changed the domain from $\clint{-10, 10}^d$ to
+$\clint{-3, 7}^d$, such that the optimum point is not located at the
+center of the optimization domain.
 \vspace{-1.6em}
 
 \begin{subequations}
