@@ -82,8 +82,8 @@ def generatePlot(q):
   
   gridTypes = [
     ("bSpline", 1, ".-", None),
-    ("notAKnotBSpline", 3, ".--", None),
-    ("notAKnotBSpline", 5, ".:", None),
+    ("notAKnotBSpline", 3, "^--", None),
+    ("notAKnotBSpline", 5, "v:", None),
   ]
   
   if q == 0:
@@ -104,11 +104,11 @@ def generatePlot(q):
       ("bSpline", 1, ".-", "C0"),
       ("modifiedBSpline", 1, ".-", "C1"),
       ("bSplineNoBoundary", 1, ".-", "C2"),
-      ("bSpline", p, ".--", "C0"),
-      ("notAKnotBSpline", p, "o--", "C0"),
-      ("modifiedBSpline", p, ".--", "C1"),
-      ("modifiedNotAKnotBSpline", p, "o--", "C1"),
-      ("bSplineNoBoundary", p, ".--", "C2"),
+      ("bSpline", p, "^--", "C0"),
+      ("notAKnotBSpline", p, "v--", "C0"),
+      ("modifiedBSpline", p, "^--", "C1"),
+      ("modifiedNotAKnotBSpline", p, "v--", "C1"),
+      ("bSplineNoBoundary", p, "^--", "C2"),
     ]
     functionTypes = [("alpine02", 2)]
     nMax, NMax, b = None, 10000, 0
@@ -124,19 +124,20 @@ def generatePlot(q):
   for gridStr, p, ls, color in gridTypes:
     for r, (fStr, d) in enumerate(functionTypes):
       currentColor = (color if color is not None else "C{}".format(r))
+      markerSize = (4.5 if ls[0] == "." else 2.5)
       
       stats = getSurplusStats(gridStr, fStr, nMax, NMax, d, b, p)
       x = sorted(list(stats.keys()))
       xs1.append(x)
       y = [stats[lSum]["mean"] for lSum in x]
-      ax1.plot(x, y, ls, clip_on=False, color=currentColor)
+      ax1.plot(x, y, ls, clip_on=False, color=currentColor, ms=markerSize)
       
       stats = getInterpolationStats(gridStr, fStr, nMax, NMax, d, b, p, NN)
       x = sorted(list(stats.keys()))
       x = [N for N in x if N > 0]
       xs2.append(x)
       y = [stats[N][2] for N in x]
-      ax2.plot(x, y, ls, clip_on=False, color=currentColor)
+      ax2.plot(x, y, ls, clip_on=False, color=currentColor, ms=markerSize)
       print(x)
       print(y)
   
