@@ -149,11 +149,11 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
       
       if not combinationTechnique:
         if l0 > 0:
-          for x0 in np.linspace(0, 1, hl0Inv / 2 + 1):
+          for x0 in np.linspace(0, 1, hl0Inv // 2 + 1):
             ax.plot(*s([x0, x0], [0, 1]), "-", clip_on=False, color=borderColor)
         
         if l1 > 0:
-          for x1 in np.linspace(0, 1, hl1Inv / 2 + 1):
+          for x1 in np.linspace(0, 1, hl1Inv // 2 + 1):
             ax.plot(*s([0, 1], [x1, x1]), "-", clip_on=False, color=borderColor)
   
   stairsCorners = [stairsCornersOuter[0]]
