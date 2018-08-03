@@ -11,7 +11,7 @@ def buildSGpp(sgppModules):
   sgppDir = Dir("sgpp")
   sgppSConsFlags = ["SG_ALL=0", "SG_PYTHON=1", "USE_PYTHON3_FOR_PYSGPP=1",
                     "USE_EIGEN=1", "USE_ARMADILLO=1", "USE_UMFPACK=1"]
-  sgppArgs = (["scons", "-C", sgppDir.abspath,
+  sgppArgs = (["scons", "-C", os.path.join("cpp", "sgpp"),
               "-j", str(env.GetOption("num_jobs"))] + sgppSConsFlags +
               ["SG_{}=1".format(module.upper()) for module in sgppModules])
 
@@ -30,24 +30,23 @@ def buildSGpp(sgppModules):
             sgppSourceFiles.append(os.path.join(root, file_))
   
   sgppOutputFiles = [
-    os.path.join(sgppDir.abspath, "lib", "sgpp",
+    os.path.join("sgpp", "lib", "sgpp",
                  "libsgpp{}.so".format(module)) for module in sgppModules
   ] + [
-    os.path.join(sgppDir.abspath, "lib", "__init__.py"),
-    os.path.join(sgppDir.abspath, "lib", "pysgpp", "__init__.py"),
-    os.path.join(sgppDir.abspath, "lib", "pysgpp", "pysgpp_swig.py"),
-    os.path.join(sgppDir.abspath, "lib", "pysgpp", "_pysgpp_swig.so"),
+    os.path.join("sgpp", "lib", "__init__.py"),
+    os.path.join("sgpp", "lib", "pysgpp", "__init__.py"),
+    os.path.join("sgpp", "lib", "pysgpp", "pysgpp_swig.py"),
+    os.path.join("sgpp", "lib", "pysgpp", "_pysgpp_swig.so"),
   ]
   
   sgppCommandLine = " ".join([shlex.quote(arg) for arg in sgppArgs])
   sgppCommandLine += " && touch {}".format(" ".join(
-      [shlex.quote(x) for x in sgppOutputFiles]))
+      [shlex.quote(os.path.join("cpp", x)) for x in sgppOutputFiles]))
   env.Command(sgppOutputFiles, sgppSourceFiles, sgppCommandLine)
   sgppFiles = []
   
   for outputFile in sgppOutputFiles:
-    installedFile = (os.path.join(env["BUILD_DIR"].abspath, "sgpp") +
-                    outputFile[len(sgppDir.abspath):])
+    installedFile = os.path.join(env["BUILD_DIR"].abspath, outputFile)
     env.InstallAs(installedFile, outputFile)
     sgppFiles.append(installedFile)
   
