@@ -95,10 +95,12 @@ def getAngle(u, v):
 
 def plotConvergenceTriangle(ax, x, y, width, order, side="lower",
                             ec="k", fc=None):
-  y0 = y / 2**(order*x)
+  isXLogScale = (ax.get_xscale() == "log")
+  xFcn = ((lambda x: np.log2(x)) if isXLogScale else (lambda x: x))
+  y0 = y / 2**(order*xFcn(x))
   if (order > 0) == (side == "lower"): x2 = x + width
   else:                                x2 = x - width
-  y2 = y0 * 2**(order*x2)
+  y2 = y0 * 2**(order*xFcn(x2))
   
   if side not in ["lower", "upper"]:
     raise ValueError("Invalid value for \"side\".")
