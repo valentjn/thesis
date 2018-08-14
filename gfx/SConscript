@@ -66,10 +66,8 @@ for py in pys:
         if dependencyName == "SG++":
           dependencies.extend(env["SGPP_FILES"])
         elif dependencyName.startswith("cpp"):
-          program = os.path.join(cppDir, os.path.basename(dependencyName))
-          dummy = program + ".dummy"
-          dependencies.append(env.Command(dummy, program,
-              program + " && touch $TARGET"))
+          dependencies.append(
+              os.path.join(cppDir, os.path.basename(dependencyName)))
         else:
           raise ValueError("Unknown dependency \"{}\".".format(
               dependencyName))
