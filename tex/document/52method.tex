@@ -28,7 +28,7 @@ As usual, the criterion works iteratively:
 Starting with an initial regular sparse grid of a very coarse level,
 the criterion selects in each iteration a specific point $\gp{\*l,\*i}$
 and inserts all its children into the grid.
-This process is repeated until a given number $\Nmax$ of grid points is
+This process is repeated until a given number $\ngpMax$ of grid points is
 reached,
 since we evaluate $\objfun$ at every grid point once and we assume that
 function evaluations dominate the overall complexity.
@@ -138,16 +138,16 @@ This means there are three types of optimization methods:
 \paragraph{Unconstrained optimization of sparse grid surrogates}
 
 Given the objective function $\objfun\colon \clint{\*0, \*1} \to \real$,
-the maximum number $\Nmax \in \nat$ of evaluations of $f$, and
+the maximum number $\ngpMax \in \nat$ of evaluations of $f$, and
 the adaptivity parameter $\gamma \in \clint{0, 1}$,
 we can determine an approximation $\xoptappr \in \clint{\*0, \*1}$
 of the global minimum $\xopt$ of $\objfun$ as follows:
-% sdadfsa
+
 \begin{enumerate}
   \item
   Generate a spatially adaptive sparse grid $\sgset$
   with the Novak--Ritter refinement criterion
-  for $\objfun$, $\Nmax$, and $\gamma$.
+  for $\objfun$, $\ngpMax$, and $\gamma$.
   
   \item
   Determine the sparse grid interpolant $\sgintp$ of $\objfun$
@@ -172,7 +172,7 @@ of the global minimum $\xopt$ of $\objfun$ as follows:
 
 Note that the third step requires a fixed number of additional
 evaluations of the objective function,
-which can be neglected compared to $\Nmax$.
+which can be neglected compared to $\ngpMax$.
 By default, we use the hierarchical not-a-knot B-spline basis for
 the construction of the sparse grid surrogate.
 However, we could apply any of the hierarchical (B-)spline bases presented in
@@ -194,7 +194,7 @@ Second, we apply the gradient-free methods
 We cannot use the gradient-based methods here as the gradient of the
 objective function is assumed to be unknown.
 For both of the comparison methods,
-we make sure that the objective function is evaluated at most $\Nmax$ times.
+we make sure that the objective function is evaluated at most $\ngpMax$ times.
 
 \paragraph{Constrained optimization}
 
