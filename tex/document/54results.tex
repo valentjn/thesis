@@ -18,7 +18,7 @@ is minimal.
 
 \paragraph{Interpolation error for different test functions}
 
-\Cref{fig:resultInterpolationErrorTestFunctions} shows the
+\Cref{fig:resultsInterpolationErrorTestFunctions} shows the
 relative $\Ltwo$ interpolation error
 $\tfrac{\normLtwo{\objfun - \sgintp}}{\normLtwo{\objfun}}$
 of sparse grid interpolants $\sgintp$ to
@@ -38,7 +38,7 @@ orders of convergence.
   \includegraphics{resultsInterpolation_6}%
   \hfill%
   \includegraphics{resultsInterpolation_8}%
-  \caption[Relative interpolation errors for different test functions]{%
+  \caption[Relative interpolation error for different test functions]{%
     Relative $\Ltwo$ interpolation error
     $\normLtwo{\objfun - \sgintp}/\normLtwo{\objfun}$
     for different test functions $\objfun$ \emph{(colors)}
@@ -46,7 +46,7 @@ orders of convergence.
     $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
     regular sparse grids $\regsgset{n}{d}$ of different levels $n$.%
   }%
-  \label{fig:resultInterpolationErrorTestFunctions}%
+  \label{fig:resultsInterpolationErrorTestFunctions}%
 \end{figure}
 
 It is already known that
@@ -58,7 +58,7 @@ asymptotically behaves like
 $\landauO{\ms{n}^{p+1} (\log_2 \ms{n}^{-1})^{d-1}}
 = \landauO{2^{-(p+1)n} n^{d-1}}$ for $n \to \infty$ \cite{Sickel11Spline}.
 We can numerically verify this fact easily with
-\cref{fig:resultInterpolationErrorTestFunctions},
+\cref{fig:resultsInterpolationErrorTestFunctions},
 in which we obtain the asserted orders of convergence
 for the continuously differentiable bivariate functions that
 are continuously differentiable.
@@ -73,7 +73,7 @@ GoP and Alp02.
 This is also the case for all functions in higher dimensionalities,
 as more interpolation points are necessary to sufficiently explore the domain
 (curse of dimensionality).
-In \cref{fig:resultInterpolationErrorTestFunctions}, this can already be seen
+In \cref{fig:resultsInterpolationErrorTestFunctions}, this can already be seen
 for $d \ge 3$.
 This is not a consequence of employing higher-order B-splines for
 the hierarchical basis.
@@ -82,7 +82,7 @@ in the interpolation error in the pre-asymptotic range.
 
 \paragraph{Interpolation error for different basis functions}
 
-In \cref{fig:resultInterpolationErrorBasisFunctions},
+In \cref{fig:resultsInterpolationErrorBasisFunctions},
 we fix the objective function and study the effect of the choice
 of hierarchical basis functions on the interpolation error.
 Shown are eight types of hierarchical B-spline bases as introduced in
@@ -113,7 +113,7 @@ albeit with a smaller constant (offset).
     \includegraphics{resultsInterpolationLegend_2}\\[2mm]%
     \includegraphics{resultsInterpolation_10}%
   \end{minipage}%
-  \caption[Relative interpolation errors for different basis functions]{%
+  \caption[Relative interpolation error for different basis functions]{%
     Relative $\Ltwo$ interpolation error
     $\normLtwo{\objfun - \sgintp}/\normLtwo{\objfun}$
     for the bivariate Alp02 function ($d = 2$)
@@ -130,7 +130,7 @@ albeit with a smaller constant (offset).
     splines as well as the combinations
     introduced in \cref{chap:20sparseGrids,chap:30BSplines}.%
   }%
-  \label{fig:resultInterpolationErrorBasisFunctions}%
+  \label{fig:resultsInterpolationErrorBasisFunctions}%
 \end{SCfigure}
 
 \paragraph{Pointwise interpolation error}
@@ -157,8 +157,8 @@ i.e., the absolute value of the hierarchical surpluses
 decay in quadratic order with the level sum $\normone{\*l}$.
 This relation can be used to estimate the convergent range
 of the corresponding interpolation error (\cref{%
-  fig:resultInterpolationErrorTestFunctions,%
-  fig:resultInterpolationErrorBasisFunctions%
+  fig:resultsInterpolationErrorTestFunctions,%
+  fig:resultsInterpolationErrorBasisFunctions%
 }).
 
 A generalization of this estimate to higher B-spline degrees $p > 1$
