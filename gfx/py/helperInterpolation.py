@@ -71,7 +71,8 @@ def getRegularSparseGrid(gridStr, n, d, b, p):
   return sgppGrid
 
 def isBoundaryGrid(gridStr):
-  return ("modified" not in gridStr) and ("NoBoundary" not in gridStr)
+  return (("modified" not in gridStr.lower()) and
+          ("noboundary" not in gridStr.lower()))
 
 def getLevelRegularSparseGrid(gridStr, nMax, NMax, d, b, p):
   sgppGrid, n = None, 0
