@@ -401,7 +401,7 @@ The Church
 Of B-Splines
 In the beginning there was the B-spline Then God came along
 You shall not have other basis functions than B-splines
-Do not insult B-splines of degree one as hat functions
+Do not defame B-splines of degree one as hat functions
 We do not talk about hierarchical B-splines of even degree
 """.strip()
   
