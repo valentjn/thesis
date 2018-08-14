@@ -137,7 +137,48 @@ albeit with a smaller constant (offset).
 
 \paragraph{Pointwise interpolation error}
 
-\blindtext{}
+The importance of not-a-knot boundary conditions is also evident
+when considering plots of the pointwise interpolation error as in
+\cref{fig:resultsInterpolationErrorPointwise}.
+Obviously, the interpolation error grows for the standard hierarchical
+B-spline basis $\bspl{\*l,\*i}{p}$
+as we move towards the boundary of the domain $\clint{\*0, \*1}$,
+before dropping to zero or near-zero values at or near boundary grid points.
+With not-a-knot B-splines $\bspl[\nak]{\*l,\*i}{p}$,
+the interpolation error is consistently low in the whole domain.
+For comparison, modified B-splines $\bspl[\modified]{\*l,\*i}{p}$
+incur even worse issues near the boundary, since the corresponding sparse grids
+do not contain boundary points.
+
+\begin{figure}
+  \includegraphics{resultsInterpolationPointwise_4}\\[2mm]%
+  \subcaptionbox{%
+    $\bspl{\*l,\*i}{p}\vphantom{\bspl[\nak]{\*l,\*i}{p}}$%
+  }[48mm]{%
+    \includegraphics{resultsInterpolationPointwise_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\bspl[\nak]{\*l,\*i}{p}$%
+  }[48mm]{%
+    \includegraphics{resultsInterpolationPointwise_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\bspl[\modified]{\*l,\*i}{p}$%
+  }[48mm]{%
+    \includegraphics{resultsInterpolationPointwise_3}%
+  }%
+  \caption[Pointwise interpolation error]{%
+    Pointwise interpolation error
+    $\abs{\objfun(\*x) - \sgintp(\*x)}$ on a logarithmic scale
+    for the bivariate GoP function ($d = 2$)
+    using different hierarchical basis functions
+    $\basis{\*l,\*i}$ \emph{(left, center, right)} of degree $p = 3$ on
+    the regular sparse grid $\regsgset{n}{d}$ of level $n = 7$.%
+  }%
+  \label{fig:resultsInterpolationErrorPointwise}%
+\end{figure}
 
 \paragraph{Decay of surpluses}
 
