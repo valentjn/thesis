@@ -139,7 +139,53 @@ albeit with a smaller constant (offset).
 
 \paragraph{Decay of surpluses}
 
+In the piecewise linear case ($p = 1$),
+the hierarchical surpluses $\surplus{\*l,\*i}$
+can be represented as the $\Ltwo$ inner product of
+the corresponding hat function $\bspl{\*l,\*i}{1}$ with the
+mixed second derivative
+$\partialderiv[2d]{\partialdiff x_1^2 \dotsm \partialdiff x_d^2}{\objfun}$
+of the objective function $\objfun$,
+if $\*l \ge \*1$ and this derivative exists and is continuous
+(see \cref{eq:surplusIntegral}).
+Consequently, one can prove that
+$\abs{\surplus{\*l,\*i}} \le 2^{-d} 2^{-2\normone{\*l}}
+\norm[\infty]{
+  \partialderiv[2d]{\partialdiff x_1^2 \dotsm \partialdiff x_d^2}{\objfun}
+}$ \cite{Bungartz04Sparse},
+i.e., the absolute value of the hierarchical surpluses
+decay in quadratic order with the level sum $\normone{\*l}$.
+This relation can be used to estimate the convergent range
+of the corresponding interpolation error (\cref{%
+  fig:resultInterpolationErrorTestFunctions,%
+  fig:resultInterpolationErrorBasisFunctions%
+}).
+
+A generalization of this estimate to higher B-spline degrees $p > 1$
+is not straightforward, as the surpluses $\surplus{\*l,\*i}$
+then also depend on function values $\objfun(\gp{\*l',\*i'})$ at
+grid points of finer levels $\*l' \ge \*l$.
+
 \blindtext{}
+
+\begin{figure}
+  \includegraphics{resultsInterpolationLegend_1}\\[2mm]%
+  \includegraphics{resultsInterpolation_1}%
+  \hfill%
+  \includegraphics{resultsInterpolation_3}%
+  %\\[2mm]%
+  %\includegraphics{resultsInterpolation_5}%
+  %\hfill%
+  %\includegraphics{resultsInterpolation_7}%
+  \caption[Decay of surpluses for different test functions]{%
+    Mean absolute value of surpluses
+    for different test functions $\objfun$ \emph{(colors)}
+    using hierarchical not-a-knot B-splines
+    $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
+    regular sparse grids $\regsgset{n}{d}$ of different levels $n$.%
+  }%
+  \label{fig:TODO}%
+\end{figure}
 
 
 
