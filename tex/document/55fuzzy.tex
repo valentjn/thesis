@@ -220,20 +220,20 @@ is straightforward:
 \begin{enumerate}
   \item
   Discretize $\clint{0, 1}$ with discrete values
-  $\alpha_j \in \clint{0, 1}$ with $N$ segments
-  (e.g., $\alpha_j := j/N$ for $j = 0, \dotsc, N$)
+  $\alpha_j \in \clint{0, 1}$ with $m$ segments
+  (e.g., $\alpha_j := j/m$ for $j = 0, \dotsc, m$)
   and compute $\acut[t]{x}{\alpha_j}$ for all $t = 1, \dotsc, d$
-  and $j = 0, \dotsc, N$ to obtain $\Omega_{\alpha_j}$.
+  and $j = 0, \dotsc, m$ to obtain $\Omega_{\alpha_j}$.
   
   \item
   Compute $\acut{y}{\alpha_j}$ by solving
   $\min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ and
-  $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ ($j = 0, \dotsc, N$).
+  $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ ($j = 0, \dotsc, m$).
   
   \item
   Approximate $\memfun{y}(y)$ by interpolating the data
-  $\{(\min(\acut{y}{\alpha_j}), \alpha_j) \mid j = 0, 1, \dotsc, N\} \cup
-  \{(\max(\acut{y}{\alpha_j}), \alpha_j) \mid j = N, N - 1, \dotsc, 0\}$.
+  $\{(\min(\acut{y}{\alpha_j}), \alpha_j) \mid j = 0, 1, \dotsc, m\} \cup
+  \{(\max(\acut{y}{\alpha_j}), \alpha_j) \mid j = m, m - 1, \dotsc, 0\}$.
 \end{enumerate}
 
 
