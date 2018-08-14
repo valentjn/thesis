@@ -162,13 +162,21 @@ of the corresponding interpolation error (\cref{%
   fig:resultsInterpolationErrorTestFunctions,%
   fig:resultsInterpolationErrorBasisFunctions%
 }).
-
 A generalization of this estimate to higher B-spline degrees $p > 1$
 is not straightforward, as the surpluses $\surplus{\*l,\*i}$
 then also depend on function values $\objfun(\gp{\*l',\*i'})$ at
 grid points of finer levels $\*l' \ge \*l$.
 
-\blindtext{}
+The decay of surpluses can be seen in \cref{fig:resultDecaySurpluses},
+which shows the mean absolute value of surpluses corresponding to
+grid points grouped by their level sum $\normone{\*l}$.
+Due to the dependency of coarse-level surpluses on fine-level grid points
+for $p > 1$,
+we have to fix the level $n$ of the regular sparse grid for this analysis.
+\Cref{fig:resultDecaySurpluses} suggests that the
+absolute value of the surpluses decays with order $p + 1$ for
+B-spline degree $p$, although there is no theoretical evidence supporting
+this claim.
 
 \begin{figure}
   \includegraphics{resultsInterpolationLegend_1}\\[2mm]%
@@ -180,13 +188,13 @@ grid points of finer levels $\*l' \ge \*l$.
   %\hfill%
   %\includegraphics{resultsInterpolation_7}%
   \caption[Decay of surpluses for different test functions]{%
-    Mean absolute value of surpluses
+    Mean absolute value of surpluses by level sum $\normone{\*l}$
     for different test functions $\objfun$ \emph{(colors)}
     using hierarchical not-a-knot B-splines
     $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
-    regular sparse grids $\regsgset{n}{d}$ of different levels $n$.%
+    the regular sparse grid $\regsgset{n}{d}$ of level $n = 11$.%
   }%
-  \label{fig:TODO}%
+  \label{fig:resultDecaySurpluses}%
 \end{figure}
 
 
