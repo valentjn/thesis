@@ -22,7 +22,9 @@ is minimal.
 relative $\Ltwo$ interpolation error
 $\tfrac{\normLtwo{\objfun - \sgintp}}{\normLtwo{\objfun}}$
 of sparse grid interpolants $\sgintp$ to
-different objective functions $\objfun$.
+different objective functions $\objfun$
+(approximated via Monte-Carlo quadrature using
+$10^4$ uniformly pseudo-random samples).
 The interpolation is performed on regular sparse grids of increasing level
 using hierarchical not-a-knot B-splines $\bspl[\nak]{\*l,\*i}{p}$
 of degree $p = 1, 3, 5$.
