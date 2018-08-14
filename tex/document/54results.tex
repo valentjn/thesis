@@ -1,31 +1,137 @@
 \section{Numerical Results}
 \label{sec:54results}
 
-\blindtext{}
+The following numerical experiments can be roughly divided into two parts.
+First, we study interpolation errors for the various test functions
+to assess the effects of the hierarchical B-spline bases introduced in
+\cref{chap:20sparseGrids,chap:30BSplines} on the interpolation.
+Second, we consider optimization errors, i.e.,
+the optimality gaps $\abs{\objfun(\xopt) - \objfun(\xoptappr)}$
+of the calculated approximations $\xoptappr$
+of the parameter $\xopt$ for which the objective function $\objfun$
+is minimal.
 
 
 
 \subsection{Interpolation Error and Decay of Surpluses}
 \label{sec:541interpolation}
 
-% * different test functions for d=2 (p = 1, 3, 5)
-% * different dimensionalities for sch22 (p = 1, 3, 5)
-% * different grid types for sch22, d=2
-% * NAK effect?
-
-% alp02 instead of sch22 would be better...
-
 \paragraph{Interpolation error for different test functions}
 
-\blindtext{}
+\Cref{fig:resultInterpolationErrorTestFunctions} shows the
+relative $\Ltwo$ interpolation error
+$\tfrac{\normLtwo{\objfun - \sgintp}}{\normLtwo{\objfun}}$
+of sparse grid interpolants $\sgintp$ to
+different objective functions $\objfun$.
+The interpolation is performed on regular sparse grids of increasing level
+using hierarchical not-a-knot B-splines $\bspl[\nak]{\*l,\*i}{p}$
+of degree $p = 1, 3, 5$.
+As a visual aid, the plots include gray lines that indicate different
+orders of convergence.
 
-\paragraph{Interpolation error for different dimensionalities}
+\begin{figure}
+  \includegraphics{resultsInterpolationLegend_1}\\[2mm]%
+  \includegraphics{resultsInterpolation_2}%
+  \hfill%
+  \includegraphics{resultsInterpolation_4}%
+  \\[2mm]%
+  \includegraphics{resultsInterpolation_6}%
+  \hfill%
+  \includegraphics{resultsInterpolation_8}%
+  \caption[Relative interpolation errors for different test functions]{%
+    Relative $\Ltwo$ interpolation error
+    $\normLtwo{\objfun - \sgintp}/\normLtwo{\objfun}$
+    for different test functions $\objfun$ \emph{(colors)}
+    using hierarchical not-a-knot B-splines
+    $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
+    regular sparse grids $\regsgset{n}{d}$ of different levels $n$.%
+  }%
+  \label{fig:resultInterpolationErrorTestFunctions}%
+\end{figure}
 
-\blindtext{}
+It is already known that
+if the objective function is sufficiently smooth
+(i.e., at least as smooth as the employed spline basis),
+the $\Ltwo$ error of spline interpolants of order $p$ on
+$d$-dimensional regular sparse grids of level $n$
+asymptotically behaves like
+$\landauO{\ms{n}^{p+1} (\log_2 \ms{n}^{-1})^{d-1}}
+= \landauO{2^{-(p+1)n} n^{d-1}}$ for $n \to \infty$ \cite{Sickel11Spline}.
+We can numerically verify this fact easily with
+\cref{fig:resultInterpolationErrorTestFunctions},
+in which we obtain the asserted orders of convergence
+for the continuously differentiable bivariate functions that
+are continuously differentiable.
+For the functions Sch06 and Sch22, which have a non-differentiable kink,
+only linear convergence can be achieved regardless of the B-spline degree.
+
+The region, where the asymptotic behavior dominates, largely depends
+on the objective function at hand.
+Functions like Bra02 and Ack with many small oscillations
+require more interpolation points than ``smoother'' functions like
+GoP and Alp02.
+This is also the case for all functions in higher dimensionalities,
+as more interpolation points are necessary to sufficiently explore the domain
+(curse of dimensionality).
+In \cref{fig:resultInterpolationErrorTestFunctions}, this can already be seen
+for $d \ge 3$.
+This is not a consequence of employing higher-order B-splines for
+the hierarchical basis.
+However, it seems that higher-order B-splines lead to a slight increase
+in the interpolation error in the pre-asymptotic range.
 
 \paragraph{Interpolation error for different basis functions}
 
-\blindtext{}
+In \cref{fig:resultInterpolationErrorBasisFunctions},
+we fix the objective function and study the effect of the choice
+of hierarchical basis functions on the interpolation error.
+Shown are eight types of hierarchical B-spline bases as introduced in
+\cref{chap:20sparseGrids,chap:30BSplines} for the three degrees
+$p = 1, 3, 5$.
+Note that some of the lines exactly overlap, which is indicated in
+the figure.
+
+For $p = 1$, the non-modified and modified bases coincide,
+respectively.
+For higher degrees, the modified bases show worse results than
+the corresponding non-modified versions for the same level $n$.
+However, modified bases need significantly less grid points
+(no boundary points),
+which means that a direct comparison based on the sparse grid level $n$
+is somewhat flawed.
+%
+In addition, we see that the not-a-knot bases coincide exactly for $p > 1$,
+as they span the same space for dimensionally adaptive sparse grids.
+Only with the not-a-knot boundary conditions, we obtain the true
+theoretical order of convergence (which is $p + 1$ for degree $p$).
+Otherwise, only quadratic convergence can be achieved regardless of $p$,
+albeit with a smaller constant (offset).
+
+\begin{SCfigure}
+  \begin{minipage}{102mm}%
+    \hspace*{10mm}%
+    \includegraphics{resultsInterpolationLegend_2}\\[2mm]%
+    \includegraphics{resultsInterpolation_10}%
+  \end{minipage}%
+  \caption[Relative interpolation errors for different basis functions]{%
+    Relative $\Ltwo$ interpolation error
+    $\normLtwo{\objfun - \sgintp}/\normLtwo{\objfun}$
+    for the bivariate Alp02 function ($d = 2$)
+    using different hierarchical basis functions
+    $\basis{\*l,\*i}$ \emph{(colors)}
+    of different degree $p$ \emph{(marker styles)} and
+    regular sparse grids $\regsgset{n}{d}$ of different levels $n$.\\
+    The basis functions shown here involve
+    standard \emph{(no superscript)},
+    not-a-knot \emph{(nak)},
+    modified \emph{(mod)},
+    fundamental \emph{(fs)}, and
+    weakly fundamental \emph{(wfs)}
+    splines as well as the combinations
+    introduced in \cref{chap:20sparseGrids,chap:30BSplines}.%
+  }%
+  \label{fig:resultInterpolationErrorBasisFunctions}%
+\end{SCfigure}
 
 \paragraph{Pointwise interpolation error}
 
