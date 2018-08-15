@@ -153,10 +153,10 @@ class SGppTestFunction(SGppScalarFunction):
     if type(f) is str:
       import pysgpp
       testFunctionTypes = {
-        "ackley" :
-          (pysgpp.OptAckleyObjective,            True,   False),
         "absoluteValue" :
           (pysgpp.OptAbsoluteValueObjective,     True,   True),
+        "ackley" :
+          (pysgpp.OptAckleyObjective,            True,   False),
         "alpine02" :
           (pysgpp.OptAlpine02Objective,          True,   False),
         "beale" :
