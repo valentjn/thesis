@@ -2,7 +2,7 @@
  * Example program for using the sgpp::optimization module of SG++.
  * Compile with -std=c++11. Call it as
  *
- * ./main ARG1_NAME=ARG1_VALUE ARG2_NAME=ARG2_VALUE ...
+ * ./optimizeUnconstrained ARG1_NAME=ARG1_VALUE ARG2_NAME=ARG2_VALUE ...
  *
  * The argument order doesn't matter. There are default values for every argument.
  * The possible argument names/values are:
@@ -272,7 +272,7 @@ EvaluatedPoint optimizeObjFcn(sgpp::optimization::IterativeGridGenerator& grid_g
 int main(int argc, const char* argv[]) {
   // INITIALIZATION
 
-  std::cout << "sgpp::optimization main program started.\n\n";
+  std::cout << "optimizeUnconstrained program started.\n\n";
   sgpp::optimization::Printer::getInstance().setVerbosity(2);
 
   // default parameter values
