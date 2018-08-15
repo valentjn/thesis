@@ -272,7 +272,8 @@ EvaluatedPoint optimizeObjFcn(sgpp::optimization::IterativeGridGenerator& grid_g
 int main(int argc, const char* argv[]) {
   // INITIALIZATION
 
-  std::cout << "optimizeUnconstrained program started.\n\n";
+  std::cerr << "optimizeUnconstrained program started.\n\n";
+  sgpp::optimization::Printer::getInstance().setStream(&std::cerr);
   sgpp::optimization::Printer::getInstance().setVerbosity(2);
 
   // default parameter values
@@ -317,27 +318,27 @@ int main(int argc, const char* argv[]) {
   //sgpp::optimization::Printer::getInstance().printVectorToFile("data/displacement.dat", displacement);
 
   // print settings
-  std::cout << "Settings:\n";
-  std::cout << "d = " << d << "\n";
-  std::cout << "problem = " << problem_str << "\n";
-  std::cout << "grid = " << grid_type_str << "\n";
-  std::cout << "gridgen = " << grid_gen_type_str << "\n";
-  std::cout << "alpha = " << alpha << "\n";
-  std::cout << "N = " << N << "\n";
-  std::cout << "bspldeg = " << bspline_degree << "\n";
-  std::cout << "seed = " << std::to_string(seed) << "\n\n";
+  std::cerr << "Settings:\n";
+  std::cerr << "d = " << d << "\n";
+  std::cerr << "problem = " << problem_str << "\n";
+  std::cerr << "grid = " << grid_type_str << "\n";
+  std::cerr << "gridgen = " << grid_gen_type_str << "\n";
+  std::cerr << "alpha = " << alpha << "\n";
+  std::cerr << "N = " << N << "\n";
+  std::cerr << "bspldeg = " << bspline_degree << "\n";
+  std::cerr << "seed = " << std::to_string(seed) << "\n\n";
 
-  sgpp::optimization::operator<<(std::cout << "displacement = ", displacement) << "\n";
-  sgpp::optimization::operator<<(std::cout << "x_opt = ", x_opt) << "\n";
-  std::cout << "f(x_opt) = " << f_x_opt << "\n\n";
+  sgpp::optimization::operator<<(std::cerr << "displacement = ", displacement) << "\n";
+  sgpp::optimization::operator<<(std::cerr << "x_opt = ", x_opt) << "\n";
+  std::cerr << "f(x_opt) = " << f_x_opt << "\n\n";
 
   // GRID GENERATION
 
   printLine();
-  std::cout << "Generating grid...\n\n";
+  std::cerr << "Generating grid...\n\n";
 
   if (!grid_gen->generate()) {
-    std::cout << "Grid generation failed, exiting.\n";
+    std::cerr << "Grid generation failed, exiting.\n";
     return 1;
   }
 
@@ -347,7 +348,7 @@ int main(int argc, const char* argv[]) {
   // HIERARCHISATION
 
   printLine();
-  std::cout << "Hierarchising...\n\n";
+  std::cerr << "Hierarchising...\n\n";
   sgpp::base::DataVector function_values(grid_gen->getFunctionValues());
   sgpp::base::DataVector coeffs;
   sgpp::optimization::HierarchisationSLE hier_system(*grid);
@@ -356,19 +357,19 @@ int main(int argc, const char* argv[]) {
 
   // solve linear system
   if (!sle_solver.solve(hier_system, function_values, coeffs)) {
-    std::cout << "Solving failed, exiting.\n";
+    std::cerr << "Solving failed, exiting.\n";
     return 1;
   }
 
   // hierarchisation of linear interpolant
   printLine();
 
-  std::cout << "Linear Hierarchisation...\n\n";
+  std::cerr << "Linear Hierarchisation...\n\n";
   std::unique_ptr<sgpp::base::Grid> grid_linear;
   std::unique_ptr<sgpp::optimization::InterpolantScalarFunction> ft_linear;
 
   if (!getLinearInterpolant(grid_type, d, *grid_gen, grid_linear, ft_linear)) {
-    std::cout << "Couldn't determine linear interpolant, exiting\n";
+    std::cerr << "Couldn't determine linear interpolant, exiting\n";
     return 1;
   }
 
@@ -376,7 +377,7 @@ int main(int argc, const char* argv[]) {
 
   printLine();
 
-  std::cout << "Optimizing...\n\n";
+  std::cerr << "Optimizing...\n\n";
   sgpp::optimization::InterpolantScalarFunction ft(*grid, coeffs);
   sgpp::optimization::InterpolantScalarFunctionGradient ft_gradient(*grid, coeffs);
   sgpp::optimization::InterpolantScalarFunctionHessian ft_hessian(*grid, coeffs);
@@ -422,14 +423,14 @@ int main(int argc, const char* argv[]) {
   // PRINTING RESULTS
 
   printLine();
-  std::cout << "Results overview (seed = " << seed << "):\n\n";
+  std::cerr << "Results overview (seed = " << seed << "):\n\n";
   printShortLine();
 
   std::vector<int> colw = {20, 13, 13, 13};
-  std::cout << std::setw(colw[0]) << std::left << "OPTIMIZED FUNCTION";
-  std::cout << std::setw(colw[1]) << std::right << "f(x)";
-  std::cout << std::setw(colw[2]) << std::right << "ft(x)";
-  std::cout << std::setw(colw[3]) << std::right << "DURATION" << "\n";
+  std::cerr << std::setw(colw[0]) << std::left << "OPTIMIZED FUNCTION";
+  std::cerr << std::setw(colw[1]) << std::right << "f(x)";
+  std::cerr << std::setw(colw[2]) << std::right << "ft(x)";
+  std::cerr << std::setw(colw[3]) << std::right << "DURATION" << "\n";
   printShortLine();
 
   for (size_t i = 0; i < optimizer_str.size(); i++) {
@@ -438,29 +439,29 @@ int main(int argc, const char* argv[]) {
       continue;
     }
 
-    std::cout << std::setw(colw[0]) << std::left << optimizer_str[i];
-    std::cout << std::setw(colw[1]) << std::right << optimizer_x_opt[i].f_x;
-    std::cout << std::setw(colw[2]) << std::right << optimizer_x_opt[i].ft_x;
+    std::cerr << std::setw(colw[0]) << std::left << optimizer_str[i];
+    std::cerr << std::setw(colw[1]) << std::right << optimizer_x_opt[i].f_x;
+    std::cerr << std::setw(colw[2]) << std::right << optimizer_x_opt[i].ft_x;
 
     if (optimizer_times[i] > 0.0) {
-      std::cout << std::setw(colw[3]-2) << std::right
+      std::cerr << std::setw(colw[3]-2) << std::right
                 << static_cast<int>(1000.0 * optimizer_times[i]) << "ms";
     } else {
-      std::cout << std::setw(colw[3]) << std::right << "";
+      std::cerr << std::setw(colw[3]) << std::right << "";
     }
 
-    std::cout << "\n";
+    std::cerr << "\n";
   }
 
   printShortLine();
-  std::cout << "\n";
+  std::cerr << "\n";
 
   // SMOOTH INTERPOLANT EVALUATION FOR d = 2
 
   // TODO
   if (d == 2) {
     printLine();
-    std::cout << "Evaluating...\n\n";
+    std::cerr << "Evaluating...\n\n";
 
     size_t NN = 2*123;
     std::vector<double> x(NN);
@@ -522,18 +523,18 @@ int main(int argc, const char* argv[]) {
   // TERMINATION
 
   printLine();
-  std::cout << "\nsgpp::opt main program terminated.\n";
+  std::cerr << "\nsgpp::opt main program terminated.\n";
 
   return 0;
 }
 
 void printLine() {
-  std::cout << "----------------------------------------"
+  std::cerr << "----------------------------------------"
             << "----------------------------------------\n";
 }
 
 void printShortLine() {
-  std::cout << "-----------------------------------------------------------\n";
+  std::cerr << "-----------------------------------------------------------\n";
 }
 
 void parseArgs(int argc, const char* argv[],
@@ -823,9 +824,9 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::UnconstrainedTes
       x_opt_min = {x_opt, f_x_opt, ft_x_opt};
     }
 
-    std::cout << "Result with " << optimizer_str[i] << ": ";
-    sgpp::optimization::operator<<(std::cout << "x_opt = ", x_opt) << "\n";
-    std::cout << "f(x_opt) = " << f_x_opt << ", ft(x_opt) = " << ft_x_opt << "\n\n";
+    std::cerr << "Result with " << optimizer_str[i] << ": ";
+    sgpp::optimization::operator<<(std::cerr << "x_opt = ", x_opt) << "\n";
+    std::cerr << "f(x_opt) = " << f_x_opt << ", ft(x_opt) = " << ft_x_opt << "\n\n";
   }
 
   return x_opt_min;
