@@ -452,74 +452,26 @@ int main(int argc, const char* argv[]) {
   printShortLine();
   std::cerr << "\n";
 
-  // SMOOTH INTERPOLANT EVALUATION FOR d = 2
+  // WRITE RESULTS TO STDOUT
 
-  // TODO
-  if (d == 2) {
-    printLine();
-    std::cerr << "Evaluating...\n\n";
-
-    size_t NN = 2*123;
-    std::vector<double> x(NN);
-    std::vector<double> y(NN);
-    std::vector<double> z(NN*NN);
-
-    for (size_t i = 0; i < NN; i++) {
-      x[i] = static_cast<double>(i) / (static_cast<double>(NN) - 1.0);
-      y[i] = x[i];
-    }
-
-    #pragma omp parallel shared(x, y, z, coeffs, NN, grid) default(none)
-    {
-      std::unique_ptr<sgpp::base::OperationEval> op_eval(
-        sgpp::op_factory::createOperationEvalNaive(*grid));
-      sgpp::base::DataVector point(2, 0.0);
-
-      #pragma omp for schedule(dynamic)
-      for (size_t i = 0; i < NN; i++) {
-        point[1] = y[i];
-
-        for (size_t j = 0; j < NN; j++) {
-          point[0] = x[j];
-
-          z[i*NN + j] = op_eval->eval(coeffs, point);
-        }
-      }
-    }
-
-    // TODO
-    //sgpp::optimization::Printer::getInstance().printVectorToFile("data/x.dat", x);
-    //sgpp::optimization::Printer::getInstance().printVectorToFile("data/y.dat", y);
-    //sgpp::optimization::Printer::getInstance().printMatrixToFile("data/z.dat", z, NN, NN);
-  }
-
-  // WRITE RESULTS TO FILE
-
-  // TODO
-  /*std::vector<std::vector<double> > optimizer_x_opt_x(
-    optimizer_x_opt.size(), std::vector<double>());
-  std::vector<double> optimizer_f_x_opt(optimizer_x_opt.size(), 0.0);
-  std::vector<double> optimizer_ft_x_opt(optimizer_x_opt.size(), 0.0);
+  std::cout << std::scientific << std::setprecision(16);
+  std::cout << "{\n";
 
   for (size_t i = 0; i < optimizer_x_opt.size(); i++) {
-    optimizer_x_opt_x[i] = optimizer_x_opt[i].x;
-    optimizer_f_x_opt[i] = optimizer_x_opt[i].f_x;
-    optimizer_ft_x_opt[i] = optimizer_x_opt[i].ft_x;
+    std::cout << "  \"" << optimizer_str[i] << "\" : {\n";
+    std::cout << "    \"xOpt\" : " << optimizer_x_opt[i].x << ",\n";
+    std::cout << "    \"fxOpt\" : " << optimizer_x_opt[i].f_x << ",\n";
+    std::cout << "    \"fsxOpt\" : " << optimizer_x_opt[i].ft_x << ",\n";
+    std::cout << "    \"runtime\" : " << optimizer_times[i] << "\n";
+    std::cout << "  }" << ((i < optimizer_x_opt.size() - 1) ? "," : "") << "\n";
   }
 
-  sgpp::optimization::Printer::getInstance().printVectorToFile("data/optimizer_str.dat", optimizer_str);
-  sgpp::optimization::Printer::getInstance().printMatrixToFile("data/optimizer_x_opt.dat", optimizer_x_opt_x);
-  sgpp::optimization::Printer::getInstance().printVectorToFile("data/optimizer_f_x_opt.dat", optimizer_f_x_opt);
-  sgpp::optimization::Printer::getInstance().printVectorToFile("data/optimizer_ft_x_opt.dat", optimizer_ft_x_opt);
-  sgpp::optimization::Printer::getInstance().printVectorToFile("data/optimizer_times.dat", optimizer_times);
-
-  std::vector<double> format_version = {3.0};
-  sgpp::optimization::Printer::getInstance().printVectorToFile("data/format_version.dat", format_version);*/
+  std::cout << "}\n";
 
   // TERMINATION
 
   printLine();
-  std::cerr << "\nsgpp::opt main program terminated.\n";
+  std::cerr << "\noptimizeUnconstrained program terminated.\n";
 
   return 0;
 }
