@@ -13,7 +13,7 @@
  *          eggHolder, goldsteinPrice, griewank, hartman3, hartman6, himmelblau,
  *          hoelderTable, increasingPower, michalewicz, mladineo, perm, rastrigin, rosenbrock,
  *          schwefel06, schwefel22, schwefel26, shcb, sphere, tremblingParabola)
- * grid     type of the grid (one of noboundary, boundary, modified)    modified
+ * grid     type of the grid (one of bSpline, notAKnotBSpline, modifiedBSpline, modifiedNotAKnotBSpline, fundamentalSpline, fundamentalNotAKnotSpline, weaklyFundamentalSpline, weaklyFundamentalNotAKnotSpline)    modifiedNotAKnotBSpline
  * gridGen type of the iterative grid generator (linearSurplus or ritterNovak)         ritterNovak
  * alpha    adaptivity of the grid generation                                           0.85
  * N        maximal number of grid points                                               1000
@@ -45,9 +45,14 @@
 
 /// type of the sparse grid
 enum GridType {
-  Noboundary,
-  TrapezoidBoundary,
-  Modified,
+  BSpline,
+  NotAKnotBSpline,
+  ModifiedBSpline,
+  ModifiedNotAKnotBSpline,
+  FundamentalSpline,
+  FundamentalNotAKnotSpline,
+  WeaklyFundamentalSpline,
+  WeaklyFundamentalNotAKnotSpline,
 };
 
 /// type of the iterative grid generation
@@ -277,8 +282,8 @@ int main(int argc, const char* argv[]) {
   std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>
   problem(new sgpp::optimization::test_problems::Branin01());
   std::string problem_str = "branin01";
-  GridType grid_type = GridType::Modified;
-  std::string grid_type_str = "modified";
+  GridType grid_type = GridType::ModifiedNotAKnotBSpline;
+  std::string grid_type_str = "modifiedNotAKnotBSpline";
   double alpha = 0.85;
   size_t N = 1000;
   GridGeneratorType grid_gen_type = GridGeneratorType::RitterNovak;
@@ -519,12 +524,22 @@ void parseArgs(int argc, const char* argv[],
     } else if (arg.find("grid=") == 0) {
       arg = arg.substr(5, std::string::npos);
 
-      if (arg == "noboundary") {
-        grid_type = GridType::Noboundary;
-      } else if (arg == "boundary") {
-        grid_type = GridType::TrapezoidBoundary;
-      } else if (arg == "modified") {
-        grid_type = GridType::Modified;
+      if (arg == "bSpline") {
+        grid_type = GridType::BSpline;
+      } else if (arg == "notAKnotBSpline") {
+        grid_type = GridType::NotAKnotBSpline;
+      } else if (arg == "modifiedBSpline") {
+        grid_type = GridType::ModifiedBSpline;
+      } else if (arg == "modifiedNotAKnotBSpline") {
+        grid_type = GridType::ModifiedNotAKnotBSpline;
+      } else if (arg == "fundamentalSpline") {
+        grid_type = GridType::FundamentalSpline;
+      } else if (arg == "fundamentalNotAKnotSpline") {
+        grid_type = GridType::FundamentalNotAKnotSpline;
+      } else if (arg == "weaklyFundamentalSpline") {
+        grid_type = GridType::WeaklyFundamentalSpline;
+      } else if (arg == "weaklyFundamentalNotAKnotSpline") {
+        grid_type = GridType::WeaklyFundamentalNotAKnotSpline;
       } else {
         continue;
       }
@@ -664,17 +679,41 @@ std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
                                         size_t d, size_t p) {
   std::unique_ptr<sgpp::base::Grid> grid;
 
-  if (grid_type == GridType::Noboundary) {
-    grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::BsplineGrid(d, p));
-  } else if (grid_type == GridType::TrapezoidBoundary) {
-    grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::BsplineBoundaryGrid(d, p));
-  } else if (grid_type == GridType::Modified) {
-    grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::ModBsplineGrid(d, p));
-  } else {
-    throw std::invalid_argument("Grid type not supported.");
+  switch (grid_type) {
+    case GridType::BSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::BsplineBoundaryGrid(d, p));
+      break;
+    case GridType::NotAKnotBSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::NotAKnotBsplineBoundaryGrid(d, p));
+      break;
+    case GridType::ModifiedBSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::ModBsplineGrid(d, p));
+      break;
+    case GridType::ModifiedNotAKnotBSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::ModNotAKnotBsplineGrid(d, p));
+      break;
+    case GridType::FundamentalSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::FundamentalSplineBoundaryGrid(d, p));
+      break;
+    case GridType::FundamentalNotAKnotSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::FundamentalNotAKnotSplineBoundaryGrid(d, p));
+      break;
+    case GridType::WeaklyFundamentalSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::LagrangeSplineBoundaryGrid(d, p));
+      break;
+    case GridType::WeaklyFundamentalNotAKnotSpline:
+      grid = std::unique_ptr<sgpp::base::Grid>(
+                new sgpp::base::LagrangeNotAKnotSplineBoundaryGrid(d, p));
+      break;
+    default:
+      throw std::invalid_argument("Grid type not supported.");
   }
 
   return grid;
@@ -710,17 +749,23 @@ bool getLinearInterpolant(GridType grid_type, size_t d,
   sgpp::base::DataVector function_values(grid_gen.getFunctionValues());
 
   // generate linear grid
-  if (grid_type == GridType::Noboundary) {
-    grid_linear = std::unique_ptr<sgpp::base::Grid>(
-                    new sgpp::base::LinearGrid(d));
-  } else if (grid_type == GridType::TrapezoidBoundary) {
-    grid_linear = std::unique_ptr<sgpp::base::Grid>(
-                    new sgpp::base::LinearBoundaryGrid(d));
-  } else if (grid_type == GridType::Modified) {
-    grid_linear = std::unique_ptr<sgpp::base::Grid>(
-                    new sgpp::base::ModLinearGrid(d));
-  } else {
-    throw std::invalid_argument("Grid type not supported.");
+  switch (grid_type) {
+    case GridType::BSpline:
+    case GridType::NotAKnotBSpline:
+    case GridType::FundamentalSpline:
+    case GridType::FundamentalNotAKnotSpline:
+    case GridType::WeaklyFundamentalSpline:
+    case GridType::WeaklyFundamentalNotAKnotSpline:
+      grid_linear = std::unique_ptr<sgpp::base::Grid>(
+                      new sgpp::base::LinearBoundaryGrid(d));
+      break;
+    case GridType::ModifiedBSpline:
+    case GridType::ModifiedNotAKnotBSpline:
+      grid_linear = std::unique_ptr<sgpp::base::Grid>(
+                      new sgpp::base::ModLinearGrid(d));
+      break;
+    default:
+      throw std::invalid_argument("Grid type not supported.");
   }
 
   // insert all grid points
