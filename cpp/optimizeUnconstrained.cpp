@@ -39,10 +39,6 @@
 #include <sgpp_base.hpp>
 #include <sgpp_optimization.hpp>
 
-/*#include <sgpp/base/grid/type/LinearGrid.hpp>
-#include <sgpp/base/grid/type/LinearTrapezoidBoundaryGrid.hpp>
-#include <sgpp/base/grid/type/ModLinearGrid.hpp>*/
-
 /* ****************************************************************************
  * ENUMERATIONS                                                               *
  **************************************************************************** */
