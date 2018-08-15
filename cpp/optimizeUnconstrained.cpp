@@ -9,10 +9,10 @@
  *
  * NAME     VALUE                                                                       DEFAULT
  * d        number of dimensions                                                        2
- * f        objective function (one of ackley, beale, branin01, easomyang,        branin01
- *          eggholder, goldstein-price, griewank, hartman3, hartman6, himmelblau,
- *          hoeldertable, michalewicz, mladineo, rastrigin, rosenbrock,
- *          schaeffler, shcb, schwefel26, sphere)
+ * f        objective function (one of absoluteValue, ackley, alpine02, beale, branin01, branin02, bubbleWrap, easomYang,        branin01
+ *          eggHolder, goldsteinPrice, griewank, hartman3, hartman6, himmelblau,
+ *          hoelderTable, increasingPower, michalewicz, mladineo, perm, rastrigin, rosenbrock,
+ *          schwefel06, schwefel22, schwefel26, shcb, sphere, tremblingParabola)
  * grid     type of the grid (one of noboundary, boundary, modified)    modified
  * grid_gen type of the iterative grid generator (linearsurplus or ritternovak)         ritternovak
  * alpha    adaptivity of the grid generation                                           0.85
@@ -494,10 +494,10 @@ void parseArgs(int argc, const char* argv[],
                size_t& bspline_degree,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed) {
   std::vector<std::string> test_problem_strs = {
-    "ackley", "beale", "branin01", "dcmotor2", "easomyang", "eggholder", "goldstein-price",
-    "griewank", "hartman3", "hartman6", "himmelblau", "hoeldertable",
-    "michalewicz", "mladineo", "rastrigin", "rosenbrock", "schaeffler",
-    "shcb", "schwefel26", "sphere",
+    "absoluteValue", "ackley", "alpine02", "beale", "branin01", "branin02", "bubbleWrap", "easomYang", "eggHolder", "goldsteinPrice",
+    "griewank", "hartman3", "hartman6", "himmelblau", "hoelderTable", "increasingPower",
+    "michalewicz", "mladineo", "perm", "rastrigin", "rosenbrock",
+    "schwefel06", "schwefel22", "schwefel26", "shcb", "sphere", "tremblingParabola",
   };
 
   for (size_t i = 1; i < static_cast<size_t>(argc); i++) {
@@ -563,9 +563,15 @@ void parseArgs(int argc, const char* argv[],
   }
 
   // create test function object, overriding d for some functions with fixed dimension
-  if (problem_str == "ackley") {
+  if (problem_str == "absoluteValue") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::AbsoluteValue(d));
+  } else if (problem_str == "ackley") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Ackley(d));
+  } else if (problem_str == "alpine02") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Alpine02(d));
   } else if (problem_str == "beale") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Beale());
@@ -574,14 +580,21 @@ void parseArgs(int argc, const char* argv[],
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Branin01());
     d = 2;
-  } else if (problem_str == "easomyang") {
+  } else if (problem_str == "branin02") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Branin02());
+    d = 2;
+  } else if (problem_str == "bubbleWrap") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::BubbleWrap(d));
+  } else if (problem_str == "easomYang") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::EasomYang(d));
-  } else if (problem_str == "eggholder") {
+  } else if (problem_str == "eggHolder") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Eggholder());
     d = 2;
-  } else if (problem_str == "goldstein-price") {
+  } else if (problem_str == "goldsteinPrice") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::GoldsteinPrice());
     d = 2;
@@ -600,10 +613,13 @@ void parseArgs(int argc, const char* argv[],
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Himmelblau());
     d = 2;
-  } else if (problem_str == "hoeldertable") {
+  } else if (problem_str == "hoelderTable") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::HoelderTable());
     d = 2;
+  } else if (problem_str == "increasingPower") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::IncreasingPower(d));
   } else if (problem_str == "michalewicz") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Michalewicz());
@@ -612,22 +628,35 @@ void parseArgs(int argc, const char* argv[],
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Mladineo());
     d = 2;
+  } else if (problem_str == "perm") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Perm(d));
   } else if (problem_str == "rastrigin") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Rastrigin(d));
   } else if (problem_str == "rosenbrock") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Rosenbrock(d));
+  } else if (problem_str == "schwefel06") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Schwefel06());
+    d = 2;
+  } else if (problem_str == "schwefel22") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Schwefel22(d));
+  } else if (problem_str == "schwefel26") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::Schwefel26(d));
   } else if (problem_str == "shcb") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::SHCB());
     d = 2;
-  } else if (problem_str == "schwefel26") {
-    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
-          new sgpp::optimization::test_problems::Schwefel26(d));
   } else if (problem_str == "sphere") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
           new sgpp::optimization::test_problems::Sphere(d));
+  } else if (problem_str == "tremblingParabola") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::UnconstrainedTestProblem>(
+          new sgpp::optimization::test_problems::TremblingParabola(d, 3));
   }
 }
 
