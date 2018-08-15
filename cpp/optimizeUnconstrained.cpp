@@ -14,10 +14,10 @@
  *          hoelderTable, increasingPower, michalewicz, mladineo, perm, rastrigin, rosenbrock,
  *          schwefel06, schwefel22, schwefel26, shcb, sphere, tremblingParabola)
  * grid     type of the grid (one of noboundary, boundary, modified)    modified
- * grid_gen type of the iterative grid generator (linearsurplus or ritternovak)         ritternovak
+ * gridGen type of the iterative grid generator (linearSurplus or ritterNovak)         ritterNovak
  * alpha    adaptivity of the grid generation                                           0.85
  * N        maximal number of grid points                                               1000
- * bspldeg  B-spline degree                                                             3
+ * p        B-spline degree                                                             3
  * seed     unsigned integer RNG seed used for generating all necessary                 0
  *          random numbers, zero seed means "use a time-dependent one"
  *
@@ -123,7 +123,7 @@ void printShortLine();
  * @param[out]  grid_gen_type_str   name of grid_gen_type as string
  * @param[out]  alpha               adaptivity \f$\alpha \in [0, 1]\f$
  * @param[out]  N                   maximal number of grid points
- * @param[out]  bspline_degree      B-spline degree
+ * @param[out]  p                   B-spline degree
  * @param[out]  seed                seed for the random number generator
  */
 void parseArgs(int argc,
@@ -137,7 +137,7 @@ void parseArgs(int argc,
                std::string& grid_gen_type_str,
                double& alpha,
                size_t& N,
-               size_t& bspline_degree,
+               size_t& p,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed);
 
 /**
@@ -146,12 +146,12 @@ void parseArgs(int argc,
  *
  * @param grid_type         type of the sparse grid
  * @param d                 number of dimensions
- * @param bspline_degree    B-spline degree
+ * @param p                 B-spline degree
  * @return                  pointer to grid
  */
 std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
                                         size_t d,
-                                        size_t bspline_degree);
+                                        size_t p);
 
 /**
  * Create an iterative grid generator for the specified grid.
@@ -282,17 +282,17 @@ int main(int argc, const char* argv[]) {
   double alpha = 0.85;
   size_t N = 1000;
   GridGeneratorType grid_gen_type = GridGeneratorType::RitterNovak;
-  std::string grid_gen_type_str = "ritternovak";
-  size_t bspline_degree = 3;
+  std::string grid_gen_type_str = "ritterNovak";
+  size_t p = 3;
   sgpp::optimization::RandomNumberGenerator::SeedType seed = 0;
 
   // parse program arguments
   parseArgs(argc, argv, d, problem, problem_str, grid_type, grid_type_str, grid_gen_type, grid_gen_type_str,
-            alpha, N, bspline_degree, seed);
+            alpha, N, p, seed);
 
   // create grid and iterative grid generator
   std::unique_ptr<sgpp::base::Grid> grid =
-    getGrid(grid_type, d, bspline_degree);
+    getGrid(grid_type, d, p);
   std::unique_ptr<sgpp::optimization::IterativeGridGenerator> grid_gen =
     getGridGenerator(grid_gen_type, *problem, *grid, N, alpha);
 
@@ -318,10 +318,10 @@ int main(int argc, const char* argv[]) {
   std::cerr << "d = " << d << "\n";
   std::cerr << "problem = " << problem_str << "\n";
   std::cerr << "grid = " << grid_type_str << "\n";
-  std::cerr << "gridgen = " << grid_gen_type_str << "\n";
+  std::cerr << "gridGen = " << grid_gen_type_str << "\n";
   std::cerr << "alpha = " << alpha << "\n";
   std::cerr << "N = " << N << "\n";
-  std::cerr << "bspldeg = " << bspline_degree << "\n";
+  std::cerr << "p = " << p << "\n";
   std::cerr << "seed = " << std::to_string(seed) << "\n\n";
 
   sgpp::optimization::operator<<(std::cerr << "displacement = ", displacement) << "\n";
@@ -491,7 +491,7 @@ void parseArgs(int argc, const char* argv[],
                GridType& grid_type, std::string& grid_type_str,
                GridGeneratorType& grid_gen_type, std::string& grid_gen_type_str,
                double& alpha, size_t& N,
-               size_t& bspline_degree,
+               size_t& p,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed) {
   std::vector<std::string> test_problem_strs = {
     "absoluteValue", "ackley", "alpine02", "beale", "branin01", "branin02", "bubbleWrap", "easomYang", "eggHolder", "goldsteinPrice",
@@ -531,12 +531,12 @@ void parseArgs(int argc, const char* argv[],
 
       grid_type_str = arg;
       // type of the iterative grid generator
-    } else if (arg.find("gridgen=") == 0) {
+    } else if (arg.find("gridGen=") == 0) {
       arg = arg.substr(8, std::string::npos);
 
-      if (arg == "linearsurplus") {
+      if (arg == "linearSurplus") {
         grid_gen_type = GridGeneratorType::LinearSurplus;
-      } else if (arg == "ritternovak") {
+      } else if (arg == "ritterNovak") {
         grid_gen_type = GridGeneratorType::RitterNovak;
       } else {
         continue;
@@ -552,9 +552,9 @@ void parseArgs(int argc, const char* argv[],
       arg = arg.substr(2, std::string::npos);
       N = std::stoi(arg);
       // B-spline degree
-    } else if (arg.find("bspldeg=") == 0) {
+    } else if (arg.find("p=") == 0) {
       arg = arg.substr(8, std::string::npos);
-      bspline_degree = std::stoi(arg);
+      p = std::stoi(arg);
       // RNG seed
     } else if (arg.find("seed=") == 0) {
       arg = arg.substr(5, std::string::npos);
@@ -661,18 +661,18 @@ void parseArgs(int argc, const char* argv[],
 }
 
 std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
-                                        size_t d, size_t bspline_degree) {
+                                        size_t d, size_t p) {
   std::unique_ptr<sgpp::base::Grid> grid;
 
   if (grid_type == GridType::Noboundary) {
     grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::BsplineGrid(d, bspline_degree));
+              new sgpp::base::BsplineGrid(d, p));
   } else if (grid_type == GridType::TrapezoidBoundary) {
     grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::BsplineBoundaryGrid(d, bspline_degree));
+              new sgpp::base::BsplineBoundaryGrid(d, p));
   } else if (grid_type == GridType::Modified) {
     grid = std::unique_ptr<sgpp::base::Grid>(
-              new sgpp::base::ModBsplineGrid(d, bspline_degree));
+              new sgpp::base::ModBsplineGrid(d, p));
   } else {
     throw std::invalid_argument("Grid type not supported.");
   }
