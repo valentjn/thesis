@@ -520,6 +520,8 @@ void parseArgs(int argc, const char* argv[],
       if (std::find(test_problem_strs.begin(), test_problem_strs.end(), arg)
           != test_problem_strs.end()) {
         problem_str = arg;
+      } else {
+        throw std::invalid_argument("Invalid objective function.");
       }
       // type of the sparse grid
     } else if (arg.find("grid=") == 0) {
