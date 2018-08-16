@@ -197,6 +197,12 @@ def transform(ax, offset, scale, plot):
     transformation.translate(*offset)
     plot.set_transform(transformation + ax.transData)
 
+def transformUnitCoordinates(ax, x, y):
+  return ax.transData.inverted().transform(ax.transAxes.transform([x, y]))
+
+def getTransformationFromUnitCoordinates(ax):
+  return (lambda x, y: transformUnitCoordinates(ax, x, y))
+
 
 
 def computeZOrderValue(ax, X):
