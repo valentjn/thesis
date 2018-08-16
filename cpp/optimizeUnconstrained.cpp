@@ -15,7 +15,7 @@
  *          schwefel06, schwefel22, schwefel26, shcb, sphere, tremblingParabola)
  * grid     type of the grid (one of bSpline, notAKnotBSpline, modifiedBSpline, modifiedNotAKnotBSpline, fundamentalSpline, fundamentalNotAKnotSpline, weaklyFundamentalSpline, weaklyFundamentalNotAKnotSpline)    modifiedNotAKnotBSpline
  * gridGen type of the iterative grid generator (linearSurplus or ritterNovak)         ritterNovak
- * alpha    adaptivity of the grid generation                                           0.85
+ * gamma    adaptivity of the grid generation                                           0.85
  * N        maximal number of grid points                                               1000
  * p        B-spline degree                                                             3
  * seed     unsigned integer RNG seed used for generating all necessary                 0
@@ -126,7 +126,7 @@ void printShortLine();
  * @param[out]  grid_type_str       name of grid_type as string
  * @param[out]  grid_gen_type       type of the iterative grid generation
  * @param[out]  grid_gen_type_str   name of grid_gen_type as string
- * @param[out]  alpha               adaptivity \f$\alpha \in [0, 1]\f$
+ * @param[out]  gamma               adaptivity \f$\gamma \in [0, 1]\f$
  * @param[out]  N                   maximal number of grid points
  * @param[out]  p                   B-spline degree
  * @param[out]  seed                seed for the random number generator
@@ -140,7 +140,7 @@ void parseArgs(int argc,
                std::string& grid_type_str,
                GridGeneratorType& grid_gen_type,
                std::string& grid_gen_type_str,
-               double& alpha,
+               double& gamma,
                size_t& N,
                size_t& p,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed);
@@ -166,14 +166,14 @@ std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
  * @param problem           test problem
  * @param grid              sparse grid
  * @param N                 maximal number of grid points
- * @param alpha             adaptivity \f$\alpha \in [0, 1]\f$
+ * @param gamma             adaptivity \f$\gamma \in [0, 1]\f$
  */
 std::unique_ptr<sgpp::optimization::IterativeGridGenerator> getGridGenerator(
   GridGeneratorType grid_gen_type,
   sgpp::optimization::test_problems::UnconstrainedTestProblem& problem,
   sgpp::base::Grid& grid,
   size_t N,
-  double alpha);
+  double gamma);
 
 /**
  * Create a grid with piecewise linear basis functions together with a linear interpolant
@@ -284,7 +284,7 @@ int main(int argc, const char* argv[]) {
   std::string problem_str = "branin01";
   GridType grid_type = GridType::ModifiedNotAKnotBSpline;
   std::string grid_type_str = "modifiedNotAKnotBSpline";
-  double alpha = 0.85;
+  double gamma = 0.85;
   size_t N = 1000;
   GridGeneratorType grid_gen_type = GridGeneratorType::RitterNovak;
   std::string grid_gen_type_str = "ritterNovak";
@@ -293,13 +293,13 @@ int main(int argc, const char* argv[]) {
 
   // parse program arguments
   parseArgs(argc, argv, d, problem, problem_str, grid_type, grid_type_str, grid_gen_type, grid_gen_type_str,
-            alpha, N, p, seed);
+            gamma, N, p, seed);
 
   // create grid and iterative grid generator
   std::unique_ptr<sgpp::base::Grid> grid =
     getGrid(grid_type, d, p);
   std::unique_ptr<sgpp::optimization::IterativeGridGenerator> grid_gen =
-    getGridGenerator(grid_gen_type, *problem, *grid, N, alpha);
+    getGridGenerator(grid_gen_type, *problem, *grid, N, gamma);
 
   if (seed == 0) {
     // set time-dependent seed
@@ -324,7 +324,7 @@ int main(int argc, const char* argv[]) {
   std::cerr << "problem = " << problem_str << "\n";
   std::cerr << "grid = " << grid_type_str << "\n";
   std::cerr << "gridGen = " << grid_gen_type_str << "\n";
-  std::cerr << "alpha = " << alpha << "\n";
+  std::cerr << "gamma = " << gamma << "\n";
   std::cerr << "N = " << N << "\n";
   std::cerr << "p = " << p << "\n";
   std::cerr << "seed = " << std::to_string(seed) << "\n\n";
@@ -496,7 +496,7 @@ void parseArgs(int argc, const char* argv[],
                std::string& problem_str,
                GridType& grid_type, std::string& grid_type_str,
                GridGeneratorType& grid_gen_type, std::string& grid_gen_type_str,
-               double& alpha, size_t& N,
+               double& gamma, size_t& N,
                size_t& p,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed) {
   std::vector<std::string> test_problem_strs = {
@@ -562,9 +562,9 @@ void parseArgs(int argc, const char* argv[],
 
       grid_gen_type_str = arg;
       // adaptivity
-    } else if (arg.find("alpha=") == 0) {
+    } else if (arg.find("gamma=") == 0) {
       arg = arg.substr(6, std::string::npos);
-      alpha = std::stod(arg);
+      gamma = std::stod(arg);
       // maximal number of grid points
     } else if (arg.find("N=") == 0) {
       arg = arg.substr(2, std::string::npos);
@@ -727,16 +727,16 @@ std::unique_ptr<sgpp::optimization::IterativeGridGenerator> getGridGenerator(
   sgpp::optimization::test_problems::UnconstrainedTestProblem& problem,
   sgpp::base::Grid& grid,
   size_t N,
-  double alpha) {
+  double gamma) {
   sgpp::optimization::test_problems::TestScalarFunction& f = problem.getObjectiveFunction();
   std::unique_ptr<sgpp::optimization::IterativeGridGenerator> grid_gen;
 
   if (grid_gen_type == GridGeneratorType::LinearSurplus) {
     grid_gen = std::unique_ptr<sgpp::optimization::IterativeGridGenerator>(
-                 new sgpp::optimization::IterativeGridGeneratorLinearSurplus(f, grid, N, alpha));
+                 new sgpp::optimization::IterativeGridGeneratorLinearSurplus(f, grid, N, gamma));
   } else if (grid_gen_type == GridGeneratorType::RitterNovak) {
     grid_gen = std::unique_ptr<sgpp::optimization::IterativeGridGenerator>(
-                 new sgpp::optimization::IterativeGridGeneratorRitterNovak(f, grid, N, alpha));
+                 new sgpp::optimization::IterativeGridGeneratorRitterNovak(f, grid, N, gamma));
   } else {
     throw std::invalid_argument("Grid generator type not supported.");
   }
