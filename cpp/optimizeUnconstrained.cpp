@@ -868,34 +868,44 @@ EvaluatedPoint optimizeSmoothIntp(
   std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
   // try out all gradient-based methods starting in x0
-  {
-    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::GradientDescent(ft, ft_gradient)),
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::NLCG(ft, ft_gradient)),
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::Newton(ft, ft_hessian))
-    };
-    x_opt_candidates.push_back(tryOptimizers(problem, ft,
-    {"Gradient method 1", "NLCG 1", "Newton 1"},
-    optimizers, x0));
-  }
+  std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers1[] = {
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::GradientDescent(ft, ft_gradient)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::NLCG(ft, ft_gradient)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::Newton(ft, ft_hessian)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::BFGS(ft, ft_gradient)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::Rprop(ft, ft_gradient)),
+  };
+  x_opt_candidates.push_back(tryOptimizers(problem, ft,
+  {"Gradient descent", "NLCG", "Newton", "BFGS", "Rprop"},
+  optimizers1, x0));
 
   // try out all gradient-free methods
-  {
-    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::NelderMead(ft)),
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::MultiStart(ft, 5000)),
-      std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-        new sgpp::optimization::optimizer::DifferentialEvolution(ft, 5000))
-    };
-    x_opt_candidates.push_back(tryOptimizers(problem, ft,
-    {"Nelder-Mead", "Random-Search (NM)", "Diff. Evolution"},
-    optimizers, EvaluatedPoint::invalid));
-  }
+  std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers2[] = {
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::NelderMead(ft)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::DifferentialEvolution(ft, 5000)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::CMAES(ft, 5000)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::MultiStart(*optimizers1[0])),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::MultiStart(*optimizers1[1])),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::MultiStart(*optimizers1[2])),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::MultiStart(*optimizers1[3])),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::MultiStart(*optimizers1[4])),
+  };
+  x_opt_candidates.push_back(tryOptimizers(problem, ft,
+  {"Nelder-Mead", "Diff. Evolution", "CMA-ES", "Gradient descent (glob.)", "NLCG (glob.)", "Newton (glob.)", "BFGS (glob.)", "Rprop (glob.)"},
+  optimizers2, EvaluatedPoint::invalid));
 
   // best point so far
   EvaluatedPoint x_opt_min = x_opt_candidates[0];
@@ -907,7 +917,7 @@ EvaluatedPoint optimizeSmoothIntp(
   }
 
   // try out all gradient-based methods starting in x_opt_min
-  {
+  /*{
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
       std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
         new sgpp::optimization::optimizer::GradientDescent(ft, ft_gradient)),
@@ -919,7 +929,7 @@ EvaluatedPoint optimizeSmoothIntp(
     x_opt_candidates.push_back(
       tryOptimizers(problem, ft, {"Gradient method 2", "NLCG 2", "Newton 2"},
                     optimizers, x_opt_min));
-  }
+  }*/
 
   // determine best point
   for (size_t i = 0; i < x_opt_candidates.size(); i++) {
@@ -948,12 +958,16 @@ EvaluatedPoint optimizeLinearIntp(
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
       new sgpp::optimization::optimizer::DifferentialEvolution(ft_linear, 5000))
   };
-  x_opt_min = tryOptimizers(f, ft, {"NM on linintp", "RS (NM) on linintp", "DE on linintp"},
+  x_opt_min = tryOptimizers(problem, ft, {"NM on linintp", "RS (NM) on linintp", "DE on linintp"},
                             optimizers, x0);*/
 
   std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(ft_linear, 5000))
+      new sgpp::optimization::optimizer::NelderMead(ft_linear)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::DifferentialEvolution(ft_linear, 5000)),
+    std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
+      new sgpp::optimization::optimizer::CMAES(ft_linear, 5000)),
   };
   x_opt_min = tryOptimizers(problem, ft, {"DE on linintp"},
                             optimizers, x0);
@@ -974,33 +988,33 @@ EvaluatedPoint optimizeObjFcn(
   EvaluatedPoint x_opt_min;
 
   // optimize objective function (split N up evenly for all three optimizers)
-  /*std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
+  std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
       new sgpp::optimization::optimizer::NelderMead(f,
     static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0))),
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-      new sgpp::optimization::optimizer::RandomSearch(f,
+      new sgpp::optimization::optimizer::DifferentialEvolution(f,
     static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0))),
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(f,
+      new sgpp::optimization::optimizer::CMAES(f,
     static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0)))
   };
-  x_opt_min = tryOptimizers(f, ft, {"NM on objfcn", "RS (NM) on objfcn", "DE on objfcn"},
-                            optimizers, EvaluatedPoint::invalid);*/
+  x_opt_min = tryOptimizers(problem, ft, {"NM on objfcn", "DE on objfcn", "CMA-ES on objfcn"},
+                            optimizers, EvaluatedPoint::invalid);
 
   /*std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
       new sgpp::optimization::optimizer::NelderMead(f, N))
   };
-  x_opt_min = tryOptimizers(f, ft, {"NM on objfcn"},
+  x_opt_min = tryOptimizers(problem, ft, {"NM on objfcn"},
                             optimizers, EvaluatedPoint::invalid);*/
 
-  std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
+  /*std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::UnconstrainedOptimizer>(
       new sgpp::optimization::optimizer::DifferentialEvolution(f, N))
   };
   x_opt_min = tryOptimizers(problem, ft, {"DE on objfcn"},
-                            optimizers, EvaluatedPoint::invalid);
+                            optimizers, EvaluatedPoint::invalid);*/
 
   return x_opt_min;
 }
