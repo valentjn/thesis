@@ -132,7 +132,7 @@ if __name__ == "__main__":
     try:
       print("")
       print("Compiling thesis...")
-      run(["scons", "-j", str(os.cpu_count()), "all"], cwd=repoPath)
+      run(["scons", "-j", str(os.cpu_count()), "pdf"], cwd=repoPath)
       outDir = os.path.join(repoPath, "out")
       thesisPDFPath = os.path.join(outDir, "thesisManuscriptScreen.pdf")
       
