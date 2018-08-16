@@ -464,7 +464,8 @@ int main(int argc, const char* argv[]) {
 
   for (size_t i = 0; i < optimizer_x_opt.size(); i++) {
     std::cout << "  \"" << optimizer_str[i] << "\" : {\n";
-    std::cout << "    \"xOpt\" : " << optimizer_x_opt[i].x << ",\n";
+    sgpp::optimization::operator<<(std::cout << "    \"xOpt\" : ",
+                                   optimizer_x_opt[i].x) << ",\n";
     std::cout << "    \"fxOpt\" : " << optimizer_x_opt[i].f_x << ",\n";
     std::cout << "    \"fsxOpt\" : " << optimizer_x_opt[i].ft_x << ",\n";
     std::cout << "    \"runtime\" : " << optimizer_times[i] << "\n";
