@@ -186,6 +186,7 @@ def startRemotelyServer(url, port, key):
             "$REAL_HOME/git/thesis/build/cpp/sgpp/lib/sgpp:"
             "$LD_LIBRARY_PATH"
           "\" "
+          "BUILD_DIR=\"$REAL_HOME/git/thesis/build/gfx\" "
           "REMOTELY_KEY=\"{}\" "
           "nice -n 19 python3 -c '"
             "import pysgpp; import multiprocessing; "
