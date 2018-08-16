@@ -198,7 +198,9 @@ Second, we apply the gradient-free methods
 We cannot use the gradient-based methods here as the gradient of the
 objective function is assumed to be unknown.
 For both of the comparison methods,
-we make sure that the objective function is evaluated at most $\ngpMax$ times.
+we make sure that the objective function is evaluated at most $\ngpMax$ times
+by splitting the $\ngpMax$ evaluations
+evenly among all employed optimization methods.
 
 \paragraph{Constrained optimization}
 
