@@ -171,6 +171,9 @@ def checkRemotelyConnection(url, port, key):
   finally:
     socket.setdefaulttimeout(previousTimeout)
 
+def isRemotelyConnected(url=DEFAULT_REMOTELY_URL):
+  return remotelyServerCache[url]["isConnected"]
+
 def startRemotelyServer(url, port, key):
   cmd =  ("PYTHONPATH=\""
             "$REAL_HOME/git/thesis/py:"
