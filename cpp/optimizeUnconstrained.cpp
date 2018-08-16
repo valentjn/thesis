@@ -571,7 +571,7 @@ void parseArgs(int argc, const char* argv[],
       N = std::stoi(arg);
       // B-spline degree
     } else if (arg.find("p=") == 0) {
-      arg = arg.substr(8, std::string::npos);
+      arg = arg.substr(2, std::string::npos);
       p = std::stoi(arg);
       // RNG seed
     } else if (arg.find("seed=") == 0) {
