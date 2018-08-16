@@ -303,12 +303,11 @@ def generatePlot(q):
   }
   
   for ax in [ax1, ax2]:
-    trafo = (lambda x: ax.transData.inverted().transform(
-        ax.transAxes.transform(x)))
-    if q < 4: ax.text(*trafo([0.05, 0.05]), "$d = {}$".format(d))
+    trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
+    if q < 4: ax.text(*trafo(0.05, 0.05), "$d = {}$".format(d))
     x = (1.03 if ax == ax1 else (1 if q in [0, 1, 4] else 0.92))
     text = (r"$\normone{l}$" if ax == ax1 else "$n$")
-    ax.text(*trafo([x, -0.03]), text, ha="right", va="top")
+    ax.text(*trafo(x, -0.03), text, ha="right", va="top")
   
   fig1.save(graphicsNumber=2*q+1)
   fig2.save(graphicsNumber=2*q+2)
