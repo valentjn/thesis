@@ -98,7 +98,7 @@ class Full(object):
     return RegularSparse(l1D, 1).generate()
   
   def generate(self):
-    X1Ds, L1Ds, I1Ds = [], [], []
+    X1Ds, L1Ds, I1Ds = np.array([]), np.array([]), np.array([])
     
     for l1D in self.l:
       X1D, L1D, I1D = self.generate1D(l1D)
@@ -256,7 +256,7 @@ class DimensionallyAdaptiveSparse(object):
                      for k in range(self.L.shape[0])])
       I = np.vstack(I)
     else:
-      L = []
+      L = np.array([])
     
     X = getCoordinates(L, I)
     return X, L, I
