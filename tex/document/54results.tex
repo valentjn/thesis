@@ -248,7 +248,76 @@ in the pre-asymptotic range.
 
 \paragraph{Unconstrained optimization}
 
+With the method described in \cref{sec:52method},
+we want to find an approximation $\xoptappr$ of the
+global minimum $\xopt$ of some objective function $\objfun$
+using optimization of a B-spline surrogate $\sgintp$ of $\objfun$
+on sparse grids.
+Obviously, the more accurate the sparse grid surrogate is,
+the better the approximation $\xoptappr$ will be.
+In \cref{fig:resultsOptimizationUnconstrainedTestFunctions},
+we plot the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
+in terms of function value.%
+\footnote{%
+  Note in order to calculate the optimality gap,
+  it is crucial to determine $\objfun(\xopt)$ as exact as possible.
+  Otherwise, the optimality gap might either not converge to zero
+  or it might even become negative.%
+}
+The results are highly sensitive to even small displacements
+of the objective function, i.e.,
+the results may change drastically for the
+function $\*x \mapsto \objfun(\*x - \*a)$
+instead of $\*x \mapsto \objfun(\*x)$ for $\*x \in \clint{\*0, \*1}$
+and some small $\*a \in \real^d$.%
+\footnote{%
+  By using the formulas in \cref{sec:a20testProblems},
+  all test functions $\objfun$ in \cref{sec:53testProblems}
+  can be extended such that they can be evaluated at $\*x - \*a$
+  for all $\*x \in \clint{\*0, \*1}$, if $\*a \in \real^d$ is small enough.%
+}
+Therefore, the optimization processes for each of the
+data points \cref{fig:resultsOptimizationUnconstrainedTestFunctions}
+were repeated five times with replacements $\*a$
+whose entries $a_t$ were independent and identically distributed Gaussian
+pseudo-random with zero mean and a standard deviation of $0.01$.
+The optimality gaps shown in
+\cref{fig:resultsOptimizationUnconstrainedTestFunctions} are calculated
+as the mean of the five runs to increase confidence in the results.
+
+\Cref{fig:resultsOptimizationUnconstrainedTestFunctions}
+shows the optimality gaps for different test functions and dimensionalities.
+
 \blindtext{}
+
+\begin{figure}
+  \includegraphics{resultsOptimizationLegend_1}\\[2mm]%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \hfill%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \\[2mm]%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \hfill%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \\[2mm]%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \hfill%
+  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \caption[Optimality gaps for different objective functions]{%
+    Optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$ between
+    the function value at the approximated optimum $\xoptappr$ and
+    the minimal function value at the actual optimum $\xopt$
+    over the number $\ngpMax$ of objective function evaluations
+    for different objective functions $\objfun$ \emph{(colors)}.
+    Shown are the optimization results of the B-spline surrogate
+    \emph{(solid lines)},
+    the optimization results of the piecewise linear surrogate
+    \emph{(dashed)}, and
+    the optimization results of the actual objective function
+    \emph{(dotted)} as described in \cref{sec:52method}.%
+  }%
+  \label{fig:resultsOptimizationUnconstrainedTestFunctions}%
+\end{figure}
 
 \paragraph{Constrained optimization}
 
