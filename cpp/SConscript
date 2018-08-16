@@ -20,8 +20,9 @@ def buildSGpp(sgppModules):
   
   for module in sgppModules:
     moduleSourceDirs = [
-      os.path.join(sgppDir.abspath, module, "src"),
       os.path.join(sgppDir.abspath, module, "build", "pysgpp"),
+      os.path.join(sgppDir.abspath, module, "src"),
+      os.path.join(sgppDir.abspath, module, "tests"),
     ]
     
     for moduleSourceDir in moduleSourceDirs:
