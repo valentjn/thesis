@@ -180,9 +180,17 @@ def addCustomLegend(ax, elements, *args, transpose=True,
     kwargs["loc"] = "{} {}".format(newLocY, newLocX)
     kwargs["bbox_to_anchor"] = point
   
-  labels = [x["label"] for x in elements]
-  for x in elements: del x["label"]
-  handles = [mpl.lines.Line2D([0], [0], **x) for x in elements]
+  labels, handles = [], []
+  
+  for x in elements:
+    if x is not None:
+      labels.append(x["label"])
+      del x["label"]
+      handles.append(mpl.lines.Line2D([0], [0], **x))
+    else:
+      labels.append("")
+      handles.append(mpl.lines.Line2D([0], [0], linestyle=""))
+  
   ax.legend(handles, labels, *args, **kwargs)
 
 
