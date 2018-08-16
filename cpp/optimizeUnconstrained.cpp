@@ -384,7 +384,7 @@ int main(int argc, const char* argv[]) {
   sgpp::optimization::InterpolantScalarFunctionHessian ft_hessian(*grid, coeffs);
 
   std::vector<std::string> optimizer_str =
-  {"Smooth Interpolant", "Linear Interpolant", "Objective Function", "Real Optimum"};
+  {"smoothInterpolant", "linearInterpolant", "objectiveFunction", "realOptimum"};
   std::vector<EvaluatedPoint> optimizer_x_opt;
   std::vector<double> optimizer_times;
 
