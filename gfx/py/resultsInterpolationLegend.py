@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 1
+# number of output figures = 2
 
 from helper.figure import Figure
 import helper.plot
@@ -25,7 +25,7 @@ helper.plot.addCustomLegend(ax, (
   } for r in range(len(functionNames))] +
   [{
     "label"  : "$p = {}$".format(p),
-    "marker" : {1 : ".", 3 : "^", 5 : "v"}[p],
+    "marker" : markerStyles[p],
     "ms"     : (4.5 if p == 1 else 2.5),
     "ls"     : lineStyles[p],
     "color"  : "k",
@@ -68,7 +68,7 @@ helper.plot.addCustomLegend(ax, (
   } for r in range(len(basisNames))] +
   [{
     "label"  : "$p = {}$".format(p),
-    "marker" : {1 : ".", 3 : "^", 5 : "v"}[p],
+    "marker" : markerStyles[p],
     "ms"     : (4.5 if p == 1 else 2.5),
     "ls"     : lineStyles[p],
     "color"  : "k",
