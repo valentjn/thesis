@@ -177,8 +177,9 @@ of the global minimum $\xopt$ of $\objfun$ as follows:
 Note that the third step requires a fixed number of additional
 evaluations of the objective function,
 which can be neglected compared to $\ngpMax$.
-By default, we use the hierarchical not-a-knot B-spline basis for
-the construction of the sparse grid surrogate.
+By default, we use the cubic hierarchical modified not-a-knot B-spline basis
+$\bspl[\mod,\nak]{\*l,\*i}{p}$ ($p = 3$)
+for the construction of the sparse grid surrogate.
 However, we could apply any of the hierarchical (B-)spline bases presented in
 \cref{chap:30BSplines,chap:40algorithms}.
 
