@@ -83,11 +83,11 @@ def main():
   
   
   
+  j = 0
+  
   for fs in fss:
     fig = Figure.create(figsize=(3.1, 2.5))
     ax = fig.gca()
-    
-    j = 0
     
     for fStr, d, color in fs:
       values = []
