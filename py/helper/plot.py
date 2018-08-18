@@ -104,7 +104,7 @@ def plotConvergenceLine(ax, x, y, order, tx=None, ty=None, **kwargs):
   ax.plot([x1, x2], [y1, y2], "-", color=color, zorder=-1000)
   if tx is not None:
     kwargs = {"clip_on" : False, "color" : color, **kwargs}
-    ax.text(tx, ty, "${}$".format(order), **kwargs)
+    ax.text(tx, ty, "${}$".format(np.abs(order)), **kwargs)
 
 
 
