@@ -226,7 +226,7 @@ def generatePlot(q):
     yl = [1e-5, 5e0]
     yt = [1e-5, 1e-4, 1e-3, 1e-2, 1e-1, 1e0]
   elif q == 3:
-    yl = [5e-3, 5e0]
+    yl = [4e-3, 5e0]
     yt = [1e-2, 1e-1, 1e0]
   else:
     yl = [1e-8, 5e0]
