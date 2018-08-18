@@ -228,6 +228,20 @@ EvaluatedPoint getFeasiblePoint(
     sgpp::optimization::VectorFunctionGradient* h_gradient);
 
 /**
+ * Determine if a point x is numerically feasible or not.
+ *
+ * @param g             inequality constraint function
+ * @param g_x           inequality constraint value in x
+ * @param h             equality constraint function
+ * @param h_x           equality constraint value in x
+ * @return true iff the point is feasible within some tolerance
+ */
+bool isPointFeasible(sgpp::optimization::VectorFunction& g,
+                     const sgpp::base::DataVector& g_x,
+                     sgpp::optimization::VectorFunction& h,
+                     const sgpp::base::DataVector& h_x);
+
+/**
  * Try out all optimizers in a list.
  *
  * @param problem       test problem
@@ -888,6 +902,30 @@ EvaluatedPoint getFeasiblePoint(
   return {x0, f_x0, ft_x0, g_x0, h_x0};
 }
 
+bool isPointFeasible(sgpp::optimization::VectorFunction& g,
+                     const sgpp::base::DataVector& g_x,
+                     sgpp::optimization::VectorFunction& h,
+                     const sgpp::base::DataVector& h_x) {
+  const double tol_g = 1e-2;
+  const double tol_h = 1e-2;
+  const size_t m_g = g.getNumberOfComponents();
+  const size_t m_h = h.getNumberOfComponents();
+
+  for (size_t j_g = 0; j_g < m_g; j_g++) {
+    if (g_x[j_g] > tol_g) {
+      return false;
+    }
+  }
+
+  for (size_t j_h = 0; j_h < m_h; j_h++) {
+    if (std::abs(h_x[j_h]) > tol_h) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
                              sgpp::optimization::InterpolantScalarFunction& ft,
                              std::vector<std::string> optimizer_str,
@@ -903,6 +941,7 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestP
   sgpp::base::DataVector h_x_opt(m_h);
   // best result of all optimizers
   EvaluatedPoint x_opt_min = {{}, INFINITY, INFINITY, {}, {}};
+  bool x_opt_min_feasible = false;
 
   if (x0.isValid()) {
     // optimal point should be no worse than the starting point (if supplied)
@@ -922,9 +961,13 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestP
     g.eval(x_opt, g_x_opt);
     h.eval(x_opt, h_x_opt);
 
-    if (f_x_opt < x_opt_min.f_x) {
-      // should be executed for i == 0 (because x_opt_min.f_x == INFINITY)
+    bool x_opt_feasible = isPointFeasible(g, g_x_opt, h, h_x_opt);
+
+    if ((x_opt_min.f_x == INFINITY) ||
+        (x_opt_feasible && (!x_opt_min_feasible ||
+                            (f_x_opt < x_opt_min.f_x)))) {
       x_opt_min = {x_opt, f_x_opt, ft_x_opt, g_x_opt, h_x_opt};
+      x_opt_min_feasible = x_opt_feasible;
     }
 
     std::cerr << "Result with " << optimizer_str[i] << ": ";
