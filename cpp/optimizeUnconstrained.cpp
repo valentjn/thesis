@@ -315,8 +315,6 @@ int main(int argc, const char* argv[]) {
   problem->generateDisplacement();
   displacement = problem->getDisplacement();
   double f_x_opt = problem->getOptimalPoint(x_opt);
-  // TODO
-  //sgpp::optimization::Printer::getInstance().printVectorToFile("data/displacement.dat", displacement);
 
   // print settings
   std::cerr << "Settings:\n";
@@ -365,7 +363,7 @@ int main(int argc, const char* argv[]) {
   // hierarchisation of linear interpolant
   printLine();
 
-  std::cerr << "Linear Hierarchisation...\n\n";
+  std::cerr << "Linear hierarchisation...\n\n";
   std::unique_ptr<sgpp::base::Grid> grid_linear;
   std::unique_ptr<sgpp::optimization::InterpolantScalarFunction> ft_linear;
 
