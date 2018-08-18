@@ -85,7 +85,7 @@ def main():
   
   j = 0
   
-  for fs in fss:
+  for q, fs in enumerate(fss):
     fig = Figure.create(figsize=(3.1, 2.5))
     ax = fig.gca()
     
@@ -116,7 +116,18 @@ def main():
     ax.set_xscale("log")
     ax.set_yscale("log")
     
-    ax.set_ylim(5e-12, 1e1)
+    if q == 0:
+      ax.set_ylim(5e-12, 1e1)
+    elif q == 1:
+      ax.set_ylim(5e-12, 1e1)
+    elif q == 2:
+      ax.set_ylim(1e-11, 2e1)
+    elif q == 3:
+      ax.set_ylim(1e-8, 1e2)
+    elif q == 4:
+      ax.set_ylim(1e-4, 1e3)
+    elif q == 5:
+      ax.set_ylim(1e-3, 1e4)
     
     ax.set_ylabel(r"$\objfun(\xoptappr) - \objfun(\xopt)$")
     
