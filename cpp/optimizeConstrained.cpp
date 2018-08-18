@@ -698,7 +698,118 @@ void createConstraintGradients(sgpp::optimization::test_problems::ConstrainedTes
   const size_t m_g = problem.getInequalityConstraintFunction().getNumberOfComponents();
   const size_t m_h =  problem.getEqualityConstraintFunction().getNumberOfComponents();
 
-  if (problem_str == "g08") {
+  if (problem_str == "g04") {
+    g_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
+      d, m_g, [&displacement](const sgpp::base::DataVector& x,
+                 sgpp::base::DataVector& value,
+                 sgpp::base::DataMatrix& gradient) {
+        const double x1 = 24.0 * (x[0] + displacement[0]) + 78.0;
+        const double x2 = 12.0 * (x[1] + displacement[1]) + 33.0;
+        const double x3 = 18.0 * (x[2] + displacement[2]) + 27.0;
+        const double x4 = 18.0 * (x[3] + displacement[3]) + 27.0;
+        const double x5 = 18.0 * (x[4] + displacement[4]) + 27.0;
+
+        value[0] = 85.334407 + 0.0056858 * x2 * x5 +
+                   0.0006262 * x1 * x4 - 0.0022053 * x3 * x5 - 92.0;
+        value[1] = -85.334407 - 0.0056858 * x2 * x5 +
+                   -0.0006262 * x1 * x4 + 0.0022053 * x3 * x5;
+        value[2] = 80.51249 + 0.0071317 * x2 * x5 +
+                   0.0029955 * x1 * x2 + 0.0021813 * x3 * x3 - 110.0;
+        value[3] = -80.51249 - 0.0071317 * x2 * x5 +
+                   -0.0029955 * x1 * x2 - 0.0021813 * x3 * x3 + 90.0;
+        value[4] = 9.300961 + 0.0047026 * x3 * x5 +
+                   0.0012547 * x1 * x3 + 0.0019085 * x3 * x4 - 25.0;
+        value[5] = -9.300961 - 0.0047026 * x3 * x5 +
+                   -0.0012547 * x1 * x3 - 0.0019085 * x3 * x4 + 20.0;
+        gradient(0, 0) = 24.0 * (0.0006262 * x4);
+        gradient(0, 1) = 12.0 * (0.0056858 * x5);
+        gradient(0, 2) = 18.0 * (-0.0022053 * x5);
+        gradient(0, 3) = 18.0 * (0.0006262 * x1);
+        gradient(0, 4) = 18.0 * (0.0056858 * x2 - 0.0022053 * x3);
+        gradient(1, 0) = 24.0 * (-0.0006262 * x4);
+        gradient(1, 1) = 12.0 * (-0.0056858 * x5);
+        gradient(1, 2) = 18.0 * (0.0022053 * x5);
+        gradient(1, 3) = 18.0 * (-0.0006262 * x1);
+        gradient(1, 4) = 18.0 * (-0.0056858 * x2 + 0.0022053 * x3);
+        gradient(2, 0) = 24.0 * (0.0029955 * x2);
+        gradient(2, 1) = 12.0 * (0.0071317 * x5 + 0.0029955 * x1);
+        gradient(2, 2) = 18.0 * (2.0 * 0.0021813 * x3);
+        gradient(2, 3) = 18.0 * (0.0);
+        gradient(2, 4) = 18.0 * (0.0071317 * x2);
+        gradient(3, 0) = 24.0 * (-0.0029955 * x2);
+        gradient(3, 1) = 12.0 * (-0.0071317 * x5 - 0.0029955 * x1);
+        gradient(3, 2) = 18.0 * (-2.0 * 0.0021813 * x3);
+        gradient(3, 3) = 18.0 * (0.0);
+        gradient(3, 4) = 18.0 * (-0.0071317 * x2);
+        gradient(4, 0) = 24.0 * (0.0012547 * x3);
+        gradient(4, 1) = 12.0 * (0.0);
+        gradient(4, 2) = 18.0 * (0.0047026 * x5 + 0.0012547 * x1 +
+                                 0.0019085 * x4);
+        gradient(4, 3) = 18.0 * (0.0019085 * x3);
+        gradient(4, 4) = 18.0 * (0.0047026 * x3);
+        gradient(5, 0) = 24.0 * (-0.0012547 * x3);
+        gradient(5, 1) = 12.0 * (0.0);
+        gradient(5, 2) = 18.0 * (-0.0047026 * x5 - 0.0012547 * x1 -
+                                 0.0019085 * x4);
+        gradient(5, 3) = 18.0 * (-0.0019085 * x3);
+        gradient(5, 4) = 18.0 * (-0.0047026 * x3);
+      }
+    ));
+    sgpp::optimization::EmptyVectorFunctionGradient::getInstance().clone(h_gradient);
+  } else if (problem_str == "g05") {
+    g_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
+      d, m_g, [&displacement](const sgpp::base::DataVector& x,
+                 sgpp::base::DataVector& value,
+                 sgpp::base::DataMatrix& gradient) {
+        // const double x1 = 1200.0 * (x[0] + displacement[0]);
+        // const double x2 = 1200.0 * (x[1] + displacement[1]);
+        const double x3 = 1.1 * (x[2] + displacement[2]) - 0.55;
+        const double x4 = 1.1 * (x[3] + displacement[3]) - 0.55;
+
+        value[0] = -x4 + x3 - 0.55;
+        value[1] = -x3 + x4 - 0.55;
+        gradient(0, 0) = 1200.0 * (0.0);
+        gradient(0, 1) = 1200.0 * (0.0);
+        gradient(0, 2) = 1.1 * (1.0);
+        gradient(0, 3) = 1.1 * (-1.0);
+        gradient(1, 0) = 1200.0 * (0.0);
+        gradient(1, 1) = 1200.0 * (0.0);
+        gradient(1, 2) = 1.1 * (-1.0);
+        gradient(1, 3) = 1.1 * (1.0);
+      }
+    ));
+    h_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
+      d, m_h, [&displacement](const sgpp::base::DataVector& x,
+                 sgpp::base::DataVector& value,
+                 sgpp::base::DataMatrix& gradient) {
+        const double x1 = 1200.0 * (x[0] + displacement[0]);
+        const double x2 = 1200.0 * (x[1] + displacement[1]);
+        const double x3 = 1.1 * (x[2] + displacement[2]) - 0.55;
+        const double x4 = 1.1 * (x[3] + displacement[3]) - 0.55;
+
+        value[0] = 1000.0 * std::sin(-x3 - 0.25) +
+            1000.0 * std::sin(-x4 - 0.25) + 894.8 - x1;
+        value[1] = 1000.0 * std::sin(x3 - 0.25) +
+            1000.0 * std::sin(x3 - x4 - 0.25) + 894.8 - x2;
+        value[2] = 1000.0 * std::sin(x4 - 0.25) +
+            1000.0 * std::sin(x4 - x3 - 0.25) + 1294.8;
+        gradient(0, 0) = 1200.0 * (-1.0);
+        gradient(0, 1) = 1200.0 * (0.0);
+        gradient(0, 2) = 1.1 * (-1000.0 * std::cos(-x3 - 0.25));
+        gradient(0, 3) = 1.1 * (-1000.0 * std::cos(-x4 - 0.25));
+        gradient(1, 0) = 1200.0 * (0.0);
+        gradient(1, 1) = 1200.0 * (-1.0);
+        gradient(1, 2) = 1.1 * (1000.0 * std::cos(x3 - 0.25) +
+                                1000.0 * std::cos(x3 - x4 - 0.25));
+        gradient(1, 3) = 1.1 * (-1000.0 * std::cos(x3 - x4 - 0.25));
+        gradient(2, 0) = 1200.0 * (0.0);
+        gradient(2, 1) = 1200.0 * (0.0);
+        gradient(2, 2) = 1.1 * (-1000.0 * std::cos(x4 - x3 - 0.25));
+        gradient(2, 3) = 1.1 * (1000.0 * std::cos(x4 - 0.25) +
+                                1000.0 * std::cos(x4 - x3 - 0.25));
+      }
+    ));
+  } else if (problem_str == "g08") {
     g_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
       d, m_g, [&displacement](const sgpp::base::DataVector& x,
                  sgpp::base::DataVector& value,
