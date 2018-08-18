@@ -106,7 +106,8 @@ def main():
         values.append(curValues)
       
       x = Ns
-      ys = list(zip(*values))
+      ys = np.array(list(zip(*values)))
+      ys[ys < 1e-16] = 1e-16
       
       for y, lineStyle in zip(ys, lineStyles):
         markerSize = (4.5 if lineStyle[0] == "." else 2.5)
