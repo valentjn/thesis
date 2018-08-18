@@ -20,7 +20,7 @@ functionNames = ["Bra02", "GoP", "Sch06", "Ack", "Alp02", "Sch22"]
 lines = [{
     "label"  : r"\rlap{{{}}}".format(lineNames[r]),
     "marker" : markerStyles[r],
-    "ms"     : (4.5 if r == 0 else 2.5),
+    "ms"     : (6 if r == 0 else 3),
     "ls"     : lineStyles[r],
     "color"  : "k",
   } for r in range(len(lineNames))]

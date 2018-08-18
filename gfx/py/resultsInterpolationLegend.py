@@ -26,7 +26,7 @@ helper.plot.addCustomLegend(ax, (
   [{
     "label"  : "$p = {}$".format(p),
     "marker" : markerStyles[p],
-    "ms"     : (4.5 if p == 1 else 2.5),
+    "ms"     : (6 if p == 1 else 3),
     "ls"     : lineStyles[p],
     "color"  : "k",
   } for p in ps]
@@ -69,7 +69,7 @@ helper.plot.addCustomLegend(ax, (
   [{
     "label"  : "$p = {}$".format(p),
     "marker" : markerStyles[p],
-    "ms"     : (4.5 if p == 1 else 2.5),
+    "ms"     : (6 if p == 1 else 3),
     "ls"     : lineStyles[p],
     "color"  : "k",
   } for p in ps]

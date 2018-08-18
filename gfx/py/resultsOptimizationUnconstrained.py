@@ -110,7 +110,7 @@ def main():
       ys[ys < 1e-16] = 1e-16
       
       for y, lineStyle in zip(ys, lineStyles):
-        markerSize = (4.5 if lineStyle[0] == "." else 2.5)
+        markerSize = (6 if lineStyle[0] == "." else 3)
         ax.plot(x, y, lineStyle, color=color, ms=markerSize)
     
     ax.set_xscale("log")

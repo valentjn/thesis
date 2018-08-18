@@ -79,7 +79,7 @@ def plotOverlapMarkers(ax, x, y, lineStyles):
   
   for lineStyle in lineStyles:
     lineStyle2 = dict(lineStyle)
-    lineStyle2["ms"] = (4.5 if lineStyle["ls"][0] == "." else 2.5)
+    lineStyle2["ms"] = (6 if lineStyle["ls"][0] == "." else 3)
     lineStyle2["ls"] = lineStyle["ls"][1:]
     ax.plot([x - margins[0], x + margins[0]], [y, y], clip_on=False,
             **lineStyle2)
@@ -145,7 +145,7 @@ def generatePlot(q):
     for r, (fStr, d) in enumerate(functionTypes):
       currentColor = (color if color is not None else
                       "C{}".format(r+(3 if q > 0 else 0)))
-      markerSize = (4.5 if ls[0] == "." else 2.5)
+      markerSize = (6 if ls[0] == "." else 3)
       
       stats = getSurplusStats(gridStr, fStr, nMax, NMax, d, b, p)
       x = sorted(list(stats.keys()))
