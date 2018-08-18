@@ -143,6 +143,19 @@ void parseArgs(int argc,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed);
 
 /**
+ * Create exact gradients for constraint functions.
+ * 
+ * @param[in] problem       test problem
+ * @param[in] problem_str   name of problem as string
+ * @param[out] g_gradient   pointer to inequality constraint gradient function
+ * @param[out] h_gradient   pointer to equality constraint gradient function
+ */
+void createConstraintGradients(sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
+                               const std::string& problem_str,
+                               std::unique_ptr<sgpp::optimization::VectorFunctionGradient>& g_gradient,
+                               std::unique_ptr<sgpp::optimization::VectorFunctionGradient>& h_gradient);
+
+/**
  * Create a grid for the specified basis functions.
  * Delete after use.
  *
@@ -225,6 +238,8 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestP
  * @param ft            smooth interpolant
  * @param ft_gradient   gradient of smooth interpolant
  * @param ft_hessian    gradient and Hessian of smooth interpolant
+ * @param g_gradient    gradient of inequality constraint function
+ * @param h_gradient    gradient of equality constraint function
  * @return              optimal point found (together with the objective function value and
  *                      the value of the smooth interpolant)
  */
@@ -232,7 +247,9 @@ EvaluatedPoint optimizeSmoothIntp(sgpp::optimization::IterativeGridGenerator& gr
                                   sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
                                   sgpp::optimization::InterpolantScalarFunction& ft,
                                   sgpp::optimization::InterpolantScalarFunctionGradient& ft_gradient,
-                                  sgpp::optimization::InterpolantScalarFunctionHessian& ft_hessian);
+                                  sgpp::optimization::InterpolantScalarFunctionHessian& ft_hessian,
+                                  sgpp::optimization::VectorFunctionGradient& g_gradient,
+                                  sgpp::optimization::VectorFunctionGradient& h_gradient);
 
 /**
  * Optimize the piecewise linear interpolant.
@@ -241,6 +258,8 @@ EvaluatedPoint optimizeSmoothIntp(sgpp::optimization::IterativeGridGenerator& gr
  * @param problem       test problem
  * @param ft            smooth interpolant (used for evaluation in the returned point)
  * @param ft_linear     piecewise linear interpolant
+ * @param g_gradient    gradient of inequality constraint function
+ * @param h_gradient    gradient of equality constraint function
  * @return              optimal point found (together with the objective function value and
  *                      the value of the smooth interpolant)
  */
@@ -256,6 +275,8 @@ EvaluatedPoint optimizeLinearIntp(sgpp::optimization::IterativeGridGenerator& gr
  *                      function evaluations)
  * @param problem       test problem
  * @param ft            smooth interpolant (used for evaluation in the returned point)
+ * @param g_gradient    gradient of inequality constraint function
+ * @param h_gradient    gradient of equality constraint function
  * @return              optimal point found (together with the objective function value and
  *                      the value of the smooth interpolant)
  */
@@ -312,8 +333,11 @@ int main(int argc, const char* argv[]) {
   problem->generateDisplacement();
   displacement = problem->getDisplacement();
   double f_x_opt = problem->getOptimalPoint(x_opt);
-  // TODO
-  //sgpp::optimization::Printer::getInstance().printVectorToFile("data/displacement.dat", displacement);
+
+  // create gradients of constraint functions
+  std::unique_ptr<sgpp::optimization::VectorFunctionGradient> g_gradient;
+  std::unique_ptr<sgpp::optimization::VectorFunctionGradient> h_gradient;
+  createConstraintGradients(*problem, problem_str, g_gradient, h_gradient);
 
   // print settings
   std::cerr << "Settings:\n";
@@ -339,9 +363,6 @@ int main(int argc, const char* argv[]) {
     std::cerr << "Grid generation failed, exiting.\n";
     return 1;
   }
-
-  // TODO
-  //sgpp::optimization::Printer::getInstance().printGridToFile("data/grid.dat", *grid_gen);
 
   // HIERARCHISATION
 
@@ -394,7 +415,7 @@ int main(int argc, const char* argv[]) {
     case 0:
       // optimization of smooth interpolant
       optimizer_x_opt.push_back(
-        optimizeSmoothIntp(*grid_gen, *problem, ft, ft_gradient, ft_hessian));
+        optimizeSmoothIntp(*grid_gen, *problem, ft, ft_gradient, ft_hessian, *g_gradient, *h_gradient));
       break;
     case 1:
       // optimization of linear interpolant
@@ -630,6 +651,69 @@ void parseArgs(int argc, const char* argv[],
   }
 }
 
+void createConstraintGradients(sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
+                               const std::string& problem_str,
+                               std::unique_ptr<sgpp::optimization::VectorFunctionGradient>& g_gradient,
+                               std::unique_ptr<sgpp::optimization::VectorFunctionGradient>& h_gradient) {
+  const sgpp::base::DataVector& displacement(problem.getDisplacement());
+  const size_t d = displacement.getSize();
+  const size_t m_g = problem.getInequalityConstraintFunction().getNumberOfComponents();
+  const size_t m_h =  problem.getEqualityConstraintFunction().getNumberOfComponents();
+
+  if (problem_str == "g08") {
+    g_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
+      d, m_g, [&displacement](const sgpp::base::DataVector& x,
+                 sgpp::base::DataVector& value,
+                 sgpp::base::DataMatrix& gradient) {
+        const double x1 = 2.0 * (x[0] + displacement[0]) + 0.5;
+        const double x2 = 3.0 * (x[1] + displacement[1]) + 3.0;
+
+        value[0] = x1 * x1 - x2 + 1.0;
+        value[1] = 1.0 - x1 + std::pow(x2 - 4.0, 2.0);
+        gradient(0, 0) = 4.0 * x1;
+        gradient(0, 1) = -3.0;
+        gradient(1, 0) = -2.0;
+        gradient(1, 1) = 6.0 * (x2 - 4.0);
+      }
+    ));
+    sgpp::optimization::EmptyVectorFunctionGradient::getInstance().clone(h_gradient);
+  } else if (problem_str == "g13") {
+    sgpp::optimization::EmptyVectorFunctionGradient::getInstance().clone(g_gradient);
+    h_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
+      d, m_h, [&displacement](const sgpp::base::DataVector& x,
+                 sgpp::base::DataVector& value,
+                 sgpp::base::DataMatrix& gradient) {
+          const double x1 = 4.6 * (x[0] + displacement[0]) - 2.3;
+          const double x2 = 4.6 * (x[1] + displacement[1]) - 2.3;
+          const double x3 = 6.4 * (x[2] + displacement[2]) - 3.2;
+          const double x4 = 6.4 * (x[3] + displacement[3]) - 3.2;
+          const double x5 = 6.4 * (x[4] + displacement[4]) - 3.2;
+
+          value[0] = x1 * x1 + x2 * x2 + x3 * x3 + x4 * x4 + x5 * x5 - 10.0;
+          value[1] = x2 * x3 - 5.0 * x4 * x5;
+          value[2] = x1 * x1 * x1 + x2 * x2 * x2 + 1.0;
+          gradient(0, 0) = 4.6 * (2.0 * x1);
+          gradient(0, 1) = 4.6 * (2.0 * x2);
+          gradient(0, 2) = 6.4 * (2.0 * x3);
+          gradient(0, 3) = 6.4 * (2.0 * x4);
+          gradient(0, 4) = 6.4 * (2.0 * x5);
+          gradient(1, 0) = 4.6 * (0.0);
+          gradient(1, 1) = 4.6 * (x3);
+          gradient(1, 2) = 6.4 * (x2);
+          gradient(1, 3) = 6.4 * (-5.0 * x5);
+          gradient(1, 4) = 6.4 * (-5.0 * x4);
+          gradient(2, 0) = 4.6 * (3.0 * x1 * x1);
+          gradient(2, 1) = 4.6 * (3.0 * x2 * x2);
+          gradient(1, 2) = 6.4 * (0.0);
+          gradient(1, 3) = 6.4 * (0.0);
+          gradient(1, 4) = 6.4 * (0.0);
+      }
+    ));
+  } else {
+      throw std::invalid_argument("Objective function not supported.");
+  }
+}
+
 std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
                                         size_t d, size_t p) {
   std::unique_ptr<sgpp::base::Grid> grid;
@@ -814,76 +898,31 @@ EvaluatedPoint optimizeSmoothIntp(
   sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
   sgpp::optimization::InterpolantScalarFunction& ft,
   sgpp::optimization::InterpolantScalarFunctionGradient& ft_gradient,
-  sgpp::optimization::InterpolantScalarFunctionHessian& ft_hessian) {
+  sgpp::optimization::InterpolantScalarFunctionHessian& ft_hessian,
+  sgpp::optimization::VectorFunctionGradient& g_gradient,
+  sgpp::optimization::VectorFunctionGradient& h_gradient) {
   EvaluatedPoint x0 = getBestGridPoint(grid_gen, problem, ft);
+  sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
+  sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
   // results of the optimizers
   std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
-  // try out all gradient-based methods starting in x0
-  std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers1[] = {
+  // optimize smooth interpolant
+  std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::GradientDescent(ft, ft_gradient)),
+      new sgpp::optimization::optimizer::LogBarrier(ft, ft_gradient, g, g_gradient)),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NLCG(ft, ft_gradient)),
+      new sgpp::optimization::optimizer::SquaredPenalty(ft, ft_gradient, g, g_gradient, h, h_gradient)),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::Newton(ft, ft_hessian)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::BFGS(ft, ft_gradient)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::Rprop(ft, ft_gradient)),
+      new sgpp::optimization::optimizer::AugmentedLagrangian(ft, ft_gradient, g, g_gradient, h, h_gradient)),
   };
   x_opt_candidates.push_back(tryOptimizers(problem, ft,
-  {"Gradient descent", "NLCG", "Newton", "BFGS", "Rprop"},
-  optimizers1, x0));
-
-  // try out all gradient-free methods
-  std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers2[] = {
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NelderMead(ft)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(ft, 5000)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::CMAES(ft, 5000)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::MultiStart(*optimizers1[0])),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::MultiStart(*optimizers1[1])),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::MultiStart(*optimizers1[2])),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::MultiStart(*optimizers1[3])),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::MultiStart(*optimizers1[4])),
-  };
-  x_opt_candidates.push_back(tryOptimizers(problem, ft,
-  {"Nelder-Mead", "Diff. Evolution", "CMA-ES", "Gradient descent (glob.)", "NLCG (glob.)", "Newton (glob.)", "BFGS (glob.)", "Rprop (glob.)"},
-  optimizers2, EvaluatedPoint::invalid));
+  {"LB", "SP", "AL"},
+  optimizers, x0));
 
   // best point so far
   EvaluatedPoint x_opt_min = x_opt_candidates[0];
 
-  for (size_t i = 0; i < x_opt_candidates.size(); i++) {
-    if (x_opt_candidates[i].f_x < x_opt_min.f_x) {
-      x_opt_min = x_opt_candidates[i];
-    }
-  }
-
-  // try out all gradient-based methods starting in x_opt_min
-  /*{
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
-      std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-        new sgpp::optimization::optimizer::GradientDescent(ft, ft_gradient)),
-      std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-        new sgpp::optimization::optimizer::NLCG(ft, ft_gradient)),
-      std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-        new sgpp::optimization::optimizer::Newton(ft, ft_hessian))
-    };
-    x_opt_candidates.push_back(
-      tryOptimizers(problem, ft, {"Gradient method 2", "NLCG 2", "Newton 2"},
-                    optimizers, x_opt_min));
-  }*/
-
-  // determine best point
   for (size_t i = 0; i < x_opt_candidates.size(); i++) {
     if (x_opt_candidates[i].f_x < x_opt_min.f_x) {
       x_opt_min = x_opt_candidates[i];
@@ -900,32 +939,32 @@ EvaluatedPoint optimizeLinearIntp(
   sgpp::optimization::InterpolantScalarFunction& ft_linear) {
   EvaluatedPoint x0 = getBestGridPoint(grid_gen, problem, ft);
   EvaluatedPoint x_opt_min;
+  sgpp::optimization::ScalarFunction& f = problem.getObjectiveFunction();
+  sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
+  sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
+  // results of the optimizers
+  std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
   // optimize linear interpolant
-  /*std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NelderMead(ft_linear, 5000)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::RandomSearch(ft_linear, 5000)),
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(ft_linear, 5000))
-  };
-  x_opt_min = tryOptimizers(problem, ft, {"NM on linintp", "RS (NM) on linintp", "DE on linintp"},
-                            optimizers, x0);*/
-
   std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NelderMead(ft_linear)),
+      new sgpp::optimization::optimizer::LogBarrier(ft_linear, g)),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(ft_linear, 5000)),
+      new sgpp::optimization::optimizer::SquaredPenalty(ft_linear, g, h)),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::CMAES(ft_linear, 5000)),
+      new sgpp::optimization::optimizer::AugmentedLagrangian(ft, g, h)),
   };
-  x_opt_min = tryOptimizers(problem, ft, {"DE on linintp"},
-                            optimizers, x0);
+  x_opt_candidates.push_back(tryOptimizers(problem, ft,
+  {"LB on linintp", "SP on linintp", "AL on linintp"},
+  optimizers, x0));
 
-  if (x0.f_x < x_opt_min.f_x) {
-    x_opt_min = x0;
+  // best point so far
+  EvaluatedPoint x_opt_min = x_opt_candidates[0];
+
+  for (size_t i = 0; i < x_opt_candidates.size(); i++) {
+    if (x_opt_candidates[i].f_x < x_opt_min.f_x) {
+      x_opt_min = x_opt_candidates[i];
+    }
   }
 
   return x_opt_min;
@@ -938,35 +977,35 @@ EvaluatedPoint optimizeObjFcn(
   sgpp::optimization::test_problems::TestScalarFunction& f = problem.getObjectiveFunction();
   const size_t N = grid_gen.getFunctionValues().size();
   EvaluatedPoint x_opt_min;
+  sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
+  sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
+  // results of the optimizers
+  std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
   // optimize objective function (split N up evenly for all three optimizers)
   std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NelderMead(f,
+      new sgpp::optimization::optimizer::LogBarrier(f, g,
     static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0))),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(f,
+      new sgpp::optimization::optimizer::SquaredPenalty(f, g, h,
     static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0))),
     std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::CMAES(f,
-    static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0)))
+      new sgpp::optimization::optimizer::AugmentedLagrangian(f, g, h,
+    static_cast<size_t>(static_cast<double>(N) / 3.0 + 1.0))),
   };
-  x_opt_min = tryOptimizers(problem, ft, {"NM on objfcn", "DE on objfcn", "CMA-ES on objfcn"},
-                            optimizers, EvaluatedPoint::invalid);
+  x_opt_candidates.push_back(tryOptimizers(problem, ft,
+  {"LB on objfun", "SP on objfun", "AL on objfun"},
+  optimizers, x0));
 
-  /*std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::NelderMead(f, N))
-  };
-  x_opt_min = tryOptimizers(problem, ft, {"NM on objfcn"},
-                            optimizers, EvaluatedPoint::invalid);*/
+  // best point so far
+  EvaluatedPoint x_opt_min = x_opt_candidates[0];
 
-  /*std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[] = {
-    std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer>(
-      new sgpp::optimization::optimizer::DifferentialEvolution(f, N))
-  };
-  x_opt_min = tryOptimizers(problem, ft, {"DE on objfcn"},
-                            optimizers, EvaluatedPoint::invalid);*/
+  for (size_t i = 0; i < x_opt_candidates.size(); i++) {
+    if (x_opt_candidates[i].f_x < x_opt_min.f_x) {
+      x_opt_min = x_opt_candidates[i];
+    }
+  }
 
   return x_opt_min;
 }
