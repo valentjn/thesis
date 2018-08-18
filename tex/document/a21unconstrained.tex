@@ -144,15 +144,14 @@ We changed the domain from $\clint{0, 10}^d$ to $\clint{2, 10}^d$
 to exclude the singularities of the derivative of the objective function
 at $\xscaled[t] = 0$.
 In addition, the author of \cite{Clerc99Swarm} searched for maximal points.
-For minimization, we have to change the sign of the objective function
-for even dimensionalities $d$.
+For minimization, we have to change the sign of the objective function.
 \vspace{-1.6em}
 
 \begin{subequations}
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{Alp02}(\xscaled)
-      := (-1)^{d+1} \prod_{t=1}^d \sqrt{\xscaled[t]} \sin(\xscaled[t]),\qquad
+      := -\prod_{t=1}^d \sqrt{\xscaled[t]} \sin(\xscaled[t]),\qquad
       \xscaled \in \clint{2, 10}^d,
     }\\
     \centertestfunline{
