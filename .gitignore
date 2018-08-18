@@ -3,6 +3,7 @@
 /.spyproject/
 /bib/*.bib.sav
 /build/
+/old/caches/*.xz
 /out/*.pdf
 /**/__pycache__/
 /**/*.pyc
