@@ -255,8 +255,8 @@ using optimization of a B-spline surrogate $\sgintp$ of $\objfun$
 on sparse grids.
 Obviously, the more accurate the sparse grid surrogate is,
 the better the approximation $\xoptappr$ will be.
-In \cref{fig:resultsOptimizationUnconstrainedTestFunctions},
-we plot the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
+In the following plots,
+we show the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
 in terms of function value.%
 \footnote{%
   Note in order to calculate the optimality gap,
@@ -281,28 +281,39 @@ data points \cref{fig:resultsOptimizationUnconstrainedTestFunctions}
 were repeated five times with replacements $\*a$
 whose entries $a_t$ were independent and identically distributed Gaussian
 pseudo-random with zero mean and a standard deviation of $0.01$.
-The optimality gaps shown in
-\cref{fig:resultsOptimizationUnconstrainedTestFunctions} are calculated
+The optimality gaps shown in the figures of this section are calculated
 as the mean of the five runs to increase confidence in the results.
 
 \Cref{fig:resultsOptimizationUnconstrainedTestFunctions}
-shows the optimality gaps for different test functions and dimensionalities.
-
-\blindtext{}
+shows the optimality gaps for different test functions $\objfun$
+over the number $\ngpMax$ of allowed evaluations of $\objfun$
+For the continuously differentiable functions Bra02, GoP, Ack, and Alp02
+in $d = 2$ dimensions (top row),
+the optimization of the corresponding cubic B-spline surrogates (solid lines)
+performs significantly better than using piecewise linear basis functions
+(dashed lines).
+The reason is two-fold:
+First, by using higher-order basis functions, the surrogates are more accurate
+in general as seen in the discussion of the interpolation error in
+\cref{sec:541interpolation}.
+Second, the availability of surrogate gradients accelerates the
+convergence of the employed optimization methods.
+For some test functions, B-splines even give better results than
+the direct optimization of the objective function (dotted lines).
 
 \begin{figure}
   \includegraphics{resultsOptimizationLegend_1}\\[2mm]%
   \includegraphics{resultsOptimizationUnconstrained_1}%
   \hfill%
-  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \includegraphics{resultsOptimizationUnconstrained_2}%
   \\[2mm]%
-  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \includegraphics{resultsOptimizationUnconstrained_3}%
   \hfill%
-  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \includegraphics{resultsOptimizationUnconstrained_4}%
   \\[2mm]%
-  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \includegraphics{resultsOptimizationUnconstrained_5}%
   \hfill%
-  \includegraphics{resultsOptimizationUnconstrained_1}%
+  \includegraphics{resultsOptimizationUnconstrained_6}%
   \caption[Optimality gaps for different objective functions]{%
     Optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$ between
     the function value at the approximated optimum $\xoptappr$ and
@@ -318,6 +329,18 @@ shows the optimality gaps for different test functions and dimensionalities.
   }%
   \label{fig:resultsOptimizationUnconstrainedTestFunctions}%
 \end{figure}
+
+For the test functions Sch06 and Sch22 with discontinuous derivatives,
+the advantage of higher-order B-splines is not as evident (Sch22) or
+does not even exist (Sch06).
+However, in low dimensions $d \le 4$, B-splines are still able
+to achieve a slight advantage compared to the piecewise linear basis.
+In higher dimensionalities $d \ge 6$ (bottom row),
+convergence speeds visibly decrease for all methods shown in
+\cref{fig:resultsOptimizationUnconstrainedTestFunctions},
+although for some objective functions, B-splines are still able
+to perform better than the comparison methods
+(most notably for the Ack function).
 
 \paragraph{Constrained optimization}
 
