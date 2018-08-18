@@ -210,10 +210,10 @@ except that for optimizing the interpolant, we only use the
 constrained optimization algorithms implemented in \sgpp
 as listed in \cref{tbl:optimizationMethod}.
 We only replace the objective function $\objfun$ with a sparse grid
-surrogate $\sgintp$ and we assume that the constraint functions
-$\ineqconfun$ and $\eqconfun$ can be evaluated fast.
-However, it would also be possible to replace $\ineqconfun$ and $\eqconfun$
-with sparse grid surrogates.
+surrogate $\sgintp$ and we assume that the constraint function
+$\ineqconfun$ can be evaluated fast.
+However, it would also be possible to replace $\ineqconfun$
+with a sparse grid surrogate.
 In this case, it cannot be guaranteed that the resulting optimal point
 $\xoptappr$ is feasible, i.e., we could have
-$\lnot(\ineqconfun(\xoptappr) \le \*0)$ or $\eqconfun(\xoptappr) \not= \*0$.
+$\lnot(\ineqconfun(\xoptappr) \le \*0)$.

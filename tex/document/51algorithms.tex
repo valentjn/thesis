@@ -15,14 +15,15 @@ In contrast, \term{constrained optimization problems} are given by
   \label{eq:constrainedOptimization}
   \xopt = \argmin \objfun(\*x),\quad
   \*x \in \real^d\;\;\text{s.t.}\;\;
-  \ineqconfun(\*x) \le \*0,\;
-  \eqconfun(\*x) = \*0,
+  \ineqconfun(\*x) \le \*0,
 \end{equation}
 where
-$\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$ and
-$\eqconfun\colon \clint{\*0, \*1} \to \real^{m_{\eqconfun}}$
-($m_{\ineqconfun}, m_{\eqconfun} \in \natz$)
-are the \term{inequality and equality constraint functions,} respectively.
+$\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$
+($m_{\ineqconfun} \in \natz$)
+is the \term{(inequality) constraint function.}
+This formulation also contains optimization problems
+with equality constraints $\eqconfun(\*x) = \*0$
+by setting $\ineqconfun(\*x) := (\eqconfun(\*x), -\eqconfun(\*x))$.
 As sparse grid surrogates $\objfun = \sgintp$ are only defined on the
 unit hyper-cube $\clint{\*0, \*1}$,
 the choice of $\*x$ has to be restricted to $\clint{\*0, \*1}$.
@@ -435,14 +436,13 @@ This can be found by solving another auxiliary problem
   \min_{(\*x, s) \in \real^{d+1}} s
   \quad\text{s.t.}\quad
   s \ge 0,\;\;
-  \ineqconfun(\*x) \le s \cdot \*1_{m_{\ineqconfun}},\;\;
-  -s \cdot \*1_{m_{\eqconfun}} \le \eqconfun(\*x) \le s \cdot \*1_{m_{\eqconfun}},
+  \ineqconfun(\*x) \le s \cdot \*1_{m_{\ineqconfun}},
 \end{equation}
-where $\*1_{m_{\ineqconfun}} \in \real^{m_{\ineqconfun}}$ and
-$\*1_{m_{\eqconfun}} \in \real^{m_{\eqconfun}}$ are all-ones vectors.
+where $\*1_{m_{\ineqconfun}} \in \real^{m_{\ineqconfun}}$
+is the all-one vector.
 An initial solution for this problem can be explicitly given
 (for example, $\*x_0 = \*0$ and
-$s_0 = \max(\max(\ineqconfun(\*x_0)), \norm[\infty]{\eqconfun(\*x_0)})$).
+$s_0 = \max(\ineqconfun(\*x_0))$).
 
 \paragraph{Log-barrier}
 
@@ -467,8 +467,7 @@ The squared penalty method
   Toussaint15Introduction%
 }
 replaces the constrained problem with the penalized problem
-$\min\, [\objfun(\*x) + \mu_k \norm[2]{(\ineqconfun(\*x))_{+}}^2 +
-\mu_k \norm[2]{\eqconfun(\*x)}^2]$,
+$\min\, [\objfun(\*x) + \mu_k \norm[2]{(\ineqconfun(\*x))_{+}}^2]$,
 where $\mu_k \in \posreal$ is an increasing penalty parameter and
 $(\cdot)_{+} := \max(\cdot, 0)$ denotes the non-negative part.
 With increasing $\mu_k$, the constraint violation of the solution of
@@ -483,14 +482,12 @@ considers the auxiliary problem
 \begin{equation}
   \min_{\*x \in \real^d} \bracket*{
     \objfun(\*x) + \mu_k \sum_{i=1}^{m_{\ineqconfun}} [\lambda_{k,i} > 0]
-    ((\ineqconfun[i](\*x))_{+})^2 + \tr{\*\lambda_k} \ineqconfun(\*x) +
-    \mu_k \norm[2]{\eqconfun(\*x)}^2 +
-    \tr{\*\kappa_k} \eqconfun(\*x)
+    ((\ineqconfun[i](\*x))_{+})^2 + \tr{\*\lambda_k} \ineqconfun(\*x)
   },
 \end{equation}
-where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is one if $\lambda_{k,i} > 0$ and
-$\*\lambda_k \in \nonnegreal^{m_{\ineqconfun}}$ and
-$\*\kappa_k \in \real^{m_{\eqconfun}}$ are estimates of the
+where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is defined as one,
+if and only if $\lambda_{k,i} > 0$, and
+$\*\lambda_k \in \nonnegreal^{m_{\ineqconfun}}$ is an estimate of the
 Lagrangian multipliers.
 They are updated according to the penalty of the previous iteration,
 generating a ``virtual gradient'' that drastically decreases
@@ -514,8 +511,7 @@ as they can be written as a non-linear system of equations.
 The linear system of the resulting \emph{Newton--Lagrange method}
 is equivalent to the KKT conditions of a quadratic programming (QP) problem,
 for which objective and constraint functions have the
-form $\objfun(\*x) = \frac{1}{2} \tr{\*x} \mat{Q} \*x + \tr{\*d} \*x$,
-$\ineqconfun(\*x) = \mat{A} \*x - \*b$, and
-$\eqconfun(\*x) = \mat{B} \*x - \*c$, respectively.
+form $\objfun(\*x) = \frac{1}{2} \tr{\*x} \mat{Q} \*x + \tr{\*d} \*x$ and
+$\ineqconfun(\*x) = \mat{A} \*x - \*b$, respectively.
 SQP methods solve one QP problem in each iteration (``sequentially'')
 to determine the search direction.
