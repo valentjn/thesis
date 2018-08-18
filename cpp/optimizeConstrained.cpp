@@ -73,6 +73,10 @@ struct EvaluatedPoint {
   double f_x;
   /// interpolant function value
   double ft_x;
+  /// inequality constraint function value
+  sgpp::base::DataVector g_x;
+  /// equality constraint function value
+  sgpp::base::DataVector h_x;
 
   /// static member indicating invalid points
   static EvaluatedPoint invalid;
@@ -85,7 +89,7 @@ struct EvaluatedPoint {
   }
 };
 
-EvaluatedPoint EvaluatedPoint::invalid = {{}, 0.0, 0.0};
+EvaluatedPoint EvaluatedPoint::invalid = {{}, 0.0, 0.0, {}, {}};
 
 /* ****************************************************************************
  * FORWARD DECLARATIONS                                                       *
@@ -333,6 +337,14 @@ int main(int argc, const char* argv[]) {
   problem->generateDisplacement();
   displacement = problem->getDisplacement();
   double f_x_opt = problem->getOptimalPoint(x_opt);
+  sgpp::optimization::test_problems::TestVectorFunction& g = problem->getInequalityConstraintFunction();
+  sgpp::optimization::test_problems::TestVectorFunction& h = problem->getEqualityConstraintFunction();
+  const size_t m_g = g.getNumberOfComponents();
+  const size_t m_h = h.getNumberOfComponents();
+  sgpp::base::DataVector g_x_opt(m_g);
+  sgpp::base::DataVector h_x_opt(m_h);
+  g.eval(x_opt, g_x_opt);
+  h.eval(x_opt, h_x_opt);
 
   // create gradients of constraint functions
   std::unique_ptr<sgpp::optimization::VectorFunctionGradient> g_gradient;
@@ -436,7 +448,7 @@ int main(int argc, const char* argv[]) {
   }
 
   // real optimum
-  optimizer_x_opt.push_back({x_opt, f_x_opt, ft.eval(x_opt)});
+  optimizer_x_opt.push_back({x_opt, f_x_opt, ft.eval(x_opt), g_x_opt, h_x_opt});
   optimizer_times.push_back(0.0);
 
   // PRINTING RESULTS
@@ -486,6 +498,10 @@ int main(int argc, const char* argv[]) {
                                    optimizer_x_opt[i].x) << ",\n";
     std::cout << "    \"fxOpt\" : " << optimizer_x_opt[i].f_x << ",\n";
     std::cout << "    \"fsxOpt\" : " << optimizer_x_opt[i].ft_x << ",\n";
+    sgpp::optimization::operator<<(std::cout << "    \"gxOpt\" : ",
+                                   optimizer_x_opt[i].g_x) << ",\n";
+    sgpp::optimization::operator<<(std::cout << "    \"hxOpt\" : ",
+                                   optimizer_x_opt[i].h_x) << ",\n";
     std::cout << "    \"runtime\" : " << optimizer_times[i] << "\n";
     std::cout << "  }" << ((i < optimizer_x_opt.size() - 1) ? "," : "") << "\n";
   }
@@ -860,9 +876,15 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestP
                              std::unique_ptr<sgpp::optimization::optimizer::ConstrainedOptimizer> optimizers[],
                              const EvaluatedPoint& x0) {
   sgpp::optimization::test_problems::TestScalarFunction& f = problem.getObjectiveFunction();
+  sgpp::optimization::test_problems::TestVectorFunction& g = problem.getInequalityConstraintFunction();
+  sgpp::optimization::test_problems::TestVectorFunction& h = problem.getEqualityConstraintFunction();
+  const size_t m_g = g.getNumberOfComponents();
+  const size_t m_h = h.getNumberOfComponents();
   sgpp::base::DataVector x_opt;
+  sgpp::base::DataVector g_x_opt(m_g);
+  sgpp::base::DataVector h_x_opt(m_h);
   // best result of all optimizers
-  EvaluatedPoint x_opt_min = {{}, INFINITY, INFINITY};
+  EvaluatedPoint x_opt_min = {{}, INFINITY, INFINITY, {}, {}};
 
   if (x0.isValid()) {
     // optimal point should be no worse than the starting point (if supplied)
@@ -879,15 +901,19 @@ EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestP
     x_opt = optimizers[i]->getOptimalPoint();
     double f_x_opt = f.eval(x_opt);
     double ft_x_opt = ft.eval(x_opt);
+    g.eval(x_opt, g_x_opt);
+    h.eval(x_opt, h_x_opt);
 
     if (f_x_opt < x_opt_min.f_x) {
       // should be executed for i == 0 (because x_opt_min.f_x == INFINITY)
-      x_opt_min = {x_opt, f_x_opt, ft_x_opt};
+      x_opt_min = {x_opt, f_x_opt, ft_x_opt, g_x_opt, h_x_opt};
     }
 
     std::cerr << "Result with " << optimizer_str[i] << ": ";
     sgpp::optimization::operator<<(std::cerr << "x_opt = ", x_opt) << "\n";
-    std::cerr << "f(x_opt) = " << f_x_opt << ", ft(x_opt) = " << ft_x_opt << "\n\n";
+    std::cerr << "f(x_opt) = " << f_x_opt << ", ft(x_opt) = " << ft_x_opt << "\n";
+    sgpp::optimization::operator<<(std::cerr << "g(x_opt) = ", g_x_opt) << "\n";
+    sgpp::optimization::operator<<(std::cerr << "h(x_opt) = ", h_x_opt) << "\n\n";
   }
 
   return x_opt_min;
