@@ -274,7 +274,9 @@ and some small $\*a \in \real^d$.%
   By using the formulas in \cref{sec:a20testProblems},
   all test functions $\objfun$ in \cref{sec:53testProblems}
   can be extended such that they can be evaluated at $\*x - \*a$
-  for all $\*x \in \clint{\*0, \*1}$, if $\*a \in \real^d$ is small enough.%
+  for all $\*x \in \clint{\*0, \*1}$, if $\*a \in \real^d$ is small enough.
+  Note that we set $a_t$ to zero if a non-zero displacement in
+  the $t$-th component would change the location of the global minimum.%
 }
 Therefore, the optimization processes for each of the
 data points \cref{fig:resultsOptimizationUnconstrainedTestFunctions}
