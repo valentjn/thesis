@@ -207,8 +207,8 @@ bool getLinearInterpolant(GridType grid_type,
                           std::unique_ptr<sgpp::optimization::InterpolantScalarFunction>& ft_linear);
 
 /**
- * Calculate feasible point.
- * 
+ * Calculate a feasible starting point.
+ *
  * @param f             objective function
  * @param ft            smooth interpolant
  * @param ft_gradient   gradient of smooth interpolant
@@ -216,6 +216,7 @@ bool getLinearInterpolant(GridType grid_type,
  * @param g_gradient    gradient of inequality constraint function
  * @param h             equality constraint function
  * @param h_gradient    gradient of equality constraint function
+ * @return feasible starting point
  */
 EvaluatedPoint getFeasiblePoint(
     sgpp::optimization::ScalarFunction& f,
