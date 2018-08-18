@@ -207,17 +207,24 @@ bool getLinearInterpolant(GridType grid_type,
                           std::unique_ptr<sgpp::optimization::InterpolantScalarFunction>& ft_linear);
 
 /**
- * Determine the grid point in the grid of the iterative grid generator with the lowest
- * objective function value.
- *
- * @param grid_gen  iterative grid generator
- * @param problem   test problem
- * @param ft        interpolant (needed because EvaluatedPoint contains objective function and
- *                  interpolant values)
+ * Calculate feasible point.
+ * 
+ * @param f             objective function
+ * @param ft            smooth interpolant
+ * @param ft_gradient   gradient of smooth interpolant
+ * @param g             inequality constraint function
+ * @param g_gradient    gradient of inequality constraint function
+ * @param h             equality constraint function
+ * @param h_gradient    gradient of equality constraint function
  */
-EvaluatedPoint getBestGridPoint(sgpp::optimization::IterativeGridGenerator& grid_gen,
-                                sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
-                                sgpp::optimization::InterpolantScalarFunction& ft);
+EvaluatedPoint getFeasiblePoint(
+    sgpp::optimization::ScalarFunction& f,
+    sgpp::optimization::ScalarFunction& ft,
+    sgpp::optimization::ScalarFunctionGradient* ft_gradient,
+    sgpp::optimization::VectorFunction& g,
+    sgpp::optimization::VectorFunctionGradient* g_gradient,
+    sgpp::optimization::VectorFunction& h,
+    sgpp::optimization::VectorFunctionGradient* h_gradient);
 
 /**
  * Try out all optimizers in a list.
@@ -844,30 +851,40 @@ bool getLinearInterpolant(GridType grid_type, size_t d,
   return true;
 }
 
-EvaluatedPoint getBestGridPoint(
-  sgpp::optimization::IterativeGridGenerator& grid_gen,
-  sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
-  sgpp::optimization::InterpolantScalarFunction& ft) {
-  sgpp::optimization::test_problems::TestScalarFunction& f = problem.getObjectiveFunction();
-  const size_t d = f.getNumberOfParameters();
-  const sgpp::base::DataVector& function_values = grid_gen.getFunctionValues();
-  sgpp::base::GridStorage& grid_storage = grid_gen.getGrid().getStorage();
-  EvaluatedPoint x0;
+EvaluatedPoint getFeasiblePoint(
+    sgpp::optimization::ScalarFunction& f,
+    sgpp::optimization::ScalarFunction& ft,
+    sgpp::optimization::ScalarFunctionGradient* ft_gradient,
+    sgpp::optimization::VectorFunction& g,
+    sgpp::optimization::VectorFunctionGradient* g_gradient,
+    sgpp::optimization::VectorFunction& h,
+    sgpp::optimization::VectorFunctionGradient* h_gradient) {
+  std::unique_ptr<sgpp::optimization::optimizer::AugmentedLagrangian> optimizer;
 
-  // index of grid point with minimal function value
-  size_t x0_index = std::distance(function_values.begin(),
-                                  std::min_element(function_values.begin(), function_values.end()));
-  x0.x = sgpp::base::DataVector(d, 0.0);
-
-  for (size_t t = 0; t < d; t++) {
-    x0.x[t] = grid_storage[x0_index].getStandardCoordinate(t);
+  if (ft_gradient != nullptr) {
+    optimizer.reset(new sgpp::optimization::optimizer::AugmentedLagrangian(
+        ft, *ft_gradient, g, *g_gradient, h, *h_gradient));
+  } else {
+    optimizer.reset(new sgpp::optimization::optimizer::AugmentedLagrangian(
+        ft, g, h));
   }
 
-  // evaluate objective function and interpolant
-  x0.f_x = function_values[x0_index];
-  x0.ft_x = ft.eval(x0.x);
+  sgpp::base::DataVector x0 = optimizer->findFeasiblePoint();
+  double f_x0 = f.eval(x0);
+  double ft_x0 = ft.eval(x0);
+  const size_t m_g = g.getNumberOfComponents();
+  const size_t m_h = h.getNumberOfComponents();
+  sgpp::base::DataVector g_x0(m_g);
+  sgpp::base::DataVector h_x0(m_h);
+  g.eval(x0, g_x0);
+  h.eval(x0, h_x0);
 
-  return x0;
+  sgpp::optimization::operator<<(std::cerr << "x0 = ", x0) << "\n";
+  std::cerr << "f(x0) = " << f_x0 << ", ft(x0) = " << ft_x0 << "\n";
+  sgpp::optimization::operator<<(std::cerr << "g(x0) = ", g_x0) << "\n";
+  sgpp::optimization::operator<<(std::cerr << "h(x0) = ", h_x0) << "\n\n";
+
+  return {x0, f_x0, ft_x0, g_x0, h_x0};
 }
 
 EvaluatedPoint tryOptimizers(sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
@@ -927,9 +944,10 @@ EvaluatedPoint optimizeSmoothIntp(
   sgpp::optimization::InterpolantScalarFunctionHessian& ft_hessian,
   sgpp::optimization::VectorFunctionGradient& g_gradient,
   sgpp::optimization::VectorFunctionGradient& h_gradient) {
-  EvaluatedPoint x0 = getBestGridPoint(grid_gen, problem, ft);
+  sgpp::optimization::ScalarFunction& f = problem.getObjectiveFunction();
   sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
   sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
+  EvaluatedPoint x0 = getFeasiblePoint(f, ft, &ft_gradient, g, &g_gradient, h, &h_gradient);
   // results of the optimizers
   std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
@@ -963,11 +981,10 @@ EvaluatedPoint optimizeLinearIntp(
   sgpp::optimization::test_problems::ConstrainedTestProblem& problem,
   sgpp::optimization::InterpolantScalarFunction& ft,
   sgpp::optimization::InterpolantScalarFunction& ft_linear) {
-  EvaluatedPoint x0 = getBestGridPoint(grid_gen, problem, ft);
-  EvaluatedPoint x_opt_min;
   sgpp::optimization::ScalarFunction& f = problem.getObjectiveFunction();
   sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
   sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
+  EvaluatedPoint x0 = getFeasiblePoint(f, ft_linear, nullptr, g, nullptr, h, nullptr);
   // results of the optimizers
   std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
@@ -1002,9 +1019,9 @@ EvaluatedPoint optimizeObjFcn(
   sgpp::optimization::InterpolantScalarFunction& ft) {
   sgpp::optimization::test_problems::TestScalarFunction& f = problem.getObjectiveFunction();
   const size_t N = grid_gen.getFunctionValues().size();
-  EvaluatedPoint x_opt_min;
   sgpp::optimization::VectorFunction& g = problem.getInequalityConstraintFunction();
   sgpp::optimization::VectorFunction& h = problem.getEqualityConstraintFunction();
+  EvaluatedPoint x0 = getFeasiblePoint(f, f, nullptr, g, nullptr, h, nullptr);
   // results of the optimizers
   std::vector<EvaluatedPoint> x_opt_candidates = {x0};
 
