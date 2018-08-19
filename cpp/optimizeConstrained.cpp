@@ -9,7 +9,7 @@
  *
  * NAME     VALUE                                                                       DEFAULT
  * d        number of dimensions                                                        2
- * problem  constrained optimization problem (one of floudas, g03, g04, g05, g06, g08, g09, g10, g11, g12, g13, simionescu, soland)      g08
+ * problem  constrained optimization problem (one of floudas, g03, g04, g04Squared, g05, g06, g08, g09, g10, g11, g12, g13, simionescu, soland)      g08
  * grid     type of the grid (one of bSpline, notAKnotBSpline, modifiedBSpline, modifiedNotAKnotBSpline, fundamentalSpline, fundamentalNotAKnotSpline, weaklyFundamentalSpline, weaklyFundamentalNotAKnotSpline)    modifiedNotAKnotBSpline
  * gridGen type of the iterative grid generator (linearSurplus or ritterNovak)         ritterNovak
  * gamma    adaptivity of the grid generation                                           0.85
@@ -556,8 +556,8 @@ void parseArgs(int argc, const char* argv[],
                size_t& p,
                sgpp::optimization::RandomNumberGenerator::SeedType& seed) {
   std::vector<std::string> test_problem_strs = {
-    "floudas", "g03", "g04", "g05", "g06", "g08", "g09", "g10",
-    "g11", "g12", "g13", "simionescu", "soland",
+    "floudas", "g03", "g04", "g04Squared", "g05", "g06", "g08", "g09",
+    "g10", "g11", "g12", "g13", "simionescu", "soland",
   };
 
   for (size_t i = 1; i < static_cast<size_t>(argc); i++) {
@@ -646,6 +646,10 @@ void parseArgs(int argc, const char* argv[],
     problem = std::unique_ptr<sgpp::optimization::test_problems::ConstrainedTestProblem>(
           new sgpp::optimization::test_problems::G04());
     d = 5;
+  } else if (problem_str == "g04Squared") {
+    problem = std::unique_ptr<sgpp::optimization::test_problems::ConstrainedTestProblem>(
+          new sgpp::optimization::test_problems::G04Squared());
+    d = 5;
   } else if (problem_str == "g05") {
     problem = std::unique_ptr<sgpp::optimization::test_problems::ConstrainedTestProblem>(
           new sgpp::optimization::test_problems::G05());
@@ -698,7 +702,7 @@ void createConstraintGradients(sgpp::optimization::test_problems::ConstrainedTes
   const size_t m_g = problem.getInequalityConstraintFunction().getNumberOfComponents();
   const size_t m_h =  problem.getEqualityConstraintFunction().getNumberOfComponents();
 
-  if (problem_str == "g04") {
+  if ((problem_str == "g04") || (problem_str == "g04Squared")) {
     g_gradient.reset(new sgpp::optimization::WrapperVectorFunctionGradient(
       d, m_g, [&displacement](const sgpp::base::DataVector& x,
                  sgpp::base::DataVector& value,
