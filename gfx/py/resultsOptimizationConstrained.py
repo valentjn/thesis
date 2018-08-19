@@ -151,9 +151,9 @@ def main():
       ax2.set_ylim(1e-17, 1e0)
     else:
       ax1.set_ylim(1e-2, 1e8)
-      ax2.set_ylim(1e-10, 1e0)
+      ax2.set_ylim(1e-17, 1e0)
     
-    ax1.yaxis.labelpad = -1
+    ax1.yaxis.labelpad = (-1 if q == 0 else 3)
     ax2.yaxis.labelpad = -1
     
     ax1.set_ylabel(r"$\objfun(\xoptappr) - \objfun(\xopt)$")
@@ -161,7 +161,7 @@ def main():
     
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax1)
     ax1.text(*trafo(0.68, -0.05), r"$\ngpMax$", ha="center", va="top")
-    ax1.text(*trafo(0.05, 0.05), "$d = {}$".format(d))
+    ax1.text(*trafo(0.05, 0.1), "$d = {}$".format(d))
     
     fig.save(hideSpines=False)
 
