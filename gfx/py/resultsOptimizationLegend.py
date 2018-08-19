@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 1
+# number of output figures = 2
 
 from helper.figure import Figure
 import helper.plot
@@ -35,6 +35,26 @@ helper.plot.addCustomLegend(ax, (
   } for r in range(len(functionNames))] +
   lines
 ), ncol=6, loc="upper center", outside=True)
+
+ax.set_axis_off()
+
+fig.save()
+
+
+
+fig = Figure.create(figsize=(5, 2))
+ax = fig.gca()
+
+lines = [{
+    "label"  : lineNames[r],
+    "marker" : markerStyles[r],
+    "ms"     : (6 if r == 0 else 3),
+    "ls"     : lineStyles[r],
+    "color"  : "k",
+  } for r in range(len(lineNames))
+]
+helper.plot.addCustomLegend(ax, lines, ncol=3,
+                            loc="upper center", outside=True)
 
 ax.set_axis_off()
 
