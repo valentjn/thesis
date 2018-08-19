@@ -100,9 +100,9 @@ def main():
           curValues2[0].append(getConstraintViolation(
               results[j]["smoothInterpolant"]["gxOpt"]))
           curValues2[1].append(getConstraintViolation(
-              results[j]["smoothInterpolant"]["gxOpt"]))
+              results[j]["linearInterpolant"]["gxOpt"]))
           curValues2[2].append(getConstraintViolation(
-              results[j]["smoothInterpolant"]["gxOpt"]))
+              results[j]["objectiveFunction"]["gxOpt"]))
           j += 1
         
         curValues1 = [np.mean(x) for x in curValues1]
