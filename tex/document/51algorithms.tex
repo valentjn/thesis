@@ -467,9 +467,9 @@ The squared penalty method
   Toussaint15Introduction%
 }
 replaces the constrained problem with the penalized problem
-$\min\, [\objfun(\*x) + \mu_k \norm[2]{(\ineqconfun(\*x))_{+}}^2]$,
+$\min\, [\objfun(\*x) + \mu_k \norm[2]{\nonnegpart{\ineqconfun(\*x)}}^2]$,
 where $\mu_k \in \posreal$ is an increasing penalty parameter and
-$(\cdot)_{+} := \max(\cdot, 0)$ denotes the non-negative part.
+$\nonnegpart{\cdot} := \max(\cdot, 0)$ denotes the non-negative part.
 With increasing $\mu_k$, the constraint violation of the solution of
 the penalized problem will decrease, although it may happen
 that it never vanishes.
