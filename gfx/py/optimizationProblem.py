@@ -90,9 +90,10 @@ def plotUnconstrainedProblem(params):
 
 def plotConstrainedProblem(q):
   fig = Figure.create(figsize=(3, 3), preamble=r"""
-\usepackage{contour}
-\contourlength{1.5pt}
-""")
+\usepackage{{contour}}
+\contourlength{{1.5pt}}
+\definecolor{{contourblau}}{{rgb}}{{{},{},{}}}
+""".format(*helper.plot.mixColors("mittelblau", 0.7)))
   ax = fig.gca()
   
   if q == 0:
@@ -103,13 +104,13 @@ def plotConstrainedProblem(q):
     xOpt = np.array([1.2280, 4.2454])
     T = [0, 1]
   else:
-    f = pysgpp.OptG13Objective()
-    g = pysgpp.OptG13InequalityConstraint()
-    h = pysgpp.OptG13EqualityConstraint()
-    bounds = np.array([[-2.3, -2.3, -3.2, -3.2, -3.2],
-                       [ 2.3,  2.3,  3.2,  3.2,  3.2]])
-    xOpt = np.array([-1.7171, 1.5957, 1.8272, -0.7636, -0.7636])
-    T = [0, 1]
+    f = pysgpp.OptG04SquaredObjective()
+    g = pysgpp.OptG04SquaredInequalityConstraint()
+    h = pysgpp.OptG04SquaredEqualityConstraint()
+    bounds = np.array([[78,  33, 27, 27, 27],
+                       [102, 45, 45, 45, 45]])
+    xOpt = np.array([78, 33, 29.995256025682, 45, 36.775812905788])
+    T = [2, 4]
   
   d = xOpt.size
   f = helper.function.SGppScalarFunction(f)
@@ -141,12 +142,12 @@ def plotConstrainedProblem(q):
     v = 20
     ax.tricontour(triangulation, YY[K], v)
   else:
-    # logarithm of objective function
-    YY = np.reshape(np.prod(XX[:,T], axis=1), XX0.shape)
-    YYMin, YYMax = np.amin(YY), np.amax(YY)
-    v = np.linspace(0, 1, 25)
+    K = np.all(gXX <= [-1e-2, 0, 0, 0, 0, 0], axis=1)
+    triangulation = mpl.tri.Triangulation(XX[K,T[0]], XX[K,T[1]])
+    YYMin, YYMax = min(np.amin(YY), fOpt), np.amax(YY)
+    v = np.linspace(0, 1, 20)**2
     v = YYMin + (YYMax - YYMin) * v
-    ax.contour(XX0, XX1, YY, v)
+    ax.tricontour(triangulation, YY[K], v)
   
   if q == 0:
     color = helper.plot.mixColors("mittelblau", 0.3)
@@ -164,28 +165,50 @@ def plotConstrainedProblem(q):
     ax.contourf(XX0, XX1, YY, [0, 1e-12], extend="min", cmap=colormap)
     
     ax.text(2.0,  5.5, r"$\ineqconfunscaled[1] \le 0$",
-            color="C0", ha="center", va="center", rotation=70)
+            color="k", ha="center", va="center", rotation=70)
     ax.text(2.25, 4.9, r"$\ineqconfunscaled[2] \le 0$",
-            color="C0", ha="center", va="center", rotation=15)
+            color="k", ha="center", va="center", rotation=15)
   else:
-    for j in range(h.m):
-      YY = np.reshape(hXX[:,j], XX0.shape)
+    color = helper.plot.mixColors("mittelblau", 0.3)
+    colormap = helper.plot.createLinearColormap("conMap", color, color)
+    
+    for j in [0, 4, 5]:
+      YY = np.reshape(gXX[:,j], XX0.shape)
+      ax.contourf(XX0, XX1, YY, [0, 1e-12], extend="min", cmap=colormap)
       ax.contour(XX0, XX1, YY, [0], colors="C0")
     
-    ax.text(1.7, 1.0, r"\contour{mittelblau!10}{$\eqconfunscaled[1] = 0$}",
-            color="C0", ha="center", va="center", rotation=-60)
-    ax.text(0,   1.3, r"\contour{mittelblau!10}{$\eqconfunscaled[2] = 0$}",
-            color="C0", ha="center", va="center", rotation=0)
-    ax.text(0,  -1.3, r"\contour{mittelblau!10}{$\eqconfunscaled[3] = 0$}",
-            color="C0", ha="center", va="center", rotation=0)
+    color = helper.plot.mixColors("mittelblau", 0.5)
+    colormap = helper.plot.createLinearColormap("conMap2", color, color)
+    
+    for I in [(0, 4), (0, 5), (4, 5)]:
+      gXXBoth = (np.sum(gXX[:,I], axis=1) +
+                 np.sqrt(np.sum(gXX[:,I]**2, axis=1)))
+      YY = np.reshape(gXXBoth, XX0.shape)
+      ax.contourf(XX0, XX1, YY, [0, 1e-12], extend="min", cmap=colormap)
+    
+    color = helper.plot.mixColors("mittelblau", 0.7)
+    colormap = helper.plot.createLinearColormap("conMap3", color, color)
+    gXXAll = gXXBoth + gXX[:,0] + np.sqrt(gXXBoth**2 + gXX[:,0]**2)
+    YY = np.reshape(gXXAll, XX0.shape)
+    ax.contourf(XX0, XX1, YY, [0, 1e-12], extend="min", cmap=colormap)
+    
+    ax.text(28.7, 34.8,
+            r"$\ineqconfunscaled[1] \le 0$",
+            color="k", ha="center", va="center", rotation=30)
+    ax.text(42.3, 38,
+            r"\contour{contourblau}{$\ineqconfunscaled[5] \le 0$}",
+            color="k", ha="center", va="center", rotation=-62)
+    ax.text(33,   32,
+            r"\contour{contourblau}{$\ineqconfunscaled[6] \le 0$}",
+            color="k", ha="center", va="center", rotation=-70)
   
   ax.plot(xOpt[T[0]], xOpt[T[1]], ".", mec="w", mfc="C1", ms=10, mew=1)
   
   ax.set_xlim(bounds[:,T[0]])
   ax.set_ylim(bounds[:,T[1]])
   
-  ax.set_xlabel(r"$\xscaled[1]$", labelpad=-7)
-  ax.set_ylabel(r"$\xscaled[2]$", labelpad=(-4 if q == 0 else -18))
+  ax.set_xlabel(r"$\xscaled[{}]$".format(T[0]+1), labelpad=-7)
+  ax.set_ylabel(r"$\xscaled[{}]$".format(T[1]+1), labelpad=-4)
   
   ax.set_xticks(np.linspace(*bounds[:,T[0]], 5))
   ax.set_yticks(np.linspace(*bounds[:,T[1]], 5))
