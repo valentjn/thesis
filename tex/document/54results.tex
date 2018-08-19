@@ -353,7 +353,15 @@ to perform better than the comparison methods
 
 \paragraph{Constrained optimization}
 
-\blindtext{}
+\Cref{fig:resultsOptimizationConstrainedTestFunctions}
+shows the result for the two constrained optimization problems.
+The objective function value $\objfun(\xoptappr)$
+at the approximated optimum $\xoptappr$ should not only
+be as small as possible, but $\xoptappr$ should also be feasible, i.e.,
+$\ineqconfun(\xoptappr) \le \*0$.
+Hence, we also plot the maximal violation
+$\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}$
+of the constraints in the respective optimal points.
 
 \begin{figure}
   \includegraphics{resultsOptimizationLegend_2}\\[2mm]%
@@ -389,6 +397,38 @@ to perform better than the comparison methods
   \label{fig:resultsOptimizationConstrainedTestFunctions}%
 \end{figure}
 
+For the bivariate G08 problem, the hierarchical B-splines surrogates
+perform better than the direct gradient-free optimization of the problem
+for $\ngpMax \le 3500$ objective function evaluations
+and better than the piecewise linear surrogate for $\ngpMax \ge 300$
+objective function evaluations.
+All calculated points are feasible
+(note that for plotting reasons,
+\cref{fig:resultsOptimizationConstrainedTestFunctions} shows
+$\max(\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}, 10^{-16})$
+instead of the true constraint violation).
+
+The range of the objective function of the five-dimensional G04Sq problem
+is larger than that of G08.
+This results in generally higher optimality gaps
+$\objfun(\xoptappr) - \objfun(\xopt)$ as we do not normalize them
+with respect to the range.
+The B-spline surrogate results in good approximations $\xoptappr$
+of $\xopt$ already for $\ngpMax = 1000$ with an optimality gap of
+around one.
+Both comparison methods result in optimality gaps that are
+seven orders of magnitude higher.
+Additionally, the corresponding values of constraint violation
+are between $10^{-10}$ and $10^{-6}$, i.e.,
+the constraints are numerically met.
+In contrast, the optimizers struggle more for
+the comparison methods (optimization of the linear surrogate and
+of objective function) to meet the constraints,
+as the values of constraint violation partly exceed $10^{-3}$.
+The availability of gradients seems to allow the constrained optimization
+algorithm to better enforce the feasibility of the
+resulting points $\xoptappr$.
+
 
 
 \subsection{Complexity of Hierarchization}
@@ -414,7 +454,6 @@ to perform better than the comparison methods
   }%
   \label{fig:TODO1}%
 \end{figure}
-
 
 \begin{figure}
   \includegraphics{complexityWeaklyFundamental_4}\\[2mm]%
