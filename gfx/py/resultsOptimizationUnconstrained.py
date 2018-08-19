@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 1
+# number of output figures = 6
 # dependencies = cpp/optimizeUnconstrained
 
 import functools
