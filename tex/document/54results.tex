@@ -316,12 +316,13 @@ the direct optimization of the objective function (dotted lines).
   \includegraphics{resultsOptimizationUnconstrained_5}%
   \hfill%
   \includegraphics{resultsOptimizationUnconstrained_6}%
-  \caption[Optimality gaps for different objective functions]{%
+  \caption[Optimality gaps for different objective functions (unconstrained)]{%
     Optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$ between
     the function value at the approximated optimum $\xoptappr$ and
     the minimal function value at the actual optimum $\xopt$
     over the number $\ngpMax$ of objective function evaluations
-    for different objective functions $\objfun$ \emph{(colors)}.
+    for different unconstrained
+    objective functions $\objfun$ \emph{(colors)}.
     Shown are the optimization results of the B-spline surrogate
     \emph{(solid lines)},
     the optimization results of the piecewise linear surrogate
@@ -347,6 +348,40 @@ to perform better than the comparison methods
 \paragraph{Constrained optimization}
 
 \blindtext{}
+
+\begin{figure}
+  \includegraphics{resultsOptimizationLegend_2}\\[2mm]%
+  \subcaptionbox{%
+    G08%
+  }[72mm]{%
+    \includegraphics{resultsOptimizationConstrained_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    G04Sq%
+  }[72mm]{%
+    \includegraphics{resultsOptimizationConstrained_2}%
+  }%
+  \caption[Optimality gaps for different objective functions (constrained)]{%
+    Optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$ between
+    the function value at the approximated optimum $\xoptappr$ and
+    the minimal function value at the actual optimum $\xopt$
+    over the number $\ngpMax$ of objective function evaluations
+    for different constrained optimization problems
+    \emph{(left vertical axes)}.
+    Shown are the optimization results of the B-spline surrogate
+    \emph{(solid lines)},
+    the optimization results of the piecewise linear surrogate
+    \emph{(dashed)}, and
+    the optimization results of the actual objective function
+    \emph{(dotted)} as described in \cref{sec:52method}.
+    Additionally, the constraint violation
+    $\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}$
+    at the approximated optimum $\xoptappr$ is plotted
+    \emph{(right vertical axes)}.%
+  }%
+  \label{fig:resultsOptimizationConstrainedTestFunctions}%
+\end{figure}
 
 
 
