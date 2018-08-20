@@ -50,9 +50,9 @@ grows exponentially in the dimensionality $d$,
 which is known as the \term{curse of dimensionality} \cite{Bellman61Adaptive}.
 
 Inverse problems are a motivating example for optimization problems
-of the form \eqref{eq:generalOptimizationProblem}, which we consider in
+of the form \eqref{eq:generalOptimizationProblem}, which we will consider in
 this thesis as our main application.
-The curse affects not only these other optimization problems,
+The curse affects not only optimization,
 but also various tasks such as interpolation, quadrature, and regression,
 which play a vital role in numerics and computational science.
 
@@ -133,7 +133,7 @@ The main goals of the thesis are
   optimization scenarios.
 \end{itemize}
 These goals set the agenda for the outline of the rest of the thesis,
-which we describe in the following.
+which is described in the following.
 
 \paragraph{Outline}
 
@@ -150,8 +150,7 @@ for the following chapters.
 We first define sparse grids with points on the boundary of the domain
 and then study options for the boundary treatment
 (as opposed to some literature %, which does it in the reverse order
-\multicite{Bungartz04Sparse,Pflueger10Spatially}),
-since this is the somewhat more natural approach.
+\multicite{Bungartz04Sparse,Pflueger10Spatially}).
 
 In \cref{chap:30BSplines}, we define
 the standard hierarchical B-spline basis for sparse grids.
@@ -172,10 +171,10 @@ which we explain in the second half of \cref{chap:30BSplines}.
 The new hierarchical B-spline bases call for novel algorithmic approaches
 to solve numerical tasks such as
 hierarchization (interpolation) on sparse grids.
-Based on existing algorithms,
-which work for B-splines only in specific special cases,
-we show in \cref{chap:40algorithms} new algorithms for
-spatially adaptive sparse grids with the example problem of hierarchization.
+In \cref{chap:40algorithms}, we show new algorithms for
+spatially adaptive sparse grids with the example problem of hierarchization
+based on existing algorithms,
+which work for B-splines only in specific special cases.
 In the course of \cref{chap:40algorithms}, we construct several new
 hierarchical B-spline basis types to enable the
 applicability of the new algorithms.
@@ -190,13 +189,13 @@ Numerical results are given for a number of test scenarios as well
 as for an example application from fuzzy arithmetic.
 
 Three real-world applications follow in
-\cref{chap:60topoOpt,chap:70muscle,chap:80finance},
-where the theoretical knowledge gained in the first half of the thesis
-is applied to the solution of three different real-world optimization problems.
-%
+\cref{chap:60topoOpt,chap:70muscle,chap:80finance}.
+In these chapters,
+the theoretical knowledge gained in the first half of the thesis
+is applied to the solution of the three real-world optimization problems:
+
 First, in \cref{chap:60topoOpt},
-we study topology optimization via homogenization
-and a two-scale approach.
+we study topology optimization via a homogenized two-scale approach.
 For this application, the key ingredient is an interpolation scheme
 that preserves both the positive definiteness of the interpolated tensors and
 their explicit differentiability.
@@ -207,13 +206,15 @@ are the result of very expensive continuum-mechanical calculations.
 The optimization problems posed in this chapter ask for
 muscle activation levels such that a specific joint angle is attained,
 which is a recurring problem in medicine and robotics.
+B-spline surrogates on sparse grids
+decrease the necessary computing time significantly.
 
 Third, in \cref{chap:80finance},
 we examine dynamic portfolio lifecycle models.
 This financial application features some peculiarities that have
 to be considered when solving the corresponding optimization problems.
 For instance, it is necessary to evaluate interpolants outside their domain
-and calculate integrals due to random factors such as the return of a stock.
+and calculate integrals due to random factors such as stock returns.
 
 \Cref{chap:90conclusion} concludes the thesis by
 summarizing its results and giving an overview of possible future work.
@@ -235,14 +236,14 @@ at the beginning of the respective chapters or sections.
 
 The notation of this thesis should be intuitive and suggestive.
 It is designed to be as natural as possible (i.e., not distracting)
-and as clear as necessary.
+and as unambiguous as necessary.
 One example is that vectors are written in bold face, which leads to
 very similar formulas for the univariate and the multivariate cases.
 For instance, $\clint{0, 1}$ and $\sum_{l=0}^n$
 %and $a \le b$
 become
 $\clint{\*0, \*1} = \clint{0, 1}^d$ and
-$\sum_{\*l=\*0}^{\*n} = \sum_{l_1=0}^{n_1} \dotsb \sum_{l_d=0}^{n_d}$
+$\sum_{\*l=\*0}^{\*n} = \sum_{l_1=0}^{n_1} \dotsb \sum_{l_d=0}^{n_d}$,
 %$\*a \le \*b \iff (a_1 \le b_1) \land \dotsb \land (a_d \le b_d)$,
 respectively.
 This and other necessary notation is introduced in the text when needed.
