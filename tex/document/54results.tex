@@ -259,7 +259,7 @@ In the following plots,
 we show the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
 in terms of function value.%
 \footnote{%
-  Note in order to calculate the optimality gap,
+  In order to calculate the optimality gap,
   it is crucial to determine $\objfun(\xopt)$ as exact as possible.
   Otherwise, the optimality gap might either not converge to zero
   or it might even become negative.%
@@ -271,7 +271,7 @@ function $\*x \mapsto \objfun(\*x - \*a)$
 instead of $\*x \mapsto \objfun(\*x)$ for $\*x \in \clint{\*0, \*1}$
 and some small $\*a \in \real^d$.%
 \footnote{%
-  By using the formulas in \cref{sec:a20testProblems},
+  By using the formulas in \cref{chap:a20testProblems},
   all test functions $\objfun$ in \cref{sec:53testProblems}
   can be extended such that they can be evaluated at $\*x - \*a$
   for all $\*x \in \clint{\*0, \*1}$, if $\*a \in \real^d$ is small enough.
@@ -279,15 +279,14 @@ and some small $\*a \in \real^d$.%
   the $t$-th component would change the location of the global minimum.%
 }
 Therefore, the optimization processes for each of the
-data points for the following figures
-(\cref{%
+data points for the following \cref{%
   fig:resultsOptimizationUnconstrainedTestFunctions,%
   fig:resultsOptimizationConstrainedTestFunctions%
-})
+}
 were repeated five times with replacements $\*a$
 whose entries $a_t$ were independent and identically distributed Gaussian
 pseudo-random with zero mean and a standard deviation of $0.01$.
-The optimality gaps shown in the figures of this section are calculated
+The optimality gaps shown in the figures of this section were computed
 as the mean of the five runs to increase confidence in the results.
 
 \paragraph{Unconstrained optimization}
