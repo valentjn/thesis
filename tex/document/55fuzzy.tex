@@ -218,30 +218,206 @@ in the original formulation of the fuzzy extension principle.
 \paragraph{Implementation}
 
 The implementation of the alternative fuzzy extension principle
-is straightforward:
-\begin{enumerate}
-  \item
-  Discretize $\clint{0, 1}$ with discrete values
-  $\alpha_j \in \clint{0, 1}$ with $m$ segments
-  (e.g., $\alpha_j := j/m$ for $j = 0, \dotsc, m$)
-  and compute $\acut[t]{x}{\alpha_j}$ for all $t = 1, \dotsc, d$
-  and $j = 0, \dotsc, m$ to obtain $\Omega_{\alpha_j}$.
-  
-  \item
-  Compute $\acut{y}{\alpha_j}$ by solving
-  $\min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ and
-  $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ ($j = 0, \dotsc, m$).
-  
-  \item
-  Approximate $\memfun{y}(y)$ by interpolating the data
-  $\{(\min(\acut{y}{\alpha_j}), \alpha_j) \mid j = 0, 1, \dotsc, m\} \cup
-  \{(\max(\acut{y}{\alpha_j}), \alpha_j) \mid j = m, m - 1, \dotsc, 0\}$.
-\end{enumerate}
+is straightforward and shown in \cref{alg:alternativeFuzzyExtensionPrinciple}
+\cite{Klimke06Uncertainty}.
+The range $\clint{0, 1}$ of $\alpha$
+is discretized into $m + 1$ uniformly spaced values $\alpha_j$
+(where $m \in \nat$).
+For each of these values $\alpha_j$, we compute the corresponding
+$\alpha_j$-cut of $\fuzzy{y}$ by solving the two box-constrained
+optimization problems of \cref{eq:alternativeFuzzyExtensionPrinciple}.
+The fuzzy output interval $\fuzzy{y}$ can then be approximated by
+interpolating the interval bounds of the $\alpha_j$-cuts of $\fuzzy{y}$.
+
+%\begin{enumerate}
+%  \item
+%  Discretize $\clint{0, 1}$ with discrete values
+%  $\alpha_j \in \clint{0, 1}$ with $m$ segments
+%  (e.g., $\alpha_j := j/m$ for $j = 0, \dotsc, m$)
+%  and compute $\acut[t]{x}{\alpha_j}$ for all $t = 1, \dotsc, d$
+%  and $j = 0, \dotsc, m$ to obtain $\Omega_{\alpha_j}$.
+%  
+%  \item
+%  Compute $\acut{y}{\alpha_j}$ by solving
+%  $\min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ and
+%  $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ ($j = 0, \dotsc, m$).
+%  
+%  \item
+%  Approximate $\memfun{y}(y)$ by interpolating the data
+%  $\{(\min(\acut{y}{\alpha_j}), \alpha_j) \mid j = 0, 1, \dotsc, m\} \cup
+%  \{(\max(\acut{y}{\alpha_j}), \alpha_j) \mid j = m, m - 1, \dotsc, 0\}$.
+%\end{enumerate}
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\fuzzy{y} = \text{alternativeFuzzyExtensionPrinciple}$}{%
+      $\fuzzy{x}_1$, \dots, $\fuzzy{x}_d$, $m$%
+    }
+      \For{$j = 0, \dotsc, m$}
+        \State{$\alpha_j \gets j/m$}
+        \ForOneLine{$t = 1, \dotsc, d$}{Compute $\acut[t]{x}{\alpha_j} = \clint{a_{j,t}, b_{j,t}}$}
+        \State{%
+          $\Omega_{\alpha_j} \gets \acut[1]{x}{\alpha_j} \times \dotsb \times
+          \acut[d]{x}{\alpha_j} = \clint{\*a_j, \*b_j}$%
+        }
+        \State{%
+          Solve $\min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$ and
+          $\max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)$%
+        }
+        \State{%
+          $\acut{y}{\alpha_j} = [c_j, d_j] \gets \clint{
+            \min_{\*x \in \Omega_{\alpha_j}} \objfun(\*x),
+            \max_{\*x \in \Omega_{\alpha_j}} \objfun(\*x)
+          }$
+        }
+      \EndFor{}\vspace{-2mm}
+      \State{%
+        $D \gets
+        \{(c_j, \alpha_j) \mid j = 0, 1, \dotsc, m\} \cup
+        \{(d_j, \alpha_j) \mid j = m, m - 1, \dotsc, 0\}$%
+      }
+      \State{%
+        $\memfun{y} \gets \text{Piecewise linear interpolant of $D$}$%
+      }%
+      \Comment{extend to $\real$ by zero}%
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[Alternative fuzzy extension principle]{%
+    Alternative fuzzy extension principle.
+    Inputs are the $d$ fuzzy intervals $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$
+    (we have to be able to evaluate $\alpha$-cuts)
+    and the number of $\alpha$ segments to use as discretization.
+    Output is an approximation to the output $\fuzzy{y}$
+    of the alternative fuzzy extension principle
+    (given by an approximation of its membership function $\memfun{y}$).%
+  }%
+  \label{alg:alternativeFuzzyExtensionPrinciple}%
+\end{algorithm}
 
 
 
 \subsection{Using B-Splines on Sparse Grids to Propagate Fuzzy Uncertainties}
 \label{sec:553fuzzyBSplines}
+
+Following Klimke's approach \cite{Klimke06Uncertainty},
+we replace the objective function $\objfun$ in
+\cref{alg:alternativeFuzzyExtensionPrinciple}
+with a sparse grid surrogate $\sgintp$.
+The solution of the optimization problems
+$\min_{\*x \in \Omega_{\alpha_j}} \sgintp(\*x)$ and
+$\max_{\*x \in \Omega_{\alpha_j}} \sgintp(\*x)$ over the
+surrogate $\sgintp$ instead of the true objective function $\objfun$
+takes significantly less time, if evaluations of the objective function
+are expensive.
+
+However, Klimke used piecewise linear functions as hierarchical basis on
+uniform sparse grids and global polynomials on sparse Clenshaw--Curtis grids.
+The drawback of each of the bases is evident:
+First, piecewise linear surrogates are not continuously differentiable and
+can thus not be optimized well with gradient-based optimization methods.
+Second, global polynomials are only suitable on Clenshaw--Curtis grids
+with Chebyshev-distributed nodes due to Runge's phenomenon,
+restricting the choice of grid points unnecessarily.
+Hierarchical B-splines of degree $p$ are $(p - 1)$ times
+continuously differentiable and can be defined for arbitrary grid point
+distributions, eliminating both drawbacks simultaneously.
+
+\paragraph{Methodology}
+
+We fix the number of $\alpha$ segments
+in \cref{alg:alternativeFuzzyExtensionPrinciple} as $m = 100$.
+Given a sparse grid $\sgset$, which may be regular or spatially adaptive,
+we compute three solutions of the alternative fuzzy extension principle
+as follows:
+
+\begin{itemize}
+  \item
+  First,
+  we replace $\objfun$ in \cref{alg:alternativeFuzzyExtensionPrinciple}
+  with the sparse grid interpolant $\sgintp[p]$
+  on $\sgset$ using modified hierarchical not-a-knot B-splines
+  $\bspl[\modified,\nak]{l,i}{p}$ of cubic degree ($p = 3$).
+  For solving the optimization problems over $\sgintp[p]$ in
+  \cref{alg:alternativeFuzzyExtensionPrinciple},
+  we use the globalized version of the gradient descent method
+  as described in \cref{sec:522method}
+  using 100 initial points and \num{50000} allowed function evaluations of
+  $\sgintp[p]$.
+  The resulting fuzzy output interval is denoted by $\fuzzy[\sparse,p]{y}$.
+  
+  \item
+  Second,
+  we replace $\objfun$ in \cref{alg:alternativeFuzzyExtensionPrinciple}
+  with the sparse grid interpolant $\sgintp[1]$
+  on $\sgset$ using modified piecewise linear basis functions.
+  For solving the optimization problems over $\sgintp[1]$ in
+  \cref{alg:alternativeFuzzyExtensionPrinciple},
+  we use a multi-start version of the Nelder--Mead method
+  as described in \cref{sec:522method}
+  using 100 initial simplexes%
+  \footnote{%
+    The Nelder--Mead method does not require an initial point,
+    but an initial simplex (given by $d + 1$ points in $\real^d$).
+    The method is a hybrid between global and local optimization.
+    If the initial simplex is chosen badly, Nelder--Mead can get stuck
+    in local minima.
+    Therefore, we restart the algorithm for different initial simplexes.%
+  }
+  and \num{50000} allowed function evaluations of $\sgintp[1]$.
+  The resulting fuzzy output interval corresponds to Klimke's method and
+  is denoted by $\fuzzy[\sparse,1]{y}$.
+  
+  \item
+  Third,
+  for comparison, we solve
+  \cref{alg:alternativeFuzzyExtensionPrinciple} for the
+  actual objective function $\objfun$.
+  For solving the optimization problems over $\objfun$,
+  we use a multi-start version of the Nelder--Mead method
+  as described in \cref{sec:522method}
+  using 1000 initial simplexes
+  and \num{2000000} allowed function evaluations of $\objfun$.
+  \usenotation{Ëref}
+  The resulting fuzzy output interval is denoted by $\fuzzy[\reference]{y}$
+  (reference solution).
+\end{itemize}
+
+\paragraph{Convergence of fuzzy intervals on regular sparse grids}
+
+As an example,
+\Cref{fig:resultsFuzzyPropagation} shows the convergence of the
+fuzzy output intervals $\fuzzy[\sparse,p]{y}$ and $\fuzzy[\sparse,1]{y}$
+obtained by the interpolation of the
+bivariate Alp02 function on regular sparse grids $\sgset = \regsgset{n}{d}$
+to the reference solution $\fuzzy[\reference]{y}$.
+Already for $n = 4$, the B-spline approximation is better than the
+piecewise linear approximation.
+For $n = 5$, no difference is visible anymore between $\fuzzy[\sparse,p]{y}$
+and $\fuzzy[\reference]{y}$, while $\fuzzy[\sparse,1]{y}$ still clearly
+deviates from $\fuzzy[\reference]{y}$.
+
+\begin{SCfigure}
+  \includegraphics{resultsFuzzyPropagation_1}%
+  \caption[Convergence of fuzzy output intervals]{%
+    Convergence of the membership functions of the fuzzy output intervals
+    $\fuzzy[\sparse,p]{y}$
+    (\emph{solid lines,} modified hierarchical cubic not-a-knot B-splines)
+    and $\fuzzy[\sparse,1]{y}$
+    (\emph{dashed,} modified hierarchical hat functions)
+    to the reference solution $\fuzzy[\reference]{y}$
+    \emph{\textcolor{C1}{(red)}} for the bivariate Alp02 function using
+    regular sparse grids of level $n = 2, \dotsc, 5$.%
+  }%
+  \label{fig:resultsFuzzyPropagation}%
+\end{SCfigure}
+
+\blindtext{}
+
+\paragraph{Fuzzy Ritter--Novak method}
+
+\blindtext{}
+
+\paragraph{Convergence of fuzzy intervals on spatially adaptive sparse grids}
 
 \blindtext{}
 
