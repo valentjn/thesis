@@ -112,9 +112,9 @@ As the gradient-based methods need some initial point and
 as they can get stuck in local minima,
 we additionally implemented globalized versions of the gradient-based methods
 via a multi-start Monte Carlo approach with $m := \min(10d, 100)$
-uniformly pseudo-random initial points, evenly splitting the number of
-permitted function evaluations among the $m$ parallel calls of the
-gradient-based method.
+uniformly distributed pseudo-random initial points,
+evenly splitting the number of permitted function evaluations
+among the $m$ parallel calls of the gradient-based method.
 This means there are three types of optimization methods:
 
 \begin{enumerate}[label={(T\arabic*)},leftmargin=*]
