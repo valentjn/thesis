@@ -1,6 +1,5 @@
 /**
- * Example program for using the sgpp::optimization module of SG++.
- * Compile with -std=c++11. Call it as
+ * Perform unconstrained optimization with SG++. Call as
  *
  * ./optimizeUnconstrained ARG1_NAME=ARG1_VALUE ARG2_NAME=ARG2_VALUE ...
  *
