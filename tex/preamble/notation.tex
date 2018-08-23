@@ -1020,11 +1020,15 @@
 % Application 0: Fuzzy Extension Principle
 % ======================================================================
 
-\newnotationcommand[1]{\fuzzy}{\tilde{#1}}{xtilde}{$\fuzzy{x}$}{
+\newnotationcommandoptarg{2}{\fuzzy}{%
+  \tilde{#2}\ifnotempty{#1}{^{#1}}%
+}{xtilde}{$\fuzzy{x}$}{
   Fuzzy set
 }
 
-\newnotationcommand[1]{\memfun}{\mu_{\fuzzy{#1}}}{Äµtilde}{$\memfun{x}$}{
+\newnotationcommandoptarg{2}{\memfun}{%
+  \mu_{\fuzzy[#1]{#2}}%
+}{Äµtilde}{$\memfun{x}$}{
   Membership function $\memfun{x}\colon X \to \clint{0, 1}$ of the
   fuzzy set $\fuzzy{x}$
 }
