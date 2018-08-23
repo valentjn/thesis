@@ -61,7 +61,7 @@ of the method of residual interpolation
 
 \begin{algorithm}
   \begin{algorithmic}[1]
-    \Function{$\vlinout =$ iterativeRefinement}{%
+    \Function{$\vlinout = \text{iterativeRefinement}$}{%
       $\vlinin$, $\vlinout[(0)]$%
     }
       \State{$\*r^{(0)} \gets \vlinin - \linop^{-1}\vlinout[(0)]$}
@@ -883,7 +883,7 @@ piecewise polynomial of degree $\le p$.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
-    \Function{$\vlinout =$ hermiteHierarchization1D}{%
+    \Function{$\vlinout = \text{hermiteHierarchization1D}$}{%
       $\vlinin$, $n$%
     }
       \For{$i = 0, 1$}
