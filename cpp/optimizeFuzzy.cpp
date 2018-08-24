@@ -720,11 +720,11 @@ std::unique_ptr<sgpp::base::Grid> getGrid(GridType grid_type,
       break;
     case GridType::WeaklyFundamentalSpline:
       grid = std::unique_ptr<sgpp::base::Grid>(
-                new sgpp::base::LagrangeSplineBoundaryGrid(d, p));
+                new sgpp::base::WeaklyFundamentalSplineBoundaryGrid(d, p));
       break;
     case GridType::WeaklyFundamentalNotAKnotSpline:
       grid = std::unique_ptr<sgpp::base::Grid>(
-                new sgpp::base::LagrangeNotAKnotSplineBoundaryGrid(d, p));
+                new sgpp::base::WeaklyFundamentalNotAKnotSplineBoundaryGrid(d, p));
       break;
     default:
       throw std::invalid_argument("Grid type not supported.");
