@@ -15,7 +15,7 @@ def processValue(n):
   fStr = "alpine02"
   d = 2
   gridType = "modifiedNotAKnotBSpline"
-  gridGenerationType = "regular"
+  gridGenerationType = ("regular" if n > 0 else "exact")
   N = 1000
   p = 3
   gamma = 0.9
@@ -31,7 +31,7 @@ def processValue(n):
 
 
 def main():
-  ns = list(range(2, 6))
+  ns = [0] + list(range(2, 6))
   
   with multiprocessing.Pool() as pool:
     resultss = pool.map(processValue, ns)
@@ -39,10 +39,9 @@ def main():
   fig = Figure.create(figsize=(3.6, 3))
   ax = fig.gca()
   
-  colors = {ns[i] : helper.plot.mixColors(
-                "hellblau", i/(len(ns)-1), "mittelblau")
-            for i in range(len(ns))}
-  print(colors)
+  colors = {ns[i+1] : helper.plot.mixColors(
+                "hellblau", i/(len(ns)-2), "mittelblau")
+            for i in range(len(ns)-1)}
   
   lineStyles = {
     "objectiveFunction" : "-",
@@ -52,9 +51,9 @@ def main():
   xl = [-8, 7]
   
   for n, results in zip(ns, resultss):
-    for s in ["smoothInterpolant", "linearInterpolant", "objectiveFunction"]:
+    for s in (["smoothInterpolant", "linearInterpolant"] if n > 0 else
+              ["objectiveFunction"]):
       if s == "objectiveFunction":
-        if (n != ns[-1]): continue
         color, lineWidth, extraArgs = "C1", 3, {"zorder" : -100}
       else:
         color, lineWidth, extraArgs = colors[n], 1, {}
@@ -81,7 +80,7 @@ def main():
       "label"  : "$n = {}$".format(n),
       "ls"     : "-",
       "color"  : colors[n],
-    } for n in ns] +
+    } for n in ns if n > 0] +
     [{
       "label"  : r"$\memfun[\sparse,p]{y}$",
       "ls"     : "-",
@@ -97,23 +96,6 @@ def main():
       "color"  : "C1",
     }],
   ncol=4, loc="upper center", outside=True, shift=(-0.03, 0.01))
-  
-  fig.save()
-  
-  
-  fig = Figure.create(figsize=(3, 3))
-  ax = fig.gca()
-  
-  lines = [[], []]
-  
-  for n, results in zip(ns, resultss):
-    for line, s in zip(lines, ["smoothInterpolant", "linearInterpolant"]):
-      line.append(results[s]["fuzzyError"])
-  
-  ax.plot(ns, lines[0], "-")
-  ax.plot(ns, lines[1], "--")
-  
-  ax.set_yscale("log")
   
   fig.save()
 
