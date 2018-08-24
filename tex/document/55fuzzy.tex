@@ -325,8 +325,6 @@ distributions, eliminating both drawbacks simultaneously.
 
 \paragraph{Methodology}
 
-We fix the number of $\alpha$ segments
-in \cref{alg:alternativeFuzzyExtensionPrinciple} as $m = 100$.
 Given a sparse grid $\sgset$, which may be regular or spatially adaptive,
 we compute three solutions of the alternative fuzzy extension principle
 as follows:
@@ -381,6 +379,14 @@ as follows:
   The resulting fuzzy output interval is denoted by $\fuzzy[\reference]{y}$
   (reference solution).
 \end{itemize}
+
+In the following, we fix the number of $\alpha$ segments
+in \cref{alg:alternativeFuzzyExtensionPrinciple} as $m = 100$.
+As fuzzy input intervals $\fuzzy{x}_t$, $t = 1, \dotsc, d$, we use
+the trapezoidal fuzzy interval with $0$-cut $\clint{0.125, 0.625}$
+and $1$-cut $\clint{0.25, 0.375}$ if $t$ is even and
+the quasi-Gaussian fuzzy number with mean $0.5$, standard deviation $0.125$,
+and $0$-cut $\clint{0.125, 0.875}$ if $t$ is odd.
 
 \paragraph{Convergence of fuzzy intervals on regular sparse grids}
 
