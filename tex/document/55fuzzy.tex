@@ -341,9 +341,8 @@ as follows:
   For solving the optimization problems over $\sgintp[p]$ in
   \cref{alg:alternativeFuzzyExtensionPrinciple},
   we use the globalized version of the gradient descent method
-  as described in \cref{sec:522method}
-  using 100 initial points and \num{50000} allowed function evaluations of
-  $\sgintp[p]$.
+  as described in \cref{sec:522method} using 100 initial points.
+  %and \num{50000} allowed function evaluations of $\sgintp[p]$.
   The resulting fuzzy output interval is denoted by $\fuzzy[\sparse,p]{y}$.
   
   \item
@@ -363,8 +362,8 @@ as follows:
     If the initial simplex is chosen badly, Nelder--Mead can get stuck
     in local minima.
     Therefore, we restart the algorithm for different initial simplexes.%
-  }
-  and \num{50000} allowed function evaluations of $\sgintp[1]$.
+  }.
+  %and \num{50000} allowed function evaluations of $\sgintp[1]$.
   The resulting fuzzy output interval corresponds to Klimke's method and
   is denoted by $\fuzzy[\sparse,1]{y}$.
   
