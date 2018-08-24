@@ -1,6 +1,12 @@
 #!/usr/bin/python3
+# dependencies = SG++
 
+import helper.function
 import helper.hpc
+
+import numpy as np
+
+import pysgpp
 
 
 
@@ -32,3 +38,15 @@ def optimizeFuzzy(fStr, d, gridType, gridGenerationType,
   
   result = json.loads(process.stdout.decode())
   return result
+
+
+
+def calculateRelativeL2FuzzyError(
+    xDataExact, alphaDataExact, xDataAppr, alphaDataAppr):
+  fuzzyIntervalExact = pysgpp.OptInterpolatedFuzzyInterval(
+      helper.function.np2sgpp(np.array(xDataExact)),
+      helper.function.np2sgpp(np.array(alphaDataExact)))
+  fuzzyIntervalAppr = pysgpp.OptInterpolatedFuzzyInterval(
+      helper.function.np2sgpp(np.array(xDataAppr)),
+      helper.function.np2sgpp(np.array(alphaDataAppr)))
+  return fuzzyIntervalExact.approximateRelativeL2Error(fuzzyIntervalAppr)
