@@ -251,7 +251,7 @@ interpolating the interval bounds of the $\alpha_j$-cuts of $\fuzzy{y}$.
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\fuzzy{y} = \text{alternativeFuzzyExtensionPrinciple}$}{%
-      $\fuzzy{x}_1$, \dots, $\fuzzy{x}_d$, $m$%
+      $m$, $\fuzzy{x}_1$, \dots, $\fuzzy{x}_d$%
     }
       \For{$j = 0, \dotsc, m$}
         \State{$\alpha_j \gets j/m$}
@@ -284,9 +284,10 @@ interpolating the interval bounds of the $\alpha_j$-cuts of $\fuzzy{y}$.
   \end{algorithmic}
   \caption[Alternative fuzzy extension principle]{%
     Alternative fuzzy extension principle.
-    Inputs are the $d$ fuzzy intervals $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$
-    (we have to be able to evaluate $\alpha$-cuts)
-    and the number of $\alpha$ segments to use as discretization.
+    Inputs are the number of $\alpha$ segments to use as discretization and
+    the $d$ fuzzy intervals $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$
+    (we have to be able to determine $\alpha$-cuts
+    of these fuzzy input intervals).
     Output is an approximation to the output $\fuzzy{y}$
     of the alternative fuzzy extension principle
     (given by an approximation of its membership function $\memfun{y}$).%
