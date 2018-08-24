@@ -20,7 +20,7 @@ def optimizeFuzzy(fStr, d, gridType, gridGenerationType,
           "n={}".format(n), "m={}".format(m), "input={}".format(inputIndex),
           "seed={}".format(seed)]
   env = dict(os.environ)
-  env["OMP_NUM_THREADS"] = "1"
+  env["OMP_NUM_THREADS"] = "48"
   
   try:
     process = subprocess.run(
