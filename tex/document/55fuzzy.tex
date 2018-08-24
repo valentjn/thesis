@@ -417,53 +417,182 @@ deviates from $\fuzzy[\reference]{y}$.
   \label{fig:resultsFuzzyPropagation}%
 \end{SCfigure}
 
-\blindtext{}
+In \cref{fig:resultsFuzzyRegular}, we study the convergence of the
+relative $\Ltwo$ errors
+\begin{equation}
+  e^{\sparse,\ast}
+  := \frac{
+    \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}
+  }{
+    \normLtwo{\memfun[\reference]{y}}
+  },\quad
+  \ast \in \{1, p\}.
+\end{equation}
+of the membership functions (``fuzzy errors'').
+The Alp02 ($d = 2$) errors
+that correspond to \cref{fig:resultsFuzzyPropagation}
+are shown in green in the left-most plot of \cref{fig:resultsFuzzyRegular}.
+For the Bra02, GoP, and Alp02 functions, B-spline surrogates achieve
+dramatic improvements over the hat function surrogates in the bivariate case.
+For the bivariate Ack function, B-splines yield an error that
+is still an order of magnitude smaller than the error of hat functions.
+Just little or even no improvement can be seen
+for the functions with discontinuous derivatives or
+higher dimensionalities $d \ge 4$.
+
+\begin{figure}
+  \includegraphics{resultsFuzzyLegend_1}\\[2mm]%
+  \includegraphics{resultsFuzzyRegular_1}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_2}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_3}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_4}%
+  \caption[Fuzzy errors for regular sparse grids]{%
+    Fuzzy errors
+    $e^{\sparse,\ast}
+    := \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
+    \normLtwo{\memfun[\reference]{y}}$
+    for regular sparse grids $\regsgset{n}{d}$
+    and different objective functions $\objfun$ \emph{(colors)}
+    over the level $n$ of the sparse grid.%
+  }%
+  \label{fig:resultsFuzzyRegular}%
+\end{figure}
 
 \paragraph{Fuzzy Ritter--Novak method}
 
-\blindtext{}
+We want to employ spatially adaptivity to improve the results
+for regular sparse grids.
+To this end, we modify the Ritter--Novak criterion
+to create a grid generation method that is tailored for the
+fuzzy extension principle, resulting in \cref{alg:fuzzyRitterNovakMethod}.
+Its main idea is to generate more points near the optimal points
+of the fuzzy extension principle
+(\cref{alg:alternativeFuzzyExtensionPrinciple}) than in other regions
+of $\clint{\*0, \*1}$.
+Therefore, we apply the Ritter--Novak criterion twice to
+every $\alpha$ level $\alpha_j = \tfrac{j}{m}$ ($j = 0, \dotsc, m$),
+one time for the minimum and one time for the maximum.
+For all $\alpha_j$, the points to be refined are collected in a set.
+If a point is selected multiple times for different $\alpha_j$,
+it is only refined once.
+In addition, we enlarge the search domain $\Omega_{\alpha_j}$
+by \SI{10}{\percent}, since the minimum or the maximum might be
+near the boundary $\Omega_{\alpha_j}$.
+We ensure a minimal size of $\Omega_{\alpha_j}$ of at least $0.05$
+in every coordinate direction.
+The following experiments use $\gamma = 0.1$ as adaptivity.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\liset = \text{fuzzyRitterNovakMethod}$}{%
+      $\objfun$, $\gamma$, $m$, $\liset$, $\fuzzy{x}_1$, \dots, $\fuzzy{x}_d$%
+    }
+      \ForOneLine{$(\*l, \*i) \in \liset$}{$d_{\*l,\*i} \gets 0$}
+      \Comment{degrees (number of refinements)}%
+      \While{$\setsize{\liset} < \ngpMax$}
+        \State{$R \gets \emptyset$}
+        \For{$j = 0, \dotsc, m$}
+          \State{$\alpha_j \gets j/m$}
+          \For{$t = 1, \dotsc, d$}
+            \State{$\clint{a_{j,t}, b_{j,t}} \gets \acut[t]{x}{\alpha_j}$}
+            \Comment{determine $\alpha_j$-cut}%
+            \If{$b_{j,t} - a_{j,t} < 0.05$}
+            \Comment{ensure minimal size of $0.05$}%
+              \State{%
+                $(a_{j,t}, b_{j,t}) \gets
+                ((a_{j,t} + b_{j,t})/2 - 0.025,
+                (a_{j,t} + b_{j,t})/2 + 0.025)$%
+              }\vspace{-1mm}
+            \EndIf{}
+            \State{%
+              $(a_{j,t}, b_{j,t}) \gets
+              (a_{j,t} - 0.05 (b_{j,t} - a_{j,t}),
+              b_{j,t} + 0.05 (b_{j,t} - a_{j,t}))$%
+            }
+            \Comment{enlarge by \SI{10}{\percent}}%
+            \vspace{-1mm}
+          \EndFor{}
+          \State{%
+            $\liset_j \gets \{(\*l, \*i) \in \liset \mid
+            \gp{\*l,\*i} \in \Omega_{\alpha_j} \cap \clint{\*0, \*1}\}$%
+          }
+          \Comment{set of feasible points}%
+          \ForOneLine{$(\*l, \*i) \in \liset_j$}{%
+            $r_{\*l,\*i} \gets \setsize{
+              \{(\*l', \*i') \in \liset_j \mid
+              \objfun(\gp{\*l',\*i'}) \le \objfun(\gp{\*l,\*i})\}
+            }$%
+          }
+          \Comment{ranks}%
+          \State{%
+            $(\*l^\ast, \*i^\ast) \gets
+            \argmin_{(\*l,\*i) \in \liset_j} \bracket*{
+              (r_{\*l,\*i} + 1)^\gamma
+              (\normone{\*l} + d_{\*l,\*i} + 1)^{1 - \gamma}
+            }$%
+          }
+          \Comment{for minimum}%
+          \vspace{-0.7mm}
+          \State{%
+            $(\*l^{\ast\ast}, \*i^{\ast\ast}) \gets
+            \argmin_{(\*l,\*i) \in \liset_j} \bracket*{
+              (\setsize{\liset_j} - r_{\*l,\*i} + 2)^\gamma
+              (\normone{\*l} + d_{\*l,\*i} + 1)^{1 - \gamma}
+            }$%
+          }
+          \Comment{for maximum}%
+          \State{%
+            $R \gets R \cup \{(\*l^\ast, \*i^\ast),
+            (\*l^{\ast\ast}, \*i^{\ast\ast})\}$%
+          }
+        \EndFor{}
+        \State{Refine all points in $\liset$ that are in $R$}
+        \ForOneLine{$(\*l, \*i) \in R$}{$d_{\*l,\*i} \gets d_{\*l,\*i} + 1$}
+      \EndWhile{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[Fuzzy Ritter--Novak method]{%
+    Fuzzy Ritter--Novak method to generate spatially adaptive sparse grids
+    for the fuzzy extension principle.
+    Inputs are
+    the objective function $\objfun$,
+    the adaptivity parameter $\gamma \in \clint{0, 1}$,
+    the number of $\alpha$ segments,
+    the initial sparse grid $\liset$ as a set of level-index pairs, and the
+    the $d$ fuzzy intervals $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$.
+    Output is the spatially adaptive sparse grid $\liset$.%
+  }%
+  \label{alg:fuzzyRitterNovakMethod}%
+\end{algorithm}
 
 \paragraph{Convergence of fuzzy intervals on spatially adaptive sparse grids}
 
-\blindtext{}
+As we can see in \cref{fig:resultsFuzzyAdaptive},
+the spatially adaptive sparse grids generated by the fuzzy Ritter--Novak
+method improve results significantly.
+\todo{write text}
+\todo{replace figure below with actual plots}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+\begin{figure}
+  \includegraphics{resultsFuzzyLegend_1}\\[2mm]%
+  \includegraphics{resultsFuzzyRegular_1}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_2}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_3}%
+  \hfill%
+  \includegraphics{resultsFuzzyRegular_4}%
+  \caption[Fuzzy errors for spatially adaptive sparse grids]{%
+    Fuzzy errors
+    $e^{\sparse,\ast}
+    := \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
+    \normLtwo{\memfun[\reference]{y}}$
+    for spatially adaptive sparse grids $\sgset$
+    and different objective functions $\objfun$ \emph{(colors)}
+    over the number $\ngpMax$ of objective function evaluations.%
+  }%
+  \label{fig:resultsFuzzyAdaptive}%
+\end{figure}
