@@ -296,7 +296,6 @@ int main(int argc, const char* argv[]) {
   sgpp::base::DataVector displacement(d), x_opt(d);
   problem->generateDisplacement();
   displacement = problem->getDisplacement();
-  double f_x_opt = problem->getOptimalPoint(x_opt);
   sgpp::optimization::ScalarFunction& f = problem->getObjectiveFunction();
 
   // print settings
@@ -312,9 +311,7 @@ int main(int argc, const char* argv[]) {
   std::cerr << "p = " << p << "\n";
   std::cerr << "seed = " << std::to_string(seed) << "\n\n";
 
-  sgpp::optimization::operator<<(std::cerr << "displacement = ", displacement) << "\n";
-  sgpp::optimization::operator<<(std::cerr << "x_opt = ", x_opt) << "\n";
-  std::cerr << "f(x_opt) = " << f_x_opt << "\n\n";
+  sgpp::optimization::operator<<(std::cerr << "displacement = ", displacement) << "\n\n";
 
   // GRID GENERATION
 
