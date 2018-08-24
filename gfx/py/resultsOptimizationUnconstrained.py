@@ -86,7 +86,7 @@ def main():
   j = 0
   
   for q, fs in enumerate(fss):
-    fig = Figure.create(figsize=(3.1, 2.5))
+    fig = Figure.create(figsize=(3.1, 2.45))
     ax = fig.gca()
     
     for fStr, d, color in fs:
