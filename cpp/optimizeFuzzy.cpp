@@ -13,7 +13,7 @@
  *          hoelderTable, increasingPower, michalewicz, mladineo, perm, rastrigin, rosenbrock,
  *          schwefel06, schwefel22, schwefel26, shcb, sphere, tremblingParabola)
  * grid     type of the grid (one of bSpline, notAKnotBSpline, modifiedBSpline, modifiedNotAKnotBSpline, fundamentalSpline, fundamentalNotAKnotSpline, weaklyFundamentalSpline, weaklyFundamentalNotAKnotSpline)    modifiedNotAKnotBSpline
- * gridGen  how to generate the grids (regular or ritterNovak)         ritterNovak
+ * gridGen  how to generate the grids (regular, ritterNovak, or exact)         ritterNovak
  * gamma    if gridGen=ritterNovak: adaptivity of the grid generation                                           0.85
  * N        if gridGen=ritterNovak: maximal number of grid points                                               1000
  * m        if gridGen=ritterNovak: number of alpha segments                                           100
@@ -61,6 +61,7 @@ enum GridType {
 enum GridGeneratorType {
   Regular,
   RitterNovak,
+  Exact,
 };
 
 /* ****************************************************************************
@@ -277,7 +278,7 @@ int main(int argc, const char* argv[]) {
 
   std::unique_ptr<sgpp::optimization::IterativeGridGenerator> grid_gen;
 
-  if (grid_gen_type != GridGeneratorType::Regular) {
+  if (grid_gen_type == GridGeneratorType::RitterNovak) {
     grid_gen =
       getGridGenerator(grid_gen_type, *problem, *grid, N, gamma, m, xFuzzyPtr);
   }
@@ -317,56 +318,61 @@ int main(int argc, const char* argv[]) {
 
   // GRID GENERATION
 
-  printLine();
-  std::cerr << "Generating grid...\n\n";
-
   sgpp::base::DataVector function_values;
 
-  if (grid_gen_type == GridGeneratorType::Regular) {
-    grid->getGenerator().regular(n);
-    sgpp::base::DataVector x(d);
-    function_values.resize(grid->getSize());
+  if (grid_gen_type != GridGeneratorType::Exact) {
+    printLine();
+    std::cerr << "Generating grid...\n\n";
 
-    for (size_t k = 0; k < grid->getSize(); k++) {
-      grid->getStorage()[k].getStandardCoordinates(x);
-      function_values[k] = f.eval(x);
-    }
-  } else if (grid_gen_type == GridGeneratorType::RitterNovak) {
-    if (!grid_gen->generate()) {
-      std::cerr << "Grid generation failed, exiting.\n";
-      return 1;
-    }
+    if (grid_gen_type == GridGeneratorType::Regular) {
+      grid->getGenerator().regular(n);
+      sgpp::base::DataVector x(d);
+      function_values.resize(grid->getSize());
 
-    function_values = grid_gen->getFunctionValues();
-  } else {
-    throw std::invalid_argument("Grid generator type not supported.");
+      for (size_t k = 0; k < grid->getSize(); k++) {
+        grid->getStorage()[k].getStandardCoordinates(x);
+        function_values[k] = f.eval(x);
+      }
+    } else if (grid_gen_type == GridGeneratorType::RitterNovak) {
+      if (!grid_gen->generate()) {
+        std::cerr << "Grid generation failed, exiting.\n";
+        return 1;
+      }
+
+      function_values = grid_gen->getFunctionValues();
+    } else {
+      throw std::invalid_argument("Grid generator type not supported.");
+    }
   }
 
   // HIERARCHISATION
 
-  printLine();
-  std::cerr << "Hierarchising...\n\n";
   sgpp::base::DataVector coeffs;
-  sgpp::optimization::HierarchisationSLE hier_system(*grid);
-  sgpp::optimization::sle_solver::Auto sle_solver;
-  //sgpp::optimization::Printer::getInstance().printSLE(hier_system);
-
-  // solve linear system
-  if (!sle_solver.solve(hier_system, function_values, coeffs)) {
-    std::cerr << "Solving failed, exiting.\n";
-    return 1;
-  }
-
-  // hierarchisation of linear interpolant
-  printLine();
-
-  std::cerr << "Linear hierarchisation...\n\n";
   std::unique_ptr<sgpp::base::Grid> grid_linear;
   std::unique_ptr<sgpp::optimization::InterpolantScalarFunction> ft_linear;
 
-  if (!getLinearInterpolant(grid_type, d, *grid, function_values, grid_linear, ft_linear)) {
-    std::cerr << "Couldn't determine linear interpolant, exiting\n";
-    return 1;
+  if (grid_gen_type != GridGeneratorType::Exact) {
+    printLine();
+    std::cerr << "Hierarchising...\n\n";
+    sgpp::optimization::HierarchisationSLE hier_system(*grid);
+    sgpp::optimization::sle_solver::Auto sle_solver;
+    //sgpp::optimization::Printer::getInstance().printSLE(hier_system);
+
+    // solve linear system
+    if (!sle_solver.solve(hier_system, function_values, coeffs)) {
+      std::cerr << "Solving failed, exiting.\n";
+      return 1;
+    }
+
+    // hierarchisation of linear interpolant
+    printLine();
+
+    std::cerr << "Linear hierarchisation...\n\n";
+
+    if (!getLinearInterpolant(grid_type, d, *grid, function_values, grid_linear, ft_linear)) {
+      std::cerr << "Couldn't determine linear interpolant, exiting\n";
+      return 1;
+    }
   }
 
   // OPTIMIZATION
@@ -374,37 +380,41 @@ int main(int argc, const char* argv[]) {
   printLine();
 
   std::cerr << "Optimizing...\n\n";
-  sgpp::optimization::InterpolantScalarFunction ft(*grid, coeffs);
-  sgpp::optimization::InterpolantScalarFunctionGradient ft_gradient(*grid, coeffs);
+  std::unique_ptr<sgpp::optimization::InterpolantScalarFunction> ft;
+  std::unique_ptr<sgpp::optimization::InterpolantScalarFunctionGradient> ft_gradient;
+  std::vector<std::string> optimizer_str;
 
-  std::vector<std::string> optimizer_str =
-  {"smoothInterpolant", "linearInterpolant", "objectiveFunction"};
+  if (grid_gen_type != GridGeneratorType::Exact) {
+    ft.reset(new sgpp::optimization::InterpolantScalarFunction(*grid, coeffs));
+    ft_gradient.reset(new sgpp::optimization::InterpolantScalarFunctionGradient(*grid, coeffs));
+    optimizer_str.push_back("smoothInterpolant");
+    optimizer_str.push_back("linearInterpolant");
+  } else {
+    optimizer_str.push_back("objectiveFunction");
+  }
+
   std::vector<std::unique_ptr<sgpp::optimization::InterpolatedFuzzyInterval>> optimizer_y_fuzzy;
   std::vector<double> optimizer_times;
 
   // optimize and measure times
-  for (size_t k = 0; k < 3; k++) {
+  for (size_t k = 0; k < optimizer_str.size(); k++) {
     std::chrono::time_point<std::chrono::system_clock> start_time =
       std::chrono::system_clock::now();
 
-    switch (k) {
-    case 0:
+    if (optimizer_str[k] == "smoothInterpolant") {
       // optimization of smooth interpolant
       optimizer_y_fuzzy.emplace_back();
-      optimizeSmoothIntp(ft, ft_gradient, m, xFuzzyPtr, optimizer_y_fuzzy[k]);
-      break;
-    case 1:
+      optimizeSmoothIntp(*ft, *ft_gradient, m, xFuzzyPtr, optimizer_y_fuzzy[k]);
+    } else if (optimizer_str[k] == "linearInterpolant") {
       // optimization of linear interpolant
       optimizer_y_fuzzy.emplace_back();
       optimizeLinearIntp(*ft_linear, m, xFuzzyPtr, optimizer_y_fuzzy[k]);
-      break;
-    case 2:
+    } else if (optimizer_str[k] == "objectiveFunction") {
       // optimization of objective function
       optimizer_y_fuzzy.emplace_back();
       optimizeObjFcn(f, m, xFuzzyPtr, optimizer_y_fuzzy[k]);
-      break;
-    default:
-      break;
+    } else {
+      throw std::invalid_argument("Optimizer type not supported.");
     }
 
     std::chrono::duration<double> duration = std::chrono::system_clock::now() - start_time;
@@ -413,62 +423,28 @@ int main(int argc, const char* argv[]) {
 
   // CALCULATION OF ERRORS
 
-  std::vector<double> optimizer_fuzzy_errors;
+  /*std::vector<double> optimizer_fuzzy_errors;
 
-  for (size_t i = 0; i < optimizer_y_fuzzy.size(); i++) {
+  for (size_t k = 0; k < optimizer_y_fuzzy.size(); k++) {
     optimizer_fuzzy_errors.push_back(
         optimizer_y_fuzzy[2]->approximateRelativeL2Error(
-          *optimizer_y_fuzzy[i]));
-  }
-
-  /*printLine();
-  std::cerr << "Results overview (seed = " << seed << "):\n\n";
-  printShortLine();
-
-  std::vector<int> colw = {20, 13, 13, 13};
-  std::cerr << std::setw(colw[0]) << std::left << "OPTIMIZED FUNCTION";
-  std::cerr << std::setw(colw[1]) << std::right << "f(x)";
-  std::cerr << std::setw(colw[2]) << std::right << "ft(x)";
-  std::cerr << std::setw(colw[3]) << std::right << "DURATION" << "\n";
-  printShortLine();
-
-  for (size_t i = 0; i < optimizer_str.size(); i++) {
-    if (optimizer_str[i] == "-") {
-      printShortLine();
-      continue;
-    }
-
-    std::cerr << std::setw(colw[0]) << std::left << optimizer_str[i];
-    std::cerr << std::setw(colw[1]) << std::right << optimizer_x_opt[i].f_x;
-    std::cerr << std::setw(colw[2]) << std::right << optimizer_x_opt[i].ft_x;
-
-    if (optimizer_times[i] > 0.0) {
-      std::cerr << std::setw(colw[3]-2) << std::right
-                << static_cast<int>(1000.0 * optimizer_times[i]) << "ms";
-    } else {
-      std::cerr << std::setw(colw[3]) << std::right << "";
-    }
-
-    std::cerr << "\n";
-  }
-
-  printShortLine();
-  std::cerr << "\n";*/
+          *optimizer_y_fuzzy[k]));
+  }*/
 
   // WRITE RESULTS TO STDOUT
 
   std::cout << std::scientific << std::setprecision(16);
   std::cout << "{\n";
 
-  for (size_t i = 0; i < optimizer_y_fuzzy.size(); i++) {
-    std::cout << "  \"" << optimizer_str[i] << "\" : {\n";
+  for (size_t k = 0; k < optimizer_str.size(); k++) {
+    std::cout << "  \"" << optimizer_str[k] << "\" : {\n";
     sgpp::optimization::operator<<(std::cout << "    \"yFuzzyXData\" : ",
-                                   optimizer_y_fuzzy[i]->getXData()) << ",\n";
+                                   optimizer_y_fuzzy[k]->getXData()) << ",\n";
     sgpp::optimization::operator<<(std::cout << "    \"yFuzzyAlphaData\" : ",
-                                   optimizer_y_fuzzy[i]->getAlphaData()) << ",\n";
-    std::cout << "    \"fuzzyError\" : " << optimizer_fuzzy_errors[i] << ",\n";
-    std::cout << "    \"runtime\" : " << optimizer_times[i] << "\n";
-    std::cout << "  }" << ((i < optimizer_y_fuzzy.size() - 1) ? "," : "") << "\n";
+                                   optimizer_y_fuzzy[k]->getAlphaData()) << ",\n";
+    //std::cout << "    \"fuzzyError\" : " << optimizer_fuzzy_errors[k] << ",\n";
+    std::cout << "    \"runtime\" : " << optimizer_times[k] << "\n";
+    std::cout << "  }" << ((k < optimizer_y_fuzzy.size() - 1) ? "," : "") << "\n";
   }
 
   std::cout << "}\n";
@@ -555,6 +531,8 @@ void parseArgs(int argc, const char* argv[],
         grid_gen_type = GridGeneratorType::Regular;
       } else if (arg == "ritterNovak") {
         grid_gen_type = GridGeneratorType::RitterNovak;
+      } else if (arg == "exact") {
+        grid_gen_type = GridGeneratorType::Exact;
       } else {
         continue;
       }
