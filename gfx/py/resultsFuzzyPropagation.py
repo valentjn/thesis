@@ -16,7 +16,7 @@ def processValue(n):
   d = 2
   gridType = "modifiedNotAKnotBSpline"
   gridGenerationType = ("regular" if n > 0 else "exact")
-  N = 1000
+  N = 0
   p = 3
   gamma = 0.9
   m = 100
