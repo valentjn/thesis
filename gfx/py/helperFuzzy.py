@@ -41,6 +41,20 @@ def optimizeFuzzy(fStr, d, gridType, gridGenerationType,
 
 
 
+def getMaximalRegularLevel(d, gridType, NMax):
+  n = 0
+  
+  while True:
+    N = getGridSize(d, gridType, n)
+    if N > NMax: return n - 1
+    n += 1
+
+def getGridSize(d, gridType, n):
+  assert gridType == "modifiedNotAKnotBSpline"
+  return helper.grid.RegularSparse(n+d-1, d).getSize()
+
+
+
 def calculateRelativeL2FuzzyError(
     xDataExact, alphaDataExact, xDataAppr, alphaDataAppr):
   fuzzyIntervalExact = pysgpp.OptInterpolatedFuzzyInterval(

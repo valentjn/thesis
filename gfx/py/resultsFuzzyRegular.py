@@ -24,15 +24,6 @@ def processParameterCombination(
       fStr, d, gridType, gridGenerationType,
       N, p, gamma, n, m, inputIndex, seed)
 
-def getMaximalRegularLevel(d, gridType, NMax):
-  assert gridType == "modifiedNotAKnotBSpline"
-  n = 0
-  
-  while True:
-    N = helper.grid.RegularSparse(n+d-1, d).getSize()
-    if N > NMax: return n - 1
-    n += 1
-
 
 
 def main():
@@ -62,7 +53,8 @@ def main():
   seeds = [1]
   
   ds = set([d for fs in fss for _, d, _ in fs])
-  nMaxs = {d : getMaximalRegularLevel(d, gridType, NMax) for d in ds}
+  nMaxs = {d : helperFuzzy.getMaximalRegularLevel(d, gridType, NMax)
+           for d in ds}
   parameterCombinations = []
   
   for fs in fss:
