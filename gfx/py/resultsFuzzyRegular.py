@@ -73,7 +73,7 @@ def main():
   j = 0
   
   for q, fs in enumerate(fss):
-    figsize = ((1.83, 2.5) if q == 0 else (1.76, 2.5))
+    figsize = ((1.83, 2.45) if q == 0 else (1.76, 2.45))
     fig = Figure.create(figsize=figsize)
     ax = fig.gca()
     
