@@ -29,7 +29,7 @@ def processParameterCombination(
 def main():
   gridType = "modifiedNotAKnotBSpline"
   gridGenerationType = "regular"
-  N = 1000
+  N = 0
   p = 3
   gamma = 0.9
   m = 100
