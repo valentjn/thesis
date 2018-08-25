@@ -310,9 +310,9 @@ class SGppGrid(object):
         "modifiedNotAKnotBSpline" : pysgpp.Grid.createModNotAKnotBsplineGrid,
         "notAKnotBSpline" : pysgpp.Grid.createNotAKnotBsplineBoundaryGrid,
         "weaklyFundamentalNotAKnotSpline" :
-            pysgpp.Grid.createLagrangeNotAKnotSplineBoundaryGrid,
+            pysgpp.Grid.createWeaklyFundamentalNotAKnotSplineBoundaryGrid,
         "weaklyFundamentalSpline" :
-            pysgpp.Grid.createLagrangeSplineBoundaryGrid,
+            pysgpp.Grid.createWeaklyFundamentalSplineBoundaryGrid,
       }
       grid = gridTypes[grid](*args)
     
