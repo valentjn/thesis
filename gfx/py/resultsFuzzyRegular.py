@@ -55,17 +55,11 @@ def main():
   ds = set([d for fs in fss for _, d, _ in fs])
   nMaxs = {d : helperFuzzy.getMaximalRegularLevel(d, gridType, NMax)
            for d in ds}
-  parameterCombinations = []
-  
-  for fs in fss:
-    for fTuple in fs:
-      d = fTuple[1]
-      nMax = nMaxs[d]
-      
-      for n in range(nMax+1):
-        for seed in seeds:
-          parameterCombinations.append([fTuple, n, seed])
-  
+  parameterCombinations = [[fTuple, n, seed]
+                           for fs in fss
+                           for fTuple in fs
+                           for n in range(nMaxs[fTuple[1]]+1)
+                           for seed in seeds]
   print(parameterCombinations)
   
   with multiprocessing.Pool() as pool:
