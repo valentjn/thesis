@@ -49,7 +49,7 @@ as a grid point of a coarser level $l'$ and an odd index $i'$:
 \begin{equation}
   \gp{l,i} = \gp{l',i'},\quad
   l' = l - \bracket*{\log_2(\xor(i, i-1) + 1) - 1},\quad
-  i' = i/2^{l-l'},
+  i' = 2^{l'-l} i,
 \end{equation}
 % https://mathoverflow.net/a/29973
 where $\xor$ is the bitwise ``exclusive or'' function.
