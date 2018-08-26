@@ -18,19 +18,23 @@ In contrast, \term{constrained optimization problems} are given by
   \ineqconfun(\*x) \le \*0,
 \end{equation}
 where
-$\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$
+$\ineqconfun\colon \real^d \to \real^{m_{\ineqconfun}}$
 ($m_{\ineqconfun} \in \natz$)
 is the \term{(inequality) constraint function.}
 This formulation also contains optimization problems
 with equality constraints $\eqconfun(\*x) = \*0$
 by setting $\ineqconfun(\*x) := (\eqconfun(\*x), -\eqconfun(\*x))$.
+Equality constraints can also be solved by incorporating them
+into the unconstrained solver (e.g., see \cite{Boyd04Convex}
+for an equality-constrained Newton method).
+
 As sparse grid surrogates $\objfun = \sgintp$ are only defined on the
-unit hyper-cube $\clint{\*0, \*1}$,
+unit hyper-cube,
 the choice of $\*x$ has to be restricted to $\clint{\*0, \*1}$.
 In the case of \eqref{eq:unconstrainedOptimization},
 this results in a \term{box-constrained optimization problem.}
-A simple method of applying algorithms for unconstrained problems
-to box-constraints is extending $\sgintp$ to $\real^d$ by
+A simple method for applying unconstrained optimization algorithms
+to box-constrained problems is extending $\sgintp$ to $\real^d$ by
 $\sgintp(\*x) = +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
 However, more sophisticated
 %, algorithm-tailored
@@ -40,22 +44,23 @@ approaches are also available \cite{More87Optimization}.
 
 Problems of the form \eqref{eq:unconstrainedOptimization} or
 \eqref{eq:constrainedOptimization} are \term{black-box optimization problems,}
-where we do not have any insight into the structure or algebraic
+where we cannot gain any insight into the structure or algebraic
 properties of $\objfun$.
 Black-box optimization methods perform a series of evaluations
-$\objfun(\*x_k)$ of $\objfun$.
-Based on the function values $\*x_0, \dotsc, \*x_k$,
-the methods choose the next evaluation point $\*x_{k+1}$.
+$\objfun(\*x_k)$ of $\objfun$,
+choosing the next evaluation point $\*x_{k+1}$
+based on the previous function values $\objfun(\*x_0), \dotsc, \objfun(\*x_k)$.
 Gradient-based methods differ from gradient-free approaches
-in the way that they also take values of the gradient
+in such a way that they also take values of the gradient
 $\gradient{\*x}{\objfun}(\*x_k)$ or of the Hessian
 $\hessian{\*x}{\objfun}(\*x_k)$ into account.
 A vast array of optimization methods exists in literature.
 Some methods are better suited for specific optimization problems
 than others.
-However, according to the ``no-free-lunch theorem'' \cite{Wolpert97No},
-all methods perform equally well in the mean of all possible
-optimization problems under some assumptions.
+However, according to the ``no-free-lunch theorem''
+and under some assumptions \cite{Wolpert97No},
+all methods perform equally well (or equally badly) in the mean of all possible
+optimization problems.
 
 \paragraph{Local and global optima}
 
@@ -65,9 +70,9 @@ where \eqref{eq:unconstrainedOptimization} or
 \eqref{eq:constrainedOptimization} only holds for $\*x$
 in a neighborhood of $\xopt$.
 One can globalize local methods to increase the probability
-of finding a global minimum with a Monte-Carlo multi-start approach:
+of finding a global optimum with a Monte-Carlo multi-start approach:
 The method is repeated with different pseudo-random initial points
-and the best local minimum is chosen.
+and the best local optimum is chosen as the result.
 
 In the following,
 we give a brief survey of a small selection of optimization methods
@@ -117,8 +122,6 @@ highlighting the key ingredients for each method.
   \label{tbl:optimizationMethod}%
 \end{table}
 
-\todo{maybe debug PSO implementation... (is currently implemented in sgpp/sgopt, but doesn't seem to work)}
-
 
 
 \subsection{Gradient-Free Unconstrained Optimization Methods}
@@ -140,13 +143,17 @@ highlighting the key ingredients for each method.
 
 \paragraph{Nelder--Mead}
 
-The Nelder--Mead method
+The \term{Nelder--Mead method}
 \multicite{Nelder65Simplex,Gao12Implementing,Valentin14Hierarchische}
 maintains a list of $d + 1$ vertices of a $d$-dimensional simplex,
-where the points are sorted by ascending function value.
+sorted by ascending function value.
 In each iteration,
 the method performs one of the operations
-reflection, expansion, outer contraction, inner contraction, and shrinking
+\term{reflection,}
+\term{expansion,}
+\term{outer contraction,}
+\term{inner contraction,} and
+\term{shrinking}
 on the vertices.
 Typically, convergence can be detected by
 checking the size of the simplex,
@@ -160,7 +167,7 @@ twice continuously differentiable objective function
 
 \paragraph{Differential evolution}
 
-The method of differential evolution
+The method of \term{differential evolution}
 \multicite{%
   Storn97Differential,%
   Zielinski09Optimizing,%
@@ -168,83 +175,83 @@ The method of differential evolution
 }
 is an evolutionary meta-heuristic algorithm.
 Being similar to genetic algorithms,
-the method maintains a population of $m$ points
-that is iteratively updated according to pseudo-random mutations,
+the method maintains a \term{population} of $m$ points
+that is iteratively updated according to pseudo-random \term{mutations,}
 which are weighted sums of the points of the previous generation.
-The mutated vector is crossed over with the original vector
+The mutated vector is \term{crossed over} with the original vector
 entry by entry.
-The resulting offsprings are only accepted if they lead to an improvement in
-terms of objective function value.
+The resulting \term{offsprings} are only accepted if they lead to
+an improvement in terms of objective function value.
 %There are various stopping criteria
 %that are based on the function value or on the location of the population
 %\cite{Zielinski09Optimizing}.
 
 \paragraph{CMA-ES}
 
-CMA-ES (covariance matrix adaption, evolution strategy)
+\term{CMA-ES (covariance matrix adaption, evolution strategy)}
 \cite{Hansen03Reducing}
 is also an evolutionary algorithm,
 which addresses the issue
 that simple evolution strategies do not prefer a search direction
 due to the lack of gradients \cite{Toussaint15Introduction}.
 The name of the algorithm stems from the fact
-that it keeps track of the covariance matrix of the
+that it keeps track of the \term{covariance matrix} of the
 Gaussian search distribution.
-After $m$ points have been sampled from the current distribution and
+After $m$ points have been sampled from the current distribution,
 the mean of the distribution for the next iteration
-has been calculated as the weighted mean of the $k$ best samples,
-the covariance matrix is updated accordingly.
-One advantage of the method is that if the population is large enough,
+is calculated as the weighted mean of the $k$ best samples and
+the covariance matrix is adapted accordingly.
+An advantage of the method is that if the population is large enough,
 local minima are smoothed out \cite{Toussaint15Introduction}.
 
 \paragraph{Simulated annealing}
 
-Simulated annealing
+\term{Simulated annealing}
 \multicite{Laarhoven87Simulated,Press07Numerical,Kiranyaz14Multidimensional}
 imitates the cooling of a solid by randomly drawing samples
-from a proposal distribution and calculating an acceptance
-probability that depends on the function value improvement as well as
-on a temperature parameter $T$.
-The temperature is slowly decreased in the course of the algorithm.
+from a proposal distribution and calculating an \term{acceptance probability}
+that depends on the function value improvement as well as
+on a \term{temperature} $T$.
+This temperature is slowly decreased in the course of the algorithm.
 Simulated annealing is closely connected to the
 Metropolis--Hastings algorithm for drawing random samples of arbitrary
 probability distributions.
-For arbitrary runtime,
+If run long enough,
 %(e.g., if the decrease rate of the temperature is small enough),
 simulated annealing is guaranteed to find the global
 optimum \cite{Toussaint15Introduction}.
 
 \paragraph{Particle swarm optimization (PSO)}
 
-The method of particle swarm optimization (PSO)
+The method of \term{particle swarm optimization (PSO)}
 \multicite{Kennedy95Particle,Zielinski09Optimizing,Kiranyaz14Multidimensional}
 can be seen as another evolutionary algorithm
 that stems from swarm intelligence.
-For each particle of the population,
-not only the position $\*x_k$ is stored,
-but also a current velocity $\*v_k$,
+For each \term{particle} of the population,
+not only the \term{position} $\*x_k$ is stored,
+but also the current \term{velocity} $\*v_k$,
 the best known position in a neighborhood of $\*x_k$
 (which may be the whole swarm), and
 the best known position of the $k$-th particle.
-The next velocity $\*v_{k+1}$ is calculated as
-the pseudo-randomly weighted sum of $\*v_k$,
+The next velocity $\*v_{k+1}$ is computed as
+a pseudo-randomly weighted sum of $\*v_k$,
 the vector from $\*x_k$ to the best neighborhood position, and
 the vector from $\*x_k$ to the best own position.
 
 \paragraph{GP-LCB}
 
-GP-LCB (Gaussian process, lower confidence bound)
+\term{GP-LCB (Gaussian process, lower confidence bound)}
 \multicite{Srinivas10Gaussian,Toussaint15Introduction} is an example
-for a Bayesian optimization strategy.
+for a \term{Bayesian optimization} strategy.
 The objective function is treated as a stochastic process.
-A prior distribution is updated according to the previous function
-evaluations to calculate the posterior distribution.
-The posterior distribution is used to form the acquisition function,
-which is turn determines the point at which the objective
+A \term{prior distribution} is updated according to the previous function
+evaluations to calculate the \term{posterior distribution.}
+The posterior distribution is used to form the \term{acquisition function,}
+which in turn determines the point at which the objective
 function is evaluated next.
-The GP-LCB is obtained by choosing
-Gaussian processes for the family of stochastic processes and
-lower confidence bounds (which are the sum of the mean
+The GP-LCB method is obtained by choosing
+\term{Gaussian processes} for the family of stochastic processes and
+\term{lower confidence bounds} (which are the sum of the mean
 and a multiple of the standard deviation) for the acquisition function.
 
 
@@ -264,81 +271,82 @@ and a multiple of the standard deviation) for the acquisition function.
 \end{figure}
 
 Most gradient-based optimization algorithms determine in
-each iteration $k$ a normed search direction $\*d_k$
+each iteration $k$ a unit \term{search direction} $\*d_k \in \real^d$
 ($\norm[2]{\*d_k} = 1$) to update the current iterate $\*x_k$:
 \begin{equation}
   \*x_k
   \to \*x_{k+1}
-  := \*x_k + \alpha_k \*d_k,\qquad
-  \alpha_k
-  := \argmin_{\alpha \in \posreal} \objfun(\*x_k + \alpha \*d_k),
+  := \*x_k + \delta_k \*d_k,\qquad
+  \delta_k
+  := \argmin_{\delta \in \posreal} \objfun(\*x_k + \delta \*d_k),
 \end{equation}
-where $\alpha_k \in \posreal$ is the step size.
-The various algorithms differ in the choice of the search direction
-$\*d_k \in \real^d$,
-which is commonly chosen such that it points in negative gradient
+where $\delta_k \in \posreal$ is the \term{step size.}
+The algorithms essentially differ in the
+choice of the search direction $\*d_k$,
+which should point in negative gradient
 direction ($\innerprod[2]{\*d_k}{\gradient{\*x}{\objfun}(\*x_k)} < 0$).
-The step size $\alpha_k$ can then be determined independently of the
-algorithm via a \term{line search algorithm.}
-One of the most common is the \term{Armijo line search algorithm}
+The step size $\delta_k$ can then be determined independently of the
+algorithm via \term{line search,}
+for instance, the \term{Armijo line search algorithm}
 \multicite{Nocedal99Numerical,Ulbrich12Nichtlineare,Valentin14Hierarchische},
 which uses a heuristic acceptance criterion
-to find $\alpha_k$ with good enough improvement.
+to find $\delta_k$ with a good enough improvement.
 
 \paragraph{Gradient descent}
 
-Gradient descent
+\term{Gradient descent}
 \multicite{%
   Ulbrich12Nichtlineare,%
   Valentin14Hierarchische,%
   Toussaint15Introduction%
 }
-is the simplest gradient-based optimization method,
-since it just chooses $\*d_k = -\gradient{\*x}{\objfun}(\*x_k)$.
-The method of gradient descent may show a very slow convergence,
-if the Hessian $\hessian{\*x}{\objfun}$
-of the objective function is ill-conditioned.
-One can show that for strictly convex and quadratic functions,
+%is the simplest gradient-based optimization method,
+%since it
+just chooses $\*d_k
+\!\propto\! -\gradient{\*x}{\!\objfun}(\*x_k)$ (i.e., normalized).
+The method suffers from slow convergence,
+if the Hessian $\hessian{\*x}{\objfun}$ is ill-conditioned:
+One can show that for strictly convex quadratic functions,
 the error $\objfun(\*x_k) - \objfun(\xopt)$
 %to the optimal function value
 can decrease in each iteration only by the factor of
-%$(\frac{\lambda^{\max} - \lambda^{\min}}{\lambda^{\max} + \lambda^{\min}})^2$,
-$(\lambda^{\max} - \lambda^{\min})^2/(\lambda^{\max} + \lambda^{\min})^2$,
+$(\tfrac{\lambda^{\max} - \lambda^{\min}}{\lambda^{\max} + \lambda^{\min}})^2$,
+%$(\lambda^{\max} - \lambda^{\min})^2/(\lambda^{\max} + \lambda^{\min})^2$,
 where $\lambda^{\min}$ and $\lambda^{\max}$ are the minimum and maximum
 eigenvalue of $\hessian{\*x}{\objfun}$, respectively
 \cite{Ulbrich12Nichtlineare}.
 If the condition number
-%$\frac{\lambda^{\max}}{\lambda^{\min}}$
-$\lambda^{\max}/\lambda^{\min}$
+$\tfrac{\lambda^{\max}}{\lambda^{\min}}$
+%$\lambda^{\max}/\lambda^{\min}$
 of $\hessian{\*x}{\objfun}$ is large,
 then this factor will be very close to one.
 
 \paragraph{NLCG}
 
 A possible remedy for this issue is the method of
-non-linear conjugate gradients (NLCG)
+\term{non-linear conjugate gradients (NLCG)}
 \multicite{%
   Nocedal99Numerical,%
   Valentin14Hierarchische,%
   Toussaint15Introduction%
-},
-which is equivalent to the CG method for solving \spd linear systems
+}.
+It is equivalent to the CG method for solving \spd linear systems
 $\mat{A} \*x = \*b$,
-if we optimize the strictly convex and quadratic function
+if we optimize the strictly convex quadratic function
 $\objfun(\*x) := \frac{1}{2} \tr{\*x} \mat{A} \*x - \tr{\*b} \*x$
-\multicite{Reinhardt13Nichtlineare,Valentin14Hierarchische}.
-Due to this correspondence,
-the NLCG method exactly finds the optimum after only $d$ steps
-for strictly convex quadratic functions.
+\multicite{Reinhardt13Nichtlineare,Valentin14Hierarchische}, i.e.,
+it finds the optimum after only $d$ steps for strictly convex
+quadratic functions.
 The NLCG quickly converges even for non-convex objective functions,
-as three times continuously differentiable functions
+as due to the Taylor theorem,
+three times continuously differentiable functions
 with positive definite Hessian are ``similar'' to a
 strictly convex quadratic function in a neighborhood of $\xopt$
 \cite{Valentin14Hierarchische}.
 
 \paragraph{Newton}
 
-The Newton method
+The \term{Newton method}
 \multicite{%
   Ulbrich12Nichtlineare,%
   Valentin14Hierarchische,%
@@ -352,12 +360,13 @@ $\objfun(\*x_k + \*d_k)
 \frac{1}{2} \tr{(\*d_k)} \hessian{\*x}{\objfun}(\*x_k) \*d_k$
 and determines the search direction such that $\*x_k + \*d_k$ is
 the minimum of the approximation, i.e.,
-$\*d_k = -(\hessian{\*x}{\objfun}(\*x_k))^{-1} \gradient{\*x}{\objfun}(\*x_k)$.
+$\*d_k \propto
+-(\hessian{\*x}{\objfun}(\*x_k))^{-1} \gradient{\*x}{\objfun}(\*x_k)$.
 Despite converging for strictly convex quadratic functions in a single step,
 the Hessian must not be ill-conditioned for the Newton method as well,
 as we have to solve a linear system with matrix
 $\hessian{\*x}{\objfun}(\*x_k)$.
-Hence, often a regularization or damping term $\lambda \eye$
+Hence, often a \term{regularization/damping term} $\lambda \eye$
 for some $\lambda > 0$ is added to the Hessian.
 
 \paragraph{BFGS}
@@ -365,8 +374,8 @@ for some $\lambda > 0$ is added to the Hessian.
 The Newton method has the disadvantage that it needs to evaluate the
 Hessian $\hessian{\*x}{\objfun}$,
 which may be unavailable or too expensive.
-Quasi-Newton methods such as the method of BFGS
-(Broyden, Fletcher, Goldfarb, Shanno)
+\term{Quasi-Newton methods} such as the method of
+\term{BFGS (Broyden, Fletcher, Goldfarb, Shanno)}
 \multicite{%
   Nocedal99Numerical,%
   Ulbrich12Nichtlineare,%
@@ -381,13 +390,13 @@ The BFGS method performs a simple rank-one update.
 
 \paragraph{Rprop}
 
-Rprop (resilient propagation)
+\term{Rprop (resilient propagation)}
 \multicite{Riedmiller93Direct,Toussaint15Introduction}
 considers the gradient entries $(\gradient{\*x}{\objfun}(\*x_k))_t$
 of each dimension $t = 1, \dotsc, d$ separately
 and updates the entries $x_{k,t}$ of $\*x_k$
-according to the sign of the respective gradient entry and
-individual step size adaption.
+according to the sign of the respective gradient entry,
+adapting the step size dimension-wise.
 Although the algorithm is independent of the exact direction
 of $\gradient{\*x}{\objfun}(\*x_k)$,
 it was found to often work robustly in machine learning scenarios
@@ -395,42 +404,42 @@ it was found to often work robustly in machine learning scenarios
 
 \paragraph{Levenberg--Marquardt}
 
-The Levenberg--Marquardt method
+The \term{Levenberg--Marquardt method}
 \multicite{Nocedal99Numerical,Freund07Stoer,Toussaint15Introduction}
-can only solve non-linear least-squares problems, i.e.,
+can only solve \term{non-linear least-squares problems,} i.e.,
 the objective function must be of the form
 $\objfun(\*x) = \tr{\*\phi(\*x)} \*\phi(\*x) = \sum_{i=1}^m \phi_i(\*x)^2$
 for some function $\*\phi\colon \real^d \to \real^m$.
-It is an improvement over the Gauss--Newton method
+It is an improvement over the \term{Gauss--Newton method}
 (which is in turn a slight modification of the Newton method)
 and can be obtained by replacing the line search in the
-Gauss--Newton method with a trust-region approach.
+Gauss--Newton method with a \term{trust-region approach.}
 
 
 
 \subsection{Constrained Optimization Methods}
 \label{sec:513gradientBasedConstrained}
 
-Algorithms for constrained optimization usually
-solve a series of unconstrained auxiliary problems with an arbitrary
+Methods for constrained optimization usually
+solve a series of unconstrained \term{auxiliary problems} with an arbitrary
 unconstrained optimization method.
 The auxiliary function to be minimized is
-the sum of the objective function and non-negative penalty terms,
+the sum of the objective function and non-negative \term{penalty terms,}
 which penalize if the current point $\*x_k$ is near the boundary
 of the feasible domain or even outside.
-The magnitude of the penalty terms slowly increases to enforce
-the feasibility of the final solution.
-Constrained optimization algorithms can roughly be divided
+The penalty terms slowly increase to enforce
+the feasibility of the final result.
+Constrained optimization methods can roughly be divided
 into \term{interior-point or barrier methods,}
 where $\*x_k$ always stays in the feasible domain,
 and \term{penalty methods,}
-where intermediate solutions $\*x_k$ can be infeasible,
+where intermediate solutions $\*x_k$ may be infeasible,
 in which case the penalty term is applied.
 %(the penalty vanishes inside the domain).
 
 At least for the interior-point methods,
-a feasible initial solution is required.
-This can be found by solving another auxiliary problem
+a feasible initial solution $\*x_0$ is required.
+We can find an initial solution by solving another auxiliary problem
 \cite{Toussaint15Introduction}, for instance
 \begin{equation}
   \min_{(\*x, s) \in \real^{d+1}} s
@@ -442,25 +451,22 @@ where $\*1_{m_{\ineqconfun}} \in \real^{m_{\ineqconfun}}$
 is the all-one vector.
 An initial solution for this problem can be explicitly given
 (for example, $\*x_0 = \*0$ and
-$s_0 = \max(\ineqconfun(\*x_0))$).
+$s_0 = \max(\max(\ineqconfun(\*x_0)), 0)$).
 
 \paragraph{Log-barrier}
 
-The log-barrier method
+The \term{log-barrier method}
 \multicite{Boyd04Convex,Reinhardt13Nichtlineare,Toussaint15Introduction}
-is an interior-point method that solves the inequality-constrained problem
-$\min \objfun(\*x) \text{ s.t. } \ineqconfun(\*x) \le \*0$ by
-adding a logarithmic barrier function term to the objective function
-near the boundary, i.e., the method solves
+is an interior-point method that adds
+a logarithmic \term{barrier function term} to the objective function
+near the boundary.
+The method solves
 $\min\, [\objfun(\*x) - \mu_k \sum_{i=1}^{m_{\ineqconfun}} \log(-g_i(\*x))]$
 for some decreasing $\mu_k \in \posreal$.
-Equality constraints can also be solved by incorporating them
-into the unconstrained solver (e.g., see \cite{Boyd04Convex}
-for an equality-constrained Newton method).
 
 \paragraph{Squared penalty}
 
-The squared penalty method
+The \term{squared penalty method}
 \multicite{%
   Polak71Computational,%
   Ulbrich12Nichtlineare,%
@@ -468,15 +474,15 @@ The squared penalty method
 }
 replaces the constrained problem with the penalized problem
 $\min\, [\objfun(\*x) + \mu_k \norm[2]{\nonnegpart{\ineqconfun(\*x)}}^2]$,
-where $\mu_k \in \posreal$ is an increasing penalty parameter and
-$\nonnegpart{\cdot} := \max(\cdot, 0)$ denotes the non-negative part.
+where $\mu_k \in \posreal$ is a penalty parameter and
+$\nonnegpart{\cdot} := \*\max(\cdot, \*0)$ denotes the non-negative part.
 With increasing $\mu_k$, the constraint violation of the solution of
-the penalized problem will decrease, although it may happen
+the penalized problem decreases, although it may happen
 that it never vanishes.
 
 \paragraph{Augmented Lagrangian}
 
-The method of the augmented Lagrangian
+The method of the \term{augmented Lagrangian}
 \multicite{Reinhardt13Nichtlineare,Toussaint15Introduction}
 considers the auxiliary problem
 \begin{equation}
@@ -488,7 +494,7 @@ considers the auxiliary problem
 where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is defined as one,
 if and only if $\lambda_{k,i} > 0$, and
 $\*\lambda_k \in \nonnegreal^{m_{\ineqconfun}}$ is an estimate of the
-Lagrangian multipliers.
+\term{Lagrangian multipliers.}
 They are updated according to the penalty of the previous iteration,
 generating a ``virtual gradient'' that drastically decreases
 the necessary magnitude of the penalty parameter $\mu_k$
@@ -496,22 +502,23 @@ to achieve feasibility of the solution \cite{Toussaint15Introduction}.
 
 \paragraph{Sequential quadratic programming (SQP)}
 
-Sequential quadratic programming (SQP) methods
+\term{Sequential quadratic programming (SQP) methods}
 \multicite{%
   Ulbrich12Nichtlineare,%
   Reinhardt13Nichtlineare,%
   Toussaint15Introduction%
 }
 are one of the most powerful method classes for constrained optimization.
-They are motivated by the Karush--Kuhn--Tucker (KKT) conditions,
+They are motivated by the \term{Karush--Kuhn--Tucker (KKT) conditions,}
 which are necessary to hold in any optimal point
 (similarly to critical points in unconstrained optimization).
-The Newton method can be employed to solve the KKT conditions,
-as they can be written as a non-linear system of equations.
+The Newton method can be employed to solve the KKT conditions when
+written as a non-linear system of equations.
 The linear system of the resulting \emph{Newton--Lagrange method}
-is equivalent to the KKT conditions of a quadratic programming (QP) problem,
+is equivalent to the KKT conditions of a
+\term{quadratic programming (QP) problem,}
 for which objective and constraint functions have the
 form $\objfun(\*x) = \frac{1}{2} \tr{\*x} \mat{Q} \*x + \tr{\*d} \*x$ and
 $\ineqconfun(\*x) = \mat{A} \*x - \*b$, respectively.
-SQP methods solve one QP problem in each iteration (``sequentially'')
-to determine the search direction.
+%SQP methods solve one QP problem in each iteration (``sequentially'')
+%to determine the search direction.

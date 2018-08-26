@@ -18,17 +18,18 @@ we apply the hierarchical B-spline bases derived in
 \cref{chap:30BSplines,chap:40algorithms} to optimization,
 which is a major task in simulation technology,
 for instance in inverse problems (see \cref{chap:10introduction}).
-We pursue a surrogate-based optimization approach:
+We pursue a three-step surrogate-based optimization approach:
 First, we sample the objective function at specific sparse grid points
 to retrieve objective function values.
 Second, by interpolating these values with hierarchical bases,
 we obtain a surrogate for the objective function.
-Finally, we discard the original objective function and apply
+Third and finally, we discard the original objective function and apply
 already existing optimization methods to the surrogate.
+
 One of the key advantages of hierarchical B-splines
 over common hierarchical bases for
 sparse grids is their continuous differentiability.
-The gradients of B-spline surrogates on sparse grids are not only continuous,
+The derivatives of B-spline surrogates on sparse grids are not only continuous,
 but also explicitly known and can be evaluated fast.
 This gives the opportunity to employ gradient-based optimization techniques,
 which usually converge significantly faster than gradient-free alternatives.
@@ -36,25 +37,26 @@ which usually converge significantly faster than gradient-free alternatives.
 The outline of this chapter is as follows:
 We start in \cref{sec:51algorithms}
 with a compact overview of textbook optimization algorithms,
-which comprises gradient-free and gradient-based optimization methods
-for unconstrained problems as well as algorithms for constrained optimization.
+which comprises gradient-free and gradient-based optimization algorithms
+for unconstrained problems as well as algorithms for constrained problems.
 In \cref{sec:52method}, we present the main method that
-conflates the various textbook optimization algorithms
-to a single method for the optimization of surrogates on sparse grids.
+conflates the various textbook optimization algorithms and
+the generation of spatially adaptive sparse grids with the
+Novak--Ritter criterion to create a single method for the
+optimization of surrogates on sparse grids.
 \Cref{sec:53testProblems} continues with a small array of test problems
 for unconstrained and constrained optimization.
 In \cref{sec:54results}, we apply the presented method
-to the test problems, studying the effects of the different
-hierarchical B-splines to optimization errors and conducting various
+to the test problems, studying the influence of the different
+hierarchical B-splines on the optimization errors and conducting several
 numerical experiments.
-Finally, in \cref{sec:55fuzzy}, we examine with the fuzzy extension principle
-an example application of optimization of hierarchical B-spline surrogates on
-sparse grids.
+Finally, in \cref{sec:55fuzzy}, we examine the fuzzy extension principle
+as an example application of the optimization of
+hierarchical B-spline surrogates on sparse grids.
 
 Parts of this chapter have already been published in previous work
-of the author of this thesis \cite{Valentin14Hierarchische}, especially
-the overview of optimization algorithms (\cref{sec:51algorithms})
-and partly the library of test problems (\cref{sec:53testProblems}).
+\cite{Valentin14Hierarchische}, especially
+the overview of optimization algorithms (\cref{sec:51algorithms}).
 However, as the previous work included other basis functions as well,
 this thesis represents the first comprehensive study
 that focuses on the application of hierarchical B-splines to optimization.
