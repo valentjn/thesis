@@ -137,8 +137,11 @@ def plotDifferentialEvolution():
       if t >= 1: ax.plot([x, x + squareSize], [y, y], "k-", clip_on=False)
       if i == 1:
         xStart = (x+squareSize if t in mutationDimensions else x-squareMargin)
+        dashPattern = 1.295 * np.array([3, 1])
+        ax.plot([xStart + 0.15, x + squareSize + squareMargin - 0.2],
+                [y + squareSize/2, y + squareSize/2], "k", ls=(0, dashPattern))
         helper.plot.plotArrow(
-            ax, [xStart + 0.15, y + squareSize/2],
+            ax, [x + squareSize + squareMargin - 0.25, y + squareSize/2],
             [x + squareSize + squareMargin - 0.2, y + squareSize/2],
             scaleHead=5)
       if i == 0:   color = "C0"
