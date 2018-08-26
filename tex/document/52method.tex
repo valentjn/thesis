@@ -14,13 +14,13 @@ sparse grids, which we explain in the following.
 The classic surplus-based refinement strategy to generate
 spatially adaptive sparse grids is not tailored to optimization,
 as this strategy tries to minimize the overall $\Ltwo$ error.
-However, in optimization, it is more reasonable to generate more
+However, in optimization, it is reasonable to generate more
 points in regions where we suspect the global minimum
 to increase the interpolant's accuracy in these regions.
-Therefore, we use instead an adaptivity criterion proposed by
-Novak and Ritter \cite{Novak96Global} for hyperbolic cross points.
-However, the criterion has also been employed for sparse grids
-\multicite{Ferenczi05Globale,Valentin14Hierarchische,Valentin16Hierarchical}.
+Hence, we use instead an adaptivity criterion proposed by
+Novak and Ritter \cite{Novak96Global} for hyperbolic cross points
+(it has also been employed for sparse grids
+\multicite{Ferenczi05Globale,Valentin14Hierarchische,Valentin16Hierarchical}).
 
 \paragraph{$m$-th order children}
 
