@@ -208,7 +208,8 @@ def plotConstrainedProblem(q):
   ax.set_ylim(bounds[:,T[1]])
   
   ax.set_xlabel(r"$\xscaled[{}]$".format(T[0]+1), labelpad=-7)
-  ax.set_ylabel(r"$\xscaled[{}]$".format(T[1]+1), labelpad=-4)
+  ax.set_ylabel(r"$\xscaled[{}]$".format(T[1]+1),
+                labelpad=(-2 if q == 0 else -8))
   
   ax.set_xticks(np.linspace(*bounds[:,T[0]], 5))
   ax.set_yticks(np.linspace(*bounds[:,T[1]], 5))
