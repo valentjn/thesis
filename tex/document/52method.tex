@@ -102,23 +102,23 @@ during the grid generation phase.
 
 \paragraph{Global, local, and globalized optimization methods}
 
-In \cref{sec:51algorithms}, we presented various optimization algorithms
+In \cref{sec:51algorithms}, we presented various optimization methods
 for the unconstrained case,
-divided into global gradient-free methods such as differential evolution an
+divided into global gradient-free methods such as differential evolution and
 local gradient-based methods such as gradient descent.
-A subset of these algorithms has been implemented in \sgpp
+A subset of these methods has been implemented in \sgpp
 (see \cref{tbl:optimizationMethod}).
 The gradient-based methods need an initial point and
 they may get stuck in local minima.
 Hence, we additionally implemented globalized versions
 of the gradient-based methods
 via a multi-start Monte Carlo approach with $m := \min(10d, 100)$
-uniformly distributed pseudo-random initial points%
+uniformly distributed pseudo-random initial points.%
 \footnote{%
   We split the number of permitted function evaluations evenly
   among the $m$ parallel calls.%
   %of the gradient-based method%
-}.
+}
 This means there are three types of optimization methods:
 
 \begin{enumerate}[label={(T\arabic*)},leftmargin=*]
@@ -130,7 +130,8 @@ This means there are three types of optimization methods:
   \item
   \label{item:localMethods}
   Local gradient-based methods listed as implemented in
-  \cref{tbl:optimizationMethod} (need an initial point)%
+  \cref{tbl:optimizationMethod}
+  %(need an initial point)%
   \footnote{%
      Excluding Levenberg--Marquardt, which is only applicable
      to least-squares problems.%
@@ -145,9 +146,9 @@ This means there are three types of optimization methods:
 \paragraph{Unconstrained optimization of sparse grid surrogates}
 
 Given the objective function $\objfun\colon \clint{\*0, \*1} \to \real$,
-the maximum number $\ngpMax \in \nat$ of evaluations of $f$, and
+the maximal number $\ngpMax \in \nat$ of evaluations of $f$, and
 the adaptivity parameter $\gamma \in \clint{0, 1}$,
-we can determine an approximation $\xoptappr \in \clint{\*0, \*1}$
+we determine an approximation $\xoptappr \in \clint{\*0, \*1}$
 of the global minimum $\xopt$ of $\objfun$ as follows:
 
 \begin{enumerate}
@@ -162,19 +163,18 @@ of the global minimum $\xopt$ of $\objfun$ as follows:
   
   \item
   Optimize the interpolant:
-  First, find the best grid point $\*x^{(0)} := \gp{\*l^{(0)},\*i^{(0)}}$,
-  where $(\*l^{(0)},\*i^{(0)})
-  = \argmin_{(\*l,\*i) \in \liset} \objfun(\*x_{\*l,\*i})$.
+  First, find the best grid point
+  $\*x^{(0)} := \argmin_{\gp{\*l,\*i} \in \sgset} \objfun(\*x_{\*l,\*i})$.
   Second, apply the local methods of type \ref{item:localMethods}
   to the interpolant $\sgintp$ with $\*x^{(0)}$ as initial point.
   Let $\*x^{(1)}$ be the resulting point with minimal objective function value.
   Third, we apply the global and globalized methods
   of types \ref{item:globalMethods} and \ref{item:globalizedMethods}
   to the interpolant $\sgintp$.
-  Again, let $\*x^{(2)}$ be the point with the
+  Again, let $\*x^{(2)}$ be the point with
   minimal $\objfun$ value.
-  Determine the point of $\{\*x^{(0)}, \*x^{(1)}, \*x^{(2)}\}$
-  with the smallest $\objfun$ value and return it as $\xoptappr$.
+  Finally, determine the point of $\{\*x^{(0)}, \*x^{(1)}, \*x^{(2)}\}$
+  with minimal $\objfun$ value and return it as $\xoptappr$.
 \end{enumerate}
 
 Note that the third step requires a fixed number of additional
@@ -188,10 +188,11 @@ However, we could apply any of the hierarchical (B-)spline bases presented in
 
 \paragraph{Comparison methods}
 
-We use two methods for comparison.
+We use two comparison methods.
 First, we apply the gradient-free methods
-(type \ref{item:globalMethods}) to the piecewise linear sparse grid surrogate
-(i.e., $p = 1$).
+(type \ref{item:globalMethods}) to the sparse grid interpolant
+using modified piecewise linear hierarchical basis functions
+(i.e., $p = 1$) and using the same grid as for the cubic B-splines.
 We cannot employ gradient-based optimization as the objective function
 should be continuously differentiable and
 discontinuous derivatives are usually numerically problematic
@@ -210,7 +211,7 @@ evenly among all employed optimization methods.
 
 For optimization problems with constraints,
 we proceed exactly as for unconstrained optimization,
-except that for optimizing the interpolant, we only use the
+except that for optimizing the interpolant, we use the
 constrained optimization algorithms implemented in \sgpp
 as listed in \cref{tbl:optimizationMethod}.
 We only replace the objective function $\objfun$ with a sparse grid
