@@ -16,25 +16,26 @@ When testing methods that involve sparse grid interpolation,
 one has to consider that the function to be interpolated
 does not satisfy a specific \term{trivial property.}
 A test function $\objfun\colon \clint{\*0, \*1} \to \real$ is trivial, if
+$\objfun$ is a sum of tensor products of which at
+least one factor is a linear polynomial, i.e., if
 $\objfun$ is of the form
 \begin{equation}
-  \objfun \equiv \sum_{q=1}^m \prod_{t=1}^d \objfun_{q,t},\quad
+  \objfun(\*x) \equiv \sum_{q=1}^m \prod_{t=1}^d \objfun_{q,t}(x_t),\quad
   m \in \natz,\;\;
-  \objfun_{q,t}\colon \clint{\*0, \*1} \to \real,\;\;
+  \objfun_{q,t}\colon \clint{0, 1} \to \real,\;\;
   \faex{q = 1, \dotsc, m}{t \in \{1, \dotsc, d\}}{
     \objfun_{q,t} \in \polyspace{1},
   }
 \end{equation}
-where $\polyspace{1}$ is the space of polynomials up to linear degree.
-Trivial test functions are sums of tensor products of which at
-least one factor is a linear polynomial.
-Note that this is already fulfilled if the summands of $\objfun(\*x)$
+where $\polyspace{1}$ is the space of univariate polynomials
+up to linear degree.
+This is already fulfilled if the summands of $\objfun(\*x)$
 do not depend on all coordinates $x_t$ of $\*x$.
 One can show that for hat functions on sparse grids,
 the hierarchical surpluses $\surplus{\*l,\*i}$ for trivial functions
 vanish if $\*l \ge \*1$.
 This means that trivial functions can well be approximated by hat functions
-on sparse grids with boundary points, without placing any points
+on sparse grids just with boundary points, without placing any points
 in the interior.
 As this would distort our results,
 we avoid trivial test functions in the following,
@@ -58,31 +59,28 @@ respectively.
 \begin{table}
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
-      >{\kern\tabcolsep}=l<{\kern5mm}*{6}{+c}+l<{\kern\tabcolsep}%
+      >{\kern\tabcolsep}=l+l<{\kern5mm}*{5}{+c}+l<{\kern\tabcolsep}%
     }
     \toprulec
     \headerrow
-    Name&                             $d$& $m_{\ineqconfun}$& C&    CD&   MM&   Reference\\
+    Name&           Abbr.& $d$& $m_{\ineqconfun}$& C&    CD&   MM&   Reference\\
     \midrulec
-    % Beale(2)?
-    \textbf{Bra}nin\textbf{02}&       2&   0&                 \yes& \yes& \yes& \cite{Munteanu98Global}\\
-    %\textbf{Egg}Holder&               2&   0&                 \yes& \no&  \yes& \cite{Whitley96Evaluating}\\
-    \textbf{Go}ldstein\textbf{P}rice& 2&   0&                 \yes& \yes& \yes& \cite{Goldstein71Descent}\\
-    \textbf{Sch}wefel\textbf{06}&     2&   0&                 \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
-    \textbf{Ack}ley&                  $d$& 0&                 \yes& \yes& \yes& \cite{Ackley87Connectionist}\\
-    \textbf{Alp}ine\textbf{02}&       $d$& 0&                 \yes& \yes& \yes& \cite{Clerc99Swarm}\\
-    \textbf{Sch}wefel\textbf{22}&     $d$& 0&                 \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
+    Branin02&       Bra02& 2&   0&                 \yes& \yes& \yes& \cite{Munteanu98Global}\\
+    GoldsteinPrice& GoP&   2&   0&                 \yes& \yes& \yes& \cite{Goldstein71Descent}\\
+    Schwefel06&     Sch06& 2&   0&                 \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
+    Ackley&         Ack&   $d$& 0&                 \yes& \yes& \yes& \cite{Ackley87Connectionist}\\
+    Alpine02&       Alp02& $d$& 0&                 \yes& \yes& \yes& \cite{Clerc99Swarm}\\
+    Schwefel22&     Sch22& $d$& 0&                 \yes& \no&  \no&  \cite{Schwefel77Numerische}\\
     \midrulec
-    \textbf{G08}&                     2&   2&                 \yes& \yes& \yes& \cite{Schoenauer93Constrained}\\
-    \textbf{G04Sq}uared&              5&   6&                 \yes& \yes& \no&  \cite{Colville68Comparative}\\
+    G08&            G08&   2&   2&                 \yes& \yes& \yes& \cite{Schoenauer93Constrained}\\
+    G04Squared&     G04Sq& 5&   6&                 \yes& \yes& \no&  \cite{Colville68Comparative}\\
     \bottomrulec
   \end{tabular}
   \caption[Selection of test problems in optimization]{%
     Unconstrained \emph{(top)} and constrained \emph{(bottom)} test problems.
-    The bold-faced part of the name will be used as an abbreviation.
-    The remaining columns state
+    The columns state the full and abbreviated names,
     the dimensionality $d$ of the objective function $\objfun$,
-    the number $m_{\ineqconfun}$ of inequality constraints,
+    the number $m_{\ineqconfun}$ of constraints,
     whether $\objfun$ is continuous in the domain
     $\clint{\*0, \*1}$ (C),
     whether $\objfun$ is continuously differentiable in the domain
@@ -96,35 +94,35 @@ respectively.
 
 \begin{figure}
   \subcaptionbox{%
-    Branin02%
+    Bra02%
   }[71mm]{%
     \includegraphics{optimizationProblem_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    GoldsteinPrice%
+    GoP%
   }[76mm]{%
     \includegraphics{optimizationProblem_2}%
   }\\[2.5mm]%
   \subcaptionbox{%
-    Schwefel06%
+    Sch06%
   }[71mm]{%
     \includegraphics{optimizationProblem_3}%
   }%
   \hfill%
   \subcaptionbox{%
-    Ackley for $d = 2$%
+    Ack for $d = 2$%
   }[76mm]{%
     \includegraphics{optimizationProblem_4}%
   }\\[2.5mm]%
   \subcaptionbox{%
-    Alpine02 for $d = 2$%
+    Alp02 for $d = 2$%
   }[71mm]{%
     \includegraphics{optimizationProblem_5}%
   }%
   \hfill%
   \subcaptionbox{%
-    Schwefel22 for $d = 2$%
+    Sch22 for $d = 2$%
   }[76mm]{%
     \includegraphics{optimizationProblem_6}%
   }%
@@ -146,7 +144,7 @@ respectively.
   }%
   \hfill%
   \subcaptionbox{%
-    G04Squared (bivariate projection over $\xscaled[3]$ and $\xscaled[5]$
+    G04Sq (bivariate projection over $\xscaled[3]$ and $\xscaled[5]$
     onto $\xscaled[t] = \xoptscaled[t]$ for $t = 1, 2, 4$)%
   }[72mm]{%
     \includegraphics{optimizationProblem_8}%
@@ -164,15 +162,15 @@ respectively.
 
 For each test problem, we state unscaled versions of objective functions
 $\objfunscaled\colon \clint{\*a, \*b} \to \real$,
-$\xscaled \to \objfunscaled(\xscaled)$
-(and, if present, the unscaled constraint function $\ineqconfunscaled$).
+$\xscaled \mapsto \objfunscaled(\xscaled)$
+(and the unscaled constraint function $\ineqconfunscaled$, if present).
 The actual objective function $\objfun\colon \clint{\*0, \*1} \to \real$
 can be obtained by $\objfun(\*x) := \objfunscaled(\xscaled)$
 with the affine parameter transformation
-$\*x = \tfrac{\xscaled - \*a}{\*b - \*a}$
-(similarly for the constraint functions).
+$x_t = \tfrac{\xscaled[t] - a_t}{b_t - a_t}$, $t = 1, \dotsc, d$
+(similarly for the constraint function).
 
-The parameter domain of some objective functions have been translated slightly
+The parameter domain of some test problems have been translated slightly
 compared to the literature
 to avoid that the minimum is located exactly at or close to
 the center of the domain.
