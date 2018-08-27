@@ -13,35 +13,35 @@ sparse grids, which we explain in the following.
 
 The classic surplus-based refinement strategy to generate
 spatially adaptive sparse grids is not tailored to optimization,
-as this strategy tries to minimize the overall $\Ltwo$ error.
+as this strategy aims to minimize the overall $\Ltwo$ error.
 However, in optimization, it is reasonable to generate more
 points in regions where we suspect the global minimum
 to increase the interpolant's accuracy in these regions.
-Hence, we use instead an adaptivity criterion proposed by
+Hence, we employ an adaptivity criterion proposed by
 Novak and Ritter \cite{Novak96Global} for hyperbolic cross points
-(it has also been employed for sparse grids
+(it has also been applied to sparse grids
 \multicite{Ferenczi05Globale,Valentin14Hierarchische,Valentin16Hierarchical}).
 
 \paragraph{$m$-th order children}
 
 As usual, the criterion works iteratively:
 Starting with an initial regular sparse grid of a very coarse level,
-the criterion selects in each iteration a specific point $\gp{\*l,\*i}$
+the criterion selects a specific point $\gp{\*l,\*i}$ in each iteration
 and inserts all its children into the grid.
 This process is repeated until a given number $\ngpMax$ of grid points is
 reached,
 since we evaluate $\objfun$ at every grid point once and we assume that
 function evaluations dominate the overall complexity.
 The difference to common refinement criteria is that
-a point can be selected multiple times, in which case
+a point may be selected multiple times, in which case
 \term{higher-order children} are inserted.
 The $m$-th order children $\gp{\*l',\*i'}$ of a grid point $\gp{\*l,\*i}$
 satisfy
 \begin{equation}
   \label{eq:indirectChild}
-  \*l'_{-t} = \*l_{-t},\;
-  \*i'_{-t} = \*i_{-t},\;
-  l'_t = l_t + m,\;
+  \*l'_{-t} = \*l_{-t},\;\,
+  \*i'_{-t} = \*i_{-t},\;\,
+  l'_t = l_t + m,\;\,
   i'_t \in
   \begin{cases}
     \{1\},&(l_t = 0) \land (i_t = 0),\\
@@ -60,7 +60,7 @@ in the grid yet.
 \paragraph{Criterion}
 
 The Novak--Ritter refinement criterion \cite{Novak96Global}
-refines the grid point $\gp{\*l,\*i}$ which minimizes the product%
+refines the grid point $\gp{\*l,\*i}$ that minimizes the product%
 \footnote{%
   Compared to \cite{Novak96Global},
   we added one in the base of each factor to avoid ambiguities
@@ -74,14 +74,15 @@ refines the grid point $\gp{\*l,\*i}$ which minimizes the product%
 \end{equation}
 Here, $r_{\*l,\*i} := \setsize{
   \{(\*l',\*i') \in \liset \mid
-  \objfun(\gp{\*l',\*i'}) \le \objfun(\gp{\*l,\*i})
-} \in \{1, \dotsc, \setsize{\liset}\}$ is \term{rank} of $\gp{\*l,\*i}$
+  \objfun(\gp{\*l',\*i'}) \le \objfun(\gp{\*l,\*i})\}
+} \in \{1, \dotsc, \setsize{\liset}\}$ is the \term{rank} of $\gp{\*l,\*i}$
 (where $\liset$ is the current set of level-index pairs of the grid), i.e.,
 the place of the function value at $\gp{\*l,\*i}$
-in the ordering of the function values at all points of the current grid.
-With $d_{\*l,\*i} \in \natz$, we denote the \term{degree} of $\gp{\*l,\*i}$
+in the ascending ordering of the function values at all points
+of the current grid.
+We denote the \term{degree} $d_{\*l,\*i} \in \natz$ of $\gp{\*l,\*i}$
 as the number of previous refinements of this point.
-Finally, $\gamma \in \clint{0, 1}$ is the \term{adaptivity parameter}.
+Finally, $\gamma \in \clint{0, 1}$ is the \term{adaptivity parameter.}
 %By choosing $\gamma = 0$, the function values become irrelevant and the
 %criterion produces regular-like sparse grids.
 %If we choose $\gamma = 1$, then the criterion always refines the point with
@@ -89,8 +90,8 @@ Finally, $\gamma \in \clint{0, 1}$ is the \term{adaptivity parameter}.
 %in local minima.
 We have to choose a suitable compromise between exploration ($\gamma = 0$)
 and exploitation ($\gamma = 1$).
-The best choice depends of course on the objective function $\objfun$ at hand,
-but we choose a priori for our purposes a value of $\gamma = 0.15$.
+The best choice of course depends on the objective function $\objfun$ at hand,
+but for our purposes, we choose a priori a value of $\gamma = 0.15$.
 However, it may be an option to adapt the value of $\gamma$ automatically
 during the grid generation phase.
 
@@ -103,18 +104,21 @@ during the grid generation phase.
 
 In \cref{sec:51algorithms}, we presented various optimization algorithms
 for the unconstrained case,
-divided in global gradient-free methods such as Nelder--Mead and
-differential evolution and local gradient-based methods such as
-gradient descent and the Newton method.
+divided into global gradient-free methods such as differential evolution an
+local gradient-based methods such as gradient descent.
 A subset of these algorithms has been implemented in \sgpp
 (see \cref{tbl:optimizationMethod}).
-As the gradient-based methods need some initial point and
-as they can get stuck in local minima,
-we additionally implemented globalized versions of the gradient-based methods
+The gradient-based methods need an initial point and
+they may get stuck in local minima.
+Hence, we additionally implemented globalized versions
+of the gradient-based methods
 via a multi-start Monte Carlo approach with $m := \min(10d, 100)$
-uniformly distributed pseudo-random initial points,
-evenly splitting the number of permitted function evaluations
-among the $m$ parallel calls of the gradient-based method.
+uniformly distributed pseudo-random initial points%
+\footnote{%
+  We split the number of permitted function evaluations evenly
+  among the $m$ parallel calls.%
+  %of the gradient-based method%
+}.
 This means there are three types of optimization methods:
 
 \begin{enumerate}[label={(T\arabic*)},leftmargin=*]
@@ -128,8 +132,8 @@ This means there are three types of optimization methods:
   Local gradient-based methods listed as implemented in
   \cref{tbl:optimizationMethod} (need an initial point)%
   \footnote{%
-     excluding Levenberg--Marquardt, which is only applicable
-     to least-squares problems%
+     Excluding Levenberg--Marquardt, which is only applicable
+     to least-squares problems.%
   }
   
   \item
