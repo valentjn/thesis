@@ -40,7 +40,9 @@ def main():
   ax = fig.gca()
   
   colors = {ns[i+1] : helper.plot.mixColors(
-                "hellblau", i/(len(ns)-2), "mittelblau")
+                helper.plot.mixColors("hellblau", 0.8),
+                i/(len(ns)-2),
+                helper.plot.mixColors("mittelblau", 0.6, "k"))
             for i in range(len(ns)-1)}
   
   lineStyles = {
