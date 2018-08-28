@@ -35,7 +35,7 @@ def optimizeConstrained(fStr, d, gridType, gridGenerationType,
   return result
 
 def processParameterCombination(p, gamma, grid, gridGen, parameterCombination):
-  (fStr, d, color1, color2), N, seed = parameterCombination
+  (fStr, d, color1), N, seed = parameterCombination
   return optimizeConstrained(fStr, d, grid, gridGen, N, p, gamma, seed)
 
 def getConstraintViolation(gx):
@@ -52,7 +52,7 @@ def main():
   initialSeed = 342
   numberOfRepeats = 5
   fss = [
-    [("g08", 2, "C0", "C5")], [("g04Squared", 5, "C1", "C3")],
+    [("g08", 2, "C0")], [("g04Squared", 5, "C1")],
   ]
   lineStyles = [".-", "^--", "v:"]
   
@@ -83,7 +83,7 @@ def main():
     ax2 = ax1.twinx()
     ax1.set_zorder(100)
     
-    for fStr, d, color1, color2 in fs:
+    for fStr, d, color1 in fs:
       values1, values2 = [], []
       
       for N in Ns:
@@ -122,6 +122,8 @@ def main():
       ys2 = np.array(list(zip(*values2)))
       ys1[ys1 < 1e-16] = 1e-16
       ys2[ys2 < 1e-16] = 1e-16
+      color2 = helper.plot.mixColors(
+          color1, 0.6, helper.plot.mixColors("mittelblau", 0.1))
       
       for y1, y2, lineStyle in zip(ys1, ys2, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
