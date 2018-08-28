@@ -54,7 +54,7 @@ basisNames = [
   r"$\bspl[\nak]{\*l,\*i}{p}$",
   r"$\bspl[\modified]{\*l,\*i}{p}$",
   r"$\bspl[\modified,\nak]{\*l,\*i}{p}$",
-  r"$\bspl[\fs]{\*l,\*i}{p}$",
+  r"$\bspl[\fs\hphantom{,\nak}]{\*l,\*i}{p}$",
   r"$\bspl[\fs,\nak]{\*l,\*i}{p}$",
   r"$\bspl[\wfs]{\*l,\*i}{p}$",
   r"$\bspl[\wfs,\nak]{\*l,\*i}{p}$",
