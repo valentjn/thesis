@@ -67,9 +67,7 @@ for q in range(3):
             ha="center", va="top")
     
     for k in range(len(xAlpha) // 2):
-      ax.plot(
-          [xAlpha[2*k]-0.05, xAlpha[2*k], xAlpha[2*k], xAlpha[2*k+1]-0.05],
-          4 * [alpha], "-", color="C1")
+      ax.plot([xAlpha[2*k], xAlpha[2*k+1]], 2 * [alpha], "-", color="C1")
   
   ax.set_xlim([-0.5, 9] if q == 1 else [0, 9])
   ax.set_ylim([0, 1])
