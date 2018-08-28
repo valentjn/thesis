@@ -45,7 +45,7 @@ def main():
     [("ackley", 6, "C3"), ("alpine02", 6, "C4"),
      ("schwefel22", 6, "C5")],
   ]
-  lineStyles = [".-", "^--", "v:"]
+  lineStyles = [".-", "^--"]
   seeds = [1]
   
   Ns = [0] + [int(x) for x in 2**np.arange(np.log2(NMin), np.log2(NMax))]
@@ -169,7 +169,9 @@ def main():
       
       for yAdaptive, lineStyle in zip(ysAdaptive, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
-        ax.plot(xAdaptive, yAdaptive, lineStyle, clip_on=False,
+        ax.plot(xAdaptive, yAdaptive, lineStyle,
+                clip_on=((d == 3) and (fStr == "alpine02") and
+                         (lineStyle == ".-")),
                 ms=markerSize, color=colorAdaptive)
         yAll = np.hstack((yAll, yAdaptive))
     
@@ -183,13 +185,13 @@ def main():
     x = xAdaptive
     ax.set_xlim(np.amin(x), np.amax(x))
     
-    ax.set_ylim(np.amin(yAll), np.amax(yAll))
+    ax.set_ylim(max(np.amin(yAll), 1e-10), np.amax(yAll))
     ytl = ["$10^{{{}}}$".format(int(np.log10(y))) for y in ax.get_yticks()]
     ax.set_yticklabels(ytl, va="center", rotation=60)
     ax.tick_params(axis="y", pad=-5)
     
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
-    ax.text(*trafo(0.68, 0.02), r"$\ngpMax$", ha="center", va="bottom")
+    ax.text(*trafo(0.71, -0.03), r"$\ngpMax$", ha="center", va="top")
     ax.text(*trafo(0.05, 1.00), r"$e^{\sparse,\ast}$")
     ax.text(*trafo(0.05, 0.04), "$d = {}$".format(d))
     
