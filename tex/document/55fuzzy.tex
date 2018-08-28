@@ -9,10 +9,10 @@ on sparse grids.
 
 Classical uncertainty quantification (UQ) distinguishes between
 aleatoric and epistemic uncertainties \cite{Walz16Fuzzy}.
-Aleatoric uncertainties result from variability of inputs or
+Aleatoric uncertainties result from the variability of inputs or
 model components and from the ``intrinsic randomness''
-of quantities and are best described by probability theory,
-giving exact probabilities.
+of quantities.
+They are best described by probability theory, giving exact probabilities.
 Epistemic uncertainties arise from subjectivity,
 simplifying modeling assumptions, and incomplete knowledge.
 These uncertainties are better captured by fuzzy theory,
@@ -21,12 +21,12 @@ of probabilities \cite{Walz16Fuzzy}.
 
 \paragraph{Uncertainty quantification with fuzzy uncertainties}
 
-In uncertainty quantification, a key question is as follows:
+In uncertainty quantification, the key question is as follows:
 Given a model and uncertain input parameters for the model,
 how is the model output distributed?
 While there are many approaches available
 for probabilistic uncertainties,
-it is not straightforward to see how to solve this task
+it is not straightforward to solve this task
 for fuzzy uncertainties.
 Fortunately, Zadeh proposed in 1975
 the \term{fuzzy extension principle} \cite{Zadeh75Concept},
@@ -34,16 +34,16 @@ which addresses this very question.
 
 \paragraph{Sparse grids and B-splines for fuzzy uncertainties}
 
-As we will explain in this section,
+As we explain in this section,
 the fuzzy extension principle requires the solution of numerous
 optimization problems that involve the original objective function
 $\objfun$.
-This predestines the use of sparse grid surrogates instead of
-$\objfun$, as explained in the beginning of the chapter.
+This predestines the replacement of $\objfun$ with sparse grid surrogates,
+as explained in the beginning of the chapter.
 Previous work by Klimke \cite{Klimke06Uncertainty} already
 studied this approach for piecewise linear functions on uniform sparse grids
 and for global polynomials on sparse Clenshaw--Curtis grids.
-We will assess the suitability of interpolation with (higher-order)
+We assess the suitability of interpolation with (higher-order)
 hierarchical B-splines on sparse grids for the fuzzy extension principle.
 It should be mentioned that there is also work
 directly incorporating (non-hierarchical) B-splines
@@ -124,11 +124,13 @@ $\acut{x}{\alpha_1} \supset \acut{x}{\alpha_2}$ for $\alpha_1 \le \alpha_2$.
 
 \paragraph{Common types of fuzzy numbers and intervals}
 
-There various types of fuzzy numbers and intervals \cite{Klimke06Uncertainty}.
+There are various types of fuzzy numbers and intervals
+\cite{Klimke06Uncertainty}.
 Most common are
 \term{triangular fuzzy numbers} (TFNs, i.e., linear B-splines),
 \term{trapezoidal fuzzy intervals}
-(TFIs, where a plateau of height one is inserted at the peak), and
+(TFIs, where a plateau of height one is inserted at the peak, i.e.,
+sums of two neighboring B-splines), and
 \term{Gaussian fuzzy numbers} (GFNs) with membership function
 $\memfun{x}(x) = \exp(-(x - \mu)^2/(2\sigma)^2)$.
 As the support of Gaussian fuzzy numbers is unbounded,
@@ -146,7 +148,7 @@ of triangular fuzzy numbers and their limit is a Gaussian fuzzy number.
 
 Let $\objfun\colon \clint{\*0, \*1} \to \real$ be an objective function,
 whose values $y = \objfun(\*x)$ represent the results of the
-simulation of a model with input parameters $\*x = (x_1, \dotsc, x_d)$.
+simulation of a model with input parameters $(x_1, \dotsc, x_d) = \*x$.
 If the input parameters are uncertain and
 given as fuzzy sets $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$,
 what is the resulting uncertain outcome
@@ -158,8 +160,8 @@ provides one possible definition.
 
 \paragraph{Alternative fuzzy extension principle}
 
-We use an alternative formulation of the fuzzy extension principle,
-both of which are stated in \cite{Klimke06Uncertainty}.
+We state an alternative formulation of the fuzzy extension principle
+in \cite{Klimke06Uncertainty}.
 The original formulation is computationally more complex,
 as it requires the solution of equality-constrained optimization problems
 and one needs to know the range of $\objfun$, which might not be given.
@@ -189,9 +191,9 @@ $\fuzzy{y}$ with
   \end{alignat}
 \end{subequations}
 This definition is visualized in \cref{fig:fuzzyExtensionPrinciple}.
-The first equation defines $\fuzzy{y}$ by specifying its $\alpha$-cuts,
+The first equation defines $\fuzzy{y}$ via its $\alpha$-cuts,
 which are given in the second equation as the closed interval
-between the minimum and the maximum value of $\objfun$ on some
+between the minimal and the maximal value of $\objfun$ on some
 hyper-rectangular domain $\Omega_\alpha$.
 The third equation specifies this domain $\Omega_\alpha$ as the
 Cartesian product of the univariate $\alpha$-cuts.
@@ -207,7 +209,7 @@ in the original formulation of the fuzzy extension principle.
     Example of the application of the
     alternative fuzzy extension principle to the bivariate objective function
     $\objfun(\*x) = 6.4 x_1 x_2$ \emph{(bottom)}
-    and triangular fuzzy interval inputs
+    and triangular fuzzy input intervals
     $\fuzzy{x}_1$ and $\fuzzy{x}_2$ \emph{(top and left)}
     to obtain the fuzzy output interval $\fuzzy{y}$ \emph{(right).}
     Adapted from \cite{Klimke06Uncertainty}.%
@@ -313,14 +315,15 @@ are expensive.
 
 However, Klimke used piecewise linear functions as hierarchical basis on
 uniform sparse grids and global polynomials on sparse Clenshaw--Curtis grids.
-The drawback of each of the bases is evident:
+The drawbacks of each of the bases are evident:
 First, piecewise linear surrogates are not continuously differentiable and
 can thus not be optimized well with gradient-based optimization methods.
-Second, global polynomials are only suitable on Clenshaw--Curtis grids
-with Chebyshev-distributed points due to Runge's phenomenon,
-restricting the choice of grid points unnecessarily.
+Second, global polynomials are only suitable for
+Clenshaw--Curtis grids (Chebyshev-distributed points)
+due to Runge's phenomenon,
+unnecessarily restricting the choice of grid points.
 Hierarchical B-splines of degree $p$ are $(p - 1)$ times
-continuously differentiable and can be defined for arbitrary point
+continuously differentiable and defined for arbitrary point
 distributions, eliminating both drawbacks simultaneously.
 
 \paragraph{Methodology}
@@ -338,7 +341,7 @@ as follows:
   $\bspl[\modified,\nak]{l,i}{p}$ of cubic degree ($p = 3$).
   For solving the optimization problems over $\sgintp[p]$ in
   \cref{alg:alternativeFuzzyExtensionPrinciple},
-  we use the globalized version of the gradient descent method
+  we use the globalized version of the method of gradient descent
   as described in \cref{sec:522method} using 100 initial points.
   %and \num{50000} allowed function evaluations of $\sgintp[p]$.
   The resulting fuzzy output interval is denoted by $\fuzzy[\sparse,p]{y}$.
@@ -355,11 +358,12 @@ as follows:
   using 100 initial simplexes%
   \footnote{%
     The Nelder--Mead method does not require an initial point,
-    but an initial simplex (given by $d + 1$ points in $\real^d$).
+    but an initial simplex.
+    %(given by $d + 1$ points in $\real^d$).
     The method is a hybrid between global and local optimization.
-    If the initial simplex is chosen badly, Nelder--Mead can get stuck
+    If the initial simplex is chosen badly, Nelder--Mead may get stuck
     in local minima.
-    Therefore, we restart the algorithm for different initial simplexes.%
+    Hence, we restart the algorithm for different initial simplexes.%
   }.
   %and \num{50000} allowed function evaluations of $\sgintp[1]$.
   The resulting fuzzy output interval corresponds to Klimke's method and
@@ -374,19 +378,19 @@ as follows:
   we use a multi-start version of the Nelder--Mead method
   as described in \cref{sec:522method}
   using 1000 initial simplexes
-  and \num{2000000} allowed function evaluations of $\objfun$.
+  and \num{2000000} allowed evaluations of $\objfun$.
   \usenotation{Ëref}
   The resulting fuzzy output interval is denoted by $\fuzzy[\reference]{y}$
-  (reference solution).
+  \term{(reference solution).}
 \end{itemize}
 
 In the following, we fix the number of $\alpha$ segments
 in \cref{alg:alternativeFuzzyExtensionPrinciple} as $m = 100$.
 As fuzzy input intervals $\fuzzy{x}_t$, $t = 1, \dotsc, d$, we use
 the trapezoidal fuzzy interval with $0$-cut $\clint{0.125, 0.625}$
-and $1$-cut $\clint{0.25, 0.375}$ if $t$ is even and
+and $1$-cut $\clint{0.25, 0.375}$ if $t$ is odd and
 the quasi-Gaussian fuzzy number with mean $0.5$, standard deviation $0.125$,
-and $0$-cut $\clint{0.125, 0.875}$ if $t$ is odd.
+and $0$-cut $\clint{0.125, 0.875}$ if $t$ is even.
 
 \paragraph{Convergence of fuzzy intervals on regular sparse grids}
 
@@ -437,7 +441,7 @@ dramatic improvements over the hat function surrogates in the bivariate case.
 For the bivariate Ack function, B-splines yield an error that
 is still an order of magnitude smaller than the error of hat functions.
 Just little or even no improvement can be seen
-for the functions with discontinuous derivatives or
+for the functions Sch06 and Sch22 with discontinuous derivatives or
 higher dimensionalities $d \ge 4$.
 
 \begin{figure}
@@ -463,12 +467,12 @@ higher dimensionalities $d \ge 4$.
 
 \paragraph{Fuzzy Novak--Ritter method}
 
-We want to employ spatially adaptivity to improve the results
-for regular sparse grids.
+We want to employ spatial adaptivity to improve the results
+of regular sparse grids.
 To this end, we modify the Novak--Ritter criterion
 to create a grid generation method that is tailored for the
 fuzzy extension principle, resulting in \cref{alg:fuzzyNovakRitterMethod}.
-Its main idea is to generate more points near the optimal points
+Its main idea is to generate more points near the optima
 of the fuzzy extension principle
 (\cref{alg:alternativeFuzzyExtensionPrinciple}) than in other regions
 of $\clint{\*0, \*1}$.
@@ -477,7 +481,7 @@ every $\alpha$ level $\alpha_j = \tfrac{j}{m}$ ($j = 0, \dotsc, m$),
 one time for the minimum and one time for the maximum.
 For all $\alpha_j$, the points to be refined are collected in a set.
 If a point is selected multiple times for different $\alpha_j$,
-it is only refined once.
+it is refined only once.
 In addition, we enlarge the search domain $\Omega_{\alpha_j}$
 by \SI{10}{\percent}, since the minimum or the maximum might be
 near the boundary $\Omega_{\alpha_j}$.
@@ -586,7 +590,7 @@ With the same budget and with spatial adaptivity, the error drops below
 \SI{0.25}{\percent}.
 Conversely, to achieve the same error as in the regular case
 (\SI{2.6}{\percent}),
-only \SI{1600} evaluations are needed when using spatial adaptive grids.
+only \SI{1600} evaluations are needed for spatially adaptive grids.
 
 \begin{figure}
   \includegraphics{resultsFuzzyLegend_2}\\[2mm]%
@@ -604,7 +608,7 @@ only \SI{1600} evaluations are needed when using spatial adaptive grids.
     and different objective functions $\objfun$ \emph{(colors)}
     over the number $\ngpMax$ of objective function evaluations.
     For comparison, the results of \cref{fig:resultsFuzzyRegular}
-    for regular sparse grids are repeated \emph{(hollow markers)}.%
+    for regular sparse grids are repeated \emph{(hollow markers).}%
   }%
   \label{fig:resultsFuzzyAdaptive}%
 \end{figure}

@@ -4,11 +4,11 @@
 The following numerical experiments can be roughly divided into two parts.
 First, we study interpolation errors for the various test functions
 to assess the effects of the hierarchical B-spline bases introduced in
-\cref{chap:20sparseGrids,chap:30BSplines} on the interpolation.
+\cref{chap:20sparseGrids,chap:30BSplines} on interpolation.
 Second, we consider optimization errors, i.e.,
 the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
 of the calculated approximations $\xoptappr$
-of the parameter $\xopt$ for which the objective function $\objfun$
+of the point $\xopt$ at which the objective function $\objfun$
 is minimal.
 
 
@@ -25,7 +25,7 @@ of sparse grid interpolants $\sgintp$ to
 different objective functions $\objfun$
 (approximated via Monte-Carlo quadrature using
 $10^4$ uniformly pseudo-random samples).
-The interpolation is performed on regular sparse grids of increasing level
+The interpolation is performed on regular sparse grids of increasing levels
 using hierarchical not-a-knot B-splines $\bspl[\nak]{\*l,\*i}{p}$
 of degree $p = 1, 3, 5$.
 As a visual aid, the plots include gray lines that indicate different
@@ -45,7 +45,8 @@ orders of convergence.
     $\normLtwo{\objfun - \sgintp}/\normLtwo{\objfun}$
     for different test functions $\objfun$ \emph{(colors)}
     using hierarchical not-a-knot B-splines
-    $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
+    $\bspl[\nak]{\*l,\*i}{p}$ of different degrees $p$
+    \emph{(line styles/markers)} on
     regular sparse grids $\regsgset{n}{d}$ of different levels $n$.%
   }%
   \label{fig:resultsInterpolationErrorTestFunctions}%
@@ -54,7 +55,7 @@ orders of convergence.
 It is already known that
 if the objective function is sufficiently smooth
 (i.e., at least as smooth as the employed spline basis),
-the $\Ltwo$ error of spline interpolants of order $p$ on
+the $\Ltwo$ error of spline interpolants of degree $p$ on
 $d$-dimensional regular sparse grids of level $n$
 asymptotically behaves like
 $\landauO{\ms{n}^{p+1} (\log_2 \ms{n}^{-1})^{d-1}}
@@ -62,12 +63,11 @@ $\landauO{\ms{n}^{p+1} (\log_2 \ms{n}^{-1})^{d-1}}
 We can numerically verify this fact easily with
 \cref{fig:resultsInterpolationErrorTestFunctions},
 in which we obtain the asserted orders of convergence
-for the continuously differentiable bivariate functions that
-are continuously differentiable.
+for the bivariate functions that are continuously differentiable.
 For the functions Sch06 and Sch22, which have a non-differentiable kink,
 only linear convergence can be achieved regardless of the B-spline degree.
 
-The region, where the asymptotic behavior dominates, largely depends
+The region where the asymptotic behavior dominates largely depends
 on the objective function at hand.
 Functions like Bra02 and Ack with many small oscillations
 require more interpolation points than ``smoother'' functions like
@@ -85,11 +85,10 @@ in the interpolation error in the pre-asymptotic range.
 \paragraph{Interpolation error for different basis functions}
 
 In \cref{fig:resultsInterpolationErrorBasisFunctions},
-we fix the objective function and study the effect of the choice
+we fix the objective function and study the influence of the choice
 of hierarchical basis functions on the interpolation error.
 Shown are eight types of hierarchical B-spline bases as introduced in
-\cref{chap:20sparseGrids,chap:30BSplines} for the three degrees
-$p = 1, 3, 5$.
+\cref{chap:20sparseGrids,chap:30BSplines} for the degrees $p = 1, 3, 5$.
 Note that some of the lines exactly overlap, which is indicated in
 the figure.
 
@@ -100,10 +99,11 @@ the corresponding non-modified versions for the same level $n$.
 However, modified bases need significantly less grid points
 (no boundary points),
 which means that a direct comparison based on the sparse grid level $n$
-is somewhat flawed.
+is somewhat skewed.
 %
 In addition, we see that the not-a-knot bases coincide exactly for $p > 1$,
-as they span the same space for dimensionally adaptive sparse grids.
+as they span the same space for regular and
+dimensionally adaptive sparse grids.
 Only with the not-a-knot boundary conditions, we obtain the true
 theoretical order of convergence (which is $p + 1$ for degree $p$).
 Otherwise, only quadratic convergence can be achieved regardless of $p$,
@@ -111,7 +111,7 @@ albeit with a smaller constant (offset).
 
 \begin{SCfigure}
   \begin{minipage}{102mm}%
-    \hspace*{10mm}%
+    \hspace*{8mm}%
     \includegraphics{resultsInterpolationLegend_2}\\[2mm]%
     \includegraphics{resultsInterpolation_10}%
   \end{minipage}%
@@ -121,13 +121,13 @@ albeit with a smaller constant (offset).
     for the bivariate Alp02 function ($d = 2$)
     using different hierarchical basis functions
     $\basis{\*l,\*i}$ \emph{(colors)}
-    of different degree $p$ \emph{(marker styles)} and
+    of different degrees $p$ \emph{(line styles/markers)} and
     regular sparse grids $\regsgset{n}{d}$ of different levels $n$.\\
     The basis functions shown here involve
-    standard \emph{(no superscript)},
-    not-a-knot \emph{(nak)},
-    modified \emph{(mod)},
-    fundamental \emph{(fs)}, and
+    standard \emph{(no superscript),}
+    not-a-knot \emph{(nak),}
+    modified \emph{(mod),}
+    fundamental \emph{(fs),} and
     weakly fundamental \emph{(wfs)}
     splines as well as the combinations
     introduced in \cref{chap:20sparseGrids,chap:30BSplines}.%
@@ -140,7 +140,7 @@ albeit with a smaller constant (offset).
 The importance of not-a-knot boundary conditions is also evident
 when considering plots of the pointwise interpolation error as in
 \cref{fig:resultsInterpolationErrorPointwise}.
-Obviously, the interpolation error grows for the standard hierarchical
+The interpolation error grows for the standard hierarchical
 B-spline basis $\bspl{\*l,\*i}{p}$
 as we move towards the boundary of the domain $\clint{\*0, \*1}$,
 before dropping to zero or near-zero values at or near boundary grid points.
@@ -186,18 +186,18 @@ In the piecewise linear case ($p = 1$),
 the hierarchical surpluses $\surplus{\*l,\*i}$
 can be represented as the $\Ltwo$ inner product of
 the corresponding hat function $\bspl{\*l,\*i}{1}$ with the
-mixed second derivative
+second mixed derivative
 $\partialderiv[2d]{\partialdiff x_1^2 \dotsm \partialdiff x_d^2}{\objfun}$
 of the objective function $\objfun$,
-if $\*l \ge \*1$ and this derivative exists and is continuous
+if $\*l \ge \*1$ and if this derivative exists and is continuous
 (see \cref{eq:surplusIntegral}).
 Consequently, one can prove that
 $\abs{\surplus{\*l,\*i}} \le 2^{-d} 2^{-2\normone{\*l}}
-\norm[\infty]{
+\normscaled[\infty]{
   \partialderiv[2d]{\partialdiff x_1^2 \dotsm \partialdiff x_d^2}{\objfun}
 }$ \cite{Bungartz04Sparse},
-i.e., the absolute value of the hierarchical surpluses
-decays in quadratic order with the level sum $\normone{\*l}$.
+i.e., the absolute values of the hierarchical surpluses
+decay  in quadratic order with the level sum $\normone{\*l}$.
 This relation can be used to estimate the convergent range
 of the corresponding interpolation error (\cref{%
   fig:resultsInterpolationErrorTestFunctions,%
@@ -216,10 +216,10 @@ for $p > 1$,
 we have to fix the level $n$ of the regular sparse grid for this analysis.
 \Cref{fig:resultsDecaySurpluses} suggests that the
 absolute value of the surpluses decays with order $p + 1$ for
-B-spline degree $p$, although there is no theoretical evidence supporting
-this claim.
+B-spline degree $p$, although no theoretical evidence
+is known to support this claim.
 Higher B-spline degrees seem to imply that
-$\abs{\surplus{\*l,\*i}}$ generally grows for $\normone{\*l}$
+$\abs{\surplus{\*l,\*i}}$ generally grows, if $\normone{\*l}$ is
 in the pre-asymptotic range.
 
 \begin{figure}
@@ -235,7 +235,8 @@ in the pre-asymptotic range.
     Mean absolute value of surpluses by level sum $\normone{\*l}$
     for different test functions $\objfun$ \emph{(colors)}
     using hierarchical not-a-knot B-splines
-    $\bspl[\nak]{\*l,\*i}{p}$ of different degree $p$ \emph{(line styles)} on
+    $\bspl[\nak]{\*l,\*i}{p}$ of different degrees $p$
+    \emph{(line styles/markers)} on
     the regular sparse grid $\regsgset{n}{d}$ of level $n = 11$.%
   }%
   \label{fig:resultsDecaySurpluses}%
@@ -250,7 +251,7 @@ In \cref{chap:40algorithms}, we introduced a number of new
 hierarchical spline bases with the aim to reduce the complexity
 of algorithms with the key example of hierarchization.
 In the following, we study the suitability of the new bases
-for this goal \cite{Valentin18Fundamental}.
+to achieve this goal \cite{Valentin18Fundamental}.
 
 \paragraph{Complexity of fundamental splines}
 
@@ -266,7 +267,7 @@ $\ngp \to \infty$ (where $\ngp$ is the number of sparse grid points and
 $d$ is assumed to be constant).
 More sophisticated methods to solve linear systems
 are not able to significantly
-decrease this complexity without any further assumptions on the system matrix
+reduce this complexity without any further assumptions on the system matrix
 $\intpmat$ (e.g., symmetry, positive definiteness, or bandedness).
 As $\ngp$ grows larger,
 the space needed to store an $\ngp \times \ngp$ matrix quickly exceeds
@@ -301,7 +302,7 @@ and the consumed memory is reduced from quadratic to linear complexity.
     $\bspl[\fs,\modified]{\*l,\*i}{p}$ \emph{\textcolor{C1}{(red)}}
     of degrees $p = 3$ and $p = 5$
     on the spatially adaptive sparse grids generated by the criterion of
-    Novak--Ritter for the optimization of Ackley with $d = 4$ and
+    Novak--Ritter for the optimization of Ack with $d = 4$ and
     $\ngpMax$ grid points.
     Adapted from \cite{Valentin18Fundamental}.%
   }%
@@ -315,12 +316,12 @@ in \cref{fig:complexityFundamental} as we have to insert missing
 chain points to apply the unidirectional principle
 (see \cref{sec:45spatAdaptiveUP}).
 As this increases the number of necessary evaluations of $\objfun$,
-a runtime comparison with standard B-spline would be skewed.
+a runtime comparison with standard B-splines would be skewed.
 Instead, we study in \cref{fig:complexityWeaklyFundamental}
 the number of grid points that have to be inserted
 to ensure the correctness of the unidirectional principle.
 As we have seen in \cref{sec:453chains}
-(cf. \cref{fig:chainInsertionBSpline}),
+(cf.\ \cref{fig:chainInsertionBSpline}),
 inserting all chains needed for standard hierarchical B-splines
 often results in a full grid.
 
@@ -346,14 +347,14 @@ often results in a full grid.
   \caption[Complexity of weakly fundamental splines]{%
     Total number of grid points after inserting all missing chains
     for cubic weakly fundamental not-a-knot splines
-    $\bspl[\wfs,\nak]{\*l,\*i}{p}$, \emph{($p = 3$, solid lines)},
-    and after inserting all missing full grid points \emph{(dashed)}.
-    Shown are the ratios of the grid sizes to the grid size
-    of the initial grids before inserting points.
+    $\bspl[\wfs,\nak]{\*l,\*i}{p}$ \emph{($p = 3$, solid lines),}
+    and after inserting all missing full grid points \emph{(dashed).}
+    Shown are the ratios of the resulting grid sizes to the
+    initial grid sizes before inserting points.
     The initial grids are the spatially adaptive sparse grids generated
-    by the criterion of Novak--Ritter for the optimization of Ackley with
+    by the criterion of Novak--Ritter for the optimization of Ack with
     different dimensionalities \emph{(colors)} and
-    different adaptivity parameters $\gamma$ \emph{(left, center, right)}.
+    different adaptivity parameters $\gamma$ \emph{(left, center, right).}
     Adapted from \cite{Valentin18Fundamental}.%
   }%
   \label{fig:complexityWeaklyFundamental}%
@@ -361,17 +362,17 @@ often results in a full grid.
 
 This can be seen in \cref{fig:complexityWeaklyFundamental}
 for hierarchical not-a-knot B-splines (dashed lines).
-The number of grid points increases by inserting all full grid points
-by several orders of magnitude:
-If the initial grid has $\ngpMax = 10000$ points,
+By inserting all full grid points,
+the number of grid points increases by several orders of magnitude:
+If the initial grid has $\ngpMax = \num{10000}$ points,
 then the grid size increases roughly by the factor $10^2$ for $d = 2$,
 $10^4$ for $d = 3$, and $10^6$ for $d = 4$,
 resulting in computationally infeasible
 grids with $10^6$, $10^8$, and $10^{10}$ points, respectively.
-If we instead only insert the chain points needed for the
+If we instead only insert the missing chain points needed for the
 hierarchical weakly fundamental not-a-knot basis
-(solid lines, cf. \cref{fig:chainInsertionWeaklyFundamentalSpline}),
-then the number of grid points only increases slightly,
+(solid lines, cf.\ \cref{fig:chainInsertionWeaklyFundamentalSpline}),
+then the number of grid points increases only slightly,
 depending on the adaptivity of the grid.
 For grids that have a low adaptivity (which corresponds
 to low adaptivity parameters $\gamma$ in the Novak--Ritter criterion,
@@ -419,7 +420,7 @@ and some small $\*a \in \real^d$.%
   the $t$-th component would change the location of the global minimum.%
 }
 Therefore, the optimization processes for each of the
-data points for the following \cref{%
+data points for \cref{%
   fig:resultsOptimizationUnconstrainedTestFunctions,%
   fig:resultsOptimizationConstrainedTestFunctions%
 }
@@ -433,7 +434,7 @@ as the mean of the five runs to increase confidence in the results.
 
 \Cref{fig:resultsOptimizationUnconstrainedTestFunctions}
 shows the optimality gaps for different test functions $\objfun$
-over the number $\ngpMax$ of allowed evaluations of $\objfun$
+over the number $\ngpMax$ of allowed evaluations of $\objfun$.
 For the continuously differentiable functions Bra02, GoP, Ack, and Alp02
 in $d = 2$ dimensions (top row),
 the optimization of the corresponding cubic B-spline surrogates (solid lines)
@@ -445,7 +446,7 @@ in general as seen in the discussion of the interpolation error in
 \cref{sec:541interpolation}.
 Second, the availability of surrogate gradients accelerates the
 convergence of the employed optimization methods.
-For some test functions, B-splines even give better results than
+For some test functions, B-splines give better results than even
 the direct optimization of the objective function (dotted lines).
 
 \begin{figure}
@@ -500,7 +501,7 @@ be as small as possible, but $\xoptappr$ should also be feasible, i.e.,
 $\ineqconfun(\xoptappr) \le \*0$.
 Hence, we also plot the maximal violation
 $\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}$
-of the constraints in the respective optimal points.
+of the constraints in the respective optimal points $\xoptappr$.
 
 \begin{figure}
   \includegraphics{resultsOptimizationLegend_2}\\[2mm]%
@@ -543,11 +544,13 @@ perform better than the direct gradient-free optimization of the problem
 for $\ngpMax \le 3500$ objective function evaluations
 and better than the piecewise linear surrogate for $\ngpMax \ge 300$
 objective function evaluations.
-All calculated points are feasible
-(note that for plotting reasons,
-\cref{fig:resultsOptimizationConstrainedTestFunctions} shows
-$\max(\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}, 10^{-16})$
-instead of the true constraint violation).
+All calculated points are feasible.%
+\footnote{%
+  For plotting reasons,
+  \cref{fig:resultsOptimizationConstrainedTestFunctions} shows
+  $\max(\norm[\infty]{\nonnegpart{\ineqconfun(\xoptappr)}}, 10^{-16})$
+  instead of the true constraint violation.%
+}
 
 The range of the objective function of the five-dimensional G04Sq problem
 is larger than that of G08.
@@ -564,10 +567,10 @@ are between $10^{-10}$ and $10^{-6}$, i.e.,
 the constraints are numerically met.
 In contrast, the optimizers struggle more for
 the comparison methods (optimization of the linear surrogate and
-of objective function) to meet the constraints,
-as the values of constraint violation partly exceed $10^{-3}$.
+of the objective function) to meet the constraints,
+as the values of the constraint violation partly exceed $10^{-3}$.
 The availability of gradients seems to allow the constrained optimization
-algorithm to better enforce the feasibility of the
+methods to better enforce the feasibility of the
 resulting points $\xoptappr$.
 
 Note that while the results look already promising for the B-spline surrogate
