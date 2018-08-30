@@ -16,6 +16,40 @@
 \initial[lhang=0.06]{0.1em}{S}{urrogates based on B-splines on sparse grids}
 can also be used for our third application,
 which stems from mathematical finance.
+In this application, we simulate the financial situation of an individual
+over their lifetime in discrete time steps or iterations $t = t_0, \dotsc, T$
+(for example, years $t = 20, 21, \dotsc, 100$, where $t$ is the age
+of the individual).
+We track three types of variables:
+
+\begin{itemize}
+  \item
+  \term{State variables}
+  such as the individual's wealth or their income
+  cannot be controlled directly by the individual.
+  Instead, the individual's decisions influence the value of
+  state variables of future iterations.%
+  \footnote{%
+    The time $t$ can also be regarded as a state variable.%
+  }
+  
+  \item
+  \term{Policy variables}
+  such as consumption or the amount of stocks to buy or sell
+  represent the investment decisions the individual can make in
+  each iteration.
+  They are subject to specific constraints
+  (for instance, you cannot spend more money than you have,
+  if you do not allow debts).
+  
+  \item
+  \term{Stochastic variables}
+  such as the return rates of stocks or the inflation
+  cannot be controlled by individual at all.
+  Therefore, statements about optimal investment conditions
+  are usually made for expected instead of exact values.
+\end{itemize}
+
 \blindtext{}
 
 \input{document/81models}
