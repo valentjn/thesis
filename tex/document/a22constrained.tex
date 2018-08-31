@@ -4,8 +4,9 @@
 \paragraph{G08}
 
 This problem originates from \cite{Schoenauer93Constrained}.
-We changed the domain from $\clint{0, 10}^2$ to increase the
-size of feasible region.
+We changed the domain from $\clint{0, 10}^2$
+to $\clint{0.5, 2.5} \times \clint{3, 6}$
+to increase the size of feasible region.
 In addition, we use different frequencies for the sine terms
 as in \cite{Gavana13Global}.
 \vspace{-1.6em}
@@ -52,7 +53,7 @@ if the level of the sparse grids is fine enough,
 see \thmref{cor:sparseGridRegularNAKPolynomials}.
 Therefore, we modified the original G04 problem by squaring the
 objective function.
-To ensure that this does not change location of the global minimum,
+To ensure that this does not change the location of the global minimum,
 we added a constant before squaring such that the shifted function
 is non-negative on $\clint{\*0, \*1}$.
 \vspace{-1.6em}

@@ -24,7 +24,8 @@ while searching for the maximum instead of the minimum.
       \vspace*{-10mm}
       \testobjfunscaled{Bra02}(\xscaled)
       := \paren*{
-        -\frac{51\xscaled[1]^2}{40\pi^2} + \frac{5\xscaled[1]}{\pi} + \xscaled[2] - 6
+        -\,\frac{51\xscaled[1]^2}{40\pi^2} +
+        \frac{5\xscaled[1]}{\pi} + \xscaled[2] - 6
       }^2 +
       \paren*{10 - \frac{5}{4\pi}} \cos(\xscaled[1]) \cos(\xscaled[2])
     }\\
@@ -114,7 +115,7 @@ center of the optimization domain.
 The form of this function originates from \cite{Ackley87Connectionist},
 where it was stated only for two variables.
 We use the generalization to $d$ variables from \cite{Gavana13Global}.
-The optimization domain $\clint{1.5, 5.5}^d$
+The optimization domain $\clint{1.5, 6.5}^d$
 was chosen such that it does not contain $\*0$,
 where the gradient of the objective function becomes singular.
 Otherwise, the function would not be continuously differentiable,
@@ -145,7 +146,7 @@ We changed the domain from $\clint{0, 10}^d$ to $\clint{2, 10}^d$
 to exclude the singularities of the derivative of the objective function
 at $\xscaled[t] = 0$.
 In addition, the author of \cite{Clerc99Swarm} searched for maximal points.
-For minimization, we have to change the sign of the objective function.
+For minimization, we changed the sign of the objective function.
 \vspace{-1.6em}
 
 \begin{subequations}
