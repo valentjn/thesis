@@ -306,7 +306,7 @@ def generatePlot(q):
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
     if q < 4: ax.text(*trafo(0.05, 0.05), "$d = {}$".format(d))
     x = (1.03 if ax == ax1 else (1 if q in [0, 1, 4] else 0.92))
-    text = (r"$\normone{l}$" if ax == ax1 else "$n$")
+    text = (r"$\normone{\*l}$" if ax == ax1 else "$n$")
     ax.text(*trafo(x, -0.03), text, ha="right", va="top")
   
   fig1.save(graphicsNumber=2*q+1)
