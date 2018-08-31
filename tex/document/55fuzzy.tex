@@ -2,7 +2,7 @@
 \label{sec:55fuzzy}
 
 To conclude this chapter, we consider the fuzzy extension principle
-as an example application of the optimization of B-spline surrogates
+as an example application of optimization of B-spline surrogates
 on sparse grids.
 
 \paragraph{Aleatoric and epistemic uncertainties}
@@ -23,7 +23,7 @@ of probabilities \cite{Walz16Fuzzy}.
 
 In uncertainty quantification, the key question is as follows:
 Given a model and uncertain input parameters for the model,
-how is the model output distributed?
+how uncertain is the model output?
 While there are many approaches available
 for probabilistic uncertainties,
 it is not straightforward to solve this task
@@ -43,7 +43,7 @@ as explained in the beginning of the chapter.
 Previous work by Klimke \cite{Klimke06Uncertainty} already
 studied this approach for piecewise linear functions on uniform sparse grids
 and for global polynomials on sparse Clenshaw--Curtis grids.
-We assess the suitability of interpolation with (higher-order)
+We assess the suitability of interpolation with higher-order
 hierarchical B-splines on sparse grids for the fuzzy extension principle.
 It should be mentioned that there is also work
 directly incorporating (non-hierarchical) B-splines
@@ -281,7 +281,7 @@ interpolating the interval bounds of the $\alpha_j$-cuts of $\fuzzy{y}$.
       \State{%
         $\memfun{y} \gets \text{Piecewise linear interpolant of $D$}$%
       }%
-      \Comment{extend to $\real$ by zero}%
+      \Comment{extend to $X$ by zero}%
     \EndFunction{}
   \end{algorithmic}
   \caption[Alternative fuzzy extension principle]{%
@@ -478,7 +478,7 @@ of the fuzzy extension principle
 of $\clint{\*0, \*1}$.
 Therefore, we apply the Novak--Ritter criterion twice to
 every $\alpha$ level $\alpha_j = \tfrac{j}{m}$ ($j = 0, \dotsc, m$),
-one time for the minimum and one time for the maximum.
+once for the minimum and once for the maximum.
 For all $\alpha_j$, the points to be refined are collected in a set.
 If a point is selected multiple times for different $\alpha_j$,
 it is refined only once.
@@ -521,9 +521,12 @@ The remaining experiments use $\gamma = 0.1$ as adaptivity.
           \EndFor{}
           \State{%
             $\liset_j \gets \{(\*l, \*i) \in \liset \mid
-            \gp{\*l,\*i} \in \Omega_{\alpha_j} \cap \clint{\*0, \*1}\}$%
+            \gp{\*l,\*i} \in \clint{\*a_j, \*b_j} \cap \clint{\*0, \*1}\}$%
           }
-          \Comment{set of feasible points}%
+          \Comment{%
+            set of feasible points
+            ($\clint{\*a_j, \*b_j} = \Omega_{\alpha_j}$)%
+          }%
           \ForOneLine{$(\*l, \*i) \in \liset_j$}{%
             $r_{\*l,\*i} \gets \setsize{
               \{(\*l', \*i') \in \liset_j \mid

@@ -11,7 +11,7 @@ sparse grids, which we explain in the following.
 \subsection{Novak--Ritter Adaptivity Criterion}
 \label{sec:521novakRitter}
 
-The classic surplus-based refinement strategy to generate
+The classic surplus-based refinement strategy for
 spatially adaptive sparse grids is not tailored to optimization,
 as this strategy aims to minimize the overall $\Ltwo$ error.
 However, in optimization, it is reasonable to generate more
@@ -130,7 +130,7 @@ This means there are three types of optimization methods:
   \item
   \label{item:localMethods}
   Local gradient-based methods listed as implemented in
-  \cref{tbl:optimizationMethod}
+  \cref{tbl:optimizationMethod}%
   %(need an initial point)%
   \footnote{%
      Excluding Levenberg--Marquardt, which is only applicable
@@ -140,7 +140,7 @@ This means there are three types of optimization methods:
   \item
   \label{item:globalizedMethods}
   Globalized versions of the methods of type \ref{item:localMethods}
-  (do not need an initial point)
+  %(do not need an initial point)
 \end{enumerate}
 
 \paragraph{Unconstrained optimization of sparse grid surrogates}

@@ -35,7 +35,7 @@ In the case of \eqref{eq:unconstrainedOptimization},
 this results in a \term{box-constrained optimization problem.}
 A simple method for applying unconstrained optimization algorithms
 to box-constrained problems is extending $\sgintp$ to $\real^d$ by
-$\sgintp(\*x) = +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
+$\sgintp(\*x) := +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
 However, more sophisticated
 %, algorithm-tailored
 approaches are also available \cite{More87Optimization}.
@@ -47,13 +47,14 @@ Problems of the form \eqref{eq:unconstrainedOptimization} or
 where we cannot gain any insight into the structure or algebraic
 properties of $\objfun$.
 Black-box optimization methods perform a series of evaluations
-$\objfun(\*x_k)$ of $\objfun$,
+$\objfun(\*x_k)$,
 choosing the next evaluation point $\*x_{k+1}$
 based on the previous function values $\objfun(\*x_0), \dotsc, \objfun(\*x_k)$.
 Gradient-based methods differ from gradient-free approaches
 in such a way that they also take values of the gradient
 $\gradient{\*x}{\objfun}(\*x_k)$ or of the Hessian
 $\hessian{\*x}{\objfun}(\*x_k)$ into account.
+
 A vast array of optimization methods exists in literature.
 Some methods are better suited for specific optimization problems
 than others.
@@ -71,7 +72,7 @@ where \eqref{eq:unconstrainedOptimization} or
 in a neighborhood of $\xopt$.
 One can globalize local methods to increase the probability
 of finding a global optimum with a Monte-Carlo multi-start approach:
-The method is repeated with different pseudo-random initial points
+The local method is repeated with different pseudo-random initial points
 and the best local optimum is chosen as the result.
 
 In the following,
@@ -159,8 +160,8 @@ Typically, convergence can be detected by
 checking the size of the simplex,
 as the simplex tends to contract around local minima.
 However, there are counterexamples where the method converges to
-a non-critical point even for an only bivariate, strictly convex, and
-twice continuously differentiable objective function
+a non-critical point for an only bivariate objective function
+that is strictly convex and twice continuously differentiable
 \cite{McKinnon98Convergence}.
 %For higher dimensionalities, the method quickly suffers from
 %the curse of dimensionality \cite{Gao12Implementing}.
@@ -190,8 +191,7 @@ an improvement in terms of objective function value.
 
 \term{CMA-ES (covariance matrix adaption, evolution strategy)}
 \cite{Hansen03Reducing}
-is also an evolutionary algorithm,
-which addresses the issue
+is an evolutionary algorithm that addresses the issue
 that simple evolution strategies do not prefer a search direction
 due to the lack of gradients \cite{Toussaint15Introduction}.
 The name of the algorithm stems from the fact
@@ -356,7 +356,7 @@ replaces the objective function with the second-order Taylor approximation
 given by
 $\objfun(\*x_k + \*d_k)
 \!\approx\! \objfun(\*x_k) +
-\tr{(\*d_k)} \gradient{\*x}{\objfun}(\*x_k) \,+
+\tr{(\gradient{\*x}{\objfun}(\*x_k))} \*d_k \,+
 \frac{1}{2} \tr{(\*d_k)} \hessian{\*x}{\objfun}(\*x_k) \*d_k$
 and determines the search direction such that $\*x_k + \*d_k$ is
 the minimum of the approximation, i.e.,
@@ -424,7 +424,7 @@ Methods for constrained optimization usually
 solve a series of unconstrained \term{auxiliary problems} with an arbitrary
 unconstrained optimization method.
 The auxiliary function to be minimized is
-the sum of the objective function and non-negative \term{penalty terms,}
+the sum of the objective function and \term{penalty terms,}
 which penalize if the current point $\*x_k$ is near the boundary
 of the feasible domain or even outside.
 The penalty terms slowly increase to enforce

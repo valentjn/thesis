@@ -54,7 +54,7 @@ orders of convergence.
 
 It is already known that
 if the objective function is sufficiently smooth
-(i.e., at least as smooth as the employed spline basis),
+%(i.e., at least as smooth as the employed spline basis),
 the $\Ltwo$ error of spline interpolants of degree $p$ on
 $d$-dimensional regular sparse grids of level $n$
 asymptotically behaves like
@@ -92,7 +92,7 @@ Shown are eight types of hierarchical B-spline bases as introduced in
 Note that some of the lines exactly overlap, which is indicated in
 the figure.
 
-For $p = 1$, the non-modified and modified bases coincide,
+For $p = 1$, the non-modified bases and the modified bases coincide,
 respectively.
 For higher degrees, the modified bases show worse results than
 the corresponding non-modified versions for the same level $n$.
@@ -105,7 +105,7 @@ In addition, we see that the not-a-knot bases coincide exactly for $p > 1$,
 as they span the same space for regular and
 dimensionally adaptive sparse grids.
 Only with the not-a-knot boundary conditions, we obtain the true
-theoretical order of convergence (which is $p + 1$ for degree $p$).
+theoretical order of convergence, which is $p + 1$ for degree $p$.
 Otherwise, only quadratic convergence can be achieved regardless of $p$,
 albeit with a smaller constant (offset).
 
@@ -255,7 +255,7 @@ to achieve this goal \cite{Valentin18Fundamental}.
 
 \paragraph{Complexity of fundamental splines}
 
-\Cref{fig:complexityFundamental} compares the complexity of
+\Cref{fig:complexityFundamental} compares the hierarchization complexity of
 modified hierarchical B-splines $\bspl[\modified]{\*l,\*i}{p}$ with the new
 modified hierarchical fundamental splines $\bspl[\fs,\modified]{\*l,\*i}{p}$
 as measured on a laptop with Intel Core i5-4300U.
@@ -323,7 +323,7 @@ to ensure the correctness of the unidirectional principle.
 As we have seen in \cref{sec:453chains}
 (cf.\ \cref{fig:chainInsertionBSpline}),
 inserting all chains needed for standard hierarchical B-splines
-often results in a full grid.
+often results in a full grid, which suffers from the curse of dimensionality.
 
 \begin{figure}
   \includegraphics{complexityWeaklyFundamental_4}\\[2mm]%
@@ -374,12 +374,12 @@ hierarchical weakly fundamental not-a-knot basis
 (solid lines, cf.\ \cref{fig:chainInsertionWeaklyFundamentalSpline}),
 then the number of grid points increases only slightly,
 depending on the adaptivity of the grid.
-For grids that have a low adaptivity (which corresponds
+For grids that have a low adaptivity (which correspond
 to low adaptivity parameters $\gamma$ in the Novak--Ritter criterion,
 see \cref{sec:521novakRitter}), the grid size only increases by the
 factor of two.
 For highly-adaptive grids
-(which corresponds to high adaptivity parameters $\gamma$),
+(which correspond to high adaptivity parameters $\gamma$),
 the number of necessary chain grid points increases significantly.
 
 
@@ -426,7 +426,7 @@ data points for \cref{%
 }
 were repeated five times with replacements $\*a$
 whose entries $a_t$ were independent and identically distributed Gaussian
-pseudo-random with zero mean and a standard deviation of $0.01$.
+pseudo-random numbers with zero mean and a standard deviation of $0.01$.
 The optimality gaps shown in the figures of this section were computed
 as the mean of the five runs to increase confidence in the results.
 
@@ -482,10 +482,11 @@ the direct optimization of the objective function (dotted lines).
 For the test functions Sch06 and Sch22 with discontinuous derivatives,
 the advantage of higher-order B-splines is not as evident (Sch22) or
 does not even exist (Sch06).
-However, in low dimensions $d \le 4$, B-splines are still able
-to achieve a slight advantage compared to the piecewise linear basis.
+However, in low dimensions $d \le 4$, B-splines
+achieve a slight advantage compared to the piecewise linear basis
+for the Sch22 function.
 In higher dimensionalities $d \ge 6$ (bottom row),
-convergence speeds visibly decrease for all methods shown in
+convergence visibly slows down for all methods shown in
 \cref{fig:resultsOptimizationUnconstrainedTestFunctions},
 although for some objective functions, B-splines are still able
 to perform better than the comparison methods
@@ -557,11 +558,12 @@ is larger than that of G08.
 This results in generally higher optimality gaps
 $\objfun(\xoptappr) - \objfun(\xopt)$ as we do not normalize them
 with respect to the range.
-The B-spline surrogate results in good approximations $\xoptappr$
+The B-spline surrogate leads to good approximations $\xoptappr$
 of $\xopt$ already for $\ngpMax = 1000$ with an optimality gap of
 around one.
-Both comparison methods result in optimality gaps that are
+Both comparison methods show optimality gaps that are
 seven orders of magnitude higher.
+
 Additionally, the corresponding values of constraint violation
 are between $10^{-10}$ and $10^{-6}$, i.e.,
 the constraints are numerically met.
@@ -580,4 +582,4 @@ spatially adaptive sparse grids does not take the constraints into account.
 Consequently, many sparse grid points are created outside the feasible domain.
 By modifying the criterion to prefer points that are in a neighborhood of
 the feasible domain, the quality of the interpolant near potential optima
-might increase.
+should increase.
