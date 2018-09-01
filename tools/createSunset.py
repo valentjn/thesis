@@ -401,24 +401,37 @@ with tempfile.TemporaryDirectory() as tempPath:
   wordCloudProperties["mask"] = MyWordCloud.load_mask_from_file(edgePath)
   wordCloud = MyWordCloud(**wordCloudProperties)
   
-  churchText = """
-The Church
-Of B-Splines
-In the beginning there was the B-spline Then God came along
-You shall not have other basis functions than B-splines
-Do not defame B-splines of degree one as hat functions
-We do not talk about hierarchical B-splines of even degree
-""".strip()
+  churchTextLines = [
+    ("the church", (85, 210), 344),
+    ("of B-splines", (85, 184), 343),
+    ("in the beginning there was the B-spline then God came along",
+     (85, 158), 358),
+    ("you shall not have other basis functions than B-splines",
+     (85, 132), 345),
+    ("do not defame B-splines of degree one as hat functions",
+     (85, 106), 359),
+    ("we do not talk", (25, 80), 347),
+    ("about hierarchical B-splines", (85, 80), 348),
+    ("of even degree", (140, 85), 349),
+    ("you shall pilgrimage", (34, 40), 350),
+    ("to B- tigheim", (34, 25), 351),
+    ("B- ssingen", (34, 10), 352),
+    ("smoothness is divine", (128, 30), 368),
+    ("recursive and beautiful", (145, 20), 364),
+    ("best basis are B-splines", (145, 13), 366),
+  ]
   
   churchPath = os.path.join(tempPath, "church.png")
   fig, ax = wordCloud.create_figure()
-  random.seed(342)
   
-  for i, line in enumerate(churchText.splitlines()):
-    center = np.array([85, 210 - i * 26], dtype=float)
-    center *= wordCloud.pixelPerMillimeter * scale
-    plotWordsDisplaced(ax, line.split(" "), center, 12,
-                       fontProperties, scaledDPI)
+  for text, center, seed in churchTextLines:
+    random.seed(seed)
+    center = (wordCloud.pixelPerMillimeter * scale *
+              np.array(center, dtype="float"))
+    plotWordsDisplaced(
+        ax, text.split(" "), center, 12, fontProperties, scaledDPI)
+  
+  random.seed(342)
   
   plt.savefig(churchPath, dpi=scaledDPI)
   run(["convert", churchPath,
