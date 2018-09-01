@@ -4,6 +4,7 @@
 *.pdf  filter=fat -crlf
 *.png  filter=fat -crlf
 *.svgz filter=fat -crlf
+*.ttf  filter=fat -crlf
 
 /data/topoOpt/**/*.density.xml filter=fat -crlf
 /data/topoOpt/**/*.h5          filter=fat -crlf
