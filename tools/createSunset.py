@@ -334,7 +334,9 @@ def plotWordsDisplaced(ax, words, center, meanFontSize,
 
 
 
-fontPath = "/usr/share/fonts/X11/Type1/c0633bt_.pfb"
+#fontPath = "/usr/share/fonts/X11/Type1/c0633bt_.pfb"
+fontPath = os.path.join(os.path.dirname(__file__),
+                        "..", "misc", "charterBoldItalic.ttf")
 fontProperties = {
   "family" : "Charter",
   "weight" : "bold",
