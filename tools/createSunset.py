@@ -4,6 +4,7 @@ import os
 import random
 import re
 import shlex
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -348,6 +349,8 @@ pdfPath = os.path.join("/", "tmp", "thesis", "thesisManuscriptScreen.pdf")
 pdfCropArea = [70, 85, 455, 700]
 pdfFirstPage = 27
 fadingOutMargin = 10
+targetPath = os.path.join(os.path.dirname(__file__),
+                          "..", "gfx", "pre", "sunset.png")
 
 wordCloudProperties = {
   "font_path" : fontPath,
@@ -478,6 +481,7 @@ We do not talk about hierarchical B-splines of even degree
        "-compose", "copyopacity",
        "-composite", finalPath])
   run(["gwenview", finalPath])
+  shutil.copy(finalPath, targetPath)
   
   
   
