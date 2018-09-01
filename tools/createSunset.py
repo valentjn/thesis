@@ -369,8 +369,8 @@ wordCloudProperties = {
   "margin" : 0,
   "color_func" : (lambda word, font_size, position, orientation,
                   font_path, random_state: "black"),
-  #"dpi" : 300,
-  "dpi" : 72,
+  #"dpi" : 150,
+  "dpi" : 100,
 }
 
 
