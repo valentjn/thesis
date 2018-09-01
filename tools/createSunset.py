@@ -183,7 +183,7 @@ class MyWordCloud(wordcloud.WordCloud):
   
   @staticmethod
   def load_mask_from_file( filename):
-    mask = scipy.ndimage.imread(filename, flatten=True)
+    mask = plt.imread(filename)
     mask = mask.astype("B")
     mask = 255 - mask
     return mask
