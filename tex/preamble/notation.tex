@@ -808,22 +808,22 @@
 % ======================================================================
 
 \newnotationcommandoptarg{1}{\xopt}{%
-  \ifempty{#1}{\*x^\mathrm{opt}}\ifnotempty{#1}{x^\mathrm{opt}_{#1}}%
+  \ifempty{#1}{\*x^\opt}\ifnotempty{#1}{x^\opt_{#1}}%
 }{xopt}{$\xopt$}{
   Solution of an optimization problem of the form
   $\xopt = \argmin \objfun(\*x)$
 }
 
 \newnotationcommandoptarg{1}{\xoptappr}{%
-  \ifempty{#1}{\*x^{\mathrm{opt},\ast}}%
-  \ifnotempty{#1}{x^{\mathrm{opt},\ast}_{#1}}%
+  \ifempty{#1}{\*x^{\opt,\ast}}%
+  \ifnotempty{#1}{x^{\opt,\ast}_{#1}}%
 }{xopt*}{$\xoptappr$}{
   Approximation for $\xopt = \argmin \objfun(\*x)$
 }
 
 \newnotationcommandoptarg{1}{\xoptscaled}{%
-  \ifempty{#1}{\bar{\*x}^\mathrm{opt}}%
-  \ifnotempty{#1}{\bar{x}^\mathrm{opt}_{#1}}%
+  \ifempty{#1}{\bar{\*x}^\opt}%
+  \ifnotempty{#1}{\bar{x}^\opt_{#1}}%
 }{xoptbar}{$\xoptscaled$}{
   Scaled solution of an optimization problem
 }
