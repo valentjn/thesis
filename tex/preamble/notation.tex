@@ -574,6 +574,13 @@
   Point where the minimum is attained
 }
 
+\DeclareMathOperator*{\argmax}{arg\,max}
+\let\argmaxorig\argmax
+\hidenextnotation
+\makecommandnotation{\argmax}{argmax}{$\argmaxorig$}{
+  Point where the maximum is attained
+}
+
 \newcommand*{\floor}[1]{\lfloor#1\rfloor}
 
 \newnotationcommand[1]{\ceil}{\lceil#1\rceil}{Öceil}{%
