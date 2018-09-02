@@ -1,14 +1,165 @@
 \section{Dynamic Portfolio Lifecycle Models}
 \label{sec:81models}
 
-\blindtext{}
+In this section, we give a mathematical framework for
+dynamic portfolio choice models,
+explain where B-splines on sparse grids come into play,
+and mention related literature briefly.
 
 
 
 \subsection{Bellman Equation}
 \label{sec:811bellmanEquation}
 
-\blindtext{}
+\paragraph{Utility maximization}
+
+Dynamic portfolio lifecycle models aim to maximize the expected
+\term{discounted utility} over the lifetime of the individual.
+If we neglect stochastic factors, then these models solve
+\begin{equation}
+  \label{eq:utilityMaximization}
+  (\optpolicyfcn_0, \dotsc, \optpolicyfcn_T)
+  = \argmax_{\policy_0, \dotsc, \policy_T}
+  \sum_{t=0}^T \patience^t \utility(\consume_t(\state_t, \policy_t))
+  \quad\text{s.t. specific constraints.}
+\end{equation}
+Here, $\state_t \in \clint{\*0, \*1} \subset \real^d$ and
+$\policy_t \in \real^{m_{\policy}}$
+are the state and policy of time $t = 0, \dotsc, T$, respectively.
+The constraints ensure that for instance, we do not spend more money
+than we actually have.
+Starting from a given initial state $\state_0$,
+the state $\state_t$ of time $t > 0$ can be computed from
+$\state_0$ and $\policy_0, \dotsc, \policy_{t-1}$ with a
+\term{state transition function} $(\state_t, \policy_t) \mapsto \state_{t+1}$.
+As shown in \cref{fig:dynamicPortfolioChoice},
+in each time step, a fraction of the available wealth
+is invested in \term{consumption} $\consume_t$,
+which can be computed from the state $\state_t$ and the policy $\policy_t$.
+We rate the consumption with a \term{utility function}
+$\utility(\consume_t)$.
+A common choice for $\utility$ is the
+\term{constant relative risk aversion (CRRA) utility}
+$\utility(\consume_t) := (c_t^{1-\riskav})/(1-\riskav)$
+with the \term{risk aversion} $\riskav \in \real \setminus \{1\}$.
+Positive and negative values correspond to risk-averse and risk-affine
+individuals, respectively.
+The factor $\patience \in \pohint{0, 1}$ is the \term{patience}
+or \term{time discount factor.}
+
+\begin{SCfigure}
+  \includegraphics{dynamicPortfolioChoice_1}%
+  \caption[TODO]{%
+    Dynamic portfolio lifecycle models.
+    The available wealth $\wealth_t$ is invested
+    into bonds ($\bond_t$) and two stocks ($\stock_{t,1}, \stock_{t,2}$).
+    The rest is consumed ($\consume_t$), resulting in the utility
+    $\utility(\consume_t)$.
+    In the last time step $T$ \emph{(far right),}
+    the whole wealth is consumed, if we do not take inheritance
+    into account.%
+  }%
+  \label{fig:dynamicPortfolioChoice}%
+\end{SCfigure}
+
+\paragraph{Limitations of naive utility maximization}
+
+When solving the utility maximization problem \eqref{eq:utilityMaximization},
+there are two issues.
+First, solving \eqref{eq:utilityMaximization} for all times $t$ at once
+implies solving a $(T+1) m$-dimensional optimization problem,
+which is usually computationally infeasible.
+Second, \eqref{eq:utilityMaximization} does not take stochastic variables
+$\stochastic_t$ such as stock return rates into account.
+These variables influence the state transition, i.e.,
+$(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$.
+Consequently, $\state_t$ cannot be computed from $\state_0$ and
+$\policy_0, \dotsc, \policy_{t-1}$ alone,
+which complicates the solution of \eqref{eq:utilityMaximization}
+even in the expected value.
+
+\paragraph{Bellman principle}
+
+To solve the first issue,
+Bellman's principle of optimality \cite{Bellman57Dynamic}
+can be applied to problems like
+\eqref{eq:utilityMaximization} that are said to have
+\term{optimal substructure.}
+The principle states that the optimal policy for all times $t = 0, \dotsc, T$
+is also optimal with respect to $t = 1, \dotsc, T$, i.e.,
+\begin{equation}
+  \max_{\policy_0, \dotsc, \policy_T}
+  \sum_{t=0}^T \patience^t \utility(\consume_t(\state_t, \policy_t))
+  = \max_{\policy_0} \left(
+    \utility(\consume_0(\state_0, \policy_0))
+    + \patience \max_{\policy_1, \dotsc, \policy_T}
+    \sum_{t=1}^T \patience^{t-1} \utility(\consume_t(\state_t, \policy_t))
+  \right),
+\end{equation}
+where we omitted the constraints for brevity.
+The inner maximum problem over $\policy_1, \dotsc, \policy_T$
+has the same structure as the original problem on the \lhs.
+With the \term{value function}
+$\valuefcn_t\colon \clint{\*0, \*1} \to \real$,
+$\valuefcn_t(\state_t) :=
+\max_{\policy_0, \dotsc, \policy_T}
+\sum_{t'=t}^T \patience^{t'}
+\utility(\consume_{t'}(\state_{t'}, \policy_{t'}))$, this can be rewritten as
+\begin{equation}
+  \label{eq:simpleBellman}
+  \valuefcn_0(\state_0)
+  = \max_{\policy_0} \left(
+    \utility(\consume_0(\state_0, \policy_0)) +
+    \patience \valuefcn_1(\state_1)
+  \right)
+  \quad\text{s.t. specific constraints,}
+\end{equation}
+where $\state_1$ is the result of the state transition
+from $(\state_0, \policy_0)$.
+
+\paragraph{General Bellman equation}
+
+If we formulate \eqref{eq:simpleBellman} for arbitrary times $t$ and
+consider stochastic variables, constraints, and state transition,
+then we obtain the following \term{Bellman equation:}
+\begin{subequations}
+  \label{eq:generalBellman}
+  \begin{gather}
+    \valuefcn_t(\state_t)
+    = \max_{\policy_t} \left(
+      \utility(\consume_t(\state_t, \policy_t)) +
+      \patience \expectation[t]{
+        \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
+      }
+    \right),\quad
+    t < T,\\
+    \policy_t \in \real^{m_{\policy}}\;\;\text{s.t.}\;\;
+    \ineqconfun_t(\state_t, \policy_t) \le \*0,
+  \end{gather}
+\end{subequations}
+where
+$\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
+\stochdomain_t \to \clint{\*0, \*1}$,
+$(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$,
+is the \term{state transition function,}
+$\ineqconfun_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \to
+\real^{m_{\ineqconfun}}$ is the \term{constraint function,}
+and the expected value is
+\begin{equation}
+  \expectation[t]{
+    \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
+  }
+  = \int_{\stochdomain_t}
+  \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
+  P_t(\stochastic_t) \diff{}\stochastic_t
+\end{equation}
+with the probability density function
+$P_t\colon \stochdomain_t \to \nonnegreal$ of $\stochastic_t$.
+We denote the location of the maximum of \eqref{eq:generalBellman}
+as the optimal policy $\optpolicyfcn_t$,
+which may be regarded as a function
+$\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$,
+$\state_t \mapsto \optpolicyfcn_t(\state_t)$.
 
 
 
