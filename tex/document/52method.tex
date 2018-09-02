@@ -30,7 +30,7 @@ the criterion selects a specific point $\gp{\*l,\*i}$ in each iteration
 and inserts all its children into the grid.
 This process is repeated until a given number $\ngpMax$ of grid points is
 reached,
-since we evaluate $\objfun$ at every grid point once and we assume that
+since we evaluate $\objfun$ at every grid point once, and we assume that
 function evaluations dominate the overall complexity.
 The difference to common refinement criteria is that
 a point may be selected multiple times, in which case
@@ -108,7 +108,7 @@ divided into global gradient-free methods such as differential evolution and
 local gradient-based methods such as gradient descent.
 A subset of these methods has been implemented in \sgpp
 (see \cref{tbl:optimizationMethod}).
-The gradient-based methods need an initial point and
+The gradient-based methods need an initial point, and
 they may get stuck in local minima.
 Hence, we additionally implemented globalized versions
 of the gradient-based methods
@@ -215,7 +215,7 @@ except that for optimizing the interpolant, we use the
 constrained optimization algorithms implemented in \sgpp
 as listed in \cref{tbl:optimizationMethod}.
 We only replace the objective function $\objfun$ with a sparse grid
-surrogate $\sgintp$ and we assume that the constraint function
+surrogate $\sgintp$, and we assume that the constraint function
 $\ineqconfun$ can be evaluated fast.
 However, it would also be possible to replace $\ineqconfun$
 with a sparse grid surrogate.
