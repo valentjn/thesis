@@ -50,7 +50,42 @@ We track three types of variables:
   are usually made for expected values instead of exact values.
 \end{itemize}
 
-\blindtext{}
+We discretize the state space with a spatially adaptive sparse grid.
+For each state grid point, an optimization problem over the policy
+variables has to be solved, where the objective function depends
+on the expected value over the stochastic variables.
+By using B-splines as sparse grid basis functions,
+the accuracy of the interpolants increases and
+the explicitly known gradients enable the usage of
+gradient-based optimization methods, thus accelerating convergence.
+The process is repeated for each time step.
+By using the Bellman principle, the objective functions that
+occur at time $t$ depend on the interpolant of next iteration $t+1$.
+Hence, the problem has to be solved backward in time
+via a scheme that resembles dynamic programming.
+
+The outline of this chapter is as follows:
+In \cref{sec:81models}, we formalize the framework of
+these dynamic portfolio lifecycle models and list related work.
+Afterwards, we explain in \cref{sec:82algorithms} the algorithms
+necessary to implement the solution of these models.
+\Cref{sec:83problems} lists example problems as application
+of the general framework introduced in \cref{sec:81models}.
+Finally, in \cref{sec:84results}, we study numerical results.
+
+This chapter is based on a collaboration with Prof.\ Dr.\ Raimond Maurer
+and Peter Schober (both Goethe University Frankfurt, Germany).
+\todo{mention paper if published}
+In previous work, Peter Schober treated the solution of
+dynamic portfolio lifecycle models with piecewise linear basis functions
+on sparse grids.
+The original contribution of this thesis is the introduction
+of higher-order B-splines for the solution of these problems.
+The author of this thesis contributed the methodology of
+hierarchical B-splines and large parts of the implementation.
+The contributions of the collaborators at Goethe University Frankfurt
+are the financial models, the literature review of related work,
+and the assessment of the quality of results.
 
 \input{document/81models}
 \input{document/82algorithms}
