@@ -276,9 +276,19 @@
   with $\hopint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t < b_t\}$
 }
 
+\hidenextnotation
+\newnotationcommand[1]{\pohint}{\mathopen]#1\mathclose]}{Öab40}{%
+  $\pohint{\*a, \*b}$%
+}{
+  Half-open hyper-rectangle
+  $:= \pohint{a_1, b_1} \times \dotsb \times \pohint{a_d, b_d}$
+  with $\pohint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t \le b_t\}$
+}
+
 \newcommand*{\clintscaled}[1]{\left[#1\right]}
 \newcommand*{\opintscaled}[1]{\left]#1\right[}
 \newcommand*{\hopintscaled}[1]{\left[#1\right[}
+\newcommand*{\pohintscaled}[1]{\left]#1\right]}
 
 % ======================================================================
 % Norms
