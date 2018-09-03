@@ -161,16 +161,163 @@ which may be regarded as a function
 $\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$,
 $\state_t \mapsto \optpolicyfcn_t(\state_t)$.
 
+\paragraph{Discrete states}
+
+The entries of the state $\state_t \in \clint{\*0, \*1}$ are continuous.
+Markov-chain \term{discrete states} $\discrstate_t \in \discrstdomain$
+such as alive/dead
+(i.e., $\discrstdomain$ is the Cartesian product of finite sets)
+can be incorporated into \eqref{eq:generalBellman}:
+The objective function of $\valuefcn_t(\state_t, \discrstate_t)$ then equals
+$\utilityfcn(\consume_t(\state_t, \discrstate_t, \policy_t)) +
+\patience \expectation[t]{
+  \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
+  \policy_t, \stochastic_t), \discrstate_{t+1}) \mid \discrstate_t
+}$,
+where the expectation is given by
+$\sum_{\discrstate_{t+1} \in \discrstdomain}
+P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t)
+\int_{\stochdomain}
+\valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
+\policy_t, \stochastic_t), \discrstate_{t+1})
+P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
+with the \term{discrete state transition probability}
+$P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t) \in \clint{0, 1}$.
+For the sake of clarity, we omit discrete states in the following,
+although they could be easily taken into account.
+
+\paragraph{Dynamic programming scheme}
+
+The Bellman equation \eqref{eq:generalBellman} can be solved
+with a dynamic programming scheme backwards in time.
+Starting from the solution $\valuefcn_T$ and $\optpolicyfcn_T$
+of time $T$, we can determine $\valuefcn_t$ and $\optpolicyfcn_t$
+from $\valuefcn_{t+1}$ and $\optpolicyfcn_{t+1}$
+for $t = T - 1, \dotsc, T - 2, \dotsc, 0$ with the Bellman equation.
+This way, we only have to solve $T+1$ separate $m_{\policy}$-dimensional
+optimization problems instead of a single large
+$(T+1) m_{\policy}$-dimensional problem.
+Often, the terminal solution $\valuefcn_T$ and $\optpolicyfcn_T$
+is explicitly known.
+For example, if we neglect inheritance,
+then the optimal terminal solution is to consume the whole wealth $\wealth_T$
+(which is usually part of the state $\state_T$)
+in the last time step $T$.
+%Otherwise, the remaining wealth would be wasted,
+%resulting in a non-optimal decision.
+Hence, we usually have
+\begin{equation}
+  \valuefcn_T(\state_T) = \wealth_T,\qquad
+  \optpolicyfcn_T(\state_T) = \utilityfcn(\wealth_T).
+\end{equation}
+
+\paragraph{Implementation and interpolation}
+
+For the implementation of \eqref{eq:generalBellman},
+we discretize the state space $\clint{\*0, \*1}$ into
+$\ngp_t$ grid points $\state_t^{(k)}$, $k = 1, \dotsc, \ngp_t$,
+and we tabulate the values of $\valuefcn_t$ and $\optpolicyfcn_t$
+at $\state_t^{(k)}$ for all $t = 0, \dotsc, T$ and $k = 1, \dotsc, \ngp_t$.
+However, in general, the next state
+$\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$ does not correspond
+to a grid point $\state_{t+1}^{(k')}$,
+which cannot lookup the value of $\valuefcn_{t+1}$
+at $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$.
+Therefore, we have to interpolate $\valuefcn_t$ and $\optpolicyfcn_t$
+at the grid points to obtain interpolants
+$\valueintp_t$ and $\optpolicyintp_t$, respectively:
+\begin{equation}
+  \label{eq:gridBellman}
+  \valueintp_t(\state_t^{(k)})
+  = \max_{\policy_t} \left(
+    \utilityfcn(\consume_t(\state_t^{(k)}, \policy_t)) +
+    \patience \expectation[t]{
+      \valueintp_{t+1}(\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t))
+    }
+  \right),\quad
+  k = 1, \dotsc, \ngp_t,
+\end{equation}
+with $t < T$.
+As $\valueintp_{t+1}$ on the \rhs is only an approximation to
+$\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
+on the \lhs are only an approximation as well.
+
 
 
 \subsection{Solution with B-Spline Surrogates on Sparse Grids}
 \label{sec:812surrogates}
 
-\blindtext{}
+\paragraph{Sparse grids and related work}
 
+Conventional schemes for interpolation of $\valuefcn_t$
+suffer from the curse of dimensionality:
+If the number $d$ of state entries in $\state_t$ is already moderately
+large (e.g., $d \ge 4$),
+then classical full grid approaches require millions of
+grid points even for medium-sized univariate grids
+(e.g., $\ngp_t \ge 32$).
+This quickly exceeds the available computational budget,
+as we have to solve an expensive optimization problem for each grid point.
+It seems obvious to instead use interpolation approaches based sparse grids.
 
+Recently, sparse grids have found increasing interest in the
+solution of dynamic models in finance
+\multicite{Brumm17Using,Judd14Smolyak,Schober18Solving,Winschel10Solving}.
+For example in \cite{Brumm17Using},
+discrete choices in the value iteration are computed
+using piecewise linear basis functions on spatially adaptive sparse grids.
+Judd et al.\ \cite{Judd14Smolyak} use global polynomials
+on sparse Clenshaw--Curtis grids for the interpolation of
+higher-dimensional economic models.
+Schober \cite{Schober18Solving} employs sparse grids for the interpolation
+of dynamic portfolio choice models, but uses the piecewise linear basis
+functions.
 
-\subsection{Related Work}
-\label{sec:813relatedWork}
+\paragraph{B-splines on sparse grids for dynamic portfolio choice models}
 
-\blindtext{}
+The shortcomings of the two approaches of piecewise linear functions
+\multicite{Brumm17Using,Schober18Solving} or global polynomials
+\cite{Judd14Smolyak} are evident:
+First,
+the piecewise linear basis is not continuously differentiable,
+impeding convergence of interpolation errors
+(see \cref{sec:541interpolation}) and prohibiting the use
+of gradient-based optimization methods to solve \eqref{eq:gridBellman}.
+The reason for the latter is that gradient-based optimizers require
+the derivatives of the objective function of \eqref{eq:gridBellman}
+with respect to $\policyentry_{t,j}$, $j = 1, \dotsc, m_{\policy}$, i.e.,
+\begin{equation}
+  \begin{split}
+    &\utilityfcn'(\consume_t(\state_t^{(k)}, \policy_t))
+    \partialderiv{\partialdiff{}\policyentry_{t,j}}{c_t}\paren{
+      \state_t^{(k)}, \policy_t
+    }\\
+    &{} + \patience \expectation[t]{
+      \tr{
+        \paren*{
+          \gradient{\state_{t+1}}{\valueintp_{t+1}}\paren{
+            \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+          }
+        }
+      }
+      \partialderiv{\partialdiff{}\policyentry_{t,j}}{\statefcn_t}\paren{
+        \state_t^{(k)}, \policy_t, \stochastic_t
+      }
+    },
+  \end{split}
+\end{equation}
+which involves the gradient
+$\gradient{\state_{t+1}}{\valueintp_{t+1}}$ of the
+value function interpolant $\valueintp_{t+1}$.
+Second,
+global polynomials only work well on Clenshaw--Curtis grids
+with Chebyshev-distributed nodes due to Runge's phenomenon.
+
+In this thesis, we use higher-order B-splines as basis functions for
+the interpolation of $\valuefcn_t$ and $\optpolicyfcn_t$.
+The advantages of the new method are obvious:
+First, B-splines of degree $p > 1$ are continuously differentiable,
+increasing the order of convergence and enabling
+gradient-based optimization for \eqref{eq:gridBellman}.
+Second, B-splines are defined for arbitrary knot sequences,
+thus leading to a greater flexibility when compared to global polynomials.
