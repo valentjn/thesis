@@ -139,7 +139,7 @@ we obtain the \term{Bellman equation:}
 \end{subequations}
 where
 $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
-\stochdomain_t \to \clint{\*0, \*1}$,
+\stochdomain \to \clint{\*0, \*1}$,
 $(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$,
 is the \term{state transition function,}
 $\ineqconfun_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \to
@@ -149,12 +149,12 @@ and the expected value is
   \expectation[t]{
     \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
   }
-  = \int_{\stochdomain_t}
+  = \int_{\stochdomain}
   \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
-  P_t(\stochastic_t) \diff{}\stochastic_t
+  P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t
 \end{equation}
 with the probability density function
-$P_t\colon \stochdomain_t \to \nonnegreal$ of $\stochastic_t$.
+$P_{t,\stochastic}\colon \stochdomain \to \nonnegreal$ of $\stochastic_t$.
 We denote the location of the maximum of \eqref{eq:generalBellman}
 as the optimal policy $\optpolicyfcn_t$,
 which may be regarded as a function
