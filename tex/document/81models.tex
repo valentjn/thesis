@@ -163,7 +163,8 @@ $\state_t \mapsto \optpolicyfcn_t(\state_t)$.
 
 \paragraph{Discrete states}
 
-The entries of the state $\state_t \in \clint{\*0, \*1}$ are continuous.
+The entries $\stateentry_{t,j}$ of the state
+$\state_t \in \clint{\*0, \*1}$ are continuous.
 Markov-chain \term{discrete states} $\discrstate_t \in \discrstdomain$
 such as alive/dead
 (i.e., $\discrstdomain$ is the Cartesian product of finite sets)
@@ -184,7 +185,7 @@ P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
 with the \term{discrete state transition probability}
 $P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t) \in \clint{0, 1}$.
 For the sake of clarity, we omit discrete states in the following,
-although they could be easily taken into account.
+although they could easily be taken into account.
 
 \paragraph{Dynamic programming scheme}
 
