@@ -20,7 +20,7 @@ If we neglect stochastic factors, then these models solve
   \label{eq:utilityMaximization}
   (\optpolicyfcn_0, \dotsc, \optpolicyfcn_T)
   = \argmax_{\policy_0, \dotsc, \policy_T}
-  \sum_{t=0}^T \patience^t \utility(\consume_t(\state_t, \policy_t))
+  \sum_{t=0}^T \patience^t \utilityfcn(\consume_t(\state_t, \policy_t))
   \quad\text{s.t. specific constraints.}
 \end{equation}
 Here, $\state_t \in \clint{\*0, \*1} \subset \real^d$ and
@@ -37,10 +37,10 @@ in each time step, a fraction of the available wealth
 is invested in \term{consumption} $\consume_t$,
 which can be computed from the state $\state_t$ and the policy $\policy_t$.
 We rate the consumption with a \term{utility function}
-$\utility(\consume_t)$.
-A common choice for $\utility$ is the
+$\utilityfcn(\consume_t)$.
+A common choice for $\utilityfcn$ is the
 \term{constant relative risk aversion (CRRA) utility}
-$\utility(\consume_t) := (c_t^{1-\riskav})/(1-\riskav)$
+$\utilityfcn(\consume_t) := (c_t^{1-\riskav})/(1-\riskav)$
 with the \term{risk aversion} $\riskav \in \real \setminus \{1\}$.
 Positive and negative values correspond to risk-averse and risk-affine
 individuals, respectively.
@@ -54,7 +54,7 @@ or \term{time discount factor.}
     The available wealth $\wealth_t$ is invested
     into bonds ($\bond_t$) and two stocks ($\stock_{t,1}, \stock_{t,2}$).
     The rest is consumed ($\consume_t$), resulting in the utility
-    $\utility(\consume_t)$.
+    $\utilityfcn(\consume_t)$.
     In the last time step $T$ \emph{(far right),}
     the whole wealth is consumed, if we do not take inheritance
     into account.%
@@ -89,11 +89,11 @@ The principle states that the optimal policy for all times $t = 0, \dotsc, T$
 is also optimal with respect to $t = 1, \dotsc, T$, i.e.,
 \begin{equation}
   \max_{\policy_0, \dotsc, \policy_T}
-  \sum_{t=0}^T \patience^t \utility(\consume_t(\state_t, \policy_t))
+  \sum_{t=0}^T \patience^t \utilityfcn(\consume_t(\state_t, \policy_t))
   = \max_{\policy_0} \left(
-    \utility(\consume_0(\state_0, \policy_0))
+    \utilityfcn(\consume_0(\state_0, \policy_0))
     + \patience \max_{\policy_1, \dotsc, \policy_T}
-    \sum_{t=1}^T \patience^{t-1} \utility(\consume_t(\state_t, \policy_t))
+    \sum_{t=1}^T \patience^{t-1} \utilityfcn(\consume_t(\state_t, \policy_t))
   \right),
 \end{equation}
 where we omitted the constraints for brevity.
@@ -104,12 +104,12 @@ $\valuefcn_t\colon \clint{\*0, \*1} \to \real$,
 $\valuefcn_t(\state_t) :=
 \max_{\policy_0, \dotsc, \policy_T}
 \sum_{t'=t}^T \patience^{t'}
-\utility(\consume_{t'}(\state_{t'}, \policy_{t'}))$, this can be rewritten as
+\utilityfcn(\consume_{t'}(\state_{t'}, \policy_{t'}))$, this can be rewritten as
 \begin{equation}
   \label{eq:simpleBellman}
   \valuefcn_0(\state_0)
   = \max_{\policy_0} \left(
-    \utility(\consume_0(\state_0, \policy_0)) +
+    \utilityfcn(\consume_0(\state_0, \policy_0)) +
     \patience \valuefcn_1(\state_1)
   \right)
   \quad\text{s.t. specific constraints,}
@@ -127,7 +127,7 @@ then we obtain the following \term{Bellman equation:}
   \begin{gather}
     \valuefcn_t(\state_t)
     = \max_{\policy_t} \left(
-      \utility(\consume_t(\state_t, \policy_t)) +
+      \utilityfcn(\consume_t(\state_t, \policy_t)) +
       \patience \expectation[t]{
         \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
       }
