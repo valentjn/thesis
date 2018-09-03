@@ -1197,6 +1197,18 @@
   $\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$ of time $t$
 }
 
+\newnotationcommand{\valueintp}{J^\sparse}{Jts}{$\valueintp_t$}{
+  Interpolated value function
+  $\valuefcn_t\colon \clint{\*0, \*1} \to \real$ of time $t$
+}
+
+\newnotationcommand{\optpolicyintp}{%
+  \policy^{\opt,\sparse}%
+}{poptts}{$\optpolicyintp_t$}{
+  Interpolated optimal policy function
+  $\optpolicyintp_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$ of time $t$
+}
+
 \newnotationcommand{\statefcn}{\*\psi}{Äψt}{$\statefcn_t$}{
   State transition function
   $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
