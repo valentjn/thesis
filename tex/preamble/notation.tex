@@ -1141,8 +1141,18 @@
   State variables $\in \clint{\*0, \*1}$ of time $t$
 }
 
+\newnotationcommand{\stateentry}{x}{xtj}{$\stateentry_{t,j}$}{
+  $j$-th state variable $\in \clint{0, 1}$ of time $t$
+  ($j = 1, \dotsc, d$)
+}
+
 \newnotationcommand{\policy}{\*p}{pt}{$\policy_t$}{
   Policy variables $\in \real^{m_{\policy}}$ of time $t$
+}
+
+\newnotationcommand{\policyentry}{p}{ptj}{$\policyentry_{t,j}$}{
+  $j$-th policy variable $\in \real$ of time $t$
+  ($j = 1, \dotsc, m_{\policy}$)
 }
 
 \newnotationcommand{\stochastic}{\*\omega}{Äωt}{$\stochastic_t$}{
