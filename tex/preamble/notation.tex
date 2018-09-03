@@ -1137,15 +1137,15 @@
 % Application 3: Dynamic Portfolio Choice Models
 % ======================================================================
 
-\newnotationcommand{\state}{\*x}{x}{$\state_t$}{
+\newnotationcommand{\state}{\*x}{xt}{$\state_t$}{
   State variables $\in \clint{\*0, \*1}$ of time $t$
 }
 
-\newnotationcommand{\policy}{\*p}{p}{$\policy_t$}{
+\newnotationcommand{\policy}{\*p}{pt}{$\policy_t$}{
   Policy variables $\in \real^{m_{\policy}}$ of time $t$
 }
 
-\newnotationcommand{\stochastic}{\*\omega}{Äω}{$\stochastic_t$}{
+\newnotationcommand{\stochastic}{\*\omega}{Äωt}{$\stochastic_t$}{
   Stochastic variables $\in \stochdomain$ of time $t$
 }
 
@@ -1153,39 +1153,39 @@
   Domain of the stochastic variables $\stochastic_t$ of time $t$
 }
 
-\newnotationcommand{\wealth}{w}{w}{$\wealth_t$}{
+\newnotationcommand{\wealth}{w}{wt}{$\wealth_t$}{
   Wealth of time $t$ (available money)
 }
 
-\newnotationcommand{\consume}{c}{c}{$\consume_t$}{
+\newnotationcommand{\consume}{c}{ct}{$\consume_t$}{
   Consumption of time $t$
 }
 
-\newnotationcommand{\bond}{b}{b}{$\bond_t$}{
+\newnotationcommand{\bond}{b}{bt}{$\bond_t$}{
   Bond investment of time $t$
 }
 
-\newnotationcommand{\stock}{s}{s2}{$\stock_t$}{
+\newnotationcommand{\stock}{s}{st}{$\stock_t$}{
   Stock investment of time $t$
 }
 
-\newnotationcommand{\valuefcn}{J}{J}{$\valuefcn_t$}{
+\newnotationcommand{\valuefcn}{J}{Jt}{$\valuefcn_t$}{
   Value function
   $\valuefcn_t\colon \clint{\*0, \*1} \to \real$ of time $t$
 }
 
-\newnotationcommand{\optpolicyfcn}{\policy^\opt}{popt}{$\optpolicyfcn_t$}{
+\newnotationcommand{\optpolicyfcn}{\policy^\opt}{poptt}{$\optpolicyfcn_t$}{
   Optimal policy function
   $\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$ of time $t$
 }
 
-\newnotationcommand{\statefcn}{\psi}{Äψ}{$\statefcn_t$}{
+\newnotationcommand{\statefcn}{\psi}{Äψt}{$\statefcn_t$}{
   State transition function
   $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
   \stochdomain_t \to \clint{\*0, \*1}$ of time $t$
 }
 
-\newnotationcommand{\utilityfcn}{u}{u3}{$\utilityfcn(\consume_t)$}{
+\newnotationcommand{\utilityfcn}{u}{uct}{$\utilityfcn(\consume_t)$}{
   Utility of consuming $\consume_t$
 }
 
