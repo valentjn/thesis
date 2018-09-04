@@ -811,14 +811,14 @@
   \ifempty{#1}{\*x^\opt}\ifnotempty{#1}{x^\opt_{#1}}%
 }{xopt}{$\xopt$}{
   Solution of an optimization problem of the form
-  $\xopt = \argmin \objfun(\*x)$
+  $\xopt = \*\argmin \objfun(\*x)$
 }
 
 \newnotationcommandoptarg{1}{\xoptappr}{%
   \ifempty{#1}{\*x^{\opt,\ast}}%
   \ifnotempty{#1}{x^{\opt,\ast}_{#1}}%
 }{xopt*}{$\xoptappr$}{
-  Approximation for $\xopt = \argmin \objfun(\*x)$
+  Approximation for $\xopt = \*\argmin \objfun(\*x)$
 }
 
 \newnotationcommandoptarg{1}{\xoptscaled}{%
