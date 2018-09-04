@@ -176,8 +176,12 @@ $\valuefcn_T$ is assumed to be explicitly known.
       }
     \EndFunction{}
   \end{algorithmic}
-  \caption[TODO]{%
-    TODO%
+  \caption[Evaluation of the value function (\texttt{optimize})]{%
+    Evaluation of the value function at all
+    grid points $\state_t^{(k)}$ of $\valueintp[1]_t$
+    at which the value function has not been evaluated yet.
+    Note that the argument $\valueintp[p]_{t+1}$ is not used
+    if $t = T$.%
   }%
   \label{alg:financeOptimize}%
 \end{algorithm}
