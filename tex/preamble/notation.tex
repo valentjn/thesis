@@ -1217,14 +1217,16 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\valueintp}{J^\sparse}{Jts}{$\valueintp_t$}{
+\newnotationcommandoptarg{1}{\valueintp}{%
+  J^{\sparse\ifnotempty{#1}{,#1}}%
+}{Jts}{$\valueintp_t$}{
   Interpolated value fcn.
 }
 
 \hidenextnotation
-\newnotationcommand{\optpolicyintp}{\policy^{\opt,\sparse}}{poptts}{%
-  $\optpolicyintp_t$%
-}{
+\newnotationcommandoptarg{1}{\optpolicyintp}{%
+  \policy^{\opt,\sparse\ifnotempty{#1}{,#1}}%
+}{poptts}{$\optpolicyintp_t$}{
   Interpolated optimal policy fcn.
 }
 
