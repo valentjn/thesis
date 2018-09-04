@@ -576,16 +576,18 @@
 \DeclareMathOperator*{\vecmax}{\vec{max}}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
-\let\argminorig\argmin
+\DeclareMathOperator*{\vecargmin}{\vec{arg\,min}}
+\let\vecargminorig\vecargmin
 \hidenextnotation
-\makecommandnotation{\argmin}{argmin}{$\argminorig$}{
+\makecommandnotation{\vecargmin}{argmin}{$\vecargminorig$}{
   Point where the minimum is attained
 }
 
 \DeclareMathOperator*{\argmax}{arg\,max}
-\let\argmaxorig\argmax
+\DeclareMathOperator*{\vecargmax}{\vec{arg\,max}}
+\let\vecargmaxorig\vecargmax
 \hidenextnotation
-\makecommandnotation{\argmax}{argmax}{$\argmaxorig$}{
+\makecommandnotation{\vecargmax}{argmax}{$\vecargmaxorig$}{
   Point where the maximum is attained
 }
 
