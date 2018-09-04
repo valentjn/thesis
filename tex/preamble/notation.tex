@@ -1143,29 +1143,27 @@
 
 \hidenextnotation
 \newnotationcommand{\state}{\*x}{xt}{$\state_t$}{
-  State variables $\in \clint{\*0, \*1}$
+  State variables
 }
 
 \hidenextnotation
 \newnotationcommand{\stateentry}{x}{xtj}{$\stateentry_{t,j}$}{
-  $j$-th state variable $\in \clint{0, 1}$
-  ($j = 1, \dotsc, d$)
+  $j$-th state variable ($j = 1, \dotsc, d$)
 }
 
 \hidenextnotation
 \newnotationcommand{\policy}{\*p}{pt}{$\policy_t$}{
-  Policy variables $\in \real^{m_{\policy}}$
+  Policy variables
 }
 
 \hidenextnotation
 \newnotationcommand{\policyentry}{p}{ptj}{$\policyentry_{t,j}$}{
-  $j$-th policy variable $\in \real$
-  ($j = 1, \dotsc, m_{\policy}$)
+  $j$-th policy variable ($j = 1, \dotsc, m_{\policy}$)
 }
 
 \hidenextnotation
 \newnotationcommand{\stochastic}{\*\omega}{Äωt}{$\stochastic_t$}{
-  Stochastic variables $\in \stochdomain$
+  Stochastic variables
 }
 
 \hidenextnotation
@@ -1175,7 +1173,7 @@
 
 \hidenextnotation
 \newnotationcommand{\discrstate}{\*\theta}{Äθt}{$\discrstate_t$}{
-  Discrete state variables $\in \discrstdomain$
+  Discrete state variables
 }
 
 \hidenextnotation
@@ -1185,7 +1183,7 @@
 
 \hidenextnotation
 \newnotationcommand{\wealth}{w}{wt}{$\wealth_t$}{
-  Wealth (available money)
+  Wealth
 }
 
 \hidenextnotation
@@ -1205,50 +1203,44 @@
 
 \hidenextnotation
 \newnotationcommand{\valuefcn}{J}{Jt}{$\valuefcn_t$}{
-  Value function
-  $\valuefcn_t\colon \clint{\*0, \*1} \to \real$
+  Value fcn.
 }
 
 \hidenextnotation
 \newnotationcommand{\optpolicyfcn}{\policy^\opt}{poptt}{$\optpolicyfcn_t$}{
-  Optimal policy function
-  $\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$
+  Optimal policy fcn.
 }
 
 \hidenextnotation
 \newnotationcommand{\valueintp}{J^\sparse}{Jts}{$\valueintp_t$}{
-  Interpolated value function
-  $\valuefcn_t\colon \clint{\*0, \*1} \to \real$
+  Interpolated value fcn.
 }
 
 \hidenextnotation
-\newnotationcommand{\optpolicyintp}{%
-  \policy^{\opt,\sparse}%
-}{poptts}{$\optpolicyintp_t$}{
-  Interpolated optimal policy function
-  $\optpolicyintp_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$
+\newnotationcommand{\optpolicyintp}{\policy^{\opt,\sparse}}{poptts}{%
+  $\optpolicyintp_t$%
+}{
+  Interpolated optimal policy fcn.
 }
 
 \hidenextnotation
 \newnotationcommand{\statefcn}{\*\psi}{Äψt}{$\statefcn_t$}{
-  State transition function
-  $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
-  \stochdomain_t \to \clint{\*0, \*1}$
+  State transition fcn.
 }
 
 \hidenextnotation
-\newnotationcommand{\utilityfcn}{u}{uct}{$\utilityfcn(\consume_t)$}{
-  Utility of consuming $\consume_t$
+\newnotationcommand{\utilityfcn}{u}{u3}{$\utilityfcn$}{
+  Utility fcn.
 }
 
 \hidenextnotation
 \newnotationcommand{\riskav}{\gamma}{Äγ}{$\riskav$}{
-  Risk aversion $\in \real \setminus \{1\}$
+  Risk aversion
 }
 
 \hidenextnotation
 \newnotationcommand{\patience}{\varrho}{Äρ2}{$\patience$}{
-  Patience factor $\in \hopint{0, 1}$
+  Patience factor
 }
 
 % ======================================================================
