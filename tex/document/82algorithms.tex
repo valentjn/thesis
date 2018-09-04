@@ -154,7 +154,7 @@ $\valuefcn_T$ is assumed to be explicitly known.
         \gets \text{grid of $\valueintp[1]_t$}$%
       }
       \For{$k = 1, \dotsc, \ngp_t$}
-        \If{$\valueintp[1]_t(\state_t^{(k)})$ not already computed}
+        \If{$\valueintp[1]_t(\state_t^{(k)})$ not previously computed}
           \IfOneLine{$t = T$}{%
             $\valueintp[1]_T(\state_T^{(k)})
             \gets \texttt{computeKnownTerminalSolution($\state_T^{(k)}$)}$%
