@@ -261,7 +261,8 @@ $\valueintp_t$ and $\optpolicyintp_t$, respectively:
   \right),\quad
   k = 1, \dotsc, \ngp_t,
 \end{equation}
-with $t < T$.
+with $t < T$ and
+$\optpolicyintp_t(\state_t^{(k)}) = \*\argmax_{\policy_t} \cdots$.
 As $\valueintp_{t+1}$ on the \rhs is only an approximation to
 $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.
@@ -282,7 +283,8 @@ grid points even for medium-sized univariate grids
 (e.g., $\ngp_t \ge 32$).
 This quickly exceeds the available computational budget,
 as we have to solve an expensive optimization problem for each grid point.
-It seems obvious to instead use interpolation approaches based sparse grids.
+It seems obvious to instead use interpolation approaches based on
+spatially adaptive sparse grids.
 
 Recently, sparse grids have found increasing interest in the
 solution of dynamic models in finance
