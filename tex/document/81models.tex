@@ -5,6 +5,29 @@ In this section, we give a mathematical framework for
 dynamic portfolio choice models,
 briefly mention related literature briefly, and
 explain where B-splines on sparse grids come into play.
+\Cref{tbl:glossaryFinance} summarizes the symbols
+that are introduced in this chapter.
+
+\begin{table}
+  \setnumberoftableheaderrows{0}%
+  \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \pnst{t}&           \pnst{\wealth}&  \pnst{\utilityfcn}\\
+    \pnst{\state}&      \pnst{\consume}& \pnst{\statefcn}\\
+    \pnst{\policy}&     \pnst{\bond}&    \pnst{\valuefcn}\\
+    \pnst{\stochastic}& \pnst{\stock}&   \pnst{\optpolicyfcn}\\
+    \pnst{\riskav}&     &&               &\\
+    \pnst{\patience}&   &&               &\\
+    \bottomrulec
+  \end{tabular}%
+  \caption[Glossary for dynamic portfolio choice models]{%
+    Glossary of the notation for dynamic portfolio choice models.%
+  }%
+  \label{tbl:glossaryFinance}%
+\end{table}
 
 
 
