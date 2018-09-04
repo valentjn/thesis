@@ -60,7 +60,15 @@ to the algorithms.
 
 \paragraph{\texttt{solveValueFunction}}
 
-\blindtext{}
+\Cref{alg:financeSolveValueFunction} shows \texttt{solveValueFunction},
+which generates the value function interpolants
+$\valueintp[1]_t$ and $\valueintp[p]_t$ ($t = 0, \dotsc, T$).
+The algorithm follows a simple optimize--refine--interpolate scheme:
+First, the Bellman equation \eqref{eq:gridBellman} is solved
+on some initial sparse grid (\texttt{optimize}).
+Then, we \texttt{refine} the grid spatially adaptively.
+Finally, the data on the resulting grid are \texttt{interpolate}d
+with hierarchical higher-order B-splines.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -99,6 +107,24 @@ to the algorithms.
   }%
   \label{alg:financeSolveValueFunction}%
 \end{algorithm}
+
+At the beginning of every iteration $t$,
+the grid of the piecewise linear interpolant is reset
+to an initial, possibly regular sparse grid.
+It is also possible to reuse the grid from the
+previous iteration $t + 1$.
+Nevertheless, the results we then obtain become worse,
+likely due to the different characteristics of $\valueintp[1]_t$
+for different $t$ (e.g., kinks).
+
+The higher-order B-spline interpolant
+$\valueintp[p]_{t+1}$ of the previous iteration $t+1$ is used
+for the \rhs of the Bellman equation \eqref{eq:gridBellman},
+if $t < T$.
+In the first iteration $t = T$,
+there is no such interpolant.
+However, it is not needed anyway, as the exact terminal solution
+$\valuefcn_T$ is assumed to be explicitly known.
 
 
 
