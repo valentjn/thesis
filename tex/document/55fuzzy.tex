@@ -536,7 +536,7 @@ The remaining experiments use $\gamma = 0.1$ as adaptivity.
           \Comment{ranks}%
           \State{%
             $(\*l^\ast, \*i^\ast) \gets
-            \*\argmin_{(\*l,\*i) \in \liset_j} \bracket*{
+            \vecargmin_{(\*l,\*i) \in \liset_j} \bracket*{
               (r_{\*l,\*i} + 1)^\gamma
               (\normone{\*l} + d_{\*l,\*i} + 1)^{1 - \gamma}
             }$%
@@ -545,7 +545,7 @@ The remaining experiments use $\gamma = 0.1$ as adaptivity.
           \vspace{-0.7mm}
           \State{%
             $(\*l^{\ast\ast}, \*i^{\ast\ast}) \gets
-            \*\argmin_{(\*l,\*i) \in \liset_j} \bracket*{
+            \vecargmin_{(\*l,\*i) \in \liset_j} \bracket*{
               (\setsize{\liset_j} - r_{\*l,\*i} + 2)^\gamma
               (\normone{\*l} + d_{\*l,\*i} + 1)^{1 - \gamma}
             }$%

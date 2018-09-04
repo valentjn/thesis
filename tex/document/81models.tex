@@ -42,7 +42,7 @@ If we neglect stochastic factors, then these models solve
 \begin{equation}
   \label{eq:utilityMaximization}
   (\optpolicyfcn_0, \dotsc, \optpolicyfcn_T)
-  = \*\argmax_{\policy_0, \dotsc, \policy_T}
+  = \vecargmax_{\policy_0, \dotsc, \policy_T}
   \sum_{t=0}^T \patience^t \utilityfcn(\consume_t(\state_t, \policy_t))
   \quad\text{s.t. specific constraints.}
 \end{equation}
@@ -262,7 +262,7 @@ $\valueintp_t$ and $\optpolicyintp_t$, respectively:
   k = 1, \dotsc, \ngp_t,
 \end{equation}
 with $t < T$ and
-$\optpolicyintp_t(\state_t^{(k)}) = \*\argmax_{\policy_t} \cdots$.
+$\optpolicyintp_t(\state_t^{(k)}) = \vecargmax_{\policy_t} \cdots$.
 As $\valueintp_{t+1}$ on the \rhs is only an approximation to
 $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.

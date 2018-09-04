@@ -7,14 +7,14 @@
 Generally, \term{unconstrained optimization problems} have the form
 \begin{equation}
   \label{eq:unconstrainedOptimization}
-  \xopt = \*\argmin \objfun(\*x),\quad
+  \xopt = \vecargmin \objfun(\*x),\quad
   \*x \in \real^d,
 \end{equation}
 where $\objfun\colon \real^d \to \real$ is the \term{objective function.}
 In contrast, \term{constrained optimization problems} are given by
 \begin{equation}
   \label{eq:constrainedOptimization}
-  \xopt = \*\argmin \objfun(\*x),\quad
+  \xopt = \vecargmin \objfun(\*x),\quad
   \*x \in \real^d\;\;\text{s.t.}\;\;
   \ineqconfun(\*x) \le \*0,
 \end{equation}
@@ -476,7 +476,7 @@ The \term{squared penalty method}
 replaces the constrained problem with the penalized problem
 $\min\, [\objfun(\*x) + \mu_k \norm[2]{\nonnegpart{\ineqconfun(\*x)}}^2]$,
 where $\mu_k \in \posreal$ is a penalty parameter and
-$\nonnegpart{\cdot} := \*\max(\cdot, \*0)$ denotes the non-negative part.
+$\nonnegpart{\cdot} := \vecmax(\cdot, \*0)$ denotes the non-negative part.
 With increasing $\mu_k$, the constraint violation of the solution of
 the penalized problem decreases, although it may happen
 that it never vanishes.
