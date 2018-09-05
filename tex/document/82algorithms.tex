@@ -111,9 +111,10 @@ with hierarchical higher-order B-splines.
   \caption[%
     Generation of value function interpolants (\texttt{solveValueFunction})%
   ]{%
-    Generation of value function interpolants
-    $\valueintp[1]_t$ (piecewise linear) and
-    $\valueintp[p]_t$ (higher-order B-splines).%
+    Generation of value function interpolants.
+    Outputs are the piecewise linear interpolants $\valueintp[1]_t$
+    and the higher-order B-spline interpolants $\valueintp[p]_t$
+    for all $t = 0, \dotsc, T$.%
   }%
   \label{alg:financeSolveValueFunction}%
 \end{algorithm}
@@ -186,8 +187,16 @@ $\valuefcn_T$ is assumed to be explicitly known.
     Evaluation of the value function at all
     grid points $\state_t^{(k)}$ of $\valueintp[1]_t$
     at which the value function has not been evaluated yet.
-    Note that the argument $\valueintp[p]_{t+1}$ is not used
-    if $t = T$.%
+    Inputs are
+    the time $t$,
+    the piecewise linear interpolant $\valueintp[1]_t$
+    of the current iteration $t$ (with the underlying sparse grid and
+    corresponding function values, possibly unset), and
+    the higher-order B-spline interpolant $\valueintp[p]_{t+1}$
+    of the previous iteration $t + 1$
+    (not used if $t = T$).
+    Output is the updated piecewise linear interpolant $\valueintp[1]_t$,
+    where all missing function values at grid points have been computed.%
   }%
   \label{alg:financeOptimize}%
 \end{algorithm}
