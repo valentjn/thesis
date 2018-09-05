@@ -32,17 +32,20 @@ for the value function and the optimal policies.
 This is useful if the shapes of value function and optimal policies
 have different characteristics.
 
-In the following (\cref{%
-  sec:822optimization,%
-  sec:823interpolation,%
+In the following \cref{%
+  sec:822solveValueFunction,%
+  sec:823optimization,%
   sec:824quadrature,%
-  sec:825gridGeneration%
-}), we first describe the algorithmic details of
+  sec:825interpolation,%
+  sec:826gridGeneration%
+}, we describe the algorithmic details of
 \texttt{solveValueFunction} (step 1).
 The treatment of the other steps \texttt{solvePolicy} (step 2) and
 \texttt{computeEulerErrors} (step 3) follows with
-\cref{sec:826policyGeneration} and \cref{sec:827eulerEquationErrors},
+\cref{sec:827solvePolicy} and \cref{sec:828eulerEquationErrors},
 respectively.
+
+\paragraph{Interpolants}
 
 We track two interpolants $\valueintp[1]_t$ and $\valueintp[p]_t$
 for each $t = 0, \dotsc, T$.
@@ -58,7 +61,10 @@ at the grid points ($k = 1, \dotsc, \ngp_t$).
 For simplicity, we do not pass them as separate data
 to the algorithms.
 
-\paragraph{\texttt{solveValueFunction}}
+
+
+\subsection{Solution for Value Function}
+\label{sec:822solveValueFunction}
 
 \Cref{alg:financeSolveValueFunction} shows \texttt{solveValueFunction},
 which generates the value function interpolants
@@ -133,7 +139,7 @@ $\valuefcn_T$ is assumed to be explicitly known.
 
 
 \subsection{Optimization}
-\label{sec:822optimization}
+\label{sec:823optimization}
 
 \todo{%
   certainty equivalence,
@@ -188,8 +194,16 @@ $\valuefcn_T$ is assumed to be explicitly known.
 
 
 
+
+\subsection{Quadrature}
+\label{sec:824quadrature}
+
+\blindtext{}
+
+
+
 \subsection{Interpolation and Extrapolation}
-\label{sec:823interpolation}
+\label{sec:825interpolation}
 
 \todo{%
   grid type, basis function type,
@@ -200,15 +214,8 @@ $\valuefcn_T$ is assumed to be explicitly known.
 
 
 
-\subsection{Quadrature}
-\label{sec:824quadrature}
-
-\blindtext{}
-
-
-
 \subsection{Grid Generation}
-\label{sec:825gridGeneration}
+\label{sec:826gridGeneration}
 
 %The piecewise linear interpolant is used for the surplus-based
 %grid generation,
@@ -246,14 +253,14 @@ $\valuefcn_T$ is assumed to be explicitly known.
 
 
 
-\subsection{Policy Generation}
-\label{sec:826policyGeneration}
+\subsection{Solution for Optimal Policies}
+\label{sec:827solvePolicy}
 
 \blindtext{}
 
 
 
 \subsection{Euler Equation Errors}
-\label{sec:827eulerEquationErrors}
+\label{sec:828eulerEquationErrors}
 
 \blindtext{}
