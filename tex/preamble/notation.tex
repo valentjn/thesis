@@ -1231,6 +1231,13 @@
 }
 
 \hidenextnotation
+\newnotationcommandoptarg{1}{\cetvalueintp}{%
+  \hat{J}^{\sparse\ifnotempty{#1}{,#1}}%
+}{Jts2}{$\cevalueintp_t$}{
+  Interpolated certainty-equivalent transformed value fcn.
+}
+
+\hidenextnotation
 \newnotationcommand{\statefcn}{\*\psi}{Äψt}{$\statefcn_t$}{
   State transition fcn.
 }
