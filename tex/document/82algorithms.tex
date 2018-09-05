@@ -142,14 +142,37 @@ $\valuefcn_T$ is assumed to be explicitly known.
 \subsection{Optimization}
 \label{sec:823optimization}
 
-\todo{%
-  certainty equivalence,
-  parallelization,
-  space transformation?
-  value trafo?%
+The \texttt{optimize} step can be seen in \cref{alg:financeOptimize}.
+This algorithm accepts in $\valueintp[1]_t$
+a spatially adaptive sparse grid
+$\gridset{t}{\sparse}
+= \{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\}$,
+where the function values $\valueintp[1]_t(\state_t^{(k)})$
+may already be known for some grid points $\state_t^{(k)}$.
+\texttt{optimize} computes the missing value function values.
+For $t = T$, we assume that the exact terminal solution
+$\valuefcn_T$ is known and can be computed explicitly by some function
+\texttt{computeKnownTerminalSolution}.%
+\footnote{%
+  In any case, the terminal solution be be computed as the
+  solution of the corresponding single-time optimization problem,
+  i.e., $\valuefcn_T(\state_T^{(k)})
+  = \max_{\policy_T} \utilityfcn(\consume_T(\state_T^{(k)}, \policy_T))$.%
 }
-
-\blindtext{}
+Otherwise, for $t < T$, we solve the Bellman equation
+\eqref{eq:gridBellman} by using the higher-order B-spline interpolant
+$\valueintp[p]_{t+1}$ of the previous iteration $t + 1$
+(\texttt{optimizeSinglePoint}).
+The computations for the different $\state_t^{(k)}$ are
+independent of each other,
+which means that they can be computed in parallel \cite{Horneff16Efficient}.%
+\footnote{%
+  Such a problem is usually referred to as \term{embarrassingly parallel.}%
+}
+After generating all missing data,
+we update the hierarchical surpluses of the
+piecewise linear interpolant $\valueintp[1]_t$
+to interpolate the new data at all grid points of $\gridset{t}{\sparse}$.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
@@ -201,6 +224,53 @@ $\valuefcn_T$ is assumed to be explicitly known.
   \label{alg:financeOptimize}%
 \end{algorithm}
 
+\paragraph{Certainty-equivalent transformation}
+
+For utility functions of \crra-type, i.e., of the form
+$\utilityfcn(\consume_t) = \consume_t^{1-\riskav}/(1-\riskav)$,
+the curvature of the objective function in the Bellman equation
+\eqref{eq:gridBellman} can be very high
+(depending on the risk aversion parameter $\riskav$),
+which may impede convergence of the optimizer.
+As a remedy, we transform the value function $\valueintp_t$ with the
+\term{certainty-equivalent transformation}
+$\valueintp_t \mapsto \cetvalueintp_t
+:= ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 0$.
+\Cref{eq:gridBellman} then becomes
+\begin{equation}
+  \label{eq:gridBellmanCET}
+  \cetvalueintp_t(\state_t^{(k)})
+  = \max_{\policy_t} \left(
+    \left(
+      \consume_t(\state_t^{(k)}, \policy_t)^{1-\riskav} +
+      \patience \expectation[t]{
+        \cetvalueintp_{t+1}(
+          \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+        )^{1-\riskav}
+      }
+    \right)^{1/(1-\riskav)}
+  \right).
+\end{equation}
+The maximum remains a maximum as for $\riskav > 0$,
+$(\cdot)^{1/(1-\riskav)}$ is strictly monotonously decreasing and
+$(1-\riskav) < 0$.
+%and hence,
+%$(\max ((1-\riskav) (\cdot)))^{1/(1-\riskav)}
+%= ((1-\riskav) \min (\cdot))^{1/(1-\riskav)}
+%= (1-\riskav)^{1/(1-\riskav)} \max ((\cdot)^{1/(1-\riskav)})$.
+
+\paragraph{State space transformation}
+
+Depending on the dynamic portfolio lifecycle model at hand,
+it might be beneficial to transform the state space as well
+with a \term{state space transformation}
+$\statetrafofcn_t\colon \clint{\*0, \*1} \to \real^d$,
+for instance, to increase the density of grid points for low
+wealth values $\wealth_t$.
+The untransformed states $\state_t^{(k)}$ are then still contained in
+the unit cube $\clint{\*0, \*1}$,
+and the occurrences of $\state_t^{(k)}$ in \cref{eq:gridBellmanCET}
+are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
 
 
 
