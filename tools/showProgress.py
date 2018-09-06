@@ -71,11 +71,12 @@ for commit in commits:
                      for fields in lines])
   editingProgress.append(editedPages / totalPages)
 
-dates = ["2018-01-31", "2018-02-21", "2018-03-12", "2018-03-16"] + dates
+dates = (["2018-01-31", "2018-02-21", "2018-03-12", "2018-03-16"] + dates +
+         [datetime.datetime.now().strftime("%Y-%m-%d")])
 writingProgress = ([0/totalPages, 52/totalPages, 56/totalPages, 70/totalPages] +
-                   writingProgress)
-testingProgress = [0, 0, 0, 0] + testingProgress
-editingProgress = [0, 0, 0, 0] + editingProgress
+                   writingProgress + [writingProgress[-1]])
+testingProgress = [0, 0, 0, 0] + testingProgress + [testingProgress[-1]]
+editingProgress = [0, 0, 0, 0] + editingProgress + [editingProgress[-1]]
 
 writingProgress = np.array(writingProgress)
 testingProgress = np.array(testingProgress)
