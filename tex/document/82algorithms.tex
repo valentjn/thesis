@@ -66,6 +66,8 @@ to the algorithms.
 \subsection{Solution for Value Function}
 \label{sec:822solveValueFunction}
 
+\paragraph{\texttt{solveValueFunction} algorithm}
+
 \Cref{alg:financeSolveValueFunction} shows \texttt{solveValueFunction},
 generating the value function interpolants
 $\valueintp[1]_t$ and $\valueintp[p]_t$ ($t = 0, \dotsc, T$).
@@ -142,6 +144,8 @@ the exact terminal solution $\valuefcn_T$ is assumed to be known.
 
 \subsection{Optimization}
 \label{sec:823optimization}
+
+\paragraph{\texttt{optimize} algorithm}
 
 The \texttt{optimize} step can be seen in \cref{alg:financeOptimize}.
 This algorithm accepts in $\valueintp[1]_t$
@@ -297,6 +301,8 @@ are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
 \subsection{Grid Generation}
 \label{sec:826gridGeneration}
 
+\paragraph{\texttt{refine} algorithm}
+
 %The piecewise linear interpolant is used for the surplus-based
 %grid generation,
 %as the surpluses are easier to compute in the piecewise linear case,
@@ -330,6 +336,10 @@ are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
   }%
   \label{alg:financeRefine}%
 \end{algorithm}
+
+\paragraph{Gradient grids}
+
+\blindtext{}
 
 
 
