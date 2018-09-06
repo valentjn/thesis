@@ -45,7 +45,7 @@ The treatment of the other steps \texttt{solvePolicy} (step 2) and
 \cref{sec:827solvePolicy} and \cref{sec:828eulerEquationErrors},
 respectively.
 
-\paragraph{Interpolants}
+%\paragraph{Interpolants}
 
 We track two interpolants $\valueintp[1]_t$ and $\valueintp[p]_t$
 for each $t = 0, \dotsc, T$.
@@ -67,13 +67,13 @@ to the algorithms.
 \label{sec:822solveValueFunction}
 
 \Cref{alg:financeSolveValueFunction} shows \texttt{solveValueFunction},
-which generates the value function interpolants
+generating the value function interpolants
 $\valueintp[1]_t$ and $\valueintp[p]_t$ ($t = 0, \dotsc, T$).
 The algorithm follows a simple optimize--refine--interpolate scheme:
 First, the Bellman equation \eqref{eq:gridBellman} is solved
-on some initial sparse grid (\texttt{optimize}).
+on an initial sparse grid (\texttt{optimize}).
 Then, we \texttt{refine} the grid spatially adaptively.
-Finally, the data on the resulting grid are \texttt{interpolate}d
+Finally, the resulting grid data are \texttt{interpolate}d
 with hierarchical higher-order B-splines.
 
 \begin{algorithm}
@@ -134,8 +134,9 @@ for the \rhs of the Bellman equation \eqref{eq:gridBellman},
 if $t < T$.
 In the first iteration $t = T$,
 there is no such interpolant.
-However, it is not needed anyway, as the exact terminal solution
-$\valuefcn_T$ is assumed to be explicitly known.
+However,
+%it is not needed anyway, as
+the exact terminal solution $\valuefcn_T$ is assumed to be known.
 
 
 
@@ -249,9 +250,9 @@ $\valueintp_t \mapsto \cetvalueintp_t
         )^{1-\riskav}
       }
     \right)^{1/(1-\riskav)}
-  \right).
+  \right),
 \end{equation}
-The maximum remains a maximum as for $\riskav > 0$,
+since for $\riskav > 0$,
 $(\cdot)^{1/(1-\riskav)}$ is strictly monotonously decreasing and
 $(1-\riskav) < 0$.
 %and hence,
