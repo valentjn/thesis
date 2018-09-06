@@ -171,7 +171,7 @@ class Figure(mpl.figure.Figure):
     Figure.graphicsCounter += 1
     graphicsNumber = Figure.graphicsCounter
     
-    if path is None:
+    if datPath is None:
       buildDir = Figure._getBuildDir()
       graphicsBasename = Figure._getGraphicsBasename()
       basename = os.path.join(buildDir, "{}_{}".format(graphicsBasename, graphicsNumber))
