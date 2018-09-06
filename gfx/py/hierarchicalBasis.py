@@ -73,8 +73,12 @@ def plotSubspace(ax, basis, l, n,
             ("{fs}" not in superscript)):
           if (l == 3) and (i == 3): x += 0.03
           if (l == 3) and (i == 5): x -= 0.03
-    ax.text(x, y, "${}_{{{},{}}}{}$".format(basisSymbol, l, i, superscript),
-            color=color, ha="center", va="bottom")
+    
+    text = "${}_{{{},{}}}{}$".format(basisSymbol, l, i, superscript)
+    if nodal or (l == 0):
+      text = r"\contour{{mittelblau!10}}{{{}}}".format(text)
+      y -= 0.02
+    ax.text(x, y, text, color=color, ha="center", va="bottom")
   
   if showD:
     D = [2**(-n) * (p-1)/2, 1 - 2**(-n) * (p-1)/2]
@@ -167,7 +171,7 @@ def plotModifiedHierarchicalBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalClenshawCurtisBSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.7, 4.98), scale=1.0)
   basis = helper.basis.HierarchicalClenshawCurtisBSpline(p)
   basisModified = helper.basis.ModifiedHierarchicalClenshawCurtisBSpline(p)
   for l in range(n+1):
@@ -178,14 +182,14 @@ def plotHierarchicalClenshawCurtisBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotNodalNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.2, 1.74), scale=1)
+  fig = Figure.create(figsize=(3.19, 1.74), scale=1)
   basis = helper.basis.HierarchicalNotAKnotBSpline(p)
   ax = fig.gca()
   plotSubspace(ax, basis, n, n, nodal=True, notAKnot=True, showSubspaces=True)
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.2, 4.2), scale=1.0)
+  fig = Figure.create(figsize=(3.19, 4.2), scale=1.0)
   basis = helper.basis.HierarchicalNotAKnotBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
@@ -193,7 +197,7 @@ def plotHierarchicalNotAKnotBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotModifiedHierarchicalNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.67, 4.98), scale=1.0)
   basis = helper.basis.HierarchicalNotAKnotBSpline(p)
   basisModified = helper.basis.ModifiedHierarchicalNotAKnotBSpline(p)
   for l in range(n+1):
@@ -204,7 +208,7 @@ def plotModifiedHierarchicalNotAKnotBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalClenshawCurtisNotAKnotBSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.67, 4.98), scale=1.0)
   basis = helper.basis.HierarchicalClenshawCurtisNotAKnotBSpline(p)
   basisModified = helper.basis.ModifiedHierarchicalClenshawCurtisNotAKnotBSpline(p)
   for l in range(n+1):
@@ -215,7 +219,7 @@ def plotHierarchicalClenshawCurtisNotAKnotBSplines(q):
   fig.save(tightLayout=tightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalNaturalBSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.67, 4.98), scale=1.0)
   basis = helper.basis.HierarchicalNaturalBSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
