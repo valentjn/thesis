@@ -70,6 +70,9 @@ class Figure(mpl.figure.Figure):
 \definecolor{C7}{rgb}{0.887,0.465,0.758}
 \definecolor{C8}{rgb}{0.496,0.496,0.496}
 
+\usepackage{contour}
+\contourlength{1.5pt}
+
 % prevent Matplotlib from loading fontspec as this resets the default text font
 % (the default math font will be alright with the no-math option to fontspec,
 % but the text font will still be CM...)
