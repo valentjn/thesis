@@ -74,10 +74,7 @@ yOffsetGlobal = schemeSize
 x = helper.grid.getCoordinates(xl, xi)
 
 figureScale = 1.39
-fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none", preamble=r"""
-\usepackage{contour}
-\contourlength{1.5pt}
-""")
+fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none")
 ax = fig.gca()
 
 for l in allL:
@@ -134,10 +131,7 @@ fig.save()
 
 
 
-#fig = Figure.create(figsize=(2, 2), scale=1.8, facecolor="none", preamble=r"""
-#\usepackage{contour}
-#\contourlength{1.5pt}
-#""")
+#fig = Figure.create(figsize=(2, 2), scale=1.8, facecolor="none")
 #ax = fig.gca()
 
 #contourColor = "C5"

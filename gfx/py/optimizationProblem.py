@@ -90,8 +90,6 @@ def plotUnconstrainedProblem(params):
 
 def plotConstrainedProblem(q):
   fig = Figure.create(figsize=(3, 3), preamble=r"""
-\usepackage{{contour}}
-\contourlength{{1.5pt}}
 \definecolor{{contourblau}}{{rgb}}{{{},{},{}}}
 """.format(*helper.plot.mixColors("mittelblau", 0.7)))
   ax = fig.gca()

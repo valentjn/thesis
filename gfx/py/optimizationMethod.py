@@ -12,10 +12,7 @@ import helper.plot
 
 
 def createFigure():
-  fig = Figure.create(figsize=(3, 3), preamble=r"""
-\usepackage{contour}
-\contourlength{1.5pt}
-""")
+  fig = Figure.create(figsize=(3, 3))
   ax = fig.gca()
   ax.set_position((0, 0, 1, 1))
   ax.set_xlim(0, 10)

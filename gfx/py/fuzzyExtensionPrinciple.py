@@ -98,10 +98,7 @@ colorSpine = "k"
 colormap = mpl.cm.viridis
 
 fig = Figure.create(figsize=(figureWidth, figureHeight), scale=figureScale,
-                    fontSize=9, facecolor="none", preamble=r"""
-\usepackage{{contour}}
-\contourlength{{1.5pt}}
-""")
+                    fontSize=9, facecolor="none")
 
 left = (figureMarginLeft + plotSize + plotMargin) / figureWidth
 bottom = figureMarginBottom / figureHeight

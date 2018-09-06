@@ -43,8 +43,6 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
   hellhellblau = helper.plot.mixColors("hellblau", 0.5)
   figureScale = (0.4 if whiteMode else 1.2)
   fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none", preamble=r"""
-\usepackage{{contour}}
-\contourlength{{1.5pt}}
 \definecolor{{hellhellblau}}{{rgb}}{{{},{},{}}}
 """.format(*hellhellblau))
   ax = fig.gca()
