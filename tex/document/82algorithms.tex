@@ -358,12 +358,151 @@ Scaling of the domain is not an option due to the dynamic nature of
 the problem.
 Modifying infeasible states by cropping them to $\clint{\*0, \*1}$
 is not straightforward, as this introduces new errors and
-the modified state must satisfy the model constraints.
+the modified state should satisfy the model constraints.
 
 Instead, we extend the interpolant $\cetvalueintp[p]_{t+1}$
-from $\clint{\*0, \*1}$ to $\real^d$ by extrapolation methods.
+to $\real^d$ by extrapolation methods as shown in
+\cref{alg:financeExtrapolate}.
+One can choose between three extrapolation \texttt{type}s:
+\texttt{constant}, \texttt{linear}, and \texttt{quadratic}.
+First, we crop the evaluation point
+$\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to
+a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$.
+For \texttt{constant} extrapolation,
+we just use $\cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$
+for the extrapolated value $\cetvalueintp[p]_{t+1}(\state_{t+1})$.
+In contrast, \texttt{linear} extrapolation is based on the
+Taylor approximation
+\begin{subequations}
+  \begin{align}
+    \cetvalueintp[p]_{t+1}(\state_{t+1})
+    &= \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    \tr{(\gradient{\state}{\cetvalueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
+    (\state_{t+1} - \state_{t+1}^\mathrm{in})\\
+    &= \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    \sum_{s=1}^d
+    \partialderiv{\partialdiff{}\stateentry_s}{\cetvalueintp[p]_{t+1}}(
+      \state_{t+1}^\mathrm{in}
+    )
+    (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})\\
+    &\approx \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    \sum_{s=1}^d
+    \sigma_s \frac{
+      \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
+      \cetvalueintp[p]_{t+1}(
+        \state_{t+1}^\mathrm{in} - \sigma_s \extpwidth \stdbasis{s}
+      )
+    }{\extpwidth}
+    (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in}),
+  \end{align}
+\end{subequations}
+where
+$\sigma_s := 1$, if $\stateentry_{t+1,s} > 1$,
+$\sigma_s := -1$, if $\stateentry_{t+1,s} < 0$, and
+$\sigma_s := 0$, otherwise,
+$\extpwidth \in \pohint{0, 1}$ is the mesh size for the finite differences,
+and $\stdbasis{s}$ is the $s$-th standard basis vector.
+\texttt{quadratic} extrapolation extrapolates linearly as well,
+but uses three (instead of two) points
+in $\clint{\*0, \*1}$ to estimate the partial derivative
+(i.e., the slope of the value function in the $s$-th direction).
+True quadratic extrapolation would require to estimate the
+Hessian $\hessian{\state}{\cetvalueintp[p]_{t+1}}$,
+for which we would need value function values at
+$\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
 
-\blindtext{}
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\cetvalueintp[p]_{t+1}(\state_{t+1}) = \texttt{extrapolate}$}{%
+      $\cetvalueintp[p]_{t+1}$, $\state_{t+1}$%
+    }
+      \State{%
+        $\state_{t+1}^\mathrm{in}
+        \gets \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$%
+      }
+      \Comment{%
+        nearest point in $\clint{\*0, \*1}$ with respect to $\norm[2]{\cdot}$%
+      }%
+      \State{%
+        $\cetvalueintp[p]_{t+1}(\state_{t+1})
+        \gets \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$%
+      }
+      \If{type $\not=$ constant}
+        \For{$s = 1, \dotsc, d$}
+          \State{%
+            $\sigma_s
+            \gets [\stateentry_{t+1,s} > 1] - [\stateentry_{t+1,s} < 0]$%
+          }
+          \Comment{%
+            $1$ if $\stateentry_{t+1,s} > 1$,\;
+            $-1$ if $\stateentry_{t+1,s} < 0$,\;
+            $0$ otherwise%
+          }%
+          \If{$\sigma_s \not= 0$}
+            \If{type $=$ linear}
+              \State{%
+                $v_s \gets (
+                  \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
+                  \cetvalueintp[p]_{t+1}(
+                    \state_{t+1}^\mathrm{in} -
+                    \sigma_s \extpwidth \stdbasis{s}
+                  )
+                )/\extpwidth$%
+              }
+            \ElsIf{type $=$ quadratic}
+              \State{%
+                $D
+                \gets \{
+                  \stateentry_{t+1,s}^\mathrm{in} - 2 \sigma_s \extpwidth,\;\;
+                  \stateentry_{t+1,s}^\mathrm{in} - \sigma_s \extpwidth,\;\;
+                  \stateentry_{t+1,s}^\mathrm{in}
+                \}$%
+              }
+              \State{%
+                $c_2 \stateentry_s^2 + c_1 \stateentry_s + c_0
+                \gets \text{%
+                  parabola interpolating
+                  $\cetvalueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
+                  at $D$%
+                }$%
+              }
+              \label{line:algFinanceExtrapolateParabola}
+              \State{%
+                $v_s \gets 2 c_2 \cdot \stateentry_{t+1,s}^\mathrm{in} + c_1$%
+              }
+            \EndIf{}
+            \State{%
+              $\cetvalueintp[p]_{t+1}(\state_{t+1})
+              \gets \cetvalueintp[p]_{t+1}(\state_{t+1}) +
+              \sigma_s v_s \cdot
+              (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})$%
+            }
+          \EndIf{}
+        \EndFor{}
+      \EndIf{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[Extrapolation of value function interpolants]{%
+    Evaluation of $\cetvalueintp[p]_{t+1}$ at $\state_{t+1}$
+    by extrapolation.
+    Inputs are
+    the value function interpolant $\cetvalueintp[p]_{t+1}$
+    of the next iteration $t + 1$ and
+    the state $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$
+    at which to evaluate the value function.
+    Output is
+    the value function value $\cetvalueintp[p]_{t+1}(\state_{t+1})$
+    at $\state_{t+1}$.
+    Note that $\cetvalueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
+    in \cref{line:algFinanceExtrapolateParabola} is short for
+    the univariate function $\cetvalueintp[p]_{t+1}(
+      \state_{t+1,1}, \dotsc, \state_{t+1,s-1},\; {\cdot},\;
+      \state_{t+1,s+1}, \dotsc, \state_{t+1,d}
+    )$.
+    The parameter $\extpwidth$ is the mesh size of the finite differences.%
+  }%
+  \label{alg:financeExtrapolate}%
+\end{algorithm}
 
 
 
