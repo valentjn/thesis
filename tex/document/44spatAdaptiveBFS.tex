@@ -503,7 +503,7 @@ $\basis{l',i'} \mapsto \fundbasis{l',i'}$.
 As usual, the multivariate case is treated with the
 tensor product approach.
 
-\paragraph{Hierarchical fundamental transformation}
+\paragraph{Hierarchical fundamental transformation (HFT)}
 
 \usenotation{Ëhft}
 The canonical way to find a fundamental basis $\fundbasis{l',i'}$ is to
@@ -556,9 +556,9 @@ can be seen in \cref{fig:hftBSpline}.
 We call the transformation $\basis{l',i'} \mapsto \basis[\hft]{l',i'}$
 \term{\hftr.}
 The following proposition shows that this is indeed only a change of basis,
-as spanned sparse grid space remains unchanged.
+as the spanned sparse grid space remains unchanged.
 Note that while the proposition is formulated for regular sparse grids,
-a similar statement can be proved for dimensionally adaptive case.
+a similar statement can be proved for the dimensionally adaptive case.
 
 \begin{proposition}[%
   spanned sparse grid space for the HFT%
@@ -612,7 +612,7 @@ a similar statement can be proved for dimensionally adaptive case.
   are linearly independent.
 \end{proof}
 
-\paragraph{Translation-invariant fundamental transformation}
+\paragraph{Translation-invariant fundamental transformation (TIFT)}
 
 Another disadvantage of the \hftr is that it does not preserve
 the so-called \term{translation invariance} of the original basis.
@@ -1045,7 +1045,7 @@ than $-1$ of said polynomial
 Due to \eqref{eq:fundamentalSplineCoefficientsDecay},
 we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
-if we symetrically truncate the linear system to
+if we symmetrically truncate the linear system to
 $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
@@ -1099,7 +1099,8 @@ hierarchical fundamental spline basis to obtain reasonable
 boundary values when working with sparse grids without boundary points.
 The definition of the modified fundamental spline
 $\bspl[\fs,\modified]{l,i}{p}\colon \clint{0, 1} \to \real$ of
-level $l \in \nat$, index $i \in \hiset{l}$, and degree $p$ is as follows:
+level $l \in \nat$, index $i \in \hiset{l}$, and degree $p$ is
+defined as follows:
 \begin{equation}
   \bspl[\fs,\modified]{l,i}{p}(x)
   :=
