@@ -285,17 +285,83 @@ are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
 \subsection{Quadrature}
 \label{sec:824quadrature}
 
-\blindtext{}
+In an implementation,
+the expectation in \cref{eq:gridBellmanCET} cannot be exactly computed;
+it has to be approximated by a quadrature rule
+\begin{equation}
+  \label{eq:bellmanQuadrature}
+  \expectation[t]{
+    (
+      \cetvalueintp[p]_{t+1}(
+        \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+      )
+    )^{1-\riskav}
+  }
+  \approx \sum_{j=1}^{m_\zeta} \quadweight^{(j)}
+  (
+    \cetvalueintp[p]_{t+1}(
+      \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
+    )
+  )^{1-\riskav}
+\end{equation}
+for some weights $\quadweight^{(j)} \in \real$ and
+quadrature points $\stochastic_t^{(j)} \in \stochdomain$
+($j = 1, \dotsc, m_\zeta$).
+Since the stochastic domain $\stochdomain \subset \real^{m_{\stochastic}}$
+might be high-dimensional as well,
+full grid quadrature rules suffer from the curse of dimensionality.
+Therefore, we use sparse grid quadrature rules based
+on Gauss--Hermite quadrature \cite{Gerstner98Numerical}.
+Note that this sparse grid in the stochastic space $\stochdomain$
+is independent of the sparse grid in the state space $\clint{\*0, \*1}$.
 
 
 
 \subsection{Interpolation and Extrapolation}
 \label{sec:825interpolation}
 
-\todo{%
-  grid type, basis function type,
-  why extrapolation necessary, extrapolation method%
-}
+\paragraph{Sparse grid interpolation}
+
+As already mentioned,
+$\valueintp[1]_t$ is constructed as the sparse grid interpolant
+of the grid data $\state_t^{(k)}$ ($k = 1, \dotsc, \ngp_t$)
+using the hierarchical piecewise linear basis.
+For $\valueintp[p]_t$,
+we use cubic hierarchical weakly fundamental not-a-knot splines
+(see \cref{sec:454wfs}).
+The not-a-knot boundary conditions help to decrease the
+interpolation error (see \cref{sec:541interpolation}),
+while the weakly fundamental property eases the hierarchization
+complexity by enabling us to use the unidirectional principle
+(see \cref{sec:45spatAdaptiveUP,sec:543complexity}).
+
+\paragraph{Extrapolation}
+
+Unfortunately, for many dynamic portfolio choice models,
+state transition is not a function
+$\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
+\stochdomain \to \clint{\*0, \*1}$:
+It may happen that for some quadrature points
+$\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature},
+we have
+\begin{equation}
+  \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
+  \notin \clint{\*0, \*1},
+\end{equation}
+i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
+is not a feasible state.
+Hence, we are not able to evaluate the value function interpolant
+$\cetvalueintp[p]_{t+1}(
+  \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
+)$, as it is only defined on $\clint{\*0, \*1}$.
+Scaling of the domain is not an option due to the dynamic nature of
+the problem.
+Modifying infeasible states by cropping them to $\clint{\*0, \*1}$
+is not straightforward, as this introduces new errors and
+the modified state must satisfy the model constraints.
+
+Instead, we extend the interpolant $\cetvalueintp[p]_{t+1}$
+from $\clint{\*0, \*1}$ to $\real^d$ by extrapolation methods.
 
 \blindtext{}
 
