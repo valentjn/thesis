@@ -47,11 +47,13 @@
         \cite{Graham94Concrete}):%
       }
       %&= (-1)^s (-1)^{a+0} \binom{(s-r-1)-0}{s-a}\\
+      \cdots
       &= (-1)^{s+a} \binom{s-r-1}{s-a}.\\
       \intertext{%
         Applying the upper negation formula again,%
       }
       %&= (-1)^{s+a} (-1)^{s-a} \binom{(s-a) - (s-r-1) - 1}{s-a}\\
+      \cdots
       &= \binom{r-a}{s-a},
     \end{align}
   \end{subequations}
@@ -86,6 +88,7 @@
         of $n - q - \normone{\*l}$ into $d$ parts
         and can computed as%
       }
+      \cdots
       &= \binom{n - q - \normone{\*l} + d - 1}{d - 1},
     \end{align}
   \end{subequations}
@@ -421,6 +424,7 @@
         This is the number of weak decompositions of
         $n - q - \normone{\hat{\*l}}$ into $d - m$ parts:%
       }
+      \cdots
       &= \binom{n - q - \normone{\hat{\*l}} + d - m - 1}{d - m - 1},
     \end{align}
   \end{subequations}
@@ -675,6 +679,7 @@
           = f^{\sparse,(j+1)} - f^{\sparse,(j)}$ by definition.
           Hence, we obtain%
         }
+        \cdots
         &\eqwithref{} (\fcnval{\*l,\*i} - f^{\sparse,(j)}(\gp{\*l,\*i})) -
         (f^{\sparse,(j+1)}(\gp{\*l,\*i}) - f^{\sparse,(j)}(\gp{\*l,\*i}))\\
         &\eqwithref{} \fcnval{\*l,\*i} - f^{\sparse,(j+1)}(\gp{\*l,\*i}),
@@ -772,6 +777,7 @@
         After inserting the induction hypothesis
         for $\linout[(q)]{\*l,\*i}$, we have%
       }
+      \cdots
       &= \paren*{
         \fcnval{\*l,\*i} -
         \largesum{\normone{\*l'} < q} \linout[(q)]{\*l',\*i'}
