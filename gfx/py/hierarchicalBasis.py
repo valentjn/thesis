@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 16
+# number of output figures = 18
 
 import multiprocessing
 
@@ -20,13 +20,12 @@ def plotSubspace(ax, basis, l, n,
   except: p = None
   
   hInv = 2**l
-  h = 1 / hInv
   I = (list(range(1, hInv, 2)) if l > 0 else [0, 1])
   plotI = (list(range(hInv + 1)) if nodal else I)
   maxY = 0
   
   if superscript is None: superscript = ("p" if p > 1 else "1")
-  if modified:        superscript += r",\mathrm{{mod}}".format("p")
+  if modified:        superscript += r",\mathrm{{mod}}"
   if clenshawCurtis:  superscript += r",\mathrm{cc}"
   if notAKnot:        superscript += r",\mathrm{nak}"
   if superscript != "": superscript = r"^{{{}}}".format(superscript)
