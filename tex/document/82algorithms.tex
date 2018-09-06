@@ -273,7 +273,8 @@ it might be beneficial to transform the state space as well
 with a \term{state space transformation}
 $\statetrafofcn_t\colon \clint{\*0, \*1} \to \real^d$,
 for instance, to increase the density of grid points for low
-wealth values $\wealth_t$.
+wealth values $\wealth_t$,
+where the value function might have a high curvature.
 The untransformed states $\state_t^{(k)}$ are then still contained in
 the unit cube $\clint{\*0, \*1}$,
 and the occurrences of $\state_t^{(k)}$ in \cref{eq:gridBellmanCET}
