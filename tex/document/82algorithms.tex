@@ -117,8 +117,7 @@ with hierarchical higher-order B-splines.
     Generation of value function interpolants (\texttt{solveValueFunction})%
   ]{%
     Generation of value function interpolants.
-    Outputs are the piecewise linear interpolants $\valueintp[1]_t$
-    and the higher-order B-spline interpolants $\valueintp[p]_t$
+    The output is the higher-order B-spline interpolant $\valueintp[p]_t$
     for all $t = 0, \dotsc, T$.%
   }%
   \label{alg:financeSolveValueFunction}%
@@ -226,7 +225,7 @@ to interpolate the new data at all grid points of $\gridset{t}{\sparse}$.
     the higher-order B-spline interpolant $\valueintp[p]_{t+1}$
     of the previous iteration $t + 1$
     (not used if $t = T$).
-    Output is the updated piecewise linear interpolant $\valueintp[1]_t$,
+    The output is the updated piecewise linear interpolant $\valueintp[1]_t$,
     where all missing function values at grid points have been computed.%
   }%
   \label{alg:financeOptimize}%
@@ -493,7 +492,7 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
     of the next iteration $t + 1$ and
     the state $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$
     at which to evaluate the value function.
-    Output is
+    The output is
     the value function value $\cetvalueintp[p]_{t+1}(\state_{t+1})$
     at $\state_{t+1}$.
     Note that $\cetvalueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
