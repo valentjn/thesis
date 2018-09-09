@@ -569,8 +569,17 @@ grid over time.
       \EndFor{}
     \EndFunction{}
   \end{algorithmic}
-  \caption[TODO]{%
-    TODO%
+  \caption[Refinement of the value function (\texttt{refine})]{%
+    In-place refinement of the value function $\valueintp[1]_t$.
+    Inputs are
+    the time $t$,
+    the piecewise linear interpolant $\valueintp[1]_t$
+    of the current iteration $t$, and
+    the higher-order B-spline interpolant $\valueintp[p]_{t+1}$
+    of the previous iteration $t + 1$
+    (not used if $t = T$).
+    The output is the updated piecewise linear interpolant $\valueintp[1]_t$
+    with refined sparse grid.%
   }%
   \label{alg:financeRefine}%
 \end{algorithm}
