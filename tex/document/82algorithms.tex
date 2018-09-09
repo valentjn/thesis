@@ -686,8 +686,45 @@ which means that they can be parallelized.
 
 
 
+\subsection{Post-Processing}
+\label{sec:828postProecessing}
 
-\subsection{Euler Equation Errors}
-\label{sec:828eulerEquationErrors}
+\paragraph{Monte Carlo simulation}
 
-\dummytext[1]{}
+There are various ways to
+assess if the resulting optimal policy B-spline interpolants
+$(\optpolicyintp[p]_t)_{t=0,\dotsc,T}$
+are reasonable.
+One possibility is a Monte Carlo simulation,
+where we calculate the mean optimal policy
+\begin{equation}
+  \optpolicymean_t
+  = \frac{1}{m_\mathrm{MC}} \sum_{j=1}^{m_\mathrm{MC}} \policy_{t,(j)}
+\end{equation}
+for $m_\mathrm{MC} \in \nat$ individuals.
+The optimal policies $\policy_{t,(j)}$ of the individuals
+($t = 0, \dotsc, T$ and $j = 1, \dotsc, m_\mathrm{MC}$)
+are determined by
+\begin{subequations}
+  \begin{align}
+    \policy_{t,(j)}
+    &:= \optpolicyintp[p]_t(\state_{t,(j)}),\\
+    \state_{t,(j)}
+    &:= \statefcn_{t-1}(
+      \state_{t-1,(j)}, \policy_{t-1,(j)}, \stochastic_{t-1,(j)}
+    ),\quad
+    t > 0,\qquad
+    \state_{t,(0)}
+    \sim P_{0,\state},\\
+    \stochastic_{t,(j)}
+    &\centerhphantom{\sim}{\hspace*{1.6em}} P_{t,\stochastic},
+  \end{align}
+\end{subequations}
+i.e., the initial state $\state_{t,(0)}$ and the
+stochastic variables $\stochastic_{t,(j)}$ are samples of random variables.
+The Monte Carlo simulation enables us to draw macro-economic conclusions.
+(For instance, how does the amount of consumption typically evolve over time?)
+
+%\paragraph{Euler equation errors}
+%
+%\dummytext[1]{}
