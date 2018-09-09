@@ -586,7 +586,27 @@ grid over time.
 
 \paragraph{Gradient grids}
 
-\dummytext[1]{}
+The classical surplus-refinement criterion puts its emphasis
+in regions where the mixed second derivative
+$\partialderiv[2d]{
+  \partialdiff \stateentry_{t,1}^2 \dotsm \partialdiff \stateentry_{t,d}^2
+}{
+  \valueintp[1]_t
+}$
+of $\valueintp[1]_t$ has large absolute values, i.e.,
+where $\valueintp[1]_t$ has large high-frequency oscillations.
+In gradient-based optimization,
+it might be advisable to apply this criterion also
+to the partial derivatives
+$\partialderiv{\partialdiff \stateentry_{t,s}}{\valueintp[1]_t}$
+of $\valueintp[1]_t$ ($s = 1, \dotsc, d$),
+since the optimizer depends on the accuracy of the gradient.
+In this case, we have to track additional sparse grid interpolants
+for every partial derivative
+$\partialderiv{\partialdiff \stateentry_{t,s}}{\valueintp[1]_t}$
+in \cref{alg:financeSolveValueFunction}.
+This possibility is omitted of the algorithms in this section,
+as this would complicate their presentation.
 
 
 
