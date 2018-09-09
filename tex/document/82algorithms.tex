@@ -611,9 +611,79 @@ as this would complicate their presentation.
 
 
 \subsection{Solution for Optimal Policies}
-\label{sec:827solvePolicy}
+\label{sec:827solvePolicies}
 
-\dummytext[1]{}
+\paragraph{\texttt{solvePolicies} algorithm}
+
+After explaining the generation of the value function interpolants
+$\valueintp[p]_t$ ($t = 0, \dotsc, T$),
+we can move on with step 2 of the general structure of our method
+(see \cref{sec:821generalStructure}):
+which is the generation of optimal policy interpolants.
+The corresponding \cref{alg:financeSolvePolicies} is similar to
+\texttt{solveValueFunction} (\cref{alg:financeSolveValueFunction}),
+except that it operates on the policy instead of
+the value function interpolants.
+The functions \texttt{optimize}, \texttt{refine}, and \texttt{interpolate}
+have been replaced by corresponding policy versions
+\texttt{optimizePolicy}, \texttt{refinePolicy}, and \texttt{interpolatePolicy},
+that work very much like their value function counterpart.
+\texttt{optimizePolicy} only has to generate new values,
+if the initial regular sparse grid for the policies
+is not contained in the grid of $\valueintp[p]_t$.
+The policy grid is then refined and interpolated independently
+of the value function grid.
+The iterations are independent of each other,
+which means that they can be parallelized.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{%
+      $\text{%
+        $(\optpolicyintp_t)_{t=0,\dotsc,T}$%
+      } = \texttt{solvePolicies}$%
+    }{%
+      $(\valueintp[p]_t)_{t=0,\dotsc,T}$%
+    }
+      \State{$\valueintp[p]_{T+1} \gets \emptyset$}
+      \Comment{dummy variable (is not used)}%
+      \For{$t = 0, \dotsc, T$}
+        \State{%
+          $\optpolicyintp[1]_t \gets \text{%
+            Initial regular sparse grid, get values from $\valueintp[p]_t$%
+          }$%
+        }
+        \State{%
+          $\optpolicyintp[1]_t \gets
+          \texttt{%
+            optimizePolicy($t$, $\optpolicyintp[1]_t$, $\valueintp[p]_{t+1}$)%
+          }$%
+        }
+        \State{%
+          $\optpolicyintp[1]_t \gets
+          \texttt{%
+            refinePolicy($t$, $\optpolicyintp[1]_t$, $\valueintp[p]_{t+1}$)%
+          }$%
+        }
+        \State{%
+          $\optpolicyintp[p]_t \gets
+          \texttt{interpolatePolicy($\optpolicyintp[1]_t$)}$%
+        }
+      \EndFor{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[%
+    Generation of interpolants for optimal policies (\texttt{solvePolicies})%
+  ]{%
+    Generation of interpolants for optimal policies.
+    The input is the higher-order B-spline interpolant $\valueintp[p]_t$
+    of the value function for all $t = 0, \dotsc, T$.
+    The output is the higher-order B-spline interpolant $\optpolicyintp[p]_t$
+    of the optimal policies for all $t = 0, \dotsc, T$.%
+  }%
+  \label{alg:financeSolvePolicies}%
+\end{algorithm}
+
 
 
 
