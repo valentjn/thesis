@@ -24,8 +24,9 @@ The general approach to solve dynamic portfolio choice models is as follows:
   %(\texttt{solvePolicies}, \cref{alg:financeSolvePolicies})
   
   \item
-  Computation of Euler equation errors
-  %(\texttt{computeEulerErrors}, \cref{alg:computeEulerErrors})
+  Post-processing, e.g., Monte Carlo simulation
+  %or computation of Euler equation errors
+  %(\cref{sec:828postProecessing})
 \end{enumerate}
 The separation of the solution processes for
 the value function interpolants $\valueintp_t$
@@ -44,8 +45,8 @@ In the following \cref{%
 }, we describe the algorithmic details of
 \texttt{solveValueFunction} (step 1).
 The treatment of the other steps \texttt{solvePolicy} (step 2) and
-\texttt{computeEulerErrors} (step 3) follows with
-\cref{sec:827solvePolicy} and \cref{sec:828eulerEquationErrors},
+post-processing (step 3) follows with
+\cref{sec:827solvePolicies} and \cref{sec:828postProecessing},
 respectively.
 
 %\paragraph{Interpolants}
