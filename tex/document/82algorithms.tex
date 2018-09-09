@@ -518,15 +518,23 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
 
 \paragraph{\texttt{refine} algorithm}
 
-%The piecewise linear interpolant is used for the surplus-based
-%grid generation,
-%as the surpluses are easier to compute in the piecewise linear case,
-%and they are more meaningful
-%due to the integral representation formula \eqref{eq:surplusIntegral}.
-
-\todo{specify level of initial sparse grid}
-
-\dummytext[1]{}
+\Cref{alg:financeRefine} shows how to generate the spatially adaptive
+sparse grid in \texttt{solveValueFunction}
+(\cref{alg:financeSolveValueFunction}).
+The criterion is the common surplus-based refinement criterion
+\cite{Pflueger10Spatially}.
+We use the piecewise linear interpolant is used for the surplus-based
+grid generation,
+as the surpluses are easier to compute in the piecewise linear case,
+and they are more meaningful
+due to the integral representation formula \eqref{eq:surplusIntegral}.
+Parameters for \cref{alg:financeRefine} are
+the tolerance $\refinetol_t \in \nonnegreal$,
+by which the set of grid points to be refined is determined, and
+the number $\norefine_t \in \natz$ of refinement iterations.
+These parameters depend on the time $t$,
+since it might be beneficial to change the adaptivity of the
+grid over time.
 
 \begin{algorithm}
   \begin{algorithmic}[1]
