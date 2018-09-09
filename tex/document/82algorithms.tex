@@ -543,10 +543,25 @@ grid over time.
     }
       \For{$j = 1, \dotsc, \norefine_t$}
         \State{%
-          Refine all grid points of $\valueintp[1]_t$ whose
-          surplus is $< \refinetol_t$%
+          $\ngp_t
+          \gets \text{number of grid points of $\valueintp[1]_t$}$%
         }
-        \IfOneLine{grid of $\valueintp[1]_t$ did not change}{\Break}
+        \ForOneLine{$k = 1, \dotsc, \ngp_t$}{%
+          $\surplus[(k)]{t}
+          \gets \text{%
+            surplus of $\state_t^{(k)}$ in $\valueintp[1]_t$%
+          }$%
+        }
+        \State{%
+          $K_\mathrm{refine}
+          \gets \{k = 1, \dotsc, \ngp_t \mid
+          \abs{\surplus[(k)]{t}} \ge \refinetol_t\}$%
+        }
+        \IfOneLine{$K_\mathrm{refine} = \emptyset$}{\Break}
+        \State{%
+          Refine all grid points in
+          $\{\state_t^{(k)} \mid k \in K_\mathrm{refine}\}$%
+        }
         \State{%
           $\valueintp[1]_t \gets
           \texttt{optimize($t$, $\valueintp[1]_t$, $\valueintp[p]_{t+1}$)}$%
