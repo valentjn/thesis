@@ -346,24 +346,24 @@ Unfortunately, for many dynamic portfolio choice models,
 state transition is not a function
 $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
 \stochdomain \to \clint{\*0, \*1}$:
-It may happen that for some quadrature points
+It may happen that
+$\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
+\notin \clint{\*0, \*1}$
+for some quadrature points
 $\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature},
-we have
-\begin{equation}
-  \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
-  \notin \clint{\*0, \*1},
-\end{equation}
 i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
 is not a feasible state.
-Hence, we are not able to evaluate the value function interpolant
+Hence, we might not be able to evaluate the value function interpolant
 $\cetvalueintp[p]_{t+1}(
   \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
 )$, as it is only defined on $\clint{\*0, \*1}$.
 Scaling of the domain is not an option due to the dynamic nature of
 the problem.
-Modifying infeasible states by cropping them to $\clint{\*0, \*1}$
-is not straightforward, as this introduces new errors and
-the modified state should satisfy the model constraints.
+%Modifying infeasible states by cropping them to $\clint{\*0, \*1}$
+%is not straightforward, as this introduces new errors and
+%the modified state should satisfy the model constraints.
+
+\paragraph{\texttt{extrapolate} algorithm}
 
 Instead, we extend the interpolant $\cetvalueintp[p]_{t+1}$
 to $\real^d$ by extrapolation methods as shown in
