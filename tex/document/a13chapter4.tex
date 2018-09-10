@@ -35,7 +35,7 @@
 \begin{proof}
   We apply the upper negation formula
   (see Eq. (5.14) of \cite{Graham94Concrete})
-  to the second binomial in the \lhs:
+  to the second binomial of the \lhs:
   \begin{subequations}
     \begin{align}
       \sum_{q=0}^a (-1)^q \binom{a}{q} \binom{r-q}{s}
@@ -84,9 +84,9 @@
       \intertext{%
         by mapping $\*a := \*l' - \*l$.
         The size of the last set is
-        known as the number of weak compositions
+        known as the number of \term{weak compositions}
         of $n - q - \normone{\*l}$ into $d$ parts
-        and can computed as%
+        and can be computed as%
       }
       \cdots
       &= \binom{n - q - \normone{\*l} + d - 1}{d - 1},
@@ -138,31 +138,28 @@
     Let $\*l' \eq \hat{\*l}$, $\hat{\*l} \eq \*l''$, and
     $t \notin T_{\*l',\*l''}$.
     From the definition of $T_{\*l',\*l''}$,
-    it holds either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
+    it holds that either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
     As $l'_t = l''_t \ge l_t$ already implies $\min\{l'_t, l''_t\} \ge l_t$,
     we assume that $l'_t \not= l''_t$.
     Here, we have three cases:
     \begin{itemize}
       \item
-      \emph{Case 1}:
-      ${l'_t \not= \hat{l}_t = l''_t}$.
+      \mbox{\emph{Case 1}: ${l'_t \not= \hat{l}_t = l''_t}$.}
       $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
       $l''_t = \hat{l}_t \ge l_t$.
-      Hence, $\min\{l'_t, l''_t\} \ge l_t$.
+      Therefore, $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \emph{Case 2}:
-      ${l'_t = \hat{l}_t \not= l''_t}$.
+      \mbox{\emph{Case 2}: ${l'_t = \hat{l}_t \not= l''_t}$.}
       Analogously to the first case, we conclude $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \emph{Case 3}:
-      ${l'_t \not= \hat{l}_t \not= l''_t}$.
+      \mbox{\emph{Case 3}: ${l'_t \not= \hat{l}_t \not= l''_t}$.}
       $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
       $t \notin T_{\*l'',\hat{\*l}}$ implies $l''_t \ge l_t$.
       Hence, $\min\{l'_t, l''_t\} \ge l_t$.
     \end{itemize}
-    Therefore, it holds $\min\{l'_t, l''_t\} \ge l_t$
+    Therefore, it holds that $\min\{l'_t, l''_t\} \ge l_t$
     for all $t \notin T_{\*l',\*l''}$, i.e., $\*l' \eq \*l''$.
   \end{itemize}
   This shows that $\eq$ is an equivalence relation.
@@ -195,8 +192,8 @@
   be the $m$-dimensional affine subspace of $\real^d$
   through $\gp{\*l, \*i}$
   parallel to the dimensions $1, \dotsc, m$,
-  where $\stdbasis{t}$ is the $t$-th unit basis vector.
-  It holds $S \cap \fgset{\*l'} = S \cap \fgset{\*l''}$ due to
+  where $\stdbasis{t}$ is the $t$-th standard basis vector.
+  It holds that $S \cap \fgset{\*l'} = S \cap \fgset{\*l''}$ due to
   $l'_t = l''_t$ for $t \le m$.%
   \footnote{%
     In more detail:
@@ -228,24 +225,28 @@
     \basis{\*l',\*i'},\quad
     \interpcoeff{\*l',\*i'} \in \real.
   \end{equation}
-  This implies that the $m$-variate function
+  This implies that the $m$-variate restricted interpolant
   $\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}$ can be written as
   \begin{subequations}
-    \begin{gather}
-      (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})(\*x_{\range{1}{m}})
-      = \sum_{\*i'_{\range{1}{m}}=\*0}^{\*2^{\*l'_{\range{1}{m}}}}
+    \begin{align}
+      (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})
+      (\*x_{\range{1}{m}})
+      &\hphantom{:}= \sum_{\*i'_{\range{1}{m}}=\*0}^{\*2^{\*l'_{\range{1}{m}}}}
       \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
       \basis{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}(\*x_{\range{1}{m}}),\quad
       \*x_{\range{1}{m}} \in \clint{0, 1}^m,\\
       \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
-      := \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
+      &:= \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
       \interpcoeff{\*l',\*i'} \cdot
       \basis{\*l'_{\range{m+1}{d}},\*i'_{\range{m+1}{d}}}%
       (\gp{\*l_{\range{m+1}{d}},\*i_{\range{m+1}{d}}})
-    \end{gather}
+    \end{align}
   \end{subequations}
   by factoring out tensor product factors corresponding to dimensions
   $m + 1, \dotsc, d$.
+  The subscripts $\range{1}{m}$ and $\range{m+1}{d}$ denote
+  the entries with respect to the dimensions $1, \dotsc, m$ and
+  $m + 1, \dotsc, d$, respectively.
   As a result,
   both $\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}}$
   and, analogously,
@@ -300,11 +301,12 @@
   to $l'_t = l''_t < l_t$, i.e., $t \in T_{\*l',\*l''}$.
   
   To prove the equivalence of $\*l'$ and $\*l''$,
-  let $t \notin T_{\*l',\*l''}$.
-  This implies either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
-  In the latter case, we trivially obtain $\min\{l''_t, \hat{l}'_t\} \ge l_t$.
-  Therefore, we assume that $l'_t \not= l''_t$.
-  As $t \notin T_{\*l',\*l''}$, we must have $t \notin T_{L_0}$.
+  let $t \notin T_{\*l',\*l''}$,
+  %This implies either $l'_t \not= l''_t$ or $l'_t = l''_t \ge l_t$.
+  %In the latter case, we trivially obtain $\min\{l'_t, l''_t\} \ge l_t$.
+  %Therefore, we assume that $l'_t \not= l''_t$.
+  %As $t \notin T_{\*l',\*l''}$, we must have
+  i.e., $t \notin T_{L_0}$.
   By assumption on $\*l'$, it holds $l'_t \ge l_t$.
   Hence, it remains to show that $l''_t \ge l_t$ as well.
   Again, by definition of $T_{L_0}$, we have either
@@ -364,7 +366,7 @@
   which contradicts $\*l' \in L$.
   Hence, we have $m > 0$.
   
-  To enumerate all the levels $\*l' \in L_0$ with $\normone{\*l'} = n - q$,
+  To enumerate all levels $\*l' \in L_0$ with $\normone{\*l'} = n - q$,
   we exploit the characterization of $L_0$ of
   \cref{lemma:combiTechniqueCharacterization}.
   For notational convenience, we define the vector
@@ -373,7 +375,7 @@
     := (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d),
   \end{equation}
   where $\*l^\ast$ is given as in \cref{lemma:combiTechniqueCharacterization}.
-  We show that $\*a := (l'_t - l_t)_{t = m+1, \dotsc, d}$,
+  We show that $\*a := (l'_t - l_t)_{t = m+1, \dotsc, d}$
   constitutes a bijection between
   \begin{equation}
     \{\*l' \in L_0 \mid \normone{\*l'} = n - q\}
@@ -403,7 +405,7 @@
       = (l^\ast_1, \dotsc, l^\ast_m,\;
       a_1 + l_{m+1}, \dotsc, a_{d-m} + l_d),
     \end{equation}
-    then $\fa{t=1,\dotsc,m}{l'_t = l^\ast_t}$ and
+    then $\fa{t=1,\dotsc,m}{l'_t = l^\ast_t < l_t}$ and
     $\fa{t=m+1,\dotsc,d}{l'_t \ge l_t}$.
     By \cref{lemma:combiTechniqueCharacterization},
     we obtain $\*l' \in L_0$ and

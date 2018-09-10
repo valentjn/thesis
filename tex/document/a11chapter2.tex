@@ -45,16 +45,16 @@
   where $2^d$ is the summand for $\*l = \*0$
   (number $\setsize{\hiset{\*0}}$ of corners of $\clint{\*0, \*1}$).
   The limits of the sum over $m$ are $d-q$,
-  since there must be at least $d-q$ entries $\ge 1$ in a level vector
+  since there are $d-q$ entries $\ge 1$ in a level vector
   with $q$ zero entries, and $n-b-q+1$,
   since $m = \normone{\*l}
   = \normone{\vecmax(\*l, \*1)} - N_\*l
   \le n-b+1 - N_\*l
   = n-b-q+1$.
   
-  In general, the innermost summand $\setsize{\hiset{\*l}}$ can be calculated as
+  In general, the innermost summand $\setsize{\hiset{\*l}}$ equals
   $\setsize{\hiset{\*l}}
-  = \prod_{l_t \ge 1} 2^{l_t-1} \cdot \prod_{l_t = 0} 2
+  = \prod_{\{t \mid l_t \ge 1\}} 2^{l_t-1} \cdot \prod_{\{t \mid l_t = 0\}} 2
   = 2^{\normone{\*l} - d + 2N_\*l}$.
   The number of innermost summands is given by
   \begin{equation}
@@ -80,7 +80,7 @@
       \cdots
       &= \setsize{\interiorregsgset{n}{d}} + 2^d +
       \sum_{q=1}^{d-1} 2^q \binom{d}{q} \sum_{m=0}^{n-d-b+1}
-      2^m \binom{(d-q)+m-1}{(d-q)-1}.\\
+      2^m \binom{(d-q)-1+m}{(d-q)-1}.\\
       \intertext{%
         We can now use \thmref{lemma:numberOfGridPointsInterior} to
         conclude that%
@@ -109,7 +109,7 @@
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
   If $\*l' := (\*l, 0)$
   is inserted for some $\*l \in \levelset^{(t-1)}$,
-  then we have $\normone{\vecmax(\*l, \*1)} \le n+d+t-b$ or
+  then we have $\normone{\vecmax(\*l, \*1)} \le n-d+t-b$ or
   $\*l = \*0$ by \cref{line:algCoarseBoundary1} of
   \cref{alg:coarseBoundary}.
   In the first case, we have
@@ -125,17 +125,17 @@
   If $\*l' := (\*l, l_t)$ is inserted
   for some $\*l \in \levelset^{(t-1)}$ and
   $l_t \in \{1, \dotsc, l^\ast\}$, then there are,
-  depending on whether $\*l \in \nat^{t-1}$ or not, two cases:
+  depending on whether $\*l \in \nat^{t-1}$, two cases:
   \begin{itemize}
     \item
-    If $\*l \in \nat^{t-1}$, then $\*l' \in \nat^{t-1}$ as well and
+    \mbox{If $\*l \in \nat^{t-1}$, then $\*l' \in \nat^t$ and}
     $\normone{\*l'} \le \normone{\*l} + l^\ast = n - d + t$
     due to \cref{line:algCoarseBoundary2},
     i.e., $\*l'$ is contained in the first set of the \rhs of
     \eqref{eq:coarseInvariant}.
     
     \item
-    If $\*l \notin \nat^{t-1}$, then $\*l' \notin \nat^{t-1}$ as well and
+    \mbox{If $\*l \notin \nat^{t-1}$, then $\*l' \notin \nat^t$ and}
     $\normone{\vecmax(\*l', \*1)}
     \le \normone{\vecmax(\*l, \*1)} + l^\ast
     = n - d + t - b + 1$
@@ -151,7 +151,8 @@
   are inserted by the algorithm into $\levelset^{(t)}$ eventually.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the \rhs of \eqref{eq:coarseInvariant} equals
-  $\{l \in \natz \mid l \le n-d+1\}$, which is just $\levelset^{(1)}$.
+  $\{l \in \natz \mid l \le n-d+1\}$, which is just $\levelset^{(1)}$
+  (see \cref{line:algCoarseBoundary6} of \cref{alg:coarseBoundary}).
   For the induction step $(t - 1) \to t$, we assume
   the validity of the induction hypothesis
   \begin{equation}
@@ -201,8 +202,8 @@
     \le n-d+t-b$.
     Consequently, $\*l \in \levelset^{(t-1)}$ by the induction hypothesis
     \eqref{eq:proofCoarseInductionHypothesis}.
-    As $l_t \in \{1, \dotsc, l^\ast\}$
-    (due to $l_t \le n-d+t-b -
+    As $1 \le l_t \le l^\ast$
+    (due to $l_t \le n-d+t-b+1 -
     \normone{\vecmax(\*l, \*1)} = l^\ast$),
     $\*l$ is added to $\levelset^{(t)}$ in \cref{line:algCoarseBoundary4}.
     
