@@ -582,6 +582,7 @@ removing points from the union $\sgset$.
           interpolant of $r^{(j-1)}$ on $\fgset{\*l^{(j)}}$%
           %(see \eqref{eq:interpFullGridMV})%
         }
+        \label{line:algResidualInterpolation3}
         \State{%
           Let $(\surplus[(j)]{\*l,\*i})_{(\*l,\*i) \in \liset}$ be such that
           $\sum_{\*l=\*0}^{\*l^{(j)}} \sum_{\*i \in \hiset{\*l}}
@@ -596,6 +597,7 @@ removing points from the union $\sgset$.
           for all $(\*l,\*i) \in \liset$%
         }
         \Comment{new residuals}%
+        \label{line:algResidualInterpolation4}
       \EndFor{}
       \State{%
         $\vlinout \gets \sum_{j=1}^{m} \vsurplus^{(j)}$
