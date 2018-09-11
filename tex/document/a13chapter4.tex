@@ -237,7 +237,7 @@
       \*x_{\range{1}{m}} \in \clint{0, 1}^m,\\
       \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
       &:= \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
-      \interpcoeff{\*l',\*i'} \cdot
+      \interpcoeff{\*l',\*i'}
       \basis{\*l'_{\range{m+1}{d}},\*i'_{\range{m+1}{d}}}%
       (\gp{\*l_{\range{m+1}{d}},\*i_{\range{m+1}{d}}})
     \end{align}
@@ -511,7 +511,13 @@
   }%
   %
   We prove the assertion by induction over $j = 1, \dotsc, m$.
-  We will need the following equations that directly follow from the algorithm:
+  We will need the following two equations
+  that directly follow from the algorithm
+  (\cref{%
+    line:algResidualInterpolation3,%
+    line:algResidualInterpolation2,%
+    line:algResidualInterpolation4%
+  }, respectively):
   \begin{subequations}
     \begin{alignat}{3}
       \label{eq:propInvariantResidualInterpolation5}
@@ -571,8 +577,9 @@
     Let $S$ be the line in $\real^d$ defined by
     \begin{equation}
       S
-      := \gp{\*l,\*i} + \spn\{\stdbasis{t'}\}.
+      := \gp{\*l,\*i} + \spn\{\stdbasis{t'}\},
     \end{equation}
+    where $\stdbasis{t'}$ is the $t'$-th standard basis vector.
     It holds that $S \cap \fgset{\*l^{(j+1)}} \subset \fgset{\*l^{(j')}}$.
     To show this, let $\gp{\*l',\*i'} \in S \cap \fgset{\*l^{(j+1)}}$
     be arbitrary (with $\*i' \in \hiset{\*l'}$).
@@ -607,23 +614,24 @@
     we exploit the tensor product nature of the basis functions and
     restrict $r_{\*l^{(j+1)}}^{(j)}$ to $S \cap \clint{0, 1}$:
     \begin{subequations}
-      \begin{gather}
+      \begin{align}
         (\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}})(x_{t'})
-        = \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
+        &\hphantom{:}= \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
         \sum_{i'_{t'} \in \hiset{l'_{t'}}}
         \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
         \basis{l'_{t'},i'_{t'}}(x_{t'}),\quad
         x_{t'} \in \clint{0, 1},\\
         \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
-        := \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
+        &:= \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
         \sum_{\*i'_{-t'} \in \hiset{\*l'_{-t'}}}
-        \surplus[(j+1)]{\*l',\*i'} \cdot
-        \basis{\*l'_{-t'},\*i'_{-t'}}(\gp{\*l_{-t'},\*i_{-t'}}).
+        \surplus[(j+1)]{\*l',\*i'}
+        \basis{\*l'_{-t'},\*i'_{-t'}}(\gp{\*l_{-t'},\*i_{-t'}}),
         %= \sum_{\*l'=\*0}^{\*l^{(j+1)}} \sum_{\*i' \in \hiset{\*l'}}
         %\surplus[(j+1)]{\*l',\*i'} \basis{\*l',\*i'}
-      \end{gather}
+      \end{align}
     \end{subequations}
-    This shows that
+    where the subscript $-t'$ indicates all entries but the $t'$-th.
+    As a consequence, this shows that
     $\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}} \in
     \ns{l_{t'}^{(j+1)}}$ is an interpolant of the zero function
     (by \eqref{eq:proofPropInvariantResidualInterpolation2}).
@@ -702,7 +710,7 @@
 \propInvariantBFS*
 
 \begin{proof}
-  We make two observations:
+  We start with two observations:
   
   \begin{itemize}
     \item
@@ -777,7 +785,7 @@
       \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).\\
       \intertext{%
         After inserting the induction hypothesis
-        for $\linout[(q)]{\*l,\*i}$, we have%
+        for the first $\linout[(q)]{\*l,\*i}$, we have%
       }
       \cdots
       &= \paren*{
@@ -830,7 +838,7 @@
     = \upop{t_{j+1}} \upop{t_j} \dotsm \upop{t_1}
     = \upop{t_{j+1}} \upop{t_1,\dotsc,t_j},
   \end{equation}
-  and infer, by assumption,
+  and infer by assumption
   \begin{equation}
     \label{eq:proofLemmaChainExistenceSufficient1}
     0
@@ -872,26 +880,29 @@
   \end{equation}
   similar to \eqref{eq:proofLemmaChainExistenceSufficient1}.
   Recall that
-  \begin{alignat}{4}
-    \chainuv{j}_t
-    &= k''_t
-    &&\;\;\text{and}\;\;
-    &\chainuv{j+1}_t
-    &= k''_t
-    &&\quad\text{for } t \in \{t_1, \dotsc, t_j\},\\
-    \chainuv{j}_t
-    &= k'_t
-    &&\;\;\text{and}\;\;
-    &\chainuv{j+1}_t
-    &= k''_t
-    &&\quad\text{for } t = t_{j+1},\\
-    \chainuv{j}_t
-    &= k'_t
-    &&\;\;\text{and}\;\;
-    &\chainuv{j+1}_t
-    &= k'_t
-    &&\quad\text{for } t \notin \{t_1, \dotsc, t_j, t_{j+1}\}.
-  \end{alignat}
+  \begin{subequations}
+    \begin{alignat}{4}
+      \chainuv{j}_t
+      &= k''_t
+      &&\;\;\text{and}\;\;
+      &\chainuv{j+1}_t
+      &= k''_t
+      &&\quad\text{for } t \in \{t_1, \dotsc, t_j\},\\
+      \label{eq:prooflemmaChainExistenceNecessary}
+      \chainuv{j}_t
+      &= k'_t
+      &&\;\;\text{and}\;\;
+      &\chainuv{j+1}_t
+      &= k''_t
+      &&\quad\text{for } t = t_{j+1},\\
+      \chainuv{j}_t
+      &= k'_t
+      &&\;\;\text{and}\;\;
+      &\chainuv{j+1}_t
+      &= k'_t
+      &&\quad\text{for } t \notin \{t_1, \dotsc, t_j, t_{j+1}\}.
+    \end{alignat}
+  \end{subequations}
   We now argue that all summands of
   \eqref{eq:proofLemmaChainExistenceNecessary1} vanish,
   except the summand with index $\chain{j}$.
@@ -935,8 +946,8 @@
     = (\upopuv{t_{j+1}}{\eqclass{\chain{j+1}}{\samepole{t_{j+1}}}})%
     _{k''_{t_{j+1}},k'_{t_{j+1}}}
   \end{equation}
-  by \eqref{eq:upopEntries} and
-  due to $\chain{j} \samepole{t_{j+1}} \chain{j+1}$.
+  by \cref{eq:upopEntries,eq:prooflemmaChainExistenceNecessary}
+  (and due to $\chain{j} \samepole{t_{j+1}} \chain{j+1}$).
   The second factor equals
   \begin{equation}
     (\upop{t_1,\dotsc,t_j})_{\chain{j},\*k'}
@@ -1043,10 +1054,11 @@
   \begin{equation}
     \sum_{i'=0}^1
     \linout{0,i'} \deriv[q]{x}{\bspl[\wfs]{0,i'}{p}}(\gp{0,i})
-    = \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
+    = \kronecker{q}{0} \cdot \fcnval{0,i} +
+    \kronecker{q}{1} \cdot (\fcnval{0,1} - \fcnval{0,0})
     = \deriv[q]{x}{\fgintp{0}}(\gp{0,i})
   \end{equation}
-  for $q = 1, \dotsc, \frac{p-1}{2}$ by
+  for $q = 0, \dotsc, \frac{p-1}{2}$ by
   \cref{%
     line:algHermiteHierarchization1,%
     line:algHermiteHierarchization3%
@@ -1059,11 +1071,13 @@
     \label{eq:proofPropInvariantHermiteHierarchization1}
     \deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})
     \overset{!}{=} \sum_{l'=0}^{l-1} \sum_{i' \in \hiset{l'}}
-    \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i})
+    \linout{l',i'} \deriv[q]{x}{\bspl[\wfs]{l',i'}{p}}(\gp{l,i}),\quad
+    i = 0, \dotsc, 2^l,\;\;
+    q = 0, \dotsc, \frac{p-1}{2}.
   \end{equation}
-  for $i = 0, \dotsc, 2^l$ and $q = 0, \dotsc, \frac{p-1}{2}$.
   Indeed, if \eqref{eq:proofPropInvariantHermiteHierarchization1} holds,
-  then we obtain by \cref{line:algHermiteHierarchization6}
+  then we obtain by
+  \cref{line:algHermiteHierarchization6,line:algHermiteHierarchization8}
   of \cref{alg:hermiteHierarchization}
   \begin{subequations}
     \begin{align}
@@ -1086,15 +1100,15 @@
   we separate two cases:
   \begin{itemize}
     \item
-    ${i \notin \hiset{l}}$:
-    In this case, the ``true'' level of $\gp{l,i}$ is actually $\le l - 1$.
+    \mbox{${i \notin \hiset{l}}$: In this case,}
+    the ``true'' level of $\gp{l,i}$ is actually $\le l - 1$.
     Therefore, we can apply the induction hypothesis
     for \cref{eq:propInvariantHermiteHierarchization} to
     obtain \eqref{eq:proofPropInvariantHermiteHierarchization1}.
     
     \item
-    ${i \in \hiset{l}}$:
-    In this case, we cannot directly apply the induction hypothesis,
+    \mbox{${i \in \hiset{l}}$: In this case,}
+    we cannot directly apply the induction hypothesis,
     as it only holds for grid points of levels $\le l - 1$.
     However, we note that in
     \eqref{eq:proofPropInvariantHermiteHierarchization1},
@@ -1118,14 +1132,15 @@
           \linout{l',i'} \bspl[\wfs]{l',i'}{p}
         }
       }(\gp{l,i\pm1}),\quad
-      q' = 0, \dotsc, \frac{q-1}{2}.
+      q' = 0, \dotsc, \frac{p-1}{2}.
     \end{equation}
     The linear combination in square brackets
     is a polynomial of degree $\le p$ on the interval
     $\clint{\gp{l,i-1}, \gp{l,i+1}}$
     by construction of the hierarchical basis functions
     $\bspl[\wfs]{l',i'}{p}$ ($l' = 0, \dotsc, l - 1$, $i' \in \hiset{l'}$).
-    Due to the uniqueness of Hermite interpolation,
+    Due to the uniqueness of Hermite interpolation
+    (\cref{lemma:hermiteInterpolation}),
     the interpolation polynomial of the data must
     coincide on $\clint{\gp{l,i-1}, \gp{l,i+1}}$
     with the term in square brackets.
@@ -1163,31 +1178,33 @@
 \begin{proof}
   By \cref{prop:invariantHermiteHierarchization} ($q = 0$), we have
   \begin{equation}
-  \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
-  \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
-  = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
-  \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
-  = \fgintp{l}(\gp{l,i}),\quad
-  l \le n,\; i \in \hiset{l}
+    \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+    = \sum_{l'=0}^l \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}(\gp{l,i})
+    = \fgintp{l}(\gp{l,i}),\quad
+    l \le n,\; i \in \hiset{l},
   \end{equation}
   as $\bspl[\wfs]{l',i'}{p}(\gp{l,i}) = 0$ if $l' > l$
   (weakly fundamental property \eqref{eq:weaklyFundamentalProperty}).
-  \Cref{line:algHermiteHierarchization8} implies
+  \Cref{line:algHermiteHierarchization8} of
+  \cref{alg:hermiteHierarchization} implies
   $\fgintp{l}(\gp{l,i})
-  = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i})$,
-  and by \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
-  the second summand $r^{(l)}_l$ equals $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
+  = \fgintp{l-1}(\gp{l,i}) + r^{(l)}_l(\gp{l,i})$, and by
+  \cref{line:algHermiteHierarchization5,line:algHermiteHierarchization7},
+  the second summand $r^{(l)}_l(\gp{l,i})$ equals
+  $\fcnval{l,i} - \fgintp{l-1}(\gp{l,i})$,
   which cancels out the first summand, resulting in
   $\fgintp{l}(\gp{l,i}) = \fcnval{l,i}$.
   Combining these statements, we obtain
   \begin{equation}
-  \sgintp(\gp{l,i})
-  = \fcnval{l,i},\quad
-  l \le n,\; i \in \hiset{l},
-  \quad\text{where}\quad
-  \sgintp
-  := \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
-  \linout{l',i'} \bspl[\wfs]{l',i'}{p}.
+    \sgintp(\gp{l,i})
+    = \fcnval{l,i},\quad
+    l \le n,\; i \in \hiset{l},
+    \quad\text{where}\quad
+    \sgintp
+    := \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+    \linout{l',i'} \bspl[\wfs]{l',i'}{p}.
   \end{equation}
   This means that $\sgintp$ is the correct hierarchical interpolant
   of the given function values
