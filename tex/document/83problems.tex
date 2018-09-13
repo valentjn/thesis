@@ -1,4 +1,144 @@
 \section{Example Problems}
 \label{sec:83problems}
 
-\dummytext[13]{}
+\minitoc{75mm}{3}
+
+\noindent
+This section defines two example problems for
+dynamic portfolio choice models.
+
+
+
+\subsection{Transaction Costs Model}
+
+In the \term{transaction costs model} \cite{Schober18Solving},
+the individual can invest their money risk-free in bonds
+(with a fixed interest rate similar to a bank account)
+or in $m_\stock \in \nat$ different stocks, which is risk-affected.
+Every stock transaction,
+i.e., buy $\buy_{t,m_j}$ or sell $\sell_{t,m_j}$,
+inflicts transaction costs $\tac \buysell_{t,m_j}$ ($\tac \in \nonnegreal$)
+proportional to the amount $\buysell_{t,m_j}$ that was bought or sold.
+The individual's income is omitted---%
+a possible scenario is that the individual only wants to invest a fixed
+amount $\wealth_0$ in stocks.
+
+If $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
+that is invested in the $j$-th stock,
+then the consumption is given by
+\begin{equation}
+  \consume_t(\state_t, \policy_t)
+  := \paren*{1 - \sum_{j=1}^{m_\stock} \stock_{t,j}} \wealth_t - \bond_t -
+  (1 + \tac) \sum_{j=1}^{m_\stock} \buy_{t,j} +
+  (1 - \tac) \sum_{j=1}^{m_\stock} \sell_{t,j}.
+\end{equation}
+The state transition is computed by adding the returns of the stocks:
+\begin{subequations}
+  \begin{align}
+    \wealth_{t+1}
+    &:= \bond_t \bondreturn_t + \sum_{j=1}^{m_\stock}
+    (\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},\\
+    \stock_{t+1,j}
+    &:= \frac{
+      (\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},
+    }{\wealth_{t+1}},\quad
+    j = 1, \dotsc, m_\stock,
+  \end{align}
+\end{subequations}
+where $\bondreturn_t \in \real$ is the bond interest rate and
+$\stockreturn_{t,j} \in \real$ is the return of the $j$-th stock
+($j = 1, \dotsc, m_\stock$).
+These equations can be normalized with respect to the wealth $\wealth_t$:
+By setting
+$\normconsume_t := \consume_t/\wealth_t$,
+$\normbond_t    := \bond_t   /\wealth_t$, and
+$\normbuysell_t := \buysell_t/\wealth_t$, we obtain
+\begin{subequations}
+  \begin{align}
+    \normconsume_t(\state_t, \policy_t)
+    &:= \paren*{1 - \sum_{j=1}^{m_\stock} \stock_{t,j}} - \normbond_t -
+    (1 + \tac) \sum_{j=1}^{m_\stock} \normbuy_{t,j} +
+    (1 - \tac) \sum_{j=1}^{m_\stock} \normsell_{t,j},\\
+    \wealthratio_{t+1}
+    &:= \normbond_t \bondreturn_t + \sum_{j=1}^{m_\stock}
+    (\stock_{t,j} + \normbuy_{t,j} - \normsell_{t,j}) \stockreturn_{t,j},
+    \qquad\left(= \frac{\wealth_{t+1}}{\wealth_t}\right)\\
+    \stock_{t+1,j}
+    &:= \frac{
+      (\stock_{t,j} + \normbuy_{t,j} - \normsell_{t,j}) \stockreturn_{t,j},
+    }{\wealthratio_{t+1}},\quad
+    j = 1, \dotsc, m_\stock.
+  \end{align}
+\end{subequations}
+%\newcommand*{\normconst}{\kappa}
+%\begin{gather}
+%  \normconst
+%  := \frac{
+%    2\tac\Sigma
+%  }{
+%    \tac + \tac \Sigma - 1 + \sqrt{
+%      1 -
+%      4 \consume_{\min} \tac +
+%      2 \tac +
+%      \tac^2 -
+%      2 \tac^2 \Sigma +
+%      \Sigma^2 \tac^2 -
+%      2 \Sigma \tac
+%    }
+%  },\\
+%  \normconst
+%  := \frac{
+%    2 (\tac\Sigma)
+%  }{
+%    -(1 - \tac - \tac \Sigma) + \sqrt{
+%      (1 - \tac - \tac \Sigma)^2 -
+%      4 (\tac\Sigma) (\tac + (\consume_{\min} - 1)/\Sigma)
+%    }
+%  },\\
+%  (\tac\Sigma) \frac{1}{\normconst^2} +
+%  (1 - \tac - \tac \Sigma) \frac{1}{\normconst} +
+%  (\tac + (\consume_{\min} - 1)/\Sigma) \ge 0,\\
+%  \hat{\stock}_{t,j}
+%  \to \frac{\hat{\stock}_{t,j}}{\max(\normconst, 1)}
+%\end{gather}
+The resulting dynamic portfolio choice model has
+the following variables:
+\begin{itemize}
+  \item
+  $\centerhphantom{d}{m_\stochastic} = m_\stock$
+  state variables $\state_t$:
+  Stock fractions $\stock_{t,1}, \dotsc, \stock_{t,m_\stock}$
+  
+  \item
+  $\centerhphantom{m_\policy}{m_\stochastic} = 2m_\stock + 1$
+  policy variables $\policy_t$:
+  Normalized bonds $\normbond_t$,
+  normalized buy amounts $\normbuy_{t,1}, \dotsc, \normbuy_{t,m_\stock}$ and
+  normalized sell amounts $\normsell_{t,1}, \dotsc, \normsell_{t,m_\stock}$
+  
+  \item
+  $m_\stochastic = m_\stock$
+  stochastic variables $\stochastic_t$:
+  Stock return rates $\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_\stock}$
+\end{itemize}
+The state space and policy space constraints are given by
+\begin{subequations}
+  \begin{gather}
+  \stock_{t,j} \ge 0,\qquad
+  \sum_{j=1}^{m_\stock} \stock_{t,j} \le 1,\\[-0.4em]
+  \normconsume_{\min} + \normbond_t +
+  (1 + \tac) \sum_{j=1}^{m_\stock} \normbuy_{t,j} -
+  (1 - \tac) \sum_{j=1}^{m_\stock} \normsell_{t,j}
+  \le 1 - \sum_{j=1}^{m_\stock} \stock_{t,j},\\
+  \normbond_t \ge 0,\qquad
+  \normbuysell_{t,j} \ge 0,\qquad
+  \normsell_{t,j} \le \stock_{t,j},\qquad
+  j = 1, \dotsc, m_\stock.
+  \end{gather}
+\end{subequations}
+
+
+
+\subsection{Immediate Annuity Model}
+
+\dummytext[5]{}
