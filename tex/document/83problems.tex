@@ -124,16 +124,16 @@ the following variables:
 The state space and policy space constraints are given by
 \begin{subequations}
   \begin{gather}
-  \stock_{t,j} \ge 0,\qquad
-  \sum_{j=1}^{m_\stock} \stock_{t,j} \le 1,\\[-0.4em]
-  \normconsume_{\min} + \normbond_t +
-  (1 + \tac) \sum_{j=1}^{m_\stock} \normbuy_{t,j} -
-  (1 - \tac) \sum_{j=1}^{m_\stock} \normsell_{t,j}
-  \le 1 - \sum_{j=1}^{m_\stock} \stock_{t,j},\\
-  \normbond_t \ge 0,\qquad
-  \normbuysell_{t,j} \ge 0,\qquad
-  \normsell_{t,j} \le \stock_{t,j},\qquad
-  j = 1, \dotsc, m_\stock.
+    \stock_{t,j} \ge 0,\qquad
+    \sum_{j=1}^{m_\stock} \stock_{t,j} \le 1,\\[-0.4em]
+    \normconsume_{\min} + \normbond_t +
+    (1 + \tac) \sum_{j=1}^{m_\stock} \normbuy_{t,j} -
+    (1 - \tac) \sum_{j=1}^{m_\stock} \normsell_{t,j}
+    \le 1 - \sum_{j=1}^{m_\stock} \stock_{t,j},\\
+    \normbond_t \ge 0,\qquad
+    \normbuysell_{t,j} \ge 0,\qquad
+    \normsell_{t,j} \le \stock_{t,j},\qquad
+    j = 1, \dotsc, m_\stock.
   \end{gather}
 \end{subequations}
 
