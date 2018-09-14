@@ -457,14 +457,14 @@ it has to be approximated by a quadrature rule
       )
     )^{1-\riskav}
   }
-  \approx \sum_{j=1}^{m_\zeta} \quadweight^{(j)}
+  \approx \sum_{j=1}^{m_\zeta} \quadweight_t^{(j)}
   (
     \cetvalueintp[p]_{t+1}(
       \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
     )
   )^{1-\riskav}
 \end{equation}
-for some weights $\quadweight^{(j)} \in \real$ and
+for some weights $\quadweight_t^{(j)} \in \real$ and
 quadrature points $\stochastic_t^{(j)} \in \stochdomain$
 ($j = 1, \dotsc, m_\zeta$).
 Since the stochastic domain $\stochdomain \subset \real^{m_{\stochastic}}$
