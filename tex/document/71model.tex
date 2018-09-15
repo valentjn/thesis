@@ -117,6 +117,7 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
     \newcommand*{\myscale}{0.14}
     \newcommand*{\mybicepsstart}{0.2}
     \newcommand*{\myradius}{9mm}
+    \newcommand*{\mysmallradius}{2mm}
     
     \foreach \myi in {1,...,5} {
       \node[anchor=north west] at ({(\myi-1)*\myhspace},0mm) {%
@@ -147,10 +148,13 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
       }{
         \pgfpointanchor{loadForceStart}{center}
       }
-      \let\myangle\pgfmathresult
+      \let\myelbowangle\pgfmathresult
       \coordinate (arcStart) at ($(joint) - (0mm,\myradius)$);
       \coordinate (arcEnd) at (
-        $(joint) + ({\myradius*cos(\myangle)},{\myradius*sin(\myangle)})$
+        $(joint) + (
+          {\myradius*cos(\myelbowangle)},
+          {\myradius*sin(\myelbowangle)}
+        )$
       );
       
       \draw[contour] (tricepsForceStart) -- (joint) -- (loadForceStart);
@@ -165,31 +169,55 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
       \draw[dashed,contour] (joint) -- (
         $(bicepsForceStart)!(joint)!(bicepsForceEnd)$
       );
-      \centerarc[dashed,contour](joint)(270:\myangle:\myradius);
+      \centerarc[dashed,contour](joint)(270:\myelbowangle:\myradius);
       
       \draw[
         ->,contour,>={Stealth[width=9pt,length=9pt]},
-      ] (tricepsForceStart) -- ($(tricepsForceEnd)!-2pt!(tricepsForceStart)$);
+      ] (tricepsForceStart) -- (
+        $(tricepsForceEnd)!-1.5pt!(tricepsForceStart)$
+      );
       \draw[
         ->,contour,>={Stealth[width=9pt,length=9pt]},
-      ] (bicepsForceStart) -- ($(bicepsForceEnd)!-2pt!(bicepsForceStart)$);
+      ] (bicepsForceStart) -- (
+        $(bicepsForceEnd)!-1.5pt!(bicepsForceStart)$
+      );
       \draw[
         ->,contour,>={Stealth[width=9pt,length=9pt]},
-      ] (loadForceStart) -- ($(loadForceEnd)!-2pt!(loadForceStart)$);
+      ] (loadForceStart) -- (
+        $(loadForceEnd)!-1.5pt!(loadForceStart)$
+      );
       
       \draw (tricepsForceStart) -- (joint) -- (loadForceStart);
       
       \draw[dashed] (joint) -- (verticalDashedEnd);
-      \draw[dashed,draw=C1] (
-        $(joint)!(horizontalDashedEnd)!(verticalDashedEnd)$
-      ) -- (horizontalDashedEnd);
-      \draw[dashed,draw=C1] (joint) -- (
-        $(tricepsForceStart)!(joint)!(tricepsForceEnd)$
-      );
-      \draw[dashed,draw=C1] (joint) -- (
-        $(bicepsForceStart)!(joint)!(bicepsForceEnd)$
-      );
-      \centerarc[dashed](joint)(270:\myangle:\myradius);
+      \centerarc[dashed](joint)(270:\myelbowangle:\myradius);
+      
+      \newcommand*{\drawleverarm}[4]{
+        \coordinate (leverArmBase) at ($(#2)!(#1)!(#3)$);
+        \draw[dashed,draw=C1] (#1) -- (leverArmBase);
+        \pgfmathanglebetweenpoints{
+          \pgfpointanchor{#1}{center}
+        }{
+          \pgfpointanchor{leverArmBase}{center}
+        }
+        \let\myangle\pgfmathresult
+        \pgfmathparse{\myangle #4 180}
+        \let\mystartangle\pgfmathresult
+        \pgfmathparse{\myangle #4 90}
+        \let\myendangle\pgfmathresult
+        \centerarc[draw=C1](leverArmBase)(
+          \mystartangle:\myendangle:\mysmallradius
+        );
+        \fill[draw=none,fill=C1] (
+          $(leverArmBase) + (
+            {0.62*\mysmallradius*cos((\mystartangle+\myendangle)/2)},
+            {0.62*\mysmallradius*sin((\mystartangle+\myendangle)/2)}
+          )$
+        ) circle (1pt);
+      }
+      \drawleverarm{horizontalDashedEnd}{joint}{verticalDashedEnd}{-}
+      \drawleverarm{joint}{tricepsForceStart}{tricepsForceEnd}{-}
+      \drawleverarm{joint}{bicepsForceStart}{bicepsForceEnd}{+}
       
       \draw[->,draw=C0] (tricepsForceStart) -- (tricepsForceEnd);
       \draw[->,draw=C0] (bicepsForceStart) -- (bicepsForceEnd);
@@ -199,20 +227,20 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
       
       \node at (
         $(joint) + (
-          {0.62*\myradius*cos((270+\myangle)/2)},
-          {0.62*\myradius*sin((270+\myangle)/2)}
+          {0.62*\myradius*cos((270+\myelbowangle)/2)},
+          {0.62*\myradius*sin((270+\myelbowangle)/2)}
         )$
       ) {\contour{mittelblau!10}{$\elbowangle$}};
       
       \node[anchor=south] at (
         $0.5*(joint) +
         0.5*(tricepsForceStart)!(joint)!(tricepsForceEnd) +
-        (-1mm,0mm)$
+        (-1mm,1mm)$
       ) {\contour{mittelblau!10}{\textcolor{C1}{$\armtriceps$}}};
       \node[anchor=south] at (
         $0.5*(joint) +
         0.5*(bicepsForceStart)!(joint)!(bicepsForceEnd) +
-        (1mm,0mm)$
+        (1mm,1mm)$
       ) {\contour{mittelblau!10}{\textcolor{C1}{$\armbiceps$}}};
       \node[anchor=north] at (
         $0.5*(horizontalDashedEnd) +
