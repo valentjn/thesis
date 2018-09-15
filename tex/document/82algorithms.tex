@@ -140,7 +140,7 @@ with hierarchical higher-order B-splines.
       \getscale
       \pgfmathparse{150+20/\myxscale^0.8}
       \let\myin\pgfmathresult
-      \draw[-{Stealth[length=2mm,width=2mm]}] (myCircle#2) to[
+      \draw[->] (myCircle#2) to[
         out=150,in=\myin,looseness=2.3,
       ] node[below,scale=1/\myxscale] {\mytext} (myCircle#2);
     }
@@ -210,13 +210,13 @@ with hierarchical higher-order B-splines.
         text width=15mm,
         align=center,
       ] at (40mm,0mm) (interpolate) {\ttfamily{}inter-\\polate};
-      \draw[-{Stealth[length=2mm,width=2mm]}] (optimize) to[
+      \draw[->] (optimize) to[
         bend left=30,
       ] (myCircle30);
-      \draw[-{Stealth[length=2mm,width=2mm]}] (myCircle30) to[
+      \draw[->] (myCircle30) to[
         bend left=30,
       ] (interpolate);
-      \draw[-{Stealth[length=2mm,width=2mm]}] (interpolate) to[
+      \draw[->] (interpolate) to[
         bend left=30,
       ] node[above,rotate=50] {$t \gets (t - 1)$} (optimize);
     \end{scope}
