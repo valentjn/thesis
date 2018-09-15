@@ -109,22 +109,138 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
 \label{sec:712details}
 
 \begin{figure}
-  \raisebox{-\height}{\rlap{\includegraphics[scale=0.13]{upperLimb_1}}}%
-  \hfill%
-  \raisebox{-\height}{\rlap{\includegraphics[scale=0.13]{upperLimb_2}}}%
-  \hfill%
-  \raisebox{-\height}{\rlap{\includegraphics[scale=0.13]{upperLimb_3}}}%
-  \hfill%
-  \raisebox{-\height}{\rlap{\includegraphics[scale=0.13]{upperLimb_4}}}%
-  \hfill%
-  \raisebox{-\height}{\rlap{\includegraphics[scale=0.13]{upperLimb_5}}}%
-  \hfill\strut%
+  \begin{tikzpicture}[
+    dashed/.style={dash pattern=on 2pt off 2pt},
+    contour/.style={line width=3pt,draw=mittelblau!10},
+  ]
+    \newcommand*{\myhspace}{30.34mm}
+    \newcommand*{\myscale}{0.14}
+    \newcommand*{\mybicepsstart}{0.2}
+    \newcommand*{\myradius}{9mm}
+    
+    \foreach \myi in {1,...,5} {
+      \node[anchor=north west] at ({(\myi-1)*\myhspace},0mm) {%
+        \includegraphics[scale=\myscale]{upperLimb_\myi}%
+      };
+      \node[anchor=north west] at ({(\myi-1)*\myhspace+11mm},0mm) {%
+        \pgfmathparse{10+35*(\myi-1)}%
+        $\theta = \SI[
+          round-mode=places,round-precision=0,
+        ]{\pgfmathresult}{\degree}$%
+      };
+    }
+    
+    \begin{scope}[shift={({(3-1)*\myhspace},0mm)}]
+      \coordinate (joint)               at (8mm,-30mm);
+      \coordinate (loadForceStart)      at (30.6mm,-35mm);
+      \coordinate (loadForceEnd)        at (30.6mm,-45mm);
+      \coordinate (tricepsForceStart)   at (5.7mm,-31.9mm);
+      \coordinate (tricepsForceEnd)     at (4mm,-15mm);
+      \coordinate (bicepsForceStart)    at (
+        ${(1-\mybicepsstart)}*(joint) + \mybicepsstart*(loadForceStart)$
+      );
+      \coordinate (bicepsForceEnd)      at (11.5mm,-10mm);
+      \coordinate (horizontalDashedEnd) at ($(loadForceEnd) + (0mm,3mm)$);
+      \coordinate (verticalDashedEnd)   at ($(joint) - (0mm,15mm)$);
+      \pgfmathanglebetweenpoints{
+        \pgfpointanchor{joint}{center}
+      }{
+        \pgfpointanchor{loadForceStart}{center}
+      }
+      \let\myangle\pgfmathresult
+      \coordinate (arcStart) at ($(joint) - (0mm,\myradius)$);
+      \coordinate (arcEnd) at (
+        $(joint) + ({\myradius*cos(\myangle)},{\myradius*sin(\myangle)})$
+      );
+      
+      \draw[contour] (tricepsForceStart) -- (joint) -- (loadForceStart);
+      
+      \draw[dashed,contour] (joint) -- (verticalDashedEnd);
+      \draw[dashed,contour] (
+        $(joint)!(horizontalDashedEnd)!(verticalDashedEnd)$
+      ) -- (horizontalDashedEnd);
+      \draw[dashed,contour] (joint) -- (
+        $(tricepsForceStart)!(joint)!(tricepsForceEnd)$
+      );
+      \draw[dashed,contour] (joint) -- (
+        $(bicepsForceStart)!(joint)!(bicepsForceEnd)$
+      );
+      \centerarc[dashed,contour](joint)(270:\myangle:\myradius);
+      
+      \draw[
+        ->,contour,>={Stealth[width=9pt,length=9pt]},
+      ] (tricepsForceStart) -- ($(tricepsForceEnd)!-2pt!(tricepsForceStart)$);
+      \draw[
+        ->,contour,>={Stealth[width=9pt,length=9pt]},
+      ] (bicepsForceStart) -- ($(bicepsForceEnd)!-2pt!(bicepsForceStart)$);
+      \draw[
+        ->,contour,>={Stealth[width=9pt,length=9pt]},
+      ] (loadForceStart) -- ($(loadForceEnd)!-2pt!(loadForceStart)$);
+      
+      \draw (tricepsForceStart) -- (joint) -- (loadForceStart);
+      
+      \draw[dashed] (joint) -- (verticalDashedEnd);
+      \draw[dashed,draw=C1] (
+        $(joint)!(horizontalDashedEnd)!(verticalDashedEnd)$
+      ) -- (horizontalDashedEnd);
+      \draw[dashed,draw=C1] (joint) -- (
+        $(tricepsForceStart)!(joint)!(tricepsForceEnd)$
+      );
+      \draw[dashed,draw=C1] (joint) -- (
+        $(bicepsForceStart)!(joint)!(bicepsForceEnd)$
+      );
+      \centerarc[dashed](joint)(270:\myangle:\myradius);
+      
+      \draw[->,draw=C0] (tricepsForceStart) -- (tricepsForceEnd);
+      \draw[->,draw=C0] (bicepsForceStart) -- (bicepsForceEnd);
+      \draw[->,draw=C0] (loadForceStart) -- (loadForceEnd);
+      
+      \fill[draw=none,fill=black] (joint) circle (2pt);
+      
+      \node at (
+        $(joint) + (
+          {0.62*\myradius*cos((270+\myangle)/2)},
+          {0.62*\myradius*sin((270+\myangle)/2)}
+        )$
+      ) {\contour{mittelblau!10}{$\elbowangle$}};
+      
+      \node[anchor=south] at (
+        $0.5*(joint) +
+        0.5*(tricepsForceStart)!(joint)!(tricepsForceEnd) +
+        (-1mm,0mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armtriceps$}}};
+      \node[anchor=south] at (
+        $0.5*(joint) +
+        0.5*(bicepsForceStart)!(joint)!(bicepsForceEnd) +
+        (1mm,0mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armbiceps$}}};
+      \node[anchor=north] at (
+        $0.5*(horizontalDashedEnd) +
+        0.5*(joint)!(horizontalDashedEnd)!(verticalDashedEnd) +
+        (0mm,-1mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armload$}}};
+      
+      \node[anchor=east] at (
+        $0.2*(tricepsForceStart) + 0.8*(tricepsForceEnd) + (-1mm,0mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forcetriceps$}}};
+      \node[anchor=west] at (
+        $0.2*(bicepsForceStart) + 0.8*(bicepsForceEnd) + (1mm,0mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forcebiceps$}}};
+      \node[anchor=west] at (
+        $0.2*(loadForceStart) + 0.8*(loadForceEnd) + (1mm,0mm)$
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forceload$}}};
+    \end{scope}
+  \end{tikzpicture}%
   \caption[Raising arm movement]{%
-    Human upper limb model geometry shown as raising arm movement
+    Human upper limb model geometry shown as a raising arm movement
     for the elbow angles
-    \SI{10}{\degree}, \SI{45}{\degree}, \SI{80}{\degree},
+    $\theta = \SI{10}{\degree}$, \SI{45}{\degree}, \SI{80}{\degree},
     \SI{115}{\degree}, and \SI{150}{\degree} \emph{(from left to right).}
-    Taken from \cite{Sprenger15Continuum}.%
+    For $\theta = \SI{80}{\degree}$,
+    the contributing forces \emph{\textcolor{C0}{(blue)}} and
+    lever arms \emph{\textcolor{C1}{(red)}} are shown.
+    Taken and adapted from
+    \multicite{Sprenger15Continuum,Valentin18Gradient}.%
   }%
   \label{fig:raisingArm}%
 \end{figure}
