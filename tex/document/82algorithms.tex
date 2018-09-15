@@ -126,10 +126,6 @@ with hierarchical higher-order B-splines.
 \end{algorithm}
 
 \begin{figure}
-  % [draw options] (center) (initial angle:final angle:radius)
-  \def\centerarc[#1](#2)(#3:#4:#5){
-    \draw[#1] ($(#2)+({(#5)*cos(#3)},{(#5)*sin(#3)})$) arc (#3:#4:#5);
-  }
   \newcommand*{\getscale}{
     \pgfgettransformentries{%
       \myxscaletmp%
