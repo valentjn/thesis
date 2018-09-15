@@ -14,9 +14,62 @@
 }
 \label{chap:70muscle}
 
-\initial{0em}{E}{xisting models}
-of the human upper limb
-\dummytext[1]{}
+\initial{0em}{E}{xisting biomechanical models of muscle-tendon complexes},
+e.g., of the human upper limb, can mainly be divided into two different types.
+The most common type are \term{lumped-parameter musculoskeletal models,}
+for instance Hill-type models based on multi-body simulations
+\multicite{Roehrle16Two,Valentin18Gradient}.
+These models assume the components of the musculoskeletal system
+to be rigid.
+The mechanical behavior is reduced to point masses
+associated with their moment of inertia;
+thus, these models can be described by few (lumped) parameters.
+
+\term{Continuum-mechanical musculoskeletal models} form the other common type.
+Their advantage is that they are more detailed and, hence, more realistic.
+However, their increased complexity leads to higher computational costs.
+An example is an inverse problem (see \cref{chap:10introduction})
+that involves a continuum-mechanical simulation of such a
+musculoskeletal model,
+i.e., we search values of model parameters
+such that a specific movement is attained.
+Each iteration of the solution process for such an inverse problem
+may take hours or days, depending on the model at hand.
+
+Surrogate methods based on sparse grid help to decrease the complexity
+in two ways:
+First, the evaluation of surrogates is obviously drastically cheaper
+than objective function evaluations.
+Second, the usage of sparse grids in particular decreases the number
+of necessary samples to construct the surrogates.
+As for the previous application,
+the choice of B-splines as hierarchical basis functions enables
+the evaluation of continuously differentiable surrogate gradients.
+For the example of inverse problems, this means that
+gradient-based optimization methods may be employed,
+which significantly accelerates convergence.
+
+This chapter is split into three sections.
+First, in \cref{sec:71model}, we introduce a continuum-mechanical
+model of the human upper limb.
+Second, in \cref{sec:72problems}, we list the types of inverse problems
+of interest.
+Finally, in \cref{sec:73results}, we present numerical results
+regarding the solution of these inverse problems.
+
+The results of this chapter are based on a collaboration with
+Prof.\ Oliver Röhrle, PhD, and Dr.\ Michael Sprenger
+(SimTech/University of Stuttgart, Germany).%
+\footnote{%
+  Michael Sprenger left the University of Stuttgart in 2015.%
+}
+The collaborators contributed the biomechanical model
+with its theory, its geometry, and its implementation,
+while the author of this thesis contributed the
+sparse grid/B-spline methodology and
+computed the numerical results.
+Note that the results have already been
+published in \cite{Valentin18Gradient}.
 
 \input{document/71model}
 \input{document/72problems}
