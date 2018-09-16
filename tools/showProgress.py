@@ -73,6 +73,8 @@ for commit in commits:
 
 dates = (["2018-01-31", "2018-02-21", "2018-03-12", "2018-03-16"] + dates +
          [datetime.datetime.now().strftime("%Y-%m-%d")])
+dates = [datetime.datetime.strptime(date, "%Y-%m-%d") for date in dates]
+
 writingProgress = ([0/totalPages, 52/totalPages, 56/totalPages, 70/totalPages] +
                    writingProgress + [writingProgress[-1]])
 testingProgress = [0, 0, 0, 0] + testingProgress + [testingProgress[-1]]
@@ -82,21 +84,46 @@ writingProgress = np.array(writingProgress)
 testingProgress = np.array(testingProgress)
 editingProgress = np.array(editingProgress)
 
+t0 = datetime.datetime(2018,  1, 31)
+T  = datetime.datetime(2018, 11, 30)
+linearProgress  = np.array([(date - t0).days / (T - t0).days
+                            for date in dates])
+daysPerPercent = 100 / (T - t0).days
+
 
 
 mpl.rcParams["axes.prop_cycle"] = cycler.cycler(color=lineColors)
 
 fig = plt.figure()
-ax = fig.gca()
-dates = [datetime.datetime.strptime(date, "%Y-%m-%d") for date in dates]
-ax.plot_date(dates, 100*writingProgress, ".-")
-ax.plot_date(dates, 100*testingProgress, ".-")
-ax.plot_date(dates, 100*editingProgress, ".-")
-ax.plot_date([datetime.datetime(2018,  1, 31),
-              datetime.datetime(2018, 11, 30)], [0, 100], "k-")
-ax.grid()
-ax.set_xlabel("Time")
-ax.set_ylabel("Percentage")
-ax.set_title("Writing, Testing, and Editing Progress")
-ax.legend(["Pages written", "Tests written", "Pages edited", "Ideal"])
+
+ax1 = fig.gca()
+lines = []
+lines.extend(ax1.plot_date(dates, 100*writingProgress, ".-"))
+lines.extend(ax1.plot_date(dates, 100*testingProgress, ".-"))
+lines.extend(ax1.plot_date(dates, 100*editingProgress, ".-"))
+lines.extend(ax1.plot_date(
+    dates + [T], (100*linearProgress).tolist() + [100], "k-"))
+ax1.grid()
+ax1.set_xlabel("Time")
+ax1.set_ylabel("Percentage")
+ax1.set_title("Writing, Testing, and Editing Progress")
+ax1.set_xlim(t0-0.05*(T-t0), T+0.05*(T-t0))
+ax1.set_ylim(-5, 105)
+
+ax2 = ax1.twinx()
+lines.extend(ax2.plot_date(
+    dates, (T - t0).days * (writingProgress-linearProgress),
+    ".--", color="C3"))
+ax1.legend(lines, ["Pages written", "Tests written", "Pages edited",
+                   "Ideal", "Written minus ideal"])
+ax2.set_ylabel("Days before schedule")
+ax1.spines["right"].set_visible(False)
+ax2.spines["right"].set_linewidth(1.5)
+ax2.spines["right"].set_linestyle((0, (3, 2.5)))
+ax2.spines["right"].set_color("C3")
+ax2.yaxis.label.set_color("C3")
+ax2.tick_params(axis="y", colors="C3")
+ax2.set_xlim(t0-0.05*(T-t0), T+0.05*(T-t0))
+ax2.set_ylim(-5, 105)
+
 plt.show()
