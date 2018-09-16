@@ -19,9 +19,9 @@ in the context of biomechanical models are listed in
       >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
     }
     \toprulec
-    \pnst{\forcetriceps}& \pnst{\armtriceps}& \pnst{\elbowangle}\\
-    \pnst{\forcebiceps}&  \pnst{\armbiceps}&  &\\
-    \pnst{\forceload}&    \pnst{\armload}&    &\\
+    \pnst{\forceT}& \pnst{\armT}& \pnst{\activationT}\\
+    \pnst{\forceB}& \pnst{\armB}& \pnst{\activationB}\\
+    \pnst{\forceL}& \pnst{\armL}& \pnst{\elbowangle}\\
     \bottomrulec
   \end{tabular}%
   \caption[Glossary for biomechanical models]{%
@@ -252,27 +252,27 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
         $0.5*(joint) +
         0.5*(tricepsForceStart)!(joint)!(tricepsForceEnd) +
         (-1mm,1mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armtriceps$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armT$}}};
       \node[anchor=south] at (
         $0.5*(joint) +
         0.5*(bicepsForceStart)!(joint)!(bicepsForceEnd) +
         (1mm,1mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armbiceps$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armB$}}};
       \node[anchor=north] at (
         $0.5*(horizontalDashedEnd) +
         0.5*(joint)!(horizontalDashedEnd)!(verticalDashedEnd) +
         (0mm,-1mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armload$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C1}{$\armL$}}};
       
       \node[anchor=east] at (
         $0.2*(tricepsForceStart) + 0.8*(tricepsForceEnd) + (-1mm,0mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forcetriceps$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forceT$}}};
       \node[anchor=west] at (
         $0.2*(bicepsForceStart) + 0.8*(bicepsForceEnd) + (1mm,0mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forcebiceps$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forceB$}}};
       \node[anchor=west] at (
         $0.2*(loadForceStart) + 0.8*(loadForceEnd) + (1mm,0mm)$
-      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forceload$}}};
+      ) {\contour{mittelblau!10}{\textcolor{C0}{$\forceL$}}};
     \end{scope}
   \end{tikzpicture}%
   \caption[Raising arm movement]{%
