@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 126
+# number of output figures = 127
 
 import multiprocessing
 
@@ -99,7 +99,7 @@ def drawImage(imageNumber):
 
 
 
-numberOfImages = 126
+numberOfImages = 127
 numberOfRevolutions = 1.0
 startAngle = 30
 elevation = 20
