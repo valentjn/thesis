@@ -157,6 +157,41 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
         )$
       );
       
+      \makeatletter
+      \newcommand*{\drawleverarm}[5][\@nil]{
+        \def\myoptarg{#1}
+        \ifx\myoptarg\@nnil
+          \def\mypointsize{1pt}
+          \def\myfill{C1}
+          \def\myoptarg{}
+        \else
+          \def\mypointsize{2pt}
+          \def\myfill{mittelblau!10}
+        \fi
+        \coordinate (leverArmBase) at ($(#3)!(#2)!(#4)$);
+        \draw[dashed,draw=C1,\myoptarg] (#2) -- (leverArmBase);
+        \pgfmathanglebetweenpoints{
+          \pgfpointanchor{#2}{center}
+        }{
+          \pgfpointanchor{leverArmBase}{center}
+        }
+        \let\myangle\pgfmathresult
+        \pgfmathparse{\myangle #5 180}
+        \let\mystartangle\pgfmathresult
+        \pgfmathparse{\myangle #5 90}
+        \let\myendangle\pgfmathresult
+        \centerarc[draw=C1,\myoptarg](leverArmBase)(
+          \mystartangle:\myendangle:\mysmallradius
+        );
+        \fill[draw=none,fill=\myfill] (
+          $(leverArmBase) + (
+            {0.62*\mysmallradius*cos((\mystartangle+\myendangle)/2)},
+            {0.62*\mysmallradius*sin((\mystartangle+\myendangle)/2)}
+          )$
+        ) circle (\mypointsize);
+      }
+      \makeatother
+      
       \draw[contour] (tricepsForceStart) -- (joint) -- (loadForceStart);
       
       \draw[dashed,contour] (joint) -- (verticalDashedEnd);
@@ -170,6 +205,10 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
         $(bicepsForceStart)!(joint)!(bicepsForceEnd)$
       );
       \centerarc[dashed,contour](joint)(270:\myelbowangle:\myradius);
+      
+      \drawleverarm[contour]{horizontalDashedEnd}{joint}{verticalDashedEnd}{-}
+      \drawleverarm[contour]{joint}{tricepsForceStart}{tricepsForceEnd}{-}
+      \drawleverarm[contour]{joint}{bicepsForceStart}{bicepsForceEnd}{+}
       
       \draw[
         ->,contour,>={Stealth[width=9pt,length=9pt]},
@@ -192,29 +231,6 @@ visualize the motion of skin \cite{Lee09Comprehensive}, for instance.
       \draw[dashed] (joint) -- (verticalDashedEnd);
       \centerarc[dashed](joint)(270:\myelbowangle:\myradius);
       
-      \newcommand*{\drawleverarm}[4]{
-        \coordinate (leverArmBase) at ($(#2)!(#1)!(#3)$);
-        \draw[dashed,draw=C1] (#1) -- (leverArmBase);
-        \pgfmathanglebetweenpoints{
-          \pgfpointanchor{#1}{center}
-        }{
-          \pgfpointanchor{leverArmBase}{center}
-        }
-        \let\myangle\pgfmathresult
-        \pgfmathparse{\myangle #4 180}
-        \let\mystartangle\pgfmathresult
-        \pgfmathparse{\myangle #4 90}
-        \let\myendangle\pgfmathresult
-        \centerarc[draw=C1](leverArmBase)(
-          \mystartangle:\myendangle:\mysmallradius
-        );
-        \fill[draw=none,fill=C1] (
-          $(leverArmBase) + (
-            {0.62*\mysmallradius*cos((\mystartangle+\myendangle)/2)},
-            {0.62*\mysmallradius*sin((\mystartangle+\myendangle)/2)}
-          )$
-        ) circle (1pt);
-      }
       \drawleverarm{horizontalDashedEnd}{joint}{verticalDashedEnd}{-}
       \drawleverarm{joint}{tricepsForceStart}{tricepsForceEnd}{-}
       \drawleverarm{joint}{bicepsForceStart}{bicepsForceEnd}{+}
