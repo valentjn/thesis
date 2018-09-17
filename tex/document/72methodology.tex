@@ -135,13 +135,99 @@ we conclude that $(\actT, \actB) \notin \actdomain{\forceL}$.
 \subsection{Optimization Problems}
 \label{sec:722optimization}
 
-\dummytext[3]{}
+\paragraph{General task}
+
+The general task in our setting is as follows:
+For a given external load $\forceL$ and a target elbow angle $\elbang^\ast$,
+find activation parameters $(\actT, \actB) \in \clint{\*0, \*1}$
+such that the target elbow angle is attained in the equilibrium,
+i.e., $\elbang_{\forceL}(\actT,\actB) = \elbang$.
+Example applications of such a scenario are medicine and robotics,
+when a specific movement should be carried out.
+
+\paragraph{List of optimization problems}
+
+However, as discussed in \cref{sec:711models},
+musculoskeletal systems with an antagonistic muscle pair,
+such as our human upper limb model, are usually overdetermined.
+This means that there are multiple solutions to this problem.
+To solve this issue, one may solve one of the three
+optimization problems that the following list proposes
+\cite{Valentin18Gradient}:
+
+\begin{enumerate}[label=O\arabic*.,leftmargin=2.7em]
+  \item
+  For a given external load $\forceL$ and a target angle
+  $\elbang^\ast \in \clint{\ang{10}, \ang{150}}$,
+  find the activation parameters $(\actT, \actB) \in \clint{\*0, \*1}$
+  such that $\actT + \actB$ is minimized under the constraint
+  $\elbang_{\forceL}(\actT, \actB) = \elbang^\ast$.
+  
+  \item
+  For a given external load $\forceL(t_2)$ for a time $t_2 > t_1$,
+  a target angle $\elbang^\ast(t_2) \in \clint{\ang{10}, \ang{150}}$,
+  and initial activation parameters
+  $(\actT(t_1), \actB(t_1)) \in \clint{\*0, \*1}$,
+  find new activation parameters
+  $(\actT(t_2), \actB(t_2)) \in \clint{\*0, \*1}$ such that
+  $(\actT(t_2) - \actT(t_1))^2 + (\actB(t_2) - \actB(t_1))^2$
+  is minimized under the constraint
+  $\elbang_{\forceL(t_2)}(\actT(t_2), \actB(t_2)) = \elbang^\ast(t_2)$.
+  
+  \item
+  For a given external load $\forceL(t_2)$ for a time $t_2 > t_1$,
+  an initial angle $\elbang^\ast(t_1) \in \clint{\ang{10}, \ang{150}}$,
+  an initial activation parameters
+  $(\actT(t_1), \actB(t_1)) \in \clint{\*0, \*1}$,
+  find new activation parameters
+  $(\actT(t_2), \actB(t_2)) \in \clint{\*0, \*1}$ such that
+  $(\actT(t_2) - \actT(t_1))^2 + (\actB(t_2) - \actB(t_1))^2 +
+  c^2 \cdot (
+    \elbang_{\forceL(t_2)}(\actT(t_2), \actB(t_2)) - \elbang^\ast(t_2)
+  )^2$ is minimized (with $c \in \nonnegreal$ arbitrary but fixed).
+\end{enumerate}
+
+\paragraph{Motivation of problem O1}
+
+The motivation of all problems is that the human body tries to
+achieve a given movement with minimal energy effort.
+For the first problem O1, this effort is quantified by $\actT + \actB$,
+i.e., the energy effort for each muscle is assumed to be proportional
+to its activation parameter.
+
+\paragraph{Motivation of problem O2}
+
+The second problem O2 is motivated as follows:
+Before time $t = t_1$, the musculoskeletal system is in equilibrium for
+an external load $\forceL(t_1)$,
+activation parameters $\actT(t_1), \actB(t_1)$, and
+elbow angle $\elbang^\ast(t_1)$, i.e.,
+$\moment_{\forceL(t_1),\actT(t_1),\actB(t_1)}(\elbang^\ast(t_1))
+= \SI{0}{\newton\meter}$.
+Directly after $t = t_1$,
+the external force and/or the target angle is suddenly changed
+to $\forceL(t_2)$ and $\elbang^\ast(t_2)$, respectively.
+Consequently, triceps and biceps adapt their activation parameters
+such that the musculoskeletal system returns to equilibrium
+at some time $t = t_2 > t_1$.
+Hence, we have to determine the new activation parameters
+$\actT(t_2), \actB(t_2)$ such that
+$\moment_{\forceL(t_2),\actT(t_2),\actB(t_2)}(\elbang^\ast(t_2))
+= \SI{0}{\newton\meter}$.
+
+TODO
+
+\paragraph{Motivation of problem O3}
+
+TODO
 
 
 
 \subsection{B-Spline Surrogates on Sparse Grids}
 \label{sec:723surrogates}
 
+\todo{talk about sparse grids}
 \todo{talk ``only'' about two dimensions}
+\todo{talk about derivatives (14)}
 
 \dummytext[3]{}
