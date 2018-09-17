@@ -36,8 +36,13 @@ process = subprocess.run(gitLogArgs, cwd=gitDir, check=True,
                          stdout=subprocess.PIPE)
 gitLogOutput = process.stdout.decode()
 lines = [line.split(" ") for line in gitLogOutput.splitlines()[::-1]]
+
 commits = [line[0] for line in lines]
 dates = [line[1] for line in lines]
+indices = sorted(list({date : i for i, date in enumerate(dates)}.values()))
+commits = [commits[i] for i in indices]
+dates   = [dates[i] for i in indices]
+
 writingProgress, testingProgress, editingProgress = [], [], []
 
 for commit in commits:
