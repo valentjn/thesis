@@ -127,6 +127,7 @@ This means that the muscles are deformed when they contract.
   ]
     \newcommand*{\myhspace}{30.34mm}
     \newcommand*{\myscale}{0.14}
+    \newcommand*{\mytricepsarmstart}{0.1}
     \newcommand*{\mybicepsstart}{0.2}
     \newcommand*{\myradius}{9mm}
     \newcommand*{\mysmallradius}{2mm}
@@ -149,6 +150,10 @@ This means that the muscles are deformed when they contract.
       \coordinate (loadForceEnd)        at (30.6mm,-45mm);
       \coordinate (tricepsForceStart)   at (5.7mm,-31.9mm);
       \coordinate (tricepsForceEnd)     at (4mm,-15mm);
+      \coordinate (tricepsArmStart)     at (
+        ${(1-\mytricepsarmstart)}*(joint) +
+        \mytricepsarmstart*(loadForceStart)$
+      );
       \coordinate (bicepsForceStart)    at (
         ${(1-\mybicepsstart)}*(joint) + \mybicepsstart*(loadForceStart)$
       );
@@ -204,7 +209,8 @@ This means that the muscles are deformed when they contract.
       }
       \makeatother
       
-      \draw[contour] (tricepsForceStart) -- (joint) -- (loadForceStart);
+      \draw[contour] (joint) -- (loadForceStart);
+      \draw[contour] (tricepsArmStart) -- (tricepsForceStart);
       
       \draw[dashed,contour] (joint) -- (verticalDashedEnd);
       \draw[dashed,contour] (
@@ -238,7 +244,8 @@ This means that the muscles are deformed when they contract.
         $(loadForceEnd)!-1.5pt!(loadForceStart)$
       );
       
-      \draw (tricepsForceStart) -- (joint) -- (loadForceStart);
+      \draw (joint) -- (loadForceStart);
+      \draw (tricepsArmStart) -- (tricepsForceStart);
       
       \draw[dashed] (joint) -- (verticalDashedEnd);
       \centerarc[dashed](joint)(270:\myelbowangle:\myradius);
