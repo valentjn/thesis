@@ -19,9 +19,9 @@ in the context of biomechanical models are listed in
       >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
     }
     \toprulec
-    \pnst{\forceT}& \pnst{\armT}& \pnst{\activationT}\\
-    \pnst{\forceB}& \pnst{\armB}& \pnst{\activationB}\\
-    \pnst{\forceL}& \pnst{\armL}& \pnst{\elbowangle}\\
+    \pnst{\forceT}& \pnst{\armT}& \pnst{\actT}\\
+    \pnst{\forceB}& \pnst{\armB}& \pnst{\actB}\\
+    \pnst{\forceL}& \pnst{\armL}& \pnst{\elbang}\\
     \bottomrulec
   \end{tabular}%
   \caption[Glossary for biomechanical models]{%
@@ -258,7 +258,7 @@ This means that the muscles are deformed when they contract.
           {0.62*\myradius*cos((270+\myelbowangle)/2)},
           {0.62*\myradius*sin((270+\myelbowangle)/2)}
         )$
-      ) {\contour{mittelblau!10}{$\elbowangle$}};
+      ) {\contour{mittelblau!10}{$\elbang$}};
       
       \node[anchor=south] at (
         $0.5*(joint) +
@@ -335,14 +335,14 @@ The anisotropic part $\mat{S}_\mathrm{aniso}$ is defined as
   \mat{S}_\mathrm{aniso}
   := (
     \mat{S}_\mathrm{passive} +
-    \activation \gamma_\mathrm{M} \mat{S}_\mathrm{active}
+    \act \gamma_\mathrm{M} \mat{S}_\mathrm{active}
   ) (1 - \gamma_\mathrm{ST}),
 \end{equation}
 cf.\ \cite{Valentin18Gradient}.
 Here, $\mat{S}_\mathrm{passive}$ and $\mat{S}_\mathrm{active}$
 are the \term{passive and active contributions}
 due to the skeletal muscle fibers,
-$\activation \in \clint{0, 1}$ is the \term{activation level} of the
+$\act \in \clint{0, 1}$ is the \term{activation level} of the
 respective muscle-tendon complex, and
 $\gamma_\mathrm{M}, \gamma_\mathrm{ST}$ are two \term{material parameters}
 with which we can differentiate between the different types of soft tissues
