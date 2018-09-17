@@ -139,9 +139,9 @@ This means that the muscles are deformed when they contract.
       };
       \node[anchor=north west] at ({(\myi-1)*\myhspace+11mm},0mm) {%
         \pgfmathparse{10+35*(\myi-1)}%
-        $\theta = \SI[
+        $\theta = \ang[
           round-mode=places,round-precision=0,
-        ]{\pgfmathresult}{\degree}$%
+        ]{\pgfmathresult}$%
       };
     }
     
@@ -298,9 +298,9 @@ This means that the muscles are deformed when they contract.
   \caption[Raising arm movement]{%
     Human upper limb model geometry shown as a raising arm movement
     for the elbow angles
-    $\theta = \SI{10}{\degree}$, \SI{45}{\degree}, \SI{80}{\degree},
-    \SI{115}{\degree}, and \SI{150}{\degree} \emph{(from left to right).}
-    For $\theta = \SI{80}{\degree}$,
+    $\theta = \ang{10}$, \ang{45}, \ang{80},
+    \ang{115}, and \ang{150} \emph{(from left to right).}
+    For $\theta = \ang{80}$,
     the contributing forces \emph{\textcolor{C0}{(blue)}} and
     lever arms \emph{\textcolor{C1}{(red)}} are shown.
     Taken and adapted from
