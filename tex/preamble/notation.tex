@@ -1148,6 +1148,11 @@
 }
 
 \hidenextnotation
+\newnotationcommand{\forcevalue}{F}{F2}{$\forcevalue$}{
+  Force
+}
+
+\hidenextnotation
 \newnotationcommand{\forceT}{F_\mathrm{T}}{FT}{$\forceT$}{
   Triceps force
 }
@@ -1160,6 +1165,11 @@
 \hidenextnotation
 \newnotationcommand{\forceL}{F_\mathrm{L}}{FL}{$\forceL$}{
   Load force
+}
+
+\hidenextnotation
+\newnotationcommand{\arm}{r}{r}{$\arm$}{
+  Lever arm
 }
 
 \hidenextnotation
@@ -1190,6 +1200,18 @@
 \hidenextnotation
 \newnotationcommand{\actB}{\beta_\mathrm{B}}{ÄβB}{$\actB$}{
   Biceps activation
+}
+
+\hidenextnotation
+\newnotationcommand{\moment}{M}{M}{$\moment$}{
+  Moment
+}
+
+\hidenextnotation
+\newnotationcommand[1]{\actdomain}{%
+  D_{\elbang_{#1}}%
+}{$DθL$}{$\actdomain{\forceL}$}{
+  Domain of $\elbang_{\forceL}$
 }
 
 % ======================================================================
