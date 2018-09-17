@@ -76,13 +76,14 @@ The \term{total moment} of the system is given by the function
     \moment_{\forceL,\actT,\actB}(\elbang)
     := \forceT(\elbang, \actT) \armT(\elbang) +
     \forceB(\elbang, \actB) \armB(\elbang) +
-    \forceL \armL(\elbang).
+    \forceL \armL(\elbang),
   \end{gather}
 \end{subequations}
+cf.\ \cite{Valentin18Gradient}.
 The system is in \term{equilibrium,}
 if the total moment vanishes, i.e.,
 $\moment_{\forceL,\actT,\actB}(\elbang) = \SI{0}{\newton\meter}$.
-The corresponding angle $\elbang$ is the
+We call the corresponding angle $\elbang$ the
 \term{equilibrium elbow angle.}
 To find this angle for a given load $\forceL$ and activation parameters
 $\actT$ and $\actB$, we first note that
@@ -125,7 +126,7 @@ We repeat the Newton method for the initial values
 $\elbang^{(0)} = \ang{80}, \ang{40}, \ang{120}$
 and use the first converged result
 (i.e., we check if $\elbang^{(0)} = \ang{80}$ converges;
-if not, proceed with $\elbang^{(0)} = \ang{40}$ and so on).
+if not, proceed with $\elbang^{(0)} = \ang{40}$, and so on).
 If all three initial values do not converge,
 we conclude that $(\actT, \actB) \notin \actdomain{\forceL}$.
 
