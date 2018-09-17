@@ -1,14 +1,133 @@
 \section{Momentum Equilibrium and Elbow Angle Optimization}
 \label{sec:72methodology}
 
-\dummytext[3]{}
+\minitoc{70mm}{4}
+
+\noindent
+In this section, we give an overview of the methodology of our approach.
+We closely follow the presentation of \cite{Valentin18Gradient}.
 
 
 
 \subsection{From Muscle Forces to Equilibrium Angles}
 \label{sec:721equilibrium}
 
-\dummytext[3]{}
+\paragraph{Model inputs and outputs}
+
+In the following, we regard simulations of the
+human upper limb model described in \cref{sec:71model} as a black box.
+This black box receives as its input
+the elbow angle $\elbang \in \clint{\ang{10}, \ang{150}}$
+and the activation parameters $\actT, \actB \in \clint{0, 1}$
+of triceps and biceps.%
+\footnote{%
+  Here and in the following, the subscripts T, B, and L stand for
+  triceps, biceps, and load, respectively.%
+}
+The outputs of the black box simulation are the forces
+$\forceT(\elbang, \actT)$ and $\forceB(\elbang, \actB)$
+that triceps and biceps exert.
+These forces depend on the elbow angle as well as on the respective
+activation parameter.
+Gravitational forces due to the masses of bones or masses
+are neglected in this context.
+However, we allow the specification of an external load $\forceL$
+applied to the end of the forearm.
+This load may the weight force of some object
+that the arm is supposed to keep in position.
+
+\paragraph{Moments and lever arms}
+
+Every force exerts a \term{moment} (or \term{torque}) on the elbow joint.
+The moments are the products of the forces $\forcevalue_\ast$
+with the respective lever arms $\arm_\ast$
+($\ast \in \{\mathrm{T}, \mathrm{B}, \mathrm{L}\}$).
+The lever arms are approximated as in
+\multicite{Roehrle16Two,Valentin18Gradient} by using
+the tendon-displacement method of \cite{An84Determination},
+resulting in
+\begin{subequations}
+  \begin{align}
+    \armT(\elbang)
+    &:= (-0.0009399 \{\elbang\}^2 + 0.1126 \{\elbang\} + 22.21)\;
+    \si{\milli\meter},\\
+    \armB(\elbang)
+    &:= (-0.001482 \{\elbang\}^2 + 0.1776 \{\elbang\} + 35.02)\;
+    \si{\milli\meter},\\
+    \armL(\elbang)
+    &:= \sin(\elbang) \cdot \SI{282.5}{\milli\meter},
+  \end{align}
+\end{subequations}
+where $\{\elbang\}$ denotes the numerical value of $\elbang$
+in degrees.
+The lever arms are non-negative and the forces are signed, i.e.,
+positive forces pull the forearm downwards,
+negative forces pull it upwards.
+In general, $\forceT, \forceL \ge \SI{0}{\newton}$ and
+$\forceB \le \SI{0}{\newton}$.
+
+\paragraph{Total moment and equilibrium elbow angle}
+
+The \term{total moment} of the system is given by the function
+\begin{subequations}
+  \begin{gather}
+    \moment_{\forceL,\actT,\actB}\colon
+    \clint{\ang{10}, \ang{150}} \to \real,\\
+    \moment_{\forceL,\actT,\actB}(\elbang)
+    := \forceT(\elbang, \actT) \armT(\elbang) +
+    \forceB(\elbang, \actB) \armB(\elbang) +
+    \forceL \armL(\elbang).
+  \end{gather}
+\end{subequations}
+The system is in \term{equilibrium,}
+if the total moment vanishes, i.e.,
+$\moment_{\forceL,\actT,\actB}(\elbang) = \SI{0}{\newton\meter}$.
+The corresponding angle $\elbang$ is the
+\term{equilibrium elbow angle.}
+To find this angle for a given load $\forceL$ and activation parameters
+$\actT$ and $\actB$, we first note that
+$\moment_{\forceL,\actT,\actB}$ may have zero, exactly one,
+or multiple zeros in $\clint{\ang{10}, \ang{150}}$.
+Hence, the inverse function evaluated at $\SI{0}{\newton\meter}$
+is partially defined depending on load and activation parameters:
+\begin{subequations}
+  \begin{gather}
+    \elbang_{\forceL}\colon \actdomain{\forceL} \to
+    \clint{\ang{10}, \ang{150}},\quad
+    \actdomain{\forceL} \subset \clint{0, 1}^2,\\
+    \elbang_{\forceL}(\actT,\actB)
+    := (\moment_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
+  \end{gather}
+\end{subequations}
+which is well-defined whenever $\moment_{\forceL,\actT,\actB}$
+has a unique root.
+We approximate $\elbang_{\forceL}(\actT,\actB)$ with the Newton method
+\multicite{Roehrle16Two,Valentin18Gradient}:
+\begin{equation}
+  \elbang^{(j+1)}
+  := \elbang^{(j)} -
+  \frac{
+    \moment_{\forceL,\actT,\actB}(\elbang^{(j)})
+  }{
+    \partialderiv{\partialdiff{} \elbang}{\moment_{\forceL,\actT,\actB}}
+    (\elbang^{(j)})
+  },\quad
+  j \in \nat,
+\end{equation}
+with an initial value
+$\elbang^{(0)} \in \clint{\ang{10}, \ang{150}}$
+and the stopping criterion of
+$\abs{\moment_{\forceL,\actT,\actB}(\elbang^{(j)})} <
+\SI{e-9}{\newton\meter}$ or
+$\abs{\partialderiv{\partialdiff{} \elbang}{\moment_{\forceL,\actT,\actB}}
+(\elbang^{(j)})} < \SI{e-9}{\newton\meter\per\degree}$.
+We repeat the Newton method for the initial values
+$\elbang^{(0)} = \ang{80}, \ang{40}, \ang{120}$
+and use the first converged result
+(i.e., we check if $\elbang^{(0)} = \ang{80}$ converges;
+if not, proceed with $\elbang^{(0)} = \ang{40}$ and so on).
+If all three initial values do not converge,
+we conclude that $(\actT, \actB) \notin \actdomain{\forceL}$.
 
 
 
