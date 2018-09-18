@@ -70,6 +70,7 @@ $\forceB \le \SI{0}{\newton}$.
 
 The \term{total moment} of the system is given by the function
 \begin{subequations}
+  \label{eq:totalMoment}
   \begin{gather}
     \moment_{\forceL,\actT,\actB}\colon
     \clint{\ang{10}, \ang{150}} \to \real,\\
@@ -105,6 +106,7 @@ has a unique root.
 We approximate $\equielbang{\forceL}(\actT,\actB)$ with the Newton method
 \multicite{Roehrle16Two,Valentin18Gradient}:
 \begin{equation}
+  \label{eq:newtonAngle}
   \elbang^{(j+1)}
   := \elbang^{(j)} -
   \frac{
