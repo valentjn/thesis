@@ -92,15 +92,14 @@ $\moment_{\forceL,\actT,\actB}$ may have zero, exactly one,
 or multiple zeros in $\clint{\ang{10}, \ang{150}}$.
 Hence, the inverse function evaluated at $\SI{0}{\newton\meter}$
 is partially defined depending on load and activation parameters:
-\begin{subequations}
-  \begin{gather}
-    \equielbang{\forceL}\colon \actdomain{\forceL} \to
-    \clint{\ang{10}, \ang{150}},\quad
-    \actdomain{\forceL} \subset \clint{0, 1}^2,\\
-    \equielbang{\forceL}(\actT,\actB)
-    := (\moment_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
-  \end{gather}
-\end{subequations}
+\begin{equation}
+  \label{eq:equilibriumAngle}
+  \equielbang{\forceL}\colon \actdomain{\forceL} \to
+  \clint{\ang{10}, \ang{150}},\quad
+  \actdomain{\forceL} \subset \clint{0, 1}^2,\quad
+  \equielbang{\forceL}(\actT,\actB)
+  := (\moment_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
+\end{equation}
 which is well-defined whenever $\moment_{\forceL,\actT,\actB}$
 has a unique root.
 We approximate $\equielbang{\forceL}(\actT,\actB)$ with the Newton method
