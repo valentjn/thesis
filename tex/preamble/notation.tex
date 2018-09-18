@@ -47,8 +47,6 @@
 
 \newnotation{i}{$\*i$}{
   Hierarchical index $\*i = \*0, \dotsc, \*2^\*l$
-  (i.e., $\*i \in \natz^d$ with $0 \le i_t \le 2^{l_t}$
-  for all $t = 1, \dotsc, d$)
 }
 
 \newnotation{k}{$\*k$}{
@@ -127,6 +125,7 @@
   $t$-th standard basis vector $:= (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg[\*k]{2}{\chain}{#1^{(#2)}}{kt}{$\chain{t_{j'}}$}{
   Point on chain $(\chain{t_1}, \dotsc, \chain{t_j})$
   between $\*k'$ and $\*k''$
@@ -418,12 +417,14 @@
   Regular sparse grid space of level $n$ with dimensionality $d$
 }
 
-\newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Sxip}{%
+\hidenextnotation
+\newnotationcommand[2]{\nonunifsplspace}{S_{#1}^{#2}}{Slξp}{%
   $\nonunifsplspace{\knotseq}{p}$%
 }{
   Spline space of degree $p$ with knots $\knotseq$
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}{%
   $\restrictedsplspace{l}{p}$%
 }{
@@ -438,6 +439,7 @@
   $\{\gp{l,i} \mid i = 0, \dotsc, 2^l\}$ of level $l$
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}{%
   $\naksplspace{l}{p}$%
 }{
@@ -512,6 +514,7 @@
 
 \newcommand*{\intpmatuv}[1]{\mat{A}^{(#1)}}
 
+\hidenextnotation
 \newnotationcommand[1]{\upop}{\linop^{(#1)}}{Lt1}{%
   $\upop{t_1, \dotsc, t_j}$%
 }{
@@ -520,6 +523,7 @@
   dimensions $t_1, \dotsc, t_j$ on the $d$-dimensional sparse grid
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\upopuv}{\linop^{(#1),#2}}{LtKpole}{%
   $\upopuv{t}{\lisetpole}$%
 }{
@@ -554,7 +558,7 @@
 \let\interiorsupporig\interiorsupp
 \makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig \objfun$}{
   Interior of the support of a continuous function
-  (i.e., $\{x \mid \objfun(x) \not= 0\}$)
+  (i.e., $\{\*x \mid \objfun(\*x) \not= 0\}$)
 }
 
 \DeclareMathOperator{\spn}{span}
@@ -563,6 +567,7 @@
   Linear span (set of all linear combinations)
 }
 
+\hidenextnotation
 \makecommandnotation{\deg}{deg}{$\deg \objfun$}{
   Degree of the polynomial $\objfun$
 }
@@ -640,7 +645,7 @@
 }
 
 \newnotationcommand{\eye}{\mat{I}}{I}{$\eye$}{
-  Identity matrix $\eye \in \real^{n \times n}$
+  Identity matrix
 }
 
 \newnotationcommand[1]{\nonnegpart}{(#1)_+}{Ö.+}{$\nonnegpart{\cdot}$}{
@@ -671,8 +676,8 @@
 }
 
 \newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{Äδij}{$\kronecker{i}{j}$}{
-  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise,
-  defined for arbitrary objects $i, j$ that can be compared via ``$=$''
+  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
+  ($i, j$ arbitrary objects)
 }
 
 \DeclareMathOperator{\xor}{xor}
@@ -685,7 +690,7 @@
 \newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{fD}{$\restrictfcn{\objfun}{D}$}{
   Restriction $\restrictfcn{\objfun}{D}\colon D \to \real$,
   $\restrictfcn{\objfun}{D}(x) := \objfun(x)$,
-  onto a sub-domain $D$ for a function $\objfun$
+  onto a sub-domain $D$
 }
 
 \newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{Öunion}{$\dotcup$}{
@@ -725,12 +730,12 @@
 % ======================================================================
 
 \newnotationcommand[1]{\hiset}{I_{#1}}{Il}{$\hiset{\*l}$}{
-  Set of (odd) indices for hierarchical basis functions
+  Set of odd hierarchical indices of level $\*l$
 }
 
 \newnotationcommand{\liset}{K}{K}{$\liset$}{
   Finite set of hierarchical level-index pairs $(\*l, \*i)$
-  or finite subset of continuous indices $\*k \in \natz^d$
+  or continuous indices $\*k \in \natz^d$
 }
 
 \newnotationcommandoptarg{1}{\lisetpole}{%
@@ -744,6 +749,7 @@
   Finite subset $\levelset \subset \natz^d$ of levels
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{4}{\coarselevelset}{%
   \levelset_{#2,#3}^{\sparse(#4)\appendwithcomma{#1}}%
 }{Lndbs}{$\coarselevelset{n}{d}{b}$}{
@@ -773,8 +779,7 @@
 \newnotationcommandoptarg{2}{\surplus}{%
   \alpha_{#2}\ifnotempty{#1}{^{#1}}%
 }{Äαli}{$\surplus{\*l,\*i}$}{
-  Hierarchical surpluses (coefficients of a linear combination of hierarchical
-  basis functions)
+  Hierarchical surpluses
 }
 
 \newcommand*{\vsurplus}{\*\alpha}
@@ -802,6 +807,7 @@
   Euler constant $\exp(1)$
 }
 
+\hidenextnotation
 \newnotationcommand{\ngpMax}{\ngp_\mathrm{max}}{Nmax}{$\ngpMax$}{
   Maximum number of grid points when generating spatially adaptive sparse grids
 }
@@ -824,6 +830,7 @@
   Approximation for $\xopt = \vecargmin \objfun(\*x)$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\xoptscaled}{%
   \ifempty{#1}{\bar{\*x}^\opt}%
   \ifnotempty{#1}{\bar{x}^\opt_{#1}}%
@@ -831,6 +838,7 @@
   Scaled solution of an optimization problem
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\xscaled}{%
   \ifempty{#1}{\bar{\*x}}\ifnotempty{#1}{\bar{x}_{#1}}%
 }{xbar}{$\xscaled$}{
@@ -866,8 +874,7 @@
   \varphi\ifnotempty{#1}{^{#1}}%
 }{Äφ}{$\parentfcn$}{
   Parent function $\parentfcn\colon \clint{0, 1} \to \real$
-  (if $\parentfcn$ is a parent function of $\basis{l,i}$,
-  then the $\basis{l,i}$ are scaled and translated versions of $\parentfcn$)
+  ($\basis{l,i}$ is scaled translate of $\parentfcn$)
 }
 
 \newnotationcommandoptarg{3}{\bspl}{%
@@ -903,6 +910,7 @@
   Weakly fundamental spline of degree $p$ (parent function)
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\nonunifbspl}{b_{#1}^{#2}}{bkξp}{%
   $\nonunifbspl{k,\knotseq}{p}$%
 }{
@@ -927,21 +935,24 @@
 }{g}{$\ineqconfun$}{
   Inequality constraint function
   $\ineqconfun\colon \clint{\*0, \*1} \to \real^{m_{\ineqconfun}}$
-  (optimal solutions $\*x$ must satisfy $\ineqconfun(\*x) \le \*0$)
+  (constraint $\ineqconfun(\*x) \le \*0$)
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\eqconfun}{
   \ifempty{#1}{\*h}\ifnotempty{#1}{h_{#1}}%
 }{h}{$\eqconfun$}{
   Equality constraint function
   $\eqconfun\colon \clint{\*0, \*1} \to \real^{m_{\eqconfun}}$
-  (optimal solutions $\*x$ must satisfy $\eqconfun(\*x) \le \*0$)
+  (optimal solutions $\*x$ must satisfy $\eqconfun(\*x) = \*0$)
 }
 
+\hidenextnotation
 \newnotationcommand{\objfunscaled}{\bar{\objfun}}{fbar}{$\objfunscaled$}{
   Scaled objective function $\objfunscaled\colon \clint{\*a, \*b} \to \real$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\ineqconfunscaled}{%
   \ifempty{#1}{\bar{\*g}}\ifnotempty{#1}{\bar{g}_{#1}}%
 }{gbar}{$\ineqconfunscaled$}{
@@ -949,6 +960,7 @@
   $\ineqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\ineqconfun}}$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\eqconfunscaled}{
   \ifempty{#1}{\bar{\*h}}\ifnotempty{#1}{\bar{h}_{#1}}%
 }{hbar}{$\eqconfunscaled$}{
@@ -1000,7 +1012,7 @@
 
 \newnotationcommandoptarg{3}{\regsgintp}{%
   f_{#2,#3}^{\sparse\appendwithcomma{#1}}%
-}{fnds}{$\regsgintp{n}{d}$}{
+}{fsnd}{$\regsgintp{n}{d}$}{
   Regular sparse grid interpolant of $\objfun$ in $\regsgspace{n}{d}$
 }
 
@@ -1014,15 +1026,18 @@
 % Spline Knots
 % ======================================================================
 
+\hidenextnotation
 \newnotationcommand[1]{\knot}{\xi_{#1}}{Äξ10}{$\knot{k}$}{
   Knot $\in \real$ of a spline space
   (point where the splines are not smooth)
 }
 
+\hidenextnotation
 \newnotationcommand{\knotseq}{\*\xi}{Äξ20}{$\knotseq$}{
   Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{3}{\nodalknot}{%
   \xi_{#2}^{#3\appendwithcomma{#1}}%
 }{Äξlkp}{$\nodalknot{l,k}{p}$}{
@@ -1030,6 +1045,7 @@
   ($k$-th entry of $\nodalknotseq{l}{p}$)
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{3}{\nodalknotseq}{%
   \*\xi_{#2}^{#3\appendwithcomma{#1}}%
 }{Äξlp}{$\nodalknotseq{l}{p}$}{
@@ -1040,12 +1056,14 @@
 % Domains
 % ======================================================================
 
+\hidenextnotation
 \newnotationcommand[2]{\spldomain}{D_{#1}^{#2}}{D10}{%
   $\spldomain{\knotseq}{p}$%
 }{
   Spline interpolation domain of $\nonunifsplspace{\knotseq}{p}$
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\rspldomain}{D_{#1}^{#2}}{D20}{%
   $\rspldomain{l}{p}$%
 }{
