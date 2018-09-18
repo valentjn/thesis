@@ -215,20 +215,172 @@ Hence, we have to determine the new activation parameters
 $\actT(t_2), \actB(t_2)$ such that
 $\moment_{\forceL(t_2),\actT(t_2),\actB(t_2)}(\tarelbang(t_2))
 = \SI{0}{\newton\meter}$.
-
-TODO
+Again, these $\actT(t_2)$ and $\actB(t_2)$ are not uniquely determined.
+Therefore, we want to find the pair of activation parameters
+that is closest (in terms of the Euclidean norm) to the initial
+activation parameters $\actT(t_1), \actB(t_1)$.
 
 \paragraph{Motivation of problem O3}
 
-TODO
+The third problem O3 is derived from O2.
+Instead of prescribing the target angle $\tarelbang(t_2)$,
+we try to stay ``near'' the initial angle $\tarelbang(t_1)$,
+ensuring that the desired target position is achieved.
+For this purpose, we introduce a weight parameter $c$ that
+allows for small deviations form $\tarelbang(t_1)$.
+
+\paragraph{Optimization methods}
+
+Problems O1 and O2 are both constrained optimization problems,
+while O3 is unconstrained.
+For problems O1 and O2, we employ the Augmented Lagrangian method as
+described in \cref{sec:513gradientBasedConstrained}
+using an adaptive gradient descent algorithm
+for the gradient-based optimization of the penalized objective function
+(see \cref{sec:512gradientBasedUnconstrained}).
+Problem O3 is a non-linear least-squares problem,
+where the objective function $\objfun\colon \clint{\*0, \*1} \to \real$
+is of the form
+$\objfun(\*x) = \tr{\*\phi(\*x)} \*\phi(\*x) = \sum_{i=1}^m \phi_i(\*x)^2$
+for some function $\*\phi\colon \clint{\*0, \*1}^d \to \real^m$.
+We solve this problem with the Levenberg--Marquardt method
+(again, see \cref{sec:512gradientBasedUnconstrained} for details).
 
 
 
 \subsection{B-Spline Surrogates on Sparse Grids}
 \label{sec:723surrogates}
 
-\todo{talk about sparse grids}
-\todo{talk ``only'' about two dimensions}
-\todo{talk about derivatives (14)}
+\paragraph{Complexity}
 
-\dummytext[3]{}
+To solve optimization problems O1 to O3,
+the optimization method needs to evaluate the objective function
+and the constraint functions multiple times during the algorithm.
+This requires the evaluation of $\equielbang{\forceL}$,
+which in turn has to be approximated with the Newton method.
+As we see in \cref{eq:newtonAngle},
+each iteration of the Newton method needs not only the values of the
+muscle forces $\forceT$ and $\forceB$, but also their
+partial derivatives with respect to $\elbang$,
+which have to be approximated with finite differences,
+as the simulation does not provide derivatives.
+
+Unfortunately, simulations of continuum-mechanical models are
+computationally expensive.
+One evaluation of the muscle force pair $\forceT, \forceB$
+requires the solution of a solid mechanics model
+with a complex constitutive law, pre-stretch, and contact between
+bone and muscles \cite{Valentin18Gradient}.
+On average, a single evaluation of $\forceT$ and $\forceB$ takes
+about half an hour.
+%
+If we assume that we need four Newton iterations on average,
+then a single iteration of the optimization algorithm to solve
+problems O1 to O3 will take four hours to complete
+(assuming one evaluation of objective and constraint functions
+per optimizer iteration and
+two evaluations per Newton iteration to calculate the missing derivative).
+Consequently, the whole optimization process takes
+two weeks to complete, if the optimizer converges after 100 iterations.
+
+\paragraph{Sparse grid surrogates}
+
+A popular way to reduce the complexity is to employ surrogates.
+In this case, the idea is to replace the muscle force functions
+$\forceT, \forceB$ with surrogates $\forceTintp, \forceBintp$
+\cite{Valentin18Gradient}, e.g., by interpolation.
+We then automatically obtain a surrogate
+\begin{subequations}
+  \begin{gather}
+    \momentintp_{\forceL,\actT,\actB}\colon
+    \clint{\ang{10}, \ang{150}} \to \real,\\
+    \momentintp_{\forceL,\actT,\actB}(\elbang)
+    := \forceTintp(\elbang, \actT) \armT(\elbang) +
+    \forceBintp(\elbang, \actB) \armB(\elbang) +
+    \forceL \armL(\elbang),
+  \end{gather}
+\end{subequations}
+for the total moment (cf.\ \cref{eq:totalMoment}) and,
+consequently, a surrogate
+\begin{equation}
+  \equielbangintp{\forceL}\colon \actdomainintp{\forceL} \to
+  \clint{\ang{10}, \ang{150}},\quad
+  \actdomainintp{\forceL} \subset \clint{0, 1}^2,\quad
+  \equielbangintp{\forceL}(\actT,\actB)
+  := (\momentintp_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
+\end{equation}
+for the equilibrium elbow angle function (cf.\ \cref{eq:equilibriumAngle}).
+Since the surrogates are much cheaper to evaluate than the original
+muscle forces, the runtime by up to seven orders of magnitude.
+
+The approach in \cite{Valentin18Gradient} and in this thesis is
+to determine the surrogates
+$\forceTintp, \forceBintp\colon \clint{\*0, \*1} \to \real$
+by sparse grid interpolation.
+Compared to usual surrogate construction techniques,
+sparse grids help to reduce the number of samples that
+are necessary to build a ``reasonably'' accurate surrogate,
+especially if the number of dimensions is moderately large
+($d \ge 4$, \term{curse of dimensionality}).
+
+The present model has only $d = 2$ dimensions ($\actT$ and $\actB$),
+since the model contains only two muscles.
+However, as we will see,
+already for this low-dimensional problem,
+sparse grids outperform conventional full grid interpolation.
+The results have to be seen as a proof of concept.
+One will be able to handle higher dimensionalities
+(i.e., models with a larger number of muscles) similarly with little
+or even no adjustments at all.
+The low dimensionality of the model in this thesis
+enables us to compute and compare against reference solutions,
+which would not be possible in a higher-dimensional setting.
+
+
+
+\paragraph{Benefiting from B-splines}
+
+As in \cite{Valentin18Gradient},
+we will use higher-order hierarchical B-splines as basis functions
+for the sparse grid surrogates.
+This has three advantages when compared with conventional
+sparse bases such as piecewise linear functions.
+%
+First, the partial derivative
+$\partialderiv{\partialdiff{} \elbang}{\momentintp}$ needed
+for the Newton method in \cref{eq:newtonAngle} is continuous and
+explicitly known.
+There is no need to approximate the derivative with
+finite differences, reducing both the error and the runtime.
+%
+Second, we can use gradient-based optimization methods
+for the solution of the optimization problems O1 to O3,
+which involve the equilibrium elbow angle function
+$\equielbangintp{\forceL}\colon \clint{\*0, \*1} \to \real$.
+With the implicit function theorem \cite{Kudryavtsev95Implicit},
+we obtain for the derivative of $\equielbangintp{\forceL}$
+\begin{equation}
+  \gradient{\actT,\actB}{\equielbangintp{\forceL}}
+  = -\,(\gradient{\actT,\actB}{\momentintp}) \cdot
+  (\gradient{\elbang}{\momentintp})^{-1}
+  = -\,\frac{
+    \gradient{\actT,\actB}{\momentintp}
+  }{
+    \partialderiv{\partialdiff{} \elbang}{\momentintp}
+  },
+\end{equation}
+where $\gradient{\actT,\actB}{}$ is the transposed Jacobian%
+\footnote{%
+  For example, the first column is the gradient with respect to $\actT$
+  and the second column is the gradient with respect to $\actB$.%
+}
+Both the gradient $\gradient{\actT,\actB}{\momentintp}$ and
+the partial derivative $\partialderiv{\partialdiff{} \elbang}{\momentintp}$
+are continuous, explicitly known, and can be evaluated fast.
+%
+Third and finally,
+the usage of higher-B-splines as basis functions
+increases the order of convergence of interpolation errors
+as shown in \cref{sec:541interpolation}.
+Thus, fewer interpolation points are necessary to build a surrogate
+with the same error as for piecewise linear functions.
