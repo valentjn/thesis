@@ -1,3 +1,4 @@
+\breakpagebeforenextheadingtrue
 \section{Approximating Elasticity Tensors}
 \label{sec:62tensors}
 
@@ -32,8 +33,7 @@ even for simple micro-cell models and optimization scenarios.
 The computation of a single elasticity tensor usually takes seconds to
 minutes.
 All $M$ micro-cell problems per optimization iteration
-can be solved in parallel without any
-communication (embarrassingly parallel).
+can be solved in parallel without any communication.
 However, $M$ is typically in the range of thousands and
 there are thousands or tens of thousands optimization iterations
 (the optimization problem is $(d \cdot M)$-dimensional!).
@@ -74,7 +74,7 @@ if there are discontinuities in the objective function
 or its gradient.
 Such discontinuities can already be caused by the inexact solution of the \fem.
 If we need Hessians or other higher-order derivatives,
-then all the mentioned issues even worsen.
+then the issues even worsen.
 
 
 
@@ -275,9 +275,9 @@ In density estimation, clamping a density-like function changes its
 integral, making it necessary to recalculate its normalization constant
 \cite{Franzelin17Data}.
 
-One possible workaround is applying an injective and continuous transformation
+One possible workaround is applying a continuous injective transformation
 $T\colon \posreal \to \real$ on the positive values (e.g., $\ln$),
-then interpolating the resulting values, and finally
+interpolating the resulting values, and finally
 applying the inverse transformation $T^{-1}\colon \real \to \posreal$
 on the interpolated values (e.g., $\exp$).%
 \footnote{%
@@ -289,15 +289,14 @@ on the interpolated values (e.g., $\exp$).%
 }
 %In density estimation, this method might introduce new unwanted modes into the
 %probability distribution.
-For the piecewise linear basis on sparse grids, another approach has been
+For the piecewise linear hierarchical basis, another approach has been
 developed recently \cite{Franzelin17Data},
-where the positivity of the function is maintained
-by inserting additional points into the sparse grid.
+where the positivity is maintained
+by inserting additional sparse grid points.
 In the context of spline approximation,
 positivity-preserving approximation schemes based on so-called
 quasi-interpolation are known \cite{Hoellig13Approximation}.
-For our application, where we do not only need to preserve positivity,
-but positive definiteness,
+For our application, where we need to preserve positive definiteness,
 it is conceivable that one could apply these positivity-preserving
 methods in the eigenspace,
 interpolating the positive eigenvalues.
@@ -400,7 +399,7 @@ The gradient can be computed easily and fast with the product rule:
 % = dE
 where both $\cholfactor[\sparse](\*x)$ and
 $\partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x)$
-are known (interpolant and its derivative using B-splines on sparse grids).
+are known (sparse grid interpolant and its derivative).
 As discussed above,
 this is key for the applicability of gradient-based optimization.
 
