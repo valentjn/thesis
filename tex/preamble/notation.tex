@@ -51,9 +51,7 @@
 
 \newnotation{k}{$\*k$}{
   Continuously enumerated index $\in \natz^d$
-  of the hierarchical level-index pairs $(\*l, \*i) \in \liset$
-  %(one possible choice is that $k_t$ the zero-based index of $(l_t, i_t)$ in
-  %$(0,0), (0,1), (1,1), (2,1), (2,3), (3,1), (3,3), (3,5), (3,7), \dotsc$)
+  of the level-index pairs $(\*l, \*i) \in \liset$
 }
 
 \newnotation{d}{$d$}{
@@ -117,7 +115,7 @@
   %$t'_1 < \dotsb t'_{d-j}$)
 }
 
-\newnotationcommand[2]{\range}{{{#1}:{#2}}}{kabrange}{$\*k_{\range{a}{b}}$}{
+\newnotationcommand[2]{\range}{{{#1}:{#2}}}{kT40}{$\*k_{\range{a}{b}}$}{
   Vector of all dimensions that are contained in $a, a + 1, \dotsc, b$
 }
 
@@ -313,7 +311,7 @@
 \let\equiv\undefined
 \newnotationcommand{\equiv}{\equivorig}{Öequiv}{$\equivorig$}{
   Equality of functions everywhere on their domain
-  (e.g., $\objfun \equiv 0$ means $\objfun(x) = 0$ for all feasible $x$)
+  (i.e., $\fa{\*x}{\objfun_1(\*x) = \objfun_2(\*x)}$)
 }
 
 % ======================================================================
@@ -330,7 +328,7 @@
 \newcommand*{\interiorsgset}{\gridset[\interiorgrid]{}{\sparse}}
 \newcommand*{\bndrysgset}{\gridset[\bndrygrid]{}{\sparse}}
 
-\makecommandnotation{\interiorgrid}{ÄΩso}{$\interiorsgset$}{
+\makecommandnotation{\interiorgrid}{ÄΩs2}{$\interiorsgset$}{
   Set $:= \sgset \cap \opint{\*0, \*1}$ of
   interior grid points
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
@@ -359,15 +357,15 @@
 
 \newnotationcommandoptarg{3}{\regsgset}{%
   \gridset{#2,#3}{\sparse\appendwithcomma{#1}}%
-}{ÄΩnds}{$\regsgset{n}{d}$}{
-  Set of regular sparse grid points of level $n$ with dimensionality $d$
+}{ÄΩsnd}{$\regsgset{n}{d}$}{
+  Set of regular sparse grid points of level $n$, dimensionality $d$
 }
 
 \newnotationcommandoptarg{4}{\coarseregsgset}{%
   \gridset{#2,#3}{\sparse(#4)\appendwithcomma{#1}}%
-}{ÄΩndsb}{$\coarseregsgset{n}{d}{b}$}{
-  Set of regular sparse grid points of level $n$ with dimensionality $d$
-  and boundary parameter $b$
+}{ÄΩsndb}{$\coarseregsgset{n}{d}{b}$}{
+  Set of regular sparse grid points of level $n$, dim. $d$,
+  boundary parameter $b$
 }
 
 \newcommand*{\interiorregsgset}[3][]{%
@@ -597,7 +595,7 @@
   $\floor{\cdot}$, $\ceil{\cdot}$%
 }{
   Floor/ceiling function
-  (greatest/smallest integer smaller/greater or equal than $\cdot$)
+  (greatest/smallest integer $\le$/$\ge$ than $\cdot$)
 }
 
 \hidenextnotation
@@ -632,6 +630,7 @@
   \mathop{\*\nabla_{\hspace*{-0.1em}#1}} #2%
 }{Ögradient}{$\gradient{\*x}{\objfun}$}{
   Gradient of a function $\objfun$ with respect to $\*x$
+  (transposed Jacobian)
 }
 
 \newnotationcommand[2]{\hessian}{%
@@ -649,8 +648,7 @@
 }
 
 \newnotationcommand[1]{\nonnegpart}{(#1)_+}{Ö.+}{$\nonnegpart{\cdot}$}{
-  Non-negative part $\nonnegpart{x} := \max(x, 0)$
-  of $x \in \real$
+  Non-negative part $\max({\cdot}, 0)$
 }
 
 \newnotationcommandoptarg{2}{\expectation}{%
@@ -666,8 +664,7 @@
 \let\oplusorig\oplus
 \let\oplus\undefined
 \newnotationcommand{\oplus}{\oplusorig}{Öoplus}{$\oplus$}{%
-  Direct sum of vector spaces (vector space sum in which the dimension of
-  the sum equals the sum of the summands' dimensions)
+  Internal direct sum of vector spaces
 }
 
 \hidenextnotation
@@ -675,9 +672,9 @@
   Convolution $f \ast g$ of two functions $f$ and $g$
 }
 
-\newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{Äδij}{$\kronecker{i}{j}$}{
-  Kronecker delta $:= 1$ if $i = j$ and $:= 0$ otherwise
-  ($i, j$ arbitrary objects)
+\newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{ÄδAB}{$\kronecker{A}{B}$}{
+  Kronecker delta $:= 1$ if $A = B$ and $:= 0$ otherwise
+  ($A, B$ arbitrary objects)
 }
 
 \DeclareMathOperator{\xor}{xor}
@@ -694,17 +691,18 @@
 }
 
 \newnotationcommand{\dotcup}{\mathbin{\dot{\cup}}}{Öunion}{$\dotcup$}{
-  Disjoint union of sets (union where the pairwise intersection of
-  the joined sets is empty)
+  Disjoint union of sets
 }
 
 \DeclareMathOperator*{\bigdotcup}{\dot{\bigcup}}
 
+\hidenextnotation
 \newnotationcommand{\eq}{\sim}{Öeq}{$\eq$}{
   Equivalence relation where
   $a \eq b$ denotes that two elements $a, b$ are equivalent
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\samepole}{\eq_{#1}}{Ösimt}{$\samepole{t}$}{
   Pole equivalence relation with respect to dimension $t = 1, \dotsc, d$
   ($\*k \samepole{t} \*k'$ if $\*k$ and $\*k'$ are on the same pole
@@ -722,7 +720,7 @@
   $\eqclass{\cdot}{\eq}$%
 }{
   Equivalence class of $\cdot$ (set of all elements equivalent to $\cdot$)
-  with respect to an equivalence relation $\eq$
+  with respect $\eq$
 }
 
 % ======================================================================
@@ -856,6 +854,7 @@
   Hierarchical basis function of level $\*l$, index $\*i$
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\fundbasis}{%
   \varphi_{#1}^\mathrm{f}%
 }{Äφlif}{$\fundbasis{\*l,\*i}$}{
@@ -863,6 +862,7 @@
   (satisfying the fundamental property)
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\wfundbasis}{%
   \varphi_{#1}^\mathrm{wf}%
 }{Äφliwf}{$\wfundbasis{\*l,\*i}$}{
@@ -880,7 +880,7 @@
 \newnotationcommandoptarg{3}{\bspl}{%
   \varphi_{#2}^{#3\appendwithcomma{#1}}%
 }{Äφlip}{$\bspl{\*l,\*i}{\*p}$}{
-  Hierarchical B-spline basis function of
+  Hierarchical standard B-spline basis function of
   level $\*l$, index $\*i$, degree $\*p$
 }
 
@@ -888,6 +888,7 @@
   Cardinal B-spline of degree $p$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\parentbspl}{%
   \parentfcn[#2\appendwithcomma{#1}]%
 }{Äφp}{$\parentbspl{p}$}{
@@ -922,6 +923,7 @@
   Spline (piecewise polynomial)
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\charfun}{\chi_{#1}}{ÄχA}{$\charfun{A}$}{
   Characteristic function of the set $A \subset \real$
 }
