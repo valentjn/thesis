@@ -119,7 +119,7 @@
   %$t'_1 < \dotsb t'_{d-j}$)
 }
 
-\newnotationcommand[2]{\range}{{{#1}:{#2}}}{abrange}{$\*k_{\range{a}{b}}$}{
+\newnotationcommand[2]{\range}{{{#1}:{#2}}}{kabrange}{$\*k_{\range{a}{b}}$}{
   Vector of all dimensions that are contained in $a, a + 1, \dotsc, b$
 }
 
@@ -260,34 +260,26 @@
 % ======================================================================
 
 \newnotationcommand[1]{\clint}{[#1]}{Öab10}{$\clint{\*a, \*b}$}{
-  Closed hyper-rectangle
-  $:= \clint{a_1, b_1} \times \dotsb \times \clint{a_d, b_d}$
-  with $\clint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t \le b_t\}$
+  Closed hyper-rectangle $\{\*x \in \real^d \mid \*a \le \*x \le \*b\}$
 }
 
 \newnotationcommand[1]{\opint}{\mathopen]#1\mathclose[}{Öab20}{%
   $\opint{\*a, \*b}$%
 }{
-  Open hyper-rectangle
-  $:= \opint{a_1, b_1} \times \dotsb \times \opint{a_d, b_d}$
-  with $\opint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t < b_t\}$
+  Open hyper-rectangle $\{\*x \in \real^d \mid \*a < \*x < \*b\}$
 }
 
 \newnotationcommand[1]{\hopint}{\mathopen[#1\mathclose[}{Öab30}{%
   $\hopint{\*a, \*b}$%
 }{
-  Half-open hyper-rectangle
-  $:= \hopint{a_1, b_1} \times \dotsb \times \hopint{a_d, b_d}$
-  with $\hopint{a_t, b_t} := \{x_t \in \real \mid a_t \le x_t < b_t\}$
+  Half-open hyper-rectangle $\{\*x \in \real^d \mid \*a \le \*x < \*b\}$
 }
 
 \hidenextnotation
 \newnotationcommand[1]{\pohint}{\mathopen]#1\mathclose]}{Öab40}{%
   $\pohint{\*a, \*b}$%
 }{
-  Half-open hyper-rectangle
-  $:= \pohint{a_1, b_1} \times \dotsb \times \pohint{a_d, b_d}$
-  with $\pohint{a_t, b_t} := \{x_t \in \real \mid a_t < x_t \le b_t\}$
+  Half-open hyper-rectangle $\{\*x \in \real^d \mid \*a < \*x \le \*b\}$
 }
 
 \newcommand*{\clintscaled}[1]{\left[#1\right]}
@@ -493,10 +485,12 @@
   Vector space dimension
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\abs}{|#1|}{Öabs}{$\abs{\cdot}$}{
   Absolute value of a scalar
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\setsize}{|#1|}{Öcount}{$\setsize{\cdot}$}{
   Number of elements of a set
 }
@@ -545,21 +539,22 @@
   Identity operator $\idop\colon \real^{\ngp} \to \real^{\ngp}$
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\intpmatentry}{A_{#1,#2}}{Akk'}{$\intpmatentry{k}{k'}$}{
   $(k, k')$-th entry of $\intpmat$
 }
 
 \DeclareMathOperator{\supp}{supp}
 \let\supporig\supp
-\makecommandnotation{\supp}{supp}{$\supporig$}{
-  Support of a function (i.e., the closure of the non-zero set)
+\makecommandnotation{\supp}{supp}{$\supporig \objfun$}{
+  Support of a function (i.e., the closure of $\interiorsupporig \objfun$)
 }
 
 \DeclareMathOperator{\interiorsupp}{\mathring{\supporig}}
 \let\interiorsupporig\interiorsupp
-\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig$}{
-  Interior of the support of a function
-  (i.e., the set where the function does not vanish)
+\makecommandnotation{\interiorsupp}{suppo}{$\interiorsupporig \objfun$}{
+  Interior of the support of a continuous function
+  (i.e., $\{x \mid \objfun(x) \not= 0\}$)
 }
 
 \DeclareMathOperator{\spn}{span}
@@ -648,14 +643,14 @@
   Identity matrix $\eye \in \real^{n \times n}$
 }
 
-\newnotationcommand[1]{\nonnegpart}{(#1)_+}{Ë.+}{$\nonnegpart{\cdot}$}{
+\newnotationcommand[1]{\nonnegpart}{(#1)_+}{Ö.+}{$\nonnegpart{\cdot}$}{
   Non-negative part $\nonnegpart{x} := \max(x, 0)$
   of $x \in \real$
 }
 
 \newnotationcommandoptarg{2}{\expectation}{%
   \mathbb{E}\ifnotempty{#1}{_{#1}}\bracket*{#2}%
-}{ËEX}{$\expectation{X}$}{
+}{EX}{$\expectation{X}$}{
   Expectation of the random variable $X$
 }
 
@@ -670,6 +665,7 @@
   the sum equals the sum of the summands' dimensions)
 }
 
+\hidenextnotation
 \newnotationcommand{\convolution}{\ast}{Öconvolution}{$\convolution$}{
   Convolution $f \ast g$ of two functions $f$ and $g$
 }
@@ -755,6 +751,7 @@
   for the grid $\coarseregsgset{n}{d}{b}$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\relindexset}{%
   J_{#2}\ifnotempty{#1}{^{#1}}%
 }{Jl}{$\relindexset{l}$}{
@@ -766,6 +763,7 @@
 % Interpolation Values and Coefficients
 % ======================================================================
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\fcnval}{%
   f\ifnotempty{#1}{^{#1}}(\gp{#2})%
 }{fli}{$\fcnval{\*l,\*i}$}{
@@ -801,7 +799,7 @@
 % ======================================================================
 
 \newnotationcommand{\econst}{\mathrm{e}}{e}{$\econst$}{
-  Euler constant $\econst = \exp(1)$
+  Euler constant $\exp(1)$
 }
 
 \newnotationcommand{\ngpMax}{\ngp_\mathrm{max}}{Nmax}{$\ngpMax$}{
@@ -891,12 +889,14 @@
   of degree $p$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\parentfundspl}{%
   \parentfcn[#2,\fs\appendwithcomma{#1}]%
 }{Äφpfs}{$\parentfundspl{p}$}{
   Fundamental spline of degree $p$ (parent function)
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\parentwfundspl}{%
   \parentfcn[#2,\wfs\appendwithcomma{#1}]%
 }{Äφpwfs}{$\parentwfundspl{p}$}{
@@ -909,6 +909,7 @@
   Non-uniform B-spline of degree $p$ with knots $\knotseq$ and index $k$
 }
 
+\hidenextnotation
 \newnotationcommand{\spl}{s}{s}{$s$}{
   Spline (piecewise polynomial)
 }
@@ -955,6 +956,7 @@
   $\eqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\testobjfunscaled}{%
   \bar{\objfun}_{\mathrm{#1}}%
 }{fbarTest}{$\testobjfunscaled{Test}$}{
@@ -963,6 +965,7 @@
   with name ``Test''
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\testineqconfunscaled}{%
   \ifempty{#1}{\bar{\*g}_{\mathrm{#2}}}%
   \ifnotempty{#1}{\bar{g}_{\mathrm{#2},#1}}%
@@ -973,6 +976,7 @@
   with name ``Test''
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\testeqconfunscaled}{
   \ifempty{#1}{\bar{\*h}_{\mathrm{#2}}}%
   \ifnotempty{#1}{\bar{h}_{\mathrm{#2},#1}}%
@@ -1053,19 +1057,22 @@
 % Application 0: Fuzzy Extension Principle
 % ======================================================================
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\fuzzy}{%
   \tilde{#2}\ifnotempty{#1}{^{#1}}%
 }{xtilde}{$\fuzzy{x}$}{
   Fuzzy set
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{2}{\memfun}{%
   \mu_{\fuzzy[#1]{#2}}%
-}{Äµtilde}{$\memfun{x}$}{
+}{Äμtilde}{$\memfun{x}$}{
   Membership function $\memfun{x}\colon X \to \clint{0, 1}$ of the
   fuzzy set $\fuzzy{x}$
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{3}{\acut}{%
   (\tilde{#2}\ifnotempty{#1}{_{#1}})_{#3}%
 }{xtildeα}{$\acut{x}{\alpha}$}{
@@ -1076,66 +1083,77 @@
 % Application 1: Topology Optimization
 % ======================================================================
 
+\hidenextnotation
 \newnotationcommand{\dimdomain}{\tilde{d}}{dtilde}{$\dimdomain$}{
   Dimensionality of $\domain$
 }
 
+\hidenextnotation
 \newnotationcommand{\domain}{\tilde{\Omega}}{ÄΩtilde}{$\domain$}{
-  Domain $\domain \subset \real^{\dimdomain}$
+  Domain
 }
 
+\hidenextnotation
 \newnotationcommand{\dens}{\varrho}{Äρ}{$\dens$}{
-  Density in $\clint{0, 1}$
+  Density fcn.
 }
 
+\hidenextnotation
 \newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\dens)$}{
-  Compliance of the density function $\dens$
+  Compliance fcn.
 }
 
+\hidenextnotation
 \newnotationcommand[1]{\vol}{\mathrm{vol}(#1)}{volΩ}{$\vol{\domain}$}{
-  Volume (Lebesgue measure) of $\domain \subset \real^{\dimdomain}$
+  Total volume
 }
 
+\hidenextnotation
 \newnotationcommand[2]{\voldens}{\mathrm{vol}_{#1}(#2)}{volρΩ}{
   $\voldens{\dens}{\domain}$
 }{%
-  Volume of $\domain \subset \real^{\dimdomain}$ with respect to the
-  density function $\dens$
+  Volume w.r.t.\ $\dens$
 }
 
+\hidenextnotation
 \newnotationcommand{\densub}{\varrho^\ast}{r*}{$\densub$}{
-  Upper bound on the volume fraction
-  $\voldens{\dens}{\domain}/\vol{\domain}$
+  Density bound
 }
 
+\hidenextnotation
 \newnotationcommand{\densmean}{\bar{\varrho}}{rbar}{$\densmean$}{
-  Mean density of all macro-cells%
+  Mean density%
 }
 
+\hidenextnotation
 \newnotationcommand{\force}{\*F}{F}{$\force$}{
-  Force $\force \in \real^{\dimdomain}$
+  External force
 }
 
+\hidenextnotation
 \newnotationcommand{\displacement}{\*u}{u2}{$\displacement$}{
-  Displacement $\displacement\colon \domain \to \real^{\dimdomain}$
+  Displacement
 }
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\etensor}{%
   \mat{E}\ifnotempty{#1}{^{#1}}%
 }{E}{$\etensor$}{
-  Elasticity tensor in
-  $\real^{3 \times 3}$ (two dimensions) or in
-  $\real^{6 \times 6}$ (three dimensions)
+  Elasticity tensor
 }
 
-\newcommand*{\etensorentry}[2][]{E_{#2}\ifnotempty{#1}{^{#1}}}
+\hidenextnotation
+\newnotationcommandoptarg{2}{\etensorentry}{%
+  E_{#2}\ifnotempty{#1}{^{#1}}%
+}{Ej}{$\etensorentry{j}$}{
+  $j$-th entry of the elasticity tensor
+}
 
+\hidenextnotation
 \newnotationcommandoptarg{1}{\cholfactor}{%
   \mat{R}\ifnotempty{#1}{^{#1}}%
 }{R2}{$\cholfactor$}{
-  Cholesky factor of $\etensor$ in
-  $\real^{3 \times 3}$ (two dimensions) or in
-  $\real^{6 \times 6}$ (three dimensions)
+  Cholesky factor
 }
 
 % ======================================================================
