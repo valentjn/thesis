@@ -38,7 +38,7 @@ def main():
   commands = {x[0] : {"isHidden" : x[1]} for x in commands}
   
   isChapterFilename = lambda x: (
-    (x[0].isdigit() or (x[0].islower() and x[1].isdigit())) and
+    (x[0].isdigit() or ((x[0] == "a") and x[1].isdigit())) and
     x.endswith(".tex"))
   texFiles = sorted([os.path.join(texPath, x) for x in os.listdir(texPath)
                      if isChapterFilename(x)])
@@ -46,7 +46,9 @@ def main():
   
   for texFile in texFiles:
     basename = os.path.basename(texFile)
-    chapter, section = basename[0].upper(), basename[:2]
+    chapter = (basename[0] if basename[0].isdigit() else
+               chr(64 + int(basename[1])))
+    section = basename[:2]
     with open(texFile, "r") as f: tex = f.read()
     
     for command in re.findall(r"\\([A-Za-z]+)", tex):
