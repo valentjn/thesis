@@ -1,7 +1,7 @@
 \section{Homogenization and the Two-Scale Approach}
 \label{sec:61homogenization}
 
-\minitoc{70mm}{3}
+\minitoc{70mm}{4}
 
 \noindent
 We roughly follow the presentation given in
@@ -10,6 +10,28 @@ We roughly follow the presentation given in
   Valentin14Hierarchische,%
   Valentin16Hierarchical%
 }.
+The necessary notation is summarized in
+\cref{tbl:glossaryTopologyOptimization}.
+
+\begin{table}
+  \setnumberoftableheaderrows{0}%
+  \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \pnst{\domain}&           \pnst{\dens}&     \pnst{\force}\\
+    \pnst{\dimdomain}&        \pnst{\densmean}& \pnst{\displacement}\\
+    $d$&\# micro-cell param.& \pnst{\densub}&   \pnst{\compliance}\\
+    \pnst{\etensor}&          \pnst{\vol}&      &\\
+    \pnst{\cholfactor}&       \pnst{\voldens}&  &\\
+    \bottomrulec
+  \end{tabular}%
+  \caption[Glossary for topology optimization]{%
+    Glossary of the notation for topology optimization.%
+  }%
+  \label{tbl:glossaryTopologyOptimization}%
+\end{table}
 
 
 
