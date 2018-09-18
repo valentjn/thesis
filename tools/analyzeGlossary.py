@@ -94,7 +94,8 @@ def main():
   
   # \name  23  3,4,5  hidden
   output = [(x, y) for x, y in commandCounts.items()]
-  output.sort(key=lambda x: (x[1]["isHidden"], -len(x[1]["chapters"]), x[0]))
+  output.sort(key=lambda x:
+      (x[1]["isHidden"], -len(x[1]["chapters"]), -x[1]["total"]))
   output = [
     (
       "\\{}".format(x[0]),
