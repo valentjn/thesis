@@ -11,6 +11,9 @@ def main():
       choices=["uses", "keystrokes"], default="uses",
       help="Determine what to count: Uses (default) or keystrokes "
            "(occurences times length).")
+  parser.add_argument("--chapters", nargs="*",
+      help="Only show commands that occur in at least one "
+           "of the given chapters.")
   args = parser.parse_args()
   
   notationTexFile = os.path.join(os.path.dirname(
@@ -84,6 +87,10 @@ def main():
         commandCounts[command]["chapters"][chapter] *= len(command)
       for section in commandCounts[command]["sections"]:
         commandCounts[command]["sections"][section] *= len(command)
+  
+  if args.chapters is not None:
+    commandCounts = {x : y for x, y in commandCounts.items()
+                    if any(z in args.chapters for z in y["chapters"])}
   
   # \name  23  3,4,5  hidden
   output = [(x, y) for x, y in commandCounts.items()]
