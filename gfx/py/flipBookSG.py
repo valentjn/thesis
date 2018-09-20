@@ -20,15 +20,6 @@ def rotate(matrix, x, y, z):
   rotatedVectors = np.dot(matrix, np.row_stack((x, y, z)) - 0.5) + 0.5
   return rotatedVectors[0,:], rotatedVectors[1,:], rotatedVectors[2,:]
 
-def axisEqual3D(ax):
-  extents = np.array([ax.get_xlim(), ax.get_ylim(), ax.get_zlim()])
-  size = extents[:,1] - extents[:,0]
-  centers = np.mean(extents, axis=1)
-  maxSizeHalf = max(abs(size)) / 2
-  ax.set_xlim(centers[0] - maxSizeHalf, centers[0] + maxSizeHalf)
-  ax.set_ylim(centers[1] - maxSizeHalf, centers[1] + maxSizeHalf)
-  ax.set_zlim(centers[2] - maxSizeHalf, centers[2] + maxSizeHalf)
-
 def drawImage(imageNumber):
   angle = startAngle + numberOfRevolutions * 360 * imageNumber / numberOfImages
   
@@ -89,7 +80,7 @@ def drawImage(imageNumber):
   ax.set_xlim(*xLim)
   ax.set_ylim(*yLim)
   ax.set_zlim(*zLim)
-  axisEqual3D(ax)
+  helper.plot.setEqual3DAxes(ax)
   ax.set_axis_off()
   
   ax.view_init(0, 0)
