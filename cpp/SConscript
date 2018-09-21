@@ -13,7 +13,7 @@ def buildSGpp(sgppModules):
   sgppSConsFlags = ["SG_ALL=0", "SG_PYTHON=1", "USE_PYTHON3_FOR_PYSGPP=1",
                     "USE_EIGEN=1", "USE_ARMADILLO=1", "USE_UMFPACK=1"]
   sgppArgs = (["scons", "-C", os.path.join("cpp", "sgpp"),
-              "-j", str(multiprocessing.cpu_count())] + sgppSConsFlags +
+               "-j", str(multiprocessing.cpu_count())] + sgppSConsFlags +
               ["SG_{}=1".format(module.upper()) for module in sgppModules])
 
   sgppSourceFiles = []
