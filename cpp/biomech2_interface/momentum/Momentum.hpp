@@ -1,5 +1,5 @@
-#ifndef MUSCLE_MOMENTUM_MOMENTUM_HPP
-#define MUSCLE_MOMENTUM_MOMENTUM_HPP
+#ifndef BIOMECH2_INTERFACE_MOMENTUM_MOMENTUM_HPP
+#define BIOMECH2_INTERFACE_MOMENTUM_MOMENTUM_HPP
 
 #include <biomech2_interface/Global.hpp>
 #include <sgpp/optimization/function/scalar/ScalarFunction.hpp>
@@ -30,4 +30,4 @@ namespace muscle {
   }
 }
 
-#endif /* MUSCLE_MOMENTUM_MOMENTUM_HPP */
+#endif /* BIOMECH2_INTERFACE_MOMENTUM_MOMENTUM_HPP */

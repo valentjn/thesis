@@ -1,5 +1,5 @@
-#ifndef MUSCLE_GLOBAL_HPP
-#define MUSCLE_GLOBAL_HPP
+#ifndef BIOMECH2_INTERFACE_GLOBAL_HPP
+#define BIOMECH2_INTERFACE_GLOBAL_HPP
 
 #include <sgpp/globaldef.hpp>
 
@@ -11,4 +11,4 @@ namespace muscle {
   constexpr double ALPHA_MAX = 1.0;
 }
 
-#endif /* MUSCLE_GLOBAL_HPP */
+#endif /* BIOMECH2_INTERFACE_GLOBAL_HPP */
