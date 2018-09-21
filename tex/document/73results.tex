@@ -1,4 +1,67 @@
 \section{Numerical Results}
 \label{sec:73results}
 
-\dummytext[25]{}
+\minitoc[-5mm]{90mm}{4}
+
+\noindent
+In the final section of this chapter,
+we present and discuss numerical results for our
+biomechanical model of the upper limb.
+
+
+
+\subsection{Reference and Sparse Grid Solution}
+\label{sec:731solutionTypes}
+
+\paragraph{Reference solution}
+
+Since the model is only two-dimensional, we can compute a reference solution
+on a full grid.
+Hence, we evaluate the exerted muscle forces $\forceT$ and $\forceB$ on
+the full grid
+\begin{equation}
+  \{\ang{10}, \ang{11}, \dotsc, \ang{150}\} \times \{0, 0.1, \dotsc, 1\}
+  \ni (\elbang, \actX),\quad
+  {\ast} \in \{\mathrm{T}, \mathrm{B}\}.
+\end{equation}
+The resulting grid data are interpolated with bicubic spline interpolation
+to obtain \term{reference solutions}
+$\forceTref, \forceBref\colon
+\clint{\ang{10}, \ang{150}} \times \clint{0, 1} \to \real$.
+Due to the high resolution of the full grid,
+we may assume that the reference solutions are accurate enough
+to ensure $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
+
+\paragraph{Sparse grid solution}
+
+
+
+\todo{reference SG++}
+
+
+
+\subsection{Interpolation Error of Muscle Forces}
+\label{sec:732forceInterpolation}
+
+\dummytext[3]{}
+
+
+
+\subsection{Error of the Equilibrium Angle}
+\label{sec:733equilbriumAngle}
+
+\dummytext[3]{}
+
+
+
+\subsection{Error in Test Scenarios}
+\label{sec:734scenarios}
+
+\dummytext[3]{}
+
+
+
+\subsection{Outlook: Spatial Adaptivity}
+\label{sec:735adaptivity}
+
+\dummytext[3]{}
