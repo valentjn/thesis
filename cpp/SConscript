@@ -9,7 +9,7 @@ env = env.Clone()
 
 def buildSGpp(sgppModules):
   # set SCons flags for SG++
-  sgppDir = Dir("sgpp")
+  sgppCppDir = Dir("sgpp")
   sgppSConsFlags = ["SG_ALL=0", "SG_PYTHON=1", "USE_PYTHON3_FOR_PYSGPP=1",
                     "USE_EIGEN=1", "USE_ARMADILLO=1", "USE_UMFPACK=1"]
   sgppArgs = (["scons", "-C", os.path.join("cpp", "sgpp"),
@@ -20,9 +20,9 @@ def buildSGpp(sgppModules):
   
   for module in sgppModules:
     moduleSourceDirs = [
-      os.path.join(sgppDir.abspath, module, "build", "pysgpp"),
-      os.path.join(sgppDir.abspath, module, "src"),
-      os.path.join(sgppDir.abspath, module, "tests"),
+      os.path.join(sgppCppDir.abspath, module, "build", "pysgpp"),
+      os.path.join(sgppCppDir.abspath, module, "src"),
+      os.path.join(sgppCppDir.abspath, module, "tests"),
     ]
     
     for moduleSourceDir in moduleSourceDirs:
@@ -52,12 +52,12 @@ def buildSGpp(sgppModules):
     env.InstallAs(installedFile, outputFile)
     sgppFiles.append(installedFile)
   
-  return sgppDir, sgppFiles
+  return sgppCppDir, sgppFiles
 
 
 
-def buildPrograms(sgppModules, sgppDir, sgppFiles):
-  cppPath = [os.path.join(sgppDir.abspath, module, "src")
+def buildPrograms(sgppModules, sgppCppDir, sgppFiles):
+  cppPath = [os.path.join(sgppCppDir.abspath, module, "src")
             for module in sgppModules]
   cppFlags = ["-fopenmp", "-g", "-std=c++11", "-Wall", "-Wextra",
               "-Wno-unused-parameter"]
@@ -86,9 +86,9 @@ def buildPrograms(sgppModules, sgppDir, sgppFiles):
 
 # build SG++
 sgppModules = ["base", "optimization"]
-sgppDir, sgppFiles = buildSGpp(sgppModules)
+sgppCppDir, sgppFiles = buildSGpp(sgppModules)
 
 # build programs
-programs = buildPrograms(sgppModules, sgppDir, sgppFiles)
+programs = buildPrograms(sgppModules, sgppCppDir, sgppFiles)
 
 Return("sgppFiles", "programs")
