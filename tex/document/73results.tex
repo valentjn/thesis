@@ -31,12 +31,26 @@ $\forceTref, \forceBref\colon
 Due to the high resolution of the full grid,
 we may assume that the reference solutions are accurate enough
 to ensure $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
+We refer to the resulting quantities with the superscript ``$\mathrm{ref}$'',
+for instance, the equilibrium elbow angle $\equielbangref{\forceL}$.
 
 \paragraph{Sparse grid solution}
 
-
-
-\todo{reference SG++}
+Additionally, we evaluate $\forceT$ and $\forceB$ at the $\ngp = 49$
+grid points of the regular sparse grid $\interiorregsgset{n}{d}$ of
+level $n = 5$ in $d = 2$ dimensions.
+We interpolate these values using
+modified hierarchical not-a-knot B-splines
+$\bspl[\modified,\nak]{\*l,\*i}{p}$ of degree $p = 1$, $3$, and $5$
+(see \cref{sec:323modifiedNAKBSplines}).
+The implementation was done using the sparse grid toolbox
+\sgpp{} \cite{Pflueger10Spatially}.
+The corresponding interpolants and resulting quantities
+are denoted with the superscript ``$\sparse,p$''.
+Note that the equilibrium elbow angle is \emph{not} interpolated
+(neither in the full grid nor in the sparse grid case),
+but rather obtained by inserting the interpolated muscle forces
+into \cref{eq:totalMomentSurrogate,eq:equilibriumAngleSurrogate}.
 
 
 
