@@ -291,6 +291,7 @@ $\forceT, \forceB$ with surrogates $\forceTintp, \forceBintp$
 \cite{Valentin18Gradient}, e.g., by interpolation.
 We then automatically obtain a surrogate
 \begin{subequations}
+  \label{eq:totalMomentSurrogate}
   \begin{gather}
     \momentintp_{\forceL,\actT,\actB}\colon
     \clint{\ang{10}, \ang{150}} \to \real,\\
@@ -303,6 +304,7 @@ We then automatically obtain a surrogate
 for the total moment (cf.\ \cref{eq:totalMoment}) and,
 consequently, a surrogate
 \begin{equation}
+  \label{eq:equilibriumAngleSurrogate}
   \equielbangintp{\forceL}\colon \actdomainintp{\forceL} \to
   \clint{\ang{10}, \ang{150}},\quad
   \actdomainintp{\forceL} \subset \clint{0, 1}^2,\quad
