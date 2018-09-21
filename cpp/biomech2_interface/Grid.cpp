@@ -197,57 +197,57 @@ void SparseGrid::hierarchize() {
 }
 
 void SparseGrid::coarsen(double surplusThresPercentT,
-												 double surplusThresPercentB) {
-	if (!adaptive) {
-		std::cerr << "Error: Trying to coarsen non-adaptive SparseGrid!\n";
-		return;
-	}
+                         double surplusThresPercentB) {
+  if (!adaptive) {
+    std::cerr << "Error: Trying to coarsen non-adaptive SparseGrid!\n";
+    return;
+  }
 
-	double minT, maxT, minB, maxB;
+  double minT, maxT, minB, maxB;
 
-	alpha.minmax(0, &minT, &maxT);
-	alpha.minmax(1, &minB, &maxB);
+  alpha.minmax(0, &minT, &maxT);
+  alpha.minmax(1, &minB, &maxB);
 
-	const double maxAbsAlphaT = std::max(maxT, std::abs(minT));
-	const double maxAbsAlphaB = std::max(maxB, std::abs(minB));
+  const double maxAbsAlphaT = std::max(maxT, std::abs(minT));
+  const double maxAbsAlphaB = std::max(maxB, std::abs(minB));
 
   const size_t Nold = sgppGrid->getSize();
-	std::list<size_t> indicesToDelete;
+  std::list<size_t> indicesToDelete;
 
-	for (size_t k = 0; k < Nold; k++) {
-		if ((std::abs(alpha(k, 0)) / maxAbsAlphaT < surplusThresPercentT) &&
-				(std::abs(alpha(k, 1)) / maxAbsAlphaB < surplusThresPercentB)) {
-			indicesToDelete.push_back(k);
-		}
-	}
+  for (size_t k = 0; k < Nold; k++) {
+    if ((std::abs(alpha(k, 0)) / maxAbsAlphaT < surplusThresPercentT) &&
+        (std::abs(alpha(k, 1)) / maxAbsAlphaB < surplusThresPercentB)) {
+      indicesToDelete.push_back(k);
+    }
+  }
 
-	std::vector<size_t> indicesRemaining =
-			sgppGrid->getStorage().deletePoints(indicesToDelete);
+  std::vector<size_t> indicesRemaining =
+      sgppGrid->getStorage().deletePoints(indicesToDelete);
 
-	const size_t Nnew = sgppGrid->getSize();
+  const size_t Nnew = sgppGrid->getSize();
 
-	sgpp::base::DataMatrix Xold(X);
-	sgpp::base::DataMatrix valuesOld(values);
-	sgpp::base::DataMatrix alphaOld(alpha);
+  sgpp::base::DataMatrix Xold(X);
+  sgpp::base::DataMatrix valuesOld(values);
+  sgpp::base::DataMatrix alphaOld(alpha);
 
-	X.resize(Nnew, 2);
-	X.setAll(std::numeric_limits<double>::quiet_NaN());
-	values.resize(Nnew, 2);
-	values.setAll(std::numeric_limits<double>::quiet_NaN());
-	alpha.resize(Nnew, 2);
-	alpha.setAll(std::numeric_limits<double>::quiet_NaN());
+  X.resize(Nnew, 2);
+  X.setAll(std::numeric_limits<double>::quiet_NaN());
+  values.resize(Nnew, 2);
+  values.setAll(std::numeric_limits<double>::quiet_NaN());
+  alpha.resize(Nnew, 2);
+  alpha.setAll(std::numeric_limits<double>::quiet_NaN());
 
-	for (size_t k = 0; k < Nnew; k++) {
-		const size_t kOld = indicesRemaining[k];
-		X(k, 0) = Xold(kOld, 0);
-		X(k, 1) = Xold(kOld, 1);
-		values(k, 0) = valuesOld(kOld, 0);
-		values(k, 1) = valuesOld(kOld, 1);
-		alpha(k, 0) = alphaOld(kOld, 0);
-		alpha(k, 1) = alphaOld(kOld, 1);
-	}
+  for (size_t k = 0; k < Nnew; k++) {
+    const size_t kOld = indicesRemaining[k];
+    X(k, 0) = Xold(kOld, 0);
+    X(k, 1) = Xold(kOld, 1);
+    values(k, 0) = valuesOld(kOld, 0);
+    values(k, 1) = valuesOld(kOld, 1);
+    alpha(k, 0) = alphaOld(kOld, 0);
+    alpha(k, 1) = alphaOld(kOld, 1);
+  }
 
-	std::cout << "After coarsening:\n";
+  std::cout << "After coarsening:\n";
   std::cout << "X = " << X.toString() << "\n";
   std::cout << "values = " << values.toString() << "\n";
   hierarchize();
@@ -267,9 +267,9 @@ std::string SparseGrid::basisString() const {
 std::string SparseGrid::toString() const {
   /*return "Regular SG (" + basisString() + ", $p = " + std::to_string(p) +
         "$, $\\ell = " + std::to_string(l) + "$)";*/
-	return std::string(adaptive ? "Adaptive SG" : "Regular SG") +
-			" (" + basisString() + ", p=" + std::to_string(p) +
-			", l=" + std::to_string(l) + ")";
+  return std::string(adaptive ? "Adaptive SG" : "Regular SG") +
+      " (" + basisString() + ", p=" + std::to_string(p) +
+      ", l=" + std::to_string(l) + ")";
 }
 
 std::string SparseGrid::getID() const {
@@ -278,5 +278,5 @@ std::string SparseGrid::getID() const {
 }
 
 bool SparseGrid::isAdaptive() const {
-	return adaptive;
+  return adaptive;
 }
