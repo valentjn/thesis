@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/momentum/Momentum.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     Momentum::Momentum(double F,
                        sgpp::optimization::VectorFunction& TB) :

@@ -5,7 +5,7 @@
 #include <sgpp/optimization/function/scalar/ScalarFunctionGradient.hpp>
 #include <sgpp/optimization/function/vector/VectorFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     class MomentumGradient : public sgpp::optimization::ScalarFunctionGradient {
       public:

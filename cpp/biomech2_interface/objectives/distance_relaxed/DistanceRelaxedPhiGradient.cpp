@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/objectives/distance_relaxed/DistanceRelaxedPhiGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace distance_relaxed {
       DistanceRelaxedPhiGradient::DistanceRelaxedPhiGradient(

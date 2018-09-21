@@ -4,7 +4,7 @@
 #include <biomech2_interface/momentum/MomentumBalanceTheta.hpp>
 #include <biomech2_interface/momentum/NewtonsMethod.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     MomentumBalanceTheta::MomentumBalanceTheta(
         double F,

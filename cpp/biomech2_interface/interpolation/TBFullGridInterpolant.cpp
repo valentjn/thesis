@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/interpolation/TBFullGridInterpolant.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace interpolation {
     TBFullGridInterpolant::TBFullGridInterpolant() :
       sgpp::optimization::VectorFunction(3, 2),

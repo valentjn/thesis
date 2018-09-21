@@ -4,7 +4,7 @@
 #include <biomech2_interface/Global.hpp>
 #include <sgpp/optimization/function/vector/InterpolantVectorFunction.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace interpolation {
     class TBSparseGridInterpolant : public sgpp::optimization::VectorFunction {
       public:

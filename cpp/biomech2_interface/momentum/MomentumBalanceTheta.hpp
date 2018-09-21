@@ -6,7 +6,7 @@
 #include <sgpp/optimization/function/vector/VectorFunction.hpp>
 #include <sgpp/optimization/function/vector/VectorFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     class MomentumBalanceTheta : public sgpp::optimization::ScalarFunction {
       public:

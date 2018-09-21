@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/momentum/NewtonsMethod.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     NewtonsMethod::NewtonsMethod(
         sgpp::optimization::ScalarFunction& f,

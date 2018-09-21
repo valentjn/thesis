@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/objectives/distance/DistanceObjectiveGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace distance {
       DistanceObjectiveGradient::DistanceObjectiveGradient(

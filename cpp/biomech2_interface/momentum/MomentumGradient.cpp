@@ -2,7 +2,7 @@
 #include <biomech2_interface/momentum/Momentum.hpp>
 #include <biomech2_interface/momentum/MomentumGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     MomentumGradient::MomentumGradient(
         double F,

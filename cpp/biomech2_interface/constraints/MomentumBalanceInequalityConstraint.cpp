@@ -1,6 +1,6 @@
 #include <biomech2_interface/constraints/MomentumBalanceInequalityConstraint.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace constraints {
     MomentumBalanceInequalityConstraint::MomentumBalanceInequalityConstraint(
         sgpp::optimization::VectorFunction& f) :

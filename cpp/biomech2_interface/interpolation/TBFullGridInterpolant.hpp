@@ -8,7 +8,7 @@
 #include <gte/GteIntpBicubic2.h>
 //#include <gte/GteIntpBilinear2.h>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace interpolation {
     class TBFullGridInterpolant : public sgpp::optimization::VectorFunction {
       public:

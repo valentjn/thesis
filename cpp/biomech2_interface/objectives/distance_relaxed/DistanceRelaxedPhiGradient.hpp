@@ -5,7 +5,7 @@
 #include <biomech2_interface/momentum/MomentumBalanceThetaGradient.hpp>
 #include <sgpp/optimization/function/scalar/ScalarFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace distance_relaxed {
       class DistanceRelaxedPhiGradient :

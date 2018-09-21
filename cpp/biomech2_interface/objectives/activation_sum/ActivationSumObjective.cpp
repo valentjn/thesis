@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/objectives/activation_sum/ActivationSumObjective.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace activation_sum {
       ActivationSumObjective::ActivationSumObjective() :

@@ -4,7 +4,7 @@
 #include <biomech2_interface/Global.hpp>
 #include <sgpp/optimization/function/vector/VectorFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace constraints {
     class MomentumBalanceInequalityConstraintGradient :
         public sgpp::optimization::VectorFunctionGradient {

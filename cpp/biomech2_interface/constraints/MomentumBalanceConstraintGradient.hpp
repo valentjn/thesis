@@ -5,7 +5,7 @@
 #include <biomech2_interface/momentum/MomentumBalanceThetaGradient.hpp>
 #include <sgpp/optimization/function/vector/VectorFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace constraints {
     class MomentumBalanceConstraintGradient :
         public sgpp::optimization::VectorFunctionGradient {

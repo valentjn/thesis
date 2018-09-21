@@ -5,7 +5,7 @@
 #include <sgpp/optimization/function/scalar/ScalarFunctionGradient.hpp>
 #include <sgpp/optimization/optimizer/unconstrained/UnconstrainedOptimizer.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     class NewtonsMethod :
         public sgpp::optimization::optimizer::UnconstrainedOptimizer {

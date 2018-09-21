@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/interpolation/TBSparseGridInterpolant.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace interpolation {
     TBSparseGridInterpolant::TBSparseGridInterpolant(
         sgpp::base::Grid& grid,

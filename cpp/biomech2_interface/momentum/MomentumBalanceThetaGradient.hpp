@@ -6,7 +6,7 @@
 #include <biomech2_interface/momentum/MomentumGradient.hpp>
 #include <sgpp/optimization/function/scalar/ScalarFunctionGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     class MomentumBalanceThetaGradient :
         public sgpp::optimization::ScalarFunctionGradient {

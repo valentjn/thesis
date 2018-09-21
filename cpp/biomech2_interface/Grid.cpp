@@ -7,12 +7,12 @@
 #include <biomech2_interface/Global.hpp>
 #include <biomech2_interface/interpolation/TBFullGridInterpolant.hpp>
 
-const double ALPHA_MIN = muscle::ALPHA_MIN;
-const size_t ALPHA_COUNT = muscle::interpolation::TBFullGridInterpolant::ALPHA_COUNT;
-const double ALPHA_MAX = muscle::ALPHA_MAX;
-const double THETA_MIN = muscle::THETA_MIN;
-const size_t THETA_COUNT = muscle::interpolation::TBFullGridInterpolant::THETA_COUNT;
-const double THETA_MAX = muscle::THETA_MAX;
+const double ALPHA_MIN = biomech2_interface::ALPHA_MIN;
+const size_t ALPHA_COUNT = biomech2_interface::interpolation::TBFullGridInterpolant::ALPHA_COUNT;
+const double ALPHA_MAX = biomech2_interface::ALPHA_MAX;
+const double THETA_MIN = biomech2_interface::THETA_MIN;
+const size_t THETA_COUNT = biomech2_interface::interpolation::TBFullGridInterpolant::THETA_COUNT;
+const double THETA_MAX = biomech2_interface::THETA_MAX;
 
 
 

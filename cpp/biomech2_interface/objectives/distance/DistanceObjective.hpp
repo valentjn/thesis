@@ -4,7 +4,7 @@
 #include <biomech2_interface/Global.hpp>
 #include <sgpp/optimization/function/scalar/ScalarFunction.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace distance {
       class DistanceObjective :

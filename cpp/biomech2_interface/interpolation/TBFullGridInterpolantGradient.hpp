@@ -10,7 +10,7 @@
 
 #include <biomech2_interface/interpolation/TBFullGridInterpolant.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace interpolation {
     class TBFullGridInterpolantGradient :
         public sgpp::optimization::VectorFunctionGradient {

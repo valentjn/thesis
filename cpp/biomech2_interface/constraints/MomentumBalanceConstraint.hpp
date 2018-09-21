@@ -5,7 +5,7 @@
 #include <biomech2_interface/momentum/MomentumBalanceTheta.hpp>
 #include <sgpp/optimization/function/vector/VectorFunction.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace constraints {
     class MomentumBalanceConstraint :
         public sgpp::optimization::VectorFunction {

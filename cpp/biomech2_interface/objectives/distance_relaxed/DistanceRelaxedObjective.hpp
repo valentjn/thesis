@@ -5,7 +5,7 @@
 #include <biomech2_interface/momentum/MomentumBalanceTheta.hpp>
 #include <sgpp/optimization/function/scalar/ScalarFunction.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace objectives {
     namespace distance_relaxed {
       class DistanceRelaxedObjective :

@@ -3,7 +3,7 @@
 
 #include <sgpp/globaldef.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   constexpr double THETA_MIN = 10.0;
   constexpr double THETA_MAX = 150.0;
 

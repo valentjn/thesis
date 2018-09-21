@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/momentum/MomentumBalanceThetaGradient.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace momentum {
     MomentumBalanceThetaGradient::MomentumBalanceThetaGradient(
         MomentumBalanceTheta& momentumBalanceTheta,

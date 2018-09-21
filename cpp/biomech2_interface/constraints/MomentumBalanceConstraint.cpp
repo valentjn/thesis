@@ -1,7 +1,7 @@
 #include <cmath>
 #include <biomech2_interface/constraints/MomentumBalanceConstraint.hpp>
 
-namespace muscle {
+namespace biomech2_interface {
   namespace constraints {
     MomentumBalanceConstraint::MomentumBalanceConstraint(
         momentum::MomentumBalanceTheta& momentumBalanceTheta,
