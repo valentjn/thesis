@@ -1,3 +1,5 @@
+import copy
+import fnmatch
 import multiprocessing
 import shlex
 import os
@@ -56,27 +58,52 @@ def buildSGpp(sgppModules):
 
 
 
+def buildBiomech2Interface(compileOptions):
+  biomech2InterfaceCppDir = Dir("biomech2_interface").abspath
+  biomech2InterfaceBuildDir = os.path.join(
+      env["BUILD_DIR"].abspath, "biomech2_interface")
+  biomech2InterfaceCpps = []
+  
+  for root, dirs, files in os.walk(biomech2InterfaceCppDir):
+    root = os.path.join(biomech2InterfaceBuildDir,
+                        root[len(biomech2InterfaceCppDir):].lstrip("/"))
+    biomech2InterfaceCpps.extend(
+        [os.path.join(root, x) for x in fnmatch.filter(files, "*.cpp")])
+  
+  biomech2Interface = env.SharedLibrary(
+      os.path.join(env["BUILD_DIR"].abspath, "libbiomech2_interface.so"),
+      biomech2InterfaceCpps, **compileOptions)
+  
+  return biomech2Interface
+
+
+
 def buildPrograms(sgppModules, sgppCppDir, sgppFiles):
-  cppPath = [os.path.join(sgppCppDir.abspath, module, "src")
-            for module in sgppModules]
-  cppFlags = ["-fopenmp", "-g", "-std=c++11", "-Wall", "-Wextra",
-              "-Wno-unused-parameter"]
-  libPath = os.path.join(env["BUILD_DIR"].abspath, "sgpp", "lib", "sgpp")
-  libs = ["sgpp{}".format(module) for module in sgppModules]
-  linkFlags = ["-fopenmp"]
+  compileOptions = {
+    "CPPPATH" : [os.path.join(sgppCppDir.abspath, module, "src")
+                 for module in sgppModules] + [Dir(".").abspath],
+    "CPPFLAGS" : ["-fopenmp", "-g", "-std=c++11", "-Wall", "-Wextra",
+                  "-Wno-unused-parameter"],
+    "LIBS" : ["sgpp{}".format(module) for module in sgppModules],
+    "LIBPATH" : os.path.join(env["BUILD_DIR"].abspath, "sgpp", "lib", "sgpp"),
+    "LINKFLAGS" : ["-fopenmp"],
+  }
   
   env.VariantDir(env["BUILD_DIR"], ".", duplicate=False)
+  
+  biomech2Interface = buildBiomech2Interface(compileOptions)
   
   cpps = env.Glob(os.path.join(env["BUILD_DIR"].abspath, "*.cpp"))
   programs = []
   
   for cpp in cpps:
-    program = os.path.join(
-        env["BUILD_DIR"].abspath,
-        os.path.splitext(os.path.basename(cpp.abspath))[0])
-    programs.append(env.Program(program, cpp,
-        CPPPATH=cppPath, CPPFLAGS=cppFlags,
-        LIBS=libs, LIBPATH=libPath, LINKFLAGS=linkFlags))
+    name = os.path.splitext(os.path.basename(cpp.abspath))[0]
+    program = os.path.join(env["BUILD_DIR"].abspath, name)
+    
+    curCompileOptions = copy.deepcopy(compileOptions)
+    if name == "muscle": curCompileOptions["LIBS"].append(biomech2Interface)
+
+    programs.append(env.Program(program, cpp, **curCompileOptions))
   
   env.Depends(programs, sgppFiles)
   
