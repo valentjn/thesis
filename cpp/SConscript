@@ -101,8 +101,9 @@ def buildPrograms(sgppModules, sgppCppDir, sgppFiles):
     program = os.path.join(env["BUILD_DIR"].abspath, name)
     
     curCompileOptions = copy.deepcopy(compileOptions)
-    if name == "muscle": curCompileOptions["LIBS"].append(biomech2Interface)
-
+    if name == "applyBiomech2":
+      curCompileOptions["LIBS"].append(biomech2Interface)
+    
     programs.append(env.Program(program, cpp, **curCompileOptions))
   
   env.Depends(programs, sgppFiles)
