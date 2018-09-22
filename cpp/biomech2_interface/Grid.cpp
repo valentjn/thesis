@@ -50,10 +50,13 @@ namespace biomech2_interface {
 
   void SparseGrid::create() {
     switch (type) {
-      case Type::MODBSPL:
+      case Type::ModifiedBSpline:
         sgppGrid.reset(sgpp::base::Grid::createModBsplineGrid(2, p));
         break;
-      case Type::MODBSPLCC:
+      case Type::ModifiedNotAKnotBSpline:
+        sgppGrid.reset(sgpp::base::Grid::createModNotAKnotBsplineGrid(2, p));
+        break;
+      case Type::ModifiedClenshawCurtisBSpline:
         sgppGrid.reset(sgpp::base::Grid::createModBsplineClenshawCurtisGrid(2, p));
         break;
       default:
@@ -251,10 +254,12 @@ namespace biomech2_interface {
 
   std::string SparseGrid::basisString() const {
     switch (type) {
-      case Type::MODBSPL:
-        return "modbspl";
-      case Type::MODBSPLCC:
-        return "modbsplcc";
+      case Type::ModifiedBSpline:
+        return "modifiedBSpline";
+      case Type::ModifiedNotAKnotBSpline:
+        return "ModifiedNotAKnotBSpline";
+      case Type::ModifiedClenshawCurtisBSpline:
+        return "modifiedClenshawCurtisBSpline";
       default:
         return "";
     }

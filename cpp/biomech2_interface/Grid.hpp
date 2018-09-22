@@ -21,9 +21,10 @@ namespace biomech2_interface {
   };
 
   struct SparseGrid : public Grid {
-    enum Type {
-      MODBSPL,
-      MODBSPLCC
+    enum class Type {
+      ModifiedBSpline,
+      ModifiedNotAKnotBSpline,
+      ModifiedClenshawCurtisBSpline,
     } type;
     size_t p;
     size_t n;
