@@ -280,4 +280,8 @@ namespace biomech2_interface {
   bool SparseGrid::isAdaptive() const {
     return adaptive;
   }
+
+  bool SparseGrid::isClenshawCurtis() const {
+    return (type == Type::ModifiedClenshawCurtisBSpline);
+  }
 }

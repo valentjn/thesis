@@ -47,5 +47,6 @@ namespace biomech2_interface {
     std::string toString() const;
     std::string getID() const;
     bool isAdaptive() const;
+    bool isClenshawCurtis() const;
   };
 }
