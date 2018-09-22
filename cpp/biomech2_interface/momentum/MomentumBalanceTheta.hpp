@@ -15,6 +15,7 @@ namespace biomech2_interface {
             sgpp::optimization::VectorFunction& TB,
             sgpp::optimization::VectorFunctionGradient& TBGradient);
 
+        using sgpp::optimization::ScalarFunction::eval;
         double eval(const sgpp::base::DataVector& x);
 
         virtual void clone(
