@@ -198,8 +198,7 @@ namespace biomech2_interface {
   void SparseGrid::coarsen(double surplusThresPercentT,
                           double surplusThresPercentB) {
     if (!adaptive) {
-      std::cerr << "Error: Trying to coarsen non-adaptive SparseGrid!\n";
-      return;
+      throw std::runtime_error("Trying to coarsen non-adaptive SparseGrid.");
     }
 
     double minT, maxT, minB, maxB;
