@@ -26,13 +26,13 @@ namespace biomech2_interface {
       MODBSPLCC
     } type;
     size_t p;
-    size_t l;
+    size_t n;
     bool adaptive;
     std::unique_ptr<sgpp::base::Grid> sgppGrid;
     sgpp::base::DataMatrix values;
     sgpp::base::DataMatrix alpha;
 
-    SparseGrid(Type type, size_t p, size_t l, bool adaptive);
+    SparseGrid(Type type, size_t p, size_t n, bool adaptive);
 
     void create();
 

@@ -44,8 +44,8 @@ namespace biomech2_interface {
 
 
 
-  SparseGrid::SparseGrid(Type type, size_t p, size_t l, bool adaptive) :
-        type(type), p(p), l(l), adaptive(adaptive), values(0, 0), alpha(0, 0) {
+  SparseGrid::SparseGrid(Type type, size_t p, size_t n, bool adaptive) :
+          type(type), p(p), n(n), adaptive(adaptive), values(0, 0), alpha(0, 0) {
   }
 
   void SparseGrid::create() {
@@ -60,7 +60,7 @@ namespace biomech2_interface {
         throw std::runtime_error("Grid unsupported.");
     }
 
-    sgppGrid->getGenerator().regular(l);
+    sgppGrid->getGenerator().regular(n);
   }
 
   void SparseGrid::load(const std::string& filename) {
@@ -265,12 +265,12 @@ namespace biomech2_interface {
           "$, $\\ell = " + std::to_string(l) + "$)";*/
     return std::string(adaptive ? "Adaptive SG" : "Regular SG") +
         " (" + basisString() + ", p=" + std::to_string(p) +
-        ", l=" + std::to_string(l) + ")";
+        ", n=" + std::to_string(n) + ")";
   }
 
   std::string SparseGrid::getID() const {
     return "sg_" + basisString() + std::to_string(p) +
-        std::string(adaptive ? "_adap" : "_reg") + std::to_string(l);
+        std::string(adaptive ? "_adap" : "_reg") + std::to_string(n);
   }
 
   bool SparseGrid::isAdaptive() const {
