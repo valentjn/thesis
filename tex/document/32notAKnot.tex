@@ -568,7 +568,7 @@ we can use $\bspl[\nak]{l,0}{p}$ to let the
 second derivative vanish in $x = 0$ itself:
 \begin{equation}
   \label{eq:modifiedNotAKnotBSpline}
-  \bspl[\modified,\nak]{l,i}{p}(x)
+  \bspl[\nak,\modified]{l,i}{p}(x)
   :=
   \begin{cases}
     1,&
@@ -580,15 +580,15 @@ second derivative vanish in $x = 0$ itself:
     l \ge 2,\quad i = 1,\\
     \bspl[\nak]{l,i}{p}(x),&
     l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \bspl[\modified,\nak]{l,1}{p}(1 - x),&
+    \bspl[\nak,\modified]{l,1}{p}(1 - x),&
     l \ge 2,\quad i = 2^l - 1.
   \end{cases}
   \hspace*{-2mm}
 \end{equation}
 The resulting modified hierarchical not-a-knot B-spline basis
-$\bspl[\modified,\nak]{l,i}{p}$ is shown with dashed lines
+$\bspl[\nak,\modified]{l,i}{p}$ is shown with dashed lines
 in \cref{fig:modifiedNotAKnotBSpline}.
-As before, we have to implement $\bspl[\modified,\nak]{l,1}{p}$
+As before, we have to implement $\bspl[\nak,\modified]{l,1}{p}$
 only for a single level $l$, as modified functions of higher levels
 are the same up to an affine parameter transformation.
 Note again that for $p \ge 5$, we would have to modify additional
@@ -658,7 +658,7 @@ cubic degree and the corresponding modified functions are shown in
 \begin{figure}
   \subcaptionbox{%
     $\bspl[\nak]{l',i'}{p}$,
-    $\bspl[\modified,\nak]{l',i'}{p}$
+    $\bspl[\nak,\modified]{l',i'}{p}$
     \emph{(dashed),} and $\gp{l',i'}$ \emph{(dots).}%
     \label{fig:modifiedNotAKnotBSpline}%
   }[73mm]{%
@@ -667,7 +667,7 @@ cubic degree and the corresponding modified functions are shown in
   \hfill
   \subcaptionbox{%
     $\bspl[\cc,\nak]{l',i'}{p}$,
-    $\bspl[\modified,\cc,\nak]{l',i'}{p}$
+    $\bspl[\cc,\nak,\modified]{l',i'}{p}$
     \emph{(dashed),} and $\ccgp{l',i'}$ \emph{(dots).}%
     \label{fig:clenshawCurtisNotAKnotBSpline}%
   }[76mm]{%
@@ -682,8 +682,8 @@ cubic degree and the corresponding modified functions are shown in
     $\bspl[\cc,\nak]{l',i'}{p}$
     ($l ' \le l$, $i' \in \hiset{l'}$, $p = 3$) up to level $l = 3$
     together with the respective modified versions
-    $\bspl[\modified,\nak]{l',i'}{p}$ and
-    $\bspl[\modified,\cc,\nak]{l',i'}{p}$
+    $\bspl[\nak,\modified]{l',i'}{p}$ and
+    $\bspl[\cc,\nak,\modified]{l',i'}{p}$
     \emph{(dashed).}
     The knots of each level $l'$ are given by removing the
     first $\tfrac{p-1}{2}$ and last $\tfrac{p-1}{2}$
