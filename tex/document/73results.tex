@@ -39,7 +39,11 @@ Due to the high resolution of the full grid,
 we may assume that the reference solutions are accurate enough
 to ensure $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 We refer to the resulting quantities with the superscript ``$\mathrm{ref}$'',
-for instance, the equilibrium elbow angle $\equielbangref{\forceL}$.
+for instance, the corresponding equilibrium elbow angle
+$\equielbangref{\forceL}$, which is displayed in
+\cref{fig:biomech2ReferenceEquilibriumAngle}
+for the exemplary loads of $\forceL = \SI{22}{\newton}$,
+$\SI{-60}{\newton}$, and $\SI{180}{\newton}$.
 
 \begin{figure}
   \includegraphics{biomech2ReferenceForce_1}%
@@ -53,6 +57,36 @@ for instance, the equilibrium elbow angle $\equielbangref{\forceL}$.
     ($X \in \{\mathrm{T}, \mathrm{B}\}$).%
   }%
   \label{fig:biomech2ReferenceForce}%
+\end{figure}
+
+\begin{figure}
+  \includegraphics{biomech2ReferenceEquilibriumAngle_4}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $\forceL = \SI{22}{\newton}$%
+  }[49mm]{%
+    \includegraphics{biomech2ReferenceEquilibriumAngle_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\forceL = \SI{-60}{\newton}$%
+  }[49mm]{%
+    \includegraphics{biomech2ReferenceEquilibriumAngle_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\forceL = \SI{180}{\newton}$%
+  }[49mm]{%
+    \includegraphics{biomech2ReferenceEquilibriumAngle_3}%
+  }%
+  \caption[Reference equilibrium elbow angle]{%
+    Reference equilibrium elbow angle $\equielbangref{\forceL}$
+    for different loads $\forceL$.
+    The empty areas correspond to activation pairs $(\actT, \actB)$
+    at which $\equielbangref{\forceL}$ is not well-defined
+    (see \cref{eq:equilibriumAngle}).%
+  }%
+  \label{fig:biomech2ReferenceEquilibriumAngle}%
 \end{figure}
 
 \paragraph{Sparse grid solution}
