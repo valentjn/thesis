@@ -26,6 +26,8 @@ void parseArgs(int argc, const char* argv[],
                Action& action, GridType& gridType, BasisType& basisType,
                size_t& p, double& forceLoad);
 
+inline void writeNumber(double x);
+
 void writeVector(const sgpp::base::DataVector& xx);
 
 void readMatrix(sgpp::base::DataMatrix& XX);
@@ -180,6 +182,20 @@ void parseArgs(int argc, const char* argv[],
   }
 }
 
+inline void writeNumber(double x) {
+  if (std::isinf(x)) {
+    if (x < 0) {
+      std::cout << "-Infinity";
+    } else {
+      std::cout << "Infinity";
+    }
+  } else if (std::isnan(x)) {
+    std::cout << "NaN";
+  } else {
+    std::cout << x;
+  }
+}
+
 void writeVector(const sgpp::base::DataVector& xx) {
   const size_t NN = xx.getSize();
   
@@ -187,7 +203,7 @@ void writeVector(const sgpp::base::DataVector& xx) {
   
   for (size_t j = 0; j < NN; j++) {
     if (j > 0) std::cout << ", ";
-    std::cout << xx[j];
+    writeNumber(xx[j]);
   }
   
   std::cout << "]\n";
@@ -219,7 +235,7 @@ void writeMatrix(const sgpp::base::DataMatrix& XX) {
     
     for (size_t t = 0; t < d; t++) {
       if (t > 0) std::cout << ", ";
-      std::cout << XX(j, t);
+      writeNumber(XX(j, t));
     }
     
     std::cout << "]";
