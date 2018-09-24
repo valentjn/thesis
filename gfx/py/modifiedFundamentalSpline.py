@@ -21,13 +21,13 @@ for p in [3, 5, 7]:
   ax.plot([1, 2, 3, 4], [1, 0, 0, 0], ".", clip_on=False, color="C0")
   
   ax.text(0.45, 1.8,
-          r"$\textstyle\parentfundspl[\mathrm{mod}]{p}$",
+          r"$\textstyle\parentfundspl[\modified]{p}$",
           color="C0", ha="left", va="bottom")
   ax.text(1.8, -0.8,
-          r"$\textstyle\deriv{x}{\parentfundspl[\mathrm{mod}]{p}}$",
+          r"$\textstyle\deriv{x}{\parentfundspl[\modified]{p}}$",
           color="C1", ha="left", va="top")
   ax.text(2.45, 1,
-          r"$\textstyle\deriv[2]{x}{\parentfundspl[\mathrm{mod}]{p}}$",
+          r"$\textstyle\deriv[2]{x}{\parentfundspl[\modified]{p}}$",
           color="C2", ha="left", va="bottom")
   
   ax.set_xticks(list(range(0, 5)))

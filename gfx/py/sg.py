@@ -133,7 +133,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
       ax.plot(*s(xSquare, ySquare), "-", clip_on=False, color=borderColor)
       
       if not whiteMode:
-        superscript = (r"\mathsf{mod}" if isModified else "")
+        superscript = (r"\modified" if isModified else "")
         subspaceName = ("V" if combinationTechnique else "W")
         ax.text(*s(0.5, 0),
                 "\\contour{{{}}}{{${}_{{({},{})}}^{{{}}}$}}".format(

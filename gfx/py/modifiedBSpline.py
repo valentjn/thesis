@@ -31,7 +31,7 @@ xx = np.linspace(*b.getSupport(l, i), 200)
 yy = b.evaluate(l, i, xx)
 ax.plot(xx, yy, "k--", clip_on=False)
 ax.text(i*h-0.02, 1.2,
-        r"$\bspl[{}]{{{},{}}}{{{}}}$".format(r"\mathrm{mod}", "l'", 1, "p"),
+        r"$\bspl[{}]{{{},{}}}{{{}}}$".format(r"\modified", "l'", 1, "p"),
         ha="left", va="bottom", color="k")
 
 maxY = 2.1

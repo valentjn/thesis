@@ -25,13 +25,13 @@ def plotSubspace(ax, basis, l, n,
   maxY = 0
   
   if superscript is None: superscript = ("p" if p > 1 else "1")
-  if modified:        superscript += r",\mathrm{{mod}}"
-  if clenshawCurtis:  superscript += r",\mathrm{cc}"
-  if notAKnot:        superscript += r",\mathrm{nak}"
+  if modified:        superscript += r",\modified"
+  if clenshawCurtis:  superscript += r",\cc"
+  if notAKnot:        superscript += r",\nak"
   if superscript != "": superscript = r"^{{{}}}".format(superscript)
   
-  if clenshawCurtis: pointSuperscript = r"^{\mathrm{cc}}"
-  elif whiteCC:      pointSuperscript = r"^{\vphantom{\mathrm{cc}}}"
+  if clenshawCurtis: pointSuperscript = r"^{\cc}"
+  elif whiteCC:      pointSuperscript = r"^{\vphantom{\cc}}"
   else:              pointSuperscript = ""
   
   for i in plotI:
