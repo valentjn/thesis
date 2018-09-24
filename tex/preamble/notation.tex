@@ -1186,12 +1186,14 @@
 }
 
 \hidenextnotation
-\newnotationcommand[1]{\equielbang}{\theta_{#1}}{ÄθFL}{$\equielbang{\forceL}$}{
+\newnotationcommand[1]{\equielbang}{%
+  \elbang_{#1}%
+}{ÄθFL}{$\equielbang{\forceL}$}{
   Equil. elbow angle
 }
 
 \hidenextnotation
-\newnotationcommand{\tarelbang}{\theta^\ast}{Äθ*}{$\tarelbang$}{
+\newnotationcommand{\tarelbang}{\elbang^\ast}{Äθ*}{$\tarelbang$}{
   Target elbow angle
 }
 
@@ -1221,17 +1223,17 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\armT}{r_\mathrm{T}}{rT}{$\armT$}{
+\newnotationcommand{\armT}{\arm_\mathrm{T}}{rT}{$\armT$}{
   Triceps lever arm
 }
 
 \hidenextnotation
-\newnotationcommand{\armB}{r_\mathrm{B}}{rB}{$\armB$}{
+\newnotationcommand{\armB}{\arm_\mathrm{B}}{rB}{$\armB$}{
   Biceps lever arm
 }
 
 \hidenextnotation
-\newnotationcommand{\armL}{r_\mathrm{L}}{rL}{$\armL$}{
+\newnotationcommand{\armL}{\arm_\mathrm{L}}{rL}{$\armL$}{
   Load lever arm
 }
 
@@ -1241,17 +1243,17 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\actX}{\beta_\ast}{Äβ*}{$\actX$}{
+\newnotationcommand{\actX}{\act_\ast}{Äβ*}{$\actX$}{
   Muscle activation
 }
 
 \hidenextnotation
-\newnotationcommand{\actT}{\beta_\mathrm{T}}{ÄβT}{$\actT$}{
+\newnotationcommand{\actT}{\act_\mathrm{T}}{ÄβT}{$\actT$}{
   Triceps activation
 }
 
 \hidenextnotation
-\newnotationcommand{\actB}{\beta_\mathrm{B}}{ÄβB}{$\actB$}{
+\newnotationcommand{\actB}{\act_\mathrm{B}}{ÄβB}{$\actB$}{
   Biceps activation
 }
 
@@ -1268,7 +1270,7 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\forceTintp}{F_\mathrm{T}^{\sparse}}{FTs}{$\forceTintp$}{
+\newnotationcommand{\forceTintp}{\forceT^{\sparse}}{FTs}{$\forceTintp$}{
   Triceps force interpolated with sparse grids
 }
 
@@ -1278,13 +1280,13 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\momentintp}{M^{\sparse}}{Ms}{$\momentintp$}{
+\newnotationcommand{\momentintp}{\moment^{\sparse}}{Ms}{$\momentintp$}{
   Moment obtained through sparse grid interpolation
 }
 
 \hidenextnotation
 \newnotationcommand[1]{\equielbangintp}{%
-  \theta_{#1}^{\sparse}%
+  \elbang_{#1}^{\sparse}%
 }{ÄθFLs}{$\equielbangintp{\forceL}$}{
   Equil. elbow angle obtained through sparse grid interpolation
 }
@@ -1298,14 +1300,14 @@
 
 \hidenextnotation
 \newnotationcommand{\forceTref}{%
-  F_\mathrm{T}^{\reference}%
+  \forceT^{\reference}%
 }{FTref}{$\forceTref$}{
   Reference triceps force
 }
 
 \hidenextnotation
 \newnotationcommand{\forceBref}{%
-  F_\mathrm{B}^{\reference}%
+  \forceB^{\reference}%
 }{FBref}{$\forceTref$}{
   Reference biceps force
 }
@@ -1317,7 +1319,7 @@
 
 \hidenextnotation
 \newnotationcommand[1]{\equielbangref}{%
-  \theta_{#1}^{\mathrm{ref}}%
+  \elbang_{#1}^{\mathrm{ref}}%
 }{ÄθFLref}{$\equielbangref{\forceL}$}{
   Reference equil. elbow angle
 }
