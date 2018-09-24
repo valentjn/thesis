@@ -103,9 +103,7 @@ def main():
   
   
   
-  fig = Figure.create(figsize=(1.2, 2.6), scale=0.9, preamble=r"""
-\usepackage{siunitx}
-""")
+  fig = Figure.create(figsize=(1.2, 2.6), scale=0.9)
   ax = fig.gca()
 
   colorMap = mpl.cm.Spectral
