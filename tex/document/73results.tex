@@ -75,6 +75,82 @@ into \cref{eq:totalMomentSurrogate,eq:equilibriumAngleSurrogate}.
 
 \dummytext[3]{}
 
+\begin{figure}
+  \includegraphics{biomech2ForceError_5}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $\abs{\forceXref - \forceXintp[p]}$ for
+    $X = \mathrm{T}$ \emph{(left)} and
+    $X = \mathrm{B}$ \emph{(right)}%
+  }[73mm]{%
+    \includegraphics{biomech2ForceError_1}%
+    \hfill%
+    \includegraphics{biomech2ForceError_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\abs{\forceXref - \forceXintp[p,\cc]}$ for
+    $X = \mathrm{T}$ \emph{(left)} and
+    $X = \mathrm{B}$ \emph{(right)}%
+  }[73mm]{%
+    \includegraphics{biomech2ForceError_3}%
+    \hfill%
+    \includegraphics{biomech2ForceError_4}%
+  }%
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{fig:TODO}%
+\end{figure}
+
+\begin{table}
+  \subcaptionbox{%
+    $\normLtwo{\forceXref - \forceXintp}/\normLtwo{\forceXref}$
+    [\textperthousand] given as triceps/biceps pairs
+    ($X \in \{\mathrm{T}, \mathrm{B}\}$).%
+  }[85mm]{%
+    \setnumberoftableheaderrows{1}%
+    \begin{tabular}{%
+      >{\kern\tabcolsep}=l<{\kern2mm}%
+      +c<{\kern-1mm}+c<{\kern-1mm}+c<{\kern\tabcolsep}%
+    }
+      \toprulec
+      \headerrow
+      $p$&$1$&$3$&$5$\\
+      \midrulec
+      $\bspl[\modified]{l,i}{p}$&     $3.60,7.12$&$3.05,7.00$&$2.98,7.90$\\
+      $\bspl[\cc,\modified]{l,i}{p}$& $3.28,4.35$&$3.30,3.56$&$3.35,3.64$\\
+      $\bspl[\nak,\modified]{l,i}{p}$&$3.60,7.12$&$3.09,10.0$&$7.13,24.6$\\
+      \bottomrulec
+    \end{tabular}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\normLtwo{\equielbangref{\forceL} - \equielbangintp{\forceL}}/
+    \normLtwo{\equielbangref{\forceL}}$
+    [\textperthousand] for $\forceL = \SI{22}{\newton}$.%
+  }[59mm]{%
+    \setnumberoftableheaderrows{1}%
+    \begin{tabular}{%
+      >{\kern\tabcolsep}=l<{\kern2mm}%
+      +c<{\kern-1mm}+c<{\kern-1mm}+c<{\kern\tabcolsep}%
+    }
+      \toprulec
+      \headerrow
+      $p$&$1$&$3$&$5$\\
+      \midrulec
+      $\bspl[\modified]{l,i}{p}$&     $4.15$&$3.74$&$3.72$\\
+      $\bspl[\cc,\modified]{l,i}{p}$& $3.42$&$2.83$&$2.86$\\
+      $\bspl[\nak,\modified]{l,i}{p}$&$4.15$&$4.06$&$8.28$\\
+      \bottomrulec
+    \end{tabular}%
+  }%
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{tbl:TODO2}%
+\end{table}
+
 
 
 \subsection{Error of the Equilibrium Angle}
