@@ -25,7 +25,12 @@ the full grid
   {\ast} \in \{\mathrm{T}, \mathrm{B}\}.
 \end{equation}
 The resulting \num{1551} grid points
-are interpolated with bicubic spline interpolation
+are interpolated with bicubic spline interpolation%
+\footnote{%
+  Computed with the Geometric Tools Engine, see
+  \url{https://www.geometrictools.com/}
+  \cite{Schneider03Geometric}.
+}
 to obtain \term{reference solutions}
 $\forceTref, \forceBref\colon
 \clint{\ang{10}, \ang{150}} \times \clint{0, 1} \to \real$,
