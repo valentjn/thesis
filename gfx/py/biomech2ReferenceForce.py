@@ -115,6 +115,31 @@ def main():
   ax.set_yticklabels(["${:g}$".format(y) for y in yt])
   
   fig.save()
+  
+  
+  
+  n = 5
+  X = np.zeros((0, 2))
+  YExact = np.zeros((0, 2))
+  
+  for basisType in ["modifiedBSpline", "modifiedClenshawCurtisBSpline"]:
+    distribution = ("clenshawCurtis"
+        if "clenshawcurtis" in basisType.lower() else "uniform")
+    _, L, I = helper.grid.RegularSparse(n, d).generate()
+    curX = helper.grid.getCoordinates(L, I, distribution)
+    X = np.vstack((X, curX))
+    YExact = np.vstack((YExact, helperBiomech2.applyBiomech2(
+        action, "sparseGrid", basisType, p, forceLoad, curX)))
+  
+  _, K = np.unique(X.round(decimals=6), axis=0, return_index=True)
+  X, YExact = X[K], YExact[K]
+  N = X.shape[0]
+  
+  YRef = helperBiomech2.applyBiomech2(
+      action, "fullGrid", basisType, p, forceLoad, X)
+  print("Relative L^2 error of reference interpolants on SG points:")
+  print(np.sqrt(np.sum((YExact - YRef)**2, axis=0) / N) /
+        np.sqrt(np.sum(YExact**2, axis=0) / N))
 
 
 
