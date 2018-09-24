@@ -264,10 +264,13 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
       \bottomrulec
     \end{tabular}%
   }%
-  \caption[TODO]{%
-    TODO%
+  \caption[Relative $L^2$ errors of forces and equilibrium elbow angle]{%
+    Relative $\Ltwo$ errors of triceps/biceps force \emph{(left)} and
+    equilibrium elbow angle \emph{(right)}
+    for different hierarchical bases $\basis{\*l,\*i}$ and
+    B-spline degrees $p$.%
   }%
-  \label{tbl:TODO2}%
+  \label{tbl:biomech2ErrorL2}%
 \end{table}
 
 \paragraph{Error of the elbow equilibrium angle}
@@ -294,10 +297,14 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
   }[49mm]{%
     \includegraphics{biomech2ErrorEquilibriumAngle_3}%
   }%
-  \caption[TODO]{%
-    TODO%
+  \caption[Absolute error of the equilibrium elbow angle]{%
+    Absolute error
+    $\abs{\equielbangref{\forceL} - \equielbangintp[p,\cc]{\forceL}}$
+    of the equilibrium elbow angle for
+    modified hierarchical cubic Clenshaw--Curtis B-splines ($p = 3$)
+    for different loads $\forceL$.%
   }%
-  \label{fig:TODO2}%
+  \label{fig:biomech2ErrorEquilibriumAngle}%
 \end{figure}
 
 
