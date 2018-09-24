@@ -135,9 +135,57 @@ into \cref{eq:totalMomentSurrogate,eq:equilibriumAngleSurrogate}.
 \subsection{Errors of Muscle Forces and Equilibrium Angle}
 \label{sec:732errors}
 
-\paragraph{Quality of reference interpolant}
+\paragraph{Quality of the reference interpolants}
 
-\dummytext{}
+Before we turn to the sparse grid interpolants,
+we assess the quality of the reference interpolant on the full grid.
+For this purpose, we evaluate the full grid interpolants
+$\forceTintp, \forceBintp$
+at the sparse grid points $(\elbang^{(k)}, \actX^{(k)})$
+(which are not a subset of the full grid points!)
+and compare the resulting values with the known exact values
+$\forceT(\elbang^{(k)}, \actT^{(k)})$ and
+$\forceB(\elbang^{(k)}, \actB^{(k)})$
+of the muscle forces $\forceT, \forceB$.
+We also incorporate the known values at the sparse
+Clenshaw--Curtis grid points.
+In particular, to simplify the notation,
+let $G$ be the union of
+$\{(\elbang^{(k)}, \actX^{(k)}) \mid k = 1, \dotsc, \ngp\}$ and
+$\{(\elbang^{(k,\cc)}, \actX^{(k,\cc)}) \mid k = 1, \dotsc, \ngp\}$.%
+\footnote{%
+  We have $\setsize{G} = 2\ngp - 1$, since sparse grids of
+  uniform and Clenshaw--Curtis type only
+  share the center point $(\elbang, \actX) = (\ang{80}, 0.5)$,
+  if there are no boundary points.%
+}
+Then, we can approximate the relative $L^2$ interpolation error
+of the reference interpolants by
+\begin{equation}
+  \frac{\normLtwo{\forceX - \forceXref}}{\normLtwo{\forceX}}
+  \approx
+  \frac{
+    \norm[l^2]{
+      (\forceX(\elbang, \actX) - \forceXref(\elbang, \actX))_
+      {(\elbang, \actX) \in G}
+    }
+  }{
+    \norm[l^2]{(\forceX(\elbang, \actX))_{(\elbang, \actX) \in G}}
+  },\quad
+  X \in \{\mathrm{T}, \mathrm{B}\},
+\end{equation}
+where the $l^2$ norm of a vector $\*a$ is given by
+$\norm[l^2]{\*a} := \sqrt{\tfrac{1}{\ngp} \sum_{k=1}^{\ngp} (a_k)^2}$.
+Inserting the known values $\forceX(\elbang, \actX)$ and
+$\forceXref(\elbang, \actX)$ on the \rhs, we obtain
+\begin{equation}
+  \frac{\normLtwo{\forceT - \forceTref}}{\normLtwo{\forceT}}
+  \approx \SI{2.19}{\permille},\qquad
+  \frac{\normLtwo{\forceB - \forceBref}}{\normLtwo{\forceB}}
+  \approx \SI{2.06}{\permille}.
+\end{equation}
+These errors are very small, which justifies our assumption of
+$\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 
 \paragraph{Error of the muscle forces}
 
