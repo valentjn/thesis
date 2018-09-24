@@ -6,11 +6,9 @@ import numpy as np
 import helper.basis
 from   helper.figure import Figure
 import helper.grid
+import helper.plot
 
-def removeWhiteLinesInSurfPlot(surf):
-  surf._facecolors2d = surf._facecolors3d
-  surf.set_linewidth(0.2)
-  surf.set_edgecolors("face")
+
 
 l = [2, 1]
 i = [1, 1]
@@ -39,7 +37,7 @@ XX0, XX1 = np.meshgrid(xx0, xx1)
 XX = np.column_stack((XX0.flatten(), XX1.flatten()))
 YY = b.evaluate(l, i, XX)
 YY = np.reshape(YY, XX0.shape)
-removeWhiteLinesInSurfPlot(ax.plot_surface(XX0, XX1, YY))
+helper.plot.removeWhiteLinesInSurfPlot(ax.plot_surface(XX0, XX1, YY))
 
 K = list(range(X.shape[0]))
 for k in [5, 4, 2, 1]: del K[k]
