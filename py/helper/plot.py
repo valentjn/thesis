@@ -240,6 +240,11 @@ def computeZOrderValue(ax, X):
 
 
 
+def removeWhiteLinesInSurfPlot(surf):
+  surf._facecolors2d = surf._facecolors3d
+  surf.set_linewidth(0.2)
+  surf.set_edgecolors("face")
+
 def setEqual3DAxes(ax):
   extents = np.array([ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]).T
   size = extents[1] - extents[0]
