@@ -92,16 +92,39 @@ $\SI{-60}{\newton}$, and $\SI{180}{\newton}$.
 \paragraph{Sparse grid solution}
 
 Additionally, we evaluate $\forceT$ and $\forceB$ at the $\ngp = 49$
-grid points of the regular sparse grid $\interiorregsgset{n}{d}$ of
-level $n = 5$ in $d = 2$ dimensions.
-We interpolate these values using
+grid points
+\begin{equation}
+  \{(\elbang^{(k)}, \actX^{(k)}) \mid k = 1, \dotsc, \ngp\}
+  \subset \clint{\ang{10}, \ang{150}} \times \clint{0, 1},\quad
+  X \in \{\mathrm{T}, \mathrm{B}\},
+\end{equation}
+of the regular sparse grid $\interiorregsgset{n}{d}$ of
+level $n = 5$ in $d = 2$ dimensions.%
+\footnote{%
+  The domain $\clint{\ang{10}, \ang{150}} \times \clint{0, 1}$
+  is assumed to be implicitly normalized to the unit square
+  $\clint{\*0, \*1}$.%
+}
+These values are interpolated using three
+different hierarchical B-spline bases of degree $p = 1$, $3$, and $5$:
+modified hierarchical B-splines
+$\bspl[\modified]{\*l,\*i}{p}$
+(see \cref{sec:313modification}),
+modified hierarchical Clenshaw--Curtis B-splines
+$\bspl[\cc,\modified]{\*l,\*i}{p}$
+(see \cref{sec:314nonUniform}), and
 modified hierarchical not-a-knot B-splines
-$\bspl[\nak,\modified]{\*l,\*i}{p}$ of degree $p = 1$, $3$, and $5$
+$\bspl[\nak,\modified]{\*l,\*i}{p}$
 (see \cref{sec:323modifiedNAKBSplines}).
 The implementation was done using the sparse grid toolbox
-\sgpp{} \cite{Pflueger10Spatially}.
+\sgpp{} \cite{Pflueger10Spatially}.%
+\footnote{%
+  \url{http://sgpp.sparsegrids.org/}%
+}
 The corresponding interpolants and resulting quantities
-are denoted with the superscript ``$\sparse,p$''.
+are denoted with the superscripts
+``$\sparse,\!p$'', ``$\sparse,\!p,\!\cc$'', or ``$\sparse,\!p,\!\nak$'',
+respectively.
 Note that the equilibrium elbow angle is \emph{not} interpolated
 (neither in the full grid nor in the sparse grid case),
 but rather obtained by inserting the interpolated muscle forces
