@@ -154,8 +154,8 @@ namespace biomech2_interface {
       X(i, 1) = X(i, 1) * (ALPHA_MAX - ALPHA_MIN) + ALPHA_MIN;
     }
 
-    std::cout << "X = " << X.toString() << "\n";
-    std::cout << "values = " << values.toString() << "\n";
+    std::cerr << "X = " << X.toString() << "\n";
+    std::cerr << "values = " << values.toString() << "\n";
   }
 
   void SparseGrid::generateValues(
@@ -182,8 +182,8 @@ namespace biomech2_interface {
       values.setRow(i, fx);
     }
 
-    std::cout << "X = " << X.toString() << "\n";
-    std::cout << "values = " << values.toString() << "\n";
+    std::cerr << "X = " << X.toString() << "\n";
+    std::cerr << "values = " << values.toString() << "\n";
   }
 
   void SparseGrid::hierarchize() {
@@ -192,7 +192,7 @@ namespace biomech2_interface {
     std::unique_ptr<sgpp::optimization::OperationMultipleHierarchisation> opHier(
         sgpp::op_factory::createOperationMultipleHierarchisation(*sgppGrid));
     opHier->doHierarchisation(alpha);
-    std::cout << "alpha = " << alpha.toString() << "\n";
+    std::cerr << "alpha = " << alpha.toString() << "\n";
   }
 
   void SparseGrid::coarsen(double surplusThresPercentT,
@@ -245,9 +245,9 @@ namespace biomech2_interface {
       alpha(k, 1) = alphaOld(kOld, 1);
     }
 
-    std::cout << "After coarsening:\n";
-    std::cout << "X = " << X.toString() << "\n";
-    std::cout << "values = " << values.toString() << "\n";
+    std::cerr << "After coarsening:\n";
+    std::cerr << "X = " << X.toString() << "\n";
+    std::cerr << "values = " << values.toString() << "\n";
     hierarchize();
   }
 
