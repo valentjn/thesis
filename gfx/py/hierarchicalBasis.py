@@ -25,9 +25,9 @@ def plotSubspace(ax, basis, l, n,
   maxY = 0
   
   if superscript is None: superscript = ("p" if p > 1 else "1")
-  if modified:        superscript += r",\modified"
   if clenshawCurtis:  superscript += r",\cc"
   if notAKnot:        superscript += r",\nak"
+  if modified:        superscript += r",\modified"
   if superscript != "": superscript = r"^{{{}}}".format(superscript)
   
   if clenshawCurtis: pointSuperscript = r"^{\cc}"
