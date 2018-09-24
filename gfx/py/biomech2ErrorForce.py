@@ -50,6 +50,7 @@ def main():
       ax.set_ylim(0, 1)
       ax.set_xticks([10, 150])
       ax.set_yticks([0, 1])
+      ax.set_xticklabels([r"$10^{\circ}$", r"$150^{\circ}$"])
       
       trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
       ax.text(*trafo(0.5, -0.05), r"$\elbang$", ha="center", va="top")
