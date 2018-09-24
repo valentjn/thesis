@@ -28,12 +28,27 @@ The resulting \num{1551} grid points
 are interpolated with bicubic spline interpolation
 to obtain \term{reference solutions}
 $\forceTref, \forceBref\colon
-\clint{\ang{10}, \ang{150}} \times \clint{0, 1} \to \real$.
+\clint{\ang{10}, \ang{150}} \times \clint{0, 1} \to \real$,
+which are shown in \cref{fig:biomech2ReferenceForce}.
 Due to the high resolution of the full grid,
 we may assume that the reference solutions are accurate enough
 to ensure $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 We refer to the resulting quantities with the superscript ``$\mathrm{ref}$'',
 for instance, the equilibrium elbow angle $\equielbangref{\forceL}$.
+
+\begin{figure}
+  \includegraphics{biomech2ReferenceForce_1}%
+  \;\;%
+  \includegraphics{biomech2ReferenceForce_2}%
+  \hfill%
+  \rlap{\raisebox{53mm}{\;$\forceXref$ [\si{\kilo\newton}]}}%
+  \includegraphics{biomech2ReferenceForce_3}%
+  \caption[Reference triceps and biceps forces]{%
+    Reference triceps and biceps forces $\forceXref$
+    ($X \in \{\mathrm{T}, \mathrm{B}\}$).%
+  }%
+  \label{fig:biomech2ReferenceForce}%
+\end{figure}
 
 \paragraph{Sparse grid solution}
 
