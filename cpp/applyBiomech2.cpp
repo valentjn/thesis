@@ -73,6 +73,8 @@ int main(int argc, const char* argv[]) {
   std::unique_ptr<sgpp::optimization::ScalarFunction> intpT;
   std::unique_ptr<sgpp::optimization::ScalarFunction> intpB;
   
+  std::unique_ptr<bm2i::SparseGrid> sparseGrid;
+  
   if (gridType == GridType::FullGrid) {
     // use full grid interpolant
     fgIntpTB.clone(intpTB);
@@ -81,27 +83,27 @@ int main(int argc, const char* argv[]) {
     fgIntpB.clone(intpB);
   } else {
     // use sparse grid interpolant
-    bm2i::SparseGrid sparseGrid(basisType, p, n, adaptive);
-    sparseGrid.create();
-    sparseGrid.load(sparseGrid.isClenshawCurtis() ?
-                    "data/biomech2/sgRegular4ClenshawCurtis.dat" :
-                    "data/biomech2/sgRegular4Uniform.dat");
-    sparseGrid.hierarchize();
+    sparseGrid.reset(new bm2i::SparseGrid(basisType, p, n, adaptive));
+    sparseGrid->create();
+    sparseGrid->load(sparseGrid->isClenshawCurtis() ?
+                     "data/biomech2/sgRegular4ClenshawCurtis.dat" :
+                     "data/biomech2/sgRegular4Uniform.dat");
+    sparseGrid->hierarchize();
 
-    if (sparseGrid.isAdaptive()) {
-      sparseGrid.coarsen(surplusThresPercentT, surplusThresPercentB);
+    if (sparseGrid->isAdaptive()) {
+      sparseGrid->coarsen(surplusThresPercentT, surplusThresPercentB);
     }
 
     intpTB.reset(
         new bm2i::interpolation::TBSparseGridInterpolant(
-            *sparseGrid.sgppGrid, sparseGrid.alpha));
+            *sparseGrid->sgppGrid, sparseGrid->alpha));
+    intpTBGradient.reset(
+        new bm2i::interpolation::TBSparseGridInterpolantGradient(
+            *sparseGrid->sgppGrid, sparseGrid->alpha));
     intpT.reset(new sgpp::optimization::ComponentScalarFunction(
         *intpTB, 0, {NAN, NAN, 0.0}));
     intpB.reset(new sgpp::optimization::ComponentScalarFunction(
         *intpTB, 1, {NAN, 0.0, NAN}));
-    intpTBGradient.reset(
-        new bm2i::interpolation::TBSparseGridInterpolantGradient(
-            *sparseGrid.sgppGrid, sparseGrid.alpha));
   }
   
   // execute action
