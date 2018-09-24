@@ -1265,30 +1265,36 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\forceTintp}{\forceT^{\sparse}}{FTs}{$\forceTintp$}{
+\newnotationcommandoptarg{1}{\forceTintp}{%
+  \forceT^{\sparse\ifnotempty{#1}{,#1}}%
+}{FTs}{$\forceTintp$}{
   Triceps force interpolated with sparse grids
 }
 
 \hidenextnotation
-\newnotationcommand{\forceBintp}{F_\mathrm{B}^{\sparse}}{FBs}{$\forceTBntp$}{
+\newnotationcommandoptarg{1}{\forceBintp}{%
+  \forceB^{\sparse\ifnotempty{#1}{,#1}}%
+}{FBs}{$\forceTBntp$}{
   Biceps force interpolated with sparse grids
 }
 
 \hidenextnotation
-\newnotationcommand{\momentintp}{\moment^{\sparse}}{Ms}{$\momentintp$}{
+\newnotationcommandoptarg{1}{\momentintp}{%
+  \moment^{\sparse\ifnotempty{#1}{,#1}}%
+}{Ms}{$\momentintp$}{
   Moment obtained through sparse grid interpolation
 }
 
 \hidenextnotation
-\newnotationcommand[1]{\equielbangintp}{%
-  \elbang_{#1}^{\sparse}%
+\newnotationcommandoptarg{2}{\equielbangintp}{%
+  \elbang_{#2}^{\sparse\ifnotempty{#1}{,#1}}%
 }{ÄθFLs}{$\equielbangintp{\forceL}$}{
   Equil. elbow angle obtained through sparse grid interpolation
 }
 
 \hidenextnotation
-\newnotationcommand[1]{\actdomainintp}{%
-  D_{\equielbang{#1}}^{\sparse}%
+\newnotationcommandoptarg{2}{\actdomainintp}{%
+  D_{\equielbang{#2}}^{\sparse\ifnotempty{#1}{,#1}}%
 }{$DθLs$}{$\actdomainintp{\forceL}$}{
   Domain of $\equielbangintp{\forceL}$
 }
