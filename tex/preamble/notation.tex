@@ -1198,6 +1198,11 @@
 }
 
 \hidenextnotation
+\newnotationcommand{\forceX}{F_X}{FX}{$\forceX$}{
+  Force
+}
+
+\hidenextnotation
 \newnotationcommand{\forceT}{F_\mathrm{T}}{FT}{$\forceT$}{
   Triceps force
 }
@@ -1214,6 +1219,11 @@
 
 \hidenextnotation
 \newnotationcommand{\arm}{r}{r}{$\arm$}{
+  Lever arm
+}
+
+\hidenextnotation
+\newnotationcommand{\armX}{\arm_X}{rX}{$\armX$}{
   Lever arm
 }
 
@@ -1265,6 +1275,13 @@
 }
 
 \hidenextnotation
+\newnotationcommandoptarg{1}{\forceXintp}{%
+  F_X^{\sparse\ifnotempty{#1}{,#1}}%
+}{FXs}{$\forceXintp$}{
+  Muscle force interpolated with sparse grids
+}
+
+\hidenextnotation
 \newnotationcommandoptarg{1}{\forceTintp}{%
   \forceT^{\sparse\ifnotempty{#1}{,#1}}%
 }{FTs}{$\forceTintp$}{
@@ -1297,6 +1314,11 @@
   D_{\equielbang{#2}}^{\sparse\ifnotempty{#1}{,#1}}%
 }{$DθLs$}{$\actdomainintp{\forceL}$}{
   Domain of $\equielbangintp{\forceL}$
+}
+
+\hidenextnotation
+\newnotationcommand{\forceXref}{\forceX^{\reference}}{FXref}{$\forceXref$}{
+  Reference force
 }
 
 \hidenextnotation
