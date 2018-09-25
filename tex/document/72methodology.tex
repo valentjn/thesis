@@ -174,18 +174,18 @@ optimization problems that the following list proposes
   $(\actT(t_2) - \actT(t_1))^2 + (\actB(t_2) - \actB(t_1))^2$
   is minimized under the constraint
   $\equielbang{\forceL(t_2)}(\actT(t_2), \actB(t_2)) = \tarelbang(t_2)$.
-  
-  \item
-  For a given external load $\forceL(t_2)$ for a time $t_2 > t_1$,
-  an initial angle $\tarelbang(t_1) \in \clint{\ang{10}, \ang{150}}$,
-  an initial activation parameters
-  $(\actT(t_1), \actB(t_1)) \in \clint{\*0, \*1}$,
-  find new activation parameters
-  $(\actT(t_2), \actB(t_2)) \in \clint{\*0, \*1}$ such that
-  $(\actT(t_2) - \actT(t_1))^2 + (\actB(t_2) - \actB(t_1))^2 +
-  c^2 \cdot (
-    \equielbang{\forceL(t_2)}(\actT(t_2), \actB(t_2)) - \tarelbang(t_2)
-  )^2$ is minimized (with $c \in \nonnegreal$ arbitrary but fixed).
+  %
+  %\item
+  %For a given external load $\forceL(t_2)$ for a time $t_2 > t_1$,
+  %an initial angle $\tarelbang(t_1) \in \clint{\ang{10}, \ang{150}}$,
+  %an initial activation parameters
+  %$(\actT(t_1), \actB(t_1)) \in \clint{\*0, \*1}$,
+  %find new activation parameters
+  %$(\actT(t_2), \actB(t_2)) \in \clint{\*0, \*1}$ such that
+  %$(\actT(t_2) - \actT(t_1))^2 + (\actB(t_2) - \actB(t_1))^2 +
+  %c^2 \cdot (
+  %  \equielbang{\forceL(t_2)}(\actT(t_2), \actB(t_2)) - \tarelbang(t_2)
+  %)^2$ is minimized (with $c \in \nonnegreal$ arbitrary but fixed).
 \end{enumerate}
 
 \paragraph{Motivation of problem O1}
@@ -220,31 +220,33 @@ Therefore, we want to find the pair of activation parameters
 that is closest (in terms of the Euclidean norm) to the initial
 activation parameters $\actT(t_1), \actB(t_1)$.
 
-\paragraph{Motivation of problem O3}
+%\paragraph{Motivation of problem O3}
+%
+%The third problem O3 is derived from O2.
+%Instead of prescribing the target angle $\tarelbang(t_2)$,
+%we try to stay ``near'' the initial angle $\tarelbang(t_1)$,
+%ensuring that the desired target position is achieved.
+%For this purpose, we introduce a weight parameter $c$ that
+%allows for small deviations form $\tarelbang(t_1)$.
 
-The third problem O3 is derived from O2.
-Instead of prescribing the target angle $\tarelbang(t_2)$,
-we try to stay ``near'' the initial angle $\tarelbang(t_1)$,
-ensuring that the desired target position is achieved.
-For this purpose, we introduce a weight parameter $c$ that
-allows for small deviations form $\tarelbang(t_1)$.
-
-\paragraph{Optimization methods}
-
-Problems O1 and O2 are both constrained optimization problems,
-while O3 is unconstrained.
-For problems O1 and O2, we employ the Augmented Lagrangian method as
+\paragraph{Optimization method}
+%
+%Problems O1 and O2 are both constrained optimization problems,
+%while O3 is unconstrained.
+%For problems O1 and O2, we employ the augmented Lagrangian method as
+Problems O1 and O2 are both constrained optimization problems.
+For their solution, we employ the augmented Lagrangian method as
 described in \cref{sec:513gradientBasedConstrained}
 using an adaptive gradient descent algorithm
 for the gradient-based optimization of the penalized objective function
 (see \cref{sec:512gradientBasedUnconstrained}).
-Problem O3 is a non-linear least-squares problem,
-where the objective function $\objfun\colon \clint{\*0, \*1} \to \real$
-is of the form
-$\objfun(\*x) = \tr{\*\phi(\*x)} \*\phi(\*x) = \sum_{i=1}^m \phi_i(\*x)^2$
-for some function $\*\phi\colon \clint{\*0, \*1}^d \to \real^m$.
-We solve this problem with the Levenberg--Marquardt method
-(again, see \cref{sec:512gradientBasedUnconstrained} for details).
+%Problem O3 is a non-linear least-squares problem,
+%where the objective function $\objfun\colon \clint{\*0, \*1} \to \real$
+%is of the form
+%$\objfun(\*x) = \tr{\*\phi(\*x)} \*\phi(\*x) = \sum_{i=1}^m \phi_i(\*x)^2$
+%for some function $\*\phi\colon \clint{\*0, \*1}^d \to \real^m$.
+%We solve this problem with the Levenberg--Marquardt method
+%(again, see \cref{sec:512gradientBasedUnconstrained} for details).
 
 
 
@@ -253,7 +255,8 @@ We solve this problem with the Levenberg--Marquardt method
 
 \paragraph{Complexity}
 
-To solve optimization problems O1 to O3,
+%To solve optimization problems O1 to O3,
+To solve optimization problems O1 and O2,
 the optimization method needs to evaluate the objective function
 and the constraint functions multiple times during the algorithm.
 This requires the evaluation of $\equielbang{\forceL}$,
@@ -276,7 +279,8 @@ about half an hour.
 %
 If we assume that we need four Newton iterations on average,
 then a single iteration of the optimization algorithm to solve
-problems O1 to O3 will take four hours to complete
+%problems O1 to O3 will take four hours to complete
+problems O1 and O2 will take four hours to complete
 (assuming one evaluation of objective and constraint functions
 per optimizer iteration and
 two evaluations per Newton iteration to calculate the missing derivative).
