@@ -191,7 +191,32 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 
 \paragraph{Error of the muscle forces}
 
-\dummytext{}
+\Cref{tbl:biomech2ErrorL2_1} contains the relative $\Ltwo$
+interpolation errors
+$\normLtwo{\forceXref - \forceXintp}/\normLtwo{\forceXref}$
+($X \in \{\mathrm{T}, \mathrm{B}\}$)
+for all hierarchical bases and the degrees $p = 1, 3, 5$.
+All reported errors are relatively small
+due to the smoothness of the original functions
+(cf.\ $\forceXref$ in \cref{fig:biomech2ReferenceForce}).
+All in all, the modified Clenshaw--Curtis B-splines perform best,
+achieving relative $\Ltwo$ errors of below \SI{3.6}{\permille}
+in the cubic case.
+Surprisingly, the not-a-knot B-splines are the worst choice in our
+comparison.
+Their corresponding errors exceed \SI{1}{\percent} for the triceps
+and $p \in \{3, 5\}$.
+Possible reasons are two-fold:
+First, there might be slight noise in the given muscle force data,
+which is visible in \cref{fig:biomech2ReferenceForce},
+as there seems to be a kink in $\forceTref$ at $\elbang \approx \ang{25}$.
+Second, the employed regular sparse grids might be too coarse
+as the convergence order of not-a-knot B-splines is higher,
+but we might still be in the pre-asymptotic range
+(see \cref{sec:541interpolation}).
+The same observations hold for the degree $p$,
+for which $p = 3$ seems to be the best choice,
+as the errors increase again for $p = 5$.
 
 \begin{table}
   \newcommand*{\bi}{$\bspl[\modified]{l,i}{p}$}
@@ -252,6 +277,44 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
   \label{tbl:biomech2ErrorL2}%
 \end{table}
 
+\Cref{fig:biomech2ErrorForce} shows the pointwise absolute error
+$\abs{\forceXref(\elbang, \actX) - \forceXintp(\elbang, \actX)}$
+for the modified B-splines on uniform and Clenshaw--Curtis grids
+in the cubic case $p = 3$.
+Note that in contrast to usual interpolation settings,
+the absolute errors $\abs{\forceXref - \forceXintp}$
+shown in \cref{fig:biomech2ErrorForce} do not vanish in the
+sparse grid points $(\elbang^{(k)}, \actX^{(k)})$
+($X \in \{\mathrm{T}, \mathrm{B}\}$, $k = 1, \dotsc, \ngp$),
+since $\forceXintp$ does not $\forceXref$ interpolate
+in these points.%
+\footnote{%
+  It would have been possible to construct $\forceXintp$
+  as a sparse grid interpolant of $\forceXref$.
+  However, building a spline surrogate ($\forceXintp$)
+  of another spline surrogate ($\forceXref$) would skew the results.%
+}
+As it is typical for sparse grid interpolants,
+the error is the largest near the boundary of the domain.
+In the Clenshaw--Curtis case, the maximal errors are given by
+\begin{equation}
+  \norm[L^\infty]{\forceTref - \forceTintp[p,\cc]}
+  \approx \SI{10.6}{\newton},\qquad
+  \norm[L^\infty]{\forceBref - \forceBintp[p,\cc]}
+  \approx \SI{9.51}{\newton},
+\end{equation}
+where $\norm[L^\infty]{\forceXref - \forceXintp[p,\cc]}
+:= \max_{(\elbang, \actX)}
+\abs{\forceXref(\elbang, \actX) - \forceXintp[p,\cc](\elbang, \actX)}$
+(since the functions are continuous).
+If we restrict the domain to
+$\clint{\ang{31}, \ang{129}} \times \clint{0.15, 0.85}$
+by omitting \SI{15}{\percent} on each side of the original domain,
+then the maximal absolute errors drop to only
+\SI{6.73}{\newton} (triceps) and \SI{0.967}{\newton} (biceps),
+which is small compared to maximal possible forces of
+around \SI{1}{\kilo\newton}.
+
 \begin{figure}
   \includegraphics{biomech2ErrorForce_5}%
   \\[2mm]%
@@ -285,7 +348,24 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 
 \paragraph{Error of the elbow equilibrium angle}
 
-\dummytext{}
+The relative $\Ltwo$ errors
+$\normLtwo{\equielbangref{\forceL} - \equielbangintp{\forceL}}/
+\normLtwo{\equielbangref{\forceL}}$
+of the elbow equilibrium angle function are shown in
+\cref{tbl:biomech2ErrorL2_1} for the example load of
+$\forceL = \SI{22}{\newton}$.
+Modified cubic Clenshaw--Curtis B-splines achieve the best results.
+Therefore, we use this type of hierarchical basis
+for the remainder of this chapter.
+Pointwise plots of the absolute error
+$\abs{\equielbangref{\forceL} - \equielbangintp[p,\cc]{\forceL}}$
+are presented in \cref{fig:biomech2ErrorEquilibriumAngle}.
+Again, the maximal error is pretty small:
+For $\forceL = \SI{22}{\newton}$, it is only \ang{0.886}.
+If we restrict the domain to $\clint{0.15, 0.85}^2$,
+then this maximal error drops to \ang{0.103} (or \ang{;6.18;}),
+as the areas near the boundary of $\clint{\*0, \*1}$
+contribute the most to the error.
 
 \begin{figure}
   \includegraphics{biomech2ErrorEquilibriumAngle_4}%
