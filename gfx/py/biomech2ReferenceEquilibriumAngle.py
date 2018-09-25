@@ -17,7 +17,8 @@ def main():
   action = "evaluateEquilibriumElbowAngle"
   basisType, p, d, forceLoads = "modifiedBSpline", 3, 2, [22, -60, 180]
   
-  XX0, XX1, XX = helper.grid.generateMeshGrid((129, 129))
+  nn = (129, 129)
+  XX0, XX1, XX = helper.grid.generateMeshGrid(nn)
   v = np.arange(10, 151, 5)
   xt = [0, 0.25, 0.5, 0.75, 1]
   xtl = ["$0$", "", "", "", "$1$"]
@@ -26,8 +27,8 @@ def main():
     fig = Figure.create(figsize=(3, 3), scale=0.72)
     ax = fig.gca()
     
-    YY = helperBiomech2.applyBiomech2(
-        action, "fullGrid", basisType, p, forceLoad, XX)
+    YY = helperBiomech2.applyBiomech2MeshGrid(
+        action, "fullGrid", basisType, p, forceLoad, nn)
     contour = ax.contourf(XX0, XX1, np.reshape(YY, XX0.shape), 20,
                           vmin=10, vmax=150)
     for c in contour.collections: c.set_edgecolor("face")

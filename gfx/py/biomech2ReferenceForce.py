@@ -53,9 +53,10 @@ def main():
   action = "evaluateForces"
   basisType, p, d, forceLoad = "modifiedBSpline", 3, 2, 22
   
-  XX0, XX1, XX = helper.grid.generateMeshGrid((65, 65))
-  YY = helperBiomech2.applyBiomech2(
-      action, "fullGrid", basisType, p, forceLoad, XX)
+  nn = (65, 65)
+  XX0, XX1, XX = helper.grid.generateMeshGrid(nn)
+  YY = helperBiomech2.applyBiomech2MeshGrid(
+      action, "fullGrid", basisType, p, forceLoad, nn)
   
   for q in range(2):
     curYY = 1e-3*np.reshape(YY[:,q], XX0.shape)
@@ -128,14 +129,14 @@ def main():
     _, L, I = helper.grid.RegularSparse(n, d).generate()
     curX = helper.grid.getCoordinates(L, I, distribution)
     X = np.vstack((X, curX))
-    YExact = np.vstack((YExact, helperBiomech2.applyBiomech2(
+    YExact = np.vstack((YExact, helperBiomech2.applyBiomech2Scattered(
         action, "sparseGrid", basisType, p, forceLoad, curX)))
   
   _, K = np.unique(X.round(decimals=6), axis=0, return_index=True)
   X, YExact = X[K], YExact[K]
   N = X.shape[0]
   
-  YRef = helperBiomech2.applyBiomech2(
+  YRef = helperBiomech2.applyBiomech2Scattered(
       action, "fullGrid", basisType, p, forceLoad, X)
   print("Relative L^2 error of reference interpolants on SG points:")
   print(np.sqrt(np.sum((YExact - YRef)**2, axis=0) / N) /

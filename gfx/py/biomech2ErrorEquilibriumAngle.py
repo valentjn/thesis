@@ -18,18 +18,19 @@ def main():
   p, d, forceLoads = 3, 2, [22, -60, 180]
   n = 5
   
-  XX0, XX1, XX = helper.grid.generateMeshGrid((65, 65))
+  nn = (65, 65)
+  XX0, XX1, XX = helper.grid.generateMeshGrid(nn)
   v = np.linspace(-3, 0.2, 17)
   xt = [0, 0.25, 0.5, 0.75, 1]
   xtl = ["$0$", "", "", "", "$1$"]
   
   for forceLoad in forceLoads:
-    YYfg = helperBiomech2.applyBiomech2(
-        action, "fullGrid", basisTypes[0], p, forceLoad, XX)
+    YYfg = helperBiomech2.applyBiomech2MeshGrid(
+        action, "fullGrid", basisTypes[0], p, forceLoad, nn)
     
     for basisType in basisTypes:
-      YYsg = helperBiomech2.applyBiomech2(
-          action, "sparseGrid", basisType, p, forceLoad, XX)
+      YYsg = helperBiomech2.applyBiomech2MeshGrid(
+          action, "sparseGrid", basisType, p, forceLoad, nn)
       
       fig = Figure.create(figsize=(3, 3), scale=0.72)
       ax = fig.gca()
@@ -75,8 +76,7 @@ def main():
   
   
   NN = 10000
-  np.random.seed(342)
-  XX = np.random.rand(NN, d)
+  XX = helperBiomech2.getMonteCarloPoints(NN)
   
   basisTypes = [
     "modifiedBSpline",
@@ -87,10 +87,10 @@ def main():
   
   for p in [1, 3, 5]:
     for basisType in basisTypes:
-      YYfg = helperBiomech2.applyBiomech2(
-          action, "fullGrid", basisType, p, forceLoad, XX)
-      YYsg = helperBiomech2.applyBiomech2(
-          action, "sparseGrid", basisType, p, forceLoad, XX)
+      YYfg = helperBiomech2.applyBiomech2MonteCarlo(
+          action, "fullGrid", basisType, p, forceLoad, NN)
+      YYsg = helperBiomech2.applyBiomech2MonteCarlo(
+          action, "sparseGrid", basisType, p, forceLoad, NN)
       error = helperBiomech2.computeRelativeL2Error(YYfg, YYsg)
       print("p = {}, basisType = {}: error = {}".format(p, basisType, error))
   
@@ -98,10 +98,10 @@ def main():
   
   basisType, p = "modifiedClenshawCurtisBSpline", 3
   
-  YYfg = helperBiomech2.applyBiomech2(
-      action, "fullGrid", basisType, p, forceLoad, XX)
-  YYsg = helperBiomech2.applyBiomech2(
-      action, "sparseGrid", basisType, p, forceLoad, XX)
+  YYfg = helperBiomech2.applyBiomech2MonteCarlo(
+      action, "fullGrid", basisType, p, forceLoad, NN)
+  YYsg = helperBiomech2.applyBiomech2MonteCarlo(
+      action, "sparseGrid", basisType, p, forceLoad, NN)
   
   print("")
   print("p = {}, basisType = {}:".format(p, basisType))
