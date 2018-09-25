@@ -93,6 +93,24 @@ def main():
           action, "sparseGrid", basisType, p, forceLoad, XX)
       error = helperBiomech2.computeRelativeL2Error(YYfg, YYsg)
       print("p = {}, basisType = {}: error = {}".format(p, basisType, error))
+  
+  
+  
+  basisType, p = "modifiedClenshawCurtisBSpline", 3
+  
+  YYfg = helperBiomech2.applyBiomech2(
+      action, "fullGrid", basisType, p, forceLoad, XX)
+  YYsg = helperBiomech2.applyBiomech2(
+      action, "sparseGrid", basisType, p, forceLoad, XX)
+  
+  print("")
+  print("p = {}, basisType = {}:".format(p, basisType))
+  print("Absolute L^inf error = {}".format(
+      np.amax(np.abs(YYfg - YYsg))))
+  K = np.all(np.logical_and((XX >= [0.15, 0.15]),
+                            (XX <= [0.85, 0.85])), axis=1)
+  print("Absolute L^inf error in sub-domain = {}".format(
+      np.amax(np.abs(YYfg[K] - YYsg[K]))))
 
 
 
