@@ -305,6 +305,7 @@ void solveScenarioA(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
+  std::cout << "[\n  []";
   const double FRef = 22.0;
 
   // optimization 1
@@ -355,6 +356,8 @@ void solveScenarioA(
   const sgpp::base::DataVector xOpt4(minimizeDistance(
       4, alphaTOld4, alphaBOld4, F4, targetTheta4,
       fgIntpTB, fgIntpTBGradient, intpTB, intpTBGradient));
+
+  std::cout << "\n]\n";
 }
 
 void solveScenarioB(
@@ -363,6 +366,7 @@ void solveScenarioB(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
+  std::cout << "[\n  []";
   const double FRef = 22.0;
   sgpp::base::DataMatrix scenario2Alphas(0, 2);
   sgpp::base::DataMatrix scenario2Thetas(0, 2);
@@ -415,6 +419,8 @@ void solveScenarioB(
       scenario2Thetas.appendRow(scenario2Theta);
     }
   }
+
+  std::cout << "\n]\n";
 }
 
 void solveScenarioBComparison(
@@ -423,6 +429,7 @@ void solveScenarioBComparison(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
+  std::cout << "[\n  []";
   const double FRef = 22.0;
   const double scenario2targetTheta = 25.0;
   const std::vector<double> scenario2Loads =
@@ -446,6 +453,8 @@ void solveScenarioBComparison(
     scenario2ComparisonPoints.appendRow(xOpt);
     time++;
   }
+
+  std::cout << "\n]\n";
 }
 
 
@@ -515,7 +524,9 @@ void writeMatrix(const sgpp::base::DataMatrix& XX) {
 
 
 void printOptimizationResultHeader() {
-  const std::vector<size_t> colWidths = { 7, 7, 14, 14, 14, 14, 14, 9, 9, 9 };
+  const std::vector<size_t> colWidths = {
+    7, 7, 14, 14, 14, 14, 14, 9, 9, 9,
+  };
   std::cerr << std::setw(colWidths[0])     << std::left << "t";
   std::cerr << std::setw(colWidths[1])     << std::left << "Point";
   std::cerr << std::setw(colWidths[2] + 1) << std::left << "α_T";
@@ -541,20 +552,46 @@ void printOptimizationResults(
     size_t numberOfNewtonIterations,
     double runtimeSeconds) {
 
-  const std::vector<size_t> colWidths = { 7, 7, 14, 14, 14, 14, 14, 9, 9, 14 };
+  const std::vector<size_t> colWidths = {
+    7, 7, 14, 14, 14, 14, 14, 9, 9, 14,
+  };
 
-  std::cout << std::scientific << std::setprecision(4);
-  std::cout << std::setw(colWidths[0]) << std::left << time;
-  std::cout << std::setw(colWidths[1]) << std::left << point;
-  std::cout << std::setw(colWidths[2]) << std::left << alphaT;
-  std::cout << std::setw(colWidths[3]) << std::left << alphaB;
-  std::cout << std::setw(colWidths[4]) << std::left << thetaTilde;
-  std::cout << std::setw(colWidths[5]) << std::left << theta;
-  std::cout << std::setw(colWidths[6]) << std::left << M;
-  std::cout << std::setw(colWidths[7]) << std::left << numberOfNewtonCalls;
-  std::cout << std::setw(colWidths[8]) << std::left << numberOfNewtonIterations;
-  std::cout << std::setw(colWidths[9]) << std::left << static_cast<size_t>(1000 * runtimeSeconds);
-  std::cout << "\n";
+  std::cerr << std::scientific << std::setprecision(4);
+  std::cerr << std::setw(colWidths[0]) << std::left
+            << time;
+  std::cerr << std::setw(colWidths[1]) << std::left
+            << point;
+  std::cerr << std::setw(colWidths[2]) << std::left
+            << alphaT;
+  std::cerr << std::setw(colWidths[3]) << std::left
+            << alphaB;
+  std::cerr << std::setw(colWidths[4]) << std::left
+            << thetaTilde;
+  std::cerr << std::setw(colWidths[5]) << std::left
+            << theta;
+  std::cerr << std::setw(colWidths[6]) << std::left
+            << M;
+  std::cerr << std::setw(colWidths[7]) << std::left
+            << numberOfNewtonCalls;
+  std::cerr << std::setw(colWidths[8]) << std::left
+            << numberOfNewtonIterations;
+  std::cerr << std::setw(colWidths[9]) << std::left
+            << static_cast<size_t>(1000 * runtimeSeconds);
+  std::cerr << "\n";
+
+  sgpp::base::DataVector output(9);
+  output[0] = time;
+  output[1] = alphaT;
+  output[2] = alphaB;
+  output[3] = thetaTilde;
+  output[4] = theta;
+  output[5] = M;
+  output[6] = numberOfNewtonCalls;
+  output[7] = numberOfNewtonIterations;
+  output[8] = static_cast<size_t>(1000 * runtimeSeconds);
+
+  std::cout << ",\n  ";
+  writeVector(output);
 
   /*latexTable << "$t_{" << std::fixed << std::setprecision(4) << time << "}$";
   latexTable << "&" << std::fixed << std::setprecision(4) << alphaT;
