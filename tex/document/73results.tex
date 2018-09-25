@@ -193,37 +193,6 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 
 \dummytext{}
 
-\begin{figure}
-  \includegraphics{biomech2ErrorForce_5}%
-  \\[2mm]%
-  \subcaptionbox{%
-    $\abs{\forceXref - \forceXintp[p]}$ for
-    $X = \mathrm{T}$ \emph{(left)} and
-    $X = \mathrm{B}$ \emph{(right).}%
-  }[73mm]{%
-    \includegraphics{biomech2ErrorForce_1}%
-    \hfill%
-    \includegraphics{biomech2ErrorForce_2}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    $\abs{\forceXref - \forceXintp[p,\cc]}$ for
-    $X = \mathrm{T}$ \emph{(left)} and
-    $X = \mathrm{B}$ \emph{(right).}%
-  }[73mm]{%
-    \includegraphics{biomech2ErrorForce_3}%
-    \hfill%
-    \includegraphics{biomech2ErrorForce_4}%
-  }%
-  \caption[Absolute error of muscle forces]{%
-    Absolute error of muscle forces $\forceT, \forceB$ for
-    modified cubic B-splines ($p = 3$)
-    on uniform sparse grids \emph{(left two plots)} and
-    on Clenshaw--Curtis sparse grids \emph{(right two plots).}%
-  }%
-  \label{fig:biomech2ErrorForce}%
-\end{figure}
-
 \begin{table}
   \newcommand*{\bi}{$\bspl[\modified]{l,i}{p}$}
   \newcommand*{\bii}{$\bspl[\cc,\modified]{l,i}{p}$}
@@ -282,6 +251,37 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
   }%
   \label{tbl:biomech2ErrorL2}%
 \end{table}
+
+\begin{figure}
+  \includegraphics{biomech2ErrorForce_5}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $\abs{\forceXref - \forceXintp[p]}$ for
+    $X = \mathrm{T}$ \emph{(left)} and
+    $X = \mathrm{B}$ \emph{(right).}%
+  }[73mm]{%
+    \includegraphics{biomech2ErrorForce_1}%
+    \hfill%
+    \includegraphics{biomech2ErrorForce_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\abs{\forceXref - \forceXintp[p,\cc]}$ for
+    $X = \mathrm{T}$ \emph{(left)} and
+    $X = \mathrm{B}$ \emph{(right).}%
+  }[73mm]{%
+    \includegraphics{biomech2ErrorForce_3}%
+    \hfill%
+    \includegraphics{biomech2ErrorForce_4}%
+  }%
+  \caption[Absolute error of muscle forces]{%
+    Absolute error of muscle forces $\forceT, \forceB$ for
+    modified cubic B-splines ($p = 3$)
+    on uniform sparse grids \emph{(left two plots)} and
+    on Clenshaw--Curtis sparse grids \emph{(right two plots).}%
+  }%
+  \label{fig:biomech2ErrorForce}%
+\end{figure}
 
 \paragraph{Error of the elbow equilibrium angle}
 
