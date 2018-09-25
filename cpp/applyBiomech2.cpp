@@ -469,7 +469,7 @@ inline void writeNumber(double x) {
   } else if (std::isnan(x)) {
     std::cout << "NaN";
   } else {
-    std::cout << x;
+    std::cout << std::scientific << std::setprecision(10) << x;
   }
 }
 
