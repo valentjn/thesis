@@ -275,6 +275,7 @@ void evaluateForces(sgpp::optimization::VectorFunction& intpTB) {
   sgpp::base::DataMatrix YY(NN, m);
   intpTB.eval(XX2, YY);
   writeMatrix(YY);
+  std::cout << "\n";
 }
 
 void evaluateEquilibriumElbowAngle(
@@ -295,6 +296,7 @@ void evaluateEquilibriumElbowAngle(
   sgpp::base::DataVector yy(NN);
   momentumBalanceTheta.eval(XX, yy);
   writeVector(yy);
+  std::cout << "\n";
 }
 
 void solveScenarioA(
@@ -472,7 +474,7 @@ void writeVector(const sgpp::base::DataVector& xx) {
     writeNumber(xx[j]);
   }
 
-  std::cout << "]\n";
+  std::cout << "]";
 }
 
 void readMatrix(sgpp::base::DataMatrix& XX) {
@@ -507,7 +509,7 @@ void writeMatrix(const sgpp::base::DataMatrix& XX) {
     std::cout << "]";
   }
 
-  std::cout << "]\n";
+  std::cout << "]";
 }
 
 
