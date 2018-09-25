@@ -78,6 +78,8 @@ def main():
   NN = 10000
   np.random.seed(342)
   XX = np.random.rand(NN, d)
+  print("")
+  print("Relative L^2 errors:")
   
   for p in [1, 3, 5]:
     for basisType in basisTypes + ["modifiedNotAKnotBSpline"]:
@@ -87,6 +89,24 @@ def main():
           action, "sparseGrid", basisType, p, forceLoad, XX)
       error = helperBiomech2.computeRelativeL2Error(YYfg, YYsg)
       print("p = {}, basisType = {}: error = {}".format(p, basisType, error))
+  
+  
+  
+  basisType, p = "modifiedClenshawCurtisBSpline", 3
+  
+  YYfg = helperBiomech2.applyBiomech2(
+      action, "fullGrid", basisType, p, forceLoad, XX)
+  YYsg = helperBiomech2.applyBiomech2(
+      action, "sparseGrid", basisType, p, forceLoad, XX)
+  
+  print("")
+  print("p = {}, basisType = {}:".format(p, basisType))
+  print("Absolute L^inf error = {}".format(
+      np.amax(np.abs(YYfg - YYsg), axis=0)))
+  K = np.all(np.logical_and((XX >= [0.15, 0.15]),
+                            (XX <= [0.85, 0.85])), axis=1)
+  print("Absolute L^inf error in sub-domain = {}".format(
+      np.amax(np.abs(YYfg[K,:] - YYsg[K,:]), axis=0)))
 
 
 
