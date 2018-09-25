@@ -58,9 +58,7 @@ def main():
   
   
   
-  fig = Figure.create(figsize=(4, 0.8), preamble=r"""
-\usepackage{siunitx}
-""")
+  fig = Figure.create(figsize=(4, 0.75))
   ax = fig.gca()
   
   colorMap = mpl.cm.viridis
@@ -68,7 +66,6 @@ def main():
   xt = np.arange(10, 151, 20)
   colorBar = mpl.colorbar.ColorbarBase(
       ax, cmap=colorMap, norm=norm, ticks=xt, orientation="horizontal")
-  print([r"$\ang{{{:g}}}$".format(x) for x in xt])
   ax.set_xticklabels([r"${:g}^{{\circ}}$".format(x) for x in xt])
   
   fig.save()
