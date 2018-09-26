@@ -9,7 +9,8 @@ import helper.hpc
 
 def applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX):
   XX = tuple(tuple(xx) for xx in np.array(XX))
-  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX)
+  return _applyBiomech2Scattered(
+      action, gridType, basisType, p, forceLoad, XX)
 
 @helper.hpc.cacheToFile
 def _applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX):
