@@ -8,7 +8,7 @@ import helper.hpc
 
 
 def applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX):
-  XX = tuple(tuple(xx) for xx in np.array(XX))
+  XX = (tuple(tuple(xx) for xx in np.array(XX)) if XX is not None else None)
   return _applyBiomech2Scattered(
       action, gridType, basisType, p, forceLoad, XX)
 
