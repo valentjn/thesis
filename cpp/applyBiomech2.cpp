@@ -588,7 +588,7 @@ void printOptimizationResults(
   output[5] = M;
   output[6] = numberOfNewtonCalls;
   output[7] = numberOfNewtonIterations;
-  output[8] = static_cast<size_t>(1000 * runtimeSeconds);
+  output[8] = runtimeSeconds;
 
   std::cout << ",\n  ";
   writeVector(output);
