@@ -405,6 +405,74 @@ contribute the most to the error.
 \subsection{Test Scenario}
 \label{sec:733scenario}
 
+In the following, we want to assess the performance
+of the sparse grid interpolants for the optimization problems O1 and O2.
+For this goal, we introduce the following test scenario
+\cite{Valentin18Gradient}:
+
+\begin{enumerate}
+  \item
+  Find a feasible initial solution for problem O1
+  with $\forceL(t_0) := \SI{22}{\newton}$ and
+  $\tarelbang(t_0) := \ang{75}$.
+  
+  \item
+  Apply O1 with $\forceL(t_1) := \SI{22}{\newton}$ and
+  $\tarelbang(t_1) := \ang{75}$.
+  
+  \item
+  Apply O2 with $\forceL(t_2) := \SI{22}{\newton}$ and
+  $\tarelbang(t_2) := \ang{60}$ (changed target angle).
+  
+  \item
+  Apply O2 with $\forceL(t_3) := \SI{40}{\newton}$ and
+  $\tarelbang(t_3) := \ang{60}$ (changed load).
+  
+  \item
+  Apply O2 with $\forceL(t_4) := \SI{100}{\newton}$ and
+  $\tarelbang(t_4) := \ang{30}$ (changed load and target angle).
+\end{enumerate}
+
+\begin{figure}
+  \includegraphics{biomech2ScenarioA_5}%
+  \\[2mm]%
+  \subcaptionbox{%
+    Load $\forceL$ and target elbow angle $\tarelbang$.%
+  }[73.3mm]{%
+    \hspace*{3.3mm}%
+    \includegraphics{biomech2ScenarioA_1}%
+    \hspace*{3.6mm}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Optimal activation parameters $\actT$ and $\actB$.%
+  }[73.3mm]{%
+    \hspace*{2.0mm}%
+    \includegraphics{biomech2ScenarioA_2}%
+    \hspace*{9.5mm}%
+  }%
+  \\[1mm]%
+  \subcaptionbox{%
+    Deviation $\abs{\equielbang{\forceL} - \tarelbang}$
+    of attained elbow angle to target and
+    deviation $|\momentref|$ of the moment from equilibrium.%
+  }[73.3mm]{%
+    \includegraphics{biomech2ScenarioA_3}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Number of evaluations of $\equielbang{\forceL}$
+    and number of Newton iterations per evaluation
+    of $\equielbang{\forceL}$.%
+  }[73.3mm]{%
+    \includegraphics{biomech2ScenarioA_4}%
+  }%
+  \caption[Settings and results of the test scenario]{%
+    Setting (a) of the test scenario and corresponding results (b, c, d).%
+  }%
+  \label{fig:biomech2ScenarioA}%
+\end{figure}
+
 \dummytext[6]{}
 
 
