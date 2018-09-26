@@ -44,7 +44,12 @@ def _applyBiomech2(action, gridType, basisType, p, forceLoad, XX):
   stdout, _ = process.communicate(input=stdin)
   
   assert process.returncode == 0, "applyBiomech2 terminated unsuccessfully."
-  result = np.array(json.loads(stdout.decode()))
+  output = json.loads(stdout.decode())
+  
+  if action.startswith("solveScenario"):
+    result = np.array(output[1:])
+  else:
+    result = np.array(output)
   
   return result
 
