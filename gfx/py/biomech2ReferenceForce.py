@@ -51,7 +51,7 @@ def plot3DTickLabels(ax, xKwargs, yKwargs, zKwargs):
 
 def main():
   action = "evaluateForces"
-  basisType, p, d, forceLoad = "modifiedBSpline", 3, 2, 22
+  basisType, p, forceLoad = "modifiedBSpline", 3, 22
   
   nn = (65, 65)
   XX0, XX1, XX = helper.grid.generateMeshGrid(nn)
@@ -119,7 +119,7 @@ def main():
   
   
   
-  n = 5
+  n, d = 5, 2
   X = np.zeros((0, 2))
   YExact = np.zeros((0, 2))
   

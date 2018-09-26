@@ -15,7 +15,7 @@ import helperBiomech2
 
 def main():
   action = "evaluateEquilibriumElbowAngle"
-  basisType, p, d, forceLoads = "modifiedBSpline", 3, 2, [22, -60, 180]
+  basisType, p, forceLoads = "modifiedBSpline", 3, [22, -60, 180]
   
   nn = (129, 129)
   XX0, XX1, XX = helper.grid.generateMeshGrid(nn)

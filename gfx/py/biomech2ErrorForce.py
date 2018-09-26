@@ -15,8 +15,8 @@ import helperBiomech2
 def main():
   action = "evaluateForces"
   basisTypes = ["modifiedBSpline", "modifiedClenshawCurtisBSpline"]
-  p, d, forceLoad = 3, 2, 22
-  n = 5
+  p, forceLoad = 3, 22
+  n, d = 5, 2
   
   nn = (65, 65)
   v = np.linspace(-2, 1.2, 17)
