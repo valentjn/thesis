@@ -629,7 +629,7 @@ sgpp::base::DataVector minimizeActivation(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
-  const size_t maxItCount = 10000;
+  const size_t maxItCount = 12000;
   sgpp::base::SGppStopwatch timer;
 
   std::cerr << "Minimizing activation with F = " << std::to_string(F)
@@ -699,6 +699,7 @@ sgpp::base::DataVector minimizeActivation(
   activationMinimizer.setStartingPoint(x0);
   activationMinimizer.setPenaltyStartValue(30.0);
   //activationMinimizer.setPenaltyIncreaseFactor(2.0);
+  activationMinimizer.setPenaltyIncreaseFactor(1.0);
   timer.start();
   activationMinimizer.optimize();
 
@@ -739,7 +740,7 @@ sgpp::base::DataVector minimizeDistance(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
-  const size_t maxItCount = 10000;
+  const size_t maxItCount = 12000;
   sgpp::base::SGppStopwatch timer;
 
   std::cerr << "Minimizing distance with F_{new} = " << std::to_string(F)
@@ -810,7 +811,9 @@ sgpp::base::DataVector minimizeDistance(
 
   //distanceMinimizer.setStartingPoint(x0);
   distanceMinimizer.setPenaltyStartValue(1e-3);
+  //distanceMinimizer.setPenaltyStartValue(1e-10);
   //distanceMinimizer.setPenaltyIncreaseFactor(1.5);
+  distanceMinimizer.setPenaltyIncreaseFactor(1.0);
   timer.start();
   distanceMinimizer.optimize();
 
@@ -855,7 +858,7 @@ sgpp::base::DataVector minimizeDistanceRelaxed(
     sgpp::optimization::VectorFunction& intpTB,
     sgpp::optimization::VectorFunctionGradient& intpTBGradient) {
 
-  const size_t maxItCount = 10000;
+  const size_t maxItCount = 12000;
   sgpp::base::SGppStopwatch timer;
 
   std::cerr << "Minimizing relaxed distance with F_{new} = "
