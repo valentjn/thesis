@@ -544,9 +544,31 @@ Unsurprisingly, this error is very small as the optimizer minimizes it
 as part of the constraint.
 The true error, which is obtained by
 using the reference equilibrium elbow angle $\equielbangref{\forceL}$,
-is of course much larger
+is in general much larger
 (top two green lines in \cref{fig:biomech2ScenarioA_3}
 with hollow markers).
+Here, we see that the cubic B-splines decrease the error
+by to two orders of magnitude compared to the
+standard piecewise linear basis.
+The reasons are two-fold:
+First, the error of $\equielbang{\forceL}$ is generally smaller
+when using higher-order B-splines as we have seen above.
+Second, higher-order B-splines are continuously differentiable,
+which makes them suitable for gradient-based optimization.
+In contrast, the surrogates obtained by piecewise linear interpolation
+have kinks, which may complicate finding optimal points
+in the augmented Lagrangian and Newton methods.
+
+\paragraph{Number of evaluations and Newton iterations}
+
+This is supported by \cref{fig:biomech2ScenarioA_4},
+which shows the number of evaluations of $\equielbang{\forceL}$
+during the optimization and the average number of Newton iterations
+per evaluation.
+While the number of total evaluations is similar for all three methods,
+the number of required Newton iterations to achieve convergence
+is in general around \SI{50}{\percent} larger for the piecewise linear
+basis functions.
 
 
 
