@@ -18,7 +18,7 @@ def main():
   
   xtl = ["$t_{{{}}}$".format(t) for t in ts]
   
-  figSize = (3.2, 2.5)
+  figSize = (3.2, 2.45)
   
   
   
@@ -81,8 +81,10 @@ def main():
   for p in ps + ["fg"]:
     lineStyle, markerSize = lineStyles[p], markerSizes[p]
     actT, actB = A[p][:,1], A[p][:,2]
-    ax.plot(ts, actT, lineStyle, color=colors[0], ms=markerSize)
-    ax.plot(ts, actB, lineStyle, color=colors[1], ms=markerSize)
+    ax.plot(ts, actT, lineStyle, color=colors[0], ms=markerSize,
+            clip_on=False)
+    ax.plot(ts, actB, lineStyle, color=colors[1], ms=markerSize,
+            clip_on=False)
   
   ax.set_xticks(ts)
   ax.set_xticklabels(xtl)
@@ -110,28 +112,29 @@ def main():
     error = np.maximum(np.abs(equilibriumAngle    - targetAngles), 1e-100)
     ax1.plot(ts, error, lineStyle, color=colors[0], ms=markerSize)
     error = np.maximum(np.abs(equilibriumAngleRef - targetAngles), 1e-100)
-    ax1.plot(ts, error, lineStyle[1:], color=colors[0])
+    ax1.plot(ts, error, lineStyle[1:], color=colors[0], clip_on=False)
     ax1.plot(ts, error, lineStyle[0],
              color=helper.plot.mixColors("mittelblau", 0.1),
-             mec=colors[0], ms=1.5*markerSize)
+             mec=colors[0], ms=1.5*markerSize, clip_on=False)
     momentum = A[p][:,5]
-    ax2.plot(ts, np.abs(momentum), lineStyle, color=colors[1], ms=markerSize)
+    ax2.plot(ts, np.abs(momentum), lineStyle, color=colors[1],
+             ms=markerSize, clip_on=False)
   
-  ax1.text(0, 1e-3, r"$\abs{\equielbangref{\forceL} - \tarelbang}$",
+  ax1.text(2, 8e-1, r"$\abs{\equielbangref{\forceL} - \tarelbang}$",
            color=colors[0], ha="left", va="bottom")
   ax1.text(0, 3e-8, r"$\abs{\equielbangintp{\forceL} - \tarelbang}$",
            color=colors[0], ha="left", va="bottom")
-  ax1.plot([1.75, 1.9], [6e-3, 1e-2], "k-")
-  ax1.plot([1.75, 3.3], [4e-3, 8e-2], "k-")
-  ax1.plot([0.85, 0.95], [5e-8, 3e-8], "k-")
-  ax1.plot([1, 1.5], [5e-8, 6.5e-9], "k-")
+  ax1.plot([2.9, 2.8], [1.5e0, 5e-1], "k-", clip_on=False)
+  ax1.plot([3, 3.3], [1.5e0, 1.5e-2], "k-", clip_on=False)
+  ax1.plot([0.9, 1.2], [3e-8, 3e-9], "k-", clip_on=False)
+  ax1.plot([1, 1.8], [3e-8, 2e-9], "k-", clip_on=False)
   
   for ax in [ax1, ax2]:
     ax.set_yscale("log")
     ax.spines["top"].set_visible(False)
   
-  ax1.set_ylim(1e-9, 1e0)
-  ax2.set_ylim(1e-3, 1e0)
+  ax1.set_ylim(1e-10, 1e0)
+  ax2.set_ylim(5e-4, 1e0)
   ax1.set_xticks(ts)
   ax1.set_xticklabels(xtl)
   ax1.set_xlabel(r"Time")
@@ -167,10 +170,12 @@ def main():
   for ax in [ax1, ax2]:
     ax.spines["top"].set_visible(False)
   
-  ax1.set_ylim(0, 4000)
-  ax2.set_ylim(0, 5)
+  ax1.set_yscale("log")
+  ax1.set_ylim(5e2, 3e4)
+  ax2.set_ylim(0, 6)
   ax1.set_xticks(ts)
   ax1.set_xticklabels(xtl)
+  ax2.set_yticks(list(range(7)))
   ax1.set_xlabel(r"Time")
   ax1.set_ylabel(r"\#Evaluations",
                  color=colors[0])
