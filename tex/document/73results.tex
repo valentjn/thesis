@@ -414,30 +414,7 @@ that simulates a pseudo-dynamic sequence of motions
 by varying the load force and/or the target elbow angle
 in discrete time steps $t$ as seen in \cref{fig:biomech2ScenarioA_1}.
 The test scenario is as follows:
-
-\begin{enumerate}
-  \item
-  Find a feasible initial solution for problem O1
-  with $\forceL(t_0) := \SI{22}{\newton}$ and
-  $\tarelbang(t_0) := \ang{75}$.
-  
-  \item
-  Apply O1 with $\forceL(t_1) := \SI{22}{\newton}$ and
-  $\tarelbang(t_1) := \ang{75}$.
-  
-  \item
-  Apply O2 with $\forceL(t_2) := \SI{22}{\newton}$ and
-  $\tarelbang(t_2) := \ang{60}$ (changed target angle).
-  
-  \item
-  Apply O2 with $\forceL(t_3) := \SI{40}{\newton}$ and
-  $\tarelbang(t_3) := \ang{60}$ (changed load).
-  
-  \item
-  Apply O2 with $\forceL(t_4) := \SI{100}{\newton}$ and
-  $\tarelbang(t_4) := \ang{30}$ (changed load and target angle).
-\end{enumerate}
-
+%
 \begin{figure}
   \includegraphics{biomech2ScenarioA_5}%
   \\[2mm]%
@@ -462,7 +439,7 @@ The test scenario is as follows:
   \subcaptionbox{%
     Deviation $\abs{\equielbang{\forceL} - \tarelbang}$
     of attained elbow angle to target and
-    deviation $|\momentref|$ of the moment from equilibrium.%
+    deviation \smash{$|\momentref|$} of the moment from equilibrium.%
     \label{fig:biomech2ScenarioA_3}%
   }[73.3mm]{%
     \includegraphics{biomech2ScenarioA_3}%
@@ -481,8 +458,93 @@ The test scenario is as follows:
   }%
   \label{fig:biomech2ScenarioA}%
 \end{figure}
+%
+\begin{enumerate}
+  \item
+  Find a feasible initial solution for problem O1
+  with $\forceL(t_0) := \SI{22}{\newton}$ and
+  $\tarelbang(t_0) := \ang{75}$.
+  
+  \item
+  Apply O1 with $\forceL(t_1) := \SI{22}{\newton}$ and
+  $\tarelbang(t_1) := \ang{75}$.
+  
+  \item
+  Apply O2 with $\forceL(t_2) := \SI{22}{\newton}$ and
+  $\tarelbang(t_2) := \ang{60}$ (changed target angle).
+  
+  \item
+  Apply O2 with $\forceL(t_3) := \SI{30}{\newton}$ and
+  $\tarelbang(t_3) := \ang{60}$ (changed load).
+  
+  \item
+  Apply O2 with $\forceL(t_4) := \SI{40}{\newton}$ and
+  $\tarelbang(t_4) := \ang{50}$ (changed load and target angle).
+\end{enumerate}
+%
+For each of the steps 2 to 5, the activation levels $\actT, \actB$ obtained
+in the previous step (i.e., either the feasible initial solution
+of step 1 or the optimal solution of steps 2 to 4) are used
+as the inputs for the optimization problem O1 or O2.
+The feasible initial solution in step 1 is determined as explained
+in \cref{sec:513gradientBasedConstrained}.
 
-\dummytext[6]{}
+\paragraph{Solutions of problem O1}
+
+We note that independent of $\forceL$ and $\tarelbang$,
+every solution $(\actT, \actB)$ of problem O1 will be
+on the boundary part of the domain $\clint{\*0, \*1}$,
+where at least one activation parameter vanishes, i.e.,
+\begin{equation}
+  \{(\actT, \actB) \in \clint{\*0, \*1} \mid
+  (\actT = 0) \lor (\actB = 0)\}.
+\end{equation}
+The reason is that the two muscles triceps and biceps are antagonistic
+(see \cref{sec:711models}), meaning that they work against each other.
+If both $\actT > 0$ and $\actB > 0$, then the body will waste energy,
+as the same target elbow angle can be attained by reducing both
+$\actT$ and $\actB$ at the same time, thus requiring less energy.
+A visual example for this is \cref{fig:biomech2ReferenceEquilibriumAngle},
+where the contour lines generally go from the bottom left
+(small $\actT, \actB$) to the top right (large $\actT, \actB$).
+This issue may prevented by either
+using more complicated musculoskeletal models with more
+than two muscles or different optimization problems
+such as problem O2, where the objective function differs.
+
+\paragraph{Discussion of the results}
+
+\Cref{fig:biomech2ScenarioA_2,fig:biomech2ScenarioA_3,fig:biomech2ScenarioA_4}
+show the results of the test scenario using the muscle forces
+$\forceXintp[p,\cc]$ obtained by interpolating with
+modified hierarchical cubic Clenshaw--Curtis B-splines (solid lines, $p = 3$).
+For comparison, we repeat the solution process
+with the forces obtained by interpolating with the
+corresponding hierarchical piecewise linear basis (dashed lines, $p = 1$) and
+with the reference forces $\forceXref$ (dotted lines).
+For the piecewise linear basis,
+we use exactly the same method as for the cubic case
+(Newton method for $\equielbangintp{\forceL}$,
+Augmented Lagrangian with adaptive gradient descent for the
+solution of problems O1 and O2),
+although the derivatives of the muscle forces have kinks.
+
+In \cref{fig:biomech2ScenarioA_2}, we see that the activation levels
+of all three methods are more or less the same.
+However, \cref{fig:biomech2ScenarioA_3} reveals that even these small
+difference lead to deviations of the resulting equilibrium elbow angle
+that differ from the target angle by up to two orders of magnitude.
+The two green lines with filled markers at the bottom of
+\cref{fig:biomech2ScenarioA_3} show the error of
+the equilibrium elbow angle $\equielbangintp{\forceL}$
+using sparse grid interpolation to the desired target angle $\tarelbang$.
+Unsurprisingly, this error is very small as the optimizer minimizes it
+as part of the constraint.
+The true error, which is obtained by
+using the reference equilibrium elbow angle $\equielbangref{\forceL}$,
+is of course much larger
+(top two green lines in \cref{fig:biomech2ScenarioA_3}
+with hollow markers).
 
 
 
