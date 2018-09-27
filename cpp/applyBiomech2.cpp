@@ -533,7 +533,7 @@ void printOptimizationResultHeader() {
   std::cerr << std::setw(colWidths[3] + 1) << std::left << "α_B";
   std::cerr << std::setw(colWidths[4] + 2) << std::left << "θ~ [°]";
   std::cerr << std::setw(colWidths[5] + 2) << std::left << "θ [°]";
-  std::cerr << std::setw(colWidths[6])     << std::left << "M";
+  std::cerr << std::setw(colWidths[6])     << std::left << "M [Nm]";
   std::cerr << std::setw(colWidths[7])     << std::left << "#Newton";
   std::cerr << std::setw(colWidths[8])     << std::left << "#N. It.";
   std::cerr << std::setw(colWidths[9])     << std::left << "Runtime [ms]";
