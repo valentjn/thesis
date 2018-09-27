@@ -724,7 +724,6 @@ sgpp::base::DataVector minimizeActivation(
       momentumBalanceTheta.getNumberOfNewtonIterations(),
       timer.stop());
   std::cerr << "\n";
-  sgpp::optimization::Printer::getInstance().setVerbosity(-1);
 
   return xOpt;
 }
@@ -841,7 +840,6 @@ sgpp::base::DataVector minimizeDistance(
       momentumBalanceTheta.getNumberOfNewtonIterations(),
       timer.stop());
   std::cerr << "\n";
-  sgpp::optimization::Printer::getInstance().setVerbosity(-1);
 
   return xOpt;
 }
@@ -930,7 +928,6 @@ sgpp::base::DataVector minimizeDistanceRelaxed(
       momentumBalanceTheta.getNumberOfNewtonIterations(),
       timer.stop());
   std::cerr << "\n";
-  sgpp::optimization::Printer::getInstance().setVerbosity(-1);
 
   return xOpt;
 }
