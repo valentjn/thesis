@@ -340,7 +340,7 @@ void solveScenarioA(
   // optimization 3
   const double alphaTOld3 = xOpt2[0];
   const double alphaBOld3 = xOpt2[1];
-  const double F3 = 40.0;
+  const double F3 = 30.0;
   const double targetTheta3 = targetTheta2;
 
   const sgpp::base::DataVector xOpt3(minimizeDistance(
@@ -350,8 +350,8 @@ void solveScenarioA(
   // optimization 4
   const double alphaTOld4 = xOpt3[0];
   const double alphaBOld4 = xOpt3[1];
-  const double F4 = 100.0;
-  const double targetTheta4 = 30.0;
+  const double F4 = 40.0;
+  const double targetTheta4 = 50.0;
 
   const sgpp::base::DataVector xOpt4(minimizeDistance(
       4, alphaTOld4, alphaBOld4, F4, targetTheta4,
