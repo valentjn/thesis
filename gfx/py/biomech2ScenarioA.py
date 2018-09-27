@@ -13,8 +13,8 @@ import helperBiomech2
 
 def main():
   ts = [0, 1, 2, 3, 4]
-  forceLoads = [22, 22, 22, 40, 100]
-  targetAngles = [75, 75, 60, 60, 30]
+  forceLoads = [22, 22, 22, 30, 40]
+  targetAngles = [75, 75, 60, 60, 50]
   
   xtl = ["$t_{{{}}}$".format(t) for t in ts]
   
