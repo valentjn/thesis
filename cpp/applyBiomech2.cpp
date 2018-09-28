@@ -23,9 +23,15 @@ enum class GridType {
 
 typedef biomech2_interface::SparseGrid::Type BasisType;
 
-void parseArgs(int argc, const char* argv[],
-               Action& action, GridType& gridType, BasisType& basisType,
-               size_t& p, double& forceLoad);
+void parseArgs(int argc,
+               const char* argv[],
+               Action& action,
+               GridType& gridType,
+               BasisType& basisType,
+               size_t& p,
+               double& forceLoad,
+               double& surplusThresholdPercentT,
+               double& surplusThresholdPercentB);
 
 void evaluateForces(sgpp::optimization::VectorFunction& intpTB);
 void evaluateEquilibriumElbowAngle(
@@ -111,15 +117,17 @@ int main(int argc, const char* argv[]) {
   BasisType basisType = BasisType::ModifiedNotAKnotBSpline;
   size_t p = 3;
   double forceLoad = 22.0;
+  double surplusThresholdPercentT = -1.0;
+  double surplusThresholdPercentB = -1.0;
+
+  // parse arguments
+  parseArgs(argc, argv, action, gridType, basisType, p, forceLoad,
+            surplusThresholdPercentT, surplusThresholdPercentB);
 
   // other parameters
   const size_t n = 4;
-  const bool adaptive = false;
-  const double surplusThresPercentT = 0.01;
-  const double surplusThresPercentB = 0.01;
-
-  // parse arguments
-  parseArgs(argc, argv, action, gridType, basisType, p, forceLoad);
+  const bool adaptive = ((surplusThresholdPercentT >= 0.0) ||
+                         (surplusThresholdPercentB >= 0.0));
 
   // full grid interpolants
   bm2i::interpolation::TBFullGridInterpolant fgIntpTB;
@@ -153,7 +161,7 @@ int main(int argc, const char* argv[]) {
     sparseGrid->hierarchize();
 
     if (sparseGrid->isAdaptive()) {
-      sparseGrid->coarsen(surplusThresPercentT, surplusThresPercentB);
+      sparseGrid->coarsen(surplusThresholdPercentT, surplusThresholdPercentB);
     }
 
     intpTB.reset(
@@ -189,9 +197,16 @@ int main(int argc, const char* argv[]) {
   return 0;
 }
 
-void parseArgs(int argc, const char* argv[],
-               Action& action, GridType& gridType, BasisType& basisType,
-               size_t& p, double& forceLoad) {
+void parseArgs(int argc,
+               const char* argv[],
+               Action& action,
+               GridType& gridType,
+               BasisType& basisType,
+               size_t& p,
+               double& forceLoad,
+               double& surplusThresholdPercentT,
+               double& surplusThresholdPercentB) {
+
   for (size_t i = 1; i < static_cast<size_t>(argc); i++) {
     std::string arg(argv[i]);
 
@@ -245,6 +260,12 @@ void parseArgs(int argc, const char* argv[],
     } else if (arg.find("forceLoad=") == 0) {
       arg = arg.substr(10, std::string::npos);
       forceLoad = std::stod(arg);
+    } else if (arg.find("surplusThresholdPercentT=") == 0) {
+      arg = arg.substr(25, std::string::npos);
+      surplusThresholdPercentT = std::stod(arg);
+    } else if (arg.find("surplusThresholdPercentB=") == 0) {
+      arg = arg.substr(25, std::string::npos);
+      surplusThresholdPercentB = std::stod(arg);
     } else {
       throw std::invalid_argument("Invalid argument.");
     }
