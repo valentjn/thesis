@@ -576,4 +576,98 @@ basis functions.
 \subsection{Spatial Adaptivity}
 \label{sec:734adaptivity}
 
-\dummytext[6]{}
+\paragraph{Generation of a spatially adaptive sparse grid}
+
+As mentioned in \cite{Valentin18Gradient}, spatially adaptive sparse grids
+may be employed to reduce the number of necessary muscle force samples,
+especially for more complicated musculoskeletal systems with
+more parameters.
+To verify this statement, we remove all grid points
+$(\elbang^{(k)}, \actX^{(k)})$ from the regular sparse Clenshaw--Curtis grid
+that satisfy
+\begin{equation}
+  \frac{
+    \abs{\alpha_\mathrm{T}^{(k),p,\cc}}
+  }{
+    \max_{k'} \abs{\alpha_\mathrm{T}^{(k'),p,\cc}}
+  } < \SI{1}{\percent}
+  \quad\text{and}\quad
+  \frac{
+    \abs{\alpha_\mathrm{B}^{(k),p,\cc}}
+  }{
+    \max_{k'} \abs{\alpha_\mathrm{B}^{(k'),p,\cc}}
+  } < \SI{1}{\percent},
+\end{equation}
+where $\alpha_X^{(k),p,\cc}$ ($X \in \{\mathrm{T}, \mathrm{B}\}$)
+is the hierarchical surplus of the basis function $\bspl[\cc,\modified]{k}{p}$
+corresponding to $(\elbang^{(k)}, \actX^{(k)})$.
+For higher dimensional models,
+one would of course not sample muscle data on a regular sparse grid
+and then coarsen the data by removing points,
+but rather use an adaptivity criterion to decide which grid points to
+refine iteratively.
+
+\paragraph{Comparison with the regular case}
+
+The resulting force interpolants $\forceXintp[p,\cc,\mathrm{adap}]$ together
+with the spatially adaptive sparse grid
+(which has been coarsened from 49 to 28 points) and
+equilibrium elbow angle $\equielbangintp[p,\cc,\mathrm{adap}]{\forceL}$
+for $\forceL = \SI{22}{\newton}$ are shown in
+\cref{fig:biomech2SpatiallyAdaptive}.
+The errors increase slightly:
+The relative $\Ltwo$ force errors for $(\mathrm{T}, \mathrm{B})$ increase
+from $(\SI{3.31}{\permille}, \SI{3.56}{\permille})$
+to $(\SI{3.36}{\permille}, \SI{4.43}{\permille})$, respectively,
+and the absolute $\Linfty$ errors increase
+from $(\SI{10.6}{\newton}, \SI{9.51}{\newton})$
+to $(\SI{12.3}{\newton}, \SI{9.57}{\newton})$.
+In addition, the relative $\Ltwo$ and absolute $\Linfty$ errors
+for $\equielbang{\forceL}$ increase
+from \SI{2.83}{\permille} and \ang{0.886}
+to \SI{4.12}{\permille} and \ang{1.09}, respectively.
+While all these errors are somewhat larger than for the regular sparse grid,
+they are still at an acceptable level,
+but the number of necessary muscle force evaluations is halved compared
+to the regular case.
+Additionally, the solution of the test scenario doesn't change significantly
+due to the similar errors of $\forceX$ and $\equielbang{\forceL}$.
+
+\begin{figure}
+  \hspace*{2mm}%
+  \raisebox{0.2mm}{\includegraphics{biomech2ErrorForce_8}}%
+  \hspace*{12mm}%
+  \includegraphics{biomech2ErrorEquilibriumAngle_6}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $\abs{\forceTref - \forceTintp[p,\cc,\mathrm{adap}]}$%
+  }[49mm]{%
+    \raisebox{1.02mm}{\includegraphics{biomech2ErrorForce_5}}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\abs{\forceBref - \forceBintp[p,\cc,\mathrm{adap}]}$%
+  }[49mm]{%
+    \raisebox{1.02mm}{\includegraphics{biomech2ErrorForce_6}}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\abs{
+      \equielbangref{\forceL} - \equielbangintp[p,\cc,\mathrm{adap}]{\forceL}
+    }$
+    for $\forceL = \SI{22}{\newton}$%
+  }[49mm]{%
+    \includegraphics{biomech2ErrorEquilibriumAngle_4}%
+  }%
+  \caption[%
+    Errors of muscle forces and equilibrium elbow angle
+    for the spatially adaptive case%
+  ]{%
+    Errors of muscle forces and equilibrium elbow angle
+    for the spatially adaptive case
+    (modified hierarchical cubic Clenshaw--Curtis B-splines,
+    i.e., $p = 3$) together with the points of the
+    spatially adaptive sparse grid \emph{(dots).}%
+  }%
+  \label{fig:biomech2SpatiallyAdaptive}%
+\end{figure}
