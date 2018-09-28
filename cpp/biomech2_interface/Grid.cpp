@@ -213,8 +213,10 @@ namespace biomech2_interface {
     std::list<size_t> indicesToDelete;
 
     for (size_t k = 0; k < Nold; k++) {
-      if ((std::abs(alpha(k, 0)) / maxAbsAlphaT < surplusThresPercentT) &&
-          (std::abs(alpha(k, 1)) / maxAbsAlphaB < surplusThresPercentB)) {
+      if (((surplusThresPercentT < 0.0) ||
+           (std::abs(alpha(k, 0)) / maxAbsAlphaT < surplusThresPercentT)) &&
+          ((surplusThresPercentB < 0.0) ||
+           (std::abs(alpha(k, 1)) / maxAbsAlphaB < surplusThresPercentB))) {
         indicesToDelete.push_back(k);
       }
     }
