@@ -6,8 +6,7 @@
 \noindent
 In the following, we first discuss the state of the art
 in biomechanical modeling.
-Then, we address the details of the model of the human upper limb
-such as its parameters and its geometry.
+Then, we address details of the model of the human upper limb.
 For convenience, the most relevant symbols that occur
 in the context of biomechanical models are listed in
 \cref{tbl:glossaryBiomechanical}.
@@ -41,8 +40,7 @@ in the context of biomechanical models are listed in
 
 \paragraph{Limitations of lumped-parameter models}
 
-Due to the simplicity and computational efficiency of
-classical lumped-parameter models,
+Due to the simplicity of classical lumped-parameter models,
 their degree of realism is limited.
 Without any modifications,
 lumped-parameter models are not able to represent
@@ -57,7 +55,7 @@ The resulting models are capable to model spatial quantities
 such as complex muscle fiber field architectures,
 local activation principles, complex muscle geometries, or contact mechanics
 \multicite{Roehrle16Two,Valentin18Gradient}.
-Most of existing work only treats a single skeletal muscle in isolation
+Most of the existing work only treats a single skeletal muscle in isolation
 \multicite{Lemos05Modeling,Sharafi11Strains,Heidlauf14Multiscale}.
 The goal of the model used in this thesis
 (which is the same model as in
@@ -69,9 +67,9 @@ is to study the interplay of multiple muscles and bones.
 Musculoskeletal systems are typically overdetermined \cite{Roehrle16Two}.
 This means that the number of muscles that act on a specific joint
 is usually larger than the number of the joint's degrees of freedom.
-For instance, in a simple model of the upper limb,
+For instance, in a simple model of the human upper limb,
 there are two antagonistic muscles
-(i.e., muscles that work against each other), namely biceps and triceps,
+(i.e., muscles that work against each other), namely triceps and biceps,
 but only one joint angle at the elbow.
 Mathematically speaking, a single muscle would suffice to attain
 most elbow angles that are possible with an antagonistic muscle pair.
@@ -84,7 +82,7 @@ to obtain unique solutions.
 There exist various types of such conditions,
 for instance, minimal control effort, minimal control change, and
 minimal kinematic energy \cite{Valentin18Gradient}.
-The idea behind all of these conditions is that the human body
+The idea behind these conditions is that the human body
 tries to minimize the energy effort that is associated with
 most types of motion.
 
@@ -97,7 +95,7 @@ for the muscles as the input and simulate the corresponding motion
 as the output.
 This requires that we know the muscle forces beforehand,
 depending on the activation levels.
-For example, one can prescribe activation levels of facials muscles
+For example, one can prescribe activation levels of facial muscles
 to achieve specific facial expressions \cite{Wu13Modelling}.
 In contrast, \term{inverse-dynamic approaches}
 use experimental motion data as the input
@@ -122,7 +120,7 @@ the antagonistic muscle pair of triceps brachii and biceps brachii
 \cite{Valentin18Gradient}.
 The bones are rigid bodies and the muscle-tendon complex
 is simulated with a continuum-mechanical approach.
-This means that the muscles are deformed when they contract.
+This implies that the muscles are deformed when they contract.
 
 \begin{figure}
   \begin{tikzpicture}[
@@ -316,7 +314,7 @@ This means that the muscles are deformed when they contract.
 
 The continuum-mechanical part of the model
 is based on the theory of finite elasticity.
-When the muscles deform, forces act on each infinitesimally small element
+When muscles deform, forces act on each infinitesimally small element
 of the muscles, which is known as \term{stress.}
 Usually, especially in linear elasticity,
 stress is measured with the \term{Cauchy stress tensor}
@@ -353,7 +351,7 @@ cf.\ \cite{Valentin18Gradient}.
 Here, $\mat{S}_\mathrm{passive}$ and $\mat{S}_\mathrm{active}$
 are the \term{passive and active contributions}
 due to the skeletal muscle fibers,
-$\act \in \clint{0, 1}$ is the \term{activation level} of the
+$\act \in \clint{0, 1}$ is the \term{activation parameter} of the
 respective muscle-tendon complex, and
 $\gamma_\mathrm{M}, \gamma_\mathrm{ST}$ are two \term{material parameters}
 with which we can differentiate between the different types of soft tissues
@@ -378,13 +376,14 @@ for instance, values for the material parameters.
 %
 The constitutive law has been implemented in the CMISS software package
 (an interactive computer program for Continuum Mechanics,
-Image analysis, Signal processing and System identification)%
+Image analysis, Signal processing and System identification%
 \footnote{%
   \url{https://www.cmiss.org/}%
-}.
+}).
 The emerging \pdes are discretized using quadratic finite element basis
 functions and the resulting linearized system is solved with CMISS.
 %
 The geometry of the human upper limb model is based on
 the Visible Human Male's dataset \cite{Spitzer96Visible}.
-Again, we refer to \multicite{Sprenger15Continuum,Roehrle16Two} for details.
+Again, we refer to \multicite{Sprenger15Continuum,Roehrle16Two} for details
+about the geometry.
