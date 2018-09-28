@@ -298,12 +298,12 @@ As it is typical for sparse grid interpolants,
 the error is the largest near the boundary of the domain.
 In the Clenshaw--Curtis case, the maximal errors are given by
 \begin{equation}
-  \norm[L^\infty]{\forceTref - \forceTintp[p,\cc]}
+  \norm[\Linfty]{\forceTref - \forceTintp[p,\cc]}
   \approx \SI{10.6}{\newton},\qquad
-  \norm[L^\infty]{\forceBref - \forceBintp[p,\cc]}
+  \norm[\Linfty]{\forceBref - \forceBintp[p,\cc]}
   \approx \SI{9.51}{\newton},
 \end{equation}
-where $\norm[L^\infty]{\forceXref - \forceXintp[p,\cc]}
+where $\norm[\Linfty]{\forceXref - \forceXintp[p,\cc]}
 := \max_{(\elbang, \actX)}
 \abs{\forceXref(\elbang, \actX) - \forceXintp[p,\cc](\elbang, \actX)}$
 (since the functions are continuous).
