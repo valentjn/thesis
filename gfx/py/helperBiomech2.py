@@ -13,20 +13,30 @@ def applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX):
       action, gridType, basisType, p, forceLoad, XX)
 
 @helper.hpc.cacheToFile
-def _applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX):
-  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX)
+def _applyBiomech2Scattered(action, gridType, basisType, p, forceLoad, XX,
+                            surplusThresholdPercentT=-1,
+                            surplusThresholdPercentB=-1):
+  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX,
+                        surplusThresholdPercentT, surplusThresholdPercentB)
 
 @helper.hpc.cacheToFile
-def applyBiomech2MeshGrid(action, gridType, basisType, p, forceLoad, nn):
+def applyBiomech2MeshGrid(action, gridType, basisType, p, forceLoad, nn,
+                            surplusThresholdPercentT=-1,
+                            surplusThresholdPercentB=-1):
   _, _, XX = helper.grid.generateMeshGrid(nn)
-  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX)
+  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX,
+                        surplusThresholdPercentT, surplusThresholdPercentB)
 
 @helper.hpc.cacheToFile
-def applyBiomech2MonteCarlo(action, gridType, basisType, p, forceLoad, NN):
+def applyBiomech2MonteCarlo(action, gridType, basisType, p, forceLoad, NN,
+                            surplusThresholdPercentT=-1,
+                            surplusThresholdPercentB=-1):
   XX = getMonteCarloPoints(NN)
-  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX)
+  return _applyBiomech2(action, gridType, basisType, p, forceLoad, XX,
+                        surplusThresholdPercentT, surplusThresholdPercentB)
 
-def _applyBiomech2(action, gridType, basisType, p, forceLoad, XX):
+def _applyBiomech2(action, gridType, basisType, p, forceLoad, XX,
+                   surplusThresholdPercentT, surplusThresholdPercentB):
   import json
   import os
   import subprocess
@@ -35,7 +45,9 @@ def _applyBiomech2(action, gridType, basisType, p, forceLoad, XX):
       os.environ["BUILD_DIR"], "..", "cpp", "applyBiomech2")
   args = [program, "action={}".format(action), "gridType={}".format(gridType),
           "basisType={}".format(basisType), "p={}".format(p),
-          "forceLoad={}".format(forceLoad)]
+          "forceLoad={}".format(forceLoad),
+          "surplusThresholdPercentT={}".format(surplusThresholdPercentT),
+          "surplusThresholdPercentB={}".format(surplusThresholdPercentB)]
   stdin = (matrix2str(XX).encode() if XX is not None else None)
   
   process = subprocess.Popen(
