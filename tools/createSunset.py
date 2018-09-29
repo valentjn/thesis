@@ -350,7 +350,7 @@ pdfCropArea = [70, 85, 455, 700]
 pdfFirstPage = 27
 fadingOutMargin = 10
 targetPath = os.path.join(os.path.dirname(__file__),
-                          "..", "gfx", "pre", "sunset.png")
+                          "..", "build", "gfx", "sunset.png")
 
 wordCloudProperties = {
   "font_path" : fontPath,
