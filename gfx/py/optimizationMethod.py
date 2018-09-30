@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of helper figures = 12
+# number of output figures = 12
 
 import matplotlib as mpl
 import numpy as np
