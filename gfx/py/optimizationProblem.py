@@ -51,8 +51,10 @@ def plotUnconstrainedProblem(params):
   faceColors = light.shade(YY, cmap=mpl.cm.viridis, blend_mode="soft")
   surface = ax.plot_surface(XX0, XX1, YY, facecolors=faceColors)
   
+  backgroundColor = helper.plot.mixColors("mittelblau", 0.1)
+  
   ax.plot(2*[xOpt[0]], 2*[xOpt[1]], ".", zs=[fOpt, contourOffset],
-          mec="w", mfc="C1", ms=10, mew=1, zorder=1000)
+          mec=backgroundColor, mfc="C1", ms=10, mew=1, zorder=1000)
   
   ax.set_xlim3d(bounds[:,0])
   ax.set_ylim3d(bounds[:,1])
@@ -200,7 +202,10 @@ def plotConstrainedProblem(q):
             r"\contour{contourblau}{$\ineqconfunscaled[6] \le 0$}",
             color="k", ha="center", va="center", rotation=-70)
   
-  ax.plot(xOpt[T[0]], xOpt[T[1]], ".", mec="w", mfc="C1", ms=10, mew=1)
+  backgroundColor = helper.plot.mixColors("mittelblau", 0.1)
+  
+  ax.plot(xOpt[T[0]], xOpt[T[1]], ".",
+          mec=backgroundColor, mfc="C1", ms=10, mew=1)
   
   ax.set_xlim(bounds[:,T[0]])
   ax.set_ylim(bounds[:,T[1]])

@@ -32,6 +32,8 @@ def main():
       [1, 3], [3, 1], [3, 3], [3, 1], [1, 1], [1, 3], [3, 1], [3, 3],
       [5, 1], [5, 3], [7, 1], [7, 3]])
   
+  backgroundColor = helper.plot.mixColors("mittelblau", 0.1)
+  
   for adaptive in [False, True]:
     for basisType in basisTypes:
       if adaptive:
@@ -74,7 +76,7 @@ def main():
         error = np.log10(error)
         contour = ax.contourf(XX0, XX1, error, v, extend="min")
         for c in contour.collections: c.set_edgecolor("face")
-        ax.plot(*X.T, "k.", mec="w", mew=0.8, ms=7, clip_on=False)
+        ax.plot(*X.T, "k.", mec=backgroundColor, mew=0.8, ms=7, clip_on=False)
         
         ax.set_xlim(10, 150)
         ax.set_ylim(0, 1)
