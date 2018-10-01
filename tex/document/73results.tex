@@ -17,7 +17,7 @@ biomechanical model of the upper limb.
 
 Since the model is only two-dimensional, we can compute a reference solution
 on a full grid.
-Hence, we evaluate the exerted muscle forces $\forceT$ and $\forceB$ on
+To this end, we evaluate the exerted muscle forces $\forceT$ and $\forceB$ on
 the full grid
 \begin{equation}
   \{\ang{10}, \ang{11}, \dotsc, \ang{150}\} \times \{0, 0.1, \dotsc, 1\}
@@ -25,11 +25,10 @@ the full grid
   X \in \{\mathrm{T}, \mathrm{B}\}.
 \end{equation}
 The resulting \num{1551} grid points
-are interpolated with bicubic spline interpolation%
+are interpolated with bicubic full grid splines%
 \footnote{%
-  Computed with the Geometric Tools Engine, see
-  \url{https://www.geometrictools.com/}
-  \cite{Schneider03Geometric}.
+  Computed with the Geometric Tools Engine \cite{Schneider03Geometric},
+  see \url{https://www.geometrictools.com/}.%
 }
 to obtain \term{reference solutions}
 $\forceTref, \forceBref\colon
@@ -42,7 +41,7 @@ We refer to the resulting quantities with the superscript ``$\mathrm{ref}$'',
 for instance, the corresponding equilibrium elbow angle
 $\equielbangref{\forceL}$, which is displayed in
 \cref{fig:biomech2ReferenceEquilibriumAngle}
-for the exemplary loads of $\forceL = \SI{22}{\newton}$,
+for the loads of $\forceL = \SI{22}{\newton}$,
 $\SI{-60}{\newton}$, and $\SI{180}{\newton}$.
 
 \begin{figure}
@@ -94,12 +93,22 @@ $\SI{-60}{\newton}$, and $\SI{180}{\newton}$.
 Additionally, we evaluate $\forceT$ and $\forceB$ at the $\ngp = 49$
 grid points
 \begin{equation}
-  \{(\elbang^{(k)}, \actX^{(k)}) \mid k = 1, \dotsc, \ngp\}
+  \{(\elbang^{(k,\mathrm{unif})}, \actX^{(k,\mathrm{unif})}) \mid
+  k = 1, \dotsc, \ngp\}
   \subset \clint{\ang{10}, \ang{150}} \times \clint{0, 1},\quad
   X \in \{\mathrm{T}, \mathrm{B}\},
 \end{equation}
-of the regular sparse grid $\interiorregsgset{n}{d}$ of
-level $n = 5$ in $d = 2$ dimensions.%
+of the uniform regular sparse grid $\interiorregsgset{n}{d}$ of
+level $n = 5$ in $d = 2$ dimensions
+without boundary points to reduce the sample size
+and at the sparse Clenshaw--Curtis grid
+\begin{equation}
+  \{(\elbang^{(k,\cc)}, \actX^{(k,\cc)}) \mid
+  k = 1, \dotsc, \ngp\}
+  \subset \clint{\ang{10}, \ang{150}} \times \clint{0, 1},\quad
+  X \in \{\mathrm{T}, \mathrm{B}\},
+\end{equation}
+of the same size and level.%
 \footnote{%
   The domain $\clint{\ang{10}, \ang{150}} \times \clint{0, 1}$
   is assumed to be implicitly normalized to the unit square
@@ -107,13 +116,13 @@ level $n = 5$ in $d = 2$ dimensions.%
 }
 These values are interpolated using three
 different hierarchical B-spline bases of degree $p = 1$, $3$, and $5$:
-modified hierarchical B-splines
+modified hierarchical uniform B-splines
 $\bspl[\modified]{\*l,\*i}{p}$
 (see \cref{sec:313modification}),
 modified hierarchical Clenshaw--Curtis B-splines
 $\bspl[\cc,\modified]{\*l,\*i}{p}$
 (see \cref{sec:314nonUniform}), and
-modified hierarchical not-a-knot B-splines
+modified hierarchical uniform not-a-knot B-splines
 $\bspl[\nak,\modified]{\*l,\*i}{p}$
 (see \cref{sec:323modifiedNAKBSplines}).
 The implementation was done using the sparse grid toolbox
@@ -130,7 +139,7 @@ means one of the three sparse grid quantities in general.
 Note that the equilibrium elbow angle is \emph{not} interpolated
 (neither in the full grid nor in the sparse grid case),
 but rather obtained by inserting the interpolated muscle forces
-into \cref{eq:totalMomentSurrogate,eq:equilibriumAngleSurrogate}.
+into \eqref{eq:totalMomentSurrogate} and \eqref{eq:equilibriumAngleSurrogate}.
 
 
 
@@ -140,7 +149,7 @@ into \cref{eq:totalMomentSurrogate,eq:equilibriumAngleSurrogate}.
 \paragraph{Quality of the reference interpolants}
 
 Before we turn to the sparse grid interpolants,
-we assess the quality of the reference interpolant on the full grid.
+we assess the quality of the reference interpolants on the full grid.
 For this purpose, we evaluate the full grid interpolants
 $\forceTintp, \forceBintp$
 at the sparse grid points $(\elbang^{(k)}, \actX^{(k)})$
@@ -151,34 +160,35 @@ $\forceB(\elbang^{(k)}, \actB^{(k)})$
 of the muscle forces $\forceT, \forceB$.
 We also incorporate the known values at the sparse
 Clenshaw--Curtis grid points.
-In particular, to simplify the notation,
-let $G$ be the union of
-$\{(\elbang^{(k)}, \actX^{(k)}) \mid k = 1, \dotsc, \ngp\}$ and
-$\{(\elbang^{(k,\cc)}, \actX^{(k,\cc)}) \mid k = 1, \dotsc, \ngp\}$.%
+In particular, let $G$ be the union of
+$\{(\elbang^{(k,\mathrm{unif})}, \actX^{(k,\mathrm{unif})}) \mid
+k = 1, \dotsc, \ngp\}$ and
+$\{(\elbang^{(k,\cc)}, \actX^{(k,\cc)}) \mid k = 1, \dotsc, \ngp\}$.
+We then approximate the relative $\Ltwo$ interpolation error
+of the reference interpolants by
+\begin{equation}
+  \frac{\normLtwo{\forceX - \forceXref}}{\normLtwo{\forceX}}
+  \approx
+  \frac{
+    \setsize{G}^{-1/2}
+    \norm[2]{
+      (\forceX(\elbang, \actX) - \forceXref(\elbang, \actX))_
+      {(\elbang, \actX) \in G}
+    }
+  }{
+    \setsize{G}^{-1/2}
+    \norm[2]{(\forceX(\elbang, \actX))_{(\elbang, \actX) \in G}}
+  },\quad
+  X \in \{\mathrm{T}, \mathrm{B}\},
+\end{equation}
+where $\norm[2]{\cdot}$ is the Euclidean norm.%
 \footnote{%
   We have $\setsize{G} = 2\ngp - 1$, since sparse grids of
   uniform and Clenshaw--Curtis type only
   share the center point $(\elbang, \actX) = (\ang{80}, 0.5)$,
   if there are no boundary points.%
 }
-Then, we can approximate the relative $\Ltwo$ interpolation error
-of the reference interpolants by
-\begin{equation}
-  \frac{\normLtwo{\forceX - \forceXref}}{\normLtwo{\forceX}}
-  \approx
-  \frac{
-    \norm[l^2]{
-      (\forceX(\elbang, \actX) - \forceXref(\elbang, \actX))_
-      {(\elbang, \actX) \in G}
-    }
-  }{
-    \norm[l^2]{(\forceX(\elbang, \actX))_{(\elbang, \actX) \in G}}
-  },\quad
-  X \in \{\mathrm{T}, \mathrm{B}\},
-\end{equation}
-where the $l^2$ norm of a vector $\*a \in \real^{\ngp}$ is given by
-$\norm[l^2]{\*a} := \sqrt{\tfrac{1}{\ngp} \sum_{k=1}^{\ngp} (a_k)^2}$.
-Inserting the known values $\forceX(\elbang, \actX)$ and
+After inserting the known values $\forceX(\elbang, \actX)$ and
 $\forceXref(\elbang, \actX)$ on the \rhs, we obtain
 \begin{equation}
   \frac{\normLtwo{\forceT - \forceTref}}{\normLtwo{\forceT}}
@@ -194,7 +204,7 @@ $\forceTref \approx \forceT$ and $\forceBref \approx \forceB$.
 \Cref{tbl:biomech2ErrorL2_1} contains the relative $\Ltwo$
 interpolation errors
 $\normLtwo{\forceXref - \forceXintp}/\normLtwo{\forceXref}$
-($X \in \{\mathrm{T}, \mathrm{B}\}$)
+($X \in \{\mathrm{T}, \mathrm{B}\}$) of the sparse grid interpolants
 for all hierarchical bases and the degrees $p = 1, 3, 5$.
 All reported errors are relatively small
 due to the smoothness of the original functions
@@ -204,16 +214,15 @@ achieving relative $\Ltwo$ errors of below \SI{3.6}{\permille}
 in the cubic case.
 Surprisingly, the not-a-knot B-splines are the worst choice in our
 comparison.
-Their corresponding errors exceed \SI{1}{\percent} for the triceps
-and $p \in \{3, 5\}$.
+Their corresponding errors exceed \SI{1}{\percent} for the triceps,
+when $p > 1$.
 Possible reasons are two-fold:
 First, there might be slight noise in the given muscle force data,
 which is visible in \cref{fig:biomech2ReferenceForce},
 as there seems to be a kink in $\forceTref$ at $\elbang \approx \ang{25}$.
 Second, the employed regular sparse grids might be too coarse
-as the convergence order of not-a-knot B-splines is higher,
-but we might still be in the pre-asymptotic range
-(see \cref{sec:541interpolation}).
+as the higher convergence order of not-a-knot B-splines
+only pays off in the asymptotic range (see \cref{sec:541interpolation}).
 The same observations hold for the degree $p$,
 for which $p = 3$ seems to be the best choice,
 as the errors increase again for $p = 5$.
@@ -286,8 +295,8 @@ the absolute errors $\abs{\forceXref - \forceXintp}$
 shown in \cref{fig:biomech2ErrorForce} do not vanish in the
 sparse grid points $(\elbang^{(k)}, \actX^{(k)})$
 ($X \in \{\mathrm{T}, \mathrm{B}\}$, $k = 1, \dotsc, \ngp$),
-since $\forceXintp$ does not $\forceXref$ interpolate
-in these points.%
+since $\forceXintp$ does not interpolate $\forceXref$
+at these points.%
 \footnote{%
   It would have been possible to construct $\forceXintp$
   as a sparse grid interpolant of $\forceXref$.
@@ -296,6 +305,8 @@ in these points.%
 }
 As it is typical for sparse grid interpolants,
 the error is the largest near the boundary of the domain.
+However, the Clenshaw--Curtis points help to decrease the error
+due to the higher density of grid points near the boundary.
 In the Clenshaw--Curtis case, the maximal errors are given by
 \begin{equation}
   \norm[\Linfty]{\forceTref - \forceTintp[p,\cc]}
@@ -340,20 +351,20 @@ around \SI{1}{\kilo\newton}.
   \caption[Absolute error of muscle forces]{%
     Absolute error of muscle forces $\forceT, \forceB$ for
     modified cubic B-splines ($p = 3$)
-    on uniform sparse grids \emph{(left two plots)} and
-    on Clenshaw--Curtis sparse grids \emph{(right two plots)}
+    on sparse grids of uniform type \emph{(left two plots)} and
+    of Clenshaw--Curtis type \emph{(right two plots)}
     together with the points of the sparse grid \emph{(dots).}%
   }%
   \label{fig:biomech2ErrorForce}%
 \end{figure}
 
-\paragraph{Error of the elbow equilibrium angle}
+\paragraph{Error of the equilibrium elbow angle}
 
 The relative $\Ltwo$ errors
 $\normLtwo{\equielbangref{\forceL} - \equielbangintp{\forceL}}/
 \normLtwo{\equielbangref{\forceL}}$
-of the elbow equilibrium angle function are shown in
-\cref{tbl:biomech2ErrorL2_1} for the example load of
+of the equilibrium elbow angle function are shown in
+\cref{tbl:biomech2ErrorL2_1} for the load of
 $\forceL = \SI{22}{\newton}$.
 Modified cubic Clenshaw--Curtis B-splines achieve the best results.
 Therefore, we use this type of hierarchical basis
@@ -361,7 +372,7 @@ for the remainder of this chapter.
 Pointwise plots of the absolute error
 $\abs{\equielbangref{\forceL} - \equielbangintp[p,\cc]{\forceL}}$
 are presented in \cref{fig:biomech2ErrorEquilibriumAngle}.
-Again, the maximal error is pretty small:
+Again, the maximal error is comparatively small:
 For $\forceL = \SI{22}{\newton}$, it is only \ang{0.886}.
 If we restrict the domain to $\clint{0.15, 0.85}^2$,
 then this maximal error drops to \ang{0.103} (or \ang{;6.18;}),
@@ -410,7 +421,7 @@ contribute the most to the error.
 
 In the following, we want to assess the performance
 of the sparse grid interpolants for the optimization problems O1 and O2.
-For this goal, we use (as in \cite{Valentin18Gradient}) a test scenario
+For this goal, we create (as in \cite{Valentin18Gradient}) a test scenario
 that simulates a pseudo-dynamic sequence of motions
 by varying the load force and/or the target elbow angle
 in discrete time steps $t$ as seen in \cref{fig:biomech2ScenarioA_1}.
@@ -486,16 +497,16 @@ The test scenario is as follows:
 For each of the steps 2 to 5, the activation levels $\actT, \actB$ obtained
 in the previous step (i.e., either the feasible initial solution
 of step 1 or the optimal solution of steps 2 to 4) are used
-as the inputs for the optimization problem O1 or O2.
+as the input of the optimization problem O1 or O2.
 The feasible initial solution in step 1 is determined as explained
 in \cref{sec:513gradientBasedConstrained}.
 
 \paragraph{Solutions of problem O1}
 
-We note that independent of $\forceL$ and $\tarelbang$,
+We note that independently of $\forceL$ and $\tarelbang$,
 every solution $(\actT, \actB)$ of problem O1 will be
 on the boundary part of the domain $\clint{\*0, \*1}$,
-where at least one activation parameter vanishes, i.e.,
+on which at least one activation parameter vanishes, i.e.,
 \begin{equation}
   \{(\actT, \actB) \in \clint{\*0, \*1} \mid
   (\actT = 0) \lor (\actB = 0)\}.
@@ -519,7 +530,7 @@ such as problem O2, where the objective function differs.
 show the results of the test scenario using the muscle forces
 $\forceXintp[p,\cc]$ obtained by interpolating with
 modified hierarchical cubic Clenshaw--Curtis B-splines (solid lines, $p = 3$).
-For comparison, we repeat the solution process
+As comparison, we repeat the solution process
 with the forces obtained by interpolating with the
 corresponding hierarchical piecewise linear basis (dashed lines, $p = 1$) and
 with the reference forces $\forceXref$ (dotted lines).
@@ -529,6 +540,10 @@ we use exactly the same method as for the cubic case
 Augmented Lagrangian with adaptive gradient descent for the
 solution of problems O1 and O2),
 although the derivatives of the muscle forces have kinks.
+For the reference forces, we abuse the fact that the reference surrogates
+are full grid spline interpolants, which can be explicitly differentiated.
+Without the full grid interpolants,
+we would have to approximate the derivatives with finite differences.
 
 \paragraph{Equilibrium elbow angle}
 
@@ -536,7 +551,7 @@ In \cref{fig:biomech2ScenarioA_2}, we see that the activation levels
 of all three methods are more or less the same.
 However, \cref{fig:biomech2ScenarioA_3} reveals that even these small
 difference lead to deviations of the resulting equilibrium elbow angle
-that differ from the target angle by up to two orders of magnitude.
+to the target angle that differ by up to two orders of magnitude.
 The two green lines with filled markers at the bottom of
 \cref{fig:biomech2ScenarioA_3} show the error of
 the equilibrium elbow angle $\equielbangintp{\forceL}$
@@ -551,7 +566,7 @@ with hollow markers).
 Here, we see that the cubic B-splines decrease the error
 by to two orders of magnitude compared to the
 standard piecewise linear basis.
-The reasons are two-fold:
+There are two reasons:
 First, the error of $\equielbang{\forceL}$ is generally smaller
 when using higher-order B-splines as we have seen above.
 Second, higher-order B-splines are continuously differentiable,
@@ -583,25 +598,25 @@ may be employed to reduce the number of necessary muscle force samples,
 especially for more complicated musculoskeletal systems with
 more parameters.
 To verify this statement, we remove all grid points
-$(\elbang^{(k)}, \actX^{(k)})$ from the regular sparse Clenshaw--Curtis grid
-that satisfy
+$(\elbang^{(k,\cc)}, \actX^{(k,\cc)})$
+from the regular sparse Clenshaw--Curtis grid that satisfy
 \begin{equation}
   \frac{
-    \abs{\alpha_\mathrm{T}^{(k),p,\cc}}
+    \abs{\alpha_\mathrm{T}^{(k,p,\cc)}}
   }{
-    \max_{k'} \abs{\alpha_\mathrm{T}^{(k'),p,\cc}}
+    \max_{k'} \abs{\alpha_\mathrm{T}^{(k',p,\cc)}}
   } < \SI{1}{\percent}
   \quad\text{and}\quad
   \frac{
-    \abs{\alpha_\mathrm{B}^{(k),p,\cc}}
+    \abs{\alpha_\mathrm{B}^{(k,p,\cc)}}
   }{
-    \max_{k'} \abs{\alpha_\mathrm{B}^{(k'),p,\cc}}
+    \max_{k'} \abs{\alpha_\mathrm{B}^{(k',p,\cc)}}
   } < \SI{1}{\percent},
 \end{equation}
-where $\alpha_X^{(k),p,\cc}$ ($X \in \{\mathrm{T}, \mathrm{B}\}$)
+where $\alpha_X^{(k,p,\cc)}$ ($X \in \{\mathrm{T}, \mathrm{B}\}$)
 is the hierarchical surplus of the basis function $\bspl[\cc,\modified]{k}{p}$
-corresponding to $(\elbang^{(k)}, \actX^{(k)})$.
-For higher dimensional models,
+corresponding to $(\elbang^{(k,\cc)}, \actX^{(k,\cc)})$.
+For higher-dimensional models,
 one would of course not sample muscle data on a regular sparse grid
 and then coarsen the data by removing points,
 but rather use an adaptivity criterion to decide which grid points to
@@ -615,6 +630,9 @@ with the spatially adaptive sparse grid
 equilibrium elbow angle $\equielbangintp[p,\cc,\mathrm{adap}]{\forceL}$
 for $\forceL = \SI{22}{\newton}$ are shown in
 \cref{fig:biomech2SpatiallyAdaptive}.
+The sparse grid is almost dimensionally adaptive,
+as $\forceXref$ seems to be almost linear in the $\actX$ direction
+for both $X = \mathrm{T}$ and $X = \mathrm{B}$.
 The errors increase slightly:
 The relative $\Ltwo$ force errors for $(\mathrm{T}, \mathrm{B})$ increase
 from $(\SI{3.31}{\permille}, \SI{3.56}{\permille})$

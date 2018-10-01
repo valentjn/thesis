@@ -15,8 +15,8 @@ We closely follow the presentation of \cite{Valentin18Gradient}.
 \paragraph{Model inputs and outputs}
 
 In the following, we regard simulations of the
-human upper limb model described in \cref{sec:71model} as a black box.
-This black box receives as its input
+human upper limb model described in \cref{sec:71model} as a black box,
+which receives as its input
 the elbow angle $\elbang \in \clint{\ang{10}, \ang{150}}$
 and the activation parameters $\actT, \actB \in \clint{0, 1}$
 of triceps and biceps.%
@@ -31,8 +31,8 @@ These forces depend on the elbow angle as well as on the respective
 activation parameter.
 Gravitational forces due to the masses of bones or masses
 are neglected in this context.
-However, we allow the specification of an external load $\forceL$
-applied to the end of the forearm.
+However, we allow the specification of an external load $\forceL$,
+which is applied to the end of the forearm.
 This load may the weight force of some object
 that the arm is supposed to keep in position.
 
@@ -44,8 +44,7 @@ with the respective lever arms $\armX$
 ($X \in \{\mathrm{T}, \mathrm{B}, \mathrm{L}\}$).
 The lever arms are approximated as in
 \multicite{Roehrle16Two,Valentin18Gradient} by using
-the tendon-displacement method of \cite{An84Determination},
-resulting in
+the tendon-displacement method of \cite{An84Determination}:
 \begin{subequations}
   \begin{align}
     \armT(\elbang)
@@ -58,7 +57,7 @@ resulting in
     &:= \sin(\elbang) \cdot \SI{282.5}{\milli\meter},
   \end{align}
 \end{subequations}
-where $\{\elbang\}$ denotes the numerical value of $\elbang$
+where $\{\elbang\}$ denotes the dimensionless value of $\elbang$
 in degrees.
 The lever arms are non-negative and the forces are signed, i.e.,
 positive forces pull the forearm downwards,
@@ -81,17 +80,18 @@ The \term{total moment} of the system is given by the function
   \end{gather}
 \end{subequations}
 cf.\ \cite{Valentin18Gradient}.
-The system is in \term{equilibrium,}
+The system is in \term{equilibrium}
 if the total moment vanishes, i.e.,
 $\moment_{\forceL,\actT,\actB}(\elbang) = \SI{0}{\newton\meter}$.
 We call the corresponding angle $\elbang$ the
-\term{equilibrium elbow angle.}
+\term{equilibrium elbow angle}
+for the load $\forceL$ and the activation parameters $\actT, \actB$.
 To find this angle for a given load $\forceL$ and activation parameters
 $\actT$ and $\actB$, we first note that
 $\moment_{\forceL,\actT,\actB}$ may have zero, exactly one,
 or multiple zeros in $\clint{\ang{10}, \ang{150}}$.
 Hence, the inverse function evaluated at $\SI{0}{\newton\meter}$
-is partially defined depending on load and activation parameters:
+is partially defined depending on the load and the activation parameters:
 \begin{equation}
   \label{eq:equilibriumAngle}
   \equielbang{\forceL}\colon \actdomain{\forceL} \to
@@ -122,7 +122,8 @@ and the stopping criterion of
 $\abs{\moment_{\forceL,\actT,\actB}(\elbang^{(j)})} <
 \SI{e-9}{\newton\meter}$ or
 $\abs{\partialderiv{\partialdiff{} \elbang}{\moment_{\forceL,\actT,\actB}}
-(\elbang^{(j)})} < \SI{e-9}{\newton\meter\per\degree}$.
+(\elbang^{(j)})} < \SI{e-9}{\newton\meter\per\degree}$,
+whichever is satisfied first.
 We repeat the Newton method for the initial values
 $\elbang^{(0)} = \ang{80}, \ang{40}, \ang{120}$
 and use the first converged result
@@ -149,12 +150,11 @@ when a specific movement should be carried out.
 \paragraph{List of optimization problems}
 
 However, as discussed in \cref{sec:711models},
-musculoskeletal systems with an antagonistic muscle pair,
-such as our human upper limb model, are usually overdetermined.
+musculoskeletal systems with an antagonistic muscle pair
+such as our human upper limb model are usually overdetermined.
 This means that there are multiple solutions to this problem.
-To solve this issue, one may solve one of the three
-optimization problems that the following list proposes
-\cite{Valentin18Gradient}:
+As a remedy, one may solve one of the following
+optimization problems \cite{Valentin18Gradient}:
 
 \begin{enumerate}[label=O\arabic*.,leftmargin=2.7em]
   \item
@@ -190,7 +190,7 @@ optimization problems that the following list proposes
 
 \paragraph{Motivation of problem O1}
 
-The motivation of all problems is that the human body tries to
+The motivation of both problems is that the human body tries to
 achieve a given movement with minimal energy effort.
 For the first problem O1, this effort is quantified by $\actT + \actB$,
 i.e., the energy effort for each muscle is assumed to be proportional
@@ -215,7 +215,8 @@ Hence, we have to determine the new activation parameters
 $\actT(t_2), \actB(t_2)$ such that
 $\moment_{\forceL(t_2),\actT(t_2),\actB(t_2)}(\tarelbang(t_2))
 = \SI{0}{\newton\meter}$.
-Again, these $\actT(t_2)$ and $\actB(t_2)$ are not uniquely determined.
+Again, these parameters
+$\actT(t_2)$ and $\actB(t_2)$ are not uniquely determined.
 Therefore, we want to find the pair of activation parameters
 that is closest (in terms of the Euclidean norm) to the initial
 activation parameters $\actT(t_1), \actB(t_1)$.
@@ -257,8 +258,8 @@ for the gradient-based optimization of the penalized objective function
 
 %To solve optimization problems O1 to O3,
 To solve optimization problems O1 and O2,
-the optimization method needs to evaluate the objective function
-and the constraint functions multiple times during the algorithm.
+the optimization method needs to evaluate the objective
+and constraint functions multiple times during the algorithm.
 This requires the evaluation of $\equielbang{\forceL}$,
 which in turn has to be approximated with the Newton method.
 As we see in \cref{eq:newtonAngle},
@@ -283,13 +284,13 @@ then a single iteration of the optimization algorithm to solve
 problems O1 and O2 will take four hours to complete
 (assuming one evaluation of objective and constraint functions
 per optimizer iteration and
-two evaluations per Newton iteration to calculate the missing derivative).
+two evaluations per Newton iteration to approximate the missing derivative).
 Consequently, the whole optimization process takes
 two weeks to complete, if the optimizer converges after 100 iterations.
 
 \paragraph{Sparse grid surrogates}
 
-A popular way to reduce the complexity is to employ surrogates.
+A popular way to reduce complexity is to employ surrogates.
 In this case, the idea is to replace the muscle force functions
 $\forceT, \forceB$ with surrogates $\forceTintp, \forceBintp$
 \cite{Valentin18Gradient}, e.g., by interpolation.
@@ -317,13 +318,14 @@ consequently, a surrogate
 \end{equation}
 for the equilibrium elbow angle function (cf.\ \cref{eq:equilibriumAngle}).
 Since the surrogates are much cheaper to evaluate,
-the runtime is decreased by up to seven orders of magnitude.
+the runtime is decreased by up to seven orders of magnitude,
+as experiments show.
 
 The approach in \cite{Valentin18Gradient} and in this thesis is
-to determine the surrogates
-$\forceTintp, \forceBintp\colon \clint{\*0, \*1} \to \real$
-by sparse grid interpolation.
-Compared to usual surrogate construction techniques,
+to determine surrogates
+$\forceXintp\colon \clint{\*0, \*1} \to \real$
+($X \in \{\mathrm{T}, \mathrm{B}\}$) by sparse grid interpolation.
+Compared to surrogate construction techniques based on full grids,
 sparse grids help to reduce the number of samples that
 are necessary to build a ``reasonably'' accurate surrogate,
 especially if the number of dimensions is moderately large
@@ -347,10 +349,10 @@ which would not be possible in a higher-dimensional setting.
 \paragraph{Benefiting from B-splines}
 
 As in \cite{Valentin18Gradient},
-we will use higher-order hierarchical B-splines as basis functions
+we use higher-order hierarchical B-splines as basis functions
 for the sparse grid surrogates.
 This has three advantages when compared with conventional
-sparse bases such as piecewise linear functions.
+sparse grid bases such as piecewise linear functions.
 %
 First, the partial derivative
 $\partialderiv{\partialdiff{} \elbang}{\momentintp}$ needed
@@ -360,7 +362,7 @@ There is no need to approximate the derivative with
 finite differences, reducing both the error and the runtime.
 %
 Second, we can use gradient-based optimization methods
-for the solution of the optimization problems O1 to O3,
+for the solution of the optimization problems O1 and O2,
 which involve the equilibrium elbow angle function
 $\equielbangintp{\forceL}\colon \clint{\*0, \*1} \to \real$.
 With the implicit function theorem \cite{Kudryavtsev95Implicit},
@@ -379,13 +381,13 @@ where $\gradient{\actT,\actB}{}$ is the transposed Jacobian%
 \footnote{%
   For example, the first column is the gradient with respect to $\actT$
   and the second column is the gradient with respect to $\actB$.%
-}
+}.
 Both the gradient $\gradient{\actT,\actB}{\momentintp}$ and
 the partial derivative $\partialderiv{\partialdiff{} \elbang}{\momentintp}$
 are continuous, explicitly known, and can be evaluated fast.
 %
 Third and finally,
-the usage of higher-B-splines as basis functions
+the usage of higher-order B-splines as basis functions
 increases the order of convergence of interpolation errors
 as shown in \cref{sec:541interpolation}.
 Thus, fewer interpolation points are necessary to build a surrogate
