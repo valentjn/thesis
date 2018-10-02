@@ -95,9 +95,9 @@ def main():
       ax.fill(*trafo([0, 1, 1, 0, 0],
                      [(1-b)/2, (1-b)/2, (1+b)/2, (1+b)/2, (1-b)/2]),
               **kwargs(1))
-      plotText(ax, trafo, 0.5, 0.2,   r"$a$", width=a,
+      plotText(ax, trafo, 0.5, 0.2,   r"$x_1$", width=a,
                contourColor=contourColors(0))
-      plotText(ax, trafo, 0.8, 0.5,   r"$b$", height=b,
+      plotText(ax, trafo, 0.8, 0.5,   r"$x_2$", height=b,
                contourColor=contourColors(1))
     else:
       ax.fill(*trafo([0, a/2, a/2, 0, 0], [0, 0, 1, 1, 0]), **kwargs(0))
@@ -110,17 +110,17 @@ def main():
                      [1-c/2, 0, 0, c/2, 1, 1, 1-c/2]), **kwargs(2))
       ax.fill(*trafo([0, d/2, 1, 1, 1-d/2, 0, 0],
                      [0, 0, 1-d/2, 1, 1, d/2, 0]), **kwargs(3))
-      plotText(ax, trafo, a/4,   0.5,   r"$\frac{a}{2}$", width=a/2,
+      plotText(ax, trafo, a/4,   0.5,   r"$\frac{x_1}{2}$", width=a/2,
                contourColor=contourColors(0))
-      plotText(ax, trafo, 1-a/4, 0.5,   r"$\frac{a}{2}$", width=a/2,
+      plotText(ax, trafo, 1-a/4, 0.5,   r"$\frac{x_1}{2}$", width=a/2,
                contourColor=contourColors(0))
-      plotText(ax, trafo, 0.5,   b/4,   r"$b/2$",         height=b/2,
+      plotText(ax, trafo, 0.5,   b/4,   r"$x_2/2$",         height=b/2,
                contourColor=contourColors(1))
-      plotText(ax, trafo, 0.5,   1-b/4, r"$b/2$",         height=b/2,
+      plotText(ax, trafo, 0.5,   1-b/4, r"$x_2/2$",         height=b/2,
                contourColor=contourColors(1))
-      plotText(ax, trafo, 0.7,   0.3,   r"$c$",           width=c,
+      plotText(ax, trafo, 0.7,   0.3,   r"$x_3$",           width=c,
                contourColor=contourColors(2))
-      plotText(ax, trafo, 0.7,   0.7,   r"$d$",           width=d,
+      plotText(ax, trafo, 0.7,   0.7,   r"$x_4$",           width=d,
                contourColor=contourColors(3))
     
     x, y = trafo([0, 1, 1, 0, 0], [0, 0, 1, 1, 0])
@@ -179,11 +179,11 @@ def main():
     plotCuboid(ax, trafo, [(1-b)/2, 0,       (1-b)/2], [b, (1-c)/2, b],
                "mittelblau", zorder=4)
     
-    plotText3D(ax, trafo, 0, 0.5, 0.5, r"$a$", [np.nan, a, a],
+    plotText3D(ax, trafo, 0, 0.5, 0.5, r"$x_1$", [np.nan, a, a],
                contourColor="mittelblau!67")
-    plotText3D(ax, trafo, 0.5, 0, 0.5, r"$b$", [b, np.nan, b],
+    plotText3D(ax, trafo, 0.5, 0, 0.5, r"$x_2$", [b, np.nan, b],
                contourColor="mittelblau!100")
-    plotText3D(ax, trafo, 0.5, 0.5, 1, r"$c$", [c, c, np.nan],
+    plotText3D(ax, trafo, 0.5, 0.5, 1, r"$x_3$", [c, c, np.nan],
                contourColor="mittelblau!78")
     
     if q == 1:
