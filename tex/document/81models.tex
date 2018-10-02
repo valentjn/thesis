@@ -163,12 +163,12 @@ we obtain the \term{Bellman equation:}
         \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
       }
     \right),\quad
-    t < T,\\
+    t = 0, \dotsc, T,\\
     \policy_t \in \real^{m_{\policy}}\;\;\text{s.t.}\;\;
     \ineqconfun_t(\state_t, \policy_t) \le \*0,
   \end{gather}
 \end{subequations}
-where
+where $\valuefcn_{T+1} :\equiv 0$ for simplicity,
 $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
 \stochdomain \to \clint{\*0, \*1}$,
 $(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$,
@@ -223,14 +223,16 @@ although they could easily be taken into account.
 The Bellman equation \eqref{eq:generalBellman} can be solved
 with a dynamic programming scheme backwards in time.
 Starting from the solution $\valuefcn_T$ and $\optpolicyfcn_T$
-of time $T$, we can determine $\valuefcn_t$ and $\optpolicyfcn_t$
+of time $T$, which is determined by maximizing the utility
+for the terminal time step,
+we can determine $\valuefcn_t$ and $\optpolicyfcn_t$
 from $\valuefcn_{t+1}$ and $\optpolicyfcn_{t+1}$
 for $t = T - 1, \dotsc, T - 2, \dotsc, 0$ with the Bellman equation.
 This way, we only have to solve $T+1$ separate $m_{\policy}$-dimensional
 optimization problems instead of a single large
 $(T+1) m_{\policy}$-dimensional problem.
-Often, the terminal solution $\valuefcn_T$ and $\optpolicyfcn_T$
-is explicitly known.
+Often, the terminal solutions $\valuefcn_T$ and $\optpolicyfcn_T$
+are explicitly known.
 For example, if we neglect inheritance,
 then the optimal terminal solution is to consume the whole wealth $\wealth_T$
 (which is usually part of the state $\state_T$)
@@ -269,8 +271,7 @@ $\valueintp_t$ and $\optpolicyintp_t$, respectively:
   \right),\quad
   k = 1, \dotsc, \ngp_t,
 \end{equation}
-with $t < T$ and
-$\optpolicyintp_t(\state_t^{(k)}) = \vecargmax_{\policy_t} \cdots$.
+with $\optpolicyintp_t(\state_t^{(k)}) = \vecargmax_{\policy_t} \cdots$.
 As $\valueintp_{t+1}$ on the \rhs is only an approximation to
 $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.

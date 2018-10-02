@@ -292,7 +292,7 @@ In the first iteration $t = T$,
 there is no such interpolant.
 However,
 %it is not needed anyway, as
-the exact terminal solution $\valuefcn_T$ is assumed to be known.
+the terminal solution $\valuefcn_T$ can be directly determined.
 
 
 
@@ -309,8 +309,8 @@ $\gridset{t}{\sparse}
 where the function values $\valueintp[1]_t(\state_t^{(k)})$
 may already be known for some grid points $\state_t^{(k)}$.
 \texttt{optimize} computes the missing value function values.
-For $t = T$, we assume that the exact terminal solution
-$\valuefcn_T$ is known and can be computed explicitly by some function
+For $t = T$, we assume that the terminal solution
+$\valuefcn_T$ can be computed by some function
 \texttt{computeKnownTerminalSolution}.%
 \footnote{%
   In any case, the terminal solution be be computed as the
@@ -396,6 +396,8 @@ As a remedy, we transform the value function $\valueintp_t$ with the
 $\valueintp_t \mapsto \cetvalueintp_t
 := ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 0$.
 \Cref{eq:gridBellman} then becomes
+$\cetvalueintp_T(\state_t^{(k)}) = \max_{\policy_T}
+\consume_T(\state_T^{(k)}, \policy_T)$ for $t = T$ and
 \begin{equation}
   \label{eq:gridBellmanCET}
   \cetvalueintp[1]_t(\state_t^{(k)})
@@ -410,9 +412,9 @@ $\valueintp_t \mapsto \cetvalueintp_t
         )^{1-\riskav}
       }
     \right)^{1/(1-\riskav)}
-  \right),
+  \right)
 \end{equation}
-since for $\riskav > 0$,
+for $t < T$, since for $\riskav > 0$,
 $(\cdot)^{1/(1-\riskav)}$ is strictly monotonously decreasing and
 $(1-\riskav) < 0$.
 For the sake of consistency, the notation in this section
