@@ -67,7 +67,7 @@ $\normbond_t    := \bond_t   /\wealth_t$, and
 $\normbuysell_t := \buysell_t/\wealth_t$, we obtain
 \begin{subequations}
   \begin{align}
-    \normconsume_t(\state_t, \policy_t)
+    \normconsume_t(\normstate_t, \normpolicy_t)
     &:= \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} - \normbond_t -
     (1 + \tac) \sum_{j=1}^{m_{\stock}} \normbuy_{t,j} +
     (1 - \tac) \sum_{j=1}^{m_{\stock}} \normsell_{t,j},\\
@@ -118,12 +118,12 @@ the following variables:
 \begin{itemize}
   \item
   $\centerhphantom{d}{m_{\stochastic}} = m_{\stock}$
-  state variables $\state_t$:
+  state variables $\normstate_t$:
   Stock fractions $\stock_{t,1}, \dotsc, \stock_{t,m_{\stock}}$
   
   \item
   $\centerhphantom{m_{\policy}}{m_{\stochastic}} = 2m_{\stock} + 1$
-  policy variables $\policy_t$:
+  policy variables $\normpolicy_t$:
   Normalized bonds $\normbond_t$,
   normalized buy amounts $\normbuy_{t,1}, \dotsc, \normbuy_{t,m_{\stock}}$ and
   normalized sell amounts $\normsell_{t,1}, \dotsc, \normsell_{t,m_{\stock}}$
