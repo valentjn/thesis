@@ -453,7 +453,7 @@ for q in range(2):
                                     ha="right", va="bottom")
     ax.set_xlim(1e2, 2e4)
     ax.set_ylim(1e-3, 1e3)
-    ax.set_ylabel("Time taken [s]")
+    ax.set_ylabel("Wall clock time [s]")
   else:
     helper.plot.plotConvergenceLine(ax, 1e4, 5e7, -1, tx=1e4, ty=4e7,
                                     ha="left", va="top")
