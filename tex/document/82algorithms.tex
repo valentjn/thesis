@@ -509,7 +509,7 @@ $\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature},
 i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
 is not a feasible state.
 Hence, we might not be able to evaluate the value function interpolant
-$\cetvalueintp[p]_{t+1}(
+$\valueintp[p]_{t+1}(
   \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
 )$, as it is only defined on $\clint{\*0, \*1}$.
 Scaling of the domain is not an option due to the dynamic nature of
@@ -520,7 +520,7 @@ the problem.
 
 \paragraph{\texttt{extrapolate} algorithm}
 
-Instead, we extend the interpolant $\cetvalueintp[p]_{t+1}$
+Instead, we extend the interpolant $\valueintp[p]_{t+1}$
 to $\real^d$ by extrapolation methods as shown in
 \cref{alg:financeExtrapolate}.
 One can choose between three extrapolation \texttt{type}s:
@@ -529,27 +529,27 @@ First, we crop the evaluation point
 $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to
 a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$.
 For \texttt{constant} extrapolation,
-we just use $\cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$
-for the extrapolated value $\cetvalueintp[p]_{t+1}(\state_{t+1})$.
+we just use $\valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$
+for the extrapolated value $\valueintp[p]_{t+1}(\state_{t+1})$.
 In contrast, \texttt{linear} extrapolation is based on the
 linear Taylor approximation
 \begin{subequations}
   \begin{align}
-    \cetvalueintp[p]_{t+1}(\state_{t+1})
-    &\approx \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
-    \tr{(\gradient{\state}{\cetvalueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
+    \valueintp[p]_{t+1}(\state_{t+1})
+    &\approx \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    \tr{(\gradient{\state}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
     (\state_{t+1} - \state_{t+1}^\mathrm{in})\\
-    &= \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    &= \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
     \sum_{s=1}^d
-    \partialderiv{\partialdiff{}\stateentry_s}{\cetvalueintp[p]_{t+1}}(
+    \partialderiv{\partialdiff{}\stateentry_s}{\valueintp[p]_{t+1}}(
       \state_{t+1}^\mathrm{in}
     )
     (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})\\
-    &\approx \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
+    &\approx \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
     \sum_{s=1}^d
     \sigma_s \frac{
-      \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
-      \cetvalueintp[p]_{t+1}(
+      \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
+      \valueintp[p]_{t+1}(
         \state_{t+1}^\mathrm{in} - \sigma_s \extpwidth \stdbasis{s}
       )
     }{\extpwidth}
@@ -567,14 +567,14 @@ but uses three (instead of two) points
 in $\clint{\*0, \*1}$ to estimate the partial derivative
 (i.e., the slope of the value function in the $s$-th direction).
 True quadratic extrapolation would require to estimate the
-Hessian $\hessian{\state}{\cetvalueintp[p]_{t+1}}$,
+Hessian $\hessian{\state}{\valueintp[p]_{t+1}}$,
 for which we would need value function values at
 $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
 
 \begin{algorithm}
   \begin{algorithmic}[1]
-    \Function{$\cetvalueintp[p]_{t+1}(\state_{t+1}) = \texttt{extrapolate}$}{%
-      $\cetvalueintp[p]_{t+1}$, $\state_{t+1}$%
+    \Function{$\valueintp[p]_{t+1}(\state_{t+1}) = \texttt{extrapolate}$}{%
+      $\valueintp[p]_{t+1}$, $\state_{t+1}$%
     }
       \State{%
         $\state_{t+1}^\mathrm{in}
@@ -584,8 +584,8 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
         nearest point in $\clint{\*0, \*1}$ with respect to $\norm[2]{\cdot}$%
       }%
       \State{%
-        $\cetvalueintp[p]_{t+1}(\state_{t+1})
-        \gets \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$%
+        $\valueintp[p]_{t+1}(\state_{t+1})
+        \gets \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$%
       }
       \If{type $\not=$ constant}
         \For{$s = 1, \dotsc, d$}
@@ -602,8 +602,8 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
             \If{type $=$ linear}
               \State{%
                 $v_s \gets (
-                  \cetvalueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
-                  \cetvalueintp[p]_{t+1}(
+                  \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
+                  \valueintp[p]_{t+1}(
                     \state_{t+1}^\mathrm{in} -
                     \sigma_s \extpwidth \stdbasis{s}
                   )
@@ -622,7 +622,7 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
                 $c_2 \stateentry_s^2 + c_1 \stateentry_s + c_0
                 \gets \text{%
                   parabola interpolating
-                  $\cetvalueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
+                  $\valueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
                   at $D$%
                 }$%
               }
@@ -632,8 +632,8 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
               }
             \EndIf{}
             \State{%
-              $\cetvalueintp[p]_{t+1}(\state_{t+1})
-              \gets \cetvalueintp[p]_{t+1}(\state_{t+1}) +
+              $\valueintp[p]_{t+1}(\state_{t+1})
+              \gets \valueintp[p]_{t+1}(\state_{t+1}) +
               \sigma_s v_s \cdot
               (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})$%
             }
@@ -645,19 +645,19 @@ $\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
   \caption[%
     Extrapolation of value function interpolants (\texttt{extrapolate})%
   ]{%
-    Evaluation of $\cetvalueintp[p]_{t+1}$ at $\state_{t+1}$
+    Evaluation of $\valueintp[p]_{t+1}$ at $\state_{t+1}$
     by extrapolation.
     Inputs are
-    the value function interpolant $\cetvalueintp[p]_{t+1}$
+    the value function interpolant $\valueintp[p]_{t+1}$
     of the next iteration $t + 1$ and
     the state $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$
     at which to evaluate the value function.
     The output is
-    the value function value $\cetvalueintp[p]_{t+1}(\state_{t+1})$
+    the value function value $\valueintp[p]_{t+1}(\state_{t+1})$
     at $\state_{t+1}$.
-    Note that $\cetvalueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
+    Note that $\valueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
     in \cref{line:algFinanceExtrapolateParabola} is short for
-    the univariate function $\cetvalueintp[p]_{t+1}(
+    the univariate function $\valueintp[p]_{t+1}(
       \state_{t+1,1}, \dotsc, \state_{t+1,s-1},\; {\cdot},\;
       \state_{t+1,s+1}, \dotsc, \state_{t+1,d}
     )$.
