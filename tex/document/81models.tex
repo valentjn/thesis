@@ -15,16 +15,21 @@ that are introduced in this chapter.
 \begin{table}
   \setnumberoftableheaderrows{0}%
   \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
+  \newcommand*{\pnsta}[1]{%
+    \printnotationsymbol{#1}&\multicolumn{3}{l}{\printnotationtext{#1}}%
+  }%
   \begin{tabular}{%
     >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
   }
     \toprulec
-    \pnst{t}&           \pnst{\wealth}&  \pnst{\utilityfcn}\\
-    \pnst{\state}&      \pnst{\consume}& \pnst{\statefcn}\\
-    \pnst{\policy}&     \pnst{\bond}&    \pnst{\valuefcn}\\
-    \pnst{\stochastic}& \pnst{\stock}&   \pnst{\optpolicyfcn}\\
-    \pnst{\riskav}&     &&               &\\
-    \pnst{\patience}&   &&               &\\
+    \pnst{t}&            \pnst{\wealth}&      \pnst{\utilityfcn}\\
+    \pnst{\state}&       \pnst{\consume}&     \pnst{\statefcn}\\
+    \pnst{\policy}&      \pnst{\bond}&        \pnst{\valuefcn}\\
+    \pnst{\stochastic}&  \pnst{\stock}&       \pnst{\optpolicyfcn}\\
+    \pnst{\riskav}&      \pnsta{\cetvalueintp}\\
+    \pnst{\patience}&    \pnst{\buysell}&     $\hat{({\cdot})}$&Normalized\\
+    \pnst{\bondreturn}&  \pnst{\stockreturn}& \pnst{\wealthratio}\\
+    \pnst{\tac}&         &&                   &\\
     \bottomrulec
   \end{tabular}%
   \caption[Glossary for dynamic portfolio choice models]{%
