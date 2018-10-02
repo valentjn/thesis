@@ -158,4 +158,65 @@ The state space and policy space constraints are given by
 
 \paragraph{Bellman equation}
 
-TODO
+Consequently, the Bellman equation \eqref{eq:gridBellmanCET}
+after the certainty-equiva\-lent transformation has to be
+normalized as well.
+By setting $\normcetvalueintp_t(\state_t^{(k)})
+:= \cetvalueintp_t(\state_t^{(k)})/\wealth_t$, we obtain
+\begin{subequations}
+  \begin{align}
+    %\normcetvalueintp_t(\state_t^{(k)})
+    %&= \frac{\cetvalueintp_t(\state_t^{(k)})}{\wealth_t}\\
+    %&= \max_{\policy_t} \left(
+    %  \left(
+    %    \left(
+    %      \frac{\consume_t(\state_t^{(k)}, \policy_t)}{\wealth_t}
+    %    \right)^{1-\riskav} +
+    %    \patience \expectation[t]{
+    %      \left(
+    %        \frac{
+    %          \cetvalueintp_{t+1}(
+    %            \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+    %          )
+    %        }{
+    %          \wealth_t
+    %        }
+    %      \right)^{1-\riskav}
+    %    }
+    %  \right)^{1/(1-\riskav)}
+    %\right)\\
+    &\hphantom{=}\hspace{0.6em} \normcetvalueintp_t(\state_t^{(k)})\\
+    &= \wealth_t^{-1} \cetvalueintp_t(\state_t^{(k)})\\
+    &= \max_{\policy_t} \left(
+      \left(
+        \left(
+          \wealth_t^{-1} \consume_t(\state_t^{(k)}, \policy_t)
+        \right)^{1-\riskav} +
+        \patience \expectation[t]{
+          \left(
+            \wealth_t^{-1} \cetvalueintp_{t+1}(
+              \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+            )
+          \right)^{1-\riskav}
+        }
+      \right)^{1/(1-\riskav)}
+    \right)\\
+    &= \max_{\policy_t} \left(
+      \left(
+        \normconsume_t(\state_t^{(k)}, \policy_t)^{1-\riskav} +
+        \patience \expectation[t]{
+          (
+            \wealthratio_{t+1} \normcetvalueintp_{t+1}(
+              \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+            )
+          )^{1-\riskav}
+        }
+      \right)^{1/(1-\riskav)}
+    \right).
+  \end{align}
+\end{subequations}
+This means that compared with the unnormalized Bellman equation
+\eqref{eq:gridBellmanCET},
+the value function in the expectation has to be multiplied by
+the wealth ratio $\wealthratio_{t+1}$ introduced above in
+\cref{eq:normalizedTCPStateTransition}.
