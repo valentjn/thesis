@@ -489,7 +489,9 @@ If a point is selected multiple times for different $\alpha_j$,
 it is refined only once.
 In addition, we enlarge the search domain $\Omega_{\alpha_j}$
 by \SI{10}{\percent}, since the minimum or the maximum might be
-near the boundary $\Omega_{\alpha_j}$.
+near the boundary $\Omega_{\alpha_j}$ and
+since the points to be inserted might not be close to
+the points to be refined.
 We ensure a minimal size of $\Omega_{\alpha_j}$ of at least $0.05$
 in every coordinate direction.
 The remaining experiments use $\gamma = 0.1$ as adaptivity.
