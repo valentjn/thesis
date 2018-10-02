@@ -8,4 +8,5 @@
 
 /data/** filter=fat -crlf
 
+*.bib diff=bib
 *.tex diff=tex
