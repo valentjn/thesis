@@ -400,13 +400,13 @@ $\cetvalueintp_T(\state_t^{(k)}) = \max_{\policy_T}
 \consume_T(\state_T^{(k)}, \policy_T)$ for $t = T$ and
 \begin{equation}
   \label{eq:gridBellmanCET}
-  \cetvalueintp[1]_t(\state_t^{(k)})
+  \cetvalueintp_t(\state_t^{(k)})
   = \max_{\policy_t} \left(
     \left(
       \consume_t(\state_t^{(k)}, \policy_t)^{1-\riskav} +
       \patience \expectation[t]{
         (
-          \cetvalueintp[p]_{t+1}(
+          \cetvalueintp_{t+1}(
             \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
           )
         )^{1-\riskav}
