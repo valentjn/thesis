@@ -29,7 +29,10 @@ amount $\wealth_0$ in stocks.
 
 If $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
 that is invested in the $j$-th stock,
-then the consumption is given by
+then the consumption can be computed as a residual variable
+(i.e., a variable that can be fully computed from $\state$ and $\policy$
+and is thus omitted from $\policy$)
+that is given by
 \begin{equation}
   \consume_t(\state_t, \policy_t)
   := \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} \wealth_t - \bond_t -
@@ -79,9 +82,12 @@ $\normbuysell_t := \buysell_t/\wealth_t$, we obtain
     &:= \frac{
       (\stock_{t,j} + \normbuy_{t,j} - \normsell_{t,j}) \stockreturn_{t,j},
     }{\wealthratio_{t+1}},\quad
-    j = 1, \dotsc, m_{\stock}.
+    j = 1, \dotsc, m_{\stock},
   \end{align}
 \end{subequations}
+where both $\normconsume_t$ and $\wealthratio_{t+1}$ are residual
+variables that specify \term{normalized consumption} and
+\term{wealth ratio,} respectively.
 %\newcommand*{\normconst}{\kappa}
 %\begin{gather}
 %  \normconst
