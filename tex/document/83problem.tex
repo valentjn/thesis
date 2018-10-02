@@ -1,15 +1,17 @@
-\section{Example Problems}
+\section{Transaction Costs Model}
 \label{sec:83problem}
 
-\minitoc{75mm}{3}
+\minitoc{70mm}{3}
 
 \noindent
-This section defines two example problems for
+This section defines the transaction costs model as an example problem for
 dynamic portfolio choice models.
 
 
 
-\subsection{Transaction Costs Model}
+\subsection{Unnormalized Problem}
+
+\paragraph{Description}
 
 In the \term{transaction costs model} \cite{Schober18Solving},
 the individual can invest their money risk-free in bonds
@@ -22,6 +24,8 @@ proportional to the amount $\buysell_{t,m_j}$ that was bought or sold.
 The individual's income is omitted---%
 a possible scenario is that the individual only wants to invest a fixed
 amount $\wealth_0$ in stocks.
+
+\paragraph{Consumption and state transition}
 
 If $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
 that is invested in the $j$-th stock,
@@ -48,7 +52,15 @@ The state transition is computed by adding the returns of the stocks:
 where $\bondreturn_t \in \real$ is the bond interest rate and
 $\stockreturn_{t,j} \in \real$ is the return of the $j$-th stock
 ($j = 1, \dotsc, m_{\stock}$).
-These equations can be normalized with respect to the wealth $\wealth_t$:
+
+
+
+\subsection{Normalization}
+
+\paragraph{State transition}
+
+The equations above can be normalized with respect to the wealth
+$\wealth_t$:
 By setting
 $\normconsume_t := \consume_t/\wealth_t$,
 $\normbond_t    := \bond_t   /\wealth_t$, and
@@ -137,8 +149,6 @@ The state space and policy space constraints are given by
   \end{gather}
 \end{subequations}
 
+\paragraph{Bellman equation}
 
-
-\subsection{Immediate Annuity Model}
-
-\dummytext[5]{}
+TODO
