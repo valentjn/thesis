@@ -78,7 +78,7 @@ def main():
   j = 0
   
   for q, fs in enumerate(fss):
-    fig = Figure.create(figsize=(3.1, 2.45))
+    fig = Figure.create(figsize=(3.1, 2.42))
     ax1 = fig.gca()
     ax2 = ax1.twinx()
     ax1.set_zorder(100)
