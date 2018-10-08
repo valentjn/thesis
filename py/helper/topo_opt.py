@@ -56,6 +56,20 @@ def readH5(path):
         "mechDisplacement/mech/Nodes/Real"))
     result["stress"] = np.array(lastStep.get(
         "mechStress/mech/Elements/Real"))
+    microparams = [
+        int(x[17:-6]) for x in lastStep.keys()
+        if x.startswith("design_microparam") and x.endswith("_plain")]
+    d = max(microparams)
+    result["microparams"] = {
+      "plain" : np.column_stack(
+          lastStep.get("design_microparam{}_plain/"
+                       "mech/Elements/Real".format(t))
+          for t in range(1, d+1)),
+      "smart" : np.column_stack(
+          lastStep.get("design_microparam{}_smart/"
+                       "mech/Elements/Real".format(t))
+          for t in range(1, d+1)),
+    }
   
   return result
 
