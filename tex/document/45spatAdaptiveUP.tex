@@ -32,11 +32,11 @@ for applying the linear operator $\linop$ on spatially adaptive sparse grids.
 The first algorithm can be applied if two requirements are met:
 \begin{itemize}
   \item
-  The inverse $\linop^{-1}$ is known and can be applied fast.
+  The inverse $\linop^{-1}$ is known and can be efficiently applied.
   
   \item
   There is an operator $\linop'$
-  that is ``sufficiently close'' to $\linop$ and can be applied fast.
+  that is ``sufficiently close'' to $\linop$ and can be efficiently applied.
 \end{itemize}
 For hierarchization with B-splines on sparse grids,
 we choose $\linop$ to be the hierarchization
@@ -55,7 +55,7 @@ Below, we will specify a sufficient criterion for the ``closeness''.
 
 \paragraph{Iterative refinement}
 
-Under the above two assumptions, we can apply the procedure given in
+Under the two assumptions above, we can apply the procedure given in
 \cref{alg:iterativeRefinement}.
 The algorithm is equivalent to the well-known method of
 \term{iterative refinement,} which has been developed to
@@ -131,7 +131,7 @@ Next, we give a sufficient condition for the
 convergence of \cref{alg:iterativeRefinement} to the true solution.
 
 \begin{proposition}[%
-  sufficient criterion for the convergence of \ref{alg:iterativeRefinement}%
+  sufficient condition for the convergence of \ref{alg:iterativeRefinement}%
 ]
   \label{prop:iterativeRefinementSufficient}
   If we have $\limsup_{m \to \infty}
@@ -242,8 +242,8 @@ $\upop{t_j}\colon \real^{\setsize{\liset}} \to \real^{\setsize{\liset}}$:
 where $(\upop{t_j})_{\*k'',\*k'}$ denotes the entry of row $\*k''$
 and column $\*k'$ of the matrix corresponding to $\upop{t_j}$
 (similar for $(\upopuv{t_j}{\lisetpole})_{k''_{t_j},k'_{t_j}}$).
-This is because the poles $\lisetpole$ are pairwise disjoint
-equivalence classes.
+The reason for this equivalence is that
+the poles $\lisetpole$ are pairwise disjoint equivalence classes.
 Consequently, every point $\*k$ is only acted upon by a single
 one-dimensional operator $\upopuv{t_j}{\lisetpole}$,
 namely the one with $\lisetpole = \eqclass{\*k}{\samepole{t_j}}$.
@@ -371,7 +371,7 @@ $\*k'$ and $\*k''$.
   $\chain{j'} \in \liset$ for all $j' = 0, \dotsc, j$.
 \end{definition}
 
-It is easy to see that this definition is equivalent to
+This definition is equivalent to
 $\chain{j'-1} \samepole{t_{j'}} \chain{j'}$ for $j' = 1, \dotsc, j$.
 \Cref{fig:chainDefinition} shows examples of chains in
 two and three dimensions.
@@ -527,11 +527,12 @@ the following corollary:
   
   The assumption of \cref{lemma:dualityUnidirectionalPrinciple}
   is satisfied:
-  $\linop$ and $\upopuv{t_j}{\lisetpole}$ are invertible
+  The operators $\upopuv{t_j}{\lisetpole}$ are invertible
   for all poles $\lisetpole$ in $\liset$
-  due to the uniqueness of the interpolant in $d$ dimensions
-  and in one dimension
+  due to the uniqueness of univariate interpolants
   (linear independence of the basis functions).
+  Similarly, $\linop$ is invertible
+  due to the uniqueness of multivariate interpolants.
   In addition, the assumption of \cref{prop:correctnessUPCharacterization}
   is satisfied, since
   \begin{equation}
@@ -632,7 +633,7 @@ for an example of a two-dimensional spatially adaptive sparse grid
     original grid points or first-order chain points
     and at least one of them is a first-order chain point.
     Analogously,
-    \textcolor{C2}{yellow points} are third-order chain points.
+    \textcolor{C2!90!black}{yellow points} are third-order chain points.
     $N$ is the number of points in the final grid.%
   }%
   \label{fig:chainInsertionBSpline}%
@@ -648,15 +649,14 @@ the Cartesian product of the union of the poles in the different dimensions:
 \begin{equation}
   \paren*{\bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{1}}}
   \times \dotsb \times
-  \paren*{\bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{d}}}.
+  \paren*{\bigcup_{\*k \in \liset} \eqclass{\*k}{\samepole{d}}},
 \end{equation}
-In this case, we fully lose the advantage of sparse grids,
-whose goal is to ease the curse of dimensionality.
+i.e., we fully lose the advantage of sparse grids,
+whose purpose is to ease the curse of dimensionality.
 For the standard hierarchical B-spline basis $\bspl{l,i}{p}$,
 this worst case often occurs as there are many non-zero entries
 in the corresponding interpolation matrices $\intpmat$
-(see \cref{sec:41problem}).
-\Cref{fig:chainInsertionBSpline3} shows an example for this worst case.
+(see \cref{sec:41problem} and \cref{fig:chainInsertionBSpline3}).
 
 
 
@@ -738,18 +738,20 @@ are now defined canonically via an affine parameter transformation:
   l \ge 1.
 \end{equation}
 For $l = 0$, we define $\bspl[\wfs]{l,i}{p}$ to be the
-linear Lagrange polynomial of level $0$, i.e.,
+linear Lagrange polynomial of level $0$:%
+\footnote{%
+  This will simplify the description of the
+  Hermite hierarchization algorithm in \cref{sec:455hermiteHierarchization}.%
+}
 \begin{equation}
   \bspl[\wfs]{0,i}{p}
   := \lagrangepoly{0,i},\quad
-  i = 0, 1,
+  i = 0, 1.
 \end{equation}
-to simplify the description of the
-Hermite hierarchization algorithm in \cref{sec:455hermiteHierarchization}.
 The hierarchical weakly fundamental spline basis is shown in
 \cref{fig:hierarchicalWeaklyFundamentalSpline}.
-Note that these basis functions are, starting with level $l \ge 1$,
-translation-invariant by construction.
+Note that these basis functions are translation-invariant by construction
+(starting with level $l \ge 1$).
 %(see \cref{eq:translationInvariance}).
 As the weakly fundamental parent spline $\parentwfundspl{p}$
 vanishes at all odd integers and as the
