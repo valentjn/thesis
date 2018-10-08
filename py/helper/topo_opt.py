@@ -48,7 +48,7 @@ def readH5(path):
   
   with h5py.File(path, "r") as f:
     result["nodes"] = np.array(f.get("Mesh/Nodes/Coordinates"))
-    result["cells"] = np.array(f.get("Mesh/Elements/Connectivity")) - 1
+    result["elements"] = np.array(f.get("Mesh/Elements/Connectivity")) - 1
     multiStep = f.get("Results/Mesh/MultiStep_1")
     steps = [int(x[5:]) for x in multiStep.keys() if x.startswith("Step_")]
     lastStep = multiStep.get("Step_{}".format(max(steps)))
