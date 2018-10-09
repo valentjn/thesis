@@ -248,8 +248,8 @@ def removeWhiteLinesInSurfPlot(surf):
 def setEqual3DAxes(ax):
   extents = np.array([ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]).T
   size = extents[1] - extents[0]
-  centers = np.mean(extents, axis=0)
+  center = np.mean(extents, axis=0)
   maxSizeHalf = max(abs(size)) / 2
-  ax.set_xlim(centers[0] - maxSizeHalf, centers[0] + maxSizeHalf)
-  ax.set_ylim(centers[1] - maxSizeHalf, centers[1] + maxSizeHalf)
-  ax.set_zlim(centers[2] - maxSizeHalf, centers[2] + maxSizeHalf)
+  ax.set_xlim(center[0] - maxSizeHalf, center[0] + maxSizeHalf)
+  ax.set_ylim(center[1] - maxSizeHalf, center[1] + maxSizeHalf)
+  ax.set_zlim(center[2] - maxSizeHalf, center[2] + maxSizeHalf)
