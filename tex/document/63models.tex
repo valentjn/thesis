@@ -126,9 +126,22 @@ The emerging \term{3D sheared cross} model has five micro-cell parameters
 \subsection{Test Scenarios}
 \label{sec:632scenarios}
 
-\cite{Valdez17Topology}
+\paragraph{Scenario Settings}
 
-\dummytext{}
+For test scenarios to benchmark the performance of the new method,
+we take a subset of the scenarios given in \cite{Valdez17Topology},
+which reviews more than 100 papers on topology optimization
+to determine the most common test scenarios in the field.
+The geometry and the boundary conditions of the
+four scenarios (two for each 2D and 3D)
+are given in \cref{fig:topoOptScenario}.
+In contrast to \cite{Valdez17Topology},
+we only use single-point loads
+(i.e., not loads applied to some line segment)
+for simplistic and implementational reasons.
+The value of the load $\force$ is \SI{62}{\kilo\newton} and
+the upper bound on the density (see \cref{sec:611homogenization})
+is $\densub = \SI{50}{\percent}$ for all scenarios.
 
 \begin{figure}
   \subcaptionbox{%
@@ -170,3 +183,15 @@ The emerging \term{3D sheared cross} model has five micro-cell parameters
   }%
   \label{fig:topoOptScenario}%
 \end{figure}
+
+\paragraph{Material}
+
+As in \cite{Valdez17Topology}, we use the ASTM A-36 steel,
+which is ``one of the most commonly used material in
+real-world structural mechanics'' according to \cite{Valdez17Topology},
+as test material.
+Its material properties are as follows \cite{Valdez17Topology}:
+$\text{Young modulus} = \SI{211}{\giga\pascal}$,
+$\text{Poisson ratio} = 0.29$,
+$\text{density} = \SI{7874}{\kilogram\per\meter\cubed}$, and
+$\text{yield stress} = \SI{220}{\mega\pascal}$.
