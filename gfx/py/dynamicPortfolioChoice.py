@@ -44,14 +44,15 @@ def main():
     
     rectArgs = {"clip_on" : False, "ec" : "k"}
     colors = ["C1", "C2", "C4", "C7"]
-    labels = ["$b_{{{}}}$", "$s_{{{},1}}$", "$s_{{{},2}}$",
-              "$c_{{{}}}$"]
+    labels = [r"$\bond_{{{}}}$", r"$\stock_{{{},1}}$",
+              r"$\stock_{{{},2}}$", r"$\consume_{{{}}}$"]
     contour = lambda x, c: r"\contour{{{}!60}}{{{}}}".format(c, x)
     
     y = choice1CumSum[-1]
     ax.add_artist(mpl.patches.Rectangle(
         (x, 0), barWidth, y, **rectArgs))
-    ax.text(x+barWidth/2, y/2, contour("$w_{{{}}}$".format(tStr), "C0"),
+    ax.text(x+barWidth/2, y/2,
+            contour(r"$\wealth_{{{}}}$".format(tStr), "C0"),
             ha="center", va="center")
     
     x += barWidth + smallMargin
@@ -84,7 +85,8 @@ def main():
     y = barHeight
     helper.plot.plotArrow(ax, [x+barWidth/2, y2+0.1],
                           [x+barWidth/2, y2+0.35])
-    ax.text(x+barWidth/2, y2+0.4, "$u(c_{{{}}})$".format(tStr),
+    ax.text(x+barWidth/2, y2+0.4,
+            r"$\utilityfcn(\consume_{{{}}})$".format(tStr),
             ha="center", va="bottom")
     
     if t == T - 1:
