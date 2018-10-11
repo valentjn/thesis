@@ -1413,17 +1413,23 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\buy}{\delta^+}{Äδtj+}{$\buy_{t,j}$}{
+\newnotationcommandoptarg{1}{\buy}{%
+  \delta^{+\appendwithcomma{#1}}%
+}{Äδtj+}{$\buy_{t,j}$}{
   Stock buy
 }
 
 \hidenextnotation
-\newnotationcommand{\sell}{\delta^-}{Äδtj-}{$\sell_{t,j}$}{
+\newnotationcommandoptarg{1}{\sell}{%
+  \delta^{-\appendwithcomma{#1}}%
+}{Äδtj-}{$\sell_{t,j}$}{
   Stock sell
 }
 
 \hidenextnotation
-\newnotationcommand{\buysell}{\delta^\pm}{Äδtj±}{$\buysell_{t,j}$}{
+\newnotationcommandoptarg{1}{\buysell}{%
+  \delta^{\pm\appendwithcomma{#1}}%
+}{Äδtj±}{$\buysell_{t,j}$}{
   Stock buy/sell
 }
 
@@ -1448,17 +1454,23 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\normbuy}{\hat{\delta}^+}{Äδ^tj+}{$\buy_{t,j}$}{
+\newnotationcommandoptarg{1}{\normbuy}{%
+  \hat{\delta}^{+\appendwithcomma{#1}}%
+}{Äδ^tj+}{$\buy_{t,j}$}{
   Normalized stock buy
 }
 
 \hidenextnotation
-\newnotationcommand{\normsell}{\hat{\delta}^-}{Äδ^tj-}{$\sell_{t,j}$}{
+\newnotationcommandoptarg{1}{\normsell}{%
+  \hat{\delta}^{-\appendwithcomma{#1}}%
+}{Äδ^tj-}{$\sell_{t,j}$}{
   Normalized stock sell
 }
 
 \hidenextnotation
-\newnotationcommand{\normbuysell}{\hat{\delta}^\pm}{Äδ^tj±}{$\buysell_{t,j}$}{
+\newnotationcommandoptarg{1}{\normbuysell}{%
+  \hat{\delta}^{\pm\appendwithcomma{#1}}%
+}{Äδ^tj±}{$\buysell_{t,j}$}{
   Normalized stock buy/sell
 }
 
