@@ -7,10 +7,12 @@
 \noindent
 In this section, we give a mathematical framework for
 dynamic portfolio choice models,
-briefly mention related literature briefly, and
+mention related literature briefly, and
 explain where B-splines on sparse grids come into play.
 \Cref{tbl:glossaryFinance} summarizes the symbols
 that are introduced in this chapter.
+A more detailed introduction into dynamic portfolio choice models
+provides \cite{Rust18Dynamic}.
 
 \begin{table}
   \setnumberoftableheaderrows{0}%
@@ -25,8 +27,8 @@ that are introduced in this chapter.
     \pnst{t}&            \pnst{\wealth}&      \pnst{\utilityfcn}\\
     \pnst{\state}&       \pnst{\consume}&     \pnst{\statefcn}\\
     \pnst{\policy}&      \pnst{\bond}&        \pnst{\valuefcn}\\
-    \pnst{\stochastic}&  \pnst{\stock}&       \pnst{\optpolicyfcn}\\
-    \pnst{\riskav}&      \pnsta{\cetvalueintp}\\
+    \pnst{\stochastic}&  \pnsta{\cetvalueintp}\\
+    \pnst{\riskav}&      \pnst{\stock}&       \pnst{\optpolicyfcn}\\
     \pnst{\patience}&    \pnst{\buysell}&     $\hat{({\cdot})}$&Normalized\\
     \pnst{\bondreturn}&  \pnst{\stockreturn}& \pnst{\wealthratio}\\
     \pnst{\tac}&         &&                   &\\
@@ -57,7 +59,16 @@ If we neglect stochastic factors, then these models solve
 \end{equation}
 Here, $\state_t \in \clint{\*0, \*1} \subset \real^d$ and
 $\policy_t \in \real^{m_{\policy}}$
-are the state and policy of time $t = 0, \dotsc, T$, respectively.
+are the state%
+\footnote{%
+  We assume that each state variable $\stateentry_{t,s}$ ($s = 1, \dotsc, d$)
+  is bounded, since the state space will be discretized with sparse grids.
+  Without loss of generality, we may then assume that
+  $\state_t \in \clint{\*0, \*1}$.
+  If state variables are unbounded in reality, then extrapolation is necessary,
+  which will be explained in \cref{sec:825interpolation}.%
+}
+and policy of time $t = 0, \dotsc, T$, respectively.
 The constraints ensure that for instance, we do not spend more money
 than we actually have.
 Starting from a given initial state $\state_0$,
@@ -68,7 +79,7 @@ As shown in \cref{fig:dynamicPortfolioChoice},
 in each time step, a fraction of the available wealth
 is invested in \term{consumption} $\consume_t$,
 which can be computed from the state $\state_t$ and the policy $\policy_t$.
-We rate the consumption with a \term{utility function}
+The individuals rate the consumption with a \term{utility function}
 $\utilityfcn(\consume_t)$.
 A common choice for $\utilityfcn$ is the \term{\crra utility}
 $\utilityfcn(\consume_t) := c_t^{1-\riskav}/(1-\riskav)$
@@ -80,15 +91,14 @@ or \term{time discount factor.}
 
 \begin{SCfigure}
   \includegraphics{dynamicPortfolioChoice_1}%
-  \caption[Dynamic portfolio choice models]{%
-    Dynamic portfolio choice models.
-    The available wealth $\wealth_t$ is invested
-    into bonds ($\bond_t$) and two stocks ($\stock_{t,1}, \stock_{t,2}$).
-    The rest is consumed ($\consume_t$), resulting in the utility
-    $\utilityfcn(\consume_t)$.
+  \caption[Example of a dynamic portfolio choice model]{%
+    Example of a dynamic portfolio choice model.
+    The available wealth $\wealth_t$ is either
+    invested into risk-free bonds ($\bond_t$) or consumed ($\consume_t$),
+    resulting in utility $\utilityfcn(\consume_t)$.
     In the last time step $T$ \emph{(far right),}
-    the whole wealth is consumed, if we do not take inheritance
-    into account.%
+    the optimal solution is to consume the whole wealth,
+    if we do not take inheritance into account.%
   }%
   \label{fig:dynamicPortfolioChoice}%
 \end{SCfigure}
@@ -146,7 +156,7 @@ $\valuefcn_t(\state_t) :=
   \quad\text{s.t. specific constraints,}
 \end{equation}
 where $\state_1$ is the result of the state transition
-from $(\state_0, \policy_0)$.
+starting from $(\state_0, \policy_0)$.
 
 \paragraph{General Bellman equation}
 
@@ -185,38 +195,38 @@ and the expected value is
   P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t
 \end{equation}
 with the probability density function
-$P_{t,\stochastic}\colon \stochdomain \to \nonnegreal$ of $\stochastic_t$.
+$P_{t,\stochastic}\colon \stochdomain \to \nonnegreal$ of $\stochastic_t$.%
+\footnote{%
+  While the state $\state_t \in \clint{\*0, \*1}$
+  is continuous in this thesis,
+  Markov-chain \term{discrete states} $\discrstate_t \in \discrstdomain$
+  such as alive/dead
+  (i.e., $\discrstdomain$ is the Cartesian product of finite sets)
+  can be incorporated into \eqref{eq:generalBellman}.
+  The objective function of $\valuefcn_t(\state_t, \discrstate_t)$ then equals
+  $\utilityfcn(\consume_t(\state_t, \discrstate_t, \policy_t)) +
+  \patience \expectation[t]{
+    \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
+    \policy_t, \stochastic_t), \discrstate_{t+1}) \mid \discrstate_t
+  }$,
+  where the expectation is given by
+  $\sum_{\discrstate_{t+1} \in \discrstdomain}
+  P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t)
+  \int_{\stochdomain}
+  \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
+  \policy_t, \stochastic_t), \discrstate_{t+1})
+  P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
+  with the \term{discrete state transition probability}
+  $P_{t+1,\discrstate}(\discrstate_{t+1} \mid
+  \discrstate_t) \in \clint{0, 1}$.%
+  %For the sake of clarity, we omit discrete states in the following,
+  %although they could easily be taken into account.
+}
 We denote the location of the maximum of \eqref{eq:generalBellman}
 as the optimal policy $\optpolicyfcn_t$,
 which may be regarded as a function
 $\optpolicyfcn_t\colon \clint{\*0, \*1} \to \real^{m_{\policy}}$,
 $\state_t \mapsto \optpolicyfcn_t(\state_t)$.
-
-\paragraph{Discrete states}
-
-The entries $\stateentry_{t,j}$ of the state
-$\state_t \in \clint{\*0, \*1}$ are continuous.
-Markov-chain \term{discrete states} $\discrstate_t \in \discrstdomain$
-such as alive/dead
-(i.e., $\discrstdomain$ is the Cartesian product of finite sets)
-can be incorporated into \eqref{eq:generalBellman}:
-The objective function of $\valuefcn_t(\state_t, \discrstate_t)$ then equals
-$\utilityfcn(\consume_t(\state_t, \discrstate_t, \policy_t)) +
-\patience \expectation[t]{
-  \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
-  \policy_t, \stochastic_t), \discrstate_{t+1}) \mid \discrstate_t
-}$,
-where the expectation is given by
-$\sum_{\discrstate_{t+1} \in \discrstdomain}
-P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t)
-\int_{\stochdomain}
-\valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
-\policy_t, \stochastic_t), \discrstate_{t+1})
-P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
-with the \term{discrete state transition probability}
-$P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t) \in \clint{0, 1}$.
-For the sake of clarity, we omit discrete states in the following,
-although they could easily be taken into account.
 
 \paragraph{Dynamic programming scheme}
 
@@ -234,16 +244,9 @@ $(T+1) m_{\policy}$-dimensional problem.
 Often, the terminal solutions $\valuefcn_T$ and $\optpolicyfcn_T$
 are explicitly known.
 For example, if we neglect inheritance,
-then the optimal terminal solution is to consume the whole wealth $\wealth_T$
-(which is usually part of the state $\state_T$)
-in the last time step $T$.
-%Otherwise, the remaining wealth would be wasted,
-%resulting in a non-optimal decision.
-Hence, we usually have
-\begin{equation}
-  \valuefcn_T(\state_T) = \wealth_T,\qquad
-  \optpolicyfcn_T(\state_T) = \utilityfcn(\wealth_T).
-\end{equation}
+then the optimal terminal solution is usually
+to consume the whole wealth $\wealth_T$
+(see \cref{fig:dynamicPortfolioChoice}).
 
 \paragraph{Implementation and interpolation}
 
@@ -255,11 +258,10 @@ at $\state_t^{(k)}$ for all $t = 0, \dotsc, T$ and $k = 1, \dotsc, \ngp_t$.
 However, in general, the next state
 $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$ does not correspond
 to a grid point $\state_{t+1}^{(k')}$,
-which cannot lookup the value of $\valuefcn_{t+1}$
+which means that we cannot lookup the value of $\valuefcn_{t+1}$
 at $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$.
-Therefore, we have to interpolate $\valuefcn_t$ and $\optpolicyfcn_t$
-at the grid points to obtain interpolants
-$\valueintp_t$ and $\optpolicyintp_t$, respectively:
+Therefore, we have to interpolate $\valuefcn_t$
+at the grid points to obtain an interpolant $\valueintp_t$:
 \begin{equation}
   \label{eq:gridBellman}
   \valueintp_t(\state_t^{(k)})
@@ -269,12 +271,25 @@ $\valueintp_t$ and $\optpolicyintp_t$, respectively:
       \valueintp_{t+1}(\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t))
     }
   \right),\quad
-  k = 1, \dotsc, \ngp_t,
+  k = 1, \dotsc, \ngp_t.
 \end{equation}
-with $\optpolicyintp_t(\state_t^{(k)}) = \vecargmax_{\policy_t} \cdots$.
 As $\valueintp_{t+1}$ on the \rhs is only an approximation to
 $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.
+Since we are mainly interested in the optimal policy decisions
+$\optpolicyfcn_t$, we have to interpolate them as well, i.e.,
+we obtain
+\begin{equation}
+  \optpolicyintp_t(\state_t^{(k)})
+  = \vecargmax_{\policy_t} \left(
+    \utilityfcn(\consume_t(\state_t^{(k)}, \policy_t)) +
+    \patience \expectation[t]{
+      \valueintp_{t+1}(\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t))
+    }
+  \right).
+\end{equation}
+Note that the employed grids for $\optpolicyintp_t$
+may be different from the grids for $\valueintp_t$.
 
 
 
@@ -352,6 +367,6 @@ the interpolation of $\valuefcn_t$ and $\optpolicyfcn_t$.
 The advantages of the new method are obvious:
 First, B-splines of degree $p > 1$ are continuously differentiable,
 increasing the order of convergence and enabling
-gradient-based optimization for \eqref{eq:gridBellman}.
+gradient-based optimization for solving \eqref{eq:gridBellman}.
 Second, B-splines are defined for arbitrary knot sequences,
 thus leading to a greater flexibility when compared to global polynomials.

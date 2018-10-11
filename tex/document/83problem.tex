@@ -21,9 +21,8 @@ Every stock transaction,
 i.e., buy $\buy_{t,m_j}$ or sell $\sell_{t,m_j}$,
 inflicts transaction costs $\tac \buysell_{t,m_j}$ ($\tac \in \nonnegreal$)
 proportional to the amount $\buysell_{t,m_j}$ that was bought or sold.
-The individual's income is omitted---%
-a possible scenario is that the individual only wants to invest a fixed
-amount $\wealth_0$ in stocks.
+The individual only wants to invest a fixed
+amount $\wealth_0$ in stocks, i.e., we omit the individual's income.
 
 \paragraph{Consumption and state transition}
 
@@ -34,7 +33,7 @@ then the consumption can be computed as a residual variable
 and is thus omitted from $\policy$)
 that is given by
 \begin{equation}
-  \consume_t(\state_t, \policy_t)
+  \consume_t
   := \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} \wealth_t - \bond_t -
   (1 + \tac) \sum_{j=1}^{m_{\stock}} \buy_{t,j} +
   (1 - \tac) \sum_{j=1}^{m_{\stock}} \sell_{t,j}.
@@ -71,7 +70,7 @@ $\normbuysell_t := \buysell_t/\wealth_t$, we obtain
 \begin{subequations}
   \label{eq:normalizedTCPStateTransition}
   \begin{align}
-    \normconsume_t(\normstate_t, \normpolicy_t)
+    \normconsume_t
     &:= \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} - \normbond_t -
     (1 + \tac) \sum_{j=1}^{m_{\stock}} \normbuy_{t,j} +
     (1 - \tac) \sum_{j=1}^{m_{\stock}} \normsell_{t,j},\\
@@ -152,9 +151,11 @@ The state space and policy space constraints are given by
     \normbond_t \ge 0,\qquad
     \normbuysell_{t,j} \ge 0,\qquad
     \normsell_{t,j} \le \stock_{t,j},\qquad
-    j = 1, \dotsc, m_{\stock}.
+    j = 1, \dotsc, m_{\stock},
   \end{gather}
 \end{subequations}
+where $\normconsume_{\min} \in \nonnegreal$ is some minimal consumption
+that must be maintained.
 
 \paragraph{Bellman equation}
 
@@ -220,3 +221,18 @@ This means that compared with the unnormalized Bellman equation
 the value function in the expectation has to be multiplied by
 the wealth ratio $\wealthratio_{t+1}$ introduced above in
 \cref{eq:normalizedTCPStateTransition}.
+Since there is no inheritance, the optimal terminal solution
+is to sell all stocks and consume everything:
+\begin{subequations}
+  \begin{gather}
+    \normcetvalueintp_t(\state_T^{(k)})
+    = 1 - \tac \sum_{j=1}^{m_{\stock}} \stock_{t,j}^{(k)},\\
+    \normbond_T^{\opt}(\state_T^{(k)})
+    = 0,\quad
+    \normbuy[\opt]_{T,j}(\state_T^{(k)})
+    = 0,\quad
+    \normsell[\opt]_{T,j}(\state_T^{(k)})
+    = \stock_{t,j}^{(k)},\quad
+    j = 1, \dotsc, m_{\stock}.
+  \end{gather}
+\end{subequations}

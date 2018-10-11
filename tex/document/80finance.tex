@@ -16,11 +16,11 @@
 \initial[lhang=0.06]{0.1em}{S}{urrogates based on B-splines on sparse grids}
 can also be used for our third application,
 which stems from mathematical finance.
-In this application, we simulate the financial situation of an individual
+In this application, we optimize financial decisions of an individual
 over their lifetime in discrete time steps or iterations $t = 0, \dotsc, T$
 (for example, years $t = 0, \dotsc, 80$, where $20+t$ is the age
-of the individual).
-We track three types of variables:
+of the individual), depending on external factors.
+There are three types of variables:
 
 \begin{itemize}
   \item
@@ -45,7 +45,7 @@ We track three types of variables:
   \item
   \term{Stochastic variables} $\stochastic_t$
   such as the return rates of stocks or the inflation
-  cannot be controlled by individual at all.
+  cannot be controlled by the individual at all.
   Therefore, statements about optimal investment conditions
   are usually made for expected values instead of exact values.
 \end{itemize}
@@ -63,7 +63,7 @@ The process is repeated for each time step.
 By using the Bellman principle, the objective functions that
 occur at time $t$ depend on the interpolant of next iteration $t+1$.
 Hence, the problem has to be solved backward in time
-via a scheme that resembles dynamic programming.
+via a scheme based on dynamic programming.
 
 The outline of this chapter is as follows:
 In \cref{sec:81models}, we formalize the framework of

@@ -5,8 +5,8 @@
 
 \noindent
 This section gives an overview of the algorithms that
-were used to implement the solution process of
-the discretized Bellman equation \eqref{eq:gridBellman}.
+were used to implement the solution process after discretization of
+the Bellman equation \eqref{eq:gridBellman}.
 
 
 
@@ -253,11 +253,11 @@ with hierarchical higher-order B-splines.
   \caption[Scheme of the generation of value function interpolants]{%
     Scheme of the generation of value function interpolants
     with \texttt{solveValueFunction}
-    (\cref{alg:financeSolveValueFunction}, \emph{left}).
-    \texttt{solveValueFunction} repeatedly calls the \texttt{optimize} routine
+    (\cref{alg:financeSolveValueFunction}, \emph{left}),
+    which repeatedly calls the \texttt{optimize} routine
     (\cref{alg:financeOptimize}, \emph{right}),
-    which consists of various sub-functions.
-    \texttt{optimize} iterates over all state grid points
+    which in turn consists of various sub-functions.
+    The function \texttt{optimize} iterates over all state grid points
     $\state_t = \state_t^{(k)}$ and calls \texttt{optimizeSinglePoint}
     for each point.
     The optimization method evaluates the objective function and
@@ -268,7 +268,7 @@ with hierarchical higher-order B-splines.
     For every quadrature point $\stochastic_t = \stochastic_t^{(j)}$,
     \texttt{evalQuadPoint} computes the corresponding value of
     the expression in the expectation.
-    Finally, \texttt{evalInterpGradEntry} evaluates the interpolant
+    Finally, \texttt{evalInterpPartDeriv} evaluates the interpolant
     $\valueintp[p]_{t+1}$ and its partial derivatives,
     for which we have to loop over the state dimensions $s = 1, \dotsc, d$.%
   }%
@@ -308,14 +308,14 @@ $\gridset{t}{\sparse}
 = \{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\}$,
 where the function values $\valueintp[1]_t(\state_t^{(k)})$
 may already be known for some grid points $\state_t^{(k)}$.
-\texttt{optimize} computes the missing value function values.
+The function \texttt{optimize} computes the missing value function values.
 For $t = T$, we assume that the terminal solution
 $\valuefcn_T$ can be computed by some function
 \texttt{computeKnownTerminalSolution}.%
 \footnote{%
-  In any case, the terminal solution be be computed as the
+  In any case, the terminal solution may be computed as the
   solution of the corresponding single-time optimization problem,
-  i.e., $\valuefcn_T(\state_T^{(k)})
+  e.g., $\valuefcn_T(\state_T^{(k)})
   = \max_{\policy_T} \utilityfcn(\consume_T(\state_T^{(k)}, \policy_T))$.%
 }
 Otherwise, for $t < T$, we solve the Bellman equation
@@ -426,19 +426,19 @@ whether the value function is transformed.
 %= ((1-\riskav) \min (\cdot))^{1/(1-\riskav)}
 %= (1-\riskav)^{1/(1-\riskav)} \max ((\cdot)^{1/(1-\riskav)})$.
 
-\paragraph{State space transformation}
-
-Depending on the dynamic portfolio lifecycle model at hand,
-it might be beneficial to transform the state space as well
-with a \term{state space transformation}
-$\statetrafofcn_t\colon \clint{\*0, \*1} \to \real^d$,
-for instance, to increase the density of grid points for low
-wealth values $\wealth_t$,
-where the value function might have a high curvature.
-The untransformed states $\state_t^{(k)}$ are then still contained in
-the unit cube $\clint{\*0, \*1}$,
-and the occurrences of $\state_t^{(k)}$ in \cref{eq:gridBellmanCET}
-are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
+%\paragraph{State space transformation}
+%
+%Depending on the dynamic portfolio lifecycle model at hand,
+%it might be beneficial to transform the state space as well
+%with a \term{state space transformation}
+%$\statetrafofcn_t\colon \clint{\*0, \*1} \to \real^d$,
+%for instance, to increase the density of grid points for low
+%wealth values $\wealth_t$,
+%where the value function might have a high curvature.
+%The untransformed states $\state_t^{(k)}$ are then still contained in
+%the unit cube $\clint{\*0, \*1}$,
+%and the occurrences of $\state_t^{(k)}$ in \cref{eq:gridBellmanCET}
+%are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
 
 
 
@@ -447,7 +447,7 @@ are replaced with $\statetrafofcn_t(\state_t^{(k)})$.
 
 In an implementation,
 the expectation in \cref{eq:gridBellmanCET} cannot be exactly computed;
-it has to be approximated by a quadrature rule
+it has to be approximated by quadrature:
 \begin{equation}
   \label{eq:bellmanQuadrature}
   \expectation[t]{
@@ -457,7 +457,7 @@ it has to be approximated by a quadrature rule
       )
     )^{1-\riskav}
   }
-  \approx \sum_{j=1}^{m_\zeta} \quadweight_t^{(j)}
+  \approx \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
   (
     \cetvalueintp[p]_{t+1}(
       \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
@@ -465,15 +465,17 @@ it has to be approximated by a quadrature rule
   )^{1-\riskav}
 \end{equation}
 for some weights $\quadweight_t^{(j)} \in \real$ and
-quadrature points $\stochastic_t^{(j)} \in \stochdomain$
-($j = 1, \dotsc, m_\zeta$).
+nodes $\stochastic_t^{(j)} \in \stochdomain$
+($j = 1, \dotsc, m_{\quadweight}$).
 Since the stochastic domain $\stochdomain \subset \real^{m_{\stochastic}}$
 might be high-dimensional as well,
 full grid quadrature rules suffer from the curse of dimensionality.
 Therefore, we use sparse grid quadrature rules based
-on Gauss--Hermite quadrature \cite{Gerstner98Numerical}.
+on Gauss--Hermite quadrature
+\multicite{Gerstner98Numerical,Horneff16Efficient}.
 Note that this sparse grid in the stochastic space $\stochdomain$
 is independent of the sparse grid in the state space $\clint{\*0, \*1}$.
+However, it would also be feasible to employ Monte-Carlo quadrature.
 
 
 
@@ -498,16 +500,17 @@ complexity by enabling us to use the unidirectional principle
 \paragraph{Extrapolation}
 
 Unfortunately, for many dynamic portfolio choice models,
-state transition is not a function
+the state transition is not a function
 $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
-\stochdomain \to \clint{\*0, \*1}$:
-It may happen that
+\stochdomain \to \clint{\*0, \*1}$,
+especially if the state space is actually unbounded.
+It may then happen that
 $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
 \notin \clint{\*0, \*1}$
-for some quadrature points
-$\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature},
-i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
-is not a feasible state.
+for some quadrature nodes
+$\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature}.
+%i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
+%is not a feasible state.
 Hence, we might not be able to evaluate the value function interpolant
 $\valueintp[p]_{t+1}(
   \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
@@ -521,151 +524,31 @@ the problem.
 \paragraph{\texttt{extrapolate} algorithm}
 
 Instead, we extend the interpolant $\valueintp[p]_{t+1}$
-to $\real^d$ by extrapolation methods as shown in
-\cref{alg:financeExtrapolate}.
-One can choose between three extrapolation \texttt{type}s:
-\texttt{constant}, \texttt{linear}, and \texttt{quadratic}.
+to $\real^d$ by an extrapolation method based on Taylor approximation.
 First, we crop the evaluation point
 $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to
 a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$.
-For \texttt{constant} extrapolation,
-we just use $\valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$
-for the extrapolated value $\valueintp[p]_{t+1}(\state_{t+1})$.
-In contrast, \texttt{linear} extrapolation is based on the
-linear Taylor approximation
-\begin{subequations}
-  \begin{align}
+The extrapolation type,
+which may be \texttt{constant}, \texttt{linear}, and \texttt{quadratic},
+determines the degree of the Taylor approximation:
+\begin{equation}
+  \begin{split}
     \valueintp[p]_{t+1}(\state_{t+1})
     &\approx \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
     \tr{(\gradient{\state}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
     (\state_{t+1} - \state_{t+1}^\mathrm{in})\\
-    &= \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
-    \sum_{s=1}^d
-    \partialderiv{\partialdiff{}\stateentry_s}{\valueintp[p]_{t+1}}(
-      \state_{t+1}^\mathrm{in}
-    )
-    (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})\\
-    &\approx \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
-    \sum_{s=1}^d
-    \sigma_s \frac{
-      \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
-      \valueintp[p]_{t+1}(
-        \state_{t+1}^\mathrm{in} - \sigma_s \extpwidth \stdbasis{s}
-      )
-    }{\extpwidth}
-    (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in}),
-  \end{align}
-\end{subequations}
-where
-$\sigma_s := 1$, if $\stateentry_{t+1,s} > 1$,
-$\sigma_s := -1$, if $\stateentry_{t+1,s} < 0$, and
-$\sigma_s := 0$, otherwise,
-$\extpwidth \in \pohint{0, 1}$ is the mesh size for the finite differences,
-and $\stdbasis{s}$ is the $s$-th standard basis vector.
-\texttt{quadratic} extrapolation extrapolates linearly as well,
-but uses three (instead of two) points
-in $\clint{\*0, \*1}$ to estimate the partial derivative
-(i.e., the slope of the value function in the $s$-th direction).
-True quadratic extrapolation would require to estimate the
-Hessian $\hessian{\state}{\valueintp[p]_{t+1}}$,
-for which we would need value function values at
-$\binom{d}{2} + 2d + 1$ points (which is quadratic in $d$).
-
-\begin{algorithm}
-  \begin{algorithmic}[1]
-    \Function{$\valueintp[p]_{t+1}(\state_{t+1}) = \texttt{extrapolate}$}{%
-      $\valueintp[p]_{t+1}$, $\state_{t+1}$%
-    }
-      \State{%
-        $\state_{t+1}^\mathrm{in}
-        \gets \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$%
-      }
-      \Comment{%
-        nearest point in $\clint{\*0, \*1}$ with respect to $\norm[2]{\cdot}$%
-      }%
-      \State{%
-        $\valueintp[p]_{t+1}(\state_{t+1})
-        \gets \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in})$%
-      }
-      \If{type $\not=$ constant}
-        \For{$s = 1, \dotsc, d$}
-          \State{%
-            $\sigma_s
-            \gets [\stateentry_{t+1,s} > 1] - [\stateentry_{t+1,s} < 0]$%
-          }
-          \Comment{%
-            $1$ if $\stateentry_{t+1,s} > 1$,\;
-            $-1$ if $\stateentry_{t+1,s} < 0$,\;
-            $0$ otherwise%
-          }%
-          \If{$\sigma_s \not= 0$}
-            \If{type $=$ linear}
-              \State{%
-                $v_s \gets (
-                  \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) -
-                  \valueintp[p]_{t+1}(
-                    \state_{t+1}^\mathrm{in} -
-                    \sigma_s \extpwidth \stdbasis{s}
-                  )
-                )/\extpwidth$%
-              }
-            \ElsIf{type $=$ quadratic}
-              \State{%
-                $D
-                \gets \{
-                  \stateentry_{t+1,s}^\mathrm{in} - 2 \sigma_s \extpwidth,\;\;
-                  \stateentry_{t+1,s}^\mathrm{in} - \sigma_s \extpwidth,\;\;
-                  \stateentry_{t+1,s}^\mathrm{in}
-                \}$%
-              }
-              \State{%
-                $c_2 \stateentry_s^2 + c_1 \stateentry_s + c_0
-                \gets \text{%
-                  parabola interpolating
-                  $\valueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
-                  at $D$%
-                }$%
-              }
-              \label{line:algFinanceExtrapolateParabola}
-              \State{%
-                $v_s \gets 2 c_2 \cdot \stateentry_{t+1,s}^\mathrm{in} + c_1$%
-              }
-            \EndIf{}
-            \State{%
-              $\valueintp[p]_{t+1}(\state_{t+1})
-              \gets \valueintp[p]_{t+1}(\state_{t+1}) +
-              \sigma_s v_s \cdot
-              (\stateentry_{t+1,s} - \stateentry_{t+1,s}^\mathrm{in})$%
-            }
-          \EndIf{}
-        \EndFor{}
-      \EndIf{}
-    \EndFunction{}
-  \end{algorithmic}
-  \caption[%
-    Extrapolation of value function interpolants (\texttt{extrapolate})%
-  ]{%
-    Evaluation of $\valueintp[p]_{t+1}$ at $\state_{t+1}$
-    by extrapolation.
-    Inputs are
-    the value function interpolant $\valueintp[p]_{t+1}$
-    of the next iteration $t + 1$ and
-    the state $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$
-    at which to evaluate the value function.
-    The output is
-    the value function value $\valueintp[p]_{t+1}(\state_{t+1})$
-    at $\state_{t+1}$.
-    Note that $\valueintp[p]_{t+1}(\stateentry_s, \*\state_{t+1,-s})$
-    in \cref{line:algFinanceExtrapolateParabola} is short for
-    the univariate function $\valueintp[p]_{t+1}(
-      \state_{t+1,1}, \dotsc, \state_{t+1,s-1},\; {\cdot},\;
-      \state_{t+1,s+1}, \dotsc, \state_{t+1,d}
-    )$.
-    The parameter $\extpwidth$ is the mesh size of the finite differences.%
-  }%
-  \label{alg:financeExtrapolate}%
-\end{algorithm}
-
+    &\qquad + \tr{(\state_{t+1} - \state_{t+1}^\mathrm{in})}
+    \hessian{\state}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in})
+    (\state_{t+1} - \state_{t+1}^\mathrm{in}),
+  \end{split}
+\end{equation}
+where \texttt{constant} and \texttt{linear}
+only use the first summand and first two summands, respectively.
+Note that since the hierarchical B-splines enable us to
+exactly and efficiently
+the gradient $\gradient{\state}{\valueintp[p]_{t+1}}$ and
+the Hessian $\hessian{\state}{\valueintp[p]_{t+1}}$;
+we do not have to approximate the derivatives with finite differences.
 
 
 \subsection{Grid Generation}
@@ -678,7 +561,7 @@ sparse grid in \texttt{solveValueFunction}
 (\cref{alg:financeSolveValueFunction}).
 The criterion is the common surplus-based refinement criterion
 \cite{Pflueger10Spatially}.
-We use the piecewise linear interpolant is used for the surplus-based
+We use the piecewise linear interpolant for the surplus-based
 grid generation,
 as the surpluses are easier to compute in the piecewise linear case,
 and they are more meaningful
@@ -734,7 +617,7 @@ grid over time.
     of the previous iteration $t + 1$
     (not used if $t = T$).
     The output is the updated piecewise linear interpolant $\valueintp[1]_t$
-    with refined sparse grid.%
+    with the refined sparse grid.%
   }%
   \label{alg:financeRefine}%
 \end{algorithm}
@@ -756,10 +639,10 @@ to the partial derivatives
 $\partialderiv{\partialdiff \stateentry_{t,s}}{\valueintp[1]_t}$
 of $\valueintp[1]_t$ ($s = 1, \dotsc, d$),
 since the optimizer depends on the accuracy of the gradient.
-In this case, we have to track additional sparse grid interpolants
-for every partial derivative
+In this case, we have to track in \cref{alg:financeSolveValueFunction}
+additional sparse grid interpolants for every partial derivative
 $\partialderiv{\partialdiff \stateentry_{t,s}}{\valueintp[1]_t}$
-in \cref{alg:financeSolveValueFunction}.
+that is affected by a policy variable.
 This possibility is omitted of the algorithms in this section,
 as this would complicate their presentation.
 
@@ -773,7 +656,7 @@ as this would complicate their presentation.
 After explaining the generation of the value function interpolants
 $\valueintp[p]_t$ ($t = 0, \dotsc, T$),
 we can move on with step 2 of the general structure of our method
-(see \cref{sec:821generalStructure}):
+(see \cref{sec:821generalStructure}),
 which is the generation of optimal policy interpolants.
 The corresponding \cref{alg:financeSolvePolicies} is similar to
 \texttt{solveValueFunction} (\cref{alg:financeSolveValueFunction}),
@@ -805,7 +688,8 @@ which means that they can be parallelized.
       \For{$t = 0, \dotsc, T$}
         \State{%
           $\optpolicyintp[1]_t \gets \text{%
-            Initial regular sparse grid, get values from $\valueintp[p]_t$%
+            Initial regular sparse grid,
+            retrieve values from $\valueintp[p]_t$%
           }$%
         }
         \State{%
