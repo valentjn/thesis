@@ -94,10 +94,14 @@ def main():
       size = np.array([1, 1, 1])
       forcePoint = [0.75, 0.215]
       forceLength = 0.15
+      h5Path = "./data/topoOpt/503/mech-3d.h5"
+      nn = np.array((20, 20, 20))
     else:
       size = np.array([2, 2, 1])
       forcePoint = [0.5, 0.4]
       forceLength = 0.2
+      h5Path = "./data/topoOpt/636/thesis-3d-centerload.h5"
+      nn = np.array((20, 20, 10))
     
     fig = Figure.create(figsize=(3, 3), scale=1.2)
     
@@ -118,20 +122,20 @@ def main():
     
     ax = fig.add_subplot(111, projection="3d", label="ax1")
     
-    h5Path = "./data/topoOpt/503/mech-3d.h5"
     data = helper.topo_opt.readH5(h5Path)
     microparams = data["microparams"]["smart"]
     VV = computeVolume(*microparams[:,:3].T)
-    VV = np.reshape(VV, (20, 20, 20))
-    VV = np.flip(np.transpose(VV, [2, 1, 0]), axis=2)
+    VV = np.transpose(np.reshape(VV, nn[::-1]), [2, 1, 0])
+    if q == 0: VV = np.flip(VV, axis=2)
     
     if q == 0:
       eps = 0.007
-      vertices = [[(0, 0, eps), (0, 1-eps, eps), (0, 1-eps, 1), (0, 0, 1)]]
+      verticess = [[(0, 0, eps), (0, 1-eps, eps), (0, 1-eps, 1), (0, 0, 1)]]
+      zOrders = [-20]
     else:
       bcSize = 0.2
       eps = 0.01
-      vertices = [
+      verticess = [
           [(0, 0, eps), (0, bcSize, eps),
            (0, bcSize, bcSize), (0, 0, bcSize)],
           [(0, size[1], eps), (0, size[1]-bcSize, eps),
@@ -140,6 +144,7 @@ def main():
            (size[0], bcSize, bcSize), (size[0], 0, bcSize)],
           [(size[0], size[1], eps), (size[0], size[1]-bcSize, eps),
            (size[0], size[1]-bcSize, bcSize), (size[0], size[1], bcSize)],
+          
           [(0, 0, eps), (bcSize, 0, eps),
            (bcSize, 0, bcSize), (0, 0, bcSize)],
           [(size[0], 0, eps), (size[0]-bcSize, 0, eps),
@@ -148,6 +153,7 @@ def main():
            (bcSize, size[1], bcSize), (0, size[1], bcSize)],
           [(size[0], size[1], eps), (size[0]-bcSize, size[1], eps),
            (size[0]-bcSize, size[1], bcSize), (size[0], size[1], bcSize)],
+          
           [(eps, 0, 0), (bcSize, 0, 0),
            (bcSize, bcSize, 0), (eps, bcSize, 0)],
           [(size[0]-eps, 0, 0), (size[0]-bcSize, 0, 0),
@@ -158,11 +164,13 @@ def main():
            (size[0]-bcSize, size[1]-bcSize-eps, 0),
            (size[0]-eps, size[1]-bcSize-eps, 0)],
       ]
+      zOrders = [-20, -20, 10, 10, 10, 10, -20, -20, -20, -20, -20, -20]
     
-    poly3DCollection = mpl_toolkits.mplot3d.art3d.Poly3DCollection(
-        vertices, facecolors=["C1"])
-    poly3DCollection.set_sort_zpos(-20)
-    ax.add_collection3d(poly3DCollection)
+    for vertices, zOrder in zip(verticess, zOrders):
+      poly3DCollection = mpl_toolkits.mplot3d.art3d.Poly3DCollection(
+          [vertices], facecolors=["C1"])
+      poly3DCollection.set_sort_zpos(zOrder)
+      ax.add_collection3d(poly3DCollection)
     
     xs = np.array([(0, 1), (0, 0), (0, 0)])
     ys = np.array([(1, 1), (1, 0), (1, 1)])
@@ -171,7 +179,6 @@ def main():
       ax.plot(size[0]*x, size[1]*y, "k-", zs=size[2]*z, clip_on=False,
               zorder=-10)
     
-    nn = 20
     v = 0.1
     verts, faces, _, _ = skimage.measure.marching_cubes_lewiner(
         VV, v, spacing=size/(nn-1))
@@ -194,7 +201,8 @@ def main():
         (1, 1), (1, 1), (0, 1), (0, 1),
         (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (1, 1)])
     for x, y, z in zip(xs, ys, zs):
-      ax.plot(size[0]*x, size[1]*y, "k-", zs=size[2]*z, clip_on=False)
+      ax.plot(size[0]*x, size[1]*y, "k-", zs=size[2]*z, clip_on=False,
+              zorder=20)
     
     eps = (0.08 if q == 0 else 0.16)
     ax.text(0, -eps, 0, "$0$",
