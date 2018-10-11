@@ -18,11 +18,17 @@ def main():
   barHeight = 1.8
   axisMarginX = 0.1
   axisMarginY = 0.1
+  #choices = [
+  #  1.0 * np.array([3, 2, 1.5, 1.5]),
+  #  1.0 * np.array([3.1, 2.5, 2.0, 1.0]),
+  #  0.24 * np.array([3.1, 2.5, 2.0, 1.0]),
+  #  1.0 * np.array([0, 0, 0, 1.0]),
+  #]
   choices = [
-    1.0 * np.array([3, 2, 1.5, 1.5]),
-    1.0 * np.array([3.1, 2.5, 2.0, 1.0]),
-    0.24 * np.array([3.1, 2.5, 2.0, 1.0]),
-    1.0 * np.array([0, 0, 0, 1.0]),
+    1.0 * np.array([2.8, 0.5]),
+    1.0 * np.array([3.05, 0.6]),
+    0.52 * np.array([3.1, 1.0]),
+    1.0 * np.array([0, 1.0]),
   ]
   T = len(choices)
   
@@ -43,9 +49,11 @@ def main():
     tStr = (("T" if t == T-1 else "t+{}".format(t)) if t > 0 else "t")
     
     rectArgs = {"clip_on" : False, "ec" : "k"}
-    colors = ["C1", "C2", "C4", "C7"]
-    labels = [r"$\bond_{{{}}}$", r"$\stock_{{{},1}}$",
-              r"$\stock_{{{},2}}$", r"$\consume_{{{}}}$"]
+    #colors = ["C1", "C2", "C4", "C7"]
+    colors = ["C1", "C2"]
+    #labels = [r"$\bond_{{{}}}$", r"$\stock_{{{},1}}$",
+    #          r"$\stock_{{{},2}}$", r"$\consume_{{{}}}$"]
+    labels = [r"$\bond_{{{}}}$", r"$\consume_{{{}}}$"]
     contour = lambda x, c: r"\contour{{{}!60}}{{{}}}".format(c, x)
     
     y = choice1CumSum[-1]
