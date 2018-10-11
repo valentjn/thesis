@@ -82,8 +82,6 @@ def main():
             ha="center", va="top")
     
     y = barHeight
-    #helper.plot.plotArrow(ax, [x - smallMargin/2 - smallArrowWidth/2, y/2],
-    #                      [x - smallMargin/2 + smallArrowWidth/2, y/2])
     helper.plot.plotArrow(ax, [x+barWidth/2, y2+0.1],
                           [x+barWidth/2, y2+0.35])
     ax.text(x+barWidth/2, y2+0.4, "$u(c_{{{}}})$".format(tStr),
@@ -98,13 +96,6 @@ def main():
     
     x += barWidth + largeMargin
     
-    #for y1, y2, label, color in zip(
-    #      choice2CumSum[:-1], choice2CumSum[1:], labels, colors):
-    #  ax.add_artist(mpl.patches.Rectangle(
-    #      (x, y1), barWidth, y2 - y1, fc=color, **rectArgs))
-    #  ax.text(x+barWidth/2, (y1+y2)/2, contour(label.format("t+1"), color),
-    #          ha="center", va="center", color="k")
-    
     ax.plot([x - largeMargin, x], [0, 0], "k--", clip_on=False)
     ax.plot([x - largeMargin, x], [choice1CumSum[-2], choice2CumSum[-1]],
             "k--", clip_on=False)
@@ -116,19 +107,6 @@ def main():
     left  += (1-t)/2 * direction
     right -= (1-t)/2 * direction
     helper.plot.plotArrow(ax, left, right)
-    
-    #x += barWidth + smallMargin
-    
-    #y = choice2CumSum[-1]
-    #ax.add_artist(mpl.patches.Rectangle(
-    #    (x, 0), barWidth, y, **rectArgs))
-    #ax.text(x+barWidth/2, y/2, contour("$w_{t+1}$", "C0"),
-    #        ha="center", va="center", color="k")
-    #helper.plot.plotArrow(ax, [x - smallMargin/2 - smallArrowWidth/2, y/2],
-    #                      [x - smallMargin/2 + smallArrowWidth/2, y/2])
-    #ax.plot(2 * [x-smallMargin/2],
-    #        [-axisMarginY-0.04, -axisMarginY+0.04], "k-", clip_on=False)
-    #ax.text(x-smallMargin/2, -axisMarginY-0.08, "$t+1$", ha="center", va="top")
     
     for y in [0, choice2CumSum[-1]]:
       ax.plot([x - smallMargin, x], [y, y], "k--", clip_on=False)
