@@ -1115,12 +1115,12 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\dens}{\varrho}{Äρ}{$\dens$}{
-  Density fcn.
+\newnotationcommand{\densglobal}{\tilde{\varrho}}{Äρ}{$\densglobal$}{
+  Global density fcn.
 }
 
 \hidenextnotation
-\newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\dens)$}{
+\newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\densglobal)$}{
   Compliance fcn.
 }
 
@@ -1131,9 +1131,9 @@
 
 \hidenextnotation
 \newnotationcommand[2]{\voldens}{\mathrm{vol}_{#1}(#2)}{volρΩ}{
-  $\voldens{\dens}{\domain}$
+  $\voldens{\densglobal}{\domain}$
 }{%
-  Volume w.r.t.\ $\dens$
+  Volume w.r.t.\ $\densglobal$
 }
 
 \hidenextnotation
