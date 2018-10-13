@@ -368,6 +368,7 @@ positive definiteness, but also the explicit differentiability
 of the surrogate $\etensor[\chol,\sparse]$ is preserved.
 The gradient can be computed easily and fast with the product rule:
 \begin{equation}
+  \label{eq:choleskyFactorDerivative}
   \partialderiv{\partialdiff{} x_t}{\etensor[\chol,\sparse]}(\*x)
   = \tr{\cholfactor[\sparse](\*x)} \cdot
   \partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x) +
