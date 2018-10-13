@@ -1,10 +1,266 @@
 \section{Numerical Results}
 \label{sec:64results}
 
+\minitoc[-5mm]{72mm}{3}
+
+\noindent
+In this final section of the chapter,
+we study optimal results of the test scenarios and
+analyze interpolation and optimization errors
+for topology optimization with B-spline surrogates on sparse grids.
+
 
 
 \subsection{Methodology}
 \label{sec:641methodology}
+
+For simplicity, in the following,
+we combine the functions to be interpolated,
+i.e., the Cholesky factor
+$\cholfactor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$ and
+the micro-cell density $\denscell\colon \clint{\*0, \*1} \to \real$,
+to one single objective function
+$\*\objfun\colon \clint{\*0, \*1} \to \real^{m+1}$.
+
+\paragraph{Overview over offline and online phase}
+
+Our method is divided into an offline phase and an online phase,
+both of which are sketched in \cref{fig:topoOptPhases}.
+The offline phase comprises
+generating the spatially adaptive sparse grid
+$\sgset = \{\gp{\*l_k,\*i_k} \mid k = 1, \dotsc, \ngp\}$,
+solving corresponding micro-problems,
+computing the Cholesky factors, and
+hierarchizing the Cholesky factor entries and micro-cell densities
+to obtain the sparse grid interpolant $\*\sgintp$.
+Each optimization iteration of the online phase consists of
+evaluating the interpolant $\*\sgintp$
+for each micro-cell parameter $\*x^{(j)}$ ($j = 1, \dotsc, M$),
+reconstructing the elasticity tensor $\etensor[\chol,\sparse]$ from
+the Cholesky factors $\cholfactor[\sparse]$, and
+solving the macro-problem to retrieve the approximated compliance value
+$\compliance[\sparse](\*x^{(1)}, \dotsc, \*x^{(M)})$.%
+\footnote{%
+  In addition, the partial derivatives
+  $\partialdiff{} \etensor[\chol,\sparse]/\partialdiff{} x_t$
+  ($t = 1, \dotsc, d$)
+  are evaluated using \cref{eq:choleskyFactorDerivative}.
+  This is required as we employ gradient-based optimization.%
+}
+The superscript in $\compliance[\sparse]$ indicates that
+we do not use the exact elasticity tensors to compute the compliance value.
+
+\begin{figure}
+  \tikzset{
+    myCircle/.style={
+      circle,
+      fill=mittelblau!30,
+      draw=mittelblau,
+      inner sep=0.5mm,
+    }
+  }%
+  \subcaptionbox{%
+    Offline phase (without the actual grid generation).%
+  }[149mm]{%
+    \begin{tikzpicture}
+      \node[myCircle] (points) at (0mm,0mm) {%
+        $
+          \begin{matrix}
+            \gp{\*l_1,\*i_1},\\
+            \dots,\\
+            \gp{\*l_{\ngp},\*i_{\ngp}}
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (elasticityTensors) at (43mm,0mm) {%
+        $
+          \begin{matrix}
+            \etensor(\gp{\*l_1,\*i_1}),\\
+            \dots,\\
+            \etensor(\gp{\*l_{\ngp},\*i_{\ngp}})
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (choleskyFactors) at (80mm,0mm) {%
+        $
+          \begin{matrix}
+            \cholfactor(\gp{\*l_1,\*i_1}),\\
+            \dots,\\
+            \cholfactor(\gp{\*l_{\ngp},\*i_{\ngp}})
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (choleskyInterpolant) at (118mm,0mm) {%
+        $
+          \begin{matrix}
+            \cholfactor[\sparse]\colon \clint{\*0, \*1}\\
+            {} \to \real^{6 \times 6}
+          \end{matrix}
+        $%
+      };
+      \draw[->,draw=C0] (points) -- node[above] {%
+        \footnotesize{}micro-problem%
+      } (elasticityTensors);
+      \draw[->,draw=C0] (elasticityTensors) -- node[above] {%
+        \footnotesize{}%
+        $
+          \tr{\cholfactor} \cholfactor = \etensor
+        $\vphantom{p}%
+      } (choleskyFactors);
+      \draw[->,draw=C0] (choleskyFactors) -- node[above] {%
+        \footnotesize{}interpolate%
+      } (choleskyInterpolant);
+    \end{tikzpicture}%
+  }%
+  \\[2mm]%
+  \subcaptionbox{%
+    Online phase (one iteration of the optimizer).%
+  }[149mm]{%
+    \begin{tikzpicture}
+      \node[myCircle] (points) at (0mm,0mm) {%
+        $
+          \begin{matrix}
+            \*x^{(1)},\\
+            \dots,\\
+            \*x^{(M)}
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (choleskyFactors) at (34mm,0mm) {%
+        $
+          \begin{matrix}
+            \cholfactor[\sparse](\*x^{(1)}),\\
+            \dots,\\
+            \cholfactor[\sparse](\*x^{(M)})
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (elasticityTensors) at (83mm,0mm) {%
+        $
+          \begin{matrix}
+            \etensor[\chol,\sparse](\*x^{(1)}),\\
+            \dots,\\
+            \etensor[\chol,\sparse](\*x^{(M)})
+          \end{matrix}
+        $%
+      };
+      \node[myCircle] (complianceValue) at (129.5mm,0mm) {%
+        $
+          \begin{matrix}
+            \compliance[\sparse](\*x^{(1)},\\
+            \dotsc,\\
+            \*x^{(M)})
+          \end{matrix}
+        $%
+      };
+      \draw[->,draw=C0] (points) -- node[above] {%
+        \footnotesize{}evaluate\vphantom{p}%
+      } (choleskyFactors);
+      \draw[->,draw=C0] (choleskyFactors) -- node[above] {%
+        \footnotesize{}%
+        $
+          \etensor[\chol,\sparse]
+          = \tr{(\cholfactor[\sparse])} \cholfactor[\sparse]
+        $\vphantom{p}%
+      } (elasticityTensors);
+      \draw[->,draw=C0] (elasticityTensors) -- node[above] {%
+        \footnotesize{}macro-problem%
+      } (complianceValue);
+    \end{tikzpicture}%
+  }%
+  \caption[Offline and online phase for topology optimization]{%
+    Offline and online phase for topology optimization.
+    The interpolation of the micro-cell density with $\denscell^{\sparse}$
+    (see \cref{sec:622BSplines}) has been omitted for brevity.%
+  }%
+  \label{fig:topoOptPhases}%
+\end{figure}
+
+\paragraph{Generation of spatially adaptive sparse grids}
+
+We use the classical surplus-based refinement criterion
+(see, e.g., \cite{Pflueger10Spatially})
+to generate the spatially adaptive sparse grids
+as show in \cref{alg:topoOptGridGeneration}.
+The difference to common surrogate settings is that the objective function
+$\*f\colon \clint{\*0, \*1} \to \real^{m+1}$
+is not scalar-valued, but matrix-valued.
+As the components of $\cholfactor$ cannot be evaluated individually,
+the adaptivity criterion has to consider all entries at once
+to avoid performing unnecessary evaluations.
+We use the surpluses in the piecewise linear hierarchical basis,
+as their absolute values correlate with the second mixed derivative
+of the objective function due to \eqref{eq:surplusIntegral}.
+
+\begin{algorithm}
+  \begin{algorithmic}[1]
+    \Function{$\sgset = \texttt{offlinePhase}$}{%
+      $\*\objfun$, $n$, $b$, $\*c$, $l_{\max}$, $\varepsilon$,
+      $\ngp_{\mathrm{refine}}$%
+    }
+      \State{$\sgset \gets \coarseregsgset{n}{d}{b}$}
+      \Comment{initial regular sparse grid}%
+      \While{\True}
+        \State{$\ngp \gets \setsize{\sgset}$}
+        \Comment{number of grid points}%
+        \State{%
+          Let $(\surplus{\*l_{k'},\*i_{k'}})_{k' = 1, \dotsc, \ngp}$
+          satisfy $
+            \fa{k = 1, \dotsc, \ngp}{
+              \sum_{k'=1}^{\ngp} \vsurplus_{\*l_{k'},\*i_{k'}}
+              \bspl{\*l_{k'},\*i_{k'}}{1}(\gp{\*l_k,\*i_k})
+              = \*\objfun(\gp{\*l_k,\*i_k})
+            }
+          $%
+        }
+        \ForOneLine{$k = 1, \dotsc, \ngp$}{%
+          $\beta_k \gets \tr{\*c} \abs{\vsurplus_{\*l,\*i}}$%
+        }
+        \Comment{combine surpluses to a scalar value}%
+        \State{%
+          $
+            \liset^\ast \gets \{
+              k = 1, \dotsc, \ngp \mid
+              \ex{\gp{\*l,\*i} \notin \sgset}{
+                \gp{\*l_k,\*i_k} \to \gp{\*l,\*i}
+              },\,
+              \norm[\infty]{\*l_k} < l_{\max},\,
+              \abs{\surplus{\*l_k,\*i_k}} > \varepsilon
+            \}
+          $%
+        }
+        \IfOneLine{$\liset^\ast = \emptyset$}{\Break{}}
+        \Comment{stop when there are not refinable grid points left}%
+        \State{%
+          Refine $\le \ngp_{\mathrm{refine}}$ of the points
+          $\{\gp{\*l_k,\*i_k} \in \sgset \mid k \in \liset^\ast\}$
+          with largest $\abs{\beta_k}$%
+        }
+      \EndWhile{}
+    \EndFunction{}
+  \end{algorithmic}
+  \caption[%
+    Generation of spatially adaptive sparse grids for topology optimization%
+  ]{%
+    Generation of spatially adaptive sparse grids for topology optimization.
+    Inputs are
+    the objective function $\*f\colon \clint{\*0, \*1} \to \real^{m+1}$
+    (combination of Cholesky factors of elasticity tensors and
+    micro-cell densities),
+    the level $n \ge d$ and boundary parameter $b \in \natz$ of the
+    initial regular sparse grid,
+    the vector $\*c \in \real^d$ of coefficients with which the
+    absolute values of the entries of the surpluses are combined,
+    the maximal level $l_{\max} \in \nat$,
+    the refinement threshold $\varepsilon \in \posreal$, and
+    the number $\ngp_{\mathrm{refine}} \in \nat$ of points to refine
+    in each iteration.
+    Output is the spatially adaptive sparse grid $\sgset$.%
+  }%
+  \label{alg:topoOptGridGeneration}%
+\end{algorithm}
+
+\paragraph{Domain discretization and parameter bounds}
 
 \todo{%
   mention restriction of micro-cell parameter domain, e.g., shearing angles%
