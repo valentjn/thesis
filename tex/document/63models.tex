@@ -13,36 +13,39 @@ experiments in the following section.
 \subsection{Micro-Cell Models}
 \label{sec:631models}
 
-We use the various micro-cell models that depicted in \cref{fig:microCell}.
+We use the various micro-cell models that are depicted in \cref{fig:microCell}.
 \todo{mention paper if published}
 The models differ in the spatial dimensionality $\dimdomain$ (two or three)
-and the number $d$ of micro-cell parameters
+and the number $d$ (two to five) of micro-cell parameters
 $\*x \in \clint{\*0, \*1} = \clint{0, 1}^d$.
+Note that the presented models are only some examples.
+One can conceive arbitrarily complicated micro-cell models
+with larger numbers of parameters.
 
 \begin{figure}
   \subcaptionbox{%
-    \lefthphantom{Cross}{($d = 2$)}\\($d = 2$)%
+    \lefthphantom{2D cross}{($d = 2$)}\\($d = 2$)%
     \label{fig:microCell_1}%
   }[31mm]{%
     \includegraphics{microCell_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Framed cross\\($d = 4$)%
+    2D framed cross\\($d = 4$)%
     \label{fig:microCell_2}%
   }[31mm]{%
     \includegraphics{microCell_3}%
   }%
   \hfill%
   \subcaptionbox{%
-    Sheared cross\\\rlap{\hspace*{13mm}{($d = 3$)}}%
+    2D sheared cross\\\rlap{\hspace*{11mm}{($d = 3$)}}%
     \label{fig:microCell_3}%
   }[41mm]{%
     \includegraphics{microCell_2}%
   }%
   \hfill%
   \subcaptionbox{%
-    Sheared framed cross\\($d = 5$)%
+    2D sheared framed cross ($d = 5$)%
     \label{fig:microCell_4}%
   }[37mm]{%
     \hspace*{-45mm}%
@@ -78,13 +81,13 @@ For the sake of micro-cell parameters,
 we have to assume the micro-cell to have edge lengths of one,
 since the micro-cells are assumed to be infinitesimally small,
 i.e., they do not have a positive size.
-To complicate the model, we add a diagonal cross with orthogonal bars
+For the \term{framed cross} (\cref{fig:microCell_2}),
+we add a diagonal cross with orthogonal bars
 of widths $x_3$ and $x_4$ (horizontally measured), rotated by \ang{45}.
 To simplify the boundary treatment,
 we shift the contents of the micro-cell by $0.5$ in both directions,
-such that a previous corner of the micro-cell corresponds to the new center.
-This is possible because the micro-cells are periodic.
-The resulting micro-model is a \term{framed cross} (\cref{fig:microCell_2}).
+such that a previous corner of the micro-cell corresponds to the new center
+(possible because the micro-cells are periodic).
 
 \paragraph{Sheared models in two dimensions}
 
