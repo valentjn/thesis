@@ -129,7 +129,7 @@ The emerging \term{3D sheared cross} model has five micro-cell parameters
 \subsection{Test Scenarios}
 \label{sec:632scenarios}
 
-\paragraph{Scenario Settings}
+%\paragraph{Scenario settings}
 
 For test scenarios to benchmark the performance of the new method,
 we take a subset of the scenarios given in \cite{Valdez17Topology},
@@ -142,9 +142,15 @@ In contrast to \cite{Valdez17Topology},
 we only use single-point loads
 (i.e., not loads applied to some line segment)
 for simplistic and implementational reasons.
-The value of the load $\force$ is \SI{62}{\kilo\newton} and
-the upper bound on the density (see \cref{sec:611homogenization})
-is $\densub = \SI{50}{\percent}$ for all scenarios.
+The upper bound on the density (see \cref{sec:611homogenization})
+is $\densub = \SI{50}{\percent}$ for the 2D scenarios and
+$\densub = \SI{10}{\percent}$ for the 3D scenarios.
+As in \cite{Sigmund01Line} and for simplicity reasons,
+we apply a force $\force$ with unit value
+(i.e., $\norm[2]{\force} = \SI{1}{\newton}$),
+and we use a hypothetical material with
+a Young modulus (stiffness) of \SI{1}{\pascal} and
+a Poisson ratio (transversal expansion to axial compression) of $0.3$.
 
 \begin{figure}
   \subcaptionbox{%
@@ -176,30 +182,25 @@ is $\densub = \SI{50}{\percent}$ for all scenarios.
   }%
   \caption[Test scenarios in topology optimization]{%
     Test scenarios in topology optimization in
-    two \emph{(top row)} and three spatial dimensions \emph{(bottom row)}.
+    two and three spatial dimensions.
     Shown are
     the domains $\domain$,
-    the load points $\force$,
-    the location of homogeneous Dirichlet boundary conditions
+    load points,
+    locations of homogeneous Dirichlet boundary conditions
     \emph{\textcolor{C1}{(red)},} and
-    examples for optimal structures \emph{\textcolor{C0}{(blue)}.}%
+    exemplary optimal structures \emph{\textcolor{C0}{(blue)}.}%
   }%
   \label{fig:topoOptScenario}%
 \end{figure}
 
-\paragraph{Material}
-
-\todo{cite Sigmund01Line}
-\todo{update: use 99lines}
-
-\cite{Sigmund01Line}
-
-As in \cite{Valdez17Topology}, we use the ASTM A-36 steel,
-which is ``one of the most commonly used material in
-real-world structural mechanics'' according to \cite{Valdez17Topology},
-as test material.
-Its material properties are as follows \cite{Valdez17Topology}:
-$\text{Young modulus} = \SI{211}{\giga\pascal}$,
-$\text{Poisson ratio} = 0.29$,
-$\text{density} = \SI{7874}{\kilogram\per\meter\cubed}$, and
-$\text{yield stress} = \SI{220}{\mega\pascal}$.
+%\paragraph{Material}
+%
+%As in \cite{Valdez17Topology}, we use the ASTM A-36 steel,
+%which is ``one of the most commonly used material in
+%real-world structural mechanics'' according to \cite{Valdez17Topology},
+%as test material.
+%Its material properties are as follows \cite{Valdez17Topology}:
+%$\text{Young modulus} = \SI{211}{\giga\pascal}$,
+%$\text{Poisson ratio} = 0.29$,
+%$\text{density} = \SI{7874}{\kilogram\per\meter\cubed}$, and
+%$\text{yield stress} = \SI{220}{\mega\pascal}$.
