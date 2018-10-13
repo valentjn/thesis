@@ -56,12 +56,12 @@ objective function and of the constraints, i.e.,%
 %}
 \begin{equation}
   \partialderiv{\partialdiff{} x_t}{\etensor^{(q)}}(\*x^{(q)}),\quad
-  \partialderiv{\partialdiff{} x_t}{\dens^{(q)}}(\*x^{(q)}),\qquad
+  \partialderiv{\partialdiff{} x_t}{\denscell^{(q)}}(\*x^{(q)}),\qquad
   q = 1, \dotsc, M,\quad
   t = 1, \dotsc, d.
 \end{equation}
 %where $\etensor^{(q)}$ is the elasticity tensor and
-%$\dens^{(q)}$ is the density of the $q$-th macro-cell.
+%$\denscell^{(q)}$ is the density of the $q$-th macro-cell.
 However, in general, both gradients are unavailable and
 have to be approximated by finite differences.
 This introduces new error sources and
@@ -117,7 +117,7 @@ which means that we would waste computation resources by selecting only
 a subset of the calculated entries.
 Therefore, we use the same grid for all components.
 
-Additionally, we approximate the density $\dens^{(q)}$
+Additionally, we approximate the density $\denscell^{(q)}$
 of the $q$-th macro-cell with a surrogate using
 B-splines on the same sparse grid as for $\etensorentry[\sparse]{j}$
 for reasons of implementation,
