@@ -322,4 +322,38 @@ The only new type of error is type 2, which we will analyze in the following.
 \subsection{Optimized Structures and Optimization Error}
 \label{sec:643optimization}
 
+\begin{table}
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l<{\kern5mm}*{6}{+c}<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \headerrow
+    Scenario&       2D-C&   2D-FC&  2D-SC&  2D-SFC& 3D-C&   3D-SC\\
+    \midrulec
+    2D cantilever&  XX.XXX& XX.XXX& XX.XXX& XX.XXX& ---&    ---\\
+    2D L shape&     XX.XXX& XX.XXX& XX.XXX& XX.XXX& ---&    ---\\
+    \midrulec
+    3D cantilever&  ---&    ---&    ---&    ---&    XX.XXX& XX.XXX\\
+    3D center load& ---&    ---&    ---&    ---&    XX.XXX& XX.XXX\\
+    \bottomrulec
+  \end{tabular}
+  \caption[Optimal compliance values]{%
+    Optimal compliance values for the different scenarios
+    and micro-cell models and the maximum number
+    $\ngpMax = \num{10000}$ of sparse grid points.
+    The columns correspond to the micro-cell models as presented
+    in \cref{fig:microCell}:
+    2D cross,
+    2D framed cross,
+    2D shared cross,
+    2D shared framed cross,
+    3D cross, and
+    3D sheared cross.%
+  }%
+  \label{tbl:optimalComplianceValues}%
+\end{table}
+
+\todo{try different basis types}
+
 \dummytext[12]{}
