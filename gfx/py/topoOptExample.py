@@ -99,9 +99,9 @@ for y in np.linspace(-hatchMargin,
   if (xx[0] > xx[1]) or (yy[0] > yy[1]): continue
   ax.plot(xx, yy, "k-", clip_on=False, solid_capstyle="butt")
 
-ax.text(1.2, 1.6, r"$\dens(\tilde{\*x}) = 1$",
+ax.text(1.2, 1.6, r"$\densglobal(\tilde{\*x}) = 1$",
         ha="center", va="center", rotation=-22)
-ax.text(0.65, 1.1, r"$\dens(\tilde{\*x}) = 0$",
+ax.text(0.65, 1.1, r"$\densglobal(\tilde{\*x}) = 0$",
         ha="center", va="center")
 ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\domain$",
         ha="right", va="top")
