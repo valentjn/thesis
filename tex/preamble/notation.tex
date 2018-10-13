@@ -1125,7 +1125,9 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\compliance}{J}{Jρ}{$\compliance(\densglobal)$}{
+\newnotationcommandoptarg{1}{\compliance}{%
+  J\ifnotempty{#1}{^{#1}}%
+}{Jρ}{$\compliance(\densglobal)$}{
   Compliance fcn.
 }
 
