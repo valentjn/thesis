@@ -64,7 +64,7 @@ compute the \term{compliance} (i.e., the inverse of the stiffness) as
 the objective function value~$\compliance(\densglobal)$:
 \begin{equation}
   \compliance(\densglobal)
-  = \int_{\domain} \innerprod[2]{\force}{\displacement_{\densglobal}(\tilde{\*x})}
+  = \int_{\domain} \tr{\force} \displacement_{\densglobal}(\tilde{\*x})
   \diff\tilde{\*x},
 \end{equation}
 where the \term{displacement function}
