@@ -46,47 +46,48 @@ Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
 although the method can be generalized to
 arbitrary dimensionalities $\dimdomain \in \nat$.
 Shapes and topologies are described by \term{density functions}
-$\dens\colon \domain \to \clint{0, 1}$.
-The function values $\dens(\tilde{\*x}) \in \clint{0, 1}$ tell if $\tilde{\*x}$
-is contained in the object (value of one) or not (value of zero).
+$\densglobal\colon \domain \to \clint{0, 1}$.
+The function values $\densglobal(\tilde{\*x}) \in \clint{0, 1}$
+tell if $\tilde{\*x}$ is contained in the object (value of one) or
+not (value of zero).
 The \term{homogenization} approach also allows values between
 zero and one, giving the physical density of the material in $\tilde{\*x}$.
 
 \paragraph{Optimization of compliance values}
 
-Furthermore, for every density function $\dens$,
-let $\compliance(\dens)$ be an objective function value.
+Furthermore, for every density function $\densglobal$,
+let $\compliance(\densglobal)$ be an objective function value.
 In our setting, which is shown in \cref{fig:topoOptExample},
 we exert a force $\force$ (or multiple forces) on the object,
 measure the resulting deformation, and
 compute the \term{compliance} (i.e., the inverse of the stiffness) as
-the objective function value~$\compliance(\dens)$:
+the objective function value~$\compliance(\densglobal)$:
 \begin{equation}
-  \compliance(\dens)
-  = \int_{\domain} \innerprod[2]{\force}{\displacement_{\dens}(\tilde{\*x})}
+  \compliance(\densglobal)
+  = \int_{\domain} \innerprod[2]{\force}{\displacement_{\densglobal}(\tilde{\*x})}
   \diff\tilde{\*x},
 \end{equation}
 where the \term{displacement function}
-$\displacement_{\dens}\colon \domain \to \real^{\dimdomain}$
+$\displacement_{\densglobal}\colon \domain \to \real^{\dimdomain}$
 depends on the density \cite{Huebner14Mehrdimensionale}.
 We want to find the density function
 with the minimal objective function value:
 \begin{equation}
   \label{eq:topoOptProblemContinuous}
-  \min_{\dens} \compliance(\dens).
+  \min_{\densglobal}\, \compliance(\densglobal).
 \end{equation}
 There are often uninteresting trivial solutions,
 if we do not impose additional conditions.
 For example, when minimizing compliance function values,
-choosing $\dens :\equiv 1$
+choosing $\densglobal :\equiv 1$
 (i.e., filling the entire domain $\domain$ with material)
 usually leads to the topology with the
 highest stiffness and, thus, the smallest displacement and compliance value.
 Therefore, we introduce the following volume constraint:
 \begin{equation}
-  \frac{\voldens{\dens}{\domain}}{\vol{\domain}} \le \densub,\quad
-  \voldens{\dens}{\domain}
-  := \int_{\domain} \dens(\tilde{\*x}) \diff\tilde{\*x},\quad
+  \frac{\voldens{\densglobal}{\domain}}{\vol{\domain}} \le \densub,\quad
+  \voldens{\densglobal}{\domain}
+  := \int_{\domain} \densglobal(\tilde{\*x}) \diff\tilde{\*x},\quad
   \vol{\domain}
   := \voldens{1}{\domain},
 \end{equation}
@@ -106,7 +107,7 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
     \emph{\textcolor{mittelblau!50}{(darker blue)}}
     and deformed by a force $\force$, resulting in a displaced object
     \emph{(dashed).}
-    The density function $\dens(\tilde{\*x})$ is one inside the object
+    The density function $\densglobal(\tilde{\*x})$ is one inside the object
     and zero outside.%
   }%
   \label{fig:topoOptExample}%
@@ -121,7 +122,7 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 numerically,
-as there are infinitely many density functions $\dens$.
+as there are infinitely many density functions $\densglobal$.
 %To be able to discretize the domain $\domain \subset \real^{\dimdomain}$
 %more easily,
 For simplicity, we assume that $\domain$ is some hyper-rectangle
