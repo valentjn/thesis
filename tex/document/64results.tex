@@ -268,16 +268,54 @@ of the objective function due to \eqref{eq:surplusIntegral}.
 
 \todo{mention discretization size (mesh size) of spatial domain}
 
-\todo{mention grid generation}
+\dummytext[1]{}
 
-\dummytext[12]{}
+\paragraph{Software and algorithms}
+
+\dummytext[1]{}
 
 
 
 \subsection{Interpolation Error}
 \label{sec:642interpolation}
 
-\dummytext[12]{}
+\paragraph{Error sources}
+
+There are multiple sources that contribute to the numerical error:
+
+\begin{enumerate}
+  \item
+  Discretization of the micro-problem
+  
+  \item
+  Reconstruction of elasticity tensors with Cholesky factors
+  (i.e., $\etensor[\chol,\sparse] \not= \etensor[\sparse]$)
+  
+  \item
+  Sparse grid interpolation
+  (i.e., $\etensor[\chol,\sparse] \not= \etensor$)
+  
+  \item
+  Discretization of the macro-problem
+  
+  \item
+  Optimization
+  (the optimizer may not find the exact global optimum)
+  
+  \item
+  Floating-point errors
+\end{enumerate}
+
+\noindent
+Errors of type 3, 5, and 6 are always present when optimizing with
+the aid of sparse grids surrogates.
+The errors of type 1 and 4 are intrinsic to the homogenization approach;
+they will not be discussed here.
+The only new type of error is type 2, which we will analyze in the following.
+
+\todo{try different basis types}
+
+\dummytext[9]{}
 
 
 
