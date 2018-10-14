@@ -260,19 +260,46 @@ of the objective function due to \eqref{eq:surplusIntegral}.
   \label{alg:topoOptGridGeneration}%
 \end{algorithm}
 
-\paragraph{Domain discretization and parameter bounds}
+\paragraph{Parameter bounds}
 
-\todo{%
-  mention restriction of micro-cell parameter domain, e.g., shearing angles%
+In the micro-cell models presented in \cref{sec:631models},
+extreme micro-cell parameters near zero or one may cause problems
+with the resulting elasticity tensors.
+For instance, the elasticity tensor entries corresponding to
+the 2D cross model are discontinuous near the lines $x_1 = 1$ or $x_2 = 1$
+\multicite{Huebner14Mehrdimensionale,Valentin14Hierarchische}.
+This is due to the fact the micro-cell is completely filled with material
+on these lines,
+independent of the other micro-cell parameter that is not one.
+Similar issues occur for the other models and the shearing angles.
+Hence, we have to restrict the range of the feasible micro-cell parameters,
+i.e., the sparse grid points $\*x$ are still defined on the unit hyper-cube
+$\clint{\*0, \*1}$,
+but the actual micro-cell parameters $\xscaled$ are retrieved by an
+affine transformation $\xscaled := \*a + (\*b - \*a) \*x$.
+For the models in \cref{sec:631models},
+we restrict the bar widths to $\clint{0.01, 0.99}$ and
+the shearing angles to $\clint{-0.35\pi, 0.35\pi}$.
+
+\paragraph{Software, algorithms, and domain discretization}
+
+The micro-problems and macro-problems are solved with the \fem
+implemented in the \fem software package CFS++ \cite{Kaltenbacher10Advanced}.%
+\footnote{%
+  \url{http://www.lse.uni-erlangen.de/cfs/}%
 }
-
-\todo{mention discretization size (mesh size) of spatial domain}
-
-\dummytext[1]{}
-
-\paragraph{Software and algorithms}
-
-\dummytext[1]{}
+The micro-problems were discretized by dividing the micro-cells into
+$128 \times 128$ elements (models in two dimensions) or
+$16 \times 16 \times 16$ elements (models in three dimensions).
+Constructing the sparse grids (offline phase) was done via a MATLAB code,
+while the evaluations of the interpolants (online phase) were performed
+by the sparse grid toolbox \sgpp \cite{Pflueger10Spatially}.%
+\footnote{%
+  \url{http://sgpp.sparsegrids.org/}%
+}
+For the solution of the emerging optimization problems,
+a sequential quadratic programming method was employed
+(see \cref{sec:513gradientBasedConstrained}).
 
 
 
