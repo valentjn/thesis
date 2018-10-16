@@ -204,15 +204,15 @@ By setting $\normcetvalueintp_t(\state_t^{(k)})
         }
       \right)^{1/(1-\riskav)}
     \right)\\
-    &= \max_{\policy_t} \left(
+    &= \max_{\normpolicy_t} \left(
       \left(
-        \normconsume_t(\state_t^{(k)}, \policy_t)^{1-\riskav} +
+        \normconsume_t(\state_t^{(k)}, \normpolicy_t)^{1-\riskav} +
         \patience \expectation[t]{
-          (
+          \bigl(
             \wealthratio_{t+1} \normcetvalueintp_{t+1}(
-              \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
+              \normstatefcn_t(\state_t^{(k)}, \normpolicy_t, \stochastic_t)
             )
-          )^{1-\riskav}
+          \bigr)^{1-\riskav}
         }
       \right)^{1/(1-\riskav)}
     \right).
