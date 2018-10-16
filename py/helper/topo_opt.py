@@ -6,6 +6,7 @@ import xml.etree.ElementTree as ET
 import numpy as np
 
 import helper.function
+import helper.grid
 
 
 
@@ -322,17 +323,33 @@ class Stats(object):
     eigenvalues = np.amin(eigenvalues, axis=1)
     return eigenvalues
   
-  def updateInterpolant(self, basis):
-    self.interpolant = helper.function.Interpolant(
-        basis, self.convertDomainToGridCoords(self.X),
-        self.L, self.I, None, aX=self.fX)
+  def updateInterpolant(self, basis, *args):
+    assert self.isHierarchized
+    
+    if isinstance(basis, str):
+      sgppGrid = helper.grid.SGppGrid(basis, *args)
+      sgppGrid.fill(self.L, self.I)
+      self.interpolant = helper.function.SGppVectorInterpolant(
+          sgppGrid.grid, None, aX=self.fX)
+    else:
+      self.interpolant = helper.function.Interpolant(
+          basis, self.convertDomainToGridCoords(self.X),
+          self.L, self.I, None, aX=self.fX)
   
-  def hierarchize(self, basis):
+  def hierarchize(self, basis, *args):
     assert not self.isHierarchized
     assert not np.any(np.isnan(self.fX))
-    self.interpolant = helper.function.Interpolant(
-        basis, self.convertDomainToGridCoords(self.X),
-        self.L, self.I, self.fX)
+    
+    if isinstance(basis, str):
+      sgppGrid = helper.grid.SGppGrid(basis, *args)
+      sgppGrid.fill(self.L, self.I)
+      self.interpolant = helper.function.SGppVectorInterpolant(
+          sgppGrid.grid, self.fX)
+    else:
+      self.interpolant = helper.function.Interpolant(
+          basis, self.convertDomainToGridCoords(self.X),
+          self.L, self.I, self.fX)
+    
     aX = self.interpolant.aX
     assert aX.shape[0] == self.N
     assert aX.shape[1] == self.m
