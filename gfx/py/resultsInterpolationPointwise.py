@@ -9,6 +9,7 @@ import pysgpp
 
 from helper.figure import Figure
 import helper.grid
+import helper.plot
 
 import helperInterpolation
 
@@ -43,7 +44,7 @@ for gridStr in gridStrs:
   contour = ax.contourf(XX0, XX1, error, v, extend="min")
   #ax.plot(X[:,0], X[:,1], "k.", clip_on=False)
   
-  for c in contour.collections: c.set_edgecolor("face")
+  helper.plot.removeWhiteLines(contour)
   
   ax.set_aspect("equal")
   ax.set_xlim(0, 1)

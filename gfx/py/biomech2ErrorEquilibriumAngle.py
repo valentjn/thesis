@@ -52,7 +52,7 @@ def main():
         error = np.log10(np.reshape(error, XX0.shape))
         
         contour = ax.contourf(XX0, XX1, error, v, extend="min")
-        for c in contour.collections: c.set_edgecolor("face")
+        helper.plot.removeWhiteLines(contour)
         
         ax.set_xlim(0, 1)
         ax.set_ylim(0, 1)

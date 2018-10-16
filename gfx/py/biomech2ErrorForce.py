@@ -75,7 +75,7 @@ def main():
         error[error >= 10**v[-1]] = 10**v[-1]
         error = np.log10(error)
         contour = ax.contourf(XX0, XX1, error, v, extend="min")
-        for c in contour.collections: c.set_edgecolor("face")
+        helper.plot.removeWhiteLines(contour)
         ax.plot(*X.T, "k.", mec=backgroundColor, mew=0.8, ms=7, clip_on=False)
         
         ax.set_xlim(10, 150)

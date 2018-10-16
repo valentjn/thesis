@@ -31,7 +31,7 @@ def main():
         action, "fullGrid", basisType, p, forceLoad, nn)
     contour = ax.contourf(XX0, XX1, np.reshape(YY, XX0.shape), 20,
                           vmin=10, vmax=150)
-    for c in contour.collections: c.set_edgecolor("face")
+    helper.plot.removeWhiteLines(contour)
     
     YYContour = np.reshape(YY, XX0.shape)
     YYContour[np.isinf(YYContour)] = (151 if forceLoad < 0 else 9)
