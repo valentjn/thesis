@@ -299,7 +299,7 @@ class Stats(object):
     self.fX = aX
     self.isHierarchized = True
   
-  def evaluate(self, XX, basis):
+  def evaluate(self, XX):
     assert self.isHierarchized
     XXsg = self.convertDomainToGridCoords(XX)
     fXX = self.interpolant.evaluate(XXsg)
