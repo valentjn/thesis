@@ -10,7 +10,7 @@ from .hierarchical_weakly_fundamental_spline import HierarchicalWeaklyFundamenta
 from .modified_hierarchical_notaknot_bspline import ModifiedHierarchicalNotAKnotBSpline
 
 class SGppBasis(HierarchicalBasis):
-  def __init__(self, basis, nu=0):
+  def __init__(self, basis, p=None, nu=0):
     super().__init__(nu=nu)
     assert nu == 0
     
