@@ -114,44 +114,45 @@ class Stats(object):
   @property
   def m(self): return self.fX.shape[1]
   
+  @staticmethod
+  def _popField(fields):
+    field = fields[0]
+    del fields[0]
+    return field
+  
   def load(self, path):
-    def popField(fields):
-      field = fields[0]
-      del fields[0]
-      return field
-    
     with open(path, "r") as f:
       firstLine = f.readline()
       secondLine = f.readline()
     
     fields = firstLine[:-1].split("\t")
     
-    field = popField(fields)
+    field = Stats._popField(fields)
     versionPrefix = "sparsegrid_ver"
     assert field.startswith(versionPrefix)
     version = int(field[len(versionPrefix):])
     assert version >= 1
     
-    N = int(popField(fields))
+    N = int(Stats._popField(fields))
     assert N >= 0
     
-    d = int(popField(fields))
+    d = int(Stats._popField(fields))
     assert d >= 0
     
-    m = int(popField(fields))
+    m = int(Stats._popField(fields))
     assert m >= 0
     
-    distribution = (popField(fields) if version >= 3 else "uniform")
+    distribution = (Stats._popField(fields) if version >= 3 else "uniform")
     distribution = Stats.Distribution.fromString(distribution)
     
-    transformation = (popField(fields) if version >= 4 else "normal")
+    transformation = (Stats._popField(fields) if version >= 4 else "normal")
     transformation = Stats.Transformation.fromString(transformation)
     
-    isHierarchized = popField(fields)
+    isHierarchized = Stats._popField(fields)
     assert isHierarchized in ["hierarchized", "not_hierarchized"]
     isHierarchized = (isHierarchized == "hierarchized")
     
-    notation = popField(fields)
+    notation = Stats._popField(fields)
     assert notation == "voigt"
     
     assert len(fields) == 0
