@@ -180,6 +180,46 @@ class Stats(object):
     self.updateX()
     self.fX = fX
   
+  def loadScattered(self, path):
+    with open(path, "r") as f:
+      firstLine = f.readline()
+      secondLine = f.readline()
+    
+    fields = firstLine[:-1].split("\t")
+    
+    field = Stats._popField(fields)
+    versionPrefix = "scattereddata_ver"
+    assert field.startswith(versionPrefix)
+    version = int(field[len(versionPrefix):])
+    assert version >= 1
+    
+    N = int(Stats._popField(fields))
+    assert N >= 0
+    
+    d = int(Stats._popField(fields))
+    assert d >= 0
+    
+    m = int(Stats._popField(fields))
+    assert m >= 0
+    
+    notation = Stats._popField(fields)
+    assert notation == "voigt"
+    
+    assert len(fields) == 0
+    
+    data = np.loadtxt(path, skiprows=1)
+    assert data.shape[0] == N
+    assert data.shape[1] == d + m
+    X, fX = data[:,:d], data[:,d:]
+    
+    self.distribution = None
+    self.transformation = Stats.Transformation.fromString("normal")
+    self.bounds = None
+    self.isHierarchized = False
+    self.L, self.I = None, None
+    self.X = X
+    self.fX = fX
+  
   def updateX(self):
     h = 1 / 2**self.L
     
