@@ -7,6 +7,8 @@
 This section gives an overview of the algorithms that
 were used to implement the solution process after discretization of
 the Bellman equation \eqref{eq:gridBellman}.
+In the following, we assume that the probability density functions of the
+stochastic variables are known.
 
 
 
@@ -258,14 +260,16 @@ with hierarchical higher-order B-splines.
     (\cref{alg:financeOptimize}, \emph{right}),
     which in turn consists of various sub-functions.
     The function \texttt{optimize} iterates over all state grid points
-    $\state_t = \state_t^{(k)}$ and calls \texttt{optimizeSinglePoint}
-    for each point.
+    $\state_t = \state_t^{(k)}$ ($k = 1, \dotsc, \ngp_t$)
+    and calls \texttt{optimizeSinglePoint} for each point.
     The optimization method evaluates the objective function and
-    its gradient at different policy points $\policy_t$.
+    its gradient at a sequence of different policy points $\policy_t$
+    to find $\optpolicyintp_t(\state_t^{(k)})$.
     This evaluation (denoted by \texttt{evalObjFcnGrad})
     has to compute the expectation in \cref{eq:gridBellman},
     which is done using a quadrature rule.
-    For every quadrature point $\stochastic_t = \stochastic_t^{(j)}$,
+    For every quadrature point $\stochastic_t = \stochastic_t^{(j)}$
+    ($j = 1, \dotsc, m_{\quadweight}$),
     \texttt{evalQuadPoint} computes the corresponding value of
     the expression in the expectation.
     Finally, \texttt{evalInterpPartDeriv} evaluates the interpolant
@@ -292,7 +296,7 @@ In the first iteration $t = T$,
 there is no such interpolant.
 However,
 %it is not needed anyway, as
-the terminal solution $\valuefcn_T$ can be directly determined.
+the terminal solution $\valuefcn_T$ is usually a known function.
 
 
 
@@ -307,7 +311,8 @@ a spatially adaptive sparse grid
 $\gridset{t}{\sparse}
 = \{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\}$,
 where the function values $\valueintp[1]_t(\state_t^{(k)})$
-may already be known for some grid points $\state_t^{(k)}$.
+may already be known for some grid points $\state_t^{(k)}$,
+if \texttt{optimize} is called from within \texttt{refine}.
 The function \texttt{optimize} computes the missing value function values.
 For $t = T$, we assume that the terminal solution
 $\valuefcn_T$ can be computed by some function
@@ -475,7 +480,8 @@ on Gauss--Hermite quadrature
 \multicite{Gerstner98Numerical,Horneff16Efficient}.
 Note that this sparse grid in the stochastic space $\stochdomain$
 is independent of the sparse grid in the state space $\clint{\*0, \*1}$.
-However, it would also be feasible to employ Monte-Carlo quadrature.
+However, it would also be feasible to employ Monte-Carlo quadrature,
+albeit usually far more expensive.
 
 
 
@@ -545,7 +551,7 @@ determines the degree of the Taylor approximation:
 where \texttt{constant} and \texttt{linear}
 only use the first summand and first two summands, respectively.
 Note that since the hierarchical B-splines enable us to
-exactly and efficiently
+exactly and efficiently compute
 the gradient $\gradient{\state}{\valueintp[p]_{t+1}}$ and
 the Hessian $\hessian{\state}{\valueintp[p]_{t+1}}$;
 we do not have to approximate the derivatives with finite differences.
@@ -763,7 +769,8 @@ are determined by
 i.e., the initial state $\state_{t,(0)}$ and the
 stochastic variables $\stochastic_{t,(j)}$ are samples of random variables.
 The Monte Carlo simulation enables us to draw macro-economic conclusions.
-(For instance, how does the amount of consumption typically evolve over time?)
+(For instance, how does the amount of consumption of the average individual
+typically evolve over time?)
 
 %\paragraph{Euler equation errors}
 %

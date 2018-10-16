@@ -21,7 +21,7 @@ provides \cite{Rust18Dynamic}.
     \printnotationsymbol{#1}&\multicolumn{3}{l}{\printnotationtext{#1}}%
   }%
   \begin{tabular}{%
-    >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
+    >{\kern\tabcolsep}=l+l<{\kern4.5mm}+l+l<{\kern4.5mm}+l+l<{\kern\tabcolsep}%
   }
     \toprulec
     \pnst{t}&            \pnst{\wealth}&      \pnst{\utilityfcn}\\
@@ -47,8 +47,10 @@ provides \cite{Rust18Dynamic}.
 
 \paragraph{Utility maximization}
 
-Dynamic portfolio choice models aim to maximize the expected
-\term{discounted utility} over the lifetime of the individual.
+In the following, dynamic portfolio choice models aim to maximize the expected
+\term{discounted time-additive utility} over the lifetime of the individual,
+where the terminal utility is derived solemnly on consumption
+(i.e., no inheritance motive).
 If we neglect stochastic factors, then these models solve
 \begin{equation}
   \label{eq:utilityMaximization}
@@ -76,8 +78,8 @@ the state $\state_t$ of time $t > 0$ can be computed from
 $\state_0$ and $\policy_0, \dotsc, \policy_{t-1}$ with a
 \term{state transition function} $(\state_t, \policy_t) \mapsto \state_{t+1}$.
 As shown in \cref{fig:dynamicPortfolioChoice},
-in each time step, a fraction of the available wealth
-is invested in \term{consumption} $\consume_t$,
+in each time step, a fraction of the available wealth is consumed
+\term{(consumption $\consume_t$)},
 which can be computed from the state $\state_t$ and the policy $\policy_t$.
 The individuals rate the consumption with a \term{utility function}
 $\utilityfcn(\consume_t)$.
@@ -243,8 +245,7 @@ optimization problems instead of a single large
 $(T+1) m_{\policy}$-dimensional problem.
 Often, the terminal solutions $\valuefcn_T$ and $\optpolicyfcn_T$
 are explicitly known.
-For example, if we neglect inheritance,
-then the optimal terminal solution is usually
+In our case, then the optimal terminal solution is
 to consume the whole wealth $\wealth_T$
 (see \cref{fig:dynamicPortfolioChoice}).
 
@@ -260,8 +261,8 @@ $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$ does not correspond
 to a grid point $\state_{t+1}^{(k')}$,
 which means that we cannot lookup the value of $\valuefcn_{t+1}$
 at $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$.
-Therefore, we have to interpolate $\valuefcn_t$
-at the grid points to obtain an interpolant $\valueintp_t$:
+Therefore, we have to interpolate $\valuefcn_{t+1}$
+at the grid points to obtain an interpolant $\valueintp_{t+1}$:
 \begin{equation}
   \label{eq:gridBellman}
   \valueintp_t(\state_t^{(k)})
@@ -271,8 +272,9 @@ at the grid points to obtain an interpolant $\valueintp_t$:
       \valueintp_{t+1}(\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t))
     }
   \right),\quad
-  k = 1, \dotsc, \ngp_t.
+  k = 1, \dotsc, \ngp_t,
 \end{equation}
+where $\valueintp_{T+1} :\equiv 0$ for simplicity.
 As $\valueintp_{t+1}$ on the \rhs is only an approximation to
 $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.
@@ -318,9 +320,9 @@ using piecewise linear basis functions on spatially adaptive sparse grids.
 Judd et al.\ \cite{Judd14Smolyak} use global polynomials
 on sparse Clenshaw--Curtis grids for the interpolation of
 higher-dimensional economic models.
-Schober \cite{Schober18Solving} employs sparse grids for the interpolation
-of dynamic portfolio choice models, but uses the piecewise linear basis
-functions.
+Schober \cite{Schober18Solving} employs spatially adaptive sparse grids
+for the interpolation of dynamic portfolio choice models,
+but uses the piecewise linear basis functions.
 
 \paragraph{B-splines on sparse grids for dynamic portfolio choice models}
 
