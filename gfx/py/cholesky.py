@@ -34,7 +34,7 @@ for q in range(2):
   _, _, XX = helper.grid.generateMeshGrid((nn, nn))
   
   XX = stats.convertGridToDomainCoords(XX)
-  YY = stats.evaluate(XX, basis)
+  YY = stats.evaluate(XX)
   YY = helper.topo_opt.Stats.transformValues(
       YY, transformations[q], helper.topo_opt.Stats.Transformation.normal)
   YY = helper.topo_opt.Stats.getSmallestEigenvalues(YY)
