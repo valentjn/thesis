@@ -240,10 +240,15 @@ def computeZOrderValue(ax, X):
 
 
 
-def removeWhiteLinesInSurfPlot(surf):
-  surf._facecolors2d = surf._facecolors3d
-  surf.set_linewidth(0.2)
-  surf.set_edgecolors("face")
+def removeWhiteLines(obj):
+  if hasattr(obj, "collections"):
+    # 2D contourf plot
+    for c in obj.collections: c.set_edgecolor("face")
+  else:
+    # 3D surf plot
+    obj._facecolors2d = obj._facecolors3d
+    obj.set_linewidth(0.2)
+    obj.set_edgecolors("face")
 
 def setEqual3DAxes(ax):
   extents = np.array([ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]).T
