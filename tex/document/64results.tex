@@ -308,37 +308,42 @@ a sequential quadratic programming method was employed
 
 \paragraph{Error sources}
 
-There are multiple sources that contribute to the numerical error:
+There are multiple sources that contribute to the numerical error
+of our method:
 
 \begin{enumerate}
   \item
   Discretization of the micro-problem
+  (i.e., the elasticity tensors $\etensor$ are inaccurate)
+  
+  \item
+  Sparse grid interpolation
+  (i.e., $\etensor[\sparse] \not= \etensor$)
   
   \item
   Reconstruction of elasticity tensors with Cholesky factors
   (i.e., $\etensor[\chol,\sparse] \not= \etensor[\sparse]$)
   
   \item
-  Sparse grid interpolation
-  (i.e., $\etensor[\chol,\sparse] \not= \etensor$)
-  
-  \item
   Discretization of the macro-problem
+  (i.e., the compliance $\compliance$ is inaccurate)
   
   \item
   Optimization
-  (the optimizer may not find the exact global optimum)
+  (i.e., the global minimum found by the optimizer is inaccurate)
   
   \item
-  Floating-point errors
+  Floating-point rounding errors
+  (i.e., arithmetical operations are inaccurate)
 \end{enumerate}
 
 \noindent
-Errors of type 3, 5, and 6 are always present when optimizing with
-the aid of sparse grids surrogates.
-The errors of type 1 and 4 are intrinsic to the homogenization approach;
-they will not be discussed here.
-The only new type of error is type 2, which we will analyze in the following.
+Errors of type 6 are always present and will not be analyzed in this chapter.
+Errors of type 1 and 4 are intrinsic to the homogenization approach
+and will also not be discussed here.
+The errors of type 2 and 5 have already been analyzed in
+\cref{chap:50optimization}.
+Therefore, in the following, we will analyze the errors of types 2, 3, and 5.
 
 \todo{try different basis types}
 
