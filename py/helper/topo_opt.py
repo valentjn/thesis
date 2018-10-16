@@ -95,7 +95,7 @@ class Stats(object):
     def fromString(s):
       return {
         "normal"   : Stats.Transformation.normal,
-        "choleksy" : Stats.Transformation.cholesky,
+        "cholesky" : Stats.Transformation.cholesky,
       }[s]
   
   def __init__(self):
