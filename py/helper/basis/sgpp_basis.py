@@ -23,10 +23,10 @@ class SGppBasis(HierarchicalBasis):
           (pysgpp.SNotAKnotBsplineBase, HierarchicalNotAKnotBSpline),
         "modifiedHierarchicalNotAKnotBSpline" :
           (pysgpp.SNotAKnotBsplineModifiedBase, ModifiedHierarchicalNotAKnotBSpline),
-        "hierarchicalLagrangeSpline" :
-          (pysgpp.SLagrangeSplineBase, HierarchicalWeaklyFundamentalSpline),
-        #"hierarchicalLagrangeNotAKnotSpline" :
-        #  (pysgpp.SLagrangeNotAKnotSplineBase, HierarchicalWeaklyFundamentalNotAKnotSpline),
+        "hierarchicalWeaklyFundamentalSpline" :
+          (pysgpp.SWeaklyFundamentalSplineBase, HierarchicalWeaklyFundamentalSpline),
+        #"hierarchicalWeaklyFundamentalNotAKnotSpline" :
+        #  (pysgpp.SWeaklyFundamentalNotAKnotSplineBase, HierarchicalWeaklyFundamentalNotAKnotSpline),
       }
       basis = basisTypes[basis][0](p)
     self.basis = basis
