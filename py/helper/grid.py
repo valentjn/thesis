@@ -340,5 +340,19 @@ class SGppGrid(object):
     X = getCoordinates(L, I)
     return X, L, I
   
+  def fill(self, L, I):
+    import pysgpp
+    gridStorage = self.grid.getStorage()
+    gridStorage.clear()
+    N = L.shape[0]
+    d = gridStorage.getDimension()
+    gp = pysgpp.HashGridPoint(d)
+    
+    for k in range(N):
+      for t in range(d):
+        gp.set(t, int(L[k,t]), int(I[k,t]))
+      
+      gridStorage.insert(gp)
+  
   def __str__(self):
     return self.label
