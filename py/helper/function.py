@@ -148,6 +148,25 @@ class SGppInterpolant(SGppScalarFunction):
 
 
 
+class SGppVectorInterpolant(SGppVectorFunction):
+  def __init__(self, grid, fX, aX=None):
+    import pysgpp
+    self.grid = grid
+    self.fX = fX
+    self.aX = (aX if aX is not None else self._getSurpluses())
+    f = pysgpp.OptInterpolantVectorFunction(grid, np2sgpp(self.aX))
+    super().__init__(f)
+  
+  def _getSurpluses(self):
+    import pysgpp
+    aX = pysgpp.DataMatrix(*self.fX.shape)
+    hierarchizationSLE = pysgpp.OptHierarchisationSLE(self.grid)
+    sleSolver = pysgpp.OptAutoSLESolver()
+    assert sleSolver.solve(hierarchizationSLE, np2sgpp(self.fX), aX)
+    return sgpp2np(aX)
+
+
+
 class SGppTestFunction(SGppScalarFunction):
   def __init__(self, f, d):
     if type(f) is str:
