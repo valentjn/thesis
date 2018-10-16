@@ -37,7 +37,7 @@ XX0, XX1 = np.meshgrid(xx0, xx1)
 XX = np.column_stack((XX0.flatten(), XX1.flatten()))
 YY = b.evaluate(l, i, XX)
 YY = np.reshape(YY, XX0.shape)
-helper.plot.removeWhiteLinesInSurfPlot(ax.plot_surface(XX0, XX1, YY))
+helper.plot.removeWhiteLines(ax.plot_surface(XX0, XX1, YY))
 
 K = list(range(X.shape[0]))
 for k in [5, 4, 2, 1]: del K[k]

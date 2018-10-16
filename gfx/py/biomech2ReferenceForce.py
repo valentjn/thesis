@@ -70,7 +70,7 @@ def main():
     faceColors = light.shade(curYY, cmap=mpl.cm.Spectral,
                              vmin=-1.1, vmax=1.1, blend_mode="soft")
     surf = ax.plot_surface(10+140*XX0, XX1, curYY, facecolors=faceColors)
-    helper.plot.removeWhiteLinesInSurfPlot(surf)
+    helper.plot.removeWhiteLines(surf)
     
     if q == 0:
       zl = [-0.1, 1e-3*np.amax(YY[:,q])]

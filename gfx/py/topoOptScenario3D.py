@@ -185,7 +185,7 @@ def main():
     lightSource = mpl.colors.LightSource(0, 45)
     surf = ax.plot_trisurf(verts[:,0], verts[:,1], faces, verts[:,2],
                           lightsource=lightSource)
-    helper.plot.removeWhiteLinesInSurfPlot(surf)
+    helper.plot.removeWhiteLines(surf)
     
     eps = 0.05
     xs = np.array([
