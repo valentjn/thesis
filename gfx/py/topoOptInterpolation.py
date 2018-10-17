@@ -167,7 +167,7 @@ def main():
   for model in models:
     if model == "framed-cross":
       tols = ["5.01187", "3.98107", "3.16228", "2.51189", "1.99526",
-              "1.58489", "1.25893", "1", "0.794328"]
+              "1.58489", "1.25893", "1", "0.794328", "0.630957", "0.501187"]
       majorName = "sga16"
       boundsName = "lb0.01-ub0.99"
       sampleStatsName = "framed-cross-thesis-samples-lb0.01-ub0.99-n100000"
@@ -181,7 +181,7 @@ def main():
                          "lb0.01,0.15-ub0.99,0.85-n100000")
     elif model == "sheared-framed-cross":
       tols = ["31.6228", "25.1189", "19.9526", "15.8489", "12.5893", "10",
-              "7.94328", "6.30957", "5.01187"]
+              "7.94328", "6.30957", "5.01187", "3.98107", "3.16228"]
       majorName = "sga16"
       boundsName = "lb0.01,0.15-ub0.99,0.85"
       sampleStatsName = ("sheared-framed-cross-thesis-samples-"
@@ -237,7 +237,7 @@ def main():
   ax.set_ylabel(r"Relative $\Ltwo$ spectral error")
   
   trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
-  ax.text(*trafo(0.76, -0.05), r"$\ngp$", ha="center", va="top")
+  ax.text(*trafo(1, -0.05), r"$\ngp$", ha="right", va="top")
   
   fig.save()
   
