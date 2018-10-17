@@ -61,7 +61,7 @@ def main():
   v = np.linspace(-6-1/4, -3+1/4, 15)
   
   for trafoStr in trafoStrs:
-    fig = Figure.create(figsize=(3.15, 3.15))
+    fig = Figure.create(figsize=(3, 3), scale=0.925)
     ax = fig.gca()
     
     trafoName = {"cholesky" : "cholesky-", "normal" : ""}[trafoStr]
@@ -98,9 +98,9 @@ def main():
   
   
   
-  fig = Figure.create(figsize=(5, 2))
+  fig = Figure.create(figsize=(2, 3))
   ax = fig.gca()
-  fig.colorbar(contour, orientation="horizontal", fraction=1,
+  fig.colorbar(contour, orientation="vertical", fraction=1, aspect=10,
                ticks=np.arange(-6, -3+0.01, 1), format="$10^{%u}$")
   ax.set_axis_off()
   fig.save()
