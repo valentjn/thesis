@@ -75,8 +75,8 @@ def main():
     
     xx, yy, zz, X = calculatePointwiseError(
         trafoStr, basisStr, p, sampleStatsName, statsName, NN)
+    print(np.amin(zz), np.amax(zz), np.mean(zz))
     
-    #print(np.amin(zz), np.amax(zz))
     zz = np.clip(zz, 1.01*10**v[0], 0.99*10**v[-1])
     contour = ax.tricontourf(xx, yy, np.log10(zz), v, extend="min")
     helper.plot.removeWhiteLines(contour)
