@@ -352,20 +352,24 @@ and of type~5 (\cref{sec:644optimization}).
 
 \begin{figure}
   \subcaptionbox{%
-    TODO%
-  }[72mm]{%
+    $\norm[2]{\etensor(\*x) - \etensor[\sparse](\*x)}$%
+  }[63mm]{%
     \includegraphics{topoOptInterpolationPointwise_1}%
   }%
-  \hfill%
+  \hspace{3mm}%
   \subcaptionbox{%
-    TODO%
-  }[72mm]{%
+    $\norm[2]{\etensor(\*x) - \etensor[\chol,\sparse](\*x)}$%
+  }[63mm]{%
     \includegraphics{topoOptInterpolationPointwise_2}%
   }%
   \hfill%
   \includegraphics{topoOptInterpolationPointwise_3}%
-  \caption[TODO]{%
-    TODO%
+  \caption[Pointwise spectral error for the 2D cross model]{%
+    Pointwise spectral error for the 2D cross model and
+    hierarchical cubic B-splines on a
+    spatially adaptive sparse grid with $\ngp = 1320$ points for
+    the direct interpolation of elasticity tensors \emph{(left)} and
+    the interpolation of Cholesky factors \emph{(right).}%
   }%
   \label{fig:topoOptInterpolationErrorPointwise}%
 \end{figure}
@@ -377,18 +381,23 @@ and of type~5 (\cref{sec:644optimization}).
   \raisebox{0.5mm}{\includegraphics{topoOptInterpolation_4}}%
   \\[2mm]%
   \subcaptionbox{%
-    TODO%
+    2D cross (different degrees)%
   }[72mm]{%
     \includegraphics{topoOptInterpolation_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    TODO%
+    Other micro-cell models ($p = 3$)%
   }[72mm]{%
     \includegraphics{topoOptInterpolation_2}%
   }%
-  \caption[TODO]{%
-    TODO%
+  \caption[Convergence of relative $L^2$ spectral errors]{%
+    Convergence of relative $\Ltwo$ spectral errors
+    over the increasing number $\ngp$ of spatially adaptive grid points
+    (i.e., for decreasing tolerance $\varepsilon$)
+    for the 2D cross model without or with Cholesky factor interpolation
+    and different degrees $p$ \emph{(left)} and
+    for the other five micro-cell models and cubic degree \emph{(right)}.%
   }%
   \label{fig:topoOptInterpolationErrorBasisFunctions}%
 \end{figure}
