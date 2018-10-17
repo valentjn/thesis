@@ -158,6 +158,7 @@ optimization problems \cite{Valentin18Gradient}:
 
 \begin{enumerate}[label=O\arabic*.,leftmargin=2.7em]
   \item
+  \label{item:biomech2MinSum}
   For a given external load $\forceL$ and a target angle
   $\tarelbang \in \clint{\ang{10}, \ang{150}}$,
   find the activation parameters $(\actT, \actB) \in \clint{\*0, \*1}$
@@ -165,6 +166,7 @@ optimization problems \cite{Valentin18Gradient}:
   $\equielbang{\forceL}(\actT, \actB) = \tarelbang$.
   
   \item
+  \label{item:biomech2MinDist}
   For a given external load $\forceL(t_2)$ for a time $t_2 > t_1$,
   a target angle $\tarelbang(t_2) \in \clint{\ang{10}, \ang{150}}$,
   and initial activation parameters
@@ -188,17 +190,18 @@ optimization problems \cite{Valentin18Gradient}:
   %)^2$ is minimized (with $c \in \nonnegreal$ arbitrary but fixed).
 \end{enumerate}
 
-\paragraph{Motivation of problem O1}
+\paragraph{Motivation of problem \ref{item:biomech2MinSum}}
 
 The motivation of both problems is that the human body tries to
 achieve a given movement with minimal energy effort.
-For the first problem O1, this effort is quantified by $\actT + \actB$,
+For the first problem \ref{item:biomech2MinSum},
+this effort is quantified by $\actT + \actB$,
 i.e., the energy effort for each muscle is assumed to be proportional
 to its activation parameter.
 
-\paragraph{Motivation of problem O2}
+\paragraph{Motivation of problem \ref{item:biomech2MinDist}}
 
-The second problem O2 is motivated as follows:
+The second problem \ref{item:biomech2MinDist} is motivated as follows:
 Before time $t = t_1$, the musculoskeletal system is in equilibrium for
 an external load $\forceL(t_1)$,
 activation parameters $\actT(t_1), \actB(t_1)$, and
@@ -223,7 +226,7 @@ activation parameters $\actT(t_1), \actB(t_1)$.
 
 %\paragraph{Motivation of problem O3}
 %
-%The third problem O3 is derived from O2.
+%The third problem O3 is derived from \ref{item:biomech2MinDist}.
 %Instead of prescribing the target angle $\tarelbang(t_2)$,
 %we try to stay ``near'' the initial angle $\tarelbang(t_1)$,
 %ensuring that the desired target position is achieved.
@@ -232,10 +235,13 @@ activation parameters $\actT(t_1), \actB(t_1)$.
 
 \paragraph{Optimization method}
 %
-%Problems O1 and O2 are both constrained optimization problems,
+%Problems \ref{item:biomech2MinSum} and \ref{item:biomech2MinDist} are
+%both constrained optimization problems,
 %while O3 is unconstrained.
-%For problems O1 and O2, we employ the augmented Lagrangian method as
-Problems O1 and O2 are both constrained optimization problems.
+%For problems \ref{item:biomech2MinSum} and \ref{item:biomech2MinDist},
+%we employ the augmented Lagrangian method as
+Problems \ref{item:biomech2MinSum} and \ref{item:biomech2MinDist}
+are both constrained optimization problems.
 For their solution, we employ the augmented Lagrangian method as
 described in \cref{sec:513gradientBasedConstrained}
 using an adaptive gradient descent algorithm
@@ -256,8 +262,9 @@ for the gradient-based optimization of the penalized objective function
 
 \paragraph{Complexity}
 
-%To solve optimization problems O1 to O3,
-To solve optimization problems O1 and O2,
+%To solve optimization problems \ref{item:biomech2MinSum} to O3,
+To solve optimization problems
+\ref{item:biomech2MinSum} and \ref{item:biomech2MinDist},
 the optimization method needs to evaluate the objective
 and constraint functions multiple times during the algorithm.
 This requires the evaluation of $\equielbang{\forceL}$,
@@ -280,8 +287,9 @@ about half an hour.
 %
 If we assume that we need four Newton iterations on average,
 then a single iteration of the optimization algorithm to solve
-%problems O1 to O3 will take four hours to complete
-problems O1 and O2 will take four hours to complete
+%problems \ref{item:biomech2MinSum} to O3 will take four hours to complete
+problems \ref{item:biomech2MinSum} and \ref{item:biomech2MinDist}
+will take four hours to complete
 (assuming one evaluation of objective and constraint functions
 per optimizer iteration and
 two evaluations per Newton iteration to approximate the missing derivative).
@@ -362,7 +370,8 @@ There is no need to approximate the derivative with
 finite differences, reducing both the error and the runtime.
 %
 Second, we can use gradient-based optimization methods
-for the solution of the optimization problems O1 and O2,
+for the solution of the optimization problems \ref{item:biomech2MinSum} and
+\ref{item:biomech2MinDist},
 which involve the equilibrium elbow angle function
 $\equielbangintp{\forceL}\colon \clint{\*0, \*1} \to \real$.
 With the implicit function theorem \cite{Kudryavtsev95Implicit},

@@ -420,7 +420,8 @@ contribute the most to the error.
 \paragraph{Definition of the test scenario}
 
 In the following, we want to assess the performance
-of the sparse grid interpolants for the optimization problems O1 and O2.
+of the sparse grid interpolants for the optimization problems
+\ref{item:biomech2MinSum} and \ref{item:biomech2MinDist}.
 For this goal, we create (as in \cite{Valentin18Gradient}) a test scenario
 that simulates a pseudo-dynamic sequence of motions
 by varying the load force and/or the target elbow angle
@@ -473,38 +474,39 @@ The test scenario is as follows:
 %
 \begin{enumerate}
   \item
-  Find a feasible initial solution for problem O1
+  Find a feasible initial solution for problem \ref{item:biomech2MinSum}
   with $\forceL(t_0) := \SI{22}{\newton}$ and
   $\tarelbang(t_0) := \ang{75}$.
   
   \item
-  Apply O1 with $\forceL(t_1) := \SI{22}{\newton}$ and
+  Apply \ref{item:biomech2MinSum} with $\forceL(t_1) := \SI{22}{\newton}$ and
   $\tarelbang(t_1) := \ang{75}$.
   
   \item
-  Apply O2 with $\forceL(t_2) := \SI{22}{\newton}$ and
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_2) := \SI{22}{\newton}$ and
   $\tarelbang(t_2) := \ang{60}$ (changed target angle).
   
   \item
-  Apply O2 with $\forceL(t_3) := \SI{30}{\newton}$ and
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_3) := \SI{30}{\newton}$ and
   $\tarelbang(t_3) := \ang{60}$ (changed load).
   
   \item
-  Apply O2 with $\forceL(t_4) := \SI{40}{\newton}$ and
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_4) := \SI{40}{\newton}$ and
   $\tarelbang(t_4) := \ang{50}$ (changed load and target angle).
 \end{enumerate}
 %
 For each of the steps 2 to 5, the activation levels $\actT, \actB$ obtained
 in the previous step (i.e., either the feasible initial solution
 of step 1 or the optimal solution of steps 2 to 4) are used
-as the input of the optimization problem O1 or O2.
+as the input of the optimization problem
+\ref{item:biomech2MinSum} or \ref{item:biomech2MinDist}.
 The feasible initial solution in step 1 is determined as explained
 in \cref{sec:513gradientBasedConstrained}.
 
-\paragraph{Solutions of problem O1}
+\paragraph{Solutions of problem \ref{item:biomech2MinSum}}
 
 We note that independently of $\forceL$ and $\tarelbang$,
-every solution $(\actT, \actB)$ of problem O1 will be
+every solution $(\actT, \actB)$ of problem \ref{item:biomech2MinSum} will be
 on the boundary part of the domain $\clint{\*0, \*1}$,
 on which at least one activation parameter vanishes, i.e.,
 \begin{equation}
@@ -522,7 +524,8 @@ where the contour lines generally go from the bottom left
 This issue may prevented by either
 using more complicated musculoskeletal models with more
 than two muscles or different optimization problems
-such as problem O2, where the objective function differs.
+such as problem \ref{item:biomech2MinDist},
+where the objective function differs.
 
 \paragraph{Plots of optimization results}
 
@@ -538,7 +541,7 @@ For the piecewise linear basis,
 we use exactly the same method as for the cubic case
 (Newton method for $\equielbangintp{\forceL}$,
 Augmented Lagrangian with adaptive gradient descent for the
-solution of problems O1 and O2),
+solution of problems \ref{item:biomech2MinSum} and \ref{item:biomech2MinDist}),
 although the derivatives of the muscle forces have kinks.
 For the reference forces, we abuse the fact that the reference surrogates
 are full grid spline interpolants, which can be explicitly differentiated.
