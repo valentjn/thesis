@@ -309,41 +309,48 @@ a sequential quadratic programming method was employed
 There are multiple sources that contribute to the numerical error
 of our method:
 
-\begin{enumerate}
+\begin{enumerate}[label=E\arabic*.,ref=E\arabic*,leftmargin=2.7em]
   \item
+  \label{item:topoOptErrorMicro}
   Discretization of the micro-problem
   (i.e., the elasticity tensors $\etensor$ are inaccurate)
   
   \item
+  \label{item:topoOptErrorInterpolation}
   Sparse grid interpolation
   (i.e., $\etensor[\sparse] \not= \etensor$)
   
   \item
+  \label{item:topoOptErrorCholesky}
   Reconstruction of elasticity tensors with Cholesky factors
   (i.e., $\etensor[\chol,\sparse] \not= \etensor[\sparse]$)
   
   \item
+  \label{item:topoOptErrorMacro}
   Discretization of the macro-problem
   (i.e., the compliance $\compliance$ is inaccurate)
   
   \item
+  \label{item:topoOptErrorOptimization}
   Optimization
   (i.e., the global minimum found by the optimizer is inaccurate)
   
   \item
+  \label{item:topoOptErrorRounding}
   Floating-point rounding errors
   (i.e., arithmetical operations are inaccurate)
 \end{enumerate}
 
 \noindent
-Errors of type~6 are always present and will not be analyzed in this chapter.
-Errors of type~1 and~4 are intrinsic to the homogenization approach
+\ref{item:topoOptErrorRounding}-type errors are always present and
+will not be analyzed in this chapter.
+Errors of type \ref{item:topoOptErrorMicro} and \ref{item:topoOptErrorMacro}
+are intrinsic to the homogenization approach
 and will also not be discussed here.
-%The errors of type 2 and 5 have already been analyzed in
-%\cref{chap:50optimization}.
 Therefore, in the remainder of this chapter,
-we will analyze the errors of types~2 and~3 (\cref{sec:643interpolation})
-and of type~5 (\cref{sec:644optimization}).
+we will analyze the errors of types \ref{item:topoOptErrorInterpolation} and
+\ref{item:topoOptErrorCholesky} (\cref{sec:643interpolation})
+and of type \ref{item:topoOptErrorOptimization} (\cref{sec:644optimization}).
 
 
 
