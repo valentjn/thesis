@@ -233,7 +233,7 @@ def main():
   
   ax.set_xscale("log")
   ax.set_yscale("log")
-  #ax.set_ylim(1e-5, 3e-2)
+  ax.set_ylim(1e-3, 1e-1)
   ax.set_ylabel(r"Relative $\Ltwo$ spectral error")
   
   trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
