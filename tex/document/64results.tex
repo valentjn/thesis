@@ -446,30 +446,25 @@ and of type~5 (\cref{sec:644optimization}).
 \begin{table}
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
-      >{\kern\tabcolsep}=l<{\kern5mm}*{5}{+c}<{\kern\tabcolsep}%
+      >{\kern\tabcolsep}=l<{\kern5mm}*{3}{+c}<{\kern\tabcolsep}%
     }
     \toprulec
     \headerrow
-    Scenario&
-    $\bspl{\*l,\*i}{1}$&
-    $\bspl{\*l,\*i}{3}$&
-    $\bspl[\nak]{\*l,\*i}{3}$&
-    $\bspl{\*l,\*i}{5}$&
-    $\bspl[\nak]{\*l,\*i}{5}$\\
+    Scenario&       $p = 1$& $p = 3$& $p = 5$\\
     \midrulec
-    2D cantilever&  XX.XXX& XX.XXX& XX.XXX& XX.XXX& XX.XXX\\
-    2D L shape&     XX.XXX& XX.XXX& XX.XXX& XX.XXX& XX.XXX\\
+    2D cantilever&  XX.XXX&  XX.XXX&  XX.XXX\\
+    2D L shape&     XX.XXX&  XX.XXX&  XX.XXX\\
     \midrulec
-    3D cantilever&  XX.XXX& XX.XXX& XX.XXX& XX.XXX& XX.XXX\\
-    3D center load& XX.XXX& XX.XXX& XX.XXX& XX.XXX& XX.XXX\\
+    3D cantilever&  XX.XXX&  XX.XXX&  XX.XXX\\
+    3D center load& XX.XXX&  XX.XXX&  XX.XXX\\
     \bottomrulec
   \end{tabular}
-  \caption[Optimal compliance values for different basis functions]{%
+  \caption[Optimal compliance values for different B-spline degrees]{%
     Optimal compliance values for the different scenarios
-    and basis functions (maximum number $\ngpMax = \num{10000}$
+    and B-spline degrees (maximum number $\ngpMax = \num{10000}$
     of sparse grid points).
     The highlighted entries indicate the best choice
-    of basis functions for a given scenario.%
+    of B-spline degree for a given scenario.%
   }%
   \label{tbl:TODO2}%
 \end{table}
