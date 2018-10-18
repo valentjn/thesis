@@ -1193,6 +1193,22 @@
   Cholesky factor
 }
 
+\hidenextnotation
+\newnotationcommandoptarg{2}{\mcp}{%
+  \*x^{\ifnotempty{#1}{#1,}(#2)}%
+}{xq}{$\mcp{q}$}{
+  Micro-cell param.
+}
+
+\newcommand*{\mcpopt}[1]{\mcp[\opt]{#1}}
+
+\hidenextnotation
+\newnotationcommandoptarg{3}{\mcpentry}{%
+  x^{\ifnotempty{#1}{#1,}(#2)}_{#3}%
+}{xqt}{$\mcpentry{q}{t}$}{
+  Micro-cell param. entry
+}
+
 % ======================================================================
 % Application 2: Biomechanical Application
 % ======================================================================
