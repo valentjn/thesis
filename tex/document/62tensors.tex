@@ -8,9 +8,9 @@
 
 During the process of solving \eqref{eq:topoOptProblemDiscrete},
 optimization algorithms typically
-evaluate the objective function $\compliance(\*x^{(1)}, \dotsc, \*x^{(M)})$
+evaluate the objective function $\compliance(\mcp{1}, \dotsc, \mcp{M})$
 iteratively at different \term{micro-cell parameter combinations}
-$(\*x^{(1)}, \dotsc, \*x^{(M)}) \in (\real^d)^M$.
+$(\mcp{1}, \dotsc, \mcp{M}) \in (\real^d)^M$.
 Every evaluation of $\compliance$ corresponds to the solution of a
 macro-problem.
 However, the elasticity tensors $\etensor^{(q)}$ of all $M$ macro-cells
@@ -55,8 +55,8 @@ objective function and of the constraints, i.e.,%
 %  gradient of its vectorization.%
 %}
 \begin{equation}
-  \partialderiv{\partialdiff{} x_t}{\etensor^{(q)}}(\*x^{(q)}),\quad
-  \partialderiv{\partialdiff{} x_t}{\denscell^{(q)}}(\*x^{(q)}),\qquad
+  \partialderiv{\partialdiff{} x_t}{\etensor^{(q)}}(\mcp{q}),\quad
+  \partialderiv{\partialdiff{} x_t}{\denscell^{(q)}}(\mcp{q}),\qquad
   q = 1, \dotsc, M,\quad
   t = 1, \dotsc, d.
 \end{equation}
@@ -87,10 +87,10 @@ As a remedy, we replace the costly evaluation of the
 elasticity tensors $\etensor^{(q)}$ with cheap surrogates.
 We assume that all macro-cells use the same micro-cell model.
 Consequently, the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro-cell
-with the micro-cell parameter $\*x^{(q)} \in \clint{\*0, \*1}$
-can be written as the value $\etensor(\*x^{(q)})$ of some function
+with the micro-cell parameter $\mcp{q} \in \clint{\*0, \*1}$
+can be written as the value $\etensor(\mcp{q})$ of some function
 $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
-(assuming that $\dimdomain = 3$) at the point $\*x^{(q)}$.
+(assuming that $\dimdomain = 3$) at the point $\mcp{q}$.
 In the following,
 $\etensor\colon \clint{\*0, \*1} \to \real^m$
 gives $m \in \nat$ values from which the symmetric elasticity tensor
@@ -151,7 +151,7 @@ Our approach has multiple obvious advantages:
   By using B-splines as basis functions,
   the interpolant $\etensor[\sparse]$ will be smoother and more accurate.
   In addition, we can calculate its derivatives
-  $\tpartialderiv{\partialdiff{} x_t}{\etensor[\sparse]}(\*x^{(q)})$
+  $\tpartialderiv{\partialdiff{} x_t}{\etensor[\sparse]}(\mcp{q})$
   fast and explicitly,
   accelerating the speed of convergence of the optimization algorithm.
 \end{itemize}
@@ -252,8 +252,8 @@ surrogate functions $\etensor[\sparse](\*x)$.
 
 Note that for most micro-cell models,
 the optimization algorithm often queries the objective function
-$\compliance(\*x^{(1)}, \dotsc, \*x^{(M)})$ for micro-cell parameter
-combinations for which many of the points $\*x^{(j)}$ are near the boundary
+$\compliance(\mcp{1}, \dotsc, \mcp{M})$ for micro-cell parameter
+combinations for which many of the points $\mcp{j}$ are near the boundary
 of $\clint{\*0, \*1}$.
 This is because many of the macro-cells will either be empty or
 fully filled with material, which usually corresponds to micro-cell

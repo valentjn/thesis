@@ -179,7 +179,7 @@ the micro-cell parameters corresponding to different macro-cells differ
 in general.
 This enables varying densities in different regions of $\domain$.
 We denote the parameters of the $q$-th macro-cell
-with $\*x^{(q)} = (x_1^{(q)}, \dotsc, x_d^{(q)}) \in
+with $\mcp{q} = (\mcpentry{1}{q}, \dotsc, \mcpentry{d}{q}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
 where $q = 1, \dotsc, M$ and
 $M := M_1 \dotsm M_{\dimdomain}$ is the number of macro-cells.
@@ -218,19 +218,19 @@ two-scale discretization process has the form
 \begin{subequations}
   \label{eq:topoOptProblemDiscrete}
   \begin{gather}
-    \min J(\*x^{(1)}, \dotsc, \*x^{(M)}),\quad
-    \*x^{(1)}, \dotsc, \*x^{(M)} \in \clint{0, 1}^d
+    \min J(\mcp{1}, \dotsc, \mcp{M}),\quad
+    \mcp{1}, \dotsc, \mcp{M} \in \clint{0, 1}^d
     \quad\text{s.t.}\quad
-    \densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \le \densub,\\
-    \densmean(\*x^{(1)}, \dotsc, \*x^{(M)})
-    := \frac{1}{M} \sum_{q=1}^M \denscell^{(q)}(\*x^{(q)}).
+    \densmean(\mcp{1}, \dotsc, \mcp{M}) \le \densub,\\
+    \densmean(\mcp{1}, \dotsc, \mcp{M})
+    := \frac{1}{M} \sum_{q=1}^M \denscell^{(q)}(\mcp{q}).
   \end{gather}
 \end{subequations}
-Here, $\denscell^{(q)}(\*x^{(q)}) \in \clint{0, 1}$ is the
-density of the $q$-th macro-cell with micro-cell parameter $\*x^{(q)}$
+Here, $\denscell^{(q)}(\mcp{q}) \in \clint{0, 1}$ is the
+density of the $q$-th macro-cell with micro-cell parameter $\mcp{q}$
 (i.e., the fraction of material volume of one micro-cell
 with respect to its total volume)
-and $\densmean(\*x^{(1)}, \dotsc, \*x^{(M)}) \in \clint{0, 1}$
+and $\densmean(\mcp{1}, \dotsc, \mcp{M}) \in \clint{0, 1}$
 is the resulting total mean density.
 This discretized optimization problem can now be implemented and
 solved numerically.

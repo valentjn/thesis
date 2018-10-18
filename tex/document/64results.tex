@@ -35,11 +35,11 @@ hierarchizing the Cholesky factor entries and micro-cell densities
 to obtain the sparse grid interpolant $\*\sgintp$.
 Each optimization iteration of the online phase consists of
 evaluating the interpolant $\*\sgintp$
-for each micro-cell parameter $\*x^{(j)}$ ($j = 1, \dotsc, M$),
+for each micro-cell parameter $\mcp{j}$ ($j = 1, \dotsc, M$),
 reconstructing the elasticity tensor $\etensor[\chol,\sparse]$ from
 the Cholesky factors $\cholfactor[\sparse]$, and
 solving the macro-problem to retrieve the approximated compliance value
-$\compliance[\sparse](\*x^{(1)}, \dotsc, \*x^{(M)})$.%
+$\compliance[\sparse](\mcp{1}, \dotsc, \mcp{M})$.%
 \footnote{%
   In addition, the partial derivatives
   $\partialdiff{} \etensor[\chol,\sparse]/\partialdiff{} x_t$
@@ -120,36 +120,36 @@ we do not use the exact elasticity tensors to compute the compliance value.
       \node[myCircle] (points) at (0mm,0mm) {%
         $
           \begin{matrix}
-            \*x^{(1)},\\
+            \mcp{1},\\
             \dots,\\
-            \*x^{(M)}
+            \mcp{M}
           \end{matrix}
         $%
       };
       \node[myCircle] (choleskyFactors) at (34mm,0mm) {%
         $
           \begin{matrix}
-            \cholfactor[\sparse](\*x^{(1)}),\\
+            \cholfactor[\sparse](\mcp{1}),\\
             \dots,\\
-            \cholfactor[\sparse](\*x^{(M)})
+            \cholfactor[\sparse](\mcp{M})
           \end{matrix}
         $%
       };
       \node[myCircle] (elasticityTensors) at (83mm,0mm) {%
         $
           \begin{matrix}
-            \etensor[\chol,\sparse](\*x^{(1)}),\\
+            \etensor[\chol,\sparse](\mcp{1}),\\
             \dots,\\
-            \etensor[\chol,\sparse](\*x^{(M)})
+            \etensor[\chol,\sparse](\mcp{M})
           \end{matrix}
         $%
       };
       \node[myCircle] (complianceValue) at (129.5mm,0mm) {%
         $
           \begin{matrix}
-            \compliance[\sparse](\*x^{(1)},\\
+            \compliance[\sparse](\mcp{1},\\
             \dotsc,\\
-            \*x^{(M)})
+            \mcp{M})
           \end{matrix}
         $%
       };
