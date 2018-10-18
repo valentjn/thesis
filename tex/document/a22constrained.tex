@@ -16,14 +16,14 @@ as in \cite{Gavana13Global}.
     \centertestfunline{
       \testobjfunscaled{G08}(\xscaled)
       := -\frac{
-        \sin^3(2\pi\xscaled[1]) \sin(2\pi\xscaled[2])
+        \sin^3(2\pi\xse{1}) \sin(2\pi\xse{2})
       }{
-        \xscaled[1]^3 (\xscaled[1] + \xscaled[2])
+        \xse{1}^3 (\xse{1} + \xse{2})
       },\quad
       \testineqconfunscaled{G08}(\xscaled)
       := \begin{pmatrix}
-        \xscaled[1]^2 - \xscaled[2] + 1\\
-        1 - \xscaled[1] + (\xscaled[2] - 4)^2
+        \xse{1}^2 - \xse{2} + 1\\
+        1 - \xse{1} + (\xse{2} - 4)^2
       \end{pmatrix},
     }\\
     \centertestfunline{
@@ -42,8 +42,8 @@ as in \cite{Gavana13Global}.
 This problem is based on a problem from
 \cite{Colville68Comparative} with the objective function
 $\testobjfunscaled{G04}(\xscaled)
-:= 5.3578547 \xscaled[3]^2 + 0.8356891 \xscaled[1] \xscaled[5] +
-37.293239 \xscaled[1] - 40792.141$ and the same constraints
+:= 5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
+37.293239 \xse{1} - 40792.141$ and the same constraints
 $\testineqconfunscaled{G04}(\xscaled) :=
 \testineqconfunscaled{G04Sq}(\xscaled)$.
 However, hierarchical cubic not-a-knot B-splines are able to exactly
@@ -63,31 +63,31 @@ is non-negative on $\clint{\*0, \*1}$.
   \begin{gather}
   \centertestfunline{
     \testobjfunscaled{G04Sq}(\xscaled)
-    := (5.3578547 \xscaled[3]^2 + 0.8356891 \xscaled[1] \xscaled[5] +
-    37.293239 \xscaled[1] - 10120)^2,
+    := (5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
+    37.293239 \xse{1} - 10120)^2,
   }\\
   \centertestfunline{
     \testineqconfunscaled{G04Sq}(\xscaled)
     := 10^{-3} \scalebox{0.92}{$
       \begin{pmatrix}
-        85334.407 + 5.6858 \xscaled[2] \xscaled[5] +
-        0.6262 \xscaled[1] \xscaled[4] -
-        2.2053 \xscaled[3] \xscaled[5] - 92000\\
-        -85334.407 - 5.6858 \xscaled[2] \xscaled[5] -
-        0.6262 \xscaled[1] \xscaled[4] +
-        2.2053 \xscaled[3] \xscaled[5]\\
-        80512.49 + 7.1317 \xscaled[2] \xscaled[5] +
-        2.9955 \xscaled[1] \xscaled[2] +
-        2.1813 \xscaled[3]^2 - 110000\\
-        -80512.49 - 7.1317 \xscaled[2] \xscaled[5] -
-        2.9955 \xscaled[1] \xscaled[2] -
-        2.1813 \xscaled[3]^2 + 90000\\
-        9300.961 + 4.7026 \xscaled[3] \xscaled[5] +
-        1.2547 \xscaled[1] \xscaled[3] +
-        1.9085 \xscaled[3] \xscaled[4] - 25000\\
-        -9300.961 - 4.7026 \xscaled[3] \xscaled[5] -
-        1.2547 \xscaled[1] \xscaled[3] -
-        1.9085 \xscaled[3] \xscaled[4] + 20000
+        85334.407 + 5.6858 \xse{2} \xse{5} +
+        0.6262 \xse{1} \xse{4} -
+        2.2053 \xse{3} \xse{5} - 92000\\
+        -85334.407 - 5.6858 \xse{2} \xse{5} -
+        0.6262 \xse{1} \xse{4} +
+        2.2053 \xse{3} \xse{5}\\
+        80512.49 + 7.1317 \xse{2} \xse{5} +
+        2.9955 \xse{1} \xse{2} +
+        2.1813 \xse{3}^2 - 110000\\
+        -80512.49 - 7.1317 \xse{2} \xse{5} -
+        2.9955 \xse{1} \xse{2} -
+        2.1813 \xse{3}^2 + 90000\\
+        9300.961 + 4.7026 \xse{3} \xse{5} +
+        1.2547 \xse{1} \xse{3} +
+        1.9085 \xse{3} \xse{4} - 25000\\
+        -9300.961 - 4.7026 \xse{3} \xse{5} -
+        1.2547 \xse{1} \xse{3} -
+        1.9085 \xse{3} \xse{4} + 20000
       \end{pmatrix},
     $}
   }\\
