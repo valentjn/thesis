@@ -17,15 +17,15 @@ The necessary notation is summarized in
   \setnumberoftableheaderrows{0}%
   \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
   \begin{tabular}{%
-    >{\kern\tabcolsep}=l+l<{\kern3.5mm}+l<{\kern-1mm}+l%
-    <{\kern3.5mm}+l<{\kern-1.5mm}+l<{\kern\tabcolsep}%
+    >{\kern\tabcolsep}=l<{\kern-1.5mm}+l<{\kern2.9mm}+l<{\kern-1.5mm}+l%
+    <{\kern2.9mm}+l<{\kern-1.25mm}+l<{\kern\tabcolsep}%
   }
     \toprulec
     \pnst{\domain}&          \pnst{\force}&        \pnst{\densglobal}\\
     \pnst{\dimdomain}&       \pnst{\displacement}& \pnst{\denscell}\\
     $d$&\#micro-cell param.& \pnst{\compliance}&   \pnst{\densub}\\
-    \pnst{\etensor}&         \pnst{\vol}&          &\\
-    \pnst{\cholfactor}&      \pnst{\voldens}&      &\\
+    \pnst{\mcp}&             \pnst{\vol}&          \pnst{\etensor}\\
+    &&                       \pnst{\voldens}&      \pnst{\cholfactor}\\
     \bottomrulec
   \end{tabular}%
   \caption[Glossary for topology optimization]{%
