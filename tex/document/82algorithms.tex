@@ -539,10 +539,10 @@ determines the degree of the Taylor approximation:
   \begin{split}
     \valueintp[p]_{t+1}(\state_{t+1})
     &\approx \valueintp[p]_{t+1}(\state_{t+1}^\mathrm{in}) +
-    \tr{(\gradient{\state}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
+    \tr{(\gradient{\state_{t+1}}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
     (\state_{t+1} - \state_{t+1}^\mathrm{in})\\
     &\qquad + \tr{(\state_{t+1} - \state_{t+1}^\mathrm{in})}
-    \hessian{\state}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in})
+    \hessian{\state_{t+1}}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in})
     (\state_{t+1} - \state_{t+1}^\mathrm{in}),
   \end{split}
 \end{equation}
