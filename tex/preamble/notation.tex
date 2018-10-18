@@ -815,33 +815,42 @@
 % Special Points
 % ======================================================================
 
-\newnotationcommandoptarg{1}{\xopt}{%
-  \ifempty{#1}{\*x^\opt}\ifnotempty{#1}{x^\opt_{#1}}%
-}{xopt}{$\xopt$}{
+\newnotationcommand{\xopt}{\*x^\opt}{xopt}{$\xopt$}{
   Solution of an optimization problem of the form
   $\xopt = \vecargmin \objfun(\*x)$
 }
 
-\newnotationcommandoptarg{1}{\xoptappr}{%
-  \ifempty{#1}{\*x^{\opt,\ast}}%
-  \ifnotempty{#1}{x^{\opt,\ast}_{#1}}%
-}{xopt*}{$\xoptappr$}{
+\newnotationcommand{\xoptappr}{\*x^{\opt,\ast}}{xopt*}{$\xoptappr$}{
   Approximation for $\xopt = \vecargmin \objfun(\*x)$
 }
 
 \hidenextnotation
 \newnotationcommandoptarg{1}{\xoptscaled}{%
-  \ifempty{#1}{\bar{\*x}^\opt}%
-  \ifnotempty{#1}{\bar{x}^\opt_{#1}}%
+  \bar{\*x}^\opt%
 }{xoptbar}{$\xoptscaled$}{
   Scaled solution of an optimization problem
 }
 
 \hidenextnotation
 \newnotationcommandoptarg{1}{\xscaled}{%
-  \ifempty{#1}{\bar{\*x}}\ifnotempty{#1}{\bar{x}_{#1}}%
+  \bar{\*x}%
 }{xbar}{$\xscaled$}{
-  Scaled $\xscaled \in \clint{a, b}$
+  Scaled $\xscaled \in \clint{\*a, \*b}$
+  for the definition of test functions
+}
+
+\hidenextnotation
+\newnotationcommand[1]{\xoptscaledentry}{%
+  \bar{x}^\opt_{#1}%
+}{xoptbart}{$\xoptscaledentry{t}$}{
+  Scaled solution entry of an optimization problem
+}
+
+\hidenextnotation
+\newnotationcommand[1]{\xscaledentry}{%
+  \bar{x}_{#1}%
+}{xbart}{$\xscaledentry{t}$}{
+  Scaled $\xscaledentry{t} \in \clint{a, b}$
   for the definition of test functions
 }
 
