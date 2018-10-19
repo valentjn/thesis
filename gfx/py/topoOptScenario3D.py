@@ -94,13 +94,13 @@ def main():
       size = np.array([1, 1, 1])
       forcePoint = [0.75, 0.215]
       forceLength = 0.15
-      h5Path = "./data/topoOpt/503/mech-3d.h5"
+      h5Path = "./data/topoOpt/results/503/mech-3d.h5"
       nn = np.array((20, 20, 20))
     else:
       size = np.array([2, 2, 1])
       forcePoint = [0.5, 0.4]
       forceLength = 0.2
-      h5Path = "./data/topoOpt/636/thesis-3d-centerload.h5"
+      h5Path = "./data/topoOpt/results/636/thesis-3d-centerload.h5"
       nn = np.array((20, 20, 10))
     
     fig = Figure.create(figsize=(3, 3), scale=1.2)

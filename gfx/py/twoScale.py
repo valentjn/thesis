@@ -77,7 +77,7 @@ def plotMeasureLines(
 
 
 A = helper.topo_opt.readDensityFile(
-    "./data/topoOpt/560/oneload-40.density.xml")
+    "./data/topoOpt/results/560/oneload-40.density.xml")
 M1, M2 = A.shape[:2]
 
 newM1, newM2 = 11, 8

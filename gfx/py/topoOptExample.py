@@ -37,7 +37,7 @@ linesInner = [
 
 
 
-A = helper.topo_opt.readH5("./data/topoOpt/560/oneload-40.h5")
+A = helper.topo_opt.readH5("./data/topoOpt/results/560/oneload-40.h5")
 np.set_printoptions(threshold=np.nan)
 M1, M2 = 40, 26
 displacementFactor = 0.005
