@@ -107,10 +107,10 @@ In contrast to the theoretical framework that we established in
 \cref{chap:20sparseGrids,chap:30BSplines,chap:40algorithms},
 the function to be interpolated is not scalar-valued, but vector-valued.
 This means that we have to construct $m$ sparse grid interpolants
-$\etensorentry[\sparse]{j}$
+$\etensorentryintp{j}$
 for the $m$ components $\etensorentry{j}$ of $\etensor$ ($j = 1, \dotsc, m$).
 Note that one could generate different spatially adaptive sparse grids for the
-different components $\etensorentry[\sparse]{j}$.
+different components $\etensorentryintp{j}$.
 However, it is not possible to evaluate only specific entries of $\etensor$
 without also evaluating all other entries,
 which means that we would waste computation resources by selecting only
@@ -118,8 +118,8 @@ a subset of the calculated entries.
 Therefore, we use the same grid for all components.
 
 Additionally, we approximate the density $\denscell^{(q)}$
-of the $q$-th macro-cell with a surrogate $\denscell^{\sparse}$ using
-B-splines on the same sparse grid as for $\etensorentry[\sparse]{j}$
+of the $q$-th macro-cell with a surrogate $denscellintp$ using
+B-splines on the same sparse grid as for $\etensorentryintp{j}$
 for reasons of implementation,
 resulting in $m + 1$ sparse grid interpolants in total.
 From a theoretical perspective, this is not necessary,
@@ -132,10 +132,10 @@ elasticity tensor.
 Our approach has multiple obvious advantages:
 \begin{itemize}
   \item
-  The sparse grid interpolant $\etensor[\sparse]$ has to be generated only
+  The sparse grid interpolant $\etensorintp$ has to be generated only
   once in an \term{offline step} before the optimization algorithm starts.
   During the optimization \term{(online phase),}
-  only inexpensive evaluations of $\etensor[\sparse]$ are performed,
+  only inexpensive evaluations of $\etensorintp$ are performed,
   saving much computation time.
   
   \item
@@ -149,9 +149,9 @@ Our approach has multiple obvious advantages:
   
   \item
   By using B-splines as basis functions,
-  the interpolant $\etensor[\sparse]$ will be smoother and more accurate.
+  the interpolant $\etensorintp$ will be smoother and more accurate.
   In addition, we can calculate its derivatives
-  $\tpartialderiv{\partialdiff{} x_t}{\etensor[\sparse]}(\mcp{q})$
+  $\tpartialderiv{\partialdiff{} x_t}{\etensorintp}(\mcp{q})$
   fast and explicitly,
   accelerating the speed of convergence of the optimization algorithm.
 \end{itemize}
@@ -174,9 +174,9 @@ not being able to find any meaningful optimum.
 %
 The root of the problem proves to be that for specific
 $\*x \in \clint{\*0, \*1}$,
-the interpolated elasticity tensors $\etensor[\sparse](\*x)$ are not
+the interpolated elasticity tensors $\etensorintp(\*x)$ are not
 positive definite.
-However, indefinite or even negative definite tensors $\etensor[\sparse]$
+However, indefinite or even negative definite tensors $\etensorintp$
 would mimic unphysical behavior.%
 \footnote{%
   In the scalar case, this is analogous to Hooke's law for linear springs,
@@ -202,14 +202,14 @@ already make the whole elasticity tensor non-positive-definite.
 
 \begin{figure}
   \subcaptionbox{%
-    Minimal eigenvalue of $\etensor[\sparse](\*x)$%
+    Minimal eigenvalue of $\etensorintp(\*x)$%
     \label{fig:cholesky1}%
   }[65mm]{%
     \includegraphics{cholesky_1}%
   }%
   \hfill%
   \subcaptionbox{%
-    Minimal eigenvalue of $\etensor[\chol,\sparse](\*x)$%
+    Minimal eigenvalue of $\etensorcholintp(\*x)$%
     \label{fig:cholesky2}%
   }[65mm]{%
     \includegraphics{cholesky_2}%
@@ -225,11 +225,11 @@ already make the whole elasticity tensor non-positive-definite.
     and cubic hierarchical B-splines $\bspl{l,i}{p}$ ($p = 3$) on
     the regular sparse grid $\coarseregsgset{n}{d}{b}$ \emph{(dots)}
     with $n = 7$ and $b = 4$.
-    \emph{Left:} The minimal eigenvalue of $\etensor[\sparse](\*x)$
+    \emph{Left:} The minimal eigenvalue of $\etensorintp(\*x)$
     becomes negative in some regions \emph{\textcolor{C1}{(red areas)}}
     of the domain $\clint{\*0, \*1}$,
-    indicating that $\etensor[\sparse](\*x)$ is not positive definite.
-    \emph{Right:} The minimal eigenvalue of $\etensor[\chol,\sparse](\*x)$
+    indicating that $\etensorintp(\*x)$ is not positive definite.
+    \emph{Right:} The minimal eigenvalue of $\etensorcholintp(\*x)$
     is non-negative in the whole domain $\clint{\*0, \*1}$.%
   }%
   \label{fig:cholesky}%
@@ -248,7 +248,7 @@ gradient with respect to $\*x$ is small near $x_1 = 0$ or $x_2 = 0$.
 Consequently, the ``surface'' of the minimal eigenvalue function
 is rather flat in these regions and almost vanishes,
 facilitating the existence of negative eigenvalues of
-surrogate functions $\etensor[\sparse](\*x)$.
+surrogate functions $\etensorintp(\*x)$.
 
 Note that for most micro-cell models,
 the optimization algorithm often queries the objective function
@@ -258,7 +258,7 @@ of $\clint{\*0, \*1}$.
 This is because many of the macro-cells will either be empty or
 fully filled with material, which usually corresponds to micro-cell
 parameters near zero or one, respectively.
-Thus, $\etensor[\sparse]$ is frequently evaluated in the regions of
+Thus, $\etensorintp$ is frequently evaluated in the regions of
 indefiniteness, which further worsens the issue.
 
 \paragraph{Positivity-preserving methods}
@@ -341,39 +341,39 @@ Our approach is as follows:
   $\etensor(\gp{\*l,\*i})$,
   and interpolate them instead of the elasticity tensors
   to obtain an interpolant
-  $\cholfactor[\sparse]\colon \clint{\*0, \*1} \to \real^{6 \times 6}$.
+  $\cholfactorintp\colon \clint{\*0, \*1} \to \real^{6 \times 6}$.
   
   \item
   During the optimization (online phase),
   every time the value $\etensor(\*x)$ of an elasticity tensor is needed,
-  the interpolant $\cholfactor[\sparse](\*x)$ is evaluated and we return
+  the interpolant $\cholfactorintp(\*x)$ is evaluated and we return
   \begin{equation}
-    \etensor[\chol,\sparse](\*x)
-    := \tr{\cholfactor[\sparse](\*x)} \cholfactor[\sparse](\*x).
+    \etensorcholintp(\*x)
+    := \tr{\cholfactorintp(\*x)} \cholfactorintp(\*x).
   \end{equation}
 \end{enumerate}
 
 \paragraph{Advantages of Cholesky factor interpolation}
 
 As shown in \cref{fig:cholesky2},
-the resulting elasticity tensor surrogate $\etensor[\chol,\sparse]$
+the resulting elasticity tensor surrogate $\etensorcholintp$
 is positive semidefinite on the whole domain and
 positive definite almost everywhere:
-The surrogate $\etensor[\chol,\sparse](\*x)$ is singular if and only if
-$\cholfactor[\sparse](\*x)$ is singular, which is in general
+The surrogate $\etensorcholintp(\*x)$ is singular if and only if
+$\cholfactorintp(\*x)$ is singular, which is in general
 only the case on a negligible null set of $\clint{\*0, \*1}$.
 
 Another advantage of this approach is that not only the
 positive definiteness, but also the explicit differentiability
-of the surrogate $\etensor[\chol,\sparse]$ is preserved.
+of the surrogate $\etensorcholintp$ is preserved.
 The gradient can be computed easily and fast with the product rule:
 \begin{equation}
   \label{eq:choleskyFactorDerivative}
-  \partialderiv{\partialdiff{} x_t}{\etensor[\chol,\sparse]}(\*x)
-  = \tr{\cholfactor[\sparse](\*x)} \cdot
-  \partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x) +
-  \tr{\partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x)} \cdot
-  \cholfactor[\sparse](\*x),\quad
+  \partialderiv{\partialdiff{} x_t}{\etensorcholintp}(\*x)
+  = \tr{\cholfactorintp(\*x)} \cdot
+  \partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x) +
+  \tr{\partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x)} \cdot
+  \cholfactorintp(\*x),\quad
   t = 1, \dotsc, d,
 \end{equation}
 % e.g. R = [[r11, r12],
@@ -398,8 +398,8 @@ The gradient can be computed easily and fast with the product rule:
 % = [[2*r11*dr11+2*r21*dr21, r11*dr12+r12*dr11+r21*dr22+r22*dr21],
 %    [r11*dr12+r12*dr11+r21*dr22+r22*dr21, 2*r12*dr12+2*r22*dr22]]
 % = dE
-where both $\cholfactor[\sparse](\*x)$ and
-$\partialderiv{\partialdiff{} x_t}{\cholfactor[\sparse]}(\*x)$
+where both $\cholfactorintp(\*x)$ and
+$\partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x)$
 are known (sparse grid interpolant and its derivative).
 As discussed above,
 this is key for the applicability of gradient-based optimization.

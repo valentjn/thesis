@@ -36,18 +36,18 @@ to obtain the sparse grid interpolant $\*\sgintp$.
 Each optimization iteration of the online phase consists of
 evaluating the interpolant $\*\sgintp$
 for each micro-cell parameter $\mcp{j}$ ($j = 1, \dotsc, M$),
-reconstructing the elasticity tensor $\etensor[\chol,\sparse]$ from
-the Cholesky factors $\cholfactor[\sparse]$, and
+reconstructing the elasticity tensor $\etensorcholintp$ from
+the Cholesky factors $\cholfactorintp$, and
 solving the macro-problem to retrieve the approximated compliance value
-$\compliance[\sparse](\mcp{1}, \dotsc, \mcp{M})$.%
+$\complianceintp(\mcp{1}, \dotsc, \mcp{M})$.%
 \footnote{%
   In addition, the partial derivatives
-  $\partialdiff{} \etensor[\chol,\sparse]/\partialdiff{} x_t$
+  $\partialdiff{} \etensorcholintp/\partialdiff{} x_t$
   ($t = 1, \dotsc, d$)
   are evaluated using \cref{eq:choleskyFactorDerivative}.
   This is required as we employ gradient-based optimization.%
 }
-The superscript in $\compliance[\sparse]$ indicates that
+The superscript in $\complianceintp$ indicates that
 we do not use the exact elasticity tensors to compute the compliance value.
 
 \begin{figure}
@@ -93,7 +93,7 @@ we do not use the exact elasticity tensors to compute the compliance value.
       \node[myCircle] (choleskyInterpolant) at (118mm,0mm) {%
         $
           \begin{matrix}
-            \cholfactor[\sparse]\colon \clint{\*0, \*1}\\
+            \cholfactorintp\colon \clint{\*0, \*1}\\
             {} \to \real^{6 \times 6}
           \end{matrix}
         $%
@@ -129,25 +129,25 @@ we do not use the exact elasticity tensors to compute the compliance value.
       \node[myCircle] (choleskyFactors) at (34mm,0mm) {%
         $
           \begin{matrix}
-            \cholfactor[\sparse](\mcp{1}),\\
+            \cholfactorintp(\mcp{1}),\\
             \dots,\\
-            \cholfactor[\sparse](\mcp{M})
+            \cholfactorintp(\mcp{M})
           \end{matrix}
         $%
       };
       \node[myCircle] (elasticityTensors) at (83mm,0mm) {%
         $
           \begin{matrix}
-            \etensor[\chol,\sparse](\mcp{1}),\\
+            \etensorcholintp(\mcp{1}),\\
             \dots,\\
-            \etensor[\chol,\sparse](\mcp{M})
+            \etensorcholintp(\mcp{M})
           \end{matrix}
         $%
       };
       \node[myCircle] (complianceValue) at (129.5mm,0mm) {%
         $
           \begin{matrix}
-            \compliance[\sparse](\mcp{1},\\
+            \complianceintp(\mcp{1},\\
             \dotsc,\\
             \mcp{M})
           \end{matrix}
@@ -159,8 +159,8 @@ we do not use the exact elasticity tensors to compute the compliance value.
       \draw[->,draw=C0] (choleskyFactors) -- node[above] {%
         \footnotesize{}%
         $
-          \etensor[\chol,\sparse]
-          = \tr{(\cholfactor[\sparse])} \cholfactor[\sparse]
+          \etensorcholintp
+          = \tr{(\cholfactorintp)} \cholfactorintp
         $\vphantom{p}%
       } (elasticityTensors);
       \draw[->,draw=C0] (elasticityTensors) -- node[above] {%
@@ -170,7 +170,7 @@ we do not use the exact elasticity tensors to compute the compliance value.
   }%
   \caption[Offline and online phase for topology optimization]{%
     Offline and online phase for topology optimization.
-    The interpolation of the micro-cell density with $\denscell^{\sparse}$
+    The interpolation of the micro-cell density with $denscellintp$
     (see \cref{sec:622BSplines}) has been omitted for brevity.%
   }%
   \label{fig:topoOptPhases}%
@@ -318,12 +318,12 @@ of our method:
   \item
   \label{item:topoOptErrorInterpolation}
   Sparse grid interpolation
-  (i.e., $\etensor[\sparse] \not= \etensor$)
+  (i.e., $\etensorintp \not= \etensor$)
   
   \item
   \label{item:topoOptErrorCholesky}
   Reconstruction of elasticity tensors with Cholesky factors
-  (i.e., $\etensor[\chol,\sparse] \not= \etensor[\sparse]$)
+  (i.e., $\etensorcholintp \not= \etensorintp$)
   
   \item
   \label{item:topoOptErrorMacro}
@@ -371,16 +371,16 @@ is not affected by the Cholesky factorization,
 we consider in the following only the elasticity tensor
 $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$ and
 its surrogate
-$\etensor[\chol,\sparse]\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
+$\etensorcholintp\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
 obtained by Cholesky factorization.
 To retrieve a scalar error measure,
 we consider the spectral norm
 \begin{equation}
-  \norm[2]{\etensor(\*x) - \etensor[\chol,\sparse](\*x)},\quad
+  \norm[2]{\etensor(\*x) - \etensorcholintp(\*x)},\quad
   \*x \in \clint{\*0, \*1},
 \end{equation}
 i.e., the largest absolute eigenvalue of
-$\etensor(\*x) - \etensor[\chol,\sparse](\*x)$.
+$\etensor(\*x) - \etensorcholintp(\*x)$.
 However, the choice of the norm is arbitrary,
 as all matrix norms on $\real^{6 \times 6}$ are equivalent to each other.
 
@@ -400,14 +400,14 @@ Hence, most points are placed near the singularity corners.
 
 \begin{figure}
   \subcaptionbox{%
-    $\norm[2]{\etensor(\*x) - \etensor[\sparse](\*x)}$%
+    $\norm[2]{\etensor(\*x) - \etensorintp(\*x)}$%
     \label{fig:topoOptInterpolationErrorPointwise_1}%
   }[63mm]{%
     \includegraphics{topoOptInterpolationPointwise_1}%
   }%
   \hspace{3mm}%
   \subcaptionbox{%
-    $\norm[2]{\etensor(\*x) - \etensor[\chol,\sparse](\*x)}$%
+    $\norm[2]{\etensor(\*x) - \etensorcholintp(\*x)}$%
     \label{fig:topoOptInterpolationErrorPointwise_2}%
   }[63mm]{%
     \includegraphics{topoOptInterpolationPointwise_2}%
@@ -426,7 +426,7 @@ Hence, most points are placed near the singularity corners.
 
 The left plot (\cref{fig:topoOptInterpolationErrorPointwise_1})
 shows the spectral interpolation error
-$\norm[2]{\etensor(\*x) - \etensor[\sparse](\*x)}$
+$\norm[2]{\etensor(\*x) - \etensorintp(\*x)}$
 of the direct elasticity tensor interpolant without Cholesky factorization
 (i.e., error \ref{item:topoOptErrorInterpolation}).
 The maximum error is \num{1.2e-3},
@@ -435,7 +435,7 @@ Note that the mean error over the whole domain $\clint{\*0, \*1}$
 is only \num{4.5e-5}.
 In the right plot (\cref{fig:topoOptInterpolationErrorPointwise_2}),
 the picture changes slightly when looking at the spectral interpolation error
-$\norm[2]{\etensor(\*x) - \etensor[\chol,\sparse](\*x)}$
+$\norm[2]{\etensor(\*x) - \etensorcholintp(\*x)}$
 of the elasticity tensor resulting by Cholesky factorization
 (i.e., errors \ref{item:topoOptErrorInterpolation} and
 \ref{item:topoOptErrorCholesky} combined).
@@ -452,7 +452,7 @@ the convergence of the relative $\Ltwo$ spectral interpolation error
   \frac{
     \normLtwoscaled{
       \vphantom{\big(}
-      \norm[2]{\etensor({\cdot}) - \etensor[\chol,\sparse]({\cdot})}
+      \norm[2]{\etensor({\cdot}) - \etensorcholintp({\cdot})}
     }
   }{
     \normLtwoscaled{
@@ -461,7 +461,7 @@ the convergence of the relative $\Ltwo$ spectral interpolation error
     }
   }
 \end{equation}
-and the corresponding error for $\etensor[\sparse]({\cdot})$
+and the corresponding error for $\etensorintp({\cdot})$
 for the 2D cross model, i.e.,
 the $\Ltwo$ norm of the function depicted in
 \cref{fig:topoOptInterpolationErrorPointwise}.
