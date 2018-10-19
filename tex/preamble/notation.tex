@@ -1129,7 +1129,9 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\denscell}{\varrho}{Äρ}{$\denscell$}{
+\newnotationcommandoptarg{1}{\denscell}{%
+  \varrho\ifnotempty{#1}{^{#1}}%
+}{Äρ}{$\denscell$}{
   Micro-cell density fcn.
 }
 
