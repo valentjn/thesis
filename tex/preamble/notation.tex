@@ -1196,6 +1196,20 @@
 }
 
 \hidenextnotation
+\newnotationcommandoptarg{1}{\etensorchol}{%
+  \mat{E}^{\chol\appendwithcomma{#1}}%
+}{Echol}{$\etensor$}{
+  Elasticity tensor retrieved by Cholesky factorization
+}
+
+\newcommand*{\complianceintp}{\compliance[\sparse]}
+\newcommand*{\denscellintp}{\denscell[\sparse]}
+\newcommand*{\etensorintp}{\etensor[\sparse]}
+\newcommand*{\etensorentryintp}[1]{\etensorentry[\sparse]{#1}}
+\newcommand*{\cholfactorintp}{\cholfactor[\sparse]}
+\newcommand*{\etensorcholintp}{\etensorchol[\sparse]}
+
+\hidenextnotation
 \newnotationcommandoptarg{2}{\mcp}{%
   \*x^{\ifnotempty{#1}{#1,}(#2)}%
 }{xq}{$\mcp{q}$}{
