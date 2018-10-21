@@ -1207,12 +1207,24 @@
   Elasticity tensor retrieved by Cholesky factorization
 }
 
-\newcommand*{\complianceintp}{\compliance[\sparse]}
-\newcommand*{\denscellintp}{\denscell[\sparse]}
-\newcommand*{\etensorintp}{\etensor[\sparse]}
-\newcommand*{\etensorentryintp}[1]{\etensorentry[\sparse]{#1}}
-\newcommand*{\cholfactorintp}{\cholfactor[\sparse]}
-\newcommand*{\etensorcholintp}{\etensorchol[\sparse]}
+\newcommand*{\complianceintp}[1][]{%
+  \compliance[\sparse\appendwithcomma{#1}]%
+}
+\newcommand*{\denscellintp}[1][]{%
+  \denscell[\sparse\appendwithcomma{#1}]%
+}
+\newcommand*{\etensorintp}[1][]{%
+  \etensor[\sparse\appendwithcomma{#1}]%
+}
+\newcommand*{\etensorentryintp}[2][]{%
+  \etensorentry[\sparse\appendwithcomma{#1}]{#2}%
+}
+\newcommand*{\cholfactorintp}[1][]{%
+  \cholfactor[\sparse\appendwithcomma{#1}]%
+}
+\newcommand*{\etensorcholintp}[1][]{%
+  \etensorchol[\sparse\appendwithcomma{#1}]%
+}
 
 \hidenextnotation
 \newnotationcommandoptarg{2}{\mcp}{%
