@@ -612,4 +612,35 @@ a fixed spatially adaptive sparse grid with around \num{10000} points.%
   \label{tbl:TODO2}%
 \end{table}
 
-\dummytext[12]{}
+\paragraph{Convergence of optimality gaps}
+
+For a given computed solution
+$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
+of the optimization problem,
+we cannot directly measure the true optimality gap
+\begin{equation}
+  \label{eq:topoOptOptimalityGapTrue}
+  \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
+  \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}),
+\end{equation}
+since we do not know the optimal micro-cell parameter combination
+$(\mcpopt{1}, \dotsc, \mcpopt{M})$.
+We can, however, calculate the gap
+\begin{equation}
+  \label{eq:topoOptOptimalityGapPseudo}
+  \abs{
+    \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
+    \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})
+  }
+\end{equation}
+between the actual compliance value
+(i.e., using exact elasticity tensors $\etensor(\mcpoptappr{q})$,
+$q = 1, \dotsc, M$, for the final solution) and
+the approximated, reported compliance value
+(i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
+This gap does not constitute any kind of bound of the true optimality gap;
+however, the idea is that like the true optimality gap,
+the gap \eqref{eq:topoOptOptimalityGapPseudo} should converge to zero as
+we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
+
+\dummytext[3]{}
