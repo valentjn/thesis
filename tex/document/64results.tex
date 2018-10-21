@@ -612,7 +612,7 @@ a fixed spatially adaptive sparse grid with around \num{10000} points.%
   \label{tbl:TODO2}%
 \end{table}
 
-\paragraph{Convergence of optimality gaps}
+\paragraph{Convergence of optimality-interpolation gaps}
 
 For a given computed solution
 $(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
@@ -625,7 +625,7 @@ we cannot directly measure the true optimality gap
 \end{equation}
 since we do not know the optimal micro-cell parameter combination
 $(\mcpopt{1}, \dotsc, \mcpopt{M})$.
-We can, however, calculate the gap
+We can, however, calculate the \term{optimality-interpolation gap}
 \begin{equation}
   \label{eq:topoOptOptimalityGapPseudo}
   \abs{
@@ -640,7 +640,7 @@ the approximated, reported compliance value
 (i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
 This gap does not constitute any kind of bound of the true optimality gap;
 however, the idea is that like the true optimality gap,
-the gap \eqref{eq:topoOptOptimalityGapPseudo} should converge to zero as
+the optimality-interpolation gap should converge to zero as
 we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
 
 \dummytext[3]{}
