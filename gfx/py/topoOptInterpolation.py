@@ -246,12 +246,6 @@ def main():
   fig = Figure.create(figsize=(5, 2))
   ax = fig.gca()
   
-  labels = {
-    1    : r"Using $\forceXintp[p,\cc]$, $p = 1$",
-    3    : r"Using $\forceXintp[p,\cc]$, $p = 3$",
-    "fg" : r"Using $\forceXref$",
-  }
-  
   helper.plot.addCustomLegend(ax, [
       {
         "label" : r"\rlap{2D-C ($\etensor[\sparse]$)}",
@@ -297,12 +291,6 @@ def main():
   
   fig = Figure.create(figsize=(5, 2))
   ax = fig.gca()
-  
-  labels = {
-    1    : r"Using $\forceXintp[p,\cc]$, $p = 1$",
-    3    : r"Using $\forceXintp[p,\cc]$, $p = 3$",
-    "fg" : r"Using $\forceXref$",
-  }
   
   helper.plot.addCustomLegend(ax, [
       {
