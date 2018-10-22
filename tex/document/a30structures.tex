@@ -61,19 +61,21 @@ TODO
     \includegraphics[scale=\myscale]{topoOptStructure660}%
   }%
   \\[2mm]%
-  \subcaptionbox{%
-    3D center-load, 3D cross%
-  }[144mm]{%
-    % id = 659
-    \includegraphics[scale=\myscale]{topoOptStructure659}%
-  }%
-  \\[2mm]%
-  \subcaptionbox{%
-    3D center-load, 3D sheared cross%
-  }[144mm]{%
-    % id = 661
-    \includegraphics[scale=\myscale]{topoOptStructure661}%
-  }%
+  \begin{tikzpicture}
+    \node[anchor=south west] at (0mm,61mm) {%
+      \includegraphics[scale=\myscale]{topoOptStructure659}%
+    };
+    \node[anchor=south west] at (0mm,0mm) {%
+      \includegraphics[scale=\myscale]{topoOptStructure661}%
+    };
+    \node[anchor=south west,text width=50mm] at (-1mm,66mm) {%
+      \subcaption{3D center-load, 3D cross}%
+    };
+    \node[anchor=south west,text width=60mm] at (-8mm,5mm) {%
+      \subcaption{3D center-load, 3D sheared cross}%
+    };
+  \end{tikzpicture}
+  \hspace*{6mm}
   \caption[Optimal structures in the 3D scenarios]{%
     Topologically optimal structures in the
     3D cantilever and center-load scenarios
