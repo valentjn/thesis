@@ -291,6 +291,17 @@ implemented in the \fem software package CFS++ \cite{Kaltenbacher10Advanced}.%
 The micro-problems were discretized by dividing the micro-cells into
 $128 \times 128$ elements (models in two dimensions) or
 $16 \times 16 \times 16$ elements (models in three dimensions).
+The macro-domains $\domain$ were discretized using
+32 macro-cells per meter in the 2D cantilever scenario
+(i.e., $64 \times 32 = 2048$ cells) and
+10 macro-cells per meter in the other scenarios
+(i.e.,
+%$50 \times 20 + 20 \times 30 = 1600$
+1600 cells for the 2D L-shape,
+%$20 \times 20 \times 20 = 8000$
+8000 cells for the 3D cantilever, and
+%$20 \times 20 \times 10 = 4000$
+4000 cells for the 3D center-load).
 Constructing the sparse grids (offline phase) was done via a MATLAB code,
 while the evaluations of the interpolants (online phase) were performed
 by the sparse grid toolbox \sgpp \cite{Pflueger10Spatially}.%
