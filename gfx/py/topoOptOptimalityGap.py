@@ -120,7 +120,7 @@ def main():
                         "cross3D", "shearedCross3D"]]
   
   for q in range(2):
-    fig = Figure.create(figsize=((3.35, 2.5) if q == 0 else (3.05, 2.5)))
+    fig = Figure.create(figsize=((3.35, 2.3) if q == 0 else (3.05, 2.3)))
     NMax = (20000 if q == 0 else 30000)
     
     if q == 0:
