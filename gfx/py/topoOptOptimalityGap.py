@@ -163,7 +163,7 @@ def main():
     
     if q > 0:
       ax2.set_yticks([1e-4, 1e-3, 1e-2, 1e-1, 1e0, 1e1])
-      ax2.set_ylabel("Optimality-interpolation gap", labelpad=8)
+      ax2.set_ylabel("Optimality-interpolation gap", labelpad=9)
     
     ax2.spines["top"].set_visible(False)
     
