@@ -524,8 +524,35 @@ a fixed spatially adaptive sparse grid with around \num{10000} points.
 The exact grid sizes and other details about the employed sparse grids
 can be found in \cref{tbl:topoOptModels}, which is located in
 \cref{chap:a30structures}.
-
-\dummytext[2]{}
+For hierarchical cubic B-splines ($p = 3$),
+\cref{tbl:topoOptResultsModels} lists the
+compliance values $\compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$
+for each of the four scenarios
+and the corresponding possible micro-cell models,
+where $(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
+is the micro-cell parameter combination that is returned by the optimizer.%
+\footnote{%
+  Note that this true compliance value differs from the
+  approximated value
+  $\complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$,
+  which the optimizer reports as optimal objective function value.%
+}
+It is obvious that the more complicated micro-cell models
+lead to lower (better) compliance values,
+as they are a generalization of the simple models.
+For instance, the 2D cross is a special case of
+the 2D framed cross, the 2D sheared cross, and the 2D sheared framed cross.
+By choosing the respectively best model,
+we are able to decrease the compliance value
+(and, hence, increase the stability of the resulting structure)
+by \SI{9.6}{\percent} in the 2D cantilever scenario,
+by \SI{7.7}{\percent} in the 2D L-shape scenario,
+by \SI{34}{\percent} in the 3D cantilever scenario, and
+by \SI{73}{\percent} in the 3D center-load scenario.
+In general, this motivates the usage of more complicated micro-cell models,
+which cannot be computationally handled with
+conventional full grid interpolation methods.
+Consequently, sparse grids have to be used.
 
 \begin{table}
   \setnumberoftableheaderrows{1}%
@@ -568,15 +595,17 @@ can be found in \cref{tbl:topoOptModels}, which is located in
   \label{tbl:topoOptResultsModels}%
 \end{table}
 
-\paragraph{Corresponding optimized structures}
+\paragraph{Corresponding optimal structures}
 
-\todo{mention runtime (in table in appendix?)}
-
-\todo{mention micro-cell/macro-cell plotting issue}
-
-\todo{mention color-coding of displacement}
-
-\dummytext[1]{}
+The corresponding optimal structures are shown in
+\cref{fig:topoOptStructure2DCantilever} for the 2D cantilever scenario
+and, for reasons of space, in \cref{chap:a30structures} in
+\cref{fig:topoOptStructure2DLShape,fig:topoOptStructure3D}
+for the other three scenarios.
+Of course, the periodic micro-cell structure cannot be plotted directly,
+as the micro-cells are infinitesimally small.
+Therefore, the figure show for each macro-cell only one single micro-cell,
+which has the same size as the macro-cell.
 
 \begin{figure}
   \subcaptionbox{%
@@ -619,6 +648,31 @@ can be found in \cref{tbl:topoOptModels}, which is located in
   }%
   \label{fig:topoOptStructure2DCantilever}%
 \end{figure}
+
+Two effects can be seen in the plots of the optimal structures:
+First, the simpler models are not able to direct the force at arbitrary
+angles.
+For example, the 2D framed cross micro-cell model strongly prefers
+angles of \ang{45}, which results in structures that are not as stable
+as they could be.
+The more flexible 2D sheared cross and 2D sheared framed cross models
+allow a wider range of angles,
+which means that internal forces can act at almost arbitrary angles.
+Second, the sheared micro-cell models use the available
+material volume more efficiently than the cross model.
+This is most striking in the 3D case (see \cref{fig:topoOptStructure3D}),
+where it seems that the sheared cross structures
+use more volume than the simple cross structures.
+The reason is that for the cross model, both bars (vertical and horizontal)
+have to be used in order to connect the macro-cell to its neighbors.
+For the sheared cross model, a shearing of the vertical bar suffices
+and volume can be saved by not using the horizontal bar.
+Both of these effects explain the significantly lower compliance
+values for the sheared micro-cell models.
+
+\paragraph{Runtime comparison}
+
+\dummytext[1]{}
 
 \paragraph{Convergence of optimality-interpolation gaps}
 
@@ -671,7 +725,7 @@ we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
   \label{fig:topoOptOptimalityGap}%
 \end{figure}
 
-\dummytext[3]{}
+\dummytext[1]{}
 
 \paragraph{Optimal compliance values for different B-spline degrees}
 
