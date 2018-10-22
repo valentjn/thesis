@@ -572,17 +572,17 @@ Consequently, sparse grids have to be used.
   }
     \toprulec
     \headerrow
-    Scenario&       2D-C&   2D-FC&         2D-SC&           2D-SFC& 3D-C&   3D-SC\\
+    Scenario&       2D-C&   2D-FC&  2D-SC&           2D-SFC& 3D-C&   3D-SC\\
     \midrulec
     % id = 650,652,654,656
-    2D cantilever&  74.974& \emph{70.816}& \textbf{67.809}& 68.602& ---&    ---\\
+    2D cantilever&  74.974& 70.816& \textbf{67.809}& 68.602& ---&    ---\\
     % id = 651,653,655,657
-    2D L-shape&     183.68& 177.51&        \textbf{169.60}& 174.55& ---&    ---\\
+    2D L-shape&     183.68& 177.51& \textbf{169.60}& 174.55& ---&    ---\\
     \midrulec
     % id = 658,660
-    3D cantilever&  ---&    ---&           ---&             ---&    247.60& \textbf{162.59}\\
+    3D cantilever&  ---&    ---&    ---&             ---&    247.60& \textbf{162.59}\\
     % id = 659,661
-    3D center-load& ---&    ---&           ---&             ---&    169.27& \textbf{46.171}\\
+    3D center-load& ---&    ---&    ---&             ---&    169.27& \textbf{46.171}\\
     \bottomrulec
   \end{tabular}
   \caption[Optimal compliance values for different micro-cell models]{%
@@ -599,8 +599,8 @@ Consequently, sparse grids have to be used.
     %3D sheared cross.
     The entries highlighted in \textbf{bold face} indicate the best choice
     of micro-cell models for a given scenario.
-    The optimization run of the entry marked as \emph{italic}
-    terminated prior to success due to numerical difficulties.
+    %The optimization run of the entry marked as \emph{italic}
+    %terminated prior to success due to numerical difficulties.
     More details can be found in \cref{tbl:topoOptResultsDetailed}.%
   }%
   \label{tbl:topoOptResultsModels}%
