@@ -681,23 +681,63 @@ and volume can be saved by not using the horizontal bar.
 Both of these effects explain the significantly lower compliance
 values for the sheared micro-cell models.
 
-\paragraph{Runtime comparison}
+\paragraph{Comparison to the direct solution}
 
-\dummytext[1]{}
+B-splines on sparse grids lead to a significant reduction in runtime.
+Solving the 2D cantilever scenario with the best-placed sheared cross model
+would take 453 days with
+exact elasticity tensor evaluations (without surrogates),
+assuming the same number of iterations as for the surrogate tensor case
+and sequential computation of the elasticity tensors.
+This estimate does not account for approximating the missing derivatives
+of the elasticity tensor.
+If we incorporate this and use 100 parallel processes,
+we still need weeks for the solution.
+In contrast, the runtime using our sparse grid surrogates
+is a matter of minutes or hours at most,
+resulting in speedups of around 200
+(excluding the time for the offline phase,
+which has to be spent only once, as the resulting grid
+can be reused for different scenarios).
 
-\paragraph{Convergence of optimality-interpolation gaps}
+\paragraph{Optimality-interpolation gaps}
 
-For a given computed optimal solution
-$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$,
-we cannot directly measure the true optimality gap
+\begin{figure}
+  \includegraphics{topoOptOptimalityGap_3}%
+  \\[2mm]%
+  \includegraphics{topoOptOptimalityGap_1}%
+  \hfill%
+  \includegraphics{topoOptOptimalityGap_2}%
+  \caption[Convergence of the optimality-interpolation gap]{%
+    Convergence of the optimality-interpolation gap
+    $\abs{\compliance[\opt,\ast] - \complianceintp[\opt,\ast]}$
+    for the 2D/3D cantilever scenario and
+    and different micro-cell models using cubic B-splines ($p = 3$).
+    In addition, the left plot shows the compliance values
+    $\compliance[\opt,\ast]$ and $\complianceintp[\opt,\ast]$
+    for the 2D cross model.%
+  }%
+  \label{fig:topoOptOptimalityGap}%
+\end{figure}
+
+%For a given computed optimal solution
+%$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$,
+Ideally, we would measure the true optimality gap
 \begin{equation}
   \label{eq:topoOptOptimalityGapTrue}
   \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
-  \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}),
+  \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}).
 \end{equation}
-since we do not know the true optimal parameter combination
-$(\mcpopt{1}, \dotsc, \mcpopt{M})$.
-We can, however, calculate the \term{optimality-interpolation gap}
+Unfortunately, the true optimal parameter combination
+$(\mcpopt{1}, \dotsc, \mcpopt{M})$ could not be computed:
+Apart from the runtime issues mentioned above,
+oscillations in the elasticity tensor evaluation and
+and errors stemming from types
+\ref{item:topoOptErrorMicro} and \ref{item:topoOptErrorRounding}
+led to optimizer crashes as it ran into discontinuities,
+which are smoothed out when using B-spline surrogates.
+However, as in \cref{fig:topoOptOptimalityGap},
+we can at least calculate the \term{optimality-interpolation gap}
 \begin{equation}
   \label{eq:topoOptOptimalityGapPseudo}
   \abs{
@@ -706,41 +746,47 @@ We can, however, calculate the \term{optimality-interpolation gap}
   }
 \end{equation}
 between the actual compliance value
-(i.e., using exact elasticity tensors $\etensor(\mcpoptappr{q})$,
-$q = 1, \dotsc, M$, for the final solution) and
-the approximated, reported compliance value
-(i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
+%(i.e., using exact elasticity tensors $\etensor(\mcpoptappr{q})$,
+%$q = 1, \dotsc, M$, for the final solution)
+and the approximated, reported compliance value.
+%(i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
 This gap does not constitute any kind of bound on the true optimality gap;
-however, the idea is that like the true optimality gap,
-the optimality-interpolation gap should converge to zero as
-we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
+however, the idea is that
+as the interpolation error converges to zero,
+the optimality-interpolation gap should converge to zero, too.
 
-\begin{figure}
-  \includegraphics{topoOptOptimalityGap_3}%
-  \\[2mm]%
-  \subcaptionbox{%
-    2D cross%
-  }[78mm]{%
-    \includegraphics{topoOptOptimalityGap_1}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    Other micro-cell models%
-  }[55mm]{%
-    \hspace*{55mm}%
-    \llap{\includegraphics{topoOptOptimalityGap_2}}%
-  }%
-  \caption[TODO]{%
-    TODO%
-  }%
-  \label{fig:topoOptOptimalityGap}%
-\end{figure}
-
-\dummytext[1]{}
+\Cref{fig:topoOptOptimalityGap} (left) shows that for the 2D cross model,
+the optimizer reports compliance values that are smaller than in reality
+($\complianceintp[\opt,\ast]$ vs. $\complianceintp[\opt,\ast]$).
+However, the difference steadily converges to zero.
+This is similar for the other micro-cell model as shown in the
+right part of \cref{fig:topoOptOptimalityGap},
+although the convergence is much slower due to the
+higher number $d$ of micro-cell parameters.
 
 \paragraph{Optimal compliance values for different B-spline degrees}
 
-\dummytext[2]{}
+Finally, to study the effect of the B-spline degree on the
+optimization performance,
+\cref{tbl:topoOptResultsDegrees} lists the compliance values
+for the degrees $p = 1, 3, 5$ and the 2D/3D cross and sheared cross
+micro-cell models.
+In the two-dimensional scenarios,
+higher-order B-splines are able to decrease the compliance value
+by up to \SI{9}{\percent}.
+In the three-dimensional scenarios,
+higher-order B-splines may perform worse than the piecewise linear
+functions ($p = 1$).
+(However, as indicated in \cref{tbl:topoOptResultsDegrees},
+all optimizations run with piecewise linear functions
+terminated prematurely due to numerical difficulties with the
+discontinuous derivatives.)
+It may be suspected that if we used micro-cell models with
+less prominent discontinuities (i.e., ``smoother'' elasticity tensors),
+the advantage of higher-order B-splines would be more visible.
+This application shows that good interpolation
+(and thus a good quality of the surrogate)
+is key to good optimization results.
 
 \begin{table}
   \setnumberoftableheaderrows{2}%
