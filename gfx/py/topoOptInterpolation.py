@@ -115,7 +115,7 @@ def main():
   
   sampleStatsName = "cross-sisc-samples-lb0.01-ub0.99-n100000"
   
-  fig = Figure.create(figsize=(3, 2.5))
+  fig = Figure.create(figsize=(3, 2.3))
   ax = fig.gca()
   
   for trafoStr in trafoStrs:
@@ -162,7 +162,7 @@ def main():
   basisStr, p = "bSpline", 3
   trafoStr = "cholesky"
   
-  fig = Figure.create(figsize=(3, 2.5))
+  fig = Figure.create(figsize=(3, 2.3))
   ax = fig.gca()
   
   for model in models:
