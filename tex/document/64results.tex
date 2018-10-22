@@ -517,7 +517,7 @@ for the same grid size.
 \subsection{Optimization Error and Optimized Structures}
 \label{sec:644optimization}
 
-\paragraph{Optimal compliance values}
+\paragraph{Optimal compliance values for different micro-cell models}
 
 In the following, we use for each micro-cell model
 a fixed spatially adaptive sparse grid with around \num{10000} points.%
@@ -573,6 +573,108 @@ a fixed spatially adaptive sparse grid with around \num{10000} points.%
   \label{tbl:topoOptResultsModels}%
 \end{table}
 
+\paragraph{Corresponding optimized structures}
+
+\todo{mention runtime (in table in appendix?)}
+
+\todo{mention micro-cell/macro-cell plotting issue}
+
+\todo{mention color-coding of displacement}
+
+\dummytext[1]{}
+
+\begin{figure}
+  \subcaptionbox{%
+    2D cross%
+  }[72mm]{%
+    % id = 650
+    \includegraphics{topoOptStructure2D_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    2D framed cross%
+  }[72mm]{%
+    % id = 652
+    \includegraphics{topoOptStructure2D_3}%
+  }%
+  \\[2mm]%
+  \subcaptionbox{%
+    2D sheared cross%
+  }[72mm]{%
+    % id = 654
+    \includegraphics{topoOptStructure2D_5}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    2D sheared framed cross%
+  }[72mm]{%
+    % id = 656
+    \includegraphics{topoOptStructure2D_7}%
+  }%
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{fig:topoOptStructure2DCantilever}%
+\end{figure}
+
+\paragraph{Convergence of optimality-interpolation gaps}
+
+For a given computed solution
+$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
+of the optimization problem,
+we cannot directly measure the true optimality gap
+\begin{equation}
+  \label{eq:topoOptOptimalityGapTrue}
+  \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
+  \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}),
+\end{equation}
+since we do not know the optimal micro-cell parameter combination
+$(\mcpopt{1}, \dotsc, \mcpopt{M})$.
+We can, however, calculate the \term{optimality-interpolation gap}
+\begin{equation}
+  \label{eq:topoOptOptimalityGapPseudo}
+  \abs{
+    \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
+    \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})
+  }
+\end{equation}
+between the actual compliance value
+(i.e., using exact elasticity tensors $\etensor(\mcpoptappr{q})$,
+$q = 1, \dotsc, M$, for the final solution) and
+the approximated, reported compliance value
+(i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
+This gap does not constitute any kind of bound of the true optimality gap;
+however, the idea is that like the true optimality gap,
+the optimality-interpolation gap should converge to zero as
+we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
+
+\begin{figure}
+  \includegraphics{topoOptOptimalityGap_3}%
+  \\[2mm]%
+  \subcaptionbox{%
+    2D cross%
+  }[78mm]{%
+    \includegraphics{topoOptOptimalityGap_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    Other micro-cell models%
+  }[55mm]{%
+    \hspace*{55mm}%
+    \llap{\includegraphics{topoOptOptimalityGap_2}}%
+  }%
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{fig:topoOptOptimalityGap}%
+\end{figure}
+
+\dummytext[3]{}
+
+\paragraph{Optimal compliance values for different B-spline degrees}
+
+\dummytext[2]{}
+
 \begin{table}
   \setnumberoftableheaderrows{2}%
   \begin{tabular}{%
@@ -611,76 +713,3 @@ a fixed spatially adaptive sparse grid with around \num{10000} points.%
   }%
   \label{tbl:topoOptResultsDegrees}%
 \end{table}
-
-\paragraph{Convergence of optimality-interpolation gaps}
-
-For a given computed solution
-$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
-of the optimization problem,
-we cannot directly measure the true optimality gap
-\begin{equation}
-  \label{eq:topoOptOptimalityGapTrue}
-  \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
-  \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}),
-\end{equation}
-since we do not know the optimal micro-cell parameter combination
-$(\mcpopt{1}, \dotsc, \mcpopt{M})$.
-We can, however, calculate the \term{optimality-interpolation gap}
-\begin{equation}
-  \label{eq:topoOptOptimalityGapPseudo}
-  \abs{
-    \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
-    \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})
-  }
-\end{equation}
-between the actual compliance value
-(i.e., using exact elasticity tensors $\etensor(\mcpoptappr{q})$,
-$q = 1, \dotsc, M$, for the final solution) and
-the approximated, reported compliance value
-(i.e., using the surrogate tensors $\etensorcholintp(\mcpoptappr{q})$).
-This gap does not constitute any kind of bound of the true optimality gap;
-however, the idea is that like the true optimality gap,
-the optimality-interpolation gap should converge to zero as
-we approach the optimum $\mcpopt{1}, \dotsc, \mcpopt{M}$.
-
-\dummytext[3]{}
-
-\paragraph{Optimized structures}
-
-\todo{mention runtime}
-
-\dummytext[1]{}
-
-\begin{figure}
-  \subcaptionbox{%
-    2D cross%
-  }[72mm]{%
-    % id = 650
-    \includegraphics{topoOptStructure2D_1}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    2D framed cross%
-  }[72mm]{%
-    % id = 652
-    \includegraphics{topoOptStructure2D_3}%
-  }%
-  \\[2mm]%
-  \subcaptionbox{%
-    2D sheared cross%
-  }[72mm]{%
-    % id = 654
-    \includegraphics{topoOptStructure2D_5}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    2D sheared framed cross%
-  }[72mm]{%
-    % id = 656
-    \includegraphics{topoOptStructure2D_7}%
-  }%
-  \caption[TODO]{%
-    TODO%
-  }%
-  \label{fig:topoOptStructure2DCantilever}%
-\end{figure}
