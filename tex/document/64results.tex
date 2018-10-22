@@ -613,16 +613,15 @@ can be found in \cref{tbl:topoOptModels}, which is located in
 
 \paragraph{Convergence of optimality-interpolation gaps}
 
-For a given computed solution
-$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$
-of the optimization problem,
+For a given computed optimal solution
+$(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) \in (\real^d)^M$,
 we cannot directly measure the true optimality gap
 \begin{equation}
   \label{eq:topoOptOptimalityGapTrue}
   \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M}) -
   \compliance(\mcpopt{1}, \dotsc, \mcpopt{M}),
 \end{equation}
-since we do not know the optimal micro-cell parameter combination
+since we do not know the true optimal parameter combination
 $(\mcpopt{1}, \dotsc, \mcpopt{M})$.
 We can, however, calculate the \term{optimality-interpolation gap}
 \begin{equation}
