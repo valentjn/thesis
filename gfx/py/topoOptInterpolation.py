@@ -142,6 +142,7 @@ def main():
       lineStyle = {1 : ".-", 3 : "^--", 5 : "v:"}[p]
       markerSize = (6 if p == 1 else 3)
       color = {"normal" : "C0", "cholesky" : "C1"}[trafoStr]
+      print(y)
       ax.plot(x, y, lineStyle, color=color, ms=markerSize)
   
   ax.set_xscale("log")
