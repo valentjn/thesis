@@ -56,6 +56,18 @@ with 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 \end{figure}
 
 \begin{figure}
+  % To generate the plots:
+  % 1.  python3 image.py --id XXX --3d-threshold 0.01 --density --save
+  % 2.  python3 3d_model.py --id XXX
+  % 3.  Open resulting sims/test.png in GIMP
+  % 4.  Colours -> Hue-Saturation -> reduce saturation by 50% (i.e., -50%)
+  % 5.  Colours -> Brightness-Contrast
+  %             -> increase brightness and contrast each by 60%
+  % 6.  Image -> Scale Image -> scale to 66.67%
+  % 7.  Set background color to e5eef5 (should be mittelblau!10)
+  % 8.  Layer -> Transparency -> Remove Alpha Channel
+  % 9.  Image -> Autocrop Image
+  % 10. Export as PNG
   \newcommand*{\myscale}{0.19}%
   \subcaptionbox{%
     3D cantilever, 3D cross%
