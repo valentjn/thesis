@@ -1,14 +1,13 @@
 \section{Continuum-Mechanical Model of the Upper Limb}
 \label{sec:71model}
 
-\minitoc{71mm}{5}
+\minitoc{71mm}{6}
 
 \noindent
 In the following, we first discuss the state of the art
 in biomechanical modeling.
 Then, we address details of the model of the human upper limb.
-For convenience, the most relevant symbols that occur
-in the context of biomechanical models are listed in
+For convenience, the most relevant symbols are listed in
 \cref{tbl:glossaryBiomechanical}.
 
 \begin{table}
@@ -38,7 +37,10 @@ in the context of biomechanical models are listed in
 \subsection{Continuum-Mechanical Musculoskeletal Models}
 \label{sec:711models}
 
-\paragraph{Limitations of lumped-parameter models}
+\paragraph{%
+  Limitations of classical models and
+  benefits of continuum-mechanical models%
+}
 
 Due to the simplicity of classical lumped-parameter models,
 their degree of realism is limited.
@@ -47,20 +49,18 @@ lumped-parameter models are not able to represent
 detailed heterogeneous material characteristics or non-trivial
 muscle force paths \cite{Roehrle16Two}.
 
-\paragraph{Benefits of continuum-mechanical models}
-
 The exploitation of continuum-mechani\-cal constitutive laws
 for musculoskeletal models is a more recent development \cite{Roehrle16Two}.
 The resulting models are capable to model spatial quantities
 such as complex muscle fiber field architectures,
 local activation principles, complex muscle geometries, or contact mechanics
 \multicite{Roehrle16Two,Valentin18Gradient}.
-Most of the existing work only treats a single skeletal muscle in isolation
+Most of the existing work only treats single skeletal muscles in isolation
 \multicite{Lemos05Modeling,Sharafi11Strains,Heidlauf14Multiscale}.
-The goal of the model used in this thesis
+The model used in this thesis
 (which is the same model as in
 \multicite{Sprenger15Continuum,Roehrle16Two,Valentin18Gradient})
-is to study the interplay of multiple muscles and bones.
+aims at studying the interplay of multiple muscles and bones.
 
 \paragraph{Overdetermined antagonistic systems}
 
@@ -84,7 +84,7 @@ for instance, minimal control effort, minimal control change, and
 minimal kinematic energy \cite{Valentin18Gradient}.
 The idea behind these conditions is that the human body
 tries to minimize the energy effort that is associated with
-most types of motion.
+all types of motion.
 
 \paragraph{Forward and inverse dynamics}
 
@@ -93,8 +93,8 @@ either forward dynamics or inverse dynamics \cite{Valentin18Gradient}.
 \term{Forward-dynamic approaches} use activation parameters
 for the muscles as the input and simulate the corresponding motion
 as the output.
-This requires that we know the muscle forces beforehand,
-depending on the activation levels.
+This requires that we know the muscle forces
+(depending on the activation levels) beforehand.
 For example, one can prescribe activation levels of facial muscles
 to achieve specific facial expressions \cite{Wu13Modelling}.
 In contrast, \term{inverse-dynamic approaches}
@@ -120,7 +120,7 @@ the antagonistic muscle pair of triceps brachii and biceps brachii
 \cite{Valentin18Gradient}.
 The bones are rigid bodies and the muscle-tendon complex
 is simulated with a continuum-mechanical approach.
-This implies that the muscles are deformed when they contract.
+This implies that the muscles deform when they contract.
 
 \begin{figure}
   \begin{tikzpicture}[
