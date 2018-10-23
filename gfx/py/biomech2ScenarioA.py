@@ -22,7 +22,7 @@ def main():
   
   
   
-  fig = Figure.create(figsize=(figSize[0]-0.3, figSize[1]), preamble=r"""
+  fig = Figure.create(figsize=(figSize[0]-0.38, figSize[1]), preamble=r"""
 \usepackage{siunitx}
 """)
   ax1 = fig.gca()
@@ -73,7 +73,7 @@ def main():
   lineStyles = {1 : "^--", 3 : ".-", "fg" : "v:"}
   markerSizes = {1 : 3, 3 : 6, "fg" : 3}
   
-  fig = Figure.create(figsize=(figSize[0]-0.47, figSize[1]))
+  fig = Figure.create(figsize=(figSize[0]-0.38, figSize[1]))
   ax = fig.gca()
   
   colors = ["C2", "C3"]
