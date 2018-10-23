@@ -124,10 +124,10 @@ def main():
            color=colors[0], ha="left", va="bottom")
   ax1.text(0, 3e-8, r"$\abs{\equielbangintp{\forceL} - \tarelbang}$",
            color=colors[0], ha="left", va="bottom")
-  ax1.plot([2.9, 2.8], [1.5e0, 5e-1], "k-", clip_on=False)
-  ax1.plot([3, 3.3], [1.5e0, 1.5e-2], "k-", clip_on=False)
-  ax1.plot([0.9, 1.2], [3e-8, 3e-9], "k-", clip_on=False)
-  ax1.plot([1, 1.8], [3e-8, 2e-9], "k-", clip_on=False)
+  ax1.plot([2.9, 2.8], [1.5e0, 5e-1], "k-", lw=0.8, clip_on=False)
+  ax1.plot([3, 3.3], [1.5e0, 1.5e-2], "k-", lw=0.8, clip_on=False)
+  ax1.plot([0.9, 1.2], [3e-8, 3e-9], "k-", lw=0.8, clip_on=False)
+  ax1.plot([1, 1.8], [3e-8, 2e-9], "k-", lw=0.8, clip_on=False)
   
   for ax in [ax1, ax2]:
     ax.set_yscale("log")

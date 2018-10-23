@@ -184,25 +184,25 @@ def generatePlot(q):
       {"ls" : gridTypes[j][2], "color" : gridTypes[j][3]}
       for j in [2, 3]
     ])
-    ax2.plot([8.5, 8.5], [2.5e-1, 1.3e-2], "k-")
+    ax2.plot([8.5, 8.5], [2.5e-1, 1.3e-2], "k-", lw=0.8)
     
     plotOverlapMarkers(ax2, 10, 5e0, [
       {"ls" : gridTypes[j][2], "color" : gridTypes[j][3]}
       for j in [0, 1, 4, 5, 6, 7]
     ])
-    ax2.plot([10, 10], [2.5e-1, 8e-4], "k-")
+    ax2.plot([10, 10], [2.5e-1, 8e-4], "k-", lw=0.8)
     
     plotOverlapMarkers(ax2, 5, 1e-5, [
       {"ls" : gridTypes[j][2], "color" : gridTypes[j][3]}
       for j in [9, 13, 15]
     ])
-    ax2.plot([5.5, 8.3], [3.5e-6, 3.5e-6], "k-")
+    ax2.plot([5.5, 8.3], [3.5e-6, 3.5e-6], "k-", lw=0.8)
     
     plotOverlapMarkers(ax2, 5, 1e-6, [
       {"ls" : gridTypes[j][2], "color" : gridTypes[j][3]}
       for j in [17, 21, 23]
     ])
-    ax2.plot([5.5, 8.0], [3.5e-7, 3.5e-7], "k-")
+    ax2.plot([5.5, 8.0], [3.5e-7, 3.5e-7], "k-", lw=0.8)
   
   for ax, xs in [(ax1, xs1), (ax2, xs2)]:
     x = np.array(sorted(list(set().union(*xs))))
