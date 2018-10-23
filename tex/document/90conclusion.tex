@@ -18,7 +18,32 @@ and giving an outlook on possible future work.
   steal summary table from 18\_odenwald\_opt
 \end{itemize}
 
-\dummytext[6]{}
+\begin{table}
+  \setnumberoftableheaderrows{1}%
+  \begin{tabular}{%
+    >{\kern\tabcolsep}=l<{\kern5mm}+l+l+l<{\kern\tabcolsep}%
+  }
+    \toprulec
+    \headerrow
+    Category&                   Biomechanics&      Topology opt.&      Finance\\
+    \midrulec
+    Interpolated quantities&    Muscle forces&     Elasticity tensors& Value functions\\
+    SG dimensionality&          2&                 5&                  4\\
+    \#Optimization variables&   2&                 \num{40000}&        9\\
+    Time per evaluation&        \SI{30}{\minute}&  \SI{30}{\second}&   ---\\
+    \#Eval. per opt. iteration& 4&                 \num{8000}&         100\\
+    Objective function type&    Linear/non-linear& Non-linear&         Non-linear\\
+    Constraint function type&   Non-linear/---&    Non-linear&         Linear\\
+    Optimization method&        Augm. Lagrangian&  SQP&                SQP\\
+    \bottomrulec
+  \end{tabular}
+  \caption[TODO]{%
+    TODO%
+  }%
+  \label{tbl:TODO}%
+\end{table}
+
+\dummytext[5]{}
 
 \paragraph{Outlook and future work}
 
@@ -63,6 +88,6 @@ and giving an outlook on possible future work.
   gradient-based approximation/interpolation methods
 \end{itemize}
 
-\dummytext[6]{}
+\dummytext[5]{}
 
 \cleardoublepage
