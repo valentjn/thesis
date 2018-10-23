@@ -42,7 +42,7 @@ def main():
         scale = 0.72
       else:
         surplusThresholdPercentT, surplusThresholdPercentB = -1, -1
-        scale = 0.58
+        scale = 0.59
       
       XX0, XX1, XX = helper.grid.generateMeshGrid(nn)
       YYfg = helperBiomech2.applyBiomech2MeshGrid(
