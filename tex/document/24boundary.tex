@@ -4,14 +4,14 @@
 \minitoc{79mm}{5}
 
 \noindent
-One issue of regular sparse grids $\regsgset{n}{d}$ as we have defined them
+One issue of regular sparse grids $\regsgset{n}{d}$
 is that the number of grid points still grows very fast
 with the level $n$ and the dimensionality $d$ \cite{Pflueger10Spatially}.
 This is mainly because the finest mesh size $\ms{n}$ on the
 boundary of the domain $\clint{\*0, \*1}$ is finer than
 the finest mesh size $\ms{n-d+1}$ that can be found in the interior.
 If we define $\interiorregsgset{n}{d}$ as the set of
-interior grid points in $\regsgset{n}{d}$, i.e.,%
+interior grid points in $\regsgset{n}{d}$,%
 \footnote{%
   Note that in the literature (e.g., \cite{Pflueger10Spatially}),
   the regular sparse grid space of level $n$ without boundary points is often
@@ -19,6 +19,7 @@ interior grid points in $\regsgset{n}{d}$, i.e.,%
   is given by $\ms{n}$.
   In our notation, this corresponds to $\interiorregsgset{n+d-1}{d}$.%
 }
+i.e.,
 \begin{equation}
   \interiorregsgset{n}{d}
   := \regsgset{n}{d} \cap \opint{\*0, \*1}
@@ -39,7 +40,7 @@ of $\regsgset{n}{d}$ can be shown:
   See \cite{Bungartz04Sparse}.
 \end{proof}
 Here, we define zero-dimensional grids to contain exactly one grid point
-(the empty tuple).
+such that $\setsize{\interiorregsgset{n}{0}} = 1$.
 The number of interior grid points can be calculated as follows:
 \begin{lemma}[number of interior regular sparse grid points]
   \label{lemma:numberOfGridPointsInterior}
@@ -113,10 +114,10 @@ which are described below.
 \subsection{Sparse Grids with Coarser Boundaries}
 \label{sec:241coarseBoundary}
 
-\paragraph{Inserting boundary points at finer levels}
+\paragraph{Inserting boundary points at higher levels}
 
 The first solution is to insert the boundary level functions and grid points
-at a finer level than at level zero.
+at a higher level than at level zero.
 A popular choice is the insertion at level one, which corresponds to
 \begin{equation}
   \label{eq:sparseGridB1}
@@ -129,16 +130,16 @@ A popular choice is the insertion at level one, which corresponds to
 where $\vec{\max}$ is to be read coordinate-wise as usual.
 This choice is equivalent to treating zero-level components as level one
 in the subspace selection.
-This ensures that the finest mesh sizes in interior of $\clint{\*0, \*1}$ and
-its boundary coincide to be $\ms{n-d+1}$, which reduces the number of grid points
-on the boundary significantly.
+This ensures that the finest mesh sizes in the interior of
+$\clint{\*0, \*1}$ and on its boundary coincide to be $\ms{n-d+1}$,
+which reduces the number of grid points on the boundary significantly.
 
 Another solution that can be found in the literature about sparse grids with
 hat functions \cite{Baar15Gradient}
 is to start with the ``constant one'' function on level zero with
 corresponding grid point $0.5$,
 then employ the two boundary functions and points on level one,
-and finally proceed as usual for the finer levels $\ge 2$.
+and finally proceed as usual for the higher levels $\ge 2$.
 Apart from a constant shift of the resulting sparse grid levels,
 this is equivalent to inserting the boundary functions and points at level two.
 This solution leads to even less grid points than the previous approach,
@@ -224,85 +225,27 @@ of $b$, especially when compared with
 $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 
 \begin{table}
-  \setnumberoftableheaderrows{1}%
+  \newcommand*{\myheader}{$\setsize{\interiorregsgset{n}{d}}$}%
+  \setnumberoftableheaderrows{2}%
   \begin{tabular}{%
-    >{\kern\tabcolsep}=l<{\kern5mm}+r<{\kern5mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
+    >{\kern\tabcolsep}=l<{\kern7mm}+r<{\kern7mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
   }
     \toprulec
     \headerrow
-    &
-    {$\setsize{\interiorregsgset{n}{d}}$}&
-    {$b = 0$}&
-    {$b = 1$}&
-    {$b = 2$}&
-    {$b = 3$}&
-    {$b = 4$}&
-    {$b = 5$}\\
+    &&\multicolumn{6}{c}{%
+      $\setsize{\coarseregsgset{n}{d}{b}}/\setsize{\interiorregsgset{n}{d}}$%
+    }\\
+    \headerrow
+    &          \myheader&     $b = 0$&    $b = 1$&    $b = 2$&    $b = 3$&    $b = 4$&    $b = 5$\\
     \midrulec
-    $n = 3$&
-    \num{1}&
-    \num{123.0}&
-    \num{27.0}&
-    \num{9.00}&
-    \num{9.00}&
-    \num{9.00}&
-    \num{9.00}\\
-    $n = 4$&
-    \num{7}&
-    \num{42.4}&
-    \num{11.6}&
-    \num{4.71}&
-    \num{2.14}&
-    \num{2.14}&
-    \num{2.14}\\
-    $n = 5$&
-    \num{31}&
-    \num{22.7}&
-    \num{7.3}&
-    \num{3.39}&
-    \num{1.84}&
-    \num{1.26}&
-    \num{1.26}\\
-    $n = 6$&
-    \num{111}&
-    \num{14.9}&
-    \num{5.3}&
-    \num{2.75}&
-    \num{1.67}&
-    \num{1.23}&
-    \num{1.07}\\
-    $n = 7$&
-    \num{351}&
-    \num{10.9}&
-    \num{4.3}&
-    \num{2.37}&
-    \num{1.55}&
-    \num{1.21}&
-    \num{1.07}\\
-    $n = 8$&
-    \num{1023}&
-    \num{8.5}&
-    \num{3.6}&
-    \num{2.13}&
-    \num{1.47}&
-    \num{1.19}&
-    \num{1.07}\\
-    $n = 9$&
-    \num{2815}&
-    \num{7.0}&
-    \num{3.2}&
-    \num{1.96}&
-    \num{1.41}&
-    \num{1.17}&
-    \num{1.07}\\
-    $n = 10$&
-    \num{7423}&
-    \num{6.0}&
-    \num{2.9}&
-    \num{1.83}&
-    \num{1.36}&
-    \num{1.16}&
-    \num{1.06}\\
+    $n = 3$&     \num{1}& \num{123.0}& \num{27.0}& \num{9.00}& \num{9.00}& \num{9.00}& \num{9.00}\\
+    $n = 4$&     \num{7}&  \num{42.4}& \num{11.6}& \num{4.71}& \num{2.14}& \num{2.14}& \num{2.14}\\
+    $n = 5$&    \num{31}&  \num{22.7}& \num{7.3}&  \num{3.39}& \num{1.84}& \num{1.26}& \num{1.26}\\
+    $n = 6$&   \num{111}&  \num{14.9}& \num{5.3}&  \num{2.75}& \num{1.67}& \num{1.23}& \num{1.07}\\
+    $n = 7$&   \num{351}&  \num{10.9}& \num{4.3}&  \num{2.37}& \num{1.55}& \num{1.21}& \num{1.07}\\
+    $n = 8$&  \num{1023}&   \num{8.5}& \num{3.6}&  \num{2.13}& \num{1.47}& \num{1.19}& \num{1.07}\\
+    $n = 9$&  \num{2815}&   \num{7.0}& \num{3.2}&  \num{1.96}& \num{1.41}& \num{1.17}& \num{1.07}\\
+    $n = 10$& \num{7423}&   \num{6.0}& \num{2.9}&  \num{1.83}& \num{1.36}& \num{1.16}& \num{1.06}\\
     \bottomrulec
   \end{tabular}
   \caption[%
@@ -324,85 +267,27 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 \end{table}
 
 \begin{table}
-  \setnumberoftableheaderrows{1}%
+  \newcommand*{\myheader}{$\setsize{\interiorregsgset{n}{d}}$}%
+  \setnumberoftableheaderrows{2}%
   \begin{tabular}{%
-    >{\kern\tabcolsep}=l<{\kern5mm}+r<{\kern5mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
+    >{\kern\tabcolsep}=l<{\kern7mm}+r<{\kern7mm}+r+r+r+r+r+r<{\kern\tabcolsep}%
   }
     \toprulec
     \headerrow
-    &
-    {$\setsize{\interiorregsgset{n}{d}}$}&
-    {$b = 0$}&
-    {$b = 1$}&
-    {$b = 2$}&
-    {$b = 3$}&
-    {$b = 4$}&
-    {$b = 5$}\\
+    &&\multicolumn{6}{c}{%
+      $\setsize{\coarseregsgset{n}{d}{b}}/\setsize{\interiorregsgset{n}{d}}$%
+    }\\
+    \headerrow
+    &             \myheader&     $b = 0$&     $b = 1$&    $b = 2$&      $b = 3$&      $b = 4$&      $b = 5$\\
     \midrulec
-    $n = 10$&
-    \num{1}&
-    \num{3.3e+08}&
-    \num{59049}&
-    \num{1025}&
-    \num{1025.0}&
-    \num{1025.0}&
-    \num{1025.0}\\
-    $n = 11$&
-    \num{21}&
-    \num{4.3e+07}&
-    \num{21558}&
-    \num{2813}&
-    \num{49.8}&
-    \num{49.8}&
-    \num{49.8}\\
-    $n = 12$&
-    \num{241}&
-    \num{1.0e+07}&
-    \num{10046}&
-    \num{1879}&
-    \num{246.0}&
-    \num{5.2}&
-    \num{5.2}\\
-    $n = 13$&
-    \num{2001}&
-    \num{3.4e+06}&
-    \num{5407}&
-    \num{1211}&
-    \num{227.2}&
-    \num{30.5}&
-    \num{1.5}\\
-    $n = 14$&
-    \num{13441}&
-    \num{1.3e+06}&
-    \num{3213}&
-    \num{806}&
-    \num{181.1}&
-    \num{34.7}&
-    \num{5.4}\\
-    $n = 15$&
-    \num{77505}&
-    \num{6.2e+05}&
-    \num{2054}&
-    \num{558}&
-    \num{140.6}&
-    \num{32.2}&
-    \num{6.8}\\
-    $n = 16$&
-    \num{397825}&
-    \num{3.1e+05}&
-    \num{1390}&
-    \num{401}&
-    \num{109.5}&
-    \num{28.2}&
-    \num{7.1}\\
-    $n = 17$&
-    \num{1862145}&
-    \num{1.7e+05}&
-    \num{984}&
-    \num{298}&
-    \num{86.5}&
-    \num{24.2}&
-    \num{6.8}\\
+    $n = 10$&       \num{1}& \num{3.3e8}& \num{59049}& \num{1025}& \num{1025.0}& \num{1025.0}& \num{1025.0}\\
+    $n = 11$&      \num{21}& \num{4.3e7}& \num{21558}& \num{2813}&   \num{49.8}&   \num{49.8}&   \num{49.8}\\
+    $n = 12$&     \num{241}& \num{1.0e7}& \num{10046}& \num{1879}&  \num{246.0}&    \num{5.2}&    \num{5.2}\\
+    $n = 13$&    \num{2001}& \num{3.4e6}&  \num{5407}& \num{1211}&  \num{227.2}&   \num{30.5}&    \num{1.5}\\
+    $n = 14$&   \num{13441}& \num{1.3e6}&  \num{3213}&  \num{806}&  \num{181.1}&   \num{34.7}&    \num{5.4}\\
+    $n = 15$&   \num{77505}& \num{6.2e5}&  \num{2054}&  \num{558}&  \num{140.6}&   \num{32.2}&    \num{6.8}\\
+    $n = 16$&  \num{397825}& \num{3.1e5}&  \num{1390}&  \num{401}&  \num{109.5}&   \num{28.2}&    \num{7.1}\\
+    $n = 17$& \num{1862145}& \num{1.7e5}&   \num{984}&  \num{298}&   \num{86.5}&   \num{24.2}&    \num{6.8}\\
     \bottomrulec
   \end{tabular}
   \caption[%
@@ -425,7 +310,7 @@ $\regsgset{n}{d} = \coarseregsgset{n}{d}{0}$.
 
 \Cref{alg:coarseBoundary} shows how to generate the necessary set of
 hierarchical levels.
-Its correctness can be formally proved with the following invariant:
+Its correctness can be formally proven with the following invariant:
 \begin{restatable}[invariant of coarse boundary SG generation]{%
   proposition%
 }{%
@@ -455,7 +340,9 @@ Its correctness can be formally proved with the following invariant:
 \end{shortcorollary}
 \begin{proof}
   Follows immediately from \cref{prop:invariantCoarseBoundary}
-  by setting $t = d$.
+  by setting $t = d$,
+  as then \eqref{eq:coarseInvariant} becomes
+  \eqref{eq:coarseBoundary2} from \thmref{def:coarseBoundary}.
 \end{proof}
 
 \begin{algorithm}
@@ -476,7 +363,9 @@ Its correctness can be formally proved with the following invariant:
           }%
           \label{line:algCoarseBoundary1}
             \State{$\levelset^{(t)} \gets \levelset^{(t)} \cup \{(\*l, 0)\}$}
-            \Comment{add corners}%
+            \Comment{%
+              add corners (with $(\*l, 0) := (l_1, \dotsc, l_{t-1}, 0)$)%
+            }%
             \label{line:algCoarseBoundary5}
           \EndIf{}
           \If{$\*l \in \nat^{t-1}$}
@@ -495,6 +384,9 @@ Its correctness can be formally proved with the following invariant:
             $\levelset^{(t)} \gets \levelset^{(t)} \cup
             \{(\*l, l_t) \mid l_t = 1, \dotsc, l^\ast\}$%
           }
+          \Comment{%
+            with $(\*l, l_t) := (l_1, \dotsc, l_{t-1}, l_t)$%
+          }%
           \label{line:algCoarseBoundary4}
         \EndFor{}
       \EndFor{}
@@ -504,10 +396,12 @@ Its correctness can be formally proved with the following invariant:
   \caption[%
     Generation of regular sparse grids with coarse boundary%
   ]{%
-    Generation of the level set $\coarselevelset{n}{d}{b}$ corresponding
-    to the sparse grid $\coarseregsgset{n}{d}{b}$ with coarse boundary.
+    Generation of the sparse grid $\coarseregsgset{n}{d}{b}$
+    with coarse boundary.
     Inputs are the level $n \in \nat$, the dimensionality $d \le n$, and
-    the boundary parameter $b \in \nat$.%
+    the boundary parameter $b \in \nat$.
+    Output is the level set $\coarselevelset{n}{d}{b}$
+    that corresponds to $\coarseregsgset{n}{d}{b}$.%
   }%
   \label{alg:coarseBoundary}%
 \end{algorithm}
@@ -581,7 +475,7 @@ Its correctness can be formally proved with the following invariant:
 
 An important implication of the regular sparse grids
 $\coarseregsgset{n}{d}{b}$ as defined in \cref{def:coarseBoundary}
-is that in general,
+is that, in general,
 the unidirectional principle cannot be directly applied anymore.
 For example, this is relevant when calculating hierarchical surpluses
 for the hat function basis.

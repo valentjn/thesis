@@ -94,8 +94,9 @@ and a linear combination are shown in \cref{fig:nodalHat}.
   }%
   \hfill%
   \subcaptionbox{%
-    Piecewise linear interpolant $\fgintp{l}$ as a weighted sum
-    of the nodal hat functions.%
+    Piecewise linear interpolant $\fgintp{l}$
+    of some function data $\objfun(\gp{l,i})$
+    as a weighted sum of the nodal hat functions.%
   }[72mm]{%
     \includegraphics{interpolant_1}%
   }%
@@ -116,14 +117,14 @@ and a linear combination are shown in \cref{fig:nodalHat}.
 
 \usenotation{d}
 For the multivariate case with $d \in \nat$ dimensions,
-we proceed with the tensor product approach,
+we employ a tensor product approach,
 for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{@0}
 \usenotation{@1}
 Therefore, the domain is now $\clint{\*0, \*1} := \clint{0, 1}^d$,
 which can be partitioned into
-$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally sized hyper-rectangles,
+$\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally-sized hyper-rectangles,
 where $\*l = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
 and $\normone{\vec{l}} := \sum_{t=1}^d l_t$ is the level sum.
 The corners of the hyper-rectangles are given by the grid points
@@ -151,7 +152,7 @@ Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
   Note that,
-  although \cref{eq:tensorProduct} does not allow it,
+  although \cref{eq:tensorProduct} does not cover it,
   one could employ basis functions of different types in
   each dimension, for example B-splines of different degrees.
   All remaining considerations in this thesis
@@ -212,6 +213,14 @@ in the nodal space $\ns{\*l}$ with $\fgintp{\*l}\colon \clint{\*0, \*1} \to \rea
 where $\interpcoeff{\*l,\*i} \in \real$ and
 the sum is over all $\*i = \*0, \dotsc, \*2^\*l$
 (i.e., $i_t = 0, \dotsc, 2^{l_t}$, $t = 1, \dotsc, d$).
+To ensure that the coefficients $\interpcoeff{\*l,\*i}$
+exist for every objective function $\objfun$ and are uniquely determined by
+the values at the grid points
+\begin{equation}
+\fgset{\*l}
+:= \{\gp{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\},
+\end{equation}
+we prove the following statement:
 \begin{lemma}[linear independence of tensor products]
   \label{lemma:tensorProductLinearIndependence}
   The functions $\basis{\*l,\*i}$ ($\*i = \*0, \dotsc, \*2^\*l$)
@@ -241,13 +250,7 @@ the sum is over all $\*i = \*0, \dotsc, \*2^\*l$
   $\interpcoeff{\*l,\*i} = 0$ for all~$\*i = \*0, \dotsc, \*2^\*l$,
   implying the linear independence of the functions $\basis{\*l,\*i}$.
 \end{proof}
-The lemma is equivalent to the statement that the coefficients $\interpcoeff{\*l,\*i} \in \real$
-exist for every objective function $\objfun$ and are uniquely determined by
-the values at the grid points
-\begin{equation}
-  \fgset{\*l}
-  := \{\gp{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
-\end{equation}
+
 \usenotation{n10}
 A common choice for the level $\*l$ is $n \cdot \*1$ for some $n \in \natz$.
 \usenotation{Vnd}

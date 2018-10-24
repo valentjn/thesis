@@ -6,7 +6,7 @@
 \noindent
 The idea of sparse grids is to use the
 hierarchical splitting \eqref{eq:hierSplittingMV}
-to keep only the most ``important'' hierarchical subspaces,
+to keep only the most important hierarchical subspaces,
 omitting the remaining ones.
 There are three main ``flavors'' of sparse grids:
 regular, dimensionally adaptive, and spatially adaptive.
@@ -49,7 +49,7 @@ $\partialderiv[2d]{\partialdiff x_1^2 \dotsm \partialdiff x_d^2}{\objfun}$
 exists and is continuous.%
 \footnote{%
   Again, the notation implies that the integration domain is
-  the unit hyper-cube $\clint{\*0, \*1}$.%
+  the unit hyper-cube $\clint{\*0, \*1} = \clint{0, 1}^d$.%
 }\multiplefootnoteseparator%
 \footnote{%
   The statement is even valid for functions in the Sobolev space
@@ -114,9 +114,11 @@ $\regsgspace{n}{d}$ have the form
 \end{equation}
 To better distinguish the different grids,
 we call the nodal spaces and grids \term{full grids.}
-Although sparse grids have been motivated using the hat function
-basis $\bspl{\*l,\*i}{1}$,
-we generalize the definition to arbitrary bases $\basis{\*l,\*i}$.
+We generalize the definition to arbitrary bases $\basis{\*l,\*i}$,
+although sparse grids have been motivated using the hat function
+basis $\bspl{\*l,\*i}{1}$
+(the estimate \eqref{eq:componentEstimation} does not hold anymore
+in the general case).
 \Cref{fig:regularSG} shows the construction of a
 regular sparse grid in two dimensions.
 
@@ -328,8 +330,8 @@ If they are not met, then the algorithms do not produce the correct results.
 %choice of $\liset$.
 For example when working with hat functions $\bspl{\*l,\*i}{1}$,
 the grid should contain the hierarchical ancestors of every grid point.
-Otherwise, the so-called
-unidirectional principle, which is used for instance to efficiently calculate
+Otherwise, the so-called unidirectional principle \cite{Balder94Adaptive},
+which is used for instance to efficiently calculate
 hierarchical surpluses, does not hold in general.
 However, as we will see in \cref{chap:40algorithms},
 the unidirectional principle cannot be applied
