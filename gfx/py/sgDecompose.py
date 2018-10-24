@@ -35,7 +35,8 @@ for q in range(d + 2):
   xs = [[0, 1], [0, 0], [0, 0]]
   ys = [[1, 1], [1, 0], [1, 1]]
   zs = [[0, 0], [0, 0], [0, 1]]
-  for x, y, z in zip(xs, ys, zs): ax.plot(x, y, "k-", zs=z, clip_on=False)
+  for x, y, z in zip(xs, ys, zs):
+    ax.plot(x, y, "-", zs=z, color=3*[0.6], clip_on=False)
   
   for r in range(2):
     if (q <= 1) and (r == 1):
