@@ -219,12 +219,12 @@ of the corresponding interpolation error (\cref{%
 A generalization of this estimate to higher B-spline degrees $p > 1$
 is not straightforward, as the surpluses $\surplus{\*l,\*i}$
 then also depend on function values $\objfun(\gp{\*l',\*i'})$ at
-grid points of finer levels $\*l' \ge \*l$.
+grid points of higher levels $\*l' \ge \*l$.
 
 The decay of surpluses can be seen in \cref{fig:resultsDecaySurpluses},
 which shows the mean absolute value of surpluses corresponding to
 grid points grouped by their level sum $\normone{\*l}$.
-Due to the dependency of coarse-level surpluses on fine-level grid points
+Due to the dependency of coarse-level surpluses on high-level grid points
 for $p > 1$,
 we have to fix the level $n$ of the regular sparse grid for this analysis.
 \Cref{fig:resultsDecaySurpluses} suggests that the

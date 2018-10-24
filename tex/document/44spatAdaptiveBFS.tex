@@ -59,7 +59,7 @@ As already discussed in \cref{sec:41problem},
 the main cause of the difficulty of hierarchizing with B-splines
 $\bspl{\*l,\*i}{p}$ is due to their overlapping support
 (which they need for their approximation order),
-fine-level B-splines $\bspl{\*l',\*i'}{p}$ do not vanish
+high-level B-splines $\bspl{\*l',\*i'}{p}$ do not vanish
 at all coarse-level grid points $\gp{\*l,\*i}$, $\*l < \*l'$.
 In the univariate case,
 the idea is to transform the B-spline basis to obtain
@@ -181,7 +181,7 @@ $\fundbasis{l'_t,i'_t}$ ($t = 1, \dotsc, d$).
 This means that every basis function
 $\fundbasis{\*l',\*i'}$ can only be non-zero
 at the grid points $\gp{\*l,\*i}$ that, in every dimension $t$,
-have a strictly finer level $l_t$ or
+have a strictly higher level $l_t$ or
 the same level-index pair $(l_t, i_t)$ as the basis function.
 We show an example for this relation in
 \cref{fig:fundamentalProperty} (top right).
@@ -1319,7 +1319,7 @@ to the grid point $\gp{l',i'}$ is large enough
 $\bspl[\fs,\nak]{l',i'}{p}$).
 For different levels $l'$, the fundamental not-a-knot splines
 $\bspl[\fs,\nak]{l',i'}{p}$ are the same up to scaling
-(if the level $l'$ is fine enough).
+(if the level $l'$ is high enough).
 
 Consequently, an efficient implementation only has to implement
 $\bspl[\fs,\nak]{l',i'}{p}$ for some special cases for coarse levels.
