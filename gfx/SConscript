@@ -132,4 +132,21 @@ for name in ["Manuscript", "Published"]:
   # make LaTeX depend on coverScreenPDF
   pdfs.append(coverScreenPDF)
 
+# logo file paths
+logoSVG = os.path.join("pre", "logoBSplines.svgz")
+logoPNG = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.png")
+logoPDF = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.pdf")
+# rasterize B-spline logo
+env.Command(logoPNG, logoSVG,
+            "inkscape --export-png=$TARGET --export-area-page "
+            "--export-dpi={} $SOURCE".format(500))
+# convert from PNG to PDF with ImageMagick
+env.Command(logoPDF, logoPNG,
+            "convert $SOURCE -density {} -units pixelsperinch "
+            "-flatten $TARGET".format(500))
+# compress resulting PDF
+env.AddPostAction(logoPDF, Helper.compressPDFs)
+# make LaTeX depend on logoPDF
+pdfs.append(logoPDF)
+
 Return("pdfs")
