@@ -82,11 +82,10 @@ then the issues even worsen.
 
 \paragraph{Elasticity tensor function}
 
-As a remedy, we replace the costly evaluation of the
-elasticity tensors $\etensor^{(q)}$ with cheap surrogates.
-We assume that all macro-cells use the same micro-cell model.
-Consequently, the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro-cell
-with the micro-cell parameter $\mcp{q} \in \clint{\*0, \*1}$
+As a remedy, we replace the costly elasticity tensors with cheap surrogates.
+If assume that all macro-cells use the same micro-cell model,
+the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro-cell
+with the parameter $\mcp{q} \in \clint{\*0, \*1}$
 can be written as the value $\etensor(\mcp{q})$ of some function
 $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
 (assuming that $\dimdomain = 3$) at the point $\mcp{q}$.
@@ -94,8 +93,8 @@ In the following,
 $\etensor\colon \clint{\*0, \*1} \to \real^m$
 gives $m \in \nat$ values from which the symmetric elasticity tensor
 can be uniquely reconstructed,
-e.g., $m = 6$ for $\dimdomain = 2$ and $m = 21$ for $\dimdomain = 3$.
-The vector-valued and the matrix-valued version of $\etensor$
+i.e., $m = 6$ for $\dimdomain = 2$ and $m = 21$ for $\dimdomain = 3$.
+The vector-valued/matrix-valued versions of $\etensor$
 will be used interchangeably.
 
 \paragraph{Elasticity tensor surrogate}
