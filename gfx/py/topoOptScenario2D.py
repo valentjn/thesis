@@ -17,13 +17,13 @@ def main():
       width, height, scale = 1.5, 0.75, 4/3
       xt, yt = [0, width], [0, height]
       forcePoint1 = [width, 0]
-      h5Path = "./data/topoOpt/results/626/thesis-2d-cantilever.h5"
+      h5Path = "./data/topoOpt/results/650/thesis-2d-cantilever.h5"
       nn = np.array([64, 32])
     else:
       width, height, scale = 1.5, 1.5, 10/3
       xt, yt = [0, 0.4*width, width], [0, 0.4*height, height]
       forcePoint1 = [width, 0.4 * height]
-      h5Path = "./data/topoOpt/results/620/thesis-2d-L.h5"
+      h5Path = "./data/topoOpt/results/651/thesis-2d-L.h5"
       nn = np.array([50, 50])
     
     fig = Figure.create(figsize=(3, 3), scale=0.9)

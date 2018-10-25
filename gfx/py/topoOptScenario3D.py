@@ -94,13 +94,13 @@ def main():
       size = np.array([1, 1, 1])
       forcePoint = [0.75, 0.215]
       forceLength = 0.15
-      h5Path = "./data/topoOpt/results/503/mech-3d.h5"
+      h5Path = "./data/topoOpt/results/658/thesis-3d-cantilever.h5"
       nn = np.array((20, 20, 20))
     else:
       size = np.array([2, 2, 1])
       forcePoint = [0.5, 0.4]
       forceLength = 0.2
-      h5Path = "./data/topoOpt/results/636/thesis-3d-centerload.h5"
+      h5Path = "./data/topoOpt/results/659/thesis-3d-centerload.h5"
       nn = np.array((20, 20, 10))
     
     fig = Figure.create(figsize=(3, 3), scale=1.2)
@@ -112,8 +112,12 @@ def main():
     helper.plot.plotArrow(
         ax0, forcePoint, [forcePoint[0], forcePoint[1] - forceLength],
         scaleHead=0.7)
-    ax0.text(forcePoint[0] + 0.02, forcePoint[1] - 0.5 * forceLength,
-            r"$\force$", ha="left", va="center")
+    if q == 0:
+      ax0.text(forcePoint[0] + 0.02, forcePoint[1] - 0.5 * forceLength,
+               r"$\force$", ha="left", va="center")
+    else:
+      ax0.text(forcePoint[0] - 0.015, forcePoint[1] - 0.5 * forceLength,
+               r"$\force$", ha="right", va="center")
     ax0.set_xlim(0, 1)
     ax0.set_ylim(0, 1)
     ax0.set_axis_off()
@@ -126,7 +130,6 @@ def main():
     microparams = data["microparams"]["smart"]
     VV = computeVolume(*microparams[:,:3].T)
     VV = np.transpose(np.reshape(VV, nn[::-1]), [2, 1, 0])
-    if q == 0: VV = np.flip(VV, axis=2)
     
     if q == 0:
       eps = 0.007
