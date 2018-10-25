@@ -11,28 +11,6 @@ import helper.topo_opt
 
 
 
-def plotHatchedRectangle(ax, corner, size, spacing=0.1, color="k"):
-  # y = x + c
-  # c = y - x
-  # x = y - c
-  cRange = [corner[1] - (corner[0] + size[0]),
-            (corner[1] + size[1]) - corner[0]]
-  cs = np.arange(cRange[0] + spacing/2, cRange[1], spacing)
-  
-  for c in cs:
-    point1 = [corner[0], corner[0] + c]
-    if point1[1] < corner[1]:
-      point1 = [corner[1] - c, corner[1]]
-    
-    point2 = [corner[0] + size[0], (corner[0] + size[0]) + c]
-    if point2[1] > corner[1] + size[1]:
-      point2 = [(corner[1] + size[1]) - c, corner[1] + size[1]]
-    
-    ax.plot(*list(zip(point1, point2)), "-", clip_on=False, color=color,
-            solid_capstyle="butt", zorder=-10)
-
-
-
 def main():
   for q in range(2):
     if q == 0:
@@ -90,8 +68,9 @@ def main():
       ax.plot(width * np.array([0, 1, 1, 0]),
               height * np.array([0, 0, 1, 1]), "k-", clip_on=False)
       ax.plot([0, 0], [0, height], "-", color="C1", clip_on=False)
-      plotHatchedRectangle(ax, [-hatchSize, 0], [hatchSize, height],
-                           spacing=hatchSpacing, color="C1")
+      helper.plot.plotHatchedRectangle(
+          ax, [-hatchSize, 0], [hatchSize, height],
+          spacing=hatchSpacing, color="C1")
       ax.text(width/2, -0.05*width, r"$\tilde{x}_1$", ha="center", va="top")
       ax.text(-0.05*width, height/2,
               r"\contour{mittelblau!10}{$\tilde{x}_2$}",
@@ -102,8 +81,9 @@ def main():
               clip_on=False)
       ax.plot([0, 0.4*width], [height, height], "-", color="C1",
               clip_on=False)
-      plotHatchedRectangle(ax, [0, height], [0.4 * width, hatchSize],
-                           spacing=hatchSpacing, color="C1")
+      helper.plot.plotHatchedRectangle(
+          ax, [0, height], [0.4 * width, hatchSize],
+          spacing=hatchSpacing, color="C1")
       ax.text(0.7*width, -0.05*width, r"$\tilde{x}_1$", ha="center", va="top")
       ax.text(-0.05*width, 0.7*height, r"$\tilde{x}_2$",
               ha="right", va="center")

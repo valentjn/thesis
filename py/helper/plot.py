@@ -250,6 +250,8 @@ def removeWhiteLines(obj):
     obj.set_linewidth(0.2)
     obj.set_edgecolors("face")
 
+
+
 def setEqual3DAxes(ax):
   extents = np.array([ax.get_xlim(), ax.get_ylim(), ax.get_zlim()]).T
   size = extents[1] - extents[0]
@@ -258,3 +260,25 @@ def setEqual3DAxes(ax):
   ax.set_xlim(center[0] - maxSizeHalf, center[0] + maxSizeHalf)
   ax.set_ylim(center[1] - maxSizeHalf, center[1] + maxSizeHalf)
   ax.set_zlim(center[2] - maxSizeHalf, center[2] + maxSizeHalf)
+
+
+
+def plotHatchedRectangle(ax, corner, size, spacing=0.1, color="k"):
+  # y = x + c
+  # c = y - x
+  # x = y - c
+  cRange = [corner[1] - (corner[0] + size[0]),
+            (corner[1] + size[1]) - corner[0]]
+  cs = np.arange(cRange[0] + spacing/2, cRange[1], spacing)
+  
+  for c in cs:
+    point1 = [corner[0], corner[0] + c]
+    if point1[1] < corner[1]:
+      point1 = [corner[1] - c, corner[1]]
+    
+    point2 = [corner[0] + size[0], (corner[0] + size[0]) + c]
+    if point2[1] > corner[1] + size[1]:
+      point2 = [(corner[1] + size[1]) - c, corner[1] + size[1]]
+    
+    ax.plot(*list(zip(point1, point2)), "-", clip_on=False, color=color,
+            solid_capstyle="butt", zorder=-10)
