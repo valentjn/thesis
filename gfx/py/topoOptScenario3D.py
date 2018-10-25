@@ -132,6 +132,7 @@ def main():
     microparams = data["microparams"]["smart"]
     VV = computeVolume(*microparams[:,:3].T)
     VV = np.transpose(np.reshape(VV, nn[::-1]), [2, 1, 0])
+    if q == 0: VV = np.pad(VV, 1, "constant", constant_values=0)
     
     if q == 0:
       eps = 0.007
@@ -186,10 +187,10 @@ def main():
     
     v = 0.1
     verts, faces, _, _ = skimage.measure.marching_cubes_lewiner(
-        VV, v, spacing=size/(nn-1))
+        VV, v, spacing=size/(nn if q == 0 else nn-1))
     lightSource = mpl.colors.LightSource(0, 45)
     surf = ax.plot_trisurf(verts[:,0], verts[:,1], faces, verts[:,2],
-                          lightsource=lightSource)
+                           lightsource=lightSource)
     helper.plot.removeWhiteLines(surf)
     
     eps = 0.05
