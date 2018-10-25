@@ -77,10 +77,10 @@ def plotMeasureLines(
 
 
 A = helper.topo_opt.readDensityFile(
-    "./data/topoOpt/results/560/oneload-40.density.xml")
+    "./data/topoOpt/results/650/thesis-2d-cantilever.density.xml")
 M1, M2 = A.shape[:2]
 
-newM1, newM2 = 11, 8
+newM1, newM2 = 16, 8
 newA = np.full((newM1, newM2, 2), np.nan)
 
 for newJ1 in range(newM1):
@@ -111,11 +111,11 @@ V = ((A[:,:,0] - 0.01) / 0.98 +
 
 
 
-fig = Figure.create(figsize=(5, 3), scale=1.22)
+fig = Figure.create(figsize=(5, 3), scale=1.2)
 ax = fig.gca()
 
-domainWidth, domainHeight = 3, 2
-jp1, jp2 = 8, 4
+domainWidth, domainHeight = 4, 2
+jp1, jp2 = 11, 4
 macroCellMargin = 0.5
 macroCellSize = 1.5
 macroCellInnerMargin = 0.1
