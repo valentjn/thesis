@@ -1,7 +1,7 @@
 \section{Micro-Cell Models and Optimization Scenarios}
 \label{sec:63models}
 
-\minitoc{72mm}{3}
+\minitoc{62mm}{3}
 
 \noindent
 In the following, we present the different micro-cell models
@@ -19,7 +19,7 @@ The models differ in the spatial dimensionality $\dimdomain$ (two or three)
 and the number $d$ (two to five) of micro-cell parameters
 $\*x \in \clint{\*0, \*1} = \clint{0, 1}^d$.
 Note that the presented models are only some examples.
-One can conceive arbitrarily complicated micro-cell models
+One can easily design complicated micro-cell models
 with larger numbers of parameters.
 
 \begin{figure}
@@ -74,54 +74,56 @@ with larger numbers of parameters.
 \paragraph{Orthogonal (non-sheared) models in two dimensions}
 
 The basic component of the four two-dimensional models
-is a square with a \term{cross} (\cref{fig:microCell_1})
+is a square with a cross (\cref{fig:microCell_1})
 of two axis-aligned orthogonal bars,
 whose widths are determined by two micro-cell parameters $x_1$ and $x_2$.
-For the sake of micro-cell parameters,
-we have to assume the micro-cell to have edge lengths of one,
-since the micro-cells are assumed to be infinitesimally small,
-i.e., they do not have a positive size.
-For the \term{framed cross} (\cref{fig:microCell_2}),
+The micro-cell parameters are ratios of the bar widths
+to the edge lengths of the micro-cell
+(although the actual micro-cells are infinitesimally small).
+This results in the \emph{cross model.}
+For the \term{framed cross model} (\cref{fig:microCell_2}),
 we add a diagonal cross with orthogonal bars
-of widths $x_3$ and $x_4$ (horizontally measured), rotated by \ang{45}.
+of widths $x_3$ and $x_4$ (horizontally measured).
 To simplify the boundary treatment,
-we shift the contents of the micro-cell by $0.5$ in both directions,
-such that a previous corner of the micro-cell corresponds to the new center
-(possible because the micro-cells are periodic).
+we shift the contents of the framed cross micro-cell by
+\SI{50}{\percent} of the micro-cell's edge lengths in both directions,
+such that previous corners of the micro-cell correspond to the new center.
+%This is possible because the micro-cells are periodic.
 
 \paragraph{Sheared models in two dimensions}
 
-Both models (cross and framed cross) can be extended by shearing.
-The idea is to increase the stability of the resulting structure
-with respect to forces that act at an angle other than
-\ang{45} for the framed cross model.
+Both of these models can be extended by shearing.
+The idea is to increase the stability of the resulting macro-structure
+with respect to forces that act at angles other than
+\ang{0} and \ang{90} (cross model) or
+\ang{0}, \ang{90}, and \ang{45} (framed cross model).
 If we just rotated the crosses in the micro-cells,
 then the micro-structure would not be periodic.
 Instead, we shear the whole micro-cell in the horizontal direction,
-where the angle $\theta$ is a micro-cell parameter,
-which gives us another degree of freedom.
-This results in the \term{sheared cross} (\cref{fig:microCell_3})
-and \term{sheared framed cross} (\cref{fig:microCell_4})
-with three and five micro-parameters each.%
+where the shearing angle $\theta$ is an additional micro-cell parameter,
+which gives us another degree of freedom.%
 \footnote{%
   To be more precise, the angle $\theta$ corresponds to an
   additional micro-cell parameter $x_3$ (sheared cross) or
   $x_5$ (sheared framed cross) that is determined by normalization
-  from $\clint{-\pi/2, \pi/2}$, i.e., $\theta/\pi + 1/2$.%
+  from $\clint{-0.35\pi, 0.35\pi}$, i.e., $\theta/(0.7\pi) + 1/2$.%
 }
+This results in the \term{sheared cross model} (\cref{fig:microCell_3})
+and \term{sheared framed crossmodel } (\cref{fig:microCell_4})
+with three and five micro-parameters each.
 
 \paragraph{Models in three dimensions}
 
 The two-dimensional cross model can be transferred to three
-spatial dimensions by adding another bar in the new dimension.
+spatial dimensions by just adding another bar in the new dimension.
 Each of the three bars has square cross-section with given edge lengths
-$x_1, x_2, x_3$,
-resulting in the \term{3D cross} model with three micro-cell parameters
+$x_1$, $x_2$, or $x_3$, respectively,
+resulting in the \term{3D cross model} with three micro-cell parameters
 (\cref{fig:microCell_5}).
 By shearing in the two horizontal directions,
 we obtain two new degrees of freedom $\theta_1$ and $\theta_2$
 (shearing angles).
-The emerging \term{3D sheared cross} model has five micro-cell parameters
+The emerging \term{3D sheared cross model} has five micro-cell parameters
 (\cref{fig:microCell_6}).
 
 
@@ -141,13 +143,13 @@ are given in \cref{fig:topoOptScenario} (dimensions in meters).
 In contrast to \cite{Valdez17Topology},
 we only use single-point loads
 (i.e., not loads applied to some line segment)
-for simplistic and implementational reasons.
+for implementational reasons.
 The upper bound on the density (see \cref{sec:611homogenization})
 is $\densub = \SI{50}{\percent}$ for the 2D scenarios and
 $\densub = \SI{10}{\percent}$ for the 3D scenarios.
 As in \cite{Sigmund01Line} and for simplicity reasons,
 we apply a force $\force$ with unit value
-(i.e., $\norm[2]{\force} = \SI{1}{\newton}$),
+(i.e., $\norm[2]{\force} = \SI{1}{\newton}$)
 and we use a hypothetical material with
 a Young modulus (stiffness) of \SI{1}{\pascal} and
 a Poisson ratio (transversal expansion to axial compression) of $0.3$.
