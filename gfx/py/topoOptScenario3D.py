@@ -4,6 +4,8 @@
 
 
 # HACK
+# mplot3d's ax.plot_trisurf has no lightsource argument
+# (i.e., no custom lightning for 3D trisurf plots);
 # important: remove this as soon as
 # https://github.com/matplotlib/matplotlib/pull/9990 has been published
 # in the release (via pip3)
