@@ -41,7 +41,15 @@ The necessary notation is summarized in
 
 \paragraph{Density function}
 
-Let $\domain \subset \real^{\dimdomain}$ be the optimization domain.
+Let $\domain \subset \real^{\dimdomain}$ be the optimization domain.%
+\footnote{%
+  We use tildes to denote variables and quantities
+  that correspond to the spatial domain $\domain$
+  (e.g., $\tilde{\*x}$ is a point in $\domain$).
+  In contrast, variables without a tilde will correspond
+  to the sparse grid domain $\clint{\*0, \*1} = \clint{0, 1}^d$
+  (e.g., $\gp{\*l,\*i} \in \clint{\*0, \*1}$ will be a sparse grid point).%
+}
 Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
 although the method can be generalized to
 arbitrary dimensionalities $\dimdomain \in \nat$.
