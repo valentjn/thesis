@@ -10,7 +10,7 @@ import helper.plot
 
 
 def plotText(ax, trafo, x, y, text, width=None, height=None,
-             contourColor=None, **kwargs):
+             contourColor=None, raiseText=0, **kwargs):
   if height is None:
     assert width is not None
     ax.plot(*trafo([x - width/2, x + width/2], [y, y]), "w-", clip_on=False)
@@ -20,7 +20,7 @@ def plotText(ax, trafo, x, y, text, width=None, height=None,
   kwargs = {"color" : "w", "ha" : "center", "va" : "center", **kwargs}
   if contourColor is not None:
     text = r"\contour[32]{{{}}}{{{}}}".format(contourColor, text)
-  ax.text(*trafo(x, y-0.03), text, **kwargs)
+  ax.text(*trafo(x, y-0.03+raiseText), text, **kwargs)
 
 
 
@@ -115,9 +115,9 @@ def main():
       plotText(ax, trafo, 1-a/4, 0.5,   r"$\frac{x_1}{2}$", width=a/2,
                contourColor=contourColors(0))
       plotText(ax, trafo, 0.5,   b/4,   r"$x_2/2$",         height=b/2,
-               contourColor=contourColors(1))
+               contourColor=contourColors(1), raiseText=0.025)
       plotText(ax, trafo, 0.5,   1-b/4, r"$x_2/2$",         height=b/2,
-               contourColor=contourColors(1))
+               contourColor=contourColors(1), raiseText=0.015)
       plotText(ax, trafo, 0.7,   0.3,   r"$x_3$",           width=c,
                contourColor=contourColors(2))
       plotText(ax, trafo, 0.7,   0.7,   r"$x_4$",           width=d,
