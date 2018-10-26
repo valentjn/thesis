@@ -21,7 +21,7 @@ The necessary notation is summarized in
     <{\kern2.9mm}+l<{\kern-1.25mm}+l<{\kern\tabcolsep}%
   }
     \toprulec
-    \pnst{\domain}&          \pnst{\force}&        \pnst{\densglobal}\\
+    \pnst{\objdomain}&       \pnst{\force}&        \pnst{\densglobal}\\
     \pnst{\dimdomain}&       \pnst{\displacement}& \pnst{\denscell}\\
     $d$&\#micro-cell param.& \pnst{\compliance}&   \pnst{\densub}\\
     \pnst{\mcp}&             \pnst{\vol}&          \pnst{\etensor}\\
@@ -41,11 +41,11 @@ The necessary notation is summarized in
 
 \paragraph{Density function}
 
-Let $\domain \subset \real^{\dimdomain}$ be the optimization domain.%
+Let $\objdomain \subset \real^{\dimdomain}$ be the optimization domain.%
 \footnote{%
   We use tildes to denote variables and quantities
-  that correspond to the spatial domain $\domain$
-  (e.g., $\tilde{\*x}$ is a point in $\domain$).
+  that correspond to the spatial domain $\objdomain$
+  (e.g., $\tilde{\*x}$ is a point in $\objdomain$).
   In contrast, variables without a tilde will correspond
   to the sparse grid domain $\clint{\*0, \*1} = \clint{0, 1}^d$
   (e.g., $\gp{\*l,\*i} \in \clint{\*0, \*1}$ will be a sparse grid point).%
@@ -54,7 +54,7 @@ Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
 although the method can be generalized to
 arbitrary dimensionalities $\dimdomain \in \nat$.
 Shapes and topologies are described by \term{density functions}
-$\densglobal\colon \domain \to \clint{0, 1}$.
+$\densglobal\colon \objdomain \to \clint{0, 1}$.
 The function values $\densglobal(\tilde{\*x}) \in \clint{0, 1}$
 tell if $\tilde{\*x}$ is contained in the object (value of one) or
 not (value of zero).
@@ -72,11 +72,11 @@ compute the \term{compliance} (i.e., the inverse of the stiffness) as
 the objective function value~$\compliance(\densglobal)$:
 \begin{equation}
   \compliance(\densglobal)
-  = \int_{\domain} \tr{\force} \displacement_{\densglobal}(\tilde{\*x})
+  = \int_{\objdomain} \tr{\force} \displacement_{\densglobal}(\tilde{\*x})
   \diff\tilde{\*x},
 \end{equation}
 where the \term{displacement function}
-$\displacement_{\densglobal}\colon \domain \to \real^{\dimdomain}$
+$\displacement_{\densglobal}\colon \objdomain \to \real^{\dimdomain}$
 depends on the density \cite{Huebner14Mehrdimensionale}.
 We want to find the density function
 with the minimal objective function value:
@@ -93,13 +93,13 @@ usually leads to the topology with the
 highest stiffness and, thus, the smallest displacement and compliance value.
 Therefore, we introduce the following volume constraint:
 \begin{equation}
-  \frac{\voldens{\densglobal}{\domain}}{\vol{\domain}} \le \densub,\quad
-  \voldens{\densglobal}{\domain}
-  := \int_{\domain} \densglobal(\tilde{\*x}) \diff\tilde{\*x},\quad
-  \vol{\domain}
-  := \voldens{1}{\domain},
+  \frac{\voldens{\densglobal}{\objdomain}}{\vol{\objdomain}} \le \densub,\quad
+  \voldens{\densglobal}{\objdomain}
+  := \int_{\objdomain} \densglobal(\tilde{\*x}) \diff\tilde{\*x},\quad
+  \vol{\objdomain}
+  := \voldens{1}{\objdomain},
 \end{equation}
-where $\vol{\domain} = \int_{\domain} 1 \diff\tilde{\*x}$
+where $\vol{\objdomain} = \int_{\objdomain} 1 \diff\tilde{\*x}$
 is the volume of the domain and
 $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
@@ -111,7 +111,7 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
     Example scenario for topology optimization.
     An object \emph{\textcolor{hellblau}{(light blue)}}
     is fixed on the left side
-    of the domain $\domain$
+    of the domain $\objdomain$
     \emph{\textcolor{mittelblau!50}{(darker blue)}}
     and deformed by a force $\force$, resulting in a displaced object
     \emph{(dashed).}
@@ -131,14 +131,14 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 numerically,
 as there are infinitely many density functions $\densglobal$.
-%To be able to discretize the domain $\domain \subset \real^{\dimdomain}$
+%To be able to discretize the domain $\objdomain \subset \real^{\dimdomain}$
 %more easily,
-For simplicity, we assume that $\domain$ is some hyper-rectangle
+For simplicity, we assume that $\objdomain$ is some hyper-rectangle
 $\clint{\tilde{\*a}, \tilde{\*b}}
 = \clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
 \clint{\tilde{a}_{\dimdomain}, \tilde{b}_{\dimdomain}}$;
-if it is not, we can replace $\domain$ with its bounding box.
-The domain $\domain$ can then be split into
+if it is not, we can replace $\objdomain$ with its bounding box.
+The domain $\objdomain$ can then be split into
 $M_1 \times \dotsb \times M_{\dimdomain}$
 equally-sized and axis-aligned sub-hyper-rectangles,
 which we call \term{macro-cells.}
@@ -165,7 +165,7 @@ depends on the optimization scenario and has to be done a priori.
   ]{%
     Two-scale approach to discretize the homogenized topology
     optimization problem in two dimensions ($\dimdomain = 2$).
-    \emph{Left:} The domain $\domain$ is subdivided into $M_1 \times M_2$
+    \emph{Left:} The domain $\objdomain$ is subdivided into $M_1 \times M_2$
     macro-cells, each with its own material properties such as density
     \emph{(colors).}
     \emph{Center:} Every macro-cell is the repetition of infinitesimally small
@@ -183,7 +183,7 @@ depends on the optimization scenario and has to be done a priori.
 Note that while the shape of all micro-cells in one macro-cell is identical,
 the micro-cell parameters corresponding to different macro-cells differ
 in general.
-This enables varying densities in different regions of $\domain$.
+This enables varying densities in different regions of $\objdomain$.
 We denote the parameters of the $q$-th macro-cell
 with $\mcp{q} = (\mcpentry{1}{q}, \dotsc, \mcpentry{d}{q}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
