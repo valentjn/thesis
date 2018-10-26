@@ -148,7 +148,7 @@ for j2 in range(M2+1):
   ax.plot([0, domainWidth], [y, y], "-", color=edgeColor, clip_on=False)
 
 ax.text(M1/2 * macroCellWidth, domainHeight + textMargin,
-        r"\textbf{Domain} $\objdomain$", ha="center", va="bottom")
+        r"\textbf{Object domain} $\objdomain$", ha="center", va="bottom")
 ax.text(M1/2 * macroCellWidth, -textMargin,
         r"$M_1$ macro-cells", ha="center", va="top")
 ax.text(-textMargin, M2/2 * macroCellHeight,
@@ -171,7 +171,7 @@ ax.text(*s2(1-macroCellInnerMargin/2, 0.55), r"$\vdots$",
         ha="center", va="center")
 
 ax.text(*(s2(0.5, 1) + np.array([0, textMargin])),
-        r"\textbf{Macro-cell}", ha="center", va="bottom")
+        r"\textbf{Macro-cell\vphantom{j}}", ha="center", va="bottom")
 
 s3 = (lambda xx, yy : s2(0.8 * np.array(xx) + macroCellInnerMargin,
                          0.8 * np.array(yy) + macroCellInnerMargin))
@@ -200,7 +200,7 @@ plotZoomBox(ax, s4, s5)
 plotCross(ax, s5, param)
 
 ax.text(*(s5(0.5, 1) + np.array([0, textMargin])),
-        r"\textbf{Micro-cell}", ha="center", va="bottom")
+        r"\textbf{Micro-cell\vphantom{j}}", ha="center", va="bottom")
 ax.text(*(s5(0.5, 0) + np.array([0, -textMargin])),
         r"$x_2$", ha="center", va="top")
 ax.text(*(s5(1, 0.5) + np.array([textMargin, 0])),
