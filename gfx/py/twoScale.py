@@ -125,7 +125,7 @@ microCellMargin = 0.5
 microCellSize = 1.5
 edgeColor = "mittelblau"
 backgroundColor = helper.plot.mixColors("mittelblau", 0.1)
-textMargin = 0.05
+textMargin = 0.07
 
 xSquare, ySquare = [0, 1, 1, 0, 0], [0, 0, 1, 1, 0]
 macroCellWidth, macroCellHeight = domainWidth / M1, domainHeight / M2
