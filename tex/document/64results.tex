@@ -14,7 +14,7 @@ for topology optimization with B-spline surrogates on sparse grids.
 \subsection{Methodology}
 \label{sec:641methodology}
 
-For simplicity, in the following,
+In the following, for simplicity,
 we combine the two functions to be interpolated,
 i.e., the Cholesky factor
 $\cholfactor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$ and
@@ -23,7 +23,7 @@ to one single objective function
 $\*\objfun\colon \clint{\*0, \*1} \to \real^{m+1}$,
 from which both functions can be recovered.
 
-\paragraph{Overview over offline and online phase}
+\paragraph{Overview of offline and online phase}
 
 Our method is divided into an offline phase and an online phase,
 both of which are sketched in \cref{fig:topoOptPhases}.
@@ -188,7 +188,7 @@ We use the classical surplus-based refinement criterion
 as show in \cref{alg:topoOptGridGeneration}
 to generate the spatially adaptive sparse grids.
 The difference to common surrogate settings is that the objective function
-$\*f\colon \clint{\*0, \*1} \to \real^{m+1}$ is but vector-valued.
+$\*f\colon \clint{\*0, \*1} \to \real^{m+1}$ is vector-valued.
 As the components of $\cholfactor$ cannot be evaluated individually,
 the adaptivity criterion has to consider all entries at once
 to avoid performing unnecessary evaluations.
@@ -212,7 +212,7 @@ points with largest $\beta_k$ are refined.
         \State{$\ngp \gets \setsize{\sgset}$}
         \Comment{number of grid points}%
         \State{%
-          Let $(\surplus{\*l_{k'},\*i_{k'}})_{k' = 1, \dotsc, \ngp}$
+          Let $(\vsurplus{\*l_{k'},\*i_{k'}})_{k' = 1, \dotsc, \ngp}$
           satisfy $
             \fa{k = 1, \dotsc, \ngp}{
               \sum_{k'=1}^{\ngp} \vsurplus_{\*l_{k'},\*i_{k'}}
@@ -233,7 +233,7 @@ points with largest $\beta_k$ are refined.
                 \gp{\*l_k,\*i_k} \to \gp{\*l,\*i}
               },\,
               \norm[\infty]{\*l_k} < l_{\max},\,
-              \abs{\surplus{\*l_k,\*i_k}} > \varepsilon
+              \abs{\beta_k} > \varepsilon
             \}
           $%
         }
@@ -257,7 +257,7 @@ points with largest $\beta_k$ are refined.
     the micro-cell density),
     the level $n \ge d$ and boundary parameter $b \in \nat$ of the
     initial regular sparse grid,
-    the vector $\*c \in \real^d$ of coefficients with which the
+    the vector $\*c \in \real^{m+1}$ of coefficients with which the
     absolute values of the entries of the surpluses are combined,
     the maximal level $l_{\max} \in \nat$,
     the refinement threshold $\varepsilon \in \posreal$, and
@@ -276,7 +276,7 @@ with the resulting elasticity tensors.
 For instance, many elasticity tensor entries corresponding to
 the 2D cross model are discontinuous near the lines $x_1 = 1$ or $x_2 = 1$
 \multicite{Huebner14Mehrdimensionale,Valentin14Hierarchische}.
-This is due to the fact the micro-cell is completely filled with material
+This is due to the fact that the micro-cell is completely filled with material
 on these lines,
 independent of the other micro-cell parameter.
 Similar issues occur for the other models and the shearing angles.
@@ -312,7 +312,7 @@ The macro-domains $\objdomain$ were discretized using
 %$20 \times 20 \times 10 = \num{4000}$
 \num{4000} cells for the 3D center-load).
 The generation of the sparse grids (offline phase) was done via a MATLAB code,
-while the evaluation of the interpolants (online phase) were performed
+while the evaluation of the interpolants (online phase) was performed
 by the sparse grid toolbox \sgpp \cite{Pflueger10Spatially}.%
 \footnote{%
   \url{http://sgpp.sparsegrids.org/}%
@@ -374,7 +374,7 @@ Therefore, in the remainder of this chapter,
 we will focus on the analysis of the errors of types
 \ref{item:topoOptErrorInterpolation} and \ref{item:topoOptErrorCholesky},
 since the interpolation of Cholesky factors is the
-major new contribution in this application.
+major new contribution to this application.
 
 
 
@@ -418,7 +418,7 @@ near $x_1 = 1$ or $x_2 = 1$
 is most severe near the corners $\*x \in \{(0, 1), (1, 0)\}$
 (cf.\ \cref{fig:cholesky}),
 as some entries vanish if one of the micro-cell bars has zero width.
-Hence, most points are placed near the singularity corners.
+Hence, most points are placed near these singularity corners.
 
 \begin{figure}
   \subcaptionbox{%
@@ -452,7 +452,7 @@ $\norm[2]{\etensor(\*x) - \etensorintp(\*x)}$
 of the direct elasticity tensor interpolant without Cholesky factorization
 (i.e., error \ref{item:topoOptErrorInterpolation}).
 The maximum error is \num{1.2e-3},
-which is attained near the critical lines $x_1 = 0$ or $x_2 = 0$.
+which is attained near the critical lines $x_1 = 1$ or $x_2 = 1$.
 Note that the mean error over the whole domain $\clint{\*0, \*1}$
 is only \num{4.5e-5}.
 In the right plot (\cref{fig:topoOptInterpolationErrorPointwise_2}),
@@ -507,7 +507,7 @@ due to the singularities of the elasticity tensor.
 This slow convergence does not improve for the other
 micro-cell models as shown in
 \Cref{fig:topoOptInterpolationErrorBasisFunctions_2}.
-In the contrary, the convergence decelerates even more
+In fact, the convergence decelerates even more
 as the number of micro-cell parameters increases.
 For the 2D sheared cross and 3D cross models with three parameters,
 the spatially adaptive sparse grid with $\ngp = \num{10000}$ grid points
@@ -811,7 +811,7 @@ In the three-dimensional scenarios,
 higher-order B-splines may perform worse than the piecewise linear
 functions ($p = 1$).
 (However, as indicated in \cref{tbl:topoOptResultsDegrees},
-all optimizations run with piecewise linear functions
+all optimization runs with piecewise linear functions
 terminated prematurely due to numerical difficulties with the
 discontinuous derivatives.)
 It may be suspected that if we used micro-cell models with
