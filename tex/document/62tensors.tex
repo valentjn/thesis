@@ -10,10 +10,11 @@ optimization algorithms typically
 evaluate the objective function $\compliance(\mcp{1}, \dotsc, \mcp{M})$
 iteratively at different \term{micro-cell parameter combinations}
 $(\mcp{1}, \dotsc, \mcp{M}) \in (\real^d)^M$.
-Every evaluation of $\compliance$ corresponds to the solution of a
+Every evaluation of $\compliance$ corresponds to one solution of a
 macro-problem.
-However, the elasticity tensors $\etensor^{(q)}$ of all $M$ macro-cells
-need to be known to solve the macro-problem.
+However, to solve the macro-problem,
+the elasticity tensors $\etensor^{(q)}$ of all $M$ macro-cells
+need to be known.
 Hence, in every optimization iteration, it is necessary to solve
 one macro-problem and $M$ micro-cell problems,
 both with the \fem.
@@ -37,7 +38,7 @@ However, $M$ is typically in the range of thousands and
 there are thousands or tens of thousands optimization iterations
 (the optimization problem is $(d \cdot M)$-dimensional!).
 This implies that the overall computation may still take
-several days to complete.
+several days or even weeks to complete.
 
 \paragraph{Drawback 2: Approximation of gradients}
 
@@ -64,9 +65,8 @@ objective function and of the constraints, i.e.,%
 However, in general, both gradients are unavailable and
 have to be approximated by finite differences.
 This introduces new error sources and
-increases the number of elasticity tensors to be evaluated
-by the factor of $2d + 1$ (central differences),
-further increasing the time-to-solution.
+increases the number of elasticity tensors to be evaluated,
+further slowing down the solution process.
 Additionally, the number of optimization iterations necessary to
 achieve convergence might increase,
 if there are discontinuities in the objective function
@@ -121,7 +121,7 @@ B-splines on the same sparse grid as for $\etensorentryintp{j}$
 for reasons of implementation,
 resulting in $m + 1$ sparse grid interpolants in total.
 From a theoretical perspective, this is not necessary,
-since the density can be calculated explicitly with simple formulas
+since the density can be explicitly calculated with simple formulas
 for most micro-cell models, independently of evaluations of the
 elasticity tensor.
 
@@ -137,7 +137,7 @@ Our approach has multiple obvious advantages:
   saving much computation time.
   
   \item
-  Sparse grids help to reduce the curse of dimensionality, which prohibits
+  Sparse grids ease the curse of dimensionality, which prohibits
   conventional full grid interpolation methods if $d > 4$.
   
   \item
@@ -172,7 +172,7 @@ The optimization algorithm crashes for most spatially adaptive grids,
 not being able to find any meaningful optimum.
 %
 The root of the problem proves to be that for specific
-$\*x \in \clint{\*0, \*1}$,
+micro-cell parameters $\*x \in \clint{\*0, \*1}$,
 the interpolated elasticity tensors $\etensorintp(\*x)$ are not
 positive definite.
 However, indefinite or even negative definite tensors $\etensorintp$
@@ -189,7 +189,7 @@ the interpolated elasticity tensors are \spd.
 
 \paragraph{Positive definiteness of sparse grid interpolants}
 
-However, interpolation on sparse grids per se does not preserve
+Interpolation on sparse grids per se does not preserve
 positive definiteness.
 A counterexample is shown in \cref{fig:cholesky1},
 which displays the minimal eigenvalue of the elasticity tensor surrogate
@@ -221,9 +221,10 @@ already make the whole elasticity tensor non-positive-definite.
     Minimal eigenvalue \emph{(colored contour lines)}
     of elasticity tensor surrogates
     for the 2D cross model ($\dimobjdomain = 2$, $d = 2$)
-    and cubic hierarchical B-splines $\bspl{l,i}{p}$ ($p = 3$) on
+    \vspace{-0.25em}%
+    and cubic hierarchical B-splines $\bspl{\*l,\*i}{p}$ ($p = 3$) on
     the regular sparse grid $\coarseregsgset{n}{d}{b}$ \emph{(dots)}
-    with $n = 7$ and $b = 4$.
+    with $n = 6$ and $b = 4$.
     \emph{Left:} The minimal eigenvalue of $\etensorintp(\*x)$
     becomes negative in some regions \emph{\textcolor{C1}{(red areas)}}
     of the domain $\clint{\*0, \*1}$,
@@ -243,15 +244,15 @@ as they place only few points near the boundary \cite{Pflueger10Spatially}.
 This leads to a loss of interpolation accuracy near the boundary
 when compared to the center of $\clint{\*0, \*1}$.
 Second, both the minimal eigenvalue of $\etensor(\*x)$ and the norm of its
-gradient with respect to $\*x$ is small near $x_1 = 0$ or $x_2 = 0$.
+gradient with respect to $\*x$ are small near $x_1 = 0$ or $x_2 = 0$.
 Consequently, the ``surface'' of the minimal eigenvalue function
 is rather flat in these regions and almost vanishes,
 facilitating the existence of negative eigenvalues of
 surrogate functions $\etensorintp(\*x)$.
 
 Note that for most micro-cell models,
-the optimization algorithm often queries the objective function
-$\compliance(\mcp{1}, \dotsc, \mcp{M})$ for micro-cell parameter
+the optimization algorithm often evaluates the objective function
+$\compliance(\mcp{1}, \dotsc, \mcp{M})$ at micro-cell parameter
 combinations for which many of the points $\mcp{j}$ are near the boundary
 of $\clint{\*0, \*1}$.
 This is because many of the macro-cells will either be empty or
@@ -267,7 +268,7 @@ indefiniteness, which further worsens the issue.
 Even in one dimension, it cannot be guaranteed that the interpolant of
 positive data remains positive,
 which is a key problem in the estimation of probability densities
-\multicite{Pflueger10Spatially,Franzelin16From,Griebel10Finite}.
+\multicite{Pflueger10Spatially,Griebel10Finite,Franzelin16From}.
 Just clamping the interpolated values via $\max(\cdot, 0)$ does not help:
 In our application, the tensor may still be indefinite;
 additionally, the calculated gradients of the interpolants do not match
@@ -276,10 +277,10 @@ In density estimation, clamping a density-like function changes its
 integral, making it necessary to recalculate its normalization constant
 \cite{Franzelin17Data}.
 
-One possible workaround is applying a continuous injective transformation
+One possible workaround is to apply a continuous injective transformation
 $T\colon \posreal \to \real$ on the positive values (e.g., $\ln$),
-interpolating the resulting values, and finally
-applying the inverse transformation $T^{-1}\colon \real \to \posreal$
+then interpolate the resulting values, and finally
+apply the inverse transformation $T^{-1}\colon \real \to \posreal$
 on the interpolated values (e.g., $\exp$).%
 \footnote{%
   Formally, the inverse function $T^{-1}\colon T(\posreal) \to \posreal$
@@ -403,4 +404,4 @@ where both $\cholfactorintp(\*x)$ and
 $\partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x)$
 are known (sparse grid interpolant and its derivative).
 As discussed above,
-this is key for the applicability of gradient-based optimization.
+this is key to the applicability of gradient-based optimization.

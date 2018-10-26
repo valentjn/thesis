@@ -41,10 +41,10 @@ The necessary notation is summarized in
 
 \paragraph{Density function}
 
-Let $\objdomain \subset \real^{\dimobjdomain}$ be the optimization domain.%
+Let $\objdomain \subset \real^{\dimobjdomain}$ be the object domain.%
 \footnote{%
   We use tildes to denote variables and quantities
-  that correspond to the spatial domain $\objdomain$
+  that correspond to the object domain $\objdomain$
   (e.g., $\tilde{\*x}$ is a point in $\objdomain$).
   In contrast, variables without a tilde will correspond
   to the sparse grid domain $\clint{\*0, \*1} = \clint{0, 1}^d$
@@ -66,7 +66,7 @@ zero and one, giving the physical density of the material in $\tilde{\*x}$.
 Furthermore, for every density function $\densglobal$,
 let $\compliance(\densglobal)$ be an objective function value.
 In our setting, which is shown in \cref{fig:topoOptExample},
-we exert a force $\force$ (or multiple forces) on the object,
+we exert a force $\force$ on the object,
 measure the resulting deformation, and
 compute the \term{compliance} (i.e., the inverse of the stiffness) as
 the objective function value~$\compliance(\densglobal)$:
@@ -79,16 +79,15 @@ where the \term{displacement function}
 $\displacement_{\densglobal}\colon \objdomain \to \real^{\dimobjdomain}$
 depends on the density \cite{Huebner14Mehrdimensionale}.
 We want to find the density function
-with the minimal objective function value:
+with the minimal compliance value:
 \begin{equation}
   \label{eq:topoOptProblemContinuous}
   \min_{\densglobal}\, \compliance(\densglobal).
 \end{equation}
-There are often uninteresting trivial solutions,
-if we do not impose additional conditions.
-For example, when minimizing compliance function values,
-choosing $\densglobal :\equiv 1$
-(i.e., filling the entire domain $\domain$ with material)
+If we do not impose additional conditions,
+then there are often uninteresting trivial solutions.
+For example, choosing $\densglobal :\equiv 1$
+(i.e., filling the entire domain $\objdomain$ with material)
 usually leads to the topology with the
 highest stiffness and, thus, the smallest displacement and compliance value.
 Therefore, we introduce the following volume constraint:
@@ -100,7 +99,7 @@ Therefore, we introduce the following volume constraint:
   := \voldens{1}{\objdomain},
 \end{equation}
 where $\vol{\objdomain} = \int_{\objdomain} 1 \diff\tilde{\*x}$
-is the volume of the domain and
+is the volume of the object domain and
 $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 
 \begin{SCfigure}
@@ -111,7 +110,7 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
     Example scenario for topology optimization.
     An object \emph{\textcolor{hellblau}{(light blue)}}
     is fixed on the left side
-    of the domain $\objdomain$
+    of the object domain $\objdomain$
     \emph{\textcolor{mittelblau!50}{(darker blue)}}
     and deformed by a force $\force$, resulting in a displaced object
     \emph{(dashed).}
@@ -137,11 +136,12 @@ For simplicity, we assume that $\objdomain$ is some hyper-rectangle
 $\clint{\tilde{\*a}, \tilde{\*b}}
 = \clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
 \clint{\tilde{a}_{\dimobjdomain}, \tilde{b}_{\dimobjdomain}}$;
-if it is not, we can replace $\objdomain$ with its bounding box.
-The domain $\objdomain$ can then be split into
+if it is not, we replace $\objdomain$ with its bounding box.
+The object domain $\objdomain$ can then be split into
 $M_1 \times \dotsb \times M_{\dimobjdomain}$
 equally-sized and axis-aligned sub-hyper-rectangles,
-which we call \term{macro-cells.}
+which we call \term{macro-cells}
+(where $M_1, \dotsc, M_{\dimobjdomain} \in \nat$).
 
 In the \term{two-scale approach,}
 we assume the material of the macro-cells to be
@@ -165,9 +165,9 @@ depends on the optimization scenario and has to be done a priori.
   ]{%
     Two-scale approach to discretize the homogenized topology
     optimization problem in two dimensions ($\dimobjdomain = 2$).
-    \emph{Left:} The domain $\objdomain$ is subdivided into $M_1 \times M_2$
-    macro-cells, each with its own material properties such as density
-    \emph{(colors).}
+    \emph{Left:} The object domain $\objdomain$ is
+    subdivided into $M_1 \times M_2$ macro-cells,
+    each with its own density \emph{(gray squares).}
     \emph{Center:} Every macro-cell is the repetition of infinitesimally small
     periodic micro-cells.
     \emph{Right:} The shape of the structure in every micro-cell is
@@ -184,7 +184,7 @@ Note that while the shape of all micro-cells in one macro-cell is identical,
 the micro-cell parameters corresponding to different macro-cells differ
 in general.
 This enables varying densities in different regions of $\objdomain$.
-We denote the parameters of the $q$-th macro-cell
+We denote the micro-cell parameters corresponding to the $q$-th macro-cell
 with $\mcp{q} = (\mcpentry{1}{q}, \dotsc, \mcpentry{d}{q}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
 where $q = 1, \dotsc, M$ and
@@ -209,23 +209,25 @@ To simplify the following considerations,
 we assume that $\dimobjdomain = 3$, i.e.,
 $\etensor^{(q)} \in \real^{6 \times 6}$.
 % caution: if not first \fem, then we need "an" before it
-They are usually computed as the solution of a \fem problem
+The elasticity tensors are usually computed as the solution of a \fem problem
 \term{(micro-problem).}
-Once all elasticity tensors $\etensor^{(q)}$ are known,
-we can compute the compliance value corresponding to the macro-shape
+Once all $\etensor^{(q)}$ are known,
+we can compute the compliance value
 by solving another \fem problem \term{(macro-problem),}
-see \cite{Allaire04Topology} and \cite{Huebner14Mehrdimensionale}
-for details.
+see \cite{Allaire04Topology} and \cite{Huebner14Mehrdimensionale}.
+
+\vspace{-0.5em}
 
 \paragraph{Discretized optimization problem}
 
-The new optimization problem following from the
+The new optimization problem emerging from the
 two-scale discretization process has the form
 \begin{subequations}
   \label{eq:topoOptProblemDiscrete}
+  \setlength{\belowdisplayskip}{5pt}%
   \begin{gather}
     \min J(\mcp{1}, \dotsc, \mcp{M}),\quad
-    \mcp{1}, \dotsc, \mcp{M} \in \clint{0, 1}^d
+    \mcp{1}, \dotsc, \mcp{M} \in \clint{\*0, \*1}
     \quad\text{s.t.}\quad
     \densmean(\mcp{1}, \dotsc, \mcp{M}) \le \densub,\\
     \densmean(\mcp{1}, \dotsc, \mcp{M})
