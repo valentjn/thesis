@@ -22,7 +22,7 @@ The necessary notation is summarized in
   }
     \toprulec
     \pnst{\objdomain}&       \pnst{\force}&        \pnst{\densglobal}\\
-    \pnst{\dimdomain}&       \pnst{\displacement}& \pnst{\denscell}\\
+    \pnst{\dimobjdomain}&    \pnst{\displacement}& \pnst{\denscell}\\
     $d$&\#micro-cell param.& \pnst{\compliance}&   \pnst{\densub}\\
     \pnst{\mcp}&             \pnst{\vol}&          \pnst{\etensor}\\
     &&                       \pnst{\voldens}&      \pnst{\cholfactor}\\
@@ -41,7 +41,7 @@ The necessary notation is summarized in
 
 \paragraph{Density function}
 
-Let $\objdomain \subset \real^{\dimdomain}$ be the optimization domain.%
+Let $\objdomain \subset \real^{\dimobjdomain}$ be the optimization domain.%
 \footnote{%
   We use tildes to denote variables and quantities
   that correspond to the spatial domain $\objdomain$
@@ -50,9 +50,9 @@ Let $\objdomain \subset \real^{\dimdomain}$ be the optimization domain.%
   to the sparse grid domain $\clint{\*0, \*1} = \clint{0, 1}^d$
   (e.g., $\gp{\*l,\*i} \in \clint{\*0, \*1}$ will be a sparse grid point).%
 }
-Usually, we assume $\dimdomain = 2$ or $\dimdomain = 3$,
+Usually, we assume $\dimobjdomain = 2$ or $\dimobjdomain = 3$,
 although the method can be generalized to
-arbitrary dimensionalities $\dimdomain \in \nat$.
+arbitrary dimensionalities $\dimobjdomain \in \nat$.
 Shapes and topologies are described by \term{density functions}
 $\densglobal\colon \objdomain \to \clint{0, 1}$.
 The function values $\densglobal(\tilde{\*x}) \in \clint{0, 1}$
@@ -76,7 +76,7 @@ the objective function value~$\compliance(\densglobal)$:
   \diff\tilde{\*x},
 \end{equation}
 where the \term{displacement function}
-$\displacement_{\densglobal}\colon \objdomain \to \real^{\dimdomain}$
+$\displacement_{\densglobal}\colon \objdomain \to \real^{\dimobjdomain}$
 depends on the density \cite{Huebner14Mehrdimensionale}.
 We want to find the density function
 with the minimal objective function value:
@@ -131,15 +131,15 @@ $\densub \in \clint{0, 1}$ is an upper bound on the volume fraction.
 Of course, we cannot solve the problem \eqref{eq:topoOptProblemContinuous}
 numerically,
 as there are infinitely many density functions $\densglobal$.
-%To be able to discretize the domain $\objdomain \subset \real^{\dimdomain}$
+%To be able to discretize the domain $\objdomain \subset \real^{\dimobjdomain}$
 %more easily,
 For simplicity, we assume that $\objdomain$ is some hyper-rectangle
 $\clint{\tilde{\*a}, \tilde{\*b}}
 = \clint{\tilde{a}_1, \tilde{b}_1} \times \dotsb \times
-\clint{\tilde{a}_{\dimdomain}, \tilde{b}_{\dimdomain}}$;
+\clint{\tilde{a}_{\dimobjdomain}, \tilde{b}_{\dimobjdomain}}$;
 if it is not, we can replace $\objdomain$ with its bounding box.
 The domain $\objdomain$ can then be split into
-$M_1 \times \dotsb \times M_{\dimdomain}$
+$M_1 \times \dotsb \times M_{\dimobjdomain}$
 equally-sized and axis-aligned sub-hyper-rectangles,
 which we call \term{macro-cells.}
 
@@ -164,7 +164,7 @@ depends on the optimization scenario and has to be done a priori.
     Two-scale approach for topology optimization%
   ]{%
     Two-scale approach to discretize the homogenized topology
-    optimization problem in two dimensions ($\dimdomain = 2$).
+    optimization problem in two dimensions ($\dimobjdomain = 2$).
     \emph{Left:} The domain $\objdomain$ is subdivided into $M_1 \times M_2$
     macro-cells, each with its own material properties such as density
     \emph{(colors).}
@@ -188,17 +188,17 @@ We denote the parameters of the $q$-th macro-cell
 with $\mcp{q} = (\mcpentry{1}{q}, \dotsc, \mcpentry{d}{q}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
 where $q = 1, \dotsc, M$ and
-$M := M_1 \dotsm M_{\dimdomain}$ is the number of macro-cells.
+$M := M_1 \dotsm M_{\dimobjdomain}$ is the number of macro-cells.
 With linear elasticity,
 one can compute so-called \term{elasticity tensors} $\etensor^{(q)}$,
 which encode information about the material properties
 of the different macro-cells.
 The elasticity tensors can be written as symmetric matrices
-in $\real^{3 \times 3}$ (for $\dimdomain = 2$) or
-in $\real^{6 \times 6}$ (for $\dimdomain = 3$).%
+in $\real^{3 \times 3}$ (for $\dimobjdomain = 2$) or
+in $\real^{6 \times 6}$ (for $\dimobjdomain = 3$).%
 \footnote{%
   In general, the elasticity tensor is a fourth-order tensor in
-  $\real^{\dimdomain \times \dimdomain \times \dimdomain \times \dimdomain}$.
+  $\real^{\dimobjdomain \times \dimobjdomain \times \dimobjdomain \times \dimobjdomain}$.
   One can reduce the size of the tensor by exploiting various symmetries
   \cite{Huebner14Mehrdimensionale}
   to obtain $6$ or $21$ stiffness coefficients
@@ -206,7 +206,7 @@ in $\real^{6 \times 6}$ (for $\dimdomain = 3$).%
   These coefficients can then be expressed as a symmetric matrix.%
 }
 To simplify the following considerations,
-we assume that $\dimdomain = 3$, i.e.,
+we assume that $\dimobjdomain = 3$, i.e.,
 $\etensor^{(q)} \in \real^{6 \times 6}$.
 % caution: if not first \fem, then we need "an" before it
 They are usually computed as the solution of a \fem problem
