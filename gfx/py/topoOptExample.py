@@ -70,7 +70,7 @@ ax.text(0.6, 0.25, r"$\densglobal(\tilde{\*x}) = 1$",
         ha="center", va="center", rotation=20)
 ax.text(0.03, 0.45, r"$\densglobal(\tilde{\*x}) = 0$",
         ha="left", va="center")
-ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\domain$",
+ax.text(domainWidth - 0.05, domainHeight - 0.05, r"$\objdomain$",
         ha="right", va="top")
 
 ax.set_aspect("equal")
