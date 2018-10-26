@@ -187,7 +187,7 @@ def main():
     
     v = 0.1
     verts, faces, _, _ = skimage.measure.marching_cubes_lewiner(
-        VV, v, spacing=size/(nn if q == 0 else nn-1))
+        VV, v, spacing=size/([nn[0], nn[1]+3, nn[2]] if q == 0 else nn-1))
     lightSource = mpl.colors.LightSource(0, 45)
     surf = ax.plot_trisurf(verts[:,0], verts[:,1], faces, verts[:,2],
                            lightsource=lightSource)
