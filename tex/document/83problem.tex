@@ -19,44 +19,56 @@ the individual can invest their money risk-free in bonds
 (with a fixed interest rate similar to a bank account)
 or in $m_{\stock} \in \nat$ different stocks, which is risk-affected.
 Every stock transaction,
-i.e., buy $\buy_{t,m_j}$ or sell $\sell_{t,m_j}$,
-inflicts transaction costs $\tac \buysell_{t,m_j}$ ($\tac \in \nonnegreal$)
-proportional to the amount $\buysell_{t,m_j}$ that was bought or sold.
+i.e., buy $\buy_{t,j}$ or sell $\sell_{t,j}$,
+inflicts transaction costs $\tac \buysell_{t,j}$ ($\tac \in \nonnegreal$)
+proportional to the amount $\buysell_{t,j}$ that was bought or sold
+($j = 1, \dotsc, m_{\stock}$).
 The individual only wants to invest a fixed
 amount $\wealth_0$ in stocks, i.e., we omit the individual's income.
 
 \paragraph{Consumption and state transition}
 
-If $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
-that is invested in the $j$-th stock,
-then the consumption can be computed as a residual variable
+In the following,
+$\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
+that is invested in the $j$-th stock.
+We combine these \term{stock fractions} $\stock_{t,j}$
+in the vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\stock}})$;
+similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\stock}})$.
+Then, the consumption can be computed as a residual variable
 (i.e., a variable that can be fully computed from $\state$ and $\policy$
 and is thus omitted from $\policy$)
 that is given by
 \begin{equation}
   \consume_t
-  := \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} \wealth_t - \bond_t -
-  (1 + \tac) \sum_{j=1}^{m_{\stock}} \buy_{t,j} +
-  (1 - \tac) \sum_{j=1}^{m_{\stock}} \sell_{t,j}.
+  := (1 - \sumfcn(\vstock_t)) \wealth_t - \bond_t -
+  (1 + \tac) \sumfcn(\vbuy_t) + (1 - \tac) \sumfcn(\vsell_t),
 \end{equation}
+where $\sumfcn(\*a) := \tr{\*1} \*a$
+is the sum of the entries of a vector $\*a$.
 The state transition is computed by adding the returns of the stocks:
 \begin{subequations}
   \begin{align}
     \wealth_{t+1}
-    &:= \bond_t \bondreturn_t + \sum_{j=1}^{m_{\stock}}
-    (\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},\\
-    \stock_{t+1,j}
+    &:= \bond_t \bondreturn_t +
+    %\sum_{j=1}^{m_{\stock}}
+    %(\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},\\
+    \sumfcn(
+      (\vstock_t \wealth_t + \vbuy_t - \vsell_t) \compmult \vstockreturn_t
+    ),\\
+    \vstock_{t+1}
     &:= \frac{
-      (\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},
-    }{\wealth_{t+1}},\quad
-    j = 1, \dotsc, m_{\stock},
+      (\vstock_t \wealth_t + \vbuy_t - \vsell_t) \compmult \vstockreturn_t
+    }{\wealth_{t+1}}.
   \end{align}
 \end{subequations}
-where $\bondreturn_t \in \real$ is the bond interest rate and
-$\stockreturn_{t,j} \in \real$ is the return of the $j$-th stock
-($j = 1, \dotsc, m_{\stock}$).
-
-
+where $\compmult$ is the component-wise multiplication,
+$\bondreturn_t \in \real$ is the bond interest rate, and
+$
+  \vstockreturn_t
+  = (\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_{\stock}})
+  \in \real^{m_{\stock}}
+$
+is the vector of (stochastic) stock return rates.
 
 \subsection{Normalization}
 \label{sec:832normalized}
@@ -66,61 +78,28 @@ $\stockreturn_{t,j} \in \real$ is the return of the $j$-th stock
 The equations above can be normalized with respect to the wealth
 $\wealth_t$:
 By setting
-$\normconsume_t := \consume_t/\wealth_t$,
-$\normbond_t    := \bond_t   /\wealth_t$, and
-$\normbuysell_t := \buysell_t/\wealth_t$, we obtain
+$\normconsume_t  := \consume_t/\wealth_t$,
+$\normbond_t     := \bond_t   /\wealth_t$, and
+$\vnormbuysell_t := \vbuysell_t/\wealth_t$, we obtain
 \begin{subequations}
   \label{eq:normalizedTCPStateTransition}
   \begin{align}
     \normconsume_t
-    &:= \paren*{1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j}} - \normbond_t -
-    (1 + \tac) \sum_{j=1}^{m_{\stock}} \normbuy_{t,j} +
-    (1 - \tac) \sum_{j=1}^{m_{\stock}} \normsell_{t,j},\\
+    &:= (1 - \sumfcn(\vstock_t)) - \normbond_t -
+    (1 + \tac) \sumfcn(\vnormbuy_t) + (1 - \tac) \sumfcn(\vnormsell_t),\\
     \wealthratio_{t+1}
-    &:= \normbond_t \bondreturn_t + \sum_{j=1}^{m_{\stock}}
-    (\stock_{t,j} + \normbuy_{t,j} - \normsell_{t,j}) \stockreturn_{t,j},
-    \qquad\left(= \frac{\wealth_{t+1}}{\wealth_t}\right)\\
-    \stock_{t+1,j}
+    &:= \normbond_t \bondreturn_t +
+    \sumfcn((\vstock_t + \vnormbuy_t - \vnormsell_t) \compmult \vstockreturn_t),
+    \qquad(= \wealth_{t+1}/\wealth_t)\\
+    \vstock_{t+1}
     &:= \frac{
-      (\stock_{t,j} + \normbuy_{t,j} - \normsell_{t,j}) \stockreturn_{t,j},
-    }{\wealthratio_{t+1}},\quad
-    j = 1, \dotsc, m_{\stock},
+      (\vstock_t + \vnormbuy_t - \vnormsell_t) \compmult \vstockreturn_t
+    }{\wealthratio_{t+1}},
   \end{align}
 \end{subequations}
 where both $\normconsume_t$ and $\wealthratio_{t+1}$ are residual
 variables that specify \term{normalized consumption} and
 \term{wealth ratio,} respectively.
-%\newcommand*{\normconst}{\kappa}
-%\begin{gather}
-%  \normconst
-%  := \frac{
-%    2\tac\Sigma
-%  }{
-%    \tac + \tac \Sigma - 1 + \sqrt{
-%      1 -
-%      4 \consume_{\min} \tac +
-%      2 \tac +
-%      \tac^2 -
-%      2 \tac^2 \Sigma +
-%      \Sigma^2 \tac^2 -
-%      2 \Sigma \tac
-%    }
-%  },\\
-%  \normconst
-%  := \frac{
-%    2 (\tac\Sigma)
-%  }{
-%    -(1 - \tac - \tac \Sigma) + \sqrt{
-%      (1 - \tac - \tac \Sigma)^2 -
-%      4 (\tac\Sigma) (\tac + (\consume_{\min} - 1)/\Sigma)
-%    }
-%  },\\
-%  (\tac\Sigma) \frac{1}{\normconst^2} +
-%  (1 - \tac - \tac \Sigma) \frac{1}{\normconst} +
-%  (\tac + (\consume_{\min} - 1)/\Sigma) \ge 0,\\
-%  \hat{\stock}_{t,j}
-%  \to \frac{\hat{\stock}_{t,j}}{\max(\normconst, 1)}
-%\end{gather}
 The resulting dynamic portfolio choice model has
 the following variables:
 \begin{itemize}
@@ -143,17 +122,22 @@ the following variables:
 \end{itemize}
 The state space and policy space constraints are given by
 \begin{subequations}
+  \newcommand*{\centereqline}[1]{%
+    \mathclap{\hphantom{\mathrm{(8.99a)}}#1}%
+  }%
   \begin{gather}
-    \stock_{t,j} \ge 0,\qquad
-    \sum_{j=1}^{m_{\stock}} \stock_{t,j} \le 1,\\[-0.4em]
-    \normconsume_{\min} + \normbond_t +
-    (1 + \tac) \sum_{j=1}^{m_{\stock}} \normbuy_{t,j} -
-    (1 - \tac) \sum_{j=1}^{m_{\stock}} \normsell_{t,j}
-    \le 1 - \sum_{j=1}^{m_{\stock}} \stock_{t,j},\\
-    \normbond_t \ge 0,\qquad
-    \normbuysell_{t,j} \ge 0,\qquad
-    \normsell_{t,j} \le \stock_{t,j},\qquad
-    j = 1, \dotsc, m_{\stock},
+    \centereqline{
+      \vstock_t \ge \*0,\qquad
+      \sumfcn(\vstock_t) \le 1,\qquad
+      \normbond_t \ge 0,\qquad
+      \vnormbuysell_t \ge \*0,\qquad
+      \vnormsell_t \le \vstock_t,
+    }\\
+    \centereqline{
+      \normconsume_{\min} + \normbond_t +
+      (1 + \tac) \sumfcn(\vnormbuy_t) - (1 - \tac) \sumfcn(\vnormsell_t)
+      \le 1 - \sumfcn(\vstock_t),
+    }
   \end{gather}
 \end{subequations}
 where $\normconsume_{\min} \in \nonnegreal$ is some minimal consumption
@@ -225,16 +209,13 @@ the wealth ratio $\wealthratio_{t+1}$ introduced above in
 \cref{eq:normalizedTCPStateTransition}.
 Since there is no inheritance, the optimal terminal solution
 is to sell all stocks and consume everything:
-\begin{subequations}
-  \begin{gather}
-    \normcetvalueintp_t(\state_T^{(k)})
-    = 1 - \tac \sum_{j=1}^{m_{\stock}} \stock_{t,j}^{(k)},\\
-    \normbond_T^{\opt}(\state_T^{(k)})
-    = 0,\quad
-    \normbuy[\opt]_{T,j}(\state_T^{(k)})
-    = 0,\quad
-    \normsell[\opt]_{T,j}(\state_T^{(k)})
-    = \stock_{t,j}^{(k)},\quad
-    j = 1, \dotsc, m_{\stock}.
-  \end{gather}
-\end{subequations}
+\begin{equation}
+  \normcetvalueintp_t(\state_T^{(k)})
+  = 1 - \tac \sumfcn(\vstock_t^{(k)}),\quad
+  \normbond_T^{\opt}(\state_T^{(k)})
+  = 0,\quad
+  \vnormbuy[\opt]_T(\state_T^{(k)})
+  = \*0,\quad
+  \vnormsell[\opt]_T(\state_T^{(k)})
+  = \vstock_t^{(k)}.
+\end{equation}
