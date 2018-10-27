@@ -19,7 +19,7 @@ def run(args, pipe=False, **kwargs):
 repoURL = "valentjn@neon%proxy:/data/scratch-ssd1/valentjn/git_repos/thesis"
 switches = {
   "draftMode" : True,
-  "checkMode" : False,
+  "checkMode" : True,
   "debugMode" : False,
   "showGlossaryDefinitionsMode" : False,
   "flipBookMode" : True,
