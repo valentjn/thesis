@@ -1544,6 +1544,14 @@
   Normalized stock buy/sell
 }
 
+\newcommand*{\vstock}{\*s}
+\newcommand*{\vbuy}[1][]{\*\delta^{+\appendwithcomma{#1}}}
+\newcommand*{\vsell}[1][]{\*\delta^{-\appendwithcomma{#1}}}
+\newcommand*{\vbuysell}[1][]{\*\delta^{\pm\appendwithcomma{#1}}}
+\newcommand*{\vnormbuy}[1][]{\hat{\*\delta}^{+\appendwithcomma{#1}}}
+\newcommand*{\vnormsell}[1][]{\hat{\*\delta}^{-\appendwithcomma{#1}}}
+\newcommand*{\vnormbuysell}[1][]{\hat{\*\delta}^{\pm\appendwithcomma{#1}}}
+
 \hidenextnotation
 \newnotationcommand{\wealthratio}{\eta}{Äηt}{$\wealthratio_t$}{
   Wealth ratio
@@ -1563,6 +1571,8 @@
 \newnotationcommand{\stockreturn}{\lambda}{Äλtj}{$\stockreturn_{t,j}$}{
   Stock return rate
 }
+
+\newcommand*{\vstockreturn}{\*\lambda}
 
 \hidenextnotation
 \newnotationcommand{\valuefcn}{J}{Jt}{$\valuefcn_t$}{
