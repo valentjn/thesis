@@ -224,3 +224,70 @@ is to sell all stocks and consume everything:
   \vnormsell[\opt]_T(\state_T^{(k)})
   = \vstock_t^{(k)}.
 \end{equation}
+
+
+
+\subsection{State Space Cropping}
+\label{sec:833cropping}
+
+\paragraph{Sparse grids on non-rectangular domains}
+
+Unfortunately, the constraint $\sumfcn(\vstock_t) \le 1$
+from \eqref{eq:normalizedTCPConstraints} limits the feasible state space
+region to a proper subset (which is the unit simplex)
+of the unit hypercube $\clint{\*0, \*1}$,
+which impedes the direct application of sparse grids.
+There are three possible remedies:
+defining a suitable transformation from the unit hypercube to
+the feasible state space,
+applying extrapolation techniques as discussed in
+\cref{sec:825interpolation}, or
+choosing a model-tailored approach to obtain
+function values outside the feasible state space.
+
+\paragraph{Virtual selling of stocks}
+
+We choose the third remedy and virtually sell, if $\sumfcn(\vstock_t) > 1$,
+as many stocks as needed to meet the constraint $\sumfcn(\vstock_t) \le 1$.
+We already might need to sell stocks
+even if $\sumfcn(\vstock_t)$ is smaller, but close to one
+in order to satisfy the minimum consumption requirement
+\eqref{eq:normalizedTCPConstraintsLong}.
+In detail, we replace $\vstock_t$ by $\normcropfactor \vstock_t$
+whenever $\normcropfactor < 1$,
+where $\normcropfactor \in \posreal$ is a \term{cropping factor}
+that is determined by
+\begin{equation}
+  \label{eq:virtualSelling}
+  \Bigl[
+    1 - \tac\, \bigl(
+      \sumfcn(\vstock_t) - \sumfcn(\normcropfactor\vstock_t)
+    \bigr)
+  \Bigr]
+  \cdot \bigl(1 - \sumfcn(\normcropfactor\vstock_t)\bigr)
+  = \normconsume_{\min}.
+\end{equation}
+Here, $\bigl(\sumfcn(\vstock_t) - \sumfcn(\normcropfactor\vstock_t)\bigr)$
+is the amount of virtually sold stocks.
+Consequently, the term in square brackets is the fraction of wealth
+that is still available after deducting the induced transaction costs.
+The product of this term with
+$\bigl(1 - \sumfcn(\normcropfactor\vstock_t)\bigr)$
+is the fraction of wealth that can be consumed after the virtual selling,
+which needs to be at least $\normconsume_{\min}$.
+Solving \cref{eq:virtualSelling} for $\normcropfactor$ and
+choosing the positive solution, we finally obtain
+\begin{equation}
+  \newcommand*{\sumX}{\sumfcn(\vstock_t)}
+  \newcommand*{\cMin}{\normconsume_{\min}}
+  \normcropfactor
+  := \frac{
+    \tac\, \bigl(1 + \sumX\bigr) - 1 +
+    \sqrt{
+      \tac^2\, \bigl(1 - \sumX\bigr)^2
+      - 2 \tac\, \bigl(2 \cMin - 1 + \sumX\bigr) + 1
+    }
+  }{
+    2 \tac \sumX
+  }.
+\end{equation}
