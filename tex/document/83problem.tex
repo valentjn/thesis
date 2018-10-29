@@ -1,16 +1,9 @@
 \section{Transaction Costs Model}
 \label{sec:83problem}
 
-\minitoc{70mm}{3}
+\minitoc[-3mm]{70mm}{4}
 
-\noindent
-This section defines the transaction costs model as an example problem for
-dynamic portfolio choice models.
-
-
-
-\subsection{Unnormalized Problem}
-\label{sec:831unnormalized}
+\vspace{-1.5em}
 
 \paragraph{Description}
 
@@ -25,6 +18,11 @@ proportional to the amount $\buysell_{t,j}$ that was bought or sold
 ($j = 1, \dotsc, m_{\stock}$).
 The individual only wants to invest a fixed
 amount $\wealth_0$ in stocks, i.e., we omit the individual's income.
+
+
+
+\subsection{Unnormalized Problem}
+\label{sec:831unnormalized}
 
 \paragraph{Consumption and state transition}
 
@@ -43,10 +41,9 @@ that is given by
   := (1 - \sumfcn(\vstock_t)) \wealth_t - \bond_t -
   (1 + \tac) \sumfcn(\vbuy_t) + (1 - \tac) \sumfcn(\vsell_t),
 \end{equation}
-where $\sumfcn(\*a) := \tr{\*1} \*a$
-is the sum of the entries of a vector $\*a$.
-The state transition is computed by adding the returns of the stocks:
-\begin{subequations}
+where $\sumfcn(\*a) := \tr{\*1} \*a$.
+The state transition is computed by adding the returns of the stocks:%
+\begin{subequations}%
   \begin{align}
     \wealth_{t+1}
     &:= \bond_t \bondreturn_t +
@@ -177,8 +174,8 @@ By setting $\normcetvalueintp_t(\state_t^{(k)})
     %    }
     %  \right)^{1/(1-\riskav)}
     %\right)\\
-    &\hphantom{=}\hspace{0.6em} \normcetvalueintp_t(\state_t^{(k)})\\
-    &= \wealth_t^{-1} \cetvalueintp_t(\state_t^{(k)})\\
+    &\hphantom{=}\hspace{0.6em} \normcetvalueintp_t(\state_t^{(k)})
+    = \wealth_t^{-1} \cetvalueintp_t(\state_t^{(k)})\\
     &= \max_{\policy_t} \left(
       \left(
         \left(
