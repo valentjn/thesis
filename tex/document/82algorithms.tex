@@ -422,7 +422,7 @@ $\cetvalueintp_T(\state_t^{(k)}) = \max_{\policy_T}
 for $t < T$, since for $\riskav > 0$,
 $(\cdot)^{1/(1-\riskav)}$ is strictly monotonously decreasing and
 $(1-\riskav) < 0$.
-For brevity, the notation in the remainder of this section
+The notation in the remainder of this section
 does not distinguish between $\valueintp[\ast]_t$ and $\cetvalueintp[\ast]_t$
 and uses $\valueintp[\ast]_t$ for both, if it is not relevant
 whether the value function is transformed.
@@ -450,9 +450,8 @@ whether the value function is transformed.
 \subsection{Quadrature}
 \label{sec:824quadrature}
 
-In an implementation,
-the expectation in \cref{eq:gridBellmanCET} cannot be exactly computed;
-it has to be approximated by quadrature:
+We need to approximate the expectation in \cref{eq:gridBellmanCET}
+by quadrature,
 \begin{equation}
   \label{eq:bellmanQuadrature}
   \expectation[t]{
@@ -467,7 +466,7 @@ it has to be approximated by quadrature:
     \cetvalueintp[p]_{t+1}(
       \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
     )
-  )^{1-\riskav}
+  )^{1-\riskav},
 \end{equation}
 for some weights $\quadweight_t^{(j)} \in \real$ and
 nodes $\stochastic_t^{(j)} \in \stochdomain$
@@ -731,8 +730,10 @@ which means that they can be parallelized.
 
 
 
+\vspace{-0.5em}
 \subsection{Post-Processing}
 \label{sec:828postProecessing}
+\vspace{-0.5em}
 
 \paragraph{Monte Carlo simulation}
 
@@ -742,15 +743,21 @@ $(\optpolicyintp[p]_t)_{t=0,\dotsc,T}$
 are reasonable.
 One possibility is a Monte Carlo simulation,
 where we calculate the mean optimal policy
-\begin{equation}
-  \optpolicymean_t
-  = \frac{1}{m_\mathrm{MC}} \sum_{j=1}^{m_\mathrm{MC}} \policy_{t,(j)}
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \optpolicymean_t
+    = \frac{1}{m_\mathrm{MC}} \sum_{j=1}^{m_\mathrm{MC}} \policy_{t,(j)}
+  \end{equation}%
+}
 for $m_\mathrm{MC} \in \nat$ individuals.
 The optimal policies $\policy_{t,(j)}$ of the individuals
 ($t = 0, \dotsc, T$ and $j = 1, \dotsc, m_\mathrm{MC}$)
 are determined by
 \begin{subequations}
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
   \begin{align}
     \policy_{t,(j)}
     &:= \optpolicyintp[p]_t(\state_{t,(j)}),\\
@@ -767,9 +774,9 @@ are determined by
 \end{subequations}
 i.e., the initial state $\state_{t,(0)}$ and the
 stochastic variables $\stochastic_{t,(j)}$ are samples of random variables.
-The Monte Carlo simulation enables us to draw macro-economic conclusions.
-(For instance, how does the amount of consumption of the average individual
-typically evolve over time?)
+The Monte Carlo simulation enables us to draw macro-economic conclusions,
+e.g., the evolution of the amount of consumption of the average individual
+over time.
 
 %\paragraph{Euler equation errors}
 %
