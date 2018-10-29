@@ -5,7 +5,7 @@
 
 \noindent
 The following numerical experiments can be roughly divided into two parts.
-First, we study interpolation errors for the various test functions
+First, we study interpolation errors for the test functions
 to assess the effects of the hierarchical B-spline bases introduced in
 \cref{chap:20sparseGrids,chap:30BSplines} on interpolation.
 Second, we consider optimization errors, i.e.,
@@ -105,8 +105,7 @@ Shown are eight types of hierarchical B-spline bases as introduced in
 Note that some lines exactly overlap, which is indicated in
 the figure.
 
-For $p = 1$, the non-modified bases and the modified bases coincide,
-respectively.
+For $p = 1$, the non-modified bases and the modified bases coincide.
 For higher degrees, the modified bases show worse results than
 the corresponding non-modified versions for the same level $n$.
 However, modified bases need significantly less grid points
@@ -495,10 +494,10 @@ the direct optimization of the objective function (dotted lines).
 For the test functions Sch06 and Sch22 with discontinuous derivatives,
 the advantage of higher-order B-splines is not as evident (Sch22) or
 does not even exist (Sch06).
-However, in low dimensions $d \le 4$, B-splines
+However, in low dimensions, i.e., $d \le 4$, B-splines
 achieve a slight advantage compared to the piecewise linear basis
 for the Sch22 function.
-In higher dimensionalities $d \ge 6$ (bottom row),
+In higher dimensionalities, i.e., $d \ge 6$ (bottom row),
 convergence visibly slows down for all methods shown in
 \cref{fig:resultsOptimizationUnconstrainedTestFunctions},
 although for some objective functions, B-splines are still able
@@ -567,7 +566,7 @@ All calculated points are feasible.%
 }
 
 The range of the objective function of the five-dimensional G04Sq problem
-is larger than that of G08.
+is larger than the range of G08.
 This results in generally higher optimality gaps
 $\objfun(\xoptappr) - \objfun(\xopt)$ as we do not normalize
 with respect to the range.

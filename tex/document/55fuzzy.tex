@@ -6,8 +6,7 @@
 
 \noindent
 To conclude this chapter, we consider the fuzzy extension principle
-as an example application of optimization of B-spline surrogates
-on sparse grids.
+as an example application of optimization of B-spline sparse grid surrogates.
 
 \paragraph{Aleatoric and epistemic uncertainties}
 
@@ -142,8 +141,9 @@ As the support of Gaussian fuzzy numbers is unbounded,
 to a fixed multiple of the standard deviation $\sigma$
 \cite{Klimke06Uncertainty}.
 However, it would be more natural to directly employ B-splines of
-higher degree (normalized adequately), since they are a generalization
-of triangular fuzzy numbers and their limit is a Gaussian fuzzy number.
+higher degree $p$ (normalized adequately), since they are a generalization
+of triangular fuzzy numbers and their limit with respect to $p$
+is a Gaussian fuzzy number.
 
 
 
@@ -492,7 +492,7 @@ by \SI{10}{\percent}, since the minimum or the maximum might be
 near the boundary $\Omega_{\alpha_j}$ and
 since the points to be inserted might not be close to
 the points to be refined.
-We ensure a minimal size of $\Omega_{\alpha_j}$ of at least $0.05$
+We ensure that the size of $\Omega_{\alpha_j}$ is at least $0.05$
 in every coordinate direction.
 The remaining experiments use $\gamma = 0.1$ as adaptivity.
 

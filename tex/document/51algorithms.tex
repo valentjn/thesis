@@ -13,7 +13,7 @@ Generally, \term{unconstrained optimization problems} have the form
   \*x \in \real^d,
 \end{equation}
 where $\objfun\colon \real^d \to \real$ is the \term{objective function.}
-In contrast, \term{constrained optimization problems} are given by
+\term{Constrained optimization problems} are given by
 \begin{equation}
   \label{eq:constrainedOptimization}
   \xopt = \vecargmin \objfun(\*x),\quad
@@ -54,9 +54,10 @@ $\objfun(\*x_k)$,
 choosing the next evaluation point $\*x_{k+1}$
 based on the previous function values $\objfun(\*x_0), \dotsc, \objfun(\*x_k)$.
 Gradient-based methods differ from gradient-free approaches
-in such a way that they also take values of the gradient
-$\gradient{\*x}{\objfun}(\*x_k)$ or of the Hessian
-$\hessian{\*x}{\objfun}(\*x_k)$ into account.
+in such a way that they also take values
+of the gradient $\gradient{\*x}{\objfun}(\*x_k)$,
+of the Hessian $\hessian{\*x}{\objfun}(\*x_k)$, or
+of even higher-order derivatives into account.
 
 A vast array of optimization methods exists in literature.
 Some methods are better suited for specific optimization problems
@@ -368,7 +369,7 @@ $\*d_k \propto
 -(\hessian{\*x}{\objfun}(\*x_k))^{-1} \gradient{\*x}{\objfun}(\*x_k)$.
 Despite converging for strictly convex quadratic functions in a single step,
 the Hessian must not be ill-conditioned for the Newton method as well,
-as we have to solve a linear system with matrix
+as we have to solve a linear system with the matrix
 $\hessian{\*x}{\objfun}(\*x_k)$.
 Hence, often a \term{regularization/damping term} $\lambda \eye$
 for some $\lambda > 0$ is added to the Hessian.
@@ -400,7 +401,7 @@ considers the gradient entries $(\gradient{\*x}{\objfun}(\*x_k))_t$
 of each dimension $t = 1, \dotsc, d$ separately
 and updates the entries $x_{k,t}$ of $\*x_k$
 according to the sign of the respective gradient entry,
-adapting the step size dimension-wise.
+while adapting the step size dimension-wise.
 Although the algorithm is independent of the exact direction
 of $\gradient{\*x}{\objfun}(\*x_k)$,
 it was found to often work robustly in machine learning scenarios
