@@ -1,4 +1,4 @@
-\section{Numerical Results}
+\section{Implementation and Numerical Results}
 \label{sec:73results}
 
 \minitoc[-8mm]{90mm}{4}
@@ -10,8 +10,33 @@ biomechanical model of the upper limb.
 
 
 
+\subsection{Implementation}
+\label{sec:731implementation}
+
+\paragraph{Parameters, implementation, and geometry}
+
+Details about implementational aspects of the model can be found in
+\multicite{Sprenger15Continuum,Roehrle16Two,Valentin18Gradient},
+for instance, values for the material parameters.
+%
+The constitutive law has been implemented in the CMISS software package
+(an interactive computer program for Continuum Mechanics,
+Image analysis, Signal processing and System identification%
+\footnote{%
+  \url{https://www.cmiss.org/}%
+}).
+The emerging PDEs are discretized using quadratic finite element basis
+functions and the resulting linearized system is solved with CMISS.
+%
+The geometry of the human upper limb model is based on
+the Visible Human Male's dataset \cite{Spitzer96Visible}.
+Again, we refer to \multicite{Sprenger15Continuum,Roehrle16Two} for details
+about the geometry.
+
+
+
 \subsection{Reference and Sparse Grid Solution}
-\label{sec:731solutionTypes}
+\label{sec:732solutionTypes}
 
 \paragraph{Reference solution}
 
@@ -144,7 +169,7 @@ into \eqref{eq:totalMomentSurrogate} and \eqref{eq:equilibriumAngleSurrogate}.
 
 
 \subsection{Errors of Muscle Forces and Equilibrium Angle}
-\label{sec:732errors}
+\label{sec:733errors}
 
 \paragraph{Quality of reference interpolants}
 
@@ -418,7 +443,7 @@ contribute the most to the error.
 
 
 \subsection{Test Scenario}
-\label{sec:733scenario}
+\label{sec:734scenario}
 
 \paragraph{Definition of the test scenario}
 
@@ -595,7 +620,7 @@ basis functions.
 
 
 \subsection{Spatial Adaptivity}
-\label{sec:734adaptivity}
+\label{sec:735adaptivity}
 
 \paragraph{Generation of a spatially adaptive sparse grid}
 
