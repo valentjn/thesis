@@ -124,10 +124,12 @@ the following variables:
 \end{itemize}
 The state space and policy space constraints are given by
 \begin{subequations}
+  \label{eq:normalizedTCPConstraints}
   \newcommand*{\centereqline}[1]{%
     \mathclap{\hphantom{\mathrm{(8.99a)}}#1}%
   }%
   \begin{gather}
+    \label{eq:normalizedTCPConstraintsShort}
     \centereqline{
       \vstock_t \ge \*0,\qquad
       \sumfcn(\vstock_t) \le 1,\qquad
@@ -135,6 +137,7 @@ The state space and policy space constraints are given by
       \vnormbuysell_t \ge \*0,\qquad
       \vnormsell_t \le \vstock_t,
     }\\
+    \label{eq:normalizedTCPConstraintsLong}
     \centereqline{
       \normconsume_{\min} + \normbond_t +
       (1 + \tac) \sumfcn(\vnormbuy_t) - (1 - \tac) \sumfcn(\vnormsell_t)
