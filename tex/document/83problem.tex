@@ -291,73 +291,183 @@ choosing the positive solution, we finally obtain
 \subsection{Euler Equation Errors}
 \label{sec:834eulerErrors}
 
-In the following, we abbreviate
-the normalized and certainty-equivalent-transformed value function interpolant
+\paragraph{Motivation}
+
+Due to the curse of dimensionality,
+reasonably accurate full grid reference solutions
+of the transaction costs problem can only be computed
+if the number $m_{\vstock}$ of stocks is small.
+Mainly (but not only) in higher-dimensional settings,
+a different means of assessing the
+quality of sparse grid solutions is desirable.
+We use Euler equation errors to measure the deviation in
+the first-order optimality conditions.
+
+\paragraph{Derivation}
+
+In the following, we fix the state $\normstate_t \in \clint{\*0, \*1}$
+for which we want to compute the Euler equation error.
+We abbreviate
+the
+%normalized and certainty-equivalent-transformed
+value function interpolant
 $
   \normcetvalueintp_t
-  = \normcetvalueintp_t(\normstate_t)
-$,
-its gradient
-$
-  \gradient{\normstate_t}{\normcetvalueintp_t}
-  = \gradient{\normstate_t}{\normcetvalueintp_t}(\normstate_t)
-$,
-the interpolated optimal policy
-$
-  \optnormpolicyintp_t
-  = \optnormpolicyintp_t(\normstate_t)
+  := \normcetvalueintp_t(\normstate_t)
 $,
 the state transition function
 $
-  \statefcn_t
-  = \statefcn_t(\normstate_t, \optnormpolicyintp_t, \stochastic_t)
+  \normstatefcn_t
+  := \normstatefcn_t(\normstate_t, \normpolicy_t, \stochastic_t)
 $,
 the wealth ratio
 $
   \wealthratio_{t+1}
-  = \wealthratio_{t+1}(
-    \normstate_t, \optnormpolicyintp_t, \stochastic_t
+  := \wealthratio_{t+1}(
+    \normstate_t, \normpolicy_t, \stochastic_t
   )
 $, and
 the consumption
 $
   \normconsume_t
-  = \normconsume_t(\normstate_t, \optnormpolicyintp_t)
+  := \normconsume_t(\normstate_t, \normpolicy_t)
 $.
-
+The Lagrangian of the optimization problem corresponding
+to the Bellman equation \eqref{eq:normalizedTCPBellmanEquation}
+of the normalized transaction costs problem
+vanishes with respect to the problem's constraints
+\eqref{eq:normalizedTCPConstraints} is given by
+\begin{equation}
+  \begin{split}
+    \lagrangian_t(\normstate_t, \normpolicy_t, \*\multiplier)
+    &:= \left(
+      (\normconsume_t)^{1-\riskav} +
+      \patience \expectation[t]{
+        \bigl(
+          \wealthratio_{t+1}\;
+          \normcetvalueintp_{t+1}(\normstatefcn_t)
+        \bigr)^{1-\riskav}
+      }
+    \right)^{1/(1-\riskav)}\\
+    &\hspace*{6mm} {}
+    - \multiplier_1 \normbond_t
+    - \tr{\*\multiplier_2} \vnormbuy_t
+    - \tr{\*\multiplier_3} \vnormsell_t
+    + \tr{\*\multiplier_4}\; (\vnormsell_t - \vstock_t)
+    + \multiplier_5\; (\normconsume_{\min} - \normconsume_t)
+  \end{split}
+\end{equation}
+with $
+\*\multiplier := (
+  \multiplier_1,
+  \*\multiplier_2,
+  \*\multiplier_3,
+  \*\multiplier_4,
+  \multiplier_5
+)$,
+$\multiplier_1, \multiplier_5 \in \real$, and
+$\*\multiplier_2, \*\multiplier_3, \*\multiplier_4 \in \real^{m_{\vstock}}$.
+According to the first-order conditions
+\term{(Karush--Kuhn--Tucker (KKT) conditions),}
+the partial derivative
+$
+  \partialderiv{\partialdiff \normbond_t}{\lagrangian_t}(
+    \normstate_t, \normpolicy_t, \*\multiplier
+  )
+$
+with respect to $\normbond_t$
+vanishes in the exact optimum
+$\normpolicy_t = \optnormpolicyfcn_t := \optnormpolicyfcn_t(\normstate_t)$,
+i.e.,
+\begin{equation}
+  \partialderiv{\partialdiff \normbond_t}{
+    \left(
+      (\normconsume_t^{\opt})^{1-\riskav} +
+      \patience \expectation[t]{
+        \bigl(
+          \wealthratio_{t+1}^{\opt}\;
+          \normcetvalueintp_{t+1}(\normstatefcn_t^{\opt})
+        \bigr)^{1-\riskav}
+      }
+    \right)^{1/(1-\riskav)}
+  }
+  - \multiplier_1
+  - \multiplier_5
+  \partialderiv{\partialdiff \normbond_t}{\normconsume_t^{\opt}}
+  = 0,
+\end{equation}
+where
+$
+  \normstatefcn_t^{\opt}
+  := \normstatefcn_t(\normstate_t, \optnormpolicyfcn_t, \stochastic_t)
+$,
+$
+  \wealthratio_{t+1}^{\opt}
+  := \wealthratio_{t+1}(
+    \normstate_t, \optnormpolicyfcn_t, \stochastic_t
+  )
+$, and
+$
+  \normconsume_t^{\opt}
+  := \normconsume_t(\normstate_t, \optnormpolicyfcn_t)
+$.
+We now neglect binding constraints,
+i.e., we assume that $\multiplier_1 = \multiplier_5 = 0$,
+otherwise we cannot compute the error.
+After calculating the derivatives, we obtain
 \begin{equation}
   \patience \bondreturn_t
   \cdot \expectationsign[t]\Bigl[
     \bigl(
       \normcetvalueintp_t
       - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
-      \statefcn_t
+      \statefcn_t^{\opt}
     \bigr) \cdot
     \bigl(
-      \wealthratio_{t+1}\; \normcetvalueintp_t
+      \wealthratio_{t+1}^{\opt}\; \normcetvalueintp_t
     \bigr)^{-\riskav}
   \Bigr]
-  = \normconsume_t^{-\riskav}
+  = (\normconsume_t^{\opt})^{-\riskav}.
 \end{equation}
-
+This equation can be used as an error measure by substituting
+$\optnormpolicyfcn_t$ for the interpolated optimum
+$\optnormpolicyintp_t = \optnormpolicyintp_t(\normstate_t)$.
+By multiplying the resulting equation by
+$
+  (\normconsume_t^{\sparse,\opt})^{\riskav}
+  := (\normconsume_t(\normstate_t, \optnormpolicyintp_t))^{\riskav}
+$, we obtain the
+\term{unit-free Euler equation errors with respect to $\normbond_t$}
 \begin{equation}
   \error_t(\normstate_t)
   := \Bigl|
     1 - \Bigl(
-      \patience \bondreturn_t \normconsume_t^{\riskav}
+      \patience \bondreturn_t (\normconsume_t^{\sparse,\opt})^{\riskav}
       \cdot \expectationsign[t]\Bigl[
         \bigl(
           \normcetvalueintp_t
           - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
-          \statefcn_t
+          \statefcn_t^{\sparse,\opt}
         \bigr) \cdot
         \bigl(
-          \wealthratio_{t+1}\; \normcetvalueintp_t
+          \wealthratio_{t+1}^{\sparse,\opt}\;
+          \normcetvalueintp_t
         \bigr)^{-\riskav}
       \Bigr]
     \Bigr)^{-1/\riskav}
-  \Bigr|,
+  \Bigr|
 \end{equation}
+with
+$
+  \normstatefcn_t^{\sparse, \opt}
+  := \normstatefcn_t(\normstate_t, \optnormpolicyintp_t, \stochastic_t)
+$ and
+$
+  \wealthratio_{t+1}^{\sparse,\opt}
+  := \wealthratio_{t+1}(
+    \normstate_t, \optnormpolicyintp_t, \stochastic_t
+  )
+$.
 
 %\begin{equation}
 %  \begin{split}
@@ -417,5 +527,3 @@ $.
 %    \Bigr|,
 %  \end{split}
 %\end{equation}
-
-\dummytext[3]{}
