@@ -287,3 +287,137 @@ choosing the positive solution, we finally obtain
     2 \tac \sumX
   }.
 \end{equation}
+
+
+
+\subsection{Euler Equation Errors}
+\label{sec:834eulerErrors}
+
+In the following, we abbreviate
+the normalized and certainty-equivalent-transformed value function interpolant
+$
+  \normcetvalueintp_t
+  = \normcetvalueintp_t(\normstate_t)
+$,
+its gradient
+$
+  \gradient{\normstate_t}{\normcetvalueintp_t}
+  = \gradient{\normstate_t}{\normcetvalueintp_t}(\normstate_t)
+$,
+the interpolated optimal policy
+$
+  \optnormpolicyintp_t
+  = \optnormpolicyintp_t(\normstate_t)
+$,
+the state transition function
+$
+  \statefcn_t
+  = \statefcn_t(\normstate_t, \optnormpolicyintp_t, \stochastic_t)
+$,
+the wealth ratio
+$
+  \wealthratio_{t+1}
+  = \wealthratio_{t+1}(
+    \normstate_t, \optnormpolicyintp_t, \stochastic_t
+  )
+$, and
+the consumption
+$
+  \normconsume_t
+  = \normconsume_t(\normstate_t, \optnormpolicyintp_t)
+$.
+
+\begin{equation}
+  \patience \bondreturn_t
+  \cdot \expectationsign[t]\Bigl[
+    \bigl(
+      \normcetvalueintp_t
+      - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
+      \statefcn_t
+    \bigr) \cdot
+    \bigl(
+      \wealthratio_{t+1}\; \normcetvalueintp_t
+    \bigr)^{-\riskav}
+  \Bigr]
+  = \normconsume_t^{-\riskav}
+\end{equation}
+
+\begin{equation}
+  \error_t(\normstate_t)
+  := \Bigl|
+    1 - \Bigl(
+      \patience \bondreturn_t \normconsume_t^{\riskav}
+      \cdot \expectationsign[t]\Bigl[
+        &\bigl(
+          \normcetvalueintp_t
+          - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
+          \statefcn_t
+        \bigr) \cdot
+        \bigl(
+          \wealthratio_{t+1}\; \normcetvalueintp_t
+        \bigr)^{-\riskav}
+      \Bigr]
+    \Bigr)^{-1/\riskav}
+  \Bigr|,
+\end{equation}
+
+%\begin{equation}
+%  \begin{split}
+%    \patience \bondreturn_t
+%    \cdot \expectationsign[t]\Bigl[
+%      &\bigl(
+%        \normcetvalueintp_t%(\normstate_t)
+%        - \tr{
+%          (
+%            \gradient{\normstate_t}{\normcetvalueintp_t}%(\normstate_t)
+%          )
+%        }
+%        \statefcn_t%(\normstate_t, \optnormpolicyfcn_t, \stochastic_t)
+%      \bigr)\\[-1mm]
+%      &{} \cdot
+%      \bigl(
+%        \wealthratio_{t+1}%(
+%        %  \normstate_t, \optnormpolicyfcn_t, \stochastic_t
+%        %)
+%        \;
+%        \normcetvalueintp_t%(\normstate_t)
+%      \bigr)^{-\riskav}
+%    \Bigr]
+%    = \normconsume_t%(\normstate_t, \optnormpolicyfcn_t)
+%    ^{-\riskav}
+%  \end{split}
+%\end{equation}
+%
+%\begin{equation}
+%  \begin{split}
+%    \error_t(\normstate_t)
+%    := \Bigl|
+%      1 - \Bigl(
+%        \patience \bondreturn_t
+%        \cdot \normconsume_t%(\normstate_t, \optnormpolicyfcn_t)
+%        ^{\riskav}
+%        \cdot \expectationsign[t]\Bigl[
+%          &\bigl(
+%            \normcetvalueintp_t%(\normstate_t)
+%            - \tr{
+%              (
+%                \gradient{\normstate_t}{\normcetvalueintp_t}%(\normstate_t)
+%              )
+%            }
+%            \statefcn_t%(\normstate_t, \optnormpolicyfcn_t, \stochastic_t)
+%          \bigr)\\[-2mm]
+%          &{} \cdot
+%          \bigl(
+%            \wealthratio_{t+1}%(
+%            %  \normstate_t, \optnormpolicyfcn_t, \stochastic_t
+%            %)
+%            \;
+%            \normcetvalueintp_t%(\normstate_t)
+%          \bigr)^{-\riskav}
+%        \Bigr]
+%      \Bigr)^{-1/\riskav}
+%    \Bigr|,
+%  \end{split}
+%\end{equation}
+
+\dummytext[3]{}
