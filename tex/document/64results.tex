@@ -203,7 +203,7 @@ points with largest $\beta_k$ are refined.
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\sgset = \texttt{offlinePhase}$}{%
-      $\*\objfun$, $n$, $b$, $\*c$, $l_{\max}$, $\varepsilon$,
+      $\*\objfun$, $n$, $b$, $\*c$, $l_{\max}$, $\refinetol$,
       $\ngp_{\mathrm{refine}}$%
     }
       \State{$\sgset \gets \coarseregsgset{n}{d}{b}$}
@@ -233,7 +233,7 @@ points with largest $\beta_k$ are refined.
                 \gp{\*l_k,\*i_k} \to \gp{\*l,\*i}
               },\,
               \norm[\infty]{\*l_k} < l_{\max},\,
-              \abs{\beta_k} > \varepsilon
+              \abs{\beta_k} > \refinetol
             \}
           $%
         }
@@ -260,7 +260,7 @@ points with largest $\beta_k$ are refined.
     the vector $\*c \in \real^{m+1}$ of coefficients with which the
     absolute values of the entries of the surpluses are combined,
     the maximal level $l_{\max} \in \nat$,
-    the refinement threshold $\varepsilon \in \posreal$, and
+    the refinement threshold $\refinetol \in \posreal$, and
     the number $\ngp_{\mathrm{refine}} \in \nat$ of points to refine
     in each iteration.
     Output is the spatially adaptive sparse grid $\sgset$.%
@@ -541,7 +541,7 @@ for the same grid size.
   \caption[Convergence of relative $L^2$ spectral interpolation errors]{%
     Convergence of relative $\Ltwo$ spectral interpolation errors
     over the increasing number $\ngp$ of spatially adaptive grid points
-    (i.e., decreasing threshold $\varepsilon$)
+    (i.e., decreasing threshold $\refinetol$)
     for the 2D cross model without or with Cholesky factor interpolation
     and different degrees $p$ \emph{(left)} and
     for the other models and cubic degree \emph{(right)}.%
