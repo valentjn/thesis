@@ -83,7 +83,7 @@ then the issues even worsen.
 \paragraph{Elasticity tensor function}
 
 As a remedy, we replace the costly elasticity tensors with cheap surrogates.
-If assume that all macro-cells use the same micro-cell model,
+If we assume that all macro-cells use the same micro-cell model,
 the elasticity tensor $\etensor^{(q)}$ of the $q$-th macro-cell
 with the parameter $\mcp{q} \in \clint{\*0, \*1}$
 can be written as the value $\etensor(\mcp{q})$ of some function
@@ -99,7 +99,7 @@ will be used interchangeably.
 
 \paragraph{Elasticity tensor surrogate}
 
-The idea is now to use B-splines on sparse grids to approximate
+The idea is to use B-splines on sparse grids to approximate
 the elasticity tensor function $\etensor$.
 In contrast to the theoretical framework that we established in
 \cref{chap:20sparseGrids,chap:30BSplines,chap:40algorithms},
@@ -111,7 +111,7 @@ Note that one could generate different spatially adaptive sparse grids for the
 different components $\etensorentryintp{j}$.
 However, it is not possible to evaluate only specific entries of $\etensor$
 without also evaluating all other entries,
-which means that we would waste computation resources by selecting only
+which means that we would waste computational resources by selecting only
 a subset of the calculated entries.
 Therefore, we use the same grid for all components.
 
@@ -164,7 +164,7 @@ Our approach has multiple obvious advantages:
 
 Unfortunately, just replacing elasticity tensors with
 B-spline surrogates often does not lead to correct results in practice.
-Experiments show that only for most regular sparse grids and
+Experiments show that for most regular sparse grids and
 for some spatially adaptive sparse grids,
 the optimization algorithm converges to an optimal point
 \cite{Valentin16Hierarchical}.
@@ -235,7 +235,7 @@ already make the whole elasticity tensor non-positive-definite.
   \label{fig:cholesky}%
 \end{figure}
 
-These oscillations occur preferably near the boundary of the domain
+These oscillations are more likely to occur near the boundary of the domain
 $\clint{\*0, \*1}$, such that there are larger regions
 where the interpolated tensor is not positive definite anymore.
 The reason is two-fold:
@@ -400,8 +400,8 @@ The gradient can be computed easily and fast with the product rule:
 % = [[2*r11*dr11+2*r21*dr21, r11*dr12+r12*dr11+r21*dr22+r22*dr21],
 %    [r11*dr12+r12*dr11+r21*dr22+r22*dr21, 2*r12*dr12+2*r22*dr22]]
 % = dE
-where both $\cholfactorintp(\*x)$ and
-$\partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x)$
-are known (sparse grid interpolant and its derivative).
+where both the sparse grid interpolant $\cholfactorintp(\*x)$ and
+its derivative $\partialderiv{\partialdiff{} x_t}{\cholfactorintp}(\*x)$
+are known.
 As discussed above,
 this is key to the applicability of gradient-based optimization.

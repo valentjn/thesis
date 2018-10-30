@@ -57,11 +57,12 @@ with larger numbers of parameters.
   }[44mm]{%
     \includegraphics{microCell_5}%
   }%
-  \qquad%
+  \quad%
   \subcaptionbox{%
     3D sheared cross (3D-SC, $d = 5$)%
     \label{fig:microCell_6}%
-  }[52mm]{%
+  }[56mm]{%
+    \hspace*{5mm}%
     \includegraphics{microCell_6}%
   }%
   \caption[Types of micro-cell models]{%
@@ -142,12 +143,12 @@ four scenarios (two for each 2D and 3D)
 are given in \cref{fig:topoOptScenario} (dimensions in meters).
 In contrast to \cite{Valdez17Topology},
 we only use single-point loads
-(i.e., not loads applied to some line segment)
+(i.e., not loads applied to line segments, areas, or volumes)
 for implementational reasons.
 The upper bound on the density (see \cref{sec:611homogenization})
 is $\densub = \SI{50}{\percent}$ for the 2D scenarios and
 $\densub = \SI{10}{\percent}$ for the 3D scenarios.
-As in \cite{Sigmund01Line} and for simplicity reasons,
+As in \cite{Sigmund01Line} and for reasons of simplicity,
 we apply a force $\force$ with unit value
 (i.e., $\norm[2]{\force} = \SI{1}{\newton}$)
 and we use a hypothetical material with

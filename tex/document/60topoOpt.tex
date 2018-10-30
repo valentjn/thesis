@@ -19,9 +19,8 @@
 \initial{0em}{N}{ow, we want to investigate}
 the first real-world application,
 which is the field of topology optimization.
-In engineering,
-the task of topology optimization generalizes the
-task of shape optimization, where the shape of a component
+The classical and widely-used method in engineering is shape optimization,
+where the shape of a component
 (parametrized by $\*x \in \real^d$) has to be
 determined such that some objective function value $\objfun(\*x)$ is optimal,
 i.e., minimal or maximal.
@@ -34,25 +33,26 @@ does not exceed a certain value (to save construction costs) or
 that the size of the resulting passage meets some size requirements
 (e.g., at least \SI{20}{\meter} wide and \SI{6}{\meter} tall).
 
-However, the framework of topology optimization is more general as
-it does not prescribe the topology
-of the shapes in the search space \cite{Allaire16Towards}.
+However, the framework of shape optimization unnecessarily prescribes the
+topology of the shapes in the search space \cite{Allaire16Towards}.
 In the bridge example, it may well be that a viaduct-type bridge with
 three arcs instead of one is more stable while occupying less volume.
-We are not able to find such a bridge in the previous example,
+We are not able to find such a bridge with shape optimization
+in the previous example,
 as we have restricted the search space to single-arc bridges.
-In topology optimization, the topology%
+This issue is solved by the more sophisticated
+framework of topology optimization, where the topology%
 \footnote{%
   Two objects are considered ``topologically different'',
   if their numbers of ``holes'' differ.
   This stems from the fact that in the field of mathematical topology,
-  the genus (i.e., the number of holes)
-  of a topological space is a topological invariant, i.e.,
+  the \term{genus} (i.e., the number of holes)
+  of a topological space is a \term{topological invariant,} i.e.,
   the genus is invariant under homeomorphism.
   If the genera of two topological spaces differ, then they cannot be
   homeomorphic and are thus considered topologically different.%
 }
-is not fixed by the user,
+is not given by the user,
 but chosen by the optimization algorithm (in a hopefully optimal way),
 rendering topology optimization a key area of simulation technology.
 
@@ -65,9 +65,11 @@ In this chapter, we want to combine these two numerical tools,
 which have been used in isolation until now,
 to perform topology optimization using B-splines on sparse grids.
 The two most common approaches for topology optimization are
-the level-set method and the homogenization method \cite{Allaire16Towards}.
+the \term{level-set method} and
+the \term{homogenization method} \cite{Allaire16Towards}.
 The level-set method describes the boundary of the object
-as the zero level set of a function (the level-set function)
+as the zero level set $\psi^{-1}(0)$ of a function
+$\psi\colon \objdomain \to \real$ \term{(level-set function)}
 and uses a \pde to iteratively transport this function and,
 consequently, the object's boundary \cite{Allaire04Topology}.
 However, we want to focus on the second method:
