@@ -12,12 +12,17 @@ parameter values and, most importantly, discuss numerical results.
 
 \subsection{Implementation}
 
-\paragraph{Parameter values}
+\paragraph{Parameter values and basis functions}
 
-\cite{Cai10Stable}
-\todo{mention values for constants (Cai10Stable), initial SG level}
-
-\dummytext[1]{}
+We use
+a risk aversion factor of $\riskav = 3.5$,
+a patience factor of $\patience = 0.97$,
+a transaction cost rate of $\tac = \SI{1}{\percent}$, and
+a minimum consumption of $\normconsume_{\min} = 0.001$.
+The bond and stock return rates are taken from \cite{Cai10Stable}.
+As higher-order B-spline basis functions,
+we use the hierarchical weakly fundamental not-a-knot splines
+$\bspl[\wfs,\nak]{\*l,\*i}{p}$ of cubic degree $p = 3$.
 
 \paragraph{Software}
 
