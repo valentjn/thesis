@@ -471,7 +471,7 @@ of interpolation errors by only less than half an order of magnitude.
 \Cref{fig:topoOptInterpolationErrorBasisFunctions_1} shows
 the convergence of the relative $\Ltwo$ spectral interpolation errors
 \begin{equation}
-  \delta^{\sparse} :=
+  \error^{\sparse} :=
   \frac{
     \normLtwoscaled{
       \vphantom{\big(}
@@ -483,7 +483,7 @@ the convergence of the relative $\Ltwo$ spectral interpolation errors
       \norm[2]{\etensor({\cdot})}
     }
   }, \qquad
-  \delta^{\chol,\sparse} :=
+  \error^{\chol,\sparse} :=
   \frac{
     \normLtwoscaled{
       \vphantom{\big(}
@@ -523,8 +523,8 @@ for the same grid size.
   \raisebox{0.5mm}{\includegraphics{topoOptInterpolation_4}}%
   \\[2mm]%
   \subcaptionbox{%
-    $\delta^{\sparse}$ \emph{\textcolor{C0}{(blue)}} and
-    $\delta^{\chol,\sparse}$ \emph{\textcolor{C1}{(red)}}
+    $\error^{\sparse}$ \emph{\textcolor{C0}{(blue)}} and
+    $\error^{\chol,\sparse}$ \emph{\textcolor{C1}{(red)}}
     for the 2D cross model and different degrees.%
     \label{fig:topoOptInterpolationErrorBasisFunctions_1}%
   }[72mm]{%
@@ -532,7 +532,7 @@ for the same grid size.
   }%
   \hfill%
   \subcaptionbox{%
-    $\delta^{\chol,\sparse}$
+    $\error^{\chol,\sparse}$
     for the other models and $p = 3$.%
     \label{fig:topoOptInterpolationErrorBasisFunctions_2}%
   }[72mm]{%
