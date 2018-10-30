@@ -1597,6 +1597,13 @@
 }
 
 \hidenextnotation
+\newnotationcommand{\optnormpolicyfcn}{%
+  \hat{\policy}^\opt%
+}{p^optt}{$\optnormpolicyfcn_t$}{
+  Normalized optimal policy fcn.
+}
+
+\hidenextnotation
 \newnotationcommandoptarg{1}{\valueintp}{%
   J^{\sparse\ifnotempty{#1}{,#1}}%
 }{Jts}{$\valueintp_t$}{
@@ -1608,6 +1615,13 @@
   \policy^{\opt,\sparse\ifnotempty{#1}{,#1}}%
 }{poptts}{$\optpolicyintp_t$}{
   Interpolated optimal policy fcn.
+}
+
+\hidenextnotation
+\newnotationcommandoptarg{1}{\optnormpolicyintp}{%
+  \hat{\policy}^{\opt,\sparse\ifnotempty{#1}{,#1}}%
+}{p^optts}{$\optnormpolicyintp_t$}{
+  Interpolated normalized optimal policy fcn.
 }
 
 \hidenextnotation
