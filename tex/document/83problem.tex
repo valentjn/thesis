@@ -10,12 +10,12 @@
 In the \term{transaction costs model} \cite{Schober18Solving},
 the individual can invest their money risk-free in bonds
 (with a fixed interest rate similar to a bank account)
-or in $m_{\stock} \in \nat$ different stocks, which is risk-affected.
+or in $m_{\vstock} \in \nat$ different stocks, which is risk-affected.
 Every stock transaction,
 i.e., buy $\buy_{t,j}$ or sell $\sell_{t,j}$,
 inflicts transaction costs $\tac \buysell_{t,j}$ ($\tac \in \nonnegreal$)
 proportional to the amount $\buysell_{t,j}$ that was bought or sold
-($j = 1, \dotsc, m_{\stock}$).
+($j = 1, \dotsc, m_{\vstock}$).
 The individual only wants to invest a fixed
 amount $\wealth_0$ in stocks, i.e., we omit the individual's income.
 
@@ -30,8 +30,8 @@ In the following,
 $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
 that is invested in the $j$-th stock.
 We combine these \term{stock fractions} $\stock_{t,j}$
-in the vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\stock}})$;
-similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\stock}})$.
+in the vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}})$;
+similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\vstock}})$.
 Then, the consumption can be computed as a residual variable
 (i.e., a variable that can be fully computed from $\state$ and $\policy$
 and is thus omitted from $\policy$)
@@ -60,8 +60,8 @@ where $\compmult$ is the component-wise multiplication,
 $\bondreturn_t \in \real$ is the bond interest rate, and
 $
   \vstockreturn_t
-  = (\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_{\stock}})
-  \in \real^{m_{\stock}}
+  = (\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_{\vstock}})
+  \in \real^{m_{\vstock}}
 $
 is the vector of (stochastic) stock return rates.
 
@@ -101,21 +101,21 @@ The resulting dynamic portfolio choice model has
 the following variables:
 \begin{itemize}
   \item
-  $\centerhphantom{d}{m_{\stochastic}} = m_{\stock}$
+  $\centerhphantom{d}{m_{\stochastic}} = m_{\vstock}$
   state variables $\normstate_t$:
-  Stock fractions $\stock_{t,1}, \dotsc, \stock_{t,m_{\stock}}$
+  Stock fractions $\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}}$
   
   \item
-  $\centerhphantom{m_{\policy}}{m_{\stochastic}} = 2m_{\stock} + 1$
+  $\centerhphantom{m_{\policy}}{m_{\stochastic}} = 2m_{\vstock} + 1$
   policy variables $\normpolicy_t$:
   Normalized bonds $\normbond_t$,
-  normalized buy amounts $\normbuy_{t,1}, \dotsc, \normbuy_{t,m_{\stock}}$ and
-  normalized sell amounts $\normsell_{t,1}, \dotsc, \normsell_{t,m_{\stock}}$
+  normalized buy amounts $\normbuy_{t,1}, \dotsc, \normbuy_{t,m_{\vstock}}$ and
+  normalized sell amounts $\normsell_{t,1}, \dotsc, \normsell_{t,m_{\vstock}}$
   
   \item
-  $m_{\stochastic} = m_{\stock}$
+  $m_{\stochastic} = m_{\vstock}$
   stochastic variables $\stochastic_t$:
-  Stock return rates $\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_{\stock}}$
+  Stock return rates $\stockreturn_{t,1}, \dotsc, \stockreturn_{t,m_{\vstock}}$
 \end{itemize}
 The state space and policy space constraints are given by
 \begin{subequations}
