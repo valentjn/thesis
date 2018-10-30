@@ -1,17 +1,16 @@
 \section{Implementation and Numerical Results}
 \label{sec:84results}
 
-\minitoc{70mm}{4}
+\minitoc{65mm}{4}
 
-\dummytext[1]{}
+\noindent
+In the final section of this chapter,
+we address implementational details such as employed software and
+parameter values and, most importantly, discuss numerical results.
+
+
 
 \subsection{Implementation}
-
-\paragraph{Software}
-
-\todo{mention MATLAB, SG++, NAG}
-
-\dummytext[1]{}
 
 \paragraph{Parameter values}
 
@@ -20,6 +19,55 @@
 
 \dummytext[1]{}
 
-\subsection{???}
+\paragraph{Software}
 
-\dummytext[23]{}
+The dynamic portfolio choice models were solved using a self-written
+MATLAB framework.
+The object-oriented framework was designed in such a way that
+not only transaction costs problems,
+but many other types of dynamic portfolio choice models can be handled.
+For instance, the base class \texttt{LifecycleProblem} provides
+an interface with abstract functions \texttt{computeTerminalValueFunction},
+\texttt{computeTerminalPolicy}, \texttt{computeStateTransition}, and so on.
+The actual functionality implemented in the base class strongly resembles
+the algorithms presented in \cref{sec:82algorithms}.
+This is not only desirable from a modeling perspective,
+but also facilitates the future usage by other researchers.
+For the creation (hierarchization) and evaluation of sparse grid interpolants,
+the sparse grid toolbox \sgpp was used \cite{Pflueger10Spatially}.%
+\footnote{%
+  \url{http://sgpp.sparsegrids.org/}%
+}
+The emerging optimization problems were solved using
+sequential quadratic programming methods supplied by the
+NAG Toolbox for MATLAB.%
+\footnote{%
+  \url{https://www.nag.com/}%
+}
+
+
+
+\subsection{Numerical Results}
+
+\paragraph{Reference solution and error measures}
+
+\dummytext[3]{}
+
+\paragraph{Solution on regular sparse grids}
+
+\dummytext[5]{}
+
+\paragraph{Comparison with piecewise linear functions}
+
+\dummytext[5]{}
+
+\paragraph{Solution on spatially adaptive sparse grids}
+
+\dummytext[5]{}
+
+\paragraph{Monte Carlo simulation}
+
+% certainty-equivalent consumption
+% mit B-splines und linearen Funktionen
+
+\dummytext[5]{}
