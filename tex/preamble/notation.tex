@@ -659,6 +659,8 @@
   Non-negative part $\max({\cdot}, 0)$
 }
 
+\newcommand*{\expectationsign}[1][]{\mathbb{E}\ifnotempty{#1}{_{#1}}}
+
 \newnotationcommandoptarg{2}{\expectation}{%
   \mathbb{E}\ifnotempty{#1}{_{#1}}\bracket*{#2}%
 }{EX}{$\expectation{X}$}{
