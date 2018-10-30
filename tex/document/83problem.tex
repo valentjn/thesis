@@ -49,9 +49,7 @@ The state transition is computed by adding the returns of the stocks:%
     &:= \bond_t \bondreturn_t +
     %\sum_{j=1}^{m_{\stock}}
     %(\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},\\
-    \sumfcn(
-      (\vstock_t \wealth_t + \vbuy_t - \vsell_t) \compmult \vstockreturn_t
-    ),\\
+    \tr{(\vstock_t \wealth_t + \vbuy_t - \vsell_t)} \vstockreturn_t,\\
     \vstock_{t+1}
     &:= \frac{
       (\vstock_t \wealth_t + \vbuy_t - \vsell_t) \compmult \vstockreturn_t
@@ -88,7 +86,7 @@ $\vnormbuysell_t := \vbuysell_t/\wealth_t$, we obtain
     (1 + \tac) \sumfcn(\vnormbuy_t) + (1 - \tac) \sumfcn(\vnormsell_t),\\
     \wealthratio_{t+1}
     &:= \normbond_t \bondreturn_t +
-    \sumfcn((\vstock_t + \vnormbuy_t - \vnormsell_t) \compmult \vstockreturn_t),
+    \tr{(\vstock_t + \vnormbuy_t - \vnormsell_t)} \vstockreturn_t,
     \qquad(= \wealth_{t+1}/\wealth_t)\\
     \vstock_{t+1}
     &:= \frac{
