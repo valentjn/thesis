@@ -32,7 +32,7 @@ def main():
   ]
   T = len(choices)
   
-  fig = Figure.create(figsize=(2.9, 1.7), scale=1.5, preamble=r"""
+  fig = Figure.create(figsize=(2.9, 1.7), scale=1.35, preamble=r"""
 \contourlength{1pt}
   """)
   ax = fig.gca()
