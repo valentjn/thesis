@@ -380,6 +380,7 @@ vanishes in the exact optimum
 $\normpolicy_t = \optnormpolicyfcn_t := \optnormpolicyfcn_t(\normstate_t)$,
 i.e.,
 \begin{equation}
+  \label{eq:eulerErrorFirstOrderCondition}
   \partialderiv{\partialdiff \normbond_t}{
     \left(
       (\normconsume_t^{\opt})^{1-\riskav} +
@@ -414,7 +415,8 @@ $.
 We now neglect binding constraints,
 i.e., we assume that $\multiplier_1 = \multiplier_5 = 0$,
 otherwise we cannot compute the error.
-After calculating the derivatives, we obtain
+After calculating the derivatives,
+\cref{eq:eulerErrorFirstOrderCondition} becomes
 \begin{equation}
   \patience \bondreturn_t
   \cdot \expectationsign[t]\Bigl[
