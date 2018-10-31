@@ -1,4 +1,3 @@
-\breakpagebeforenextheadingtrue
 \section{Dynamic Portfolio Choice Models}
 \label{sec:81models}
 
@@ -130,15 +129,18 @@ can be applied to problems like
 \term{optimal substructure.}
 The principle states that the optimal policy for all times $t = 0, \dotsc, T$
 is also optimal with respect to $t = 1, \dotsc, T$, i.e.,
-\begin{equation}
-  \max_{\policy_0, \dotsc, \policy_T}
-  \sum_{t=0}^T \patience^t \utilityfcn(\consume_t(\state_t, \policy_t))
-  = \max_{\policy_0} \left(
-    \utilityfcn(\consume_0(\state_0, \policy_0))
-    + \patience \max_{\policy_1, \dotsc, \policy_T}
-    \sum_{t=1}^T \patience^{t-1} \utilityfcn(\consume_t(\state_t, \policy_t))
-  \right),
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{6pt}%
+  \begin{equation}
+    \max_{\policy_0, \dotsc, \policy_T}
+    \sum_{t=0}^T \patience^t \utilityfcn(\consume_t(\state_t, \policy_t))
+    = \max_{\policy_0} \left(
+      \utilityfcn(\consume_0(\state_0, \policy_0))
+      + \patience \max_{\policy_1, \dotsc, \policy_T}
+      \sum_{t=1}^T \patience^{t-1} \utilityfcn(\consume_t(\state_t, \policy_t))
+    \right),
+  \end{equation}%
+}
 where we omitted the constraints for brevity.
 The inner maximum problem over $\policy_1, \dotsc, \policy_T$
 has the same structure as the original problem on the \lhs.
@@ -148,15 +150,18 @@ $\valuefcn_t(\state_t) :=
 \max_{\policy_0, \dotsc, \policy_T}
 \sum_{t'=t}^T \patience^{t'-t}
 \utilityfcn(\consume_{t'}(\state_{t'}, \policy_{t'}))$, this can be rewritten as
-\begin{equation}
-  \label{eq:simpleBellman}
-  \valuefcn_0(\state_0)
-  = \max_{\policy_0} \left(
-    \utilityfcn(\consume_0(\state_0, \policy_0)) +
-    \patience \valuefcn_1(\state_1)
-  \right)
-  \quad\text{s.t. specific constraints,}
-\end{equation}
+{%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \label{eq:simpleBellman}
+    \valuefcn_0(\state_0)
+    = \max_{\policy_0} \left(
+      \utilityfcn(\consume_0(\state_0, \policy_0)) +
+      \patience \valuefcn_1(\state_1)
+    \right)
+    \quad\text{s.t. specific constraints,}
+  \end{equation}%
+}
 where $\state_1$ is the result of the state transition
 starting from $(\state_0, \policy_0)$.
 
@@ -166,6 +171,7 @@ If we formulate \eqref{eq:simpleBellman} for arbitrary times $t$ and
 consider constraints, state transition, and stochastic variables,
 we obtain the \term{Bellman equation:}
 \begin{subequations}
+  \setlength{\abovedisplayskip}{9pt}%
   \label{eq:generalBellman}
   \begin{gather}
     \valuefcn_t(\state_t)
@@ -175,7 +181,7 @@ we obtain the \term{Bellman equation:}
         \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
       }
     \right),\quad
-    t = 0, \dotsc, T,\\
+    t = 0, \dotsc, T,\\[-2mm]
     \policy_t \in \real^{m_{\policy}}\;\;\text{s.t.}\;\;
     \ineqconfun_t(\state_t, \policy_t) \le \*0,
   \end{gather}
@@ -186,8 +192,7 @@ $\statefcn_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \times
 $(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$,
 is the \term{state transition function,}
 $\ineqconfun_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \to
-\real^{m_{\ineqconfun}}$ is the \term{constraint function,}
-and the expected value is
+\real^{m_{\ineqconfun}}$ is the \term{constraint function,} and
 \begin{equation}
   \expectation[t]{
     \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
@@ -210,17 +215,17 @@ $P_{t,\stochastic}\colon \stochdomain \to \nonnegreal$ of $\stochastic_t$.%
   \patience \expectation[t]{
     \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
     \policy_t, \stochastic_t), \discrstate_{t+1}) \mid \discrstate_t
-  }$,
-  where the expectation is given by
-  $\sum_{\discrstate_{t+1} \in \discrstdomain}
-  P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t)
-  \int_{\stochdomain}
-  \valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
-  \policy_t, \stochastic_t), \discrstate_{t+1})
-  P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
-  with the \term{discrete state transition probability}
-  $P_{t+1,\discrstate}(\discrstate_{t+1} \mid
-  \discrstate_t) \in \clint{0, 1}$.%
+  }$.%
+  %where the expectation is given by
+  %$\sum_{\discrstate_{t+1} \in \discrstdomain}
+  %P_{t+1,\discrstate}(\discrstate_{t+1} \mid \discrstate_t)
+  %\int_{\stochdomain}
+  %\valuefcn_{t+1}(\statefcn_t(\state_t, \discrstate_t,
+  %\policy_t, \stochastic_t), \discrstate_{t+1})
+  %P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t$
+  %with the \term{discrete state transition probability}
+  %$P_{t+1,\discrstate}(\discrstate_{t+1} \mid
+  %\discrstate_t) \in \clint{0, 1}$.%
   %For the sake of clarity, we omit discrete states in the following,
   %although they could easily be taken into account.
 }
@@ -280,7 +285,6 @@ $\valuefcn_{t+1}$, the new values $\valueintp_t(\state_t^{(k)})$
 on the \lhs are only an approximation as well.
 Since we are mainly interested in the optimal policy decisions
 $\optpolicyfcn_t$, we have to interpolate them as well, i.e.,
-we obtain
 \begin{equation}
   \optpolicyintp_t(\state_t^{(k)})
   = \vecargmax_{\policy_t} \left(
@@ -371,4 +375,4 @@ First, B-splines of degree $p > 1$ are continuously differentiable,
 increasing the order of convergence and enabling
 gradient-based optimization for solving \eqref{eq:gridBellman}.
 Second, B-splines are defined for arbitrary knot sequences,
-thus leading to a greater flexibility when compared to global polynomials.
+leading to a greater flexibility when compared to global polynomials.
