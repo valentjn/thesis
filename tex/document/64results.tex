@@ -859,3 +859,146 @@ is key to good optimization results.
   }%
   \label{tbl:topoOptResultsDegrees}%
 \end{table}
+
+%10197   cross-sisc-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl3
+%10502   framed-cross-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3
+%10723   sheared-cross-sisc-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
+%10694   sheared-framed-cross-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
+%9207    cross-3d-sga16-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl3
+%15389   sheared-cross-3d-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
+%
+%
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=626 stats=cross-sisc-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01 optUB=0.99,0.99 optIC=0.2,0.2 problem=thesis-2d-cantilever id=650
+%python3 generate.py --checkpoint-hack=sgpp --default-id=620 stats=cross-sisc-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01 optUB=0.99,0.99 optIC=0.2,0.2 problem=thesis-2d-L id=651
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=framed-cross-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.01 optUB=0.99,0.99,0.99,0.99 optIC=0.2,0.2,0.2,0.2 id=652
+%python3 generate.py --checkpoint-hack=sgpp --default-id=651 stats=framed-cross-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.01 optUB=0.99,0.99,0.99,0.99 optIC=0.2,0.2,0.2,0.2 id=653
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=sheared-cross-sisc-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.15 optUB=0.99,0.99,0.85 optIC=0.2,0.2,0.5 id=654
+%python3 generate.py --checkpoint-hack=sgpp --default-id=651 stats=sheared-cross-sisc-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.15 optUB=0.99,0.99,0.85 optIC=0.2,0.2,0.5 id=655
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=sheared-framed-cross-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.01,0.15 optUB=0.99,0.99,0.99,0.99,0.85 optIC=0.2,0.2,0.2,0.2,0.5 id=656
+%python3 generate.py --checkpoint-hack=sgpp --default-id=651 stats=sheared-framed-cross-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.01,0.15 optUB=0.99,0.99,0.99,0.99,0.85 optIC=0.2,0.2,0.2,0.2,0.5 id=657
+%python3 generate.py --checkpoint-hack=sgpp --default-id=634 stats=cross-3d-sga16-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01,0.01 optUB=0.99,0.99,0.99 optIC=0.2,0.2,0.2 problem=thesis-3d-cantilever id=658
+%python3 generate.py --checkpoint-hack=sgpp --default-id=635 stats=cross-3d-sga16-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl3 optLB=0.01,0.01,0.01 optUB=0.99,0.99,0.99 optIC=0.2,0.2,0.2 problem=thesis-3d-centerload id=659
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=sheared-cross-3d-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.15,0.15 optUB=0.99,0.99,0.99,0.85,0.85 optIC=0.2,0.2,0.2,0.5,0.5 id=660
+%python3 generate.py --checkpoint-hack=sgpp --default-id=659 stats=sheared-cross-3d-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 optLB=0.01,0.01,0.01,0.15,0.15 optUB=0.99,0.99,0.99,0.85,0.85 optIC=0.2,0.2,0.2,0.5,0.5 id=661
+%
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-thesis-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=670
+%python3 generate.py --checkpoint-hack=sgpp --default-id=651 stats=cross-thesis-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=671
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-thesis-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=672
+%python3 generate.py --checkpoint-hack=sgpp --default-id=653 stats=framed-cross-thesis-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=673
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-thesis-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=674
+%python3 generate.py --checkpoint-hack=sgpp --default-id=655 stats=sheared-cross-thesis-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=675
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=676
+%python3 generate.py --checkpoint-hack=sgpp --default-id=657 stats=sheared-framed-cross-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=677
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-thesis-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=678
+%python3 generate.py --checkpoint-hack=sgpp --default-id=659 stats=cross-3d-thesis-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl5 bsplineDegree=5 id=679
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=680
+%python3 generate.py --checkpoint-hack=sgpp --default-id=661 stats=sheared-cross-3d-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl5 bsplineDegree=5 id=681
+%
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-thesis-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=690
+%python3 generate.py --checkpoint-hack=sgpp --default-id=651 stats=cross-thesis-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=691
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-thesis-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=692
+%python3 generate.py --checkpoint-hack=sgpp --default-id=653 stats=framed-cross-thesis-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=693
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-thesis-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=694
+%python3 generate.py --checkpoint-hack=sgpp --default-id=655 stats=sheared-cross-thesis-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=695
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=696
+%python3 generate.py --checkpoint-hack=sgpp --default-id=657 stats=sheared-framed-cross-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=697
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-thesis-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=698
+%python3 generate.py --checkpoint-hack=sgpp --default-id=659 stats=cross-3d-thesis-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl1 bsplineDegree=1 id=699
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=700
+%python3 generate.py --checkpoint-hack=sgpp --default-id=661 stats=sheared-cross-3d-thesis-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl1 bsplineDegree=1 id=701
+%
+%
+%
+%
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.215443-lb0.01-ub0.99-cholesky-hier-bspl3 id=720
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.1-lb0.01-ub0.99-cholesky-hier-bspl3 id=721
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.0464159-lb0.01-ub0.99-cholesky-hier-bspl3 id=722
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.0215443-lb0.01-ub0.99-cholesky-hier-bspl3 id=723
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.01-lb0.01-ub0.99-cholesky-hier-bspl3 id=724
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.00464159-lb0.01-ub0.99-cholesky-hier-bspl3 id=725
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.00215443-lb0.01-ub0.99-cholesky-hier-bspl3 id=726
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.001-lb0.01-ub0.99-cholesky-hier-bspl3 id=727
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.000464159-lb0.01-ub0.99-cholesky-hier-bspl3 id=728
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.000215443-lb0.01-ub0.99-cholesky-hier-bspl3 id=729
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol0.0001-lb0.01-ub0.99-cholesky-hier-bspl3 id=730
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol4.64159e-05-lb0.01-ub0.99-cholesky-hier-bspl3 id=731
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl3 id=732
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol1e-05-lb0.01-ub0.99-cholesky-hier-bspl3 id=733
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol4.64159e-06-lb0.01-ub0.99-cholesky-hier-bspl3 id=734
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol2.15443e-06-lb0.01-ub0.99-cholesky-hier-bspl3 id=735
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol1e-06-lb0.01-ub0.99-cholesky-hier-bspl3 id=736
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol4.64159e-07-lb0.01-ub0.99-cholesky-hier-bspl3 id=737
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol2.15443e-07-lb0.01-ub0.99-cholesky-hier-bspl3 id=738
+%python3 generate.py --checkpoint-hack=sgpp --default-id=650 stats=cross-sisc-conv-tol1e-07-lb0.01-ub0.99-cholesky-hier-bspl3 id=739
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol5.01187-lb0.01-ub0.99-cholesky-hier-bspl3 id=750
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol3.98107-lb0.01-ub0.99-cholesky-hier-bspl3 id=751
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol3.16228-lb0.01-ub0.99-cholesky-hier-bspl3 id=752
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol2.51189-lb0.01-ub0.99-cholesky-hier-bspl3 id=753
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol1.99526-lb0.01-ub0.99-cholesky-hier-bspl3 id=754
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol1.58489-lb0.01-ub0.99-cholesky-hier-bspl3 id=755
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol1.25893-lb0.01-ub0.99-cholesky-hier-bspl3 id=756
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol1-lb0.01-ub0.99-cholesky-hier-bspl3 id=757
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3 id=758
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol0.630957-lb0.01-ub0.99-cholesky-hier-bspl3 id=759
+%python3 generate.py --checkpoint-hack=sgpp --default-id=652 stats=framed-cross-sga16-conv-tol0.501187-lb0.01-ub0.99-cholesky-hier-bspl3 id=760
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.316228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=770
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.215443-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=771
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.14678-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=772
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.1-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=773
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.0681292-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=774
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.0464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=775
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.0316228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=776
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.0215443-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=777
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.014678-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=778
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.01-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=779
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.00681292-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=780
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=781
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.00316228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=782
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.00215443-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=783
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.0014678-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=784
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.001-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=785
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.000681292-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=786
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.000464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=787
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.000316228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=788
+%python3 generate.py --checkpoint-hack=sgpp --default-id=654 stats=sheared-cross-sisc-conv-tol0.000215443-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=789
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol31.6228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=800
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol25.1189-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=801
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol19.9526-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=802
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol15.8489-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=803
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol12.5893-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=804
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol10-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=805
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol7.94328-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=806
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol6.30957-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=807
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=808
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol3.98107-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=809
+%python3 generate.py --checkpoint-hack=sgpp --default-id=656 stats=sheared-framed-cross-sga16-conv-tol3.16228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=810
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol1.25893-lb0.01-ub0.99-cholesky-hier-bspl3 id=820
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3 id=821
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.630957-lb0.01-ub0.99-cholesky-hier-bspl3 id=822
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.501187-lb0.01-ub0.99-cholesky-hier-bspl3 id=823
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.398107-lb0.01-ub0.99-cholesky-hier-bspl3 id=824
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.316228-lb0.01-ub0.99-cholesky-hier-bspl3 id=825
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.251189-lb0.01-ub0.99-cholesky-hier-bspl3 id=826
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.199526-lb0.01-ub0.99-cholesky-hier-bspl3 id=827
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.158489-lb0.01-ub0.99-cholesky-hier-bspl3 id=828
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.125893-lb0.01-ub0.99-cholesky-hier-bspl3 id=829
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.1-lb0.01-ub0.99-cholesky-hier-bspl3 id=830
+%python3 generate.py --checkpoint-hack=sgpp --default-id=658 stats=cross-3d-sga16-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl3 id=831
+%
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol31.6228-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=840
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol25.1189-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=841
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol19.9526-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=842
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol15.8489-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=843
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol12.5893-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=844
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol10-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=845
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol7.94328-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=846
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol6.30957-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=847
+%python3 generate.py --checkpoint-hack=sgpp --default-id=660 stats=sheared-cross-3d-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3 id=848
