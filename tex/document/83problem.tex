@@ -201,11 +201,11 @@ By setting $\normcetvalueintp_t(\state_t^{(k)})
     \right).
   \end{align}
 \end{subequations}
-This means that compared with the unnormalized Bellman equation
+This means that compared with %the unnormalized Bellman equation
 \eqref{eq:gridBellmanCET},
 the value function in the expectation has to be multiplied by
 the wealth ratio $\wealthratio_{t+1}$ introduced above in
-\cref{eq:normalizedTCPStateTransition}.
+\eqref{eq:normalizedTCPStateTransition}.
 Since there is no inheritance, the optimal terminal solution
 is to sell all stocks and consume everything:
 \begin{equation}
@@ -337,26 +337,30 @@ to the Bellman equation \eqref{eq:normalizedTCPBellmanEquation}
 of the normalized transaction costs problem
 vanishes with respect to the problem's constraints
 \eqref{eq:normalizedTCPConstraints} is given by
-\begin{equation}
-  \begin{split}
-    \lagrangian_t(\normstate_t, \normpolicy_t, \*\multiplier)
-    &:= \left(
-      (\normconsume_t)^{1-\riskav} +
-      \patience \expectation[t]{
-        \bigl(
-          \wealthratio_{t+1}\;
-          \normcetvalueintp_{t+1}(\normstatefcn_t)
-        \bigr)^{1-\riskav}
-      }
-    \right)^{1/(1-\riskav)}\\
-    &\hspace*{6mm} {}
-    - \multiplier_1 \normbond_t
-    - \tr{\*\multiplier_2} \vnormbuy_t
-    - \tr{\*\multiplier_3} \vnormsell_t
-    + \tr{\*\multiplier_4}\; (\vnormsell_t - \vstock_t)
-    + \multiplier_5\; (\normconsume_{\min} - \normconsume_t)
-  \end{split}
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \begin{split}
+      \lagrangian_t(\normstate_t, \normpolicy_t, \*\multiplier)
+      &:= \left(
+        (\normconsume_t)^{1-\riskav} +
+        \patience \expectation[t]{
+          \bigl(
+            \wealthratio_{t+1}\;
+            \normcetvalueintp_{t+1}(\normstatefcn_t)
+          \bigr)^{1-\riskav}
+        }
+      \right)^{1/(1-\riskav)}\\
+      &\hspace*{6mm} {}
+      - \multiplier_1 \normbond_t
+      - \tr{\*\multiplier_2} \vnormbuy_t
+      - \tr{\*\multiplier_3} \vnormsell_t
+      + \tr{\*\multiplier_4}\; (\vnormsell_t - \vstock_t)
+      + \multiplier_5\; (\normconsume_{\min} - \normconsume_t)
+    \end{split}
+  \end{equation}%
+}%
 with $
 \*\multiplier := (
   \multiplier_1,
@@ -379,24 +383,28 @@ with respect to $\normbond_t$
 vanishes in the exact optimum
 $\normpolicy_t = \optnormpolicyfcn_t := \optnormpolicyfcn_t(\normstate_t)$,
 i.e.,
-\begin{equation}
-  \label{eq:eulerErrorFirstOrderCondition}
-  \partialderiv{\partialdiff \normbond_t}{
-    \left(
-      (\normconsume_t^{\opt})^{1-\riskav} +
-      \patience \expectation[t]{
-        \bigl(
-          \wealthratio_{t+1}^{\opt}\;
-          \normcetvalueintp_{t+1}(\normstatefcn_t^{\opt})
-        \bigr)^{1-\riskav}
-      }
-    \right)^{1/(1-\riskav)}
-  }
-  - \multiplier_1
-  - \multiplier_5
-  \partialderiv{\partialdiff \normbond_t}{\normconsume_t^{\opt}}
-  = 0,
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \label{eq:eulerErrorFirstOrderCondition}
+    \partialderiv{\partialdiff \normbond_t}{
+      \left(
+        (\normconsume_t^{\opt})^{1-\riskav} +
+        \patience \expectation[t]{
+          \bigl(
+            \wealthratio_{t+1}^{\opt}\;
+            \normcetvalueintp_{t+1}(\normstatefcn_t^{\opt})
+          \bigr)^{1-\riskav}
+        }
+      \right)^{1/(1-\riskav)}
+    }
+    - \multiplier_1
+    - \multiplier_5
+    \partialderiv{\partialdiff \normbond_t}{\normconsume_t^{\opt}}
+    = 0,
+  \end{equation}%
+}%
 where
 $
   \normstatefcn_t^{\opt}
@@ -417,20 +425,24 @@ i.e., we assume that $\multiplier_1 = \multiplier_5 = 0$,
 otherwise we cannot compute the error.
 After calculating the derivatives,
 \cref{eq:eulerErrorFirstOrderCondition} becomes
-\begin{equation}
-  \patience \bondreturn_t
-  \cdot \expectationsign[t]\Bigl[
-    \bigl(
-      \normcetvalueintp_t
-      - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
-      \statefcn_t^{\opt}
-    \bigr) \cdot
-    \bigl(
-      \wealthratio_{t+1}^{\opt}\; \normcetvalueintp_t
-    \bigr)^{-\riskav}
-  \Bigr]
-  = (\normconsume_t^{\opt})^{-\riskav}.
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \patience \bondreturn_t
+    \cdot \expectationsign[t]\Bigl[
+      \bigl(
+        \normcetvalueintp_t
+        - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
+        \statefcn_t^{\opt}
+      \bigr) \cdot
+      \bigl(
+        \wealthratio_{t+1}^{\opt}\; \normcetvalueintp_t
+      \bigr)^{-\riskav}
+    \Bigr]
+    = (\normconsume_t^{\opt})^{-\riskav}.
+  \end{equation}
+}%
 This equation can be used as an error measure by substituting
 $\optnormpolicyfcn_t$ for the interpolated optimum
 $\optnormpolicyintp_t = \optnormpolicyintp_t(\normstate_t)$.
@@ -441,25 +453,29 @@ $
 $, we obtain the
 \term{unit-free Euler equation errors $\error_t(\normstate_t)$}
 with respect to $\normbond_t$:
-\begin{equation}
-  \error_t(\normstate_t)
-  := \Bigl|
-    1 - \Bigl(
-      \patience \bondreturn_t (\normconsume_t^{\sparse,\opt})^{\riskav}
-      \cdot \expectationsign[t]\Bigl[
-        \bigl(
-          \normcetvalueintp_t
-          - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
-          \statefcn_t^{\sparse,\opt}
-        \bigr) \cdot
-        \bigl(
-          \wealthratio_{t+1}^{\sparse,\opt}\;
-          \normcetvalueintp_t
-        \bigr)^{-\riskav}
-      \Bigr]
-    \Bigr)^{-1/\riskav}
-  \Bigr|
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \error_t(\normstate_t)
+    := \Bigl|
+      1 - \Bigl(
+        \patience \bondreturn_t (\normconsume_t^{\sparse,\opt})^{\riskav}
+        \cdot \expectationsign[t]\Bigl[
+          \bigl(
+            \normcetvalueintp_t
+            - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
+            \statefcn_t^{\sparse,\opt}
+          \bigr) \cdot
+          \bigl(
+            \wealthratio_{t+1}^{\sparse,\opt}\;
+            \normcetvalueintp_t
+          \bigr)^{-\riskav}
+        \Bigr]
+      \Bigr)^{-1/\riskav}
+    \Bigr|
+  \end{equation}
+}%
 with
 $
   \normstatefcn_t^{\sparse, \opt}
