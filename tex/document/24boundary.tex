@@ -30,7 +30,7 @@ of $\regsgset{n}{d}$ can be shown:
 
 \begin{lemma}[number of regular sparse grid points]
   \label{lemma:numberOfGridPointsBoundary}
-  \setlength{\abovedisplayskip}{0pt}
+  \setlength{\abovedisplayskip}{0pt}%
   \begin{equation}
     \setsize{\regsgset{n}{d}}
     = \sum_{q=0}^d 2^q \binom{d}{q} \setsize{\interiorregsgset{n}{d-q}}
@@ -44,7 +44,7 @@ such that $\setsize{\interiorregsgset{n}{0}} = 1$.
 The number of interior grid points can be calculated as follows:
 \begin{lemma}[number of interior regular sparse grid points]
   \label{lemma:numberOfGridPointsInterior}
-  \setlength{\abovedisplayskip}{0pt}
+  \setlength{\abovedisplayskip}{0pt}%
   \begin{equation}
     \setsize{\interiorregsgset{n}{d}}
     = \sum_{q=0}^{n-d} 2^q \binom{d-1+q}{d-1}
@@ -206,7 +206,7 @@ can be calculated as follows:
   propGridSizeCoarseBoundary%
 }
   \label{prop:gridSizeCoarseBoundary}
-  \setlength{\abovedisplayskip}{0pt}
+  \setlength{\abovedisplayskip}{0pt}%
   \begin{equation}
     \setsize{\coarseregsgset{n}{d}{b}}
     = \setsize{\interiorregsgset{n}{d}} +
