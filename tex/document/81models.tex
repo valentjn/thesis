@@ -19,6 +19,7 @@ provides \cite{Rust18Dynamic}.
   \newcommand*{\pnsta}[1]{%
     \printnotationsymbol{#1}&\multicolumn{3}{l}{\printnotationtext{#1}}%
   }%
+  \newcommand*{\pnstb}{$\error_t$&Euler eq. error}%
   \begin{tabular}{%
     >{\kern\tabcolsep}=l+l<{\kern4.5mm}+l+l<{\kern4.5mm}+l+l<{\kern\tabcolsep}%
   }
@@ -30,7 +31,7 @@ provides \cite{Rust18Dynamic}.
     \pnst{\riskav}&      \pnst{\stock}&       \pnst{\optpolicyfcn}\\
     \pnst{\patience}&    \pnst{\buysell}&     $\hat{({\cdot})}$&Normalized\\
     \pnst{\bondreturn}&  \pnst{\stockreturn}& \pnst{\wealthratio}\\
-    \pnst{\tac}&         &&                   &\\
+    \pnst{\tac}&         \pnstb{}&            &\\
     \bottomrulec
   \end{tabular}%
   \caption[Glossary for dynamic portfolio choice models]{%
