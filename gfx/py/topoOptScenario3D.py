@@ -197,15 +197,24 @@ def main():
     xs = np.array([
         (1, 1), (0, 1), (0, 0), (0, 0), (0, 1),
         (1, 1), (0, 1), (1, 1), (1, 1),
-        (0, 0), (1, 1), (1, 1+eps), (1, 1+eps), (-eps, 0), (-eps, 0)])
+        (0, 0), (1, 1), (1, 1+eps), (1, 1+eps), (-eps, 0), (-eps, 0)] +
+        ([(bcSize/size[0], bcSize/size[0]),
+          (-eps, 0),
+          (1, 1+eps)] if q == 1 else []))
     ys = np.array([
         (0, 1), (0, 0), (0, 0), (0, 1), (1, 1),
         (0, 1), (0, 0), (0, 0), (1, 1),
-        (-eps, 0), (-eps, 0), (0, 0), (1, 1), (0, 0), (0, 0)])
+        (-eps, 0), (-eps, 0), (0, 0), (1, 1), (0, 0), (0, 0)] +
+        ([(-eps, 0),
+          (0, 0),
+          (bcSize/size[1], bcSize/size[1])] if q == 1 else []))
     zs = np.array([
         (0, 0), (0, 0), (0, 1), (1, 1), (1, 1),
         (1, 1), (1, 1), (0, 1), (0, 1),
-        (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (1, 1)])
+        (0, 0), (0, 0), (0, 0), (0, 0), (0, 0), (1, 1)] +
+        ([(0, 0),
+          (bcSize/size[2], bcSize/size[2]),
+          (0, 0)] if q == 1 else []))
     for x, y, z in zip(xs, ys, zs):
       ax.plot(size[0]*x, size[1]*y, "k-", zs=size[2]*z, clip_on=False,
               zorder=20)
@@ -216,13 +225,21 @@ def main():
     ax.text(size[0], -eps, 0, "${:.0f}$".format(size[0]),
             ha="right", va="top")
     ax.text(size[0]+eps, 0, 0, "$0$",
-            ha="left", va="center")
+            ha="left", va=("center" if q == 0 else "top"))
     ax.text(size[0]+eps, size[1], 0, "${:.0f}$".format(size[1]),
             ha="left", va="center")
     ax.text(-eps, 0, 0, "$0$",
             ha="right", va="center")
     ax.text(-eps, 0, size[2], "${:.0f}$".format(size[2]),
             ha="right", va="center")
+    
+    if q == 1:
+      ax.text(0.2, -1.5*eps, 0, "$0.2$",
+              ha="left", va="top")
+      ax.text(size[0]+eps, 0.2, 0, "$0.2$",
+              ha="left", va="center")
+      ax.text(-eps, 0, 0.2, "$0.2$",
+              ha="right", va="center")
     
     if q == 0:
       eps = 0.1
