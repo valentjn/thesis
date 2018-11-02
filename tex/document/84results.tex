@@ -20,6 +20,9 @@ a patience factor of $\patience = 0.97$,
 a transaction cost rate of $\tac = \SI{1}{\percent}$, and
 a minimum consumption of $\normconsume_{\min} = 0.001$.
 The bond and stock return rates are taken from \cite{Cai10Stable}.
+The models are solved for $T = 6$ time steps;
+this number suffices to show all relevant numerical effects and results,
+while keeping the computational effort at a reasonable level.
 As higher-order B-spline basis functions,
 we use the hierarchical weakly fundamental not-a-knot splines
 $\bspl[\wfs,\nak]{\*l,\*i}{p}$ of cubic degree $p = 3$
