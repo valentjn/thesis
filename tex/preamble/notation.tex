@@ -305,6 +305,16 @@
 
 \newcommand*{\normLtwoscaled}[1]{\normscaled[\Ltwo]{#1}}
 
+\newnotationcommand[1]{\normLinfty}{\norm[\Linfty]{#1}}{ÖnormLinfty}{%
+  $\normLinfty{\cdot}$%
+}{
+  $\Linfty$ norm
+  $\normLinfty{\objfun} := \max_{\*x \in \Omega} \abs{\objfun(\*x)}$
+  of a continuous function $\objfun\colon \Omega \to \real$
+}
+
+\newcommand*{\normLinftyscaled}[1]{\normscaled[\Linfty]{#1}}
+
 % ======================================================================
 % Relation Symbols
 % ======================================================================
