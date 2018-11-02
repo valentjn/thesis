@@ -337,12 +337,12 @@ However, the Clenshaw--Curtis points help to decrease the error
 due to the higher density of grid points near the boundary.
 In the Clenshaw--Curtis case, the maximal errors are given by
 \begin{equation}
-  \norm[\Linfty]{\forceTref - \forceTintp[p,\cc]}
+  \normLinfty{\forceTref - \forceTintp[p,\cc]}
   \approx \SI{10.6}{\newton},\qquad
-  \norm[\Linfty]{\forceBref - \forceBintp[p,\cc]}
+  \normLinfty{\forceBref - \forceBintp[p,\cc]}
   \approx \SI{9.51}{\newton},
 \end{equation}
-where $\norm[\Linfty]{\forceXref - \forceXintp[p,\cc]}
+where $\normLinfty{\forceXref - \forceXintp[p,\cc]}
 := \max_{(\elbang, \actX)}
 \abs{\forceXref(\elbang, \actX) - \forceXintp[p,\cc](\elbang, \actX)}$
 (since the functions are continuous).
