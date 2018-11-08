@@ -79,7 +79,7 @@ of the optimal policy.
 Both error measures can be analyzed pointwise or
 via their $\Ltwo$ or $\Linfty$ norms.
 %(the reference solution errors are relative).
-If we omit the time subscript $t$,
+If we omit the time subscript $t$ and the norm sign,
 then we additionally take the mean over all times $t = 0, \dotsc, T - 1$
 (e.g., $
   \eulererror_{\Ltwo} := \frac{1}{T} \sum_{t=0}^{T-1} \normLtwo{\eulererror_t}
@@ -107,6 +107,8 @@ The next-level solution would already have almost \num{36000} grid points
 and take over a week to compute.
 Therefore, only the reference solutions for $d = 1$ and $d = 2$
 are sufficiently accurate.
+This impressively underlines the need for sophisticated
+discretization techniques such as sparse grids.
 
 \paragraph{Solution on regular sparse grids}
 
