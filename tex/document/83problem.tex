@@ -453,29 +453,25 @@ $
 $, we obtain the
 \term{unit-free Euler equation errors $\error_t(\normstate_t)$}
 with respect to $\normbond_t$:
-{%
-  \setlength{\abovedisplayskip}{9pt}%
-  \setlength{\belowdisplayskip}{9pt}%
-  \begin{equation}
-    \error_t(\normstate_t)
-    := \Bigl|
-      1 - \Bigl(
-        \patience \bondreturn_t (\normconsume_t^{\sparse,\opt})^{\riskav}
-        \cdot \expectationsign[t]\Bigl[
-          \bigl(
-            \normcetvalueintp_t
-            - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
-            \statefcn_t^{\sparse,\opt}
-          \bigr) \cdot
-          \bigl(
-            \wealthratio_{t+1}^{\sparse,\opt}\;
-            \normcetvalueintp_t
-          \bigr)^{-\riskav}
-        \Bigr]
-      \Bigr)^{-1/\riskav}
-    \Bigr|
-  \end{equation}
-}%
+\begin{equation}
+  \eulererror_t(\normstate_t)
+  := \Bigl|
+    1 - \Bigl(
+      \patience \bondreturn_t (\normconsume_t^{\sparse,\opt})^{\riskav}
+      \cdot \expectationsign[t]\Bigl[
+        \bigl(
+          \normcetvalueintp_t
+          - \tr{(\gradient{\normstate_t}{\normcetvalueintp_t})}
+          \statefcn_t^{\sparse,\opt}
+        \bigr) \cdot
+        \bigl(
+          \wealthratio_{t+1}^{\sparse,\opt}\;
+          \normcetvalueintp_t
+        \bigr)^{-\riskav}
+      \Bigr]
+    \Bigr)^{-1/\riskav}
+  \Bigr|
+\end{equation}
 with
 $
   \normstatefcn_t^{\sparse, \opt}
