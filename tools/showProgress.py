@@ -24,7 +24,7 @@ lineColors = [
 ]
 
 progressPaths = ["tex/document/progress.tex", "tex/progress.tex"]
-totalPages = 228
+totalPages = 232
 totalTests = 44
 
 
