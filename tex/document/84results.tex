@@ -82,7 +82,7 @@ via their $\Ltwo$ or $\Linfty$ norms.
 If we omit the time subscript $t$,
 then we additionally take the mean over all times $t = 0, \dotsc, T - 1$
 (e.g., $
-  \normLtwo{\error} := \frac{1}{T} \sum_{t=0}^{T-1} \normLtwo{\error_t}
+  \error_{\Ltwo} := \frac{1}{T} \sum_{t=0}^{T-1} \normLtwo{\error_t}
 $).
 
 We use full grid solutions as reference solutions,
@@ -93,15 +93,15 @@ for low dimensionalities $d$ due to the curse of dimensionality.
 The one-dimensional reference solution has level $n = 11$
 ($\ngp_t = \num{2049}$, runtime \hms{;17}) and
 mean Euler equation error of
-$\normLtwo{\error} \approx \num{6.50e-9}$.
+$\error_{\Ltwo} \approx \num{6.50e-9}$.
 The two-dimensional reference solution has level $n = 7$
 ($\ngp_t = \num{16641}$, runtime \hms{9;33}) and
 mean Euler equation error of
-$\normLtwo{\error} \approx \num{4.78e-4}$.
+$\error_{\Ltwo} \approx \num{4.78e-4}$.
 In three dimensions, only a reference solution of level $n = 4$
 ($\ngp_t = \num{4913}$, runtime \hms{4;2}) and
 mean Euler equation error of
-$\normLtwo{\error} \approx \num{1.76e-2}$ could be computed
+$\error_{\Ltwo} \approx \num{1.76e-2}$ could be computed
 (with a large maximum error of $\normLinfty{\error} \approx \num{0.112}$).
 The next-level solution would already have almost \num{36000} grid points
 and take over a week to compute.
