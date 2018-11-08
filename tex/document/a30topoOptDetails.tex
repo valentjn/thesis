@@ -187,27 +187,27 @@ with 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
   }
     \toprulec
     \headerrow
-    Model&  $d$& \#Points& \cece{Threshold}& \cece{Rel. err.}& Eval. time\\
+    Model&  $d$& \#Points&    \cece{Threshold}& \cece{Rel. err.}& Eval. time\\
     \midrulec
     % cross-sisc-conv-tol2.15443e-05-lb0.01-ub0.99-cholesky-hier-bspl3
     % Homogenization.generateShearedCrossExact
-    2D-C&   2&   10197&    \num{2.15e-5}&    \num{2.24e-5}&    \SI{6.96}{\second}\\
+    2D-C&   2&   \num{10197}&    \num{2.15e-5}&    \num{2.24e-5}& \SI{6.96}{\second}\\
     % framed-cross-sga16-conv-tol0.794328-lb0.01-ub0.99-cholesky-hier-bspl3
     % Homogenization.generateFramedCross
-    2D-FC&  4&   10502&    \num{7.94e-1}&    \num{1.81e-2}&    \SI{7.45}{\second}\\
+    2D-FC&  4&   \num{10502}&    \num{7.94e-1}&    \num{1.81e-2}& \SI{7.45}{\second}\\
     % sheared-cross-sisc-conv-tol0.00464159-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
     % Homogenization.generateShearedCrossExact
-    2D-SC&  3&   10723&    \num{4.64e-3}&    \num{1.49e-3}&    \SI{8.72}{\second}\\
+    2D-SC&  3&   \num{10723}&    \num{4.64e-3}&    \num{1.49e-3}& \SI{8.72}{\second}\\
     % sheared-framed-cross-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
     % Homogenization.generateShearedFramedCross
-    2D-SFC& 5&   10694&    \num{5.01e0}&     \num{4.82e-2}&    \SI{7.45}{\second}\\
+    2D-SFC& 5&   \num{10694}&    \num{5.01e0}&     \num{4.82e-2}& \SI{7.45}{\second}\\
     \midrulec
     % cross-3d-sga16-conv-tol0.0794328-lb0.01-ub0.99-cholesky-hier-bspl3
     % Homogenization.generateCross3DExact
-    3D-C&   3&    9207&    \num{7.94e-2}&    \num{3.18e-3}&    \SI{33.5}{\second}\\
+    3D-C&   3&    \num{9207}&    \num{7.94e-2}&    \num{3.18e-3}& \SI{33.5}{\second}\\
     % sheared-cross-3d-sga16-conv-tol5.01187-lb0.01,0.15-ub0.99,0.85-cholesky-hier-bspl3
     % Homogenization.generateShearedCross3DExact
-    3D-SC&  5&   15389&    \num{5.01e0}&     \num{4.95e-2}&    \SI{40.0}{\second}\\
+    3D-SC&  5&   \num{15389}&    \num{5.01e0}&     \num{4.95e-2}& \SI{40.0}{\second}\\
     \bottomrulec
   \end{tabular}
   \caption[Detailed information about spatially adaptive sparse grids]{%
