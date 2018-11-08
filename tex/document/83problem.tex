@@ -546,3 +546,31 @@ $.
 %    \Bigr|,
 %  \end{split}
 %\end{equation}
+
+\paragraph{Weighted Euler equation errors}
+
+However, the state space cropping as introduced above
+distorts Euler equation errors:
+The error $\eulererror_t(\normstate_t)$ does not vanish
+even for the exact solution and even inside the feasible state space.
+This is because the cropping already occurs for large stock holdings
+$\sumfcn(\vstock_t)$ that are close to, but lower than one,
+as stocks have to be sold to maintain
+minimum consumption $\normconsume_{\min}$.
+Numerical experiments showed that due to this issue,
+the error attains large values near the hyperplane
+$\sumfcn(\vstock_t) = 1$.
+Economically, this region is not significant
+as such high stock fractions are unusual
+(which is confirmed by Monte Carlo simulations).
+We therefore use the \term{weighted Euler equation error}
+\begin{equation}
+  \weightedeulererror_t(\normstate_t)
+  := \bigl(1 - \sumfcn(\normstate_t)\bigr) \cdot
+  \eulererror_t(\normstate_t)
+\end{equation}
+instead of $\eulererror_t$,
+although other strategies exist
+such as restricting the state domain where the error is computed or
+weighting the error with the probability that a given state
+occurs in Monte Carlo simulations.
