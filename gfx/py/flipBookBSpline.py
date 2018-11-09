@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 128
+# number of output figures = 129
 
 import multiprocessing
 
@@ -61,7 +61,7 @@ def drawImage(imageNumber):
 
 
 
-numberOfImages = 128
+numberOfImages = 129
 pauseStartInXUnits = 0.2
 pauseBetweenInXUnits = 0.2
 pauseEndInXUnits = 0.2
