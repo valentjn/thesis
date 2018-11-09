@@ -53,11 +53,11 @@ function values and evaluating the resulting interpolant.
   }%
   \hfill%
   \subcaptionbox{%
-    The resulting interpolant $\sgintp$ \emph{(black dashed line)}
-    is evaluated at a point $x \in \clint{0, 1}$
+    The interpolant $\sgintp$ \emph{(black dashed line)}
+    is evaluated at $x \in \clint{0, 1}$
     by adding contributions \emph{(black dotted lines)}
-    of the weighted basis functions $\surplus{l,i} \basis{l,i}$
-    \emph{(colored),} obtaining $\sgintp(x)$ \emph{(cross)} as a result.%
+    of weighted basis functions $\surplus{l,i} \basis{l,i}$
+    \emph{(colored),} obtaining $\sgintp(x)$ \emph{(cross).}%
     %For the piecewise linear basis, the height of the weighted
     %basis functions \emph{(colored dashed lines)} is given by
     %the corresponding surpluses \emph{(panel 2).}%
@@ -178,8 +178,7 @@ both $\intpmat$ and $\intpmatinv$ become significantly denser.
     of its inverse $\intpmatinv$
     \emph{(bottom row, \textcolor{C1}{red})}
     for the regular sparse grid $\coarseregsgset{n}{d}{1}$
-    of level $n = 4$ and dimensionality $d = 2$
-    \emph{(top row)}
+    with $n = 4$ and $d = 2$ \emph{(top row)}
     and uniform hierarchical B-splines $\bspl{\*l,\*i}{\*p}$
     for degrees $\*p \in \{\*1, \*3, \*5\}$.
     The \textcolor{C0}{blue areas} in the top row
@@ -221,13 +220,13 @@ $(l_t, i_t)$ ($l_t \in \natz$, $i_t \in \hiset{l_t}$)
 are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \natz$.
 We identify $(\*l, \*i)$ with a single index $\*k$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
-Consequently,
+Hence,
 we regard $\liset$ as a subset $\{\*k \mid \*x_\*k \in \sgset\}$
 of $\natz^d$.
 We will switch between the notations whenever appropriate.
 All statements that are formulated in the $\*k$ notation are
-valid for both the nodal and the hierarchical basis
-(i.e., for all tensor product bases).
+valid for both the nodal and the hierarchical basis.
+%(i.e., for all tensor product bases).
 
 \usenotation{kT00}
 In the following, $k_t$ denotes the $t$-th component of a $d$-vector $\*k$

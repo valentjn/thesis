@@ -1,4 +1,3 @@
-\breakpagebeforenextheadingtrue
 \longsection{%
   \texorpdfstring{%
     Hierarchization on Spatially Adaptive Sparse Grids\\
@@ -15,7 +14,7 @@
 }
 \label{sec:44spatAdaptiveBFS}
 
-\minitoc{87mm}{8}
+\minitoc{87mm}{7}
 
 \noindent
 Unfortunately, we cannot apply the algorithms presented in the last
@@ -267,6 +266,8 @@ via forward substitution:
 \begin{proof}
   The linear system \eqref{eq:hierarchizationSLE} is given by
   \begin{subequations}
+    \setlength{\abovedisplayskip}{9pt}%
+    \setlength{\belowdisplayskip}{9pt}%
     \begin{align}
       \fcnval{\*l,\*i}
       &= \largesum{(\*l',\*i') \in \liset}
@@ -282,11 +283,12 @@ via forward substitution:
       \cdots
       &= \surplus{\*l,\*i} +
       \largesum{\substack{(\*l',\*i')\in\liset\\\normone{\*l'} < \normone{\*l}}}
-      \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}),
+      \surplus{\*l',\*i'} \fundbasis{\*l',\*i'}(\gp{\*l,\*i}).\\[-6.4em]\notag
     \end{align}
   \end{subequations}
-  as desired.
 \end{proof}
+
+\vspace{1em}
 
 \paragraph{Breadth-first search}
 
@@ -297,22 +299,26 @@ the spatially adaptive sparse grid $\sgset$.
 The nodes of the \dagr are the level-index pairs $(\*l, \*i) \in \liset$.
 An edge connects $(\*l, \*i)$ to $(\*l', \*i')$,
 if $(\*l, \*i)$ is a direct ancestor of $(\*l', \*i')$, i.e., if
-\begin{equation}
-  \label{eq:directAncestor}
-  \exlarge{t = 1, \dotsc, d}{
-    \*l'_{-t} = \*l_{-t},\;
-    \*i'_{-t} = \*i_{-t},\;
-    l'_t = l_t + 1,\;
-    i'_t \in
-    \begin{cases}
-      \{1\},&l_t = 0,\\
-      \{2i_t - 1, 2i_t + 1\},&l_t > 0.
-    \end{cases}
-  }
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \label{eq:directAncestor}
+    \exlarge{t = 1, \dotsc, d}{
+      \*l'_{-t} = \*l_{-t},\;
+      \*i'_{-t} = \*i_{-t},\;
+      l'_t = l_t + 1,\;
+      i'_t \in
+      \begin{cases}
+        \{1\},&l_t = 0,\\
+        \{2i_t - 1, 2i_t + 1\},&l_t > 0.
+      \end{cases}
+    }
+  \end{equation}%
+}
 An example for the resulting \dagr for a regular sparse grid
 in two dimensions is shown in \cref{fig:DAG}.
-
+%
 \begin{algorithm}
   \begin{algorithmic}[1]
     \Function{$\vlinout = \texttt{breadthFirstSearch}$}{%
@@ -374,7 +380,7 @@ in two dimensions is shown in \cref{fig:DAG}.
   }%
   \label{alg:BFS}%
 \end{algorithm}
-
+%
 \begin{SCfigure}
   \includegraphics{dag_1}%
   \caption[%
@@ -391,7 +397,7 @@ in two dimensions is shown in \cref{fig:DAG}.
   }%
   \label{fig:DAG}%
 \end{SCfigure}
-
+%
 We make two assumptions for \cref{alg:BFS}.
 First, $\liset$ should contain at least all $2^d$ corners of the
 domain $\clint{\*0, \*1}$:
@@ -1055,11 +1061,11 @@ $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
-to evaluate the fundamental spline $\parentfundspl{p}$ once.
+to evaluate $\parentfundspl{p}$ once.
 %due to the local support of B-splines.
 In \cref{tbl:fundamentalSplineDecay}, we list the decay rates $\gamma_p$,
 the factors $\beta_p$ and $\beta'_p$, and the truncation indices
-$\fundsplcutoff{p}$ for different degrees.
+$\fundsplcutoff{p}$ for different $p$.
 
 \begin{table}
   \setnumberoftableheaderrows{1}%

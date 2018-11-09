@@ -147,9 +147,9 @@ to dimensionally adaptive sparse grids
   }
   As both $\regsgintp[\ct]{n}{d}$ and $\regsgintp{n}{d}$
   are contained in $\regsgspace{n}{d}$ and
-  interpolate $\objfun$ on $\regsgset{n}{d}$, they must coincide
+  interpolate $\objfun$ on $\regsgset{n}{d}$, they coincide
   due to the uniqueness of sparse grid interpolation
-  (linear independence of the hierarchical basis functions).
+  (linear independence of the hierarchical basis).
 \end{proof}
 
 \paragraph{Inclusion-exclusion principle}
@@ -162,9 +162,9 @@ In its simplest form, the idea of the principle is that the cardinality
 of the union of two finite subsets $A$ and $B$ of some set is given by
 \begin{equation}
   \setsize{A \cup B}
-  = \setsize{A} + \setsize{B} - \setsize{A \cap B}.
+  = \setsize{A} + \setsize{B} - \setsize{A \cap B},
 \end{equation}
-This equation states that we have to first count (include)
+i.e., we first count (include)
 the elements in $A$ and then in $B$,
 but as we have counted the elements of $A \cap B$ twice,
 we have to subtract (exclude) its cardinality again.
@@ -283,8 +283,7 @@ The lemma allows to group summands in the second sum of
 \eqref{eq:combiTechniqueSplitSum} by function values.
 Hence, it remains to count the number of levels in
 each equivalence class of $\eq$.
-Therefore, we need a characterization of the structure
-of the equivalence classes:
+Therefore, we need a characterization of the equivalence classes:
 
 \begin{SCfigure}
   \includegraphics{combiTechniqueProof_1}%
@@ -734,8 +733,8 @@ the following invariant, which can be used to show its correctness:
   with unique surpluses $\surplus{\*l',\*i'}$ such that the function values
   are interpolated (see \eqref{eq:hierarchizationProblem}),
   the coefficients $\linout{\*l',\*i'}$
-  (which are the output of \cref{alg:residualInterpolation})
-  must coincide with the surpluses $\surplus{\*l',\*i'}$.
+  (output of \cref{alg:residualInterpolation})
+  coincide with the surpluses $\surplus{\*l',\*i'}$.
 \end{proof}
 
 \Cref{prop:invariantResidualInterpolation} shows that
