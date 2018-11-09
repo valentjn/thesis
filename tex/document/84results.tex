@@ -59,11 +59,7 @@ NAG Toolbox for MATLAB.%
 Runtimes were measured on a shared memory computer
 with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 
-
-
-\subsection{Numerical Results}
-
-\paragraph{Error measures and reference solution}
+\paragraph{Error measures}
 
 To assess the quality of the resulting value and policy functions,
 we use two error measures:
@@ -88,6 +84,12 @@ we take the mean of the relative $\Ltwo$ error:
 \end{equation}
 It suffices to consider $t = 0$, as both error measures
 usually grow backwards in time due to the dynamic programming approach.
+
+
+
+\subsection{Numerical Results}
+
+\paragraph{Reference solution}
 
 We use full grid solutions as reference solutions,
 i.e., $\{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\} = \fgset{n,d}$
