@@ -80,10 +80,6 @@ def plotUnconstrainedProblem(params):
   ax.xaxis.set_rotate_label(False)
   ax.yaxis.set_rotate_label(False)
   
-  ax.w_xaxis.set_pane_color((0.96, 0.96, 0.96, 1.0))
-  ax.w_yaxis.set_pane_color((0.92, 0.92, 0.92, 1.0))
-  ax.w_zaxis.set_pane_color((0.94, 0.94, 0.94, 1.0))
-  
   if cameraPosition is not None: ax.view_init(*cameraPosition[::-1])
   
   fig.save(graphicsNumber=q+1)
