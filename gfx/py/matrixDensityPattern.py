@@ -115,7 +115,7 @@ fX = np.zeros((N,))
 
 
 
-fig = Figure.create(figsize=(2, 2), scale=2.8)
+fig = Figure.create(figsize=(2, 2), scale=2.6)
 ax = fig.gca()
 
 xMargin = 0.1
