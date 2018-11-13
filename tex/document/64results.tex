@@ -390,7 +390,7 @@ of the objective function $\*\objfun\colon \clint{\*0, \*1} \to \real^{m+1}$
 and its surrogate $\vsgintp$, since both are vector-valued.
 As the micro-cell density $\denscell$
 is not affected by the Cholesky factorization,
-we consider in the following only the elasticity tensor
+we consider only the elasticity tensor
 $\etensor\colon \clint{\*0, \*1} \to \real^{6 \times 6}$ and
 its surrogate
 $\etensorcholintp\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
@@ -574,7 +574,7 @@ is the micro-cell parameter combination that is returned by the optimizer.%
   $\complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$,
   which the optimizer reports as optimal objective function value.%
 }
-It is obvious that the more complicated micro-cell models
+It is obvious that more complicated micro-cell models
 lead to lower (better) compliance values,
 as they are a generalization of the simple models.
 For instance, the 2D cross is a special case of
@@ -686,8 +686,6 @@ one single large micro-cell.
   \label{fig:topoOptStructure2DCantilever}%
 \end{figure}
 
-\pagebreak
-
 Two effects can be seen in the plots of the optimal structures:
 First, the simpler models are not able to direct the emerging forces at
 arbitrary angles.
@@ -700,7 +698,7 @@ internal forces to act at almost arbitrary angles.
 Second, the sheared micro-cell models use the available
 material volume more efficiently than the cross model.
 This is most striking in the 3D case (see \cref{fig:topoOptStructure3D}),
-where it looks like that the sheared cross structures
+where it seems that the sheared cross structures
 use more volume than the simple cross structures,
 although the structures spend exactly the same amount of material volume.
 The reason is that for the cross model, both bars
@@ -805,7 +803,7 @@ optimization performance,
 for the degrees $p = 1, 3, 5$ and the 2D/3D cross and sheared cross
 micro-cell models.
 In the two-dimensional scenarios,
-higher-order B-splines are able to decrease the compliance value
+higher-order B-splines decrease the compliance value
 by up to \SI{9}{\percent}.
 In the three-dimensional scenarios,
 higher-order B-splines may perform worse than the piecewise linear
