@@ -182,6 +182,57 @@ discretization techniques such as sparse grids.
   \label{fig:financeEulerError}%
 \end{figure}
 
+
+
+\begin{figure}
+  \subcaptionbox{%
+    $\normcetvalueintp_t$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_7}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\normbuy[\sparse]_{t,1}$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_8}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\normbuy[\sparse]_{t,2}$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_9}%
+  }%
+  \\[2mm]%
+  \subcaptionbox{%
+    $\normsell[\sparse]_{t,1}$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_10}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\normsell[\sparse]_{t,2}$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_11}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $\normbond_t^{\sparse}$%
+  }[48mm]{%
+    \includegraphics{financeSolution2D_12}%
+  }%
+  \caption[Sparse grid solution for the two-dimensional TCP]{%
+    Spatially adaptive sparse grid solution for the transaction costs problem
+    with $d = 2$ stocks.
+    \vspace{-0.15em}%
+    Shown are the value function $\normcetvalueref_t$ \emph{(top left)} and the
+    optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$,
+    together with the corresponding grid points \emph{(dots).}
+    The color coding is the same as in
+    \cref{fig:financeSolution2DReference}.%
+  }%
+  \label{fig:financeSolution2DSparseGrid}%
+\end{figure}
+
 \dummytext[2]{}
 
 \paragraph{Pointwise error}
