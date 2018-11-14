@@ -152,6 +152,35 @@ discretization techniques such as sparse grids.
 % FG vs. regular SG vs. adaptive SG
 % Euler eq. errors, policy errors?
 
+\begin{figure}
+  \includegraphics{financeEulerError_4}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $d = 1$%
+  }[48mm]{%
+    \includegraphics{financeEulerError_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 2$%
+  }[48mm]{%
+    \includegraphics{financeEulerError_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 3$%
+  }[48mm]{%
+    \includegraphics{financeEulerError_3}%
+  }%
+  \caption[Convergence of the weighted Euler equation error]{%
+    Convergence of the $\Ltwo$ norm $\normLtwo{\weightedeulererror_0}$
+    of the weighted Euler equation error for $t = 0$ for
+    full grids \emph{\textcolor{C0}{(blue)},}
+    regular sparse grids \emph{\textcolor{C1}{(red)},} and
+    spatially adaptive sparse grids \emph{\textcolor{C2}{(yellow)}.}%
+  }%
+  \label{fig:financeEulerError}%
+\end{figure}
 
 \dummytext[2]{}
 
