@@ -71,8 +71,9 @@ For instance, in a simple model of the human upper limb,
 there are two antagonistic muscles
 (i.e., muscles that work against each other), namely triceps and biceps,
 but only one joint angle at the elbow.
-Mathematically speaking, a single muscle would suffice to attain
-most elbow angles that are possible with an antagonistic muscle pair.
+Mathematically speaking, a single muscle suffices to attain
+a large range of elbow angles
+that are possible with an antagonistic muscle pair.
 However, the usage of two muscles enables faster movements and
 allows for abrupt changes of direction.
 
@@ -333,7 +334,7 @@ resulting overall second Piola-Kirchhoff stress $\mat{S}_\mathrm{MTC}$ of
 the muscle-tendon complex satisfies
 \begin{equation}
   \mat{S}_\mathrm{MTC}
-  = \mat{S}_\mathrm{iso} + \mat{S}_\mathrm{aniso} - p \mat{C},
+  = \mat{S}_\mathrm{iso} + \mat{S}_\mathrm{aniso} - p \mat{C}^{-1},
 \end{equation}
 where $\mat{S}_\mathrm{iso}$ and $\mat{S}_\mathrm{aniso}$
 are the \term{isotropic and anisotropic parts} of the stress, respectively,
