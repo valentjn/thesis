@@ -147,17 +147,21 @@ discretization techniques such as sparse grids.
   \label{fig:financeSolution2DReference}%
 \end{figure}
 
-\paragraph{Solution on regular sparse grids}
+\paragraph{Convergence of 1D, 2D, and 3D solutions}
 
-\dummytext[8]{}
+% FG vs. regular SG vs. adaptive SG
+% Euler eq. errors, policy errors?
 
-\paragraph{Solution on spatially adaptive sparse grids}
 
-\dummytext[8]{}
+\dummytext[2]{}
 
-\paragraph{Comparison with piecewise linear functions}
+\paragraph{Pointwise error}
 
-\dummytext[8]{}
+\dummytext[3]{}
+
+\paragraph{4D and 5D solutions}
+
+\dummytext[2]{}
 
 \paragraph{Monte Carlo simulation}
 
@@ -226,4 +230,129 @@ discretization techniques such as sparse grids.
 % certainty-equivalent consumption
 % mit B-splines und linearen Funktionen
 
-\dummytext[8]{}
+\dummytext[3]{}
+
+\paragraph{Error sources}
+
+% high-level explanation of accumulation of errors over time
+
+\begin{enumerate}
+  \item
+  Interpolation of the value function
+  (i.e., $\normcetvalueintp_{t+1} \not= \normcetvaluefcn_{t+1}$)
+  
+  \item
+  Interpolation of the policy functions
+  (i.e., $\optnormpolicyintp_t \not= \optnormpolicyfcn_t$)
+  
+  \item
+  Extrapolation errors
+  (i.e., $
+    \normcetvalueintp_{t+1}(\state_{t+1})
+    \not= \normcetvaluefcn_{t+1}(\state_{t+1})
+  $)
+  
+  \item
+  Errors from state space cropping
+  (i.e., Euler errors do not vanish for exact solution)
+  
+  \item
+  Optimization error
+  (i.e., the global minimum found by the optimizer is inaccurate)
+  
+  \item
+  Quadrature error
+  ($
+    \expectation[t]{\cdots}
+    \not= \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
+    [\cdots](\stochastic_t^{(j)})
+  $)
+  
+  \item
+  Floating-point rounding errors
+  (i.e., arithmetical operations are inaccurate)
+\end{enumerate}
+
+\dummytext[2]{}
+
+\paragraph{Complexity and runtime analysis}
+
+% analyze runtime behavior over N (fixed d) and d
+
+% (e-mail 2018-01-03)
+%Runtime of one optimize() run
+%- -----------------------------
+%O(#New state grid points
+%* #Optimization iterations
+%* #Quadrature points
+%* #Old state grid points
+%* #State dimensions
+%* Runtime of one 1D basis evaluation)
+%
+%where
+%#(Optimization iterations) depends on #(Policy dimensions),
+%#(Policy dimensions) = 2 * #Stocks + 1
+%#(State dimensions) = #Stocks + 1
+%
+%(modulo extrapolations)
+
+\begin{equation}
+  \landauO{
+    % for every time step
+    T
+    % for every grid point of new time step
+    \cdot \ngp_t
+    % for every optimization iteration
+    \cdot \text{\#optimizer iterations}
+    \cdot
+    \underbrace{
+      % for every gradient entry of the objective function
+      m_{\policy}
+      % for every quadrature point
+      \cdot m_{\stochastic}
+      \cdot
+      \overbrace{
+        % for every summand of the sparse grid function
+        % (grid point of old time step)
+        \ngp_{t+1}
+        % for every tensor product factor
+        \cdot m_{\state}
+        % for every B-spline summand
+        \cdot p
+      }^{\mathclap{\text{evaluation of interpolant}}}
+    }_{\text{evaluation of objective gradient}}\,
+  }
+\end{equation}
+
+\#optimizer iterations contains multi-start points!
+
+\begin{equation}
+  \landauO{
+    T
+    \cdot
+    2^n n^{d-1}
+    \cdot
+    2^n n^{d-1}
+    \cdot
+    (2d + 1)
+    \cdot
+    2^n n^{d-1}
+    \cdot
+    2^n n^{d-1}
+    \cdot
+    d
+    \cdot
+    p
+  }
+  = \landauO{Tdp 2^{4n} n^{4d-4}}??
+\end{equation}
+
+\dummytext[3]{}
+
+\paragraph{Impact of the B-spline degree}
+
+\dummytext[3]{}
+
+\paragraph{Comparing exact gradients to finite differences}
+
+\dummytext[3]{}
