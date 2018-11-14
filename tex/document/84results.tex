@@ -106,6 +106,8 @@ For each $d$,
 (see \cref{chap:a40financeDetails})
 contains full grid solutions of different levels,
 where the solution with the highest level is used as reference solution.
+The reference solution for $d = 2$ is shown in
+\cref{fig:financeSolution2DReference}.
 Unfortunately, only full grid solutions up to $d = 3$ could be computed
 due to excessive runtime for $d \ge 4$,
 which means that policy errors can only be given for $d = 2$ or $d = 3$.
@@ -136,10 +138,13 @@ discretization techniques such as sparse grids.
   \makebox[49mm][r]{%
     \includegraphics{financeSolution2D_6}%
   }%
-  \caption[TODO]{%
-    TODO%
+  \caption[Reference solution for the two-dimensional TCP]{%
+    Reference solution for the transaction costs problem
+    with $d = 2$ stocks.
+    Shown are the value function $\normcetvalueref_t$ \emph{(top left)} and the
+    optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$.%
   }%
-  \label{fig:financeSolution2D}%
+  \label{fig:financeSolution2DReference}%
 \end{figure}
 
 \paragraph{Solution on regular sparse grids}
