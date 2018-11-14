@@ -2,7 +2,7 @@
 # number of output figures = 12
 
 import functools
-import multiprocessing
+#import multiprocessing
 
 import matplotlib as mpl
 import numpy as np
@@ -155,10 +155,14 @@ def main():
           interpPolicy, t, discreteStateName, name)) for name in names]
     parameterss = list(zip(qs, names, interpolants))
     
-    with multiprocessing.Pool() as pool:
-      pool.map(functools.partial(plotJOrPolicy,
-            solution, interpPolicy, discreteStateName, t, isSparseGrid),
-          parameterss)
+    #with multiprocessing.Pool() as pool:
+    #  pool.map(functools.partial(plotJOrPolicy,
+    #        solution, interpPolicy, discreteStateName, t, isSparseGrid),
+    #      parameterss)
+    
+    for parameters in parameterss:
+      plotJOrPolicy(solution, interpPolicy, discreteStateName, t,
+                    isSparseGrid, parameters)
 
 
 
