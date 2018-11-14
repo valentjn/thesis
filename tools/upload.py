@@ -128,6 +128,12 @@ if __name__ == "__main__":
         shutil.copytree(os.path.join(args.copy_stuff, "build", x),
                         os.path.join(repoPath, "build", x),
                         copy_function=shutil.copy)
+      print("")
+      print("Copying data/...")
+      os.rmdir(os.path.join(repoPath, "data"))
+      shutil.copytree(os.path.join(args.copy_stuff, "data"),
+                      os.path.join(repoPath, "data"),
+                      copy_function=shutil.copy2)
     
     try:
       print("")
