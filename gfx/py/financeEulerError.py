@@ -56,12 +56,12 @@ def main():
     
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
     ax.text(*trafo(0.04, 1.0),
-            r"$\normLtwo{\weightedeulererror_0}$",
+            r"$\normLtwo{\weightedeulererror_t}$",
             ha="left", va="top")
     if   d == 1: x = 0.6
     elif d == 2: x = 0.7
     elif d == 3: x = 0.65
-    ax.text(*trafo(x, -0.05), r"$\ngp$",
+    ax.text(*trafo(x, -0.05), r"$\ngp_t$",
             ha="center", va="top")
     
     fig.save()
