@@ -63,38 +63,12 @@ of initial multi-start points (in the range of a few dozens).
 All runtimes were measured on a shared memory computer
 with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 
-\paragraph{Error measures}
-
-To assess the quality of the resulting value and policy functions,
-we use two error measures:
-Euler equation error and policy error.
-The weighted Euler equation error $\weightedeulererror_t(\normstate_t)$
-measures the violation of the first-order optimality conditions,
-derived as above.
-The policy error is the difference
-$\optnormpolicyref_t(\state_t) - \optnormpolicyintp_t(\state_t)$
-of the optimal policy to some reference.
-Both error measures can be analyzed pointwise or
-via their $\Ltwo$ norms, where for the policy error,
-we take the mean of the relative $\Ltwo$ error:
-\begin{equation}
-  \policyerror_t
-  := \frac{1}{m_{\policy}} \sum_{j=1}^{m_{\policy}}
-  \frac{
-    \normLtwo{\optnormpolicyentryref_{t,j} - \optnormpolicyentryintp_{t,j}}
-  }{
-    \normLtwo{\optnormpolicyentryref_{t,j}}
-  }.
-\end{equation}
-It suffices to consider $t = 0$, as both error measures
-usually grow backwards in time due to the dynamic programming approach.
 
 
-
-\subsection{Error Sources}
+\subsection{Error Sources and Error Measure}
 \label{sec:842errorSources}
 
-% high-level explanation of accumulation of errors over time
+\paragraph{Error sources}
 
 In this application, there are the following error sources:
 
@@ -145,6 +119,16 @@ on the left-hand side, and so on.
 If the system does not damp these errors,
 the error might become stronger and stronger backwards in time $t$.
 
+\paragraph{Error measure}
+
+We use the weighted Euler equation error
+$\weightedeulererror_t(\normstate_t)$
+to assess the quality of the resulting optimal policy functions.
+This error measure can be analyzed pointwise or
+via its $\Ltwo$ norms.
+As the errors generally grow backwards in time,
+it suffices to consider $t = 0$.
+
 
 
 \subsection{Numerical Results}
@@ -160,13 +144,11 @@ for low dimensionalities $d$ due to the curse of dimensionality.
 For each $d$,
 \cref{tbl:financeSolutionFullRegularSparseGrids}
 (see \cref{chap:a40financeDetails})
-contains full grid solutions of different levels,
-where the solution with the highest level is used as reference solution.
+contains full grid solutions of different levels.
 The reference solution for $d = 2$ is shown in
 \cref{fig:financeSolution2DReference}.
 Unfortunately, only full grid solutions up to $d = 3$ could be computed
-due to excessive runtime for $d \ge 4$,
-which means that policy errors can only be given for $d = 2$ or $d = 3$.
+due to excessive runtime for $d \ge 4$.
 This underlines the need for sophisticated
 discretization techniques such as sparse grids.
 

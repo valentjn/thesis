@@ -13,57 +13,56 @@
 \begin{table}
   \sisetup{retain-zero-exponent=true}%
   \newcommand*{\cece}[1]{\multicolumn{1}{c}{#1}}%
-  \newcommand*{\erri}{\cece{$\policyerror_0$}}%
-  \newcommand*{\errii}{\cece{$\normLtwo{\weightedeulererror_0}$}}%
+  \newcommand*{\err}{\cece{$\normLtwo{\weightedeulererror_0}$}}%
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
     >{\kern\tabcolsep}=l+c+r<{\kern5mm}+r+l+l+r<{\kern\tabcolsep}%
   }
     \toprulec
     \headerrow
-    Grid&                 $d$&         $n$&    $\ngp_0$&        \erri&       \errii&     Runtime\\
+    Grid&   $d$& $n$&    $\ngp_0$&         \err&     Runtime\\
     \midrulec
     % id=0004
-    Full&                   1&           9&   \num{513}&   \cece{---}& \num{3.6e-8}&    \hms{;1}\\
+    Full&     1&   9&   \num{513}& \num{3.6e-8}&    \hms{;1}\\
     % id=0005
-    Full&                   1&          10&  \num{1025}&   \cece{---}& \num{1.7e-8}&    \hms{;4}\\
+    Full&     1&  10&  \num{1025}& \num{1.7e-8}&    \hms{;4}\\
     % id=0006
-    \textbf{Full}& \textbf{1}& \textbf{11}&  \num{2049}&   \cece{---}& \num{3.8e-9}&   \hms{;18}\\
+    Full&     1&  11&  \num{2049}& \num{3.8e-9}&   \hms{;18}\\
     \midrulec
     % id=0012
-    Full&                   2&           5&  \num{1089}&   \cece{---}& \num{4.5e-5}&    \hms{;2}\\
+    Full&     2&   5&  \num{1089}& \num{4.5e-5}&    \hms{;2}\\
     % id=0013
-    Full&                   2&           6&  \num{4225}&   \cece{---}& \num{1.2e-5}&   \hms{;28}\\
+    Full&     2&   6&  \num{4225}& \num{1.2e-5}&   \hms{;28}\\
     % id=0014
-    \textbf{Full}& \textbf{2}&  \textbf{7}& \num{16641}&   \cece{---}& \num{3.1e-6}&  \hms{9;33}\\
+    Full&     2&   7& \num{16641}& \num{3.1e-6}&  \hms{9;33}\\
     \midrulec
     % id=0020
-    Full&                   3&           2&   \num{125}&   \cece{---}& \num{1.4e-2}&    \hms{;1}\\
+    Full&     3&   2&   \num{125}& \num{1.4e-2}&    \hms{;1}\\
     % id=0021
-    Full&                   3&           3&   \num{729}&   \cece{---}& \num{2.5e-3}&    \hms{;6}\\
+    Full&     3&   3&   \num{729}& \num{2.5e-3}&    \hms{;6}\\
     % id=0022
-    \textbf{Full}& \textbf{3}&  \textbf{4}&  \num{4913}&   \cece{---}& \num{4.7e-4}&   \hms{4;2}\\
+    Full&     3&   4&  \num{4913}& \num{4.7e-4}&   \hms{4;2}\\
     \midrulec
     % id=0034
-    Sparse&                 2&           7&  \num{1281}& \num{2.3e-2}& \num{2.1e-4}&    \hms{;5}\\
+    Sparse&   2&   7&  \num{1281}& \num{2.1e-4}&    \hms{;5}\\
     % id=0035
-    Sparse&                 2&           8&  \num{2817}& \num{7.1e-3}& \num{1.7e-4}&   \hms{;23}\\
+    Sparse&   2&   8&  \num{2817}& \num{1.7e-4}&   \hms{;23}\\
     % id=0036
-    Sparse&                 2&           9&  \num{6145}& \num{4.2e-3}& \num{7.0e-5}&  \hms{2;40}\\
+    Sparse&   2&   9&  \num{6145}& \num{7.0e-5}&  \hms{2;40}\\
     \midrulec
     % id=0042
-    Sparse&                 3&           4&   \num{593}& \num{2.8e-1}& \num{1.3e-2}&    \hms{;5}\\
+    Sparse&   3&   4&   \num{593}& \num{1.3e-2}&    \hms{;5}\\
     % id=0043
-    Sparse&                 3&           5&  \num{1505}& \num{8.0e-2}& \num{1.7e-2}&   \hms{;28}\\
+    Sparse&   3&   5&  \num{1505}& \num{1.7e-2}&   \hms{;28}\\
     % id=0044
-    Sparse&                 3&           6&  \num{3713}& \num{2.5e-1}& \num{8.7e-3}&   \hms{4;7}\\
+    Sparse&   3&   6&  \num{3713}& \num{8.7e-3}&   \hms{4;7}\\
     \midrulec
     % id=0050
-    Sparse&                 4&           2&   \num{297}&   \cece{---}& \num{3.1e-1}&    \hms{;4}\\
+    Sparse&   4&   2&   \num{297}& \num{3.1e-1}&    \hms{;4}\\
     % id=0051
-    Sparse&                 4&           3&   \num{945}&   \cece{---}& \num{4.7e-2}&   \hms{;39}\\
+    Sparse&   4&   3&   \num{945}& \num{4.7e-2}&   \hms{;39}\\
     % id=0052
-    Sparse&                 4&           4&  \num{2769}&   \cece{---}& \num{1.1e-1}&  \hms{5;29}\\
+    Sparse&   4&   4&  \num{2769}& \num{1.1e-1}&  \hms{5;29}\\
     \bottomrulec
   \end{tabular}
   \caption[%
@@ -73,7 +72,6 @@
     for different dimensionalities $d$ and levels $n$.
     The other columns show
     the number $\ngp_0$ of grid points for $t = 0$,
-    the mean policy error $\policyerror_0$ for $t = 0$,
     the weighted Euler equation error $\normLtwo{\weightedeulererror_0}$
     for $t = 0$,
     and the runtime.
