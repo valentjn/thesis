@@ -91,8 +91,52 @@ usually grow backwards in time due to the dynamic programming approach.
 
 
 
+\subsection{Error Sources}
+\label{sec:842errorSources}
+
+% high-level explanation of accumulation of errors over time
+
+\begin{enumerate}
+  \item
+  Interpolation of the value function
+  (i.e., $\normcetvalueintp_{t+1} \not= \normcetvaluefcn_{t+1}$)
+  
+  \item
+  Interpolation of the policy functions
+  (i.e., $\optnormpolicyintp_t \not= \optnormpolicyfcn_t$)
+  
+  \item
+  Extrapolation errors
+  (i.e., $
+  \normcetvalueintp_{t+1}(\state_{t+1})
+  \not= \normcetvaluefcn_{t+1}(\state_{t+1})
+  $)
+  
+  \item
+  Errors from state space cropping
+  (i.e., Euler errors do not vanish for exact solution)
+  
+  \item
+  Optimization error
+  (i.e., the global minimum found by the optimizer is inaccurate)
+  
+  \item
+  Quadrature error
+  ($
+  \expectation[t]{\cdots}
+  \not= \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
+  [\cdots](\stochastic_t^{(j)})
+  $)
+  
+  \item
+  Floating-point rounding errors
+  (i.e., arithmetical operations are inaccurate)
+\end{enumerate}
+
+
+
 \subsection{Numerical Results}
-\label{sec:842results}
+\label{sec:843results}
 
 \paragraph{Reference solution}
 
@@ -370,53 +414,10 @@ discretization techniques such as sparse grids.
       TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
       TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO%
     }%
-    \vspace*{-6mm}%
+    \vspace*{-6.3mm}%
     \label{fig:financeSimulation}%
   \end{minipage}%
 \end{figure}
-
-\dummytext[2]{}
-
-\paragraph{Error sources}
-
-% high-level explanation of accumulation of errors over time
-
-\begin{enumerate}
-  \item
-  Interpolation of the value function
-  (i.e., $\normcetvalueintp_{t+1} \not= \normcetvaluefcn_{t+1}$)
-  
-  \item
-  Interpolation of the policy functions
-  (i.e., $\optnormpolicyintp_t \not= \optnormpolicyfcn_t$)
-  
-  \item
-  Extrapolation errors
-  (i.e., $
-    \normcetvalueintp_{t+1}(\state_{t+1})
-    \not= \normcetvaluefcn_{t+1}(\state_{t+1})
-  $)
-  
-  \item
-  Errors from state space cropping
-  (i.e., Euler errors do not vanish for exact solution)
-  
-  \item
-  Optimization error
-  (i.e., the global minimum found by the optimizer is inaccurate)
-  
-  \item
-  Quadrature error
-  ($
-    \expectation[t]{\cdots}
-    \not= \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
-    [\cdots](\stochastic_t^{(j)})
-  $)
-  
-  \item
-  Floating-point rounding errors
-  (i.e., arithmetical operations are inaccurate)
-\end{enumerate}
 
 \dummytext[2]{}
 
