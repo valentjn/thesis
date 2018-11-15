@@ -96,7 +96,9 @@ usually grow backwards in time due to the dynamic programming approach.
 
 % high-level explanation of accumulation of errors over time
 
-\begin{enumerate}
+In this application, there are the following error sources:
+
+\begin{enumerate}[label=E\arabic*.,ref=E\arabic*,leftmargin=2.7em]
   \item
   Interpolation of the value function
   (i.e., $\normcetvalueintp_{t+1} \not= \normcetvaluefcn_{t+1}$)
@@ -132,6 +134,16 @@ usually grow backwards in time due to the dynamic programming approach.
   Floating-point rounding errors
   (i.e., arithmetical operations are inaccurate)
 \end{enumerate}
+Due to the dynamic programming scheme,
+the combination of all errors accumulates over $t$.
+For instance, if the optimization does not find the global optimum
+exactly or it only finds a local one for the time $t + 1$,
+the error propagates from the interpolant $\normcetvalueintp_{t+1}$
+on the right-hand side of the Bellman equation
+\eqref{eq:normalizedTCPBellmanEquation} to $\normcetvalueintp_t$
+on the left-hand side, and so on.
+If the system does not damp these errors,
+the error might become stronger and stronger backwards in time $t$.
 
 
 
