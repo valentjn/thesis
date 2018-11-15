@@ -208,6 +208,15 @@ discretization techniques such as sparse grids.
 % FG vs. regular SG vs. adaptive SG
 % Euler eq. errors, policy errors?
 
+\Cref{fig:financeEulerError} shows the convergence of the
+$\Ltwo$ norm $\normLtwo{\weightedeulererror_0}$
+weighted Euler equation error for $t = 0$ for the reference full grids,
+regular sparse grids, and spatially adaptive sparse grids.
+For this and the following plots,
+the value function grid is kept unchanged,
+while the mean number $\ngp_t$ of policy grid points increases
+with decreasing refinement threshold $\refinetol_t$.
+
 \begin{figure}
   \includegraphics{financeEulerError_4}%
   \\[2mm]%
