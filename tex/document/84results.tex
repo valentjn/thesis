@@ -499,22 +499,15 @@ with decreasing refinement threshold $\refinetol_t$.
 \begin{equation}
   \landauO{
     T
-    \cdot
-    2^n n^{d-1}
-    \cdot
-    2^n n^{d-1}
-    \cdot
-    (2d + 1)
-    \cdot
-    2^n n^{d-1}
-    \cdot
-    2^n n^{d-1}
-    \cdot
-    d
-    \cdot
-    p
+    \cdot \ngp
+    \cdot \text{\#optim.\ it.}
+    \cdot d
+    \cdot d
+    \cdot \ngp
+    \cdot d
+    \cdot p
   }
-  = \landauO{Tdp 2^{4n} n^{4d-4}}??
+  = \landauO{T \ngp^2 d^3 p \cdot \text{\#optim.\ it.}}??
 \end{equation}
 
 \dummytext[3]{}
