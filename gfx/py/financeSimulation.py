@@ -27,7 +27,7 @@ def plotPolygon(ax, ts, ys, label, color, opacity):
 
 
 def main():
-  ids = [145, 153, 187, 153]
+  ids = [145, 153, 187, 145]
   ts = list(range(7))
   isStackeds = [False, False, False, True]
   tac = 0.01
