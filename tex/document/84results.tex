@@ -74,14 +74,17 @@ In this application, there are the following error sources:
 
 \begin{enumerate}[label=E\arabic*.,ref=E\arabic*,leftmargin=2.7em]
   \item
+  \label{item:financeErrorInterpolationValue}
   Interpolation of the value function
   (i.e., $\normcetvalueintp_{t+1} \not= \normcetvaluefcn_{t+1}$)
   
   \item
+  \label{item:financeErrorInterpolationPolicy}
   Interpolation of the policy functions
   (i.e., $\optnormpolicyintp_t \not= \optnormpolicyfcn_t$)
   
   \item
+  \label{item:financeErrorExtrapolation}
   Extrapolation errors
   (i.e., $
   \normcetvalueintp_{t+1}(\state_{t+1})
@@ -89,14 +92,17 @@ In this application, there are the following error sources:
   $)
   
   \item
+  \label{item:financeErrorCropping}
   Errors from state space cropping
   (i.e., Euler errors do not vanish for exact solution)
   
   \item
+  \label{item:financeErrorOptimization}
   Optimization error
   (i.e., the global minimum found by the optimizer is inaccurate)
   
   \item
+  \label{item:financeErrorQuadrature}
   Quadrature error
   ($
   \expectation[t]{\cdots}
@@ -105,6 +111,7 @@ In this application, there are the following error sources:
   $)
   
   \item
+  \label{item:financeErrorRounding}
   Floating-point rounding errors
   (i.e., arithmetical operations are inaccurate)
 \end{enumerate}
