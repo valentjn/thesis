@@ -57,6 +57,8 @@ def main():
     
     fig.save()
   
+  
+  
   fig = Figure.create(figsize=(5, 2))
   ax = fig.gca()
   fig.colorbar(contour, orientation="horizontal", fraction=1, extend="min",
