@@ -192,20 +192,13 @@ discretization techniques such as sparse grids.
   \label{fig:financeSolution2DReference}%
 \end{figure}
 
-\paragraph{Convergence of 1D, 2D, and 3D solutions}
-
-% FG vs. regular SG vs. adaptive SG
-% Euler eq. errors, policy errors?
+\paragraph{Convergence of the weighted Euler equation error}
 
 \Cref{fig:financeEulerError} shows the convergence of the
 $\Ltwo$ norm $\normLtwo{\weightedeulererror_0}$
-weighted Euler equation error for $t = 0$ for the reference full grids,
-regular sparse grids, and spatially adaptive sparse grids.
-For this and the following plots,
-the value function grid is kept unchanged,
-while the mean number $\ngp_t$ of policy grid points increases
-with decreasing refinement threshold $\refinetol_t$.
-
+weighted Euler equation error for $t = 0$ for regular sparse grids
+and spatially adaptive sparse grids
+for the cases of $d = 1, \dotsc, 4$ stocks.
 \begin{figure}
   \includegraphics{financeEulerError_5}%
   \\[2mm]%
@@ -244,7 +237,36 @@ with decreasing refinement threshold $\refinetol_t$.
     of the $j$-th policy entry.%
   }%
   \label{fig:financeEulerError}%
-\end{figure}
+\end{figure}%
+For this and the following plots,
+the value function grid is kept unchanged
+(usually a slightly refined regular sparse grid of level three or four),
+while the mean number $\ngp_t$ of policy grid points increases
+with decreasing refinement threshold $\refinetol_t$,
+since the value function grid does not seem to have a great influence
+on the convergence of the Euler equation errors.
+The spatial adaptivity decreases the error by
+two orders of magnitude in one dimension.
+The gain is smaller for higher dimensionalities $d$,
+but spatial adaptive grids still outperform regular grids.
+For $d = 2$, we observe that the error saturates
+after $\ngp_t \approx \num{4000}$ points before dropping below $10^{-5}$.
+This is most likely due to the parts
+\ref{item:financeErrorExtrapolation} to
+\ref{item:financeErrorRounding} of the error that are not influenced
+by sparse grid interpolation.
+In addition, convergence significantly decelerates starting with $d = 4$.
+For $d = 4$, spatially adaptive sparse grids with
+a mean number $\ngp_t \approx \num{4252}$ of policy grid points for $t = 0$
+are able to achieve a weighted Euler equation error of
+$\normLtwo{\weightedeulererror_t} \approx \num{2.0e-2}$.
+For $d = 5$, we are still able to achieve an acceptable error of
+$\normLtwo{\weightedeulererror_t} \approx \num{3.2e-2}$
+with spatially adaptive sparse grids with
+a mean number $\ngp_t \approx \num{7768}$ of policy grid points for $t = 0$.
+While we do not see any convergence for this dimensionality,
+this is still a major result as such high-dimensional models
+could not be solved with state-of-the-art methods up to now.
 
 
 
