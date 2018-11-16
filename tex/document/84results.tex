@@ -319,6 +319,92 @@ could not be solved with state-of-the-art methods up to now.
   \label{fig:financeSolution2DSparseGrid}%
 \end{figure}
 
+\begin{figure}
+  \makebox[37mm][c]{%
+    \hspace*{3.8mm}%
+    \raisebox{-\height}{\includegraphics{financeSolution5D_13}}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \hspace*{2.9mm}%
+    \raisebox{-\height}{\includegraphics{financeSolution5D_14}}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \hspace*{4.7mm}%
+    \raisebox{-\height}{\includegraphics{financeSolution5D_16}}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \hspace*{4.5mm}%
+    \raisebox{-\height}{\includegraphics{financeSolution5D_15}}%
+  }%
+  \\[1mm]%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_1}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_4}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_12}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_9}%
+  }%
+  \\[1mm]%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_2}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_5}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_7}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_10}%
+  }%
+  \\[1mm]%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_3}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_6}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_8}%
+  }%
+  \hfill%
+  \makebox[37mm][c]{%
+    \includegraphics{financeSolution5D_11}%
+  }%
+  \caption[Sparse grid solution for the five-dimensional TCP]{%
+    Spatially adaptive sparse grid solution for the transaction costs problem
+    with $d = 5$ stocks.
+    \vspace{-0.15em}%
+    Shown are slice plots of
+    the value function $\normcetvalueref_t$ \emph{(top left)} and
+    the optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$,
+    where for each function, a pair $(o_1, o_2)$
+    of dimensions to be plotted was chosen,
+    and the stock fractions $\stock_{t,o}$ of the other dimensions $o$
+    are set to $0.1$.
+    In addition, the corresponding grid points \emph{(dots)}
+    are shown as the projection onto the
+    $\stock_{t,o_1}$--$\stock_{t,o_2}$ plane.%
+  }%
+  \label{fig:financeSolution5DSparseGrid}%
+\end{figure}
+
 \paragraph{Pointwise error}
 
 \begin{figure}
