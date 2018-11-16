@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# number of output figures = 4
+# number of output figures = 5
 
 import numpy as np
 import scipy.io
@@ -12,14 +12,17 @@ import helper.plot
 
 def main():
   idsss = [
-      [list(range(  0,   7)),                  None, list(range( 70,  85))],
-      [list(range( 10,  15)), list(range( 30,  37)), list(range( 90, 105))],
-      [list(range( 20,  23)), list(range( 40,  45)), list(range(130, 146))],
+      [list(range(  0,   7)), list(range( 70,  85))],
+      [list(range( 30,  37)), list(range( 90, 105))],
+      [list(range( 40,  45)), list(range(130, 146))],
+      [list(range( 50,  53)), list(range(150, 156))],
   ]
   
   for d, idss in zip(list(range(1, 5)), idsss):
-    fig = Figure.create(figsize=(2.2, 2.5))
+    fig = Figure.create(figsize=(1.8, 2.5))
     ax = fig.gca()
+    
+    errorss = []
     
     for i, ids in enumerate(idss):
       if ids is None: continue
@@ -35,8 +38,8 @@ def main():
         policyNames = (["DeltaNormNormS{}Buy".format(t+1)  for t in range(d)] +
                       ["DeltaNormNormS{}Sell".format(t+1) for t in range(d)] +
                       ["normNormB"])
-        N = np.mean([helper.finance.createPolicyInterpolant(
-                        interpPolicy, t, discreteStateName, policyName).X.shape[0]
+        N = np.mean([helper.finance.createPolicyInterpolant(interpPolicy,
+                        t, discreteStateName, policyName).X.shape[0]
                     for policyName in policyNames])
         
         errorsMat = scipy.io.loadmat("{}/euler_errors.mat".format(resultsPath))
@@ -45,23 +48,35 @@ def main():
       
       errors.sort(key=lambda x: x[0])
       errors = np.array(errors)
-      ax.plot(*errors.T, ".-", color="C{}".format(i))
+      ax.plot(*errors.T, ".-", color="C{}".format(i), clip_on=False)
+      errorss.append(errors)
     
     ax.set_xscale("log")
     ax.set_yscale("log")
     
-    if   d == 1: ax.set_ylim(2e-9, 2e-4)
-    elif d == 2: ax.set_ylim(2e-6, 2e-2)
-    elif d == 3: ax.set_ylim(4e-4, 2e-1)
+    allNs = [N for errors in errorss for N in errors[:,0]]
+    xl = [min(allNs), max(allNs)]
+    if d > 1: xl[1] = max(xl[1], 1.01e4)
+    ax.set_xlim(*xl)
+    xt = [x for x in [1e2, 1e3, 1e4] if xl[0] <= x <= xl[1]]
+    ax.set_xticks(xt)
+    
+    allErrors = [error for errors in errorss for error in errors[:,1]]
+    yl = [min(allErrors), max(allErrors)]
+    yl = [yl[0], 10**(np.log10(yl[1]) +
+                      0.15 * (np.log10(yl[1]) - np.log10(yl[0])))]
+    ax.set_ylim(*yl)
+    
+    yt = ax.get_yticks()
+    ytl = [r"$10^{{{:.0f}}}$".format(np.log10(y)) for y in yt]
+    ax.set_yticklabels(ytl, va="center", rotation=60)
+    ax.tick_params(axis="y", pad=-5)
     
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
     ax.text(*trafo(0.04, 1.0),
-            r"$\normLtwo{\weightedeulererror_t}$",
-            ha="left", va="top")
-    if   d == 1: x = 0.6
-    elif d == 2: x = 0.7
-    elif d == 3: x = 0.65
-    ax.text(*trafo(x, -0.05), r"$\ngp_t$",
+            r"$\normLtwo{\weightedeulererror_t}$", ha="left", va="top")
+    _, y = trafo(1e3, -0.05)
+    ax.text(10**(2.5 if d == 1 else 3.5), y, r"$\ngp_t$",
             ha="center", va="top")
     
     fig.save()
@@ -73,20 +88,15 @@ def main():
   
   helper.plot.addCustomLegend(ax,
     [{
-      "label"  : "Full grid",
+      "label"  : "Regular",
       "marker" : ".",
       "ls"     : "-",
       "color"  : "C0",
     }, {
-      "label"  : "Regular sparse grid",
+      "label"  : "Spatially adaptive",
       "marker" : ".",
       "ls"     : "-",
       "color"  : "C1",
-    }, {
-      "label"  : "Spatially adaptive sparse grid",
-      "marker" : ".",
-      "ls"     : "-",
-      "color"  : "C2",
     }],
   ncol=4, columnspacing=1, loc="upper center", outside=True)
   
