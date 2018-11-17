@@ -525,8 +525,103 @@ the error decreases quickly in the whole domain.
 
 \paragraph{Monte Carlo simulation}
 
-\cite{Mueller15Ansaetze}
-\cite{Sharpe66Mutual}
+As explained in \cref{sec:828postProecessing},
+we perform a multi-individual Monte Carlo simulation
+and plot the resulting mean state and policy in \cref{fig:financeSimulation}
+for $d = 3$, $4$, and $5$ stocks.
+\begin{figure}
+  \includegraphics{financeSimulation_5}%
+  \\[2mm]%
+  \subcaptionbox{%
+    $d = 3$%
+  }[48mm]{%
+    \includegraphics{financeSimulation_1}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 4$%
+  }[48mm]{%
+    \includegraphics{financeSimulation_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 5$%
+  }[48mm]{%
+    \includegraphics{financeSimulation_3}%
+  }%
+  %\\[2mm]%
+  %\subcaptionbox{%
+  %  $d = 3$ (stacked)%
+  %}[38.5mm]{%
+  %  \includegraphics{financeSimulation_4}%
+  %}%
+  %\hfill%
+  %\begin{minipage}[b]{110.5mm}%
+    \caption[Monte Carlo simulation of the transaction costs problem]{%
+      Mean values of
+      wealth $\wealth_t$
+      \emph{\textcolor{C0}{(blue)},}
+      unnormalized optimal bonds $\bond_t$
+      \emph{\textcolor{C3}{(purple)},}
+      unnormalized optimal consumption $\consume_t$
+      \emph{\textcolor{C4}{(green)},} and
+      unnormalized stock holdings
+      $
+        \acute{\vstock}_t
+        := (\vstock_t + \vnormbuy_t - \vnormsell_t) \wealth_t
+      $
+      after buying and selling
+      \emph{\textcolor{C1}{(red)}}
+      in a Monte Carlo simulation of \num{10000} individuals,
+      where we assume that $\wealth_0 = \$1$ for all individuals.
+      In addition, the plots show the evolution of the
+      $\Ltwo$ error $\weightedeulererrorLtwo_t$ over time $t$
+      \emph{\textcolor{C7}{(pink, right axes)}.}%
+    }%
+    %\vspace*{-6.3mm}%
+    \label{fig:financeSimulation}%
+  %\end{minipage}%
+\end{figure}%
+In addition, this figure contains the evolution of the
+weighted Euler equation error $\weightedeulererrorLtwo_t$ over time.
+We perform a two-part assessment of the simulated results.
+First, consumption should ideally be constant over time
+from a finance perspective.
+We measure this by calculating the coefficients of variation
+(ratio of the standard deviation of the $c_t$ values to their mean),
+which is \SI{2.8}{\percent}, \SI{2.7}{\percent}, and \SI{30}{\percent}
+for $d = 3$, $4$, and $5$, respectively.
+This indicates that while the three-stock and four-stock cases are
+solved well, the five-stock case is not solved sufficiently accurately.
+Second, we consider the so-called \term{Sharpe ratios}
+\cite{Sharpe66Mutual}.
+The ratios are stock fractions $\vstock$ that are determined
+such that the excess stock return (compared to risk-free investment)
+per risk is maximized:%
+\footnote{%
+  The Sharpe ratios per se are derived for non-skewed
+  stock return rate distributions.
+  Our stock return rates are log-normally distributed and thus skewed,
+  but the deviation should be small after six time steps.
+  However, there are variants that
+  take skewed distributions into account \cite{Mueller15Ansaetze}.%
+}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \max_{\vstock \in \clint{0, 1}^d}
+    \frac{
+      \tr{\*\mu_{\range{1}{d}}} \vstock - \bondreturn
+    }{
+      \sqrt{\tr{\vstock} \mat{\Sigma}_{\range{1}{d},\range{1}{d}} \vstock}
+    },
+  \end{equation}%
+}%
+where $\*\mu$ and $\mat{\Sigma}$ are mean and covariance matrix
+of the stocks as given in \cref{eq:financeStockReturnMeanCovariance}
+and the notation indicates the first $d$ entries or
+the principal minor of order $d$.
 
 % Die Idee ist der Sharpe-Ratio [1]:
 % 
@@ -557,47 +652,6 @@ the error decreases quickly in the whole domain.
 %rf = problem.Return.riskfreeRate
 %f = @(x) -(x*b'-rf)./sqrt(x*A*x')
 %xopt = fmincon(f, [1/4 1/4 1/4 1/4], [], [], [1 1 1 1], 1, [0 0 0 0], [1 1 1 1])
-
-\begin{figure}
-  \includegraphics{financeSimulation_5}%
-  \\[2mm]%
-  \subcaptionbox{%
-    $d = 3$%
-  }[48mm]{%
-    \includegraphics{financeSimulation_1}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    $d = 4$%
-  }[48mm]{%
-    \includegraphics{financeSimulation_2}%
-  }%
-  \hfill%
-  \subcaptionbox{%
-    $d = 5$%
-  }[48mm]{%
-    \includegraphics{financeSimulation_3}%
-  }%
-  \\[2mm]%
-  \subcaptionbox{%
-    $d = 3$ (stacked)%
-  }[48mm]{%
-    \includegraphics{financeSimulation_4}%
-  }%
-  \hfill%
-  \begin{minipage}[b]{92mm}%
-    \caption[TODO]{%
-      TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-      TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-      TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-      TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO%
-    }%
-    \vspace*{-6.3mm}%
-    \label{fig:financeSimulation}%
-  \end{minipage}%
-\end{figure}
-
-\dummytext[2]{}
 
 \paragraph{Complexity and runtime analysis}
 
