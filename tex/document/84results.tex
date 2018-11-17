@@ -698,6 +698,52 @@ weighted Euler equation error (cf.\ \cref{fig:financeSimulation_3}).
 
 % analyze runtime behavior over N (fixed d) and d
 
+The fact that the difficulty of the problem grows very fast with $d$
+can be explained with a complexity analysis:
+The number of necessary arithmetic operations grows like
+(cf.\ \cref{fig:structureSolveValueFunction})
+{%
+  \setlength{\abovedisplayskip}{6pt}%
+  \setlength{\belowdisplayskip}{6pt}%
+  \begin{equation}
+    \landauTheta{
+      % for every time step
+      T
+      % for every grid point of new time step
+      \cdot \ngp_t
+      % for every optimization iteration
+      \cdot \text{\#optimizer iterations}
+      \cdot
+      \underbrace{
+        % for every gradient entry of the objective function
+        m_{\policy}
+        % for every quadrature point
+        \cdot m_{\stochastic}
+        \cdot
+        \overbrace{
+          % for every summand of the sparse grid function
+          % (grid point of old time step)
+          \ngp_{t+1}
+          % for every tensor product factor
+          \cdot m_{\state}
+          % for every B-spline summand
+          \cdot p
+        }^{\mathclap{\text{one evaluation of interpolant}}}
+      }_{\mathclap{\text{one evaluation of objective gradient}}}\,
+    },
+  \end{equation}%
+}%
+where $m_{\policy}, m_{\stochastic}, m_{\state} \in \landauTheta{d}$,
+$\ngp_t, \ngp_{t+1} \in \landauTheta{2^n n^{d-1}}$
+if regular sparse grids of level $n$ are used, and
+the number of optimizer iterations is likely superlinear in $d$,
+as this depends on the dimensionality $m_{\policy}$ of the search space
+as well as on the number of multi-start points
+(which also grows with $m_{\policy}$).
+This means that the complexity is at least cubic in $d$
+and quadratic in the mean number $\ngp$ of employed grid points,
+more likely even higher.
+
 % (e-mail 2018-01-03)
 %Runtime of one optimize() run
 %- -----------------------------
@@ -715,51 +761,7 @@ weighted Euler equation error (cf.\ \cref{fig:financeSimulation_3}).
 %
 %(modulo extrapolations)
 
-\begin{equation}
-  \landauO{
-    % for every time step
-    T
-    % for every grid point of new time step
-    \cdot \ngp_t
-    % for every optimization iteration
-    \cdot \text{\#optimizer iterations}
-    \cdot
-    \underbrace{
-      % for every gradient entry of the objective function
-      m_{\policy}
-      % for every quadrature point
-      \cdot m_{\stochastic}
-      \cdot
-      \overbrace{
-        % for every summand of the sparse grid function
-        % (grid point of old time step)
-        \ngp_{t+1}
-        % for every tensor product factor
-        \cdot m_{\state}
-        % for every B-spline summand
-        \cdot p
-      }^{\mathclap{\text{evaluation of interpolant}}}
-    }_{\text{evaluation of objective gradient}}\,
-  }
-\end{equation}
-
-\#optimizer iterations contains multi-start points!
-
-\begin{equation}
-  \landauO{
-    T
-    \cdot \ngp
-    \cdot \text{\#optim.\ it.}
-    \cdot d
-    \cdot d
-    \cdot \ngp
-    \cdot d
-    \cdot p
-  }
-  = \landauO{T \ngp^2 d^3 p \cdot \text{\#optim.\ it.}}??
-\end{equation}
-
-\dummytext[3]{}
+\dummytext[1]{}
 
 \paragraph{Impact of the B-spline degree}
 
