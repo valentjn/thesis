@@ -43,7 +43,7 @@ def main():
                     for policyName in policyNames])
         
         errorsMat = scipy.io.loadmat("{}/euler_errors.mat".format(resultsPath))
-        error = errorsMat["errors"][0,t]["L2"][0,1]
+        error = errorsMat["errors"][t,0]["L2"][0,1]
         errors.append((N, error))
       
       errors.sort(key=lambda x: x[0])

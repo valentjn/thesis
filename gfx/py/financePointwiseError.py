@@ -32,8 +32,8 @@ def main():
     resultsPath  = "data/finance/results/{:04}".format(id_)
     errorsMat = scipy.io.loadmat("{}/euler_errors.mat".format(resultsPath))
     errors = errorsMat["errors"]
-    XX = errors[0,t]["points"]
-    YY = errors[0,t]["All"][:,1]
+    XX = errors[t,0]["points"]
+    YY = errors[t,0]["All"][:,1]
     
     for point in [(0, 0), (0, 1), (1, 0)]:
       k = np.argmin(np.sum((XX - point)**2, axis=1))
