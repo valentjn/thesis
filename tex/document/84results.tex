@@ -135,6 +135,27 @@ This error measure can be analyzed pointwise or
 via its $\Ltwo$ norm.
 As the errors generally grow backwards in time,
 it suffices to consider $t = 0$.
+However, since the Euler equation error can only be evaluated at points in
+the simplex
+$
+  \Omega_\mathrm{simplex}
+  := \{\normstate_t \in \clint{\*0, \*1} \mid \sumfcn(\normstate_t) \le 1\}
+$, the $\Ltwo$ norm would
+quickly converge to zero with growing dimensionality, even if the mean error
+stayed constant.
+Therefore, we normalize the $\Ltwo$ norm:
+\begin{equation}
+  \weightedeulererrorLtwo_t
+  := \sqrt{d!} \cdot \normLtwo{\weightedeulererror_t}
+  = \sqrt{
+    \frac{1}{\vol{\Omega_\mathrm{simplex}}}
+    \int_{\mathrlap{\Omega_\mathrm{simplex}}\hphantom{\Omega}}
+    \weightedeulererror_t(\normstate_t)^2 \diff{}\normstate_t
+  },
+\end{equation}
+where the expression under the root sign is approximated
+via Monte Carlo quadrature as the mean of samples
+of $\weightedeulererror_t(\normstate_t)^2$.
 
 
 
