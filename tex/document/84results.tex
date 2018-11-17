@@ -160,20 +160,20 @@ of $\weightedeulererror_t(\normstate_t)^2$.
 \subsection{Numerical Results}
 \label{sec:843results}
 
-\paragraph{Reference solution}
+\paragraph{Full grid solution}
 
-We use full grid solutions as reference solutions,
+We show in \cref{fig:financeSolution2DReference}
+a full grid solution for the case of $d = 2$ stocks,
 i.e., $\{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\} = \fgset{n,d}$
-for some fixed level $n \in \nat$ for all $t = 0, \dotsc, T$.
+for some fixed level $n \in \nat$
+(here, $n = 7$ and $\ngp_t = (2^7 + 1)^2 = \num{16641}$) and
+for all $t = 0, \dotsc, T$.
 Obviously, this is only computationally feasible
 for low dimensionalities $d$ due to the curse of dimensionality.
-For each $d$,
-\cref{tbl:financeSolutionFullRegularSparseGrids}
-(see \cref{chap:a40financeDetails})
-contains full grid solutions of different levels.
-The reference solution for $d = 2$ is shown in
-\cref{fig:financeSolution2DReference}.
-Unfortunately, only full grid solutions up to $d = 3$ could be computed
+The two-dimensional solution of level $n = 7$
+already took over nine hours to compute.
+The solution of the next level is estimated to take already one week.
+Full grid solutions can only be computed up to $d = 3$
 due to excessive runtime for $d \ge 4$.
 This underlines the need for sophisticated
 discretization techniques such as sparse grids.
