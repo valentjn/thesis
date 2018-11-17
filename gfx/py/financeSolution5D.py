@@ -143,7 +143,6 @@ def main():
     t = 0
     qs = list(range(q0, q0 + len(names)))
     q0 += len(names)
-    continue
     
     policiesMat = scipy.io.loadmat(
         "data/finance/results/{:04}/policies_serialized.mat".format(id_))
