@@ -19,7 +19,7 @@ def main():
   ]
   
   for d, idss in zip(list(range(1, 5)), idsss):
-    fig = Figure.create(figsize=(1.8, 2.5))
+    fig = Figure.create(figsize=(1.8, 2.4))
     ax = fig.gca()
     
     errorss = []
