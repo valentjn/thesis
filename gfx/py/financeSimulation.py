@@ -32,7 +32,7 @@ def main():
   isStackeds = [False, False, False, True]
   tac = 0.01
   
-  #stockLabel = (lambda o: (r"$(\stock_{{t,{0}}} + \normbuy_{{t,{0}}} + "
+  #stockLabel = (lambda o: (r"$(\stock_{{t,{0}}} + \normbuy_{{t,{0}}} - "
   #                         r"\normsell_{{t,{0}}}) \wealth_t$").format(o))
   #bondLabel    = r"$\normbond_t \wealth_t$"
   #consumeLabel = r"$\normconsume_t \wealth_t$"
