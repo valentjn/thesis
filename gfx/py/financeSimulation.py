@@ -85,6 +85,11 @@ def main():
     print("stdev(c_t)/mean(c_t) = {}".format(
         np.std(consume) / np.mean(consume)))
     
+    for t in ts[:-1]:
+      print("stock weightes for t = {}: [{}]".format(t, ", ".join([
+          "{:.5f}".format(x)
+          for x in newStock[:,t] / np.sum(newStock[:,t])])))
+    
     if isStacked:
       ys = []
       
