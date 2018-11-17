@@ -290,10 +290,24 @@ could not be solved with state-of-the-art methods up to now.
 \paragraph{Optimal policies in 2D and 5D}
 
 The value function and optimal policies corresponding to
-sparse grid solutions for $d = 2$ or $d = 5$ stocks are shown in
+sparse grid solutions for
+$d = 2$ stocks with $\ngp_0 = \num{879}$ policy grid points or
+$d = 5$ stocks with $\ngp_0 = \num{7768}$ policy grid points
+are shown in
 \cref{fig:financeSolution2DSparseGrid} and
 \cref{fig:financeSolution5DSparseGrid}, respectively.
-
+Obviously, most grid points are placed along the various kinks in the
+policies.
+Interestingly, experiments show that the surplus-based refinement
+criterion does not place more grid points along the perfect diagonal kink
+caused by the cropping of the state space
+(i.e., along $\sumfcn(\vstock_t) = 1$).
+It is possible to circumvent this issue by either
+transforming the domain (e.g., rotations as in \cite{Bohn18Optimally}) or
+directly incorporating the distance to the diagonal into the
+refinement criterion for the value function.
+However, we refrain from doing so here as this does not seem to
+drastically improve results.
 
 \begin{figure}
   \subcaptionbox{%
