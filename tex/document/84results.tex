@@ -20,7 +20,40 @@ a risk aversion factor of $\riskav = 3.5$,
 a patience factor of $\patience = 0.97$,
 a transaction cost rate of $\tac = \SI{1}{\percent}$, and
 a minimum consumption of $\normconsume_{\min} = 0.001$.
-The bond and stock return rates are taken from \cite{Cai10Stable}.
+The bond and stock return rates $\bondreturn_t$ and $\vstockreturn_t$
+are taken from \cite{Cai10Stable};
+the log-normally distributed stock return rates are generalized
+from the three-stock case to five stocks via
+$\ln \vstockreturn_t \sim \mathcal{N}(\*\mu, \mat{\Sigma})$, where
+{%
+  \setlength{\abovedisplayskip}{6pt}%
+  \setlength{\belowdisplayskip}{6pt}%
+  \begin{equation}
+    \label{eq:financeStockReturnMeanCovariance}
+    \*\mu
+    :=
+    \scalebox{0.92}{$
+      \begin{pmatrix*}[l]
+        0.0572\\
+        0.0638\\
+        0.07\\
+        0.0764\\
+        0.0828
+      \end{pmatrix*}
+    $},\quad
+    \mat{\Sigma}
+    := 10^{-2}
+    \scalebox{0.92}{$
+      \begin{pmatrix*}[l]
+        2.56&  0.576&   0.288&   0.176&  0.096\\
+        0.576& 3.24&    0.90432& 1.0692& 1.296\\
+        0.288& 0.90432& 4&       1.32&   1.68\\
+        0.176& 1.0692&  1.32&    4.84&   2.112\\
+        0.096& 1.296&   1.68&    2.112&  5.76
+      \end{pmatrix*}
+    $}.
+  \end{equation}%
+}%
 The models are solved for $T = 6$ time steps;
 this number suffices to show all relevant numerical effects and results,
 while keeping the computational effort at a reasonable level.
