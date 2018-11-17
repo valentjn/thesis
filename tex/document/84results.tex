@@ -129,10 +129,8 @@ the error might become stronger and stronger backwards in time $t$.
 \paragraph{Error measure}
 
 We use the weighted Euler equation error
-$\weightedeulererror_t(\normstate_t)$
-to assess the quality of the resulting optimal policies.
-This error measure can be analyzed pointwise or
-via its $\Ltwo$ norm.
+$\weightedeulererror_t(\normstate_t)$ ($\Ltwo$ norm or pointwise)
+to assess the quality of the resulting policies.
 As the errors generally grow backwards in time,
 it suffices to consider $t = 0$.
 However, since the Euler equation error can only be evaluated at points in
@@ -192,7 +190,7 @@ discretization techniques such as sparse grids.
   \makebox[49mm][r]{%
     \includegraphics{financeSolution2D_4}%
   }%
-  \\[1mm]%
+  \\[0mm]%
   \makebox[49mm][r]{%
     \includegraphics{financeSolution2D_6}%
   }%
@@ -208,7 +206,7 @@ discretization techniques such as sparse grids.
     Full grid solution for the transaction costs problem
     with $d = 2$ stocks.
     Shown are the value function $\normcetvalueref_t$ \emph{(top left)} and the
-    optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$.%
+    optimal policy $\optnormpolicyref_t$ for $t = 0$.%
   }%
   \label{fig:financeSolution2DReference}%
 \end{figure}
