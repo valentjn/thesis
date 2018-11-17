@@ -26,7 +26,7 @@ def main():
   
   
   for id_ in ids:
-    fig = Figure.create(figsize=(3, 3), scale=0.75)
+    fig = Figure.create(figsize=(3, 3), scale=0.7)
     ax = fig.gca()
     
     resultsPath  = "data/finance/results/{:04}".format(id_)
@@ -59,10 +59,11 @@ def main():
   
   
   
-  fig = Figure.create(figsize=(5, 2))
+  fig = Figure.create(figsize=(1, 2), scale=1.15)
   ax = fig.gca()
-  fig.colorbar(contour, orientation="horizontal", fraction=1, extend="min",
-              ticks=np.arange(v[0], v[-1]+0.01, 1), format="$10^{%u}$")
+  fig.colorbar(contour, orientation="vertical", fraction=1, aspect=15,
+               extend="min",
+               ticks=np.arange(v[0], v[-1]+0.01, 1), format="$10^{%u}$")
   ax.set_axis_off()
   fig.save()
   
