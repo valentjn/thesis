@@ -80,6 +80,11 @@ def main():
     bond     = np.mean(bond, axis=0)
     consume  = np.mean(consume, axis=0)
     
+    print("d = {}".format(d))
+    print("stdev(c_t) = {}".format(np.std(consume)))
+    print("stdev(c_t)/mean(c_t) = {}".format(
+        np.std(consume) / np.mean(consume)))
+    
     if isStacked:
       ys = []
       
