@@ -42,7 +42,7 @@ def main():
   bondLabel    = r"$\bond_t$"
   consumeLabel = r"$\consume_t$"
   wealthLabel  = r"$\wealth_t$"
-  errorLabel   = r"$\normLtwo{\weightedeulererror_t}$"
+  errorLabel   = r"$\weightedeulererrorLtwo_t$"
   
   stockDashes = (lambda o: ((o*[1, 0.7]) + [1, 3]))
   stockMarker = (lambda o: [".", "s", "^", "v", "x"][o])

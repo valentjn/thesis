@@ -74,7 +74,7 @@ def main():
     
     trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
     ax.text(*trafo(0.04, 1.0),
-            r"$\normLtwo{\weightedeulererror_t}$", ha="left", va="top")
+            r"$\weightedeulererrorLtwo_t$", ha="left", va="top")
     _, y = trafo(1e3, -0.05)
     ax.text(10**(2.5 if d == 1 else 3.5), y, r"$\ngp_t$",
             ha="center", va="top")
