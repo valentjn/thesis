@@ -441,28 +441,45 @@ directly incorporating the distance to the diagonal into the
 refinement criterion for the value function.
 However, we refrain from doing so here as this does not seem to
 drastically improve results.
+This might be due to the domination of the overall error by
+the parts \ref{item:financeErrorExtrapolation} to
+\ref{item:financeErrorRounding} that are not related to interpolation.
 
 \paragraph{Pointwise error}
 
-\dummytext[2]{}
+Pointwise plots of the weighted Euler equation error,
+as in \cref{fig:financePointwiseError} two stocks,
+reveal that there are two types of regions where the error is large:
+The first region is the neighborhood of the aforementioned diagonal boundary
+$\sumfcn(\vstock_t) = 1$ of the uncropped region,
+where the cropping distorts the error despite the weights.
+The second region are kinks of the optimal policy functions,
+which is most visible for coarse grids
+(e.g., \cref{fig:financePointwiseError_1}).
+When increasing the number of grid points
+(e.g., \cref{fig:financePointwiseError_1,fig:financePointwiseError_2}),
+the error decreases quickly in the whole domain.
 
 \begin{figure}
   \includegraphics{financePointwiseError_4}%
   \\[2mm]%
   \subcaptionbox{%
     $\ngp_t = 129$ (\num{5.3e-3})%
+    \label{fig:financePointwiseError_1}%
   }[49mm]{%
     \includegraphics{financePointwiseError_1}%
   }%
   \hfill%
   \subcaptionbox{%
     $\ngp_t = 889$ (\num{2.1e-4})%
+    \label{fig:financePointwiseError_2}%
   }[49mm]{%
     \includegraphics{financePointwiseError_2}%
   }%
   \hfill%
   \subcaptionbox{%
     $\ngp_t = 5159$ (\num{1.2e-5})%
+    \label{fig:financePointwiseError_3}%
   }[49mm]{%
     \includegraphics{financePointwiseError_3}%
   }%
