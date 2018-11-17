@@ -13,7 +13,7 @@
 \begin{table}
   \sisetup{retain-zero-exponent=true}%
   \newcommand*{\cece}[1]{\multicolumn{1}{c}{#1}}%
-  \newcommand*{\err}{\cece{$\normLtwo{\weightedeulererror_0}$}}%
+  \newcommand*{\err}{\cece{$\weightedeulererrorLtwo_0$}}%
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
     >{\kern\tabcolsep}=l+c+r<{\kern5mm}+r+l+l+r<{\kern\tabcolsep}%
@@ -72,7 +72,7 @@
     for different dimensionalities $d$ and levels $n$.
     The other columns show
     the number $\ngp_0$ of grid points for $t = 0$,
-    the weighted Euler equation error $\normLtwo{\weightedeulererror_0}$
+    the weighted Euler equation error $\weightedeulererrorLtwo_0$
     for $t = 0$,
     and the runtime.
     The highlighted full grid solutions are used to compute

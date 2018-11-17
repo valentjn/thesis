@@ -214,7 +214,7 @@ discretization techniques such as sparse grids.
 \paragraph{Convergence of the weighted Euler equation error}
 
 \Cref{fig:financeEulerError} shows the convergence of the
-$\Ltwo$ norm $\normLtwo{\weightedeulererror_0}$
+$\Ltwo$ norm $\weightedeulererrorLtwo_0$
 weighted Euler equation error for $t = 0$ for regular sparse grids
 and spatially adaptive sparse grids
 for the cases of $d = 1, \dotsc, 4$ stocks.
@@ -245,7 +245,7 @@ for the cases of $d = 1, \dotsc, 4$ stocks.
     \includegraphics{financeEulerError_4}%
   }%
   \caption[Convergence of the weighted Euler equation error]{%
-    Convergence of the $\Ltwo$ norm $\normLtwo{\weightedeulererror_t}$
+    Convergence of the $\Ltwo$ norm $\weightedeulererrorLtwo_t$
     of the weighted Euler equation error for $t = 0$ for
     regular sparse grids \emph{\textcolor{C0}{(blue)}} and
     spatially adaptive sparse grids \emph{\textcolor{C1}{(red)}.}
@@ -278,9 +278,9 @@ In addition, convergence significantly decelerates starting with $d = 4$.
 For $d = 4$, spatially adaptive sparse grids with
 a mean number $\ngp_t = \num{4252}$ of policy grid points for $t = 0$
 are able to achieve a weighted Euler equation error of
-$\normLtwo{\weightedeulererror_t} \approx \num{2.0e-2}$.
+$\weightedeulererrorLtwo_t \approx \num{2.0e-2}$.
 For $d = 5$, we are still able to achieve an acceptable error of
-$\normLtwo{\weightedeulererror_t} \approx \num{3.2e-2}$
+$\weightedeulererrorLtwo_t \approx \num{3.2e-2}$
 with spatially adaptive sparse grids with
 a mean number $\ngp_t = \num{7768}$ of policy grid points for $t = 0$.
 While we do not see any convergence for this dimensionality,
@@ -472,7 +472,7 @@ drastically improve results.
     Pointwise weighted Euler equation error $\weightedeulererror_t(\vstock_t)$
     ($t = 0$) for the two-dimensional transaction costs problem and
     different spatially adaptive sparse grids.
-    The $\Ltwo$ error $\normLtwo{\weightedeulererror_t}$ is given in
+    The $\Ltwo$ error $\weightedeulererrorLtwo_t$ is given in
     parentheses.%
   }%
   \label{fig:financePointwiseError}%
