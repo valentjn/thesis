@@ -621,10 +621,48 @@ per risk is maximized:%
     },
   \end{equation}%
 }%
-where $\*\mu$ and $\mat{\Sigma}$ are mean and covariance matrix
-of the stocks as given in \cref{eq:financeStockReturnMeanCovariance}
-and the notation indicates the first $d$ entries or
-the principal minor of order $d$.
+where $\*\mu_{\range{1}{d}}$ and
+$\mat{\Sigma}_{\range{1}{d},\range{1}{d}}$
+are the first $d$ entries of $\*\mu$ and
+the principal minor of order $d$ of $\mat{\Sigma}$ as given in
+\cref{eq:financeStockReturnMeanCovariance}.
+We compare these theoretical Sharpe ratios (left)
+with the simulated stock fractions
+$\acute{\stock}_{t,o}/\sumfcn(\acute{\vstock}_t)$ for $t = 0$ (right):
+\begin{subequations}
+  \setlength{\jot}{0pt}%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{align}
+    d = 3\colon\,&
+    (0.314, 0.302, 0.384\rlap{),}\hphantom{, 0.999, 0.999}\quad
+    (0.300, 0.317, 0.383),\\
+    d = 4\colon\,&
+    (0.275, 0.185, 0.250, 0.289\rlap{),}\hphantom{, 0.999}\quad
+    (0.239, 0.238, 0.253, 0.270),\\
+    d = 5\colon\,&
+    (0.275, 0.122, 0.176, 0.203, 0.223\rlap{),}\quad
+    (0.381, 0.000, 0.079, 0.195, 0.345).
+  \end{align}
+\end{subequations}
+This unveils that the simulated stock fractions
+well match the predicted Sharpe ratios for $d \le 4$,
+while the stock fractions for $d = 5$ are visibly off.
+As the five-dimensional simulated stock fractions
+$(0.240, 0.151, 0.186, 0.205, 0.218)$
+for $t = 4$ are still acceptable,
+it seems that the computed policies lack accuracy for $t \le 3$,
+a fact that is also supported by the growing
+weighted Euler equation error (cf.\ \cref{fig:financeSimulation_3}).
+
+% [0.2998, 0.3173, 0.3829]
+% [0.2395, 0.2376, 0.2528, 0.2701]
+% [0.3809, 0.0000, 0.0792, 0.1948, 0.3451] (t = 0)
+% [0.2401, 0.1509, 0.1858, 0.2055, 0.2177] (t = 4)
+
+% 0.3142    0.3020    0.3838
+% 0.2755    0.1847    0.2503    0.2894
+% 0.2749    0.1224    0.1765    0.2032    0.2229
 
 % Die Idee ist der Sharpe-Ratio [1]:
 % 
