@@ -49,7 +49,8 @@ def main():
   stockMarkerSize = (lambda o: (6 if stockMarker(o) == "." else 3))
   
   for q, (id_, isStacked) in enumerate(zip(ids, isStackeds)):
-    fig = Figure.create(figsize=(2.2, 2.2))
+    width = (1.85 if isStacked else 2.2)
+    fig = Figure.create(figsize=(width, 2.2))
     ax1 = fig.gca()
     
     resultsPath = "data/finance/results/{:04}".format(id_)
