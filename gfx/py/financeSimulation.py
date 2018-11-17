@@ -42,6 +42,7 @@ def main():
   bondLabel    = r"$\bond_t$"
   consumeLabel = r"$\consume_t$"
   wealthLabel  = r"$\wealth_t$"
+  errorLabel   = r"$\normLtwo{\weightedeulererror_t}$"
   
   stockDashes = (lambda o: ((o*[1, 0.7]) + [1, 3]))
   stockMarker = (lambda o: [".", "s", "^", "v", "x"][o])
@@ -49,10 +50,10 @@ def main():
   
   for q, (id_, isStacked) in enumerate(zip(ids, isStackeds)):
     fig = Figure.create(figsize=(2.2, 2.2))
-    ax = fig.gca()
+    ax1 = fig.gca()
     
-    simulationMat = scipy.io.loadmat(
-        "data/finance/results/{:04}/simulation.mat".format(id_))
+    resultsPath = "data/finance/results/{:04}".format(id_)
+    simulationMat = scipy.io.loadmat("{}/simulation.mat".format(resultsPath))
     simulation = simulationMat["simulation"]
     
     state = list(simulation[0,0]["state"][0,0].tolist())
@@ -83,37 +84,65 @@ def main():
       
       for o in range(d):
         ys.append(newStock[o,ts])
-        plotPolygon(ax, ts, ys, stockLabel(o+1), "C1", 0.3+o*0.1)
+        plotPolygon(ax1, ts, ys, stockLabel(o+1), "C1", 0.3+o*0.1)
       
-      ys.append(bond[ts]);    plotPolygon(ax, ts, ys, bondLabel,    "C3", 0.6)
-      ys.append(consume[ts]); plotPolygon(ax, ts, ys, consumeLabel, "C4", 0.6)
-      ax.plot(ts, wealth[ts], ".-", clip_on=False, color="C0")
-      ax.text(ts[1], wealth[ts[1]] + 0.04, wealthLabel,
+      ys.append(bond[ts])
+      plotPolygon(ax1, ts, ys, bondLabel,    "C3", 0.6)
+      ys.append(consume[ts])
+      plotPolygon(ax1, ts, ys, consumeLabel, "C4", 0.6)
+      ax1.plot(ts, wealth[ts], ".-", clip_on=False, color="C0")
+      ax1.text(ts[1], wealth[ts[1]] + 0.04, wealthLabel,
               color="C0", ha="center", va="bottom")
     else:
       for o in range(d):
-        ax.plot(ts, newStock[o,ts], "-", clip_on=False, color="C1",
-                marker=stockMarker(o), ms=stockMarkerSize(o),
-                dashes=stockDashes(o))
+        ax1.plot(ts, newStock[o,ts], "-", clip_on=False, color="C1",
+                 marker=stockMarker(o), ms=stockMarkerSize(o),
+                 dashes=stockDashes(o))
       
-      ax.plot(ts, bond[ts],    ".-", clip_on=False, color="C3")
-      ax.plot(ts, consume[ts], ".-", clip_on=False, color="C4")
-      ax.plot(ts, wealth[ts],  ".-", clip_on=False, color="C0")
+      ax1.plot(ts, bond[ts],    ".-", clip_on=False, color="C3")
+      ax1.plot(ts, consume[ts], ".-", clip_on=False, color="C4")
+      ax1.plot(ts, wealth[ts],  ".-", clip_on=False, color="C0")
     
     #print(np.sum(newStock[:,ts], axis=0) + bond[ts] + consume[ts])
     #print(wealth[ts])
     
-    ax.set_xlim(ts[0], ts[-1])
-    ax.set_ylim(0, 1)
-    ax.set_xticks(ts)
-    ax.set_xticklabels([(r"${}$".format(t) if t % 2 == 0 else "")
-                        for t in ts])
+    ax1.set_xlim(ts[0], ts[-1])
+    ax1.set_ylim(0, 1)
+    ax1.set_xticks(ts)
+    ax1.set_xticklabels([(r"${}$".format(t) if t % 2 == 0 else "")
+                         for t in ts])
     
-    trafo = helper.plot.getTransformationFromUnitCoordinates(ax)
-    ax.text(*trafo( 0.90, -0.05), r"$t$", ha="center", va="top")
-    ax.text(*trafo(-0.10,  0.90), r"\$",  ha="right",  va="center")
+    trafo = helper.plot.getTransformationFromUnitCoordinates(ax1)
+    ax1.text(*trafo( 0.90, -0.05), r"$t$", ha="center", va="top")
+    ax1.text(*trafo(-0.10,  0.90), r"\$",  ha="right",  va="center")
     
-    fig.save()
+    ax1.spines["right"].set_visible(False)
+    ax1.spines["top"].set_visible(False)
+    
+    if not isStacked:
+      ax2 = ax1.twinx()
+      
+      errorsMat = scipy.io.loadmat("{}/euler_errors.mat".format(resultsPath))
+      errors = ([errorsMat["errors"][t,0]["L2"][0,1] for t in ts[:-1]] +
+                [1e-100])
+      ax2.plot(ts, errors, "--", color="C7")
+      ax2.plot(ts, errors, ".", color="C7", clip_on=False)
+      
+      ax2.set_yscale("log")
+      yl = [10**np.floor(np.log10(min(errors[:-1]))),
+            10**np.ceil(np.log10(max(errors[:-1])))]
+      ax2.set_ylim(*yl)
+      mpl.pyplot.setp(ax2.get_yminorticklabels(), visible=False)
+      ax2.set_ylabel(errorLabel, labelpad=-20)
+      
+      ax2.spines["left"].set_visible(False)
+      ax2.spines["bottom"].set_visible(False)
+      ax2.spines["top"].set_visible(False)
+      ax2.spines["right"].set_color("C7")
+      ax2.yaxis.label.set_color("C7")
+      ax2.tick_params(axis="y", which="both", colors="C7")
+    
+    fig.save(hideSpines=False)
   
   
   
@@ -143,8 +172,14 @@ def main():
       "ms"     : stockMarkerSize(o),
       "dashes" : stockDashes(o),
       "color"  : "C1",
-    } for o in range(5)],
-  ncol=8, columnspacing=1, loc="upper center", outside=True)
+    } for o in range(5)] +
+    [{
+      "label"  : errorLabel,
+      "marker" : ".",
+      "ls"     : "--",
+      "color"  : "C7",
+    }],
+  ncol=9, columnspacing=0.5, loc="upper center", outside=True)
   
   ax.set_axis_off()
   
