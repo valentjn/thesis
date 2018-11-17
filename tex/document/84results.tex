@@ -296,19 +296,6 @@ $d = 5$ stocks with $\ngp_0 = \num{7768}$ policy grid points
 are shown in
 \cref{fig:financeSolution2DSparseGrid} and
 \cref{fig:financeSolution5DSparseGrid}, respectively.
-Obviously, most grid points are placed along the various kinks in the
-policies.
-Interestingly, experiments show that the surplus-based refinement
-criterion does not place more grid points along the perfect diagonal kink
-caused by the cropping of the state space
-(i.e., along $\sumfcn(\vstock_t) = 1$).
-It is possible to circumvent this issue by either
-transforming the domain (e.g., rotations as in \cite{Bohn18Optimally}) or
-directly incorporating the distance to the diagonal into the
-refinement criterion for the value function.
-However, we refrain from doing so here as this does not seem to
-drastically improve results.
-
 \begin{figure}
   \subcaptionbox{%
     $\normcetvalueintp[1]_t$%
@@ -356,8 +343,7 @@ drastically improve results.
     \cref{fig:financeSolution2DReference}.%
   }%
   \label{fig:financeSolution2DSparseGrid}%
-\end{figure}
-
+\end{figure}%
 \begin{figure}
   \makebox[37mm][c]{%
     \hspace*{3.8mm}%
@@ -442,7 +428,19 @@ drastically improve results.
     $\stock_{t,o_1}$--$\stock_{t,o_2}$ plane.%
   }%
   \label{fig:financeSolution5DSparseGrid}%
-\end{figure}
+\end{figure}%
+Obviously, most grid points are placed along the various kinks in the
+policies.
+Interestingly, experiments show that the surplus-based refinement
+criterion does not place more grid points along the perfect diagonal kink
+caused by the cropping of the state space
+(i.e., along $\sumfcn(\vstock_t) = 1$).
+It is possible to circumvent this issue by either
+transforming the domain (e.g., rotations as in \cite{Bohn18Optimally}) or
+directly incorporating the distance to the diagonal into the
+refinement criterion for the value function.
+However, we refrain from doing so here as this does not seem to
+drastically improve results.
 
 \paragraph{Pointwise error}
 
