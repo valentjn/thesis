@@ -740,12 +740,13 @@ The number of necessary arithmetic operations grows like
       \cdot \text{\#optimizer iterations}
       \cdot
       \underbrace{
-        % for every gradient entry of the objective function
-        m_{\policy}
         % for every quadrature point
-        \cdot m_{\zeta}
+        m_{\zeta}
         \cdot
         \overbrace{
+          % for every gradient entry of the objective function
+          m_{\policy}
+          \cdot
           % for every summand of the sparse grid function
           % (grid point of old time step)
           \ngp_{t+1}
