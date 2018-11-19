@@ -302,7 +302,7 @@ for the cases of $d = 1, \dotsc, 4$ stocks.
 \end{figure}%
 For this and the following plots,
 the value function grid is kept unchanged
-(usually a slightly refined regular sparse grid of level three or four),
+(usually a slightly refined regular sparse grid),
 while the mean number $\ngp_t$ of policy grid points increases
 with decreasing refinement threshold $\refinetol_t$,
 since the value function grid does not seem to have a great influence
@@ -656,14 +656,14 @@ $\acute{\stock}_{t,o}/\sumfcn(\acute{\vstock}_t)$ for $t = 0$ (right):
   \end{align}
 \end{subequations}
 This unveils that the simulated stock fractions
-well match the predicted Sharpe ratios for $d \le 4$,
+match the predicted Sharpe ratios well for $d \le 4$,
 while the stock fractions for $d = 5$ are visibly off.
 As the five-dimensional simulated stock fractions
 $(0.240, 0.151, 0.186, 0.205, 0.218)$
 for $t = 4$ are still acceptable,
 it seems that the computed policies lack accuracy for $t \le 3$,
 a fact that is also supported by the growing
-weighted Euler equation error (cf.\ \cref{fig:financeSimulation_3}).
+weighted Euler equation error (see \cref{fig:financeSimulation_3}).
 
 % [0.2998, 0.3173, 0.3829]
 % [0.2395, 0.2376, 0.2528, 0.2701]
