@@ -743,7 +743,7 @@ The number of necessary arithmetic operations grows like
         % for every gradient entry of the objective function
         m_{\policy}
         % for every quadrature point
-        \cdot m_{\stochastic}
+        \cdot m_{\zeta}
         \cdot
         \overbrace{
           % for every summand of the sparse grid function
@@ -758,16 +758,18 @@ The number of necessary arithmetic operations grows like
     },
   \end{equation}%
 }%
-where $m_{\policy}, m_{\stochastic}, m_{\state} \in \landauTheta{d}$,
-$\ngp_t, \ngp_{t+1} \in \landauTheta{2^n n^{d-1}}$
-if regular sparse grids of level $n$ are used, and
+where $m_{\state}, m_{\policy} \in \landauTheta{d}$,
+$m_{\zeta}, \ngp_t, \ngp_{t+1} \in \landauTheta{2^n n^{d-1}}$
+if regular sparse grids of level $n$
+without boundary points would be used for state and stochastic grids
+(due to $m_{\stochastic} = d$), and
 the number of optimizer iterations is likely superlinear in $d$,
 as this depends on the dimensionality $m_{\policy}$ of the search space
 as well as on the number of multi-start points
 (which also grows with $m_{\policy}$).
-This means that the complexity is at least cubic in $d$
-and quadratic in the mean number $\ngp$ of employed grid points,
-more likely even higher.
+This means that the complexity is at least cubic in $d$,
+quadratic in the mean number $\ngp$ of employed state grid points, and
+linear in the number $m_{\zeta}$ of quadrature points.
 
 \begin{figure}
   \includegraphics{financeRuntime_7}%
