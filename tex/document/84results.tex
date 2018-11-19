@@ -706,7 +706,22 @@ weighted Euler equation error (see \cref{fig:financeSimulation_3}).
 
 \paragraph{Complexity and runtime analysis}
 
-% analyze runtime behavior over N (fixed d) and d
+% (e-mail 2018-01-03)
+%Runtime of one optimize() run
+%- -----------------------------
+%O(#New state grid points
+%* #Optimization iterations
+%* #Quadrature points
+%* #Old state grid points
+%* #State dimensions
+%* Runtime of one 1D basis evaluation)
+%
+%where
+%#(Optimization iterations) depends on #(Policy dimensions),
+%#(Policy dimensions) = 2 * #Stocks + 1
+%#(State dimensions) = #Stocks + 1
+%
+%(modulo extrapolations)
 
 The fact that the difficulty of the problem grows very fast with $d$
 can be explained with a complexity analysis:
@@ -754,22 +769,46 @@ This means that the complexity is at least cubic in $d$
 and quadratic in the mean number $\ngp$ of employed grid points,
 more likely even higher.
 
-% (e-mail 2018-01-03)
-%Runtime of one optimize() run
-%- -----------------------------
-%O(#New state grid points
-%* #Optimization iterations
-%* #Quadrature points
-%* #Old state grid points
-%* #State dimensions
-%* Runtime of one 1D basis evaluation)
-%
-%where
-%#(Optimization iterations) depends on #(Policy dimensions),
-%#(Policy dimensions) = 2 * #Stocks + 1
-%#(State dimensions) = #Stocks + 1
-%
-%(modulo extrapolations)
+\begin{figure}
+  \includegraphics{financeRuntime_7}%
+  \\[1mm]%
+  \subcaptionbox{%
+    $d = 1$%
+  }[48mm]{%
+    \includegraphics{financeRuntime_1}%
+    \newline\hspace*{1.764mm}%
+    \includegraphics{financeRuntime_2}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 2$%
+  }[48mm]{%
+    \includegraphics{financeRuntime_3}%
+    \newline\hspace*{1.764mm}%
+    \includegraphics{financeRuntime_4}%
+  }%
+  \hfill%
+  \subcaptionbox{%
+    $d = 3$%
+  }[48mm]{%
+    \includegraphics{financeRuntime_5}%
+    \newline\hspace*{1.764mm}%
+    \includegraphics{financeRuntime_6}%
+  }%
+  \caption[Computation times and numbers of iterations for the TCP]{%
+    Computation times \emph{(top)} and
+    numbers of iterations and interpolant evaluations \emph{(bottom)}
+    for the transaction costs problem on static regular sparse grids
+    (i.e., without refinement).
+    ``Total time'' is the serial time required to solve all $T\ngp$
+    emerging optimization problems.
+    ``Time per opt.''\ is the total time divided by the number $T\ngp$
+    of optimization problems.
+    The colors correspond to B-spline degrees $p = 3$ or $p = 1$ and
+    to using gradients ($\nabla$) or finite differences (FD).%
+  }%
+  \label{fig:financeRuntime}%
+\end{figure}%
 
 \dummytext[1]{}
 
