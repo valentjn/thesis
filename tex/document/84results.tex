@@ -771,8 +771,8 @@ as well as on the number of multi-start points
 This means that the complexity is at least cubic in $d$,
 quadratic in the mean number $\ngp$ of employed state grid points, and
 linear in the number $m_{\zeta}$ of quadrature points.
-
-
+\Cref{fig:financeRuntime} confirms these observations with
+experimental data.
 \begin{figure}
   \includegraphics{financeRuntime_7}%
   \\[1mm]%
@@ -813,16 +813,61 @@ linear in the number $m_{\zeta}$ of quadrature points.
   }%
   \label{fig:financeRuntime}%
 \end{figure}%
-
-\dummytext[1]{}
+For fixed $d$, the total time required by the optimization process
+grows quadratically with the number $\ngp$ of grid points.
+The time for one solution of the Bellman equation,
+the time for one optimizer iteration, and
+the time for one evaluation of the interpolant are all linear in $\ngp$,
+as the number of optimizer iterations%
+\footnote{%
+  Note that here and in \cref{fig:financeRuntime},
+  one iteration of the optimizer assumed to correspond to
+  exactly one combined evaluation of objective function and gradient
+  (the latter only if gradients are used).%
+}
+is constant for fixed $d$.
+If $d$ increases,
+then the number of interpolant evaluations per optimizer iteration
+(i.e., the number of quadrature points) increases as well.
+Surprisingly, the number of optimizer iterations per grid point
+and the time per evaluation are not monotonously increasing.
+The latter might be due to vectorization effects.
 
 \paragraph{Comparison to piecewise linear functions}
 
 % certainty-equivalent consumption (aus Simulation?)
 % mit B-splines und linearen Funktionen
 
-\dummytext[1]{}
+Hierarchical B-splines introduce two major benefits into
+the solution of dynamic portfolio choice models.
+The first benefit is the smooth objective functions:
+When repeating the computations with piecewise linear functions (i.e., $p = 1$),
+one obtains almost the same weighted Euler equation errors as in the cubic case
+(except for the case of $d = 1$, where the error is one order of
+magnitude worse than in the cubic case).
+However, as we see in \cref{fig:financeRuntime},
+the total computation time is several times larger
+(e.g., more than five times for $d = 3$) for piecewise linear functions,
+although evaluations are cheaper than for B-splines.
+The main reason is that the number of required optimizer iterations
+is much higher (e.g., almost seven times as high for $d = 3$) for $p = 1$
+than in the cubic case,
+since the optimizer has to deal with kinks in the objective function.
+Experiments show that beginning with $d = 4$,
+the total optimization time required to solve the transaction costs problem
+is one order of magnitude shorter for cubic B-splines.
 
 \paragraph{Comparing exact gradients to finite differences}
 
-\dummytext[1]{}
+The second benefit is the availability of exact gradients:
+\Cref{fig:financeRuntime} also contains computation times of the
+solution process
+if we artificially do not use exact gradients of the objective functions,
+but rather approximate them with finite differences.
+For each evaluation of the objective gradient,
+at least $m_{\policy}$ additional evaluations of the objective function
+have to performed to compute the finite differences
+($2m_{\policy}$ if central differences are used).
+Consequently, while the resulting weighted Euler equation errors are
+similar, the total optimization time roughly increases by the
+factor of four if we do not use exact gradients.
