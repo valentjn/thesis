@@ -66,12 +66,12 @@ def main():
   colors = ["C0", "C1", "C2", "C3"]
   
   for idss, d in zip(idsss, ds):
-    fig1 = Figure.create(figsize=(2.2, 2.15), preamble=r"""
+    fig1 = Figure.create(figsize=(2.25, 2.15), preamble=r"""
 \usepackage{siunitx}
 """)
     ax1 = fig1.gca()
     
-    fig2 = Figure.create(figsize=(2.129, 2.15), preamble=r"""
+    fig2 = Figure.create(figsize=(2.2, 2.15), preamble=r"""
 \usepackage{siunitx}
 """)
     ax2 = fig2.gca()
@@ -102,7 +102,7 @@ def main():
     
     xl = np.log10([min(Ns), max(Ns)])
     xl = 10**np.array([xl[0]-0.1*(xl[1]-xl[0]), xl[1]+0.1*(xl[1]-xl[0])])
-    yls = [(0.999e-5, 1.001e6), (5e0,  3e9)]
+    yls = [(0.999e-5, 1.001e6), (5e0, 4e9)]
     
     for ax, yl in zip([ax1, ax2], yls):
       ax.set_xscale("log")
@@ -113,21 +113,32 @@ def main():
       ax.set_yticks(10**yt)
       ax.set_yticklabels([(r"$10^{{{:.0f}}}$".format(y) if y % 2 == 0 else "")
                           for y in yt])
+      #ax.spines["top"].set_visible(False)
+      ax.xaxis.set_ticks_position("both")
+      ax.yaxis.set_ticks_position("both")
+      
+      for tick in ax.get_xaxis().get_major_ticks():
+          tick.set_pad(1)
+          tick.label1 = tick._get_text1()
+    
+    for tick in ax2.get_yaxis().get_major_ticks():
+        tick.set_pad(5)
+        tick.label1 = tick._get_text1()
     
     x = Ns[-1]
     
     if d == 1:   y = 2e-1
     elif d == 2: y = 4e-1
     elif d == 3: y = 9e-1
-    helper.plot.plotConvergenceLine(ax1, x, y, -1, tx=0.6*x, ty=y)
+    helper.plot.plotConvergenceLine(ax1, x, y, -1, tx=0.6*x, ty=1.3*y)
     
     if d == 1:   y = 2e3
     elif d == 2: y = 6e3
     elif d == 3: y = 1e4
-    helper.plot.plotConvergenceLine(ax1, x, y, -2, tx=0.6*x, ty=0.1*y)
+    helper.plot.plotConvergenceLine(ax1, x, y, -2, tx=0.6*x, ty=0.05*y)
     
     y = 2e5
-    helper.plot.plotConvergenceLine(ax2, x, y, -1, tx=0.6*x, ty=0.18*y)
+    helper.plot.plotConvergenceLine(ax2, x, y, -1, tx=0.6*x, ty=0.11*y)
     
     trafo1 = helper.plot.getTransformationFromUnitCoordinates(ax1)
     trafo2 = helper.plot.getTransformationFromUnitCoordinates(ax2)
@@ -137,12 +148,12 @@ def main():
     elif d == 3: x = 0.48
     
     ax1.text(*trafo1(x, -0.05), r"$\ngp$", ha="center", va="top")
-    ax1.text(*trafo1(0.05, 1), r"[\si{\second}]", ha="left",  va="top")
+    ax1.text(*trafo1(0.92, 0.95), r"[\si{\second}]", ha="left",  va="top")
     
     ax2.text(*trafo2(x, -0.05), r"$\ngp$", ha="center", va="top")
     
-    fig1.save()
-    fig2.save()
+    fig1.save(hideSpines=False)
+    fig2.save(hideSpines=False)
   
   
   
