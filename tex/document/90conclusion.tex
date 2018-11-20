@@ -4,20 +4,62 @@
 \noindent
 Finally, we conclude the thesis by summarizing its results
 and giving an outlook on possible future work.
+In particular, we highlight key contributions of this thesis to research,
+give recommendations for future applications of the presented method, and
+state possible downsides and limitations.
 
-\paragraph{Summary of the findings}
+\paragraph{Summary of the thesis}
 
-\todo{highlight advantages and limitations}
+The contribution of this thesis consists of two major parts.
+In the first part of the thesis,
+hierarchical B-splines on sparse grids were comprehensively presented
+and embedded in a sparse grid framework with general
+tensor product basis functions.
+The advantage of this approach was that the framework could be reused
+for different hierarchical bases
+(as for the various spline bases derived in this thesis)
+and that it clarified which properties only held for the
+classical piecewise linear bases and not for other tensor product bases.
+We saw that standard hierarchical B-splines suffer from
+approximation issues near the boundary, and
+we solved this issue by incorporating not-a-knot boundary conditions
+into the hierarchical B-spline basis.
+The focus was on the algorithmic implications
+of the novel bases, where we focused on the hierarchization problem as
+an example problem.
+We looked at requirements that grids and bases had to satisfy
+to enable efficient hierarchization algorithms,
+for which we gave clear formulations and formal correctness proofs.
+As a result, a whole ``zoo'' of hierarchical (B-)spline functions
+has been derived in this thesis.
+The main types were
+standard hierarchical B-splines,
+modified hierarchical B-splines,
+hierarchical not-a-knot B-splines,
+hierarchical fundamental splines, and
+hierarchical weakly fundamental splines
+(where the former two are not novel).
+Modified, not-a-knot, and (weakly) fundamental splines could be combined
+almost arbitrarily to tailor the ansatz functions to suit one's specific needs.
 
-\begin{itemize}
-  \item
-  Chapter 8: model limitations, no inheritance,
-  no saving money for housing, \dots
-  
-  \item
-  steal summary table from 18\_odenwald\_opt
-\end{itemize}
-
+The second, more practical part of the thesis was dedicated to transferring
+the newly gained theoretical knowledge to
+academic and real-life application test cases.
+We verified that only with the new hierarchical not-a-knot conditions,
+one is able to retrieve the best possible order of convergence
+$\landauO{\ms{h}^{p+1}}$ for interpolation
+(B-spline degree $p$, fixed dimensionality $d$).
+Using the Novak--Ritter criterion,
+which was specifically designed for optimization,
+we were able to achieve optimization gaps
+that were for some test functions up to six orders of magnitude smaller
+for cubic B-splines than for standard piecewise linear functions.
+We transfered the Novak--Ritter criterion to uncertainty quantification
+and obtained similarly strong results for the
+propagation of fuzzy uncertainties with the fuzzy extension principle.
+Furthermore, we successfully showed the suitability of hierarchical B-splines
+for three real-world applications
+(see the summary in \cref{tbl:applicationSummary}).
 \begin{table}
   \setnumberoftableheaderrows{1}%
   \begin{tabular}{%
@@ -41,9 +83,33 @@ and giving an outlook on possible future work.
     TODO%
   }%
   \label{tbl:TODO}%
-\end{table}
+\end{table}%
+First, by interpolating Cholesky factors of elasticity tensors,
+we accomplished to solve three-dimensional topology optimization problems
+with complex micro-cell structures.
+Second, in the biomechanical application,
+we dramatically reduced the computational time to solve
+test scenarios by up to \SI{99}{\percent} by using
+sparse grid surrogates with B-splines instead of the
+actual continuum-mechanical model.
+Third, we were able to solve dynamic portfolio choice problems
+with five state variables and eleven policy variables
+with unprecedented precision, as one could only speculate
+how the solution looks like with state-of-the-art methods.
+In all of these applications, the advantages of B-splines were made clear
+by comparing the results to the classical piecewise linear basis.
+The implementation of hierarchical B-splines of sparse grids is
+publicly available under a free and open-source license.%
+\footnote{%
+  \url{http://sgpp.sparsegrids.org/}%
+}
 
-\dummytext[5]{}
+\paragraph{Recommendations (advantages and disadvantages)}
+
+% Chapter 8: model limitations, no inheritance,
+% no saving money for housing, \dots
+
+\dummytext[1]{}
 
 \paragraph{Outlook and future work}
 
@@ -94,6 +160,6 @@ and giving an outlook on possible future work.
   \cite{Baar15Gradient}
 \end{itemize}
 
-\dummytext[5]{}
+\dummytext[2]{}
 
 \cleardoublepage
