@@ -103,20 +103,85 @@ how the solution looks like with state-of-the-art methods.
 In all of these applications, the advantages of B-splines were made clear
 by comparing the results to the classical piecewise linear basis.
 The implementation of hierarchical B-splines of sparse grids is
-publicly available under a free and open-source license.%
+publicly available under a free and open-source license,
+as part of the sparse grid toolbox \sgpp.%
 \footnote{%
   \url{http://sgpp.sparsegrids.org/}%
 }
 
 \paragraph{Recommendations (advantages and disadvantages)}
 
-% Chapter 8: model limitations, no inheritance,
-% no saving money for housing, \dots
-
-\dummytext[1]{}
+Despite its broad applicability,
+the presented method of B-splines on sparse grids is of course
+not suited for all possible cases.
+One must be able to sample the objective function at arbitrary
+locations in some hyper-rectangle in order to use sparse grids;
+a prescribed point cloud of scattered data does not suffice.
+The problem should not have more than ten dimensions,
+since convergence notably slows down as the dimensionality grows
+(although spatial adaptive approaches might still be feasible for
+higher dimensionalities \cite{Pflueger10Spatially}).
+In order to benefit from higher-order B-splines,
+the objective function should be ``as smooth as possible.''
+This means at the very least continuous,
+but twice continuously differentiable is desirable.
+The general rule is that the employed basis functions should be
+at least as smooth as the objective function in order to obtain
+optimal convergence results.
+The concrete choice of basis (general type and degree) depends
+on the application as well.
+Not-a-knot B-splines are well-suited for objective functions with
+dominating near-polynomial parts.
+Fundamental splines may be used to accelerate the process of
+hierarchization by enabling breadth-first search in quadratic time.
+With weakly fundamental splines, this can further be reduced to
+linear time with the unidirectional principle.
+However, the additional grid points, which have to be inserted,
+have to be taken into account as well.
+The rule of thumb is that the more spatially adaptive a sparse grid is
+(i.e., only few high-level grid points),
+the more points have to be inserted.
+In general, it does not hurt to try the different available
+B-spline types and degrees,
+since the function values can simply be reused,
+once the objective function has been sampled.
 
 \paragraph{Outlook and future work}
 
+Finally, we briefly give suggestions for possible future work.
+A major topic of interest is that of refinement criteria and adaptivity.
+Besides the Novak--Ritter criterion,
+there are other refinement criteria that are tailored to optimization
+such as simultaneous stochastic optimization [TODO].
+In addition, nested methods for hierarchical optimization could
+use multiple interpolants with different resolutions [TODO].
+Criteria that directly incorporate constraints would improve
+results in constrained optimization settings.
+With respect to adaptivity,
+there is also much work left to do.
+This thesis focused on spatial adaptivity on its applications,
+but there might be interesting applications using dimensional adaptivity,
+for example plasma physics [TODO].
+A key task is introducing $h$-$p$-adaptivity to B-splines on sparse grids,
+which would greatly enhance the applicability of B-splines in
+non-smooth settings.
+As a simple special case,
+one could investigate different B-spline degrees in different dimensions.
+However, true $h$-$p$-adaptivity would allow to locally choose the
+B-spline degree and adapt it according to the local smoothness of the
+function.
+
+\pagebreak
+
+With regard to the application side, there are also quite a few
+possibilities for future work.
+The sparse grids in the biomechanical application
+we considered in this thesis were only two-dimensional.
+This is not in the range of dimensions where sparse grids
+demonstrate their full power.
+Currently, an extended model five muscles and therefore
+five-dimensional sparse grids is being considered
+(see \cref{fig:upperLimb5D}).
 \begin{SCfigure}
   \includegraphics[height=70mm]{upperLimb5D}%
   \caption[Extended model of the human upper limb with five muscles]{%
@@ -131,58 +196,73 @@ publicly available under a free and open-source license.%
     Without the bands, the muscles would raise unnaturally from the bones.%
   }%
   \label{fig:upperLimb5D}%
-\end{SCfigure}
+\end{SCfigure}%
+Here, spatial adaptivity has to be used a priori to cope with
+the increased dimensionality.
+In the application in topology optimization,
+more complicated micro-cell models and more complicated
+settings could be employed.
+For example, the widths of the diagonal macro-bars could be constrained
+\cite{Allaire16Towards}.
+The dynamic portfolio choice models in the financial application
+were quite limited.
+For example, there was no inheritance (or bequest) motive
+and there was no saving for larger necessary investments
+(e.g., cars or houses), both of which seems unnecessarily unrealistic.
+Finally, one could consider many other real-world optimization problems
+or other application fields of B-splines on sparse grids,
+for instance, data mining or uncertainty quantification.
+If objective gradients are available besides function values,
+it might be feasible to directly incorporate the gradients into
+the interpolation scheme \cite{Baar15Gradient}.
 
-\todo{mention the following future work (not in that order)}
+% Chapter 8: model limitations, no inheritance,
+% no saving money for housing, \dots
 
-\begin{itemize}
-  \item
-  steal from future work of Milestone Report,
-  steal from project description (JP program)
+%\begin{itemize}
+  %\item
+  %steal from future work of Milestone Report,
+  %steal from project description (JP program)
   
-  \item
-  dimension-wise degree adaptivity
+  %\item
+  %other adaptivity criteria than Novak--Ritter
+  %(e.g., for constrained optimization)
   
-  \item
-  h-p-adaptivity
+  %\item
+  %dimensional adaptivity with the combination technique
   
-  \item
-  other adaptivity criteria than Novak--Ritter
-  (e.g., for constrained optimization)
+  %\item
+  %h-p-adaptivity,
+  %special case: dimension-wise degree adaptivity
   
-  \item
-  other real-world optimization applications
+  %\item
+  %data mining with the new bases
   
-  \item
-  biomechanical application: more complicated musculoskeletal model
-  with more parameters, have to exploit spatial adaptivity
-  (was proof of concept)
+  %\item
+  %uncertainty quantification with B-splines on sparse grids
   
-  \item
-  topology optimization: more complicated micro-cell models,
-  more complicated constraints (bar widths like in \cite{Allaire16Towards})
+  %\item
+  %gradient-based approximation/interpolation methods
+  %\cite{Baar15Gradient}
   
-  \item
-  finance application: other models such as immediate annuity,
-  eliminate limitations
+  %\item
+  %biomechanical application: more complicated musculoskeletal model
+  %with more parameters, have to exploit spatial adaptivity
+  %(was proof of concept)
   
-  \item
-  data mining with the new bases
+  %\item
+  %topology optimization: more complicated micro-cell models,
+  %more complicated constraints (bar widths like in \cite{Allaire16Towards})
   
-  \item
-  uncertainty quantification with B-splines on sparse grids
+  %\item
+  %finance application: other models such as immediate annuity,
+  %eliminate limitations
   
-  \item
-  dimensional adaptivity with the combination technique
-  
-  \item
-  gradient-based approximation/interpolation methods
-  \cite{Baar15Gradient}
-\end{itemize}
+  %\item
+  %other real-world optimization applications
+%\end{itemize}
 
-\dummytext[2]{}
-
-This extensive, but not exhaustive list of possible future work is by no means
+This extensive, by no means exhaustive list of possible future work is not
 intended to intimidate future researchers.
 It should rather be seen as inspiration and starting point
 for new and interesting applications of B-splines for sparse grids.
