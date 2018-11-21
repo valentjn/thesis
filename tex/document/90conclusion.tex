@@ -183,17 +183,44 @@ Currently, an extended model five muscles and therefore
 five-dimensional sparse grids is being considered
 (see \cref{fig:upperLimb5D}).
 \begin{SCfigure}
-  \includegraphics[height=70mm]{upperLimb5D}%
+  \begin{tikzpicture}
+    \node[anchor=south west] at (0mm,0mm) {%
+      \includegraphics[height=80mm]{upperLimb5D}%
+    };
+    \node[anchor=west] (humerus)    at (0mm,75mm)  {\small{}Humerus};
+    \node[anchor=west] (radius)     at (0mm,20mm)  {\small{}Radius};
+    \node[anchor=east] (ulna)       at (40mm,10mm) {\small{}Ulna};
+    \node[anchor=east] (triceps)    at (73mm,52mm) {\small{}Triceps};
+    \node[anchor=west] (biceps)     at (0mm,52mm)  {\small{}Biceps};
+    \node[anchor=west] (brachialis) at (0mm,44mm)  {\small{}Brachialis};
+    \node[anchor=west] (brachioradialis) at (0mm,36mm) {%
+      \small{}Brachioradialis%
+    };
+    \node[anchor=east] (anonceus)   at (73mm,20mm) {\small{}Anonceus};
+    \draw (humerus)         -- (39mm,75mm);
+    \draw (radius)          -- ($(0mm,10mm)!(radius)!(20mm,10mm)$);
+    \draw (ulna)            -- (21mm,10mm);
+    \draw (triceps)         -- (48mm,52mm);
+    \draw (biceps)          -- (33mm,52mm);
+    \draw (brachialis)      -- (35mm,44mm);
+    \draw (brachioradialis) -- (36mm,36mm);
+    \draw (anonceus)        -- (39mm,20mm);
+  \end{tikzpicture}%
   \caption[Extended model of the human upper limb with five muscles]{%
     Extended model of the human upper limb with
-    the three bones humerus, ulna, and radius \emph{(light brown)} and
+    the three bones humerus, ulna, and radius
+    \emph{\textcolor[RGB]{191,162,118}{(light brown)}} and
     the five muscles
-    triceps, biceps, anonceus, brachialis, and brachioradialis
-    \emph{(colored).}
-    Each muscle has associated tendon and muscle-tendon complexes.
+    triceps, biceps, brachialis, brachioradialis, and anonceus
+    \emph{\textcolor[RGB]{150,58,46}{(red)}.}
+    Each muscle has associated tendon
+    \emph{\textcolor[RGB]{128,128,128}{(white)}}
+    and muscle-tendon complexes
+    \emph{\textcolor[RGB]{255,183,172}{(light red)}.}
     Biceps and brachioradialis have each been fixed with one and two bands
+    \emph{\textcolor[RGB]{107,206,138}{(green)}}
     to simulate the effect of the missing skin.
-    Without the bands, the muscles would raise unnaturally from the bones.%
+    Without bands, the muscles would raise unnaturally from the bones.%
   }%
   \label{fig:upperLimb5D}%
 \end{SCfigure}%
