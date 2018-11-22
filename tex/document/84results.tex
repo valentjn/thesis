@@ -13,16 +13,16 @@
 \label{sec:841implementation}
 \printornamentstrue
 
-\paragraph{Parameter values and basis functions}
+\paragraph{Parameter values}
 
-We use
-a risk aversion factor of $\riskav = 3.5$,
-a patience factor of $\patience = 0.97$,
-a transaction cost rate of $\tac = \SI{1}{\percent}$, and
-a minimum consumption of $\normconsume_{\min} = 0.001$.
+We used
+a risk aversion factor of $\riskav := 3.5$,
+a patience factor of $\patience := 0.97$,
+a transaction cost rate of $\tac := \SI{1}{\percent}$, and
+a minimum consumption of $\normconsume_{\min} := 0.001$.
 The bond and stock return rates $\bondreturn_t$ and $\vstockreturn_t$
-are taken from \cite{Cai10Stable};
-the log-normally distributed stock return rates are generalized
+were taken from \cite{Cai10Stable};
+the log-normally distributed stock return rates were generalized
 from the three-stock case to five stocks via
 $\ln \vstockreturn_t \sim \mathcal{N}(\*\mu, \mat{\Sigma})$, where
 {%
@@ -54,20 +54,20 @@ $\ln \vstockreturn_t \sim \mathcal{N}(\*\mu, \mat{\Sigma})$, where
     $}.
   \end{equation}%
 }%
-The models are solved for $T = 6$ time steps;
+The models were solved for $T = 6$ time steps;
 this number suffices to show all relevant numerical effects and results,
 while keeping the computational effort at a reasonable level.
-As higher-order B-spline basis functions,
-we use the hierarchical weakly fundamental not-a-knot splines
-$\bspl[\wfs,\nak]{\*l,\*i}{p}$ of cubic degree $p = 3$
-to enable hierarchization with the unidirectional principle
-(see \cref{sec:454wfs}).
-As initial grids, we employ regular sparse grids
+%As higher-order B-spline basis functions,
+%we use the hierarchical weakly fundamental not-a-knot splines
+%$\bspl[\wfs,\nak]{\*l,\*i}{p}$ of cubic degree $p = 3$
+%to enable hierarchization with the unidirectional principle
+%(see \cref{sec:454wfs}).
+As initial grids, we employed regular sparse grids
 $\coarseregsgset{n}{d}{b}$ with $b = 1$
 to decrease the number of grid points
 (see \cref{sec:241coarseBoundary}).
 
-\vspace*{-0.5em}
+\vspace*{0.25em}
 
 \paragraph{Software}
 
@@ -84,7 +84,7 @@ The actual functionality implemented in the base class strongly resembles
 the algorithms presented in \cref{sec:82algorithms}.
 This is not only desirable from a modeling perspective,
 but also facilitates future usage by other researchers.
-For creating (hierarchization) and evaluating sparse grid interpolants,
+For creating (i.e., hierarchizing) and evaluating sparse grid interpolants,
 the sparse grid toolbox \sgpp was used \cite{Pflueger10Spatially}.%
 \footnote{%
   \url{http://sgpp.sparsegrids.org/}%
@@ -96,7 +96,7 @@ NAG Toolbox for MATLAB.%
   \url{https://www.nag.com/}%
 }
 To avoid getting stuck in local minima,
-we repeat the optimization process for a varying number
+we repeated the optimization process for a varying number
 of initial multi-start points (in the range of a few dozens).
 All runtimes were measured on a shared memory computer
 with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
@@ -106,6 +106,8 @@ with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 \subsection{Error Sources and Error Measure}
 \label{sec:842errorSources}
 
+\vspace*{0.25em}
+
 \paragraph{Error sources}
 
 In this application, there are the following error sources:
@@ -114,7 +116,6 @@ In this application, there are the following error sources:
   label=E\arabic*.,
   ref=E\arabic*,
   leftmargin=2.7em,
-  itemsep=-0.3em,
 ]
   \item
   \label{item:financeErrorInterpolationValue}
@@ -128,7 +129,7 @@ In this application, there are the following error sources:
   
   \item
   \label{item:financeErrorExtrapolation}
-  Extrapolation errors
+  Extrapolation
   (i.e., $
   \normcetvalueintp_{t+1}(\state_{t+1})
   \not= \normcetvaluefcn_{t+1}(\state_{t+1})
@@ -136,21 +137,21 @@ In this application, there are the following error sources:
   
   \item
   \label{item:financeErrorCropping}
-  Errors from state space cropping
+  State space cropping
   (i.e., Euler errors do not vanish for exact solution)
   
   \item
   \label{item:financeErrorOptimization}
-  Optimization error
+  Optimization
   (i.e., the global minimum found by the optimizer is inaccurate)
   
   \item
   \label{item:financeErrorQuadrature}
-  Quadrature error
+  Quadrature
   ($
-  \expectation[t]{\cdots}
-  \not= \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
-  [\cdots](\stochastic_t^{(j)})
+    \expectation[t]{\cdots}
+    \not= \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
+    \cdot [\cdots](\stochastic_t^{(j)})
   $)
   
   \item
@@ -161,7 +162,7 @@ In this application, there are the following error sources:
 Due to the dynamic programming scheme,
 the combination of all errors accumulates over $t$.
 For instance, if the optimization does not find the global optimum
-exactly or it only finds a local one for the time $t + 1$,
+exactly or it only finds a local one for $t + 1$,
 the error propagates from the interpolant $\normcetvalueintp_{t+1}$
 on the right-hand side of the Bellman equation
 \eqref{eq:normalizedTCPBellmanEquation} to $\normcetvalueintp_t$
@@ -176,7 +177,7 @@ $\weightedeulererror_t(\normstate_t)$ ($\Ltwo$ norm or pointwise)
 to assess the quality of the resulting policies.
 As the errors generally grow backwards in time,
 it suffices to consider $t = 0$.
-However, since the Euler equation error can only be evaluated at points in
+However, since Euler equation errors can only be evaluated at points in
 the simplex
 $
   \Omega_\mathrm{simplex}

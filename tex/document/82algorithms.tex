@@ -1,3 +1,4 @@
+\breakpagebeforenextheadingtrue
 \section{Algorithms}
 \label{sec:82algorithms}
 
@@ -55,11 +56,11 @@ respectively.
 
 We track two interpolants $\valueintp[1]_t$ and $\valueintp[p]_t$
 for each $t = 0, \dotsc, T$.
-The former interpolates the value function data at the grid points
+The former interpolates value function data at the grid points
 with the hierarchical piecewise linear basis
 (used for the surplus-based grid generation),
-while the latter interpolates the data with hierarchical B-splines
-of higher order $p > 1$.
+while the latter interpolates the same data with hierarchical B-splines
+of degree $p > 1$.
 Each $\valueintp[\ast]_t$ ($\ast \in \{1, p\}$)
 additionally stores the grid points $\state_t^{(k)}$
 and the optimal policies $\optpolicyintp_t(\state_t^{(k)})$
@@ -75,10 +76,10 @@ to the algorithms.
 \paragraph{\texttt{solveValueFunction} algorithm}
 
 \Cref{alg:financeSolveValueFunction} shows \texttt{solveValueFunction},
-generating the value function interpolants
+which generates the value function interpolants
 $\valueintp[1]_t$ and $\valueintp[p]_t$ ($t = 0, \dotsc, T$).
 The algorithm follows a simple optimize--refine--interpolate scheme,
-which is presented in \cref{fig:structureSolveValueFunction}:
+which is visualized in \cref{fig:structureSolveValueFunction}:
 First, the Bellman equation \eqref{eq:gridBellman} is solved
 on an initial sparse grid (\texttt{optimize}).
 Then, we \texttt{refine} the grid spatially adaptively.
@@ -96,7 +97,7 @@ with hierarchical higher-order B-splines.
     }
       \State{$\valueintp[p]_{T+1} \gets \emptyset$}
       \Comment{dummy variable (is not used)}%
-      \For{$t = T, T - 1, \dotsc, 0$}
+      \For{$t = T,\, T - 1,\, \dotsc,\, 0$}
         \State{%
           $\valueintp[1]_t \gets \text{%
             Initial regular sparse grid with no values%
@@ -282,7 +283,7 @@ with hierarchical higher-order B-splines.
 At the beginning of every iteration $t$,
 the grid of the piecewise linear interpolant is reset
 to an initial, possibly regular sparse grid.
-It is also possible to reuse the grid from the
+It would also be possible to reuse the grid from the
 previous iteration $t + 1$.
 Nevertheless, the results we then obtain become worse,
 likely due to the different characteristics of $\valueintp[1]_t$
@@ -305,7 +306,7 @@ the terminal solution $\valuefcn_T$ is usually a known function.
 
 \paragraph{\texttt{optimize} algorithm}
 
-The \texttt{optimize} step can be seen in \cref{alg:financeOptimize}.
+The \texttt{optimize} is given as \cref{alg:financeOptimize}.
 This algorithm accepts in $\valueintp[1]_t$
 a spatially adaptive sparse grid
 $\gridset{t}{\sparse}
@@ -401,7 +402,7 @@ As a remedy, we transform the value function $\valueintp_t$ with the
 $\valueintp_t \mapsto \cetvalueintp_t
 := ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 0$.
 \Cref{eq:gridBellman} then becomes
-$\cetvalueintp_T(\state_t^{(k)}) = \max_{\policy_T}
+$\cetvalueintp_T(\state_T^{(k)}) = \max_{\policy_T}
 \consume_T(\state_T^{(k)}, \policy_T)$ for $t = T$ and
 \begin{equation}
   \label{eq:gridBellmanCET}
@@ -513,7 +514,7 @@ It may then happen that
 $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
 \notin \clint{\*0, \*1}$
 for some quadrature nodes
-$\stochastic_t^{(j)} \in \stochdomain$ in \eqref{eq:bellmanQuadrature}.
+$\stochastic_t^{(j)} \in \stochdomain$ in \cref{eq:bellmanQuadrature}.
 %i.e., $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})$
 %is not a feasible state.
 Hence, we might not be able to evaluate the value function interpolant
@@ -530,7 +531,9 @@ Instead, we extend the interpolant $\valueintp[p]_{t+1}$
 to $\real^d$ by an extrapolation method based on Taylor approximation.
 First, we crop the evaluation point
 $\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to
-a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$.
+a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$
+with $\state_{t+1}^\mathrm{in} := \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$
+(component-wise minimum/maximum).
 The extrapolation type,
 which may be \texttt{constant}, \texttt{linear}, and \texttt{quadratic},
 determines the degree of the Taylor approximation:
@@ -547,10 +550,10 @@ determines the degree of the Taylor approximation:
 \end{equation}
 where \texttt{constant} and \texttt{linear}
 only use the first summand and first two summands, respectively.
-Note that since the hierarchical B-splines enable us to
+Since the hierarchical B-splines enable us to
 exactly and efficiently compute
-the gradient $\gradient{\state}{\valueintp[p]_{t+1}}$ and
-the Hessian $\hessian{\state}{\valueintp[p]_{t+1}}$;
+the gradient $\gradient{\state_{t+1}}{\valueintp[p]_{t+1}}$ and
+the Hessian $\hessian{\state_{t+1}}{\valueintp[p]_{t+1}}$,
 we do not have to approximate the derivatives with finite differences.
 
 
@@ -568,14 +571,14 @@ The criterion is the common surplus-based refinement criterion
 As for the application in topology optimization (see \cref{chap:60topoOpt}),
 we use the piecewise linear interpolant for the surplus-based
 grid generation,
-as the surpluses are easier to compute in the piecewise linear case,
+since the surpluses are easier to compute in the piecewise linear case,
 and they are more meaningful
 due to the integral representation formula \eqref{eq:surplusIntegral}.
 Parameters for \cref{alg:financeRefine} are
 the tolerance $\refinetol_t \in \nonnegreal$,
 by which the set of grid points to be refined is determined, and
 the number $\norefine_t \in \natz$ of refinement iterations.
-These parameters depend on the time $t$,
+These parameters may depend on the time $t$,
 since it might be beneficial to change the adaptivity of the
 grid over time.
 
@@ -648,8 +651,8 @@ In this case, we have to track in \cref{alg:financeSolveValueFunction}
 additional sparse grid interpolants for every partial derivative
 $\partialderiv{\partialdiff \stateentry_{t,o}}{\valueintp[1]_t}$
 that is affected by a policy variable.
-This possibility is omitted of the algorithms in this section,
-as this would unnecessarily complicate their presentation.
+This possibility is omitted from the algorithms in this section,
+as it would unnecessarily complicate their presentation.
 
 
 
@@ -660,7 +663,7 @@ as this would unnecessarily complicate their presentation.
 
 After explaining the generation of the value function interpolants
 $\valueintp[p]_t$ ($t = 0, \dotsc, T$),
-we can move on with step 2 of the general structure of our method
+we can move on to step 2 of the general structure of our method
 (see \cref{sec:821generalStructure}),
 which is the generation of optimal policy interpolants.
 The corresponding \cref{alg:financeSolvePolicies} is similar to
@@ -671,7 +674,7 @@ The functions \texttt{optimize}, \texttt{refine}, and \texttt{interpolate}
 have been replaced by corresponding policy versions
 \texttt{optimizePolicy}, \texttt{refinePolicy}, and \texttt{interpolatePolicy},
 that work very much like their value function counterpart.
-\texttt{optimizePolicy} only has to generate new values,
+\texttt{optimizePolicy} only has to generate new values
 if the initial regular sparse grid for the policies
 is not contained in the grid of $\valueintp[p]_t$.
 The policy grid is then refined and interpolated independently
@@ -737,8 +740,8 @@ which means that they can be parallelized.
 
 \paragraph{Monte Carlo simulation}
 
-There are various ways to
-assess if the resulting optimal policy B-spline interpolants
+There are various ways to assess
+whether the resulting optimal policy B-spline interpolants
 $(\optpolicyintp[p]_t)_{t=0,\dotsc,T}$
 are reasonable.
 One possibility is a Monte Carlo simulation,
@@ -766,15 +769,15 @@ are determined by
       \state_{t-1,(j)}, \policy_{t-1,(j)}, \stochastic_{t-1,(j)}
     ),\quad
     t > 0,\qquad
-    \state_{t,(0)}
+    \state_{0,(j)}
     \sim P_{0,\state},\\
     \stochastic_{t,(j)}
     &\centerhphantom{\sim}{\hspace*{1.6em}} P_{t,\stochastic},
   \end{align}
 \end{subequations}
-i.e., the initial state $\state_{t,(0)}$ and the
+i.e., the initial state $\state_{0,(j)}$ and the
 stochastic variables $\stochastic_{t,(j)}$ are samples of random variables.
-The Monte Carlo simulation enables us to draw macro-economic conclusions,
+Monte Carlo simulations enable us to draw macro-economic conclusions,
 e.g., the evolution of the amount of consumption of the average individual
 over time.
 

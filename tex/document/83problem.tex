@@ -10,11 +10,11 @@
 In the \term{transaction costs model} \cite{Schober18Solving},
 the individual can invest their money risk-free in bonds
 (with a fixed interest rate similar to a bank account)
-or in $m_{\vstock} \in \nat$ different stocks, which is risk-affected.
+or in $m_{\vstock} \in \nat$ different risk-affected stocks.
 Every stock transaction,
 i.e., buy $\buy_{t,j}$ or sell $\sell_{t,j}$,
 inflicts transaction costs $\tac \buysell_{t,j}$ ($\tac \in \nonnegreal$)
-proportional to the amount $\buysell_{t,j}$ that was bought or sold
+proportional to the amount $\buysell_{t,j}$ bought or sold
 ($j = 1, \dotsc, m_{\vstock}$).
 The individual only wants to invest a fixed
 amount $\wealth_0$ in stocks, i.e., we omit the individual's income.
@@ -30,19 +30,21 @@ In the following,
 $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
 that is invested in the $j$-th stock.
 We combine these \term{stock fractions} $\stock_{t,j}$
-in the vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}})$;
-similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\vstock}})$.
+in a vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}})$;
+similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\vstock}})$
+combines buy and sell amounts.
 Then, the consumption can be computed as a residual variable
 (i.e., a variable that can be fully computed from $\state$ and $\policy$
-and is thus omitted from $\policy$)
-that is given by
+and is thus omitted from $\policy$),
+which is given by
 \begin{equation}
   \consume_t
   := (1 - \sumfcn(\vstock_t)) \wealth_t - \bond_t -
   (1 + \tac) \sumfcn(\vbuy_t) + (1 - \tac) \sumfcn(\vsell_t),
 \end{equation}
-where $\sumfcn(\*a) := \tr{\*1} \*a$.
-The state transition is computed by adding the returns of the stocks:%
+where $\sumfcn(\*a) := \tr{\*1} \*a$
+is the sum of all entries of $\*a$.
+The state transition is computed by adding the returns of bonds and stocks:%
 \begin{equation}
   \wealth_{t+1}
   := \bond_t \bondreturn_t +
@@ -61,7 +63,7 @@ $
   \in \real^{m_{\vstock}}
 $
 is the vector of (stochastic) stock return rates, and
-$\compmult$ is the component-wise multiplication.
+$\compmult$ is component-wise multiplication.
 
 
 
@@ -70,7 +72,7 @@ $\compmult$ is the component-wise multiplication.
 
 \paragraph{State transition}
 
-The equations above can be normalized with respect to the wealth
+The above equations can be normalized with respect to the wealth
 $\wealth_t$:
 By setting
 $\normconsume_t  := \consume_t/\wealth_t$,
@@ -80,22 +82,24 @@ $\vnormbuysell_t := \vbuysell_t/\wealth_t$, we obtain
   \label{eq:normalizedTCPStateTransition}
   \begin{align}
     \normconsume_t
-    &:= (1 - \sumfcn(\vstock_t)) - \normbond_t -
+    &\hphantom{:}=
+    (1 - \sumfcn(\vstock_t)) - \normbond_t -
     (1 + \tac) \sumfcn(\vnormbuy_t) + (1 - \tac) \sumfcn(\vnormsell_t),\\
     \wealthratio_{t+1}
     &:= \normbond_t \bondreturn_t +
     \tr{(\vstock_t + \vnormbuy_t - \vnormsell_t)} \vstockreturn_t,
     \qquad(= \wealth_{t+1}/\wealth_t)\\
     \vstock_{t+1}
-    &:= \frac{
+    &\hphantom{:}=
+    \frac{
       (\vstock_t + \vnormbuy_t - \vnormsell_t) \compmult \vstockreturn_t
     }{\wealthratio_{t+1}},
   \end{align}
 \end{subequations}
-where both $\normconsume_t$ and $\wealthratio_{t+1}$ are residual
+where $\normconsume_t$ and $\wealthratio_{t+1}$ are residual
 variables that specify \term{normalized consumption} and
 \term{wealth ratio,} respectively.
-The resulting dynamic portfolio choice model has
+All in all, the resulting dynamic portfolio choice model has
 the following variables:
 \begin{itemize}
   \item
@@ -244,7 +248,7 @@ We choose the third remedy and \term{virtually sell,}
 if $\sumfcn(\vstock_t) > 1$,
 as many stocks as needed to meet the constraint $\sumfcn(\vstock_t) \le 1$.
 We already might need to sell stocks
-even if $\sumfcn(\vstock_t)$ is smaller, but close to one
+even if $\sumfcn(\vstock_t)$ is smaller but close to one
 in order to satisfy the minimum consumption requirement
 \eqref{eq:normalizedTCPConstraintsLong}.
 In detail, we replace $\vstock_t$ by $\normcropfactor \vstock_t$
@@ -263,7 +267,7 @@ that is determined by
 \end{equation}
 Here, $\bigl(\sumfcn(\vstock_t) - \sumfcn(\normcropfactor\vstock_t)\bigr)$
 is the amount of virtually sold stocks.
-Consequently, the term in square brackets is the fraction of wealth
+Hence, the term in square brackets is the fraction of wealth
 that is still available after deducting the induced transaction costs.
 The product of this term with
 $\bigl(1 - \sumfcn(\normcropfactor\vstock_t)\bigr)$
@@ -451,7 +455,7 @@ $
   (\normconsume_t^{\sparse,\opt})^{\riskav}
   := (\normconsume_t(\normstate_t, \optnormpolicyintp_t))^{\riskav}
 $, we obtain the
-\term{unit-free Euler equation errors $\error_t(\normstate_t)$}
+\term{unit-free Euler equation errors $\eulererror_t(\normstate_t)$}
 with respect to $\normbond_t$:
 \begin{equation}
   \eulererror_t(\normstate_t)
@@ -513,7 +517,7 @@ $.
 %
 %\begin{equation}
 %  \begin{split}
-%    \error_t(\normstate_t)
+%    \eulererror_t(\normstate_t)
 %    := \Bigl|
 %      1 - \Bigl(
 %        \patience \bondreturn_t
@@ -550,15 +554,15 @@ distorts Euler equation errors:
 The error $\eulererror_t(\normstate_t)$ does not vanish
 even for the exact solution and even inside the feasible state space.
 This is because the cropping already occurs for large stock holdings
-$\sumfcn(\vstock_t)$ that are close to, but lower than one,
+$\sumfcn(\vstock_t)$ that are less than one,
 as stocks have to be sold to maintain
 minimum consumption $\normconsume_{\min}$.
 Numerical experiments showed that due to this issue,
 the error attains large values near the hyperplane
 $\sumfcn(\vstock_t) = 1$.
 Economically, this region is not significant
-as such high stock fractions are unusual
-(which is confirmed by Monte Carlo simulations).
+as such large stock fractions are highly unusual,
+which is confirmed by Monte Carlo simulations.
 We therefore use the \term{weighted Euler equation error}
 \begin{equation}
   \weightedeulererror_t(\normstate_t)

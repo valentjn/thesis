@@ -27,7 +27,7 @@ There are three types of variables:
   \term{State variables} $\state_t$
   such as the individual's wealth $\wealth_t$ or their income
   cannot be controlled directly by the individual.
-  Instead, the individual's decisions influence the value of
+  Instead, the individual's decisions may influence the value of
   state variables of future iterations.%
   \footnote{%
     The time $t$ can also be regarded as a state variable.%
@@ -55,23 +55,24 @@ We discretize the state space with a spatially adaptive sparse grid.
 For each state grid point, an optimization problem over the policy
 variables has to be solved, where the objective function depends
 on the expected value over the stochastic variables.
-By using B-splines as sparse grid basis functions,
-the accuracy of the interpolants increases and
+By using B-splines as hierarchical basis functions,
+the accuracy of the interpolants is increased and
 the explicitly known gradients enable the usage of
 gradient-based optimization methods, thus accelerating convergence.
-The process is repeated for each time step.
-By using the Bellman principle, the objective functions that
-occur at time $t$ depend on the interpolant of next iteration $t+1$.
+The process is repeated for each time step,
+which is possible due to the Bellman principle,
+which states that the objective functions
+occurring at time $t$ depend on the interpolant of the next iteration $t+1$.
 Hence, the problem has to be solved backward in time
-via a scheme based on dynamic programming.
+via a scheme that closely resembles dynamic programming.
 
 The outline of this chapter is as follows:
 In \cref{sec:81models}, we formalize the framework of
 dynamic portfolio choice models and describe our approach.
-Afterwards, we explain in \cref{sec:82algorithms} the algorithms
-necessary to implement the solution of these models.
-\Cref{sec:83problem} shows the transaction costs problem
-as an example application of the general framework introduced
+Afterwards, we explain in \cref{sec:82algorithms} the necessary algorithms
+for implementing the solution of these models.
+\Cref{sec:83problem} introduces the transaction costs problem
+as an example application of the general framework presented
 in \cref{sec:81models}.
 Finally, in \cref{sec:84results}, we study numerical results.
 
@@ -80,7 +81,7 @@ and Peter Schober (both Goethe University Frankfurt, Germany).
 %\todo{mention paper if published}
 In previous work, Peter Schober treated the solution of
 dynamic portfolio choice models with piecewise linear basis functions
-on spatially adaptive sparse grids.
+on spatially adaptive sparse grids \cite{Schober18Solving}.
 The original contribution of this thesis is the introduction
 of higher-order B-splines for the solution of these problems.
 The author of this thesis contributed the methodology of

@@ -1,4 +1,4 @@
-\section{Dynamic Portfolio Choice Models}
+\section{Solving the Bellman Equation}
 \label{sec:81models}
 
 \minitoc[-0.5mm]{76mm}{4}
@@ -6,18 +6,24 @@
 \noindent
 In this section, we give a mathematical framework for
 dynamic portfolio choice models,
-mention related literature briefly, and
+briefly mention related literature, and
 explain where B-splines on sparse grids come into play.
 \Cref{tbl:glossaryFinance} summarizes the symbols
 that are introduced in this chapter.
-A more detailed introduction into dynamic portfolio choice models
-provides \cite{Rust18Dynamic}.
+Rust provides a more detailed introduction into
+dynamic portfolio choice models \cite{Rust18Dynamic}.
 
 \begin{table}
   \setnumberoftableheaderrows{0}%
-  \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
+  \newcommand*{\vph}{%
+    \vphantom{\printnotationsymbol{\buysell}}%
+    %\vphantom{$\hat{({\cdot})}$}%
+  }%
+  \newcommand*{\pnst}[1]{%
+    \printnotationsymbol{#1}\vph&\printnotationtext{#1}%
+  }%
   \newcommand*{\pnsta}[1]{%
-    \printnotationsymbol{#1}&\multicolumn{3}{l}{\printnotationtext{#1}}%
+    \printnotationsymbol{#1}\vph&\multicolumn{3}{l}{\printnotationtext{#1}}%
   }%
   \begin{tabular}{%
     >{\kern\tabcolsep}=l+l<{\kern4.5mm}+l<{\kern-1.5mm}+l%
@@ -49,7 +55,7 @@ provides \cite{Rust18Dynamic}.
 
 In the following, dynamic portfolio choice models aim to maximize the expected
 \term{discounted time-additive utility} over the lifetime of the individual,
-where the terminal utility is derived solemnly on consumption
+where the terminal utility is derived solemnly from consumption
 (i.e., no inheritance motive).
 If we neglect stochastic factors, then these models solve
 \begin{equation}
@@ -67,7 +73,8 @@ are the state%
   is bounded, since the state space will be discretized with sparse grids.
   Without loss of generality, we may then assume that
   $\state_t \in \clint{\*0, \*1}$.
-  If state variables are unbounded in reality, then extrapolation is necessary,
+  If some state variables are unbounded in reality,
+  then extrapolation is necessary,
   which will be explained in \cref{sec:825interpolation}.%
 }
 and policy of time $t = 0, \dotsc, T$, respectively.
@@ -79,7 +86,7 @@ $\state_0$ and $\policy_0, \dotsc, \policy_{t-1}$ with a
 \term{state transition function} $(\state_t, \policy_t) \mapsto \state_{t+1}$.
 As shown in \cref{fig:dynamicPortfolioChoice},
 in each time step, a fraction of the available wealth is consumed
-\term{(consumption $\consume_t$)},
+\term{(consumption $\consume_t$),}
 which can be computed from the state $\state_t$ and the policy $\policy_t$.
 The individuals rate the consumption with a \term{utility function}
 $\utilityfcn(\consume_t)$.
@@ -107,26 +114,26 @@ or \term{time discount factor.}
 
 \paragraph{Limitations of naive utility maximization}
 
-When solving the utility maximization problem \eqref{eq:utilityMaximization},
-there are two issues.
-First, solving \eqref{eq:utilityMaximization} for all times $t$ at once
+When solving the utility maximization problem
+in \cref{eq:utilityMaximization}, there are two issues.
+First, solving \cref{eq:utilityMaximization} for all times $t$ at once
 implies solving a $(T+1) m_{\policy}$-dimensional optimization problem,
 which is usually computationally infeasible.
-Second, \eqref{eq:utilityMaximization} does not take stochastic variables
+Second, \cref{eq:utilityMaximization} does not take stochastic variables
 $\stochastic_t$ such as stock return rates into account.
 These variables influence the state transition, i.e.,
 $(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$.
 Consequently, $\state_t$ cannot be computed from $\state_0$ and
 $\policy_0, \dotsc, \policy_{t-1}$ alone,
-which complicates the solution of \eqref{eq:utilityMaximization}
-even in the expected value.
+which complicates the solution of \cref{eq:utilityMaximization}
+even for expected values.
 
 \paragraph{Bellman principle}
 
 To solve the first issue,
 Bellman's principle of optimality \cite{Bellman57Dynamic}
 can be applied to problems like
-\eqref{eq:utilityMaximization} that are said to have
+\cref{eq:utilityMaximization} that are said to have
 \term{optimal substructure.}
 The principle states that the optimal policy for all times $t = 0, \dotsc, T$
 is also optimal with respect to $t = 1, \dotsc, T$, i.e.,
@@ -169,7 +176,7 @@ starting from $(\state_0, \policy_0)$.
 
 \paragraph{General Bellman equation}
 
-If we formulate \eqref{eq:simpleBellman} for arbitrary times $t$ and
+If we formulate \cref{eq:simpleBellman} for arbitrary times $t$ and
 consider constraints, state transition, and stochastic variables,
 we obtain the \term{Bellman equation:}
 \begin{subequations}
@@ -246,13 +253,13 @@ of time $T$, which is determined by maximizing the utility
 for the terminal time step,
 we can determine $\valuefcn_t$ and $\optpolicyfcn_t$
 from $\valuefcn_{t+1}$ and $\optpolicyfcn_{t+1}$
-for $t = T - 1, \dotsc, T - 2, \dotsc, 0$ with the Bellman equation.
+for $t = T - 1,\, T - 2,\, \dotsc,\, 0$ with the Bellman equation.
 This way, we only have to solve $T+1$ separate $m_{\policy}$-dimensional
 optimization problems instead of a single large
 $(T+1) m_{\policy}$-dimensional problem.
 Often, the terminal solutions $\valuefcn_T$ and $\optpolicyfcn_T$
 are explicitly known.
-In our case, then the optimal terminal solution is
+In our case, the optimal terminal solution is
 to consume the whole wealth $\wealth_T$
 (see \cref{fig:dynamicPortfolioChoice}).
 
@@ -269,7 +276,8 @@ to a grid point $\state_{t+1}^{(k')}$,
 which means that we cannot lookup the value of $\valuefcn_{t+1}$
 at $\statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)$.
 Therefore, we have to interpolate $\valuefcn_{t+1}$
-at the grid points to obtain an interpolant $\valueintp_{t+1}$:
+at the grid points, obtaining the interpolant $\valueintp_{t+1}$
+as a result:
 \begin{equation}
   \label{eq:gridBellman}
   \valueintp_t(\state_t^{(k)})
@@ -304,39 +312,30 @@ may be different from the grids for $\valueintp_t$.
 \subsection{Solution with B-Spline Surrogates on Sparse Grids}
 \label{sec:812surrogates}
 
-\paragraph{Sparse grids and related work}
+\paragraph{Sparse grids for dynamic models and related work}
 
-Conventional schemes for interpolation of $\valuefcn_t$
-suffer from the curse of dimensionality:
-If the number $d$ of state entries in $\state_t$ is already moderately
-large (e.g., $d \ge 4$),
-then classical full grid approaches require millions of
-grid points even for medium-sized univariate grids
-(e.g., $\ngp_t \ge 32$).
-This quickly exceeds the available computational budget,
-as we have to solve an expensive optimization problem for each grid point.
-Instead, we use interpolation on spatially adaptive sparse grids.
-
+As interpolation approaches for $\valuefcn_t$ based on full grids
+suffer from the curse of dimensionality,
+we want to use interpolation on spatially adaptive sparse grids instead.
 Recently, sparse grids have found increasing interest in the
 solution of dynamic models in finance
 \multicite{Brumm17Using,Judd14Smolyak,Schober18Solving,Winschel10Solving}.
 For example in \cite{Brumm17Using},
 discrete choices in the value iteration are computed
 using piecewise linear basis functions on spatially adaptive sparse grids.
-Judd et al.\ \cite{Judd14Smolyak} use global polynomials
+Judd et al.\ use global polynomials
 on sparse Clenshaw--Curtis grids for the interpolation of
-higher-dimensional economic models.
-Schober \cite{Schober18Solving} employs spatially adaptive sparse grids
+higher-dimensional economic models \cite{Judd14Smolyak}.
+Schober employs spatially adaptive sparse grids
 for the interpolation of dynamic portfolio choice models,
-but uses the piecewise linear basis functions.
+but uses the piecewise linear basis functions \cite{Schober18Solving}.
 
 \paragraph{B-splines on sparse grids for dynamic portfolio choice models}
 
 The shortcomings of the two approaches of piecewise linear functions
 \multicite{Brumm17Using,Schober18Solving} or global polynomials
 \cite{Judd14Smolyak} are evident:
-First,
-the piecewise linear basis is not continuously differentiable,
+Piecewise linear basis functions are not continuously differentiable,
 impeding convergence of interpolation errors
 (see \cref{sec:541interpolation}) and prohibiting the use
 of gradient-based optimization methods to solve \eqref{eq:gridBellman}.
@@ -366,13 +365,13 @@ with respect to $\policyentry_{t,j}$, $j = 1, \dotsc, m_{\policy}$, i.e.,
 which involves the gradient
 $\gradient{\state_{t+1}}{\valueintp_{t+1}}$ of the
 value function interpolant $\valueintp_{t+1}$.
-Second,
+In addition,
 global polynomials only work well on Clenshaw--Curtis grids
 with Chebyshev-distributed nodes due to Runge's phenomenon.
 
-In this thesis, we use higher-order B-splines as basis functions for
+In the following, we use higher-order B-splines as basis functions for
 the interpolation of $\valuefcn_t$ and $\optpolicyfcn_t$.
-The advantages of the new method are obvious:
+This method has two advantages:
 First, B-splines of degree $p > 1$ are continuously differentiable,
 increasing the order of convergence and enabling
 gradient-based optimization for solving \eqref{eq:gridBellman}.
