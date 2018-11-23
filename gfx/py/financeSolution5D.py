@@ -47,13 +47,13 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
     zLabel = r"$\normcetvalueintp[1]_t$"
   elif name.endswith("Buy"):
     zl = (-0.01, 0.25)
-    zLabel = r"$\normbuy[\sparse,1]_{{t,{}}}$".format(name[-4])
+    zLabel = r"$\normbuy[\opt,\sparse,1]_{{t,{}}}$".format(name[-4])
   elif name.endswith("Sell"):
     zl = (-0.04, 0.53)
-    zLabel = r"$\normsell[\sparse,1]_{{t,{}}}$".format(name[-5])
+    zLabel = r"$\normsell[\opt,\sparse,1]_{{t,{}}}$".format(name[-5])
   else:
     zl = (-0.01, 0.20)
-    zLabel = r"$\normbond_t^{\sparse,1}$"
+    zLabel = r"$\normbond_t^{\opt,\sparse,1}$"
   
   nn = (65, 65)
   xBreak = 0.25
