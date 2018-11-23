@@ -710,7 +710,7 @@ values for the sheared micro-cell models.
 
 \paragraph{Comparison to the direct solution}
 
-B-splines on sparse grids lead to a drastic reduction in runtime.
+B-splines on sparse grids lead to a drastic reduction in computation time.
 Solving the 2D cantilever scenario with the best-placed sheared cross model
 would take 453 days with
 exact elasticity tensor evaluations (i.e., without surrogates),
@@ -720,7 +720,7 @@ This estimate does not account for approximating the missing derivatives
 of the elasticity tensor.
 If we incorporate this and use 100 parallel processes,
 we still need weeks for the solution.
-In contrast, the runtime using our sparse grid surrogates
+In contrast, the computation time using our sparse grid surrogates
 is a matter of minutes or hours at most,
 resulting in speedups of around 200
 (excluding the time for the offline phase,
@@ -761,7 +761,7 @@ Ideally, we would measure the true optimality gap
 cf.\ error \ref{item:topoOptErrorOptimization}.
 Unfortunately, the true optimum
 $(\mcpopt{1}, \dotsc, \mcpopt{M})$ could not be computed:
-Apart from the runtime issues mentioned above,
+Apart from the computation time issues mentioned above,
 oscillations in the elasticity tensor evaluation and
 errors stemming from types
 \ref{item:topoOptErrorMicro} and \ref{item:topoOptErrorRounding}

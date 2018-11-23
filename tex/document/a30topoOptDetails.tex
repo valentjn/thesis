@@ -17,7 +17,7 @@ In addition, we report details of the corresponding optimization runs
 in \cref{tbl:topoOptResultsDetailed} and
 information about the employed spatially adaptive sparse grids in
 \cref{tbl:topoOptResultsModels}.
-The runtimes were measured on a shared memory computer
+The computation times were measured on a shared memory computer
 with 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 
 \begin{figure}
@@ -130,7 +130,7 @@ with 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
   }
     \toprulec
     \headerrow
-    Scenario& Model& \#Iter.& $\trcmp$& $\apcmp$& \cece{O.-i. gap}& Runtime\\
+    Scenario& Model& \#Iter.& $\trcmp$& $\apcmp$& \cece{O.-i. gap}& Time\\
     \midrulec
     % id = 650,652,654,656
     &         2D-C&      547& 74.974&   74.974&   \num{3.67e-5}&    \hms{;5}\\
@@ -172,7 +172,7 @@ with 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
     $\apcmp := \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$
     as reported by the optimizer,
     the optimality-interpolation gaps $\abs{\trcmp - \apcmp}$, and
-    the runtime of the online phase
+    the computation time of the online phase
     (without the time to generate the sparse grid data).%
   }%
   \label{tbl:topoOptResultsDetailed}%

@@ -325,7 +325,7 @@ consequently, a surrogate
 \end{equation}
 for the equilibrium elbow angle function (cf.\ \cref{eq:equilibriumAngle}).
 Since the surrogates are much cheaper to evaluate,
-the runtime is decreased by up to seven orders of magnitude,
+the computation time is decreased by up to seven orders of magnitude,
 as experiments show.
 
 The approach in \cite{Valentin18Gradient} and in this thesis is
@@ -366,7 +366,7 @@ $\partialderiv{\partialdiff{} \elbang}{\momentintp}$ needed
 for the Newton method in \cref{eq:newtonAngle} is continuous and
 explicitly known.
 There is no need to approximate the derivative with
-finite differences, reducing both the error and the runtime.
+finite differences, reducing both error and computation time.
 %
 Second, we can use gradient-based optimization methods
 for the solution of the optimization problems \ref{item:biomech2MinSum} and
