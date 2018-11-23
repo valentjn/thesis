@@ -98,7 +98,7 @@ NAG Toolbox for MATLAB.%
 To avoid getting stuck in local minima,
 we repeated the optimization process for a varying number
 of initial multi-start points (in the range of a few dozens).
-All runtimes were measured on a shared memory computer
+All computation times were measured on a shared memory computer
 with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 
 
@@ -168,7 +168,7 @@ on the right-hand side of the Bellman equation
 \eqref{eq:normalizedTCPBellmanEquation} to $\normcetvalueintp_t$
 on the left-hand side, and so on.
 If the system does not damp these errors,
-the error might become larger and larger backwards in time $t$.
+the error might steadily become larger backwards in time $t$.
 
 \paragraph{Error measure}
 
@@ -215,10 +215,10 @@ for all $t = 0, \dotsc, T$.
 Obviously, this is only computationally feasible
 for low dimensionalities $d$ due to the curse of dimensionality.
 The two-dimensional solution of level $n = 7$
-already took over nine hours to compute.
-The solution of the next level is estimated to take already one week.
-Full grid solutions can only be computed up to $d = 3$
-due to excessive runtime for $d \ge 4$.
+took over nine hours to compute.
+The solution of the next level is estimated to already take one week.
+Hence, full grid solutions can only be computed up to $d = 3$
+due to excessive computation time for $d \ge 4$.
 This underlines the need for sophisticated
 discretization techniques such as sparse grids.
 
@@ -305,15 +305,15 @@ For this and the following plots,
 the value function grid is kept unchanged
 (usually a slightly refined regular sparse grid),
 while the mean number $\ngp_t$ of policy grid points increases
-with decreasing refinement threshold $\refinetol_t$,
-since the value function grid does not seem to have a great influence
+with decreasing refinement threshold $\refinetol_t$.
+This is because the value function grid does not seem to have a great influence
 on the convergence of the Euler equation errors.
-The spatial adaptivity decreases the error by
+Compared to regular grids, the spatial adaptivity decreases the error by
 two orders of magnitude in one dimension.
 The gain is smaller for higher dimensionalities $d$,
 but spatial adaptive grids still outperform regular grids.
 For $d = 2$, we observe that the error saturates
-after $\ngp_t \approx \num{4000}$ points before dropping below $10^{-5}$.
+after $\ngp_t \approx \num{4000}$ points just above $10^{-5}$.
 This is most likely due to the parts
 \ref{item:financeErrorExtrapolation} to
 \ref{item:financeErrorRounding} of the error that are not influenced
@@ -323,10 +323,10 @@ For $d = 4$, spatially adaptive sparse grids with
 a mean number $\ngp_t = \num{4252}$ of policy grid points for $t = 0$
 are able to achieve a weighted Euler equation error of
 $\weightedeulererrorLtwo_t \approx \num{2.0e-2}$.
-For $d = 5$, we are still able to achieve an acceptable error of
-$\weightedeulererrorLtwo_t \approx \num{3.2e-2}$
+For $d = 5$, we are still able to achieve a small error of
+$\weightedeulererrorLtwo_t \approx \num{1.9e-2}$
 with spatially adaptive sparse grids with
-a mean number $\ngp_t = \num{7768}$ of policy grid points for $t = 0$.
+a mean number $\ngp_t = \num{12572}$ of policy grid points for $t = 0$.
 While we do not see any convergence for this dimensionality,
 this is still a major result as such high-dimensional models
 could not be solved with conventional methods up to now.
@@ -334,7 +334,7 @@ could not be solved with conventional methods up to now.
 \paragraph{Optimal policies in 2D and 5D}
 
 \Cref{fig:financeSolution2DSparseGrid,fig:financeSolution5DSparseGrid}
-respectively display
+each display
 \begin{figure}
   \subcaptionbox{%
     $\normcetvalueintp[1]_t$%
@@ -343,31 +343,31 @@ respectively display
   }%
   \hfill%
   \subcaptionbox{%
-    $\normbuy[\sparse,1]_{t,1}$%
+    $\normbuy[\opt,\sparse,1]_{t,1}$%
   }[48mm]{%
     \includegraphics{financeSolution2D_8}%
   }%
   \hfill%
   \subcaptionbox{%
-    $\normsell[\sparse,1]_{t,1}$%
+    $\normsell[\opt,\sparse,1]_{t,1}$%
   }[48mm]{%
     \includegraphics{financeSolution2D_10}%
   }%
   \\[2mm]%
   \subcaptionbox{%
-    $\normbond_t^{\sparse,1}$%
+    $\normbond_t^{\opt,\sparse,1}$%
   }[48mm]{%
     \includegraphics{financeSolution2D_12}%
   }%
   \hfill%
   \subcaptionbox{%
-    $\normbuy[\sparse,1]_{t,2}$%
+    $\normbuy[\opt,\sparse,1]_{t,2}$%
   }[48mm]{%
     \includegraphics{financeSolution2D_9}%
   }%
   \hfill%
   \subcaptionbox{%
-    $\normsell[\sparse,1]_{t,2}$%
+    $\normsell[\opt,\sparse,1]_{t,2}$%
   }[48mm]{%
     \includegraphics{financeSolution2D_11}%
   }%
@@ -375,8 +375,8 @@ respectively display
     Spatially adaptive sparse grid solution for the transaction costs problem
     with $d = 2$ stocks.
     \vspace{-0.15em}%
-    Shown are the value function $\normcetvalueref_t$ \emph{(top left)} and the
-    optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$,
+    Shown are the value function $\normcetvalueintp_t$ \emph{(top left)} and the
+    optimal policy $\optnormpolicyintp_t$ for the initial time step $t = 0$,
     together with the corresponding grid points \emph{(dots).}
     The color coding is the same as in
     \cref{fig:financeSolution2DReference}.%
@@ -456,26 +456,27 @@ respectively display
     with $d = 5$ stocks.
     \vspace{-0.15em}%
     Shown are slice plots of
-    the value function $\normcetvalueref_t$ \emph{(top left)} and
-    the optimal policy $\optnormpolicyref_t$ for the initial time step $t = 0$,
+    the value function $\normcetvalueintp_t$ \emph{(top left)} and
+    the optimal policy $\optnormpolicyintp_t$
+    for the initial time step $t = 0$,
     where for each function, a pair $(o_1, o_2)$
     of dimensions to be plotted was chosen,
     and the stock fractions $\stock_{t,o}$ of the other dimensions $o$
     are set to $0.1$.
     In addition, the corresponding grid points \emph{(dots)}
     are shown as the projection onto the
-    $\stock_{t,o_1}$--$\stock_{t,o_2}$ plane.%
+    $\stock_{t,o_1}$-$\stock_{t,o_2}$ plane.%
   }%
   \label{fig:financeSolution5DSparseGrid}%
 \end{figure}%
-the value function and optimal policies corresponding to
+the value function and the optimal policies corresponding to
 sparse grid solutions for
 $d = 2$ stocks with $\ngp_0 = \num{879}$ policy grid points or
-$d = 5$ stocks with $\ngp_0 = \num{7768}$ policy grid points.
+$d = 5$ stocks with $\ngp_0 = \num{12572}$ policy grid points.
 Obviously, most grid points are placed along the various kinks in the
 policies.
 Interestingly, experiments show that the surplus-based refinement
-criterion does not place more grid points along the perfect diagonal kink
+criterion does not place more grid points along the perfectly diagonal kink
 caused by the cropping of the state space
 (i.e., along $\sumfcn(\vstock_t) = 1$).
 It is possible to circumvent this issue by either
@@ -490,13 +491,15 @@ the parts \ref{item:financeErrorExtrapolation} to
 
 \paragraph{Pointwise error}
 
-Pointwise plots of the weighted Euler equation error,
-as in \cref{fig:financePointwiseError} for two stocks,
+Pointwise plots of the weighted Euler equation error
+as in \cref{fig:financePointwiseError} for two stocks
 reveal that there are two types of regions where the error is large:
-The first region is the neighborhood of the aforementioned diagonal boundary
+The first type of region
+is the neighborhood of the aforementioned diagonal boundary
 $\sumfcn(\vstock_t) = 1$ of the uncropped region,
 where the cropping distorts the error despite the weights.
-The second region are kinks of the optimal policy functions,
+The second type of region
+are kinks of the optimal policy functions,
 which is most visible for coarse grids
 (e.g., \cref{fig:financePointwiseError_1}).
 When increasing the number of grid points
@@ -537,7 +540,7 @@ the error decreases quickly in the whole domain.
 \paragraph{Monte Carlo simulation}
 
 As explained in \cref{sec:828postProecessing},
-we perform a multi-individual Monte Carlo simulation
+we perform a multi-agent Monte Carlo simulation
 and plot the resulting mean state and policy in \cref{fig:financeSimulation}
 for $d = 3$, $4$, and $5$ stocks.
 \begin{figure}
@@ -590,7 +593,7 @@ for $d = 3$, $4$, and $5$ stocks.
       where we assume that $\wealth_0 = \$1$ for all individuals.
       In addition, the plots show the evolution of the
       $\Ltwo$ error $\weightedeulererrorLtwo_t$ over time $t$
-      \emph{\textcolor{C7}{(pink, right axes)}.}%
+      \emph{\textcolor{C2}{(yellow, right axes)}.}%
     }%
     %\vspace*{-6.3mm}%
     \label{fig:financeSimulation}%
@@ -605,13 +608,13 @@ We measure this by calculating the coefficients of variation
 (ratio of the standard deviation of the $c_t$ values to their mean),
 which is \SI{2.76}{\percent}, \SI{2.68}{\percent}, and \SI{2.58}{\percent}
 for $d = 3$, $4$, and $5$, respectively.
-This indicates that while the three-stock and four-stock cases are
-solved well, the five-stock case is not solved sufficiently accurately.
+This indicates that the variation of the consumption over time
+is indeed small.
 Second, we consider the so-called \term{Sharpe ratios}
 \cite{Sharpe66Mutual}.
 The ratios are stock fractions $\vstock$ that are determined
 such that the excess stock return (compared to risk-free investment)
-per risk is maximized:%
+per unit of risk is maximized:%
 \footnote{%
   The Sharpe ratios per se are derived for non-skewed
   stock return rate distributions.
@@ -624,7 +627,7 @@ per risk is maximized:%
   \setlength{\abovedisplayskip}{9pt}%
   \setlength{\belowdisplayskip}{9pt}%
   \begin{equation}
-    \max_{\vstock \in \clint{0, 1}^d}
+    \vecargmax_{\vstock \in \clint{0, 1}^d}
     \frac{
       \tr{\*\mu_{\range{1}{d}}} \vstock - \bondreturn
     }{
@@ -656,10 +659,10 @@ $\acute{\stock}_{t,o}/\sumfcn(\acute{\vstock}_t)$ for $t = 0$ (right):
     (0.199, 0.188, 0.197, 0.205, 0.212).
   \end{align}
 \end{subequations}
-This unveils that the simulated stock fractions
+The simulated stock fractions
 match the predicted Sharpe ratios well for $d = 3$,
 while the deviation for $d \ge 4$ is larger.
-However, as the stock fractions do not change much over time,
+However, as the simulated stock fractions do not change much over time,
 we may suspect that the skewness of the distribution of the stock return rates
 limits the applicability of the Sharpe ratios to these cases.
 
@@ -697,17 +700,17 @@ limits the applicability of the Sharpe ratios to these cases.
 %f = @(x) -(x*b'-rf)./sqrt(x*A*x')
 %xopt = fmincon(f, [1/4 1/4 1/4 1/4], [], [], [1 1 1 1], 1, [0 0 0 0], [1 1 1 1])
 
-\paragraph{Complexity and runtime analysis}
+\paragraph{Complexity and computation time}
 
 % (e-mail 2018-01-03)
-%Runtime of one optimize() run
+%Computation time of one optimize() run
 %- -----------------------------
 %O(#New state grid points
 %* #Optimization iterations
 %* #Quadrature points
 %* #Old state grid points
 %* #State dimensions
-%* Runtime of one 1D basis evaluation)
+%* Computation time of one 1D basis evaluation)
 %
 %where
 %#(Optimization iterations) depends on #(Policy dimensions),
@@ -716,8 +719,8 @@ limits the applicability of the Sharpe ratios to these cases.
 %
 %(modulo extrapolations)
 
-The fact that the difficulty of the problem grows very fast with $d$
-can be explained with a complexity analysis:
+A complexity analysis reveals that the difficulty of solving
+transaction cost problems quickly grows with the dimensionality $d$:
 The number of necessary arithmetic operations grows like
 (cf.\ \cref{fig:structureSolveValueFunction})
 {%
@@ -752,11 +755,12 @@ The number of necessary arithmetic operations grows like
     },
   \end{equation}%
 }%
-where $m_{\state}, m_{\policy} \in \landauTheta{d}$,
+where $m_{\state}, m_{\policy} \in \landauTheta{d}$ and
 $m_{\zeta}, \ngp_t, \ngp_{t+1} \in \landauTheta{2^n n^{d-1}}$
 if regular sparse grids of level $n$
 without boundary points would be used for state and stochastic grids
-(due to $m_{\stochastic} = d$), and
+(due to $m_{\stochastic} = d$).
+In addition,
 the number of optimizer iterations is likely superlinear in $d$,
 as this depends on the dimensionality $m_{\policy}$ of the search space
 as well as on the number of multi-start points
@@ -799,7 +803,7 @@ experimental data.
     (i.e., without refinement).
     ``Total time'' is the serial time required to solve all $T\ngp$
     emerging optimization problems.
-    ``Time per opt.''\ is the total time divided by the number $T\ngp$
+    ``Time per opt.''\ is this time divided by the number $T\ngp$
     of optimization problems.
     The colors correspond to B-spline degrees $p = 3$ or $p = 1$ and
     to using gradients ($\nabla$) or finite differences (FD).%
@@ -831,13 +835,13 @@ The latter might be due to vectorization effects.
 % certainty-equivalent consumption (aus Simulation?)
 % mit B-splines und linearen Funktionen
 
-Hierarchical B-splines introduce two major benefits into
+Hierarchical B-splines introduce two major benefits to
 the solution of dynamic portfolio choice models.
-The first benefit is the smooth objective functions:
+The first benefit are the smooth objective functions:
 When repeating the computations with piecewise linear functions (i.e., $p = 1$),
 one obtains almost the same weighted Euler equation errors as in the cubic case
 (except for the case of $d = 1$, where the error is one order of
-magnitude worse than in the cubic case).
+magnitude greater than in the cubic case).
 However, as we see in \cref{fig:financeRuntime},
 the total computation time is several times larger
 (e.g., more than five times for $d = 3$) for piecewise linear functions,
@@ -848,7 +852,8 @@ than in the cubic case,
 since the optimizer has to deal with kinks in the objective function.
 Experiments show that beginning with $d = 4$,
 the total optimization time required to solve the transaction costs problem
-is one order of magnitude shorter for cubic B-splines.
+is one whole order of magnitude shorter for cubic B-splines
+than for piecewise linear functions.
 
 \paragraph{Comparing exact gradients to finite differences}
 
@@ -862,5 +867,5 @@ at least $m_{\policy}$ additional evaluations of the objective function
 have to performed to compute the finite differences
 ($2m_{\policy}$ if central differences are used).
 Consequently, while the resulting weighted Euler equation errors are
-similar, the total optimization time roughly increases by the
-factor of four if we do not use exact gradients.
+similar, the total optimization time roughly increases by a
+factor of up to five if we do not use exact gradients.
