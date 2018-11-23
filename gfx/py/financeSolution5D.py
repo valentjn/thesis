@@ -46,13 +46,13 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
     zl = (0.07997, 0.08073)
     zLabel = r"$\normcetvalueintp[1]_t$"
   elif name.endswith("Buy"):
-    zl = (-0.01, 0.25)
+    zl = (-0.01, 0.12)
     zLabel = r"$\normbuy[\opt,\sparse,1]_{{t,{}}}$".format(name[-4])
   elif name.endswith("Sell"):
-    zl = (-0.04, 0.53)
+    zl = (-0.04, 0.66)
     zLabel = r"$\normsell[\opt,\sparse,1]_{{t,{}}}$".format(name[-5])
   else:
-    zl = (-0.01, 0.20)
+    zl = (-0.20, 0.30)
     zLabel = r"$\normbond_t^{\opt,\sparse,1}$"
   
   nn = (65, 65)
@@ -121,7 +121,7 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
           ha="center", va="top")
   ax.text(*trafo(-0.05,  0.5), r"$\stock_{{t,{}}}$".format(o1+1),
           ha="right",  va="center", rotation=90)
-  ax.text(*trafo(0.95, 0.95),
+  ax.text(*trafo(0.97, 0.95),
           r"\contour{{mittelblau!10}}{{{}}}".format(zLabel),
           ha="right", va="top")
   
@@ -130,7 +130,7 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
 
 
 def main():
-  ids = [187]
+  ids = [502]
   q0 = 0
   
   for id_ in ids:
