@@ -65,15 +65,55 @@ def main():
   ds = [1, 2, 3]
   colors = ["C0", "C1", "C2", "C3"]
   
-  for idss, d in zip(idsss, ds):
-    fig1 = Figure.create(figsize=(2.25, 2.15), preamble=r"""
+  preamble = r"""
 \usepackage{siunitx}
-""")
+
+% math version of \settowidth, automatically choosing the right style
+% (textstyle, displaystyle, ...)
+\makeatletter
+\def\mathsettowidth#1#2{%
+  \setbox\@tempboxa\hbox{$\m@th\mathpalette{}{#2}$}%
+  #1=\wd\@tempboxa%
+  \setbox\@tempboxa\box\voidb@x%
+}
+\makeatother
+
+% \halfhphantom works like \hphantom, except that it creates a box
+% that is only half as wide as that of \hphantom
+\newlength{\halfhphantomlength}
+\newcommand*{\halfhphantom}[1]{%
+  \ifmmode%
+    \mathsettowidth{\halfhphantomlength}{#1}%
+  \else%
+    \settowidth{\halfhphantomlength}{#1}%
+  \fi%
+  \setlength{\halfhphantomlength}{\halfhphantomlength/2}%
+  \hspace{\halfhphantomlength}%
+}
+
+% \lefthphantom{abc}{defghij} positions the text "abc" as follows:
+% |abc    |
+%  defghij
+\newcommand*{\lefthphantom}[2]{%
+  \ifmmode\mathrlap{#1}\else\rlap{#1}\fi%
+  \hphantom{#2}%
+}
+
+% \centerhphantom{abc}{defghij} positions the text "abc" as follows:
+% |  abc  |
+%  defghij
+\newcommand*{\centerhphantom}[2]{%
+  \halfhphantom{#2}%
+  \ifmmode\mathclap{#1}\else\clap{#1}\fi%
+  \halfhphantom{#2}%
+}
+"""
+  
+  for idss, d in zip(idsss, ds):
+    fig1 = Figure.create(figsize=(2.25, 2.15), preamble=preamble)
     ax1 = fig1.gca()
     
-    fig2 = Figure.create(figsize=(2.2, 2.15), preamble=r"""
-\usepackage{siunitx}
-""")
+    fig2 = Figure.create(figsize=(2.2, 2.15), preamble=preamble)
     ax2 = fig2.gca()
     
     for ids, color in zip(idss, colors):
@@ -111,8 +151,9 @@ def main():
       ax.set_ylim(*yl)
       yt = np.arange(np.floor(np.log10(yl[0]))+1, np.ceil(np.log10(yl[1])))
       ax.set_yticks(10**yt)
-      ax.set_yticklabels([(r"$10^{{{:.0f}}}$".format(y) if y % 2 == 0 else "")
-                          for y in yt])
+      ax.set_yticklabels([
+          (r"$\centerhphantom{{10^{{{:.0f}}}}}{{10^{{-4}}}}$".format(y)
+           if y % 2 == 0 else "") for y in yt])
       #ax.spines["top"].set_visible(False)
       ax.xaxis.set_ticks_position("both")
       ax.yaxis.set_ticks_position("both")
@@ -120,10 +161,6 @@ def main():
       for tick in ax.get_xaxis().get_major_ticks():
           tick.set_pad(1)
           tick.label1 = tick._get_text1()
-    
-    for tick in ax2.get_yaxis().get_major_ticks():
-        tick.set_pad(5)
-        tick.label1 = tick._get_text1()
     
     x = Ns[-1]
     
@@ -147,10 +184,10 @@ def main():
     elif d == 2: x = 0.48
     elif d == 3: x = 0.48
     
-    ax1.text(*trafo1(x, -0.05), r"$\ngp$", ha="center", va="top")
-    ax1.text(*trafo1(0.92, 0.95), r"[\si{\second}]", ha="left",  va="top")
+    ax1.text(*trafo1(x, -0.062), r"$\ngp$", ha="center", va="top")
+    ax1.text(*trafo1(0.03, 0.95), r"[\si{\second}]", ha="left",  va="top")
     
-    ax2.text(*trafo2(x, -0.05), r"$\ngp$", ha="center", va="top")
+    ax2.text(*trafo2(x, -0.062), r"$\ngp$", ha="center", va="top")
     
     fig1.save(hideSpines=False)
     fig2.save(hideSpines=False)
