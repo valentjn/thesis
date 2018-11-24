@@ -43,6 +43,10 @@ if __name__ == "__main__":
                       help="use draft mode (default)")
   parser.add_argument("--no-draft-mode", action="store_false", dest="draft_mode",
                       help="don't use draft mode")
+  parser.add_argument("--repeat-draft-mode", action="store_true",
+                      dest="repeat_draft_mode",
+                      help="first don't use draft mode, "
+                           "then repeat with draft mode")
   parser.add_argument("--destination", default=None, metavar="PATH",
                       help="local destination for compiled thesis")
   parser.add_argument("--copy-stuff", metavar="DIR",
@@ -51,10 +55,8 @@ if __name__ == "__main__":
                            "to save time")
   args = parser.parse_args()
   
-  switches["draftMode"] = args.draft_mode
-  destination = (args.destination if args.destination is not None else
-                 (defaultThesisPDFCopyPathDraft if args.draft_mode else
-                  defaultThesisPDFCopyPathFinal))
+  draftModes = ([False, True] if args.repeat_draft_mode else
+                [args.draft_mode])
   
   with tempfile.TemporaryDirectory() as repoPath:
     print("Creating directory...")
@@ -101,22 +103,6 @@ if __name__ == "__main__":
     print("Pulling git-fat files...")
     run(["git", "fat", "pull"], cwd=repoPath)
     
-    print("")
-    print("Setting switches...")
-    switchesPath = os.path.join(repoPath, "tex", "preamble", "switches.tex")
-    with open(switchesPath, "r") as f: switchesTex = f.read()
-    
-    for switchName, switchValue in switches.items():
-      trueString  = r"\toggletrue{{{}}}".format(switchName)
-      falseString = r"\togglefalse{{{}}}".format(switchName)
-      newString   = r"\newtoggle{{{}}}".format(switchName)
-      switchesTex = switchesTex.replace(trueString, "")
-      switchesTex = switchesTex.replace(falseString, "")
-      switchesTex = switchesTex.replace(
-        newString, newString + (trueString if switchValue else falseString))
-    
-    with open(switchesPath, "w") as f: f.write(switchesTex)
-    
     if args.copy_stuff is not None:
       print("")
       print("Copying cpp/sgpp/...")
@@ -133,36 +119,62 @@ if __name__ == "__main__":
                         os.path.join(repoPath, "build", x),
                         copy_function=shutil.copy)
     
-    try:
+    for draftMode in draftModes:
       print("")
-      print("Compiling thesis...")
-      run(["scons", "-j", str(os.cpu_count()), "out"], cwd=repoPath)
-      outDir = os.path.join(repoPath, "out")
-      thesisPDFPath = os.path.join(outDir, "thesisManuscriptScreen.pdf")
+      print("Draft mode is {}.".format(
+          "enabled" if draftMode else "disabled"))
+      switches["draftMode"] = draftMode
       
-      if args.upload:
-        print("")
-        print("Uploading thesis...")
-        uploadFilename = ("thesisDraft.pdf" if args.draft_mode else
-                          "thesisFinal.pdf")
-        run(["scp", thesisPDFPath, uploadFilename,
-             "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/{}".format(
-               uploadFilename)])
-    except subprocess.CalledProcessError:
       print("")
-      print("Error while compiling or uploading the thesis.")
-      print("Entering endless loop. You've got the chance to debug or")
-      print("copy necessary files. Repository: {}".format(repoPath))
-      while True: time.sleep(1)
-      raise
-    
-    print("")
-    print("Copying thesis to {}...".format(destination))
-    os.makedirs(destination, exist_ok=True)
-    
-    for filename in os.listdir(outDir):
-      if filename.endswith(".pdf"):
-        shutil.copy(os.path.join(outDir, filename), destination)
-    
-    shutil.copy(os.path.join(repoPath, "build", "tex", "thesis.log"),
-                destination)
+      print("Setting switches...")
+      switchesPath = os.path.join(repoPath, "tex", "preamble", "switches.tex")
+      with open(switchesPath, "r") as f: switchesTex = f.read()
+      
+      for switchName, switchValue in switches.items():
+        trueString  = r"\toggletrue{{{}}}".format(switchName)
+        falseString = r"\togglefalse{{{}}}".format(switchName)
+        newString   = r"\newtoggle{{{}}}".format(switchName)
+        switchesTex = switchesTex.replace(trueString, "")
+        switchesTex = switchesTex.replace(falseString, "")
+        switchesTex = switchesTex.replace(
+          newString, newString + (trueString if switchValue else falseString))
+      
+      with open(switchesPath, "w") as f: f.write(switchesTex)
+      
+      try:
+        print("")
+        print("Compiling thesis...")
+        run(["scons", "-j", str(os.cpu_count()), "out"], cwd=repoPath)
+        outDir = os.path.join(repoPath, "out")
+        thesisPDFPath = os.path.join(outDir, "thesisManuscriptScreen.pdf")
+        
+        if args.upload:
+          print("")
+          print("Uploading thesis...")
+          uploadFilename = ("thesisDraft.pdf" if draftMode else
+                            "thesisFinal.pdf")
+          run(["scp", thesisPDFPath, uploadFilename,
+              "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/{}".format(
+                uploadFilename)])
+      except subprocess.CalledProcessError:
+        print("")
+        print("Error while compiling or uploading the thesis.")
+        print("Entering endless loop. You've got the chance to debug or")
+        print("copy necessary files. Repository: {}".format(repoPath))
+        while True: time.sleep(1)
+        raise
+      
+      destination = (args.destination if args.destination is not None else
+                    (defaultThesisPDFCopyPathDraft if draftMode else
+                     defaultThesisPDFCopyPathFinal))
+      
+      print("")
+      print("Copying thesis to {}...".format(destination))
+      os.makedirs(destination, exist_ok=True)
+      
+      for filename in os.listdir(outDir):
+        if filename.endswith(".pdf"):
+          shutil.copy(os.path.join(outDir, filename), destination)
+      
+      shutil.copy(os.path.join(repoPath, "build", "tex", "thesis.log"),
+                  destination)
