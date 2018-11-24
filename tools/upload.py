@@ -160,3 +160,6 @@ if __name__ == "__main__":
     for filename in os.listdir(outDir):
       if filename.endswith(".pdf"):
         shutil.copy(os.path.join(outDir, filename), destination)
+    
+    shutil.copy(os.path.join(repoPath, "build", "tex", "thesis.log"),
+                destination)
