@@ -143,8 +143,11 @@ if __name__ == "__main__":
       if args.upload:
         print("")
         print("Uploading thesis...")
-        run(["scp", thesisPDFPath,
-             "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/thesis.pdf"])
+        uploadFilename = ("thesisDraft.pdf" if args.draft_mode else
+                          "thesisFinal.pdf")
+        run(["scp", thesisPDFPath, uploadFilename,
+             "jvalentin@xgm.de:bsplines.org/pub/~valentjn/files/{}".format(
+               uploadFilename)])
     except subprocess.CalledProcessError:
       print("")
       print("Error while compiling or uploading the thesis.")
