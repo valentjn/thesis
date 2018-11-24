@@ -25,7 +25,8 @@ switches = {
   "flipBookMode" : True,
   "partialCompileMode" : False,
 }
-defaultThesisPDFCopyPath = "/tmp/thesis/"
+defaultThesisPDFCopyPathDraft = "/tmp/thesisDraft/"
+defaultThesisPDFCopyPathFinal = "/tmp/thesisFinal/"
 
 
 
@@ -42,7 +43,7 @@ if __name__ == "__main__":
                       help="use draft mode (default)")
   parser.add_argument("--no-draft-mode", action="store_false", dest="draft_mode",
                       help="don't use draft mode")
-  parser.add_argument("--destination", default=defaultThesisPDFCopyPath, metavar="PATH",
+  parser.add_argument("--destination", default=None, metavar="PATH",
                       help="local destination for compiled thesis")
   parser.add_argument("--copy-stuff", metavar="DIR",
                       help="copy .sconsign.dblite, build/gfx, and "
@@ -51,6 +52,9 @@ if __name__ == "__main__":
   args = parser.parse_args()
   
   switches["draftMode"] = args.draft_mode
+  destination = (args.destination if args.destination is not None else
+                 (defaultThesisPDFCopyPathDraft if args.draft_mode else
+                  defaultThesisPDFCopyPathFinal))
   
   with tempfile.TemporaryDirectory() as repoPath:
     print("Creating directory...")
@@ -150,9 +154,9 @@ if __name__ == "__main__":
       raise
     
     print("")
-    print("Copying thesis to {}...".format(args.destination))
-    os.makedirs(args.destination, exist_ok=True)
+    print("Copying thesis to {}...".format(destination))
+    os.makedirs(destination, exist_ok=True)
     
     for filename in os.listdir(outDir):
       if filename.endswith(".pdf"):
-        shutil.copy(os.path.join(outDir, filename), args.destination)
+        shutil.copy(os.path.join(outDir, filename), destination)
