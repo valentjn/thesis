@@ -272,7 +272,7 @@ def plotHierarchicalFundamentalNotAKnotSplines(q):
   fig.save(tightLayout=myTightLayout, graphicsNumber=q+1)
 
 def plotHierarchicalWeaklyFundamentalSplines(q):
-  fig = Figure.create(figsize=(3.7, 5.0), scale=1.0)
+  fig = Figure.create(figsize=(3.75, 5.0), scale=1.0)
   basis = helper.basis.HierarchicalWeaklyFundamentalSpline(p)
   for l in range(n+1):
     ax = fig.add_subplot(n+1, 1, l+1)
