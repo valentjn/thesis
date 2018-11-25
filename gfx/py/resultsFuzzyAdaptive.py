@@ -128,7 +128,9 @@ def main():
       
       for yRegular, lineStyle in zip(ysRegular, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
-        ax.plot(xRegular, yRegular, lineStyle,
+        # fix stupid hairline at end of some specific dashed line
+        dashes = ((3.71, 1.6) if "--" in lineStyle else [])
+        ax.plot(xRegular, yRegular, lineStyle, dashes=dashes,
                 ms=2*markerSize, mfc="none", color=colorRegular)
     
     
