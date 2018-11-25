@@ -46,6 +46,16 @@ for q in range(2):
   ax.contourf(XX0, XX1, -YY, [0, 100], colors="C1")
   ax.contour(XX0, XX1, YY, v)
   
+  # remove weird hairline from (0.00015128, 0) to (0, 0.00015128)
+  # (behind origin grid point, has line width of 0.0311
+  # according to Preflight)
+  for child in ax.get_children():
+    if isinstance(child, mpl.collections.LineCollection):
+      segments = [XX for XX in child.get_segments()
+                  if not np.any(np.all(XX < 0.01, axis=1))]
+      if len(segments) != len(child.get_segments()):
+        child.set_segments(segments)
+  
   X = stats.convertDomainToGridCoords(stats.X)
   ax.plot(X[:,0], X[:,1], "k.", clip_on=False)
   
