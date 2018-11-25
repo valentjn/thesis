@@ -214,6 +214,7 @@ class Figure(mpl.figure.Figure):
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
     
+    # remove transparency in background panes (not allowed in PDF/X)
     if fix3DTransparency:
       for ax in self.axes:
         if isinstance(ax, Axes3D):
@@ -224,6 +225,11 @@ class Figure(mpl.figure.Figure):
           # bottom pane
           ax.w_zaxis.set_pane_color((0.94, 0.94, 0.94, 1.0))
     
+    # remove hairlines in colorbars (leads to errors in Preflight),
+    # see matplotlib's ColorbarBase._config_axes; not sure why they
+    # use a line width of 0.01. Also, it would be nice to specifically
+    # detect axes that correspond to colorbars, but I'm not sure if that's
+    # possible at all.
     if fixColorbarHairlines:
       for ax in self.get_axes():
         for child in ax.get_children():
