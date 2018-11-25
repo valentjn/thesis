@@ -247,7 +247,7 @@ def removeWhiteLines(obj):
   else:
     # 3D surf plot
     obj._facecolors2d = obj._facecolors3d
-    obj.set_linewidth(0.2)
+    obj.set_linewidth(0.26)
     obj.set_edgecolors("face")
 
 
