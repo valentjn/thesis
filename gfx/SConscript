@@ -134,16 +134,21 @@ for name in ["Manuscript", "Published"]:
 
 # logo file paths
 logoSVG = os.path.join("pre", "logoBSplines.svgz")
+logoPNGTransparent = os.path.join(env["BUILD_DIR"].abspath,
+                                  "logoBSplinesTransparent.png")
 logoPNG = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.png")
 logoPDF = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.pdf")
 # rasterize B-spline logo
-env.Command(logoPNG, logoSVG,
+env.Command(logoPNGTransparent, logoSVG,
             "inkscape --export-png=$TARGET --export-area-page "
             "--export-dpi={} $SOURCE".format(500))
+# remove transparency
+env.Command(logoPNG, logoPNGTransparent,
+            "convert -flatten $SOURCE $TARGET")
 # convert from PNG to PDF with ImageMagick
 env.Command(logoPDF, logoPNG,
             "convert $SOURCE -density {} -units pixelsperinch "
-            "-flatten $TARGET".format(500))
+            "$TARGET".format(500))
 # compress resulting PDF
 env.AddPostAction(logoPDF, Helper.compressPDFs)
 # make LaTeX depend on logoPDF
