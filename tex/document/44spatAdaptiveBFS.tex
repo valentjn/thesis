@@ -792,6 +792,8 @@ is not contained in the nodal space $\ns{l'}$.
   \end{equation}
 \end{proposition}
 
+\vspace*{0pt plus 1em}
+
 \begin{proof}
   We have $\ns[\ext]{\*l'} \supset \ns[\tift,\ext]{\*l'}$ as
   $\basis[\tift]{\*l',\*i'} \in \ns[\ext]{\*l'}$
@@ -835,6 +837,8 @@ is not contained in the nodal space $\ns{l'}$.
   Hence, the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$)
   are linearly independent.
 \end{proof}
+
+\vspace*{0pt plus 1em}
 
 
 
@@ -1053,10 +1057,13 @@ The decay rate is given by the absolute value of the largest root smaller
 than $-1$ of said polynomial
 (see \multicite{Chui92Introduction,Schoenberg73Cardinal}).
 
+\vspace*{\fill}
+
 Due to \eqref{eq:fundamentalSplineCoefficientsDecay},
 we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
 if we symmetrically truncate the linear system to
+\pagebreak
 $2\fundsplcutoff{p} - 1$ dimensions
 and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
@@ -1197,6 +1204,8 @@ basis $\bspl[\fs,\modified]{l,i}{p}$ are shown in
   \label{fig:modifiedFundamentalSpline}%
 \end{figure}
 
+\vspace*{\fill}
+
 The conditions stated in \eqref{eq:modifiedFundamentalSplineConditions}
 are motivated by the case $p = 3$ of cubic fundamental splines.
 The first relevant cardinal B-spline is the one with
@@ -1213,6 +1222,7 @@ namely $k = -1$ and $k = 0$.
 We use these to let $\parentfundspl[\modified]{p}$ extrapolate
 linearly on $\clint{0, 1}$, as we did for uniform hierarchical
 B-splines (see \cref{sec:313modification}).
+\pagebreak
 Therefore, in the cubic case, we set the second derivative
 $\tderiv[2]{x}{\parentfundspl[\modified]{p}}$ to zero
 at $x = 0$ and at $x = 1$.

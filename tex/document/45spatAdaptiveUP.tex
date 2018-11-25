@@ -995,6 +995,8 @@ piecewise polynomials of degree $\le p$.
   \label{alg:hermiteHierarchization}%
 \end{algorithm}
 
+\vspace*{\fill}
+
 The idea of \cref{alg:hermiteHierarchization},
 which is also illustrated in \cref{fig:hermiteHierarchization},
 is to hierarchize the function value data level by level,
@@ -1014,6 +1016,8 @@ determined in \cref{line:algHermiteHierarchization4}.
 This is not an issue since in an implementation,
 one would typically simultaneously evaluate the
 Hermite interpolant and its derivatives.
+
+\vspace*{\fill}
 
 \begin{SCfigure}
   \includegraphics{hermiteHierarchization_1}%
@@ -1057,6 +1061,8 @@ In total, the complexity of \cref{alg:hermiteHierarchization} is
 given by $\landauO{\sum_{l=0}^n 2^l} = \landauO{2^n}$, i.e.,
 the time and memory required by \cref{alg:hermiteHierarchization}
 is only linear in the number of grid points.
+
+\pagebreak
 
 \paragraph{Correctness}
 
