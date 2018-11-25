@@ -124,7 +124,7 @@ def main():
       xRegular = [helperFuzzy.getGridSize(d, gridType, n) for n in ns[1:]]
       ysRegular = np.array(list(zip(*valuesRegular)))
       ysRegular[ysRegular < 1e-16] = 1e-16
-      print(d, fStr, xRegular, ysRegular)
+      #print(d, fStr, xRegular, ysRegular)
       
       for yRegular, lineStyle in zip(ysRegular, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
@@ -167,7 +167,7 @@ def main():
       xAdaptive = Ns[1:]
       ysAdaptive = np.array(list(zip(*valuesAdaptive)))
       ysAdaptive[ysAdaptive < 1e-16] = 1e-16
-      print(d, fStr, xAdaptive, ysAdaptive)
+      #print(d, fStr, xAdaptive, ysAdaptive)
       
       for yAdaptive, lineStyle in zip(ysAdaptive, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
