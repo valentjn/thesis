@@ -1,7 +1,7 @@
 \section{Numerical Results}
 \label{sec:54results}
 
-\minitoc{66mm}{6}
+\minitoc{90mm}{5}
 
 \noindent
 The following numerical experiments can be roughly divided into two parts.
@@ -13,6 +13,8 @@ the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
 of the calculated approximations $\xoptappr$
 of the point $\xopt$ at which the objective function $\objfun$
 is minimal.
+
+\pagebreak
 
 The results have been computed with the sparse grid toolbox \sgpp
 \cite{Pflueger10Spatially},%
@@ -80,6 +82,8 @@ for the bivariate functions that are continuously differentiable.
 For the functions Sch06 and Sch22, which have a non-differentiable kink,
 only linear convergence can be achieved regardless of the B-spline degree.
 
+\vspace*{\fill}
+
 The region where the asymptotic behavior dominates largely depends
 on the objective function at hand.
 Functions like Bra02 and Ack with many small oscillations
@@ -94,6 +98,8 @@ This is not a consequence of employing higher-order B-splines for
 the hierarchical basis.
 However, it seems that higher-order B-splines lead to a slight increase
 in the interpolation error in the pre-asymptotic range.
+
+\pagebreak
 
 \paragraph{Interpolation error for different basis functions}
 
@@ -122,8 +128,8 @@ Otherwise, only quadratic convergence can be achieved regardless of $p$,
 albeit with a smaller constant (offset).
 
 \begin{SCfigure}
-  \begin{minipage}{102mm}%
-    \hspace*{8mm}%
+  \begin{minipage}{98mm}%
+    \hspace*{4mm}%
     \includegraphics{resultsInterpolationLegend_2}\\[2mm]%
     \includegraphics{resultsInterpolation_10}%
   \end{minipage}%
@@ -137,27 +143,29 @@ albeit with a smaller constant (offset).
     regular sparse grids $\regsgset{n}{d}$ of different levels $n$.\\
     The basis functions shown here involve
     standard \emph{(no superscript),}
-    not-a-knot \emph{($\mathrm{nak}$),}
-    modified \emph{($\mathrm{mod}$),}
-    fundamental \emph{($\mathrm{fs}$),} and
-    weakly fundamental \emph{($\mathrm{wfs}$)}
+    not-a-knot ($\mathrm{nak}$),
+    modified ($\mathrm{mod}$),
+    fundamental ($\mathrm{fs}$), and
+    weakly fundamental ($\mathrm{wfs}$)
     splines as well as the combinations
     introduced in \cref{chap:20sparseGrids,chap:30BSplines}.%
   }%
   \label{fig:resultsInterpolationErrorBasisFunctions}%
 \end{SCfigure}
 
+\vspace*{-0.5em}
+
 \paragraph{Pointwise interpolation error}
 
 The importance of not-a-knot boundary conditions is also evident
-when considering plots of the pointwise interpolation error as in
+from plots of the pointwise interpolation error as in
 \cref{fig:resultsInterpolationErrorPointwise}.
 The interpolation error grows for the standard hierarchical
 B-spline basis $\bspl{\*l,\*i}{p}$
 as we move towards the boundary of the domain $\clint{\*0, \*1}$,
 before dropping to zero or near-zero values at or near boundary grid points.
 With not-a-knot B-splines $\bspl[\nak]{\*l,\*i}{p}$,
-the interpolation error is consistently low in the whole domain.
+the interpolation error is uniformly low.
 For comparison, modified B-splines $\bspl[\modified]{\*l,\*i}{p}$
 incur even worse issues near the boundary, since the corresponding sparse grids
 do not contain boundary points.
@@ -191,6 +199,8 @@ do not contain boundary points.
   }%
   \label{fig:resultsInterpolationErrorPointwise}%
 \end{figure}
+
+\vspace*{-0.3em}
 
 \paragraph{Decay of surpluses}
 
@@ -310,6 +320,7 @@ and the consumed memory is reduced from quadratic to linear complexity.
     Computation time and memory consumption of hierarchization
     with modified hierarchical B-splines
     $\bspl[\modified]{\*l,\*i}{p}$ \emph{\textcolor{C0}{(blue)}} and
+    \vspace*{-0.3em}%
     modified hierarchical fundamental splines
     $\bspl[\fs,\modified]{\*l,\*i}{p}$ \emph{\textcolor{C1}{(red)}}
     of degrees $p = 3$ and $p = 5$
@@ -336,7 +347,7 @@ As we have seen in \cref{sec:453chains}
 (cf.\ \cref{fig:chainInsertionBSpline}),
 inserting all chains needed for standard hierarchical B-splines
 often results in a full grid, which suffers from the curse of dimensionality.
-
+%
 \begin{figure}
   \includegraphics{complexityWeaklyFundamental_4}\\[2mm]%
   \subcaptionbox{%
@@ -370,8 +381,8 @@ often results in a full grid, which suffers from the curse of dimensionality.
     and $\ngpMax$ grid points.%
   }%
   \label{fig:complexityWeaklyFundamental}%
-\end{figure}
-
+\end{figure}%
+%
 This can be seen in \cref{fig:complexityWeaklyFundamental}
 for hierarchical not-a-knot B-splines (dashed lines).
 By inserting all full grid points,
@@ -384,14 +395,14 @@ grids with $10^6$, $10^8$, and $10^{10}$ points, respectively.
 If we instead only insert the missing chain points needed for the
 hierarchical weakly fundamental not-a-knot basis
 (solid lines, cf.\ \cref{fig:chainInsertionWeaklyFundamentalSpline}),
-then the number of grid points increases only slightly,
-depending on the adaptivity of the grid.
+then the number of grid points increases only slightly.
+%depending on the adaptivity of the grid.
 For grids that have a low adaptivity (which correspond
 to low adaptivity parameters $\gamma$ in the Novak--Ritter criterion,
 see \cref{sec:521novakRitter}), the grid size only increases by the
 factor of two.
 For highly-adaptive grids
-(which correspond to high adaptivity parameters $\gamma$),
+(corresponding to large $\gamma$),
 the number of necessary chain grid points increases significantly.
 
 
@@ -402,7 +413,7 @@ the number of necessary chain grid points increases significantly.
 \paragraph{Optimality gaps and displacements}
 
 With the method described in \cref{sec:52method},
-we want to find an approximation $\xoptappr$ of the
+we find approximations $\xoptappr$ of the
 global minimum $\xopt$ of some objective function $\objfun$
 using optimization of a B-spline surrogate $\sgintp$ of $\objfun$
 on sparse grids.
@@ -431,12 +442,12 @@ and some small $\*a \in \real^d$.%
   Note that we set $a_t$ to zero if a non-zero displacement in
   the $t$-th component would change the location of the global minimum.%
 }
-Therefore, the optimization processes for each of the
+Therefore, the optimization for each of the
 data points for \cref{%
   fig:resultsOptimizationUnconstrainedTestFunctions,%
   fig:resultsOptimizationConstrainedTestFunctions%
 }
-were repeated five times with replacements $\*a$
+was repeated five times with replacements $\*a$
 whose entries $a_t$ were independent and identically distributed Gaussian
 pseudo-random numbers with zero mean and a standard deviation of $0.01$.
 The optimality gaps shown in the figures of this section were computed

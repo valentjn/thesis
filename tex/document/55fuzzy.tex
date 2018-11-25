@@ -1,4 +1,3 @@
-\breakpagebeforenextheadingtrue
 \section{Example Application: Fuzzy Extension Principle}
 \label{sec:55fuzzy}
 
@@ -68,7 +67,7 @@ A more in-depth introduction can be found in
   \subcaptionbox{%
     Non-convex fuzzy set \emph{\textcolor{C0}{(blue)}}
     and $\alpha$-cut \emph{\textcolor{C1}{(red)}.}%
-  }[43mm]{%
+  }[46mm]{%
     \includegraphics{fuzzySet_1}%
   }%
   \hfill%
@@ -133,16 +132,16 @@ Most common are
 \term{triangular fuzzy numbers} (TFNs, i.e., linear B-splines),
 \term{trapezoidal fuzzy intervals}
 (TFIs, where a plateau of height one is inserted at the peak, i.e.,
-sums of two neighboring B-splines), and
+sums of two neighboring linear B-splines), and
 \term{Gaussian fuzzy numbers} (GFNs) with membership function
-$\memfun{x}(x) = \exp(-(x - \mu)^2/(2\sigma)^2)$.
+$\memfun{x}(x) = \exp(-\frac{(x - \mu)^2}{(2\sigma)^2})$.
 As the support of Gaussian fuzzy numbers is unbounded,
 \term{quasi-Gaussian fuzzy numbers} (QGFNs) truncate the support
 to a fixed multiple of the standard deviation $\sigma$
 \cite{Klimke06Uncertainty}.
 However, it would be more natural to directly employ B-splines of
-higher degree $p$ (normalized adequately), since they are a generalization
-of triangular fuzzy numbers and their limit with respect to $p$
+degree $p > 1$ (normalized adequately), since they generalize
+triangular fuzzy numbers and their limit with respect to $p$
 is a Gaussian fuzzy number.
 
 
