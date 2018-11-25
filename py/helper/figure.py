@@ -191,7 +191,8 @@ class Figure(mpl.figure.Figure):
   
   def save(self, graphicsNumber=None, appendGraphicsNumber=True,
            hideSpines=True, tightLayout=True, crop=True, close=True,
-           transparent=True, fix3DTransparency=True):
+           transparent=True, fix3DTransparency=True,
+           fixColorbarHairlines=True):
     plt.figure(self.number)
     
     if graphicsNumber is None:
@@ -222,6 +223,12 @@ class Figure(mpl.figure.Figure):
           ax.w_yaxis.set_pane_color((0.92, 0.92, 0.92, 1.0))
           # bottom pane
           ax.w_zaxis.set_pane_color((0.94, 0.94, 0.94, 1.0))
+    
+    if fixColorbarHairlines:
+      for ax in self.get_axes():
+        for child in ax.get_children():
+          if isinstance(child, mpl.patches.Polygon):
+            if child.get_linewidth() == 0.01: child.set_edgecolor("none")
     
     if graphicsNumber is None: graphicsNumber = self.number
     
