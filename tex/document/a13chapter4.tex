@@ -870,13 +870,15 @@
   (due to $\chain{0} = \*k'$).
   The \rhs is by convention also one, as it is an empty product.
   
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
   For the induction step $j \to (j+1)$, we consider again
   \begin{equation}
     \label{eq:proofLemmaChainExistenceNecessary1}
     (\upop{t_1,\dotsc,t_{j+1}})_{\chain{j+1},\*k'}
     = \sum_{\*k \in \liset} (\upop{t_{j+1}})_{\chain{j+1},\*k}
     (\upop{t_1,\dotsc,t_j})_{\*k,\*k'}
-  \end{equation}
+  \end{equation}%
   similar to \eqref{eq:proofLemmaChainExistenceSufficient1}.
   Recall that
   \begin{subequations}
@@ -963,10 +965,13 @@
     (\upopuv{t_1}{\eqclass{\chain{1}}{\samepole{t_1}}})_{k''_{t_1},k'_{t_1}}
     \dotsm
     (\upopuv{t_{j+1}}{\eqclass{\chain{j+1}}{\samepole{t_{j+1}}}})%
-    _{k''_{t_{j+1}},k'_{t_{j+1}}},
+    _{k''_{t_{j+1}},k'_{t_{j+1}}}.
+    \vspace*{-2.5em}
   \end{equation}
-  as claimed.
 \end{proof}
+
+\vspace*{1em}
+\pagebreak
 
 \propCorrectnessUPCharacterization*
 
@@ -1028,6 +1033,7 @@
 
 
 
+\breakpagebeforenextheadingtrue
 \subsection{Correctness Proof of Hermite Hierarchization}
 \label{sec:a135proofHermiteHierarchization}
 
