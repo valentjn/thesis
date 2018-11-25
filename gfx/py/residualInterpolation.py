@@ -64,7 +64,7 @@ yOffsetGlobal = schemeSize
 Xs = [helper.grid.getCoordinates(l, helper.grid.getNodalIndices(l))
       for l in L]
 
-figureScale = 1.39
+figureScale = 1.37
 fig = Figure.create(figsize=(3, 3), scale=figureScale, facecolor="none")
 ax = fig.gca()
 
