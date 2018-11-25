@@ -130,7 +130,7 @@ def generatePlot(q):
     functionTypes = [("alpine02", 2)]
     nMax, NMax, b = 11, 20000, 0
   
-  figsize = ((3.1, 2.6) if q < 4 else (4.3, 3.2))
+  figsize = ((3.1, 2.6) if q < 4 else (4.15, 3.2))
   
   fig1 = Figure.create(figsize=figsize)
   ax1 = fig1.gca()
