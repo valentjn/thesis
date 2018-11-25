@@ -424,7 +424,7 @@ lineStyles = {3 : "^--", 5 : "v:"}
 Ns = [100, 200, 500, 1000, 2000, 5000, 10000, 12000, 15000, 20000]
 
 for q in range(2):
-  fig = Figure.create(figsize=(3, 2.5))
+  fig = Figure.create(figsize=(3, 2.3))
   ax = fig.gca()
   dict_ = (times if q == 0 else mems)
   
