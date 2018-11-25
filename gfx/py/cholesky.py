@@ -44,7 +44,7 @@ for q in range(2):
   XX0, XX1 = np.reshape(XX[:,0], (nn, nn)), np.reshape(XX[:,1], (nn, nn))
   v = np.linspace(0, 0.4, 33)
   ax.contourf(XX0, XX1, -YY, [0, 100], colors="C1")
-  contour = ax.contour(XX0, XX1, YY, v)
+  ax.contour(XX0, XX1, YY, v)
   
   X = stats.convertDomainToGridCoords(stats.X)
   ax.plot(X[:,0], X[:,1], "k.", clip_on=False)
