@@ -191,7 +191,7 @@ class Figure(mpl.figure.Figure):
   
   def save(self, graphicsNumber=None, appendGraphicsNumber=True,
            hideSpines=True, tightLayout=True, crop=True, close=True,
-           transparent=True, remove3DTransparency=True):
+           transparent=True, fix3DTransparency=True):
     plt.figure(self.number)
     
     if graphicsNumber is None:
@@ -213,7 +213,7 @@ class Figure(mpl.figure.Figure):
         ax.spines["top"].set_visible(False)
         ax.spines["right"].set_visible(False)
     
-    if remove3DTransparency:
+    if fix3DTransparency:
       for ax in self.axes:
         if isinstance(ax, Axes3D):
           # left pane
