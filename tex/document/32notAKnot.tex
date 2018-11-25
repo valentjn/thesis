@@ -116,9 +116,13 @@ described by the \term{Schoenberg--Whitney conditions:}
   \end{equation}
 \end{proposition}
 
+\vspace*{0pt plus 0.3fill}
+
 \begin{proof}
   See \cite{Hoellig13Approximation}.
 \end{proof}
+
+\vspace*{0pt plus 1.0fill}
 
 The Schoenberg--Whitney conditions require that the interpolation points
 are contained in $\rspldomain{l}{p}$,
@@ -139,6 +143,8 @@ boundary values.
 In addition, the condition of the interpolation problem will most likely
 worsen if we place interpolation points near the ends of the supports
 of the corresponding basis functions.
+
+\pagebreak
 
 \paragraph{Mismatch of dimensions}
 
@@ -292,6 +298,8 @@ $\wholesplspace{l}{p}$.
   \label{fig:splineSpaceNotAKnot}%
 \end{figure}
 
+\vspace*{\fill}
+
 However, $\bigoplus_{l'=0}^l \hsbspl{l'}{p}$ is not a subspace of
 $\naksplspace{l}{p}$ anymore,
 since the hierarchical basis functions $\bspl{l',i'}{p}$ are not
@@ -300,6 +308,8 @@ $\naksplspace{l}{p}$).
 For this reason,
 we have to incorporate the not-a-knot boundary conditions into the
 hierarchical basis.
+
+\vspace*{\fill}
 
 Before defining the new hierarchical basis functions,
 we make two additional observations.
@@ -317,6 +327,8 @@ For coarser levels,
 there are not enough interior knots that could be removed.
 Without any special treatment,
 we would not be able to obtain enough basis functions to span the spline space.
+
+\pagebreak
 
 \paragraph{Definition of hierarchical not-a-knot B-splines}
 
@@ -396,6 +408,8 @@ $\deg \lagrangepoly{l,i} \le 2^l < p$
   \label{fig:notAKnotBSpline}%
 \end{figure}
 
+\vspace*{\fill}
+
 The motivation for using Lagrange polynomials for coarse levels
 is that they form a basis of the polynomial space
 and that they can be implemented and calculated quickly.
@@ -405,6 +419,8 @@ as long as these functions are linearly independent
 (of each other and of the ``true'' not-a-knot B-splines
 $\bspl[\nak]{l,i}{p}$, $l \ge \ceil{\log_2(p+1)}$)
 and contained in the space $\naksplspace{l}{p}$.
+
+\pagebreak
 
 \paragraph{Implementation}
 
@@ -420,6 +436,10 @@ i.e., we have
   \bspl[\nak]{l,i}{p} = \bspl{l,i}{p},\quad
   i = p + 2,\; p + 4,\; \dotsc,\; 2^l - p - 2.
 \end{equation}
+
+\vspace*{\fill}
+
+\noindent
 This means that we can reuse uniform B-spline code
 for the inner functions.
 Due to $\bspl[\nak]{l,i}{p}(x) = \bspl[\nak]{l,2^l-i}{p}(1-x)$
@@ -429,8 +449,10 @@ As $\bspl[\nak]{l,i}{p}$ and $\bspl[\nak]{l+1,i}{p}$
 use the same knots up to an affine transformation for $l$ large enough
 ($l \ge 3$ suffices for $p = 3$),
 only a number of special cases for coarse levels $l$ must be implemented.
-%In other words, the not-a-knot approach is ``minimally invasive''
-%with respect to an implementation that already uses uniform B-splines.
+In other words, the not-a-knot approach is ``minimally invasive''
+with respect to an implementation that already uses uniform B-splines.
+
+\pagebreak
 
 \paragraph{Hierarchical splitting}
 

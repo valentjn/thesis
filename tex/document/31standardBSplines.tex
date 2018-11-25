@@ -574,6 +574,8 @@ of an arbitrary polynomial of degree $\le p$ by giving an explicit formula
 for the B-spline coefficients of shifted monomials $({\cdot} - y)^p$.
 Interestingly, the coefficients are polynomials themselves (in $y$):
 
+\vspace*{0pt plus 0.5fill}
+
 \begin{lemma}[Marsden's identity]
   \label{lemma:marsden}
   Let $p \in \natz$ and
@@ -591,6 +593,8 @@ Interestingly, the coefficients are polynomials themselves (in $y$):
 \begin{proof}
   See \cite{Hoellig13Approximation}.
 \end{proof}
+
+\vspace*{0pt plus 1fill}
 
 \paragraph{Modified hierarchical B-splines}
 
@@ -614,28 +618,34 @@ This can be used to derive a definition for $\bspl[\modified]{l,i}{p}$:
   x \in \real.
 \end{equation}
 Note that only the B-splines with $i \ge 1 - \tfrac{p+1}{2}$
-are relevant for the unit interval as all other B-splines vanish in $\clint{0, 1}$.
+are relevant for the unit interval
+as all other B-splines vanish in $\clint{0, 1}$.
 Pflüger omits summands with $i > 1$ as he only wants to modify
 $\bspl{l,1}{p}$ left of its grid point $\gp{l,1}$ \cite{Pflueger10Spatially}.
 The right-most function $\bspl[\modified]{l,2^l-1}{p}$ can be derived
 analogously by mirroring $\bspl[\modified]{l,1}{p}$ at $x = \tfrac{1}{2}$.
+\pagebreak
 For~$l = 1$, again the ``constant one'' function is taken for the definition
 of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
-\begin{equation}
-  \label{eq:modifiedBSplineDefinition}
-  \bspl[\modified]{l,i}{p}(x)
-  :=
-  \begin{cases}
-    1,&
-    l = 1,\quad i = 1,\\
-    \displaystyle\sum_{i'=1-(p+1)/2}^1\!\!\!\! (2 - i') \bspl{l,i'}{p}(x),&
-    l \ge 2,\quad i = 1,\\
-    \bspl{l,i}{p}(x),&
-    l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
-    \bspl[\modified]{l,1}{p}(1 - x),&
-    l \ge 2,\quad i = 2^l - 1.
-  \end{cases}
-\end{equation}
+{%
+  \setlength{\abovedisplayskip}{9pt}%
+  \setlength{\belowdisplayskip}{9pt}%
+  \begin{equation}
+    \label{eq:modifiedBSplineDefinition}
+    \bspl[\modified]{l,i}{p}(x)
+    :=
+    \begin{cases}
+      1,&
+      l = 1,\quad i = 1,\\
+      \displaystyle\sum_{i'=1-(p+1)/2}^1\!\!\!\! (2 - i') \bspl{l,i'}{p}(x),&
+      l \ge 2,\quad i = 1,\\
+      \bspl{l,i}{p}(x),&
+      l \ge 2,\quad i \in \hiset{l} \setminus \{1, 2^l - 1\},\\
+      \bspl[\modified]{l,1}{p}(1 - x),&
+      l \ge 2,\quad i = 2^l - 1.
+    \end{cases}
+  \end{equation}%
+}%
 By \thmref{prop:splineSpace},
 this definition implies that
 $\bspl{l,1}{p}(x) = 2 - \tfrac{x}{\ms{l}}$ ($l \ge 2$)
@@ -656,8 +666,7 @@ for growing $p$.
   \subcaptionbox{%
     Construction of the modified hierarchical cubic B-spline
     $\bspl[\modified]{l',1}{p}$ (\emph{dashed,} $l' \ge 2$)
-    as a linear combination of neighboring B-splines $\bspl{l',i'}{p}$
-    using Marsden's identity.%
+    as a linear combination of neighboring B-splines $\bspl{l',i'}{p}$.%
   }[72mm]{%
     \includegraphics{modifiedBSpline_1}%
   }%
