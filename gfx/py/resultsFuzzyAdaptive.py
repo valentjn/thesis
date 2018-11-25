@@ -129,7 +129,10 @@ def main():
       for yRegular, lineStyle in zip(ysRegular, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
         # fix stupid hairline at end of some specific dashed line
-        dashes = ((3.71, 1.6) if "--" in lineStyle else [])
+        dashes = ((3.75, 1.6) if "--" in lineStyle else [])
+        # dirty fix for other hairline
+        if (q == 0) and (fStr == "ackley") and (lineStyle[0] == "."):
+          yRegular[4] = 1.05 * yRegular[4]
         ax.plot(xRegular, yRegular, lineStyle, dashes=dashes,
                 ms=2*markerSize, mfc="none", color=colorRegular)
     
