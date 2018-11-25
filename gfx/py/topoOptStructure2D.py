@@ -54,6 +54,7 @@ def plotMacroCell(ax, corner, size, parameters, model, color="k"):
     if c > thresholds[1]: c = 1
     if d > thresholds[1]: d = 1
     if a > thresholds[0]:
+      a = max(a, 2*thresholds[0])
       plotPolygon(ax, totalTrafo, color, [
           (0, 0),
           (1, 0),
@@ -65,6 +66,7 @@ def plotMacroCell(ax, corner, size, parameters, model, color="k"):
           (1, 1),
           (0, 1)])
     if b > thresholds[0]:
+      b = max(b, 2*thresholds[0])
       plotPolygon(ax, totalTrafo, color, [
           (0,   0),
           (b/2, 0),
