@@ -32,7 +32,7 @@ def main():
   ]
   T = len(choices)
   
-  fig = Figure.create(figsize=(2.9, 1.7), scale=1.35, preamble=r"""
+  fig = Figure.create(figsize=(3.0, 1.7), scale=1.35, preamble=r"""
 \contourlength{1pt}
   """)
   ax = fig.gca()
@@ -70,11 +70,11 @@ def main():
               [-axisMarginY-0.04, -axisMarginY+0.04], "k-", clip_on=False)
       ax.text(x-barWidth/2, -axisMarginY-0.08, "${}$".format(tStr),
               ha="center", va="top")
-      ax.text(x+largeMargin/2, choice2CumSum[-1]/2, "$\cdots$",
+      ax.text(x+largeMargin, choice2CumSum[-1]/2, "$\cdots$",
               ha="center", va="center")
-      ax.text(x+largeMargin/2, -axisMarginY-0.15, "$\cdots$",
+      ax.text(x+largeMargin, -axisMarginY-0.15, "$\cdots$",
               ha="center", va="center")
-      x += largeMargin
+      x += 2 * largeMargin
       continue
     
     for y1, y2, label, color in zip(
