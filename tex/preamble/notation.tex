@@ -346,14 +346,14 @@
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
 
-\let\bndrygridorig\bndrygrid
-\newcommand*{\bndrysgsetorig}{\gridset[\bndrygridorig]{}{\sparse}}
-\makecommandnotation{\bndrygrid}{ÄΩsd}{$\bndrysgsetorig$}{
-  Set $:= \sgset \cap \bndrydomain{\clint{\*0, \*1}}
-  = \sgset \setminus \interiorsgset$ of
-  boundary sparse grid points
-  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
-}
+%\let\bndrygridorig\bndrygrid
+%\newcommand*{\bndrysgsetorig}{\gridset[\bndrygridorig]{}{\sparse}}
+%\makecommandnotation{\bndrygrid}{ÄΩsd}{$\bndrysgsetorig$}{
+%  Set $:= \sgset \cap \bndrydomain{\clint{\*0, \*1}}
+%  = \sgset \setminus \interiorsgset$ of
+%  boundary sparse grid points
+%  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
+%}
 
 \newnotationcommandoptarg{2}{\fgset}{%
   \Omega_{#2}\ifnotempty{#1}{^{#1}}%
@@ -1002,22 +1002,22 @@
   $\ineqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\ineqconfun}}$
 }
 
-\hidenextnotation
-\newnotationcommandoptarg{1}{\eqconfunscaled}{
-  \ifempty{#1}{\bar{\*h}}\ifnotempty{#1}{\bar{h}_{#1}}%
-}{hbar}{$\eqconfunscaled$}{
-  Scaled equality constraint function
-  $\eqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
-}
-
-\hidenextnotation
-\newnotationcommand[1]{\testobjfunscaled}{%
-  \bar{\objfun}_{\mathrm{#1}}%
-}{fbarTest}{$\testobjfunscaled{Test}$}{
-  Scaled test objective function
-  $\testobjfunscaled{Test}\colon \clint{\*a, \*b} \to \real$
-  with name ``Test''
-}
+%\hidenextnotation
+%\newnotationcommandoptarg{1}{\eqconfunscaled}{
+%  \ifempty{#1}{\bar{\*h}}\ifnotempty{#1}{\bar{h}_{#1}}%
+%}{hbar}{$\eqconfunscaled$}{
+%  Scaled equality constraint function
+%  $\eqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
+%}
+%
+%\hidenextnotation
+%\newnotationcommand[1]{\testobjfunscaled}{%
+%  \bar{\objfun}_{\mathrm{#1}}%
+%}{fbarTest}{$\testobjfunscaled{Test}$}{
+%  Scaled test objective function
+%  $\testobjfunscaled{Test}\colon \clint{\*a, \*b} \to \real$
+%  with name ``Test''
+%}
 
 \hidenextnotation
 \newnotationcommandoptarg{2}{\testineqconfunscaled}{%
@@ -1560,12 +1560,12 @@
   Normalized stock sell
 }
 
-\hidenextnotation
-\newnotationcommandoptarg{1}{\normbuysell}{%
-  \hat{\delta}^{\pm\appendwithcomma{#1}}%
-}{Äδ^tj±}{$\buysell_{t,j}$}{
-  Normalized stock buy/sell
-}
+%\hidenextnotation
+%\newnotationcommandoptarg{1}{\normbuysell}{%
+%  \hat{\delta}^{\pm\appendwithcomma{#1}}%
+%}{Äδ^tj±}{$\buysell_{t,j}$}{
+%  Normalized stock buy/sell
+%}
 
 \newcommand*{\vstock}{\*s}
 \newcommand*{\vbuy}[1][]{\*\delta^{+\appendwithcomma{#1}}}
@@ -1695,10 +1695,10 @@
   Normalized state transition fcn.
 }
 
-\hidenextnotation
-\newnotationcommand{\statetrafofcn}{\*\nu}{Äν}{$\statetrafofcn_t$}{
-  State space transformation fcn.
-}
+%\hidenextnotation
+%\newnotationcommand{\statetrafofcn}{\*\nu}{Äν}{$\statetrafofcn_t$}{
+%  State space transformation fcn.
+%}
 
 \hidenextnotation
 \newnotationcommand{\utilityfcn}{u}{u3}{$\utilityfcn$}{
