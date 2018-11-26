@@ -17,9 +17,17 @@ def run(args, pipe=False, **kwargs):
 
 
 repoURL = "valentjn@neon%proxy:/data/scratch-ssd1/valentjn/git_repos/thesis"
-switches = {
+draftSwitches = {
   "draftMode" : True,
   "checkMode" : True,
+  "debugMode" : False,
+  "showGlossaryDefinitionsMode" : False,
+  "flipBookMode" : True,
+  "partialCompileMode" : False,
+}
+finalSwitches = {
+  "draftMode" : False,
+  "checkMode" : False,
   "debugMode" : False,
   "showGlossaryDefinitionsMode" : False,
   "flipBookMode" : True,
@@ -123,7 +131,7 @@ if __name__ == "__main__":
       print("")
       print("Draft mode is {}.".format(
           "enabled" if draftMode else "disabled"))
-      switches["draftMode"] = draftMode
+      switches = (draftSwitches if draftMode else finalSwitches)
       
       print("")
       print("Setting switches...")
