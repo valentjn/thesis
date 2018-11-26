@@ -62,6 +62,7 @@ con-se-quent-ly
 con-sid-er-a-tions
 con-strained
 con-straints
+con-sume
 con-tained
 con-tains
 con-tin-u-ous
@@ -74,6 +75,7 @@ con-tri-bu-tion
 con-tri-bu-tions
 con-trolled
 con-vo-lu-tion
+cor-rect
 cor-rect-ness
 cor-re-spond-ing
 cor-re-sponds
@@ -82,6 +84,7 @@ cross-overs
 cu-bic
 data-driven
 de-crease
+de-fine
 de-riv-a-tive
 de-scribed
 de-ter-mine
@@ -141,7 +144,7 @@ gradient-based
 gra-di-en-ten
 gradient-free
 hes-sian
-hier-ar-chi-cal
+hi-er-ar-chi-cal
 hier-ar-chiz-ing
 hier-ar-chiza-tion
 high-di-men-sion-al
@@ -163,13 +166,14 @@ in-for-ma-tion
 ini-tial
 in-sert-ing
 in-te-gra-tion
-in-ter-rest
+in-ter-est
 in-ter-polant
 in-ter-polants
 in-ter-po-lat-ed
 in-ter-po-la-tion
 in-ter-val
 in-tro-duc-tion
+in-tro-duced
 in-vest-ed
 it-er-a-tion
 it-er-a-tions
@@ -212,7 +216,7 @@ num-ber
 nu-me-rik
 ob-ser-va-tions
 ob-tain-ing
-one-dimen-sional
+one-di-men-sional
 op-er-ates
 op-ti-mal
 op-ti-mie-rungs-pro-ble-me
@@ -272,7 +276,7 @@ sci-ence
 sec-tion
 seg-ments
 semi-circle
-sig-ni-fi-cant-ly
+sig-nif-i-cant-ly
 sim-plic-i-ty
 sim-u-la-tion
 sim-u-la-tions
@@ -287,6 +291,7 @@ spa-tial-ly
 split-ting
 struc-tures
 study-ing
+su-per-script
 sub-jec-tiv-i-ty
 sub-space
 sub-spaces
