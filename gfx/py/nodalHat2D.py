@@ -48,13 +48,30 @@ ax.plot([x[0]], [x[1]], "k.", zs=[1], clip_on=False)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.set_zlim(0, 1)
-ax.set_xticks([0, 1])
-ax.set_yticks([0, 1])
+
+ax.set_xticks(np.unique(X[:,0]))
+ax.set_yticks(np.unique(X[:,1]))
 ax.set_zticks([0, 1])
-ax.set_xlabel(r"$x_1$", labelpad=-8)
-ax.set_ylabel(r"$x_2$", labelpad=-8)
-ax.xaxis.set_rotate_label(False)
-ax.yaxis.set_rotate_label(False)
+
+ax.set_xticklabels([])
+ax.set_yticklabels([])
+ax.set_zticklabels([])
+
+eps = 0.15
+ax.text(0, -eps, 0, r"$0$", ha="center", va="top")
+ax.text(1, -eps, 0, r"$1$", ha="center", va="top")
+
+eps = 0.1
+ax.text(1+eps, 0, 0, r"$0$", ha="left", va="top")
+ax.text(1+eps, 0.95, 0, r"$1$", ha="left", va="top")
+
+eps = 0.1
+ax.text(1+eps, 1, 0.02, r"$0$", ha="left", va="bottom")
+ax.text(1+eps, 1, 1, r"$1$", ha="left", va="center")
+
+ax.text(0.5, -0.2, 0, r"$x_1$", ha="center", va="top")
+ax.text(1.1, 0.5, 0, r"$x_2$", ha="left", va="top")
+
 ax.grid(False)
 
 fig.save()
