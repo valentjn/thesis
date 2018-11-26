@@ -50,12 +50,12 @@
 }
 
 \newnotation{kT00}{$\*k$}{
-  Continuously enumerated index $\in \natz^d$
+  Continuously enumerated index $\*k \in \natz^d$
   of the level-index pairs $(\*l, \*i)$
 }
 
 \newnotation{d}{$d$}{
-  Dimensionality $\in \nat$
+  Dimensionality $d \in \nat$
 }
 
 \newnotation{n10}{$n$}{
@@ -96,7 +96,7 @@
 }
 
 \newnotation{kT10}{$\*k_{-t}$}{
-  Vector of all dimensions except the $t$-th
+  Vector of all entries $k_{t'}$ except the $t$-th
   %($\*k_{-t}
   %:= (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$)
 }
@@ -120,7 +120,8 @@
 }
 
 \newnotationcommand[1]{\stdbasis}{\*e_{#1}}{et}{$\stdbasis{t}$}{
-  $t$-th standard basis vector $:= (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
+  $t$-th standard basis vector
+  $\stdbasis{t} := (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
 }
 
 \hidenextnotation
@@ -178,77 +179,77 @@
 \newcommand*{\reference}{\mathrm{ref}}
 \newcommand*{\opt}{\mathrm{opt}}
 
-\newnotation{Ë1}{$\cdot^1$}{
+\newnotation{Ë1}{$(\cdot)^1$}{
   Superscript for ``Piecewise linear''
   %(basis function/function space/interpolant)''
 }
 
-\newnotation{Ëp}{$\cdot^p$}{
+\newnotation{Ëp}{$(\cdot)^p$}{
   Superscript for ``B-splines of degree $p$''
   %(basis function/function space/interpolant)''
 }
 
-\newnotation{Ës}{$\cdot^\sparse$}{
+\newnotation{Ës}{$(\cdot)^\sparse$}{
   Superscript for ``Sparse grid''
   %(grid point set/function space/interpolant)''
 }
 
-\newnotation{Ësb}{$\cdot^{\sparse(b)}$}{
+\newnotation{Ësb}{$(\cdot)^{\sparse(b)}$}{
   Superscript for ``Sparse grid with boundary parameter $b$''
   %(grid point set/function space/interpolant)''
 }
 
-\newnotation{Ëmod}{$\cdot^\modified$}{
+\newnotation{Ëmod}{$(\cdot)^\modified$}{
   Superscript for ``Modified''
   %(basis function/function space/interpolant)
   %for grids without boundary points''
 }
 
-\newnotation{Ëcc}{$\cdot^\cc$}{
+\newnotation{Ëcc}{$(\cdot)^\cc$}{
   Superscript for ``Clenshaw--Curtis''
   %(grid point/grid point set/basis
   %function/function space/interpolant)''
 }
 
-\newnotation{Ënak}{$\cdot^\nak$}{
+\newnotation{Ënak}{$(\cdot)^\nak$}{
   Superscript for ``Not-a-knot''
   %(knot sequence/basis function/function space/interpolant)''
 }
 
-%\newnotation{Ënat}{$\cdot^\ntrl$}{
+%\newnotation{Ënat}{$(\cdot)^\ntrl$}{
 %  Superscript for ``Natural''
 %  %(basis function/function space/interpolant)''
 %}
 
-%\newnotation{Ëhft}{$\cdot^\hft$}{
+%\newnotation{Ëhft}{$(\cdot)^\hft$}{
 %  Superscript for ``Hierarchical fundamental transformation''
 %  %(basis function/function space/interpolant)''
 %}
 
-%\newnotation{Ëtift}{$\cdot^\tift$}{
+%\newnotation{Ëtift}{$(\cdot)^\tift$}{
 %  Superscript for ``Translation-invariant fundamental transformation''
 %  %(basis function/function space/interpolant)''
 %}
 
-\newnotation{Ëfs}{$\cdot^\fs$}{
+\newnotation{Ëfs}{$(\cdot)^\fs$}{
   Superscript for ``Fundamental spline''
   %(basis function/function space/interpolant)''
 }
 
-\newnotation{Ëwfs}{$\cdot^\wfs$}{
+\newnotation{Ëwfs}{$(\cdot)^\wfs$}{
   Superscript for ``Weakly fundamental spline''
   %(basis function/function space/interpolant)''
 }
 
-%\newnotation{Ëchol}{$\cdot^\chol$}{
+%\newnotation{Ëchol}{$(\cdot)^\chol$}{
 %  Superscript for ``Cholesky''
 %}
 
-%\newnotation{Ëref}{$\cdot^\reference$}{
+%\newnotation{Ëref}{$(\cdot)^\reference$}{
 %  Superscript for ``Reference solution''
 %}
 
-\newnotation{Ëopt}{$\cdot^\opt$}{
+\newnotation{Ëopt}{$(\cdot)^\opt$}{
   Superscript for ``Optimal''
 }
 
@@ -808,7 +809,7 @@
   c_{#2}\ifnotempty{#1}{^{#1}}%
 }{cli}{$\interpcoeff{\*l,\*i}$}{
   Full grid interpolation coefficients
-  (coefficients of a linear combination of nodal basis functions)
+  %(coefficients of a linear combination of nodal basis functions)
 }
 
 \newcommand*{\interpcoefftilde}[2][]{\tilde{c}_{#2}\ifnotempty{#1}{^{#1}}}
