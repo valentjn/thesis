@@ -10,7 +10,7 @@ briefly mention related literature, and
 explain where B-splines on sparse grids come into play.
 \Cref{tbl:glossaryFinance} summarizes the symbols
 that are introduced in this chapter.
-Rust provides a more detailed introduction into
+Rust provides a more detailed introduction to
 dynamic portfolio choice models \cite{Rust18Dynamic}.
 
 \begin{table}
@@ -35,7 +35,7 @@ dynamic portfolio choice models \cite{Rust18Dynamic}.
     \pnst{\policy}&      \pnst{\bond}&        \pnst{\valuefcn}\\
     \pnst{\stochastic}&  \pnsta{\cetvalueintp}\\
     \pnst{\riskav}&      \pnst{\stock}&       \pnst{\optpolicyfcn}\\
-    \pnst{\patience}&    \pnst{\buysell}&     $\hat{({\cdot})}$&Normalized\\
+    \pnst{\patience}&    \pnst{\buysell}&     $\hat{({\cdot})}$&Normalized quantity\\
     \pnst{\bondreturn}&  \pnst{\stockreturn}& \pnst{\wealthratio}\\
     \pnst{\tac}&         \pnsta{\weightedeulererror}\\
     \bottomrulec
@@ -82,8 +82,8 @@ and policy of time $t = 0, \dotsc, T$, respectively.
 The constraints ensure that for instance, we do not spend more money
 than we actually have.
 Starting from a given initial state $\state_0$,
-the state $\state_t$ of time $t > 0$ can be computed from
-$\state_0$ and $\policy_0, \dotsc, \policy_{t-1}$ with a
+the state $\state_{t+1}$ of time $t+1$ can be computed from
+$\state_0$ and $\policy_0, \dotsc, \policy_t$ with a
 \term{state transition function} $(\state_t, \policy_t) \mapsto \state_{t+1}$.
 As shown in \cref{fig:dynamicPortfolioChoice},
 in each time step, a fraction of the available wealth is consumed
@@ -94,8 +94,8 @@ $\utilityfcn(\consume_t)$.
 A common choice for $\utilityfcn$ is the \term{\crra utility}
 $\utilityfcn(\consume_t) := c_t^{1-\riskav}/(1-\riskav)$
 with the \term{risk aversion} $\riskav \in \real \setminus \{1\}$.
-Positive and negative values correspond to risk-averse and risk-affine
-individuals, respectively.
+Positive and negative values of $\riskav$
+correspond to risk-averse and risk-affine individuals, respectively.
 The factor $\patience \in \pohint{0, 1}$ is the \term{patience}
 or \term{time discount factor.}
 
@@ -124,8 +124,8 @@ Second, \cref{eq:utilityMaximization} does not take stochastic variables
 $\stochastic_t$ such as stock return rates into account.
 These variables influence the state transition, i.e.,
 $(\state_t, \policy_t, \stochastic_t) \mapsto \state_{t+1}$.
-Consequently, $\state_t$ cannot be computed from $\state_0$ and
-$\policy_0, \dotsc, \policy_{t-1}$ alone,
+Consequently, $\state_{t+1}$ cannot be computed from $\state_0$ and
+$\policy_0, \dotsc, \policy_t$ alone,
 which complicates the solution of \cref{eq:utilityMaximization}
 even for expected values.
 
@@ -156,7 +156,7 @@ has the same structure as the problem on the \lhs.
 With the \term{value function}
 $\valuefcn_t\colon \clint{\*0, \*1} \to \real$,
 $\valuefcn_t(\state_t) :=
-\max_{\policy_0, \dotsc, \policy_T}
+\max_{\policy_t, \dotsc, \policy_T}
 \sum_{t'=t}^T \patience^{t'-t}
 \utilityfcn(\consume_{t'}(\state_{t'}, \policy_{t'}))$,
 this can be rewritten as
@@ -216,7 +216,7 @@ $P_{t,\stochastic}\colon \stochdomain \to \nonnegreal$ of $\stochastic_t$.%
 \footnote{%
   While the state $\state_t \in \clint{\*0, \*1}$
   is continuous in this thesis,
-  Markov-chain \term{discrete states} $\discrstate_t \in \discrstdomain$
+  \term{Markov-chain discrete states} $\discrstate_t \in \discrstdomain$
   such as alive/dead
   (i.e., $\discrstdomain$ is the Cartesian product of finite sets)
   can be incorporated into \eqref{eq:generalBellman}.
@@ -248,7 +248,7 @@ $\state_t \mapsto \optpolicyfcn_t(\state_t)$.
 \paragraph{Dynamic programming scheme}
 
 The Bellman equation \eqref{eq:generalBellman} can be solved
-with a dynamic programming scheme backwards in time.
+backwards in time with a dynamic programming scheme.
 Starting from the solution $\valuefcn_T$ and $\optpolicyfcn_T$
 of time $T$, which is determined by maximizing the utility
 for the terminal time step,
@@ -324,12 +324,12 @@ solution of dynamic models in finance
 For example in \cite{Brumm17Using},
 discrete choices in the value iteration are computed
 using piecewise linear basis functions on spatially adaptive sparse grids.
-Judd et al.\ use global polynomials
-on sparse Clenshaw--Curtis grids for the interpolation of
-higher-dimensional economic models \cite{Judd14Smolyak}.
 Schober employs spatially adaptive sparse grids
 for the interpolation of dynamic portfolio choice models,
 but uses the piecewise linear basis functions \cite{Schober18Solving}.
+Judd et al.\ use global polynomials
+on sparse Clenshaw--Curtis grids for the interpolation of
+higher-dimensional economic models \cite{Judd14Smolyak}.
 
 \vspace*{2em}
 
