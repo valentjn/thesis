@@ -31,14 +31,14 @@ def getParentDimension(l1, i1, l2, i2):
   
   return parentDimension
 
-def plotLine(ax, xx, yy, l, n):
+def plotLine(ax, xx, yy, l, n, colormap="viridis", maxIntensity=1):
   #ax.plot(xx, yy, "k-")
   N = xx.shape[0]
   segments = [np.array([[xx[k], yy[k]], [xx[k+1], yy[k+1]]])
               for k in range(N - 1)]
   lineCollection = mpl.collections.LineCollection(
-    segments, cmap="viridis", norm=mpl.colors.Normalize(0, 1))
-  t = np.linspace(0, 1, n+1)
+    segments, cmap=colormap, norm=mpl.colors.Normalize(0, 1))
+  t = maxIntensity * np.linspace(0, 1, n+1)
   tt = np.linspace(t[l], t[l+1], N)
   lineCollection.set_array(tt)
   ax.add_collection(lineCollection)
@@ -61,7 +61,10 @@ fig = Figure.create(figsize=(3, 3), scale=1.5)
 ax = fig.gca()
 
 angle = 35 / 180 * np.pi
-colormap = mpl.cm.get_cmap("viridis")
+colormap = mpl.cm.get_cmap("Blues_r")
+maxIntensity = 0.55
+
+normalize = mpl.colors.Normalize(0, n / maxIntensity)
 
 for k1 in range(N):
   for k2 in range(N):
@@ -71,13 +74,17 @@ for k1 in range(N):
       l = L[k1,parentDimension]
       nn = int(125 * np.linalg.norm(X[k2,:] - X[k1,:]))
       tt = np.linspace(0, 1, nn)
-      XX = helper.plot.getQuadraticBezierCurveViaAngle(X[k1,:], X[k2,:], angle, tt)
+      XX = helper.plot.getQuadraticBezierCurveViaAngle(
+          X[k1,:], X[k2,:], angle, tt)
       XX = XX[:-2,:]
-      curPlotLine = (lambda ax, xx, yy: plotLine(ax, xx, yy, np.sum(L[k1,:]), n))
+      curPlotLine = (lambda ax, xx, yy:
+          plotLine(ax, xx, yy, np.sum(L[k1,:]), n, colormap=colormap,
+                   maxIntensity=maxIntensity))
       levelSum = np.sum(L[k2,:])
-      headColor = colormap(levelSum / n)
+      headColor = colormap(maxIntensity * levelSum / n)
       helper.plot.plotArrowPolygon(
-        ax, XX[:,0], XX[:,1], curPlotLine, scaleHead=0.5, virtualHeadLength=0.015,
+        ax, XX[:,0], XX[:,1], curPlotLine, scaleHead=0.5,
+        virtualHeadLength=0.015,
         ec=headColor, fc=headColor, zorder=levelSum, cutOff=1)
 
 ax.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], "k-", clip_on=False)
@@ -86,7 +93,8 @@ ax.plot([0, 1, 1, 0, 0], [0, 0, 1, 1, 0], "k-", clip_on=False)
 #  color = colormap(np.sum(L[k,:]) / n)
 #  ax.plot(X[k,0], X[k,1], ".", clip_on=False, color=color)
 
-ax.scatter(X[:,0], X[:,1], c=np.sum(L, axis=1)/n, edgecolors="k", zorder=100)
+ax.scatter(X[:,0], X[:,1], c=np.sum(L, axis=1), cmap=colormap, norm=normalize,
+           edgecolors="k", zorder=100)
 
 ax.set_axis_off()
 ax.set_aspect("equal")
@@ -112,9 +120,8 @@ cax = fig.add_axes(pos)
 h = 1/n
 bounds = n * np.linspace(-h/2, 1+h/2, n+2)
 ticks = n * np.linspace(0, 1, n+1)
-norm = mpl.colors.Normalize(0, n)
 colorbar = mpl.colorbar.ColorbarBase(
-  cax, cmap=colormap, boundaries=bounds, ticks=ticks, norm=norm)
+  cax, cmap=colormap, boundaries=bounds, ticks=ticks, norm=normalize)
 cax.set_position(pos)
 cax.text(0.55, 1.02, r"$\normone{\*l}$", ha="center", va="bottom")
 
