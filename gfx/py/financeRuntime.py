@@ -110,10 +110,10 @@ def main():
 """
   
   for idss, d in zip(idsss, ds):
-    fig1 = Figure.create(figsize=(2.25, 2.15), preamble=preamble)
+    fig1 = Figure.create(figsize=(2.25, 2.5), preamble=preamble)
     ax1 = fig1.gca()
     
-    fig2 = Figure.create(figsize=(2.2, 2.15), preamble=preamble)
+    fig2 = Figure.create(figsize=(2.25, 2.5), preamble=preamble)
     ax2 = fig2.gca()
     
     for ids, color in zip(idss, colors):
@@ -159,7 +159,7 @@ def main():
       ax.yaxis.set_ticks_position("both")
       
       for tick in ax.get_xaxis().get_major_ticks():
-          tick.set_pad(1)
+          tick.set_pad(3)
           tick.label1 = tick._get_text1()
     
     x = Ns[-1]
