@@ -39,7 +39,8 @@ for q in range(3):
     
     r = np.argmax(yy)
     ax.text(xx[r], yy[r] + 0.02,
-            r"$\nonunifbspl{{{},\knotseq}}{{p}}$".format(k),
+            (r"\contour{{mittelblau!10}}{{"
+             r"$\nonunifbspl{{{},\knotseq}}{{p}}$}}").format(k),
             color=color, ha="center", va="bottom")
   
   if q == 0:
