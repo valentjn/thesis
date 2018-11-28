@@ -344,7 +344,8 @@ impeding convergence of interpolation errors
 of gradient-based optimization methods to solve \eqref{eq:gridBellman}.
 The reason for the latter is that gradient-based optimizers require
 the derivatives of the objective function of \eqref{eq:gridBellman}
-with respect to $\policyentry_{t,j}$, $j = 1, \dotsc, m_{\policy}$, i.e.,
+with respect to the entries $\policyentry_{t,j}$ of $\policy_t$
+($j = 1, \dotsc, m_{\policy}$), i.e.,
 \begin{equation}
   \begin{split}
     &\utilityfcn'(\consume_t(\state_t^{(k)}, \policy_t))
