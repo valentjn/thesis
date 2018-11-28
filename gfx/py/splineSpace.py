@@ -75,7 +75,7 @@ for q in range(3):
     ax.text(1+(p+1)*h, -0.2, r"$x\vphantom{0}$", ha="center", va="top", color=color)
     I = helper.grid.getNodalIndices(n)
     X = helper.grid.getCoordinates(n, I)
-    ax.plot(X, 0*X, ".", color=color, clip_on=False, zorder=10)
+    ax.plot(X, 0*X, ".", ms=10, color=color, clip_on=False, zorder=10)
   
   xtl = len(xi) * [""]
   xtl[0] = r"$\knot{0}$"
