@@ -95,10 +95,10 @@ NAG Toolbox for MATLAB.%
 \footnote{%
   \url{https://www.nag.com/}%
 }
-To avoid getting stuck in local minima,
+To avoid being stuck in local minima,
 we repeated the optimization process for a varying number
 of initial multi-start points (in the range of a few dozens).
-All computation times were measured on a shared memory computer
+All computation times were measured on a shared-memory computer
 with 144 threads on 4x Intel Xeon E7-8880v3 (72 cores, 144 threads).
 
 
@@ -168,13 +168,14 @@ on the right-hand side of the Bellman equation
 \eqref{eq:normalizedTCPBellmanEquation} to $\normcetvalueintp_t$
 on the left-hand side, and so on.
 If the system does not damp these errors,
-the error might steadily become larger backwards in time $t$.
+the error steadily becomes larger backwards in time $t$.
 
 \paragraph{Error measure}
 
 We use the weighted Euler equation error
-$\weightedeulererror_t(\normstate_t)$ ($\Ltwo$ norm or pointwise)
-to assess the quality of the resulting policies.
+$\weightedeulererror_t(\normstate_t)$
+to assess the quality of the resulting policies
+($\Ltwo$ norm or pointwise).
 As the errors generally grow backwards in time,
 it suffices to consider $t = 0$.
 However, since Euler equation errors can only be evaluated at points in
@@ -302,7 +303,7 @@ for the cases of $d = 1, \dotsc, 4$ stocks.
   \label{fig:financeEulerError}%
 \end{figure}%
 For this and the following plots,
-the value function grid is kept unchanged
+the value function grid is left unchanged
 (usually a slightly refined regular sparse grid),
 while the mean number $\ngp_t$ of policy grid points increases
 with decreasing refinement threshold $\refinetol_t$.
@@ -313,23 +314,23 @@ two orders of magnitude in one dimension.
 The gain is smaller for higher dimensionalities $d$,
 but spatial adaptive grids still outperform regular grids.
 For $d = 2$, we observe that the error saturates
-after $\ngp_t \approx \num{4000}$ points just above $10^{-5}$.
+at $\ngp_t \approx \num{4000}$ points just above $10^{-5}$.
 This is most likely due to the parts
 \ref{item:financeErrorExtrapolation} to
 \ref{item:financeErrorRounding} of the error that are not influenced
 by sparse grid interpolation.
 In addition, convergence significantly decelerates starting with $d = 4$.
-For $d = 4$, spatially adaptive sparse grids with
-a mean number $\ngp_t = \num{4252}$ of policy grid points for $t = 0$
+For $d = 4$, spatially adaptive sparse grids
 are able to achieve a weighted Euler equation error of
-$\weightedeulererrorLtwo_t \approx \num{2.0e-2}$.
+$\weightedeulererrorLtwo_t \approx \num{2.0e-2}$ for $t = 0$
+(with a mean number $\ngp_0 = \num{4252}$ of policy grid points).
 For $d = 5$, we are still able to achieve a small error of
-$\weightedeulererrorLtwo_t \approx \num{1.9e-2}$
+$\weightedeulererrorLtwo_t \approx \num{1.9e-2}$ for $t = 0$
 with spatially adaptive sparse grids with
-a mean number $\ngp_t = \num{12572}$ of policy grid points for $t = 0$.
-While we do not see any convergence for this dimensionality,
+a mean number $\ngp_0 = \num{12572}$ of policy grid points.
+While we do not notice any convergence for this dimensionality,
 this is still a major result as such high-dimensional models
-could not be solved with conventional methods up to now.
+could not be solved up to now with conventional methods.
 
 \paragraph{Optimal policies in 2D and 5D}
 
@@ -373,6 +374,7 @@ each display
   }%
   \caption[Sparse grid solution for the two-dimensional TCP]{%
     Spatially adaptive sparse grid solution for the transaction costs problem
+    \vspace{-0.15em}%
     with $d = 2$ stocks.
     \vspace{-0.15em}%
     Shown are the value function $\normcetvalueintp_t$ \emph{(top left)} and the
@@ -453,6 +455,7 @@ each display
   }%
   \caption[Sparse grid solution for the five-dimensional TCP]{%
     Spatially adaptive sparse grid solution for the transaction costs problem
+    \vspace{-0.15em}%
     with $d = 5$ stocks.
     \vspace{-0.15em}%
     Shown are slice plots of
@@ -485,7 +488,7 @@ directly incorporating the distance to the diagonal into the
 refinement criterion for the value function.
 However, we refrain from doing so here as this does not seem to
 drastically improve results.
-This might be due to the domination of the overall error by
+Again, this might be due to the domination of the overall error by
 the parts \ref{item:financeErrorExtrapolation} to
 \ref{item:financeErrorRounding} that are not related to interpolation.
 
@@ -589,7 +592,9 @@ for $d = 3$, $4$, and $5$ stocks.
       $
       after buying and selling
       \emph{\textcolor{C1}{(red)}}
+      \vspace{0.1em}%
       in a Monte Carlo simulation of \num{10000} individuals,
+      \vspace{-0.1em}%
       where we assume that $\wealth_0 = \$1$ for all individuals.
       In addition, the plots show the evolution of the
       $\Ltwo$ error $\weightedeulererrorLtwo_t$ over time $t$
@@ -777,7 +782,7 @@ experimental data.
     $d = 1$%
   }[49.5mm]{%
     \includegraphics{financeRuntime_1}%
-    \vspace*{0.5mm}\newline\hspace*{1.0mm}%
+    \vspace*{0.3mm}\newline\hspace*{1.0mm}%
     \includegraphics{financeRuntime_2}%
   }%
   \hfill%
@@ -785,7 +790,7 @@ experimental data.
     $d = 2$%
   }[49.5mm]{%
     \includegraphics{financeRuntime_3}%
-    \vspace*{0.5mm}\newline\hspace*{1.0mm}%
+    \vspace*{0.3mm}\newline\hspace*{1.0mm}%
     \includegraphics{financeRuntime_4}%
   }%
   \hfill%
@@ -793,20 +798,28 @@ experimental data.
     $d = 3$%
   }[49.5mm]{%
     \includegraphics{financeRuntime_5}%
-    \vspace*{0.5mm}\newline\hspace*{1.0mm}%
+    \vspace*{0.3mm}\newline\hspace*{1.0mm}%
     \includegraphics{financeRuntime_6}%
   }%
   \caption[Computation times and numbers of iterations for the TCP]{%
     Computation times \emph{(top)} and
-    numbers of iterations and interpolant evaluations \emph{(bottom)}
+    numbers of iterations and evaluations of the interpolant \emph{(bottom)}
     for the transaction costs problem on static regular sparse grids
     (i.e., without refinement).
-    ``Total time'' is the serial time required to solve all $T\ngp$
+    ``Total time'' is the serial time required to solve all
     emerging optimization problems.
-    ``Time per opt.''\ is this time divided by the number $T\ngp$
-    of optimization problems.
+    ``Time per opt.''\ is this time divided by the number
+    $\mathrm{\#Opt.} = T\ngp$ of optimization problems.
+    ``Time per it.''\ is the time divided by the number
+    \#It.\ of optimization iterations,
+    each of which is assumed to correspond to
+    exactly one combined evaluation of objective function and gradient
+    (the latter only if gradients are used).
+    ``Time per eval.''\ is the time divided by
+    the number \#Eval.\ of evaluations of
+    the sparse grid interpolant and its gradient.
     The colors correspond to B-spline degrees $p = 3$ or $p = 1$ and
-    to using gradients ($\nabla$) or finite differences (FD).%
+    to using gradients (``$\nabla$'') or finite differences (``FD'').%
   }%
   \label{fig:financeRuntime}%
 \end{figure}%
@@ -814,15 +827,14 @@ For fixed $d$, the total time required by the optimization process
 grows quadratically with the number $\ngp$ of grid points.
 The time for one solution of the Bellman equation,
 the time for one optimizer iteration, and
-\vspace*{\fill}\pagebreak%
 the time for one evaluation of the interpolant are all linear in $\ngp$,
-as the number of optimizer iterations%
-\footnote{%
-  Note that here and in \cref{fig:financeRuntime},
-  one iteration of the optimizer assumed to correspond to
-  exactly one combined evaluation of objective function and gradient
-  (the latter only if gradients are used).%
-}
+as the number of optimizer iterations
+%\footnote{%
+%  Note that here and in \cref{fig:financeRuntime},
+%  one iteration of the optimizer assumed to correspond to
+%  exactly one combined evaluation of objective function and gradient
+%  (the latter only if gradients are used).%
+%}
 is constant for fixed $d$.
 If $d$ increases,
 then the number of interpolant evaluations per optimizer iteration
@@ -848,8 +860,7 @@ the total computation time is several times larger
 (e.g., more than five times for $d = 3$) for piecewise linear functions,
 although evaluations are cheaper than for B-splines.
 The main reason is that the number of required optimizer iterations
-is much higher (e.g., almost seven times as high for $d = 3$) for $p = 1$
-than in the cubic case,
+is for $p = 1$ almost seven times as high as in the cubic case,
 since the optimizer has to deal with kinks in the objective function.
 Experiments show that beginning with $d = 4$,
 the total optimization time required to solve the transaction costs problem
