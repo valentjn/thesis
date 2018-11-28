@@ -57,7 +57,8 @@ for q in range(2):
     tt = np.linspace(0.15, 0.85, 100)
     angle = (-1)**q * (30 / 180 * np.pi)
     XX = helper.plot.getQuadraticBezierCurveViaAngle(x1, x2, angle, tt)
-    helper.plot.plotArrowPolygon(ax, XX[:,0], XX[:,1], "k-", scaleHead=0.5)
+    helper.plot.plotArrowPolygon(ax, XX[:,0], XX[:,1],
+                                 ("k-" if q == 0 else "k--"), scaleHead=0.5)
   
   for j, li in enumerate(chain):
     if (q == 1) and (j == 1): continue
