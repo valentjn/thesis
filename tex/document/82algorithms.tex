@@ -34,7 +34,7 @@ The general approach to solve dynamic portfolio choice models is as follows:
 The separation of the solution processes for
 the value function interpolants $\valueintp_t$
 and the optimal policy interpolants $\optpolicyintp_t$
-enables to generate different spatially adaptive sparse grids
+enables the generation of different spatially adaptive sparse grids
 for the value function and the optimal policies.
 This is useful if the shapes of value function and optimal policies
 have different characteristics.
@@ -83,7 +83,7 @@ which is visualized in \cref{fig:structureSolveValueFunction}:
 First, the Bellman equation \eqref{eq:gridBellman} is solved
 on an initial sparse grid (\texttt{optimize}).
 Then, we \texttt{refine} the grid spatially adaptively.
-Finally, the resulting grid data are \texttt{interpolate}d
+Finally, the resulting grid point data are \texttt{interpolate}d
 with hierarchical higher-order B-splines.
 
 \begin{algorithm}
@@ -307,12 +307,12 @@ the terminal solution $\valuefcn_T$ is usually a known function.
 \paragraph{\texttt{optimize} algorithm}
 
 The \texttt{optimize} is given as \cref{alg:financeOptimize}.
-This algorithm accepts in $\valueintp[1]_t$
-a spatially adaptive sparse grid
+The grid of the argument $\valueintp[1]_t$
+is some spatially adaptive sparse grid
 $\gridset{t}{\sparse}
 = \{\state_t^{(k)} \mid k = 1, \dotsc, \ngp_t\}$,
 where the function values $\valueintp[1]_t(\state_t^{(k)})$
-may already be known for some grid points $\state_t^{(k)}$,
+may already be known for some of the grid points $\state_t^{(k)}$,
 if \texttt{optimize} is called from within \texttt{refine}.
 The function \texttt{optimize} computes the missing value function values.
 For $t = T$, we assume that the terminal solution
@@ -400,7 +400,7 @@ which may impede convergence of the optimizer.
 As a remedy, we transform the value function $\valueintp_t$ with the
 \term{certainty-equivalent transformation}
 $\valueintp_t \mapsto \cetvalueintp_t
-:= ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 0$.
+:= ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 1$.
 \Cref{eq:gridBellman} then becomes
 $\cetvalueintp_T(\state_T^{(k)}) = \max_{\policy_T}
 \consume_T(\state_T^{(k)}, \policy_T)$ for $t = T$ and
@@ -411,21 +411,21 @@ $\cetvalueintp_T(\state_T^{(k)}) = \max_{\policy_T}
     \left(
       \consume_t(\state_t^{(k)}, \policy_t)^{1-\riskav} +
       \patience \expectation[t]{
-        (
+        \bigl(
           \cetvalueintp_{t+1}(
             \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
           )
-        )^{1-\riskav}
+        \bigr)^{1-\riskav}
       }
     \right)^{1/(1-\riskav)}
   \right)
 \end{equation}
-for $t < T$, since for $\riskav > 0$,
+for $t < T$, since for $\riskav > 1$,
 $(\cdot)^{1/(1-\riskav)}$ is strictly monotonously decreasing and
 $(1-\riskav) < 0$.
 The notation in the remainder of this section
 does not distinguish between $\valueintp[\ast]_t$ and $\cetvalueintp[\ast]_t$
-and uses $\valueintp[\ast]_t$ for both, if it is not relevant
+and uses $\valueintp[\ast]_t$ for both if it is not relevant
 whether the value function is transformed.
 %and hence,
 %$(\max ((1-\riskav) (\cdot)))^{1/(1-\riskav)}
@@ -456,18 +456,18 @@ by quadrature,
 \begin{equation}
   \label{eq:bellmanQuadrature}
   \expectation[t]{
-    (
+    \bigl(
       \cetvalueintp[p]_{t+1}(
         \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t)
       )
-    )^{1-\riskav}
+    \bigr)^{1-\riskav}
   }
   \approx \sum_{j=1}^{m_{\quadweight}} \quadweight_t^{(j)}
-  (
+  \bigl(
     \cetvalueintp[p]_{t+1}(
       \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
     )
-  )^{1-\riskav},
+  \bigr)^{1-\riskav},
 \end{equation}
 for some weights $\quadweight_t^{(j)} \in \real$ and
 nodes $\stochastic_t^{(j)} \in \stochdomain$
@@ -530,8 +530,12 @@ the problem.
 Instead, we extend the interpolant $\valueintp[p]_{t+1}$
 to $\real^d$ by an extrapolation method based on Taylor approximation.
 First, we crop the evaluation point
-$\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to
-a point $\state_{t+1}^\mathrm{in} \in \clint{\*0, \*1}$
+$\state_{t+1} \in \real^d \setminus \clint{\*0, \*1}$ to a point
+$
+  \state_{t+1}^\mathrm{in}
+  = \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
+  \in \clint{\*0, \*1}
+$
 with $\state_{t+1}^\mathrm{in} := \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$
 (component-wise minimum/maximum).
 The extrapolation type,
@@ -544,7 +548,7 @@ determines the degree of the Taylor approximation:
     \tr{(\gradient{\state_{t+1}}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))}
     (\state_{t+1} - \state_{t+1}^\mathrm{in})\\
     &\qquad + \tr{(\state_{t+1} - \state_{t+1}^\mathrm{in})}
-    \hessian{\state_{t+1}}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in})
+    (\hessian{\state_{t+1}}{\valueintp[p]_{t+1}}(\state_{t+1}^\mathrm{in}))
     (\state_{t+1} - \state_{t+1}^\mathrm{in}),
   \end{split}
 \end{equation}
@@ -575,8 +579,8 @@ since the surpluses are easier to compute in the piecewise linear case,
 and they are more meaningful
 due to the integral representation formula \eqref{eq:surplusIntegral}.
 Parameters for \cref{alg:financeRefine} are
-the tolerance $\refinetol_t \in \nonnegreal$,
-by which the set of grid points to be refined is determined, and
+the tolerance $\refinetol_t \in \nonnegreal$
+by which the set of grid points to be refined is determined and
 the number $\norefine_t \in \natz$ of refinement iterations.
 These parameters may depend on the time $t$,
 since it might be beneficial to change the adaptivity of the
@@ -663,7 +667,7 @@ as it would unnecessarily complicate their presentation.
 
 After explaining the generation of the value function interpolants
 $\valueintp[p]_t$ ($t = 0, \dotsc, T$),
-we can move on to step 2 of the general structure of our method
+we move on to step 2 of the general structure of our method
 (see \cref{sec:821generalStructure}),
 which is the generation of optimal policy interpolants.
 The corresponding \cref{alg:financeSolvePolicies} is similar to
@@ -673,13 +677,13 @@ the value function interpolants.
 The functions \texttt{optimize}, \texttt{refine}, and \texttt{interpolate}
 have been replaced by corresponding policy versions
 \texttt{optimizePolicy}, \texttt{refinePolicy}, and \texttt{interpolatePolicy},
-that work very much like their value function counterpart.
+that work very much like their value function counterparts.
 \texttt{optimizePolicy} only has to generate new values
 if the initial regular sparse grid for the policies
 is not contained in the grid of $\valueintp[p]_t$.
 The policy grid is then refined and interpolated independently
 of the value function grid.
-The iterations are independent of each other,
+The iterations over time are independent of each other,
 which means that they can be parallelized.
 
 \begin{algorithm}

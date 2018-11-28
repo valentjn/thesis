@@ -214,13 +214,13 @@ Since there is no inheritance, the optimal terminal solution
 is to sell all stocks and consume everything:
 \begin{equation}
   \normcetvalueintp_t(\state_T^{(k)})
-  = 1 - \tac \sumfcn(\vstock_t^{(k)}),\quad
+  = 1 - \tac \sumfcn(\vstock_T^{(k)}),\quad
   \normbond_T^{\opt}(\state_T^{(k)})
   = 0,\quad
   \vnormbuy[\opt]_T(\state_T^{(k)})
   = \*0,\quad
   \vnormsell[\opt]_T(\state_T^{(k)})
-  = \vstock_t^{(k)}.
+  = \vstock_T^{(k)}.
 \end{equation}
 
 
@@ -557,8 +557,8 @@ This is because the cropping already occurs for large stock holdings
 $\sumfcn(\vstock_t)$ that are less than one,
 as stocks have to be sold to maintain
 minimum consumption $\normconsume_{\min}$.
-Numerical experiments showed that due to this issue,
-the error attains large values near the hyperplane
+Numerical experiments show that due to this issue,
+the error attains large values in the region near the hyperplane
 $\sumfcn(\vstock_t) = 1$.
 Economically, this region is not significant
 as such large stock fractions are highly unusual,
