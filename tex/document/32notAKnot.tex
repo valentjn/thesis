@@ -9,7 +9,7 @@ the hierarchical splitting equation \eqref{eq:hierSplittingUV}
 only holds when restricting the function spaces to
 $\rspldomain{l}{p} =
 \clint{\tfrac{p-1}{2} \ms{l},\; 1 - \tfrac{p-1}{2} \ms{l}}$,
-which is a proper subset of the domain $\clint{0, 1}$ (for $p > 1$).
+which is a proper subset of the domain $\clint{0, 1}$ if $p > 1$.
 As we will see, the implications of this fact on the approximation quality
 of the hierarchical B-spline basis are severe.
 In this section, we study the underlying reasons of the restriction and
@@ -67,7 +67,9 @@ for other non-polynomial functions as well.
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to replicate a cubic polynomial $\objfun$
     (here: $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$)
+    \vphantom{$\bspl{l',i'}{p}$}%
     when interpolating on the grid of level $l = 3$.%
+    \vphantom{$\bspl{l',i'}{p}$}%
   }%
   \label{fig:nakInterpolation}%
 \end{figure}
@@ -157,12 +159,13 @@ on the grid of level $l$, i.e., the space $\nonunifsplspace{\knotseq}{p}$ with
   k = 0, \dotsc, m + p,\quad
   m := 2^l + p.
 \end{equation}
-We have $\spldomain{\knotseq}{p} = \clint{0, 1}$ for this choice of $\knotseq$
+We have $\spldomain{\knotseq}{p} = \clint{0, 1}$
+for this choice of $\knotseq$.
 Hence, the grid points $\gp{l,i}$ ($i = 0, \dotsc, 2^l$) satisfy
 the Schoenberg--Whitney conditions for the uniform B-spline basis.
 Clearly, the sum $\bigoplus_{l'=0}^l \hsbspl{l'}{p}$
 is a subspace of $\wholesplspace{l}{p}$,
-but it cannot equal $\wholesplspace{l}{p}$ due to
+but it cannot be equal to $\wholesplspace{l}{p}$ due to
 \begin{equation}
   \dim \bigoplus_{l'=0}^l \hsbspl{l'}{p}
   = 2^l + 1
@@ -264,14 +267,18 @@ of $\wholesplspace{l}{p}$ with the desired dimensionality:
   = \dim \naksplspace{l}{p}.
 \end{equation}
 The space $\naksplspace{l}{p}$ satisfies our two requirements:
+\vspace{0.1em}%
 First, the spline interpolation domain
 $\spldomain{\nodalknotseq[\nak]{l}{p}}{p}
 = \clint{\nodalknot[\nak]{l,p}{p}, \nodalknot[\nak]{l,m}{p}}$
 of $\naksplspace{l}{p}$ equals the whole unit interval $\clint{0, 1}$.
+\vspace{-0.3em}%
 This means that the Schoenberg--Whitney conditions are satisfied
+\vspace{0.1em}%
 for $\naksplspace{l}{p}$, since all interpolation points
 (grid points) are contained in
 $\spldomain{\nodalknotseq[\nak]{l}{p}}{p} = \clint{0, 1}$.
+\vspace{-0.3em}%
 Second, $\naksplspace{l}{p}$ still contains all polynomials of
 degree $\le p$, as we have only removed knots compared to
 $\wholesplspace{l}{p}$.
@@ -504,6 +511,8 @@ respectively.
   the coefficient corresponding to the grid point.
   Hence, all coefficients must vanish.
 \end{proof}
+
+\vspace*{1em}
 
 \begin{corollary}[%
   multivariate hierarchical splitting for not-a-knot B-splines%
