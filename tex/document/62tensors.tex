@@ -5,7 +5,7 @@
 
 \minitoc{75mm}{7}
 
-During the process of solving \eqref{eq:topoOptProblemDiscrete},
+During the process of solving \cref{eq:topoOptProblemDiscrete},
 optimization algorithms typically
 evaluate the objective function $\compliance(\mcp{1}, \dotsc, \mcp{M})$
 iteratively at different \term{micro-cell parameter combinations}
@@ -17,7 +17,7 @@ the elasticity tensors $\etensor^{(q)}$ of all $M$ macro-cells
 need to be known.
 Hence, in every optimization iteration, it is necessary to solve
 one macro-problem and $M$ micro-cell problems,
-both with the \fem.
+all with the \fem.
 This naive approach has two major drawbacks, which we explain in
 the following.
 
@@ -68,7 +68,7 @@ This introduces new error sources and
 increases the number of elasticity tensors to be evaluated,
 further slowing down the solution process.
 Additionally, the number of optimization iterations necessary to
-achieve convergence might increase,
+achieve convergence might increase
 if there are discontinuities in the objective function
 or its gradient.
 Such discontinuities can already be caused by the inexact solution of the \fem.
@@ -164,17 +164,16 @@ Our approach has multiple obvious advantages:
 
 Unfortunately, just replacing elasticity tensors with
 B-spline surrogates often does not lead to correct results in practice.
-Experiments show that for most regular sparse grids and
-for some spatially adaptive sparse grids,
+Experiments show that for only for some sparse grids,
 the optimization algorithm converges to an optimal point
 \cite{Valentin16Hierarchical}.
 The optimization algorithm crashes for most spatially adaptive grids,
 not being able to find any meaningful optimum.
 %
-The root of the problem proves to be that for specific
-micro-cell parameters $\*x \in \clint{\*0, \*1}$,
+The root of the problem proves to be that
 the interpolated elasticity tensors $\etensorintp(\*x)$ are not
-positive definite.
+positive definite for specific
+micro-cell parameters $\*x \in \clint{\*0, \*1}$.
 However, indefinite or even negative definite tensors $\etensorintp$
 would mimic unphysical behavior.%
 \footnote{%
@@ -221,7 +220,7 @@ already make the whole elasticity tensor non-positive-definite.
     Minimal eigenvalue \emph{(colored contour lines)}
     of elasticity tensor surrogates
     for the 2D cross model ($\dimobjdomain = 2$, $d = 2$)
-    \vspace{-0.25em}%
+    \vspace{-0.3em}%
     and cubic hierarchical B-splines $\bspl{\*l,\*i}{p}$ ($p = 3$) on
     the regular sparse grid $\coarseregsgset{n}{d}{b}$ \emph{(dots)}
     with $n = 6$ and $b = 4$.
@@ -293,12 +292,11 @@ on the interpolated values (e.g., $\exp$).%
 %probability distribution.
 For the piecewise linear hierarchical basis, another approach has been
 developed recently \cite{Franzelin17Data},
-where the positivity is maintained
-by inserting additional sparse grid points.
+maintaining the positivity by inserting additional sparse grid points.
 In the context of spline approximation,
 positivity-preserving approximation schemes based on so-called
 quasi-interpolation are known \cite{Hoellig13Approximation}.
-For our application, where we need to preserve positive definiteness,
+For our application, for which we need to preserve positive definiteness,
 it is conceivable that one could apply these positivity-preserving
 methods in the eigenspace,
 interpolating the positive eigenvalues.
@@ -363,7 +361,7 @@ is positive semidefinite on the whole domain and
 positive definite almost everywhere:
 The surrogate $\etensorcholintp(\*x)$ is singular if and only if
 $\cholfactorintp(\*x)$ is singular, which is in general
-only the case on a negligible null set of $\clint{\*0, \*1}$.
+only the case on a negligible null set in $\clint{\*0, \*1}$.
 
 Another advantage of this approach is that not only the
 positive definiteness, but also the explicit differentiability

@@ -185,11 +185,11 @@ $\etensorcholintp$.
 
 We use the classical surplus-based refinement criterion
 (see, e.g., \cite{Pflueger10Spatially})
-as show in \cref{alg:topoOptGridGeneration}
+as shown in \cref{alg:topoOptGridGeneration}
 to generate the spatially adaptive sparse grids.
 The difference to common surrogate settings is that the objective function
 $\*f\colon \clint{\*0, \*1} \to \real^{m+1}$ is vector-valued.
-As the components of $\cholfactor$ cannot be evaluated individually,
+As the entries of $\cholfactor$ cannot be evaluated individually,
 the adaptivity criterion has to consider all entries at once
 to avoid performing unnecessary evaluations.
 We use the surpluses in the piecewise linear hierarchical basis,
@@ -292,12 +292,12 @@ the shearing angles to $\clint{-0.35\pi, 0.35\pi}$.
 
 \paragraph{Software, algorithms, and domain discretization}
 
-The micro-problems and macro-problems were solved with the \fem
-implemented in the \fem software package CFS++ \cite{Kaltenbacher10Advanced}.%
+The micro-problems and macro-problems were solved with the
+\fem software package CFS++ \cite{Kaltenbacher10Advanced}.%
 \footnote{%
   \url{http://www.lse.uni-erlangen.de/cfs/}%
 }
-The micro-problems were discretized by dividing the micro-cells into
+The micro-pro\-blems were discretized by dividing the micro-cells into
 $128 \times 128 = \num{16384}$ elements (models in two dimensions) or
 $16 \times 16 \times 16 = \num{4096}$ elements (models in three dimensions).
 The macro-domains $\objdomain$ were discretized using
@@ -396,7 +396,7 @@ its surrogate
 $\etensorcholintp\colon \clint{\*0, \*1} \to \real^{6 \times 6}$
 obtained by Cholesky factorization.
 To retrieve a scalar error measure,
-we consider the spectral norm
+we use the spectral norm
 \begin{equation}
   \norm[2]{\etensor(\*x) - \etensorcholintp(\*x)},\quad
   \*x \in \clint{\*0, \*1},
@@ -510,7 +510,7 @@ micro-cell models as shown in
 In fact, the convergence decelerates even more
 as the number of micro-cell parameters increases.
 For the 2D sheared cross and 3D cross models with three parameters,
-the spatially adaptive sparse grid with $\ngp = \num{10000}$ grid points
+the spatially adaptive sparse grid with $\ngp \approx \num{10000}$ grid points
 is able to achieve a relative error of around \SI{3}{\permille}.
 However, for the 2D sheared framed cross and 3D sheared cross models
 with five parameters, only errors of about \SI{5}{\percent} are reached
@@ -572,7 +572,7 @@ is the micro-cell parameter combination that is returned by the optimizer.%
   Note that this true compliance value differs from the
   approximated value
   $\complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$,
-  which the optimizer reports as optimal objective function value.%
+  which the optimizer reports as the optimal objective function value.%
 }
 It is obvious that more complicated micro-cell models
 lead to lower (better) compliance values,
@@ -681,6 +681,7 @@ one single large micro-cell.
     bright regions to strong displacements.
     The color map is the same as in
     \cref{fig:topoOptStructure2DLShape}.
+    Only bars with widths $\ge 0.1$ are shown.
     More details can be found in \cref{tbl:topoOptResultsDetailed}.%
   }%
   \label{fig:topoOptStructure2DCantilever}%
@@ -761,7 +762,7 @@ Ideally, we would measure the true optimality gap
 cf.\ error \ref{item:topoOptErrorOptimization}.
 Unfortunately, the true optimum
 $(\mcpopt{1}, \dotsc, \mcpopt{M})$ could not be computed:
-Apart from the computation time issues mentioned above,
+Apart from the time issue mentioned above,
 oscillations in the elasticity tensor evaluation and
 errors stemming from types
 \ref{item:topoOptErrorMicro} and \ref{item:topoOptErrorRounding}
