@@ -4,7 +4,7 @@
 \noindent
 Finally, we conclude the thesis by summarizing its results
 and giving an outlook on possible future work.
-In particular, we highlight key contributions of this thesis to research,
+In particular, we highlight key contributions of the thesis to research,
 give recommendations for future applications of the presented method, and
 state possible downsides and limitations.
 
@@ -12,8 +12,8 @@ state possible downsides and limitations.
 
 \paragraph{Summary of the thesis}
 
-The contribution of this thesis consists of two major parts.
-In the first part of the thesis,
+The contribution of this thesis consisted of two major parts.
+In the first part,
 hierarchical B-splines on sparse grids were comprehensively presented
 and embedded in a sparse grid framework with general
 tensor product basis functions.
@@ -24,10 +24,10 @@ and that it clarified which properties only held for the
 classical piecewise linear bases and not for other tensor product bases.
 We saw that standard hierarchical B-splines suffer from
 approximation issues near the boundary, and
-we solved these issues by incorporating not-a-knot boundary conditions
+we resolved these issues by incorporating not-a-knot boundary conditions
 into the hierarchical B-spline basis.
-The focus was put in the further course of the thesis
-on the algorithmic implications of the novel bases,
+In the further course of the thesis,
+the focus was put on the algorithmic implications of the novel bases,
 taking the hierarchization problem as an example.
 We looked at requirements that had to be satisfied by grids and bases
 to enable efficient hierarchization algorithms,
@@ -40,9 +40,11 @@ modified hierarchical B-splines,
 hierarchical not-a-knot B-splines,
 hierarchical fundamental splines, and
 hierarchical weakly fundamental splines
-(where the former two are not novel).
+(where the first two are not novel).
 Modified, not-a-knot, and (weakly) fundamental splines could be combined
 almost arbitrarily to tailor the ansatz functions to suit one's specific needs.
+
+\pagebreak
 
 The second, more practical part of the thesis was dedicated to transferring
 the newly gained theoretical knowledge to
@@ -56,7 +58,7 @@ which was specifically designed for optimization,
 we were able to achieve optimization gaps
 that were for some test functions up to six orders of magnitude smaller
 for cubic B-splines than for standard piecewise linear functions.
-We transfered the Novak--Ritter criterion to uncertainty quantification
+We transferred the Novak--Ritter criterion to uncertainty quantification
 and obtained similarly strong results for the
 propagation of fuzzy uncertainties with the fuzzy extension principle.
 Furthermore, we successfully showed the suitability of hierarchical B-splines
@@ -91,17 +93,18 @@ which are summarized in \cref{tbl:applicationSummary}.
   \label{tbl:applicationSummary}%
 \end{table}%
 First, by interpolating Cholesky factors of elasticity tensors,
-we accomplished to efficiently solve three-dimensional
-topology optimization problems with complex micro-cell structures.
+we accomplished to efficiently solve
+topology optimization problems in three spatial dimensions
+with complex micro-cell structures.
 Second, in the biomechanical application,
 we dramatically reduced the computational time to solve
 test scenarios by up to \SI{99}{\percent} by using
 sparse grid surrogates with B-splines instead of the
-actual continuum-mechanical model.
+exact continuum-mechanical model.
 Third, we were able to solve dynamic portfolio choice problems
 with five state variables and eleven policy variables
 with unprecedented precision, as one could only speculate
-how the solution looks like with state-of-the-art methods.
+how the solution looked like with state-of-the-art methods.
 In all of these applications, the advantages of B-splines were made clear
 by comparing the results to the classical piecewise linear basis.
 The implementation of hierarchical B-splines of sparse grids is
@@ -128,8 +131,8 @@ since convergence notably slows down as the dimensionality grows
 higher dimensionalities \cite{Pflueger10Spatially}).
 In addition, the objective function should be ``as smooth as possible''
 in order to benefit from higher-order B-splines.
-This means at the very least continuous,
-but twice continuously differentiable is desirable.
+This means ``continuous'' at the very least,
+but twice continuous differentiability is more desirable.
 The general rule is that the employed basis functions should be
 at least as smooth as the objective function in order to obtain
 optimal convergence results.
@@ -139,16 +142,16 @@ Not-a-knot B-splines are well-suited for objective functions with
 dominating near-polynomial parts.
 Fundamental splines may be used to accelerate the process of
 hierarchization by enabling breadth-first search in quadratic time.
-With weakly fundamental splines, this can further be reduced to
-linear time with the unidirectional principle.
-However, the additional grid points, which have to be inserted,
+With weakly fundamental splines, this can be further reduced to
+linear time using the unidirectional principle.
+However, the additional grid points that have to be inserted
 have to be taken into account as well.
 The rule of thumb is that the more spatially adaptive a sparse grid is
 (i.e., only few high-level grid points),
 the more points have to be inserted.
 In general, it does not hurt to try the different available
 B-spline types and degrees,
-since the function values can simply be reused,
+since most function values can simply be reused
 once the objective function has been sampled.
 
 \vspace*{\fill}
@@ -161,15 +164,18 @@ Besides the Novak--Ritter criterion,
 there are other refinement criteria that are tailored to optimization
 such as simultaneous optimistic optimization \cite{Wang14Bayesian}.
 In addition, nested methods for hierarchical optimization could
-use multiple interpolants with different resolutions \cite{Delbos14Global}.
+use multiple interpolants with different resolutions
+on different grids \cite{Delbos14Global}.
 Criteria that directly incorporate constraints would improve
 results in constrained optimization settings.
 With respect to adaptivity,
 there is also much work left to do.
 This thesis focused on spatial adaptivity for its applications,
-but there might be interesting applications using dimensional adaptivity,
+but there are interesting applications
+that greatly benefit from dimensional adaptivity,
 for example plasma physics \cite{Pflueger14EXAHD}.
-A key task is introducing $h$-$p$-adaptivity to B-splines on sparse grids,
+Another key task would be the introduction of
+$h$-$p$-adaptivity to B-splines on sparse grids,
 which would greatly enhance the applicability of B-splines in
 non-smooth scenarios.
 As a simple special case,
@@ -185,7 +191,9 @@ possibilities for future work.
 The sparse grids in the biomechanical application
 we considered in this thesis were only two-dimensional.
 This is not in the range of dimensions where sparse grids
-demonstrate their full strength.
+demonstrate their full strength,
+although the two-dimensional surrogates were already able to drastically
+reduce the required computation time compared to full grids.
 Currently, an extended model with five muscles and therefore
 five-dimensional sparse grids is being considered
 (see \cref{fig:upperLimb5D}).
@@ -231,18 +239,20 @@ five-dimensional sparse grids is being considered
   }%
   \label{fig:upperLimb5D}%
 \end{SCfigure}%
-Here, spatial adaptivity has to be used a priori to cope with
-the increased dimensionality.
+Here, it will be mandatory to employ spatial adaptivity
+to cope with the increased dimensionality.
 In the application of topology optimization,
 more complicated micro-cell models and more complicated
-settings could be employed.
+settings could be studied.
 For example, the widths of the diagonal macro-bars could be constrained
 \cite{Allaire16Towards}.
 The dynamic portfolio choice models in the financial application
 were quite limited.
-For example, there was no inheritance (i.e., bequest) motive and
+For example,
+there was no inheritance motive (i.e., bequest),
+the model did not contain the individual's regular income, and
 the model did not account for savings for large necessary investments
-(e.g., cars or houses), both of which seems unnecessarily unrealistic.
+(e.g., cars or houses), which seems unnecessarily unrealistic.
 Finally, one could consider many other real-world optimization problems
 or other application fields of B-splines on sparse grids,
 for instance, data mining or uncertainty quantification.
