@@ -123,7 +123,7 @@ def main():
       ys1[ys1 < 1e-16] = 1e-16
       ys2[ys2 < 1e-16] = 1e-16
       color2 = helper.plot.mixColors(
-          color1, 0.55, helper.plot.mixColors("mittelblau", 0.1))
+          color1, 0.45, helper.plot.mixColors("mittelblau", 0.1))
       
       for y1, y2, lineStyle in zip(ys1, ys2, lineStyles):
         markerSize = (6 if lineStyle[0] == "." else 3)
