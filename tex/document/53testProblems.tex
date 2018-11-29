@@ -15,7 +15,7 @@ actual application settings.
 When testing methods that involve sparse grid interpolation,
 one has to consider that the function to be interpolated
 does not satisfy a specific \term{trivial property.}
-A test function $\objfun\colon \clint{\*0, \*1} \to \real$ is trivial, if
+A test function $\objfun\colon \clint{\*0, \*1} \to \real$ is trivial if
 $\objfun$ is a sum of tensor products of which at
 least one factor is a linear polynomial, i.e., if
 $\objfun$ is of the form
@@ -177,11 +177,11 @@ $x_t = \tfrac{\xscaledentry{t} - a_t}{b_t - a_t}$, $t = 1, \dotsc, d$
 
 \vspace*{1em}
 
-The parameter domain of some test problems has been slightly translated
+The parameter domains of some test problems have been slightly translated
 compared to the literature
-to avoid that the minimum is located exactly at or close to
+to avoid that the minima are located exactly at or close to
 the center of the domain.
-In this case, sparse grids would be in advantage as
+In these cases, sparse grids would be in advantage as
 they tend to place more points near the center of the domain
 (especially for high dimensionalities).
 

@@ -22,7 +22,7 @@ where $\objfun\colon \real^d \to \real$ is the \term{objective function.}
 \end{equation}
 where
 $\ineqconfun\colon \real^d \to \real^{m_{\ineqconfun}}$
-($m_{\ineqconfun} \in \natz$)
+($m_{\ineqconfun} \in \nat$)
 is the \term{(inequality) constraint function.}
 This formulation also contains optimization problems
 with equality constraints $\eqconfun(\*x) = \*0$
@@ -287,8 +287,8 @@ each iteration $k$ a unit \term{search direction} $\*d_k \in \real^d$
 where $\delta_k \in \posreal$ is the \term{step size.}
 The algorithms essentially differ in the
 choice of the search direction $\*d_k$,
-which should point in negative gradient
-direction ($\innerprod[2]{\*d_k}{\gradient{\*x}{\objfun}(\*x_k)} < 0$).
+which should be oriented like the negative gradient
+($\innerprod[2]{\*d_k}{\gradient{\*x}{\objfun}(\*x_k)} < 0$).
 The step size $\delta_k$ can then be determined independently of the
 algorithm via \term{line search,}
 for instance, the \term{Armijo line search algorithm}
@@ -362,7 +362,7 @@ given by
 $\objfun(\*x_k + \*d_k)
 \!\approx\! \objfun(\*x_k) +
 \tr{(\gradient{\*x}{\objfun}(\*x_k))} \*d_k \,+
-\frac{1}{2} \tr{(\*d_k)} \hessian{\*x}{\objfun}(\*x_k) \*d_k$
+\frac{1}{2} \tr{(\*d_k)} (\hessian{\*x}{\objfun}(\*x_k)) \*d_k$
 and determines the search direction such that $\*x_k + \*d_k$ is
 the minimum of the approximation, i.e.,
 $\*d_k \propto
@@ -413,8 +413,12 @@ The \term{Levenberg--Marquardt method}
 \multicite{Nocedal99Numerical,Freund07Stoer,Toussaint15Introduction}
 can only solve \term{non-linear least-squares problems,} i.e.,
 the objective function must be of the form
-$\objfun(\*x) = \tr{\*\phi(\*x)} \*\phi(\*x) = \sum_{i=1}^m \phi_i(\*x)^2$
-for some function $\*\phi\colon \real^d \to \real^m$.
+$
+  \objfun(\*x)
+  = \norm[2]{\*\phi(\*x)}^2
+  = \sum_{i=1}^{m_{\*\phi}} \abs{\phi_i(\*x)}^2
+$
+for some function $\*\phi\colon \real^d \to \real^{m_{\*\phi}}$.
 It is an improvement over the \term{Gauss--Newton method}
 (which is in turn a slight modification of the Newton method)
 and can be obtained by replacing the line search in the
@@ -496,7 +500,7 @@ considers the auxiliary problem
     ((\ineqconfun[i](\*x))_{+})^2 + \tr{\*\lambda_k} \ineqconfun(\*x)
   },
 \end{equation}
-where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is defined as one,
+where $[\lambda_{k,i} > 0] \in \{0, 1\}$ is defined as one
 if and only if $\lambda_{k,i} > 0$, and
 $\*\lambda_k \in \nonnegreal^{m_{\ineqconfun}}$ is an estimate of the
 \term{Lagrangian multipliers.}
