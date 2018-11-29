@@ -1010,15 +1010,15 @@
 %  Scaled equality constraint function
 %  $\eqconfunscaled\colon \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
 %}
-%
-%\hidenextnotation
-%\newnotationcommand[1]{\testobjfunscaled}{%
-%  \bar{\objfun}_{\mathrm{#1}}%
-%}{fbarTest}{$\testobjfunscaled{Test}$}{
-%  Scaled test objective function
-%  $\testobjfunscaled{Test}\colon \clint{\*a, \*b} \to \real$
-%  with name ``Test''
-%}
+
+\hidenextnotation
+\newnotationcommand[1]{\testobjfunscaled}{%
+  \bar{\objfun}_{\mathrm{#1}}%
+}{fbarTest}{$\testobjfunscaled{Test}$}{
+  Scaled test objective function
+  $\testobjfunscaled{Test}\colon \clint{\*a, \*b} \to \real$
+  with name ``Test''
+}
 
 \hidenextnotation
 \newnotationcommandoptarg{2}{\testineqconfunscaled}{%
@@ -1031,16 +1031,16 @@
   with name ``Test''
 }
 
-\hidenextnotation
-\newnotationcommandoptarg{2}{\testeqconfunscaled}{
-  \ifempty{#1}{\bar{\*h}_{\mathrm{#2}}}%
-  \ifnotempty{#1}{\bar{h}_{\mathrm{#2},#1}}%
-}{hbarTest}{$\testeqconfunscaled{Test}$}{
-  Scaled test equality constraint function
-  $\testeqconfunscaled{Test}\colon
-  \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
-  with name ``Test''
-}
+%\hidenextnotation
+%\newnotationcommandoptarg{2}{\testeqconfunscaled}{
+%  \ifempty{#1}{\bar{\*h}_{\mathrm{#2}}}%
+%  \ifnotempty{#1}{\bar{h}_{\mathrm{#2},#1}}%
+%}{hbarTest}{$\testeqconfunscaled{Test}$}{
+%  Scaled test equality constraint function
+%  $\testeqconfunscaled{Test}\colon
+%  \clint{\*a, \*b} \to \real^{m_{\eqconfun}}$
+%  with name ``Test''
+%}
 
 \newnotationcommand[1]{\fgintp}{f_{#1}}{fl}{$\fgintp{\*l}$}{
   Full grid interpolant of $\objfun$ in $\ns{\*l}$
