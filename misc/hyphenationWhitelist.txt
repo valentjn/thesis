@@ -25,10 +25,13 @@ as-sump-tion
 as-sump-tions
 asymp-tot-i-cal-ly
 avail-able
+b-spline-ba-sen
 ba-sis
+ba-sis-funk-tio-nen
 be-fore
 best-masters
 be-tween
+bell-man
 birk-häu-ser
 bound-ary
 b-spline
@@ -39,6 +42,8 @@ char-ac-ter-i-za-tion
 cheb-y-shev
 cheb-y-shev-dis-trib-ut-ed
 choos-ing
+cir-cum-stances
+clar-i-fied
 clas-si-cal
 co-ef-fi-cients
 col-lab-o-ra-tion
@@ -124,6 +129,7 @@ evo-lu-tions-stra-te-gie
 ex-ten-sion
 fig-ure
 fol-low-ing
+fol-lows
 for-mu-lat-ed
 for-ward
 frank-furt
@@ -167,6 +173,7 @@ ini-tial
 in-sert-ing
 in-te-gra-tion
 in-ter-est
+in-ter-est-ing
 in-ter-polant
 in-ter-polants
 in-ter-po-lat-ed
@@ -188,7 +195,7 @@ lit-er-a-ture
 log-a-rith-mic
 macro-bars
 macro-cells
-macro-problems
+macro-prob-lems
 mag-ni-tude
 mat-lab
 math-e-mat-ics
@@ -196,6 +203,7 @@ max-i-mize
 mean-ing-ful
 meth-ods
 micro-cell
+micro-prob-lems
 micro-mechan-ic-al
 mod-els
 mod-er-ate-ly
@@ -219,6 +227,7 @@ ob-tain-ing
 one-di-men-sional
 op-er-ates
 op-ti-mal
+op-ti-mie-rung
 op-ti-mie-rungs-pro-ble-me
 op-ti-miza-tion
 op-ti-mize-pol-i-cy
@@ -230,8 +239,9 @@ over-de-ter-mined
 pa-ram-e-ter
 pa-ram-e-ters
 par-ti-cle
-pick-ing
 pi-o-neered
+pick-ing
+piece-wise
 point-wise
 poly-no-mi-als
 port-fo-lio
@@ -253,9 +263,8 @@ prop-er-ties
 real-world
 rea-son-ing
 rect-an-gles
-ref-er-ence
+re-fine
 re-fine-ment
-reg-u-lar
 re-lat-ed
 re-lied
 re-moved
@@ -267,10 +276,13 @@ resid-u-al
 re-spec-tive-ly
 re-sult
 re-sult-ing
+ref-er-ence
+reg-u-lar
 right-hand
 right-most
 run-time
 sam-ples
+sat-is-fied
 scalability-efficiency-maintainability-portability
 sci-ence
 sec-tion
@@ -289,15 +301,18 @@ sorti-ng
 sort-ing
 spa-tial-ly
 split-ting
+ste-tig
 struc-tures
 study-ing
 su-per-script
 sub-jec-tiv-i-ty
+sub-se-quent-ly
 sub-space
 sub-spaces
 sum-ma-rizes
 sup-port
 sur-plus-es
+sur-ro-gate
 sur-ro-gates
 tech-nique
 ten-don-dis-place-ment
@@ -313,6 +328,7 @@ tran-si-tion
 translation-invariant
 tri-ceps
 two-dimen-sional
+un-brauch-bar
 un-cer-tain-ties
 un-con-strained
 un-nor-mal-ized
