@@ -1674,7 +1674,9 @@
 }
 
 \hidenextnotation
-\newnotationcommand{\normstatefcn}{\hat{\*\psi}}{Äψt2}{$\normstatefcn_t$}{
+\newnotationcommandoptarg{1}{\normstatefcn}{%
+  \hat{\*\psi}\ifnotempty{#1}{^{\raisebox{-0.5em}{\scriptsize$#1$}}}%
+}{Äψt2}{$\normstatefcn_t$}{
   Normalized state transition fcn.
 }
 
