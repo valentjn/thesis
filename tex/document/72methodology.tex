@@ -5,7 +5,7 @@
 
 \noindent
 In this section, we give an overview of the methodology of our approach.
-We closely follow the presentation of \cite{Valentin18Gradient}.
+We continue following the presentation of \cite{Valentin18Gradient}.
 
 
 
@@ -270,9 +270,9 @@ which in turn has to be approximated with the Newton method.
 As we see in \cref{eq:newtonAngle},
 each iteration of the Newton method needs not only the values of the
 muscle forces $\forceT$ and $\forceB$, but also their
-partial derivatives with respect to $\elbang$,
-which have to be approximated with finite differences,
-as the simulation does not provide derivatives.
+partial derivatives with respect to $\elbang$.
+These partial derivatives have to be approximated with finite differences.
+%as the simulation method does not provide derivatives.
 
 Unfortunately, simulations of continuum-mechanical models are
 computationally expensive.
@@ -334,11 +334,11 @@ $\forceXintp\colon \clint{\*0, \*1} \to \real$
 ($X \in \{\mathrm{T}, \mathrm{B}\}$) by sparse grid interpolation.
 Compared to surrogate construction techniques based on full grids,
 sparse grids help to reduce the number of samples that
-are necessary to build a ``reasonably'' accurate surrogate,
+are necessary to build ``reasonably'' accurate surrogates,
 especially if the number of dimensions is moderately large
 ($d \ge 4$, \term{curse of dimensionality}).
 
-The present model has only $d = 2$ dimensions ($\actT$ and $\actB$),
+The present model only has $d = 2$ dimensions ($\actT$ and $\actB$),
 since the model contains only two muscles.
 However, as we will see,
 already for this low-dimensional problem,

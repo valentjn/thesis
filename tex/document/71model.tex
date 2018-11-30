@@ -12,7 +12,11 @@ For convenience, the most relevant symbols are listed in
 
 \begin{table}
   \setnumberoftableheaderrows{0}%
-  \newcommand*{\pnst}[1]{\printnotationsymbol{#1}&\printnotationtext{#1}}%
+  \newcommand*{\pnst}[1]{%
+    \printnotationsymbol{#1}%
+    \vphantom{\printnotationsymbol{\equielbang}$(\cdot)^{\reference}$}&%
+    \printnotationtext{#1}%
+  }%
   \begin{tabular}{%
       >{\kern\tabcolsep}=l+l<{\kern5mm}+l+l<{\kern5mm}+l+l<{\kern\tabcolsep}%
     }
