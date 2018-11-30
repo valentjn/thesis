@@ -326,7 +326,7 @@ discrete choices in the value iteration are computed
 using piecewise linear basis functions on spatially adaptive sparse grids.
 Schober employs spatially adaptive sparse grids
 for the interpolation of dynamic portfolio choice models,
-but uses the piecewise linear basis functions \cite{Schober18Solving}.
+but uses piecewise linear basis functions \cite{Schober18Solving}.
 Judd et al.\ use global polynomials
 on sparse Clenshaw--Curtis grids for the interpolation of
 higher-dimensional economic models \cite{Judd14Smolyak}.
@@ -338,12 +338,12 @@ higher-dimensional economic models \cite{Judd14Smolyak}.
 The shortcomings of the two approaches of piecewise linear functions
 \multicite{Brumm17Using,Schober18Solving} or global polynomials
 \cite{Judd14Smolyak} are evident:
-Piecewise linear basis functions are not continuously differentiable,
+Piecewise linear functions are not continuously differentiable,
 impeding convergence of interpolation errors
 (see \cref{sec:541interpolation}) and prohibiting the use
-of gradient-based optimization methods to solve \eqref{eq:gridBellman}.
-The reason for the latter is that gradient-based optimizers require
-the derivatives of the objective function of \eqref{eq:gridBellman}
+of gradient-based optimization methods to solve \cref{eq:gridBellman}.
+The reason for the latter statement is that gradient-based optimizers require
+the derivatives of the objective function of \cref{eq:gridBellman}
 with respect to the entries $\policyentry_{t,j}$ of $\policy_t$
 ($j = 1, \dotsc, m_{\policy}$), i.e.,
 \begin{equation}
@@ -380,6 +380,6 @@ the interpolation of $\valuefcn_t$ and $\optpolicyfcn_t$.
 This method has two advantages:
 First, B-splines of degree $p > 1$ are continuously differentiable,
 increasing the order of convergence and enabling
-gradient-based optimization for solving \eqref{eq:gridBellman}.
+gradient-based optimization for solving \cref{eq:gridBellman}.
 Second, B-splines are defined for arbitrary knot sequences,
 leading to a greater flexibility when compared to global polynomials.

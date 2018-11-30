@@ -250,8 +250,8 @@ discretization techniques such as sparse grids.
   \caption[Reference solution for the two-dimensional TCP]{%
     Full grid solution for the transaction costs problem
     with $d = 2$ stocks.
-    Shown are the value function $\normcetvalueref_t$ \emph{(top left)} and the
-    optimal policy $\optnormpolicyref_t$ for $t = 0$.%
+    Shown are the value function $\normcetvaluefcn_t$ \emph{(top left)} and the
+    optimal policy $\optnormpolicyfcn_t$ for $t = 0$.%
   }%
   \label{fig:financeSolution2DReference}%
 \end{figure}
@@ -312,7 +312,7 @@ on the convergence of the Euler equation errors.
 Compared to regular grids, the spatial adaptivity decreases the error by
 two orders of magnitude in one dimension.
 The gain is smaller for higher dimensionalities $d$,
-but spatial adaptive grids still outperform regular grids.
+but spatially adaptive grids still outperform regular grids.
 For $d = 2$, we observe that the error saturates
 at $\ngp_t \approx \num{4000}$ points just above $10^{-5}$.
 This is most likely due to the parts
@@ -328,7 +328,7 @@ For $d = 5$, we are still able to achieve a small error of
 $\weightedeulererrorLtwo_t \approx \num{1.9e-2}$ for $t = 0$
 with spatially adaptive sparse grids with
 a mean number $\ngp_0 = \num{12572}$ of policy grid points.
-While we do not notice any convergence for this dimensionality,
+While we cannot detect any convergence for this dimensionality yet,
 this is still a major result as such high-dimensional models
 could not be solved up to now with conventional methods.
 
@@ -392,17 +392,17 @@ each display
   }%
   \hfill%
   \makebox[37mm][c]{%
-    \hspace*{2.9mm}%
+    \hspace*{3.8mm}%
     \raisebox{-\height}{\includegraphics{financeSolution5D_14}}%
   }%
   \hfill%
   \makebox[37mm][c]{%
-    \hspace*{4.7mm}%
+    \hspace*{4.4mm}%
     \raisebox{-\height}{\includegraphics{financeSolution5D_16}}%
   }%
   \hfill%
   \makebox[37mm][c]{%
-    \hspace*{4.5mm}%
+    \hspace*{2.4mm}%
     \raisebox{-\height}{\includegraphics{financeSolution5D_15}}%
   }%
   \\[1mm]%
@@ -598,7 +598,7 @@ for $d = 3$, $4$, and $5$ stocks.
       where we assume that $\wealth_0 = \$1$ for all individuals.
       In addition, the plots show the evolution of the
       $\Ltwo$ error $\weightedeulererrorLtwo_t$ over time $t$
-      \emph{\textcolor{C2}{(yellow, right axes)}.}%
+      \emph{\textcolor{C8}{(gray, right axes)}.}%
     }%
     %\vspace*{-6.3mm}%
     \label{fig:financeSimulation}%
@@ -726,8 +726,8 @@ limits the applicability of the Sharpe ratios to these cases.
 
 A complexity analysis reveals that the difficulty of solving
 transaction cost problems quickly grows with the dimensionality $d$:
-The number of necessary arithmetic operations grows like
-(cf.\ \cref{fig:structureSolveValueFunction})
+As shown in \cref{fig:structureSolveValueFunction},
+the number of necessary arithmetic operations grows like
 {%
   \setlength{\abovedisplayskip}{6pt}%
   \setlength{\belowdisplayskip}{6pt}%
@@ -763,7 +763,7 @@ The number of necessary arithmetic operations grows like
 where $m_{\state}, m_{\policy} \in \landauTheta{d}$ and
 $m_{\zeta}, \ngp_t, \ngp_{t+1} \in \landauTheta{2^n n^{d-1}}$
 if regular sparse grids of level $n$
-without boundary points would be used for state and stochastic grids
+without boundary points are used for state and stochastic grids
 (due to $m_{\stochastic} = d$).
 In addition,
 the number of optimizer iterations is likely superlinear in $d$,
@@ -841,7 +841,7 @@ then the number of interpolant evaluations per optimizer iteration
 (i.e., the number of quadrature points) increases as well.
 Surprisingly, the number of optimizer iterations per grid point
 and the time per evaluation are not monotonously increasing.
-The latter might be due to vectorization effects.
+The latter observation might be due to vectorization effects.
 
 \paragraph{Comparison to piecewise linear functions}
 

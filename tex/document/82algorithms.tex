@@ -6,7 +6,7 @@
 
 \noindent
 This section gives an overview of the algorithms that
-were used to implement the solution process after discretization of
+we use to implement the solution process after discretization of
 the Bellman equation \eqref{eq:gridBellman}.
 In the following, we assume that the probability density functions of the
 stochastic variables are known.
@@ -306,7 +306,7 @@ the terminal solution $\valuefcn_T$ is usually a known function.
 
 \paragraph{\texttt{optimize} algorithm}
 
-The \texttt{optimize} is given as \cref{alg:financeOptimize}.
+The \texttt{optimize} step is given as \cref{alg:financeOptimize}.
 The grid of the argument $\valueintp[1]_t$
 is some spatially adaptive sparse grid
 $\gridset{t}{\sparse}
@@ -554,7 +554,7 @@ determines the degree of the Taylor approximation:
 \end{equation}
 where \texttt{constant} and \texttt{linear}
 only use the first summand and first two summands, respectively.
-Since the hierarchical B-splines enable us to
+Since hierarchical B-splines enable us to
 exactly and efficiently compute
 the gradient $\gradient{\state_{t+1}}{\valueintp[p]_{t+1}}$ and
 the Hessian $\hessian{\state_{t+1}}{\valueintp[p]_{t+1}}$,
@@ -570,7 +570,7 @@ we do not have to approximate the derivatives with finite differences.
 \Cref{alg:financeRefine} shows how to generate the spatially adaptive
 sparse grid in \texttt{solveValueFunction}
 (\cref{alg:financeSolveValueFunction}).
-The criterion is the common surplus-based refinement criterion
+The underlying criterion is the common surplus-based refinement criterion
 \cite{Pflueger10Spatially}.
 As for the application in topology optimization (see \cref{chap:60topoOpt}),
 we use the piecewise linear interpolant for the surplus-based
@@ -636,8 +636,8 @@ grid over time.
 
 \paragraph{Gradient grids}
 
-The classical surplus-refinement criterion puts its emphasis
-in regions where the mixed second derivative
+The classical surplus-refinement criterion focuses on
+regions where the mixed second derivative
 $\partialderiv[2d]{
   \partialdiff \stateentry_{t,1}^2 \dotsm \partialdiff \stateentry_{t,d}^2
 }{
@@ -676,7 +676,7 @@ except that it operates on the policy instead of
 the value function interpolants.
 The functions \texttt{optimize}, \texttt{refine}, and \texttt{interpolate}
 have been replaced by corresponding policy versions
-\texttt{optimizePolicy}, \texttt{refinePolicy}, and \texttt{interpolatePolicy},
+\texttt{optimizePolicy}, \texttt{refinePolicy}, and \texttt{interpolatePolicy}
 that work very much like their value function counterparts.
 \texttt{optimizePolicy} only has to generate new values
 if the initial regular sparse grid for the policies
