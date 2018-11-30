@@ -1636,19 +1636,8 @@
   Interpolated normalized optimal policy fcn.
 }
 
-\hidenextnotation
-\newnotationcommandoptarg{1}{\optnormpolicyref}{%
-  \hat{\policy}^{\opt,\reference\ifnotempty{#1}{,#1}}%
-}{p^opttref}{$\optnormpolicyref_t$}{
-  Reference normalized optimal policy fcn.
-}
-
 \newcommand*{\optnormpolicyentryintp}[1][]{%
   \hat{\policyentry}^{\opt,\sparse\ifnotempty{#1}{,#1}}%
-}
-
-\newcommand*{\optnormpolicyentryref}[1][]{%
-  \hat{\policyentry}^{\opt,\reference\ifnotempty{#1}{,#1}}%
 }
 
 \hidenextnotation
@@ -1670,13 +1659,6 @@
 \hat{\tilde{J}}^{\sparse\ifnotempty{#1}{,#1}}%
 }{Jts3}{$\normcetvalueintp_t$}{
   Interpolated normalized certainty-equivalent-transf.\ value fcn.
-}
-
-\hidenextnotation
-\newnotationcommandoptarg{1}{\normcetvalueref}{%
-  \hat{\tilde{J}}^{\reference\ifnotempty{#1}{,#1}}%
-}{Jtref}{$\normcetvalueref_t$}{
-  Reference normalized certainty-equivalent-transf.\ value fcn.
 }
 
 \hidenextnotation
