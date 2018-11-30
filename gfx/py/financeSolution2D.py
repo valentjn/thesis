@@ -36,7 +36,7 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, isSparseGrid,
     zt = [0, 0.6]
     zLabel = r"$\normsell[\opt]_{{t,{}}}$".format(name[-5])
   else:
-    zl = (0, 0.55)
+    zl = (0.35, 0.55)
     zt = [0, 0.4]
     zLabel = r"$\normbond_t^{\opt}$"
   
