@@ -3,7 +3,7 @@
 
 \noindent
 Finally, we conclude the thesis by summarizing its results
-and giving an outlook on possible future work.
+and by giving an outlook on possible future work.
 In particular, we highlight key contributions of the thesis to research,
 give recommendations for future applications of the presented method, and
 state possible downsides and limitations.
@@ -30,7 +30,8 @@ In the further course of the thesis,
 the focus was put on the algorithmic implications of the novel bases,
 taking the hierarchization problem as an example.
 We looked at requirements that had to be satisfied by grids and bases
-to enable efficient hierarchization algorithms,
+to enable efficient hierarchization algorithms
+such as breadth-first search and unidirectional principle,
 for which we gave clear formulations and formal correctness proofs.
 As a result, a whole ``zoo'' of hierarchical (B-)spline functions
 has been derived in this thesis.
@@ -126,9 +127,9 @@ One must be able to sample the objective function at arbitrary
 locations in some hyper-rectangle in order to use sparse grids;
 a prescribed point cloud of scattered data does not suffice.
 Moreover, the problem should not have more than ten dimensions,
-since convergence notably slows down as the dimensionality grows
-(although spatial adaptive approaches might still be feasible for
-higher dimensionalities \cite{Pflueger10Spatially}).
+since convergence notably slows down as the dimensionality grows,
+although spatially adaptive approaches might still be feasible for
+higher dimensionalities \cite{Pflueger10Spatially}.
 In addition, the objective function should be ``as smooth as possible''
 in order to benefit from higher-order B-splines.
 This means ``continuous'' at the very least,
@@ -190,7 +191,7 @@ With regard to the application side, there are also quite a few
 possibilities for future work.
 The sparse grids in the biomechanical application
 we considered in this thesis were only two-dimensional.
-This is not in the range of dimensions where sparse grids
+This is not in the range of dimensions in which sparse grids
 demonstrate their full strength,
 although the two-dimensional surrogates were already able to drastically
 reduce the required computation time compared to full grids.
@@ -235,7 +236,7 @@ five-dimensional sparse grids is being considered
     Biceps and brachioradialis have each been fixed with one and two bands
     \emph{\textcolor[RGB]{80,200,100}{(green)}}
     to simulate the effect of the missing skin.
-    Without bands, the muscles would raise unnaturally from the bones.%
+    Without bands, the muscles would unnaturally raise from the bones.%
   }%
   \label{fig:upperLimb5D}%
 \end{SCfigure}%
