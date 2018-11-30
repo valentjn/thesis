@@ -26,19 +26,19 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, isSparseGrid,
   if name == "J":
     zl = (0.0775, 0.0783)
     zt = [0.0776, 0.0782]
-    zLabel = r"$\normcetvalueref_t$"
+    zLabel = r"$\normcetvaluefcn_t$"
   elif name.endswith("Buy"):
     zl = (0, 0.18)
     zt = [0, 0.15]
-    zLabel = r"$\normbuy[\opt,\reference]_{{t,{}}}$".format(name[-4])
+    zLabel = r"$\normbuy[\opt]_{{t,{}}}$".format(name[-4])
   elif name.endswith("Sell"):
     zl = (0, 0.75)
     zt = [0, 0.6]
-    zLabel = r"$\normsell[\opt,\reference]_{{t,{}}}$".format(name[-5])
+    zLabel = r"$\normsell[\opt]_{{t,{}}}$".format(name[-5])
   else:
     zl = (0, 0.55)
     zt = [0, 0.4]
-    zLabel = r"$\normbond_t^{\opt,\reference}$"
+    zLabel = r"$\normbond_t^{\opt}$"
   
   nn = (65, 65)
   xBreak = 0.25
