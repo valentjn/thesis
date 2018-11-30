@@ -55,7 +55,7 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
     zl = (0.24, 0.29)
     zLabel = r"$\normbond_t^{\opt,\sparse,1}$"
   
-  nn = (65, 65)
+  nn = (33, 33)
   xBreak = 0.25
   
   #if name in ["DeltaNormNormS1Buy", "normNormB"]:
