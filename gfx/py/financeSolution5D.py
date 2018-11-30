@@ -43,16 +43,16 @@ def plotJOrPolicy(solution, interpPolicy, discreteStateName, t, parameters):
   ax = fig.gca()
   
   if name == "J":
-    zl = (0.07997, 0.08073)
+    zl = (0.08336, 0.08405)
     zLabel = r"$\normcetvalueintp[1]_t$"
   elif name.endswith("Buy"):
     zl = (-0.01, 0.12)
     zLabel = r"$\normbuy[\opt,\sparse,1]_{{t,{}}}$".format(name[-4])
   elif name.endswith("Sell"):
-    zl = (-0.04, 0.66)
+    zl = (-0.01, 0.66)
     zLabel = r"$\normsell[\opt,\sparse,1]_{{t,{}}}$".format(name[-5])
   else:
-    zl = (-0.20, 0.30)
+    zl = (0.24, 0.29)
     zLabel = r"$\normbond_t^{\opt,\sparse,1}$"
   
   nn = (65, 65)
@@ -198,20 +198,22 @@ def main():
   
   
   for q in range(4):
-    v = [(0.07997, 0.08073), (-0.01, 0.25),
-         (-0.04, 0.53), (-0.01, 0.20)][q]
+    v = [(0.08336, 0.08405), (-0.01, 0.12),
+         (-0.01, 0.66), (0.24, 0.29)][q]
     labels = [r"$\normcetvalueintp[1]_t$", r"$\normbuy[\sparse,1]_{t,o}$",
              r"$\normsell[\sparse,1]_{t,o}$", r"$\normbond_t^{\sparse,1}$"]
     label = labels[q]
     label += "".join([r"\vphantom{{{}}}".format(x) for x in labels])
-    width = [1.83, 1.58, 1.57, 1.63][q]
+    width = [1.76, 1.56, 1.61, 1.77][q]
     
     fig = Figure.create(figsize=(width, 0.75))
     ax = fig.gca()
     
     colorMap = mpl.cm.viridis
     norm = mpl.colors.Normalize(v[0], v[-1])
-    xt = ([0, 0.1*np.floor(10*v[-1])] if q > 0 else [0.0800, 0.0807])
+    if q == 0:   xt = [0.0834, 0.0840]
+    elif q == 3: xt = [0.24, 0.29]
+    else:        xt = [0, 0.1*np.floor(10*v[-1])]
     colorBar = mpl.colorbar.ColorbarBase(
       ax, cmap=colorMap, ticks=xt, norm=norm, orientation="horizontal")
     
