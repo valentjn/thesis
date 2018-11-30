@@ -676,10 +676,11 @@ the following invariant, which can be used to show its correctness:
       &&\*l \in L,\;\;
       &&\*i \in \hiset{\*l},&&
     \end{alignat}
-  \end{subequations}
-  where
+  \end{subequations}%
+  \setlength{\abovedisplayskip}{0pt}%
   \begin{equation}
     \label{eq:propInvariantResidualInterpolation4}
+    \text{where}\quad
     f^{\sparse,(j)}
     := \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
     \paren*{\sum_{j'=1}^{j} \surplus[(j')]{\*l',\*i'}} \basis{\*l',\*i'}.
@@ -736,6 +737,8 @@ the following invariant, which can be used to show its correctness:
   (output of \cref{alg:residualInterpolation})
   coincide with the surpluses $\surplus{\*l',\*i'}$.
 \end{proof}
+
+\vspace{1em}
 
 \Cref{prop:invariantResidualInterpolation} shows that
 $r^{(j)}(\gp{\*l,\*i})$ is the residual of the

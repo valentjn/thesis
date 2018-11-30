@@ -14,7 +14,7 @@
 }
 \label{sec:44spatAdaptiveBFS}
 
-\minitoc{87mm}{7}
+\minitoc{87mm}{8}
 
 \noindent
 Unfortunately, we cannot apply the algorithms presented in the last
@@ -49,7 +49,15 @@ to enable $p$-adaptivity.
 
 
 
+\vspace*{\fill}%
+\hfill\includegraphics{ornament_2}\hfill%
+\vspace*{\fill}
+
+
+
+\printornamentsfalse
 \subsection{Hierarchization with Breadth-First Search on Fundamental Bases}
+\printornamentstrue
 \label{sec:441BFSFundamentalBases}
 
 \paragraph{Fundamental property}
@@ -61,6 +69,7 @@ $\bspl{\*l,\*i}{p}$ is due to their overlapping support
 high-level B-splines $\bspl{\*l',\*i'}{p}$ do not vanish
 at all coarse-level grid points $\gp{\*l,\*i}$, $\*l < \*l'$.
 In the univariate case,
+\pagebreak%
 the idea is to transform the B-spline basis to obtain
 new basis functions $\fundbasis{l',i'}\colon \clint{0, 1} \to \real$
 ($l' \in \natz$, $i' \in \hiset{l'}$) that satisfy
