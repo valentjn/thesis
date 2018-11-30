@@ -62,9 +62,9 @@
   \begin{equation}
     \setsize{\{\*l \in \natz^d \mid N_\*l = q,\; \normone{\*l} = m\}}
     = \binom{d}{q} \setsize{\{\*l \in \nat^{d-q} \mid \normone{\*l} = m\}}
-    = \binom{d}{q} \binom{m-1}{d-q-1}
+    = \binom{d}{q} \binom{m-1}{d-q-1}.
   \end{equation}
-  by first putting $q$ zeros in $d$ places,
+  This can be seen by first putting $q$ zeros in $d$ places,
   for which there are $\binom{d}{q}$ possibilities, and then
   counting all positive vectors of length $d - q$ with level sum $m$,
   which can be done in $\binom{m-1}{d-q-1}$ ways.
@@ -76,8 +76,8 @@
       \sum_{q=1}^{d-1} \binom{d}{q} \sum_{m=d-q}^{n-b-q+1}
       2^{m - d + 2q} \binom{m-1}{d-q-1}.\\[1em]
       \intertext{%
-        Shifting the index $m \to (m + d - q)$ and rearranging the terms
-        slightly, we obtain%
+        After shifting the index $m \to (m + d - q)$ and slightly
+        rearranging the terms, we obtain%
       }
       \cdots
       &= \setsize{\interiorregsgset{n}{d}} + 2^d +
@@ -96,7 +96,7 @@
   as desired.
 \end{proof}
 
-\vspace*{4em}
+\vspace*{2em}
 
 
 
@@ -153,7 +153,7 @@
   
   It remains to prove that all levels on the \rhs of
   \eqref{eq:coarseInvariant}
-  are inserted by the algorithm into $\levelset^{(t)}$ eventually.
+  are eventually inserted by the algorithm into $\levelset^{(t)}$.
   We prove this by induction over $t = 1, \dotsc, d$.
   For $t = 1$, the \rhs of \eqref{eq:coarseInvariant} equals
   $\{l \in \natz \mid l \le n-d+1\}$, which is just $\levelset^{(1)}$
@@ -191,7 +191,7 @@
   (due to
   $l_t = \normone{\*l'} - \normone{\*l} \le n-d+t - \normone{\*l} = l^\ast$),
   the level $\*l'$ is inserted into $\levelset^{(t)}$ during the innermost loop
-  in \cref{line:algCoarseBoundary4}.
+  in \cref{line:algCoarseBoundary4} of \cref{alg:coarseBoundary}.
   
   Second, let $\*l' = (\*l, l_t)$
   be in the second set of the \rhs, i.e., we have

@@ -144,17 +144,17 @@
     Here, we have three cases:
     \begin{itemize}
       \item
-      \mbox{\emph{Case 1}: ${l'_t \not= \hat{l}_t = l''_t}$.}
+      \mbox{\emph{Case 1:} ${l'_t \not= \hat{l}_t = l''_t}$.}
       $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
       $l''_t = \hat{l}_t \ge l_t$.
       Therefore, $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \mbox{\emph{Case 2}: ${l'_t = \hat{l}_t \not= l''_t}$.}
+      \mbox{\emph{Case 2:} ${l'_t = \hat{l}_t \not= l''_t}$.}
       Analogously to the first case, we conclude $\min\{l'_t, l''_t\} \ge l_t$.
       
       \item
-      \mbox{\emph{Case 3}: ${l'_t \not= \hat{l}_t \not= l''_t}$.}
+      \mbox{\emph{Case 3:} ${l'_t \not= \hat{l}_t \not= l''_t}$.}
       $t \notin T_{\*l',\hat{\*l}}$ implies $l'_t \ge l_t$ and
       $t \notin T_{\*l'',\hat{\*l}}$ implies $l''_t \ge l_t$.
       Hence, $\min\{l'_t, l''_t\} \ge l_t$.
@@ -380,7 +380,8 @@
   \begin{equation}
     \{\*l' \in L_0 \mid \normone{\*l'} = n - q\}
     \quad\text{and}\quad
-    \{\*a \in \natz^{d-m} \mid \normone{\*a} = n - q - \normone{\hat{\*l}}\}:
+    \{\*a \in \natz^{d-m} \mid \normone{\*a} = n - q - \normone{\hat{\*l}}\}
+    \colon
   \end{equation}
   \begin{itemize}
     \item
@@ -480,6 +481,10 @@
 
 
 
+\vspace{2em}
+
+
+
 \subsection{Correctness Proof of the Method of Residual Interpolation}
 \label{sec:a132proofResidualInterpolation}
 
@@ -517,7 +522,7 @@
     line:algResidualInterpolation3,%
     line:algResidualInterpolation2,%
     line:algResidualInterpolation4%
-  }, respectively):
+  }, respectively):%
   \begin{subequations}
     \begin{alignat}{3}
       \label{eq:propInvariantResidualInterpolation5}
@@ -532,6 +537,9 @@
       &&\*i \in \hiset{\*l}.
     \end{alignat}
   \end{subequations}
+  
+  \vspace*{-2em}
+  \pagebreak
   
   \noindent
   \textbf{Induction base case:}
