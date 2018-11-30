@@ -3,6 +3,7 @@ adap-tive
 addison-wesley
 ad-di-tion-al-ly
 ad-van-tage
+af-ter
 al-go-rithm
 al-go-rith-men
 al-go-rithms
@@ -93,6 +94,7 @@ de-fine
 de-riv-a-tive
 de-scribed
 de-ter-mine
+deriva-tives
 dif-fer-en-tiable
 dif-fe-ren-tial-glei-chungen
 di-men-sion-al-i-ty
@@ -200,6 +202,7 @@ mag-ni-tude
 mat-lab
 math-e-mat-ics
 max-i-mize
+me-chan-ics
 mean-ing-ful
 meth-ods
 micro-cell
@@ -301,6 +304,7 @@ sorti-ng
 sort-ing
 spa-tial-ly
 split-ting
+state-ment
 ste-tig
 struc-tures
 study-ing
@@ -311,6 +315,7 @@ sub-space
 sub-spaces
 sum-ma-rizes
 sup-port
+sur-plus-based
 sur-plus-es
 sur-ro-gate
 sur-ro-gates
