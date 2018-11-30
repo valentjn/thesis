@@ -136,8 +136,8 @@ def main():
       errorsMat = scipy.io.loadmat("{}/euler_errors.mat".format(resultsPath))
       errors = ([errorsMat["errors"][t,0]["L2"][0,1] for t in ts[:-1]] +
                 [1e-100])
-      ax2.plot(ts, errors, "--", color="C2")
-      ax2.plot(ts, errors, ".", color="C2", clip_on=False)
+      ax2.plot(ts, errors, "--", color="C8")
+      ax2.plot(ts, errors, ".", color="C8", clip_on=False)
       
       ax2.set_yscale("log")
       yl = [10**np.floor(np.log10(min(errors[:-1]))),
@@ -149,9 +149,9 @@ def main():
       ax2.spines["left"].set_visible(False)
       ax2.spines["bottom"].set_visible(False)
       ax2.spines["top"].set_visible(False)
-      ax2.spines["right"].set_color("C2")
-      ax2.yaxis.label.set_color("C2")
-      ax2.tick_params(axis="y", which="both", colors="C2")
+      ax2.spines["right"].set_color("C8")
+      ax2.yaxis.label.set_color("C8")
+      ax2.tick_params(axis="y", which="both", colors="C8")
     
     fig.save(hideSpines=False)
   
@@ -188,7 +188,7 @@ def main():
       "label"  : errorLabel,
       "marker" : ".",
       "ls"     : "--",
-      "color"  : "C2",
+      "color"  : "C8",
     }],
   ncol=9, columnspacing=0.5, loc="upper center", outside=True)
   
