@@ -230,7 +230,7 @@ def plotSGScheme(b, n, showDiagonal=True, highlightedSubspaces=None,
 
 
 def plotGrid(sgType, n=None, includedSubspaces=[], includedPoints=None,
-             withBoundary=True, distribution="uniform", scale=1.7):
+             withBoundary=True, distribution="uniform", scale=1.65):
   fig = Figure.create(figsize=(1, 1), scale=scale)
   ax = fig.gca()
   
