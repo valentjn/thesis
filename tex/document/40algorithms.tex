@@ -41,18 +41,19 @@ values of grid points that cannot be resolved with conventional algorithms.
 
 This chapter gives an overview of six algorithms for B-splines
 on sparse grids.
-We can find two of these algorithms in the literature,
+Two of these algorithms are already known
+\multicite{Griebel92Combination,Balder94Adaptive},
 while the remaining four are new.
 Correctness results are given for every algorithm.
 We use hierarchization as the exemplary problem for our algorithms,
 but the ideas of the algorithms can be generalized to any linear operator.
-Furthermore, most algorithms are not tailored for B-splines $\bspl{l,i}{p}$,
-but applicable for general tensor product basis functions $\basis{l,i}$.
+Furthermore, most algorithms are not tailored to B-splines $\bspl{l,i}{p}$,
+but applicable to general tensor product basis functions $\basis{l,i}$.
 Whether an algorithmic approach is feasible for the sparse grid at hand
 or not depends on the grid's type:
 full grid, dimensionally adaptive sparse grid, or
 spatially adaptive sparse grid.
-Naturally, the more assumptions the grid satisfies, the faster and
+The more assumptions the grid satisfies, the faster and
 easier the corresponding algorithms will be.
 
 \Cref{sec:41problem} explains hierarchization as our example problem
