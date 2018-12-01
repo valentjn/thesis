@@ -170,6 +170,7 @@ in-cor-po-rat-ing
 in-creas-ing
 in-de-pen-dence
 in-dex
+in-di-vid-u-al
 in-di-vid-u-al-ly
 in-duc-tive-ly
 in-for-ma-tion
@@ -264,6 +265,7 @@ pro-cess
 pro-cess-ing
 pro-gram
 pro-gram-ming
+pro-por-tion-al
 prop-er-ties
 real-world
 rea-son-ing
