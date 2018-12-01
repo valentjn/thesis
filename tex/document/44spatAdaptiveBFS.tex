@@ -712,6 +712,8 @@ We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
   \eqref{eq:tiftDefinition} holds, exist and are uniquely determined.
 \end{itemize}
 
+\vspace{1em}
+
 \noindent
 Let $\basis{l',i''}$ be translation-invariant and
 let $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$ be arbitrary.
@@ -774,6 +776,8 @@ preserves translation-invariance.
 Therefore, we call the transformation
 $\basis{l',i'} \mapsto \basis[\tift]{l',i'}$ \term{\tiftr.}
 
+\vspace{2em}
+
 In contrast to the \hftr, the \tiftr is only a change of basis
 if we consider the extended nodal spaces that also include
 basis functions with indices outside of $\{0, \dotsc, 2^{l'}\}$.
@@ -788,6 +792,8 @@ We cannot formulate an equivalent version of \thmref{prop:hftSparseGridSpace},
 as it might be that, in one dimension,
 $\basis{l',i''}$ ($i'' < 0$ or $i'' > 2^{l'}$)
 is not contained in the nodal space $\ns{l'}$.
+
+\pagebreak
 
 \begin{proposition}[%
   spanned nodal space for the TIFT%
@@ -805,7 +811,7 @@ is not contained in the nodal space $\ns{l'}$.
   \end{equation}
 \end{proposition}
 
-\vspace*{0pt plus 1em}
+\vspace{1em}
 
 \begin{proof}
   We have $\ns[\ext]{\*l'} \supset \ns[\tift,\ext]{\*l'}$ as
@@ -851,11 +857,17 @@ is not contained in the nodal space $\ns{l'}$.
   are linearly independent.
 \end{proof}
 
-\vspace*{0pt plus 1em}
+
+
+\vspace*{\fill}%
+\hfill\includegraphics{ornament_2}\hfill%
+\vspace*{\fill}
 
 
 
+\printornamentsfalse
 \subsection{Hierarchical Fundamental Splines}
+\printornamentstrue
 \label{sec:443fundamentalSplines}
 
 \paragraph{Definition}
@@ -879,6 +891,7 @@ According to \eqref{eq:tiftParentFunctionInterpolation},
 the coefficients $\fundsplcoeff{k}{p} \in \real$ of
 the transformed parent function $\parentfcn[p,\tift]$
 in \cref{eq:tiftParentFunctionDefinition} are determined by a
+\pagebreak%
 bi-infinite-dimensional system of linear equations:
 \begin{equation}
   \label{eq:fundamentalSplineSLE}
