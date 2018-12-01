@@ -91,7 +91,7 @@ editingProgress = np.array(editingProgress)
 
 t0 = datetime.datetime(2018,  1, 31)
 T  = datetime.datetime(2018, 11, 30)
-linearProgress  = np.array([(date - t0).days / (T - t0).days
+linearProgress  = np.array([min((date - t0).days / (T - t0).days, 1)
                             for date in dates])
 daysPerPercent = 100 / (T - t0).days
 
