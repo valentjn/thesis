@@ -47,6 +47,7 @@ cir-cum-stances
 clar-i-fied
 clas-si-cal
 co-ef-fi-cients
+coarse-level
 col-lab-o-ra-tion
 col-ors
 com-bi-na-tion
@@ -112,6 +113,7 @@ dy-na-mi-schen
 dünn-git-ter-funk-tio-nen
 ein-fa-che
 elas-tic-i-ty
+en-gi-neer-ing
 en-hance
 en-sure
 en-tries
@@ -339,6 +341,7 @@ un-con-strained
 un-nor-mal-ized
 uni-di-rec-tion-al
 uni-vari-ate
+uni-ver-si-ty
 us-ing
 vari-ables
 var-i-ous
