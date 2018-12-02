@@ -147,11 +147,12 @@ Our approach has multiple obvious advantages:
   
   \item
   By using B-splines as basis functions,
-  the interpolant $\etensorintp$ will be smoother and more accurate.
+  the interpolant $\etensorintp$ will be more accurate
+  than with piecewise linear basis functions.
   In addition, we can calculate its derivatives
   $\tpartialderiv{\partialdiff{} x_t}{\etensorintp}(\mcp{q})$
   fast and explicitly,
-  accelerating the speed of convergence of the optimization algorithm.
+  accelerating the speed of convergence of the optimizer.
 \end{itemize}
 
 
@@ -238,7 +239,8 @@ These oscillations are more likely to occur near the boundary of the domain
 $\clint{\*0, \*1}$, such that there are larger regions
 where the interpolated tensor is not positive definite anymore.
 The reason is two-fold:
-First, sparse grids are notoriously biased towards the center of the domain,
+First, sparse grids without boundary points
+are notoriously biased towards the center of the domain,
 as they place only few points near the boundary \cite{Pflueger10Spatially}.
 This leads to a loss of interpolation accuracy near the boundary
 when compared to the center of $\clint{\*0, \*1}$.

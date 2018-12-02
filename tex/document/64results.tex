@@ -353,7 +353,7 @@ of our method:
   \item
   \label{item:topoOptErrorOptimization}
   Optimization
-  (i.e., the global minimum found by the optimizer is inaccurate)
+  (i.e., the minimum found by the optimizer is inaccurate or not global)
   
   \item
   \label{item:topoOptErrorRounding}
@@ -723,10 +723,12 @@ If we incorporate this and use 100 parallel processes,
 we still need weeks for the solution.
 In contrast, the computation time using our sparse grid surrogates
 is a matter of minutes or hours at most,
-resulting in speedups of around 200
-(excluding the time for the offline phase,
-which has to be spent only once, as the resulting grid
-can be reused for different scenarios).
+resulting in speedups of around 200.
+This is excluding the time for the offline phase,
+which is in the range of hours, but which has to be spent only once,
+as the resulting grid can be reused for different scenarios.
+
+\vspace{2em}
 
 \paragraph{Optimality-interpolation gaps}
 
@@ -741,7 +743,7 @@ can be reused for different scenarios).
     $\abs{\compliance[\opt,\ast] - \complianceintp[\opt,\ast]}$
     for the 2D/3D cantilever scenario and
     and different micro-cell models using cubic B-splines ($p = 3$).
-    In addition, the left plot shows
+    The left plot additionally shows
     $\compliance[\opt,\ast]
     := \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$ and
     $\complianceintp[\opt,\ast]
@@ -786,6 +788,8 @@ This gap does not constitute any kind of bound on the true optimality gap;
 however, the idea is that
 as the interpolation error converges to zero,
 the optimality-interpolation gap should converge to zero, too.
+
+\pagebreak
 
 \Cref{fig:topoOptOptimalityGap} (left) shows that for the 2D cross model,
 the optimizer reports compliance values that are smaller than in reality
