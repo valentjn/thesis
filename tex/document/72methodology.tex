@@ -188,10 +188,12 @@ optimization problems \cite{Valentin18Gradient}:
   %)^2$ is minimized (with $c \in \nonnegreal$ arbitrary but fixed).
 \end{enumerate}
 
-\paragraph{Motivation of problem \ref{item:biomech2MinSum}}
-
+\noindent
 The motivation of both problems is that the human body tries to
 achieve a given movement with minimal energy effort.
+
+\paragraph{Motivation of problem \ref{item:biomech2MinSum}}
+
 For the first problem \ref{item:biomech2MinSum},
 this effort is quantified by $\actT + \actB$,
 i.e., the energy effort for each muscle is assumed to be proportional
@@ -281,7 +283,7 @@ requires the solution of a solid mechanics model
 with a complex constitutive law, pre-stretch, and contact between
 bone and muscles \cite{Valentin18Gradient}.
 On average, a single evaluation of $\forceT$ and $\forceB$ takes
-about half an hour.
+about half an hour on current desktop computers.
 %
 If we assume that we need four Newton iterations on average,
 then a single iteration of the optimization algorithm to solve

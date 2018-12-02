@@ -313,6 +313,8 @@ as the errors increase again for $p = 5$.
   \label{tbl:biomech2ErrorL2}%
 \end{table}
 
+\vspace{\fill}
+
 \Cref{fig:biomech2ErrorForce} shows the pointwise absolute error
 $\abs{\forceXref(\elbang, \actX) - \forceXintp(\elbang, \actX)}$
 for the modified B-splines $\bspl[\modified]{l,i}{p}$ and
@@ -335,7 +337,7 @@ As it is typical for (modified) sparse grid interpolants,
 the error is the largest near the boundary of the domain.
 However, the Clenshaw--Curtis points help to decrease the error
 due to the higher density of grid points near the boundary.
-In the Clenshaw--Curtis case, the maximal errors are given by
+In the Clenshaw--Curtis case, the maximal errors are
 \begin{equation}
   \normLinfty{\forceTref - \forceTintp[p,\cc]}
   \approx \SI{10.6}{\newton},\qquad
@@ -385,6 +387,8 @@ around \SI{1}{\kilo\newton}.
   }%
   \label{fig:biomech2ErrorForce}%
 \end{figure}
+
+\pagebreak
 
 \paragraph{Error of the equilibrium elbow angle}
 
