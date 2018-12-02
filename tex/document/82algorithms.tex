@@ -571,7 +571,7 @@ we do not have to approximate the derivatives with finite differences.
 sparse grid in \texttt{solveValueFunction}
 (\cref{alg:financeSolveValueFunction}).
 The underlying criterion is the common surplus-based refinement criterion
-\cite{Pflueger10Spatially}.
+\cite{Pflueger13Spatially}.
 As for the application in topology optimization (see \cref{chap:60topoOpt}),
 we use the piecewise linear interpolant for the surplus-based
 grid generation,
@@ -579,8 +579,8 @@ since the surpluses are easier to compute in the piecewise linear case,
 and they are more meaningful
 due to the integral representation formula \eqref{eq:surplusIntegral}.
 Parameters for \cref{alg:financeRefine} are
-the tolerance $\refinetol_t \in \nonnegreal$
-by which the set of grid points to be refined is determined and
+the tolerance $\refinetol_t \in \nonnegreal$,
+by which the set of grid points to be refined is determined, and
 the number $\norefine_t \in \natz$ of refinement iterations.
 These parameters may depend on the time $t$,
 since it might be beneficial to change the adaptivity of the

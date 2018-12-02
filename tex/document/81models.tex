@@ -331,8 +331,6 @@ Judd et al.\ use global polynomials
 on sparse Clenshaw--Curtis grids for the interpolation of
 higher-dimensional economic models \cite{Judd14Smolyak}.
 
-\vspace*{2em}
-
 \paragraph{B-splines on sparse grids for dynamic portfolio choice models}
 
 The shortcomings of the two approaches of piecewise linear functions
@@ -369,11 +367,12 @@ with respect to the entries $\policyentry_{t,j}$ of $\policy_t$
 which involves the gradient
 $\gradient{\state_{t+1}}{\valueintp_{t+1}}$ of the
 value function interpolant $\valueintp_{t+1}$.
-In addition,
-global polynomials only work well on Clenshaw--Curtis grids
+Gradient-based optimization methods do not converge fast
+if this gradient is discontinuous.
+Moreover, piecewise linear basis functions introduce
+many additional local minima.
+In contrast, global polynomials only work well on Clenshaw--Curtis grids
 with Chebyshev-distributed nodes due to Runge's phenomenon.
-
-\vspace*{1em}
 
 In the following, we use higher-order B-splines as basis functions for
 the interpolation of $\valuefcn_t$ and $\optpolicyfcn_t$.
