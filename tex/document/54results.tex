@@ -21,7 +21,7 @@ The results have been computed with the sparse grid toolbox \sgpp
 \footnote{%
   \url{http://sgpp.sparsegrids.org/}%
 }
-which was extended appropriately in the scope of this thesis.
+which has been extended in the scope of this thesis.
 The new code has been written in such a way that
 it is scalable and efficient, while still being maintainable and
 portable \cite{Pflueger16Scalability}.
@@ -79,6 +79,7 @@ $\landauO{\ms{n}^{p+1} (\log_2 \ms{n}^{-1})^{d-1}}
 We can numerically verify this fact easily with
 \cref{fig:resultsInterpolationErrorTestFunctions},
 in which we obtain the asserted orders of convergence
+\pagebreak%
 for the bivariate functions that are continuously differentiable.
 For the functions Sch06 and Sch22, which have a non-differentiable kink,
 only linear convergence can be achieved regardless of the B-spline degree.
@@ -423,7 +424,7 @@ Obviously, the more accurate the sparse grid surrogate is,
 the better the approximation $\xoptappr$ will be.
 In the following plots,
 we show the optimality gaps $\objfun(\xoptappr) - \objfun(\xopt)$
-in terms of function value.%
+in terms of function values.%
 \footnote{%
   In order to calculate the optimality gap,
   it is crucial to determine $\objfun(\xopt)$ as exact as possible.
@@ -607,5 +608,5 @@ The Novak--Ritter criterion used to generate the
 spatially adaptive sparse grids does not take the constraints into account.
 Consequently, many sparse grid points are created outside the feasible domain.
 By modifying the criterion to prefer points that are in a neighborhood of
-the feasible domain, the quality of the interpolant near potential optima
-should increase.
+the feasible domain, the quality of the interpolant
+close to potential optima should increase.

@@ -155,7 +155,7 @@ simulation of a model with input parameters $(x_1, \dotsc, x_d) = \*x$.
 If the input parameters are uncertain and
 given as fuzzy sets $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$,
 what is the resulting uncertain outcome
-``$\fuzzy{y} = \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$''?
+``$\fuzzy{y} := \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$''?
 Note that there is no definite answer to this question,
 as ``$\objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$'' is not well-defined.
 The fuzzy extension principle, suggested by Zadeh \cite{Zadeh75Concept},
@@ -311,12 +311,12 @@ we replace the objective function $\objfun$ in
 with a sparse grid surrogate $\sgintp$.
 The solution of the optimization problems
 $\min_{\*x \in \Omega_{\alpha_j}} \sgintp(\*x)$ and
-$\max_{\*x \in \Omega_{\alpha_j}} \sgintp(\*x)$ over the
+$\max_{\*x \in \Omega_{\alpha_j}} \sgintp(\*x)$ with respect to the
 surrogate $\sgintp$ instead of the true objective function $\objfun$
 takes significantly less time, if evaluations of the objective function
 are expensive.
 
-However, Klimke used piecewise linear functions as hierarchical basis on
+However, Klimke used piecewise linear functions as the hierarchical basis on
 uniform sparse grids and global polynomials on sparse Clenshaw--Curtis grids.
 The drawbacks of each of the bases are evident:
 First, piecewise linear surrogates are not continuously differentiable and
@@ -358,7 +358,7 @@ as follows:
   \cref{alg:alternativeFuzzyExtensionPrinciple},
   we use a multi-start version of the Nelder--Mead method
   as described in \cref{sec:522method}
-  using 100 initial simplexes%
+  using 100 initial simplices%
   \footnote{%
     The Nelder--Mead method does not require an initial point,
     but an initial simplex.
@@ -366,7 +366,7 @@ as follows:
     The method is a hybrid between global and local optimization.
     If the initial simplex is chosen badly, Nelder--Mead may get stuck
     in local minima.
-    Hence, we restart the algorithm for different initial simplexes.%
+    Hence, we restart the algorithm for different initial simplices.%
   }.
   %and \num{50000} allowed function evaluations of $\sgintp[1]$.
   The resulting fuzzy output interval corresponds to Klimke's method and
@@ -380,7 +380,7 @@ as follows:
   For solving the optimization problems over $\objfun$,
   we use a multi-start version of the Nelder--Mead method
   as described in \cref{sec:522method}
-  using 1000 initial simplexes
+  using 1000 initial simplices
   and \num{2000000} allowed evaluations of $\objfun$.
   %\usenotation{Ëref}
   The resulting fuzzy output interval is denoted by $\fuzzy[\reference]{y}$
