@@ -140,6 +140,7 @@ frank-furt
 func-tion
 func-tions
 fun-da-men-tal
+fur-ther
 gar-cke
 gauss-her-mite
 ge-glie-dert
@@ -214,11 +215,13 @@ micro-mechan-ic-al
 mod-els
 mod-er-ate-ly
 mod-i-fied
+more-over
 mul-ti-plied
 muscle-tendon
 nec-es-sary
 nelder-mead
 ``no-free-lunch
+no-to-ri-ous-ly
 non-in-tru-sive
 non-mod-i-fied
 non-neg-a-tive
@@ -231,6 +234,7 @@ nu-me-rik
 ob-ser-va-tions
 ob-tain-ing
 one-di-men-sional
+op-er-a-tor
 op-er-ates
 op-ti-mal
 op-ti-mie-rung
