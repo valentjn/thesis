@@ -652,6 +652,7 @@ calculate its individual $2^{l'} + 1$ coefficients $c_{l'',i''}^{l',i'}$.
 To solve this problem,
 we use a similar ansatz as for the \hftr,
 but we replace the hierarchical basis functions $\basis{l'',i''}$
+($l'' = 0, \dotsc, l'$,\, $i'' \in \hiset{l''}$)
 with nodal basis functions $\basis{l',i''}$ and
 allow general integer indices $i'' \in \integer$:
 \begin{equation}
@@ -689,7 +690,7 @@ We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
     l' \in \natz,
   \end{equation}
   of relevant indices should be finite,
-  so that in each point $x \in \clint{0, 1}$,
+  so that in each point $x \in \clint{0, 1}$
   only a finite number of basis functions $\basis{l',i''}$ of level $l'$
   is non-zero.
   This means that the series in \eqref{eq:tiftDefinition} collapses to a
@@ -825,7 +826,7 @@ is not contained in the nodal space $\ns{l'}$.
   $\ns[\ext]{\*l'} \subset \ns[\tift,\ext]{\*l'}$,
   we show that the dimensions of the two spaces match.
   As before, it suffices to show that
-  the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$),
+  the functions $\basis[\tift]{\*l',\*i'}$ ($\*i' \in \relindexset{\*l'}$)
   are linearly independent.
   Let $\surplus{\*l',\*i'} \in \real$ be with
   $\sum_{\*i' \in \relindexset{\*l'}}
@@ -1077,7 +1078,7 @@ we may solve the system \eqref{eq:fundamentalSplineSLE}
 of linear equations approximatively,
 if we symmetrically truncate the linear system to
 \pagebreak
-$2\fundsplcutoff{p} - 1$ dimensions
+$2\fundsplcutoff{p} - 1$ rows and columns
 and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
@@ -1176,10 +1177,11 @@ experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
 fundamental spline,
 we can also approximate $\fundsplcoeff[\modified]{k}{p}$ by solving
 a truncated system of linear equations.
-The resulting function $\parentfundspl[\modified]{p}$ and the hierarchical
-basis $\bspl[\fs,\modified]{l,i}{p}$ are shown in
-\cref{fig:modifiedFundamentalSpline} and
-\cref{fig:hierarchicalFundamentalSpline}, respectively.
+The resulting function $\parentfundspl[\modified]{p}$
+is shown in \cref{fig:modifiedFundamentalSpline}.
+The corresponding hierarchical
+basis $\bspl[\fs,\modified]{l,i}{p}$ is included in
+\cref{fig:hierarchicalFundamentalSpline} (dashed lines).
 
 \begin{figure}
   \subcaptionbox{%

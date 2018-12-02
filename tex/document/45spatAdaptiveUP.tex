@@ -18,8 +18,10 @@
 
 \noindent
 In this final section of the chapter,
-we study two algorithms based on the \up
-for applying the linear operator $\linop$ on spatially adaptive sparse grids.
+we further decrease the computational complexity
+for the application of the linear operator $\linop$
+on spatially adaptive sparse grids
+from quadratic to linear time with two algorithms based on the \up.
 %\todo{mention Vazipfl if published}
 
 
@@ -131,8 +133,11 @@ which we denote with $\vlinout[\ast] := \linop \vlinin$.
 
 \vspace{0.5em}
 
+\noindent
 Next, we give a sufficient condition for the
 convergence of \cref{alg:iterativeRefinement} to the true solution.
+
+\vspace{0.5em}
 
 \begin{proposition}[%
   sufficient condition for the convergence of
@@ -148,8 +153,10 @@ convergence of \cref{alg:iterativeRefinement} to the true solution.
   for every initial solution $\vlinout[(0)]$.
 \end{proposition}
 
+\vspace{-0.5em}
+
 \begin{proof}
-  A short induction proof shows that
+  A short proof by induction shows that
   %the explicit representations of $\vlinout[(m)]$ and $\*r^{(m)}$:
   %\begin{subequations}
   %  \begin{align}
@@ -207,7 +214,7 @@ As before, we denote with $\liset$ the level-index set of
 the spatially adaptive sparse grid (see \cref{sec:41problem}).
 
 The \up\punctfix{,} as stated in
-\cref{alg:unidirectionalPrinciple} for the full grids,
+\cref{alg:unidirectionalPrinciple} for full grids,
 subsequently applies one-dimensional operators
 $\upopuv{t_j}{\lisetpole}\colon \real^{\setsize{\lisetpole}} \to
 \real^{\setsize{\lisetpole}}$
@@ -1031,7 +1038,7 @@ Note that in \cref{line:algHermiteHierarchization8},
 we have to evaluate the derivatives of
 $\deriv[q]{x}{\fgintp{l-1}}(\gp{l,i})$ of the Hermite interpolant
 determined in \cref{line:algHermiteHierarchization4}.
-This is not an issue since in an implementation,
+This is not an issue since in an implementation
 one would typically simultaneously evaluate the
 Hermite interpolant and its derivatives.
 
