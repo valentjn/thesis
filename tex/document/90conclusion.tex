@@ -72,16 +72,16 @@ which are summarized in \cref{tbl:applicationSummary}.
   }
     \toprulec
     \headerrow
-    Category&                   Biomechanics&      Topology opt.&      Finance\\
+    Category&                   Topology opt.&      Biomechanics&      Finance\\
     \midrulec
-    Interpolated quantities&    Muscle forces&     Elasticity tensors& Value functions\\
-    SG dimensionality&          2&                 5&                  5\\
-    \#Optimization variables&   2&                 \num{40000}&        11\\
-    Time per evaluation&        \SI{30}{\minute}&  \SI{30}{\second}&   ---\\
-    \#Eval. per opt. iteration& 4&                 \num{8000}&         150\\
-    Objective function type&    Linear/non-linear& Non-linear&         Non-linear\\
-    Constraint function type&   Non-linear/---&    Non-linear&         Linear\\
-    Optimization method&        Augm. Lagrangian&  SQP&                SQP\\
+    Interpolated quantities&    Elasticity tensors& Muscle forces&     Value functions\\
+    SG dimensionality&          5&                  2&                 5\\
+    \#Optimization variables&   \num{40000}&        2&                 11\\
+    Time per evaluation&        \SI{30}{\second}&   \SI{30}{\minute}&  ---\\
+    \#Eval. per opt. iteration& \num{8000}&         4&                 150\\
+    Objective function type&    Non-linear&         Linear/non-linear& Non-linear\\
+    Constraint function type&   Non-linear&         Non-linear/---&    Linear\\
+    Optimization method&        SQP&                Augm. Lagrangian&  SQP\\
     \bottomrulec
   \end{tabular}
   \caption[%
@@ -122,7 +122,7 @@ under a free and open-source license.%
 
 Despite its broad applicability,
 the presented method of B-splines on sparse grids is of course
-not suited for all possible cases.
+not suited for all possible scenarios.
 One must be able to sample the objective function at arbitrary
 locations in some hyper-rectangle in order to use sparse grids;
 a prescribed point cloud of scattered data does not suffice.
@@ -307,9 +307,8 @@ the interpolation scheme \cite{Baar15Gradient}.
   %other real-world optimization applications
 %\end{itemize}
 
-This extensive but by no means exhaustive list of possible future work is not
-intended to intimidate future researchers.
-It should rather be seen as inspiration and starting point
+This extensive but by no means exhaustive list of possible future work
+can be seen as an inspiration and starting point
 for new and interesting applications of B-splines for sparse grids.
 
 %I want to stay as close to the edge as I can without going over.
