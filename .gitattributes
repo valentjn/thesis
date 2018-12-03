@@ -6,7 +6,8 @@
 *.svgz filter=fat -crlf
 *.ttf  filter=fat -crlf
 
-/data/** filter=fat -crlf
+/data/**  filter=fat -crlf
+/final/** filter=fat -crlf
 
 *.bib diff=bib
 *.tex diff=tex
