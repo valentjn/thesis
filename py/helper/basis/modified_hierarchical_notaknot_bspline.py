@@ -3,7 +3,7 @@
 import numpy as np
 
 import helper.grid
-import helper.symbolicSplines
+import helper.symbolic_splines
 
 from .hierarchical_basis import HierarchicalBasis
 from .hierarchical_notaknot_bspline import HierarchicalNotAKnotBSpline
@@ -28,13 +28,13 @@ class ModifiedHierarchicalNotAKnotBSpline(HierarchicalBasis):
           I = list(range(2**l + 1))
           X = helper.grid.getCoordinates(l, I)
           data = [(0, 0, 2)] + [(X[j], int(j == 1)) for j in I[1:]]
-          basis = helper.symbolicSplines.InterpolatingPolynomialPiece(data)
+          basis = helper.symbolic_splines.InterpolatingPolynomialPiece(data)
           yy = basis.evaluate(xx)
         else:
           xiLeft = self.unmodifiedBasis.getKnots(l, 0)
           xi = self.unmodifiedBasis.getKnots(l, 1)
-          basisLeft = helper.symbolicSplines.BSpline(xiLeft)
-          basis = helper.symbolicSplines.BSpline(xi)
+          basisLeft = helper.symbolic_splines.BSpline(xiLeft)
+          basis = helper.symbolic_splines.BSpline(xi)
           
           if self.p > 1:
             basis, _ = basis.addSplinesForInterpolation([basisLeft], [(0, 0, 2)])

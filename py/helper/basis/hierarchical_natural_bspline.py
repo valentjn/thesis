@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import helper.grid
-import helper.symbolicSplines
+import helper.symbolic_splines
 
 from .hierarchical_basis import HierarchicalBasis
 from .hierarchical_bspline import HierarchicalBSpline, restrictKnots
@@ -30,20 +30,20 @@ class HierarchicalNaturalBSpline(HierarchicalBasis):
         basis = self.basisCache[(l, i)]
       else:
         xi = self.getKnots(l, i)
-        basis = helper.symbolicSplines.BSpline(xi)
+        basis = helper.symbolic_splines.BSpline(xi)
         basesToAdd = []
         conditions = []
         
         if i - (self.p+1)//2 < 0:
           for j in range((self.p-1)//2):
             xi = self.getKnots(l, i-j-1)
-            basesToAdd.append(helper.symbolicSplines.BSpline(xi))
+            basesToAdd.append(helper.symbolic_splines.BSpline(xi))
             conditions.append((0, 0, j+2))
         
         if i + (self.p+1)//2 > hInv:
           for j in range((self.p-1)//2):
             xi = self.getKnots(l, i+j+1)
-            basesToAdd.append(helper.symbolicSplines.BSpline(xi))
+            basesToAdd.append(helper.symbolic_splines.BSpline(xi))
             conditions.append((1, 0, j+2))
         
         basis, _ = basis.addSplinesForInterpolation(basesToAdd, conditions)
