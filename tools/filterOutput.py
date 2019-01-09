@@ -7,6 +7,8 @@ import sys
 # list of custom filter regexs
 FILTER_REGEXS = [
   r"^ system commands enabled\.$",
+  r"^entering extended mode$",
+  r"^ restricted \\write18 enabled.$",
   r"^LaTeX2e <[0-9\-]+>$",
   r"^luaotfload | main : initialization completed in ",
   r"^Babel <.*> and hyphenation patterns for .* language\(s\) loaded\.$",
@@ -14,6 +16,7 @@ FILTER_REGEXS = [
   r"^Package scrlfile, .* \(loading files\)$",
   r"^ *Copyright \(C\) Markus Kohm$",
   r"^Package hyperref Message: Driver \(autodetected\): ",
+  r"^Package hyperref Message: Driver: hpdftex.",
   r"^For additional information on amsmath, use the `\?' option\.$",
   r"^Document Style algorithmicx .* - a greatly improved "
       r"`algorithmic' style$",
