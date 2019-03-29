@@ -272,11 +272,8 @@ class SGppVectorFunction(Function):
   def evaluate(self, XX):
     import pysgpp
     
-    if XX.ndim == 1:
-      yy = pysgpp.DataVector(self.m)
-    else:
-      yy = pysgpp.DataMatrix(XX.shape[0], self.m)
-    
+    if XX.ndim == 1: yy = pysgpp.DataVector(self.m)
+    else:            yy = pysgpp.DataMatrix(XX.shape[0], self.m)
     self.f.eval(np2sgpp(XX), yy)
     yy = sgpp2np(yy)
     
