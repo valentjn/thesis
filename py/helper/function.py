@@ -281,22 +281,23 @@ class SGppVectorFunction(Function):
 
 
 
+def getSurpluses(grid, fX):
+  import pysgpp
+  aX = (pysgpp.DataVector(fX.size) if fX.ndim == 1 else
+        pysgpp.DataMatrix(*fX.shape))
+  hierarchizationSLE = pysgpp.OptHierarchisationSLE(grid)
+  sleSolver = pysgpp.OptAutoSLESolver()
+  assert sleSolver.solve(hierarchizationSLE, np2sgpp(fX), aX)
+  return sgpp2np(aX)
+
 class SGppInterpolant(SGppFunction):
   def __init__(self, grid, fX, aX=None):
     import pysgpp
     self.grid = grid
     self.fX = fX
-    self.aX = (aX if aX is not None else self._getSurpluses())
+    self.aX = (aX if aX is not None else getSurpluses(self.grid, self.fX))
     f = pysgpp.OptInterpolantScalarFunction(grid, np2sgpp(self.aX))
     super().__init__(f)
-  
-  def _getSurpluses(self):
-    import pysgpp
-    aX = pysgpp.DataVector(self.fX.size)
-    hierarchizationSLE = pysgpp.OptHierarchisationSLE(self.grid)
-    sleSolver = pysgpp.OptAutoSLESolver()
-    assert sleSolver.solve(hierarchizationSLE, np2sgpp(self.fX), aX)
-    return sgpp2np(aX)
 
 
 
@@ -305,17 +306,9 @@ class SGppVectorInterpolant(SGppVectorFunction):
     import pysgpp
     self.grid = grid
     self.fX = fX
-    self.aX = (aX if aX is not None else self._getSurpluses())
+    self.aX = (aX if aX is not None else getSurpluses(self.grid, self.fX))
     f = pysgpp.OptInterpolantVectorFunction(grid, np2sgpp(self.aX))
     super().__init__(f)
-  
-  def _getSurpluses(self):
-    import pysgpp
-    aX = pysgpp.DataMatrix(*self.fX.shape)
-    hierarchizationSLE = pysgpp.OptHierarchisationSLE(self.grid)
-    sleSolver = pysgpp.OptAutoSLESolver()
-    assert sleSolver.solve(hierarchizationSLE, np2sgpp(self.fX), aX)
-    return sgpp2np(aX)
 
 
 
