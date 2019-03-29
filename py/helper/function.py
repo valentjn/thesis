@@ -214,8 +214,6 @@ class SGppFunction(Function):
 
 class SGppFunctionGradient(Function):
   def __init__(self, fGradient):
-    import pysgpp
-    
     super().__init__(fGradient.getNumberOfParameters())
     self.d = fGradient.getNumberOfParameters()
     self.fGradient = fGradient
@@ -240,8 +238,6 @@ class SGppFunctionGradient(Function):
 
 class SGppFunctionHessian(Function):
   def __init__(self, fHessian):
-    import pysgpp
-    
     super().__init__(fHessian.getNumberOfParameters())
     self.d = fHessian.getNumberOfParameters()
     self.fHessian = fHessian
