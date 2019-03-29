@@ -107,7 +107,25 @@ class Figure(mpl.figure.Figure):
 \makeatletter
   % prepare loading of notation
   \input{preamble/settings/glossary}
+  
+  % automatically replace "l" with \ell in math mode
+  \mathcode`l="8000
+  \begingroup
+  \lccode`\~=`\l
+  \DeclareMathSymbol{\lsb@l}{\mathalpha}{letters}{`l}
+  \lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \ell \else \lsb@l \fi}}%
+  \endgroup
+\makeatother
 
+\input{preamble/notation}
+""",
+    "defense" : r"""
+\usepackage[bitstream-charter]{mathdesign}
+
+% needed for some of the notation definitions
+\usepackage{xstring}
+
+\makeatletter
   % automatically replace "l" with \ell in math mode
   \mathcode`l="8000
   \begingroup
@@ -133,6 +151,9 @@ class Figure(mpl.figure.Figure):
         self.mode = "beamer"
       elif "thesis" in Figure._getBuildDir():
         self.mode = "thesis"
+      elif "defense" in Figure._getBuildDir():
+        self.mode = "defense"
+        defaultFontSize = 9
       else:
         self.mode = "paper"
     else:
@@ -149,6 +170,12 @@ class Figure(mpl.figure.Figure):
       "font.size" : fontSize,
       "pgf.preamble" : preamble.splitlines(),
     })
+    
+    if self.mode == "defense":
+      mpl.rcParams.update({
+        "lines.linewidth" : 0.8,
+        "lines.markersize" : 4
+      })
     
     self._saveDisabled = (platform.node() == "neon")
   
