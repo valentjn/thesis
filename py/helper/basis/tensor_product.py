@@ -12,7 +12,7 @@ class TensorProduct(HierarchicalBasis):
   def evaluate(self, l, i, XX):
     NN, d = XX.shape
     YY = np.ones((NN,))
-    for t in range(d): YY = YY * self.basis1D[t].evaluate(l[t], i[t], XX[:,t])
+    for t in range(d): YY *= self.basis1D[t].evaluate(l[t], i[t], XX[:,t])
     return YY
   
   def getSupport(self, l, i):
