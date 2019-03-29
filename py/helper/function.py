@@ -212,6 +212,61 @@ class SGppFunction(Function):
 
 
 
+class SGppFunctionGradient(Function):
+  def __init__(self, fGradient):
+    import pysgpp
+    
+    super().__init__(fGradient.getNumberOfParameters())
+    self.d = fGradient.getNumberOfParameters()
+    self.fGradient = fGradient
+  
+  def evaluate(self, XX):
+    import pysgpp
+    
+    if XX.ndim == 1:
+      yyGradient = pysgpp.DataVector(self.d)
+      yy = self.fGradient.eval(np2sgpp(XX), yyGradient)
+      yyGradient = sgpp2np(yyGradient)
+    else:
+      nn = XX.shape[0]
+      yy = pysgpp.DataVector(nn)
+      yyGradient = pysgpp.DataMatrix(nn, self.d)
+      self.fGradient.eval(np2sgpp(XX), yy, yyGradient)
+      yy, yyGradient = sgpp2np(yy), sgpp2np(yyGradient)
+    
+    return yy, yyGradient
+
+
+
+class SGppFunctionHessian(Function):
+  def __init__(self, fHessian):
+    import pysgpp
+    
+    super().__init__(fHessian.getNumberOfParameters())
+    self.d = fHessian.getNumberOfParameters()
+    self.fHessian = fHessian
+  
+  def evaluate(self, XX):
+    import pysgpp
+    
+    if XX.ndim == 1:
+      yyGradient = pysgpp.DataVector(self.d)
+      yyHessian  = pysgpp.DataMatrix(self.d, self.d)
+      yy = self.fHessian.eval(np2sgpp(XX), yyGradient, yyHessian)
+      yyGradient, yyHessian = sgpp2np(yyGradient), sgpp2np(yyHessian)
+    else:
+      nn = XX.shape[0]
+      yy = pysgpp.DataVector(nn)
+      yyGradient = pysgpp.DataMatrix(nn, self.d)
+      yyHessian  = pysgpp.DataMatrixVector()
+      self.fHessian.eval(np2sgpp(XX), yy, yyGradient, yyHessian)
+      yy, yyGradient = sgpp2np(yy), sgpp2np(yyGradient)
+      yyHessian = np.array([sgpp2np(yyHessian[k]) for k in range(nn)])
+    
+    return yy, yyGradient, yyHessian
+
+
+
 class SGppVectorFunction(Function):
   def __init__(self, f):
     super().__init__(f.getNumberOfParameters())
