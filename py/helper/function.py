@@ -88,7 +88,7 @@ class Interpolant(Function):
 
 
 
-class SGppScalarFunction(Function):
+class SGppFunction(Function):
   def __init__(self, f):
     super().__init__(f.getNumberOfParameters())
     self.f = f
@@ -104,8 +104,6 @@ class SGppScalarFunction(Function):
       yy = sgpp2np(yy)
     
     return yy
-
-SGppFunction = SGppScalarFunction
 
 
 
@@ -130,7 +128,7 @@ class SGppVectorFunction(Function):
 
 
 
-class SGppInterpolant(SGppScalarFunction):
+class SGppInterpolant(SGppFunction):
   def __init__(self, grid, fX, aX=None):
     import pysgpp
     self.grid = grid
@@ -168,7 +166,7 @@ class SGppVectorInterpolant(SGppVectorFunction):
 
 
 
-class SGppTestFunction(SGppScalarFunction):
+class SGppTestFunction(SGppFunction):
   def __init__(self, f, d):
     if type(f) is str:
       import pysgpp
