@@ -69,7 +69,7 @@ def plotText3D(ax, trafo, x, y, z, text, extent,
 
 
 def main():
-  a, b, c, d = 0.3, 0.4, 0.3, 0.4
+  a, b, c, d = 0.4, 0.3, 0.3, 0.4
   theta = 20/180*np.pi
   
   kwargs = (lambda r: {
@@ -90,34 +90,34 @@ def main():
                              np.array(y)))
     
     if q < 2:
-      ax.fill(*trafo([(1-a)/2, (1+a)/2, (1+a)/2, (1-a)/2, (1-a)/2],
-                     [0, 0, 1, 1, 0]), **kwargs(0))
       ax.fill(*trafo([0, 1, 1, 0, 0],
-                     [(1-b)/2, (1-b)/2, (1+b)/2, (1+b)/2, (1-b)/2]),
+                     [(1-a)/2, (1-a)/2, (1+a)/2, (1+a)/2, (1-a)/2]),
               **kwargs(1))
-      plotText(ax, trafo, 0.5, 0.2,   r"$x_1$", width=a,
-               contourColor=contourColors(0))
-      plotText(ax, trafo, 0.8, 0.5,   r"$x_2$", height=b,
+      ax.fill(*trafo([(1-b)/2, (1+b)/2, (1+b)/2, (1-b)/2, (1-b)/2],
+                     [0, 0, 1, 1, 0]), **kwargs(0))
+      plotText(ax, trafo, 0.8, 0.5,   r"$x_1$", height=a,
                contourColor=contourColors(1))
+      plotText(ax, trafo, 0.5, 0.2,   r"$x_2$", width=b,
+               contourColor=contourColors(0))
     else:
-      ax.fill(*trafo([0, a/2, a/2, 0, 0], [0, 0, 1, 1, 0]), **kwargs(0))
-      ax.fill(*trafo([1-a/2, 1, 1, 1-a/2, 1-a/2], [0, 0, 1, 1, 0]),
-              **kwargs(0))
-      ax.fill(*trafo([0, 1, 1, 0, 0], [0, 0, b/2, b/2, 0]), **kwargs(1))
-      ax.fill(*trafo([0, 1, 1, 0, 0], [1-b/2, 1-b/2, 1, 1, 1-b/2]),
+      ax.fill(*trafo([0, 1, 1, 0, 0], [0, 0, a/2, a/2, 0]), **kwargs(1))
+      ax.fill(*trafo([0, 1, 1, 0, 0], [1-a/2, 1-a/2, 1, 1, 1-b/2]),
               **kwargs(1))
+      ax.fill(*trafo([0, b/2, b/2, 0, 0], [0, 0, 1, 1, 0]), **kwargs(0))
+      ax.fill(*trafo([1-b/2, 1, 1, 1-b/2, 1-b/2], [0, 0, 1, 1, 0]),
+              **kwargs(0))
       ax.fill(*trafo([0, 1-c/2, 1, 1, c/2, 0, 0],
                      [1-c/2, 0, 0, c/2, 1, 1, 1-c/2]), **kwargs(2))
       ax.fill(*trafo([0, d/2, 1, 1, 1-d/2, 0, 0],
                      [0, 0, 1-d/2, 1, 1, d/2, 0]), **kwargs(3))
-      plotText(ax, trafo, a/4,   0.5,   r"$\frac{x_1}{2}$", width=a/2,
-               contourColor=contourColors(0))
-      plotText(ax, trafo, 1-a/4, 0.5,   r"$\frac{x_1}{2}$", width=a/2,
-               contourColor=contourColors(0))
-      plotText(ax, trafo, 0.5,   b/4,   r"$x_2/2$",         height=b/2,
+      plotText(ax, trafo, 0.5,   a/4,   r"$x_1/2$",         height=a/2,
                contourColor=contourColors(1), raiseText=0.025)
-      plotText(ax, trafo, 0.5,   1-b/4, r"$x_2/2$",         height=b/2,
+      plotText(ax, trafo, 0.5,   1-a/4, r"$x_1/2$",         height=a/2,
                contourColor=contourColors(1), raiseText=0.015)
+      plotText(ax, trafo, b/4,   0.5,   r"$\frac{x_2}{2}$", width=b/2,
+               contourColor=contourColors(0))
+      plotText(ax, trafo, 1-b/4, 0.5,   r"$\frac{x_2}{2}$", width=b/2,
+               contourColor=contourColors(0))
       plotText(ax, trafo, 0.7,   0.3,   r"$x_3$",           width=c,
                contourColor=contourColors(2))
       plotText(ax, trafo, 0.7,   0.7,   r"$x_4$",           width=d,
