@@ -88,6 +88,111 @@ class Interpolant(Function):
 
 
 
+class InterpolantGradient(Interpolant):
+  def __init__(self, basis1D, basis1DGradient, X, L, I, fX, aX=None):
+    import helper.basis
+    if not hasattr(basis1D, "__len__"):
+      basis1D = X.shape[1] * [basis1D]
+    if not hasattr(basis1DGradient, "__len__"):
+      basis1DGradient = X.shape[1] * [basis1DGradient]
+    self.basis1D         = basis1D
+    self.basis1DGradient = basis1DGradient
+    basis = helper.basis.TensorProduct(basis1D)
+    super().__init__(basis, X, L, I, fX, aX=aX)
+  
+  def evaluate(self, XX):
+    assert (self.aX.ndim == 1), "Only scalar-valued interpolants " \
+                                "are supported."
+    assert (self.L.ndim == 2), "L needs to be a matrix."
+    assert (self.I.ndim == 2), "I needs to be a matrix."
+    if XX.ndim == 1: XX = np.array([XX])
+    
+    (N, d), NN = self.X.shape, XX.shape[0]
+    YY,         curYY         = np.zeros((NN,)),   np.zeros((NN,))
+    YYGradient, curYYGradient = np.zeros((NN, d)), np.zeros((NN, d))
+    
+    for k in range(N):
+      curYY.fill(self.aX[k])
+      curYYGradient.fill(self.aX[k])
+      
+      for t in range(d):
+        YY1D = self.basis1D[t].evaluate(
+            self.L[k,t], self.I[k,t], XX[:,t])
+        YY1DGradient = self.basis1DGradient[t].evaluate(
+            self.L[k,t], self.I[k,t], XX[:,t])
+        curYY *= YY1D
+        
+        for t2 in range(d):
+          curYYGradient[:,t2] *= (YY1DGradient if t2 == t else YY1D)
+      
+      YY         += curYY
+      YYGradient += curYYGradient
+    
+    return YY, YYGradient
+
+
+
+class InterpolantHessian(Interpolant):
+  def __init__(self, basis1D, basis1DGradient, basis1DHessian,
+               X, L, I, fX, aX=None):
+    import helper.basis
+    if not hasattr(basis1D, "__len__"):
+      basis1D = X.shape[1] * [basis1D]
+    if not hasattr(basis1DGradient, "__len__"):
+      basis1DGradient = X.shape[1] * [basis1DGradient]
+    if not hasattr(basis1DHessian, "__len__"):
+      basis1DHessian = X.shape[1] * [basis1DHessian]
+    self.basis1D         = basis1D
+    self.basis1DGradient = basis1DGradient
+    self.basis1DHessian  = basis1DHessian
+    basis = helper.basis.TensorProduct(basis1D)
+    super().__init__(basis, X, L, I, fX, aX=aX)
+  
+  def evaluate(self, XX):
+    assert (self.aX.ndim == 1), "Only scalar-valued interpolants " \
+                                "are supported."
+    assert (self.L.ndim == 2), "L needs to be a matrix."
+    assert (self.I.ndim == 2), "I needs to be a matrix."
+    if XX.ndim == 1: XX = np.array([XX])
+    
+    (N, d), NN = self.X.shape, XX.shape[0]
+    YY,         curYY         = np.zeros((NN,)),      np.zeros((NN,))
+    YYGradient, curYYGradient = np.zeros((NN, d)),    np.zeros((NN, d))
+    YYHessian,  curYYHessian  = np.zeros((NN, d, d)), np.zeros((NN, d, d))
+    
+    for k in range(N):
+      curYY.fill(self.aX[k])
+      curYYGradient.fill(self.aX[k])
+      curYYHessian.fill(self.aX[k])
+      
+      for t in range(d):
+        YY1D = self.basis1D[t].evaluate(
+            self.L[k,t], self.I[k,t], XX[:,t])
+        YY1DGradient = self.basis1DGradient[t].evaluate(
+            self.L[k,t], self.I[k,t], XX[:,t])
+        YY1DHessian = self.basis1DHessian[t].evaluate(
+            self.L[k,t], self.I[k,t], XX[:,t])
+        curYY *= YY1D
+        
+        for t2 in range(d):
+          if t2 == t:
+            curYYGradient[:,t2] *= YY1DGradient
+            for t3 in range(d):
+              curYYHessian[:,t2,t3] *= (YY1DHessian if t3 == t else
+                                        YY1DGradient)
+          else:
+            curYYGradient[:,t2] *= YY1D
+            for t3 in range(d):
+              curYYHessian[:,t2,t3] *= (YY1DGradient if t3 == t else YY1D)
+      
+      YY         += curYY
+      YYGradient += curYYGradient
+      YYHessian  += curYYHessian
+    
+    return YY, YYGradient, YYHessian
+
+
+
 class SGppFunction(Function):
   def __init__(self, f):
     super().__init__(f.getNumberOfParameters())
