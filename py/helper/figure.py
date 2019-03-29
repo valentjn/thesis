@@ -12,6 +12,7 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 plt.switch_backend("pgf")
 from mpl_toolkits.mplot3d import Axes3D
+from mpl_toolkits.mplot3d.axis3d import Axis
 
 
 
@@ -158,6 +159,18 @@ class Figure(mpl.figure.Figure):
         self.mode = "paper"
     else:
       self.mode = mode
+    
+    if self.mode != "thesis":
+      # patch mplot3d such that margins near xy-plane edges vanishs
+      # (from https://stackoverflow.com/a/16496436)
+      if not hasattr(Axis, "_get_coord_info_old"):
+        def _get_coord_info_new(self, renderer):
+          mins, maxs, centers, deltas, tc, highs = self._get_coord_info_old(renderer)
+          mins += deltas / 4
+          maxs -= deltas / 4
+          return mins, maxs, centers, deltas, tc, highs
+        Axis._get_coord_info_old = Axis._get_coord_info
+        Axis._get_coord_info = _get_coord_info_new
     
     fontFamily = ("sans-serif" if self.mode == "beamer" else "serif")
     if fontSize is None: fontSize = defaultFontSize
