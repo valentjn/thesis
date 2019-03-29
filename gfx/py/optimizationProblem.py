@@ -109,7 +109,7 @@ def plotConstrainedProblem(q):
     T = [2, 4]
   
   d = xOpt.size
-  f = helper.function.SGppScalarFunction(f)
+  f = helper.function.SGppFunction(f)
   g = helper.function.SGppVectorFunction(g)
   h = helper.function.SGppVectorFunction(h)
   fOpt = f.evaluate((xOpt-bounds[0])/(bounds[1]-bounds[0]))
