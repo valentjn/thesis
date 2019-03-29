@@ -70,6 +70,7 @@ class Interpolant(Function):
     return A
   
   def evaluate(self, XX):
+    if XX.ndim == 1: XX = np.array([XX])
     N, NN = self.X.shape[0], XX.shape[0]
     
     if self.aX.ndim == 1:
