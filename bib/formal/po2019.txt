@@ -1,22 +1,22 @@
 Promotionsordnung der Universität Stuttgart
-Vom 22. Februar 2016
+Vom 01. März 2019
 Auf Grund von § 38 Abs. 4 des Landeshochschulgesetzes vom 1. Januar 2005 (GBl. S. 1),
-zuletzt geändert durch Gesetz vom 01. April 2014 (GBl. S. 99) hat der Senat der Universität
-Stuttgart am 20. Januar 2016 die nachstehende Neufassung der Promotionsordnung
+zuletzt geändert durch Gesetz vom 13. März 2018 (GBl. S. 85) hat der Senat der Universität
+Stuttgart am 13. Februar 2019 die nachstehende Neufassung der Promotionsordnung
 beschlossen.
-Der Rektor hat seine Zustimmung gemäß § 38 Abs. 4 des Landeshochschulgesetzes am
-22. Februar 2016, Az.: 7841.170, erteilt.
+Der Rektor hat seine Zustimmung gemäß § 38 Abs. 4 des Landeshochschulgesetzes am 01.
+März 2019, Az.: 7841.170, erteilt.
 Inhaltsverzeichnis
 §1
 §2
 §3
 §4
 §5
-§ 5a
 §6
 §7
 §8
 § 8a
+§ 8b
 §9
 § 10
 § 11
@@ -32,22 +32,22 @@ Inhaltsverzeichnis
 § 21
 
 Allgemeines
-Die Dissertation
+Dissertation
 Voraussetzungen für die Promotion
-Annahme als Doktorandin oder Doktorand
-Promotion bei GRADUS, Mindestqualitätsstandards und Fortschrittsbericht
-Ombudspersonen
-Anmeldung zur Prüfung
+Annahme als Doktorandin oder als Doktorand
+Ombudsperson
+Zulassung zur Prüfung
 Prüfungsorgane
 Promotionen in der Graduiertenschule GSAME
 Promotionen in der Graduiertenschule IMPRS-CMS
+Promotionen in der Graduiertenschule IMPRS-IS
 Promotionen im Stuttgarter Zentrum für Simulationswissenschaften (SC SimTech)
-Beurteilung der Dissertation
+Begutachtung der Dissertation und Fortgang des Verfahrens
 Mündliche Prüfung
-Beschluss über das Ergebnis der Prüfung
+Benotung der Dissertation und der mündlichen Prüfung, Ermittlung der Gesamtnote
 Veröffentlichung der Dissertation
 Promotionsurkunde
-Gemeinsame Promotion mit einer ausländischen Hochschule
+Gemeinsame Promotion mit einer inländischen oder ausländischen Hochschule
 Täuschung
 Entziehung des Doktorgrades
 Ehrenpromotion
@@ -88,6 +88,7 @@ Doktors der Naturwissenschaften (Dr. rer. nat.);
 auf Beschluss der Promotionsausschüsse der
 Philosophisch-Historischen Fakultät
 und der Fakultäten
+- Architektur und Stadtplanung
 - Informatik, Elektrotechnik und Informationstechnik
 - Wirtschafts- und Sozialwissenschaften
 sowie des Promotionsausschusses des
@@ -103,7 +104,7 @@ den eines Doktors der Wirtschafts- und Sozialwissenschaften (Dr. rer. pol.).
 
 (2)
 
-Der Doktorgrad wird auf Grund einer von der Bewerberin oder vom Bewerber verfassten
+Der Doktorgrad wird auf Grund einer von der Doktorandin oder vom Doktoranden verfassten
 wissenschaftlichen Abhandlung (Dissertation) und einer mündlichen Prüfung verliehen.
 
 §2
@@ -138,7 +139,8 @@ einzelnen Fakultäten bzw. Einrichtungen der Universität Stuttgart durch Richtl
 Studien-, Seminar- und Semesterarbeiten, die Bachelorarbeit, die Diplomarbeit, die
 Master- oder Magisterarbeit, die wissenschaftliche Arbeit der Lehramtsprüfung oder
 Arbeiten, die zu anderen Prüfungen eingereicht wurden, sowie bereits veröffentlichte
-Arbeiten können nicht als Dissertation verwendet werden. Die Veröffentlichung von
+Arbeiten können nicht als Dissertation verwendet werden, hiervon ausgenommen sind
+Veröffentlichungen im Rahmen von Absatz 6. Die Veröffentlichung von
 Teilen der Dissertation vor Abschluss des Promotionsverfahrens ist möglich.
 
 (5)
@@ -147,10 +149,27 @@ Die Dissertation soll im Regelfall an einem Institut der Universität Stuttgart 
 Außerhalb der Universität Stuttgart angefertigte wissenschaftliche Arbeiten können nur
 dann als Dissertation anerkannt werden, wenn Gegenstand und Durchführung der
 Arbeit mit einer zuständigen Professorin oder einem zuständigen Professor,
+Tenure-Track-Professorin oder Tenure-Track-Professor,
 Juniorprofessorin oder Juniorprofessor , Privat-, Hochschul- oder Universitätsdozentin
-oder -dozent, der bzw. dem das Recht der Berichterin oder des Berichters zusteht, oder
+oder -dozent, der bzw. dem das Recht der Berichterin oder des Berichters zusteht,
 Honorarprofessorin bzw. Honorarprofessor, der bzw. dem der zuständige Fakultätsrat
-das Recht einer Berichterin oder eines Berichters übertragen hat, erörtert wurden.
+das Recht einer Berichterin oder eines Berichters übertragen hat
+oder einer assoziierten Professorin bzw. einem assoziierten Professor einer Hochschule
+für angewandte Wissenschaften erörtert wurden.
+
+(6)
+
+Die Dissertation kann publikationsbasiert in kumulativer Form angefertigt werden, wenn
+dies durch Richtlinie des Promotionsausschusses im Einvernehmen mit dem
+Fakultätsrat gestattet wird und die Betreuerin oder der Betreuer der Anfertigung einer
+publikationsbasierten Dissertation zustimmt. Die Richtlinie muss insbesondere
+Regelungen enthalten zu Art, Mindestanzahl und Publikationsstand der verwendeten
+wissenschaftlichen Veröffentlichungen, zu den zulässigen bzw. anerkannten
+Publikationsorganen, zur Zulässigkeit und zum zulässigen Umfang von KoAutorenschaften. Eine kumulative Dissertation muss in ihrer Gesamtheit eine einer
+Dissertation gemäß Abs. 1 gleichwertige Leistung darstellen. Der kumulativen
+Dissertation ist eine ausführliche Einführung voranzustellen, in der der theoretische
+Bezugsrahmen dargelegt wird sowie die Einordnung der Einzelpublikationen in einen
+wissenschaftlichen Gesamtzusammenhang erfolgt.
 
 §3
 
@@ -176,21 +195,22 @@ Bewerber zu weiterer wissenschaftlicher Forschungsarbeit befähigt ist;
 Dissertation zugrunde liegt, mit dem Studienfach; bei Bewerberinnen oder
 Bewerbern mit einem Abschluss in einem Kombinationsstudiengang, insbesondere
 mit Master-, Magister- oder Staatsexamen mit einem Studien-Hauptfach;
-3. ein Studium oder eine Tätigkeit im akademischen bzw. wissenschaftlichen Dienst
-von mindestens einjähriger Dauer an der Universität Stuttgart; diese können auch
-während der Anfertigung der Dissertation abgeleistet werden;
-4. ein von einer Professorin oder einem Professor, Juniorprofessorin oder
+3. ein von einer Professorin oder einem Professor,
+Tenure-Track-Professorin oder Tenure-Track-Professor, Juniorprofessorin oder
 Juniorprofessor, Privat-, Hochschul- oder Universitätsdozentin oder -dozent der
 Universität Stuttgart, der oder dem das Recht der Berichterin oder des Berichters
 zusteht, oder Honorarprofessorin bzw. Honorarprofessor, der oder dem der
 zuständige Fakultätsrat das Recht einer Berichterin oder eines Berichters
-übertragen hat, gestelltes oder gebilligtes Thema für die geplante Dissertation und
+übertragen hat, oder einer assoziierten Professorin
+bzw. einem assoziierten Professor einer Hochschule für angewandte Wissenschaften
+gestelltes oder gebilligtes Thema für die geplante Dissertation und
 deren oder dessen Bereitschaft, die Betreuung der zugehörigen
-Forschungsarbeiten zu übernehmen. In besonders begründeten Ausnahmefällen
+Forschungsarbeiten zu übernehmen. In begründeten Ausnahmefällen
 kann der Promotionsausschuss die selbständige Betreuung einer Promotion
 herausragend qualifizierten, promovierten Wissenschaftlerinnen oder
 Wissenschaftlern der Fakultät, die an extern begutachteten
-Hochschullehrernachwuchsförderprogrammen teilnehmen (z.B. Emmy-Noether-Stipendiatinnen oder -stipendiaten), auch ohne Nachweis einer Habilitation
+Hochschullehrernachwuchsförderprogrammen teilnehmen (z.B. Leiterinnen und Leiter einer
+Emmy-Noether-Nachwuchsgruppe), auch ohne Nachweis einer Habilitation
 übertragen.
 
 (2)
@@ -211,11 +231,7 @@ Thema der Dissertation zusammenhängen, nicht oder nicht in der hinreichenden
 Breite und Tiefe umfasst oder die diese Fachgebiete nur im Rahmen eines
 Nebenfaches studiert haben, müssen anderweitig erworbene, vertiefte Kenntnisse
 auf diesen Gebieten nachweisen (vgl. Abs. 3).
-3. Bewerberinnen oder Bewerber, die nicht mindestens ein Jahr der Universität
-Stuttgart im Sinne von Abs. 1 Ziff. 3 angehören, haben ein Ausnahmegesuch bei
-der oder dem Vorsitzenden des Promotionsausschusses zu stellen und zu
-begründen.
-4. Bei Bewerberinnen oder Bewerbern, die ein selbst gewähltes Thema zu
+3. Bei Bewerberinnen oder Bewerbern, die ein selbst gewähltes Thema zu
 untersuchen beabsichtigen, prüft der Promotionsausschuss der jeweiligen Fakultät
 bzw. Einrichtung pflichtgemäß,
 a) ob die betreffende Fakultät bzw. Einrichtung für das in Aussicht genommene
@@ -224,7 +240,8 @@ b) ob das Thema eine wissenschaftlichen Ansprüchen genügende Dissertation im
 Sinne von § 2 Abs. 1 erwarten lässt,
 c) ob die mit dem Thema zusammenhängenden Fachgebiete an der Universität
 Stuttgart in ausreichendem Maße vertreten sind; hierzu gehören
-fachkompetente Professoreninnen und Professoren, Juniorprofessoreninnen
+fachkompetente Professoreninnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren, Juniorprofessoreninnen
 und Juniorprofessoren, Privat-, Hochschul- oder Universitätsdozenteninnen
 oder -dozenten, denen das Recht der Berichterin oder des Berichters zusteht,
 oder Honorarprofessoreninnen bzw. Honorarprofessoren, denen der zuständige
@@ -232,14 +249,15 @@ Fakultätsrat das Recht einer Berichterin oder eines Berichters übertragen hat,
 sowie eine hinreichende Sachausstattung (Räume, Apparaturen, Bibliotheken,
 Forschungsmittel etc.), welche zur Durchführung der erforderlichen
 Forschungsarbeiten notwendig ist,
-d) ob eine Professorin oder ein Professor, Juniorprofessorin oder Juniorprofessor,
+d) ob eine Professorin oder ein Professor,
+Tenure-Track-Professorin oder Tenure-Track-Professor, Juniorprofessorin oder Juniorprofessor,
 Privat-, Hochschul- oder Universitätsdozentin oder -dozent der Universität
 Stuttgart, der oder dem das Recht einer Berichterin oder eines Berichters
 zusteht, oder Honorarprofessorin bzw. Honorarprofessor, der oder dem der
 zuständige Fakultätsrat das Recht einer Berichterin oder eines Berichters
 übertragen hat, bereit und in der Lage ist, die Betreuung der Bewerberin oder
 des Bewerbers zu übernehmen.
-5. Bei besonders qualifizierten Bachelorabsolventinnen oder Bachelorabsolventen
+4. Bei besonders qualifizierten Bachelorabsolventinnen oder Bachelorabsolventen
 einer Hochschule in der Bundesrepublik Deutschland, die nicht unter Abs. 1 Nr. 1
 fallen, und bei besonders qualifizieren Absolventinnen oder Absolventen eines
 Diplomstudiengangs einer Fachhochschule bzw. Hochschule für angewandte
@@ -268,15 +286,18 @@ a) die Anfertigung einer wissenschaftlichen Arbeit, die einer Masterarbeit vergl
 ist,
 b) die Ablegung von zwei mündlichen Prüfungen in verschiedenen Fachgebieten von
 je etwa 30 Minuten Dauer.
+Das Prüfungsergebnis muss erkennen lassen, dass die Bewerberin oder der Bewerber
+zu weiterer wissenschaftlicher Forschungsarbeit befähigt ist.
 Die oder der Vorsitzende des Promotionsausschusses legt auf Vorschlag der
 Betreuerin oder des Betreuers die näheren Einzelheiten (Prüferin bzw. Prüfer, Termine,
-Prüfungsfächer und -gegenstände) fest. Der Promotionsausschuss kann andere Arten
+Prüfungsfächer und -gegenstände) fest. Der Promotionsausschuss kann andere
+Prüfungsformen (z.B. schriftlich) festlegen und andere Arten
 des Nachweises (z.B. Eignungsfeststellungsverfahren nach Abs. 2 Nr. 5) anerkennen
-und in besonderen Fällen auf die genannten Leistungen ganz oder teilweise verzichten.
+sowie in besonderen Fällen auf die genannten Leistungen ganz oder teilweise verzichten.
 
 (4)
 
-Wurden die nach Abs. 2 Nr. 5 und Abs. 3 abzulegenden Prüfungen nicht bestanden,
+Wurden die nach Abs. 2 Nr. 4 und Abs. 3 abzulegenden Prüfungen nicht bestanden,
 können die nicht bestandenen Teile einmal frühestens nach drei Monaten, spätestens
 innerhalb eines Jahres wiederholt werden. Wird die Jahresfrist nicht eingehalten,
 erlischt die Berechtigung zur Teilnahme am Eignungsfeststellungsverfahren bzw. an
@@ -295,10 +316,10 @@ Doktorand beantragen. Der Antrag ist in der Regel vor Beginn der Arbeit an der
 Dissertation zu stellen. Die Annahme als Doktorandin oder Doktorand setzt voraus,
 dass die Bewerberin oder der Bewerber die Voraussetzungen zur Promotion gemäß
 § 3 erfüllt. Soweit die Bewerberin oder der Bewerber für das Erfüllen der
-Voraussetzungen noch ein Eignungsfeststellungsverfahren nach § 3 Abs. 2 Nr. 5 oder
+Voraussetzungen noch ein Eignungsfeststellungsverfahren nach § 3 Abs. 2 Nr. 4 oder
 eine Anerkennungsprüfung nach § 3 Abs. 3 erfolgreich absolvieren muss, kann die
 Annahme als Doktorandin oder Doktorand mit der Auflage erfolgen, dass das
-Eignungsfestellungsverfahren bzw. die Anerkennungsprüfung innerhalb einer vom
+Eignungsfeststellungsverfahren bzw. die Anerkennungsprüfung innerhalb einer vom
 Promotionsausschuss festgesetzten Frist oder sofern eine solche nicht festgesetzt
 wird, spätestens bis zur Zulassung zur Prüfung nach § 6 bestanden sein muss.
 
@@ -309,8 +330,9 @@ der Promotionsausschuss der zuständigen Fakultät bzw. Einrichtung.
 
 (3)
 
-Das Gesuch auf Annahme als Doktorandin oder Doktorand ist schriftlich an die
-zuständige Stelle der Zentralen Verwaltung zu richten. Es muss, soweit nicht schon bei
+Das Gesuch auf Annahme als Doktorandin oder Doktorand ist in der von der
+zuständigen Stelle der Universität vorgeschriebenen Form an diese zu richten.
+Es muss, soweit nicht schon bei
 den Akten vorliegend, enthalten:
 1. eine in deutscher oder englischer Sprache abgefasste Darstellung des
 Lebenslaufes, die insbesondere über den Bildungsgang der Bewerberin oder des
@@ -320,15 +342,15 @@ Bewerbers Aufschluss gibt,
 oder wissenschaftliche Staatsprüfung in Urschrift oder in beglaubigter Abschrift, bei
 Bewerberinnen oder Bewerbern mit einer Abschlussprüfung einer ausländischen
 Hochschule das entsprechende Abschlusszeugnis und bei Bewerberinnen und
-Bewerbern nach § 3 Abs. 2 Ziff. 5 das Zeugnis über die Bachelor-, Diplom- bzw.
+Bewerbern nach § 3 Abs. 2 Ziff. 4 das Zeugnis über die Bachelor-, Diplom- bzw.
 Abschlussprüfung und die Bescheinigung des zuständigen Promotionsausschusses
-gemäß § 3 Abs. 2 Ziffer 5,
+gemäß § 3 Abs. 2 Ziffer 4,
 4. die Angabe der Fakultät oder Einrichtung der Universität Stuttgart, bei der das
 Promotionsverfahren durchgeführt werden soll,
 5. die Angabe des Themas oder Arbeitsgebietes der geplanten Dissertation,
 6. eine schriftliche Promotionsvereinbarung zwischen einer Betreuerin oder einem
 Betreuer, die oder der gemäß § 7 Abs. 3 zur Berichterin oder zum Berichter bestellt
-werden kann und der Doktorandin oder dem Doktoranden gemäß § 38 Abs. 5
+werden kann und der Bewerberin oder dem Bewerber gemäß § 38 Abs. 5
 Landeshochschulgesetz in der jeweils geltenden Fassung mit den dort geregelten
 Mindestinhalten. Die Promotionsvereinbarung muss insbesondere Regelungen über
 ein individuelles Qualifizierungsprogramm im Umfang von mindestens 9
@@ -337,17 +359,23 @@ die jeweiligen Promotionsausschüsse in Abstimmung mit Vertretern der
 Promovierenden erstellen. Die Wirksamkeit der Promotionsvereinbarung steht unter
 dem Vorbehalt, dass die Voraussetzungen für die Promotion nach § 3 vorliegen und
 der Promotionsausschuss der Annahme als Doktorandin oder Doktorand zustimmt.
-7. ggf. eine Begründung für eine Ausnahme gemäß § 3 Abs. 2 Ziff. 3,
-8. eine Erklärung über etwaige frühere Promotionsversuche, noch bestehende
+Mit Abschluss der Promotionsvereinbarung ist die Bewerberin oder der Bewerber
+verpflichtet, sich unter Nutzung der Promovierendensoftware der Universität Stuttgart
+zu registrieren. Mit der Registrierung gelten die Bewerberinnen und Bewerber als an
+der Universität Stuttgart Tätige im Sinne von § 9 Absatz 4 Satz 1
+Landeshochschulgesetz und sind im gleichen Umfang wie angenommene
+Doktorandinnen und Doktoranden zur Nutzung der universitären Einrichtungen
+berechtigt.
+7. eine Erklärung über etwaige frühere Promotionsversuche, noch bestehende
 laufende Promotionsverfahren und erfolgreich abgeschlossene Promotionen, ggf.
 nähere Angaben über Zeitpunkt, Hochschule, Fakultät und Dissertationsthema,
-9. die Verpflichtung, etwaige anderweitige Promotionsverfahren, die nach dem
+8. die Verpflichtung, etwaige anderweitige Promotionsverfahren, die nach dem
 Gesuch auf Annahme als Doktorandin oder Doktorand eingeleitet wurden, sofort
-mitzuteilen; im Übrigen gilt Ziff. 8.
+mitzuteilen; im Übrigen gilt Ziff. 7.
 
 (4)
 
-Die zuständige Stelle der Zentralen Verwaltung überprüft das Vorliegen der Nachweise
+Die zuständige Stelle der Universität überprüft das Vorliegen der Nachweise
 nach Abs. 3 und leitet das Gesuch auf Annahme als Doktorandin oder Doktorand,
 sofern die Rektorin oder der Rektor die ggf. nach § 3 Abs. 2 Ziff. 1 erforderliche
 Genehmigung erteilt hat, an den Promotionsausschuss der zuständigen Fakultät bzw.
@@ -378,7 +406,7 @@ abgeschlossenen oder noch schwebenden Promotionsverfahrens derselben
 Bewerberin oder desselben Bewerbers gleich oder eng benachbart ist,
 2. wenn der Bewerberin oder dem Bewerber durch die beabsichtigte Promotion ein
 zweites Mal derselbe Doktorgrad verliehen würde,
-3. wenn die Bewerberin oder der Bewerber die gemäß § 4 Absatz 3 Nr. 8 und 9
+3. wenn die Bewerberin oder der Bewerber die gemäß § 4 Absatz 3 Nr. 7 und 8
 erforderlichen Erklärungen unvollständig oder unrichtig abgegeben hat;
 4. wenn Gründe vorliegen, die nach den gesetzlichen Vorschriften eine Aberkennung
 des Akademischen Grades rechtfertigten.
@@ -388,22 +416,25 @@ des Akademischen Grades rechtfertigten.
 Die Annahme als Doktorandin oder Doktorand kann versagt oder zurückgestellt
 werden, wenn die mit dem Thema der Dissertation zusammenhängenden Fachgebiete
 an der Universität Stuttgart nicht in ausreichendem Maße vertreten oder ausgestattet
-sind (vgl. § 3 Abs. 2 Ziff. 4 c).
+sind (vgl. § 3 Abs. 2 Ziff. 3 c).
 
 (8)
 
 Der Bewerberin oder dem Bewerber wird schriftlich mitgeteilt, ob die Voraussetzungen
 zur Promotion erfüllt sind und sie oder er als Doktorandin oder Doktorand
 angenommen wird. Eine Kopie des Schreibens ist von der oder dem Vorsitzenden des
-Promotionsausschusses an die zuständige Stelle der Zentralen Verwaltung zu
+Promotionsausschusses an die zuständige Stelle der Universität zu
 übersenden. Soweit eine Annahme mit Auflagen nach Abs. 1 erfolgt, sind die Auflagen
 zu benennen.
 
 (9)
 
 Bewerberinnen oder Bewerber, die als Doktorandinnen oder Doktoranden
-angenommen wurden, können sich für die Dauer der Promotion als
-Promotionsstudierende immatrikulieren.
+angenommen wurden, müssen sich nach den Bestimmungen des Landeshochschulgesetzes in der
+jeweils geltenden Fassung für die Dauer der Promotion immatrikulieren. Hiervon
+ausgenommen sind Doktorandinnen und Doktoranden, die an der Universität Stuttgart
+hauptberuflich tätig sind und schriftlich gegenüber dem Rektorat erklärt haben, dass sie
+nicht immatrikuliert werden wollen.
 
 (10)
 
@@ -439,7 +470,7 @@ Promotionsausschusses widerrufen werden, wenn
 a) die Doktorandin oder der Doktorand sich nicht um den Fortgang der Dissertation
 bemüht oder dem Thema nicht gewachsen ist,
 b) sich fehlende oder unrichtige Angaben im Annahmegesuch herausstellen oder der
-Verpflichtung von § 4 Absatz 2 Nr. 9 nicht nachgekommen wird.
+Verpflichtung von § 4 Absatz 3 Nr. 8 nicht nachgekommen wird.
 c) wissenschaftliches Fehlverhalten gemäß den vom Senat der Universität Stuttgart
 beschlossenen Grundsätzen zur Sicherung guter wissenschaftlicher Praxis in der
 jeweils geltenden Fassung vorliegt.
@@ -448,127 +479,14 @@ geben.
 
 §5
 
-Promotion bei GRADUS, Mindestqualitätsstandards und Fortschrittsbericht
+Ombudsperson
 
-(1)
-
-Die Graduierten-Akademie Universität Stuttgart (GRADUS) ist eine zentrale
-wissenschaftliche Einrichtung der Universität Stuttgart. Zu den Aufgaben der GRADUS
-gehört die strukturierte Förderung des wissenschaftlichen Nachwuchses und eine
-Sicherung hoher Qualität in der Doktorandenqualifizierung. Hierfür bietet sie für
-Doktorandinnen und Doktoranden ein fächerübergreifendes Qualifizierungsangebot an
-und legt Mindeststandards für die promotionsbegleitende Weiterbildung in GRADUS
-fest.
-
-(2)
-
-Mit der Annahme als Doktorandin oder Doktorand treffen die Bewerberinnen und
-Bewerber eine Entscheidung über die Mitgliedschaft bei GRADUS. Die nachfolgenden
-Regelungen gelten nur für Mitglieder von GRADUS.
-
-(3)
-
-Ein späterer Eintritt zu GRADUS ist möglich. GRADUS legt hierfür die
-Voraussetzungen fest.
-
-(4)
-
-Zur Sicherung eines hohen Qualifizierungsniveaus während der Promotionsphase
-müssen die Doktorandinnen und Doktoranden folgende Elemente absolvieren:
-1. erfolgreiche Teilnahme an wissenschaftlichen fachbezogenen Lehrveranstaltungen
-auf Doktorandenniveau im Umfang von mindestens 6 Leistungspunkten,
-2. Teilnahme an Kursen auf Doktorandenniveau zur Vermittlung von
-fachübergreifenden Schlüsselqualifikationen im Umfang von mindestens 3
-Leistungspunkten und
-3. Teilnahme an zwei Lehrveranstaltungen der Graduiertenakademie GRADUS zu
-interdisziplinären Themen. In begründeten Ausnahmefällen können
-fachgebietsabhängig vom Promotionsausschuss andere äquivalente Leistungen
-anerkannt werden.
-Die einzelnen von der Doktorandin oder vom Doktoranden zu absolvierenden
-Ausbildungselemente sind von der Betreuerin oder vom Betreuer der Dissertation
-festzulegen und in der Promotionsvereinbarung schriftlich festzuhalten. Eine Kopie der
-Promotionsvereinbarung erhält der Promotionsausschuss. Die absolvierten
-Ausbildungselemente sind mit der Anmeldung zur Prüfung durch eine Bescheinigung
-der Betreuerin oder des Betreuers nachzuweisen (vgl. § 6).
-
-(5)
-
-Spätestens 18 Monate nach der Annahme als Doktorandin oder Doktorand soll diese
-oder dieser den Stand ihres oder seines Promotionsvorhabens in einem
-Fortschrittsbericht vorstellen. Der Fortschrittsbericht setzt sich in der Regel aus einem
-ca. 30minütigen Vortrag und einem sich hieran anschließenden mündlichen
-Fachgespräch im Umfang von 30 bis 40 Minuten zusammen. Der Fortschrittsbericht
-wird von der Betreuerin oder vom Betreuer der Dissertation (vgl. § 2 Abs. 5) und einer
-weiteren Prüferin oder einem weiteren Prüfer abgenommen, die oder der vom
-Promotionsausschuss bestellt wird und die Voraussetzungen des § 7 Abs. 3 erfüllen
-muss. Die Abnahme des Fortschrittsberichtes ist gemäß § 6 für die Anmeldung zur
-Prüfung nachzuweisen.
-
-(6)
-
-Die zuständigen Promotionsausschüsse können abweichende oder darüber
-hinausgehende Anforderungen für GRADUS-Promotionen in ihrem jeweiligen
-Fachbereich formulieren.
-
-(7)
-
-Wurden die in Abs. 4 bis 6 geforderten Ausbildungselemente erfolgreich absolviert,
-wird die Teilnahme am Qualifizierungsprogramm der GRADUS auf der
-Promotionsurkunde zertifiziert.
-
-§5a
-
-Ombudspersonen
-
-(1)
-
-Ombudspersonen sind Ansprechpartner für alle Doktorandinnen und Doktoranden der
-Universität Stuttgart sowie für deren Betreuerinnen und Betreuer. Ergeben sich im
-Laufe des Promotionsverfahrens Konflikte und Streitfälle zwischen Doktorandin bzw.
-Doktorand und Betreuerin bzw. Betreuer, können sich beide Seiten an eine
-Ombudsperson wenden. Dabei kann die betreffende Person frei entscheiden, ob sie
-sich zunächst an die Ombudsperson nach Abs. 3 oder an eine der Ombudspersonen
-nach Abs. 2 wendet.
-
-(2)
-
-Der Senat der Universität Stuttgart bestellt auf Vorschlag des Doktorandenkonventes 3
-universitätsübergreifende Ombudspersonen. Als Ombudspersonen kommen in
-Forschung und Lehre erfahrene Professorinnen und Professoren in Betracht, die
-aufgrund der ihnen möglicherweise zugehenden Informationen nicht selbst zu
-einschlägigen Handeln, beispielsweise als Dekanin oder Dekan, gezwungen sind. In
-der Regel soll jeweils eine Ombudsperson aus den Bereichen Ingenieurwissenschaft,
-Naturwissenschaften und Geistes-, Sozial- und Wirtschaftswissenschaften bestellt
-werden. Mindestens eine Ombudsperson soll eine Frau sein. Die Amtszeit beträgt 3
-Jahre, wobei eine erneute Bestellung möglich ist. Die Ombudspersonen sind
-hochschulöffentlich in geeigneter Weise bekannt zu machen.
-
-(3)
-
-Die Fakultäten können zusätzlich durch ihre Fakultätsräte und die Graduiertenschule
-GSAME sowie das Stuttgarter Zentrum für Simulationswissenschaften durch ihre
-Promotionsausschüsse jeweils eine Ombudsperson als Ansprechpartner für
-Promotionsverfahren die an der jeweiligen Fakultät oder Einrichtung durchgeführt
-werden, bestellen. Als Ombudspersonen kommen in Forschung und Lehre erfahrene
-Professorinnen und Professoren in Betracht, die aufgrund der ihnen möglicherweise
-zugehenden Informationen nicht selbst zu einschlägigen Handeln, beispielsweise als
-Dekanin oder Dekan, gezwungen sind. Die Amtszeit beträgt 3 Jahre, wobei eine
-erneute Bestellung möglich ist.
-
-(4)
-
-Die Ombudspersonen stellen eine unabhängige Instanz dar und verstehen sich als
-neutrale Beratungs- und Vermittlungsstelle, die frei von Weisungen ist. Als
-unabhängige Vertrauenspersonen fungieren sie für beide Seiten und tragen so zu einer
-Lösung von Konflikten und Streitfällen bei. Die Ombudspersonen beraten und
-sprechen Empfehlungen aus. Ihre Empfehlungen können nicht auf dem Rechtsweg
-angefochten werden. Die Ombudspersonen sind nicht befugt, auf die Bewertung der
-erbrachten Leistungen der Doktorandin oder des Doktoranden Einfluss zu nehmen.
-
-(5)
-
-Die Ombudspersonen sind zur Verschwiegenheit verpflichtet und gegenüber
-niemandem auskunftspflichtig, es sei denn dies ist durch Rechtsvorschrift vorgesehen.
+(1) Ergeben sich im Laufe des Promotionsverfahrens Konflikte und Streitfälle zwischen
+Doktorandin bzw. Doktorand und Betreuerin bzw. Betreuer, können sich beide Seiten an
+die zuständige Ombudsperson wenden.
+(2) Das Nähere, insbesondere die Bestellung der Ombudsperson sowie das Verfahren,
+bestimmt sich nach der Satzung der Universität Stuttgart zu Ombudsverfahren in der
+jeweils geltenden Fassung.
 
 §6
 
@@ -585,29 +503,22 @@ Stellungnahme darüber anfordern, ob die Arbeit reif zur Einreichung ist. Die Be
 oder der Bewerber ist von der oder dem Vorsitzenden des Promotionsausschusses
 zum Prüfungsverfahren zuzulassen, wenn sie oder er als Doktorandin oder Doktorand
 angenommen wurde und eventuell bei der Annahme nach § 4 Abs. 1 erteilte Auflagen
-erfüllt hat sowie die Voraussetzungen des § 6 Abs. 2 nachgewiesen sind.
+erfüllt hat.
 
 (2)
-
-Bei Mitgliedern der Graduiertenakademie GRADUS ist der Dissertation eine
-Bescheinigung der Betreuerin oder des Betreuers beizufügen, die die Erfüllung der
-Mindestqualitätsstandards sowie die Abnahme des Fortschrittsberichtes nach § 5
-nachweist.
-
-(3)
 
 Der Dissertation ist eine Erklärung der Doktorandin oder des Doktoranden beizufügen,
 dass sie bzw. er, abgesehen von den ausdrücklich bezeichneten Hilfsmitteln die
 Dissertation selbständig verfasst hat. Eine Versicherung an Eides statt über die
 Eigenständigkeit der wissenschaftlichen Leistung kann verlangt werden.
 
-(4)
+(3)
 
 Entstand die Dissertation außerhalb der Universität, so ist eine schriftliche
 Stellungnahme der Betreuerin oder des Betreuers der Universität Stuttgart beizufügen,
-mit dem gemäß § 2 Abs. 5 die Arbeit erörtert wurde.
+mit der oder dem gemäß § 2 Abs. 5 die Arbeit erörtert wurde.
 
-(5)
+(4)
 
 Der Antrag auf Zulassung zur Prüfung kann durch schriftliche Erklärung gegenüber der
 oder dem Vorsitzenden des Prüfungsausschusses (§ 7 Abs. 2) einmalig ohne Angabe
@@ -626,7 +537,8 @@ Prüfungsorgane
 
 Promotionsausschuss
 Die dem Großen Fakultätsrat angehörenden Professorinnen und Professoren,
-Juniorprofessoreninnen und Juniorprofessoren sowie die Privat-, Universitäts- und
+Tenure-Track-Professorinnen und Tenure-Track-Professoren, Juniorprofessoreninnen und
+Juniorprofessoren sowie die Privat-, Universitäts- und
 Hochschuldozenteninnen und -dozenten der jeweiligen Fakultät bilden den
 Promotionsausschuss oder bestellen aus ihrem Kreis die Mitglieder des
 Promotionsausschusses. Die Fakultäten können abweichend von Satz 1 durch
@@ -636,8 +548,9 @@ Honorarprofessoren im Promotionsausschuss regeln.
 Verleiht eine Fakultät mehr als einen Doktorgrad können weitere
 Promotionsausschüsse eingerichtet werden.
 Die oder der Vorsitzende ist die Dekanin oder der Dekan oder eine oder ein von ihr
-bzw. ihm bestellte Vertreterin oder bestellter Vertreter, die oder der für das Amt der
-Dekanin oder des Dekans wählbar sein muss, bzw. die oder der Vorsitzende der vom
+bzw. ihm bestellte Vertreterin oder bestellter Vertreter, die oder der der
+Fakultät angehörende hauptberufliche Professorin oder
+angehörender hauptberuflicher Professor sein muss, bzw. die oder der Vorsitzende der vom
 Senat eingerichteten Kommission, der die Ausübung des Promotionsrechtes (z.B. SC
 SimTech und GSAME) übertragen wurde.
 Alle Entscheidungen nach dieser Ordnung, für die keine besondere Zuständigkeit
@@ -648,12 +561,14 @@ begründet ist, werden vom Promotionsausschuss getroffen.
 Prüfungsausschuss
 Der Prüfungsausschuss wird in jedem Einzelfall vom Promotionsausschuss bestellt.
 Der Prüfungsausschuss besteht aus der Dekanin oder dem Dekan oder einer oder
-einem von ihr bzw. ihm bestellten Vertreterin oder Vertreter, die oder der für das Amt
-des Dekans wählbar sein muss bzw. der oder dem Vorsitzenden der vom Senat
+einem von ihr bzw. ihm bestellten Vertreterin oder Vertreter, die oder der der Fakultät
+angehörende hauptberufliche Professorin oder angehörender hauptberuflicher Professor
+sein muss bzw. der oder dem Vorsitzenden der vom Senat
 eingerichteten Kommission, der die Ausübung des Promotionsrechtes übertragen
 wurde als Vorsitzender oder Vorsitzendem, sowie einer Hauptberichterin oder einem
 Hauptberichter und einem oder zwei Mitberichterinnen bzw. Mitberichtern. Darüber
-hinaus können im Einzelfall weitere Professoreninnen und Professoren,
+hinaus können im Einzelfall weitere Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren,
 Juniorprofessoreninnen und Juniorprofessoren, Privat-, Hochschul- oder
 Universitätsdozentinnen und -dozenten der zuständigen Fakultät oder Einrichtung,
 denen das Recht der Berichterin oder des Berichters zusteht, oder
@@ -663,10 +578,11 @@ Prüfungsausschusses bestellt werden.
 
 (3)
 
-Berichterinnen oder Berichter sind in der Regel Professorinnen und Professoren sowie
+Berichterinnen oder Berichter sind in der Regel Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren sowie
 Juniorprofessorinnen und Juniorprofessoren der zuständigen Fakultät. Als Berichterin
 oder Berichter können weiterhin durch Beschluss des Promotionsausschusses auch
-Professorinnen und Professoren, Juniorprofessorinnen und Juniorprofessoren und
+Professorinnen und Professoren, Tenure-Track-Professorinnen und Tenure-Track-Professoren, Juniorprofessorinnen und Juniorprofessoren und
 Privatdozentinnen und -dozenten einer anderen Fakultät oder einer anderen
 Universität, sofern ihnen dort das Recht der Berichterin oder des Berichters zusteht,
 Privat-, Universitäts- oder Hochschuldozentinnen und -dozenten der Universität
@@ -674,18 +590,29 @@ Stuttgart oder Honorarprofessorinnen und Honorarprofessoren, denen der zuständi
 Fakultätsrat das Recht einer Berichterin oder eines Berichters übertragen hat, sowie
 im Einzelfall Professorinnen und Professoren der Hochschulen für Angewandte
 Wissenschaften oder Dualen Hochschule Baden-Württemberg bestellt werden. In
-besonders begründeten Fällen kann der Promotionsausschuss auch herausragend
+begründeten Fällen kann der Promotionsausschuss auch herausragend
 qualifizierte, promovierte Wissenschaftlerinnen oder Wissenschaftler der Fakultät ohne
 Nachweis der Habilitation, die an einem extern begutachteten
-Hochschullehrernachwuchsförderprogramm teilnehmen (z.B. Emmy-Noether-Stipendiaten), zur
+Hochschullehrernachwuchsförderprogramm
+teilnehmen (z.B. Leiterinnen und Leiter einer Emmy-Noether-Nachwuchsgruppe), zur
 Berichterin oder zum Berichter bestellen (vgl. § 3 Abs. 1 Nr. 4).
 
 (4)
 
-Mindestens einer der Berichter muss Professorin oder Professor oder hauptberuflich an
+Mindestens einer der Berichter muss Professorin oder Professor,
+Tenure-Track-Professorin oder Tenure-Track-Professor, Juniorprofessorin oder Juniorprofessor oder
+hauptberuflich an
 der Universität Stuttgart tätige außerplanmäßige Professorin oder tätiger
 außerplanmäßiger Professor der zuständigen Fakultät oder Einrichtung, der die
 Ausübung des Promotionsrechts übertragen wurde (GSAME und SC SimTech), sein.
+Der Promotionsausschuss kann im Einzelfall beschließen, dass die Voraussetzungen
+des Satz 1 auch als erfüllt gelten, wenn die Hauptberichterin bzw. der Hauptberichter,
+die oder der das Promotionsverfahren betreut hat, zum Zeitpunkt der Bestellung des
+Prüfungsausschusses nicht mehr Mitglied der Fakultät ist, die Voraussetzungen des
+Satz 1 aber zum Zeitpunkt der Annahme der Doktorandin bzw. des Doktoranden erfüllt
+hat. Das Ausscheiden aus der Fakultät darf hierbei nicht länger als 3 Jahre zurückliegen,
+hiervon ausgenommen sind entpflichtete und im Ruhestand befindliche Professoren
+nach § 9 Abs. 1 Satz 2 Landeshochschulgesetz.
 
 (5)
 
@@ -706,7 +633,8 @@ für die Durchführung der einzelnen Promotionsverfahren ist die Graduiertenschu
 GSAME. Die Aufgaben des Promotionsausschusses nach dieser Promotionsordnung
 obliegen dem Promotionsausschuss der Graduiertenschule GSAME. Dem
 Promotionsausschuss der Graduiertenschule GSAME gehören die Professorinnen und
-Professoren, Juniorprofessorinnen und Juniorprofessoren sowie die Privat-,
+Professoren, Tenure-Track-Professorinnen und Tenure-Track-Professoren,
+Juniorprofessorinnen und Juniorprofessoren sowie die Privat-,
 Universitäts- und Hochschuldozentinnen und -dozenten der Graduiertenschule GSAME
 an.
 
@@ -722,10 +650,12 @@ dieser Promotionsordnung.
 
 (3)
 
-Berichterinnen und Berichter sind in der Regel Professorinnen und Professoren sowie
+Berichterinnen und Berichter sind in der Regel Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren sowie
 Juniorprofessorinnen und Juniorprofessoren der Graduiertenschule GSAME. Darüber
 hinaus können weiterhin Privat-, Universitäts- oder Hochschuldozentinnen bzw. -dozenten
-der Graduiertenschule GSAME sowie Professorinnen und Professoren und
+der Graduiertenschule GSAME sowie Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren und
 Juniorprofessorinnen und Juniorprofessoren einer Fakultät der Universität Stuttgart
 oder einer anderen Universität, sofern ihnen dort das Recht der Berichterin oder des
 Berichters zusteht, und Honorarprofessorinnen und Honorarprofessoren, denen ein
@@ -776,7 +706,7 @@ bestellen, der andere als Stellvertreterin oder Stellvertreter. Die Amtszeit der
 
 (2)
 
-Die zuständige Stelle der Zentralen Verwaltung nach § 4 Abs. 4 leitet das Gesuch auf
+Die zuständige Stelle der Universität nach § 4 Abs. 4 leitet das Gesuch auf
 Annahme als Doktorandin oder Doktorand an die oder den Vorsitzenden des
 gemeinsamen Ausschusses weiter. Der gemeinsame Ausschuss gibt nach Vorprüfung
 des Antrages eine Empfehlung an den fachlich zuständigen Promotionsausschuss über
@@ -789,6 +719,25 @@ Berichter über die in § 7 Abs. 3 genannten Personengruppen hinaus auch promovi
 Max-Planck-Forschungsgruppenleiterinnen oder Max-Planck-Forschungsgruppenleiter,
 die ein extern begutachtetes Verfahren durchlaufen haben, ohne Nachweis der
 Habilitation bestellen.
+
+§8b
+
+Promotionen in der Graduiertenschule IMPRS-IS
+
+(1)
+
+Für Promotionen in der „International Max Planck Research School for Intelligent
+Systems (IMPRS-IS)“ gilt diese Promotionsordnung, soweit in diesem Paragraphen
+keine abweichenden Regelungen getroffen werden.
+
+(2)
+
+In besonders begründeten Fällen kann der Promotionsausschuss als Berichterin oder
+Berichter über die in § 7 Abs. 3 genannten Personengruppen hinaus auch promovierte
+Max-Planck-Forschungsgruppenleiterinnen oder Max-Planck-Forschungsgruppenleiter,
+die ein extern begutachtetes Verfahren durchlaufen haben oder eine vergleichbare
+herausragende Qualifikation nachweisen können, ohne Nachweis der Habilitation
+bestellen.
 
 §9
 
@@ -809,10 +758,11 @@ Annahme als Doktorandin oder Doktorand anschließend durch den zuständigen
 Promotionsausschuss der Fakultät nach Satz 3 bestätigt werden. Die Aufgaben des
 Promotionsausschusses nach dieser Promotionsordnung obliegen dem
 Promotionsausschuss des SC SimTech. Dem Promotionsausschuss des SC SimTech
-gehören die Professorinnen und Professoren, Juniorprofessorinnen und
+gehören die Professorinnen und Professoren, Tenure-Track-Professorinnen und Tenure-Track-Professoren, Juniorprofessorinnen und
 Juniorprofessoren sowie die Privat-, Universitäts- und Hochschuldozentinnen und
 -dozenten des SC SimTech an. Im Falle der Beteiligung einer Fakultät gehören dem
-Promotionsausschuss weiterhin die Professorinnen und Professoren sowie
+Promotionsausschuss weiterhin die Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren sowie
 Juniorprofessorinnen und Juniorprofessoren des Promotionsausschusses der Fakultät
 der Universität Stuttgart an, die auf Grund des Themas der Dissertation und nach den
 Feststellungen des Promotionsausschusses des SC SimTech von der Promotion
@@ -831,10 +781,12 @@ des Dekans nach dieser Promotionsordnung.
 
 (3)
 
-Berichter sind in der Regel Professorinnen und Professoren sowie
+Berichter sind in der Regel Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren sowie
 Juniorprofessorinnen und Juniorprofessoren des SC SimTech. Darüber hinaus können
 weiterhin Privat-, Universitäts- oder Hochschuldozentinnen und -dozenten des SC
-SimTech sowie Professorinnen und Professoren sowie Juniorprofessorinnen und
+SimTech sowie Professorinnen und Professoren,
+Tenure-Track-Professorinnen und Tenure-Track-Professoren sowie Juniorprofessorinnen und
 Juniorprofessoren einer Fakultät der Universität Stuttgart oder einer anderen
 Universität, sofern ihnen dort das Recht der Berichterin oder des Berichters zusteht,
 und Honorarprofessorinnen und Honorarprofessoren denen ein Fakultätsrat das Recht
@@ -848,17 +800,24 @@ SimTech sein.
 
 §10
 
-Beurteilung der Dissertation
+Begutachtung der Dissertation und Fortgang des Verfahrens
 
 (1)
 
-Die Berichterinnen und Berichter begutachten die Dissertation. Die Begutachtung soll in
-der Regel innerhalb von 3 Monaten abgeschlossen werden. In der schriftlichen
+Die Berichterinnen und Berichter begutachten die Dissertation. Die oder der Vorsitzende
+des Promotionsausschusses wirkt darauf hin, dass die Begutachtung innerhalb von drei
+Monaten abgeschlossen ist. In der schriftlichen
 Beurteilung der Dissertation beantragen die Berichterinnen und Berichter, die
 Dissertation anzunehmen, die Dissertation mit bestimmten Änderungen anzunehmen
 oder diese abzulehnen. Sie können auch vorschlagen, die Arbeit der Doktorandin oder
 dem Doktoranden zur Umarbeitung oder Erweiterung innerhalb einer bestimmten Frist
 (höchstens ein Jahr) zurückzugeben.
+Im Falle der Beantragung der Annahme bewerten sie darüber hinaus die Dissertation mit
+einer Note nach § 12 Abs. 2. Bei überragenden Leistungen kann der Vorschlag
+ergänzend die Vergabe einer Gesamtnote mit Auszeichnung empfehlen. Wird die
+Dissertation der Doktorandin oder dem Doktoranden nach Abs. 4 Nr. 2 zurückgegeben,
+erfolgt die endgültige Bewertung durch die Berichterinnen und Berichter erst nach
+Erfüllung der Auflagen.
 
 (2)
 
@@ -912,15 +871,11 @@ gemäß § 7 Abs. 3 und Abs. 4 vorschlagen.
 (5)
 
 Eine abgelehnte Dissertation verbleibt mit allen Gutachten bei den Akten der Fakultät
-bzw. Einrichtung. Die Bewerberin oder der Bewerber kann sich mit einer neuen
-Dissertation nur einmal, und zwar frühestens nach einem Jahr, wieder melden. Dies gilt
+bzw. Einrichtung. Die Doktorandin oder der Doktorand kann einen erneuten Antrag auf
+Zulassung zur Prüfung mit einer neuen
+Dissertation nur einmal, und zwar frühestens nach einem Jahr, stellen. Dies gilt
 auch, wenn die erste erfolglose Bewerbung an einer anderen Hochschule
 stattgefunden hat.
-
-(6)
-
-Die Promotionsausschüsse können bestimmen, dass die Doktorandinnen und
-Doktoranden zu einem öffentlichen Vortrag aufgefordert werden.
 
 §11
 
@@ -934,14 +889,22 @@ Dissertation entnommen ist.
 
 (2)
 
+Die Promotionsausschüsse können bestimmen, dass die Doktorandinnen und
+Doktoranden einen in der Regel dreißigminütigen hochschulöffentlichen Vortrag zu den
+Themenbereichen der Dissertation zu halten haben und weiterhin für ihren Bereich
+beschließen, dass der Vortrag Bestandteil der mündlichen Prüfung ist und in die
+Benotung nach § 12 einfließt.
+
+(3)
+
 Zur mündlichen Prüfung werden die Rektorin oder der Rektor, die Professorinnen und
 Professoren, die Juniorprofessorinnen und Juniorprofessoren, die Privat-, Hochschulund Universitätsdozentinnen und -dozenten der zuständigen Fakultäten oder
 Einrichtungen, die Honorarprofessorinnen und Honorarprofessoren, denen der
 zuständige Fakultätsrat das Recht der Berichterin oder des Berichters übertragen hat,
 die Mitglieder des Promotionsausschusses und die sonstigen am Verfahren gemäß
-§ 11 Abs. 3 und Abs. 5 beteiligten Personen eingeladen.
+§ 11 Abs. 4 und Abs. 6 beteiligten Personen eingeladen.
 
-(3)
+(4)
 
 Die Prüfung wird von der oder dem Vorsitzenden des Prüfungsausschusses geleitet.
 Prüferinnen und Prüfer sind die Mitglieder des Prüfungsausschusses. Ist ein Mitglied
@@ -950,29 +913,33 @@ oder der Vorsitzende des Promotionsausschusses eine Stellvertreterin oder einen
 Stellvertreter. Die Prüfung kann nur stattfinden, wenn alle Mitglieder des
 Prüfungsausschusses oder ihre Stellvertreterinnen und Stellvertreter anwesend sind.
 Eine Vertretung der Hauptberichterin oder des Hauptberichters ist nur bei Vorliegen
-zwingender Gründe möglich.
+zwingender Gründe möglich. In begründeten Ausnahmefällen kann die oder der
+Vorsitzende des Prüfungsausschusses mit Zustimmung der Doktorandin oder des
+Doktoranden gestatten, dass ein Mitglied des Prüfungsausschusses per Videokonferenz
+an der Prüfung teilnimmt. Durch entsprechende technische Randbedingungen muss in
+diesem Fall eine anwesenheitsentsprechende Beteiligung des zugeschalteten
+Prüfungsausschussmitglieds sichergestellt sein.
 
-(4)
+(5)
 
-Die mündliche Prüfung dauert zwischen einer und zwei Stunden. Am
-Prüfungsgespräch mit der Doktorandin oder dem Doktoranden beteiligen sich nur die
+Die mündliche Prüfung dauert zwischen einer und zwei Stunden. Sofern Bestandteil der
+mündlichen Prüfung ein hochschulöffentlicher Vortrag nach Abs. 2 ist, muss hiervon
+mindestens eine Stunde auf das Prüfungsgespräch entfallen. Am Prüfungsgespräch mit
+der Doktorandin oder dem Doktoranden beteiligen sich nur die
 Mitglieder des Prüfungsausschusses. Es ist ein Protokoll zu führen. Die Prüfung kann
 auf vorherigen Antrag der Doktorandin oder des Doktoranden mit Zustimmung aller
 Mitglieder des Prüfungsausschusses auch in einer Fremdsprache durchgeführt werden.
 
-(5)
+(6)
 
-Als Zuhörerinnen und Zuhörer bei mündlichen Doktorprüfungen sind neben den nach
-Abs. 2 Geladenen die Professorinnen und Professoren anderer Fakultäten der
-Universität Stuttgart zugelassen. Daneben können Bewerberinnen und Bewerber, die
+Sofern die Doktorandin oder der Doktorand zustimmt, sind
+als Zuhörerinnen und Zuhörer bei mündlichen Doktorprüfungen neben den nach
+Abs. 3 Geladenen die Professorinnen und Professoren anderer Fakultäten der
+Universität Stuttgart zugelassen.
+Unter den gleichen Voraussetzungen können Bewerberinnen und Bewerber, die
 als Doktorandinnen und Doktoranden angenommen wurden, als Zuhörer teilnehmen.
 Bei der Beratung und der Bekanntgabe des Ergebnisses durch den Prüfungsausschuss
 sind die Zuhörer ausgeschlossen.
-
-(6)
-
-Zuhörer sind auf Antrag der Doktorandin oder des Doktoranden auszuschließen. Sie
-können aus wichtigem Grund durch den Prüfungsausschuss ausgeschlossen werden.
 
 (7)
 
@@ -984,34 +951,46 @@ geeigneter Nachweise darzulegen. Bei einer gesundheitlichen Beeinträchtigung is
 
 §12
 
-Beschluss über das Ergebnis der Prüfung
+Benotung der Dissertation und der mündlichen Prüfung, Ermittlung der Gesamtnote
 
 (1)
 
-Nach Beendigung der Prüfung entscheidet der Prüfungsausschuss einvernehmlich auf
-Grund der Vorschläge der Berichterinnen und Berichter ob die Doktorandin oder der
-Doktorand zu promovieren ist und welche Note die Dissertation erhalten soll. Der
-Prüfungsausschuss entscheidet ferner über die Note der mündlichen Prüfung. Kommt
+Nach Beendigung der mündlichen Prüfung entscheidet der Prüfungsausschuss einvernehmlich auf
+Grund der Vorschläge der Berichterinnen und Berichter über das
+Bestehen und die Note der mündlichen Prüfung. Sind mündliche Prüfung und
+Dissertation bestanden, entscheidet er ferner über die Gesamtnote nach Abs. 4 und 5. Kommt
 keine Einigung zustande, so entscheidet die oder der Vorsitzende unter Abwägung
 aller prüfungsrelevanten Gesichtspunkte.
 
 (2)
 
-Falls die Doktorandin oder der Doktorand zu promovieren ist, werden die Dissertation
-und die mündliche Prüfung mit den folgenden Noten bewertet:
+Die Berichterinnen und Berichter bewerten die Dissertation und der Prüfungsausschuss
+die unter den Voraussetzungen des Absatz 1 als bestanden bewertete mündliche
+Prüfung mit einer der folgenden Noten:
 1,0 = sehr gut
 1,5 = sehr gut bis gut
 2,0 = gut
 2,5 = gut bis befriedigend
 3,0 = befriedigend
-3,5 = befriedigend bis genügend
-4,0 = genügend
 
 (3)
 
-Die Gesamtnote ergibt sich durch Mittelung aus den Noten der Dissertation und der
-mündlichen Prüfung. Sie kann unter Abwägung aller prüfungsrelevanten
-Gesichtspunkte vom arithmetischen Mittel beider Noten um eine ganze Note nach oben
+Die Note der Dissertation ergibt sich aus dem arithmetischen Mittel der von den
+einzelnen Berichterinnen und Berichtern vergebenen Noten. Dabei wird nur die erste
+Stelle hinter dem Komma berücksichtigt, alle weiteren Stellen werden ohne Rundung
+gestrichen. Die Noten lauten:
+von 1,0 bis 1,4 = sehr gut
+von 1,5 bis 2,0 = sehr gut bis gut
+von 2,0 bis 2,4 = gut
+von 2,5 bis 2,9 = gut bis befriedigend
+bei 3,0 = befriedigend
+
+(4)
+
+Die Gesamtnote ergibt sich durch Mittelung aus der
+nach Abs. 3 berechneten Dezimalnote für die Dissertation und der
+Note der mündlichen Prüfung. Sie kann unter Abwägung aller prüfungsrelevanten
+Gesichtspunkte vom arithmetischen Mittel beider Noten um eine halbe Note (0,5) nach oben
 oder unten abweichen.
 Die Gesamtnote lautet:
 bei einem Durchschnitt
@@ -1019,14 +998,14 @@ bis 1,5 magna cum laude (sehr gut)
 bei einem Durchschnitt
 über 1,5 bis 2,5 cum laude (gut)
 bei einem Durchschnitt
-über 2,5 bis 4,0 rite (bestanden).
+über 2,5 bis 3,0 rite (befriedigend).
 
-(4)
+(5)
 
 Bei überragenden Leistungen kann die Gesamtnote „summa cum laude (mit
 Auszeichnung)" erteilt werden.
 
-(5)
+(6)
 
 Ist die Prüfung bestanden, so stellt der Promotionsausschuss unter Mitteilung des
 Ergebnisses bei der Rektorin oder beim Rektor den Antrag, der Doktorandin oder dem
@@ -1035,7 +1014,7 @@ Doktorin bzw. eines Doktors der Naturwissenschaften, einer Doktorin bzw. eines
 Doktors der Philosophie oder einer Doktorin bzw. eines Doktors der Wirtschafts- und
 Sozialwissenschaften zu verleihen.
 
-(6)
+(7)
 
 Ist die Prüfung nicht bestanden, so kann sich die Doktorandin oder der Doktorand nur
 einmal, und zwar nicht vor Ablauf von sechs Monaten, zu einer Wiederholung
@@ -1056,14 +1035,14 @@ in dem etwaige während des Prüfungsverfahrens der Doktorandin oder dem
 Doktoranden auferlegte Änderungen berücksichtigt sind. Die Hauptberichterin oder der
 Hauptberichter prüft die Richtigkeit und gibt der Bewerberin oder dem Bewerber die
 Dissertation zum Druck frei. Vorher darf die Dissertation nicht veröffentlicht werden. § 2
-Abs. 4 bleibt unberührt. Die Hauptberichterin oder der Hauptberichter behält das bei
+Abs. 4 und 6 bleiben unberührt. Die Hauptberichterin oder der Hauptberichter behält das bei
 ihm eingereichte Exemplar in Verwahrung.
 
 (2)
 
 Die Doktorandin oder der Doktorand ist verpflichtet, ihre bzw. seine Dissertation in
 angemessener Weise der wissenschaftlichen Öffentlichkeit zugänglich zu machen.
-Wurden Teile der Dissertation nach § 2 Abs. 4 vorab veröffentlicht, ist die Doktorandin
+Wurden Teile der Dissertation nach § 2 Abs. 4 und 6 vorab veröffentlicht, ist die Doktorandin
 oder der Doktorand bei der Veröffentlichung dieser Teile in der Dissertation für die
 Einhaltung der geltenden urheberrechtlichen Bestimmungen verantwortlich. Er muss
 weiterhin zu dem für die Prüfungsakten erforderlichen Exemplar je nach gewählter
@@ -1075,8 +1054,8 @@ der Bewerber der Universität das Recht, diese Form der Dissertation elektronisc
 zu speichern und in Datennetzen öffentlich zugänglich zu machen. Sie bzw. er
 überträgt der Universität Stuttgart ferner das Recht zur Konvertierung zum Zwecke
 der Langzeitarchivierung unter Beachtung der Bewahrung des Inhalts. Zusätzlich
-muss die Bewerberin oder der Bewerber schriftlich erklären, dass die elektronische
-Version mit der gemäß Abs. 1 genehmigten Fassung der Arbeit in Form und Inhalt
+muss die Bewerberin oder der Bewerber schriftlich erklären, dass die maschinenlesbare
+Datei mit der gemäß Abs. 1 genehmigten Fassung der Arbeit in Form und Inhalt
 übereinstimmt,
 2. Verlagsveröffentlichung: 6 Exemplare, wenn ein gewerblicher Verleger die
 Verbreitung über den Buchhandel übernimmt. Die Verlegerin oder der Verleger
@@ -1107,10 +1086,19 @@ Exemplare, mit dem Datum des Eingangs versehen, der Hauptberichterin oder dem
 Hauptberichter. Diese bzw. dieser prüft die Richtigkeit des Druckexemplars anhand des
 bei ihr oder ihm liegenden Manuskripts und übersendet ein Exemplar mit ihrer oder
 seiner Zustimmung der oder dem Vorsitzenden des Promotionsausschusses.
+
+(5)
+
 Diese oder dieser gibt durch Schreiben an die Bibliothek die gedruckte Dissertation frei
-und bestätigt der Zentralen Verwaltung die form- und termingerechte Ablieferung der
+und bestätigt der zuständigen Stelle der Universität die die form- und termingerechte Ablieferung der
 Pflichtexemplare. Das Original nebst drei Druckexemplaren behält die Hauptberichterin
 oder der Hauptberichter. Ein Druckexemplar behält die Fakultät bzw. Einrichtung.
+
+(6) Den Regeln der guten wissenschaftlichen Praxis folgend, sind auch die für die
+Dissertation relevanten Forschungsdaten in geeigneter Infrastruktur der Universität
+Stuttgart unter Nutzung von Diensten, die von der Universität anerkannt sind, und unter
+Beachtung der Forschungsdaten-Policy der Universität Stuttgart zu dokumentieren und
+zu archivieren.
 
 §14
 
@@ -1119,24 +1107,22 @@ Promotionsurkunde
 (1)
 
 Die in deutscher Sprache abgefasste Promotionsurkunde erhält das Datum des Tages
-der mündlichen Prüfung. Auf Wunsch der Kandidatin oder des Kandidaten wird eine
+der mündlichen Prüfung. Auf Wunsch der Doktorandin oder des Doktoranden wird eine
 englischsprachige Übersetzung erstellt.
-Sie wird von der Rektorin oder vom Rektor und von der Dekanin oder dem Dekan
+Die Promotionsurkunde wird von der Rektorin oder vom Rektor und von der Dekanin
+oder dem Dekan bzw. der oder dem Vorsitzenden der vom Senat eingerichteten
+Kommission, der die Ausübung des Promotionsrechts übertragen wurde,
 eigenhändig unterzeichnet und mit dem Siegel der Universität versehen. Sie enthält
 das Gesamturteil und auf Beschluss des Promotionsausschusses die beiden anderen
 Noten.
-Bei GRADUS-Promotionen wird die erfolgreiche Teilnahme am
-Qualifizierungsprogramm der Graduierten-Akademie Universität Stuttgart auf der
-Urkunde zertifiziert.
 
 (2)
 
-Die Promotionsurkunde wird der Bewerberin oder dem Bewerber ausgehändigt, sobald
-die oder der Vorsitzende des Promotionsausschusses der Zentralen Verwaltung die in
+Die Promotionsurkunde wird der Doktorandin oder dem Doktoranden ausgehändigt, sobald
+die oder der Vorsitzende des Promotionsausschusses der zuständigen Stelle der Universität die in
 § 13 Abs. 4 Satz 3 erläuterte Bestätigung geschickt hat. Erscheint der volle Wortlaut
 der Dissertation in einem Verlag oder in einer wissenschaftlichen Zeitschrift, so kann
-mit Zustimmung des zuständigen Promotionsausschusses die Promotionsurkunde der
-Bewerberin oder dem Bewerber ausgehändigt werden, wenn eine verbindliche
+mit Zustimmung des zuständigen Promotionsausschusses die Promotionsurkunde der Doktorandin oder dem Doktoranden ausgehändigt werden, wenn eine verbindliche
 schriftliche Zusage eines Verlags bzw. einer Schriftleitung darüber vorliegt, dass die
 Dissertation binnen einer bestimmten vom Promotionsausschuss gebilligten Frist
 veröffentlicht wird. In diesem Zusammenhang ist die Fristregelung gemäß § 13 Abs. 3
@@ -1149,33 +1135,48 @@ Doktorgrades.
 
 §15
 
-Gemeinsame Promotion mit einer ausländischen Hochschule
+Gemeinsame Promotion mit einer inländischen oder ausländischen Hochschule
 
 (1)
 
-Die Universität Stuttgart kann zusammen mit ausländischen wissenschaftlichen
-Hochschulen in einem gemeinsam durchgeführten Promotionsverfahren einen der in
+Die Universität Stuttgart kann zusammen mit in- oder ausländischen wissenschaftlichen
+promotionsberechtigten Hochschulen in einem gemeinsam durchgeführten Promotionsverfahren einen der in
 § 1 genannten Doktorgrade verleihen. Dieses Verfahren sieht abweichend eine
-gemeinsame Betreuung durch je eine Betreuerin oder einen Betreuer und einen
-jeweils einsemestrigen Aufenthalt an den beteiligten Hochschulen vor. Der Doktorgrad
-kann wahlweise in der Form der Universität Stuttgart oder in der Form der
+gemeinsame Betreuung durch je eine Betreuerin oder einen Betreuer und in der Regel einen
+jeweils einsemestrigen Aufenthalt an den
+beteiligten Hochschulen vor. Sofern die Bezeichnung des Doktorgrades an den
+beteiligten Hochschulen voneinander abweicht, kann der Doktorgrad wahlweise in der
+Form der Universität Stuttgart oder in der Form der beteiligten in- oder
 ausländischen Hochschule geführt werden, näheres regelt die Vereinbarung nach Abs. 2.
 
 (2)
 
 Zum Zweck eines gemeinsamen Verfahrens ist zwischen der Universität Stuttgart und
-der zuständigen Fakultät bzw. Einrichtung sowie der ausländischen Hochschule eine
+der zuständigen Fakultät bzw. Einrichtung sowie der in- oder ausländischen Hochschule eine
 Vereinbarung zu treffen, die der Promotionsausschuss genehmigen muss. Die
-Vereinbarung regelt ein gemeinsam von den zuständigen Organen der ausländischen
+Vereinbarung regelt ein gemeinsam von den zuständigen Organen der in- oder ausländischen
 Hochschule und dem Promotionsausschuss geleitetes Promotionsverfahren,
 insbesondere eine gemeinsame Prüfung, Bewertung und Benotung der
 Prüfungsleistungen durch einen gemeinsamen Prüfungsausschuss. Sie kann
 Ausnahmen zur Zusammensetzung des Prüfungsausschusses, zur Erstellung der
 Gutachten, der Form, Dauer und Sprache der mündlichen Prüfung, zur Sprache der
-Dissertation und zur Sprache der Promotionsurkunde vorsehen. Zulässige Sprachen
+Dissertation und zur Sprache und zum Inhalt der Promotionsurkunde vorsehen. Zulässige Sprachen
 sind neben Deutsch auch Englisch und Französisch.
+In diesem Zusammenhang ist es auch zulässig, zu regeln, dass sich insbesondere die
+Begutachtung der Dissertation und die Durchführung der mündlichen Prüfungen nur
+nach einer der für das Verfahren maßgeblichen Promotionsordnungen richten.
 
 (3)
+
+Für Abschlüsse in Promotionsstudiengängen (Doktorandenkollegs) kann der
+Promotionsausschuss abweichend von § 1 Abs. 1 beschließen und in der Vereinbarung
+nach Absatz 2 regeln, dass die Universität Stuttgart den akademischen Grad Doctor of
+Philosophy (Ph.D.) verleiht. Im Falle einer Kooperation mit einer ausländischen
+Hochschule muss sichergestellt sein, dass das Ausbildungsziel des
+Promotionsstudiengangs (Doktorandenkollegs) die Qualifikation für Wissenschaft und
+Forschung ist.
+
+(4)
 
 Die Pflicht zur Veröffentlichung der Dissertation und die Rechte an ihr richten sich nach
 den Vorschriften der beteiligten Hochschulen.
@@ -1187,12 +1188,12 @@ Täuschung
 (1)
 
 Wird vor Aushändigung der Promotionsurkunde festgestellt, dass die Annahme bzw.
-Zulassung zur Promotion auf Grund vorsätzlich falscher Angaben der Bewerberin oder
-des Bewerbers zu Unrecht erteilt wurde oder dass die Bewerberin oder der Bewerber
+Zulassung zur Promotion auf Grund vorsätzlich falscher Angaben der Doktorandin oder
+des Doktoranden zu Unrecht erteilt wurde oder dass die Doktorandin oder der Doktorand
 bei ihren bzw. seinen Leistungen eine Täuschung versucht oder begangen hat, so
 können diese Promotionsleistungen vom zuständigen Promotionsausschuss mit der
 Note „nicht bestanden“ bewertet werden. In schwerwiegenden Fällen kann der
-Promotionsausschuss darüber hinaus die Kandidatin oder den Kandidaten von einem
+Promotionsausschuss darüber hinaus die Doktorandin oder den Doktoranden von einem
 weiteren Promotionsverfahren in der Fakultät bzw. Einrichtung ausschließen.
 
 (2)
@@ -1204,7 +1205,7 @@ Landesverwaltungsverfahrensgesetzes (LVwVfG) zurückgenommen werden.
 
 § 17 Entziehung des Doktorgrades
 Die Entziehung des Doktorgrades erfolgt durch den Promotionsausschuss entsprechend den
-gesetzlichen Bestimmungen. Die Kandidatin oder der Kandidat ist vorher zu hören.
+gesetzlichen Bestimmungen. Die Betroffene oder der Betroffene ist vorher zu hören.
 
 §18
 
@@ -1224,7 +1225,8 @@ Ehrungsvorschlag wird den Senatsmitgliedern in einer Sitzung des Senats unterbre
 Lesung Einsicht in die Unterlagen. Einwände sind der Rektorin oder dem Rektor
 möglichst umgehend mitzuteilen. Der Senat kann eine Kommission zur Prüfung des
 Vorschlags einsetzen. Der Senat beschließt über die Verleihung der Ehrendoktorwürde
-in einer weiteren Sitzung (2. Lesung). Hierbei bedarf es der Zustimmung von Zwei-Dritteln der stimmberechtigten Mitglieder.
+in einer weiteren Sitzung (2. Lesung). Hierbei bedarf es der Zustimmung von Zwei-Dritteln der
+stimmberechtigten Mitglieder.
 
 (3)
 
@@ -1262,22 +1264,25 @@ Inkrafttreten und Übergangsbestimmungen
 
 (1)
 
-Diese Neufassung der Promotionsordnung tritt am 01. April 2016 in Kraft.
+Diese Neufassung der Promotionsordnung tritt am 01. April 2019 in Kraft.
 
 (2)
 
 Doktorandinnen und Doktoranden, die vor Inkrafttreten dieser Neufassung der
 Promotionsordnung zur Promotion angenommen oder zugelassen wurden, können
 diese nach der bisher gültigen Promotionsordnung abschließen, längstens jedoch bis
-zum 31. März 2024. Soll die Promotion nach der bisher gültigen Promotionsordnung
-abgeschlossen werden, steht es der Doktorandin oder dem Doktoranden frei, die
-Dissertation nach den Regelungen des § 13 dieser Neufassung zu veröffentlichen. Auf
+zum 31. März 2026. Auf
 unwiderruflichen Antrag an die oder den Vorsitzenden des Promotionsausschusses
 kann die Promotion auch nach der neuen Promotionsordnung abgeschlossen werden.
 
 (3)
 
-Doktorandinnen und Doktoranden, die gemäß § 21 Abs. 3 der Promotionsordnung vom
+Doktorandinnen und Doktoranden, die gemäß § 21 Abs. 2 der Promotionsordnung vom
+22. Februar 2016 (Amtliche Bekanntmachung Nr. 5/2016) vor dem 01. April 2016 zur
+Promotion zugelassen wurden, können ihr Promotionsvorhaben noch nach der
+Promotionsordnung vom 01. September 2011 (Amtliche Bekanntmachung Nr. 55/2011)
+abschließen, längstens jedoch bis zum 31. März 2024. Doktorandinnen und
+Doktoranden, die gemäß § 21 Abs. 3 der Promotionsordnung vom
 01. September 2011 (Amtliche Bekanntmachung Nr. 55/2011) gegenüber der oder dem
 Vorsitzenden des Promotionsausschusses bis zum 31. März 2012 eine entsprechende
 schriftliche Erklärung abgegeben haben, können ihr Promotionsvorhaben auch noch
@@ -1287,223 +1292,10 @@ für Doktorandinnen und Doktoranden, die vor dem 01. Oktober 2011 zur Promotion
 zugelassen wurden. Soll die Promotion nach der Promotionsordnung vom 16. Oktober
 2008 abgeschlossen werden, steht es der Doktorandin oder dem Doktoranden frei, die
 Dissertation nach den Regelungen des § 13 dieser Neufassung zu veröffentlichen.
+Absatz 2 Satz 2 gilt in den zuvor genannten Fällen entsprechend.
 
-Stuttgart, den 22. Februar 2016
+Stuttgart, den 01. März 2019
 
-Univ.-Prof. Dr.-Ing. Dr. h.c. Wolfram Ressel
+Univ.-Prof. Dr.-Ing. Wolfram Ressel
 (Rektor)
 
-23
-
-Merkblatt für Doktorandinnen und Doktoranden
-über die äußere Form der Dissertationen
-
-(neugefasst durch Beschluss des Senats vom 20. Januar 2016)
-
-Inhaltsverzeichnis
-
-Richtlinien für die äußere Form der Veröffentlichung
-von Dissertationen
-
-25
-
-I. Manuskript
-
-25
-
-II. Veröffentlichte Form der Dissertation
-
-26
-
-II.1 Allgemeines
-
-26
-
-II.2 Elektronische Form
-
-26
-
-II.3 Verlagsveröffentlichung
-
-26
-
-II.4 Eigendruck
-
-26
-
-II.5 Institutsreihe
-
-27
-
-II.6 Sonderdruck
-
-27
-
-Anlage 1: Muster für das Titelblatt der veröffentlichten Dissertation (inhaltlich verbindlich)
-
-24
-
-28
-
-Die Veröffentlichungsarten sowie die Anzahl der an die Universitätsbibliothek Stuttgart abzuliefernden
-Exemplare einer Dissertation sind in § 13 Abs. 2 der Promotionsordnung vom 22. Februar 2016
-festgelegt.
-Die äußere Form der jeweiligen Veröffentlichungsart regelt dieses Merkblatt.
-
-Richtlinien für die äußere Form der Veröffentlichung von Dissertationen
-Die Regelungen im Abschnitt Manuskript beziehen sich auf die Schriftform der Dissertation bis zur
-Druckfreigabe gem. § 13 Abs. 1 der Promotionsordnung. Für die veröffentlichte Form der Dissertation
-nach § 13 Abs. 2 gelten je nach Veröffentlichungsart die in den jeweiligen Abschnitten aufgeführten
-Regelungen.
-
-I. Manuskript
-Das M a n u s k r i p t der Dissertation ist im Format DIN A 4 anzufertigen.
-Es soll folgendermaßen gegliedert sein:
-Titelblatt (Muster siehe Anlage 1)
-Inhaltsverzeichnis
-Abkürzungsverzeichnis
-Kurzzusammenfassung/Abstract (in deutscher und englischer Sprache) s. § 2 Abs. 3
-Text der Arbeit
-Literaturverzeichnis
-2
-Lebenslauf (Studiengang, Hochschulen, akademische Lehrerinnen und Lehrer). )
-Die Seitenzählung soll in einer Folge durchgehend von der ersten bis zur letzten Textseite erfolgen,
-und zwar so, dass unter Einschluss des Titelblattes von diesem an gezählt wird. Eine teilweise
-römische Seitenzählung am Anfang oder am Ende der Dissertation ist ebenso möglich. Auch
-Tabellen, Tafeln, Abbildungen etc. und Anhänge sind in die durchgehende Seitenzählung
-einzubeziehen.
-
-Anfertigung des Manuskripts
-a. Manuskript-Format DIN A 4
-b. es sollte möglichst glattes, weißes, holzfreies Papier verwendet werden, das nicht durchscheint
-c.
-
-nach allen Seiten ist ein Rand von mindestens 2 cm zu lassen
-
-d.
-
-der Zeilenabstand soll 1 1/2 betragen.
-
-e.
-
-Die Schriftfarbe des laufenden Textes ist schwarz
-
-f.
-
-es sind Standardschriftarten (Fonts) zu verwenden. Die Schriftgröße für den laufenden Text soll
-12-14 Punkte betragen. Fußnoten, evtl. auch Zitate sind in 1-2 Punkte kleinerem Schriftgrad zu
-setzen. Überschriften sind in entsprechend größerem Schriftgrad zu setzen. Die Benutzung von
-Formatvorlagen bzw. Stylesheets oder Templates für das jeweils verwendete
-Textverarbeitungssystem wird dringend empfohlen.
-
-g.
-
-bei der Erstellung bzw. Einbindung von Grafiken, Zeichnungen und Abbildungen ist auf
-ausreichende Auflösung bzw. Kontrast zu achten.
-
-2
-
-siehe § 13 Abs. 3 Satz 1
-25
-
-II. Veröffentlichte Form der Dissertation
-II.1 Allgemeines
-Das für den Dissertationsdruck vorgeschriebene Format ist in der Regel DIN A 5. Vorder- und
-Rückseite müssen bedruckt sein. Als Bindungsart darf keine Ringbindung, sondern muss eine
-dauerhaft haltbare Bindung, z.B. Klebebindung, gewählt werden.
-Wegen der langfristigen Archivierung darf kein Recyclingpapier verwendet werden. Nach Möglichkeit
-sollte die Dissertation auf säurefreiem Papier gedruckt werden.
-Die Promotionsausschüsse können für ihre Zuständigkeitsbereiche abweichende Formate zulassen.
-
-II.2 Elektronische Form (nach § 13 Abs. 2 Ziff. 1)
-II.2.1 Äußere Form
-Wird der Veröffentlichungspflicht nach § 13 Abs. 2 Ziff. 1 entsprochen, so versichert die Bewerberin
-oder der Bewerber die Übereinstimmung der elektronischen Form mit der gemäß § 13 Abs. 1
-genehmigten Fassung der Arbeit in Form und Inhalt. Die Bestimmungen zur Manuskriptgestaltung
-gelten daher - soweit anwendbar - auch für die elektronische Form der Arbeit. Dies gilt insbesondere
-für die Gliederung, den Satzspiegel und die Zeilenabstände (siehe Punkt I.).
-Technische Anleitungen und Richtlinien zur Vorbereitung und Ablieferung der elektronischen Version
-einer Dissertation werden von der Universitätsbibliothek gesondert auf Informationsblättern und über
-deren Homepage im World Wide Web bereit gestellt. Sie regeln insbesondere Dateiformat,
-Datenträger, Datenübertragungsarten u.ä. Verbindlich zu nutzende Formulare zur Rechteübertragung
-an die Universität Stuttgart können ebenfalls von der Homepage der Universitätsbibliothek
-heruntergeladen werden.
-Für die zusätzlich abzuliefernden gedruckten Exemplare gilt Abschnitt II.1.
-
-II.2.2 Metadaten und Abgabe
-Die elektronische Form der Dissertation ist von der Bewerberin oder vom Bewerber auf dem
-Dokumentenserver der Universitätsbibliothek einzubringen. Metadaten, welche die Dissertation formal
-und inhaltlich beschreiben, sind Teil der Dissertation und müssen vom Bewerber selbst über ein
-HTML-Formular erfasst werden.
-II.3 Verlagsveröffentlichung (nach § 13 Abs. 2 Ziff. 2)
-Erscheint eine Dissertation als Monographie in einem gewerblichen Verlag, ist die gesamte Auflage
-als Dissertation zu kennzeichnen, und zwar durch Eindruck der Kennziffer D 93 (bedeutet Dissertation
-Universität Stuttgart) oder durch einen entsprechenden Vermerk im Klartext auf der Rückseite des
-3
-Verlagstitelblatts. Zumindest in den sechs abzuliefernden Exemplaren müssen ein
-Dissertationstitelblatt (siehe Anlage 1) und die Zusammenfassungen nach § 2 Abs. 3 enthalten sein.
-
-II.4 Eigendruck (nach § 13 Abs. 2 Ziff. 3)
-Voraussetzung für die Vervielfältigung durch oder im Auftrag der Bewerberin oder des Bewerbers ist
-die Vorlage eines einwandfreien Manuskripts entsprechend den Richtlinien unter Punkt I. Für die
-abzuliefernden Exemplare gilt Abschnitt II.1.
-
-3
-
-Die Kennziffer D 93 bzw. der entsprechende Vermerk können entfallen, wenn in der kompletten
-Auflage das Dissertationstitelblatt als einziges Titelblatt enthalten ist.
-26
-
-II.5 Institutsreihe
-Erscheint die Dissertation innerhalb einer von einem Institut der Universität Stuttgart
-herausgegebenen Reihe, gelten für Reihen, die elektronisch erscheinen, die Regeln für die
-elektronische Veröffentlichung. Erscheint die Reihe in einem Verlag, gelten die Regeln für
-Verlagsveröffentlichungen. Wird die Reihe vom Institut selbst verlegt, gelten die Bestimmungen für
-Eigendruck.
-
-II.6 Sonderdruck (nach § 13 Abs. 2 Ziff. 4)
-Wird eine Dissertation in einer Zeitschrift veröffentlicht, so ist die Arbeit in einer Fußnote als
-Dissertation zu kennzeichnen. Aus den abzuliefernden Sonderdrucken muss der Name der Zeitschrift,
-Jahrgang (bzw. Band) und die Seitenzahl zweifelsfrei hervorgehen. Alle sechs Sonderdrucke sind mit
-einem Titelblatt (siehe Anlage 1) zu versehen.
-
-27
-
-Anlage 1
-Muster für das Titelblatt der veröffentlichten Dissertation (inhaltlich verbindlich)
-
-Titel der Dissertation
-
-4
-
-Von der Fakultät ........der Universität Stuttgart
-zur Erlangung der Würde eines Doktors der
-5
-.........(Dr. .....) genehmigte Abhandlung
-
-Vorgelegt von
-Verfasser (Vor- und Zuname)
-aus Geburtsort
-
-Hauptberichter:
-Prof. Dr. .....
-Mitberichter:
-Prof. Dr. ......
-(eventuell 2. und weitere Mitberichter)
-Tag der mündlichen Prüfung:
-
-.....
-
-Institut ........der Universität Stuttgart
-Erscheinungsjahr
-
-4
-
-Liste der Fakultäten: http://www.uni-stuttgart.de/ueberblick/organisation/fakultaeten/
-
-5
-
-Akademischer Grad gemäß § 1 Abs. 1
-28
-
-
