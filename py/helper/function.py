@@ -299,7 +299,25 @@ class SGppInterpolant(SGppFunction):
     f = pysgpp.OptInterpolantScalarFunction(grid, np2sgpp(self.aX))
     super().__init__(f)
 
+class SGppInterpolantGradient(SGppFunctionGradient):
+  def __init__(self, grid, fX, aX=None):
+    import pysgpp
+    self.grid = grid
+    self.fX = fX
+    self.aX = (aX if aX is not None else getSurpluses(self.grid, self.fX))
+    fGradient = pysgpp.OptInterpolantScalarFunctionGradient(
+        grid, np2sgpp(self.aX))
+    super().__init__(fGradient)
 
+class SGppInterpolantHessian(SGppFunctionHessian):
+  def __init__(self, grid, fX, aX=None):
+    import pysgpp
+    self.grid = grid
+    self.fX = fX
+    self.aX = (aX if aX is not None else getSurpluses(self.grid, self.fX))
+    fHessian = pysgpp.OptInterpolantScalarFunctionHessian(
+        grid, np2sgpp(self.aX))
+    super().__init__(fHessian)
 
 class SGppVectorInterpolant(SGppVectorFunction):
   def __init__(self, grid, fX, aX=None):
