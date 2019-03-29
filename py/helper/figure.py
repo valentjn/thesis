@@ -123,8 +123,10 @@ class Figure(mpl.figure.Figure):
   
   graphicsCounter = 0
   
-  def __init__(self, *args, fontSize=11, preamble="", mode=None, **kwargs):
+  def __init__(self, *args, fontSize=None, preamble="", mode=None, **kwargs):
     super(Figure, self).__init__(*args, **kwargs)
+    
+    defaultFontSize = 11
     
     if mode is None:
       if "talk" in Figure._getBuildDir():
@@ -137,6 +139,7 @@ class Figure(mpl.figure.Figure):
       self.mode = mode
     
     fontFamily = ("sans-serif" if self.mode == "beamer" else "serif")
+    if fontSize is None: fontSize = defaultFontSize
     preamble = (Figure._TEX_PREAMBLE_COMMON +
                 Figure._TEX_PREAMBLE_SPECIAL[self.mode] +
                 preamble)
