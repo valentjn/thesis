@@ -302,13 +302,13 @@ $128 \times 128 = \num{16384}$ elements (models in two dimensions) or
 $16 \times 16 \times 16 = \num{4096}$ elements (models in three dimensions).
 The macro-domains $\objdomain$ were discretized using
 32 macro-cells per meter in the 2D cantilever scenario
-(i.e., $64 \times 32 = 2048$ cells) and
+(i.e., $64 \times 32 = \num{2048}$ cells),
+20 macro-cells per meter in the 3D cantilever scenario
+(i.e., $20 \times 20 \times 20 = \num{8000}$ cells), and
 10 macro-cells per meter in the other scenarios
 (i.e.,
 %$50 \times 20 + 20 \times 30 = \num{1600}$
-\num{1600} cells for the 2D L-shape,
-%$20 \times 20 \times 20 = \num{8000}$
-\num{8000} cells for the 3D cantilever, and
+\num{1600} cells for the 2D L-shape and
 %$20 \times 20 \times 10 = \num{4000}$
 \num{4000} cells for the 3D center-load).
 The generation of the sparse grids (offline phase) was done via a MATLAB code,
