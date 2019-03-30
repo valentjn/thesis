@@ -755,22 +755,22 @@ where we calculate the mean optimal policy
   \setlength{\belowdisplayskip}{9pt}%
   \begin{equation}
     \optpolicymean_t
-    \ceq \frac{1}{m_\mathrm{MC}} \sum_{j=1}^{m_\mathrm{MC}} \policy_{t,(j)}
+    \ceq \frac{1}{m_\mathrm{MC}} \sum_{j=1}^{m_\mathrm{MC}} \optpolicyfcn_{t,(j)}
   \end{equation}%
 }%
 for $m_\mathrm{MC} \in \nat$ individuals.
-The optimal policies $\policy_{t,(j)}$ of the individuals
+The optimal policies $\optpolicyfcn_{t,(j)}$ of the individuals
 ($t = 0, \dotsc, T$ and $j = 1, \dotsc, m_\mathrm{MC}$)
 are determined by
 \begin{subequations}
   \setlength{\abovedisplayskip}{9pt}%
   \setlength{\belowdisplayskip}{9pt}%
   \begin{align}
-    \policy_{t,(j)}
+    \optpolicyfcn_{t,(j)}
     &\ceq \optpolicyintp[p]_t(\state_{t,(j)}),\\
     \state_{t,(j)}
     &\ceq \statefcn_{t-1}(
-      \state_{t-1,(j)}, \policy_{t-1,(j)}, \stochastic_{t-1,(j)}
+      \state_{t-1,(j)}, \optpolicyfcn_{t-1,(j)}, \stochastic_{t-1,(j)}
     ),\quad
     t > 0,\qquad
     \state_{0,(j)}
