@@ -288,7 +288,7 @@ on the interpolated values (e.g., $\exp$).%
   is only defined on the image $T(\posreal)$ of $T$,
   which might not be the whole real line.
   However, we assume that $T^{-1}$ can be ``reasonably'' extended to $\real$
-  (e.g., $T := \sqrt{\cdot}$ and $T^{-1} = ({\cdot})^2$).%
+  (e.g., $T \ceq \sqrt{\cdot}$ and $T^{-1} = ({\cdot})^2$).%
 }
 %In density estimation, this method might introduce new unwanted modes into the
 %probability distribution.
@@ -326,7 +326,7 @@ approach based on Cholesky factorization:
 %\usenotation{Ëchol}
 In one dimension, the Cholesky factorization is equivalent
 to the application of a transformation $T$ as above by choosing
-$T := \sqrt{\cdot}$ and $T^{-1} = (\cdot)^2$.
+$T \ceq \sqrt{\cdot}$ and $T^{-1} = (\cdot)^2$.
 Our approach is as follows:
 \begin{enumerate}
   \item
@@ -351,7 +351,7 @@ Our approach is as follows:
   the interpolant $\cholfactorintp(\*x)$ is evaluated and we return
   \begin{equation}
     \etensorcholintp(\*x)
-    := \tr{\cholfactorintp(\*x)} \cholfactorintp(\*x).
+    \ceq \tr{\cholfactorintp(\*x)} \cholfactorintp(\*x).
   \end{equation}
 \end{enumerate}
 

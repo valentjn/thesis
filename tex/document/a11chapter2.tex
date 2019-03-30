@@ -28,7 +28,7 @@
   The second sum can be split into summands
   with the same number $q$ of zero entries,
   which we count with
-  $N_\*l := \setsize{\{t \mid l_t = 0\}}
+  $N_\*l \ceq \setsize{\{t \mid l_t = 0\}}
   = \normone{\vecmax(\*l, \*1)} - \normone{\*l}$,
   and the same level sum $m = \normone{\*l}$:
   \begin{equation}
@@ -111,7 +111,7 @@
 \begin{proof}
   First, we show that every inserted level $\*l' \in \natz^t$ in the inner loop
   can be found on the right-hand side of \eqref{eq:coarseInvariant}.
-  If $\*l' := (\*l, 0)$
+  If $\*l' \ceq (\*l, 0)$
   is inserted for some $\*l \in \levelset^{(t-1)}$,
   then we have $\normone{\vecmax(\*l, \*1)} \le n-d+t-b$ or
   $\*l = \*0$ by \cref{line:algCoarseBoundary1} of
@@ -126,7 +126,7 @@
   In either case, $\*l'$ is contained in the \rhs of
   \eqref{eq:coarseInvariant}.
   
-  If $\*l' := (\*l, l_t)$ is inserted
+  If $\*l' \ceq (\*l, l_t)$ is inserted
   for some $\*l \in \levelset^{(t-1)}$ and
   $l_t \in \{1, \dotsc, l^\ast\}$, then there are,
   depending on whether $\*l \in \nat^{t-1}$, two cases:

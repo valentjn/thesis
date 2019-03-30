@@ -31,8 +31,8 @@ In the following,
 $\stock_{t,j}$ denotes the fraction of the total wealth $\wealth_t$
 that is invested in the $j$-th stock.
 We combine these \term{stock fractions} $\stock_{t,j}$
-in a vector $\vstock_t := (\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}})$;
-similarly, $\vbuysell_t := (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\vstock}})$
+in a vector $\vstock_t \ceq (\stock_{t,1}, \dotsc, \stock_{t,m_{\vstock}})$;
+similarly, $\vbuysell_t \ceq (\buysell_{t,1}, \dotsc, \buysell_{t,m_{\vstock}})$
 combines buy and sell amounts.
 Then, the consumption can be computed as a residual variable
 (i.e., a variable that can be fully computed from $\state$ and $\policy$
@@ -40,20 +40,20 @@ and is thus omitted from $\policy$),
 which is given by
 \begin{equation}
   \consume_t
-  := (1 - \sumfcn(\vstock_t)) \wealth_t - \bond_t -
+  \ceq (1 - \sumfcn(\vstock_t)) \wealth_t - \bond_t -
   (1 + \tac) \sumfcn(\vbuy_t) + (1 - \tac) \sumfcn(\vsell_t),
 \end{equation}
-where $\sumfcn(\*a) := \tr{\*1} \*a$
+where $\sumfcn(\*a) \ceq \tr{\*1} \*a$
 is the sum of all entries of $\*a$.
 The state transition is computed by adding the returns of bonds and stocks:%
 \begin{equation}
   \wealth_{t+1}
-  := \bond_t \bondreturn_t +
+  \ceq \bond_t \bondreturn_t +
   %\sum_{j=1}^{m_{\vstock}}
   %(\stock_{t,j} \wealth_t + \buy_{t,j} - \sell_{t,j}) \stockreturn_{t,j},\\
   \tr{(\vstock_t \wealth_t + \vbuy_t - \vsell_t)} \vstockreturn_t,\qquad
   \vstock_{t+1}
-  := \frac{
+  \ceq \frac{
     (\vstock_t \wealth_t + \vbuy_t - \vsell_t) \compmult \vstockreturn_t
   }{\wealth_{t+1}},
 \end{equation}
@@ -76,22 +76,22 @@ $\compmult$ is component-wise multiplication.
 The above equations can be normalized with respect to the wealth
 $\wealth_t$:
 By setting
-$\normconsume_t  := \consume_t/\wealth_t$,
-$\normbond_t     := \bond_t   /\wealth_t$, and
-$\vnormbuysell_t := \vbuysell_t/\wealth_t$, we obtain
+$\normconsume_t  \ceq \consume_t/\wealth_t$,
+$\normbond_t     \ceq \bond_t   /\wealth_t$, and
+$\vnormbuysell_t \ceq \vbuysell_t/\wealth_t$, we obtain
 \begin{subequations}
   \label{eq:normalizedTCPStateTransition}
   \begin{align}
     \normconsume_t
-    &\hphantom{:}=
+    &\mathrel{\righthphantom{=}{\ceq}}
     (1 - \sumfcn(\vstock_t)) - \normbond_t -
     (1 + \tac) \sumfcn(\vnormbuy_t) + (1 - \tac) \sumfcn(\vnormsell_t),\\
     \wealthratio_{t+1}
-    &:= \normbond_t \bondreturn_t +
+    &\ceq \normbond_t \bondreturn_t +
     \tr{(\vstock_t + \vnormbuy_t - \vnormsell_t)} \vstockreturn_t,
     \qquad(= \wealth_{t+1}/\wealth_t)\\
     \vstock_{t+1}
-    &\hphantom{:}=
+    &\mathrel{\righthphantom{=}{\ceq}}
     \frac{
       (\vstock_t + \vnormbuy_t - \vnormsell_t) \compmult \vstockreturn_t
     }{\wealthratio_{t+1}},
@@ -152,7 +152,7 @@ Consequently, the Bellman equation \eqref{eq:gridBellmanCET}
 after the certainty-equiva\-lent transformation has to be
 normalized as well.
 By setting $\normcetvalueintp_t(\state_t^{(k)})
-:= \cetvalueintp_t(\state_t^{(k)})/\wealth_t$, we obtain
+\ceq \cetvalueintp_t(\state_t^{(k)})/\wealth_t$, we obtain
 \begin{subequations}
   \begin{align}
     %\normcetvalueintp_t(\state_t^{(k)})
@@ -280,7 +280,7 @@ choosing the positive solution, we finally obtain
   \newcommand*{\sumX}{\sumfcn(\vstock_t)}
   \newcommand*{\cMin}{\normconsume_{\min}}
   \normcropfactor
-  := \frac{
+  \ceq \frac{
     \tac\, \bigl(1 + \sumX\bigr) - 1 +
     \sqrt{
       \tac^2\, \bigl(1 - \sumX\bigr)^2
@@ -318,24 +318,24 @@ the
 value function interpolant
 $
   \normcetvalueintp_t
-  := \normcetvalueintp_t(\normstate_t)
+  \ceq \normcetvalueintp_t(\normstate_t)
 $,
 the state transition function
 $
   \normstatefcn_t
-  := \normstatefcn_t(\normstate_t, \normpolicy_t, \stochastic_t)
+  \ceq \normstatefcn_t(\normstate_t, \normpolicy_t, \stochastic_t)
 $,
 the wealth ratio
 $
   \wealthratio_{t+1}
-  := \wealthratio_{t+1}(
+  \ceq \wealthratio_{t+1}(
     \normstate_t, \normpolicy_t, \stochastic_t
   )
 $, and
 the consumption
 $
   \normconsume_t
-  := \normconsume_t(\normstate_t, \normpolicy_t)
+  \ceq \normconsume_t(\normstate_t, \normpolicy_t)
 $.
 The Lagrangian of the optimization problem corresponding
 to the Bellman equation \eqref{eq:normalizedTCPBellmanEquation}
@@ -348,7 +348,7 @@ vanishes with respect to the problem's constraints
   \begin{equation}
     \begin{split}
       \lagrangian_t(\normstate_t, \normpolicy_t, \*\multiplier)
-      &:= \left(
+      &\ceq \left(
         (\normconsume_t)^{1-\riskav} +
         \patience \expectation[t]{
           \bigl(
@@ -367,7 +367,7 @@ vanishes with respect to the problem's constraints
   \end{equation}%
 }%
 with $
-\*\multiplier := (
+\*\multiplier \ceq (
   \multiplier_1,
   \*\multiplier_2,
   \*\multiplier_3,
@@ -386,7 +386,7 @@ $
 $
 with respect to $\normbond_t$
 vanishes in the exact optimum
-$\normpolicy_t = \optnormpolicyfcn_t := \optnormpolicyfcn_t(\normstate_t)$,
+$\normpolicy_t = \optnormpolicyfcn_t \ceq \optnormpolicyfcn_t(\normstate_t)$,
 i.e.,
 {%
   \setlength{\abovedisplayskip}{9pt}%
@@ -413,17 +413,17 @@ i.e.,
 where
 $
   \normstatefcn[\opt]_t
-  := \normstatefcn_t(\normstate_t, \optnormpolicyfcn_t, \stochastic_t)
+  \ceq \normstatefcn_t(\normstate_t, \optnormpolicyfcn_t, \stochastic_t)
 $,
 $
   \wealthratio_{t+1}^{\opt}
-  := \wealthratio_{t+1}(
+  \ceq \wealthratio_{t+1}(
     \normstate_t, \optnormpolicyfcn_t, \stochastic_t
   )
 $, and
 $
   \normconsume_t^{\opt}
-  := \normconsume_t(\normstate_t, \optnormpolicyfcn_t)
+  \ceq \normconsume_t(\normstate_t, \optnormpolicyfcn_t)
 $.
 We now neglect binding constraints,
 i.e., we assume that $\multiplier_1 = \multiplier_5 = 0$,
@@ -454,13 +454,13 @@ $\optnormpolicyintp_t = \optnormpolicyintp_t(\normstate_t)$.
 By multiplying the resulting equation by
 $
   (\normconsume_t^{\opt,\sparse})^{\riskav}
-  := (\normconsume_t(\normstate_t, \optnormpolicyintp_t))^{\riskav}
+  \ceq (\normconsume_t(\normstate_t, \optnormpolicyintp_t))^{\riskav}
 $, we obtain the
 \term{unit-free Euler equation errors $\eulererror_t(\normstate_t)$}
 with respect to $\normbond_t$:
 \begin{equation}
   \eulererror_t(\normstate_t)
-  := \Bigl|
+  \ceq \Bigl|
     1 - \Bigl(
       \patience \bondreturn_t (\normconsume_t^{\opt,\sparse})^{\riskav}
       \cdot \expectationsign[t]\Bigl[
@@ -480,11 +480,11 @@ with respect to $\normbond_t$:
 with
 $
   \normstatefcn[\opt,\sparse]_t
-  := \normstatefcn_t(\normstate_t, \optnormpolicyintp_t, \stochastic_t)
+  \ceq \normstatefcn_t(\normstate_t, \optnormpolicyintp_t, \stochastic_t)
 $ and
 $
   \wealthratio_{t+1}^{\opt,\sparse}
-  := \wealthratio_{t+1}(
+  \ceq \wealthratio_{t+1}(
     \normstate_t, \optnormpolicyintp_t, \stochastic_t
   )
 $.
@@ -519,7 +519,7 @@ $.
 %\begin{equation}
 %  \begin{split}
 %    \eulererror_t(\normstate_t)
-%    := \Bigl|
+%    \ceq \Bigl|
 %      1 - \Bigl(
 %        \patience \bondreturn_t
 %        \cdot \normconsume_t%(\normstate_t, \optnormpolicyfcn_t)
@@ -567,7 +567,7 @@ which is confirmed by Monte Carlo simulations.
 We therefore use the \term{weighted Euler equation error}
 \begin{equation}
   \weightedeulererror_t(\normstate_t)
-  := \bigl(1 - \sumfcn(\normstate_t)\bigr) \cdot
+  \ceq \bigl(1 - \sumfcn(\normstate_t)\bigr) \cdot
   \eulererror_t(\normstate_t)
 \end{equation}
 instead of $\eulererror_t$,

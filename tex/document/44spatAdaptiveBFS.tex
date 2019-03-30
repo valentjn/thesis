@@ -530,7 +530,7 @@ is fulfilled:
 \begin{equation}
   \label{eq:hierarchicalFundamentalTransformation}
   \basis[\hft]{l',i'}
-  := \sum_{l''=0}^{l'} \sum_{i'' \in \hiset{l''}}
+  \ceq \sum_{l''=0}^{l'} \sum_{i'' \in \hiset{l''}}
   c_{l'',i''}^{l',i'} \basis{l'',i''}
   \quad\text{such that}\quad
   \fafalarge{l = 0, \dotsc, l'}{i \in \hiset{l}}{
@@ -580,14 +580,14 @@ a similar statement can be proven for the dimensionally adaptive case.
   spanned sparse grid space for the HFT%
 ]
   \label{prop:hftSparseGridSpace}
-  If $\liset := \{(\*l, \*i) \mid
+  If $\liset \ceq \{(\*l, \*i) \mid
   \normone{\*l'} \le n,\; \*i' \in \hiset{\*l'}\}$
   is the set of level-index pairs for the regular sparse grid of level $n$
   and dimensionality $d$, then
   \begin{equation}
     \regsgspace{n}{d}
     = \regsgspace[\hft]{n}{d}
-    := \spn\{\basis[\hft]{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
+    \ceq \spn\{\basis[\hft]{\*l',\*i'} \mid (\*l', \*i') \in \liset\}.
   \end{equation}
 \end{proposition}
 
@@ -603,7 +603,7 @@ a similar statement can be proven for the dimensionally adaptive case.
     c_{\*l'',\*i''}^{\*l',\*i'} \basis{\*l'',\*i''}
     \in \regsgspace{n}{d},\quad
     c_{\*l'',\*i''}^{\*l',\*i'}
-    := \prod_{t=1}^d c_{l''_t,i''_t}^{l'_t,i'_t}.
+    \ceq \prod_{t=1}^d c_{l''_t,i''_t}^{l'_t,i'_t}.
   \end{equation}
   
   To prove that $\regsgspace{n}{d} \subset \regsgspace[\hft]{n}{d}$,
@@ -658,7 +658,7 @@ allow general integer indices $i'' \in \integer$:
 \begin{equation}
   \label{eq:tiftDefinition}
   \basis[\tift]{l',i'}
-  := \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}
+  \ceq \sum_{i'' \in \integer} c_{i''}^{l',i'} \basis{l',i''}
   \quad\text{such that}\quad
   \falarge{i \in \hiset{l'}}{
     \basis[\tift]{l',i'}(\gp{l',i}) = \kronecker{i}{i'},
@@ -683,7 +683,7 @@ We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
   The set
   \begin{equation}
     \relindexset{l'}
-    := \braced*{
+    \ceq \braced*{
       i'' \in \integer \bigm\vert
       \restrictfcn{\basis{l',i''}}{\clint{0, 1}} \not\equiv 0
     },\quad
@@ -698,7 +698,7 @@ We have to make three assumptions for \eqref{eq:tiftDefinition} to make sense:
   The condition is met for compactly supported and translation-invariant
   basis functions such as B-splines $\bspl{l',i''}{p}$.
   For $d \in \nat$ dimensions and $\*l' \in \natz^d$, we define
-  $\relindexset{\*l'} :=
+  $\relindexset{\*l'} \ceq
   \relindexset{l'_1} \times \dotsb \times \relindexset{l'_d}$.
   
   \item
@@ -744,13 +744,13 @@ there is only a single set of coefficients of $\parentfcn({\cdot} - i'')$
 such that \eqref{eq:tiftParentFunctionConditions} holds.
 This means that $c_{i'+i''}^{l',i'}$ does not depend on $l'$ or $i'$,
 if $\basis{l',i'}$ is translation-invariant.
-Consequently, if we set $c_{i''} := c_{i'+i''}^{l',i'}$
+Consequently, if we set $c_{i''} \ceq c_{i'+i''}^{l',i'}$
 for some arbitrary $l' \in \natz$ and $i' = 0, \dotsc, 2^{l'}$,
 then $\parentfcn[\tift]\colon \real \to \real$ defined by
 \begin{equation}
   \label{eq:tiftParentFunctionDefinition}
   \parentfcn[\tift](x)
-  := \sum_{i'' \in \integer} c_{i''} \parentfcn(x - i''),\quad
+  \ceq \sum_{i'' \in \integer} c_{i''} \parentfcn(x - i''),\quad
   x \in \clint{0, 1},
 \end{equation}
 is a parent function of $\basis[\tift]{l',i'}$ that satisfies
@@ -799,7 +799,7 @@ is not contained in the nodal space $\ns{l'}$.
     \spn\{\basis{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\}
     =: \ns[\ext]{\*l'}
     = \ns[\tift,\ext]{\*l'}
-    := \spn\{\basis[\tift]{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
+    \ceq \spn\{\basis[\tift]{\*l',\*i'} \mid \*i' \in \relindexset{\*l'}\},\quad
     \*l' \in \natz^d.
     \hspace*{-20mm}
   \end{equation}
@@ -819,7 +819,7 @@ is not contained in the nodal space $\ns{l'}$.
     c_{\*i''}^{\*l',\*i'} \basis{\*l',\*i''}
     \in \ns[\ext]{\*l'},\quad
     c_{\*i''}^{\*l',\*i'}
-    := \prod_{t=1}^d c_{i''_t}^{l'_t,i'_t}.
+    \ceq \prod_{t=1}^d c_{i''_t}^{l'_t,i'_t}.
   \end{equation}
   
   To prove that
@@ -866,9 +866,9 @@ and the set $\relindexset[p]{l}$ of relevant indices for level $l \in \natz$
 are given by
 \begin{equation}
   \parentbspl{p}(x)
-  := \cardbspl{p}(x + \tfrac{p+1}{2}),\qquad
+  \ceq \cardbspl{p}(x + \tfrac{p+1}{2}),\qquad
   \relindexset[p]{l}
-  := \{-\tfrac{p-1}{2},\;
+  \ceq \{-\tfrac{p-1}{2},\;
   -\tfrac{p-1}{2} + 1,\;
   \dotsc,\;
   2^l + \tfrac{p-1}{2}\},
@@ -937,7 +937,7 @@ is uniquely solvable:
   The system \eqref{eq:fundamentalSplineSLE} has a unique solution
   $(\fundsplcoeff{k}{p})_{k \in \integer}$ and the corresponding parent function
   $\parentfundspl{p}\colon \real \to \real$ defined by
-  $\parentfundspl{p}(x) :=
+  $\parentfundspl{p}(x) \ceq
   \sum_{k \in \integer} \fundsplcoeff{k}{p} \parentbspl{p}(x - k)$
   satisfies
   \begin{equation}
@@ -1009,7 +1009,7 @@ $\bspl[\fs]{l,i}{p}\colon \clint{0, 1} \to \real$ via
 \cref{eq:translationInvariance}, i.e.,
 \begin{equation}
   \bspl[\fs]{l,i}{p}(x)
-  := \parentfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
+  \ceq \parentfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
   l \in \natz,\;\;
   i = 0, \dotsc, 2^l,\;\;
   x \in \clint{0, 1}.
@@ -1079,7 +1079,7 @@ of linear equations approximatively,
 if we symmetrically truncate the linear system to
 \pagebreak
 $2\fundsplcutoff{p} - 1$ rows and columns
-and set $\fundsplcoeff{k}{p} := 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
+and set $\fundsplcoeff{k}{p} \ceq 0$ for all $\abs{k} \ge \fundsplcutoff{p}$,
 where $\fundsplcutoff{p} \in \nat$ is a truncation index.
 Note that we only have to perform $p + 1$ cardinal B-spline evaluations
 to evaluate $\parentfundspl{p}$ once.
@@ -1135,7 +1135,7 @@ level $l \in \nat$, index $i \in \hiset{l}$, and degree $p$ is
 defined as follows:
 \begin{equation}
   \bspl[\fs,\modified]{l,i}{p}(x)
-  :=
+  \ceq
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
@@ -1151,7 +1151,7 @@ where $\parentfundspl[\modified]{p}$ is a linear combination
 \begin{equation}
   \parentfundspl[\modified]{p}\colon \nonnegreal \to \real,\quad
   \parentfundspl[\modified]{p}(x)
-  := \largesum[\infty]{k=1-(p+1)/2}
+  \ceq \largesum[\infty]{k=1-(p+1)/2}
   \fundsplcoeff[\modified]{k}{p} \parentbspl{p}(x - k),
 \end{equation}
 whose coefficients $\fundsplcoeff[\modified]{k}{p} \in \real$
@@ -1171,7 +1171,7 @@ are chosen such that
 \end{subequations}
 if $p > 1$.
 For $p = 1$, we define $\parentfundspl[\modified]{p}
-:= \bspl[\modified]{2,1}{p}(\tfrac{{\cdot}}{4})$.
+\ceq \bspl[\modified]{2,1}{p}(\tfrac{{\cdot}}{4})$.
 Since the modification coefficients $\fundsplcoeff[\modified]{k}{p}$
 experience the same decay as the coefficients $\fundsplcoeff{k}{p}$ of the
 fundamental spline,
@@ -1282,7 +1282,7 @@ fundamental property \eqref{eq:fundamentalProperty} is satisfied:
 \begin{equation}
   \label{eq:fundamentalNotAKnotSplines}
   \bspl[\fs,\nak]{l',i'}{p}
-  := \sum_{i''=0}^{2^{l'}}
+  \ceq \sum_{i''=0}^{2^{l'}}
   \fundsplcoeff[l',i',\fs]{i''}{p} \bspl[\nak]{l',i''}{p}
   \quad\text{such that}\quad
   \falarge{i = 0, \dotsc, 2^{l'}}{

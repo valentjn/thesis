@@ -345,7 +345,7 @@ In the Clenshaw--Curtis case, the maximal errors are
   \approx \SI{9.51}{\newton},
 \end{equation}
 where $\normLinfty{\forceXref - \forceXintp[p,\cc]}
-:= \max_{(\elbang, \actX)}
+\ceq \max_{(\elbang, \actX)}
 \abs{\forceXref(\elbang, \actX) - \forceXintp[p,\cc](\elbang, \actX)}$
 (since the functions are continuous).
 If we restrict the domain to
@@ -507,24 +507,24 @@ The test scenario is as follows:
 \begin{enumerate}
   \item
   Find a feasible initial solution for problem \ref{item:biomech2MinSum}
-  with $\forceL(t_0) := \SI{22}{\newton}$ and
-  $\tarelbang(t_0) := \ang{75}$.
+  with $\forceL(t_0) \ceq \SI{22}{\newton}$ and
+  $\tarelbang(t_0) \ceq \ang{75}$.
   
   \item
-  Apply \ref{item:biomech2MinSum} with $\forceL(t_1) := \SI{22}{\newton}$ and
-  $\tarelbang(t_1) := \ang{75}$.
+  Apply \ref{item:biomech2MinSum} with $\forceL(t_1) \ceq \SI{22}{\newton}$ and
+  $\tarelbang(t_1) \ceq \ang{75}$.
   
   \item
-  Apply \ref{item:biomech2MinDist} with $\forceL(t_2) := \SI{22}{\newton}$ and
-  $\tarelbang(t_2) := \ang{60}$ (changed target angle).
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_2) \ceq \SI{22}{\newton}$ and
+  $\tarelbang(t_2) \ceq \ang{60}$ (changed target angle).
   
   \item
-  Apply \ref{item:biomech2MinDist} with $\forceL(t_3) := \SI{30}{\newton}$ and
-  $\tarelbang(t_3) := \ang{60}$ (changed load).
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_3) \ceq \SI{30}{\newton}$ and
+  $\tarelbang(t_3) \ceq \ang{60}$ (changed load).
   
   \item
-  Apply \ref{item:biomech2MinDist} with $\forceL(t_4) := \SI{40}{\newton}$ and
-  $\tarelbang(t_4) := \ang{50}$ (changed load and target angle).
+  Apply \ref{item:biomech2MinDist} with $\forceL(t_4) \ceq \SI{40}{\newton}$ and
+  $\tarelbang(t_4) \ceq \ang{50}$ (changed load and target angle).
 \end{enumerate}
 %
 For each of the steps 2 to 5, the activation levels $\actT, \actB$ obtained

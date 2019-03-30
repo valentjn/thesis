@@ -111,7 +111,7 @@ We prove the correctness of the \up with the following invariant:
   $\liset = \{\*0, \dotsc, \*2^\*l\}$
   corresponds to a full grid $\fgset{\*l}$ of level $\*l$.
   After iteration $j$ of \cref{alg:unidirectionalPrinciple}
-  ($j = 1, \dotsc, d$), it holds for $T := (t_1, \dotsc, t_j)$
+  ($j = 1, \dotsc, d$), it holds for $T \ceq (t_1, \dotsc, t_j)$
   \begin{equation}
     \sum_{\*k_T=\*0}^{\*2^{\*l_T}}
     \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{\*k_T}(\gp{\*k'_T})
@@ -119,13 +119,13 @@ We prove the correctness of the \up with the following invariant:
     \*k' = \*0, \dotsc, \*2^\*l,
   \end{equation}
   where $(\*k_T,\*k'_{-T})$ is shorthand for $\*k''$
-  with $k''_t := k_t$ if $t \in T$ and $k''_t := k'_t$ if $t \notin T$.
+  with $k''_t \ceq k_t$ if $t \in T$ and $k''_t \ceq k'_t$ if $t \notin T$.
 \end{proposition}
 
 \begin{proof}
   We prove the assertion by induction over $j = 1, \dotsc, d$.
-  We set $T' := (t_1, \dotsc, t_{j-1})$,
-  $T := (t_1, \dotsc, t_{j-1}, t_j)$,
+  We set $T' \ceq (t_1, \dotsc, t_{j-1})$,
+  $T \ceq (t_1, \dotsc, t_{j-1}, t_j)$,
   and we exploit the tensor product structure of the basis
   to write the \lhs of the assertion for $j$
   and arbitrary $\*k' = \*0, \dotsc, \*2^\*l$ as
@@ -139,7 +139,7 @@ We prove the correctness of the \up with the following invariant:
     \linout[(j)]{(\*k_T,\*k'_{-T})} \basis{k_{t_j}}(\gp{k'_{t_j}}).
   \end{equation}
   If we choose the equivalence class
-  $\lisetpole := \eqclass{(\*k_T,\*k'_{-T})}{\samepole{t_j}}$
+  $\lisetpole \ceq \eqclass{(\*k_T,\*k'_{-T})}{\samepole{t_j}}$
   ($\*k_T$ arbitrary),
   then the inner sum over $k_{t_j}$ equals
   \begin{equation}

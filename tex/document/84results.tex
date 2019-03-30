@@ -15,10 +15,10 @@
 \paragraph{Parameter values}
 
 We used
-a risk aversion factor of $\riskav := 3.5$,
-a patience factor of $\patience := 0.97$,
-a transaction cost rate of $\tac := \SI{1}{\percent}$, and
-a minimum consumption of $\normconsume_{\min} := 0.001$.
+a risk aversion factor of $\riskav \ceq 3.5$,
+a patience factor of $\patience \ceq 0.97$,
+a transaction cost rate of $\tac \ceq \SI{1}{\percent}$, and
+a minimum consumption of $\normconsume_{\min} \ceq 0.001$.
 The bond and stock return rates $\bondreturn_t$ and $\vstockreturn_t$
 were taken from \cite{Cai10Stable};
 the log-normally distributed stock return rates were generalized
@@ -30,7 +30,7 @@ $\ln \vstockreturn_t \sim \mathcal{N}(\*\mu, \mat{\Sigma})$, where
   \begin{equation}
     \label{eq:financeStockReturnMeanCovariance}
     \*\mu
-    :=
+    \ceq
     \scalebox{0.92}{$
       \begin{pmatrix*}[l]
         0.0572\\
@@ -41,7 +41,7 @@ $\ln \vstockreturn_t \sim \mathcal{N}(\*\mu, \mat{\Sigma})$, where
       \end{pmatrix*}
     $},\quad
     \mat{\Sigma}
-    := 10^{-2}
+    \ceq 10^{-2}
     \scalebox{0.92}{$
       \begin{pmatrix*}[l]
         2.56&  0.576&   0.288&   0.176&  0.096\\
@@ -181,14 +181,14 @@ However, since Euler equation errors can only be evaluated at points in
 the simplex
 $
   \Omega_\mathrm{simplex}
-  := \{\normstate_t \in \clint{\*0, \*1} \mid \sumfcn(\normstate_t) \le 1\}
+  \ceq \{\normstate_t \in \clint{\*0, \*1} \mid \sumfcn(\normstate_t) \le 1\}
 $, the $\Ltwo$ norm would
 quickly converge to zero with growing dimensionality, even if the mean error
 stayed constant.
 Therefore, we normalize the $\Ltwo$ norm:
 \begin{equation}
   \weightedeulererrorLtwo_t
-  := \sqrt{d!} \cdot \normLtwo{\weightedeulererror_t}
+  \ceq \sqrt{d!} \cdot \normLtwo{\weightedeulererror_t}
   = \sqrt{
     \frac{1}{\vol{\Omega_\mathrm{simplex}}}
     \int_{\mathrlap{\Omega_\mathrm{simplex}}\hphantom{\Omega}}
@@ -587,7 +587,7 @@ for $d = 3$, $4$, and $5$ stocks.
       unnormalized stock holdings
       $
         \acute{\vstock}_t
-        := (\vstock_t + \vnormbuy_t - \vnormsell_t) \wealth_t
+        \ceq (\vstock_t + \vnormbuy_t - \vnormsell_t) \wealth_t
       $
       after buying and selling
       \emph{\textcolor{C1}{(red)}}

@@ -26,7 +26,7 @@ $\ineqconfun\colon \real^d \to \real^{m_{\ineqconfun}}$
 is the \term{(inequality) constraint function.}
 This formulation also contains optimization problems
 with equality constraints $\eqconfun(\*x) = \*0$
-by setting $\ineqconfun(\*x) := (\eqconfun(\*x), -\eqconfun(\*x))$.
+by setting $\ineqconfun(\*x) \ceq (\eqconfun(\*x), -\eqconfun(\*x))$.
 Equality constraints can also be solved by incorporating them
 into the unconstrained solver (e.g., see \cite{Boyd04Convex}
 for an equality-constrained Newton method).
@@ -38,7 +38,7 @@ In the case of \eqref{eq:unconstrainedOptimization},
 this results in a \term{box-constrained optimization problem.}
 A simple method for applying unconstrained optimization algorithms
 to box-constrained problems is extending $\sgintp$ to $\real^d$ by
-$\sgintp(\*x) := +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
+$\sgintp(\*x) \ceq +\infty$ for all $\*x \in \real^d \setminus \clint{\*0, \*1}$.
 However, more sophisticated
 %, algorithm-tailored
 approaches are also available \cite{More87Optimization}.
@@ -280,9 +280,9 @@ each iteration $k$ a unit \term{search direction} $\*d_k \in \real^d$
 \begin{equation}
   \*x_k
   \to \*x_{k+1}
-  := \*x_k + \delta_k \*d_k,\qquad
+  \ceq \*x_k + \delta_k \*d_k,\qquad
   \delta_k
-  := \argmin_{\delta \in \posreal} \objfun(\*x_k + \delta \*d_k),
+  \ceq \argmin_{\delta \in \posreal} \objfun(\*x_k + \delta \*d_k),
 \end{equation}
 where $\delta_k \in \posreal$ is the \term{step size.}
 The algorithms essentially differ in the
@@ -338,7 +338,7 @@ It is equivalent to the CG method for
 solving symmetric positive definite %\spd
 linear systems $\mat{A} \*x = \*b$,
 if we optimize the strictly convex quadratic function
-$\objfun(\*x) := \frac{1}{2} \tr{\*x} \mat{A} \*x - \tr{\*b} \*x$
+$\objfun(\*x) \ceq \frac{1}{2} \tr{\*x} \mat{A} \*x - \tr{\*b} \*x$
 \multicite{Reinhardt13Nichtlineare,Valentin14Hierarchische}, i.e.,
 it finds the optimum after only $d$ steps for strictly convex
 quadratic functions.
@@ -484,7 +484,7 @@ The \term{squared penalty method}
 replaces the constrained problem with the penalized problem
 $\min\, [\objfun(\*x) + \mu_k \norm[2]{\nonnegpart{\ineqconfun(\*x)}}^2]$,
 where $\mu_k \in \posreal$ is a penalty parameter and
-$\nonnegpart{\cdot} := \vecmax(\cdot, \*0)$ denotes the non-negative part.
+$\nonnegpart{\cdot} \ceq \vecmax(\cdot, \*0)$ denotes the non-negative part.
 With increasing $\mu_k$, the constraint violation of the solution of
 the penalized problem decreases, although it may happen
 that it never vanishes.

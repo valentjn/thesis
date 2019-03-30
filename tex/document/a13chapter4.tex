@@ -13,7 +13,7 @@
   $n \in \natz$ and $k \in \integer$ as
   \begin{equation}
     \binom{n}{k}
-    :=
+    \ceq
     \begin{cases}
       \frac{n (n - 1) \dotsm (n - (k-1))}{k!},&0 < k < n,\\
       1,&(k = 0) \lor (k = n),\\
@@ -81,7 +81,7 @@
         \{\*a \in \natz^d \mid \normone{\*a} = n - q - \normone{\*l}\}
       }\\
       \intertext{%
-        by mapping $\*a := \*l' - \*l$.
+        by mapping $\*a \ceq \*l' - \*l$.
         The size of the last set is
         known as the number of \term{weak compositions}
         of $n - q - \normone{\*l}$ into $d$ parts
@@ -94,8 +94,8 @@
   see Theorem 2.2 of \cite{Bona15Introduction}.
   Now, we can use \cref{lemma:inclusionExclusionCountingLemma}
   with the values
-  $a := s := d - 1$ and
-  $r := n - \normone{\*l} + d - 1$
+  $a \ceq s \ceq d - 1$ and
+  $r \ceq n - \normone{\*l} + d - 1$
   %(note that $r \ge m$ due to $\normone{\*l} \le n$)
   to conclude that the \lhs of the assertion
   \eqref{eq:combiTechniqueOne} equals
@@ -184,7 +184,7 @@
   
   Let
   \begin{equation}
-    S := \gp{\*l,\*i} + \spn\{\stdbasis{1}, \dotsc, \stdbasis{m}\}
+    S \ceq \gp{\*l,\*i} + \spn\{\stdbasis{1}, \dotsc, \stdbasis{m}\}
     = \{\gp{\*l,\*i} + \textstyle\sum_{t=1}^m c_t \stdbasis{t} \mid
     c_1, \dotsc, c_m \in \real\}
   \end{equation}
@@ -230,12 +230,13 @@
     \begin{align}
       (\restrictfcn{\fgintp{\*l'}}{S \cap \clint{\*0, \*1}})
       (\*x_{\range{1}{m}})
-      &\hphantom{:}= \sum_{\*i'_{\range{1}{m}}=\*0}^{\*2^{\*l'_{\range{1}{m}}}}
+      &\mathrel{\righthphantom{=}{\ceq}}
+      \sum_{\*i'_{\range{1}{m}}=\*0}^{\*2^{\*l'_{\range{1}{m}}}}
       \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
       \basis{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}(\*x_{\range{1}{m}}),\quad
       \*x_{\range{1}{m}} \in \clint{0, 1}^m,\\
       \interpcoefftilde{\*l'_{\range{1}{m}},\*i'_{\range{1}{m}}}
-      &:= \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
+      &\ceq \sum_{\*i'_{\range{m+1}{d}}=\*0}^{\*2^{\*l'_{\range{m+1}{d}}}}
       \interpcoeff{\*l',\*i'}
       \basis{\*l'_{\range{m+1}{d}},\*i'_{\range{m+1}{d}}}%
       (\gp{\*l_{\range{m+1}{d}},\*i_{\range{m+1}{d}}})
@@ -371,10 +372,10 @@
   For notational convenience, we define the vector
   \begin{equation}
     \hat{\*l}
-    := (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d),
+    \ceq (l^\ast_1, \dotsc, l^\ast_m,\; l_{m+1}, \dotsc, l_d),
   \end{equation}
   where $\*l^\ast$ is given as in \cref{lemma:combiTechniqueCharacterization}.
-  We show that $\*a := (l'_t - l_t)_{t = m+1, \dotsc, d}$
+  We show that $\*a \ceq (l'_t - l_t)_{t = m+1, \dotsc, d}$
   constitutes a bijection between
   \begin{equation}
     \{\*l' \in L_0 \mid \normone{\*l'} = n - q\}
@@ -444,9 +445,9 @@
     \end{align}
   \end{subequations}
   Again, we apply \thmref{lemma:inclusionExclusionCountingLemma}
-  with the values $a := d - 1$,
-  $r := n - \normone{\hat{\*l}} + d - m - 1$, and
-  $s := d - m - 1$ to infer that as claimed,
+  with the values $a \ceq d - 1$,
+  $r \ceq n - \normone{\hat{\*l}} + d - m - 1$, and
+  $s \ceq d - m - 1$ to infer that as claimed,
   \eqref{eq:proofCombiTechniqueIdenticalValues3} is equal to
   \begin{equation}
   \label{eq:proofCombiTechniqueIdenticalValues4}
@@ -581,7 +582,7 @@
     Let $S$ be the line in $\real^d$ defined by
     \begin{equation}
       S
-      := \gp{\*l,\*i} + \spn\{\stdbasis{t'}\},
+      \ceq \gp{\*l,\*i} + \spn\{\stdbasis{t'}\},
     \end{equation}
     where $\stdbasis{t'}$ is the $t'$-th standard basis vector.
     It holds that $S \cap \fgset{\*l^{(j+1)}} \subset \fgset{\*l^{(j')}}$.
@@ -620,13 +621,14 @@
     \begin{subequations}
       \begin{align}
         (\restrictfcn{r_{\*l^{(j+1)}}^{(j)}}{S \cap \clint{0, 1}})(x_{t'})
-        &\hphantom{:}= \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
+        &\mathrel{\righthphantom{=}{\ceq}}
+        \sum_{l'_{t'}=0}^{l_{t'}^{(j+1)}}
         \sum_{i'_{t'} \in \hiset{l'_{t'}}}
         \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
         \basis{l'_{t'},i'_{t'}}(x_{t'}),\quad
         x_{t'} \in \clint{0, 1},\\
         \surplustilde[(j+1)]{l'_{t'},i'_{t'}}
-        &:= \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
+        &\ceq \sum_{\*l'_{-t'}=\*0}^{\*l^{(j+1)}_{-t'}}
         \sum_{\*i'_{-t'} \in \hiset{\*l'_{-t'}}}
         \surplus[(j+1)]{\*l',\*i'}
         \basis{\*l'_{-t'},\*i'_{-t'}}(\gp{\*l_{-t'},\*i_{-t'}}),
@@ -1211,7 +1213,7 @@
     l \le n,\; i \in \hiset{l},
     \quad\text{where}\quad
     \sgintp
-    := \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
+    \ceq \sum_{l'=0}^n \sum_{i' \in \hiset{l'}}
     \linout{l',i'} \bspl[\wfs]{l',i'}{p}.
   \end{equation}
   This means that $\sgintp$ is the correct hierarchical interpolant

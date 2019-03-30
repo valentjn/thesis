@@ -65,7 +65,7 @@ this implies that $\fgset{l}$ decomposes into
 \begin{equation}
   \fgset{l}
   = \bigdotcup_{l'=0}^l \{\gp{l',i'} \mid i' \in \hiset{l'}\},\quad
-  \hiset{l'} :=
+  \hiset{l'} \ceq
   \begin{cases}
     \{i' = 0, \dotsc, 2^{l'} \mid \text{$i'$ odd}\},&l' > 0,\\
     \{0, 1\},&l' = 0,
@@ -76,7 +76,7 @@ We call the spaces spanned by the basis functions that correspond to the
 index sets $\hiset{l'}$ \term{hierarchical subspaces} $\hs{l'}$:
 \begin{equation}
   \hs{l'}
-  := \spn\{\basis{l',i'} \mid i' \in \hiset{l'}\}.
+  \ceq \spn\{\basis{l',i'} \mid i' \in \hiset{l'}\}.
 \end{equation}
 The corresponding basis functions
 $\basis{l',i'}$, $l' = 0, \dotsc, l$, $i' \in \hiset{l'}$,
@@ -212,9 +212,9 @@ Multivariate hierarchical subspaces are defined analogously
 to the univariate case:
 \begin{equation}
   \hs{\*l}
-  := \spn\{\basis{\*l,\*i} \mid \*i \in \hiset{\*l}\},\quad
+  \ceq \spn\{\basis{\*l,\*i} \mid \*i \in \hiset{\*l}\},\quad
   \hiset{\*l}
-  := \hiset{l_1} \times \dotsb \times \hiset{l_d},\quad
+  \ceq \hiset{l_1} \times \dotsb \times \hiset{l_d},\quad
   \*l \in \natz^d.
 \end{equation}
 The univariate hierarchical splitting \eqref{eq:hierSplittingUV}

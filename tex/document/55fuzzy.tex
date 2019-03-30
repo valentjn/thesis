@@ -94,7 +94,7 @@ A more in-depth introduction can be found in
 
 Let $X \subset \real$ be a closed interval on the real line
 and $\memfun{x}\colon X \to \clint{0, 1}$ be a function.
-We call the graph $\fuzzy{x} := \{(x, \memfun{x}(x) \mid x \in X\}$
+We call the graph $\fuzzy{x} \ceq \{(x, \memfun{x}(x) \mid x \in X\}$
 of $\memfun{x}$ a \term{fuzzy set} with
 \term{membership function} $\memfun{x}$.
 Fuzzy sets generalize ordinary subsets of $X$,
@@ -117,8 +117,8 @@ If $\{x \in X \mid \memfun{x}(x) = 1\} = \{a\}$ for some $a \in X$,
 then the fuzzy interval $\fuzzy{x}$ is called \term{fuzzy number.}
 
 For $\alpha \in \clint{0, 1}$, the $\alpha$-cut of $\fuzzy{x}$ is
-defined as $\acut{x}{\alpha} := \{x \in X \mid \memfun{x}(x) \ge \alpha\}$
-for $\alpha > 0$ and $\acut{x}{0} := \supp \memfun{x}$ for $\alpha = 0$.
+defined as $\acut{x}{\alpha} \ceq \{x \in X \mid \memfun{x}(x) \ge \alpha\}$
+for $\alpha > 0$ and $\acut{x}{0} \ceq \supp \memfun{x}$ for $\alpha = 0$.
 The $\alpha$-cuts of fuzzy intervals $\fuzzy{x}$ are always
 nested closed intervals, i.e.,
 $\acut{x}{\alpha} = [a, b]$ for some $a \le b$ and
@@ -155,7 +155,7 @@ simulation of a model with input parameters $(x_1, \dotsc, x_d) = \*x$.
 If the input parameters are uncertain and
 given as fuzzy sets $\fuzzy{x}_1, \dotsc, \fuzzy{x}_d$,
 what is the resulting uncertain outcome
-``$\fuzzy{y} := \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$''?
+``$\fuzzy{y} \ceq \objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$''?
 Note that there is no definite answer to this question,
 as ``$\objfun(\fuzzy{x}_1, \dotsc, \fuzzy{x}_d)$'' is not well-defined.
 The fuzzy extension principle, suggested by Zadeh \cite{Zadeh75Concept},
@@ -180,16 +180,16 @@ $\fuzzy{y}$ with
   \label{eq:alternativeFuzzyExtensionPrinciple}
   \begin{alignat}{2}
     \memfun{y}(y)
-    &:= \sup\{\alpha \in \clint{0, 1} \mid y \in \acut{y}{\alpha}\},\quad
+    &\ceq \sup\{\alpha \in \clint{0, 1} \mid y \in \acut{y}{\alpha}\},\quad
     &&y \in \real,\\
     \acut{y}{\alpha}
-    &:= \bracket*{
+    &\ceq \bracket*{
       \min_{\*x \in \Omega_\alpha} \objfun(\*x),\;
       \max_{\*x \in \Omega_\alpha} \objfun(\*x)
     },\quad
     &&\alpha \in \clint{0, 1},\\
     \Omega_\alpha
-    &:= \acut[1]{x}{\alpha} \times \dotsb \times \acut[d]{x}{\alpha},\quad
+    &\ceq \acut[1]{x}{\alpha} \times \dotsb \times \acut[d]{x}{\alpha},\quad
     &&\alpha \in \clint{0, 1}.
   \end{alignat}
 \end{subequations}
@@ -238,7 +238,7 @@ interpolating the interval bounds of the $\alpha_j$-cuts of $\fuzzy{y}$.
 %  \item
 %  Discretize $\clint{0, 1}$ with discrete values
 %  $\alpha_j \in \clint{0, 1}$ with $m$ segments
-%  (e.g., $\alpha_j := j/m$ for $j = 0, \dotsc, m$)
+%  (e.g., $\alpha_j \ceq j/m$ for $j = 0, \dotsc, m$)
 %  and compute $\acut[t]{x}{\alpha_j}$ for all $t = 1, \dotsc, d$
 %  and $j = 0, \dotsc, m$ to obtain $\Omega_{\alpha_j}$.
 %  
@@ -429,7 +429,7 @@ In \cref{fig:resultsFuzzyRegular}, we study the convergence of the
 relative $\Ltwo$ errors
 \begin{equation}
   e^{\sparse,\ast}
-  := \frac{
+  \ceq \frac{
     \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}
   }{
     \normLtwo{\memfun[\reference]{y}}
@@ -461,7 +461,7 @@ higher dimensionalities $d \ge 4$.
   \caption[Fuzzy errors for regular sparse grids]{%
     Fuzzy errors
     $e^{\sparse,\ast}
-    := \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
+    \ceq \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
     \normLtwo{\memfun[\reference]{y}}$
     for regular sparse grids $\regsgset{n}{d}$
     and different objective functions $\objfun$ \emph{(colors)}
@@ -612,7 +612,7 @@ only \SI{1600} evaluations are needed for spatially adaptive grids.
   \caption[Fuzzy errors for spatially adaptive sparse grids]{%
     Fuzzy errors
     $e^{\sparse,\ast}
-    := \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
+    \ceq \normLtwo{\memfun[\reference]{y} - \memfun[\sparse,\ast]{y}}/
     \normLtwo{\memfun[\reference]{y}}$
     for spatially adaptive sparse grids $\sgset$ \emph{(solid markers)}
     and different objective functions $\objfun$ \emph{(colors)}

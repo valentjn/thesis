@@ -97,9 +97,9 @@ The resulting function space and grid point set
 \begin{equation}
   \label{eq:regularSG}
   \regsgspace{n}{d}
-  := \bigoplus_{\normone{\*l} \le n} \hs{\*l},\qquad
+  \ceq \bigoplus_{\normone{\*l} \le n} \hs{\*l},\qquad
   \regsgset{n}{d}
-  := \bigdotcup_{\normone{\*l} \le n}
+  \ceq \bigdotcup_{\normone{\*l} \le n}
   \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\}
 \end{equation}
 are called \term{regular sparse grid space} and
@@ -314,8 +314,8 @@ If they are not met, then the algorithms do not produce the correct results.
 %  \fafa{(\*l,\*i) \in \liset}{\{t = 1, \dotsc, d \mid l_t \ge 1\}}{
 %    (\*l',\*i') \in \liset
 %  },\quad
-%  \*l' := \*l - \*e_t,\quad
-%  i_{t'}' :=
+%  \*l' \ceq \*l - \*e_t,\quad
+%  i_{t'}' \ceq
 %  \begin{cases}
 %    2 \floor{i_t/4} + 1,&t = t',\\
 %    i_{t'},&t \not= t',

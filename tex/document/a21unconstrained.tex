@@ -22,7 +22,7 @@ while searching for the maximum instead of the minimum.
     \centertestfunline{
       \vspace*{-10mm}
       \testobjfunscaled{Bra02}(\xscaled)
-      := \paren*{
+      \ceq \paren*{
         -\,\frac{51\xse{1}^2}{40\pi^2} +
         \frac{5\xse{1}}{\pi} + \xse{2} - 6
       }^2 +
@@ -56,7 +56,7 @@ for the sake of plotting.
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{GoP}(\xscaled)
-      := 10^{-4} \cdot \paren*{
+      \ceq 10^{-4} \cdot \paren*{
         1 + (\xse{1} + \xse{2} + 1)^2
         (19 - 14\xse{1} + 3\xse{1}^2 - 14\xse{2} +
         6\xse{1}\xse{2} + 3\xse{2}^2)
@@ -93,7 +93,7 @@ center of the optimization domain.
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{Sch06}(\xscaled)
-      := \max(
+      \ceq \max(
         \abs{\xse{1} + 2\xse{2} - 7},
         \abs{2\xse{1} + \xse{2} - 5}
       ),
@@ -126,7 +126,7 @@ which would be a disadvantage for spline-based approaches
   \begin{gather}
    \centertestfunline{
       \testobjfunscaled{Ack}(\xscaled)
-      := -20 \exp\paren*{-\frac{\norm[2]{\xscaled}}{5\sqrt{d}}} -
+      \ceq -20 \exp\paren*{-\frac{\norm[2]{\xscaled}}{5\sqrt{d}}} -
       \exp\paren*{\frac{1}{d} \sum_{t=1}^d \cos(2\pi \xse{t})} +
       20 + \econst,
     }\\
@@ -152,7 +152,7 @@ For minimization, we changed the sign of the objective function.
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{Alp02}(\xscaled)
-      := -\prod_{t=1}^d \sqrt{\xse{t}} \sin(\xse{t}),\qquad
+      \ceq -\prod_{t=1}^d \sqrt{\xse{t}} \sin(\xse{t}),\qquad
       \xscaled \in \clint{2, 10}^d,
     }\\
     \centertestfunline{
@@ -174,7 +174,7 @@ center of the optimization domain.
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{Sch22}(\xscaled)
-      := \sum_{t=1}^d \abs{\xse{t}} +
+      \ceq \sum_{t=1}^d \abs{\xse{t}} +
       \prod_{t=1}^d \abs{\xse{t}},\qquad
       \xscaled \in \clint{-3, 7}^d,
     }\\

@@ -196,7 +196,7 @@ We use the surpluses in the piecewise linear hierarchical basis,
 as their absolute values correlate with the second mixed derivative
 of the objective function due to \cref{eq:surplusIntegral}.
 The surpluses are combined using the formula
-$\beta_k := \tr{\*c} \vabs{\vsurplus_{\*l_k,\*i_k}}$
+$\beta_k \ceq \tr{\*c} \vabs{\vsurplus_{\*l_k,\*i_k}}$
 (with entry-wise absolute value) and the
 points with largest $\beta_k$ are refined.
 
@@ -285,7 +285,7 @@ i.e., the sparse grid points
 $\*x = \gp{\*l_k,\*i_k}$ are still defined on the unit hyper-cube
 $\clint{\*0, \*1}$,
 but the actual micro-cell parameters $\xscaled$ are retrieved by an
-affine transformation $\xscaled := \*a + (\*b - \*a) \*x$.
+affine transformation $\xscaled \ceq \*a + (\*b - \*a) \*x$.
 For the models in \cref{sec:631models},
 we restrict the bar widths to $\clint{0.01, 0.99}$ and
 the shearing angles to $\clint{-0.35\pi, 0.35\pi}$.
@@ -471,7 +471,7 @@ of interpolation errors by only less than half an order of magnitude.
 \Cref{fig:topoOptInterpolationErrorBasisFunctions_1} shows
 the convergence of the relative $\Ltwo$ spectral interpolation errors
 \begin{equation}
-  \error^{\sparse} :=
+  \error^{\sparse} \ceq
   \frac{
     \normLtwoscaled{
       \vphantom{\big(}
@@ -483,7 +483,7 @@ the convergence of the relative $\Ltwo$ spectral interpolation errors
       \norm[2]{\etensor({\cdot})}
     }
   }, \qquad
-  \error^{\chol,\sparse} :=
+  \error^{\chol,\sparse} \ceq
   \frac{
     \normLtwoscaled{
       \vphantom{\big(}
@@ -745,9 +745,9 @@ as the resulting grid can be reused for different scenarios.
     and different micro-cell models using cubic B-splines ($p = 3$).
     The left plot additionally shows
     $\compliance[\opt,\ast]
-    := \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$ and
+    \ceq \compliance(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$ and
     $\complianceintp[\opt,\ast]
-    := \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$
+    \ceq \complianceintp(\mcpoptappr{1}, \dotsc, \mcpoptappr{M})$
     for the 2D cross model.%
   }%
   \label{fig:topoOptOptimalityGap}%

@@ -400,7 +400,7 @@ which may impede convergence of the optimizer.
 As a remedy, we transform the value function $\valueintp_t$ with the
 \term{certainty-equivalent transformation}
 $\valueintp_t \mapsto \cetvalueintp_t
-:= ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 1$.
+\ceq ((1 - \riskav) \valueintp_t)^{1/(1-\riskav)}$ if $\riskav > 1$.
 \Cref{eq:gridBellman} then becomes
 $\cetvalueintp_T(\state_T^{(k)}) = \max_{\policy_T}
 \consume_T(\state_T^{(k)}, \policy_T)$ for $t = T$ and
@@ -536,7 +536,7 @@ $
   = \statefcn_t(\state_t^{(k)}, \policy_t, \stochastic_t^{(j)})
   \in \clint{\*0, \*1}
 $
-with $\state_{t+1}^\mathrm{in} := \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$
+with $\state_{t+1}^\mathrm{in} \ceq \vecmin(\vecmax(\state_{t+1}, \*0), \*1)$
 (component-wise minimum/maximum).
 The extrapolation type,
 which may be \texttt{constant}, \texttt{linear}, and \texttt{quadratic},
@@ -767,9 +767,9 @@ are determined by
   \setlength{\belowdisplayskip}{9pt}%
   \begin{align}
     \policy_{t,(j)}
-    &:= \optpolicyintp[p]_t(\state_{t,(j)}),\\
+    &\ceq \optpolicyintp[p]_t(\state_{t,(j)}),\\
     \state_{t,(j)}
-    &:= \statefcn_{t-1}(
+    &\ceq \statefcn_{t-1}(
       \state_{t-1,(j)}, \policy_{t-1,(j)}, \stochastic_{t-1,(j)}
     ),\quad
     t > 0,\qquad

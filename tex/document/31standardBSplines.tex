@@ -29,7 +29,7 @@ is defined by
 \begin{equation}
   \label{eq:cardinalBSpline}
   \cardbspl{p}(x)
-  :=
+  \ceq
   \begin{cases}
     \displaystyle\int_0^1 \cardbspl{p-1}(x - y) \diff{}y,&p \ge 1,\\
     \charfun{\hopint{0, 1}}(x),&p = 0,
@@ -141,7 +141,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
   $\{(k, \kronecker{k}{1}) \mid k \in \integer\}$.
   For $p \to \infty$, the normalized cardinal B-splines converge
   pointwise to the standard Gaussian function
-  $\cardbspl{\infty}(x) := (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
+  $\cardbspl{\infty}(x) \ceq (2\pi)^{-1/2} \exp(-x^2/2)$ \cite{Unser92Asymptotic}:%
   \footnote{%
     This can also be seen as a consequence of the central limit theorem
     applied to uniformly distributed random variables.
@@ -155,7 +155,7 @@ which are shown in \cref{fig:cardinalBSplineProps}:
     \lim_{p \to \infty}
     c^p \cardbspl{p}(c^p x + \tfrac{p+1}{2})
     = \cardbspl{\infty}(x),\quad
-    c^p := \sqrt{\frac{p+1}{12}},\quad
+    c^p \ceq \sqrt{\frac{p+1}{12}},\quad
     x \in \real.
   \end{equation}
 \end{enumerate}
@@ -190,7 +190,7 @@ $i \in \hiset{l}$ via an affine parameter transformation
 \begin{equation}
   \label{eq:uniformHierarchicalBSplineUV}
   \bspl{l,i}{p}(x)
-  := \cardbspl{p}(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
+  \ceq \cardbspl{p}(\tfrac{x}{\ms{l}} + \tfrac{p+1}{2} - i).
 \end{equation}
 The support of $\bspl{l,i}{p}$ is given
 by $\supp \bspl{l,i}{p} = \clint{0, 1} \cap \clint{\gp{l,i-(p+1)/2}, \gp{l,i+(p+1)/2}}$.
@@ -307,7 +307,7 @@ we introduce the notion of non-uniform B-splines.
   \multicite{Cox72Numerical,Boor72Calculating,Hoellig13Approximation}
   \begin{equation}
     \nonunifbspl{k,\knotseq}{p}(x)
-    :=
+    \ceq
     \begin{cases}
       \dfrac{x - \knot{k}}{\knot{k+p} - \knot{k}} \nonunifbspl{k,\knotseq}{p-1}(x) +
       \dfrac{\knot{k+p+1} - x}{\knot{k+p+1} - \knot{k+1}}
@@ -329,10 +329,10 @@ the nodal space $\nsbspl{l}{p}$:
   form a basis of the \term{spline space}
   \begin{equation}
     \nonunifsplspace{\knotseq}{p}
-    := \spn\{\nonunifbspl{k,\knotseq}{p} \mid k = 0, \dotsc, m - 1\}.
+    \ceq \spn\{\nonunifbspl{k,\knotseq}{p} \mid k = 0, \dotsc, m - 1\}.
   \end{equation}
   $\nonunifsplspace{\knotseq}{p}$ contains exactly those functions that are continuous
-  on $\spldomain{\knotseq}{p} := \clint{\knot{p}, \knot{m}}$,
+  on $\spldomain{\knotseq}{p} \ceq \clint{\knot{p}, \knot{m}}$,
   polynomials of degree $\le p$ on every knot interval
   $\hopint{\knot{k}, \knot{k+1}}$ in
   $\spldomain{\knotseq}{p}$
@@ -401,7 +401,7 @@ to~$\spldomain{\knotseq}{p}$:
     the grid points $\fgset{l}$ \emph{\textcolor{mittelblau}{(blue dots)}}
     coincide with the B-spline knots.
     The spline interpolation domain
-    $\rspldomain{l}{p} := \spldomain{\nodalknotseq{l}{p}}{p}$
+    $\rspldomain{l}{p} \ceq \spldomain{\nodalknotseq{l}{p}}{p}$
     \emph{(thick line)}
     is only a proper subset of~$\clint{0, 1}$.%
   }%
@@ -418,10 +418,10 @@ to~$\spldomain{\knotseq}{p}$:
   \begin{subequations}
     \begin{gather}
       \nodalknot{l,k}{p}
-      := (k - \tfrac{p+1}{2}) \ms{l},\quad
+      \ceq (k - \tfrac{p+1}{2}) \ms{l},\quad
       k = 0, \dotsc, m + p,\quad
-      m := 2^l + 1,\\
-      \rspldomain{l}{p} := [\tfrac{p-1}{2} \ms{l},\;
+      m \ceq 2^l + 1,\\
+      \rspldomain{l}{p} \ceq [\tfrac{p-1}{2} \ms{l},\;
       1 - \tfrac{p-1}{2} \ms{l}],
     \end{gather}
   \end{subequations}
@@ -429,7 +429,7 @@ to~$\spldomain{\knotseq}{p}$:
   \begin{equation}
     \restrictspace{\nsbspl{l}{p}}{\rspldomain{l}{p}}
     = \restrictedsplspace{l}{p}
-    := \nonunifsplspace{\nodalknotseq{l}{p}}{p}.
+    \ceq \nonunifsplspace{\nodalknotseq{l}{p}}{p}.
   \end{equation}
 \end{corollary}
 
@@ -648,7 +648,7 @@ of modified hierarchical B-splines (see \cref{fig:modifiedBSpline}):
   \begin{equation}
     \label{eq:modifiedBSplineDefinition}
     \bspl[\modified]{l,i}{p}(x)
-    :=
+    \ceq
     \begin{cases}
       1,&
       l = 1,\quad i = 1,\\
@@ -734,7 +734,7 @@ The \term{Chebyshev points} $\ccgp{l,i}$ of level $l \in \natz$
 are defined as
 \begin{equation}
   \ccgp{l,i}
-  := \frac{1 - \cos(\pi \gp{l,i})}{2},\quad
+  \ceq \frac{1 - \cos(\pi \gp{l,i})}{2},\quad
   i = 0, \dotsc, 2^l,
 \end{equation}
 see \cite{Xu16Chebyshev} for example.
@@ -748,7 +748,7 @@ Chebyshev points are the locations of the extrema%
 }
 of the Chebyshev polynomials $T_{2^l}$, defined as
 $T_{2^l}\colon \clint{0, 1} \to \real$,
-$T_{2^l}(x) := \cos(2^l \arccos(2x - 1))$.
+$T_{2^l}(x) \ceq \cos(2^l \arccos(2x - 1))$.
 They are geometrically obtained
 by dividing a semicircle into $2^l$ equally-sized
 segments and subsequently orthogonally projecting the
@@ -797,14 +797,14 @@ $\bspl[\cc]{l,i}{p}$ of level $l \in \natz$ and index
 $i \in \hiset{l}$ is defined as \cite{Valentin14Hierarchische}
 \begin{equation}
   \bspl[\cc]{l,i}{p}
-  := \nonunifbspl{i,\nodalknotseq[\cc]{l}{p}}{p},
+  \ceq \nonunifbspl{i,\nodalknotseq[\cc]{l}{p}}{p},
 \end{equation}
 where
 \begin{subequations}
   \label{eq:clenshawCurtisBSplineKnots}
   \begin{gather}
     \nodalknot[\cc]{l,k}{p}
-    :=
+    \ceq
     \begin{cases}
       (k - \frac{p+1}{2}) \cdot \ccgp{l,1},&
       k = 0,\, \dotsc,\, \frac{p-1}{2},\\
@@ -814,7 +814,7 @@ where
       k = 2^l + \frac{p+3}{2},\, \dotsc,\, 2^l + p + 1,
     \end{cases}\\
     k = 0, \dotsc, m + p,\quad
-    m := 2^l + 1.
+    m \ceq 2^l + 1.
   \end{gather}
 \end{subequations}
 For the construction of the knot sequence $\nodalknotseq[\cc]{l}{p}$,

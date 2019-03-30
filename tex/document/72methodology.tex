@@ -49,13 +49,13 @@ the tendon-displacement method of \cite{An84Determination}:
 \begin{subequations}
   \begin{align}
     \armT(\elbang)
-    &:= (-0.0009399 \{\elbang\}^2 + 0.1126 \{\elbang\} + 22.21)\;
+    &\ceq (-0.0009399 \{\elbang\}^2 + 0.1126 \{\elbang\} + 22.21)\;
     \si{\milli\meter},\\
     \armB(\elbang)
-    &:= (-0.001482 \{\elbang\}^2 + 0.1776 \{\elbang\} + 35.02)\;
+    &\ceq (-0.001482 \{\elbang\}^2 + 0.1776 \{\elbang\} + 35.02)\;
     \si{\milli\meter},\\
     \armL(\elbang)
-    &:= \sin(\elbang) \cdot \SI{282.5}{\milli\meter},
+    &\ceq \sin(\elbang) \cdot \SI{282.5}{\milli\meter},
   \end{align}
 \end{subequations}
 where $\{\elbang\}$ denotes the dimensionless value of $\elbang$
@@ -75,7 +75,7 @@ The \term{total moment} of the system is given by the function
     \moment_{\forceL,\actT,\actB}\colon
     \clint{\ang{10}, \ang{150}} \to \real,\\
     \moment_{\forceL,\actT,\actB}(\elbang)
-    := \forceT(\elbang, \actT) \armT(\elbang) +
+    \ceq \forceT(\elbang, \actT) \armT(\elbang) +
     \forceB(\elbang, \actB) \armB(\elbang) +
     \forceL \armL(\elbang),
   \end{gather}
@@ -99,7 +99,7 @@ is partially defined depending on the load and the activation parameters:
   \clint{\ang{10}, \ang{150}},\quad
   \actdomain{\forceL} \subset \clint{\*0, \*1},\quad
   \equielbang{\forceL}(\actT,\actB)
-  := (\moment_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
+  \ceq (\moment_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
 \end{equation}
 which is well-defined whenever $\moment_{\forceL,\actT,\actB}$
 has a unique root.
@@ -108,7 +108,7 @@ We approximate $\equielbang{\forceL}(\actT,\actB)$ with the Newton method
 \begin{equation}
   \label{eq:newtonAngle}
   \elbang^{(j+1)}
-  := \elbang^{(j)} -
+  \ceq \elbang^{(j)} -
   \frac{
     \moment_{\forceL,\actT,\actB}(\elbang^{(j)})
   }{
@@ -205,7 +205,7 @@ The second problem \ref{item:biomech2MinDist} is motivated as follows:
 Before time $t = t_1$, the musculoskeletal system is in equilibrium for
 the external load $\forceL(t_1)$,
 activation parameters $\actT(t_1), \actB(t_1)$, and elbow angle
-$\tarelbang(t_1) := \equielbang{\forceL(t_1)}(\actT(t_1), \actB(t_1))$, i.e.,
+$\tarelbang(t_1) \ceq \equielbang{\forceL(t_1)}(\actT(t_1), \actB(t_1))$, i.e.,
 $\moment_{\forceL(t_1),\actT(t_1),\actB(t_1)}(\tarelbang(t_1))
 = \SI{0}{\newton\meter}$.
 Directly after $t = t_1$,
@@ -310,7 +310,7 @@ We then automatically obtain a surrogate
     \momentintp_{\forceL,\actT,\actB}\colon
     \clint{\ang{10}, \ang{150}} \to \real,\\
     \momentintp_{\forceL,\actT,\actB}(\elbang)
-    := \forceTintp(\elbang, \actT) \armT(\elbang) +
+    \ceq \forceTintp(\elbang, \actT) \armT(\elbang) +
     \forceBintp(\elbang, \actB) \armB(\elbang) +
     \forceL \armL(\elbang),
   \end{gather}
@@ -323,7 +323,7 @@ consequently, a surrogate
   \clint{\ang{10}, \ang{150}},\quad
   \actdomainintp{\forceL} \subset \clint{\*0, \*1},\quad
   \equielbangintp{\forceL}(\actT,\actB)
-  := (\momentintp_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
+  \ceq (\momentintp_{\forceL,\actT,\actB})^{-1}(\SI{0}{\newton\meter}),
 \end{equation}
 for the equilibrium elbow angle function (cf.\ \cref{eq:equilibriumAngle}).
 Since the surrogates are much cheaper to evaluate,

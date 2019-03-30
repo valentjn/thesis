@@ -106,7 +106,7 @@ The loop in \cref{alg:iterativeRefinement} has to be terminated
 after some iterations.
 The following simple lemma allows to use a stopping criterion based on the
 size of the residual $\*r^{(m)}$ to the true solution,
-which we denote with $\vlinout[\ast] := \linop \vlinin$.
+which we denote with $\vlinout[\ast] \ceq \linop \vlinin$.
 
 \begin{shortlemma}[equivalent convergence for iterative refinement]
   \label{lemma:iterativeRefinementEquivalent}
@@ -242,7 +242,7 @@ $\upop{t_j}\colon \real^{\setsize{\liset}} \to \real^{\setsize{\liset}}$:
 \begin{equation}
   \label{eq:upopEntries}
   (\upop{t_j})_{\*k'',\*k'}
-  :=
+  \ceq
   \begin{cases}
     (\upopuv{t_j}{\lisetpole})_{k''_{t_j},k'_{t_j}},&
     \ex{\lisetpole \in \eqclasses{\liset}{\samepole{t_j}}}{
@@ -312,7 +312,7 @@ $\upop{t_1,\dotsc,t_d}\colon \real^{\setsize{\liset}} \to
 \begin{equation}
   \label{eq:upopProduct}
   \upop{t_1,\dotsc,t_d}
-  := \upop{t_d} \dotsm \upop{t_1}.
+  \ceq \upop{t_d} \dotsm \upop{t_1}.
 \end{equation}
 The right-most operator is $\upop{t_1}$, since it is applied first.
 We say that the \up is \term{correct} for $\linop$ and
@@ -371,11 +371,11 @@ $\*k'$ and $\*k''$.
   $(\chain{0}, \dotsc, \chain{j})$, where
   \begin{equation}
     \chain{j'}_{T_{j'}}
-    := \*k''_{T_{j'}},\quad
+    \ceq \*k''_{T_{j'}},\quad
     \chain{j'}_{-T_{j'}}
-    := \*k'_{-T_{j'}},\quad
+    \ceq \*k'_{-T_{j'}},\quad
     T_{j'}
-    := (t_1, \dotsc, t_{j'}),\quad
+    \ceq (t_1, \dotsc, t_{j'}),\quad
     j' = 0, \dotsc, j,
     \hspace*{-10mm}
   \end{equation}
@@ -592,14 +592,14 @@ the hierarchical ancestors of every grid point in every direction:
     \fafa{(\*l',\*i') \in \liset}{\{t = 1, \dotsc, d \mid l'_t > 1\}}{
       (\*l,\*i) \in \liset
     },\quad
-    &&&\*l := \*l' - \stdbasis{t},\quad
-    &&i_t := 2 \floor{\tfrac{i'_t}{4}} + 1,\quad
+    &&&\*l \ceq \*l' - \stdbasis{t},\quad
+    &&i_t \ceq 2 \floor{\tfrac{i'_t}{4}} + 1,\quad
     &&\*i_{-t} = \*i'_{-t},\\
     \fafa{(\*l',\*i') \in \liset}{\{t = 1, \dotsc, d \mid l'_t = 1\}}{
       (\*l,\*i) \in \liset
     },\quad
-    &&&\*l := \*l' - \stdbasis{t},\quad
-    &&i_t := 0,\quad
+    &&&\*l \ceq \*l' - \stdbasis{t},\quad
+    &&i_t \ceq 0,\quad
     &&\*i_{-t} = \*i'_{-t},
   \end{alignat}
 \end{subequations}
@@ -743,7 +743,7 @@ satisfies the weakly fundamental property
   \begin{gather}
     \label{eq:weaklyFundamentalSplineParent}
     \parentwfundspl{p}(x)
-    := \largesum[(p-1)/2]{k=-(p-1)/2}
+    \ceq \largesum[(p-1)/2]{k=-(p-1)/2}
     \wfundsplcoeff{k}{p} \parentbspl{p}(x - k)
     \quad\text{such that}\\
     \wfundsplcoeff{0}{p} = 1,\quad
@@ -757,7 +757,7 @@ $\bspl[\wfs]{l,i}{p}\colon \clint{0, 1} \to \real$
 are now defined canonically via an affine parameter transformation:
 \begin{equation}
   \bspl[\wfs]{l,i}{p}(x)
-  := \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
+  \ceq \parentwfundspl{p}(\tfrac{x}{\ms{l}} - i),\quad
   l \ge 1.
 \end{equation}
 For $l = 0$, we define $\bspl[\wfs]{l,i}{p}$ to be the
@@ -768,7 +768,7 @@ linear Lagrange polynomial of level zero:%
 }
 \begin{equation}
   \bspl[\wfs]{0,i}{p}
-  := \lagrangepoly{0,i},\quad
+  \ceq \lagrangepoly{0,i},\quad
   i = 0, 1.
 \end{equation}
 The hierarchical weakly fundamental spline basis is shown in

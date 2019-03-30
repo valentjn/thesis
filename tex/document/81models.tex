@@ -92,7 +92,7 @@ which can be computed from the state $\state_t$ and the policy $\policy_t$.
 The individuals rate the consumption with a \term{utility function}
 $\utilityfcn(\consume_t)$.
 A common choice for $\utilityfcn$ is the \term{\crra utility}
-$\utilityfcn(\consume_t) := c_t^{1-\riskav}/(1-\riskav)$
+$\utilityfcn(\consume_t) \ceq c_t^{1-\riskav}/(1-\riskav)$
 with the \term{risk aversion} $\riskav \in \real \setminus \{1\}$.
 Positive and negative values of $\riskav$
 correspond to risk-averse and risk-affine individuals, respectively.
@@ -155,7 +155,7 @@ The inner maximum problem over $\policy_1, \dotsc, \policy_T$
 has the same structure as the problem on the \lhs.
 With the \term{value function}
 $\valuefcn_t\colon \clint{\*0, \*1} \to \real$,
-$\valuefcn_t(\state_t) :=
+$\valuefcn_t(\state_t) \ceq
 \max_{\policy_t, \dotsc, \policy_T}
 \sum_{t'=t}^T \patience^{t'-t}
 \utilityfcn(\consume_{t'}(\state_{t'}, \policy_{t'}))$,
@@ -207,7 +207,7 @@ $\ineqconfun_t\colon \clint{\*0, \*1} \times \real^{m_{\policy}} \to
   \expectation[t]{
     \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
   }
-  := \int_{\stochdomain}
+  \ceq \int_{\stochdomain}
   \valuefcn_{t+1}(\statefcn_t(\state_t, \policy_t, \stochastic_t))
   P_{t,\stochastic}(\stochastic_t) \diff{}\stochastic_t
 \end{equation}

@@ -94,9 +94,9 @@ Therefore, we introduce the following volume constraint:
 \begin{equation}
   \frac{\voldens{\densglobal}{\objdomain}}{\vol{\objdomain}} \le \densub,\quad
   \voldens{\densglobal}{\objdomain}
-  := \int_{\objdomain} \densglobal(\tilde{\*x}) \diff\tilde{\*x},\quad
+  \ceq \int_{\objdomain} \densglobal(\tilde{\*x}) \diff\tilde{\*x},\quad
   \vol{\objdomain}
-  := \voldens{1}{\objdomain},
+  \ceq \voldens{1}{\objdomain},
 \end{equation}
 where $\vol{\objdomain} = \int_{\objdomain} 1 \diff\tilde{\*x}$
 is the volume of the object domain and
@@ -188,7 +188,7 @@ We denote the micro-cell parameters corresponding to the $q$-th macro-cell
 with $\mcp{q} = (\mcpentry{1}{q}, \dotsc, \mcpentry{d}{q}) \in
 \clint{\*0, \*1} = \clint{0, 1}^d$,
 where $q = 1, \dotsc, M$ and
-$M := M_1 \dotsm M_{\dimobjdomain}$ is the number of macro-cells.
+$M \ceq M_1 \dotsm M_{\dimobjdomain}$ is the number of macro-cells.
 With linear elasticity,
 one can compute so-called \term{elasticity tensors} $\etensor^{(q)}$,
 which encode information about the material properties
@@ -231,7 +231,7 @@ two-scale discretization process has the form
     \quad\text{s.t.}\quad
     \densmean(\mcp{1}, \dotsc, \mcp{M}) \le \densub,\\
     \densmean(\mcp{1}, \dotsc, \mcp{M})
-    := \frac{1}{M} \sum_{q=1}^M \denscell^{(q)}(\mcp{q}).
+    \ceq \frac{1}{M} \sum_{q=1}^M \denscell^{(q)}(\mcp{q}).
   \end{gather}
 \end{subequations}
 Here, $\denscell^{(q)}(\mcp{q}) \in \clint{0, 1}$ is the

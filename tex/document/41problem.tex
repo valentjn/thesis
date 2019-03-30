@@ -6,7 +6,7 @@ may be spatially adaptive, i.e.,
 of the form $\sgset = \{\gp{\*l,\*i} \mid (\*l, \*i) \in \liset\}$,
 where $\liset$ is a set of level-index pairs $(\*l, \*i)$ with $\*l \in \natz^d$
 and $\*i \in \hiset{\*l}$ such that
-$\ngp := \setsize{\sgset} = \setsize{\liset} < \infty$
+$\ngp \ceq \setsize{\sgset} = \setsize{\liset} < \infty$
 (see \cref{sec:233spatiallyAdaptiveSG}).
 The \term{hierarchization problem} is finding
 \term{hierarchical surpluses}
@@ -26,7 +26,7 @@ This then defines the interpolant $\sgintp$ as
 \begin{equation}
   \label{eq:hierarchizationInterpolant}
   \sgintp\colon \clint{\*0, \*1} \to \real,\quad
-  \sgintp :=
+  \sgintp \ceq
   \largesum{(\*l', \*i') \in \liset} \surplus{\*l',\*i'}
   \basis{\*l',\*i'},
 \end{equation}
@@ -221,7 +221,7 @@ are continuously enumerated by a single index $k_t = k_t(l_t, i_t) \in \natz$.
 We identify $(\*l, \*i)$ with a single index $\*k$,
 whose $t$-th component is given by $k_t(l_t, i_t)$.
 Hence,
-we regard $\liset$ as a subset $\liset := \{\*k \mid \*x_\*k \in \sgset\}$
+we regard $\liset$ as a subset $\liset \ceq \{\*k \mid \*x_\*k \in \sgset\}$
 of $\natz^d$.
 We will switch between the notations whenever appropriate.
 All statements that are formulated in the $\*k$ notation are
@@ -234,7 +234,7 @@ as usual.
 \usenotation{kT10}
 With $\*k_{-t}$, we denote the $(d-1)$-vector that is obtained from $\*k$
 by omitting the $t$-th component,
-i.e., $\*k_{-t} := (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$.
+i.e., $\*k_{-t} \ceq (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$.
 \usenotation{kT20}
 For a $j$-tuple $T = (t_1, \dotsc, t_j) \in \{1, \dotsc, d\}^j$,
 we define $\*k_T$ to be the $j$-vector $(k_{t_1}, \dotsc, k_{t_j})$
@@ -243,5 +243,5 @@ that only contains the entries of the dimensions listed in $T$.
 Accordingly, $\*k_{-T}$ is defined as the $(d-j)$-vector
 that contains the entries of the remaining dimensions
 (sorted by the dimension $t$).
-We define $\*k_{\range{a}{b}} := (k_a, k_{a+1}, \dotsc, k_b)$
+We define $\*k_{\range{a}{b}} \ceq (k_a, k_{a+1}, \dotsc, k_b)$
 as an indexing shortcut ($a \le b$).

@@ -21,10 +21,10 @@ where $l \in \natz$ is the \term{level.}
 \usenotation{i}
 The resulting $2^l + 1$ \term{grid points} $\gp{l,i}$ are given by
 \begin{equation}
-  \gp{l,i} := i \cdot \ms{l},\quad
+  \gp{l,i} \ceq i \cdot \ms{l},\quad
   i = 0, \dotsc, 2^l,
 \end{equation}
-where $i$ is the \term{index} and $\ms{l} := 2^{-l}$ is the \term{mesh size.}%
+where $i$ is the \term{index} and $\ms{l} \ceq 2^{-l}$ is the \term{mesh size.}%
 \footnote{%
   Note that from a strict formal perspective,
   this equation defined $\gp{l,i}$ only for $i = 0, \dotsc, 2^l$,
@@ -46,7 +46,7 @@ are the most common choice for $\basis{l,i}$:
 \begin{equation}
   \label{eq:hatFunctionUV}
   \bspl{l,i}{1}(x)
-  := \max(1 - \abs{\tfrac{x}{\ms{l}} - i}, 0).
+  \ceq \max(1 - \abs{\tfrac{x}{\ms{l}} - i}, 0).
 \end{equation}
 Here and in the following,
 the superscript ``1'' stands for the degree of the linear B-spline and
@@ -60,7 +60,7 @@ The \term{nodal space} $\ns{l}$ of level $l$
 is defined as the linear span of all basis functions
 $\basis{l,i}$:
 \begin{equation}
-  \ns{l} := \spn\{\basis{l,i} \mid i = 0, \dotsc, 2^l\}.
+  \ns{l} \ceq \spn\{\basis{l,i} \mid i = 0, \dotsc, 2^l\}.
 \end{equation}
 We assume that the functions $\basis{l,i}$ form a basis of $\ns{l}$, i.e.,
 they are linearly independent.
@@ -121,15 +121,15 @@ for which we replace all indices, points, and functions with
 multi-indices, Cartesian products, and tensor products, respectively.
 \usenotation{@0}
 \usenotation{@1}
-Therefore, the domain is now $\clint{\*0, \*1} := \clint{0, 1}^d$,
+Therefore, the domain is now $\clint{\*0, \*1} \ceq \clint{0, 1}^d$,
 which can be partitioned into
 $\prod_{t=1}^d 2^{l_t} = 2^{\normone{\vec{l}}}$ equally-sized hyper-rectangles,
 where $\*l = (l_1, \dotsc, l_d) \in \natz^d$ is the $d$-dimensional level
-and $\normone{\vec{l}} := \sum_{t=1}^d \abs{l_t}$ is the level sum.
+and $\normone{\vec{l}} \ceq \sum_{t=1}^d \abs{l_t}$ is the level sum.
 The corners of the hyper-rectangles are given by the grid points
 \begin{equation}
   \label{eq:gridPointMultivariate}
-  \gp{\*l,\*i} := \*i \cdot \ms{\*l},\quad
+  \gp{\*l,\*i} \ceq \*i \cdot \ms{\*l},\quad
   \*i = \*0, \dotsc, \*2^{\*l}.
 \end{equation}
 Relations and operations with vectors in bold face
@@ -141,12 +141,12 @@ For example, \eqref{eq:gridPointMultivariate} is equivalent to
 the much longer formula
 \begin{equation}
   \gp{\*l,\*i}
-  := (i_1 \ms{l_1},\; \dotsc,\; i_d \ms{l_d}),\quad
+  \ceq (i_1 \ms{l_1},\; \dotsc,\; i_d \ms{l_d}),\quad
   i_t = 0, \dotsc, 2^{l_t},\quad
   t = 1, \dotsc, d,
 \end{equation}
 with the $d$-dimensional mesh size
-$\ms{\*l} := \*2^{-\*l} = (\ms{l_1}, \dotsc, \ms{l_d})$.
+$\ms{\*l} \ceq \*2^{-\*l} = (\ms{l_1}, \dotsc, \ms{l_d})$.
 Again, every grid point is associated with a basis function that is defined
 as the tensor product of the univariate functions:%
 \footnote{%
@@ -163,7 +163,7 @@ as the tensor product of the univariate functions:%
   \label{eq:tensorProduct}
   \basis{\*l,\*i}\colon \clint{\*0, \*1} \to \real,\quad
   \basis{\*l,\*i}(\*x)
-  := \prod_{t=1}^d \basis{l_t,i_t}(x_t).
+  \ceq \prod_{t=1}^d \basis{l_t,i_t}(x_t).
 \end{equation}
 \cref{fig:nodalHat2D} shows an example of a bivariate nodal hat function
 $\bspl{\*l,\*i}{1}$.
@@ -189,7 +189,7 @@ The multivariate nodal space $\ns{\*l}$ is defined analogously to
 the univariate case:
 \begin{equation}
   \ns{\*l}
-  := \spn\{\basis{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
+  \ceq \spn\{\basis{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\}.
 \end{equation}
 In the case of hat functions $\bspl{\*l,\*i}{1}$,
 the nodal space $\nsbspl{\*l}{1}$ is the $d$-linear spline space
@@ -199,7 +199,7 @@ on $\clint{\*0, \*1}$ that are piecewise $d$-linear polynomials on
 all hyper-rectangles
 \begin{equation}
   \clint{\gp{\*l,\*i}, \gp{\*l,\*i+\*1}}
-  := \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
+  \ceq \clint{\gp{l_1,i_1}, \gp{l_1,i_1+1}} \times \dotsb \times
   \clint{\gp{l_d,i_d}, \gp{l_d,i_d+1}},\quad
   \*i = \*0, \dotsc, \*2^\*l - \*1.
 \end{equation}
@@ -220,7 +220,7 @@ exist for every objective function $\objfun$ and are uniquely determined by
 the values at the grid points
 \begin{equation}
 \fgset{\*l}
-:= \{\gp{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\},
+\ceq \{\gp{\*l,\*i} \mid \*i = \*0, \dotsc, \*2^{\*l}\},
 \end{equation}
 we prove the following statement:
 
@@ -261,7 +261,7 @@ we prove the following statement:
 A common choice for the level $\*l$ is $n \cdot \*1$ for some $n \in \natz$.
 \usenotation{Vnd}
 In this case, we replace ``$\*l$'' in the subscripts with ``$n{,}d$''
-(for example, $\ns{n,d} := \ns{n \cdot \*1}$).
+(for example, $\ns{n,d} \ceq \ns{n \cdot \*1}$).
 For the hat function basis $\bspl{\*l,\*i}{1}$,
 it can be shown that the $\Ltwo$ interpolation error of the interpolant
 $\fgintp{n,d} \in \ns{n,d}$ is given by

@@ -15,13 +15,13 @@ as in \cite{Gavana13Global}.
   \begin{gather}
     \centertestfunline{
       \testobjfunscaled{G08}(\xscaled)
-      := -\frac{
+      \ceq -\frac{
         \sin^3(2\pi\xse{1}) \sin(2\pi\xse{2})
       }{
         \xse{1}^3 (\xse{1} + \xse{2})
       },\quad
       \testineqconfunscaled{G08}(\xscaled)
-      := \begin{pmatrix}
+      \ceq \begin{pmatrix}
         \xse{1}^2 - \xse{2} + 1\\
         1 - \xse{1} + (\xse{2} - 4)^2
       \end{pmatrix},
@@ -42,9 +42,9 @@ as in \cite{Gavana13Global}.
 This problem is based on a problem from
 \cite{Colville68Comparative} with the objective function
 $\testobjfunscaled{G04}(\xscaled)
-:= 5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
+\ceq 5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
 37.293239 \xse{1} - 40792.141$ and the same constraints
-$\testineqconfunscaled{G04}(\xscaled) :=
+$\testineqconfunscaled{G04}(\xscaled) \ceq
 \testineqconfunscaled{G04Sq}(\xscaled)$.
 However, hierarchical cubic not-a-knot B-splines are able to exactly
 represent the polynomial $\testobjfunscaled{G04}$ of coordinate degree two
@@ -63,12 +63,12 @@ is non-negative on $\clint{\*0, \*1}$.
   \begin{gather}
   \centertestfunline{
     \testobjfunscaled{G04Sq}(\xscaled)
-    := (5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
+    \ceq (5.3578547 \xse{3}^2 + 0.8356891 \xse{1} \xse{5} +
     37.293239 \xse{1} - 10120)^2,
   }\\
   \centertestfunline{
     \testineqconfunscaled{G04Sq}(\xscaled)
-    := 10^{-3} \scalebox{0.92}{$
+    \ceq 10^{-3} \scalebox{0.92}{$
       \begin{pmatrix}
         85334.407 + 5.6858 \xse{2} \xse{5} +
         0.6262 \xse{1} \xse{4} -

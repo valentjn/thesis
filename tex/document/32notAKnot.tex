@@ -66,7 +66,7 @@ for other non-polynomial functions as well.
     Hierarchical cubic B-splines $\bspl{l',i'}{p}$
     ($l' \le l$, $i' \in \hiset{l'}$, $p = 3$)
     fail to replicate a cubic polynomial $\objfun$
-    (here: $\objfun(x) := -10.2 x^3 + 14.7 x^2 - 5x + 0.7$)
+    (here: $\objfun(x) \ceq -10.2 x^3 + 14.7 x^2 - 5x + 0.7$)
     \vphantom{$\bspl{l',i'}{p}$}%
     when interpolating on the grid of level $l = 3$.%
     \vphantom{$\bspl{l',i'}{p}$}%
@@ -155,9 +155,9 @@ let $\wholesplspace{l}{p}$ denote the space of all splines of degree $p$
 on the grid of level $l$, i.e., the space $\nonunifsplspace{\knotseq}{p}$ with
 \begin{equation}
   \label{eq:fullGridKnots}
-  \knot{k} := (k - p) \ms{l},\quad
+  \knot{k} \ceq (k - p) \ms{l},\quad
   k = 0, \dotsc, m + p,\quad
-  m := 2^l + p.
+  m \ceq 2^l + p.
 \end{equation}
 We have $\spldomain{\knotseq}{p} = \clint{0, 1}$
 for this choice of $\knotseq$.
@@ -233,11 +233,11 @@ with not-a-knot boundary conditions is defined as follows:
 \begin{subequations}
   \begin{gather}
     \nodalknotseq[\nak]{l}{p}
-    := (\nodalknot[\nak]{l,0}{p}, \dotsc,
+    \ceq (\nodalknot[\nak]{l,0}{p}, \dotsc,
     \nodalknot[\nak]{l,m+p}{p}),\quad
-    m := 2^l + 1,\\
+    m \ceq 2^l + 1,\\
     \nodalknot[\nak]{l,k}{p}
-    :=
+    \ceq
     \begin{cases}
       \gp{l,k-p},&
       k = 0, \dotsc, p,\\
@@ -257,7 +257,7 @@ in \cref{fig:splineSpaceNotAKnot}.
 The resulting spline space
 \begin{equation}
   \naksplspace{l}{p}
-  := \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}
+  \ceq \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}
 \end{equation}
 is a subspace
 of $\wholesplspace{l}{p}$ with the desired dimensionality:
@@ -346,7 +346,7 @@ we use global Lagrange polynomials for the coarser levels:
   \label{eq:hierarchicalNotAKnotBSpline}
   \begin{gather}
     \bspl[\nak]{l,i}{p}
-    :=
+    \ceq
     \begin{cases}
       \lagrangepoly{l,i},&
       l < \ceil{\log_2(p+1)},\\
@@ -357,7 +357,7 @@ we use global Lagrange polynomials for the coarser levels:
     i \in \hiset{l},\\
     \lagrangepoly{l,i}\colon \clint{0, 1} \to \real,\quad
     \lagrangepoly{l,i}(x)
-    := \!\!\prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
+    \ceq \!\!\prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \gp{l,i'}}{\gp{l,i} - \gp{l,i'}}.
   \end{gather}
 \end{subequations}
@@ -540,13 +540,13 @@ are defined analogously to the uniform case, i.e.,
 \begin{equation}
   \label{eq:sparseGridRegularNAK}
   \regsgspace[\*p,\nak]{n}{d}
-  := \bigoplus_{\normone{\*l} \le n} \hsbspl[\nak]{\*l}{\*p}.
+  \ceq \bigoplus_{\normone{\*l} \le n} \hsbspl[\nak]{\*l}{\*p}.
 \end{equation}
 If the level $n$ is large enough, then $\regsgspace[\*p,\nak]{n}{d}$
 contains the space $\polyspace{\*p}$ of all $d$-variate polynomials of
 coordinate degree $\le \*p$ on $\clint{\*0, \*1}$
 (i.e., functions $\objfun\colon \clint{0, 1} \to \real$ of the form
-$\objfun(\*x) := \sum_{\*q=\*0}^\*p \interpcoeff{\*q} \prod_{t=1}^d x_t^{q_t}$
+$\objfun(\*x) \ceq \sum_{\*q=\*0}^\*p \interpcoeff{\*q} \prod_{t=1}^d x_t^{q_t}$
 with $\interpcoeff{\*q} \in \real$).
 This means that in contrast to the uniform B-spline basis,
 hierarchical not-a-knot B-splines on sparse grids are able to
@@ -561,7 +561,7 @@ replicate global polynomials on $\clint{\*0, \*1}$:
 \end{shortcorollary}
 
 \begin{proof}
-  Let $\*l := \ceil{\veclog_\*2(\*p + \*1)}$ and $n \ge \normone{\*l}$.
+  Let $\*l \ceq \ceil{\veclog_\*2(\*p + \*1)}$ and $n \ge \normone{\*l}$.
   By \cref{cor:hierSplittingNAKBSplineMV}, we have
   $\bigoplus_{\*l'=\*0}^{\*l} \hsbspl[\nak]{\*l'}{\*p} = \naksplspace{\*l}{\*p}$.
   In addition, all $\*l' \in \natz^d$ with $\*l' \le \*l$ satisfy
@@ -600,7 +600,7 @@ second derivative vanish in $x = 0$ itself:
 \begin{equation}
   \label{eq:modifiedNotAKnotBSpline}
   \bspl[\nak,\modified]{l,i}{p}(x)
-  :=
+  \ceq
   \begin{cases}
     1,&
     l = 1,\quad i = 1,\\
@@ -640,11 +640,11 @@ we first specify the knot sequence as
 \begin{subequations}
   \begin{gather}
     \nodalknotseq[\cc,\nak]{l}{p}
-    := (\nodalknot[\cc,\nak]{l,0}{p}, \dotsc,
+    \ceq (\nodalknot[\cc,\nak]{l,0}{p}, \dotsc,
     \nodalknot[\cc,\nak]{l,m+p}{p}),\quad
-    m := 2^l + 1,\\
+    m \ceq 2^l + 1,\\
     \nodalknot[\cc,\nak]{l,k}{p}
-    :=
+    \ceq
     \begin{cases}
       \ccgp{l,k-p},&
       k = 0, \dotsc, p,\\
@@ -659,7 +659,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
 \begin{subequations}
   \begin{gather}
     \bspl[\cc,\nak]{l,i}{p}
-    :=
+    \ceq
     \begin{cases}
       \lagrangepoly[\cc]{l,i},&
       l < \ceil{\log_2(p+1)},\\
@@ -670,7 +670,7 @@ and then define hierarchical not-a-knot Clenshaw--Curtis B-splines as
     i \in \hiset{l},\\
     \lagrangepoly[\cc]{l,i}\colon \clint{0, 1} \to \real,\quad
     \lagrangepoly[\cc]{l,i}(x)
-    := \!\!\prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
+    \ceq \!\!\prod_{\substack{i'=0,\dotsc,2^l\\i'\not=i}}
     \frac{x - \ccgp{l,i'}}%
     {\ccgp{l,i} - \ccgp{l,i'}}.
   \end{gather}
@@ -751,7 +751,7 @@ Consequently, we can define hierarchical natural B-splines as
 \begin{subequations}
   \begin{gather}
     \bspl[\ntrl]{l,i}{p}(x)
-    :=
+    \ceq
     \begin{cases}
       \lagrangepoly{0,i}(x),&
       l = 0,\\
@@ -762,7 +762,7 @@ Consequently, we can define hierarchical natural B-splines as
     l \in \natz,\quad
     i \in \hiset{l},\\
     J_i^{p,\ntrl}
-    := \{i-\tfrac{p-1}{2}, \dotsc, i-1\} \cup
+    \ceq \{i-\tfrac{p-1}{2}, \dotsc, i-1\} \cup
     \{i+1, \dotsc, i+\tfrac{p-1}{2}\},
   \end{gather}
 \end{subequations}

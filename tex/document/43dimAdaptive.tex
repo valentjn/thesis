@@ -47,7 +47,7 @@ to dimensionally adaptive sparse grids
 
 \begin{theorem}[sparse grid combination technique]
   \label{thm:combiTechnique}
-  Let $\liset := \{(\*l, \*i) \mid
+  Let $\liset \ceq \{(\*l, \*i) \mid
   \normone{\*l} \le n,\; \*i \in \hiset{\*l}\}$
   correspond to the regular sparse grid
   $\regsgset{n}{d}$ and let $(\fcnval{\*l,\*i})_{(\*l,\*i) \in \liset}$
@@ -243,7 +243,7 @@ on the equivalence classes.
   \begin{equation}
     \label{eq:combiTechniqueSpecialLevelSet}
     L
-    := \{\*l' \mid \ex{q=0,\dotsc,d-1}{
+    \ceq \{\*l' \mid \ex{q=0,\dotsc,d-1}{
       \normone{\*l'} = n - q,\; \fgset{\*l'} \notni \gp{\*l,\*i}
     }\}
   \end{equation}
@@ -253,7 +253,7 @@ on the equivalence classes.
   \begin{equation}
     \falarge{t \notin T_{\*l',\*l''}}{\min\{l'_t, l''_t\} \ge l_t},\quad
     T_{\*l',\*l''}
-    := \{t \mid l'_t = l''_t < l_t\}.
+    \ceq \{t \mid l'_t = l''_t < l_t\}.
   \end{equation}
 \end{definition}
 
@@ -278,7 +278,7 @@ in \cref{fig:combiTechniqueProof}:
 The components $\fgintp{\*l'}$ and $\fgintp{\*l''}$ are equal
 on the $m$-dimensional affine subspace through $\gp{\*l,\*i}$
 parallel to the $m$ coordinates in $T_{\*l',\*l''}$
-(where $m := \setsize{T_{\*l',\*l''}}$).
+(where $m \ceq \setsize{T_{\*l',\*l''}}$).
 The lemma allows to group summands in the second sum of
 \eqref{eq:combiTechniqueSplitSum} by function values.
 Hence, it remains to count the number of levels in
@@ -320,7 +320,7 @@ Therefore, we need a characterization of the equivalence classes:
   If we define
   \begin{equation}
     T_{L_0}
-    := \{t \mid \exfa{l^\ast_t < l_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
+    \ceq \{t \mid \exfa{l^\ast_t < l_t}{\*l' \in L_0}{l'_t = l^\ast_t}\}
   \end{equation}
   as the set of dimensions $t$ in which all levels in $L_0$
   have the same entry $l^\ast_t < l_t$, then
@@ -682,7 +682,7 @@ the following invariant, which can be used to show its correctness:
     \label{eq:propInvariantResidualInterpolation4}
     \text{where}\quad
     f^{\sparse,(j)}
-    := \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
+    \ceq \sum_{\*l' \in \levelset} \sum_{\*i' \in \hiset{\*l'}}
     \paren*{\sum_{j'=1}^{j} \surplus[(j')]{\*l',\*i'}} \basis{\*l',\*i'}.
   \end{equation}
 \end{restatable}
@@ -767,7 +767,7 @@ Therefore, if $(\*l, \*i)$ is not contained in one of the
 grids that are processed in one of the remaining iterations $j+1, \dotsc, m$,
 then $\linout[(j)]{\*l,\*i}$ is already equal to the correct surplus
 $\surplus{\*l,\*i}$,
-where $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
+where $\linout[(j)]{\*l,\*i} \ceq \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
 denotes the intermediate result obtained after $j$ iterations.
 
 \begin{SCfigure}
@@ -780,7 +780,7 @@ denotes the intermediate result obtained after $j$ iterations.
     $\regsgspace{n}{d}$ of level $n = 3$ \emph{(top left)}
     using the method of residual interpolation.
     In this figure, we use
-    $\linout[(j)]{\*l,\*i} := \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
+    $\linout[(j)]{\*l,\*i} \ceq \sum_{j'=1}^j \surplus[(j')]{\*l,\*i}$
     as an abbreviation.
     The order of the nodal spaces (here: bottom left to top right)
     does not matter.

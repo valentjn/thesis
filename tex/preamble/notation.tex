@@ -98,18 +98,18 @@
 \newnotation{kT10}{$\*k_{-t}$}{
   Vector of all entries $k_{t'}$ except the $t$-th
   %($\*k_{-t}
-  %:= (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$)
+  %\ceq (k_1, \dotsc, k_{t-1}, k_{t+1}, \dotsc, k_d)$)
 }
 
 \newnotation{kT20}{$\*k_T$}{
   Vector of all dimensions that are contained in $T \in \{1, \dotsc, d\}^j$
   %($\*k_T
-  %:= (k_{t_1}, \dotsc, k_{t_j}$ with $T = (t_1, \dotsc, t_j)$)
+  %\ceq (k_{t_1}, \dotsc, k_{t_j}$ with $T = (t_1, \dotsc, t_j)$)
 }
 
 \newnotation{kT30}{$\*k_{-T}$}{
   Vector of all dimensions that are not contained in $T \in \{1, \dotsc, d\}^j$
-  %($\*k_{-T} := \*k_{T'}$ for $T = (t_1, \dotsc, t_j)$ and
+  %($\*k_{-T} \ceq \*k_{T'}$ for $T = (t_1, \dotsc, t_j)$ and
   %$T' = (t'_1, \dotsc, t'_{d-j})$ with
   %$\{t_1, \dotsc, t_j\} \cup \{t'_1, \dotsc, t'_{d-j}\} = \{1, \dotsc, d\}$ and
   %$t'_1 < \dotsb t'_{d-j}$)
@@ -121,7 +121,7 @@
 
 \newnotationcommand[1]{\stdbasis}{\*e_{#1}}{et}{$\stdbasis{t}$}{
   $t$-th standard basis vector
-  $\stdbasis{t} := (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
+  $\stdbasis{t} \ceq (0, \dotsc, 0, 1, 0, \dotsc, 0) \in \real^d$
 }
 
 \hidenextnotation
@@ -139,7 +139,7 @@
 \newnotationcommand[1]{\gp}{%
   \containsvector{#1}{\*x}{x}_{#1}%
 }{xli}{$\gp{\*l,\*i}$}{
-  Grid point $\gp{\*l,\*i} := \*i \cdot \ms{\*l}$
+  Grid point $\gp{\*l,\*i} \ceq \*i \cdot \ms{\*l}$
 }
 
 \newcommand*{\vgp}[1]{\*x_{#1}}
@@ -157,7 +157,7 @@
 \newnotationcommand[1]{\ms}{%
   \containsvector{#1}{\*h}{h}_{#1}%
 }{hl}{$\ms{\*l}$}{
-  Mesh size $\ms{\*l} := \*2^{-\*l}$
+  Mesh size $\ms{\*l} \ceq \*2^{-\*l}$
 }
 
 % ======================================================================
@@ -290,7 +290,7 @@
 % ======================================================================
 
 \newnotationcommand[1]{\normone}{\norm[1]{#1}}{Önorm1}{$\normone{\cdot}$}{
-  $\ell_1$ norm $\normone{\*x} := \sum_{t=1}^d \abs{x_t}$
+  $\ell_1$ norm $\normone{\*x} \ceq \sum_{t=1}^d \abs{x_t}$
 }
 
 \newcommand*{\Ltwo}{L^2}
@@ -300,7 +300,7 @@
   $\normLtwo{\cdot}$%
 }{
   $\Ltwo$ norm
-  $\normLtwo{\objfun} := \sqrt{\int_\Omega \objfun(\*x)^2 \diff{}\*x}$
+  $\normLtwo{\objfun} \ceq \sqrt{\int_\Omega \objfun(\*x)^2 \diff{}\*x}$
   of a function $\objfun\colon \Omega \to \real$
 }
 
@@ -310,7 +310,7 @@
   $\normLinfty{\cdot}$%
 }{
   $\Linfty$ norm
-  $\normLinfty{\objfun} := \max_{\*x \in \Omega} \abs{\objfun(\*x)}$
+  $\normLinfty{\objfun} \ceq \max_{\*x \in \Omega} \abs{\objfun(\*x)}$
   of a continuous function $\objfun\colon \Omega \to \real$
 }
 
@@ -342,7 +342,7 @@
 \newcommand*{\bndrysgset}{\gridset[\bndrygrid]{}{\sparse}}
 
 \makecommandnotation{\interiorgrid}{ÄΩs2}{$\interiorsgset$}{
-  Set $:= \sgset \cap \opint{\*0, \*1}$ of
+  Set $\ceq \sgset \cap \opint{\*0, \*1}$ of
   interior grid points
   for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
 }
@@ -350,7 +350,7 @@
 %\let\bndrygridorig\bndrygrid
 %\newcommand*{\bndrysgsetorig}{\gridset[\bndrygridorig]{}{\sparse}}
 %\makecommandnotation{\bndrygrid}{ÄΩsd}{$\bndrysgsetorig$}{
-%  Set $:= \sgset \cap \bndrydomain{\clint{\*0, \*1}}
+%  Set $\ceq \sgset \cap \bndrydomain{\clint{\*0, \*1}}
 %  = \sgset \setminus \interiorsgset$ of
 %  boundary sparse grid points
 %  for a finite set $\sgset \subset \clint{\*0, \*1}$ of grid points
@@ -407,7 +407,7 @@
 
 \newnotation{Vnd}{$\ns{n,d}$}{
   Multivariate nodal space
-  $:= \ns{n \cdot \*1}$ of level $n$ with dimensionality $d$
+  $\ceq \ns{n \cdot \*1}$ of level $n$ with dimensionality $d$
 }
 
 \newnotationcommandoptarg{2}{\hs}{%
@@ -439,7 +439,7 @@
 \newnotationcommand[2]{\restrictedsplspace}{S_{#1}^{#2}}{Slp}{%
   $\restrictedsplspace{l}{p}$%
 }{
-  Spline space $:= \nonunifsplspace{\nodalknotseq{l}{p}}{p}$
+  Spline space $\ceq \nonunifsplspace{\nodalknotseq{l}{p}}{p}$
   (spanned by the uniform nodal B-splines of level $l$, degree $p$)
 }
 
@@ -454,7 +454,7 @@
 \newnotationcommand[2]{\naksplspace}{S_{#1}^{#2,\nak}}{Slpnak}{%
   $\naksplspace{l}{p}$%
 }{
-  Spline space $:= \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}$
+  Spline space $\ceq \nonunifsplspace{\nodalknotseq[\nak]{l}{p}}{p}$
   (spanned by the nodal not-a-knot B-splines of level $l$, degree $p$)
 }
 
@@ -466,7 +466,7 @@
 \newnotationcommand[2]{\restrictspace}{#1|_{#2}}{V|D}{%
   $\restrictspace{V}{D}$%
 }{
-  Restriction $:= \{\restrictfcn{\objfun}{D} \mid \objfun \in V\}$
+  Restriction $\ceq \{\restrictfcn{\objfun}{D} \mid \objfun \in V\}$
   onto a sub-domain $D$ for a function space $V$
 }
 
@@ -695,7 +695,7 @@
 }
 
 \newnotationcommand[2]{\kronecker}{\delta_{#1,#2}}{ÄδAB}{$\kronecker{A}{B}$}{
-  Kronecker delta $:= 1$ if $A = B$ and $:= 0$ otherwise
+  Kronecker delta $\ceq 1$ if $A = B$ and $\ceq 0$ otherwise
   ($A, B$ arbitrary objects)
 }
 
@@ -708,7 +708,7 @@
 
 \newnotationcommand[2]{\restrictfcn}{#1|_{#2}}{fD}{$\restrictfcn{\objfun}{D}$}{
   Restriction $\restrictfcn{\objfun}{D}\colon D \to \real$,
-  $\restrictfcn{\objfun}{D}(x) := \objfun(x)$,
+  $\restrictfcn{\objfun}{D}(x) \ceq \objfun(x)$,
   onto a sub-domain $D$
 }
 
@@ -934,7 +934,7 @@
   \parentfcn[#2\appendwithcomma{#1}]%
 }{Äφp}{$\parentbspl{p}$}{
   Centralized cardinal B-spline
-  $\parentbspl{p} := \cardbspl{p}({\cdot} + \tfrac{p+1}{2})$
+  $\parentbspl{p} \ceq \cardbspl{p}({\cdot} + \tfrac{p+1}{2})$
   of degree $p$
 }
 
@@ -1079,7 +1079,7 @@
 
 \hidenextnotation
 \newnotationcommand{\knotseq}{\*\xi}{Äξ20}{$\knotseq$}{
-  Knot sequence $:= (\knot{0}, \dotsc, \knot{m+p})$
+  Knot sequence $\ceq (\knot{0}, \dotsc, \knot{m+p})$
 }
 
 \hidenextnotation
@@ -1712,7 +1712,7 @@
 
 \hidenextnotation
 \newnotationcommand{\sumfcn}{\mathop{\Sigma}}{ÄΣ}{$\sumfcn$}{
-  Sum function $\sumfcn(\*x) := \tr{\*1} \*x$
+  Sum function $\sumfcn(\*x) \ceq \tr{\*1} \*x$
 }
 
 \hidenextnotation
