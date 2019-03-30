@@ -293,7 +293,7 @@ for the cases of $d = 1, \dotsc, 4$ stocks.
     of the weighted Euler equation error for $t = 0$ for
     regular sparse grids \emph{\textcolor{C0}{(blue)}} and
     spatially adaptive sparse grids \emph{\textcolor{C1}{(red)}.}
-    The number $\ngp_t$ is the mean number
+    The number $\ngp_t$ is the average number
     $\frac{1}{m_{\policy}} \sum_{j=1}^{m_{\policy}} \ngp_{t,j}$
     of grid points over all policy grids for $t = 0$,
     where $\ngp_{t,j}$ is the number of grid points
@@ -304,7 +304,7 @@ for the cases of $d = 1, \dotsc, 4$ stocks.
 For this and the following plots,
 the value function grid is left unchanged
 (usually a slightly refined regular sparse grid),
-while the mean number $\ngp_t$ of policy grid points increases
+while the average number $\ngp_t$ of policy grid points increases
 with decreasing refinement threshold $\refinetol_t$.
 This is because the value function grid does not seem to have a great influence
 on the convergence of the Euler equation errors.
@@ -322,11 +322,11 @@ In addition, convergence significantly decelerates starting with $d = 4$.
 For $d = 4$, spatially adaptive sparse grids
 are able to achieve a weighted Euler equation error of
 $\weightedeulererrorLtwo_t \approx \num{2.0e-2}$ for $t = 0$
-(with a mean number $\ngp_0 = \num{4252}$ of policy grid points).
+(with an average number $\ngp_0 = \num{4252}$ of policy grid points).
 For $d = 5$, we are still able to achieve a small error of
 $\weightedeulererrorLtwo_t \approx \num{1.9e-2}$ for $t = 0$
 with spatially adaptive sparse grids with
-a mean number $\ngp_0 = \num{12572}$ of policy grid points.
+an average number $\ngp_0 = \num{12572}$ of policy grid points.
 While we cannot detect any convergence for this dimensionality yet,
 this is still a major result as such high-dimensional models
 could not be solved up to now with conventional methods.
@@ -770,7 +770,7 @@ as this depends on the dimensionality $m_{\policy}$ of the search space
 as well as on the number of multi-start points
 (which also grows with $m_{\policy}$).
 This means that the complexity is at least cubic in $d$,
-quadratic in the mean number $\ngp$ of employed state grid points, and
+quadratic in the average number $\ngp$ of employed state grid points, and
 linear in the number $m_{\zeta}$ of quadrature points.
 \Cref{fig:financeRuntime} confirms these observations with
 experimental data.
