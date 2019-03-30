@@ -249,13 +249,13 @@ def main():
   
   helper.plot.addCustomLegend(ax, [
       {
-        "label" : r"\rlap{2D-C ($\delta^{\sparse}$)}",
+        "label" : r"\rlap{2D-C ($\error^{\sparse}$)}",
         "ls"    : "-",
         "color" : "C0",
       },
       None,
       {
-        "label" : r"\rlap{2D-C ($\delta^{\chol,\sparse}$)}",
+        "label" : r"\rlap{2D-C ($\error^{\chol,\sparse}$)}",
         "ls"    : "-",
         "color" : "C1",
       },
