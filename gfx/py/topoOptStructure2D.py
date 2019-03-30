@@ -32,7 +32,7 @@ def plotMacroCell(ax, corner, size, parameters, model, color="k"):
     shearingTrafo = (lambda x, y: np.column_stack(
         (x + (y-0.5) * np.tan(theta), y)))
     totalTrafo = (lambda x, y: elementTrafo(*shearingTrafo(x, y).T))
-    if a > thresholds[0]: plotPolygon(ax, totalTrafo, color, [
+    if a > thresholds[0]: plotPolygon(ax, elementTrafo, color, [
         (0, (1-a)/2),
         (1, (1-a)/2),
         (1, (1+a)/2),
@@ -55,12 +55,12 @@ def plotMacroCell(ax, corner, size, parameters, model, color="k"):
     if d > thresholds[1]: d = 1
     if a > thresholds[0]:
       a = max(a, 2*thresholds[0])
-      plotPolygon(ax, totalTrafo, color, [
+      plotPolygon(ax, elementTrafo, color, [
           (0, 0),
           (1, 0),
           (1, a/2),
           (0, a/2)])
-      plotPolygon(ax, totalTrafo, color, [
+      plotPolygon(ax, elementTrafo, color, [
           (0, 1-a/2),
           (1, 1-a/2),
           (1, 1),
