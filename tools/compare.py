@@ -76,8 +76,9 @@ def main():
                       help="first revision to compare")
   parser.add_argument("revision2", metavar="REVISION2",
                       help="first revision to compare")
-  parser.add_argument("--copy-gfx", metavar="DIR",
-                      help="copy .sconsign.dblite and build/gfx from this thesis folder "
+  parser.add_argument("--copy-stuff", metavar="DIR",
+                      help="copy .sconsign.dblite, build/gfx, and "
+                           "git-fat files from this thesis folder "
                            "to save time")
   args = parser.parse_args()
   
