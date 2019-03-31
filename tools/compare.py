@@ -1,29 +1,41 @@
 #!/usr/bin/python3
 
 import argparse
+import functools
 import multiprocessing
 import os
 import shlex
 import shutil
 import subprocess
 
+
+
+directory = "/tmp/compare"
+brightnessThreshold = 0
+
+
+
 def run(args, pipe=True, **kwargs):
-  print("Running \"{}\"...".format(" ".join([shlex.quote(arg) for arg in args])))
+  print("Running \"{}\"...".format(
+      " ".join([shlex.quote(arg) for arg in args])))
   if pipe: kwargs["stdout"] = subprocess.PIPE
   process = subprocess.run(args, check=True, **kwargs)
   if pipe: return process.stdout.decode()
 
-def compileConvert(i):
+
+
+def compileConvert(revs, copyStuff, i):
   pdfPath = os.path.join(directory, "thesis_{}.pdf".format(revs[i]))
   
   if os.path.isfile(pdfPath):
     print("{} already exists.".format(pdfPath))
   else:
     print("Compiling PDF for revision {}...".format(revs[i]))
-    uploadPath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "upload.py")
-    uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload", "--no-draft-mode",
-                  "--destination", pdfPath]
-    if args.copy_stuff: uploadArgs += ["--copy-stuff", args.copy_stuff]
+    uploadPath = os.path.join(
+        os.path.dirname(os.path.realpath(__file__)), "upload.py")
+    uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload",
+                  "--no-draft-mode", "--destination", pdfPath]
+    if copyStuff: uploadArgs += ["--copy-stuff", copyStuff]
     run(uploadArgs, pipe=False)
   
   firstImagePath = os.path.join(directory, "thesis_{}-0.png".format(revs[i]))
@@ -35,7 +47,9 @@ def compileConvert(i):
     pngPath = os.path.join(directory, "thesis_{}.png".format(revs[i]))
     run(["convert", "-density", "100", pdfPath, "-alpha", "flatten", pngPath])
 
-def diffPage(j):
+
+
+def diffPage(imagePaths, diffPaths, j):
   if os.path.isfile(diffPaths[j]):
     print("{} already exists.".format(diffPaths[j]))
   else:
@@ -43,21 +57,19 @@ def diffPage(j):
     run(["composite", imagePaths[j][0], imagePaths[j][1],
          "-compose", "difference", diffPaths[j]])
   
-  brightness = float(run(["identify", "-format", "%[fx:maxima]", diffPaths[j]]).strip())
+  brightness = float(run(
+      ["identify", "-format", "%[fx:maxima]", diffPaths[j]]).strip())
   return (brightness > brightnessThreshold)
 
-def generateResult(j):
+
+
+def generateResult(imagePaths, diffPaths, resultPaths, j):
   run(["convert", imagePaths[j][0], diffPaths[j], imagePaths[j][1],
        "+append", resultPaths[j]])
 
 
 
-directory = "/tmp/compare"
-brightnessThreshold = 0
-
-
-
-if __name__ == "__main__":
+def main():
   parser = argparse.ArgumentParser(
     description="Compares two versions of the thesis")
   parser.add_argument("revision1", metavar="REVISION1",
@@ -77,14 +89,16 @@ if __name__ == "__main__":
     args.revision1, revs[0], args.revision2, revs[1]))
   
   with multiprocessing.Pool() as pool:
-    pool.map(compileConvert, range(2))
+    pool.map(
+        functools.partial(compileConvert, revs, args.copy_stuff), range(2))
   
   pageCount = 0
   imagePaths = []
   
   while True:
-    curImagePaths = [os.path.join(directory, "thesis_{}-{}.png".format(rev, pageCount))
-                     for rev in revs]
+    curImagePaths = [
+        os.path.join(directory, "thesis_{}-{}.png".format(rev, pageCount))
+        for rev in revs]
     if any([not os.path.isfile(x) for x in curImagePaths]): break
     pageCount += 1
     imagePaths.append(curImagePaths)
@@ -93,7 +107,8 @@ if __name__ == "__main__":
                for j in range(pageCount)]
   
   with multiprocessing.Pool() as pool:
-    pagesChanged = pool.map(diffPage, range(pageCount))
+    pagesChanged = pool.map(
+        functools.partial(diffPage, imagePaths, diffPaths), range(pageCount))
   
   pagesChanged = [i for i in range(pageCount) if pagesChanged[i]]
   resultsDirectory = os.path.join(directory, "results")
@@ -104,11 +119,19 @@ if __name__ == "__main__":
                  for j in range(pageCount)]
   
   with multiprocessing.Pool() as pool:
-    pool.map(generateResult, pagesChanged)
+    pool.map(
+        functools.partial(generateResult, imagePaths, diffPaths, resultPaths),
+        pagesChanged)
   
   if len(pagesChanged) > 0:
-    print("Pages with changes: {}".format(", ".join([str(x+1) for x in pagesChanged])))
+    print("Pages with changes: {}".format(
+        ", ".join([str(x+1) for x in pagesChanged])))
     subprocess.Popen(["gwenview", resultPaths[pagesChanged[0]]],
                      stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
   else:
     print("No changes detected.")
+
+
+
+if __name__ == "__main__":
+  main()
