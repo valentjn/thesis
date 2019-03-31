@@ -25,7 +25,8 @@ def run(args, pipe=True, **kwargs):
 
 
 def compileConvert(revs, copyStuff, i):
-  pdfPath = os.path.join(directory, "thesis_{}.pdf".format(revs[i]))
+  subDirectory = os.path.join(directory, "out_{}".format(revs[i]))
+  pdfPath = os.path.join(subDirectory, "thesisManuscriptScreen.pdf")
   
   if os.path.isfile(pdfPath):
     print("{} already exists.".format(pdfPath))
@@ -34,7 +35,7 @@ def compileConvert(revs, copyStuff, i):
     uploadPath = os.path.join(
         os.path.dirname(os.path.realpath(__file__)), "upload.py")
     uploadArgs = [uploadPath, "--revision", revs[i], "--no-upload",
-                  "--no-draft-mode", "--destination", pdfPath]
+                  "--no-draft-mode", "--destination", subDirectory]
     if copyStuff: uploadArgs += ["--copy-stuff", copyStuff]
     run(uploadArgs, pipe=False)
   
