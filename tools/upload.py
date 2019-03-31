@@ -9,7 +9,8 @@ import tempfile
 import time
 
 def run(args, pipe=False, **kwargs):
-  print("Running \"{}\"...".format(" ".join([shlex.quote(arg) for arg in args])))
+  print("Running \"{}\"...".format(
+      " ".join([shlex.quote(arg) for arg in args])))
   if pipe: kwargs["stdout"] = subprocess.PIPE
   process = subprocess.run(args, check=True, **kwargs)
   if pipe: return process.stdout.decode()
@@ -49,7 +50,8 @@ if __name__ == "__main__":
                       help="don't upload to bsplines.org")
   parser.add_argument("--draft-mode", action="store_true", default=True,
                       help="use draft mode (default)")
-  parser.add_argument("--no-draft-mode", action="store_false", dest="draft_mode",
+  parser.add_argument("--no-draft-mode", action="store_false",
+                      dest="draft_mode",
                       help="don't use draft mode")
   parser.add_argument("--repeat-draft-mode", action="store_true",
                       dest="repeat_draft_mode",
