@@ -91,9 +91,10 @@ exceeds a certain value $n \in \natz$,
 as their contribution can be neglected compared to the summands
 with coarser level sums.
 More formally, the selection of the relevant subspaces can be formulated as a
-continuous knapsack problem~\cite{Bungartz04Sparse}.
+continuous knapsack problem~\cite{Bungartz04Sparse},
+assuming homogeneous boundary conditions.
 \usenotation{Ës}
-The resulting function space and grid point set
+This motivates
 \begin{equation}
   \label{eq:regularSG}
   \regsgspace{n}{d}
@@ -102,7 +103,7 @@ The resulting function space and grid point set
   \ceq \bigdotcup_{\normone{\*l} \le n}
   \{\gp{\*l,\*i} \mid \*i \in \hiset{\*l}\}
 \end{equation}
-are called \term{regular sparse grid space} and
+as the definitions for the \term{regular sparse grid space} and
 \term{regular sparse grid} of level $n$, respectively.
 The functions $\regsgintp{n}{d}$ contained in
 $\regsgspace{n}{d}$ have the form
