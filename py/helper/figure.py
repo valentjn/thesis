@@ -6,6 +6,7 @@ import pickle
 import platform
 import subprocess
 import sys
+import warnings
 
 import cycler
 import matplotlib as mpl
@@ -199,7 +200,10 @@ class Figure(mpl.figure.Figure):
   
   @staticmethod
   def _getBuildDir():
-    return os.path.realpath(os.environ["BUILD_DIR"])
+    if "." not in os.environ:
+      warnings.warn("Environment variable BUILD_DIR not set. "
+                    "Writing graphic files to the current directory.")
+    return os.path.realpath(os.environ.get("BUILD_DIR", "."))
   
   @staticmethod
   def _getGraphicsBasename():
