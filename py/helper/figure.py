@@ -139,6 +139,25 @@ class Figure(mpl.figure.Figure):
 
 \input{preamble/notation}
 """,
+    "beamer2" : r"""
+\usepackage[bitstream-charter]{mathdesign}
+
+% needed for some of the notation definitions
+\usepackage{xstring}
+
+\makeatletter
+  % automatically replace "l" with \ell in math mode
+  \mathcode`l="8000
+  \begingroup
+  \lccode`\~=`\l
+  \DeclareMathSymbol{\lsb@l}{\mathalpha}{letters}{`l}
+  \lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \ell \else \lsb@l \fi}}%
+  \endgroup
+\makeatother
+
+\renewcommand*{\vec}[1]{{\boldsymbol{#1}}}
+\def\*#1{\vec{#1}}
+""",
   }
   
   graphicsCounter = 0
@@ -185,7 +204,7 @@ class Figure(mpl.figure.Figure):
       "pgf.preamble" : preamble.splitlines(),
     })
     
-    if self.mode == "defense":
+    if self.mode in ["defense", "beamer2"]:
       mpl.rcParams.update({
         "lines.linewidth" : 0.8,
         "lines.markersize" : 4
