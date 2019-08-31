@@ -116,5 +116,6 @@ env.Depends(env["BUILD_PDF"], [dirTargets[dir_] for dir_ in dirs
 # (https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=893740),
 # they seem to have reintroduced the Python-2-only syntax "dict.has_key"
 # (instead of "in") in SCons/Script/Main.py, line 1111,
-# occurs when cleaning, i.e., `scons -c`
-os.environ.has_key = (lambda x: x in os.environ)
+# occurs when cleaning, i.e., `scons -c`, while using Python 3.x for SCons
+if not hasattr(os.environ, "has_key"):
+  os.environ.has_key = (lambda x: x in os.environ)
