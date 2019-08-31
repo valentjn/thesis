@@ -165,8 +165,6 @@ class Figure(mpl.figure.Figure):
   def __init__(self, *args, fontSize=None, preamble="", mode=None, **kwargs):
     super(Figure, self).__init__(*args, **kwargs)
     
-    defaultFontSize = 11
-    
     if mode is None:
       if "talk" in Figure._getBuildDir():
         self.mode = "beamer"
@@ -174,7 +172,6 @@ class Figure(mpl.figure.Figure):
         self.mode = "thesis"
       elif "defense" in Figure._getBuildDir():
         self.mode = "defense"
-        defaultFontSize = 9
       else:
         self.mode = "paper"
     else:
@@ -193,6 +190,7 @@ class Figure(mpl.figure.Figure):
         Axis._get_coord_info = _get_coord_info_new
     
     fontFamily = ("sans-serif" if self.mode == "beamer" else "serif")
+    defaultFontSize = (9 if self.mode in ["defense", "beamer2"] else 11)
     if fontSize is None: fontSize = defaultFontSize
     preamble = (Figure._TEX_PREAMBLE_COMMON +
                 Figure._TEX_PREAMBLE_SPECIAL[self.mode] +
