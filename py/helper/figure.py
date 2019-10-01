@@ -217,7 +217,7 @@ class Figure(mpl.figure.Figure):
   
   @staticmethod
   def _getBuildDir():
-    if "." not in os.environ:
+    if "BUILD_DIR" not in os.environ:
       warnings.warn("Environment variable BUILD_DIR not set. "
                     "Writing graphic files to the current directory.")
     return os.path.realpath(os.environ.get("BUILD_DIR", "."))
