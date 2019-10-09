@@ -142,19 +142,18 @@ for name in ["Manuscript", "Published"]:
 
 # logo file paths
 logoSVG = os.path.join("pre", "logoBSplines.svgz")
-logoPNGTransparent = os.path.join(env["BUILD_DIR"].abspath,
-                                  "logoBSplinesTransparent.png")
 logoPNG = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.png")
+logoJPG = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.jpg")
 logoPDF = os.path.join(env["BUILD_DIR"].abspath, "logoBSplines.pdf")
 # rasterize B-spline logo
-env.Command(logoPNGTransparent, logoSVG,
+env.Command(logoPNG, logoSVG,
             "inkscape --export-png=$TARGET --export-area-page "
             "--export-dpi={} $SOURCE".format(500))
-# remove transparency
-env.Command(logoPNG, logoPNGTransparent,
-            "convert -flatten $SOURCE $TARGET")
-# convert from PNG to PDF with ImageMagick
-env.Command(logoPDF, logoPNG,
+# convert from PNG to JPG with ImageMagick
+env.Command(logoJPG, logoPNG,
+            "convert $SOURCE -flatten -quality 80 $TARGET")
+# convert from JPG to PDF with ImageMagick
+env.Command(logoPDF, logoJPG,
             "convert $SOURCE -density {} -units pixelsperinch "
             "$TARGET".format(500))
 # compress resulting PDF
