@@ -111,22 +111,29 @@ for name in ["Manuscript", "Published"]:
       env["BUILD_DIR"].abspath, "cover{}Print.png".format(name))
   coverScreenPNG = os.path.join(
       env["BUILD_DIR"].abspath, "cover{}Screen.png".format(name))
+  coverPrintJPG  = os.path.join(
+      env["BUILD_DIR"].abspath, "cover{}Print.jpg".format(name))
+  coverScreenJPG = os.path.join(
+      env["BUILD_DIR"].abspath, "cover{}Screen.jpg".format(name))
   coverPrintPDF  = os.path.join(
       env["BUILD_DIR"].abspath, "cover{}Print.pdf".format(name))
   coverScreenPDF = os.path.join(
       env["BUILD_DIR"].abspath, "cover{}Screen.pdf".format(name))
-  
-  for coverDPI, coverPNG, coverPDF in \
-        [(coverPrintDPI,  coverPrintPNG,  coverPrintPDF),
-         (coverScreenDPI, coverScreenPNG, coverScreenPDF)]:
+
+  for coverDPI, coverPNG, coverJPG, coverPDF in \
+        [(coverPrintDPI,  coverPrintPNG,  coverPrintJPG,  coverPrintPDF),
+         (coverScreenDPI, coverScreenPNG, coverScreenJPG, coverScreenPDF)]:
     # rasterize cover
     env.Command(coverPNG, coverSVG,
                 "inkscape --export-png=$TARGET --export-area-page "
                 "--export-dpi={} $SOURCE".format(coverDPI))
-    # convert from PNG to PDF with ImageMagick
-    env.Command(coverPDF, coverPNG,
+    # convert from PNG to JPG with ImageMagick
+    env.Command(coverJPG, coverPNG,
+                "convert $SOURCE -flatten -quality 80 $TARGET")
+    # convert from JPG to PDF with ImageMagick
+    env.Command(coverPDF, coverJPG,
                 "convert $SOURCE -density {} -units pixelsperinch "
-                "-rotate 270 -flatten $TARGET".format(coverDPI))
+                "-rotate 270 $TARGET".format(coverDPI))
     # compress resulting PDF
     env.AddPostAction(coverPDF, Helper.compressPDFs)
   
