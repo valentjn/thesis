@@ -7,7 +7,8 @@ env = env.Clone()
 
 # install pre-made graphics
 pre = (env.Glob(os.path.join("pre", "*.pdf")) +
-       env.Glob(os.path.join("pre", "*.png")))
+       env.Glob(os.path.join("pre", "*.png")) +
+       env.Glob(os.path.join("pre", "*.jpg")))
 pre = env.Install(env["BUILD_DIR"], pre)
 
 # search for Python scripts
