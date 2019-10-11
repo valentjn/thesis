@@ -1,5 +1,6 @@
 /.env
 /.sconsign.dblite
+/.sconf_temp/
 /.spyproject/
 /thesis.txss
 /bib/*.bib.sav
