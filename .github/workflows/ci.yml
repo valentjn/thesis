@@ -1,0 +1,29 @@
+name: "CI"
+
+on:
+  push:
+    branches:
+      - "develop"
+    tags:
+      - "*"
+  pull_request:
+    branches:
+      - "develop"
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: "CI - Build Job"
+    runs-on: "ubuntu-20.04"
+
+    steps:
+      - name: "Checkout Repository"
+        uses: "actions/checkout@v2"
+        with:
+          fetch-depth: 2
+
+      - name: "Install apt-get Dependencies"
+        run: "sudo apt-get update && sudo apt-get install python3-matplotlib texlive-extra-utils texlive-fonts-extra texlive-lang-german texlive-latex-extra texlive-luatex"
+
+      - name: "Build Test Figure"
+        run: "python -u tools/runGfxScript.py -u gfx/py/fuzzyExtensionPrinciple.py"
