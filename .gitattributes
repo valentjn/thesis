@@ -1,13 +1,2 @@
-*.eps  filter=fat -crlf
-*.icc  filter=fat -crlf
-*.jpg  filter=fat -crlf
-*.pdf  filter=fat -crlf
-*.png  filter=fat -crlf
-*.svgz filter=fat -crlf
-*.ttf  filter=fat -crlf
-
-/data/**  filter=fat -crlf
-/final/** filter=fat -crlf
-
 *.bib diff=bib
 *.tex diff=tex

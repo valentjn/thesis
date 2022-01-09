@@ -1,3 +1,0 @@
-[rsync]
-	remote = neon.informatik.uni-stuttgart.de:/data/scratch-ssd1/valentjn/git_repos/git-fat
-	sshuser = valentjn
