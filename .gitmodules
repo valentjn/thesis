@@ -1,4 +1,4 @@
 [submodule "cpp/sgpp"]
 	path = cpp/sgpp
-	url = git@simsgs.informatik.uni-stuttgart.de:SGpp/SGpp.git
+	url = git@github.com:SGpp/SGpp.git
 	branch = sgopt
